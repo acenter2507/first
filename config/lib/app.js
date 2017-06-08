@@ -9,6 +9,8 @@ var config = require('../config'),
   chalk = require('chalk'),
   seed = require('./seed');
 
+console.log("Config: ", config);
+
 function seedDB() {
   if (config.seedDB && config.seedDB.seed) {
     console.log(chalk.bold.red('Warning:  Database seeding is turned on'));

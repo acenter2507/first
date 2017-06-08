@@ -176,12 +176,15 @@ var initGlobalConfig = function () {
 
   // Get the default config
   var defaultConfig = require(path.join(process.cwd(), 'config/env/default'));
+  console.log("defaultConfig: ", defaultConfig);
 
   // Get the current config
   var environmentConfig = require(path.join(process.cwd(), 'config/env/', process.env.NODE_ENV)) || {};
+  console.log("environmentConfig: ", environmentConfig);
 
   // Merge config files
   var config = _.merge(defaultConfig, environmentConfig);
+  console.log("Config: ", config);
 
   // read package.json for MEAN.JS project information
   var pkg = require(path.resolve('./package.json'));

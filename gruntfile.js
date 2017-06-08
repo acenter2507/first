@@ -19,13 +19,13 @@ module.exports = function (grunt) {
         NODE_ENV: 'test'
       },
       dev: {
-        NODE_ENV: 'developments'
+        NODE_ENV: 'development'
       },
       prod: {
         NODE_ENV: 'production'
       },
       lenh: {
-        NODE_ENV: 'developments',
+        NODE_ENV: 'development',
         MONGO_SEED: 'true',
         MONGO_SEED_LOG_RESULTS: 'true'
       }

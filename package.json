@@ -20,13 +20,13 @@
     "postinstall": "bower install --config.interactive=false"
   },
   "dependencies": {
-    "acl": "~0.4.4", // Bảo vệ resouce giữa các phân quyền user, hỗ trợ mongod
-    "async": "^1.3.0", // Xử lý bất đồng bộ http://caolan.github.io/async/
-    "body-parser": "^1.13.1", // Xử lý lấy dữ liệu trong request từ client
-    "bower": "^1.4.1", //　https://bower.io/
-    "cfenv": "~1.0.0", // Thiết lập và hỗ trợ môi trường project https://www.npmjs.com/package/cfenv
-    "chalk": "^1.1.0", // Hỗ trợ đổi màu, xử lý chuỗi https://www.npmjs.com/package/chalk
-    "compression": "^1.5.0", // Hỗ trợ nén file
+    "acl": "~0.4.4",
+    "async": "^1.3.0",
+    "body-parser": "^1.13.1",
+    "bower": "^1.4.1",
+    "cfenv": "~1.0.0",
+    "chalk": "^1.1.0",
+    "compression": "^1.5.0",
     "connect-flash": "~0.1.1",
     "connect-mongo": "~0.8.1",
     "consolidate": "~0.13.1",

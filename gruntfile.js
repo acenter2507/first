@@ -25,6 +25,16 @@ module.exports = function (grunt) {
         NODE_ENV: 'production'
       }
     },
+    seed: {
+      ok: {
+        MONGO_SEED: 'true',
+        MONGO_SEED_LOG_RESULTS: 'true'
+      },
+      ng: {
+        MONGO_SEED: 'false',
+        MONGO_SEED_LOG_RESULTS: 'false'
+      }
+    },
     watch: {
       serverViews: {
         files: defaultAssets.server.views,
@@ -312,7 +322,7 @@ module.exports = function (grunt) {
 
   // Run the project in development mode
   grunt.registerTask('default', ['env:dev', 'lint', 'mkdir:upload', 'copy:localConfig', 'concurrent:default']);
-
+  grunt.registerTask('lenh', ['env:dev', 'seed:ok', 'lint', 'mkdir:upload', 'copy:localConfig', 'concurrent:default']);
   // Run the project in debug mode
   grunt.registerTask('debug', ['env:dev', 'lint', 'mkdir:upload', 'copy:localConfig', 'concurrent:debug']);
 

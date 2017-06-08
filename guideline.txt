@@ -1,0 +1,44 @@
+1. Giải thích các modules nodejs trong file package.json
+  "acl": Bảo vệ resouce giữa các phân quyền user, hỗ trợ mongod
+  "async": Xử lý bất đồng bộ http://caolan.github.io/async/
+  "body-parser": Xử lý lấy dữ liệu trong request từ client
+  "bower": https://bower.io/
+  "cfenv": Thiết lập và hỗ trợ môi trường project -> https://www.npmjs.com/package/cfenv
+  "chalk": Hỗ trợ đổi màu, xử lý chuỗi -> https://www.npmjs.com/package/chalk
+  "compression": Hỗ trợ nén file
+  "connect-flash": Hỗ trợ flash giống PHP, message ra client
+  "connect-mongo": Kết nối Mongodb
+  "consolidate": Thiết lập view engine cho nodejs -> https://www.npmjs.com/package/consolidate
+  "cookie-parser": Hỗ trợ express đọc cookie của request -> https://www.npmjs.com/package/cookie-parser
+  "crypto": Mã hóa (password, security)
+  "express": các middleware thường được sử dụng: http://expressjs.com/en/resources/middleware.html
+  "express-session": Hỗ trợ sử dụng session cho express -> https://www.npmjs.com/package/express-session
+  "file-stream-rotator": Hỗ trợ stream file log, thêm tiền tố, hậu tố date vào tên file....https://www.npmjs.com/package/file-stream-rotator
+  "forever": Giúp server chạy vĩnh viễn chỉ bằng một dòng command -> https://www.npmjs.com/package/forever
+  "generate-password": Tạo password random với các tùy chọn kèm theo -> https://www.npmjs.com/package/generate-password
+  "glob": Hỗ trợ sử dụng các file js (chưa rõ thằng này lắm) https://www.npmjs.com/package/glob
+  "grunt": https://gruntjs.com/
+  "grunt-cli": 
+  "helmet": Bảo vệ Express khỏi các nguy cơ từ internet -> https://www.npmjs.com/package/helmet
+  "jasmine-core": Javascript test framework -> https://www.npmjs.com/package/jasmine-core
+  "lodash": Là một util hỗ trợ js cực kỳ mạnh -> https://lodash.com/
+  "method-override": Hỗ trợ thêm vào 2 phương thức request PUT và DELETE khi client không support -> https://www.npmjs.com/package/method-override
+  "mocha": Framework test -> https://mochajs.org/
+  "mongoose": Hỗ trợ sử dụng mongodb hoàn chỉnh
+  "morgan": Hỗ trợ in log toàn bộ các request từ client -> https://www.npmjs.com/package/morgan
+  "multer": Hỗ trợ upload file -> https://www.npmjs.com/package/multer
+  "nodemailer": Hỗ trợ gửi mail từ nodejs -> https://nodemailer.com/about/
+  "owasp-password-strength-test": 
+  "passport": 
+  "passport-facebook": 
+  "passport-github": 
+  "passport-google-oauth": 
+  "passport-linkedin": 
+  "passport-local": 
+  "passport-paypal-openidconnect": 
+  "passport-twitter": 
+  "phantomjs": Test hiệu năng của ứng dụng
+  "serve-favicon": Hỗ trợ favicon cho express
+  "socket.io": 
+  "swig": View engine
+  "validator": Hỗ trợ validate string

@@ -11,7 +11,7 @@
     $stateProvider
       .state('polls', {
         abstract: true,
-        url: '/polls',
+        url: '/pollssss',
         template: '<ui-view/>'
       })
       .state('polls.list', {

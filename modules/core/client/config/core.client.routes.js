@@ -15,7 +15,12 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
     $stateProvider
     .state('home', {
       url: '/',
-      templateUrl: 'modules/core/client/views/home.client.view.html'
+      templateUrl: 'modules/polls/client/views/list-polls.client.view.html',
+      controller: 'PollsListController',
+      controllerAs: 'vm',
+      data: {
+        pageTitle: 'Polls List'
+      }
     })
     .state('not-found', {
       url: '/not-found',

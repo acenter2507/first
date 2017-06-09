@@ -12,5 +12,5 @@ module.exports = function (app) {
 
   // Define application route
   app.route('/*').get(core.renderIndex);
-  console.log(app.local);
+  console.log(app.locals);
 };

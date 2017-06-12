@@ -5,7 +5,7 @@ angular.module('core.admin').run(['Menus',
     Menus.addMenuItem('topbar', {
       title: 'Adminsssss',
       state: 'admin',
-      type: 'dropdown',
+      type: 'button',
       roles: ['*']
     });
   }

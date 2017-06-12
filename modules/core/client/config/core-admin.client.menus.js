@@ -6,7 +6,7 @@ angular.module('core.admin').run(['Menus',
       title: 'Adminsssss',
       state: 'admin',
       type: 'button',
-      roles: ['*']
+      roles: ['admin']
     });
   }
 ]);

@@ -10,6 +10,5 @@
   function PollsListController(PollsService) {
     var vm = this;
     vm.polls = PollsService.query();
-    console.log(vm);
   }
 }());

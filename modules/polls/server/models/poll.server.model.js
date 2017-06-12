@@ -10,19 +10,42 @@ var mongoose = require('mongoose'),
  * Poll Schema
  */
 var PollSchema = new Schema({
-  name: {
+  title: {
     type: String,
     default: '',
-    required: 'Please fill Poll name',
+    required: 'Please fill Poll title',
     trim: true
   },
-  created: {
-    type: Date,
-    default: Date.now
+  body: {
+    type: String,
+    default: '',
+    required: 'Please fill Poll body',
+    trim: true
+  },
+  is_add_opt: {
+    type: Boolean,
+    default: false
   },
   user: {
     type: Schema.ObjectId,
     ref: 'User'
+  },
+  viewCount: {
+    type: 'Number',
+    default: 0
+  },
+  options: [{ type: Schema.ObjectId, ref: 'Option' }],
+  created: {
+    type: Date,
+    default: Date.now
+  },
+  updated: {
+    type: Date,
+    default: Date.now
+  },
+  closed: {
+    type: 'Date',
+    required: false
   }
 });
 

@@ -10,8 +10,8 @@
         Posted on
         <span ng-bind="poll.created | date:'mediumDate'"></span>
         by
-        <span ng-if="poll.user" ng-bind="poll.user.displayName"></span>
-        <span ng-if="!poll.user">Deleted User</span>
+          <span ng-if="poll.user" ng-bind="poll.user.displayName"></span>
+          <span ng-if="!poll.user">Deleted User</span>
       </small>
       <h4 class="list-group-item-heading" ng-bind="poll.name"></h4>
     </a>

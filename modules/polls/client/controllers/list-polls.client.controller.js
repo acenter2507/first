@@ -9,6 +9,7 @@
 
   function PollsListController(PollsService) {
     var vm = this;
+    console.log(vm);
 
     vm.polls = PollsService.query();
   }

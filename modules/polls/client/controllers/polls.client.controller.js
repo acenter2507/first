@@ -13,6 +13,7 @@
 
     vm.authentication = Authentication;
     vm.poll = poll;
+    vm.close_min = new Date();
     vm.error = null;
     vm.form = {};
     vm.remove = remove;

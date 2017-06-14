@@ -1,15 +1,14 @@
 <section>
   <div class="page-header">
-    <h1 ng-bind="vm.poll.name"></h1>
+    <h1 ng-bind="vm.poll.title"></h1>
   </div>
-  <div class="pull-right"
-       ng-show="vm.poll.isCurrentUserOwner">
+  <div class="pull-right" ng-show="vm.poll.isCurrentUserOwner">
     <a class="btn btn-primary"
        ui-sref="polls.edit({ pollId: vm.poll._id })">
-      <i class="glyphicon glyphicon-edit"></i>
+      <i class="glyphicon glyphicon-edit"></i> Edit
     </a>
     <a class="btn btn-primary" ng-click="vm.remove()">
-      <i class="glyphicon glyphicon-trash"></i>
+      <i class="glyphicon glyphicon-trash"></i> Delete
     </a>
   </div>
   <small>
@@ -22,5 +21,5 @@
       <span ng-if="!vm.poll.user">Deleted User</span>
     </em>
   </small>
-  <p class="lead" ng-bind="vm.poll.content"></p>
+  <p class="lead" ng-bind="vm.poll.body"></p>
 </section>

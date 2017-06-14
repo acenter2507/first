@@ -13,7 +13,7 @@
           <span ng-if="poll.user" ng-bind="poll.user.displayName"></span>
           <span ng-if="!poll.user">Deleted User</span>
       </small>
-      <h4 class="list-group-item-heading" ng-bind="poll.name"></h4>
+      <h4 class="list-group-item-heading" ng-bind="poll.title"></h4>
     </a>
   </div>
   <div class="alert alert-warning text-center" ng-if="vm.polls.$resolved && !vm.polls.length">

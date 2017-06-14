@@ -5,25 +5,25 @@
     .module('comments')
     .run(menuConfig);
 
-  menuConfig.$inject = ['menuService'];
+  menuConfig.$inject = ['Menus'];
 
-  function menuConfig(menuService) {
+  function menuConfig(Menus) {
     // Set top bar menu items
-    menuService.addMenuItem('topbar', {
+    Menus.addMenuItem('topbar', {
       title: 'Comments',
       state: 'comments',
       type: 'dropdown',
-      roles: ['*']
+      roles: ['admin']
     });
 
     // Add the dropdown list item
-    menuService.addSubMenuItem('topbar', 'comments', {
+    Menus.addSubMenuItem('topbar', 'comments', {
       title: 'List Comments',
       state: 'comments.list'
     });
 
     // Add the dropdown create item
-    menuService.addSubMenuItem('topbar', 'comments', {
+    Menus.addSubMenuItem('topbar', 'comments', {
       title: 'Create Comment',
       state: 'comments.create',
       roles: ['user']

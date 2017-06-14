@@ -13,7 +13,7 @@
       title: 'Options',
       state: 'options',
       type: 'dropdown',
-      roles: ['*']
+      roles: ['admin']
     });
 
     // Add the dropdown list item

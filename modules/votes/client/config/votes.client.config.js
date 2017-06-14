@@ -5,25 +5,25 @@
     .module('votes')
     .run(menuConfig);
 
-  menuConfig.$inject = ['menuService'];
+  menuConfig.$inject = ['Menus'];
 
-  function menuConfig(menuService) {
+  function menuConfig(Menus) {
     // Set top bar menu items
-    menuService.addMenuItem('topbar', {
+    Menus.addMenuItem('topbar', {
       title: 'Votes',
       state: 'votes',
       type: 'dropdown',
-      roles: ['*']
+      roles: ['admin']
     });
 
     // Add the dropdown list item
-    menuService.addSubMenuItem('topbar', 'votes', {
+    Menus.addSubMenuItem('topbar', 'votes', {
       title: 'List Votes',
       state: 'votes.list'
     });
 
     // Add the dropdown create item
-    menuService.addSubMenuItem('topbar', 'votes', {
+    Menus.addSubMenuItem('topbar', 'votes', {
       title: 'Create Vote',
       state: 'votes.create',
       roles: ['user']

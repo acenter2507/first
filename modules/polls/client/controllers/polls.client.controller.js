@@ -1,4 +1,4 @@
-(function () {
+(function() {
   'use strict';
 
   // Polls controller
@@ -8,16 +8,18 @@
 
   PollsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'pollResolve'];
 
-  function PollsController ($scope, $state, $window, Authentication, poll) {
+  function PollsController($scope, $state, $window, Authentication, poll) {
     var vm = this;
 
     vm.authentication = Authentication;
     vm.poll = poll;
+    vm.poll_bk = poll;
     vm.close_min = new Date();
     vm.error = null;
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
+    vm.discard = discard;
 
     // Remove existing Poll
     function remove() {
@@ -49,6 +51,26 @@
 
       function errorCallback(res) {
         vm.error = res.data.message;
+      }
+    }
+
+    // Discard edit or add poll
+    function discard() {
+      if (angular.equals(vm.poll, vm.poll_bk)) {
+        handle_discard();
+      } else {
+        if ($window.confirm('Are you sure you want to discard?')) {
+          handle_discard();
+        }
+      }
+    }
+
+    // Back to before screen
+    function handle_discard() {
+      if (vm.poll._id) {
+        $state.go('polls.view', { pollId: vm.poll._id });
+      } else {
+        $state.go('polls.list');
       }
     }
   }

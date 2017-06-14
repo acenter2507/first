@@ -3,11 +3,11 @@
     <h1 ng-bind="vm.poll.title"></h1>
   </div>
   <div class="pull-right" ng-show="vm.poll.isCurrentUserOwner">
-    <a class="btn btn-primary"
+    <a class="btn btn-info"
        ui-sref="polls.edit({ pollId: vm.poll._id })">
       <i class="glyphicon glyphicon-edit"></i> Edit
     </a>
-    <a class="btn btn-primary" ng-click="vm.remove()">
+    <a class="btn btn-danger" ng-click="vm.remove()">
       <i class="glyphicon glyphicon-trash"></i> Delete
     </a>
   </div>
@@ -21,5 +21,5 @@
       <span ng-if="!vm.poll.user">Deleted User</span>
     </em>
   </small>
-  <p class="lead" ng-bind="vm.poll.body"></p>
+  <p class="lead text-justify" ng-bind="vm.poll.body"></p>
 </section>

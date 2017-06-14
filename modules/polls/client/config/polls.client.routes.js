@@ -40,7 +40,7 @@
 
               },
               'options@polls.create': {
-                templateUrl: 'modules/core/client/views/test.client.view.html',
+                templateUrl: 'modules/core/client/views/test.client.view.html'
               }
             }
           }

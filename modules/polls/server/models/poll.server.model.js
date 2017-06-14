@@ -6,6 +6,9 @@
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
+let getTags = tags => tags.join(',');
+let setTags = tags => tags.split(',');
+
 /**
  * Poll Schema
  */
@@ -21,6 +24,11 @@ var PollSchema = new Schema({
     default: '',
     required: 'Please fill Poll body',
     trim: true
+  },
+  tags: { 
+    type: [],
+    get: getTags,
+    set: setTags
   },
   is_add_opt: {
     type: Boolean,
@@ -43,7 +51,7 @@ var PollSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  closed: {
+  close: {
     type: 'Date',
     required: false
   }

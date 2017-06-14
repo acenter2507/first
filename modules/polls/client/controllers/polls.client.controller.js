@@ -17,9 +17,12 @@
     vm.close_min = new Date();
     vm.error = null;
     vm.form = {};
+
+    // Function
     vm.remove = remove;
     vm.save = save;
     vm.discard = discard;
+
     // Remove existing Poll
     function remove() {
       if ($window.confirm('Are you sure you want to delete?')) {
@@ -55,8 +58,6 @@
 
     // Discard edit or add poll
     function discard() {
-      console.log(vm.bk_poll);
-      console.log(vm.poll);
       if (angular.equals(vm.poll, vm.bk_poll)) {
         handle_discard();
       } else {

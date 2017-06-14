@@ -13,7 +13,6 @@
 
     vm.authentication = Authentication;
     vm.poll = poll;
-    vm.poll_bk = poll;
     vm.close_min = new Date();
     vm.error = null;
     vm.form = {};
@@ -57,8 +56,8 @@
     // Discard edit or add poll
     function discard() {
       console.log(vm.poll);
-      console.log(vm.poll_bk);
-      if (angular.equals(vm.poll, vm.poll_bk)) {
+      console.log(poll);
+      if (angular.equals(vm.poll, poll)) {
         handle_discard();
       } else {
         if ($window.confirm('Are you sure you want to discard?')) {

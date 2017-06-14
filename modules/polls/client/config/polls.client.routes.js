@@ -1,51 +1,49 @@
 (function() {
-    'use strict';
+  'use strict';
 
-    angular
-      .module('polls')
-      .config(routeConfig);
+  angular
+    .module('polls')
+    .config(routeConfig);
 
-    routeConfig.$inject = ['$stateProvider'];
+  routeConfig.$inject = ['$stateProvider'];
 
-    function routeConfig($stateProvider) {
-      $stateProvider
-        .state('polls', {
-          abstract: true,
-          url: '/polls',
-          template: '<ui-view/>'
-        })
-        .state('polls.list', {
-          url: '',
-          templateUrl: 'modules/polls/client/views/list-polls.client.view.html',
-          controller: 'PollsListController',
-          controllerAs: 'vm',
-          data: {
-            pageTitle: 'Polls List'
-          }
-        })
-        .state('polls.create', {
-            url: '/create',
-            views: {
-              '': {
-                templateUrl: 'modules/polls/client/views/form-poll.client.view.html',
-                controller: 'PollsController',
-                controllerAs: 'vm',
-                resolve: {
-                  pollResolve: newPoll
-                },
-                data: {
-                  roles: ['user', 'admin'],
-                  pageTitle: 'Polls Create'
-                }
-
-              },
-              'options@polls.create': {
-                templateUrl: 'modules/core/client/views/test.client.view.html'
-              }
+  function routeConfig($stateProvider) {
+    $stateProvider
+      .state('polls', {
+        abstract: true,
+        url: '/polls',
+        template: '<ui-view/>'
+      })
+      .state('polls.list', {
+        url: '',
+        templateUrl: 'modules/polls/client/views/list-polls.client.view.html',
+        controller: 'PollsListController',
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Polls List'
+        }
+      })
+      .state('polls.create', {
+        url: '/create',
+        views: {
+          '': {
+            templateUrl: 'modules/polls/client/views/form-poll.client.view.html',
+            controller: 'PollsController',
+            controllerAs: 'vm',
+            resolve: {
+              pollResolve: newPoll
+            },
+            data: {
+              roles: ['user', 'admin'],
+              pageTitle: 'Polls Create'
             }
+          },
+          'options@polls.create': {
+            templateUrl: 'modules/core/client/views/test.client.view.html'
           }
-        })
-    .state('polls.edit', {
+        }
+      })
+      .state('polls.edit', {
         url: '/:pollId/edit',
         templateUrl: 'modules/polls/client/views/form-poll.client.view.html',
         controller: 'PollsController',

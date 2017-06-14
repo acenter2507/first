@@ -11,6 +11,7 @@
   function PollsController($scope, $state, $window, Authentication, poll) {
     var vm = this;
 
+    const bk_poll = poll;
     vm.authentication = Authentication;
     vm.poll = poll;
     vm.close_min = new Date();
@@ -55,9 +56,7 @@
 
     // Discard edit or add poll
     function discard() {
-      console.log(vm.poll);
-      console.log(poll);
-      if (angular.equals(vm.poll, poll)) {
+      if (angular.equals(vm.poll, bk_poll)) {
         handle_discard();
       } else {
         if ($window.confirm('Are you sure you want to discard?')) {

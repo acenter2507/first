@@ -56,6 +56,8 @@
 
     // Discard edit or add poll
     function discard() {
+      console.log(bk_poll);
+      console.log(vm.poll);
       if (angular.equals(vm.poll, bk_poll)) {
         handle_discard();
       } else {

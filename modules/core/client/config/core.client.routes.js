@@ -15,7 +15,7 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
     $stateProvider
     .state('home', {
       url: '/',
-      templateUrl: 'modules/core/client/views/test.client.view.html',
+      templateUrl: 'modules/polls/client/views/list-polls.client.view.html',
       controller: 'PollsListController',
       controllerAs: 'vm',
       data: {

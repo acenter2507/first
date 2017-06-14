@@ -1,15 +1,15 @@
 <section>
   <div class="page-header">
     <h1 ng-bind="vm.poll.title"></h1>
-  <div class="pull-right" ng-show="vm.poll.isCurrentUserOwner">
-    <a class="btn btn-info"
-       ui-sref="polls.edit({ pollId: vm.poll._id })">
-      <i class="glyphicon glyphicon-edit"></i> Edit
-    </a>
-    <a class="btn btn-danger" ng-click="vm.remove()">
-      <i class="glyphicon glyphicon-trash"></i> Delete
-    </a>
-  </div>
+    <div class="pull-right" ng-show="vm.poll.isCurrentUserOwner">
+      <a class="btn btn-info" ui-sref="polls.edit({ pollId: vm.poll._id })">
+        <i class="glyphicon glyphicon-edit"></i> Edit
+      </a>
+      <a class="btn btn-danger" ng-click="vm.remove()">
+        <i class="glyphicon glyphicon-trash"></i> Delete
+      </a>
+    </div>
+    <div class="clearfix"></div>
   </div>
   <small>
     <em class="text-muted">

@@ -20,7 +20,9 @@
       <span ng-if="vm.cmt.user"
             ng-bind="vm.cmt.user.displayName"></span>
       <span ng-if="!vm.cmt.user">Deleted User</span>
+      on
+      <span ng-bind="vm.cmt.poll.title"></span>
     </em>
   </small>
-  <p class="lead" ng-bind="vm.cmt.content"></p>
+  <p class="text-justify" ng-bind="vm.cmt.body"></p>
 </section>

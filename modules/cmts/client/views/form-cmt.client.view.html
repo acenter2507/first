@@ -6,10 +6,20 @@
     <form name="vm.form.cmtForm" class="form-horizontal" ng-submit="vm.save(vm.form.cmtForm.$valid)" novalidate>
       <fieldset>
         <div class="form-group" show-errors>
-          <label class="control-label" for="name">Name</label>
-          <input name="name" type="text" ng-model="vm.cmt.name" id="name" class="form-control" placeholder="Name" required>
-          <div ng-messages="vm.form.cmtForm.name.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Cmt name is required.</p>
+          <label class="control-label" for="body">Body</label>
+          <input name="body" type="text" ng-model="vm.cmt.body" id="body" class="form-control" placeholder="Name" required>
+          <div ng-messages="vm.form.cmtForm.body.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Cmt body is required.</p>
+          </div>
+        </div>
+        
+        <!-- Poll -->
+        <div class="form-group" show-errors>
+          <label class="control-label" for="poll">Poll</label>
+          <select id="poll" name="poll" ng-model="vm.cmt.poll" class="form-control" ng-options="poll as poll._id for poll in vm.polls" required>
+          </select>
+          <div ng-messages="vm.form.cmtForm.poll.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Poll is required.</p>
           </div>
         </div>
         <div class="form-group">

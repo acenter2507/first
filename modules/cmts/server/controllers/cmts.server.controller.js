@@ -103,7 +103,7 @@ exports.cmtByID = function(req, res, next, id) {
     });
   }
 
-  Cmt.findById(id).populate('user', 'displayName').exec(function (err, cmt) {
+  Cmt.findById(id).populate('user', 'displayName', 'poll').exec(function (err, cmt) {
     if (err) {
       return next(err);
     } else if (!cmt) {

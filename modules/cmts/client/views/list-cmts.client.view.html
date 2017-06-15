@@ -12,8 +12,10 @@
         by
         <span ng-if="cmt.user" ng-bind="cmt.user.displayName"></span>
         <span ng-if="!cmt.user">Deleted User</span>
+        on
+        <span ng-if="cmt.poll" ng-bind="cmt.poll"></span>
       </small>
-      <h4 class="list-group-item-heading" ng-bind="cmt.name"></h4>
+      <h5 class="list-group-item-heading" ng-bind="cmt.body"></h5>
     </a>
   </div>
   <div class="alert alert-warning text-center" ng-if="vm.cmts.$resolved && !vm.cmts.length">

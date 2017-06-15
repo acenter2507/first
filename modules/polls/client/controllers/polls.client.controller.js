@@ -56,7 +56,7 @@
         $scope.$broadcast('show-errors-check-validity', 'vm.form.pollForm');
         return false;
       }
-
+      console.log(vm.poll);
       // TODO: move create/update logic to service
       if (vm.poll._id) {
         vm.poll.$update(successCallback, errorCallback);

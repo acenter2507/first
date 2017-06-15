@@ -38,7 +38,7 @@
         <!-- Close date -->
         <div class="form-group">
           <label class="control-label" for="close">Close</label>
-          <input type="date" ng-model="vm.poll.close | date:'yyyy/MM/dd'" class="form-control" name="close" id="close" min="{{vm.close_min}}">
+          <input type="datetime-local" ng-model="vm.poll.close" class="form-control" name="close" id="close" min="{{vm.close_min}}">
         </div>
 
         <div class="form-group">

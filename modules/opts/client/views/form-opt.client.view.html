@@ -26,6 +26,9 @@
           <select id="poll" name="poll" ng-model="vm.opt.poll" class="form-control">
             <option ng-repeat="poll in vm.polls" value="poll._id">{{poll._id + " " + poll.title}}</option>
           </select>
+          <div ng-messages="vm.form.optForm.poll.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Poll is required.</p>
+          </div>
         </div>
         <div class="form-group">
           <button type="submit" class="btn btn-default">{{vm.opt._id ? 'Update' : 'Create'}}</button>

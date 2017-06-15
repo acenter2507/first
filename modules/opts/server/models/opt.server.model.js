@@ -40,14 +40,11 @@ var OptSchema = new Schema({
     default: Date.now
   }
 });
+
 /**
  * Hook a pre save method to hash the password
  */
 OptSchema.pre('save', function (next) {
-  if (typeof this._id === 'String') {
-    this._id = mongoose.Types.ObjectId(this._id);
-  }
-
   next();
 });
 

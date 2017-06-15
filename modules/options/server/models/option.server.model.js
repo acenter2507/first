@@ -10,6 +10,18 @@ var mongoose = require('mongoose'),
  * Option Schema
  */
 var OptionSchema = new Schema({
+  title: {
+    type: String,
+    default: '',
+    required: 'Please fill Option title',
+    trim: true
+  },
+  body: {
+    type: String,
+    default: '',
+    required: 'Please fill Option body',
+    trim: true
+  },
   name: {
     type: String,
     default: '',

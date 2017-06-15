@@ -6,6 +6,7 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Poll = mongoose.model('Poll'),
+  Opt = mongoose.model('Opt'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 
@@ -93,6 +94,21 @@ exports.list = function(req, res) {
 };
 
 /**
+ * List of Polls
+ */
+exports.opts = function(req, res) {
+  Opt.find({poll: req.pollId}).sort('-created').populate('user', 'displayName').exec(function(err, opts) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(opts);
+    }
+  });
+};
+
+/**
  * Poll middleware
  */
 exports.pollByID = function(req, res, next, id) {
@@ -103,7 +119,7 @@ exports.pollByID = function(req, res, next, id) {
     });
   }
 
-  Poll.findById(id).populate('user', 'displayName', 'opts').exec(function (err, poll) {
+  Poll.findById(id).populate('user', 'displayName').exec(function (err, poll) {
     if (err) {
       return next(err);
     } else if (!poll) {

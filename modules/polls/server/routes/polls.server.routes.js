@@ -19,4 +19,6 @@ module.exports = function(app) {
 
   // Finish by binding the Poll middleware
   app.param('pollId', polls.pollByID);
+  app.route('/api/polls/:pollId/opts').all(pollsPolicy.isAllowed)
+    .get(polls.opts);
 };

@@ -1,5 +1,5 @@
 // Polls service used to communicate Polls REST endpoints
-(function () {
+(function() {
   'use strict';
 
   angular
@@ -16,5 +16,20 @@
         method: 'PUT'
       }
     });
+  }
+
+  // Polls api
+  angular
+    .module('polls')
+    .factory('PollsApi', PollsApi);
+
+  PollsService.$inject = ['$http'];
+
+  function PollsApi($http) {
+    return {
+      opts: (id) => {
+        return $http.get('/api/polls/:pollId/opts', {pollId: id});
+      }
+    };
   }
 }());

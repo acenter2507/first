@@ -17,4 +17,18 @@
       }
     });
   }
+
+    angular
+    .module('polls')
+    .factory('PollsApi', PollsApi);
+
+  PollsApi.$inject = ['$http'];
+
+  function PollsApi($http) {
+    return {
+      findOpts: (id) => {
+        return $http.get('/api/findOpts/' + id);
+      },
+    };
+  }
 }());

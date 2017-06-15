@@ -6,18 +6,25 @@
     .module('polls')
     .controller('PollsController', PollsController);
 
-  PollsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'pollResolve'];
+  PollsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'pollResolve', 'PollsApi'];
 
-  function PollsController($scope, $state, $window, Authentication, poll) {
+  function PollsController($scope, $state, $window, Authentication, poll, PollsApi) {
     var vm = this;
 
     vm.authentication = Authentication;
     vm.poll = poll;
-    vm.opts = [];
     vm.bk_poll = angular.copy(poll);
     vm.close_min = new Date();
     vm.error = null;
     vm.form = {};
+
+    PollsApi.findOpts(poll.id)
+    .then(opts => {
+      vm.opts = opts;
+    })
+    .catch(err => {
+      alert("error" + err);
+    });
 
     // Function
     vm.remove = remove;

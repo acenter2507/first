@@ -17,6 +17,8 @@ module.exports = function(app) {
     .put(polls.update)
     .delete(polls.delete);
 
+  app.route('/api/findOpts/:pollId').get(polls.findOpts);
+
   // Finish by binding the Poll middleware
   app.param('pollId', polls.pollByID);
 };

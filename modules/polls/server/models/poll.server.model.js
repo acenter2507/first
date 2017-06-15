@@ -25,7 +25,7 @@ var PollSchema = new Schema({
     required: 'Please fill Poll body',
     trim: true
   },
-  tags: { 
+  tags: {
     type: [],
     get: getTags,
     set: setTags
@@ -56,5 +56,11 @@ var PollSchema = new Schema({
     required: false
   }
 });
+
+PollSchema.statics.findOpts = function(id, callback) {
+  return this.model('Opt').find({
+    poll: id
+  }, callback);
+}
 
 mongoose.model('Poll', PollSchema);

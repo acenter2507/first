@@ -11,14 +11,14 @@ var mongoose = require('mongoose'),
  */
 var CmtSchema = new Schema({
   body: {
-    type : String,
-    default : '',
+    type: String,
+    default: '',
     required: 'Please fill Comment body',
-    trim : true
+    trim: true
   },
   poll: {
-    type : Schema.ObjectId,
-    ref : 'Poll'
+    type: Schema.ObjectId,
+    ref: 'Poll'
   },
   created: {
     type: Date,

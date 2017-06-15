@@ -1,4 +1,4 @@
-(function () {
+(function() {
   'use strict';
 
   // Cmts controller
@@ -8,11 +8,12 @@
 
   CmtsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'cmtResolve', 'PollsService'];
 
-  function CmtsController ($scope, $state, $window, Authentication, cmt, Polls) {
+  function CmtsController($scope, $state, $window, Authentication, cmt, Polls) {
     var vm = this;
 
     vm.authentication = Authentication;
     vm.cmt = cmt;
+    console.log(cmt);
     vm.error = null;
     vm.form = {};
     vm.remove = remove;

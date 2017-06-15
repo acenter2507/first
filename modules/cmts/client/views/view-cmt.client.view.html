@@ -1,16 +1,15 @@
 <section>
   <div class="page-header">
     <h1 ng-bind="vm.cmt.name"></h1>
-  </div>
-  <div class="pull-right"
-       ng-show="vm.cmt.isCurrentUserOwner">
-    <a class="btn btn-primary"
-       ui-sref="cmts.edit({ cmtId: vm.cmt._id })">
-      <i class="glyphicon glyphicon-edit"></i>
-    </a>
-    <a class="btn btn-primary" ng-click="vm.remove()">
-      <i class="glyphicon glyphicon-trash"></i>
-    </a>
+    <div class="pull-right" ng-show="vm.cmt.isCurrentUserOwner">
+      <a class="btn btn-primary" ui-sref="cmts.edit({ cmtId: vm.cmt._id })">
+        <i class="glyphicon glyphicon-edit"></i> Edit
+      </a>
+      <a class="btn btn-primary" ng-click="vm.remove()">
+        <i class="glyphicon glyphicon-trash"></i> Delete
+      </a>
+    </div>
+    <div class="clearfix"></div>
   </div>
   <small>
     <em class="text-muted">

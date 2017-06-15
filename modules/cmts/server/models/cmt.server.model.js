@@ -10,11 +10,15 @@ var mongoose = require('mongoose'),
  * Cmt Schema
  */
 var CmtSchema = new Schema({
-  name: {
-    type: String,
-    default: '',
-    required: 'Please fill Cmt name',
-    trim: true
+  body: {
+    type : String,
+    default : '',
+    required: 'Please fill Comment body',
+    trim : true
+  },
+  poll: {
+    type : Schema.ObjectId,
+    ref : 'Poll'
   },
   created: {
     type: Date,

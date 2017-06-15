@@ -6,13 +6,14 @@
     .module('polls')
     .controller('PollsController', PollsController);
 
-  PollsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'pollResolve'];
+  PollsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'pollResolve', 'OptsService'];
 
-  function PollsController($scope, $state, $window, Authentication, poll) {
+  function PollsController($scope, $state, $window, Authentication, poll, Opts) {
     var vm = this;
 
     vm.authentication = Authentication;
     vm.poll = poll;
+    vm.opts = Opts.query();
     vm.bk_poll = angular.copy(poll);
     vm.close_min = new Date();
     vm.error = null;

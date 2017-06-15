@@ -5,13 +5,26 @@
   <div class="col-md-12">
     <form name="vm.form.polltagForm" class="form-horizontal" ng-submit="vm.save(vm.form.polltagForm.$valid)" novalidate>
       <fieldset>
+        <!-- Poll -->
         <div class="form-group" show-errors>
-          <label class="control-label" for="name">Name</label>
-          <input name="name" type="text" ng-model="vm.polltag.name" id="name" class="form-control" placeholder="Name" required>
-          <div ng-messages="vm.form.polltagForm.name.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Polltag name is required.</p>
+          <label class="control-label" for="poll">Poll</label>
+          <select id="poll" name="poll" ng-model="vm.polltag.poll" class="form-control" ng-options="poll as poll._id for poll in vm.polls" required>
+          </select>
+          <div ng-messages="vm.form.polltagForm.poll.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Poll is required.</p>
           </div>
         </div>
+
+        <!-- Poll -->
+        <div class="form-group" show-errors>
+          <label class="control-label" for="tag">Tag</label>
+          <select id="tag" name="tag" ng-model="vm.polltag.tag" class="form-control" ng-options="tag as tag._id for tag in vm.tags" required>
+          </select>
+          <div ng-messages="vm.form.polltagForm.tag.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Tag is required.</p>
+          </div>
+        </div>
+
         <div class="form-group">
           <button type="submit" class="btn btn-default">{{vm.polltag._id ? 'Update' : 'Create'}}</button>
         </div>

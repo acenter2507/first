@@ -5,11 +5,11 @@
     .module('polltags')
     .run(menuConfig);
 
-  menuConfig.$inject = ['menuService'];
+  menuConfig.$inject = ['Menus'];
 
-  function menuConfig(menuService) {
+  function menuConfig(Menus) {
     // Set top bar menu items
-    menuService.addMenuItem('topbar', {
+    Menus.addMenuItem('topbar', {
       title: 'Polltags',
       state: 'polltags',
       type: 'dropdown',
@@ -17,13 +17,13 @@
     });
 
     // Add the dropdown list item
-    menuService.addSubMenuItem('topbar', 'polltags', {
+    Menus.addSubMenuItem('topbar', 'polltags', {
       title: 'List Polltags',
       state: 'polltags.list'
     });
 
     // Add the dropdown create item
-    menuService.addSubMenuItem('topbar', 'polltags', {
+    Menus.addSubMenuItem('topbar', 'polltags', {
       title: 'Create Polltag',
       state: 'polltags.create',
       roles: ['user']

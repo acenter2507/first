@@ -10,19 +10,15 @@ var mongoose = require('mongoose'),
  * Polltag Schema
  */
 var PolltagSchema = new Schema({
-  name: {
-    type: String,
-    default: '',
-    required: 'Please fill Polltag name',
-    trim: true
+  poll: {
+    type : Schema.ObjectId,
+    ref : 'Poll',
+    required: 'Please fill Poll info',
   },
-  created: {
-    type: Date,
-    default: Date.now
-  },
-  user: {
-    type: Schema.ObjectId,
-    ref: 'User'
+  tag: {
+    type : Schema.ObjectId,
+    ref : 'Tag',
+    required: 'Please fill Tag info',
   }
 });
 

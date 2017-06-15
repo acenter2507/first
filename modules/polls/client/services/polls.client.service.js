@@ -29,6 +29,9 @@
       findOpts: (id) => {
         return $http.get('/api/findOpts/' + id);
       },
+      findCmts: (id) => {
+        return $http.get('/api/findCmts/' + id);
+      }
     };
   }
 }());

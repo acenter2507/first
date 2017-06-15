@@ -18,14 +18,23 @@
     vm.error = null;
     vm.form = {};
 
+    // Get all Opts
     PollsApi.findOpts(poll._id)
       .then(opts => {
         vm.opts = opts.data;
       })
       .catch(err => {
-        alert("error" + err);
+        alert('error' + err);
       });
 
+    // Get all Cmts
+    PollsApi.findCmts(poll._id)
+      .then(cmts => {
+        vm.cmts = cmts.data;
+      })
+      .catch(err => {
+        alert('error' + err);
+      });
     // Function
     vm.remove = remove;
     vm.save = save;

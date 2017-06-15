@@ -1,4 +1,4 @@
-(function () {
+(function() {
   'use strict';
 
   // Opts controller
@@ -8,7 +8,7 @@
 
   OptsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'optResolve', 'PollsService', 'OptsUtil'];
 
-  function OptsController ($scope, $state, $window, Authentication, opt, Polls, Utils) {
+  function OptsController($scope, $state, $window, Authentication, opt, Polls, Utils) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -55,7 +55,7 @@
 
     // Poll selection change
     function poll_change() {
-      
+
     }
   }
 }());

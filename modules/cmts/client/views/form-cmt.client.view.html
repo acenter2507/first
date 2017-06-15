@@ -7,7 +7,7 @@
       <fieldset>
         <div class="form-group" show-errors>
           <label class="control-label" for="body">Body</label>
-          <input name="body" type="text" ng-model="vm.cmt.body" id="body" class="form-control" placeholder="Name" required>
+          <textarea name="body" ng-model="vm.cmt.body" id="body" class="form-control" placeholder="Body" required></textarea>
           <div ng-messages="vm.form.cmtForm.body.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Cmt body is required.</p>
           </div>

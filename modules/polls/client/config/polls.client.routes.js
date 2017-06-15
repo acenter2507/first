@@ -71,8 +71,7 @@
             }
           },
           'opts@polls.view': {
-            templateUrl: 'modules/opts/client/views/opts-in-poll.client.view.html',
-            controller: 'PollsController',
+            templateUrl: 'modules/opts/client/views/opts-in-poll.client.view.html'
           }
         }
       });

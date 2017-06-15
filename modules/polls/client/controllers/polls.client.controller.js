@@ -19,12 +19,12 @@
     vm.form = {};
 
     PollsApi.findOpts(poll.id)
-    .then(opts => {
-      vm.opts = opts;
-    })
-    .catch(err => {
-      alert("error" + err);
-    });
+      .then(opts => {
+        vm.opts = opts;
+      })
+      .catch(err => {
+        alert("error" + err);
+      });
 
     // Function
     vm.remove = remove;

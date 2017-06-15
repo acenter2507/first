@@ -61,6 +61,6 @@ PollSchema.statics.findOpts = function(id, callback) {
   return this.model('Opt').find({
     poll: id
   }, callback);
-}
+};
 
 mongoose.model('Poll', PollSchema);

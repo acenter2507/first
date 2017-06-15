@@ -18,7 +18,7 @@
     });
   }
 
-    angular
+  angular
     .module('polls')
     .factory('PollsApi', PollsApi);
 

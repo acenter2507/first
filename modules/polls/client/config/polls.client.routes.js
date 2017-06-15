@@ -58,17 +58,18 @@
       })
       .state('polls.view', {
         url: '/:pollId',
+        controller: 'PollsController',
+        controllerAs: 'vm',
+        resolve: {
+          pollResolve: getPoll
+        },
+        data: {
+          pageTitle: 'Poll {{ pollResolve.name }}'
+        }
+
         views: {
           '': {
-            templateUrl: 'modules/polls/client/views/view-poll.client.view.html',
-            controller: 'PollsController',
-            controllerAs: 'vm',
-            resolve: {
-              pollResolve: getPoll
-            },
-            data: {
-              pageTitle: 'Poll {{ pollResolve.name }}'
-            }
+            templateUrl: 'modules/polls/client/views/view-poll.client.view.html'
           },
           'opts@polls.view': {
             templateUrl: 'modules/opts/client/views/opts-in-poll.client.view.html'

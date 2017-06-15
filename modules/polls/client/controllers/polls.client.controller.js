@@ -39,7 +39,6 @@
       }
 
       // TODO: move create/update logic to service
-      console.log(vm.poll);
       if (vm.poll._id) {
         vm.poll.$update(successCallback, errorCallback);
       } else {

@@ -73,7 +73,6 @@
           'opts@polls.view': {
             templateUrl: 'modules/opts/client/views/opts-in-poll.client.view.html',
             controller: 'PollsController',
-            controllerAs: 'vm'
           }
         }
       });

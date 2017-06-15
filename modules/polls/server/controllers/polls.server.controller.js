@@ -97,7 +97,7 @@ exports.list = function(req, res) {
  * List of Polls
  */
 exports.opts = function(req, res) {
-  Opt.find({ poll: req.pollId }).sort('-created').populate('user', 'displayName').exec(function(err, opts) {
+  Opt.find().where('poll').gt(req.pollId).sort('-created').populate('user', 'displayName').exec(function(err, opts) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)

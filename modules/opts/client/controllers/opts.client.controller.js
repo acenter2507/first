@@ -6,9 +6,9 @@
     .module('opts')
     .controller('OptsController', OptsController);
 
-  OptsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'optResolve', 'PollsService'];
+  OptsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'optResolve', 'PollsService', 'OptsUtil'];
 
-  function OptsController ($scope, $state, $window, Authentication, opt, PollsService) {
+  function OptsController ($scope, $state, $window, Authentication, opt, Polls, Utils) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -17,7 +17,8 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
-    vm.polls = PollsService.query();
+    vm.polls = Polls.query();
+    vm.poll_change = poll_change;
 
     // Remove existing Opt
     function remove() {
@@ -33,6 +34,7 @@
         return false;
       }
 
+      vm.opt.poll = Utils.get_poll_by_id(vm.polls, vm.opt.poll);
       // TODO: move create/update logic to service
       if (vm.opt._id) {
         vm.opt.$update(successCallback, errorCallback);
@@ -49,6 +51,11 @@
       function errorCallback(res) {
         vm.error = res.data.message;
       }
+    }
+
+    // Poll selection change
+    function poll_change() {
+      
     }
   }
 }());

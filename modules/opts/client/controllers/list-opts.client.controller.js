@@ -1,4 +1,4 @@
-(function () {
+(function() {
   'use strict';
 
   angular
@@ -8,7 +8,7 @@
   OptsListController.$inject = ['OptsService'];
 
   function OptsListController(OptsService) {
-  	console.log(OptsService);
+    console.log(OptsService);
     var vm = this;
 
     vm.opts = OptsService.query();

@@ -6,9 +6,9 @@
     .module('opts')
     .controller('OptsController', OptsController);
 
-  OptsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'optResolve'];
+  OptsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'optResolve', 'PollsService'];
 
-  function OptsController ($scope, $state, $window, Authentication, opt) {
+  function OptsController ($scope, $state, $window, Authentication, opt, PollsService) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -17,6 +17,7 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
+    vm.polls = PollsService.query();
 
     // Remove existing Opt
     function remove() {

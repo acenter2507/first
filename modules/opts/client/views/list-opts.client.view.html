@@ -7,13 +7,13 @@
        ui-sref="opts.view({ optId: opt._id })"
        class="list-group-item">
       <small class="list-group-item-text">
-        Posted on
+        Added on
         <span ng-bind="opt.created | date:'mediumDate'"></span>
         by
         <span ng-if="opt.user" ng-bind="opt.user.displayName"></span>
         <span ng-if="!opt.user">Deleted User</span>
       </small>
-      <h4 class="list-group-item-heading" ng-bind="opt.name"></h4>
+      <h4 class="list-group-item-heading" ng-bind="opt.title"></h4>
     </a>
   </div>
   <div class="alert alert-warning text-center" ng-if="vm.opts.$resolved && !vm.opts.length">

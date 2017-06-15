@@ -24,7 +24,8 @@ var OptSchema = new Schema({
   },
   poll: {
     type : Schema.ObjectId,
-    ref : 'Poll'
+    ref : 'Poll',
+    required: 'Please fill Poll info',
   },
   user: {
     type: Schema.ObjectId,

@@ -6,9 +6,9 @@
     .module('cmts')
     .controller('CmtsController', CmtsController);
 
-  CmtsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'cmtResolve'];
+  CmtsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'cmtResolve', 'PollsService'];
 
-  function CmtsController ($scope, $state, $window, Authentication, cmt) {
+  function CmtsController ($scope, $state, $window, Authentication, cmt, Polls) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -17,6 +17,7 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
+    vm.polls = Polls.query();
 
     // Remove existing Cmt
     function remove() {

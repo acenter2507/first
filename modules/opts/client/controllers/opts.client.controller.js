@@ -6,9 +6,9 @@
     .module('opts')
     .controller('OptsController', OptsController);
 
-  OptsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'optResolve', 'PollsService', 'OptsUtil'];
+  OptsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'optResolve', 'PollsService'];
 
-  function OptsController($scope, $state, $window, Authentication, opt, Polls, Utils) {
+  function OptsController($scope, $state, $window, Authentication, opt, Polls) {
     var vm = this;
 
     vm.authentication = Authentication;

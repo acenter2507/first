@@ -65,8 +65,7 @@
         },
         data: {
           pageTitle: 'Poll {{ pollResolve.name }}'
-        }
-
+        },
         views: {
           '': {
             templateUrl: 'modules/polls/client/views/view-poll.client.view.html'

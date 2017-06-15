@@ -34,7 +34,7 @@
         return false;
       }
 
-      vm.opt.poll = Utils.get_poll_by_id(vm.polls, vm.opt.poll);
+      // vm.opt.poll = Utils.get_poll_by_id(vm.polls, vm.opt.poll);
       // TODO: move create/update logic to service
       if (vm.opt._id) {
         vm.opt.$update(successCallback, errorCallback);

@@ -20,8 +20,7 @@
 
     PollsApi.findOpts(poll._id)
       .then(opts => {
-        console.log(opts);
-        vm.opts = opts;
+        vm.opts = opts.data;
       })
       .catch(err => {
         alert("error" + err);

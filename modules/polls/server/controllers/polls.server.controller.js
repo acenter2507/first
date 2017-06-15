@@ -99,7 +99,7 @@ exports.list = function(req, res) {
 exports.opts = function(req, res) {
   Opt.find().where('poll').gt(req.pollId).sort('-created').populate('user', 'displayName').exec(function(err, opts) {
     if (err) {
-      return res.status(401).send({
+      return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {

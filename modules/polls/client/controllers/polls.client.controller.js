@@ -13,7 +13,10 @@
 
     vm.authentication = Authentication;
     vm.poll = poll;
-    vm.opts = Opts.query();
+    Opts.get({poll: poll._id}, (opts) => {
+      vm.opts = opts;
+    }, (err) => {});
+    
     vm.bk_poll = angular.copy(poll);
     vm.close_min = new Date();
     vm.error = null;

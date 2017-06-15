@@ -97,9 +97,7 @@ exports.list = function(req, res) {
  * List of Opts in poll
  */
 exports.findOpts = function(req, res) {
-  console.log(req.poll);
-  const id = req.params.pollId;
-  Poll.findOpts(id).populate('user', 'displayName').exec(function(err, opts) {
+  Poll.findOpts(req.poll._id).populate('user', 'displayName').exec(function(err, opts) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)

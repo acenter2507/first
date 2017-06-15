@@ -5,11 +5,11 @@
     .module('cmts')
     .run(menuConfig);
 
-  menuConfig.$inject = ['menuService'];
+  menuConfig.$inject = ['Menus'];
 
-  function menuConfig(menuService) {
+  function menuConfig(Menus) {
     // Set top bar menu items
-    menuService.addMenuItem('topbar', {
+    Menus.addMenuItem('topbar', {
       title: 'Cmts',
       state: 'cmts',
       type: 'dropdown',
@@ -17,13 +17,13 @@
     });
 
     // Add the dropdown list item
-    menuService.addSubMenuItem('topbar', 'cmts', {
+    Menus.addSubMenuItem('topbar', 'cmts', {
       title: 'List Cmts',
       state: 'cmts.list'
     });
 
     // Add the dropdown create item
-    menuService.addSubMenuItem('topbar', 'cmts', {
+    Menus.addSubMenuItem('topbar', 'cmts', {
       title: 'Create Cmt',
       state: 'cmts.create',
       roles: ['user']

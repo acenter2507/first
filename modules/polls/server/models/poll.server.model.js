@@ -42,7 +42,7 @@ var PollSchema = new Schema({
     type: 'Number',
     default: 0
   },
-  options: [{ type: Schema.ObjectId, ref: 'Option' }],
+  options: [{ type: Schema.ObjectId, ref: 'Opt' }],
   created: {
     type: Date,
     default: Date.now

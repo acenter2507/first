@@ -18,7 +18,7 @@
     vm.error = null;
     vm.form = {};
 
-    PollsApi.findOpts(poll.id)
+    PollsApi.findOpts(poll._id)
       .then(opts => {
         vm.opts = opts;
       })

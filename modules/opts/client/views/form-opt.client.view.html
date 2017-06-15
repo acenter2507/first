@@ -23,7 +23,7 @@
         <!-- Poll -->
         <div class="form-group" show-errors>
           <label class="control-label" for="poll">Poll</label>
-          <select id="poll" name="poll" ng-model="vm.opt.poll">
+          <select id="poll" name="poll" ng-model="vm.opt.poll" class="form-control">
             <option ng-repeat="poll in vm.polls" value="poll._id">{{poll._id + " " + poll.title}}</option>
           </select>
         </div>

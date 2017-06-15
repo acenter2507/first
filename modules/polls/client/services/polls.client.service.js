@@ -23,7 +23,7 @@
     .module('polls')
     .factory('PollsApi', PollsApi);
 
-  PollsService.$inject = ['$http'];
+  PollsApi.$inject = ['$http'];
 
   function PollsApi($http) {
     return {

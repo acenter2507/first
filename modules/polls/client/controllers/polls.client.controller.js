@@ -13,7 +13,7 @@
 
     vm.authentication = Authentication;
     vm.poll = poll;
-    vm.poll.close = new Date(vm.poll.close);
+    vm.poll.close = (vm.poll.close) ? new Date(vm.poll.close) : vm.poll.close;
     vm.bk_poll = angular.copy(poll);
     vm.close_min = new Date();
     vm.error = null;

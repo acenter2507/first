@@ -97,12 +97,15 @@ exports.list = function(req, res) {
  * List of Polls
  */
 exports.opts = function(req, res) {
+  console.log("1");
   Opt.find().where('poll').gt(req.pollId).sort('-created').populate('user', 'displayName').exec(function(err, opts) {
     if (err) {
+    console.log("2");
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
+  console.log("3");
       res.jsonp(opts);
     }
   });

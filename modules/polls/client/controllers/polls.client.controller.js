@@ -13,7 +13,7 @@
 
     vm.authentication = Authentication;
     vm.poll = poll;
-    Opts.get({poll: poll._id}, (opts) => {
+    Opts.query({poll: poll._id}, (opts) => {
       vm.opts = opts;
     }, (err) => {});
     

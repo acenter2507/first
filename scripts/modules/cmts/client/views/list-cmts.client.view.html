@@ -1,0 +1,22 @@
+<section>
+  <div class="page-header">
+    <h1>Cmts</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="cmt in vm.cmts"
+       ui-sref="cmts.view({ cmtId: cmt._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="cmt.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="cmt.user" ng-bind="cmt.user.displayName"></span>
+        <span ng-if="!cmt.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="cmt.name"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="vm.cmts.$resolved && !vm.cmts.length">
+    No Cmts yet, why don't you <a ui-sref="cmts.create">create one</a>?
+  </div>
+</section>

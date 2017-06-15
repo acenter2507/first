@@ -1,0 +1,117 @@
+'use strict';
+
+/**
+ * Module dependencies.
+ */
+var path = require('path'),
+  mongoose = require('mongoose'),
+  Cmt = mongoose.model('Cmt'),
+  errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
+  _ = require('lodash');
+
+/**
+ * Create a Cmt
+ */
+exports.create = function(req, res) {
+  var cmt = new Cmt(req.body);
+  cmt.user = req.user;
+
+  cmt.save(function(err) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(cmt);
+    }
+  });
+};
+
+/**
+ * Show the current Cmt
+ */
+exports.read = function(req, res) {
+  // convert mongoose document to JSON
+  var cmt = req.cmt ? req.cmt.toJSON() : {};
+
+  // Add a custom field to the Article, for determining if the current User is the "owner".
+  // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
+  cmt.isCurrentUserOwner = req.user && cmt.user && cmt.user._id.toString() === req.user._id.toString();
+
+  res.jsonp(cmt);
+};
+
+/**
+ * Update a Cmt
+ */
+exports.update = function(req, res) {
+  var cmt = req.cmt;
+
+  cmt = _.extend(cmt, req.body);
+
+  cmt.save(function(err) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(cmt);
+    }
+  });
+};
+
+/**
+ * Delete an Cmt
+ */
+exports.delete = function(req, res) {
+  var cmt = req.cmt;
+
+  cmt.remove(function(err) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(cmt);
+    }
+  });
+};
+
+/**
+ * List of Cmts
+ */
+exports.list = function(req, res) {
+  Cmt.find().sort('-created').populate('user', 'displayName').exec(function(err, cmts) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(cmts);
+    }
+  });
+};
+
+/**
+ * Cmt middleware
+ */
+exports.cmtByID = function(req, res, next, id) {
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).send({
+      message: 'Cmt is invalid'
+    });
+  }
+
+  Cmt.findById(id).populate('user', 'displayName').exec(function (err, cmt) {
+    if (err) {
+      return next(err);
+    } else if (!cmt) {
+      return res.status(404).send({
+        message: 'No Cmt with that identifier has been found'
+      });
+    }
+    req.cmt = cmt;
+    next();
+  });
+};

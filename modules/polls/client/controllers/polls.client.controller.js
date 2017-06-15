@@ -13,9 +13,10 @@
 
     vm.authentication = Authentication;
     vm.poll = poll;
-    Opts.query({poll: poll._id}, (opts) => {
-      vm.opts = opts;
-    }, (err) => {});
+    vm.opts = poll.opts;
+    // Opts.query({poll: poll._id}, (opts) => {
+    //   vm.opts = opts;
+    // }, (err) => {});
     
     vm.bk_poll = angular.copy(poll);
     vm.close_min = new Date();

@@ -6,9 +6,6 @@
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
-let getTags = tags => tags.join(',');
-let setTags = tags => tags.split(',');
-
 /**
  * Poll Schema
  */
@@ -25,14 +22,9 @@ var PollSchema = new Schema({
     required: 'Please fill Poll body',
     trim: true
   },
-  tags: {
-    type: [],
-    get: getTags,
-    set: setTags
-  },
-  is_add_opt: {
+  only_member: {
     type: Boolean,
-    default: false
+    default: true
   },
   user: {
     type: Schema.ObjectId,
@@ -69,4 +61,9 @@ PollSchema.statics.findCmts = function(id, callback) {
   }, callback);
 };
 
+PollSchema.statics.findVotes = function(id, callback) {
+  return this.model('Vote').find({
+    poll: id
+  }, callback);
+};
 mongoose.model('Poll', PollSchema);

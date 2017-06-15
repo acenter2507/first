@@ -5,11 +5,11 @@
     .module('tags')
     .run(menuConfig);
 
-  menuConfig.$inject = ['menuService'];
+  menuConfig.$inject = ['Menus'];
 
-  function menuConfig(menuService) {
+  function menuConfig(Menus) {
     // Set top bar menu items
-    menuService.addMenuItem('topbar', {
+    Menus.addMenuItem('topbar', {
       title: 'Tags',
       state: 'tags',
       type: 'dropdown',
@@ -17,13 +17,13 @@
     });
 
     // Add the dropdown list item
-    menuService.addSubMenuItem('topbar', 'tags', {
+    Menus.addSubMenuItem('topbar', 'tags', {
       title: 'List Tags',
       state: 'tags.list'
     });
 
     // Add the dropdown create item
-    menuService.addSubMenuItem('topbar', 'tags', {
+    Menus.addSubMenuItem('topbar', 'tags', {
       title: 'Create Tag',
       state: 'tags.create',
       roles: ['user']

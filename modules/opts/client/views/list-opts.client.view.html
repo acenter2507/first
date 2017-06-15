@@ -14,6 +14,7 @@
         <span ng-if="!opt.user">Deleted User</span>
       </small>
       <h4 class="list-group-item-heading" ng-bind="opt.title"></h4>
+      <p class="list-group-item-text" ng-bind="opt.body"></p>
     </a>
   </div>
   <div class="alert alert-warning text-center" ng-if="vm.opts.$resolved && !vm.opts.length">

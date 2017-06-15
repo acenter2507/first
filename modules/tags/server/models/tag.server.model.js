@@ -16,6 +16,15 @@ var TagSchema = new Schema({
     required: 'Please fill Tag name',
     trim: true
   },
+  des: {
+    type: String,
+    default: '',
+    trim: true
+  },
+  count: {
+    type: 'Number',
+    default: 0
+  },
   created: {
     type: Date,
     default: Date.now
@@ -23,7 +32,16 @@ var TagSchema = new Schema({
   user: {
     type: Schema.ObjectId,
     ref: 'User'
+  },
+  updated: {
+    type: Date,
+    default: Date.now
   }
+});
+
+TagSchema.pre('save', function (next) {
+  this.updated = new Date();
+  next();
 });
 
 mongoose.model('Tag', TagSchema);

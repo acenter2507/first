@@ -1,5 +1,3 @@
-'use strict';
-
 // Opts service used to communicate Opts REST endpoints
 (function () {
   'use strict';

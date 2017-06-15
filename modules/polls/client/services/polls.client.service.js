@@ -17,19 +17,4 @@
       }
     });
   }
-
-  // Polls api
-  angular
-    .module('polls')
-    .factory('PollsApi', PollsApi);
-
-  PollsApi.$inject = ['$http'];
-
-  function PollsApi($http) {
-    return {
-      opts: (id) => {
-        return $http.post('/api/polls/opts', { pollId: id });
-      }
-    };
-  }
 }());

@@ -20,9 +20,6 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/polls/:pollId',
       permissions: '*'
-    }, {
-      resources: '/api/polls/opts',
-      permissions: '*'
     }]
   }, {
     roles: ['user'],
@@ -32,9 +29,6 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/polls/:pollId',
       permissions: ['get']
-    }, {
-      resources: '/api/polls/opts',
-      permissions: '*'
     }]
   }, {
     roles: ['guest'],
@@ -44,11 +38,7 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/polls/:pollId',
       permissions: ['get']
-    }, {
-      resources: '/api/polls/opts',
-      permissions: ['post']
-    }
-    ]
+    }]
   }]);
 };
 

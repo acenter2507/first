@@ -28,7 +28,7 @@
   function PollsApi($http) {
     return {
       opts: (id) => {
-        return $http.get('/api/polls/opts', { pollId: id });
+        return $http.post('/api/polls/opts', { pollId: id });
       }
     };
   }

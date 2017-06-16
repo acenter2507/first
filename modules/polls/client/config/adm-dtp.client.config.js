@@ -3,7 +3,7 @@
 
   angular
     .module('polls')
-    .run(dtpConfig);
+    .config(dtpConfig);
 
   dtpConfig.$inject = ['ADMdtpProvider'];
 

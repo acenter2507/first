@@ -36,7 +36,16 @@
         <!-- Close date -->
         <div class="form-group">
           <label class="control-label" for="close">Date end of poll:</label>
-          
+          <adm-dtp ng-model='date'>
+            <!-- fully access to 'date' and 'date_details' parameters -->
+            <!-- input is optional too, but must use in this format -->
+            <input type='text' ng-model='date' dtp-input />
+            <!-- attributes name are important, not tags name -->
+            <button dtp-open> Open calendar </button>
+            <button dtp-close> Close calendar </button>
+            <button dtp-toggle> Toggle calendar </button>
+            <button dtp-destroy> Destroy calendar </button>
+          </adm-dtp>
         </div>
         <adm-dtp id="close" name="close" ng-model="vm.poll.close" options="dtp_options"></adm-dtp>
         <!-- Tags -->

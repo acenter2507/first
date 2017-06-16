@@ -35,10 +35,7 @@
         </div>
         <!-- Close date -->
         <div class="form-group">
-          <md-input-container flex-gt-md="30">
-            <label>Date end of poll:</label>
-            <input mdc-datetime-picker date="true" time="true" type="text" id="close" format="YYYY-MM-DD HH:mm" ng-model="vm.poll.close">
-          </md-input-container>
+          <input moment-picker="vm.poll.close" ng-model="vm.poll.close" format="YYYY/MM/DD">
         </div>
         <!-- Tags -->
         <div class="form-group">

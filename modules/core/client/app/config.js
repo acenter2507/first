@@ -13,7 +13,8 @@ var ApplicationConfiguration = (function() {
     'ui.utils',
     'angularFileUpload',
     'uiSwitch',
-    'ngTagsInput'
+    'ngTagsInput',
+    'moment-picker'
   ];
 
   // Add a new vertical module

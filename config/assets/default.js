@@ -10,7 +10,8 @@ module.exports = {
         'public/lib/angular-ui-switch/angular-ui-switch.css',
         'public/lib/ng-tags-input/ng-tags-input.css',
         'public/lib/angular-datetime-range/dist/datetime-range.min.css',
-        'public/lib/angular-datetime-inputs/dist/datetime-inputs.min.css'
+        'public/lib/angular-datetime-inputs/dist/datetime-inputs.min.css',
+        'public/lib/adm-dtp/dist/ADM-dateTimePicker.min.css'
       ],
       js: [
         'public/lib/angular/angular.js',
@@ -27,7 +28,8 @@ module.exports = {
         'public/lib/underscore/underscore.js',
         'public/lib/moment/moment.js',
         'public/lib/angular-datetime-range/dist/datetime-range.min.js',
-        'public/lib/angular-datetime-inputs/dist/datetime-inputs.min.js'
+        'public/lib/angular-datetime-inputs/dist/datetime-inputs.min.js',
+        'public/lib/adm-dtp/dist/ADM-dateTimePicker.min.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

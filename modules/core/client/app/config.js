@@ -15,7 +15,8 @@ var ApplicationConfiguration = (function() {
     'uiSwitch',
     'ngTagsInput',
     'g1b.datetime-range',
-    'g1b.datetime-inputs'
+    'g1b.datetime-inputs',
+    'ADM-dateTimePicker'
   ];
 
   // Add a new vertical module

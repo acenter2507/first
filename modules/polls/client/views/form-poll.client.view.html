@@ -28,11 +28,14 @@
         </div>
         <!-- Add option -->
         <div class="form-group">
-          <div class="checkbox">
+          <switch id="only_member" name="only_member" ng-model="vm.poll.only_member" class="green">Only members can vote</switch>
+          <br>{{ vm.poll.only_member }}
+<!--           <div class="checkbox">
             <label>
+
               <input type="checkbox" ng-model="vm.poll.only_member" name="only_member" id="only_member">
               Only members can vote</label>
-          </div>
+          </div> -->
         </div>
 
         <!-- Close date -->

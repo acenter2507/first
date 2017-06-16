@@ -40,12 +40,18 @@
         </div>
         <!-- Tags -->
         <div class="form-group">
-          <label class="control-label" for="#">Current tags: {{(!vm.polltags.length) ? 'Has no tag was added' : ''}}</label>
-          <ul class="tags" ng-show="vm.polltags.length">
-            <li ng-repeat="polltag in vm.polltags"><a ui-sref="tags.view({ tagId: polltag.tag._id })" class="tag">{{polltag.tag.name}}</a></li>
+          <label class="control-label" for="#">Current tags: {{(!vm.poll.tags.length) ? 'Has no tag was added' : ''}}</label>
+          <ul class="tags" ng-show="vm.poll.tags.length">
+            <li ng-repeat="tag in vm.poll.tags"><a ui-sref="tags.view({ tagId: tag._id })" class="tag">{{tag.name}}</a></li>
           </ul>
         </div>
-
+        <!-- New tags -->
+        <div class="form-group" ng-controller="AutocompleteTagController">
+          <label for="#">Update all tags:</label>
+          <tags-input ng-model="vm.poll.tags" display-property="name" placeholder="{{placeholder}}" add-from-autocomplete-only="true" replace-spaces-with-dashes="false" min-length="1" enforce-max-tags>
+            <auto-complete source="loadItems($query)" min-length="1" debounce-delay="0"></auto-complete>
+            </tags-input>
+        </div>
         <div class="form-group">
           <button type="submit" class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i>{{vm.poll._id ? ' Update' : ' Create'}}</button>
           <a class="btn btn-default" ng-click="vm.discard()"><i class="fa fa-times" aria-hidden="true"></i> Discard</a>

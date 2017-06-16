@@ -31,7 +31,7 @@
   <div class="row">
     <div class="col-xs-12">
       <p>Tags:
-        <a ng-repeat="polltag in vm.polltags" ui-sref="tags.view({ tagId: polltag.tag._id })">{{polltag.tag.name}}</a>
+        <a class="btn btn-sm btn-default" ng-repeat="polltag in vm.polltags" ui-sref="tags.view({ tagId: polltag.tag._id })">{{polltag.tag.name}}</a>
       </p>
     </div>
   </div>

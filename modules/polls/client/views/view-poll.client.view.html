@@ -33,7 +33,7 @@
     <div class="col-xs-12">
       <h4>Tags:</h4>
       <ul class="tags">
-        <li ng-repeat="polltag in vm.polltags"><a ui-sref="tags.view({ tagId: polltag.tag._id })" class="tag">{{polltag.tag.name}}</a></li>
+        <li ng-repeat="tag in vm.poll.tags"><a ui-sref="tags.view({ tagId: tag._id })" class="tag">{{tag.name}}</a></li>
       </ul>
     </div>
   </div>

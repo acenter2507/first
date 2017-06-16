@@ -55,6 +55,12 @@
     vm.discard = discard;
     vm.comment = comment;
 
+    $scope.dtp_options = {
+      freezeInput: true,
+      autoClose: true,
+      minuteStep: 30,
+      zIndex: 1000
+    };
     $scope.print = function(datetime) {
       console.log('datetime', datetime);
     };

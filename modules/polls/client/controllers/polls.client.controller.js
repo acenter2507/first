@@ -55,13 +55,6 @@
     vm.discard = discard;
     vm.comment = comment;
 
-    $scope.dtp_options = {
-      freezeInput: true,
-      autoClose: true,
-      minuteStep: 30,
-      zIndex: 1000
-    };
-
     // Remove existing Poll
     function remove() {
       if ($window.confirm('Are you sure you want to delete?')) {
@@ -75,7 +68,6 @@
         $scope.$broadcast('show-errors-check-validity', 'vm.form.pollForm');
         return false;
       }
-      console.log(vm.poll);
       // TODO: move create/update logic to service
       if (vm.poll._id) {
         vm.poll.$update(successCallback, errorCallback);

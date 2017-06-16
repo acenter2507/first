@@ -39,7 +39,7 @@
           <input id="close" name="close" class="form-control" moment-picker="vm.poll.close" ng-model="vm.poll.close" format="YYYY/MM/DD HH:mm" start-view="month" placeholder="Select a date...">
         </div>
         <!-- Tags -->
-        <div class="form-group">
+        <div class="form-group" ng-controller="AutocompleteTagController">
           <label class="control-label" for="#">Current tags: {{(!vm.poll.tags.length) ? 'Has no tag was added' : ''}}</label>
           <tags-input ng-model="vm.poll.tags" display-property="name" placeholder="{{placeholder}}" add-from-autocomplete-only="true" replace-spaces-with-dashes="false" min-length="1" enforce-max-tags class="tags-custom">
             <auto-complete source="loadItems($query)" min-length="1" debounce-delay="0" max-results="10"></auto-complete>

@@ -1,4 +1,5 @@
 <section>
+  <div ng-show="vm.authentication.isAdmin">Hello admin</div>
   <div class="page-header">
     <h1 ng-bind="vm.poll.title"></h1>
     <div class="pull-right" ng-show="vm.poll.isCurrentUserOwner || vm.authentication.isAdmin">

@@ -1,5 +1,5 @@
 <section class="container">
-<!--   <div class="row">
+  <!--   <div class="row">
     <div class="col col-xs-12 col-sm-12 col-md-8 col-lg-8"></div>
     <div class="col col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
   </div> -->
@@ -30,9 +30,10 @@
   <div ui-view="cmts"></div>
   <div class="row">
     <div class="col-xs-12">
-      <p>Tags:
-        <a class="btn btn-sm btn-default" ng-repeat="polltag in vm.polltags" ui-sref="tags.view({ tagId: polltag.tag._id })">{{polltag.tag.name}}</a>
-      </p>
+      <h4>Tags:</h4>
+      <ul class="tags">
+        <li ng-repeat="polltag in vm.polltags"><a ui-sref="tags.view({ tagId: polltag.tag._id })" class="tag">{{polltag.tag.name}}</a></li>
+      </ul>
     </div>
   </div>
 </section>

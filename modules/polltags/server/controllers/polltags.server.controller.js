@@ -103,7 +103,7 @@ exports.polltagByID = function(req, res, next, id) {
     });
   }
 
-  Polltag.findById(id).populate('user', 'displayName').exec(function (err, polltag) {
+  Polltag.findById(id).populate('poll').populate('tag').exec(function (err, polltag) {
     if (err) {
       return next(err);
     } else if (!polltag) {

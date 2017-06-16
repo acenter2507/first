@@ -55,35 +55,8 @@
     vm.discard = discard;
     vm.comment = comment;
 
-    $scope.start = moment();
-    $scope.end = (vm.poll.close) ? moment(vm.poll.close) : null;
-
-    $scope.presets = [{
-      'name': 'This Week',
-      'start': moment().startOf('week').startOf('day'),
-      'end': moment().endOf('week').endOf('day'),
-    }, {
-      'name': 'This Month',
-      'start': moment().startOf('month').startOf('day'),
-      'end': moment().endOf('month').endOf('day'),
-    }, {
-      'name': 'This Year',
-      'start': moment().startOf('year').startOf('day'),
-      'end': moment().endOf('year').endOf('day'),
-    }];
-    $scope.changed = function() {
-      console.log('changed start or end datetime objects');
-      console.log($scope.start);
-      console.log($scope.end);
-    };
-    $scope.changedStart = function() {
-      console.log('changed start datetime object');
-    };
-    $scope.changedEnd = function() {
-      console.log('changed end datetime object');
-    };
-    $scope.closed = function() {
-      console.log('edit popover closed');
+    $scope.print = function(datetime) {
+      console.log('datetime', datetime);
     };
 
     // Remove existing Poll

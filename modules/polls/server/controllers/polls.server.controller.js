@@ -7,6 +7,7 @@ var path = require('path'),
   mongoose = require('mongoose'),
   Poll = mongoose.model('Poll'),
   Opt = mongoose.model('Opt'),
+  Polltag = mongoose.model('Polltag'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 
@@ -17,15 +18,27 @@ exports.create = function(req, res) {
   var poll = new Poll(req.body);
   poll.user = req.user;
 
-  poll.save(function(err) {
-    if (err) {
+  var tags = req.body.tags;
+  var promises = [];
+  poll.save()
+    .then(_poll => {
+      tags.forEach((tag) => {
+        var polltag = new Polltag();
+        polltag.tag = tag;
+        polltag.poll = _poll;
+        promises.push(polltag.save());
+      });
+      return Promise.all(promises);
+    })
+    .then(_tags => {
+      promises = [];
+      res.jsonp(poll);
+    })
+    .catch(err => {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
-    } else {
-      res.jsonp(poll);
-    }
-  });
+    });
 };
 
 /**
@@ -50,7 +63,30 @@ exports.update = function(req, res) {
   var poll = req.poll;
 
   poll = _.extend(poll, req.body);
-
+  var tags = req.body.tags;
+  var promises = [];
+  poll.save()
+    .then(_poll => {
+      return Polltag.remove({ poll: _poll._id });
+    })
+    .then(() => {
+      tags.forEach((tag) => {
+        var polltag = new Polltag();
+        polltag.tag = tag;
+        polltag.poll = poll;
+        promises.push(polltag.save());
+      });
+      return Promise.all(promises);
+    })
+    .then(_tags => {
+      promises = [];
+      res.jsonp(poll);
+    })
+    .catch(err => {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    });
   poll.save(function(err) {
     if (err) {
       return res.status(400).send({

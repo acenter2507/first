@@ -13,8 +13,6 @@
 
     $scope.loadItems = function(query) {
       var items, deferred = $q.defer();
-      return Tags.query().$promise;
-
       items = _.chain($scope.tags),filter((obj) => {
         return obj.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
       })

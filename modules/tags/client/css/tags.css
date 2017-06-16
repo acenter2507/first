@@ -46,10 +46,10 @@
 
 .tags-custom .autocomplete .suggestion-item em {
   font-weight: normal;
-  background-color: #ffff00;
+  background-color: #eee;
 }
 
 .tags-custom .autocomplete .suggestion-item.selected em {
   color: #262626;
-  background-color: #ffff00;
+  background-color: #eee;
 }

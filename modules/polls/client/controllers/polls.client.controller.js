@@ -73,6 +73,8 @@
     }];
     $scope.changed = function() {
       console.log('changed start or end datetime objects');
+      console.log($scope.start);
+      console.log($scope.end);
     };
     $scope.changedStart = function() {
       console.log('changed start datetime object');

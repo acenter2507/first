@@ -8,6 +8,7 @@ module.exports = {
         'public/lib/bootstrap/dist/css/bootstrap-theme.css',
         'public/lib/components-font-awesome/css/font-awesome.css',
         'public/lib/angular-ui-switch/angular-ui-switch.css',
+        'public/lib/ng-tags-input/ng-tags-input.css'
       ],
       js: [
         'public/lib/angular/angular.js',
@@ -19,7 +20,8 @@ module.exports = {
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
         'public/lib/angular-file-upload/angular-file-upload.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
-        'public/lib/angular-ui-switch/angular-ui-switch.js'
+        'public/lib/angular-ui-switch/angular-ui-switch.js',
+        'public/lib/ng-tags-input/ng-tags-input.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

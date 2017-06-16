@@ -12,10 +12,10 @@
 }
 
 .tags-custom .tags .tag-item {
-  background: #428bca;
-  border: 1px solid #357ebd;
-  border-radius: 4px;
-  color: #fff;
+  background: #eee;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  color: #999;
 }
 
 .tags-custom .tags .tag-item.selected {
@@ -27,7 +27,7 @@
 
 .tags-custom .tags .tag-item button {
   background: transparent;
-  color: #000;
+  color: #555;
   opacity: .4;
 }
 

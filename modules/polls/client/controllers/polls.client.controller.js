@@ -14,6 +14,7 @@
     vm.authentication = Authentication;
     vm.poll = poll;
     vm.poll.close = (vm.poll.close) ? new Date(vm.poll.close) : vm.poll.close;
+    vm.poll.tags = [];
     vm.bk_poll = angular.copy(poll);
     vm.close_min = new Date();
     vm.error = null;
@@ -39,7 +40,9 @@
       // Get all Cmts
       PollsApi.findTags(poll._id)
         .then(polltags => {
-          vm.polltags = polltags.data;
+          angular.forEach(polltags.data, (polltag, index) => {
+            vm.poll.tags.push(polltag.tag);
+          });
         })
         .catch(err => {
           alert('error' + err);
@@ -51,6 +54,11 @@
     vm.save = save;
     vm.discard = discard;
     vm.comment = comment;
+
+
+    // $scope.loadItems = function(query) {
+    //   return Tags.query().$promise;
+    // };
 
     // Remove existing Poll
     function remove() {

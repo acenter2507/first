@@ -10,14 +10,8 @@
     <a ng-repeat="polltag in vm.polltags"
        ui-sref="polltags.view({ polltagId: polltag._id })"
        class="list-group-item">
-      <small class="list-group-item-text">
-        Posted on
-        <span ng-bind="polltag.created | date:'mediumDate'"></span>
-        by
-        <span ng-if="polltag.user" ng-bind="polltag.user.displayName"></span>
-        <span ng-if="!polltag.user">Deleted User</span>
-      </small>
-      <h4 class="list-group-item-heading" ng-bind="polltag.name"></h4>
+      <h4 class="list-group-item-heading" ng-bind="polltag.poll.title"></h4>
+      <p class="list-group-item-text" ng-bind="polltag.tag.name"></p>
     </a>
   </div>
   <div class="alert alert-warning text-center" ng-if="vm.polltags.$resolved && !vm.polltags.length">

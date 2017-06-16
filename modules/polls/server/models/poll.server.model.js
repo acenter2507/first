@@ -70,4 +70,10 @@ PollSchema.statics.findVotes = function(id, callback) {
     poll: id
   }, callback);
 };
+
+PollSchema.statics.findTags = function(id, callback) {
+  return this.model('Polltag').find({
+    poll: id
+  }, callback);
+};
 mongoose.model('Poll', PollSchema);

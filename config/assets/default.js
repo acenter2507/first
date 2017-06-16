@@ -11,7 +11,7 @@ module.exports = {
         'public/lib/ng-tags-input/ng-tags-input.css',
         'public/lib/angular-datetime-range/dist/datetime-range.min.css',
         'public/lib/angular-datetime-inputs/dist/datetime-inputs.min.css',
-        'public/lib/adm-dtp/dist/ADM-dateTimePicker.min.css'
+        'public/lib/adm-dtp/dist/ADM-dateTimePicker.css'
       ],
       js: [
         'public/lib/angular/angular.js',
@@ -29,7 +29,7 @@ module.exports = {
         'public/lib/moment/moment.js',
         'public/lib/angular-datetime-range/dist/datetime-range.min.js',
         'public/lib/angular-datetime-inputs/dist/datetime-inputs.min.js',
-        'public/lib/adm-dtp/dist/ADM-dateTimePicker.min.js'
+        'public/lib/adm-dtp/dist/ADM-dateTimePicker.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

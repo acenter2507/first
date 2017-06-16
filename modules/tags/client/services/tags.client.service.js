@@ -1,5 +1,5 @@
 // Tags service used to communicate Tags REST endpoints
-(function () {
+(function() {
   'use strict';
 
   angular
@@ -16,5 +16,17 @@
         method: 'PUT'
       }
     });
+  }
+
+  angular
+    .module('tags')
+    .factory('TagsApi', TagsApi);
+
+  TagsApi.$inject = ['$http', '$q'];
+
+  function TagsApi($http, $q) {
+    this.loadTag = () => {
+
+    };
   }
 }());

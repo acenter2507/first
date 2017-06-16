@@ -1,59 +1,55 @@
-<section class="content">
-  <section class="container">
-    <section>
-      <div class="page-header">
-        <h3>{{vm.poll._id ? 'Edit Poll' : 'New Poll'}}</h3>
-      </div>
-      <div class="col-md-12">
-        <form name="vm.form.pollForm" class="form-horizontal" ng-submit="vm.save(vm.form.pollForm.$valid)" novalidate>
-          <fieldset>
-            <!-- Title -->
-            <div class="form-group" show-errors>
-              <label class="control-label" for="title">Title</label>
-              <input name="title" type="text" ng-model="vm.poll.title" id="title" class="form-control" placeholder="Title" required>
-              <div ng-messages="vm.form.pollForm.title.$error" role="alert">
-                <p class="help-block error-text" ng-message="required">Poll title is required.</p>
-              </div>
-            </div>
-            <!-- Body -->
-            <div class="form-group" show-errors>
-              <label class="control-label" for="body">Body</label>
-              <textarea name="body" ng-model="vm.poll.body" id="body" class="form-control" placeholder="Body" required></textarea>
-              <div ng-messages="vm.form.pollForm.body.$error" role="alert">
-                <p class="help-block error-text" ng-message="required">Poll body is required.</p>
-              </div>
-            </div>
-            <!-- Vote option -->
-            <div class="form-group">
-              <label>
-                <switch id="only_member" name="only_member" ng-model="vm.poll.only_member" class="blue"></switch>
-                Allow guests can vote</label>
-            </div>
-            <!-- Add option -->
-            <div class="form-group">
-              <label>
-                <switch id="allow_add" name="allow_add" ng-model="vm.poll.allow_add" class="blue"></switch>
-                Allow members add option</label>
-            </div>
-            <!-- Close date -->
-            <div class="form-group">
-              <label class="control-label" for="close">Close</label>
-              <input type="datetime-local" ng-model="vm.poll.close" class="form-control" name="close" id="close" min="{{vm.close_min}}">
-            </div>
-            <div class="form-group">
-              <button type="submit" class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i>{{vm.poll._id ? ' Update' : ' Create'}}</button>
-              <a class="btn btn-default" ng-click="vm.discard()"><i class="fa fa-times" aria-hidden="true"></i> Discard</a>
-            </div>
-            <div ng-show="vm.error" class="text-danger">
-              <strong ng-bind="vm.error"></strong>
-            </div>
-          </fieldset>
-        </form>
-      </div>
-      <div class="clearfix"></div>
-      <div class="col-md-12">
-        <div ui-view="options"></div>
-      </div>
-    </section>
-  </section>
+<section class="container">
+  <div class="page-header">
+    <h3>{{vm.poll._id ? 'Edit Poll' : 'New Poll'}}</h3>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.pollForm" class="form-horizontal" ng-submit="vm.save(vm.form.pollForm.$valid)" novalidate>
+      <fieldset>
+        <!-- Title -->
+        <div class="form-group" show-errors>
+          <label class="control-label" for="title">Title</label>
+          <input name="title" type="text" ng-model="vm.poll.title" id="title" class="form-control" placeholder="Title" required>
+          <div ng-messages="vm.form.pollForm.title.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Poll title is required.</p>
+          </div>
+        </div>
+        <!-- Body -->
+        <div class="form-group" show-errors>
+          <label class="control-label" for="body">Body</label>
+          <textarea name="body" ng-model="vm.poll.body" id="body" class="form-control" placeholder="Body" required></textarea>
+          <div ng-messages="vm.form.pollForm.body.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Poll body is required.</p>
+          </div>
+        </div>
+        <!-- Vote option -->
+        <div class="form-group">
+          <label>
+            <switch id="only_member" name="only_member" ng-model="vm.poll.only_member" class="blue"></switch>
+            Allow guests can vote</label>
+        </div>
+        <!-- Add option -->
+        <div class="form-group">
+          <label>
+            <switch id="allow_add" name="allow_add" ng-model="vm.poll.allow_add" class="blue"></switch>
+            Allow members add option</label>
+        </div>
+        <!-- Close date -->
+        <div class="form-group">
+          <label class="control-label" for="close">Close</label>
+          <input type="datetime-local" ng-model="vm.poll.close" class="form-control" name="close" id="close" min="{{vm.close_min}}">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i>{{vm.poll._id ? ' Update' : ' Create'}}</button>
+          <a class="btn btn-default" ng-click="vm.discard()"><i class="fa fa-times" aria-hidden="true"></i> Discard</a>
+        </div>
+        <div ng-show="vm.error" class="text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+  <div class="clearfix"></div>
+  <div class="col-md-12">
+    <div ui-view="options"></div>
+  </div>
 </section>

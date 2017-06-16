@@ -1,4 +1,4 @@
-<section>
+<section class="container">
   <div class="page-header">
     <h3 ng-bind="vm.poll.title"></h3>
     <div class="pull-right" ng-show="vm.poll.isCurrentUserOwner || vm.poll.canEdit">
@@ -22,6 +22,6 @@
     </em>
   </small>
   <p class="text-justify" ng-bind="vm.poll.body"></p>
+  <div ui-view="opts"></div>
+  <div ui-view="cmts"></div>
 </section>
-<div ui-view="opts"></div>
-<div ui-view="cmts"></div>

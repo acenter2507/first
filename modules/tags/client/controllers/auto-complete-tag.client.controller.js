@@ -1,4 +1,4 @@
-(function () {
+(function() {
   'use strict';
 
   // Tags controller
@@ -8,9 +8,9 @@
 
   AutocompleteTagController.$inject = ['$scope', '$http', 'TagsService'];
 
-  function AutocompleteTagController ($scope, $http, Tags) {
+  function AutocompleteTagController($scope, $http, Tags) {
     $scope.loadItems = function(query) {
-        return Tags.query().$promise;
+      return Tags.query().$promise;
     };
   }
 }());

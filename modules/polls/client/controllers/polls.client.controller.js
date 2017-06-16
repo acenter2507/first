@@ -56,7 +56,7 @@
     vm.comment = comment;
 
     $scope.start = moment();
-    $scope.end = moment().add(1, 'days').add(1, 'hours');
+    $scope.end = (vm.poll.close) ? moment(vm.poll.close) : null;
 
     $scope.presets = [{
       'name': 'This Week',

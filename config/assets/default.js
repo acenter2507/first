@@ -21,7 +21,8 @@ module.exports = {
         'public/lib/angular-file-upload/angular-file-upload.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
         'public/lib/angular-ui-switch/angular-ui-switch.js',
-        'public/lib/ng-tags-input/ng-tags-input.js'
+        'public/lib/ng-tags-input/ng-tags-input.js',
+        'public/lib/underscore/underscore.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

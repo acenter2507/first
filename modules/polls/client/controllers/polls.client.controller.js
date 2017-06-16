@@ -61,6 +61,7 @@
       minuteStep: 30,
       zIndex: 1000
     };
+    $scope.date = moment();
     $scope.print = function(datetime) {
       console.log('datetime', datetime);
     };

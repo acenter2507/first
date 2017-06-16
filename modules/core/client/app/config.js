@@ -13,8 +13,7 @@ var ApplicationConfiguration = (function() {
     'ui.utils',
     'angularFileUpload',
     'uiSwitch',
-    'ngTagsInput',
-    'ADM-dateTimePicker'
+    'ngTagsInput'
   ];
 
   // Add a new vertical module

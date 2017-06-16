@@ -1,37 +1,33 @@
-<section class="content">
-  <section class="container">
-    <section>
-      <div class="page-header">
-        <h3>{{vm.cmt._id ? 'Edit Cmt' : 'New Cmt'}}</h3>
-      </div>
-      <div class="col-md-12">
-        <form name="vm.form.cmtForm" class="form-horizontal" ng-submit="vm.save(vm.form.cmtForm.$valid)" novalidate>
-          <fieldset>
-            <div class="form-group" show-errors>
-              <label class="control-label" for="body">Body</label>
-              <textarea name="body" ng-model="vm.cmt.body" id="body" class="form-control" placeholder="Body" required></textarea>
-              <div ng-messages="vm.form.cmtForm.body.$error" role="alert">
-                <p class="help-block error-text" ng-message="required">Cmt body is required.</p>
-              </div>
-            </div>
-            <!-- Poll -->
-            <div class="form-group" show-errors>
-              <label class="control-label" for="poll">Poll</label>
-              <select id="poll" name="poll" ng-model="vm.cmt.poll" class="form-control" ng-options="poll as poll._id for poll in vm.polls" required>
-              </select>
-              <div ng-messages="vm.form.cmtForm.poll.$error" role="alert">
-                <p class="help-block error-text" ng-message="required">Poll is required.</p>
-              </div>
-            </div>
-            <div class="form-group">
-              <button type="submit" class="btn btn-default">{{vm.cmt._id ? 'Update' : 'Create'}}</button>
-            </div>
-            <div ng-show="vm.error" class="text-danger">
-              <strong ng-bind="vm.error"></strong>
-            </div>
-          </fieldset>
-        </form>
-      </div>
-    </section>
-  </section>
+<section>
+  <div class="page-header">
+    <h3>{{vm.cmt._id ? 'Edit Cmt' : 'New Cmt'}}</h3>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.cmtForm" class="form-horizontal" ng-submit="vm.save(vm.form.cmtForm.$valid)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="body">Body</label>
+          <textarea name="body" ng-model="vm.cmt.body" id="body" class="form-control" placeholder="Body" required></textarea>
+          <div ng-messages="vm.form.cmtForm.body.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Cmt body is required.</p>
+          </div>
+        </div>
+        <!-- Poll -->
+        <div class="form-group" show-errors>
+          <label class="control-label" for="poll">Poll</label>
+          <select id="poll" name="poll" ng-model="vm.cmt.poll" class="form-control" ng-options="poll as poll._id for poll in vm.polls" required>
+          </select>
+          <div ng-messages="vm.form.cmtForm.poll.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Poll is required.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-default">{{vm.cmt._id ? 'Update' : 'Create'}}</button>
+        </div>
+        <div ng-show="vm.error" class="text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
 </section>

@@ -13,8 +13,7 @@ var ApplicationConfiguration = (function() {
     'ui.utils',
     'angularFileUpload',
     'uiSwitch',
-    'ngTagsInput',
-    'ngMaterialDatePicker'
+    'ngTagsInput'
   ];
 
   // Add a new vertical module

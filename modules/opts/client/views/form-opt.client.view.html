@@ -1,41 +1,43 @@
-<section>
-  <div class="page-header">
-    <h3>{{vm.opt._id ? 'Edit Opt' : 'New Opt'}}</h3>
-  </div>
-  <div class="col-md-12">
-    <form name="vm.form.optForm" class="form-horizontal" ng-submit="vm.save(vm.form.optForm.$valid)" novalidate>
-      <fieldset>
-        <!-- Title -->
-        <div class="form-group" show-errors>
-          <label class="control-label" for="title">Title</label>
-          <input name="title" type="text" ng-model="vm.opt.title" id="title" class="form-control" placeholder="Title" required>
-          <div ng-messages="vm.form.optForm.title.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Opt title is required.</p>
-          </div>
-        </div>
-
-        <!-- Body -->
-        <div class="form-group">
-          <label class="control-label" for="body">Body</label>
-          <textarea name="body" ng-model="vm.opt.body" id="body" class="form-control" placeholder="Body" required></textarea>
-        </div>
-
-        <!-- Poll -->
-        <div class="form-group" show-errors>
-          <label class="control-label" for="poll">Poll</label>
-          <select id="poll" name="poll" ng-model="vm.opt.poll" class="form-control" ng-options="poll as poll._id for poll in vm.polls" required>
-          </select>
-          <div ng-messages="vm.form.optForm.poll.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Poll is required.</p>
-          </div>
-        </div>
-        <div class="form-group">
-          <button type="submit" class="btn btn-default">{{vm.opt._id ? 'Update' : 'Create'}}</button>
-        </div>
-        <div ng-show="vm.error" class="text-danger">
-          <strong ng-bind="vm.error"></strong>
-        </div>
-      </fieldset>
-    </form>
-  </div>
+<section class="content">
+  <section class="container">
+    <section>
+      <div class="page-header">
+        <h3>{{vm.opt._id ? 'Edit Opt' : 'New Opt'}}</h3>
+      </div>
+      <div class="col-md-12">
+        <form name="vm.form.optForm" class="form-horizontal" ng-submit="vm.save(vm.form.optForm.$valid)" novalidate>
+          <fieldset>
+            <!-- Title -->
+            <div class="form-group" show-errors>
+              <label class="control-label" for="title">Title</label>
+              <input name="title" type="text" ng-model="vm.opt.title" id="title" class="form-control" placeholder="Title" required>
+              <div ng-messages="vm.form.optForm.title.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Opt title is required.</p>
+              </div>
+            </div>
+            <!-- Body -->
+            <div class="form-group">
+              <label class="control-label" for="body">Body</label>
+              <textarea name="body" ng-model="vm.opt.body" id="body" class="form-control" placeholder="Body" required></textarea>
+            </div>
+            <!-- Poll -->
+            <div class="form-group" show-errors>
+              <label class="control-label" for="poll">Poll</label>
+              <select id="poll" name="poll" ng-model="vm.opt.poll" class="form-control" ng-options="poll as poll._id for poll in vm.polls" required>
+              </select>
+              <div ng-messages="vm.form.optForm.poll.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Poll is required.</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-default">{{vm.opt._id ? 'Update' : 'Create'}}</button>
+            </div>
+            <div ng-show="vm.error" class="text-danger">
+              <strong ng-bind="vm.error"></strong>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </section>
+  </section>
 </section>

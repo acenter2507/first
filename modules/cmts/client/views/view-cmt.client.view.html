@@ -1,17 +1,19 @@
-<section>
-  <div class="page-header">
-    <h3 ng-bind="vm.cmt.name"></h3>
-    <div class="pull-right" ng-show="vm.cmt.isCurrentUserOwner">
-      <a class="btn btn-info" ui-sref="cmts.edit({ cmtId: vm.cmt._id })">
-        <i class="glyphicon glyphicon-edit"></i> Edit
-      </a>
-      <a class="btn btn-danger" ng-click="vm.remove()">
-        <i class="glyphicon glyphicon-trash"></i> Delete
-      </a>
-    </div>
-    <div class="clearfix"></div>
-  </div>
-  <small>
+<section class="content">
+  <section class="container">
+    <section>
+      <div class="page-header">
+        <h3 ng-bind="vm.cmt.name"></h3>
+        <div class="pull-right" ng-show="vm.cmt.isCurrentUserOwner">
+          <a class="btn btn-info" ui-sref="cmts.edit({ cmtId: vm.cmt._id })">
+            <i class="glyphicon glyphicon-edit"></i> Edit
+          </a>
+          <a class="btn btn-danger" ng-click="vm.remove()">
+            <i class="glyphicon glyphicon-trash"></i> Delete
+          </a>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <small>
     <em class="text-muted">
       Posted on
       <span ng-bind="vm.cmt.created | date:'mediumDate'"></span>
@@ -23,5 +25,7 @@
       <span ng-bind="vm.cmt.poll.title"></span>
     </em>
   </small>
-  <p class="text-justify" ng-bind="vm.cmt.body"></p>
+      <p class="text-justify" ng-bind="vm.cmt.body"></p>
+    </section>
+  </section>
 </section>

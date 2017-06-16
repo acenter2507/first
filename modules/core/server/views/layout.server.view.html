@@ -37,7 +37,9 @@
 
 <body class="ng-cloak">
   <header ng-include="'/modules/core/client/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
-  {% block content %}{% endblock %}
+
+  <section class="content">{% block content %}{% endblock %}</section>
+
   <!--Embedding The User Object-->
   <script type="text/javascript">
     var user = {{ user | json | safe }};

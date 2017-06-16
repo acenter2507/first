@@ -38,7 +38,7 @@
           <label class="control-label" for="close">Date end of poll:</label>
           
         </div>
-        <adm-dtp id="close" name="close" ng-model='vm.poll.close' options="dtp_options"></adm-dtp>
+        <adm-dtp id="close" name="close" ng-model="vm.poll.close" options="dtp_options"></adm-dtp>
         <!-- Tags -->
         <div class="form-group">
           <label class="control-label" for="#">Current tags: {{(!vm.poll.tags.length) ? 'Has no tag was added' : ''}}</label>
@@ -64,7 +64,6 @@
     </form>
   </div>
   <div class="clearfix"></div>
-  <adm-dtp ng-model='date'></adm-dtp>
   <div class="col-md-12">
     <div ui-view="options"></div>
   </div>

@@ -1,4 +1,8 @@
 <section class="container">
+<!--   <div class="row">
+    <div class="col col-xs-12 col-sm-12 col-md-8 col-lg-8"></div>
+    <div class="col col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
+  </div> -->
   <div class="page-header">
     <h3 ng-bind="vm.poll.title"></h3>
     <div class="pull-right" ng-show="vm.poll.isCurrentUserOwner || vm.poll.canEdit">
@@ -24,4 +28,11 @@
   <p class="text-justify" ng-bind="vm.poll.body"></p>
   <div ui-view="opts"></div>
   <div ui-view="cmts"></div>
+  <div class="row">
+    <div class="col-xs-12">
+      <p>Tags:
+        <a ng-repeat="polltag in vm.polltags" ui-sref="tags.view({ tagId: polltag.tag._id })">{{polltag.tag.name}}</a>
+      </p>
+    </div>
+  </div>
 </section>

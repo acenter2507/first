@@ -36,6 +36,14 @@
         .catch(err => {
           alert('error' + err);
         });
+      // Get all Cmts
+      PollsApi.findTags(poll._id)
+        .then(polltags => {
+          vm.polltags = polltags.data;
+        })
+        .catch(err => {
+          alert('error' + err);
+        });
     }
 
     // Function

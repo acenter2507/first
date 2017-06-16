@@ -31,6 +31,9 @@
       },
       findCmts: (id) => {
         return $http.get('/api/findCmts/' + id);
+      },
+      findTags: (id) => {
+        return $http.get('/api/findTags/' + id);
       }
     };
   }

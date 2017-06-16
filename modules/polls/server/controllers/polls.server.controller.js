@@ -125,6 +125,21 @@ exports.findCmts = function(req, res) {
 };
 
 /**
+ * List of Opts in poll
+ */
+exports.findTags = function(req, res) {
+  Poll.findTags(req.poll._id).populate('tag').exec(function(err, polltags) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(polltags);
+    }
+  });
+};
+
+/**
  * Poll middleware
  */
 exports.pollByID = function(req, res, next, id) {

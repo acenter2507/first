@@ -1,8 +1,7 @@
 <section>
-  <h3 ng-if="vm.authentication.isAdmin">Hello Admin</h3>
   <div class="page-header">
     <h1 ng-bind="vm.poll.title"></h1>
-    <div class="pull-right" ng-show="vm.poll.isCurrentUserOwner">
+    <div class="pull-right" ng-show="vm.poll.isCurrentUserOwner || vm.authentication.isAdmin">
       <a class="btn btn-info" ui-sref="polls.edit({ pollId: vm.poll._id })">
         <i class="glyphicon glyphicon-edit"></i> Edit
       </a>

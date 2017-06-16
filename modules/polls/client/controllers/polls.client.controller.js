@@ -94,5 +94,14 @@
         $state.go('polls.list');
       }
     }
+
+    // Comment
+    function comment() {
+      if (vm.authentication.user) {
+        alert("You can repply in this poll");
+      } else {
+        $state.go('authentication.signin');
+      }
+    }
   }
 }());

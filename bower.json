@@ -20,7 +20,8 @@
     "ng-tags-input": "^3.2.0",
     "underscore": "^1.8.3",
     "moment": "^2.18.1",
-    "angular-datetime-range": "^0.2.13"
+    "angular-datetime-range": "^0.2.13",
+    "angular-datetime-inputs": "^0.1.30"
   },
   "resolutions": {
     "angular": "~1.3"

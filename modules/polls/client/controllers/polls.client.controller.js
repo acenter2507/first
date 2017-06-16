@@ -13,7 +13,7 @@
 
     vm.authentication = Authentication;
     vm.poll = poll;
-    vm.poll.close = (vm.poll.close) ? new Date(vm.poll.close) : vm.poll.close;
+    vm.poll.close = (vm.poll.close) ? moment(vm.poll.close) : vm.poll.close;
     vm.poll.tags = [];
     vm.bk_poll = angular.copy(poll);
     vm.close_min = new Date();
@@ -61,10 +61,6 @@
       minuteStep: 30,
       zIndex: 1000
     };
-    $scope.date = moment();
-    $scope.print = function(datetime) {
-      console.log('datetime', datetime);
-    };
 
     // Remove existing Poll
     function remove() {
@@ -79,6 +75,7 @@
         $scope.$broadcast('show-errors-check-validity', 'vm.form.pollForm');
         return false;
       }
+      console.log(vm.poll);
       // TODO: move create/update logic to service
       if (vm.poll._id) {
         vm.poll.$update(successCallback, errorCallback);

@@ -8,7 +8,8 @@ module.exports = {
         'public/lib/bootstrap/dist/css/bootstrap-theme.css',
         'public/lib/components-font-awesome/css/font-awesome.css',
         'public/lib/angular-ui-switch/angular-ui-switch.css',
-        'public/lib/ng-tags-input/ng-tags-input.css'
+        'public/lib/ng-tags-input/ng-tags-input.css',
+        'public/lib/extended-datetimepicker/css/extended-datetimepicker.css'
       ],
       js: [
         'public/lib/angular/angular.js',
@@ -23,7 +24,8 @@ module.exports = {
         'public/lib/angular-ui-switch/angular-ui-switch.js',
         'public/lib/ng-tags-input/ng-tags-input.js',
         'public/lib/underscore/underscore.js',
-        'public/lib/moment/moment.js'
+        'public/lib/moment/moment.js',
+        'public/lib/extended-datetimepicker/js/extended-datetimepicker.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

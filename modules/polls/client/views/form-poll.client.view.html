@@ -35,8 +35,10 @@
         </div>
         <!-- Close date -->
         <div class="form-group">
-          <label class="control-label" for="close">Date end of poll:</label>
-          
+          <md-input-container flex-gt-md="30">
+            <label>Date end of poll:</label>
+            <input mdc-datetime-picker date="true" time="true" type="text" id="close" format="YYYY-MM-DD HH:mm" ng-model="vm.poll.close">
+          </md-input-container>
         </div>
         <!-- Tags -->
         <div class="form-group">

@@ -6,11 +6,13 @@
     .module('polltags')
     .controller('PolltagsController', PolltagsController);
 
-  PolltagsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'polltagResolve'];
+  PolltagsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'polltagResolve', 'PollsService', 'TagsService'];
 
-  function PolltagsController ($scope, $state, $window, Authentication, polltag) {
+  function PolltagsController ($scope, $state, $window, Authentication, polltag, Polls, Tags) {
     var vm = this;
 
+    $scope.polls = Polls.query();
+    $scope.tags = Tags.query();
     vm.authentication = Authentication;
     vm.polltag = polltag;
     vm.error = null;

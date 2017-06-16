@@ -8,7 +8,7 @@
         <!-- Poll -->
         <div class="form-group" show-errors>
           <label class="control-label" for="poll">Poll</label>
-          <select id="poll" name="poll" ng-model="vm.polltag.poll" class="form-control" ng-options="poll as poll._id for poll in vm.polls" required>
+          <select id="poll" name="poll" ng-model="vm.polltag.poll" class="form-control" ng-options="poll as poll.title for poll in polls" required>
           </select>
           <div ng-messages="vm.form.polltagForm.poll.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Poll is required.</p>
@@ -18,7 +18,7 @@
         <!-- Poll -->
         <div class="form-group" show-errors>
           <label class="control-label" for="tag">Tag</label>
-          <select id="tag" name="tag" ng-model="vm.polltag.tag" class="form-control" ng-options="tag as tag._id for tag in vm.tags" required>
+          <select id="tag" name="tag" ng-model="vm.polltag.tag" class="form-control" ng-options="tag as tag.name for tag in tags" required>
           </select>
           <div ng-messages="vm.form.polltagForm.tag.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Tag is required.</p>

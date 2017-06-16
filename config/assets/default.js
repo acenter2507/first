@@ -8,7 +8,8 @@ module.exports = {
         'public/lib/bootstrap/dist/css/bootstrap-theme.css',
         'public/lib/components-font-awesome/css/font-awesome.css',
         'public/lib/angular-ui-switch/angular-ui-switch.css',
-        'public/lib/ng-tags-input/ng-tags-input.css'
+        'public/lib/ng-tags-input/ng-tags-input.css',
+        'public/lib/angular-datetime-range/dist/datetime-range.min.css'
       ],
       js: [
         'public/lib/angular/angular.js',
@@ -22,7 +23,9 @@ module.exports = {
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
         'public/lib/angular-ui-switch/angular-ui-switch.js',
         'public/lib/ng-tags-input/ng-tags-input.js',
-        'public/lib/underscore/underscore.js'
+        'public/lib/underscore/underscore.js',
+        'public/lib/moment/moment.js',
+        'public/lib/angular-datetime-range/dist/datetime-range.min.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

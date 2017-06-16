@@ -6,7 +6,6 @@ angular.module('users').factory('Authentication', ['$window',
     var auth = {
       user: $window.user,
       isAdmin: () => {
-      	console.log($window.user);
       	if (!$window.user || !$window.user.roles || !$window.user.roles.length) {
       		return false;
       	} else {

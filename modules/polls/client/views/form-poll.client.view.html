@@ -26,18 +26,17 @@
           <label class="control-label" for="tags">Tags</label>
           <input name="tags" type="text" ng-model="vm.poll.tags" id="tags" class="form-control" placeholder="Tags">
         </div>
+        <!-- Vote option -->
+        <div class="form-group">
+          <label>
+          <switch id="only_member" name="only_member" ng-model="vm.poll.only_member" class="blue"></switch>
+          Allow guests can vote</label>
+        </div>
         <!-- Add option -->
         <div class="form-group">
           <label>
-          <switch id="only_member" name="only_member" ng-model="vm.poll.only_member" class="green"></switch>
-          Only members can vote</label>
-          <br>{{ vm.poll.only_member }}
-<!--           <div class="checkbox">
-            <label>
-
-              <input type="checkbox" ng-model="vm.poll.only_member" name="only_member" id="only_member">
-              Only members can vote</label>
-          </div> -->
+          <switch id="allow_add" name="allow_add" ng-model="vm.poll.allow_add" class="blue"></switch>
+          Allow members add option</label>
         </div>
 
         <!-- Close date -->

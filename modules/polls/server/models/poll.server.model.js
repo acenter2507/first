@@ -24,7 +24,11 @@ var PollSchema = new Schema({
   },
   only_member: {
     type: Boolean,
-    default: true
+    default: false
+  },
+  allow_add: {
+    type: Boolean,
+    default: false
   },
   user: {
     type: Schema.ObjectId,

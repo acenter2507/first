@@ -36,7 +36,7 @@ exports.read = function(req, res) {
 
   // Add a custom field to the Article, for determining if the current User is the "owner".
   // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
-  polltag.isCurrentUserOwner = req.user && polltag.user && polltag.user._id.toString() === req.user._id.toString();
+  polltag.canEdit = req.user && req.user.roles && req.user.roles.length && req.user.roles.indexOf('admin') > -1;
 
   res.jsonp(polltag);
 };

@@ -26,7 +26,7 @@
     Menus.addSubMenuItem('topbar', 'polltags', {
       title: 'Create Polltag',
       state: 'polltags.create',
-      roles: ['user']
+      roles: ['admin']
     });
   }
 }());

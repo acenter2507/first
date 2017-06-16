@@ -1,6 +1,10 @@
 <section>
   <div class="page-header">
-    <h1>Polls</h1>
+    <div class="col col-xs-12 col-sm-8"><h3>Polls</h3></div>
+    <div class="col col-xs-12 col-sm-4">
+      <a class="btn btn-primary pull-right" ui-sref="polls.create">Create poll</a>
+    </div>
+    <div class="clearfix"></div>
   </div>
   <div class="list-group">
     <a ng-repeat="poll in vm.polls"

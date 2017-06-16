@@ -1,6 +1,6 @@
 <section>
   <div class="page-header">
-    <h1 ng-bind="vm.poll.title"></h1>
+    <h3 ng-bind="vm.poll.title"></h3>
     <div class="pull-right" ng-show="vm.poll.isCurrentUserOwner || vm.poll.canEdit">
       <a class="btn btn-info" ui-sref="polls.edit({ pollId: vm.poll._id })">
         <i class="glyphicon glyphicon-edit"></i> Edit

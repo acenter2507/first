@@ -34,7 +34,7 @@
             Allow members add option</label>
         </div>
         <!-- Close date -->
-        <div class="form-group">
+        <div class="form-group" ng-controller="DatetimeController">
           <md-input-container flex-gt-md="30">
             <label>Date end of poll:</label>
             <input mdc-datetime-picker date="true" time="true" type="text" id="close" format="YYYY-MM-DD HH:mm" ng-model="vm.poll.close">

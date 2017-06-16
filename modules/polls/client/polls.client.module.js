@@ -1,5 +1,5 @@
 (function (app) {
   'use strict';
 
-  app.registerModule('polls', ['ngMaterialDatePicker']);
+  app.registerModule('polls');
 }(ApplicationConfiguration));

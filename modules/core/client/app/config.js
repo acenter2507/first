@@ -14,8 +14,6 @@ var ApplicationConfiguration = (function() {
     'angularFileUpload',
     'uiSwitch',
     'ngTagsInput',
-    'g1b.datetime-range',
-    'g1b.datetime-inputs',
     'ADM-dateTimePicker'
   ];
 

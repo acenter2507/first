@@ -8,7 +8,7 @@
 
   AutocompleteTagController.$inject = ['$scope', '$http', '$q', 'TagsService'];
 
-  function AutocompleteTagController($scope, $http, Tags) {
+  function AutocompleteTagController($scope, $http, $q, Tags) {
     $scope.tags = Tags.query();
 
     $scope.loadItems = function(query) {

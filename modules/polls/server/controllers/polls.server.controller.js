@@ -33,8 +33,7 @@ exports.create = function(req, res) {
     .then(_tags => {
       promises = [];
       res.jsonp(poll);
-    })
-    .catch(err => {
+    }, err => {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
@@ -81,21 +80,11 @@ exports.update = function(req, res) {
     .then(_tags => {
       promises = [];
       res.jsonp(poll);
-    })
-    .catch(err => {
+    }, err => {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     });
-  poll.save(function(err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.jsonp(poll);
-    }
-  });
 };
 
 /**

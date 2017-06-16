@@ -12,6 +12,7 @@
     var vm = this;
 
     vm.authentication = Authentication;
+    console.log(vm.authentication.user);
     vm.poll = poll;
     vm.poll.close = (vm.poll.close) ? new Date(vm.poll.close) : vm.poll.close;
     vm.bk_poll = angular.copy(poll);

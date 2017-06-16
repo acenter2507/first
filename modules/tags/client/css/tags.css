@@ -18,6 +18,10 @@
   color: #999;
 }
 
+.tags-custom .tags .tag-item .remove-button {
+  text-decoration: none;
+}
+
 .tags-custom .tags .tag-item.selected {
   background: #d9534f;
   border: 1px solid #d43f3a;

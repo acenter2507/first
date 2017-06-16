@@ -6,7 +6,7 @@ angular.module('users').factory('Authentication', ['$window',
     var auth = {
       user: $window.user,
       isAdmin: () => {
-        return ($window.user.roles.indexOf('admin') > -1);
+        return ($window.user && $window.user.roles.indexOf('admin') > -1);
       }
     };
     return auth;

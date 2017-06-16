@@ -35,11 +35,8 @@
         </div>
         <!-- Close date -->
         <div class="form-group">
-          <label class="control-label" for="close">Date end of poll:{{ (vm.poll.close) ? '' : 'Unlimited'}}</label>
-          <!--           <input type="datetime-local" ng-model="vm.poll.close" class="form-control" name="close" id="close" min="{{vm.close_min}}"> -->
-          <!-- <datetime-range start="start" end="end" presets="presets" on-change="changed()" on-change-start="changedStart()" on-change-end="changedEnd()" on-close="closed()">
-          </datetime-range> -->
-          <datetime-input datetime="" on-change="print(now)"></datetime-input>
+          <label class="control-label" for="close">Date end of poll:</label>
+          <adm-dtp ng-model='vm.poll.close' disable='{{!vm.poll.close}}'></adm-dtp>
         </div>
         <!-- Tags -->
         <div class="form-group">

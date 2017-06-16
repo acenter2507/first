@@ -33,6 +33,6 @@
     inject: true,
     register: true,
     sinon: true,
-    _: false
+    _: true
   }
 }

@@ -21,7 +21,7 @@
         <!-- Poll -->
         <div class="form-group" show-errors>
           <label class="control-label" for="poll">Poll</label>
-          <select id="poll" name="poll" ng-model="vm.opt.poll" class="form-control" ng-options="poll as poll._id for poll in vm.polls" required>
+          <select id="poll" name="poll" ng-model="vm.opt.poll" class="form-control" ng-options="poll as poll.title for poll in vm.polls" required>
           </select>
           <div ng-messages="vm.form.optForm.poll.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Poll is required.</p>

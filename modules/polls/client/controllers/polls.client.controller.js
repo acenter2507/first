@@ -42,6 +42,7 @@
     vm.remove = remove;
     vm.save = save;
     vm.discard = discard;
+    vm.comment = comment;
 
     // Remove existing Poll
     function remove() {

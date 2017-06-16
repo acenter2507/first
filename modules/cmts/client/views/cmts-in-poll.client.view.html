@@ -4,6 +4,7 @@
     <div class="pull-right">
       <button class="btn btn-primary btn-sm" ng-click="vm.comment"><i class="fa fa-reply" aria-hidden="true"></i> Reply</button>
     </div>
+    <div class="clearfix"></div>
   </div>
   <div class="list-group">
     <a ng-repeat="cmt in vm.cmts" ui-sref="cmts.view({ cmtId: cmt._id })" class="list-group-item">

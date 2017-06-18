@@ -13,21 +13,17 @@
   border: 1px solid #e3e3e3;
 }
 
-.item-title　{
-  margin-top: 0;
+.poll-item-title　{
+  margin-top: 0 !important;
 }
 
-.item-title　a {
+.poll-item-title　a {
   text-decoration: none !important;
 }
 
-.item-info　{
-  display: inline;
+.poll-item-info　{
+  display: inline !important;
 }
-
-/*.poll-item .poll-item-info:not(:first-child)　{
-  margin-right: 10px;
-}*/
 
 .tags {
   list-style: none;

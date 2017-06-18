@@ -128,7 +128,6 @@
     vm.comment = {};
     vm.comment_form_change_screen = comment_form_change_screen;
     vm.send_comment = send_comment;
-    vm.save_comment = save_comment;
     vm.reply = reply;
 
     function comment_form_change_screen() {
@@ -140,11 +139,27 @@
         $scope.$broadcast('show-errors-check-validity', 'vm.form.cmtForm');
         return false;
       }
-      save_comment();
-    }
+      if (vm.comment._id) {
+        vm.comment.$update(successCallback, errorCallback);
+      } else {
+        vm.poll.cmtCnt += 1;
+        vm.poll.update((_poll) => {
+          vm.comment.poll = _poll;
+          vm.comment.$save(successCallback, errorCallback);
+        }, errorCallback);
+      }
 
-    function save_comment() {
-      console.log(vm.comment);
+      function successCallback(res) {
+        $state.reload();
+        // $state.go('polls.view', {
+        //   pollId: res._id
+        // });
+      }
+
+      function errorCallback(err) {
+        console.log(err);
+        //vm.error = res.data.message;
+      }
     }
 
     function reply(cmt) {

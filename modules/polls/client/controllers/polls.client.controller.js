@@ -13,11 +13,10 @@
     'Authentication',
     'pollResolve',
     'PollsApi',
-    'TagsService',
-    '$aside'
+    'TagsService'
   ];
 
-  function PollsController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $aside) {
+  function PollsController($scope, $state, $window, Authentication, poll, PollsApi, Tags) {
     var vm = this;
 
     vm.authentication = Authentication;

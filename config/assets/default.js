@@ -6,6 +6,7 @@ module.exports = {
       css: [
         'public/lib/bootstrap/dist/css/bootstrap.css',
         'public/lib/bootstrap/dist/css/bootstrap-theme.css',
+        'public/lib/angular-motion/dist/angular-motion.css',
         'public/lib/components-font-awesome/css/font-awesome.css',
         'public/lib/angular-ui-switch/angular-ui-switch.css',
         'public/lib/ng-tags-input/ng-tags-input.css',

@@ -2,19 +2,19 @@
   background-color: red !important;
 }
 
-.poll-list .well {
+.poll-list .poll-item {
   background-color: red !important;
 }
 
-.poll-list .well a h2　{
+.poll-list .poll-item a h2　{
   margin-top: 0 !important;
 }
 
-.poll-list .well p.poll-item-info　{
+.poll-list .poll-item p.poll-item-info　{
   display: inline !important;
 }
 
-.poll-list .well p.poll-item-info:not(:first-child)　{
+.poll-list .poll-item p.poll-item-info:not(:first-child)　{
   margin-right: 10px !important;
 }
 

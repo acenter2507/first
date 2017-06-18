@@ -34,11 +34,15 @@ var PollSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'User'
   },
-  viewCount: {
+  viewCnt: {
     type: 'Number',
     default: 0
   },
   opts: [{ type: Schema.ObjectId, ref: 'Opt' }],
+  voteCnt: {
+    type: 'Number',
+    default: 0
+  },
   created: {
     type: Date,
     default: Date.now

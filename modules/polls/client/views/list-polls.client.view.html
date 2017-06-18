@@ -1,27 +1,25 @@
 <section class="container">
-  <div class="page-header">
-    <div class="col col-xs-12 col-sm-8"><h3>Polls</h3></div>
-    <div class="col col-xs-12 col-sm-4">
-      <a class="btn btn-primary pull-right" ui-sref="polls.create">Create poll</a>
+  <div class="row">
+    <div class="well poll-item" ng-repeat="poll in vm.polls">
+      <a ui-sref="polls.view({ pollId: poll._id })"><h2 ng-bind="poll.title"></h2></a>
+      <p class="poll-item-info">
+        <i class="fa fa-heart-o" aria-hidden="true"></i>
+        <strong> Vote: </strong>{{poll.voteCnt}}
+      </p>
+      <p class="poll-item-info">
+        <i class="fa fa-eye" aria-hidden="true"></i>
+        <strong> View: </strong>{{poll.viewCnt}}
+      </p>
+      <p class="poll-item-info">
+        <i class="fa fa-user" aria-hidden="true"></i>
+        <strong> Added by: </strong>
+        <span ng-if="poll.user" ng-bind="poll.user.displayName"></span>
+        <span ng-if="!poll.user">Deleted User</span>
+      </p>
+      <p class="text-justify" ng-bind="poll.body"></p>
     </div>
-    <div class="clearfix"></div>
-  </div>
-  <div class="list-group">
-    <a ng-repeat="poll in vm.polls"
-       ui-sref="polls.view({ pollId: poll._id })"
-       class="list-group-item">
-      <small class="list-group-item-text">
-        Posted on
-        <span ng-bind="poll.created | date:'mediumDate'"></span>
-        by
-          <span ng-if="poll.user" ng-bind="poll.user.displayName"></span>
-          <span ng-if="!poll.user">Deleted User</span>
-      </small>
-      <h4 class="list-group-item-heading" ng-bind="poll.title"></h4>
-      <p class="list-group-item-text" ng-bind="poll.body"></p>
-    </a>
-  </div>
-  <div class="alert alert-warning text-center" ng-if="vm.polls.$resolved && !vm.polls.length">
-    No Polls yet, why don't you <a ui-sref="polls.create">create one</a>?
+    <div class="alert alert-warning text-center" ng-if="vm.polls.$resolved && !vm.polls.length">
+      No Polls yet, why don't you <a ui-sref="polls.create">create one</a>?
+    </div>
   </div>
 </section>

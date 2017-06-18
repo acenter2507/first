@@ -8,6 +8,7 @@ var ApplicationConfiguration = (function() {
     'ngResource',
     'ngAnimate',
     'ngMessages',
+    'ngSanitize',
     'ui.router',
     'ui.bootstrap',
     'ui.utils',

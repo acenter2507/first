@@ -6,7 +6,7 @@ module.exports = {
       css: [
         'public/lib/bootstrap/dist/css/bootstrap.css',
         'public/lib/bootstrap/dist/css/bootstrap-theme.css',
-        // 'public/lib/angular-motion/dist/angular-motion.min.css',
+        'public/lib/angular-motion/dist/angular-motion.css',
         'public/lib/components-font-awesome/css/font-awesome.css',
         'public/lib/angular-ui-switch/angular-ui-switch.css',
         'public/lib/ng-tags-input/ng-tags-input.css',
@@ -17,18 +17,19 @@ module.exports = {
         'public/lib/angular-resource/angular-resource.js',
         'public/lib/angular-animate/angular-animate.js',
         'public/lib/angular-messages/angular-messages.js',
+        'public/lib/angular-sanitize/angular-sanitize.js',
         'public/lib/angular-ui-router/release/angular-ui-router.js',
         'public/lib/angular-ui-utils/ui-utils.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
         'public/lib/angular-file-upload/angular-file-upload.js',
+        'public/lib/angular-strap/dist/angular-strap.js',
+        'public/lib/angular-strap/dist/angular-strap.tpl.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
         'public/lib/angular-ui-switch/angular-ui-switch.js',
         'public/lib/ng-tags-input/ng-tags-input.js',
         'public/lib/underscore/underscore.js',
         'public/lib/moment/moment.js',
-        'public/lib/angular-moment-picker/dist/angular-moment-picker.js',
-        'public/lib/angular-strap/dist/angular-strap.js',
-        'public/lib/angular-strap/dist/angular-strap.tpl.js'
+        'public/lib/angular-moment-picker/dist/angular-moment-picker.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

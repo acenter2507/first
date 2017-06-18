@@ -1,16 +1,16 @@
-.poll-item h2　{
+.well.poll-item h2　{
   background-color: red;
 }
 
-.poll-item h2　{
+.well.poll-item h2　{
   margin-top: 0;
 }
 
-.poll-item p.poll-item-info　{
+.well.poll-item p.poll-item-info　{
   display: inline;
 }
 
-.poll-item p.poll-item-info:not(:first-child)　{
+.well.poll-item p.poll-item-info:not(:first-child)　{
   margin-right: 10px;
 }
 

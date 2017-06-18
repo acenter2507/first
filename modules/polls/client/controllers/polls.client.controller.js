@@ -123,9 +123,9 @@
       templateUrl: 'modules/cmts/client/views/new-cmt-in-poll.client.view.html',
       title: vm.poll.title,
       placement: 'bottom',
-      animation: 'am-fade-and-slide-bottom',
-      comment: {}
+      animation: 'am-fade-and-slide-bottom'
     };
+    vm.comment = {};
     vm.comment_form_change_screen = comment_form_change_screen;
     vm.send_comment = send_comment;
     vm.save_comment = save_comment;
@@ -144,7 +144,7 @@
     }
 
     function save_comment() {
-      console.log(vm.comment_form.comment);
+      console.log(vm.comment);
     }
 
     function reply(cmt) {

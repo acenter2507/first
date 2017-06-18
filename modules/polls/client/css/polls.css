@@ -15,6 +15,7 @@
 
 .poll_item_title {
   margin-top: 0 !important;
+  text-decoration: none !important;
 }
 
 .poll_item_title　a {

@@ -26,7 +26,8 @@
     "extended-datetimepicker": "*",
     "angular-moment-picker": "moment-picker#^0.10.1",
     "angular-strap": "^2.3.12",
-    "angular-motion": "^0.4.4"
+    "angular-motion": "^0.4.4",
+    "angular-sanitize": "^1.6.4"
   },
   "resolutions": {
     "angular": "~1.3",

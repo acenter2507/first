@@ -123,8 +123,10 @@
       templateUrl: 'modules/cmts/client/views/new-cmt-in-poll.client.view.html',
       title: vm.poll.title,
       placement: 'bottom',
-      animation: 'am-fade-and-slide-bottom'
+      animation: 'am-fade-and-slide-bottom',
+      show: false
     };
+    var comment_aside = $aside(vm.comment_form);
     vm.comment = {};
     vm.comment_form_change_screen = comment_form_change_screen;
     vm.send_comment = send_comment;
@@ -150,6 +152,7 @@
       }
 
       function successCallback(res) {
+        comment_aside.$promise.then(comment_aside.hide);
         $state.reload();
         // $state.go('polls.view', {
         //   pollId: res._id
@@ -165,7 +168,7 @@
     function reply(cmt) {
       if (vm.authentication.user) {
         vm.comment = (!cmt) ? new Cmts() : cmt;
-        $aside(vm.comment_form);
+        comment_aside.$promise.then(comment_aside.show);
       } else {
         $state.go('authentication.signin');
       }

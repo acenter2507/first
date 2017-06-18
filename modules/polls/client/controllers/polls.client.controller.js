@@ -141,8 +141,6 @@
         return false;
       }
       if (vm.comment._id) {
-        console.log(vm.comment);
-        
         vm.comment.$update(successCallback, errorCallback);
       } else {
         vm.poll.cmtCnt += 1;

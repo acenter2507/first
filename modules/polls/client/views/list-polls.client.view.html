@@ -1,9 +1,9 @@
 <section class="container">
   <div class="row poll-list">
     <div ng-repeat="poll in vm.polls" class="poll-item">
-      <h2 class="poll_item_title">
+      <h3 class="poll_item_title">
         <a ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a>
-      </h2>
+      </h3>
     </div>
     <div class="alert alert-warning text-center" ng-if="vm.polls.$resolved && !vm.polls.length">
       No Polls yet, why don't you <a ui-sref="polls.create">create one</a>?

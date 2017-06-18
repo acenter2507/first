@@ -1,30 +1,31 @@
-.poll-list .poll-item {
+.poll-item {
   min-height: 20px;
   padding: 19px;
   margin-bottom: 15px;
   background-color: #fff;
   color: #555;
   border-radius: 4px;
+  cursor: pointer;
 }
 
-.poll-list .poll-item:hover {
+.poll-item:hover {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
   border: 1px solid #e3e3e3;
 }
 
-.poll-list .poll-item .poll-item-title　a{
+.poll-item .poll-item-title　a {
   text-decoration: none;
 }
 
-.poll-list .poll-item .poll-item-title　{
+.poll-item .poll-item-title　{
   margin-top: 0;
 }
 
-.poll-list .poll-item p.poll-item-info　{
+.poll-item p.poll-item-info　{
   display: inline;
 }
 
-.poll-list .poll-item p.poll-item-info:not(:first-child)　{
+.poll-item p.poll-item-info:not(:first-child)　{
   margin-right: 10px;
 }
 

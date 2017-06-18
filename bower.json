@@ -24,7 +24,8 @@
     "angular-datetime-inputs": "^0.1.30",
     "adm-dtp": "*",
     "extended-datetimepicker": "*",
-    "angular-moment-picker": "moment-picker#^0.10.1"
+    "angular-moment-picker": "moment-picker#^0.10.1",
+    "angular-strap": "^2.3.12"
   },
   "resolutions": {
     "angular": "~1.3",

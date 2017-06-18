@@ -4,7 +4,11 @@
   min-width: 100% !important;
 }
 
-.aside .aside-dialog .aside-header .close {
+/*.aside .aside-dialog .aside-header .close {
+}*/
+
+.aside .aside-body {
+  padding: 20px;
 }
 
 .poll-item {

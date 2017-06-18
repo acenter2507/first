@@ -140,7 +140,7 @@
         $scope.$broadcast('show-errors-check-validity', $form);
         return false;
       }
-      $form.commit();
+      save_comment();
     }
 
     function save_comment() {

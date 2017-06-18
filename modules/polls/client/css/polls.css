@@ -1,9 +1,20 @@
-.poll-list {
-  background-color: red !important;
+.poll-list .poll-item {
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 15px;
+  background-color: #fff;
+  color: #555;
+  border-radius: 4px;
 }
 
-.poll-list .poll-item {
-  background-color: red !important;
+.poll-list .poll-item: hover {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+  border: 1px solid #e3e3e3;
+}
+
+.poll-list .poll-item a h2　{
+  text-decoration: none;
 }
 
 .poll-list .poll-item a h2　{

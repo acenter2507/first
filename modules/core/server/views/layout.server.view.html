@@ -37,15 +37,10 @@
   <section class="content">{% block content %}{% endblock %}</section>
   <!--Embedding The User Object-->
   <script type="text/javascript">
-  var user = {
-    {
-      user | json | safe
-    }
-  };
+  var user = { user | json | safe };
   </script>
   <!--Load The Socket.io File-->
   <script type="text/javascript" src="/socket.io/socket.io.js"></script>
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/fontawesome/4.5.0/css/font-awesome.css">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="//mgcrea.github.io/angular-strap/styles/libs.min.css">
   <link rel="stylesheet" href="//mgcrea.github.io/angular-strap/styles/docs.min.css">

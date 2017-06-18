@@ -5,10 +5,10 @@
   </div> -->
   <div class="page-header">
     <h3 ng-bind="vm.poll.title"></h3>
-    <button type="button" class="btn btn-lg btn-primary" data-animation="am-fade-and-scale" data-placement="center" bs-modal="modal">Click to toggle modal
+<!--     <button type="button" class="btn btn-lg btn-primary" data-animation="am-fade-and-scale" data-placement="center" bs-modal="modal">Click to toggle modal
       <br>
       <small>(using an object)</small>
-    </button>
+    </button> -->
     <div class="pull-right" ng-show="vm.poll.isCurrentUserOwner || vm.poll.canEdit">
       <a class="btn btn-info" ui-sref="polls.edit({ pollId: vm.poll._id })">
         <i class="glyphicon glyphicon-edit"></i> Edit

@@ -8,17 +8,19 @@
         <h4 class="aside-title" ng-bind="title"></h4>
       </div>
       <div class="aside-body">
-        <form name="vm.form.cmtForm" class="form-horizontal" ng-submit="vm.save_comment()" novalidate>
-          <fieldset>
-            <input type="hidden" name="_id" ng-model="comment._id">
-            <div class="form-group" show-errors>
-              <textarea name="body" ng-model="comment.body" class="form-control" placeholder="Type your reply" required></textarea>
-              <div ng-messages="vm.form.cmtForm.body.$error" role="alert">
-                <p class="help-block error-text" ng-message="required">You must type something.</p>
+        <div class="col-xs-12">
+          <form name="vm.form.cmtForm" class="form-horizontal" ng-submit="vm.save_comment()" novalidate>
+            <fieldset>
+              <input type="hidden" name="_id" ng-model="comment._id">
+              <div class="form-group" show-errors>
+                <textarea name="body" ng-model="comment.body" class="form-control" placeholder="Type your reply" required></textarea>
+                <div ng-messages="vm.form.cmtForm.body.$error" role="alert">
+                  <p class="help-block error-text" ng-message="required">You must type something.</p>
+                </div>
               </div>
-            </div>
-          </fieldset>
-        </form>
+            </fieldset>
+          </form>
+        </div>
       </div>
       <div class="aside-footer">
         <button type="button" class="btn btn-default" ng-click="vm.send_comment(vm.form.cmtForm)">Send reply</button>

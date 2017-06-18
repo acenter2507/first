@@ -68,7 +68,7 @@
     //   "title": "Title",
     //   "content": "Hello Aside<br />This is a multiline message!"
     // };
-    var myOtherAside = $aside({ scope: $scope, template: 'modules/cmts/client/views/new-cmt-in-poll.client.view.html' });
+    // var myOtherAside = $aside({ scope: $scope, template: 'modules/cmts/client/views/new-cmt-in-poll.client.view.html' });
 
     // Remove existing Poll
     function remove() {
@@ -124,8 +124,8 @@
     // Comment
     function comment() {
       if (vm.authentication.user) {
-        //alert('You can repply in this poll');
-        myOtherAside.show();
+        alert('You can repply in this poll');
+        // myOtherAside.show();
       } else {
         $state.go('authentication.signin');
       }

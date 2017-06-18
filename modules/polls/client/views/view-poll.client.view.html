@@ -5,6 +5,10 @@
   </div> -->
   <div class="page-header">
     <h3 ng-bind="vm.poll.title"></h3>
+    <button type="button" class="btn btn-lg btn-primary" bs-aside="aside">Click to toggle aside
+      <br>
+      <small>(using an object)</small>
+    </button>
     <div class="pull-right" ng-show="vm.poll.isCurrentUserOwner || vm.poll.canEdit">
       <a class="btn btn-info" ui-sref="polls.edit({ pollId: vm.poll._id })">
         <i class="glyphicon glyphicon-edit"></i> Edit
@@ -28,7 +32,6 @@
   <p class="text-justify" ng-bind="vm.poll.body"></p>
   <div ui-view="opts"></div>
   <div ui-view="cmts"></div>
-
   <div class="row">
     <div class="col-xs-12">
       <h4>Tags:{{(!vm.poll.tags.length) ? 'Has no tag was added' : ''}}</h4>

@@ -43,7 +43,6 @@
       PollsApi.findCmts(poll._id)
         .then(cmts => {
           vm.cmts = cmts.data;
-          console.log(vm.cmts);
         })
         .catch(err => {
           alert('error' + err);

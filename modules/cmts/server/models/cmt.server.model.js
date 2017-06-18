@@ -27,7 +27,21 @@ var CmtSchema = new Schema({
   user: {
     type: Schema.ObjectId,
     ref: 'User'
+  },
+  updated: {
+    type: Date,
+    default: Date.now
+  },
+  isEdited: {
+    type: Boolean,
+    default: false
   }
+});
+
+CmtSchema.pre('update', function(next){
+  this.updated = new Date();
+  this.isEdited = true;
+  next();
 });
 
 mongoose.model('Cmt', CmtSchema);

@@ -6,16 +6,14 @@
     </div>
     <div class="clearfix"></div>
   </div>
-  <div class="list-group">
-    <a ng-repeat="cmt in vm.cmts" ui-sref="cmts.view({ cmtId: cmt._id })" class="list-group-item">
-      <small class="list-group-item-text">
+  <a class="well" ng-repeat="cmt in vm.cmts | orderBy:'-updated'">
+    <small class="list-group-item-text">
         Posted on
         <span ng-bind="cmt.created | date:'mediumDate'"></span>
         by
         <span ng-if="cmt.user" ng-bind="cmt.user.displayName"></span>
         <span ng-if="!cmt.user">Deleted User</span>
       </small>
-      <h5 class="list-group-item-heading" ng-bind="cmt.body"></h5>
-    </a>
-  </div>
+      <p class="text-justify" ng-bind="cmt.body"></p>
+  </a>
 </section>

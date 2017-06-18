@@ -67,7 +67,9 @@
     $scope.comment = {
       scope: $scope,
       templateUrl: 'modules/cmts/client/views/new-cmt-in-poll.client.view.html',
-      title: vm.poll.title
+      title: vm.poll.title,
+      placement: 'bottom',
+      animation: 'am-fade-and-slide-bottom'
     };
     //var myOtherAside = $aside({ scope: $scope, template: 'modules/cmts/client/views/new-cmt-in-poll.client.view.html' });
 

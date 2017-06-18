@@ -14,7 +14,8 @@ var ApplicationConfiguration = (function() {
     'angularFileUpload',
     'uiSwitch',
     'ngTagsInput',
-    'moment-picker'
+    'moment-picker',
+    'mgcrea.ngStrap'
   ];
 
   // Add a new vertical module

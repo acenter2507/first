@@ -1,27 +1,6 @@
 <section class="container">
   <div class="row poll-list">
-    <div ng-repeat="poll in vm.polls" ng-class="[poll-item]">
-      <h2 ng-class="poll-item-title">
-        <a ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a>
-      </h2>
-      <p ng-class="poll-item-info">
-        <i class="fa fa-heart-o" aria-hidden="true"></i>
-        <strong> Vote: </strong>{{poll.voteCnt}}
-      </p>
-      <p ng-class="poll-item-info">
-        <i class="fa fa-eye" aria-hidden="true"></i>
-        <strong> View: </strong>{{poll.viewCnt}}
-      </p>
-      <p ng-class="poll-item-info">
-        <i class="fa fa-user" aria-hidden="true"></i>
-        <strong> Added by: </strong>
-        <span ng-if="poll.user" ng-bind="poll.user.displayName"></span>
-        <span ng-if="!poll.user">Deleted User</span>
-      </p>
-      <p class="text-justify" ng-bind="poll.summary"></p>
-      <p ng-show="poll.body.length > poll.summary.length">...
-        <a ui-sref="polls.view({ pollId: poll._id })">more</a>
-      </p>
+    <div ng-repeat="poll in vm.polls" ng-class="'poll-item'">
     </div>
     <div class="alert alert-warning text-center" ng-if="vm.polls.$resolved && !vm.polls.length">
       No Polls yet, why don't you <a ui-sref="polls.create">create one</a>?

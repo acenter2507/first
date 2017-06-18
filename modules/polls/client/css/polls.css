@@ -25,9 +25,9 @@
   display: inline;
 }
 
-.poll-item .poll-item-info:not(:first-child)　{
+/*.poll-item .poll-item-info:not(:first-child)　{
   margin-right: 10px;
-}
+}*/
 
 .tags {
   list-style: none;

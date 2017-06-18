@@ -137,7 +137,7 @@
 
     function send_comment($form) {
       if (!$form.$valid) {
-        $scope.$broadcast('show-errors-check-validity', $form);
+        $scope.$broadcast('show-errors-check-validity', 'vm.form.cmtForm');
         return false;
       }
       save_comment();

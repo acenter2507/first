@@ -14,10 +14,11 @@
     'pollResolve',
     'PollsApi',
     'TagsService',
-    '$aside'
+    '$aside',
+    'CmtsService'
   ];
 
-  function PollsController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $aside) {
+  function PollsController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $aside, Cmts) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -42,6 +43,7 @@
       PollsApi.findCmts(poll._id)
         .then(cmts => {
           vm.cmts = cmts.data;
+          console.log(vm.cmts);
         })
         .catch(err => {
           alert('error' + err);
@@ -62,7 +64,7 @@
     vm.remove = remove;
     vm.save = save;
     vm.discard = discard;
-    vm.comment = comment;
+    vm.reply = reply;
     vm.comment_form_change_screen = comment_form_change_screen;
 
     // Remove existing Poll
@@ -117,21 +119,29 @@
     }
 
     // Comment
-
-    $scope.comment_form = {
+    vm.comment_form = {
       scope: $scope,
       controllerAs: vm,
       templateUrl: 'modules/cmts/client/views/new-cmt-in-poll.client.view.html',
       title: vm.poll.title,
       placement: 'bottom',
-      animation: 'am-fade-and-slide-bottom'
+      animation: 'am-fade-and-slide-bottom',
+      comment: {}
     };
     function comment_form_change_screen() {
       alert(1);
     }
-    function comment() {
+    function save_comment(isValid) {
+      if (!isValid) {
+        $scope.$broadcast('show-errors-check-validity', 'vm.form.cmtForm');
+        return false;
+      }
+      console.log(vm.comment_form.comment);
+    }
+    function reply(cmt) {
       if (vm.authentication.user) {
-        $aside($scope.comment_form);
+        vm.comment_form.comment = (cmt) ? new Cmts() : cmt;
+        $aside(vm.comment_form);
       } else {
         $state.go('authentication.signin');
       }

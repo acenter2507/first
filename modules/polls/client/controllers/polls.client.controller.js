@@ -64,8 +64,6 @@
     vm.remove = remove;
     vm.save = save;
     vm.discard = discard;
-    vm.reply = reply;
-    vm.comment_form_change_screen = comment_form_change_screen;
 
     // Remove existing Poll
     function remove() {
@@ -128,16 +126,27 @@
       animation: 'am-fade-and-slide-bottom',
       comment: {}
     };
+    vm.comment_form_change_screen = comment_form_change_screen;
+    vm.send_comment = send_comment;
+    vm.save_comment = save_comment;
+    vm.reply = reply;
+
     function comment_form_change_screen() {
       alert(1);
     }
-    function save_comment(isValid) {
-      if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'vm.form.cmtForm');
+
+    function send_comment($form) {
+      if (!$form.$valid) {
+        $scope.$broadcast('show-errors-check-validity', $form);
         return false;
       }
+      $form.submit();
+    }
+
+    function save_comment() {
       console.log(vm.comment_form.comment);
     }
+
     function reply(cmt) {
       if (vm.authentication.user) {
         vm.comment_form.comment = (cmt) ? new Cmts() : cmt;

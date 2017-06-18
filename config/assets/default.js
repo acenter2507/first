@@ -6,7 +6,6 @@ module.exports = {
       css: [
         'public/lib/bootstrap/dist/css/bootstrap.css',
         'public/lib/bootstrap/dist/css/bootstrap-theme.css',
-        'public/lib/angular-motion/dist/angular-motion.css',
         'public/lib/components-font-awesome/css/font-awesome.css',
         'public/lib/angular-ui-switch/angular-ui-switch.css',
         'public/lib/ng-tags-input/ng-tags-input.css',
@@ -17,7 +16,6 @@ module.exports = {
         'public/lib/angular-resource/angular-resource.js',
         'public/lib/angular-animate/angular-animate.js',
         'public/lib/angular-messages/angular-messages.js',
-        'public/lib/angular-sanitize/angular-sanitize.js',
         'public/lib/angular-ui-router/release/angular-ui-router.js',
         'public/lib/angular-ui-utils/ui-utils.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',

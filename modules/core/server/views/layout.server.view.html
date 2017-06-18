@@ -29,6 +29,7 @@
   <link href="{{favicon}}" rel="shortcut icon" type="image/x-icon">
   <!-- Application CSS Files -->
   {% for cssFile in cssFiles %}
+  <link rel="stylesheet" href="http://mgcrea.github.io/angular-strap/styles/libs.min.css">
   <link rel="stylesheet" href="{{cssFile}}">{% endfor %}
 </head>
 
@@ -41,7 +42,6 @@
   </script>
   <!--Load The Socket.io File-->
   <script type="text/javascript" src="/socket.io/socket.io.js"></script>
-  <!-- <link rel="stylesheet" href="//mgcrea.github.io/angular-strap/styles/libs.min.css"> -->
   <!-- <link rel="stylesheet" href="//mgcrea.github.io/angular-strap/styles/docs.min.css"> -->
   <!--Application JavaScript Files-->
   {% for jsFile in jsFiles %}

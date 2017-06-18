@@ -46,7 +46,7 @@
 }
 
 .tag {
-  background: #eee;
+  background: #d6d6d6;
   border-radius: 3px 0 0 3px;
   color: #999;
   display: inline-block;
@@ -74,7 +74,7 @@
 .tag::after {
   background: #f5f5f5;
   border-bottom: 13px solid transparent;
-  border-left: 10px solid #eee;
+  border-left: 10px solid #d6d6d6;
   border-top: 13px solid transparent;
   content: '';
   position: absolute;

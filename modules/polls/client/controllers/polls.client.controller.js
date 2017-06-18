@@ -13,7 +13,8 @@
     'Authentication',
     'pollResolve',
     'PollsApi',
-    'TagsService'
+    'TagsService',
+    '$aside'
   ];
 
   function PollsController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $aside) {

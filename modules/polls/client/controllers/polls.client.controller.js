@@ -67,6 +67,10 @@
       "title": "Title",
       "content": "Hello Modal<br />This is a multiline message!"
     };
+    $scope.aside = {
+      "title": "Title",
+      "content": "Hello Aside<br />This is a multiline message!"
+    };
     // var myOtherAside = $aside({ scope: $scope, template: 'modules/cmts/client/views/new-cmt-in-poll.client.view.html' });
 
     // Remove existing Poll

@@ -1,7 +1,7 @@
 <section class="container">
   <div class="row poll-list">
     <div class="poll-item" ng-repeat="poll in vm.polls">
-    <h2 class="poll-item-title">
+    <h2 class="poll-item-title" style="margin-top: 0;">
       <a ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a>
     </h2>
       <p class="poll-item-info">

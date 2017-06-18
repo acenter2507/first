@@ -13,12 +13,12 @@
   border: 1px solid #e3e3e3;
 }
 
-.poll-item-title　a {
-  text-decoration: none !important;
-}
-
 .poll-item-title　{
   margin-top: 0 !important;
+}
+
+.poll-item .poll-item-title　a {
+  text-decoration: none !important;
 }
 
 .poll-item-info　{

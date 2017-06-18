@@ -7,7 +7,7 @@
         </button>
         <h4 class="aside-title" ng-bind="title"></h4>
       </div>
-      <div class="aside-body" ng-bind="content">
+      <div class="aside-body">
         <form name="vm.form.cmtForm" class="form-horizontal" ng-submit="vm.save_comment()" novalidate>
           <fieldset>
             <input type="hidden" name="_id" ng-model="comment._id">
@@ -23,8 +23,6 @@
       </div>
       <div class="aside-footer">
         <button type="button" class="btn btn-default" ng-click="vm.send_comment(vm.form.cmtForm)">Send reply</button>
-      </div>
-      <div class="aside-footer">
         <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
       </div>
     </div>

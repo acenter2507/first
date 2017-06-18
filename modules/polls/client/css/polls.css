@@ -1,12 +1,8 @@
-.poll-item {
-
-}
-
-.poll-item p.poll-item-info{
+.poll-item p.poll-item-info　{
   display: inline;
 }
 
-.poll-item p.poll-item-info:not(:first-child){
+.poll-item p.poll-item-info:not(:first-child)　{
   margin-right: 10px;
 }
 

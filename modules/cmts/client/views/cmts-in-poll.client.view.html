@@ -6,7 +6,7 @@
     </div>
     <div class="clearfix"></div>
   </div>
-  <a class="well" ng-repeat="cmt in vm.cmts | orderBy:'-updated'">
+  <div class="well" ng-repeat="cmt in vm.cmts | orderBy:'-updated'">
     <small class="list-group-item-text">
         Posted on
         <span ng-bind="cmt.created | date:'mediumDate'"></span>
@@ -15,5 +15,5 @@
         <span ng-if="!cmt.user">Deleted User</span>
       </small>
     <p class="text-justify" ng-bind="cmt.body"></p>
-  </a>
+  </div>
 </section>

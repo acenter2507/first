@@ -143,7 +143,7 @@
         vm.comment.$update(successCallback, errorCallback);
       } else {
         vm.poll.cmtCnt += 1;
-        vm.poll.update((_poll) => {
+        vm.poll.$update((_poll) => {
           vm.comment.poll = _poll;
           vm.comment.$save(successCallback, errorCallback);
         }, errorCallback);

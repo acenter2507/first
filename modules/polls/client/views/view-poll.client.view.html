@@ -13,6 +13,10 @@
       <br>
       <small>(using an object)</small>
     </button>
+    <button type="button" class="btn btn-lg btn-danger" data-template-url="modules/cmts/client/views/new-cmt-in-poll.client.view.html" data-placement="left" data-animation="am-slide-left" bs-aside="aside" data-container="body">Custom aside
+      <br>
+      <small>(using data-template)</small>
+    </button>
     <div class="pull-right" ng-show="vm.poll.isCurrentUserOwner || vm.poll.canEdit">
       <a class="btn btn-info" ui-sref="polls.edit({ pollId: vm.poll._id })">
         <i class="glyphicon glyphicon-edit"></i> Edit

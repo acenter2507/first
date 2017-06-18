@@ -14,7 +14,7 @@
     'pollResolve',
     'PollsApi',
     'TagsService'
-    ];
+  ];
 
   function PollsController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $aside) {
     var vm = this;
@@ -67,7 +67,7 @@
     //   "title": "Title",
     //   "content": "Hello Aside<br />This is a multiline message!"
     // };
-    var myOtherAside = $aside({scope: $scope, template: 'modules/cmts/client/views/new-cmt-in-poll.client.view.html'});
+    var myOtherAside = $aside({ scope: $scope, template: 'modules/cmts/client/views/new-cmt-in-poll.client.view.html' });
 
     // Remove existing Poll
     function remove() {

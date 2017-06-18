@@ -1,5 +1,5 @@
 <section class="container">
-  <div class="row">
+  <div class="row poll-list">
     <div class="well poll-item" ng-repeat="poll in vm.polls">
       <a ui-sref="polls.view({ pollId: poll._id })"><h2 ng-bind="poll.title"></h2></a>
       <p class="poll-item-info">

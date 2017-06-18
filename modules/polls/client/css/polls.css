@@ -1,3 +1,7 @@
+.poll-list {
+  background-color: red !important;
+}
+
 .poll-item {
   background-color: red !important;
 }

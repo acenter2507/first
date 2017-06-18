@@ -1,17 +1,17 @@
-.well.poll-item {
-  background-color: red;
+.poll-item {
+  background-color: red !important;
 }
 
-.well.poll-item h2　{
-  margin-top: 0;
+.poll-item h2　{
+  margin-top: 0 !important;
 }
 
-.well.poll-item p.poll-item-info　{
-  display: inline;
+.poll-item p.poll-item-info　{
+  display: inline !important;
 }
 
-.well.poll-item p.poll-item-info:not(:first-child)　{
-  margin-right: 10px;
+.poll-item p.poll-item-info:not(:first-child)　{
+  margin-right: 10px !important;
 }
 
 .tags {

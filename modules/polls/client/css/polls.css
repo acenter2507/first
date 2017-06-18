@@ -15,10 +15,9 @@
 
 .poll_item_title {
   margin-top: 0 !important;
-  background-color: green !important;
 }
 
-.poll-item-title　a {
+.poll_item_title　a {
   text-decoration: none !important;
 }
 

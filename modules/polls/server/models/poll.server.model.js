@@ -22,6 +22,10 @@ var PollSchema = new Schema({
     required: 'Please fill Poll body',
     trim: true
   },
+  summary: {
+    type: String,
+    default: ''
+  },
   only_member: {
     type: Boolean,
     default: false
@@ -55,6 +59,11 @@ var PollSchema = new Schema({
     type: 'Date',
     required: false
   }
+});
+
+PollSchema.pre('save', function(next) {
+  this.summary = (this.body.length > 255) ? this.body.substring(0, 254): this.body;
+  next();
 });
 
 PollSchema.statics.findOpts = function(id, callback) {

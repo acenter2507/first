@@ -16,7 +16,10 @@
         <span ng-if="poll.user" ng-bind="poll.user.displayName"></span>
         <span ng-if="!poll.user">Deleted User</span>
       </p>
-      <p class="text-justify" ng-bind="poll.body"></p>
+      <p class="text-justify" ng-bind="poll.summary"></p>
+      <p ng-show="poll.body.length > poll.summary.length">...
+      <a ui-sref="polls.view({ pollId: poll._id })">more</a>
+      </p>
     </div>
     <div class="alert alert-warning text-center" ng-if="vm.polls.$resolved && !vm.polls.length">
       No Polls yet, why don't you <a ui-sref="polls.create">create one</a>?

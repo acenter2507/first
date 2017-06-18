@@ -1,3 +1,7 @@
+.poll-item h2　{
+  margin-top: 0px;
+}
+
 .poll-item p.poll-item-info　{
   display: inline;
 }

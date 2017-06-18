@@ -63,15 +63,7 @@
     vm.save = save;
     vm.discard = discard;
     vm.comment = comment;
-
-    $scope.comment = {
-      scope: $scope,
-      templateUrl: 'modules/cmts/client/views/new-cmt-in-poll.client.view.html',
-      title: vm.poll.title,
-      placement: 'bottom',
-      animation: 'am-fade-and-slide-bottom'
-    };
-    //var myOtherAside = $aside({ scope: $scope, template: 'modules/cmts/client/views/new-cmt-in-poll.client.view.html' });
+    vm.comment_form_change_screen = comment_form_change_screen;
 
     // Remove existing Poll
     function remove() {
@@ -125,9 +117,21 @@
     }
 
     // Comment
+
+    $scope.comment_form = {
+      scope: $scope,
+      controllerAs: vm,
+      templateUrl: 'modules/cmts/client/views/new-cmt-in-poll.client.view.html',
+      title: vm.poll.title,
+      placement: 'bottom',
+      animation: 'am-fade-and-slide-bottom'
+    };
+    function comment_form_change_screen() {
+      alert(1);
+    }
     function comment() {
       if (vm.authentication.user) {
-        $aside($scope.comment);
+        $aside($scope.comment_form);
       } else {
         $state.go('authentication.signin');
       }

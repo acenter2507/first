@@ -13,19 +13,19 @@
   border: 1px solid #e3e3e3;
 }
 
-.poll-item .poll-item-title　a {
+.poll-item-title　a {
   text-decoration: none;
 }
 
-.poll-item .poll-item-title　{
+.poll-item-title　{
   margin-top: 0;
 }
 
-.poll-item p.poll-item-info　{
+.poll-item-info　{
   display: inline;
 }
 
-.poll-item p.poll-item-info:not(:first-child)　{
+.poll-item .poll-item-info:not(:first-child)　{
   margin-right: 10px;
 }
 

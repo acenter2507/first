@@ -1,6 +1,6 @@
 <section class="container">
   <div class="row poll-list">
-    <div class="well poll" ng-repeat="poll in vm.polls">
+    <div class="well" ng-repeat="poll in vm.polls">
       <a ui-sref="polls.view({ pollId: poll._id })"><h2 ng-bind="poll.title"></h2></a>
       <p class="poll-item-info">
         <i class="fa fa-heart-o" aria-hidden="true"></i>

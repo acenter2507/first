@@ -26,6 +26,14 @@
   display: inline !important;
 }
 
+.poll_item_info:not(:last-child) {
+  margin-right: 10px;
+}
+
+.poll_item_body {
+  display: inline !important;
+}
+
 .tags {
   list-style: none;
   margin: 0;

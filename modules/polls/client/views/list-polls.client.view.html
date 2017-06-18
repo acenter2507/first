@@ -18,8 +18,9 @@
         <span ng-if="poll.user" ng-bind="poll.user.displayName"></span>
         <span ng-if="!poll.user">Deleted User</span>
       </p>
-      <p class="text-justify poll_item_info" ng-bind="poll.summary"></p>
-      <p ng-show="poll.body.length > poll.summary.length" class="poll_item_info">...
+      <br>
+      <p class="text-justify poll_item_body" ng-bind="poll.summary"></p>
+      <p ng-show="poll.body.length > poll.summary.length" class="poll_item_body">...
         <a ui-sref="polls.view({ pollId: poll._id })">more</a>
       </p>
     </div>

@@ -1,7 +1,10 @@
 <section class="container">
   <div class="row poll-list">
     <div class="poll-item" ng-repeat="poll in vm.polls">
-      <a ui-sref="polls.view({ pollId: poll._id })"><h2 ng-bind="poll.title"></h2></a>
+    <h2 class="poll-item-title">
+      <a ui-sref="polls.view({ pollId: poll._id })">
+      {{poll.title}}
+      </a></h2>
       <p class="poll-item-info">
         <i class="fa fa-heart-o" aria-hidden="true"></i>
         <strong> Vote: </strong>{{poll.voteCnt}}

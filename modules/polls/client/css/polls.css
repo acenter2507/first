@@ -12,20 +12,20 @@
   border: 1px solid #e3e3e3;
 }
 
-.poll-list .poll-item a h2　{
+.poll-list .poll-item .poll-item-title　a{
   text-decoration: none;
 }
 
-.poll-list .poll-item a h2　{
-  margin-top: 0 !important;
+.poll-list .poll-item .poll-item-title　{
+  margin-top: 0;
 }
 
 .poll-list .poll-item p.poll-item-info　{
-  display: inline !important;
+  display: inline;
 }
 
 .poll-list .poll-item p.poll-item-info:not(:first-child)　{
-  margin-right: 10px !important;
+  margin-right: 10px;
 }
 
 .tags {

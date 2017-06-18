@@ -1,3 +1,7 @@
+.aside {
+  top: calc(100% / 2) !important;
+}
+
 .poll-item {
   min-height: 20px;
   padding: 19px;

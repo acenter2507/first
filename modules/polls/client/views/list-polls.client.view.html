@@ -4,15 +4,15 @@
       <h3 class="poll_item_title">
         <a ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a>
       </h3>
-      <p ng-class="poll_item_info">
+      <p class="poll_item_info">
         <i class="fa fa-heart-o" aria-hidden="true"></i>
         <strong> Vote: </strong>{{poll.voteCnt}}
       </p>
-      <p ng-class="poll_item_info">
+      <p class="poll_item_info">
         <i class="fa fa-eye" aria-hidden="true"></i>
         <strong> View: </strong>{{poll.viewCnt}}
       </p>
-      <p ng-class="poll_item_info">
+      <p class="poll_item_info">
         <i class="fa fa-user" aria-hidden="true"></i>
         <strong> Added by: </strong>
         <span ng-if="poll.user" ng-bind="poll.user.displayName"></span>

@@ -149,7 +149,7 @@
 
     function reply(cmt) {
       if (vm.authentication.user) {
-        vm.comment = (cmt) ? new Cmts() : cmt;
+        vm.comment = (!cmt) ? new Cmts() : cmt;
         $aside(vm.comment_form);
       } else {
         $state.go('authentication.signin');

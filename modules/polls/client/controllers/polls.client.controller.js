@@ -64,9 +64,9 @@
     vm.discard = discard;
     vm.comment = comment;
 
-    $scope.aside = {
+    $scope.modal = {
       "title": "Title",
-      "content": "Hello Aside<br />This is a multiline message!"
+      "content": "Hello Modal<br />This is a multiline message!"
     };
     // var myOtherAside = $aside({ scope: $scope, template: 'modules/cmts/client/views/new-cmt-in-poll.client.view.html' });
 

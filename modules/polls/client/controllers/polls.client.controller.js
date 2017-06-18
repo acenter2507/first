@@ -141,6 +141,7 @@
         return false;
       }
       if (vm.comment._id) {
+        console.log(vm.comment);
         vm.comment.$update(successCallback, errorCallback);
       } else {
         vm.poll.cmtCnt += 1;
@@ -166,6 +167,7 @@
 
     function reply(cmt) {
       if (vm.authentication.user) {
+        console.log(cmt);
         vm.comment = (!cmt) ? new Cmts() : cmt;
         comment_aside.$promise.then(comment_aside.show);
       } else {

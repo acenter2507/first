@@ -13,15 +13,15 @@
   border: 1px solid #e3e3e3;
 }
 
-.poll-item-title　{
-  margin-top: 0 !important;
+.item-title　{
+  margin-top: 0;
 }
 
-.poll-item .poll-item-title　a {
+.item-title　a {
   text-decoration: none !important;
 }
 
-.poll-item-info　{
+.item-info　{
   display: inline;
 }
 

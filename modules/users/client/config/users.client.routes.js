@@ -67,6 +67,10 @@ angular.module('users').config(['$stateProvider',
       .state('password.reset.form', {
         url: '/:token',
         templateUrl: 'modules/users/client/views/password/reset-password.client.view.html'
+      })
+      .state('users.info', {
+        url: '/user/:userId',
+        templateUrl: 'modules/users/client/views/public/info.client.view.html'
       });
   }
 ]);

@@ -9,14 +9,6 @@
   OptsInPollController.$inject = [
     '$scope',
     '$state'
-    // '$window',
-    // 'Authentication',
-    // 'pollResolve',
-    // 'PollsApi',
-    // 'TagsService',
-    // '$aside',
-    // 'CmtsService',
-    // '$dropdown'
   ];
 
   function OptsInPollController($scope, $state) {

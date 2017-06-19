@@ -11,10 +11,6 @@
         <span ng-if="!cmt.user">Deleted User</span>
         <span> on </span>
         <span ng-bind="cmt.created | date:'mediumDate'"></span>
-      </small>
-      <br>
-      <p class="text-justify" ng-bind="cmt.body"></p>
-      <div class="pull-left">
         <a href="#" bs-dropdown aria-haspopup="true" aria-expanded="false">
           <i class="fa fa-ellipsis-v fa-lg" aria-hidden="true"></i>
         </a>
@@ -23,7 +19,9 @@
           <li ng-show="cmt.user._id === vm.authentication.user._id"><a ng-click="vm.edit_cmt(cmt)"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
           <li ng-show="cmt.user._id === vm.authentication.user._id"><a ng-click="vm.delete_cmt(cmt)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
         </ul>
-      </div>
+      </small>
+      <br>
+      <p class="text-justify" ng-bind="cmt.body"></p>
       <div class="clearfix"></div>
       <hr>
     </li>

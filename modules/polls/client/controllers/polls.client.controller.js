@@ -14,13 +14,13 @@
     'pollResolve',
     'PollsApi',
     'TagsService',
-    '$modal',
     '$aside',
     'CmtsService',
-    '$dropdown'
+    '$dropdown',
+    '$filter'
   ];
 
-  function PollsController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $modal, $aside, Cmts, $dropdown) {
+  function PollsController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $modal, $aside, Cmts, $dropdown, $filter) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -241,8 +241,9 @@
       alert('send_vote')
     }
 
-    function toggleSelection(opt) {
-      vote_modal.$promise.then(vote_modal.show);
+    function selectedOpts(opt) {
+      vm.voteds = $filter('filter')(vm.opts, {checked: true});
+      console.log(vm.voteds);
     }
   }
 }());

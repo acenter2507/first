@@ -39,7 +39,6 @@ var CmtSchema = new Schema({
 });
 
 CmtSchema.pre('save', function(next){
-  this.updated = new Date();
   next();
 });
 

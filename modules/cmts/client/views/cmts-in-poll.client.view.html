@@ -1,12 +1,16 @@
 <div class="row">
   <ul class="cmts">
     <li ng-repeat="cmt in vm.cmts | orderBy:'updated'">
-      <small>
-        Posted on
-        <span ng-bind="cmt.created | date:'mediumDate'"></span>
-        by
-        <a ui-sref="users.info({userId: cmt.user._id})" ng-if="cmt.user" ng-bind="cmt.user.displayName"></a>
+      <div class="icon pull-left">
+        <a ui-sref="users.info({userId: cmt.user._id})" ng-if="cmt.user" ng-bind="cmt.user.displayName">
+          <img src="{{cmt.user.profileImageURL}}" alt="{{cmt.user.displayName}}">
+        </a>
+      </div>
+      <small class="pull-left">
+        <strong><a ui-sref="users.info({userId: cmt.user._id})" ng-if="cmt.user" ng-bind="cmt.user.displayName"></a></strong>
         <span ng-if="!cmt.user">Deleted User</span>
+        <span> on </span>
+        <span ng-bind="cmt.created | date:'mediumDate'"></span>
       </small>
       <p class="text-justify" ng-bind="cmt.body"></p>
       <div class="pull-left">
@@ -25,8 +29,24 @@
   </ul>
 </div>
 
-        <!-- <a href="" ng-show="cmt.user._id == vm.authentication.user._id" ng-click="vm.reply(cmt)"></a> -->
-        <!-- <i class="fa fa-ellipsis-v" aria-hidden="true" ng-click="vm.show_cmt_menu(this, cmt)"></i> -->
-        <!--         <button data-animation="am-flip-x" bs-dropdown="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-        </button> -->
+
+<!--       <small>
+        Posted on
+        <span ng-bind="cmt.created | date:'mediumDate'"></span>
+        by
+        <a ui-sref="users.info({userId: cmt.user._id})" ng-if="cmt.user" ng-bind="cmt.user.displayName"></a>
+        <span ng-if="!cmt.user">Deleted User</span>
+      </small>
+      <p class="text-justify" ng-bind="cmt.body"></p>
+      <div class="pull-left">
+        <a href="#" bs-dropdown aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-ellipsis-v fa-lg" aria-hidden="true"></i>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li ng-show="(vm.authentication.user) && cmt.user._id !== vm.authentication.user._id"><a ng-click="vm.reply_cmt(cmt)"><i class="fa fa-reply"></i>&nbsp;Reply</a></li>
+          <li ng-show="cmt.user._id === vm.authentication.user._id"><a ng-click="vm.edit_cmt(cmt)"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
+          <li ng-show="cmt.user._id === vm.authentication.user._id"><a ng-click="vm.delete_cmt(cmt)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
+        </ul>
+      </div>
+      <div class="clearfix"></div>
+      <hr> -->

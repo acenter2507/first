@@ -235,15 +235,13 @@
 
     // VOTE
     vm.send_vote = send_vote;
-    vm.selectedOpts = selectedOpts;
-    vm.voteds = [];
+
+    vm.voteds = function() {
+      return filterFilter($scope.opts, { selected: true });
+    };
 
     function send_vote() {
       alert('send_vote');
-    }
-    function selectedOpts() {
-      vm.voteds = filterFilter($scope.opts, { selected: true });
-      console.log(vm.voteds);
     }
   }
 }());

@@ -175,28 +175,5 @@
         $state.go('authentication.signin');
       }
     }
-
-    vm.cmt_dropdown = [];
-    vm.show_cmt_menu = show_cmt_menu;
-
-    function show_cmt_menu(elm, _comment) {
-      if (vm.authentication.user && _comment.user._id != vm.authentication.user._id) {
-        vm.cmt_dropdown.push({
-          'text': '<i class="fa fa-reply"></i>&nbsp;Reply',
-          'click': 'reply()'
-        });
-      }
-      if (_comment.user._id == vm.authentication.user._id) {
-        vm.cmt_dropdown.push({
-          'text': '<i class="fa fa-pencil-square-o"></i>&nbsp;Edit',
-          'click': 'reply(_comment)'
-        });
-        vm.cmt_dropdown.push({
-          'text': '<i class="fa fa-trash"></i>&nbsp;Delete',
-          'click': 'delete(_comment)'
-        });
-      }
-      $dropdown(elm, {scope: {content: vm.cmt_dropdown}});
-    }
   }
 }());

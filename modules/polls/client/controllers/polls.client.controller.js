@@ -123,6 +123,13 @@
       }
     }
 
+    function like_poll() {
+      alert("like_poll");
+    }
+
+    function dislike_poll() {
+      alert("dislike_poll");
+    }
     // Comment
     vm.comment_form = {
       scope: $scope,
@@ -197,6 +204,14 @@
 
     function delete_cmt(cmt) {
       alert("delete_cmt");
+    }
+
+    function like_cmt(cmt) {
+      alert("like_cmt");
+    }
+
+    function dislike_cmt(cmt) {
+      alert("dislike_cmt");
     }
   }
 }());

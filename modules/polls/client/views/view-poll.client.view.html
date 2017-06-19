@@ -14,6 +14,11 @@
       </em>
     </small>
     <p class="text-justify" ng-bind="vm.poll.body"></p>
+    <span class="pull-right" class="like_tools">
+      <a href="#" ng-click="vm.like_poll()"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
+        <span class="mg5l mg5r" ng-bind="poll.likeCnt"></span>
+      <a href="#" ng-click="vm.dislike_poll()"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>
+    </span>
     <div class="clearfix"></div>
     <hr>
   </div>

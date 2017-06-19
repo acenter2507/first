@@ -10,19 +10,10 @@ var mongoose = require('mongoose'),
  * Vote Schema
  */
 var VoteSchema = new Schema({
-  body: {
-    type : String,
-    default : '',
-    trim : true
-  },
   poll: {
     type : Schema.ObjectId,
     ref : 'Poll'
   },
-  options: [{
-    type : Schema.ObjectId,
-    ref : 'Opt'
-  }],
   ip: {
     type: String,
     default: ''
@@ -35,7 +26,7 @@ var VoteSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'User'
   },
-  updates: {
+  updateCnt: {
     type: Number,
     default: 0
   },

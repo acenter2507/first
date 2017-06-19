@@ -17,21 +17,21 @@
     <div class="clearfix"></div>
     <hr>
   </div>
+  <!-- Control -->
   <div class="row">
     <div class="pull-right">
-      <button class="btn btn-primary" ng-click="vm.reply()"><i class="fa fa-reply" aria-hidden="true"></i> Reply</button>
-    </div>
-    <div class="pull-right" ng-show="vm.poll.isCurrentUserOwner || vm.poll.canEdit">
-      <a class="btn btn-info" ui-sref="polls.edit({ pollId: vm.poll._id })">
+      <a class="btn btn-info" ui-sref="polls.edit({ pollId: vm.poll._id })" ng-show="vm.poll.isCurrentUserOwner || vm.poll.canEdit">
         <i class="glyphicon glyphicon-edit"></i> Edit
       </a>
-      <a class="btn btn-danger" ng-click="vm.remove()">
+      <a class="btn btn-danger" ng-click="vm.remove()" ng-show="vm.poll.isCurrentUserOwner || vm.poll.canEdit">
         <i class="glyphicon glyphicon-trash"></i> Delete
       </a>
+      <button class="btn btn-primary" ng-click="vm.reply()"><i class="fa fa-reply" aria-hidden="true"></i> Reply</button>
     </div>
     <div class="clearfix"></div>
     <hr>
   </div>
+  <!-- #Control -->
   <div ui-view="opts"></div>
   <div ui-view="cmts"></div>
   <div class="row">

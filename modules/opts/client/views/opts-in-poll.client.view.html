@@ -4,15 +4,8 @@
       <div class="opt_image pull-left">
         <img src="{{opt.image}}" alt="{{opt.title}}" class="img-rounded">
       </div>
-      <div class="clearfix"></div>
-      <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-          <h4 ng-bind="opt.title"></h4>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-          <uib-progressbar max="max" value="dynamic"><span style="color:white; white-space:nowrap;">{{dynamic}} / {{max}}</span></uib-progressbar>
-        </div>
-      </div>
+      <h4 ng-bind="opt.title"></h4>
+      <uib-progressbar max="max" value="dynamic"><span style="color:white; white-space:nowrap;">{{dynamic}} / {{max}}</span></uib-progressbar>
       <div class="clearfix"></div>
     </li>
   </ul>

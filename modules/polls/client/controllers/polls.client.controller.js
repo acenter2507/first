@@ -31,10 +31,9 @@
     vm.error = null;
     vm.form = {};
     vm.cmt_sorts = [
-      { val: '-updated', name: 'Newest' },
-      { val: 'updated', name: 'Oldest' },
-      { val: '-pointCnt', name: 'Best comment' },
-      { val: 'pointCnt', name: 'Badest comment' }
+      { val: '-updated', name: 'Newest to oldest' },
+      { val: 'updated', name: 'Oldest to newest' },
+      { val: '-pointCnt', name: 'Most likes' }
     ];
     vm.cmt_sort = '-updated';
 

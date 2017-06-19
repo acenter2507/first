@@ -5,7 +5,9 @@
   margin-bottom: 10px;
   margin-top: 0;
 }
-
+.opts li {
+  
+}
 .opts a {
   text-decoration: none;
   cursor: pointer;
@@ -13,14 +15,14 @@
 
 .opt_image {
   position: relative;
-  min-width: 46px;
-  min-height: 46px;
+  min-width: 36px;
+  min-height: 36px;
   margin-top: 2px;
   background: transparent;
 }
 
 .opt_image img {
   margin-right: 15px;
-  width: 46px;
-  height: 46px;
+  width: 36px;
+  height: 36px;
 }

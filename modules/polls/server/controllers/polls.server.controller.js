@@ -138,7 +138,7 @@ exports.findOpts = function(req, res) {
  * List of Opts in poll
  */
 exports.findCmts = function(req, res) {
-  Poll.findCmts(req.poll._id).populate('user', 'displayName', 'profileImageURL').exec(function(err, cmts) {
+  Poll.findCmts(req.poll._id).populate('user').exec(function(err, cmts) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)

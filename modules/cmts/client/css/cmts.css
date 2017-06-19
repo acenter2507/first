@@ -5,7 +5,10 @@
 	margin-bottom: 10px;
 	margin-top: 0;
 }
-
+.cmts a {
+	text-decoration: none;
+	cursor: pointer;
+}
 /*.cmts li{
 	position: relative;
 }*/

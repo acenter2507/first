@@ -2,7 +2,7 @@
   <ul class="cmts">
     <li ng-repeat="cmt in vm.cmts | orderBy:'updated'">
       <div class="icon pull-left">
-        <a ui-sref="users.info({userId: cmt.user._id})" ng-if="cmt.user" ng-bind="cmt.user.displayName">
+        <a ui-sref="users.info({userId: cmt.user._id})" ng-if="cmt.user">
           <img src="{{cmt.user.profileImageURL}}" alt="{{cmt.user.displayName}}">
         </a>
       </div>

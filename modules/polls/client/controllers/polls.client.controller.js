@@ -235,12 +235,11 @@
 
     // VOTE
     vm.send_vote = send_vote;
+    vm.voteds = [];
 
-    $scope.$watch('vm.opts|filter:{selected:true}', function(nv) {
-      $scope.voteds = nv.map(function(opt) {
-        return opt._id;
-      });
-    }, true);
+    vm.checked = function(opt) {
+      console.log(opt);
+    };
 
     function send_vote() {
       console.log($scope.voteds);

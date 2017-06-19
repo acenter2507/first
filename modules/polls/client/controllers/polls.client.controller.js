@@ -30,6 +30,13 @@
     vm.close_min = new Date();
     vm.error = null;
     vm.form = {};
+    vm.cmt_sorts = [
+      { val: '-updated', name: 'Newest' },
+      { val: 'updated', name: 'Oldest' },
+      { val: '-pointCnt', name: 'Best comment' },
+      { val: 'pointCnt', name: 'Badest comment' }
+    ];
+    vm.cmt_sort = '-updated';
 
     if (vm.poll._id) {
       // Get all Opts
@@ -180,12 +187,15 @@
     vm.reply_cmt = reply_cmt;
     vm.edit_cmt = edit_cmt;
     vm.delete_cmt = delete_cmt;
+
     function reply_cmt(cmt) {
       alert("reply_cmt");
     }
+
     function edit_cmt(cmt) {
       reply(cmt);
     }
+
     function delete_cmt(cmt) {
       alert("delete_cmt");
     }

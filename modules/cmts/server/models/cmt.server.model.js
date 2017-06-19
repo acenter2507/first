@@ -35,6 +35,10 @@ var CmtSchema = new Schema({
   isEdited: {
     type: Boolean,
     default: false
+  },
+  pointCnt: {
+    type: Number,
+    default: 0
   }
 });
 

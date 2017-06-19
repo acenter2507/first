@@ -1,6 +1,6 @@
 <div class="row">
   <ul class="cmts">
-    <li ng-repeat="cmt in vm.cmts | orderBy:'-updated'">
+    <li ng-repeat="cmt in vm.cmts | orderBy: vm.cmt_sort">
       <div class="icon pull-left">
         <a ui-sref="users.info({userId: cmt.user._id})" ng-if="cmt.user">
           <img src="{{cmt.user.profileImageURL}}" alt="{{cmt.user.displayName}}">

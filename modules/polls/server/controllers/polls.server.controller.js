@@ -175,7 +175,7 @@ exports.pollByID = function(req, res, next, id) {
     });
   }
 
-  Poll.findById(id).populate('user', 'displayName').exec(function(err, poll) {
+  Poll.findById(id).populate('user', 'displayName profileImageURL').exec(function(err, poll) {
     if (err) {
       return next(err);
     } else if (!poll) {

@@ -5,19 +5,22 @@
     <div class="page-header">
       <h3 ng-bind="vm.poll.title"></h3>
     </div>
-    <small>
-      <em class="text-muted">Posted on
-        <span ng-bind="vm.poll.created | date:'mediumDate'"></span>
-        by
-        <span ng-if="vm.poll.user" ng-bind="vm.poll.user.displayName"></span>
-        <span ng-if="!vm.poll.user">Deleted User</span>
-      </em>
+    <div class="icon pull-left">
+      <a ui-sref="users.info({userId: cmt.user._id})" ng-if="vm.poll.user">
+        <img src="{{vm.poll.user.profileImageURL}}" alt="{{vm.poll.user.displayName}}">
+      </a>
+    </div>
+    <small class="pull-left">
+      <strong><a ui-sref="users.info({userId: vm.poll.user._id})" ng-if="vm.poll.user.user" ng-bind="vm.poll.user.displayName"></a></strong>
+      <span ng-if="!vm.poll.user">Deleted User</span>
+      <span>&nbsp;on&nbsp;</span>
+      <span ng-bind="vm.poll.created | date:'mediumDate'"></span>
     </small>
     <p class="text-justify" ng-bind="vm.poll.body"></p>
     <span class="pull-right" class="like_tools">
       <a href="#" ng-click="vm.like_poll()"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
         <span class="mg5l mg5r" ng-bind="vm.poll.likeCnt"></span>
-      <a href="#" ng-click="vm.dislike_poll()"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>
+    <a href="#" ng-click="vm.dislike_poll()"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>
     </span>
     <div class="clearfix"></div>
     <hr>

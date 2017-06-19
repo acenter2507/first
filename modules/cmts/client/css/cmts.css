@@ -15,7 +15,7 @@
 	position: relative;
 }*/
 
-.cmts .icon {
+.icon {
   position: relative;
   border-radius: 50%;
   min-width: 46px;
@@ -23,7 +23,7 @@
   margin-top: 2px;
 }
 
-.cmts .icon img {
+.icon img {
   margin-right: 15px;
   border-radius: 50%;
   width: 46px;

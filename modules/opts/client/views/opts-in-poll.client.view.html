@@ -1,5 +1,5 @@
-<div class="row" ng-controller="OptsInPollController">
-  <ul class="opts">
+<div class="row">
+  <ul class="opts" ng-controller="OptsInPollController">
     <li ng-repeat="opt in vm.opts | orderBy: '-voteCnt'">
       <div class="opt_image pull-left">
         <img src="{{opt.image}}" alt="{{opt.title}}" class="img-rounded">
@@ -16,7 +16,7 @@
     </li>
   </ul>
   <hr>
-  <div class="list-group">
+<!--   <div class="list-group">
     <a ng-repeat="opt in vm.opts" ui-sref="opts.view({ optId: opt._id })" class="list-group-item">
       <small class="list-group-item-text">
         Added on
@@ -27,6 +27,6 @@
       </small>
       <h4 class="list-group-item-heading" ng-bind="opt.title"></h4>
     </a>
-  </div>
+  </div> -->
   <hr>
 </div>

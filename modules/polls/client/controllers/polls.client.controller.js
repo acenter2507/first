@@ -236,7 +236,7 @@
     // VOTE
     vm.send_vote = send_vote;
 
-    $scope.$watch('optionts|filter:{selected:true}', function (nv) {
+    $scope.$watch('vm.opts|filter:{selected:true}', function (nv) {
       $scope.voteds = nv.map(function (opt) {
         return opt._id;
       });

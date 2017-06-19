@@ -11,11 +11,12 @@
       </a>
     </div>
     <small class="pull-left">
-      <strong><a ui-sref="users.info({userId: vm.poll.user._id})" ng-if="vm.poll.user.user" ng-bind="vm.poll.user.displayName"></a></strong>
+      <strong><a ui-sref="users.info({userId: vm.poll.user._id})" ng-if="vm.poll.user" ng-bind="vm.poll.user.displayName"></a></strong>
       <span ng-if="!vm.poll.user">Deleted User</span>
       <span>&nbsp;on&nbsp;</span>
       <span ng-bind="vm.poll.created | date:'mediumDate'"></span>
     </small>
+    <br>
     <p class="text-justify" ng-bind="vm.poll.body"></p>
     <span class="pull-right" class="like_tools">
       <a href="#" ng-click="vm.like_poll()"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>

@@ -97,4 +97,12 @@ PollSchema.statics.findTags = function(id, callback) {
     poll: id
   }, callback);
 };
+
+PollSchema.statics.findOwnerVote = function(id, user, callback) {
+  return this.model('Vote').findOne({
+    poll: id,
+    user: user
+  }, callback);
+};
+
 mongoose.model('Poll', PollSchema);

@@ -14,12 +14,13 @@
     'pollResolve',
     'PollsApi',
     'TagsService',
+    '$modal',
     '$aside',
     'CmtsService',
     '$dropdown'
   ];
 
-  function PollsController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $aside, Cmts, $dropdown) {
+  function PollsController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $modal, $aside, Cmts, $dropdown) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -65,13 +66,20 @@
           alert('error' + err);
         });
       // Get all Votes
-      PollsApi.findVotes(poll._id)
-        .then(votes => {
-          vm.votes = votes.data;
-        })
-        .catch(err => {
-          alert('error' + err);
-        });
+      // PollsApi.findVotes(poll._id)
+      //   .then(votes => {
+      //     vm.votes = votes.data;
+      //   })
+      //   .catch(err => {
+      //     alert('error' + err);
+      //   });
+      // PollsApi.findOwnerVote(poll._id, vm.authentication.user._id)
+      //   .then(vote => {
+      //     vm.ownVote = vote.data;
+      //   })
+      //   .catch(err => {
+      //     alert('error' + err);
+      //   });
     }
 
     // Function
@@ -224,5 +232,12 @@
     function dislike_cmt(cmt) {
       alert("dislike_cmt");
     }
+
+    // VOTE
+    vm.show_vote = show_vote;
+    function show_vote() {
+      $modal({controllerAs: vm, scope: $scope, template: 'modules/votes/client/views/vote-modal.client.view.html', show: true});
+    }
+
   }
 }());

@@ -135,7 +135,7 @@ exports.findOpts = function(req, res) {
 };
 
 /**
- * List of Opts in poll
+ * List of Cmts in poll
  */
 exports.findCmts = function(req, res) {
   Poll.findCmts(req.poll._id).populate('user', 'displayName profileImageURL').exec(function(err, cmts) {
@@ -150,7 +150,7 @@ exports.findCmts = function(req, res) {
 };
 
 /**
- * List of Opts in poll
+ * List of Tags in poll
  */
 exports.findTags = function(req, res) {
   Poll.findTags(req.poll._id).populate('tag').exec(function(err, polltags) {
@@ -165,7 +165,7 @@ exports.findTags = function(req, res) {
 };
 
 /**
- * List of Opts in poll
+ * List of Votes in poll
  */
 exports.findVotes = function(req, res) {
   Poll.findVotes(req.poll._id).exec(function(err, votes) {
@@ -178,6 +178,23 @@ exports.findVotes = function(req, res) {
     }
   });
 };
+
+/**
+ * Vote in poll of user
+ */
+exports.findOwnerVote = function(req, res) {
+  console.log(req.params.userId);
+  Poll.findOwnerVote(req.poll._id, req.params.userId).exec(function(err, vote) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(vote);
+    }
+  });
+};
+
 
 /**
  * Poll middleware

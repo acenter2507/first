@@ -37,6 +37,9 @@
       },
       findVotes: (id) => {
         return $http.get('/api/findVotes/' + id);
+      },
+      findOwnerVote: (id, user) => {
+        return $http.get('/api/findOwnerVote/' + id + '/' + user);
       }
     };
   }

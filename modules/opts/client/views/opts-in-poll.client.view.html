@@ -4,13 +4,13 @@
       <div class="opt_image pull-left">
         <img src="{{opt.image}}" alt="{{opt.title}}" class="img-rounded">
       </div>
-      <h4 ng-bind="opt.title" data-placement="top-left" title="{{opt.title}}" data-content="{{opt.body}}" data-trigger="hover" bs-popover></h4>
+      <h4 ng-bind="opt.title"></h4>
       <progressbar max="max" value="dynamic"><span style="color:white; white-space:nowrap;">{{dynamic}} / {{max}}</span></progressbar>
       <div class="clearfix"></div>
     </li>
   </ul>
   <div>
-    <button class="btn btn-primary" ></button>
+    <button class="btn btn-primary" ng-click="vm.vote()"></button>
   </div>
   <hr>
 </div>

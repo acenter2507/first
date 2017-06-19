@@ -1,4 +1,4 @@
-<section>
+<div class="row">
   <div class="list-group">
     <a ng-repeat="opt in vm.opts" ui-sref="opts.view({ optId: opt._id })" class="list-group-item">
       <small class="list-group-item-text">
@@ -11,4 +11,5 @@
       <h4 class="list-group-item-heading" ng-bind="opt.title"></h4>
     </a>
   </div>
-</section>
+  <hr>
+</div>

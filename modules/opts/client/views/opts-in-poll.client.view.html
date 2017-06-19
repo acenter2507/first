@@ -4,7 +4,7 @@
       <div class="opt_image pull-left">
         <img src="{{opt.image}}" alt="{{opt.title}}" class="img-rounded">
       </div>
-      <h4 ng-bind="opt.title" tooltip="adalksjdlakjsdlkajsdlkajslkdj"></h4>
+      <h4 ng-bind="opt.title" popover="opt.body" popover-trigger="mouseenter"></h4>
       <progressbar max="max" value="dynamic"><span style="color:white; white-space:nowrap;">{{dynamic}} / {{max}}</span></progressbar>
       <div class="clearfix"></div>
     </li>

@@ -9,24 +9,24 @@
 
   function menuConfig(Menus) {
     // Set top bar menu items
-    Menus.addMenuItem('topbar', {
-      title: 'Cmts',
-      state: 'cmts',
-      type: 'dropdown',
-      roles: ['*']
-    });
+    // Menus.addMenuItem('topbar', {
+    //   title: 'Cmts',
+    //   state: 'cmts',
+    //   type: 'dropdown',
+    //   roles: ['*']
+    // });
 
-    // Add the dropdown list item
-    Menus.addSubMenuItem('topbar', 'cmts', {
-      title: 'List Cmts',
-      state: 'cmts.list'
-    });
+    // // Add the dropdown list item
+    // Menus.addSubMenuItem('topbar', 'cmts', {
+    //   title: 'List Cmts',
+    //   state: 'cmts.list'
+    // });
 
-    // Add the dropdown create item
-    Menus.addSubMenuItem('topbar', 'cmts', {
-      title: 'Create Cmt',
-      state: 'cmts.create',
-      roles: ['user']
-    });
+    // // Add the dropdown create item
+    // Menus.addSubMenuItem('topbar', 'cmts', {
+    //   title: 'Create Cmt',
+    //   state: 'cmts.create',
+    //   roles: ['user']
+    // });
   }
 }());

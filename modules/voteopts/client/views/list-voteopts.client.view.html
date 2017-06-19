@@ -1,0 +1,22 @@
+<section>
+  <div class="page-header">
+    <h1>Voteopts</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="voteopt in vm.voteopts"
+       ui-sref="voteopts.view({ voteoptId: voteopt._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="voteopt.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="voteopt.user" ng-bind="voteopt.user.displayName"></span>
+        <span ng-if="!voteopt.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="voteopt.name"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="vm.voteopts.$resolved && !vm.voteopts.length">
+    No Voteopts yet, why don't you <a ui-sref="voteopts.create">create one</a>?
+  </div>
+</section>

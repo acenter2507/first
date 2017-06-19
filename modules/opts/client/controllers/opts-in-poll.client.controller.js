@@ -14,6 +14,5 @@
   function OptsInPollController($scope, $state) {
     $scope.dynamic = 80;
     $scope.max = 100;
-    console.log(vm.poll);
   }
 }());

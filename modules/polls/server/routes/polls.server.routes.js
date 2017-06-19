@@ -20,6 +20,7 @@ module.exports = function(app) {
   app.route('/api/findOpts/:pollId').get(polls.findOpts);
   app.route('/api/findCmts/:pollId').get(polls.findCmts);
   app.route('/api/findTags/:pollId').get(polls.findTags);
+  app.route('/api/findVotes/:pollId').get(polls.findVotes);
 
   // Finish by binding the Poll middleware
   app.param('pollId', polls.pollByID);

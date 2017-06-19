@@ -165,6 +165,21 @@ exports.findTags = function(req, res) {
 };
 
 /**
+ * List of Opts in poll
+ */
+exports.findVotes = function(req, res) {
+  Poll.findVotes(req.poll._id).exec(function(err, votes) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(votes);
+    }
+  });
+};
+
+/**
  * Poll middleware
  */
 exports.pollByID = function(req, res, next, id) {

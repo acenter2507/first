@@ -34,6 +34,9 @@
       },
       findTags: (id) => {
         return $http.get('/api/findTags/' + id);
+      },
+      findVotes: (id) => {
+        return $http.get('/api/findVotes/' + id);
       }
     };
   }

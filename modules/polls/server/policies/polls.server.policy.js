@@ -29,6 +29,9 @@ exports.invokeRolesPolicies = function() {
     }, {
       resources: '/api/findTags/:pollId',
       permissions: '*'
+    }, {
+      resources: '/api/findVotes/:pollId',
+      permissions: '*'
     }]
   }, {
     roles: ['user'],
@@ -47,6 +50,9 @@ exports.invokeRolesPolicies = function() {
     }, {
       resources: '/api/findTags/:pollId',
       permissions: '*'
+    }, {
+      resources: '/api/findVotes/:pollId',
+      permissions: '*'
     }]
   }, {
     roles: ['guest'],
@@ -64,6 +70,9 @@ exports.invokeRolesPolicies = function() {
       permissions: '*'
     }, {
       resources: '/api/findTags/:pollId',
+      permissions: '*'
+    }, {
+      resources: '/api/findVotes/:pollId',
       permissions: '*'
     }]
   }]);

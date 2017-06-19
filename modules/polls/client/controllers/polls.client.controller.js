@@ -64,6 +64,14 @@
         .catch(err => {
           alert('error' + err);
         });
+      // Get all Votes
+      PollsApi.findVotes(poll._id)
+        .then(votes => {
+          vm.votes = votes.data;
+        })
+        .catch(err => {
+          alert('error' + err);
+        });
     }
 
     // Function

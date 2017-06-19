@@ -1,6 +1,6 @@
 <div class="row">
   <ul class="opts" ng-controller="OptsInPollController">
-    <li ng-repeat="opt in vm.opts | orderBy: '-voteCnt'">
+    <li ng-repeat="opt in vm.opts | orderBy: '-voteCnt'" tooltip="{{opt.body}}>
       <div class="opt_image pull-left">
         <img src="{{opt.image}}" alt="{{opt.title}}" class="img-rounded">
       </div>

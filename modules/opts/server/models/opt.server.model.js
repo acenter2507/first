@@ -25,7 +25,7 @@ var OptSchema = new Schema({
   image: {
     type: String,
     default: 'modules/opts/client/img/default.png'
-  }
+  },
   poll: {
     type : Schema.ObjectId,
     ref : 'Poll',

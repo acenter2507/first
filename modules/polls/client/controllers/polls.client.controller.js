@@ -234,9 +234,19 @@
     }
 
     // VOTE
+    vm.vote_modal_opt = {
+      scope: $scope,
+      controllerAs: vm,
+      templateUrl: 'modules/votes/client/views/vote-modal.client.view.html',
+      title: vm.poll.title,
+      placement: "center",
+      show: false
+    };
+    var vote_modal = $modal(vm.vote_modal_opt);
     vm.show_vote = show_vote;
+
     function show_vote() {
-      $modal({controllerAs: vm, scope: $scope, template: 'modules/votes/client/views/vote-modal.client.view.html', show: true});
+      vote_modal.$promise.then(vote_modal.show);
     }
 
   }

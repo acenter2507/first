@@ -22,6 +22,10 @@ var OptSchema = new Schema({
     required: 'Please fill Option body',
     trim : true
   },
+  image: {
+    type: String,
+    default: 'modules/opts/client/img/default.png'
+  }
   poll: {
     type : Schema.ObjectId,
     ref : 'Poll',

@@ -13,12 +13,12 @@ var PolltagSchema = new Schema({
   poll: {
     type : Schema.ObjectId,
     ref : 'Poll',
-    required: 'Please fill Poll info',
+    required: 'Please fill Poll info'
   },
   tag: {
     type : Schema.ObjectId,
     ref : 'Tag',
-    required: 'Please fill Tag info',
+    required: 'Please fill Tag info'
   }
 });
 

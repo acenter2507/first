@@ -10,19 +10,15 @@ var mongoose = require('mongoose'),
  * Voteopt Schema
  */
 var VoteoptSchema = new Schema({
-  name: {
-    type: String,
-    default: '',
-    required: 'Please fill Voteopt name',
-    trim: true
+  vote: {
+    type : Schema.ObjectId,
+    ref : 'Vote',
+    required: 'Please fill Vote info'
   },
-  created: {
-    type: Date,
-    default: Date.now
-  },
-  user: {
-    type: Schema.ObjectId,
-    ref: 'User'
+  opt: {
+    type : Schema.ObjectId,
+    ref : 'Opt',
+    required: 'Please fill Option info'
   }
 });
 

@@ -1,4 +1,12 @@
 <div class="row">
+  <ul class="opts">
+    <li ng-repeat="opt in vm.opts | orderBy: '-voteCnt'">
+      <div class="opt_image pull-left">
+        <img src="{{opt.image}}" alt="{{opt.title}}" class="img-rounded">
+      </div>
+      
+    </li>
+  </ul>
   <div class="list-group">
     <a ng-repeat="opt in vm.opts" ui-sref="opts.view({ optId: opt._id })" class="list-group-item">
       <small class="list-group-item-text">

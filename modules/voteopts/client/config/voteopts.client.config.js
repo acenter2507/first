@@ -5,11 +5,11 @@
     .module('voteopts')
     .run(menuConfig);
 
-  menuConfig.$inject = ['menuService'];
+  menuConfig.$inject = ['Menus'];
 
-  function menuConfig(menuService) {
+  function menuConfig(Menus) {
     // Set top bar menu items
-    menuService.addMenuItem('topbar', {
+    Menus.addMenuItem('topbar', {
       title: 'Voteopts',
       state: 'voteopts',
       type: 'dropdown',
@@ -17,13 +17,13 @@
     });
 
     // Add the dropdown list item
-    menuService.addSubMenuItem('topbar', 'voteopts', {
+    Menus.addSubMenuItem('topbar', 'voteopts', {
       title: 'List Voteopts',
       state: 'voteopts.list'
     });
 
     // Add the dropdown create item
-    menuService.addSubMenuItem('topbar', 'voteopts', {
+    Menus.addSubMenuItem('topbar', 'voteopts', {
       title: 'Create Voteopt',
       state: 'voteopts.create',
       roles: ['user']

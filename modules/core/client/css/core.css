@@ -40,6 +40,36 @@ a:hover .header-profile-image {
   display: inline;
 }
 
+.mgn {
+  margin: 0;
+}
+.mgnl {
+  margin-left: 0;
+}
+.mgnr {
+  margin-right: 0;
+}
+.mgnt {
+  margin-top: 0;
+}
+.mgnb {
+  margin-bottom: 0;
+}
+.pdn {
+  padding: 0;
+}
+.pdnl {
+  padding-left: 0;
+}
+.pdnr {
+  padding-right: 0;
+}
+.pdnt {
+  padding-top: 0;
+}
+.pdnb {
+  padding-bottom: 0;
+}
 .mg1t {
   margin-top: 1px;
 }

@@ -15,10 +15,11 @@
     'PollsApi',
     'TagsService',
     '$aside',
-    'CmtsService'
+    'CmtsService',
+    '$dropdown'
   ];
 
-  function PollsController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $aside, Cmts) {
+  function PollsController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $aside, Cmts, $dropdown) {
     var vm = this;
 
     vm.authentication = Authentication;

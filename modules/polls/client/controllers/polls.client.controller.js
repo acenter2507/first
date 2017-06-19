@@ -239,7 +239,7 @@
     vm.voteds = [];
 
     function send_vote() {
-      alert('send_vote')
+      alert('send_vote');
     }
 
     function selectedOpts() {

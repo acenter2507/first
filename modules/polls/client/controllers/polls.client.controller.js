@@ -33,7 +33,7 @@
     vm.cmt_sorts = [
       { val: '-updated', name: 'Newest to oldest' },
       { val: 'updated', name: 'Oldest to newest' },
-      { val: '-pointCnt', name: 'Most likes' }
+      { val: '-likeCnt', name: 'Most likes' }
     ];
     vm.cmt_sort = '-updated';
 

@@ -36,7 +36,7 @@ var CmtSchema = new Schema({
     type: Boolean,
     default: false
   },
-  pointCnt: {
+  likeCnt: {
     type: Number,
     default: 0
   }

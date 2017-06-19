@@ -1,0 +1,26 @@
+.opts {
+  min-width: 100%;
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 10px;
+  margin-top: 0;
+}
+
+.opts a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.opt_image {
+  position: relative;
+  min-width: 46px;
+  min-height: 46px;
+  margin-top: 2px;
+  background: transparent;
+}
+
+.opt_image img {
+  margin-right: 15px;
+  width: 46px;
+  height: 46px;
+}

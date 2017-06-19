@@ -244,10 +244,14 @@
     };
     var vote_modal = $modal(vm.vote_modal_opt);
     vm.show_vote = show_vote;
+    vm.voteds = [];
 
     function show_vote() {
       vote_modal.$promise.then(vote_modal.show);
     }
 
+    function toggleSelection(opt) {
+      vote_modal.$promise.then(vote_modal.show);
+    }
   }
 }());

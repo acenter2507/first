@@ -38,9 +38,8 @@ var CmtSchema = new Schema({
   }
 });
 
-CmtSchema.pre('update', function(next){
+CmtSchema.pre('save', function(next){
   this.updated = new Date();
-  this.isEdited = true;
   next();
 });
 

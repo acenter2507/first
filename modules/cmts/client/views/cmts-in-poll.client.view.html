@@ -11,7 +11,7 @@
         <span ng-if="!cmt.user">Deleted User</span>
         <span>&nbsp;on&nbsp;</span>
         <span ng-bind="cmt.updated | date:'mediumDate'"></span>
-        <span class="mg10l"><i class="fa fa-pencil-square-o" aria-hidden="true" ng-show="cmt.isEdited"></i></span>
+        <span class="mg10l" ng-show="cmt.isEdited"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
         <a href="#" bs-dropdown aria-haspopup="true" aria-expanded="false" class="mg10l">
           <i class="fa fa-ellipsis-v fa-lg" aria-hidden="true"></i>
         </a>
@@ -28,25 +28,3 @@
     </li>
   </ul>
 </div>
-
-
-<!--       <small>
-        Posted on
-        <span ng-bind="cmt.created | date:'mediumDate'"></span>
-        by
-        <a ui-sref="users.info({userId: cmt.user._id})" ng-if="cmt.user" ng-bind="cmt.user.displayName"></a>
-        <span ng-if="!cmt.user">Deleted User</span>
-      </small>
-      <p class="text-justify" ng-bind="cmt.body"></p>
-      <div class="pull-left">
-        <a href="#" bs-dropdown aria-haspopup="true" aria-expanded="false">
-          <i class="fa fa-ellipsis-v fa-lg" aria-hidden="true"></i>
-        </a>
-        <ul class="dropdown-menu" role="menu">
-          <li ng-show="(vm.authentication.user) && cmt.user._id !== vm.authentication.user._id"><a ng-click="vm.reply_cmt(cmt)"><i class="fa fa-reply"></i>&nbsp;Reply</a></li>
-          <li ng-show="cmt.user._id === vm.authentication.user._id"><a ng-click="vm.edit_cmt(cmt)"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
-          <li ng-show="cmt.user._id === vm.authentication.user._id"><a ng-click="vm.delete_cmt(cmt)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
-        </ul>
-      </div>
-      <div class="clearfix"></div>
-      <hr> -->

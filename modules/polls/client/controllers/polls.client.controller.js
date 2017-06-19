@@ -183,7 +183,7 @@
       alert("reply_cmt");
     }
     function edit_cmt(cmt) {
-      alert("edit_cmt");
+      reply(cmt);
     }
     function delete_cmt(cmt) {
       alert("delete_cmt");

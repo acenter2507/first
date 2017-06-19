@@ -243,7 +243,9 @@
     }
 
     function selectedOpts() {
-      vm.voteds = $filter('filter')(vm.opts, {checked: true});
+      vm.voteds = = $filter('filter')($scope.users, {
+        checked: true
+      });
       console.log(vm.voteds);
     }
   }

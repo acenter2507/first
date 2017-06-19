@@ -235,13 +235,14 @@
 
     // VOTE
     vm.send_vote = send_vote;
+    vm.selectedOpts = selectedOpts;
     vm.voteds = [];
 
     function send_vote() {
       alert('send_vote')
     }
 
-    function selectedOpts(opt) {
+    function selectedOpts() {
       vm.voteds = $filter('filter')(vm.opts, {checked: true});
       console.log(vm.voteds);
     }

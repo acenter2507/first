@@ -166,6 +166,7 @@
     }
 
     function reply(cmt) {
+      console.log(cmt);
       if (vm.authentication.user) {
         vm.comment = (!cmt) ? new Cmts() : new Cmts(cmt);
         comment_aside.$promise.then(comment_aside.show);
@@ -174,22 +175,27 @@
       }
     }
 
-    $scope.dropdown = [{
-      "text": "<i class=\"fa fa-download\"></i>&nbsp;adasdasdasdasd",
-      "href": "#anotherAction",
-      "active": true
-    }, {
-      "text": "<i class=\"fa fa-globe\"></i>&nbsp;Display an alert",
-      "click": "$alert(\"Holy guacamole!\")"
-    }, {
-      "text": "<i class=\"fa fa-external-link\"></i>&nbsp;External link",
-      "href": "/auth/facebook",
-      "target": "_self"
-    }, {
-      "divider": true
-    }, {
-      "text": "Separated link",
-      "href": "#separatedLink"
-    }];
+    vm.cmt_dropdown = [];
+    vm.show_cmt_menu = show_cmt_menu;
+
+    function show_cmt_menu(elm, _comment) {
+      if (vm.authentication.user && _comment.user._id != vm.authentication.user._id) {
+        vm.cmt_dropdown.push({
+          'text': '<i class="fa fa-reply"></i>&nbsp;Reply',
+          'click': 'reply()'
+        });
+      }
+      if (_comment.user._id == vm.authentication.user._id) {
+        vm.cmt_dropdown.push({
+          'text': '<i class="fa fa-pencil-square-o"></i>&nbsp;Edit',
+          'click': 'reply(_comment)'
+        });
+        vm.cmt_dropdown.push({
+          'text': '<i class="fa fa-trash"></i>&nbsp;Delete',
+          'click': 'delete(_comment)'
+        });
+      }
+      $dropdown(elm, {scope: {content: vm.cmt_dropdown}});
+    }
   }
 }());

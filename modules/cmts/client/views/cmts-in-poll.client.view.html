@@ -9,11 +9,12 @@
         <span ng-if="!cmt.user">Deleted User</span>
       </small>
       <p class="text-justify" ng-bind="cmt.body"></p>
-      <div class="pull-right">
+      <div class="pull-right" ng-show="vm.authentication.user">
         <!-- <a href="" ng-show="cmt.user._id == vm.authentication.user._id" ng-click="vm.reply(cmt)"></a> -->
-        <button data-animation="am-flip-x" bs-dropdown="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-ellipsis-v" aria-hidden="true" ng-click="vm.show_cmt_menu(this, cmt)"></i>
+<!--         <button data-animation="am-flip-x" bs-dropdown="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-        </button>
+        </button> -->
       </div>
       <div class="clearfix"></div>
       <hr>

@@ -1,13 +1,11 @@
 <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 pdnl pdnr">
-    <ul class="opts">
-      <li ng-repeat="opt in vm.opts">
-        <label>
-          <input type="checkbox" ng-model="opt.checked" ng-change="vm.selectedOpts()">
-          {{opt.title}}
-        </label>
-      </li>
-    </ul>
+    <div class="form-group">
+      <label ng-repeat="fruit in fruits" class="checkbox-inline">
+        <input type="checkbox" name="selectedFruits[]" value="{{opt._id}}" ng-model="opt.selected"> 
+        {{opt.title}}
+      </label>
+    </div>
     <button class="btn btn-primary btn-sm" ng-click="vm.send_vote()">Vote</button>
   </div>
   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 pdnl pdnr">

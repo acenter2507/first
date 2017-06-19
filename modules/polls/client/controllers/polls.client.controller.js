@@ -10,7 +10,7 @@
     '$scope',
     '$state',
     '$window',
-    '$filter',
+    'filterFilter',
     'Authentication',
     'pollResolve',
     'PollsApi',
@@ -20,7 +20,7 @@
     '$dropdown'
   ];
 
-  function PollsController($scope, $state, $window, $filter, Authentication, poll, PollsApi, Tags, $modal, $aside, Cmts, $dropdown) {
+  function PollsController($scope, $state, $window, filterFilter, Authentication, poll, PollsApi, Tags, $modal, $aside, Cmts, $dropdown) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -243,9 +243,7 @@
     }
 
     function selectedOpts() {
-      vm.voteds = $filter('filter')($scope.users, {
-        checked: true
-      });
+      vm.voteds = filterFilter($scope.opts, { selected: true });
       console.log(vm.voteds);
     }
   }

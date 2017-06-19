@@ -6,7 +6,7 @@
     </div>
     <div class="clearfix"></div>
   </div>
-  <div class="well" ng-repeat="cmt in vm.cmts | orderBy:'-updated'">
+  <div class="well" ng-repeat="cmt in vm.cmts | orderBy:'updated'">
     <small>
       Posted on
       <span ng-bind="cmt.created | date:'mediumDate'"></span>

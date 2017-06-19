@@ -141,6 +141,7 @@
         return false;
       }
       if (vm.comment._id) {
+        vm.comment.isEdited = true;
         vm.comment.$update(successCallback, errorCallback);
       } else {
         vm.poll.cmtCnt += 1;

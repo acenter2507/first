@@ -2,9 +2,9 @@
   <ul class="opts" ng-controller="OptsInPollController">
     <li ng-repeat="opt in vm.opts | orderBy: '-voteCnt'">
       <div class="opt_image pull-left">
-        <img src="{{opt.image}}" alt="{{opt.title}}" class="img-rounded"　tooltip="opt.body" tooltip-trigger="mouseenter">
+        <img src="{{opt.image}}" alt="{{opt.title}}" class="img-rounded">
       </div>
-      <h4 ng-bind="opt.title"></h4>
+      <h4 ng-bind="opt.title" tooltip="adalksjdlakjsdlkajsdlkajslkdj"></h4>
       <progressbar max="max" value="dynamic"><span style="color:white; white-space:nowrap;">{{dynamic}} / {{max}}</span></progressbar>
       <div class="clearfix"></div>
     </li>

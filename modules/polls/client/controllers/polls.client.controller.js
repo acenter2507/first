@@ -236,12 +236,14 @@
     // VOTE
     vm.send_vote = send_vote;
 
-    vm.voteds = function() {
-      return filterFilter($scope.opts, { selected: true });
-    };
+    $scope.$watch('optionts|filter:{selected:true}', function (nv) {
+      $scope.voteds = nv.map(function (opt) {
+        return opt._id;
+      });
+    }, true);
 
     function send_vote() {
-      alert('send_vote');
+      console.log($scope.voteds);
     }
   }
 }());

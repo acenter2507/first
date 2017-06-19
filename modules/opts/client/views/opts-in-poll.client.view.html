@@ -4,7 +4,7 @@
       <div class="opt_image pull-left">
         <img src="{{opt.image}}" alt="{{opt.title}}" class="img-rounded">
       </div>
-      <h4 ng-bind="opt.title"></h4>
+      <h4 ng-bind="opt.title" data-animation="am-flip-x" bs-tooltip="{title: opt.body}"></h4>
       <uib-progressbar max="max" value="dynamic"><span style="color:white; white-space:nowrap;">{{dynamic}} / {{max}}</span></uib-progressbar>
       <div class="clearfix"></div>
     </li>

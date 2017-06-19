@@ -167,13 +167,25 @@
     }
 
     function reply(cmt) {
-      console.log(cmt);
       if (vm.authentication.user) {
         vm.comment = (!cmt) ? new Cmts() : new Cmts(cmt);
         comment_aside.$promise.then(comment_aside.show);
       } else {
         $state.go('authentication.signin');
       }
+    }
+
+    vm.reply_cmt = reply_cmt;
+    vm.edit_cmt = edit_cmt;
+    vm.delete_cmt = delete_cmt;
+    function reply_cmt(cmt) {
+      alert("reply_cmt");
+    }
+    function edit_cmt(cmt) {
+      alert("edit_cmt");
+    }
+    function delete_cmt(cmt) {
+      alert("delete_cmt");
     }
   }
 }());

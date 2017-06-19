@@ -14,10 +14,9 @@
           <i class="fa fa-ellipsis-v fa-lg" aria-hidden="true"></i>
         </a>
         <ul class="dropdown-menu" role="menu">
-          <li><a ng-click="alert('Holy guacamole')"><i class="fa fa-reply"></i>&nbsp;Reply</a></li>
-          <li><a ng-click="alert('Holy guacamole')"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
-          <li><a ng-click="alert('Holy guacamole')"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
-          <!-- <li ng-repeat="i in ['Foo', 'Bar', 'Baz']"><a ng-href="#action{{i}}"><i class="fa fa-chevron-right"></i>&nbsp;{{i}}</a></li> -->
+          <li ng-show="(vm.authentication.user) && cmt.user._id !== vm.authentication.user._id"><a ng-click="vm.reply_cmt(cmt)"><i class="fa fa-reply"></i>&nbsp;Reply</a></li>
+          <li ng-show="cmt.user._id === vm.authentication.user._id"><a ng-click="vm.edit_cmt(cmt)"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
+          <li ng-show="cmt.user._id === vm.authentication.user._id"><a ng-click="vm.delete_cmt(cmt)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
         </ul>
       </div>
       <div class="clearfix"></div>

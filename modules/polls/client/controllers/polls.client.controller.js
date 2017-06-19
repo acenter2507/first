@@ -70,6 +70,8 @@
     vm.remove = remove;
     vm.save = save;
     vm.discard = discard;
+    vm.like_poll = like_poll;
+    vm.dislike_poll = dislike_poll;
 
     // Remove existing Poll
     function remove() {
@@ -192,6 +194,8 @@
     vm.reply_cmt = reply_cmt;
     vm.edit_cmt = edit_cmt;
     vm.delete_cmt = delete_cmt;
+    vm.like_cmt = like_cmt;
+    vm.dislike_cmt = dislike_cmt;
 
     function reply_cmt(cmt) {
       alert("reply_cmt");

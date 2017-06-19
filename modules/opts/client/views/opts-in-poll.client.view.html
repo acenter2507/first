@@ -1,5 +1,4 @@
 <div class="row">
-<button popover="{{dynamicPopover.content}}" popover-title="{{dynamicPopover.title}}" class="btn btn-default">Dynamic Popover</button>
   <ul class="opts" ng-controller="OptsInPollController">
     <li ng-repeat="opt in vm.opts | orderBy: '-voteCnt'">
       <div class="opt_image pull-left">

@@ -14,10 +14,5 @@
   function OptsInPollController($scope, $state) {
     $scope.dynamic = 80;
     $scope.max = 100;
-    $scope.dynamicPopover = {
-      content: 'Hello, World!',
-      templateUrl: 'myPopoverTemplate.html',
-      title: 'Title'
-    };
   }
 }());

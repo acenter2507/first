@@ -237,8 +237,9 @@
     vm.send_vote = send_vote;
     vm.voteds = [];
 
-    vm.checked = function(opt) {
-      console.log(opt);
+    vm.checked = function() {
+      vm.voteds = filterFilter(vm.opts, { selected: true });
+      console.log(vm.voteds);
     };
 
     function send_vote() {

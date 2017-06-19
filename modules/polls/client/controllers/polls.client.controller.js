@@ -214,7 +214,7 @@
     vm.dislike_cmt = dislike_cmt;
 
     function reply_cmt(cmt) {
-      alert("reply_cmt");
+      alert('reply_cmt');
     }
 
     function edit_cmt(cmt) {
@@ -222,32 +222,23 @@
     }
 
     function delete_cmt(cmt) {
-      alert("delete_cmt");
+      alert('delete_cmt');
     }
 
     function like_cmt(cmt) {
-      alert("like_cmt");
+      alert('like_cmt');
     }
 
     function dislike_cmt(cmt) {
-      alert("dislike_cmt");
+      alert('dislike_cmt');
     }
 
     // VOTE
-    vm.vote_modal_opt = {
-      scope: $scope,
-      controllerAs: vm,
-      templateUrl: 'modules/votes/client/views/vote-modal.client.view.html',
-      title: vm.poll.title,
-      placement: "center",
-      show: false
-    };
-    var vote_modal = $modal(vm.vote_modal_opt);
-    vm.show_vote = show_vote;
+    vm.send_vote = send_vote;
     vm.voteds = [];
 
-    function show_vote() {
-      vote_modal.$promise.then(vote_modal.show);
+    function send_vote() {
+      alert('send_vote')
     }
 
     function toggleSelection(opt) {

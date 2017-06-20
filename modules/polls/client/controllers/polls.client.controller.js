@@ -71,14 +71,13 @@
         .then(res => {
           if (res.data) {
             vm.ownVote = res.data;
-            return VotesApi.fintOpts(vm.ownVote._id);
+            return VotesApi.findOpts(vm.ownVote._id);
           } else {
             vm.ownVote = new Votes();
           }
         })
         .then(res => {
           vm.votedOpts = (res && res.data) ? res.data : [];
-          console.log(vm.votedOpts);
         })
         .catch(err => {
           // alert('error' + err);

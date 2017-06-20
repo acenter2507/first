@@ -46,6 +46,7 @@ exports.create = function(req, res) {
         } else {
           var _opt = new Opt(opt);
           _opt.user = req.user;
+          _opt.poll = poll;
           promises.push(_opt.save());
         }
       });

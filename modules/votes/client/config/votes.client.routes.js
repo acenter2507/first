@@ -33,7 +33,6 @@
         },
         data: {
           // roles: ['user', 'admin'],
-          roles: ['*'],
           pageTitle: 'Votes Create'
         }
       })

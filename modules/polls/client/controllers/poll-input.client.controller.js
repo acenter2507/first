@@ -40,7 +40,7 @@
         .catch(err => {
           alert('error' + err);
         });
-      // Get all Cmts
+      // Get all Tags
       PollsApi.findTags(poll._id)
         .then(polltags => {
           angular.forEach(polltags.data, (polltag, index) => {
@@ -120,6 +120,7 @@
     };
     var opt_aside = $aside(vm.opt_form);
     vm.input_opt = input_opt;
+    vm.save_opt = save_opt;
     vm.aside_full_screen = aside_full_screen;
     // Click button add option
     function input_opt(opt) {

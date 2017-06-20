@@ -20,10 +20,12 @@ exports.create = function(req, res) {
 
   var tags = req.body.tags;
   var opts = req.body.opts;
+  console.log(opts);
   var promises = [];
   poll.save()
     .then(_poll => {
       poll = _poll;
+      console.log(poll);
       tags.forEach((tag) => {
         var polltag = new Polltag();
         polltag.tag = tag;

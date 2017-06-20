@@ -49,4 +49,7 @@
 
 .poll_info_item {
   display: inline;
+  min-width: 40px;
+  min-height: 40px;
+  background: green;
 }

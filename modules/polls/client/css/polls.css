@@ -46,3 +46,11 @@
 .sort {
   max-width: 200px;
 }
+
+.poll_info {
+  display: inline;
+}
+
+.poll_info_item {
+  text-align: center;
+}

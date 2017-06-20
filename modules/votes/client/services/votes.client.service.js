@@ -1,5 +1,5 @@
 // Votes service used to communicate Votes REST endpoints
-(function () {
+(function() {
   'use strict';
 
   angular
@@ -18,7 +18,7 @@
     });
   }
 
-    angular
+  angular
     .module('votes')
     .factory('VotesApi', VotesApi);
 

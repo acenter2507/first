@@ -21,7 +21,7 @@
     'VotesApi'
   ];
 
-  function PollsController($scope, $state, $window, filterFilter, Authentication, poll, PollsApi, Tags, $modal, $aside, Cmts, Votes, VotesApi) {
+  function PollsController($scope, $state, $window, filterFilter, Authentication, poll, PollsApi, Tags, $aside, Cmts, Votes, VotesApi) {
     var vm = this;
 
     console.log(Votes);

@@ -15,9 +15,10 @@
           </div>
         </div>
         <!-- Options -->
+        <pre>{{vm.opts | json}}</pre>
         <div class="form-group">
           <label class="control-label" for="opt">Options</label>
-          <button type="button" class="btn btn-default" ng-model="vm.selectedOpts" data-html="1" data-multiple="1" data-animation="am-flip-x" bs-options="opt as opt.title for opt in vm.opts" bs-select required>
+          <button type="button" class="btn btn-default form-control" ng-model="vm.selectedOpts" data-html="1" data-multiple="1" data-animation="am-flip-x" bs-options="opt as opt.title for opt in vm.opts" bs-select required>
             Action <span class="caret"></span>
           </button>
         </div>

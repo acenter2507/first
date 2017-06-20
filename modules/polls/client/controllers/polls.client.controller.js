@@ -24,7 +24,6 @@
   function PollsController($scope, $state, $window, filterFilter, Authentication, poll, PollsApi, Tags, $aside, Cmts, Votes, VotesApi) {
     var vm = this;
 
-    console.log(Votes);
     vm.authentication = Authentication;
     vm.poll = poll;
     vm.poll.close = (vm.poll.close) ? moment(vm.poll.close) : vm.poll.close;
@@ -75,11 +74,10 @@
             return VotesApi.fintOpts(vm.ownVote._id);
           } else {
             vm.ownVote = new Votes();
-            vm.votedOpts = [];
           }
         })
         .then(res => {
-          vm.votedOpts = res.data;
+          vm.votedOpts = (res && res.data) ? res.data : [];
           console.log(vm.votedOpts);
         })
         .catch(err => {

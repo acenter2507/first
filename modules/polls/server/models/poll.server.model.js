@@ -26,7 +26,7 @@ var PollSchema = new Schema({
     type: String,
     default: ''
   },
-  only_member: {
+  allow_guest: {
     type: Boolean,
     default: false
   },

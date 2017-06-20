@@ -70,7 +70,7 @@
         $scope.$broadcast('show-errors-check-validity', 'vm.form.pollForm');
         return false;
       }
-      
+
       vm.poll.opts = vm.opts;
       if (vm.poll._id) {
         vm.poll.$update(successCallback, errorCallback);
@@ -86,6 +86,7 @@
 
       function errorCallback(res) {
         vm.error = res.data.message;
+        console.log(res);
       }
     }
 

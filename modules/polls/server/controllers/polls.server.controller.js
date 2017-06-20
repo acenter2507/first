@@ -216,7 +216,6 @@ exports.findOwnerVote = function(req, res) {
     condition.ip = req.headers["X-Forwarded-For"] || req.headers["x-forwarded-for"] || req.client.remoteAddress;
     condition.guest = true;
   }
-  console.log(condition);
   Poll.findOwnerVote(condition).exec(function(err, vote) {
     if (err) {
       return res.status(400).send({

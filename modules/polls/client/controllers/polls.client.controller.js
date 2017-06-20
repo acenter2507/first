@@ -240,7 +240,7 @@
 
     // VOTE
     vm.send_vote = send_vote;
-    vm.selectedOpts = angular.copy(vm.votedOpts);
+    vm.selectedOpts = (vm.ownVote._id) ? angular.copy(vm.votedOpts) : [];
 
     vm.checked = function(id) {
       if (_.contains(vm.selectedOpts, id)) {

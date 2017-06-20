@@ -10,7 +10,6 @@
     '$scope',
     '$state',
     '$window',
-    'filterFilter',
     'Authentication',
     'pollResolve',
     'PollsApi',
@@ -18,10 +17,11 @@
     '$aside',
     'CmtsService',
     'VotesService',
-    'VotesApi'
+    'VotesApi',
+    'OptsService',
   ];
 
-  function PollsController($scope, $state, $window, filterFilter, Authentication, poll, PollsApi, Tags, $aside, Cmts, Votes, VotesApi) {
+  function PollsController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $aside, Cmts, Votes, VotesApi, Opts) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -38,7 +38,6 @@
       { val: '-likeCnt', name: 'Most likes' }
     ];
     vm.cmt_sort = '-updated';
-    vm.add_opt = add_opt;
 
     vm.opts = [];
 
@@ -129,16 +128,53 @@
       }
     }
 
-    // Click button add option
-    function add_opt() {
-      $aside({title: 'My Title', content: 'My Content', show: true});
-    }
     function like_poll() {
       alert("like_poll");
     }
 
     function dislike_poll() {
       alert("dislike_poll");
+    }
+
+    // OPTIONS
+    vm.opt_form = {
+      scope: $scope,
+      controllerAs: vm,
+      templateUrl: 'modules/opts/client/views/new-opt-in-poll.client.view.html',
+      title: vm.poll.title,
+      placement: 'bottom',
+      animation: 'am-fade-and-slide-bottom',
+      show: false
+    };
+    var opt_aside = $aside(vm.opt_form);
+    vm.input_opt = input_opt;
+    // Click button add option
+    function input_opt(opt) {
+      vm.option = (!opt) ? new Opts() : new Opts(opt);
+      opt_aside.$promise.then(opt_aside.show);
+    }
+    // Click button save option
+    function save_opt($form) {
+      if (!$form.$valid) {
+        $scope.$broadcast('show-errors-check-validity', 'vm.form.optForm');
+        return false;
+      }
+      if (vm.option._id) {
+        vm.option.$update(successCallback, errorCallback);
+      } else {
+        vm.option.poll = vm.poll._id;
+        vm.comment.$save(successCallback, errorCallback);
+      }
+
+      function successCallback(res) {
+        opt_aside.$promise.then(opt_aside.hide);
+        $state.reload();
+      }
+
+      function errorCallback(err) {
+        console.log(err);
+        //vm.error = res.data.message;
+      }
     }
 
     // Comment
@@ -153,11 +189,11 @@
     };
     var comment_aside = $aside(vm.comment_form);
     vm.comment = {};
-    vm.comment_form_change_screen = comment_form_change_screen;
+    vm.aside_full_screen = aside_full_screen;
     vm.send_comment = send_comment;
     vm.reply = reply;
 
-    function comment_form_change_screen() {
+    function aside_full_screen() {
       alert(1);
     }
 

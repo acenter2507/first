@@ -3,20 +3,27 @@
     <div class="aside-content">
       <div class="aside-header" ng-show="title">
         <button type="button" class="close" ng-click="$hide()">&times;</button>
-        <button type="button" class="close" ng-click="comment_form_change_screen()">
+        <button type="button" class="close" ng-click="aside_full_screen()">
         </button>
         <h4 class="aside-title" ng-bind="title"></h4>
       </div>
       <div class="aside-body">
         <div class="col-xs-12">
-          <form name="vm.form.cmtForm" class="form-horizontal" novalidate>
+          <form name="vm.form.optForm" class="form-horizontal" novalidate>
             <fieldset>
-              <input type="hidden" name="_id" ng-model="vm.comment._id">
+              <input type="hidden" name="_id" ng-model="vm.option._id">
+              <!-- Title -->
               <div class="form-group" show-errors>
-                <textarea name="body" ng-model="vm.comment.body" class="form-control" placeholder="Type your reply" required></textarea>
-                <div ng-messages="vm.form.cmtForm.body.$error" role="alert">
-                  <p class="help-block error-text" ng-message="required">You must type something.</p>
+                <label class="control-label" for="title">Title</label>
+                <input type="text" ng-model="vm.option.title" class="form-control" placeholder="Title" required>
+                <div ng-messages="vm.form.optForm.title.$error" role="alert">
+                  <p class="help-block error-text" ng-message="required">Opt title is required.</p>
                 </div>
+              </div>
+              <!-- Body -->
+              <div class="form-group">
+                <label class="control-label" for="body">Body</label>
+                <textarea ng-model="vm.option.body" class="form-control" placeholder="Body" required></textarea>
               </div>
             </fieldset>
           </form>
@@ -24,7 +31,7 @@
         <div class="clearfix"></div>
       </div>
       <div class="aside-footer">
-        <button type="button" class="btn btn-default" ng-click="vm.send_comment(vm.form.cmtForm)">Send reply</button>
+        <button type="button" class="btn btn-default" ng-click="vm.save_option(vm.form.cmtForm)">Save</button>
         <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
       </div>
     </div>

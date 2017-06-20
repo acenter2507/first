@@ -135,8 +135,8 @@
       }
       if (!vm.option._id) {
         vm.opts.push(vm.option);
-        opt_aside.$promise.then(opt_aside.hide);
       }
+      opt_aside.$promise.then(opt_aside.hide);
       // if (vm.option._id) {
       //   vm.option.$update(successCallback, errorCallback);
       // } else {

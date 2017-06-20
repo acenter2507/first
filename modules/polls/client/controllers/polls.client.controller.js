@@ -278,7 +278,7 @@
     };
 
     function send_vote() {
-      if (!vm.votedOpts.length || vm.votedOpts.length === 0) {
+      if (!vm.selectedOpts.length || vm.selectedOpts.length === 0) {
         return alert('You must vote at least one option.');
       }
       vm.ownVote.opts = vm.selectedOpts;
@@ -290,7 +290,7 @@
       }
 
       function successCallback(res) {
-        vm.votedOpts = angular.copy(vm.selectedOpts);
+        vm.votedOpts = angular.copy(vm.selectedOpts) || [];
         alert('Vote success');
       }
 

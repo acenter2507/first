@@ -17,6 +17,8 @@ module.exports = function(app) {
     .put(votes.update)
     .delete(votes.delete);
 
+  app.route('/api/findOpts/:voteId').get(votes.findOpts);
+
   // Finish by binding the Vote middleware
   app.param('voteId', votes.voteByID);
 };

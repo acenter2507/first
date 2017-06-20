@@ -17,4 +17,18 @@
       }
     });
   }
+
+    angular
+    .module('votes')
+    .factory('VotesApi', VotesApi);
+
+  VotesApi.$inject = ['$http'];
+
+  function VotesApi($http) {
+    return {
+      findOpts: (id) => {
+        return $http.get('/api/findOpts/' + id);
+      }
+    };
+  }
 }());

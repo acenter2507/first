@@ -18,9 +18,10 @@
     '$aside',
     'CmtsService',
     'VotesService',
+    'VotesApi'
   ];
 
-  function PollsController($scope, $state, $window, filterFilter, Authentication, poll, PollsApi, Tags, $modal, $aside, Cmts, Votes) {
+  function PollsController($scope, $state, $window, filterFilter, Authentication, poll, PollsApi, Tags, $modal, $aside, Cmts, Votes, VotesApi) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -65,18 +66,20 @@
         .catch(err => {
           alert('error' + err);
         });
-      // Get all Votes
-      // PollsApi.findVotes(poll._id)
-      //   .then(votes => {
-      //     vm.votes = votes.data;
-      //   })
-      //   .catch(err => {
-      //     alert('error' + err);
-      //   });
+      // Get Voted
       PollsApi.findOwnerVote(poll._id)
-        .then(vote => {
-          vm.ownVote = vote.data;
-          console.log(vm.ownVote);
+        .then(res => {
+          if (res.data) {
+            vm.ownVote = res.data;
+            return VotesApi.fintOpts(vm.ownVote._id);
+          } else {
+            vm.ownVote = new Votes();
+            vm.votedOpts = [];
+          }
+        })
+        .then(res => {
+          vm.votedOpts = res.data;
+          console.log(vm.votedOpts);
         })
         .catch(err => {
           // alert('error' + err);
@@ -245,7 +248,7 @@
 
     function send_vote() {
       console.log($scope.voteds);
-      
+
     }
   }
 }());

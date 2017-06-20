@@ -36,21 +36,6 @@ exports.create = function(req, res) {
       res.jsonp(vote);
     }, handleError);
 
-  // vote.save(function(err) {
-  //   if (err) {
-  //     return res.status(400).send({
-  //       message: errorHandler.getErrorMessage(err)
-  //     });
-  //   } else {
-  //     opts.forEach(opt => {
-  //       var voteopt = new Voteopt({opt: opt, vote: vote._id});
-  //       promises.push(voteopt.save());
-  //     });
-  //     return Promise.all(promises);
-  //     res.jsonp(vote);
-  //   }
-  // });
-
   function handleError(err) {
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
@@ -119,6 +104,21 @@ exports.list = function(req, res) {
       });
     } else {
       res.jsonp(votes);
+    }
+  });
+};
+
+/**
+ * List of Opts voted
+ */
+exports.findOpts = function(req, res) {
+  Vote.findOpts(req.vote._id).exec(function(err, opts) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(opts);
     }
   });
 };

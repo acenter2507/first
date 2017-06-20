@@ -1,19 +1,11 @@
-<section>
+<section class="container">
   <div class="page-header">
     <h1>Voteopts</h1>
   </div>
   <div class="list-group">
-    <a ng-repeat="voteopt in vm.voteopts"
-       ui-sref="voteopts.view({ voteoptId: voteopt._id })"
-       class="list-group-item">
-      <small class="list-group-item-text">
-        Posted on
-        <span ng-bind="voteopt.created | date:'mediumDate'"></span>
-        by
-        <span ng-if="voteopt.user" ng-bind="voteopt.user.displayName"></span>
-        <span ng-if="!voteopt.user">Deleted User</span>
-      </small>
-      <h4 class="list-group-item-heading" ng-bind="voteopt.name"></h4>
+    <a ng-repeat="voteopt in vm.voteopts" ui-sref="voteopts.view({ voteoptId: voteopt._id })" class="list-group-item">
+      <h4 class="list-group-item-heading">{{(voteopt.vote.guest) ? voteopt.vote.ip : voteopt.vote.user}}</h4>
+      <p class="list-group-item-text" ng-bind="voteopt.opt.title"></p>
     </a>
   </div>
   <div class="alert alert-warning text-center" ng-if="vm.voteopts.$resolved && !vm.voteopts.length">

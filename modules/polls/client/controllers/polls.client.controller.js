@@ -17,10 +17,10 @@
     'TagsService',
     '$aside',
     'CmtsService',
-    '$dropdown'
+    'VotesService',
   ];
 
-  function PollsController($scope, $state, $window, filterFilter, Authentication, poll, PollsApi, Tags, $modal, $aside, Cmts, $dropdown) {
+  function PollsController($scope, $state, $window, filterFilter, Authentication, poll, PollsApi, Tags, $modal, $aside, Cmts, Votes) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -239,11 +239,11 @@
 
     vm.checked = function() {
       vm.voteds = filterFilter(vm.opts, { selected: true });
-      console.log(vm.voteds);
     };
 
     function send_vote() {
       console.log($scope.voteds);
+      
     }
   }
 }());

@@ -1,4 +1,4 @@
-(function () {
+(function() {
   'use strict';
 
   // Votes controller
@@ -6,9 +6,9 @@
     .module('votes')
     .controller('VotesController', VotesController);
 
-  VotesController.$inject = ['$scope', '$state', '$window', 'Authentication', 'voteResolve'];
+  VotesController.$inject = ['$scope', '$state', '$window', 'Authentication', 'voteResolve', 'PollsService', 'PollsApi'];
 
-  function VotesController ($scope, $state, $window, Authentication, vote) {
+  function VotesController($scope, $state, $window, Authentication, vote, Polls, PollsApi) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -17,7 +17,10 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
-
+    vm.polls = Polls.query();
+    vm.selectPoll = selectPoll;
+    vm.opts = [];
+    vm.selectedOpts = [];
     // Remove existing Vote
     function remove() {
       if ($window.confirm('Are you sure you want to delete?')) {
@@ -31,7 +34,6 @@
         $scope.$broadcast('show-errors-check-validity', 'vm.form.voteForm');
         return false;
       }
-
       // TODO: move create/update logic to service
       if (vm.vote._id) {
         vm.vote.$update(successCallback, errorCallback);
@@ -48,6 +50,16 @@
       function errorCallback(res) {
         vm.error = res.data.message;
       }
+    }
+
+    function selectPoll() {
+      PollsApi.findOpts(vm.vote.poll._id)
+        .then(opts => {
+          vm.opts = opts.data;
+        })
+        .catch(err => {
+          alert('error' + err);
+        });
     }
   }
 }());

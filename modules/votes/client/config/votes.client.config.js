@@ -26,7 +26,7 @@
     Menus.addSubMenuItem('topbar', 'votes', {
       title: 'Create Vote',
       state: 'votes.create',
-      roles: ['user']
+      roles: ['*']
     });
   }
 }());

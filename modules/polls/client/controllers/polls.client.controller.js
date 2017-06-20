@@ -78,6 +78,7 @@
         })
         .then(res => {
           vm.votedOpts = (res && res.data) ? res.data : [];
+          console.log(vm.votedOpts);
         })
         .catch(err => {
           // alert('error' + err);

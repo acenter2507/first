@@ -272,8 +272,7 @@
       }
 
       function successCallback(res) {
-        vm.votedOpts = angular.copy(vm.selectedOpts) || [];
-        alert('Vote success');
+        $state.reload();
       }
 
       function errorCallback(res) {

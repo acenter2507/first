@@ -74,7 +74,7 @@
             console.log("ownVote", vm.ownVote);
             return VotesApi.findOpts(vm.ownVote._id);
           } else {
-            vm.ownVote = new Votes();
+            vm.ownVote = new Votes({poll: vm.poll._id});
           }
         })
         .then(res => {
@@ -240,16 +240,17 @@
 
     // VOTE
     vm.send_vote = send_vote;
+    vm.selectedOpts = angular.copy(vm.votedOpts);
 
     vm.checked = function(id) {
-      if (_.contains(vm.votedOpts, id)) {
-        vm.votedOpts = _.without(vm.votedOpts, id);
+      if (_.contains(vm.selectedOpts, id)) {
+        vm.selectedOpts = _.without(vm.selectedOpts, id);
       } else {
-        vm.votedOpts.push(id);
+        vm.selectedOpts.push(id);
       }
     };
     vm.is_voted = function(id) {
-      return _.contains(vm.votedOpts, id);
+      return _.contains(vm.selectedOpts, id);
     };
     vm.voted_title = function() {
       return _.pluck(_.filter(vm.opts, function(opt){ return _.contains(vm.votedOpts, opt._id); }), 'title');
@@ -258,7 +259,7 @@
       if (!vm.votedOpts.length || vm.votedOpts.length === 0) {
         return alert("You must vote at least one option.");
       }
-      vm.ownVote.opts = vm.votedOpts;
+      vm.ownVote.opts = vm.selectedOpts;
       if (vm.ownVote._id) {
         vm.ownVote.updateCnt += 1;
         vm.ownVote.$update(successCallback, errorCallback);
@@ -266,6 +267,7 @@
         vm.ownVote.$save(successCallback, errorCallback);
       }
       function successCallback(res) {
+        vm.votedOpts = angular.copy(vm.selectedOpts);
         alert('Vote success');
       }
 

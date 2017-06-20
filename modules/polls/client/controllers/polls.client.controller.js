@@ -24,6 +24,7 @@
   function PollsController($scope, $state, $window, filterFilter, Authentication, poll, PollsApi, Tags, $modal, $aside, Cmts, Votes, VotesApi) {
     var vm = this;
 
+    console.log(Votes);
     vm.authentication = Authentication;
     vm.poll = poll;
     vm.poll.close = (vm.poll.close) ? moment(vm.poll.close) : vm.poll.close;

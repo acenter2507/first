@@ -183,19 +183,24 @@ exports.findVotes = function(req, res) {
  * Vote in poll of user
  */
 exports.findOwnerVote = function(req, res) {
-  console.log(req.user);
-  return res.status(400).send({
-    message: errorHandler.getErrorMessage(new Error("hehehe"))
+  var condition = {};
+  condition['poll'] = req.poll._id;
+  if (req.user) {
+    condition['user'] = req.user._id;
+    condition['guest'] = false;
+  } else {
+    condition['ip'] = req.headers["X-Forwarded-For"] || req.headers["x-forwarded-for"] || req.client.remoteAddress;
+    condition['guest'] = true;
+  }
+  Poll.findOwnerVote(condition).exec(function(err, vote) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(vote);
+    }
   });
-  // Poll.findOwnerVote(req.poll._id, req.params.userId).exec(function(err, vote) {
-  //   if (err) {
-  //     return res.status(400).send({
-  //       message: errorHandler.getErrorMessage(err)
-  //     });
-  //   } else {
-  //     res.jsonp(vote);
-  //   }
-  // });
 };
 
 

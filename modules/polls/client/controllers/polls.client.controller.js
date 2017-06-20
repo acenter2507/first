@@ -76,6 +76,7 @@
       PollsApi.findOwnerVote(poll._id)
         .then(vote => {
           vm.ownVote = vote.data;
+          console.log(vm.ownVote);
         })
         .catch(err => {
           // alert('error' + err);

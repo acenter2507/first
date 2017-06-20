@@ -33,6 +33,7 @@ exports.create = function(req, res) {
       return Promise.all(promises);
     }, handleError)
     .then(rs => {
+      promises = [];
       res.jsonp(vote);
     }, handleError);
 
@@ -64,16 +65,30 @@ exports.update = function(req, res) {
   var vote = req.vote;
 
   vote = _.extend(vote, req.body);
+  const opts = req.body.opts;
+  var promises = [];
 
-  vote.save(function(err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
+  vote.save()
+    .then(_vote => {
+      return Voteopt.remove({ vote: _vote._id });
+    }, handleError)
+    .then(() => {
+      opts.forEach(opt => {
+        var voteopt = new Voteopt({ opt: opt, vote: vote._id });
+        promises.push(voteopt.save());
       });
-    } else {
+      return Promise.all(promises);
+    }, handleError)
+    .then(_tags => {
+      promises = [];
       res.jsonp(vote);
-    }
-  });
+    }, handleError);
+
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 };
 
 /**

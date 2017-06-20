@@ -250,7 +250,23 @@
       return _.contains(vm.votedOpts, id);
     }
     function send_vote() {
-      console.log(vm.votedOpts);
+      if (!vm.votedOpts.length || vm.votedOpts.length == 0) {
+        return alert("You must vote at least one option.");
+      }
+      vm.ownVote.opts = vm.votedOpts;
+      if (vm.ownVote._id) {
+        vm.ownVote.updateCnt += 1;
+        vm.ownVote.$update(successCallback, errorCallback);
+      } else {
+        vm.ownVote.$save(successCallback, errorCallback);
+      }
+      function successCallback(res) {
+        return alert("Vote success")
+      }
+
+      function errorCallback(res) {
+        return alert("Vote failed")
+      }
     }
   }
 }());

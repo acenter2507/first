@@ -20,12 +20,10 @@ exports.create = function(req, res) {
 
   var tags = req.body.tags;
   var opts = req.body.opts;
-  console.log(opts);
   var promises = [];
   poll.save()
     .then(_poll => {
       poll = _poll;
-      console.log(poll);
       tags.forEach((tag) => {
         var polltag = new Polltag();
         polltag.tag = tag;
@@ -37,12 +35,13 @@ exports.create = function(req, res) {
     .then(() => {
       promises = [];
       opts.forEach((opt) => {
+        console.log(opt);
         if (opt._id) {
           promises.push(() => {
             Opt.findById(opt._id).exec((err, _opt) => {
               _opt = _.extend(_opt, opt);
               return _opt.save();
-            })
+            });
           });
         } else {
           var _opt = new Opt(opt);

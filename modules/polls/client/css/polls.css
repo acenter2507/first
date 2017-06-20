@@ -47,6 +47,10 @@
   max-width: 200px;
 }
 
+.poll_info {
+  display: flex;
+}
+
 .poll_info_item {
   width: 40px;
   height: 40px;

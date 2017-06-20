@@ -184,13 +184,13 @@ exports.findVotes = function(req, res) {
  */
 exports.findOwnerVote = function(req, res) {
   var condition = {};
-  condition['poll'] = req.poll._id;
+  condition.poll = req.poll._id;
   if (req.user) {
-    condition['user'] = req.user._id;
-    condition['guest'] = false;
+    condition.user = req.user._id;
+    condition.guest = false;
   } else {
-    condition['ip'] = req.headers["X-Forwarded-For"] || req.headers["x-forwarded-for"] || req.client.remoteAddress;
-    condition['guest'] = true;
+    condition.ip = req.headers["X-Forwarded-For"] || req.headers["x-forwarded-for"] || req.client.remoteAddress;
+    condition.guest = true;
   }
   Poll.findOwnerVote(condition).exec(function(err, vote) {
     if (err) {

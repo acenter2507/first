@@ -131,7 +131,7 @@
 
     // Click button add option
     function add_opt() {
-      alert(1);
+      $aside({title: 'My Title', content: 'My Content', show: true});
     }
     function like_poll() {
       alert("like_poll");

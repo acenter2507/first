@@ -250,7 +250,7 @@
       return _.contains(vm.votedOpts, id);
     };
     vm.voted_title = function() {
-      return _.pluck(_.filter(vm.opts, function(opt){ return _.contains(vm.votedOpts, opt._id); }));
+      return _.pluck(_.filter(vm.opts, function(opt){ return _.contains(vm.votedOpts, opt._id); }), 'title');
     }
     function send_vote() {
       if (!vm.votedOpts.length || vm.votedOpts.length === 0) {

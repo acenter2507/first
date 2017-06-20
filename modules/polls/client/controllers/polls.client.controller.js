@@ -38,7 +38,7 @@
       { val: '-likeCnt', name: 'Most likes' }
     ];
     vm.cmt_sort = '-updated';
-
+    vm.add_opt = add_opt;
     if (vm.poll._id) {
       // Get all Opts
       PollsApi.findOpts(poll._id)
@@ -126,6 +126,10 @@
       }
     }
 
+    // Click button add option
+    function add_opt() {
+      alert(1);
+    }
     function like_poll() {
       alert("like_poll");
     }

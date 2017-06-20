@@ -81,7 +81,7 @@ exports.delete = function(req, res) {
  * List of Voteopts
  */
 exports.list = function(req, res) {
-  Voteopt.find().sort('-created').populate('user', 'displayName').exec(function(err, voteopts) {
+  Voteopt.find().sort('-created').populate('vote').populate('opt').exec(function(err, voteopts) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -103,7 +103,7 @@ exports.voteoptByID = function(req, res, next, id) {
     });
   }
 
-  Voteopt.findById(id).populate('user', 'displayName').exec(function (err, voteopt) {
+  Voteopt.findById(id).populate('vote').populate('opt').exec(function (err, voteopt) {
     if (err) {
       return next(err);
     } else if (!voteopt) {

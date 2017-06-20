@@ -34,6 +34,7 @@
         $scope.$broadcast('show-errors-check-validity', 'vm.form.voteForm');
         return false;
       }
+      vm.vote.opts = vm.selectedOpts;
       // TODO: move create/update logic to service
       if (vm.vote._id) {
         vm.vote.$update(successCallback, errorCallback);

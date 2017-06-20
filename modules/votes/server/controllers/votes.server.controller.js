@@ -6,6 +6,7 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Vote = mongoose.model('Vote'),
+  Voteopt = mongoose.model('Voteopt'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 
@@ -14,17 +15,47 @@ var path = require('path'),
  */
 exports.create = function(req, res) {
   var vote = new Vote(req.body);
-  vote.user = req.user;
-
-  vote.save(function(err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
+  if (req.user) {
+    vote.user = req.user;
+    vote.guest = false;
+  } else {
+    vote.ip = req.headers["X-Forwarded-For"] || req.headers["x-forwarded-for"] || req.client.remoteAddress;
+    vote.guest = true;
+  }
+  const opts = req.body.opts;
+  var promises = [];
+  vote.save()
+    .then(_vote => {
+      opts.forEach(opt => {
+        var voteopt = new Voteopt({ opt: opt, vote: _vote._id });
+        promises.push(voteopt.save());
       });
-    } else {
+      return Promise.all(promises);
+    }, handleError)
+    .then(rs => {
       res.jsonp(vote);
-    }
-  });
+    }, handleError);
+
+  // vote.save(function(err) {
+  //   if (err) {
+  //     return res.status(400).send({
+  //       message: errorHandler.getErrorMessage(err)
+  //     });
+  //   } else {
+  //     opts.forEach(opt => {
+  //       var voteopt = new Voteopt({opt: opt, vote: vote._id});
+  //       promises.push(voteopt.save());
+  //     });
+  //     return Promise.all(promises);
+  //     res.jsonp(vote);
+  //   }
+  // });
+
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 };
 
 /**
@@ -81,7 +112,7 @@ exports.delete = function(req, res) {
  * List of Votes
  */
 exports.list = function(req, res) {
-  Vote.find().sort('-created').populate('user', 'displayName').exec(function(err, votes) {
+  Vote.find().sort('-created').populate('poll').populate('user', 'displayName').exec(function(err, votes) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -103,7 +134,7 @@ exports.voteByID = function(req, res, next, id) {
     });
   }
 
-  Vote.findById(id).populate('user', 'displayName').exec(function (err, vote) {
+  Vote.findById(id).populate('user', 'displayName').exec(function(err, vote) {
     if (err) {
       return next(err);
     } else if (!vote) {

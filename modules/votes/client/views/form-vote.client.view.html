@@ -17,7 +17,7 @@
         <!-- Options -->
         <div class="form-group">
           <label class="control-label" for="opt">Options</label>
-          <button type="button" class="btn btn-default" ng-model="vm.selectedOpts" data-html="1" data-multiple="true" bs-options="opt as opt.title for opt in vm.opts" bs-select>
+          <button type="button" class="btn btn-default" ng-model="vm.selectedOpts" data-html="1" data-multiple="true" bs-options="opt._id as opt.title for opt in vm.opts" bs-select>
             <span class="caret"></span>
           </button>
         </div>

@@ -39,6 +39,10 @@ var OptSchema = new Schema({
     type : Number,
     default : 0
   },
+  status: {
+    type : Number,
+    default : 1 // 1: Approved, 2: Waiting, 3: Rejected
+  },
   created: {
     type: Date,
     default: Date.now

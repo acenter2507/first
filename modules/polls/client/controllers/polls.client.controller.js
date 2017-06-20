@@ -250,7 +250,7 @@
       return _.contains(vm.votedOpts, id);
     }
     function send_vote() {
-      if (!vm.votedOpts.length || vm.votedOpts.length == 0) {
+      if (!vm.votedOpts.length || vm.votedOpts.length === 0) {
         return alert("You must vote at least one option.");
       }
       vm.ownVote.opts = vm.votedOpts;

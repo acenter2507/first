@@ -19,9 +19,11 @@ exports.create = function(req, res) {
   poll.user = req.user;
 
   var tags = req.body.tags;
+  var opts = req.body.opts;
   var promises = [];
   poll.save()
     .then(_poll => {
+      poll = _poll;
       tags.forEach((tag) => {
         var polltag = new Polltag();
         polltag.tag = tag;
@@ -29,15 +31,35 @@ exports.create = function(req, res) {
         promises.push(polltag.save());
       });
       return Promise.all(promises);
-    })
+    }, handleError)
     .then(_tags => {
       promises = [];
-      res.jsonp(poll);
-    }, err => {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
+      opts.forEach((opt) => {
+        if (opt._id) {
+          promises.push(() => {
+            Opt.findById(opt._id).exec((err, _opt) => {
+              _opt = _.extend(_opt, opt);
+              return _opt.save();
+            })
+          });
+        } else {
+          var _opt = new Opt(opt);
+          _opt = req.user;
+          promises.push(_opt.save());
+        }
       });
+      return Promise.all(promises);
+    }, handleError)
+    .then(() => {
+      promises = [];
+      res.jsonp(poll);
+    }, handleError);
+
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
     });
+  }
 };
 
 /**
@@ -67,7 +89,7 @@ exports.update = function(req, res) {
   poll.save()
     .then(_poll => {
       return Polltag.remove({ poll: _poll._id });
-    })
+    }, handleError)
     .then(() => {
       tags.forEach((tag) => {
         var polltag = new Polltag();
@@ -76,15 +98,17 @@ exports.update = function(req, res) {
         promises.push(polltag.save());
       });
       return Promise.all(promises);
-    })
+    }, handleError)
     .then(_tags => {
       promises = [];
       res.jsonp(poll);
-    }, err => {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
+    }, handleError);
+
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
     });
+  }
 };
 
 /**

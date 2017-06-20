@@ -52,8 +52,8 @@
 }
 
 .poll_info_item {
-  width: 40px;
-  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
   margin-left: 10px;
 }
 

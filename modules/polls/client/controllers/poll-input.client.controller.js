@@ -124,7 +124,7 @@
     vm.aside_full_screen = aside_full_screen;
     // Click button add option
     function input_opt(opt) {
-      vm.option = (!opt) ? new Opts() : new Opts(opt);
+      vm.option = (!opt) ? {poll: vm.poll._id, title: '', body: '', image: 'modules/opts/client/img/option.png'} : opt;
       opt_aside.$promise.then(opt_aside.show);
     }
     // Click button save option
@@ -133,11 +133,14 @@
         $scope.$broadcast('show-errors-check-validity', 'vm.form.optForm');
         return false;
       }
-      if (vm.option._id) {
-        vm.option.$update(successCallback, errorCallback);
-      } else {
-        vm.option.poll = vm.poll._id;
-        vm.comment.$save(successCallback, errorCallback);
+      if (!vm.option._id) {
+        vm.opts.push(vm.option);
+      }
+      // if (vm.option._id) {
+      //   vm.option.$update(successCallback, errorCallback);
+      // } else {
+      //   vm.option.poll = vm.poll._id;
+      //   vm.comment.$save(successCallback, errorCallback);
       }
 
       function successCallback(res) {

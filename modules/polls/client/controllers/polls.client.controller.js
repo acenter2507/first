@@ -238,17 +238,19 @@
 
     // VOTE
     vm.send_vote = send_vote;
-    vm.voteds = [];
 
-    vm.checked = function() {
-      vm.voteds = filterFilter(vm.opts, { selected: true });
+    vm.checked = function(id) {
+      if (_.contains(vm.votedOpts, id)) {
+        vm.votedOpts = _.without(vm.votedOpts, id);
+      } else {
+        vm.votedOpts.push(id);
+      }
     };
     vm.is_voted = function(id) {
       return _.contains(vm.votedOpts, id);
     }
     function send_vote() {
-      console.log($scope.voteds);
-
+      console.log(vm.votedOpts);
     }
   }
 }());

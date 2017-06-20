@@ -70,7 +70,7 @@ var PollSchema = new Schema({
 });
 
 PollSchema.pre('save', function(next) {
-  this.summary = (this.body.length > 255) ? this.body.substring(0, 254): this.body;
+  this.summary = (this.body.length > 255) ? this.body.substring(0, 254) : this.body;
   next();
 });
 
@@ -102,4 +102,10 @@ PollSchema.statics.findOwnerVote = function(condition, callback) {
   return this.model('Vote').findOne(condition, callback);
 };
 
+PollSchema.statics.countUpVote = function(id, callback) {
+  return this.findById(id).exec(function(err, poll) {
+    poll.voteCnt += 1;
+    return poll.save();
+  });
+};
 mongoose.model('Poll', PollSchema);

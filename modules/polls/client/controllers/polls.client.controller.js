@@ -133,6 +133,7 @@
     function dislike_poll() {
       alert("dislike_poll");
     }
+
     // Comment
     vm.comment_form = {
       scope: $scope,
@@ -173,9 +174,6 @@
       function successCallback(res) {
         comment_aside.$promise.then(comment_aside.hide);
         $state.reload();
-        // $state.go('polls.view', {
-        //   pollId: res._id
-        // });
       }
 
       function errorCallback(err) {
@@ -276,6 +274,7 @@
       }
 
       function errorCallback(res) {
+        vm.selectedOpts = angular.copy(vm.votedOpts) || [];
         alert('Vote failed');
       }
     }

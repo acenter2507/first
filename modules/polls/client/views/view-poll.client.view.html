@@ -33,6 +33,16 @@
       <select class="form-control sort" ng-model="vm.cmt_sort" ng-options="sort.val as sort.name for sort in vm.cmt_sorts"></select>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 pdnl pdnr">
+      <div class="poll_info">
+        <span class="poll_info_item">
+          <span ng-bind="vm.poll.viewCnt"></span>
+          <p>View</p>
+        </span>
+        <span class="poll_info_item">
+          <span ng-bind="vm.poll.voteCnt"></span>
+          <p>Vote</p>
+        </span>
+      </div>
       <div class="pull-right">
         <a class="btn btn-info" ui-sref="polls.edit({ pollId: vm.poll._id })" ng-show="vm.poll.isCurrentUserOwner || vm.poll.canEdit">
           <i class="glyphicon glyphicon-edit"></i> Edit
@@ -50,7 +60,7 @@
   <div ui-view="cmts"></div>
   <div class="row">
     <div class="col-xs-12">
-      <h4>Tags:{{(!vm.poll.tags.length) ? 'Has no tag was added' : ''}}</h4>
+      <h4>Tags: <small>{{(!vm.poll.tags.length) ? 'Has no tag added' : ''}}</small></h4>
       <ul class="tags" ng-show="vm.poll.tags.length">
         <li ng-repeat="tag in vm.poll.tags"><a ui-sref="tags.view({ tagId: tag._id })" class="tag">{{tag.name}}</a></li>
       </ul>

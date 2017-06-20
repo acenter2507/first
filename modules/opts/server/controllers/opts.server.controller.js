@@ -6,6 +6,7 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Opt = mongoose.model('Opt'),
+  Voteopt = mongoose.model('Voteopt'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 
@@ -66,15 +67,19 @@ exports.update = function(req, res) {
 exports.delete = function(req, res) {
   var opt = req.opt;
 
-  opt.remove(function(err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
+  opt.remove()
+    .then(() => {
+      return Voteopt.remove({ opt: opt._id });
+    }, handleError)
+    .then(() => {
       res.jsonp(opt);
-    }
-  });
+    }, handleError);
+
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 };
 
 /**
@@ -103,7 +108,7 @@ exports.optByID = function(req, res, next, id) {
     });
   }
 
-  Opt.findById(id).populate('user', 'displayName').exec(function (err, opt) {
+  Opt.findById(id).populate('user', 'displayName').exec(function(err, opt) {
     if (err) {
       return next(err);
     } else if (!opt) {

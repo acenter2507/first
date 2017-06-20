@@ -79,7 +79,6 @@
 
       function errorCallback(res) {
         vm.error = res.data.message;
-        console.log(res);
       }
     };
     vm.discard = () => {
@@ -115,7 +114,10 @@
       opt_aside.$promise.then(opt_aside.show);
     };
     vm.remove_opt = (opt) => {
-
+      if ($window.confirm('Are you sure you want to remove?')) {
+        var _opt = new Opts(opt);
+        _opt.$remove($state.reload());
+      }
     };
     vm.save_opt = ($form) => {
       if (!$form.$valid) {
@@ -143,7 +145,7 @@
         //vm.error = res.data.message;
       }
     };
-    
+
     vm.aside_full_screen = () => {
       alert(1);
     };

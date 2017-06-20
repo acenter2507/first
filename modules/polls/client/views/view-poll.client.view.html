@@ -29,20 +29,22 @@
   <div ui-view="opts"></div>
   <!-- Control -->
   <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4 pdnl pdnr">
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 pdnl pdnr">
       <select class="form-control sort" ng-model="vm.cmt_sort" ng-options="sort.val as sort.name for sort in vm.cmt_sorts"></select>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 pdnl pdnr">
+    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 pdnl pdnr">
       <div class="poll_info">
         <span class="poll_info_item">
           <span ng-bind="vm.poll.viewCnt"></span>
-          <p>View</p>
+          <p>VIEW</p>
         </span>
         <span class="poll_info_item">
           <span ng-bind="vm.poll.voteCnt"></span>
-          <p>Vote</p>
+          <p>VOTE</p>
         </span>
       </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 pdnl pdnr">
       <div class="pull-right">
         <a class="btn btn-info" ui-sref="polls.edit({ pollId: vm.poll._id })" ng-show="vm.poll.isCurrentUserOwner || vm.poll.canEdit">
           <i class="glyphicon glyphicon-edit"></i> Edit

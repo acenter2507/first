@@ -262,11 +262,11 @@
       }
       function successCallback(res) {
         vm.ownVote = res.data;
-        return alert('Vote success');
+        alert('Vote success');
       }
 
       function errorCallback(res) {
-        return alert('Vote failed');
+        alert('Vote failed');
       }
     }
   }

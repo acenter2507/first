@@ -8,7 +8,7 @@
     <div class="form-group" ng-if="vm.opts.length">
       <button class="btn btn-primary btn-sm" ng-click="vm.send_vote()">{{(vm.ownVote._id) ? 'Change vote' : 'Vote'}}</button>
       <p class="text-muted" ng-hide="vm.ownVote._id">You have not voted for this poll.</p>
-      <p class="text-muted" ng-show="vm.ownVote._id">You have voted for {{vm.voted_title()}}.</p>
+      <p class="text-muted" ng-show="vm.ownVote._id">You have voted for: <strong><span ng-repeat="title in vm.voted_title()">{{title + ' '}}</span></strong></p>
     </div>
   </div>
   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 pdnl pdnr">

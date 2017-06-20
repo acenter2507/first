@@ -27,7 +27,7 @@
   function VotesApi($http) {
     return {
       findOpts: (id) => {
-        return $http.get('/api/findOpts/' + id);
+        return $http.get('/api/votes/findOpts/' + id);
       }
     };
   }

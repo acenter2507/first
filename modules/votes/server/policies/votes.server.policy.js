@@ -21,7 +21,7 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/votes/:voteId',
       permissions: '*'
     }, {
-      resources: '/api/findOpts/:voteId',
+      resources: '/api/votes/findOpts/:voteId',
       permissions: '*'
     }]
   }, {
@@ -33,7 +33,7 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/votes/:voteId',
       permissions: ['get']
     }, {
-      resources: '/api/findOpts/:voteId',
+      resources: '/api/votes/findOpts/:voteId',
       permissions: '*'
     }]
   }, {
@@ -45,7 +45,7 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/votes/:voteId',
       permissions: ['*']
     }, {
-      resources: '/api/findOpts/:voteId',
+      resources: '/api/votes/findOpts/:voteId',
       permissions: '*'
     }]
   }]);

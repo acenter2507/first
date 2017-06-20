@@ -50,13 +50,14 @@
     </div>
     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 pdnl pdnr">
       <div class="pull-right">
-        <a class="btn btn-info" ui-sref="polls.edit({ pollId: vm.poll._id })" ng-show="vm.poll.isCurrentUserOwner || vm.poll.canEdit">
+        <a class="btn btn-info" ui-sref="polls.edit({ pollId: vm.poll._id })" ng-if="vm.poll.isCurrentUserOwner || vm.poll.canEdit">
           <i class="glyphicon glyphicon-edit"></i> Edit
         </a>
-        <a class="btn btn-danger" ng-click="vm.remove()" ng-show="vm.poll.isCurrentUserOwner || vm.poll.canEdit">
+        <a class="btn btn-danger" ng-click="vm.remove()" ng-if="vm.poll.isCurrentUserOwner || vm.poll.canEdit">
           <i class="glyphicon glyphicon-trash"></i> Delete
         </a>
         <button class="btn btn-primary" ng-click="vm.reply()"><i class="fa fa-reply" aria-hidden="true"></i> Reply</button>
+        <button ng-if="!vm.poll.isCurrentUserOwner && vm.poll.allow_add && vm.authentication.user" class="btn btn-warning" ng-click="vm.add_opt()"><i class="fa fa-plus" aria-hidden="true"></i> Add option</button>
       </div>
     </div>
     <div class="clearfix"></div>

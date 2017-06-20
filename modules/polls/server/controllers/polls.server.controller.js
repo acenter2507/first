@@ -183,16 +183,19 @@ exports.findVotes = function(req, res) {
  * Vote in poll of user
  */
 exports.findOwnerVote = function(req, res) {
-  console.log(req.params.userId);
-  Poll.findOwnerVote(req.poll._id, req.params.userId).exec(function(err, vote) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.jsonp(vote);
-    }
+  console.log(req.user);
+  return res.status(400).send({
+    message: errorHandler.getErrorMessage(new Error("hehehe"))
   });
+  // Poll.findOwnerVote(req.poll._id, req.params.userId).exec(function(err, vote) {
+  //   if (err) {
+  //     return res.status(400).send({
+  //       message: errorHandler.getErrorMessage(err)
+  //     });
+  //   } else {
+  //     res.jsonp(vote);
+  //   }
+  // });
 };
 
 

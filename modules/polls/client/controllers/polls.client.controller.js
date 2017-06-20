@@ -73,13 +73,13 @@
       //   .catch(err => {
       //     alert('error' + err);
       //   });
-      // PollsApi.findOwnerVote(poll._id, vm.authentication.user._id)
-      //   .then(vote => {
-      //     vm.ownVote = vote.data;
-      //   })
-      //   .catch(err => {
-      //     alert('error' + err);
-      //   });
+      PollsApi.findOwnerVote(poll._id)
+        .then(vote => {
+          vm.ownVote = vote.data;
+        })
+        .catch(err => {
+          alert('error' + err);
+        });
     }
 
     // Function

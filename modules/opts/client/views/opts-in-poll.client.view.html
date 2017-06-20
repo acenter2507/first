@@ -1,4 +1,5 @@
 <div class="row">
+  <p class="text-muted" ng-hide="vm.opts.length">Has no option added.</p>
   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 pdnl pdnr">
     <div class="form-group" ng-if="vm.opts.length">
       <label ng-repeat="opt in vm.opts">

@@ -42,7 +42,6 @@ var PollSchema = new Schema({
     type: 'Number',
     default: 0
   },
-  opts: [{ type: Schema.ObjectId, ref: 'Opt' }],
   voteCnt: {
     type: 'Number',
     default: 0

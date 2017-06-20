@@ -28,7 +28,7 @@
         views: {
           '': {
             templateUrl: 'modules/polls/client/views/form-poll.client.view.html',
-            controller: 'PollsController',
+            controller: 'PollInputController',
             controllerAs: 'vm',
             resolve: {
               pollResolve: newPoll
@@ -46,7 +46,7 @@
       .state('polls.edit', {
         url: '/:pollId/edit',
         templateUrl: 'modules/polls/client/views/form-poll.client.view.html',
-        controller: 'PollsController',
+        controller: 'PollInputController',
         controllerAs: 'vm',
         resolve: {
           pollResolve: getPoll

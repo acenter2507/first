@@ -1,0 +1,156 @@
+(function() {
+  'use strict';
+
+  // Polls controller
+  angular
+    .module('polls')
+    .controller('PollInputController', PollInputController);
+
+  PollInputController.$inject = [
+    '$scope',
+    '$state',
+    '$window',
+    'Authentication',
+    'pollResolve',
+    'PollsApi',
+    'TagsService',
+    '$aside',
+    'OptsService'
+  ];
+
+  function PollInputController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $aside, Opts) {
+    var vm = this;
+
+    vm.authentication = Authentication;
+    vm.poll = poll;
+    vm.poll.close = (vm.poll.close) ? moment(vm.poll.close) : vm.poll.close;
+    vm.poll.tags = [];
+    vm.bk_poll = angular.copy(poll);
+    vm.error = null;
+    vm.form = {};
+
+    vm.opts = [];
+
+    if (vm.poll._id) {
+      // Get all Opts
+      PollsApi.findOpts(poll._id)
+        .then(opts => {
+          vm.opts = opts.data;
+        })
+        .catch(err => {
+          alert('error' + err);
+        });
+      // Get all Cmts
+      PollsApi.findTags(poll._id)
+        .then(polltags => {
+          angular.forEach(polltags.data, (polltag, index) => {
+            vm.poll.tags.push(polltag.tag);
+          });
+        })
+        .catch(err => {
+          alert('error' + err);
+        });
+    }
+
+    // Function
+    vm.remove = remove;
+    vm.save = save;
+    vm.discard = discard;
+
+    // Remove existing Poll
+    function remove() {
+      if ($window.confirm('Are you sure you want to delete?')) {
+        vm.poll.$remove($state.go('polls.list'));
+      }
+    }
+
+    // Save Poll
+    function save(isValid) {
+      if (!isValid) {
+        $scope.$broadcast('show-errors-check-validity', 'vm.form.pollForm');
+        return false;
+      }
+      // TODO: move create/update logic to service
+      if (vm.poll._id) {
+        vm.poll.$update(successCallback, errorCallback);
+      } else {
+        vm.poll.$save(successCallback, errorCallback);
+      }
+
+      function successCallback(res) {
+        $state.go('polls.view', {
+          pollId: res._id
+        });
+      }
+
+      function errorCallback(res) {
+        vm.error = res.data.message;
+      }
+    }
+
+    // Discard edit or add poll
+    function discard() {
+      if (angular.equals(vm.poll, vm.bk_poll)) {
+        handle_discard();
+      } else {
+        if ($window.confirm('Are you sure you want to discard?')) {
+          handle_discard();
+        }
+      }
+    }
+
+    // Back to before screen
+    function handle_discard() {
+      if (vm.poll._id) {
+        $state.go('polls.view', { pollId: vm.poll._id });
+      } else {
+        $state.go('polls.list');
+      }
+    }
+
+    // OPTIONS
+    vm.opt_form = {
+      scope: $scope,
+      controllerAs: vm,
+      templateUrl: 'modules/opts/client/views/new-opt-in-poll.client.view.html',
+      title: vm.poll.title,
+      placement: 'bottom',
+      animation: 'am-fade-and-slide-bottom',
+      show: false
+    };
+    var opt_aside = $aside(vm.opt_form);
+    vm.input_opt = input_opt;
+    vm.aside_full_screen = aside_full_screen;
+    // Click button add option
+    function input_opt(opt) {
+      vm.option = (!opt) ? new Opts() : new Opts(opt);
+      opt_aside.$promise.then(opt_aside.show);
+    }
+    // Click button save option
+    function save_opt($form) {
+      if (!$form.$valid) {
+        $scope.$broadcast('show-errors-check-validity', 'vm.form.optForm');
+        return false;
+      }
+      if (vm.option._id) {
+        vm.option.$update(successCallback, errorCallback);
+      } else {
+        vm.option.poll = vm.poll._id;
+        vm.comment.$save(successCallback, errorCallback);
+      }
+
+      function successCallback(res) {
+        opt_aside.$promise.then(opt_aside.hide);
+        $state.reload();
+      }
+
+      function errorCallback(err) {
+        console.log(err);
+        //vm.error = res.data.message;
+      }
+    }
+    function aside_full_screen() {
+      alert(1);
+    }
+  }
+}());

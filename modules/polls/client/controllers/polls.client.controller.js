@@ -78,7 +78,6 @@
         })
         .then(res => {
           vm.votedOpts = (res && res.data) ? _.pluck(res.data, 'opt') : [];
-          console.log(vm.votedOpts);
         })
         .catch(err => {
           // alert('error' + err);
@@ -244,7 +243,9 @@
     vm.checked = function() {
       vm.voteds = filterFilter(vm.opts, { selected: true });
     };
-
+    vm.is_voted = function(id) {
+      return _.contains(vm.votedOpts, id);
+    }
     function send_vote() {
       console.log($scope.voteds);
 

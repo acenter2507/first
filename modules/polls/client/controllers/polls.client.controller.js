@@ -78,7 +78,8 @@
           vm.ownVote = vote.data;
         })
         .catch(err => {
-          alert('error' + err);
+          // alert('error' + err);
+          console.log(err);
         });
     }
 

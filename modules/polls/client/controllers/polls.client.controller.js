@@ -74,7 +74,7 @@
             console.log("ownVote", vm.ownVote);
             return VotesApi.findOpts(vm.ownVote._id);
           } else {
-            vm.ownVote = new Votes();
+            vm.ownVote = new Votes({ poll: vm.poll._id });
           }
         })
         .then(res => {
@@ -239,8 +239,27 @@
     }
 
     // VOTE
+    if (vm.poll._id) {
+      // Get Voted
+      PollsApi.findOwnerVote(poll._id)
+        .then(res => {
+          if (res.data) {
+            vm.ownVote = new Votes(res.data);
+            return VotesApi.findOpts(vm.ownVote._id);
+          } else {
+            vm.ownVote = new Votes({ poll: vm.poll._id });
+          }
+        })
+        .then(res => {
+          vm.votedOpts = (res && res.data) ? _.pluck(res.data, 'opt') : [];
+          vm.selectedOpts = (res && res.data) ? _.pluck(res.data, 'opt') : [];
+        })
+        .catch(err => {
+          // alert('error' + err);
+          console.log(err);
+        });
+    }
     vm.send_vote = send_vote;
-    vm.selectedOpts = (vm.ownVote._id) ? angular.copy(vm.votedOpts) : [];
 
     vm.checked = function(id) {
       if (_.contains(vm.selectedOpts, id)) {
@@ -254,7 +273,8 @@
     };
     vm.voted_title = function() {
       return _.pluck(_.filter(vm.opts, function(opt) {
-        return _.contains(vm.votedOpts, opt._id); }), 'title');
+        return _.contains(vm.votedOpts, opt._id);
+      }), 'title');
     };
 
     function send_vote() {
@@ -266,7 +286,6 @@
         vm.ownVote.updateCnt += 1;
         vm.ownVote.$update(successCallback, errorCallback);
       } else {
-        vm.ownVote.poll = poll._id;
         vm.ownVote.$save(successCallback, errorCallback);
       }
 

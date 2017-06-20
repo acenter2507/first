@@ -53,19 +53,12 @@
     }
 
     // Function
-    vm.remove = remove;
-    vm.save = save;
-    vm.discard = discard;
-
-    // Remove existing Poll
-    function remove() {
+    vm.remove = () => {
       if ($window.confirm('Are you sure you want to delete?')) {
         vm.poll.$remove($state.go('polls.list'));
       }
-    }
-
-    // Save Poll
-    function save(isValid) {
+    };
+    vm.save = (isValid) => {
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.pollForm');
         return false;
@@ -88,10 +81,8 @@
         vm.error = res.data.message;
         console.log(res);
       }
-    }
-
-    // Discard edit or add poll
-    function discard() {
+    };
+    vm.discard = () => {
       if (angular.equals(vm.poll, vm.bk_poll)) {
         handle_discard();
       } else {
@@ -99,8 +90,7 @@
           handle_discard();
         }
       }
-    }
-
+    };
     // Back to before screen
     function handle_discard() {
       if (vm.poll._id) {
@@ -111,7 +101,7 @@
     }
 
     // OPTIONS
-    vm.opt_form = {
+    var opt_aside = $aside({
       scope: $scope,
       controllerAs: vm,
       templateUrl: 'modules/opts/client/views/new-opt-in-poll.client.view.html',
@@ -119,18 +109,15 @@
       placement: 'bottom',
       animation: 'am-fade-and-slide-bottom',
       show: false
-    };
-    var opt_aside = $aside(vm.opt_form);
-    vm.input_opt = input_opt;
-    vm.save_opt = save_opt;
-    vm.aside_full_screen = aside_full_screen;
-    // Click button add option
-    function input_opt(opt) {
+    });
+    vm.input_opt = (opt) => {
       vm.option = (!opt) ? { poll: vm.poll._id, title: '', body: '', image: 'modules/opts/client/img/option.png' } : opt;
       opt_aside.$promise.then(opt_aside.show);
-    }
-    // Click button save option
-    function save_opt($form) {
+    };
+    vm.remove_opt = (opt) => {
+
+    };
+    vm.save_opt = ($form) => {
       if (!$form.$valid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.optForm');
         return false;
@@ -155,10 +142,10 @@
         console.log(err);
         //vm.error = res.data.message;
       }
-    }
-
-    function aside_full_screen() {
+    };
+    
+    vm.aside_full_screen = () => {
       alert(1);
-    }
+    };
   }
 }());

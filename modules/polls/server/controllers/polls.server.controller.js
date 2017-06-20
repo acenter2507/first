@@ -35,20 +35,10 @@ exports.create = function(req, res) {
     .then(() => {
       promises = [];
       opts.forEach((opt) => {
-        console.log(opt);
-        if (opt._id) {
-          promises.push(() => {
-            Opt.findById(opt._id).exec((err, _opt) => {
-              _opt = _.extend(_opt, opt);
-              return _opt.save();
-            });
-          });
-        } else {
-          var _opt = new Opt(opt);
-          _opt.user = req.user;
-          _opt.poll = poll;
-          promises.push(_opt.save());
-        }
+        var _opt = new Opt(opt);
+        _opt.user = req.user;
+        _opt.poll = poll;
+        promises.push(_opt.save());
       });
       return Promise.all(promises);
     }, handleError)
@@ -84,9 +74,9 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
   var poll = req.poll;
-
   poll = _.extend(poll, req.body);
   var tags = req.body.tags;
+  var opts = req.body.opts;
   var promises = [];
   poll.save()
     .then(_poll => {
@@ -101,7 +91,26 @@ exports.update = function(req, res) {
       });
       return Promise.all(promises);
     }, handleError)
-    .then(_tags => {
+    .then(() => {
+      promises = [];
+      opts.forEach((opt) => {
+        if (opt._id) {
+          promises.push(() => {
+            Opt.findById(opt._id).exec((err, _opt) => {
+              _opt = _.extend(_opt, opt);
+              return _opt.save();
+            });
+          });
+        } else {
+          var _opt = new Opt(opt);
+          _opt.user = req.user;
+          _opt.poll = poll;
+          promises.push(_opt.save());
+        }
+      });
+      return Promise.all(promises);
+    }, handleError)
+    .then(() => {
       promises = [];
       res.jsonp(poll);
     }, handleError);

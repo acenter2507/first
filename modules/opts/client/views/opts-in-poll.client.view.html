@@ -1,14 +1,15 @@
 <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 pdnl pdnr">
-    <div class="form-group">
+    <div class="form-group" ng-if="vm.opts.length">
       <label ng-repeat="opt in vm.opts">
-        <input type="checkbox" value="{{opt._id}}" ng-click="vm.checked(opt._id)" ng-checked="vm.is_voted(opt._id)"> 
-        {{opt.title}}
+        <input type="checkbox" value="{{opt._id}}" ng-click="vm.checked(opt._id)" ng-checked="vm.is_voted(opt._id)"> {{opt.title}}
       </label>
     </div>
-    <button class="btn btn-primary btn-sm" ng-click="vm.send_vote()">{{(vm.ownVote._id) ? 'Change vote' : 'Vote'}}</button>
-    <p class="text-muted" ng-hide="vm.ownVote._id">You have not voted for this poll.</p>
-    <p class="text-muted" ng-show="vm.ownVote._id">You have voted for {{vm.voted_title()}}.</p>
+    <div class="form-group" ng-if="vm.opts.length">
+      <button class="btn btn-primary btn-sm" ng-click="vm.send_vote()">{{(vm.ownVote._id) ? 'Change vote' : 'Vote'}}</button>
+      <p class="text-muted" ng-hide="vm.ownVote._id">You have not voted for this poll.</p>
+      <p class="text-muted" ng-show="vm.ownVote._id">You have voted for {{vm.voted_title()}}.</p>
+    </div>
   </div>
   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 pdnl pdnr">
     <ul class="opts" ng-controller="OptsInPollController">

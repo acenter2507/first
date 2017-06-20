@@ -26,6 +26,7 @@ exports.create = function(req, res) {
   var promises = [];
   vote.save()
     .then(_vote => {
+      vote = _vote;
       opts.forEach(opt => {
         var voteopt = new Voteopt({ opt: opt, vote: _vote._id });
         promises.push(voteopt.save());

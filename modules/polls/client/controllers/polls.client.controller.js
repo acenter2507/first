@@ -71,6 +71,7 @@
         .then(res => {
           if (res.data) {
             vm.ownVote = new Votes(res.data);
+            console.log("ownVote", vm.ownVote);
             return VotesApi.findOpts(vm.ownVote._id);
           } else {
             vm.ownVote = new Votes();
@@ -78,6 +79,7 @@
         })
         .then(res => {
           vm.votedOpts = (res && res.data) ? _.pluck(res.data, 'opt') : [];
+          console.log("votedOpts", vm.votedOpts);
         })
         .catch(err => {
           // alert('error' + err);

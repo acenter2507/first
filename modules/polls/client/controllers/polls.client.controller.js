@@ -261,11 +261,11 @@
         vm.ownVote.$save(successCallback, errorCallback);
       }
       function successCallback(res) {
-        return alert("Vote success")
+        return alert('Vote success');
       }
 
       function errorCallback(res) {
-        return alert("Vote failed")
+        return alert('Vote failed');
       }
     }
   }

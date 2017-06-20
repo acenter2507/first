@@ -124,7 +124,7 @@
     vm.aside_full_screen = aside_full_screen;
     // Click button add option
     function input_opt(opt) {
-      vm.option = (!opt) ? {poll: vm.poll._id, title: '', body: '', image: 'modules/opts/client/img/option.png'} : opt;
+      vm.option = (!opt) ? { poll: vm.poll._id, title: '', body: '', image: 'modules/opts/client/img/option.png' } : opt;
       opt_aside.$promise.then(opt_aside.show);
     }
     // Click button save option
@@ -154,6 +154,7 @@
         //vm.error = res.data.message;
       }
     }
+
     function aside_full_screen() {
       alert(1);
     }

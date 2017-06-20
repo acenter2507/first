@@ -30,7 +30,7 @@ exports.invokeRolesPolicies = function() {
       resources: '/api/findTags/:pollId',
       permissions: '*'
     }, {
-      resources: '/api/findVotes/:pollId',findOwnerVote
+      resources: '/api/findVotes/:pollId',
       permissions: '*'
     }, {
       resources: '/api/findOwnerVote/:pollId',

@@ -32,7 +32,7 @@ exports.create = function(req, res) {
       });
       return Promise.all(promises);
     }, handleError)
-    .then(_tags => {
+    .then(() => {
       promises = [];
       opts.forEach((opt) => {
         if (opt._id) {

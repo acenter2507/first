@@ -2,7 +2,7 @@
   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 pdnl pdnr">
     <div class="form-group">
       <label ng-repeat="opt in vm.opts">
-        <input type="checkbox" value="{{opt._id}}" ng-change="vm.checked(opt._id)" ng-checked="vm.is_voted(opt._id)"> 
+        <input type="checkbox" value="{{opt._id}}" ng-click="vm.checked(opt._id)" ng-checked="vm.is_voted(opt._id)"> 
         {{opt.title}}
       </label>
     </div>

@@ -1,62 +1,72 @@
 <section class="container">
-  <div class="page-header">
-    <h3>{{vm.poll._id ? 'Edit Poll' : 'New Poll'}}</h3>
+  <div class="row">
+    <div class="page-header">
+      <h3>{{vm.poll._id ? 'Edit Poll' : 'New Poll'}}</h3>
+    </div>
   </div>
-  <div class="col-md-12">
-    <form name="vm.form.pollForm" class="form-horizontal" ng-submit="vm.save(vm.form.pollForm.$valid)" novalidate>
-      <fieldset>
-        <!-- Title -->
-        <div class="form-group" show-errors>
-          <label class="control-label" for="title">Title</label>
-          <input name="title" type="text" ng-model="vm.poll.title" id="title" class="form-control" placeholder="Title" required>
-          <div ng-messages="vm.form.pollForm.title.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Poll title is required.</p>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+      <form name="vm.form.pollForm" class="form-horizontal" ng-submit="vm.save(vm.form.pollForm.$valid)" novalidate>
+        <fieldset>
+          <!-- Title -->
+          <div class="form-group" show-errors>
+            <label class="control-label" for="title">Title</label>
+            <input name="title" type="text" ng-model="vm.poll.title" id="title" class="form-control" placeholder="Title" required>
+            <div ng-messages="vm.form.pollForm.title.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Poll title is required.</p>
+            </div>
           </div>
-        </div>
-        <!-- Body -->
-        <div class="form-group" show-errors>
-          <label class="control-label" for="body">Body</label>
-          <textarea name="body" ng-model="vm.poll.body" id="body" class="form-control" placeholder="Body" required></textarea>
-          <div ng-messages="vm.form.pollForm.body.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Poll body is required.</p>
+          <!-- Body -->
+          <div class="form-group" show-errors>
+            <label class="control-label" for="body">Body</label>
+            <textarea name="body" ng-model="vm.poll.body" id="body" class="form-control" placeholder="Body" required></textarea>
+            <div ng-messages="vm.form.pollForm.body.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Poll body is required.</p>
+            </div>
           </div>
-        </div>
-        <!-- Vote option -->
-        <div class="form-group">
-          <label>
-            <switch id="allow_guest" name="allow_guest" ng-model="vm.poll.allow_guest" class="blue"></switch>
-            Allow guests can vote</label>
-        </div>
-        <!-- Add option -->
-        <div class="form-group">
-          <label>
-            <switch id="allow_add" name="allow_add" ng-model="vm.poll.allow_add" class="blue"></switch>
-            Allow members add option</label>
-        </div>
-        <!-- Close date -->
-        <div class="form-group">
-          <label class="control-label" for="close">Stop voting at:</label>
-          <input id="close" name="close" class="form-control" moment-picker="vm.poll.close" ng-model="vm.poll.close" format="YYYY/MM/DD HH:mm" start-view="month" placeholder="Select a date...">
-        </div>
-        <!-- Tags -->
-        <div class="form-group" ng-controller="AutocompleteTagController">
-          <label class="control-label" for="#">Current tags: {{(!vm.poll.tags.length) ? 'Has no tag was added' : ''}}</label>
-          <tags-input ng-model="vm.poll.tags" display-property="name" placeholder="{{placeholder}}" add-from-autocomplete-only="true" replace-spaces-with-dashes="false" min-length="1" enforce-max-tags class="tags-custom">
-            <auto-complete source="loadItems($query)" min-length="1" debounce-delay="0" max-results="10"></auto-complete>
-          </tags-input>
-        </div>
-        <div class="form-group">
-          <button type="submit" class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i>{{vm.poll._id ? ' Update' : ' Create'}}</button>
-          <a class="btn btn-default" ng-click="vm.discard()"><i class="fa fa-times" aria-hidden="true"></i> Discard</a>
-        </div>
-        <div ng-show="vm.error" class="text-danger">
-          <strong ng-bind="vm.error"></strong>
-        </div>
-      </fieldset>
-    </form>
-  </div>
-  <div class="clearfix"></div>
-  <div class="col-md-12">
-    <div ui-view="options"></div>
+          <!-- Vote option -->
+          <div class="form-group">
+            <label>
+              <switch id="allow_guest" name="allow_guest" ng-model="vm.poll.allow_guest" class="blue"></switch>
+              Allow guests can vote</label>
+          </div>
+          <!-- Add option -->
+          <div class="form-group">
+            <label>
+              <switch id="allow_add" name="allow_add" ng-model="vm.poll.allow_add" class="blue"></switch>
+              Allow members add option</label>
+          </div>
+          <!-- Close date -->
+          <div class="form-group">
+            <label class="control-label" for="close">Stop voting at:</label>
+            <input id="close" name="close" class="form-control" moment-picker="vm.poll.close" ng-model="vm.poll.close" format="YYYY/MM/DD HH:mm" start-view="month" placeholder="Select a date...">
+          </div>
+          <!-- Tags -->
+          <div class="form-group" ng-controller="AutocompleteTagController">
+            <label class="control-label" for="#">Current tags: {{(!vm.poll.tags.length) ? 'Has no tag was added' : ''}}</label>
+            <tags-input ng-model="vm.poll.tags" display-property="name" placeholder="{{placeholder}}" add-from-autocomplete-only="true" replace-spaces-with-dashes="false" min-length="1" enforce-max-tags class="tags-custom">
+              <auto-complete source="loadItems($query)" min-length="1" debounce-delay="0" max-results="10"></auto-complete>
+            </tags-input>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i>{{vm.poll._id ? ' Update' : ' Create'}}</button>
+            <a class="btn btn-default" ng-click="vm.discard()"><i class="fa fa-times" aria-hidden="true"></i> Discard</a>
+          </div>
+          <div ng-show="vm.error" class="text-danger">
+            <strong ng-bind="vm.error"></strong>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+      <ul class="list-group">
+        <li ng-repeat="opt in vm.opts">
+          <h4 class="list-group-item-heading" ng-bind="opt.title"></h4>
+          <p class="list-group-item-text" ng-bind="opt.body"></p>
+        </li>
+      </ul>
+      <button class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Add option</button>
+    </div>
+    <div class="clearfix"></div>
   </div>
 </section>

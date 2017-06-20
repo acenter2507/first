@@ -39,6 +39,9 @@
     ];
     vm.cmt_sort = '-updated';
     vm.add_opt = add_opt;
+
+    vm.opts = [];
+
     if (vm.poll._id) {
       // Get all Opts
       PollsApi.findOpts(poll._id)

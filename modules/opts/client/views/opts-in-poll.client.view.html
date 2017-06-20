@@ -6,7 +6,7 @@
         {{opt.title}}
       </label>
     </div>
-    <button class="btn btn-primary btn-sm" ng-click="vm.send_vote()">Vote</button>
+    <button class="btn btn-primary btn-sm" ng-click="vm.send_vote()">{{(vm.ownVote._id) ? 'Change vote' : 'Vote'}}</button>
   </div>
   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 pdnl pdnr">
     <ul class="opts" ng-controller="OptsInPollController">

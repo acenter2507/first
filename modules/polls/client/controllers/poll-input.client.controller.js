@@ -141,7 +141,7 @@
       // } else {
       //   vm.option.poll = vm.poll._id;
       //   vm.comment.$save(successCallback, errorCallback);
-      }
+      // }
 
       function successCallback(res) {
         opt_aside.$promise.then(opt_aside.hide);

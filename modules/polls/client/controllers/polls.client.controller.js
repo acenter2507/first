@@ -257,6 +257,9 @@
     };
 
     function send_vote() {
+      if (!vm.authentication.user && !vm.poll.allow_guest) {
+        return $state.go('authentication.signin');
+      }
       if (!vm.selectedOpts.length || vm.selectedOpts.length === 0) {
         return alert('You must vote at least one option.');
       }

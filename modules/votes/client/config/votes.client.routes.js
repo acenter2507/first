@@ -32,7 +32,8 @@
           voteResolve: newVote
         },
         data: {
-          roles: ['user', 'admin'],
+          // roles: ['user', 'admin'],
+          roles: ['*'],
           pageTitle: 'Votes Create'
         }
       })

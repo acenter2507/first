@@ -46,3 +46,8 @@
 .sort {
   max-width: 200px;
 }
+
+.poll_info_item {
+  display: inline;
+  line-height: 1.5em;
+}

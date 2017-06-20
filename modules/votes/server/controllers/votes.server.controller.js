@@ -104,15 +104,19 @@ exports.update = function(req, res) {
 exports.delete = function(req, res) {
   var vote = req.vote;
 
-  vote.remove(function(err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
+  vote.remove()
+    .then(() => {
+      return Voteopt.remove({ vote: vote._id });
+    }, handleError)
+    .then(() => {
       res.jsonp(vote);
-    }
-  });
+    }, handleError);
+
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 };
 
 /**

@@ -7,6 +7,7 @@ var path = require('path'),
   mongoose = require('mongoose'),
   Poll = mongoose.model('Poll'),
   Opt = mongoose.model('Opt'),
+  Vote = mongoose.model('Vote'),
   Polltag = mongoose.model('Polltag'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
@@ -127,16 +128,22 @@ exports.update = function(req, res) {
  */
 exports.delete = function(req, res) {
   var poll = req.poll;
-
-  poll.remove(function(err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
+  poll.remove()
+    .then(() => {
+      return Opt.remove({ poll: poll._id });
+    }, handleError)
+    .then(() => {
+      return Vote.remove({ poll: poll._id });
+    }, handleError)
+    .then(() => {
       res.jsonp(poll);
-    }
-  });
+    }, handleError);
+
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 };
 
 /**

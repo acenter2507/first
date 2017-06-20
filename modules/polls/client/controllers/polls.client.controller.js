@@ -74,7 +74,7 @@
             console.log("ownVote", vm.ownVote);
             return VotesApi.findOpts(vm.ownVote._id);
           } else {
-            vm.ownVote = new Votes({ poll: vm.poll._id });
+            vm.ownVote = new Votes();
           }
         })
         .then(res => {
@@ -266,6 +266,7 @@
         vm.ownVote.updateCnt += 1;
         vm.ownVote.$update(successCallback, errorCallback);
       } else {
+        vm.ownVote.poll = poll._id;
         vm.ownVote.$save(successCallback, errorCallback);
       }
 

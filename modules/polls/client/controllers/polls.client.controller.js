@@ -261,6 +261,7 @@
         vm.ownVote.$save(successCallback, errorCallback);
       }
       function successCallback(res) {
+        vm.ownVote = res.data;
         return alert('Vote success');
       }
 

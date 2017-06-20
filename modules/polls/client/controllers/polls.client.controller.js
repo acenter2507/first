@@ -70,7 +70,7 @@
       PollsApi.findOwnerVote(poll._id)
         .then(res => {
           if (res.data) {
-            vm.ownVote = res.data;
+            vm.ownVote = new Votes(res.data);
             return VotesApi.findOpts(vm.ownVote._id);
           } else {
             vm.ownVote = new Votes();

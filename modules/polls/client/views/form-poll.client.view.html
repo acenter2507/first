@@ -60,6 +60,7 @@
     </div>
     <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
       <ul class="list-group">
+        <p class="text-muted" ng-if="!vm.option.length">Has no option added.</p>
         <li ng-repeat="opt in vm.opts">
           <h4 class="list-group-item-heading" ng-bind="opt.title"></h4>
           <p class="list-group-item-text" ng-bind="opt.body"></p>

@@ -76,8 +76,8 @@ exports.read = function(req, res) {
 exports.update = function(req, res) {
   var poll = req.poll;
   poll = _.extend(poll, req.body);
-  var tags = req.body.tags | [];
-  var opts = req.body.opts | [];
+  var tags = req.body.tags || [];
+  var opts = req.body.opts || [];
   var promises = [];
   poll.save()
     .then(_poll => {

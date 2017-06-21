@@ -175,7 +175,7 @@
       }
 
       function successCallback(res) {
-        vm.like = res.like;
+        vm.like = res;
         console.log("liked");
       }
 
@@ -216,8 +216,7 @@
       }
 
       function successCallback(res) {
-        vm.like = res.like;
-        vm.poll.likeCnt = res.likes;
+        vm.like = res;
         console.log("disliked");
       }
 

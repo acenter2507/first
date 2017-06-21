@@ -386,11 +386,9 @@
       } else {
         cnt = 1;
         cmt.likeCnt += cnt;
-        cmt.like.poll = vm.poll._id;
-        cmt.like.user = vm.authentication.user._id;
-        cmt.like.type = 1;
-        cmt.like.cnt = cnt;
-        cmt.like.$save(successCallback, errorCallback);
+        var _like = new CmtlikesApi({ cmt: cmt._id, type: 1 });
+        _like.cnt = cnt;
+        _like.$save(successCallback, errorCallback);
       }
 
       function successCallback(res) {
@@ -440,11 +438,9 @@
       } else {
         cnt = -1;
         cmt.likeCnt += cnt;
-        cmt.like.poll = vm.poll._id;
-        cmt.like.user = vm.authentication.user._id;
-        cmt.like.type = 2;
-        cmt.like.cnt = cnt;
-        cmt.like.$save(successCallback, errorCallback);
+        _dislike = new CmtlikesApi({ cmt: cmt._id, type: 2 });
+        _dislike.cnt = cnt;
+        _dislike.$save(successCallback, errorCallback);
       }
 
       function successCallback(res) {

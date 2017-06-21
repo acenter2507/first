@@ -151,7 +151,12 @@
       }
       var _like;
       if (vm.like._id) {
-        vm.like.type = 1;
+        vm.like.lastType = vm.like.type;
+        if (vm.like.type === 1) {
+          vm.like.type = 0;
+        } else {
+          vm.like.type = 1;
+        }
         _like = new Likes(vm.like);
         _like.$update(successCallback, errorCallback);
       } else {
@@ -160,9 +165,8 @@
       }
 
       function successCallback(res) {
-        console.log(res);
-        // vm.like = res.data.like;
-        // vm.poll.likeCnt = res.data.likes;
+        vm.like = res.like;
+        vm.poll.likeCnt = res.likes;
         console.log("liked");
       }
 
@@ -178,7 +182,12 @@
       }
       var _dislike;
       if (vm.like._id) {
-        vm.like.type = 2;
+        vm.like.lastType = vm.like.type;
+        if (vm.like.type === 2) {
+          vm.like.type = 0;
+        } else {
+          vm.like.type = 2;
+        }
         _dislike = new Likes(vm.like);
         _dislike.$update(successCallback, errorCallback);
       } else {
@@ -187,8 +196,8 @@
       }
 
       function successCallback(res) {
-        vm.like = res.data.like;
-        vm.poll.likeCnt = res.data.likes;
+        vm.like = res.like;
+        vm.poll.likeCnt = res.likes;
         console.log("disliked");
       }
 

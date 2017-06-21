@@ -115,17 +115,11 @@ PollSchema.statics.countUpCmt = function(id, callback) {
   });
 };
 
-PollSchema.statics.countUpLike = function(id, callback) {
+PollSchema.statics.countLike = function(id, cnt, callback) {
   return this.findById(id).exec(function(err, poll) {
-    poll.likeCnt += 1;
+    poll.likeCnt += cnt;
     return poll.save();
   });
 };
 
-PollSchema.statics.countDownLike = function(id, callback) {
-  return this.findById(id).exec(function(err, poll) {
-    poll.likeCnt -= 1;
-    return poll.save();
-  });
-};
 mongoose.model('Poll', PollSchema);

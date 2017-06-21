@@ -20,11 +20,8 @@ exports.create = function(req, res) {
   like.save()
     .then(_like => {
       like = _like;
-      if (_like.type === 1) {
-        return Poll.countUpLike(_like.poll);
-      } else {
-        return Poll.countDownLike(_like.poll);
-      }
+      var cnt = (_like.type === 1) ? 1 : -1;
+      return Poll.countLike(_like.poll, cnt);
     }, handleError)
     .then(poll => {
       res.jsonp({ like: like, likes: poll.likeCnt });
@@ -62,11 +59,8 @@ exports.update = function(req, res) {
   like.save()
     .then(_like => {
       like = _like;
-      if (_like.type === 1) {
-        return Poll.countUpLike(_like.poll);
-      } else {
-        return Poll.countDownLike(_like.poll);
-      }
+      var cnt = likeCal(_like.type, _like.lastType);
+      return Poll.countLike(_like.poll, cnt);
     }, handleError)
     .then(poll => {
       res.jsonp({ like: like, likes: poll.likeCnt });
@@ -134,3 +128,39 @@ exports.likeByID = function(req, res, next, id) {
     next();
   });
 };
+
+function likeCal(type, lastType) {
+  switch (type) {
+    case 0:
+      switch (lastType) {
+        case 0:
+          return 0;
+        case 1:
+          return -1;
+        case 2:
+          return 1;
+        default:
+          return 0;
+      }
+    case 1:
+      switch (lastType) {
+        case 0:
+          return 1;
+        case 2:
+          return 2;
+        default:
+          return 0;
+      }
+    case 2:
+      switch (lastType) {
+        case 0:
+          return -1;
+        case 1:
+          return -2;
+        default:
+          return 0;
+      }
+    default:
+      return 0;
+  }
+}

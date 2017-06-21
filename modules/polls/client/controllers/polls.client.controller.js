@@ -149,14 +149,14 @@
       if (!vm.authentication.user) {
         return alert("You must login to like this poll.");
       }
-      
+      var _like;
       if (vm.like._id) {
         vm.like.type = 1;
-        var _like = new Likes(vm.like);
-        _like.$update(successCallback, errorCallback)
+        _like = new Likes(vm.like);
+        _like.$update(successCallback, errorCallback);
       } else {
-        var _like = new Likes({poll: vm.poll._id, user: vm.authentication.user._id, type: 1});
-        _like.$save(successCallback, errorCallback)
+        _like = new Likes({poll: vm.poll._id, user: vm.authentication.user._id, type: 1});
+        _like.$save(successCallback, errorCallback);
       }
 
       function successCallback(res) {
@@ -173,14 +173,14 @@
       if (!vm.authentication.user) {
         return alert("You must login to dislike this poll.");
       }
-      
+      var _like;
       if (vm.like._id) {
         vm.like.type = 2;
-        var _like = new Likes(vm.like);
-        _like.$update(successCallback, errorCallback)
+        _like = new Likes(vm.like);
+        _like.$update(successCallback, errorCallback);
       } else {
-        var _like = new Likes({poll: vm.poll._id, user: vm.authentication.user._id, type: 2});
-        _like.$save(successCallback, errorCallback)
+        _like = new Likes({poll: vm.poll._id, user: vm.authentication.user._id, type: 2});
+        _like.$save(successCallback, errorCallback);
       }
 
       function successCallback(res) {

@@ -258,7 +258,7 @@ exports.findVoteopts = function(req, res) {
     } else {
       rs.votes = _votes;
       rs.voteopts = [];
-      ids = _.pluck(_votes, '_id')
+      ids = _.pluck(_votes, '_id');
       Voteopt.find({ vote: { $in: ids } }).exec(function(err, opts) {
         if (err) {
           handleError(err);

@@ -182,7 +182,7 @@
 
       function successCallback(res) {
         vm.like = res;
-        liking = true;
+        liking = false;
         console.log("liked");
       }
 
@@ -229,7 +229,7 @@
 
       function successCallback(res) {
         vm.like = res;
-        liking = true;
+        liking = false;
         console.log("disliked");
       }
 

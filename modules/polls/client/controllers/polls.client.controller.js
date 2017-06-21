@@ -51,7 +51,6 @@
           return PollsApi.findVoteopts(poll._id);
         })
         .then(res => {
-          console.log(res);
           vm.votes = res.data.votes || [];
           vm.voteopts = res.data.voteopts || [];
           vm.votedTotal = vm.voteopts.length;

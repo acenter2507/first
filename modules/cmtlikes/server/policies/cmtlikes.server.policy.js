@@ -48,6 +48,9 @@ exports.invokeRolesPolicies = function() {
 exports.isAllowed = function(req, res, next) {
   var roles = (req.user) ? req.user.roles : ['guest'];
 
+  console.log('req.cmtlike', req.cmtlike)
+  console.log('req.cmtlike.user.id', req.cmtlike.user.id);
+  console.log('req.user.id',req.user.id);
   // If an Cmtlike is being processed and the current user created it then allow any manipulation
   if (req.cmtlike && req.user && req.cmtlike.user && req.cmtlike.user.id === req.user.id) {
     return next();

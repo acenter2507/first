@@ -169,7 +169,8 @@
         _like.cnt = cnt;
         _like.$update(successCallback, errorCallback);
       } else {
-        _like = new Likes({ poll: vm.poll._id, user: vm.authentication.user._id, type: 1 });
+        vm.like = { poll: vm.poll._id, user: vm.authentication.user._id, type: 1 };
+        _like = new Likes(vm.like);
         _like.cnt = 1;
         _like.$save(successCallback, errorCallback);
       }

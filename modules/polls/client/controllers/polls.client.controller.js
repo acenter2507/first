@@ -160,6 +160,8 @@
       }
 
       function successCallback(res) {
+        vm.like = res.data.like;
+        vm.poll.likeCnt = res.data.likes;
         console.log("liked");
       }
 
@@ -173,17 +175,19 @@
       if (!vm.authentication.user) {
         return alert("You must login to dislike this poll.");
       }
-      var _like;
+      var _dislike;
       if (vm.like._id) {
         vm.like.type = 2;
-        _like = new Likes(vm.like);
-        _like.$update(successCallback, errorCallback);
+        _dislike = new Likes(vm.like);
+        _dislike.$update(successCallback, errorCallback);
       } else {
-        _like = new Likes({ poll: vm.poll._id, user: vm.authentication.user._id, type: 2 });
-        _like.$save(successCallback, errorCallback);
+        _dislike = new Likes({ poll: vm.poll._id, user: vm.authentication.user._id, type: 2 });
+        _dislike.$save(successCallback, errorCallback);
       }
 
       function successCallback(res) {
+        vm.like = res.data.like;
+        vm.poll.likeCnt = res.data.likes;
         console.log("disliked");
       }
 

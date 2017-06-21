@@ -6,6 +6,7 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Like = mongoose.model('Like'),
+  Poll = mongoose.model('Poll'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 
@@ -16,15 +17,24 @@ exports.create = function(req, res) {
   var like = new Like(req.body);
   like.user = req.user;
 
-  like.save(function(err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.jsonp(like);
-    }
-  });
+  like.save()
+    .then(_like => {
+      like = _like;
+      if (_like.type == 1) {
+        return Poll.countUpLike(_like.poll);
+      } else {
+        return Poll.countDownLike(_like.poll);
+      }
+    }, handleError)
+    .then(poll => {
+      res.jsonp({ like: like, likes: poll.likeCnt });
+    }, handleError);
+
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 };
 
 /**
@@ -49,15 +59,24 @@ exports.update = function(req, res) {
 
   like = _.extend(like, req.body);
 
-  like.save(function(err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.jsonp(like);
-    }
-  });
+  like.save()
+    .then(_like => {
+      like = _like;
+      if (_like.type == 1) {
+        return Poll.countUpLike(_like.poll);
+      } else {
+        return Poll.countDownLike(_like.poll);
+      }
+    }, handleError)
+    .then(poll => {
+      res.jsonp({ like: like, likes: poll.likeCnt });
+    }, handleError);
+
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 };
 
 /**
@@ -103,7 +122,7 @@ exports.likeByID = function(req, res, next, id) {
     });
   }
 
-  Like.findById(id).populate('user', 'displayName').exec(function (err, like) {
+  Like.findById(id).populate('user', 'displayName').exec(function(err, like) {
     if (err) {
       return next(err);
     } else if (!like) {

@@ -10,6 +10,7 @@ var path = require('path'),
   Vote = mongoose.model('Vote'),
   Voteopt = mongoose.model('Voteopt'),
   Polltag = mongoose.model('Polltag'),
+  Like = mongoose.model('Like'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 
@@ -269,6 +270,25 @@ exports.findVoteopts = function(req, res) {
     }
   });
 
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
+};
+
+/**
+ * Get Like of user on this poll
+ */
+exports.findPollLike = function(req, res) {
+  var condition = { poll: req.poll._id, user: req.user._id };
+  Like.findOne(condition).exec(function(err, like) {
+    if (err) {
+      handleError(err);
+    } else {
+      res.jsonp(like);
+    }
+  });
   function handleError(err) {
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)

@@ -19,9 +19,10 @@
     'VotesService',
     'VotesApi',
     'OptsService',
+    'LikesService',
   ];
 
-  function PollsController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $aside, Cmts, Votes, VotesApi, Opts) {
+  function PollsController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $aside, Cmts, Votes, VotesApi, Opts, Likes) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -36,9 +37,10 @@
     ];
     vm.cmt_sort = '-updated';
 
+    vm.poll.tags = [];
+    vm.like = {};
     vm.opts = [];
     vm.cmts = [];
-    vm.poll.tags = [];
     vm.votes = [];
     vm.voteopts = [];
     vm.votedTotal = 0;
@@ -132,12 +134,63 @@
       }
     }
 
+    // LIKES
+    if (vm.poll._id && vm.authentication.user) {
+      PollsApi.findPollLike(poll._id)
+        .then(res => {
+          vm.like = res.data;
+          console.log(vm.like);
+        })
+        .catch(err => {
+          alert('error' + err);
+        });
+    }
     vm.like_poll = () => {
-      alert("like_poll");
+      if (!vm.authentication.user) {
+        return alert("You must login to like this poll.");
+      }
+      
+      if (vm.like._id) {
+        vm.like.type = 1;
+        var _like = new Likes(vm.like);
+        _like.$update(successCallback, errorCallback)
+      } else {
+        var _like = new Likes({poll: vm.poll._id, user: vm.authentication.user._id, type: 1});
+        _like.$save(successCallback, errorCallback)
+      }
+
+      function successCallback(res) {
+        console.log("liked");
+      }
+
+      function errorCallback(err) {
+        console.log(err);
+        //vm.error = res.data.message;
+      }
     };
 
     vm.dislike_poll = () => {
-      alert("dislike_poll");
+      if (!vm.authentication.user) {
+        return alert("You must login to dislike this poll.");
+      }
+      
+      if (vm.like._id) {
+        vm.like.type = 2;
+        var _like = new Likes(vm.like);
+        _like.$update(successCallback, errorCallback)
+      } else {
+        var _like = new Likes({poll: vm.poll._id, user: vm.authentication.user._id, type: 2});
+        _like.$save(successCallback, errorCallback)
+      }
+
+      function successCallback(res) {
+        console.log("disliked");
+      }
+
+      function errorCallback(err) {
+        console.log(err);
+        //vm.error = res.data.message;
+      }
     };
 
     // OPTIONS

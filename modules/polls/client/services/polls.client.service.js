@@ -43,6 +43,9 @@
       },
       findVoteopts: (id) => {
         return $http.get('/api/findVoteopts/' + id);
+      },
+      findPollLike: (id) => {
+        return $http.get('/api/findPollLike/' + id);
       }
     };
   }

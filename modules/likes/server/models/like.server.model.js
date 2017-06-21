@@ -10,11 +10,9 @@ var mongoose = require('mongoose'),
  * Like Schema
  */
 var LikeSchema = new Schema({
-  name: {
-    type: String,
-    default: '',
-    required: 'Please fill Like name',
-    trim: true
+  poll: {
+    type: Schema.ObjectId,
+    ref: 'Poll'
   },
   created: {
     type: Date,
@@ -23,6 +21,10 @@ var LikeSchema = new Schema({
   user: {
     type: Schema.ObjectId,
     ref: 'User'
+  },
+  type: {
+    type: Number,
+    default: 1 // 1: like, 2: dislike
   }
 });
 

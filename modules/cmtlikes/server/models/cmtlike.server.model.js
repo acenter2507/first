@@ -10,11 +10,9 @@ var mongoose = require('mongoose'),
  * Cmtlike Schema
  */
 var CmtlikeSchema = new Schema({
-  name: {
-    type: String,
-    default: '',
-    required: 'Please fill Cmtlike name',
-    trim: true
+  cmt: {
+    type: Schema.ObjectId,
+    ref: 'Cmt'
   },
   created: {
     type: Date,
@@ -23,6 +21,10 @@ var CmtlikeSchema = new Schema({
   user: {
     type: Schema.ObjectId,
     ref: 'User'
+  },
+  type: {
+    type: Number,
+    default: 1 // 1: like, 2: dislike
   }
 });
 

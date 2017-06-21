@@ -5,11 +5,11 @@
     .module('likes')
     .run(menuConfig);
 
-  menuConfig.$inject = ['menuService'];
+  menuConfig.$inject = ['Menus'];
 
-  function menuConfig(menuService) {
+  function menuConfig(Menus) {
     // Set top bar menu items
-    menuService.addMenuItem('topbar', {
+    Menus.addMenuItem('topbar', {
       title: 'Likes',
       state: 'likes',
       type: 'dropdown',
@@ -17,13 +17,13 @@
     });
 
     // Add the dropdown list item
-    menuService.addSubMenuItem('topbar', 'likes', {
+    Menus.addSubMenuItem('topbar', 'likes', {
       title: 'List Likes',
       state: 'likes.list'
     });
 
     // Add the dropdown create item
-    menuService.addSubMenuItem('topbar', 'likes', {
+    Menus.addSubMenuItem('topbar', 'likes', {
       title: 'Create Like',
       state: 'likes.create',
       roles: ['user']

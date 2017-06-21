@@ -43,7 +43,7 @@
       // Get all Opts
       PollsApi.findOpts(poll._id)
         .then(opts => {
-          vm.opts = opts.data;
+          vm.opts = _.where(opts.data, { status: 1 });
         })
         .catch(err => {
           alert('error' + err);
@@ -149,6 +149,7 @@
         return false;
       }
       vm.comment.$save(successCallback, errorCallback);
+
       function successCallback(res) {
         opt_aside.$promise.then(opt_aside.hide);
         alert('Your option is waiting for approve. Thanks.');

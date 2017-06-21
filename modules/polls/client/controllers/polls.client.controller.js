@@ -145,6 +145,7 @@
         });
     }
     var liking = false;
+    var cnt = 0;
     vm.like_poll = () => {
       if (!vm.authentication.user) {
         return alert('You must login to like this poll.');
@@ -152,7 +153,7 @@
       if (liking) {
         return alert('You cannot interact continuously.')
       }
-      var _like, cnt;
+      var _like;
       liking = true;
       if (vm.like._id) {
         switch (vm.like.type) {
@@ -174,19 +175,23 @@
         _like.cnt = cnt;
         _like.$update(successCallback, errorCallback);
       } else {
-        vm.poll.likeCnt += 1;
+        cnt = 1;
+        vm.poll.likeCnt += cnt;
         _like = new Likes({ poll: vm.poll._id, user: vm.authentication.user._id, type: 1 });
-        _like.cnt = 1;
+        _like.cnt = cnt;
         _like.$save(successCallback, errorCallback);
       }
 
       function successCallback(res) {
-        vm.like = res;
+        vm.like = res.like;
+        vm.poll.likeCnt = res.likeCnt;
         liking = false;
         console.log("liked");
       }
 
       function errorCallback(err) {
+        vm.poll.likeCnt -= cnt;
+        liking = false;
         console.log(err);
         //vm.error = res.data.message;
       }
@@ -221,19 +226,23 @@
         _dislike.cnt = cnt;
         _dislike.$update(successCallback, errorCallback);
       } else {
-        vm.poll.likeCnt -= 1;
+        cnt = -1;
+        vm.poll.likeCnt -= cnt;
         _dislike = new Likes({ poll: vm.poll._id, user: vm.authentication.user._id, type: 2 });
-        _dislike.cnt = -1;
+        _dislike.cnt = cnt;
         _dislike.$save(successCallback, errorCallback);
       }
 
       function successCallback(res) {
         vm.like = res;
+        vm.poll.likeCnt = res.likeCnt;
         liking = false;
         console.log("disliked");
       }
 
       function errorCallback(err) {
+        vm.poll.likeCnt -= cnt;
+        liking = false;
         console.log(err);
         //vm.error = res.data.message;
       }

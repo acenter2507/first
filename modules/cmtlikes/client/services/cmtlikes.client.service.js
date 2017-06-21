@@ -25,7 +25,7 @@
   CmtlikesApi.$inject = ['$resource'];
 
   function CmtlikesApi($resource) {
-    return $resource('api/cmtlikes/:cmtId', {
+    return $resource('api/cmtlike/:cmtId', {
       cmtId: '@cmt'
     }, {
       update: {

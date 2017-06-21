@@ -17,7 +17,7 @@ module.exports = function(app) {
     .put(cmtlikes.update)
     .delete(cmtlikes.delete);
 
-  app.route('/api/cmtlikes/:cmtId').all(cmtlikesPolicy.isAllowed)
+  app.route('/api/cmtlike/:cmtId').all(cmtlikesPolicy.isAllowed)
     .get(cmtlikes.findCmtlike)
     .put(cmtlikes.saveCmtlike);
 

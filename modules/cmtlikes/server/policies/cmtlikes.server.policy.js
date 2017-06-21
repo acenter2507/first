@@ -21,7 +21,7 @@ exports.invokeRolesPolicies = function() {
       resources: '/api/cmtlikes/:cmtlikeId',
       permissions: '*'
     }, {
-      resources: '/api/cmtlikes/:cmtId',
+      resources: '/api/cmtlike/:cmtId',
       permissions: '*'
     }]
   }, {
@@ -33,7 +33,7 @@ exports.invokeRolesPolicies = function() {
       resources: '/api/cmtlikes/:cmtlikeId',
       permissions: ['get']
     }, {
-      resources: '/api/cmtlikes/:cmtId',
+      resources: '/api/cmtlike/:cmtId',
       permissions: '*'
     }]
   }, {
@@ -45,7 +45,7 @@ exports.invokeRolesPolicies = function() {
       resources: '/api/cmtlikes/:cmtlikeId',
       permissions: ['get']
     }, {
-      resources: '/api/cmtlikes/:cmtId',
+      resources: '/api/cmtlike/:cmtId',
       permissions: '*'
     }]
   }]);

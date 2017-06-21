@@ -138,7 +138,7 @@
     if (vm.poll._id && vm.authentication.user) {
       PollsApi.findPollLike(poll._id)
         .then(res => {
-          vm.like = res.data;
+          vm.like = res.data || {};
           console.log(vm.like);
         })
         .catch(err => {

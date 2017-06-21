@@ -72,7 +72,7 @@
           if (vm.authentication.user) {
             vm.cmts.forEach(cmt => {
               CmtsApi.findLike(cmt._id).then(res => {
-                cmt.like = res.data;
+                cmt.like = res.data || {};
               });
             });
           }

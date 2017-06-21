@@ -19,10 +19,10 @@ exports.create = function(req, res) {
 
   cmt.save()
     .then(_cmt => {
+      cmt = _cmt;
       return Poll.countUpCmt(_cmt.poll);
     }, handleError)
     .then(() => {
-      promises = [];
       res.jsonp(cmt);
     }, handleError);
 

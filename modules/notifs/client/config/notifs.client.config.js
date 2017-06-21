@@ -5,11 +5,11 @@
     .module('notifs')
     .run(menuConfig);
 
-  menuConfig.$inject = ['menuService'];
+  menuConfig.$inject = ['Menus'];
 
-  function menuConfig(menuService) {
+  function menuConfig(Menus) {
     // Set top bar menu items
-    menuService.addMenuItem('topbar', {
+    Menus.addMenuItem('topbar', {
       title: 'Notifs',
       state: 'notifs',
       type: 'dropdown',
@@ -17,13 +17,13 @@
     });
 
     // Add the dropdown list item
-    menuService.addSubMenuItem('topbar', 'notifs', {
+    Menus.addSubMenuItem('topbar', 'notifs', {
       title: 'List Notifs',
       state: 'notifs.list'
     });
 
     // Add the dropdown create item
-    menuService.addSubMenuItem('topbar', 'notifs', {
+    Menus.addSubMenuItem('topbar', 'notifs', {
       title: 'Create Notif',
       state: 'notifs.create',
       roles: ['user']

@@ -159,6 +159,9 @@
       if (!vm.authentication.user) {
         return alert('You must login to like this poll.');
       }
+      if (vm.poll.isCurrentUserOwner) {
+        return alert('You cannot like your poll.');
+      }
       if (liking) {
         return alert('You cannot interact continuously.');
       }
@@ -211,6 +214,9 @@
     vm.dislike_poll = () => {
       if (!vm.authentication.user) {
         return alert("You must login to dislike this poll.");
+      }
+      if (vm.poll.isCurrentUserOwner) {
+        return alert('You cannot dislike your poll.');
       }
       if (liking) {
         return alert('You cannot interact continuously.');
@@ -362,6 +368,9 @@
       if (!vm.authentication.user) {
         return alert('You must login to like this poll.');
       }
+      if (vm.authentication.user._id === cmt.user._id) {
+        return alert('You cannot like your comment.');
+      }
       if (liking) {
         return alert('You cannot interact continuously.');
       }
@@ -413,7 +422,10 @@
 
     vm.dislike_cmt = (cmt) => {
       if (!vm.authentication.user) {
-        return alert('You must login to like this poll.');
+        return alert('You must login to dislike this poll.');
+      }
+      if (vm.authentication.user._id === cmt.user._id) {
+        return alert('You cannot dislike your comment.');
       }
       if (liking) {
         return alert('You cannot interact continuously.');

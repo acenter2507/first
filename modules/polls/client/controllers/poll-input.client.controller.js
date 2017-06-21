@@ -100,6 +100,7 @@
     }
 
     // OPTIONS
+    vm.option = {};
     var opt_aside = $aside({
       scope: $scope,
       controllerAs: vm,

@@ -141,7 +141,7 @@
     vm.input_opt = (opt) => {
       vm.option = (!opt) ? new Opts({ poll: vm.poll._id, title: '', body: '', image: 'modules/opts/client/img/option.png', status: 2 }) : new Opts(opt);
       opt_aside.$promise.then(opt_aside.show);
-    }
+    };
     // Click button save option
     vm.save_opt = (isValid) => {
       if (!isValid) {
@@ -174,7 +174,7 @@
 
     vm.aside_full_screen = () => {
       alert(1);
-    }
+    };
 
     vm.input_cmt = (cmt) => {
       if (vm.authentication.user) {
@@ -183,7 +183,7 @@
       } else {
         $state.go('authentication.signin');
       }
-    }
+    };
 
     vm.send_comment = ($form) => {
       if (!$form.$valid) {
@@ -211,28 +211,28 @@
         console.log(err);
         //vm.error = res.data.message;
       }
-    }
+    };
 
 
     vm.reply_cmt = (cmt) => {
       alert('reply_cmt');
-    }
+    };
 
     vm.edit_cmt = (cmt) => {
       vm.input_cmt(cmt);
-    }
+    };
 
     vm.delete_cmt = (cmt) => {
       alert('delete_cmt');
-    }
+    };
 
     vm.like_cmt = (cmt) => {
       alert('like_cmt');
-    }
+    };
 
     vm.dislike_cmt = (cmt) => {
       alert('dislike_cmt');
-    }
+    };
 
     // VOTE
     if (vm.poll._id) {
@@ -294,6 +294,6 @@
         vm.selectedOpts = angular.copy(vm.votedOpts) || [];
         alert('Vote failed');
       }
-    }
+    };
   }
 }());

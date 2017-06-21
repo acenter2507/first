@@ -438,7 +438,7 @@
       } else {
         cnt = -1;
         cmt.likeCnt += cnt;
-        _dislike = new CmtlikesApi({ cmt: cmt._id, type: 2 });
+        var _dislike = new CmtlikesApi({ cmt: cmt._id, type: 2 });
         _dislike.cnt = cnt;
         _dislike.$save(successCallback, errorCallback);
       }

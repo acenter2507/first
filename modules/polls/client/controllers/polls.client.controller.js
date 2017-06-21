@@ -234,7 +234,7 @@
       }
 
       function successCallback(res) {
-        vm.like = res;
+        vm.like = res.like;
         vm.poll.likeCnt = res.likeCnt;
         liking = false;
         console.log("disliked");

@@ -175,7 +175,6 @@
       }
 
       function successCallback(res) {
-        vm.like = res;
         console.log("liked");
       }
 
@@ -210,13 +209,13 @@
         _dislike.cnt = cnt;
         _dislike.$update(successCallback, errorCallback);
       } else {
-        _dislike = new Likes({ poll: vm.poll._id, user: vm.authentication.user._id, type: 2 });
+        vm.like = { poll: vm.poll._id, user: vm.authentication.user._id, type: 2 };
+        _dislike = new Likes(vm.like);
         _dislike.cnt = -1;
         _dislike.$save(successCallback, errorCallback);
       }
 
       function successCallback(res) {
-        vm.like = res;
         console.log("disliked");
       }
 

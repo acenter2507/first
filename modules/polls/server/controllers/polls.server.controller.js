@@ -266,6 +266,7 @@ exports.findVoteopts = function(req, res) {
           }
         });
       });
+      console.log(opts);
       res.jsonp(rs);
     }
   });

@@ -14,7 +14,7 @@
   </div>
   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 pdnl pdnr">
     <ul class="opts" ng-controller="OptsInPollController">
-      <li ng-repeat="opt in vm.opts | orderBy: 'voteCnt'">
+      <li ng-repeat="opt in vm.opts | orderBy: '-voteCnt'">
         <div class="opt_image pull-left">
           <img src="{{opt.image}}" alt="{{opt.title}}" class="img-rounded">
         </div>

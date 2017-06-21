@@ -151,7 +151,7 @@
         return alert('You must login to like this poll.');
       }
       if (liking) {
-        return alert('You cannot interact continuously.')
+        return alert('You cannot interact continuously.');
       }
       var _like;
       liking = true;
@@ -202,7 +202,7 @@
         return alert("You must login to dislike this poll.");
       }
       if (liking) {
-        return alert('You cannot interact continuously.')
+        return alert('You cannot interact continuously.');
       }
       var _dislike, cnt;
       liking = true;

@@ -21,7 +21,7 @@ module.exports = function(app) {
     .get(cmtlikes.findCmtlike)
     .put(cmtlikes.update);
   app.route('/api/cmtlike').all(cmtlikesPolicy.isAllowed)
-    .get(cmtlikes.create);
+    .post(cmtlikes.create);
 
   // Finish by binding the Cmtlike middleware
   app.param('cmtlikeId', cmtlikes.cmtlikeByID);

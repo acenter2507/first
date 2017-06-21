@@ -331,6 +331,7 @@
         vm.comment.updated = new Date();
         vm.comment.$update(successCallback, errorCallback);
       } else {
+        vm.comment.poll = vm.poll._id;
         vm.comment.$save(successCallback, errorCallback);
       }
 

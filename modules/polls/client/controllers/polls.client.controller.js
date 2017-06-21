@@ -139,7 +139,6 @@
       PollsApi.findPollLike(poll._id)
         .then(res => {
           vm.like = res.data || {};
-          console.log(vm.like);
         })
         .catch(err => {
           alert('error' + err);
@@ -149,39 +148,34 @@
       if (!vm.authentication.user) {
         return alert("You must login to like this poll.");
       }
-      var _like;
+      var _like, cnt;
       if (vm.like._id) {
-        switch(vm.like.type) {
+        switch (vm.like.type) {
           case 0:
-            vm.poll.likeCnt += 1;
+            cnt = 1;
             vm.like.type = 1;
             break;
           case 1:
-            vm.poll.likeCnt -= 1;
+            cnt = -1;
             vm.like.type = 0;
             break;
           case 2:
-            vm.poll.likeCnt += 2;
+            cnt = 2;
             vm.like.type = 1;
             break;
         }
+        vm.poll.likeCnt += cnt;
+        _like = new Likes(vm.like);
+        _like.cnt = cnt;
+        _like.$update(successCallback, errorCallback);
+      } else {
+        _like = new Likes({ poll: vm.poll._id, user: vm.authentication.user._id, type: 1 });
+        _like.cnt = 1;
+        _like.$save(successCallback, errorCallback);
       }
-      //   vm.like.lastType = vm.like.type;
-      //   if (vm.like.type === 1) {
-      //     vm.like.type = 0;
-      //   } else {
-      //     vm.like.type = 1;
-      //   }
-      //   _like = new Likes(vm.like);
-      //   _like.$update(successCallback, errorCallback);
-      // } else {
-      //   _like = new Likes({ poll: vm.poll._id, user: vm.authentication.user._id, type: 1 });
-      //   _like.$save(successCallback, errorCallback);
-      // }
 
       function successCallback(res) {
         vm.like = res.like;
-        vm.poll.likeCnt = res.likes;
         console.log("liked");
       }
 
@@ -195,33 +189,30 @@
       if (!vm.authentication.user) {
         return alert("You must login to dislike this poll.");
       }
-      var _dislike;
+      var _dislike, cnt;
       if (vm.like._id) {
-        switch(vm.like.type) {
+        switch (vm.like.type) {
           case 0:
-            vm.poll.likeCnt -= 1;
+            cnt = -1;
             vm.like.type = 2;
             break;
           case 1:
-            vm.poll.likeCnt -= 2;
+            cnt = -2;
             vm.like.type = 2;
             break;
           case 2:
-            vm.poll.likeCnt += 1;
+            cnt = 1;
             vm.like.type = 0;
             break;
         }
-      //   vm.like.lastType = vm.like.type;
-      //   if (vm.like.type === 2) {
-      //     vm.like.type = 0;
-      //   } else {
-      //     vm.like.type = 2;
-      //   }
-      //   _dislike = new Likes(vm.like);
-      //   _dislike.$update(successCallback, errorCallback);
-      // } else {
-      //   _dislike = new Likes({ poll: vm.poll._id, user: vm.authentication.user._id, type: 2 });
-      //   _dislike.$save(successCallback, errorCallback);
+        vm.poll.likeCnt += cnt;
+        _dislike = new Likes(vm.like);
+        _dislike.cnt = cnt;
+        _dislike.$update(successCallback, errorCallback);
+      } else {
+        _dislike = new Likes({ poll: vm.poll._id, user: vm.authentication.user._id, type: 2 });
+        _dislike.cnt = -1;
+        _dislike.$save(successCallback, errorCallback);
       }
 
       function successCallback(res) {

@@ -25,10 +25,6 @@ var LikeSchema = new Schema({
   type: {
     type: Number,
     default: 0 // 0: notthing, 1: like, 2: dislike
-  },
-  lastType: {
-    type: Number,
-    default: 0 // 0: notthing, 1: like, 2: dislike
   }
 });
 

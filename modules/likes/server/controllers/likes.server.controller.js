@@ -15,16 +15,16 @@ var path = require('path'),
  */
 exports.create = function(req, res) {
   var like = new Like(req.body);
+  var cnt = req.body.cnt;
   like.user = req.user;
 
   like.save()
     .then(_like => {
       like = _like;
-      var cnt = (_like.type === 1) ? 1 : -1;
       return Poll.countLike(_like.poll, cnt);
     }, handleError)
     .then(poll => {
-      res.jsonp({ like: like, likes: poll.likeCnt });
+      res.jsonp(like);
     }, handleError);
 
   function handleError(err) {
@@ -55,15 +55,15 @@ exports.update = function(req, res) {
   var like = req.like;
 
   like = _.extend(like, req.body);
+  var cnt = req.body.cnt;
 
   like.save()
     .then(_like => {
       like = _like;
-      var cnt = likeCal(_like.type, _like.lastType);
       return Poll.countLike(_like.poll, cnt);
     }, handleError)
     .then(poll => {
-      res.jsonp({ like: like, likes: poll.likeCnt });
+      res.jsonp(like);
     }, handleError);
 
   function handleError(err) {

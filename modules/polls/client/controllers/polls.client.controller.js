@@ -21,9 +21,10 @@
     'OptsService',
     'LikesService',
     'CmtlikesApi',
+    'CmtlikesService',
   ];
 
-  function PollsController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $aside, Cmts, Votes, VotesApi, Opts, Likes, CmtlikesApi) {
+  function PollsController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $aside, Cmts, Votes, VotesApi, Opts, Likes, CmtlikesApi, Cmtlikes) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -363,6 +364,7 @@
       if (liking) {
         return alert('You cannot interact continuously.');
       }
+      var _like;
       liking = true;
       var bk_like = cmt.like;
       if (cmt.like._id) {
@@ -381,12 +383,13 @@
             break;
         }
         cmt.likeCnt += cnt;
-        cmt.like.cnt = cnt;
-        cmt.like.$update(successCallback, errorCallback);
+        _like = new Cmtlikes(cmt.like);
+        _like.cnt = cnt;
+        _like.$update(successCallback, errorCallback);
       } else {
         cnt = 1;
         cmt.likeCnt += cnt;
-        var _like = new CmtlikesApi({ cmt: cmt._id, type: 1 });
+        _like = new Cmtlikes({ cmt: cmt._id, type: 1 });
         _like.cnt = cnt;
         _like.$save(successCallback, errorCallback);
       }
@@ -415,6 +418,7 @@
         return alert('You cannot interact continuously.');
       }
 
+      var _dislike;
       liking = true;
       var bk_like = vm.like;
       if (cmt.like._id) {
@@ -433,12 +437,13 @@
             break;
         }
         cmt.likeCnt += cnt;
-        cmt.like.cnt = cnt;
-        cmt.like.$update(successCallback, errorCallback);
+        _dislike = new Cmtlikes(cmt.like);
+        _dislike.cnt = cnt;
+        _dislike.$update(successCallback, errorCallback);
       } else {
         cnt = -1;
         cmt.likeCnt += cnt;
-        var _dislike = new CmtlikesApi({ cmt: cmt._id, type: 2 });
+        _dislike = new Cmtlikes({ cmt: cmt._id, type: 2 });
         _dislike.cnt = cnt;
         _dislike.$save(successCallback, errorCallback);
       }

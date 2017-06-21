@@ -24,7 +24,7 @@ exports.create = function(req, res) {
       return Poll.countLike(_like.poll, cnt);
     }, handleError)
     .then(poll => {
-      res.jsonp({like: like, likeCnt: poll.likeCnt});
+      res.jsonp({ like: like, likeCnt: poll.likeCnt });
     }, handleError);
 
   function handleError(err) {
@@ -63,7 +63,7 @@ exports.update = function(req, res) {
       return Poll.countLike(_like.poll, cnt);
     }, handleError)
     .then(poll => {
-      res.jsonp({like: like, likeCnt: poll.likeCnt});
+      res.jsonp({ like: like, likeCnt: poll.likeCnt });
     }, handleError);
 
   function handleError(err) {

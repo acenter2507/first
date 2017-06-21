@@ -8,6 +8,7 @@ var path = require('path'),
   Poll = mongoose.model('Poll'),
   Opt = mongoose.model('Opt'),
   Vote = mongoose.model('Vote'),
+  Voteopt = mongoose.model('Voteopt'),
   Polltag = mongoose.model('Polltag'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
@@ -249,25 +250,22 @@ exports.findOwnerVote = function(req, res) {
  * Get all info of vote in poll
  */
 exports.findVoteopts = function(req, res) {
-  var rs = {};
+  var rs = {}, ids;
   Poll.findVotes(req.poll._id).exec(function(err, _votes) {
     if (err) {
       handleError(err);
     } else {
       rs.votes = _votes;
       rs.voteopts = [];
-      _votes.forEach(vote => {
-        Vote.findOpts(vote._id).exec(function(err, opts) {
-          if (err) {
-            handleError(err);
-          } else {
-            console.log(opts);
-            rs.voteopts.push(opts);
-          }
-        });
+      ids = _.pluck(_votes, '_id')
+      Voteopt.find({ vote: { $in: ids } }).exec(function(err, opts) {
+        if (err) {
+          handleError(err);
+        } else {
+          rs.voteopts = opts;
+          res.jsonp(rs);
+        }
       });
-      console.log(rs);
-      res.jsonp(rs);
     }
   });
 

@@ -20,7 +20,7 @@ exports.create = function(req, res) {
   like.save()
     .then(_like => {
       like = _like;
-      if (_like.type == 1) {
+      if (_like.type === 1) {
         return Poll.countUpLike(_like.poll);
       } else {
         return Poll.countDownLike(_like.poll);
@@ -62,7 +62,7 @@ exports.update = function(req, res) {
   like.save()
     .then(_like => {
       like = _like;
-      if (_like.type == 1) {
+      if (_like.type === 1) {
         return Poll.countUpLike(_like.poll);
       } else {
         return Poll.countDownLike(_like.poll);

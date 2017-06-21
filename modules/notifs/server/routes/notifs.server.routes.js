@@ -8,11 +8,11 @@ var notifsPolicy = require('../policies/notifs.server.policy'),
 
 module.exports = function(app) {
   // Notifs Routes
-  app.route('/api/notifs').all(notifsPolicy.isAllowed)
+  app.route('/api/notifs') //.all(notifsPolicy.isAllowed)
     .get(notifs.list)
     .post(notifs.create);
 
-  app.route('/api/notifs/:notifId').all(notifsPolicy.isAllowed)
+  app.route('/api/notifs/:notifId') //.all(notifsPolicy.isAllowed)
     .get(notifs.read)
     .put(notifs.update)
     .delete(notifs.delete);

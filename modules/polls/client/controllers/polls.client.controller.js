@@ -22,9 +22,10 @@
     'LikesService',
     'CmtsApi',
     'CmtlikesService',
+    'PollsSocket',
   ];
 
-  function PollsController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $aside, Cmts, Votes, VotesApi, Opts, Likes, CmtsApi, Cmtlikes) {
+  function PollsController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $aside, Cmts, Votes, VotesApi, Opts, Likes, CmtsApi, Cmtlikes, PollsSocket) {
     var vm = this;
 
     vm.authentication = Authentication;

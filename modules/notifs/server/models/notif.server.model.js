@@ -10,19 +10,31 @@ var mongoose = require('mongoose'),
  * Notif Schema
  */
 var NotifSchema = new Schema({
-  name: {
+  from: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  },
+  to: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  },
+  content: {
     type: String,
     default: '',
-    required: 'Please fill Notif name',
+    required: 'Please fill Notif content',
     trim: true
+  },
+  status: {
+    type: Number,
+    default: 0
+  },
+  poll: {
+    type: Schema.ObjectId,
+    ref: 'Poll'
   },
   created: {
     type: Date,
     default: Date.now
-  },
-  user: {
-    type: Schema.ObjectId,
-    ref: 'User'
   }
 });
 

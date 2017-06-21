@@ -118,7 +118,7 @@ exports.cmtlikeByID = function(req, res, next, id) {
 
 
 exports.findCmtlike = function(req, res) {
-  Cmtlike.findOne({ cmt: req.cmt._id, user: req.user._id }).exec(function(err, cmtlike) => {
+  Cmtlike.findOne({ cmt: req.cmt._id, user: req.user._id }).exec(function(err, cmtlike) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)

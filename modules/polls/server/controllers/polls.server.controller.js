@@ -257,6 +257,7 @@ exports.findVoteopts = function(req, res) {
       rs.votes = _votes;
       rs.voteopts = [];
       _votes.forEach(vote => {
+        console.log(vote);
         Vote.findOpts(vote._id).exec(function(err, opts) {
           if (err) {
             handleError(err);

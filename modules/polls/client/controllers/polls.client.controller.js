@@ -160,8 +160,9 @@
       }
 
       function successCallback(res) {
-        vm.like = res.data.like;
-        vm.poll.likeCnt = res.data.likes;
+        console.log(res);
+        // vm.like = res.data.like;
+        // vm.poll.likeCnt = res.data.likes;
         console.log("liked");
       }
 

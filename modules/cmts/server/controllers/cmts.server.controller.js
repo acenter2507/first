@@ -16,15 +16,20 @@ exports.create = function(req, res) {
   var cmt = new Cmt(req.body);
   cmt.user = req.user;
 
-  cmt.save(function(err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
+  cmt.save()
+    .then(_cmt => {
+      return Poll.countUpCmt(_cmt.poll);
+    }, handleError)
+    .then(() => {
+      promises = [];
       res.jsonp(cmt);
-    }
-  });
+    }, handleError);
+
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 };
 
 /**

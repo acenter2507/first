@@ -245,6 +245,36 @@ exports.findOwnerVote = function(req, res) {
   });
 };
 
+/**
+ * Get all info of vote in poll
+ */
+exports.findVoteopts = function(req, res) {
+  var rs = {};
+  Poll.findVotes(req.poll._id).exec(function(err, _votes) {
+    if (err) {
+      handleError(err);
+    } else {
+      rs.votes = _votes;
+      rs.voteopts = [];
+      _votes.forEach(vote => {
+        Vote.findOpts(vote._id).exec(function(err, opts) {
+          if (err) {
+            handleError(err);
+          } else {
+            rs.voteopts.push(opts);
+          }
+        });
+      });
+      res.jsonp(rs);
+    }
+  });
+
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
+};
 
 /**
  * Poll middleware

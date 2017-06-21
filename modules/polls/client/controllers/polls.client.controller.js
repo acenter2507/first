@@ -27,7 +27,6 @@
     vm.authentication = Authentication;
     vm.poll = poll;
     vm.poll.close = (vm.poll.close) ? moment(vm.poll.close) : vm.poll.close;
-    vm.poll.tags = [];
     vm.error = null;
     vm.form = {};
     vm.cmt_sorts = [
@@ -38,28 +37,42 @@
     vm.cmt_sort = '-updated';
 
     vm.opts = [];
+    vm.cmts = [];
+    vm.poll.tags = [];
+    vm.votes = [];
+    vm.voteopts = [];
+    vm.votedTotal = 0;
 
     if (vm.poll._id) {
       // Get all Opts
       PollsApi.findOpts(poll._id)
-        .then(opts => {
-          vm.opts = _.where(opts.data, { status: 1 });
+        .then(res => {
+          vm.opts = _.where(res.data, { status: 1 });
+          return PollsApi.findVoteopts(poll._id);
+        })
+        .then(res => {
+          vm.votes = res.data.votes || [];
+          vm.voteopts = res.data.voteopts || [];
+          vm.votedTotal = vm.voteopts.length;
+          vm.opts.forEach(opt => {
+            opt.voteCnt = _.where(vm.voteopts, { opt: opt._id }).length || 0;
+          });
         })
         .catch(err => {
           alert('error' + err);
         });
       // Get all Cmts
       PollsApi.findCmts(poll._id)
-        .then(cmts => {
-          vm.cmts = cmts.data;
+        .then(res => {
+          vm.cmts = res.data;
         })
         .catch(err => {
           alert('error' + err);
         });
-      // Get all Cmts
+      // Get all Tags
       PollsApi.findTags(poll._id)
-        .then(polltags => {
-          angular.forEach(polltags.data, (polltag, index) => {
+        .then(res => {
+          angular.forEach(res.data, (polltag, index) => {
             vm.poll.tags.push(polltag.tag);
           });
         })
@@ -187,7 +200,7 @@
       }
     };
 
-    vm.send_comment = ($form) => {
+    vm.save_cmt = ($form) => {
       if (!$form.$valid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.cmtForm');
         return false;
@@ -197,11 +210,7 @@
         vm.comment.updated = new Date();
         vm.comment.$update(successCallback, errorCallback);
       } else {
-        vm.poll.cmtCnt += 1;
-        vm.poll.$update((_poll) => {
-          vm.comment.poll = _poll;
-          vm.comment.$save(successCallback, errorCallback);
-        }, errorCallback);
+        vm.comment.$save(successCallback, errorCallback);
       }
 
       function successCallback(res) {
@@ -214,7 +223,6 @@
         //vm.error = res.data.message;
       }
     };
-
 
     vm.reply_cmt = (cmt) => {
       alert('reply_cmt');
@@ -273,7 +281,7 @@
         return _.contains(vm.votedOpts, opt._id);
       }), 'title');
     };
-    vm.send_vote = () => {
+    vm.save_vote = () => {
       if (!vm.authentication.user && !vm.poll.allow_guest) {
         return $state.go('authentication.signin');
       }

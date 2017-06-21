@@ -107,4 +107,12 @@ PollSchema.statics.countUpVote = function(id, callback) {
     return poll.save();
   });
 };
+
+PollSchema.statics.countUpCmt = function(id, callback) {
+  return this.findById(id).exec(function(err, poll) {
+    poll.cmtCnt += 1;
+    return poll.save();
+  });
+};
+
 mongoose.model('Poll', PollSchema);

@@ -71,7 +71,7 @@
           vm.cmts = res.data;
           if (vm.authentication.user) {
             vm.cmts.forEach(cmt => {
-              CmtsApi.findLike(cmt.id).then(res => {
+              CmtsApi.findLike(cmt._id).then(res => {
                 cmt.like = res.data;
               });
             });

@@ -149,7 +149,7 @@
         $scope.$broadcast('show-errors-check-validity', 'vm.form.optForm');
         return false;
       }
-      vm.comment.$save(successCallback, errorCallback);
+      vm.option.$save(successCallback, errorCallback);
 
       function successCallback(res) {
         opt_aside.$promise.then(opt_aside.hide);

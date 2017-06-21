@@ -17,20 +17,4 @@
       }
     });
   }
-
-  angular
-    .module('cmtlikes')
-    .factory('CmtlikesApi', CmtlikesApi);
-
-  CmtlikesApi.$inject = ['$resource'];
-
-  function CmtlikesApi($resource) {
-    return $resource('api/cmtlike/:cmtId', {
-      cmtId: '@cmt'
-    }, {
-      update: {
-        method: 'PUT'
-      }
-    });
-  }
 }());

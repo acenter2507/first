@@ -17,4 +17,18 @@
       }
     });
   }
+
+  angular
+    .module('cmts')
+    .factory('CmtsApi', CmtsApi);
+
+  CmtsApi.$inject = ['$http'];
+
+  function CmtsApi($http) {
+    return {
+      findLike: (id) => {
+        return $http.get('/api/findLike/' + id);
+      }
+    };
+  }
 }());

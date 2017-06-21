@@ -7,6 +7,7 @@ var path = require('path'),
   mongoose = require('mongoose'),
   Cmt = mongoose.model('Cmt'),
   Poll = mongoose.model('Poll'),
+  Cmtlike = mongoose.model('Cmtlike'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 
@@ -120,4 +121,24 @@ exports.cmtByID = function(req, res, next, id) {
     req.cmt = cmt;
     next();
   });
+};
+
+/**
+ * List of Cmts
+ */
+exports.findLike = function(req, res) {
+  var condition = { cmt: req.cmt._id, user: req.user._id };
+  Cmtlike.findOne(condition).exec(function(err, cmtlike) {
+    if (err) {
+      handleError(err);
+    } else {
+      res.jsonp(cmtlike);
+    }
+  });
+
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 };

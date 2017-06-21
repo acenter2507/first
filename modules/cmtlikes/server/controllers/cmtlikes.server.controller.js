@@ -6,7 +6,6 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Cmtlike = mongoose.model('Cmtlike'),
-  Cmt = mongoose.model('Cmt'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 
@@ -124,18 +123,5 @@ exports.cmtlikeByID = function(req, res, next, id) {
     }
     req.cmtlike = cmtlike;
     next();
-  });
-};
-
-
-exports.findCmtlike = function(req, res) {
-  Cmtlike.findOne({ cmt: req.cmt._id, user: req.user._id }).exec(function(err, cmtlike) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.jsonp(cmtlike);
-    }
   });
 };

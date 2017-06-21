@@ -17,12 +17,6 @@ module.exports = function(app) {
     .put(cmtlikes.update)
     .delete(cmtlikes.delete);
 
-  app.route('/api/cmtlike').all(cmtlikesPolicy.isAllowed)
-    .post(cmtlikes.create);
-  app.route('/api/cmtlike/:cmtId').all(cmtlikesPolicy.isAllowed)
-    .get(cmtlikes.findCmtlike)
-    .put(cmtlikes.update);
-
   // Finish by binding the Cmtlike middleware
   app.param('cmtlikeId', cmtlikes.cmtlikeByID);
 };

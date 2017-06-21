@@ -6,6 +6,7 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Cmtlike = mongoose.model('Cmtlike'),
+  Cmt = mongoose.model('Cmt'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 

@@ -251,7 +251,8 @@ exports.findOwnerVote = function(req, res) {
  * Get all info of vote in poll
  */
 exports.findVoteopts = function(req, res) {
-  var rs = {}, ids;
+  var rs = {},
+    ids;
   Poll.findVotes(req.poll._id).exec(function(err, _votes) {
     if (err) {
       handleError(err);
@@ -289,6 +290,7 @@ exports.findPollLike = function(req, res) {
       res.jsonp(like);
     }
   });
+
   function handleError(err) {
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)

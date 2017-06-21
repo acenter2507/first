@@ -62,3 +62,7 @@
   height: 50%;
   width: 100%
 }
+
+.like_btn {
+  cursor: pointer;
+}

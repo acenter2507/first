@@ -19,11 +19,11 @@
     <br>
     <p class="text-justify" ng-bind="vm.poll.body"></p>
     <span class="pull-right" class="like_tools">
-      <a ng-click="vm.like_poll()" ng-show="vm.like.type == 1"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
-      <span ng-click="vm.like_poll()" ng-show="vm.like.type != 1"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span>
+      <a class="list_btn" ng-click="vm.like_poll()" ng-show="vm.like.type == 1"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
+      <span class="list_btn" ng-click="vm.like_poll()" ng-show="vm.like.type != 1"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span>
       <span class="mg5l mg5r" ng-bind="vm.poll.likeCnt"></span>
-      <a ng-click="vm.dislike_poll()" ng-show="vm.like.type == 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>
-      <span ng-click="vm.dislike_poll()" ng-show="vm.like.type != 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></span>
+      <a class="list_btn" ng-click="vm.dislike_poll()" ng-show="vm.like.type == 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>
+      <span class="list_btn" ng-click="vm.dislike_poll()" ng-show="vm.like.type != 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></span>
     </span>
     <div class="clearfix"></div>
     <hr>

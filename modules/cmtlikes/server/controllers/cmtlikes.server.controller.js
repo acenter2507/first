@@ -115,3 +115,14 @@ exports.cmtlikeByID = function(req, res, next, id) {
     next();
   });
 };
+
+
+exports.findCmtlike = function(req, res) {
+  console.log(req.cmt);
+  console.log(req.user);
+};
+
+exports.saveCmtlike = function(req, res) {
+  console.log(req.cmt);
+  console.log(req.user);
+};

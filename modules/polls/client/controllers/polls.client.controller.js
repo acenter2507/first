@@ -20,9 +20,10 @@
     'VotesApi',
     'OptsService',
     'LikesService',
+    'CmtlikesApi',
   ];
 
-  function PollsController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $aside, Cmts, Votes, VotesApi, Opts, Likes) {
+  function PollsController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $aside, Cmts, Votes, VotesApi, Opts, Likes, CmtlikesApi) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -67,6 +68,13 @@
       PollsApi.findCmts(poll._id)
         .then(res => {
           vm.cmts = res.data;
+          if (vm.authentication.user) {
+            vm.cmts.forEach(cmt => {
+              cmt.like = CmtlikesApi.get({
+                cmtId: cmt._id
+              }).$promise;
+            });
+          }
         })
         .catch(err => {
           alert('error' + err);

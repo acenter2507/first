@@ -11,7 +11,7 @@ acl = new acl(new acl.memoryBackend());
 /**
  * Invoke Cmtlikes Permissions
  */
-exports.invokeRolesPolicies = function () {
+exports.invokeRolesPolicies = function() {
   acl.allow([{
     roles: ['admin'],
     allows: [{
@@ -19,6 +19,9 @@ exports.invokeRolesPolicies = function () {
       permissions: '*'
     }, {
       resources: '/api/cmtlikes/:cmtlikeId',
+      permissions: '*'
+    }, {
+      resources: '/api/cmtlikes/:cmtId',
       permissions: '*'
     }]
   }, {
@@ -29,6 +32,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/cmtlikes/:cmtlikeId',
       permissions: ['get']
+    }, {
+      resources: '/api/cmtlikes/:cmtId',
+      permissions: '*'
     }]
   }, {
     roles: ['guest'],
@@ -38,6 +44,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/cmtlikes/:cmtlikeId',
       permissions: ['get']
+    }, {
+      resources: '/api/cmtlikes/:cmtId',
+      permissions: '*'
     }]
   }]);
 };
@@ -45,7 +54,7 @@ exports.invokeRolesPolicies = function () {
 /**
  * Check If Cmtlikes Policy Allows
  */
-exports.isAllowed = function (req, res, next) {
+exports.isAllowed = function(req, res, next) {
   var roles = (req.user) ? req.user.roles : ['guest'];
 
   // If an Cmtlike is being processed and the current user created it then allow any manipulation
@@ -54,7 +63,7 @@ exports.isAllowed = function (req, res, next) {
   }
 
   // Check for user roles
-  acl.areAnyRolesAllowed(roles, req.route.path, req.method.toLowerCase(), function (err, isAllowed) {
+  acl.areAnyRolesAllowed(roles, req.route.path, req.method.toLowerCase(), function(err, isAllowed) {
     if (err) {
       // An authorization error occurred
       return res.status(500).send('Unexpected authorization error');

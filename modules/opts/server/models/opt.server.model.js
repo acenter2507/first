@@ -19,7 +19,6 @@ var OptSchema = new Schema({
   body: {
     type : String,
     default : '',
-    required: 'Please fill Option body',
     trim : true
   },
   image: {

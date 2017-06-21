@@ -28,8 +28,6 @@
     vm.poll = poll;
     vm.poll.close = (vm.poll.close) ? moment(vm.poll.close) : vm.poll.close;
     vm.poll.tags = [];
-    vm.bk_poll = angular.copy(poll);
-    vm.close_min = new Date();
     vm.error = null;
     vm.form = {};
     vm.cmt_sorts = [
@@ -70,22 +68,15 @@
         });
     }
 
-    // Function
-    vm.remove = remove;
-    vm.save = save;
-    vm.discard = discard;
-    vm.like_poll = like_poll;
-    vm.dislike_poll = dislike_poll;
-
     // Remove existing Poll
-    function remove() {
+    vm.remove = () => {
       if ($window.confirm('Are you sure you want to delete?')) {
         vm.poll.$remove($state.go('polls.list'));
       }
-    }
+    };
 
     // Save Poll
-    function save(isValid) {
+    vm.save = (isValid) => {
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.pollForm');
         return false;
@@ -106,10 +97,10 @@
       function errorCallback(res) {
         vm.error = res.data.message;
       }
-    }
+    };
 
     // Discard edit or add poll
-    function discard() {
+    vm.discard = () => {
       if (angular.equals(vm.poll, vm.bk_poll)) {
         handle_discard();
       } else {
@@ -117,7 +108,7 @@
           handle_discard();
         }
       }
-    }
+    };
 
     // Back to before screen
     function handle_discard() {
@@ -128,16 +119,16 @@
       }
     }
 
-    function like_poll() {
+    vm.like_poll = () => {
       alert("like_poll");
-    }
+    };
 
-    function dislike_poll() {
+    vm.dislike_poll = () => {
       alert("dislike_poll");
-    }
+    };
 
     // OPTIONS
-    vm.opt_form = {
+    var opt_aside = $aside({
       scope: $scope,
       controllerAs: vm,
       templateUrl: 'modules/opts/client/views/new-opt-in-poll.client.view.html',
@@ -145,40 +136,32 @@
       placement: 'bottom',
       animation: 'am-fade-and-slide-bottom',
       show: false
-    };
-    var opt_aside = $aside(vm.opt_form);
-    vm.input_opt = input_opt;
+    });
     // Click button add option
-    function input_opt(opt) {
-      vm.option = (!opt) ? new Opts() : new Opts(opt);
+    vm.input_opt = (opt) => {
+      vm.option = (!opt) ? new Opts({ poll: vm.poll._id, title: '', body: '', image: 'modules/opts/client/img/option.png', status: 2 }) : new Opts(opt);
       opt_aside.$promise.then(opt_aside.show);
     }
     // Click button save option
-    function save_opt($form) {
-      if (!$form.$valid) {
+    vm.save_opt = (isValid) => {
+      if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.optForm');
         return false;
       }
-      if (vm.option._id) {
-        vm.option.$update(successCallback, errorCallback);
-      } else {
-        vm.option.poll = vm.poll._id;
-        vm.comment.$save(successCallback, errorCallback);
-      }
-
+      vm.comment.$save(successCallback, errorCallback);
       function successCallback(res) {
         opt_aside.$promise.then(opt_aside.hide);
-        $state.reload();
+        alert('Your option is waiting for approve. Thanks.');
       }
 
       function errorCallback(err) {
         console.log(err);
         //vm.error = res.data.message;
       }
-    }
+    };
 
     // Comment
-    vm.comment_form = {
+    var comment_aside = $aside({
       scope: $scope,
       controllerAs: vm,
       templateUrl: 'modules/cmts/client/views/new-cmt-in-poll.client.view.html',
@@ -186,18 +169,23 @@
       placement: 'bottom',
       animation: 'am-fade-and-slide-bottom',
       show: false
-    };
-    var comment_aside = $aside(vm.comment_form);
+    });
     vm.comment = {};
-    vm.aside_full_screen = aside_full_screen;
-    vm.send_comment = send_comment;
-    vm.reply = reply;
 
-    function aside_full_screen() {
+    vm.aside_full_screen = () => {
       alert(1);
     }
 
-    function send_comment($form) {
+    vm.input_cmt = (cmt) => {
+      if (vm.authentication.user) {
+        vm.comment = (!cmt) ? new Cmts() : new Cmts(cmt);
+        comment_aside.$promise.then(comment_aside.show);
+      } else {
+        $state.go('authentication.signin');
+      }
+    }
+
+    vm.send_comment = ($form) => {
       if (!$form.$valid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.cmtForm');
         return false;
@@ -225,38 +213,24 @@
       }
     }
 
-    function reply(cmt) {
-      if (vm.authentication.user) {
-        vm.comment = (!cmt) ? new Cmts() : new Cmts(cmt);
-        comment_aside.$promise.then(comment_aside.show);
-      } else {
-        $state.go('authentication.signin');
-      }
-    }
 
-    vm.reply_cmt = reply_cmt;
-    vm.edit_cmt = edit_cmt;
-    vm.delete_cmt = delete_cmt;
-    vm.like_cmt = like_cmt;
-    vm.dislike_cmt = dislike_cmt;
-
-    function reply_cmt(cmt) {
+    vm.reply_cmt = (cmt) => {
       alert('reply_cmt');
     }
 
-    function edit_cmt(cmt) {
-      reply(cmt);
+    vm.edit_cmt = (cmt) => {
+      vm.input_cmt(cmt);
     }
 
-    function delete_cmt(cmt) {
+    vm.delete_cmt = (cmt) => {
       alert('delete_cmt');
     }
 
-    function like_cmt(cmt) {
+    vm.like_cmt = (cmt) => {
       alert('like_cmt');
     }
 
-    function dislike_cmt(cmt) {
+    vm.dislike_cmt = (cmt) => {
       alert('dislike_cmt');
     }
 
@@ -281,7 +255,6 @@
           console.log(err);
         });
     }
-    vm.send_vote = send_vote;
 
     vm.checked = function(id) {
       if (_.contains(vm.selectedOpts, id)) {
@@ -298,8 +271,7 @@
         return _.contains(vm.votedOpts, opt._id);
       }), 'title');
     };
-
-    function send_vote() {
+    vm.send_vote = () => {
       if (!vm.authentication.user && !vm.poll.allow_guest) {
         return $state.go('authentication.signin');
       }

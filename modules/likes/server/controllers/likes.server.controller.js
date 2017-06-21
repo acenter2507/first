@@ -135,46 +135,35 @@ function likeCal(type, lastType) {
       switch (lastType) {
         case 0:
           return 0;
-          break;
         case 1:
           return -1;
-          break;
         case 2:
           return 1;
-          break;
         default:
           return 0;
-          break;
       }
       break;
     case 1:
       switch (lastType) {
         case 0:
           return 1;
-          break;
         case 2:
           return 2;
-          break;
         default:
           return 0;
-          break;
       }
       break;
     case 2:
       switch (lastType) {
         case 0:
           return -1;
-          break;
         case 1:
           return -2;
-          break;
         default:
           return 0;
-          break;
       }
       break;
     default:
       return 0;
-      break;
   }
 }

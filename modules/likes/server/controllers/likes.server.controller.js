@@ -116,7 +116,7 @@ exports.likeByID = function(req, res, next, id) {
     });
   }
 
-  Like.findById(id).exec(function(err, like) {
+  Like.findById(id).populate('user', 'displayName').exec(function(err, like) {
     if (err) {
       return next(err);
     } else if (!like) {

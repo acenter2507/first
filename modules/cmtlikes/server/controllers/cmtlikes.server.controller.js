@@ -114,7 +114,7 @@ exports.cmtlikeByID = function(req, res, next, id) {
     });
   }
 
-  Cmtlike.findById(id).exec(function(err, cmtlike) {
+  Cmtlike.findById(id).populate('user', 'displayName').exec(function(err, cmtlike) {
     if (err) {
       return next(err);
     } else if (!cmtlike) {

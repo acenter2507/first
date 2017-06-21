@@ -49,7 +49,7 @@ exports.isAllowed = function (req, res, next) {
   var roles = (req.user) ? req.user.roles : ['guest'];
 
   // If an Like is being processed and the current user created it then allow any manipulation
-  if (req.like && req.user && req.like.user && req.like.user === req.user.id) {
+  if (req.like && req.user && req.like.user && req.like.user.id === req.user.id) {
     return next();
   }
 

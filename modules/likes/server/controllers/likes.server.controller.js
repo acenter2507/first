@@ -15,7 +15,7 @@ var path = require('path'),
  */
 exports.create = function(req, res) {
   var like = new Like(req.body);
-  var cnt = req.body.cnt;
+  var cnt = req.body.cnt || 0;
   like.user = req.user;
 
   like.save()
@@ -55,7 +55,7 @@ exports.update = function(req, res) {
   var like = req.like;
 
   like = _.extend(like, req.body);
-  var cnt = req.body.cnt;
+  var cnt = req.body.cnt || 0;
 
   like.save()
     .then(_like => {

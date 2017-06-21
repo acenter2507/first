@@ -6,6 +6,7 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Cmtlike = mongoose.model('Cmtlike'),
+  Cmt = mongoose.model('Cmt'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 
@@ -15,16 +16,21 @@ var path = require('path'),
 exports.create = function(req, res) {
   var cmtlike = new Cmtlike(req.body);
   cmtlike.user = req.user;
+  var cnt = req.body.cnt || 0;
+  cmtlike.save()
+    .then(_cmtlike => {
+      cmtlike = _cmtlike;
+      return Cmt.countLike(_cmtlike.cmt, cnt);
+    }, handleError)
+    .then(cmt => {
+      res.jsonp({ like: cmtlike, likeCnt: cmt.likeCnt });
+    }, handleError);
 
-  cmtlike.save(function(err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.jsonp(cmtlike);
-    }
-  });
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 };
 
 /**
@@ -48,16 +54,21 @@ exports.update = function(req, res) {
   var cmtlike = req.cmtlike;
 
   cmtlike = _.extend(cmtlike, req.body);
+  var cnt = req.body.cnt || 0;
+  cmtlike.save()
+    .then(_cmtlike => {
+      cmtlike = _cmtlike;
+      return Cmt.countLike(_cmtlike.cmt, cnt);
+    }, handleError)
+    .then(cmt => {
+      res.jsonp({ like: cmtlike, likeCnt: cmt.likeCnt });
+    }, handleError);
 
-  cmtlike.save(function(err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.jsonp(cmtlike);
-    }
-  });
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 };
 
 /**

@@ -19,7 +19,9 @@ module.exports = function(app) {
 
   app.route('/api/cmtlike/:cmtId').all(cmtlikesPolicy.isAllowed)
     .get(cmtlikes.findCmtlike)
-    .put(cmtlikes.saveCmtlike);
+    .put(cmtlikes.update);
+  app.route('/api/cmtlike').all(cmtlikesPolicy.isAllowed)
+    .get(cmtlikes.create);
 
   // Finish by binding the Cmtlike middleware
   app.param('cmtlikeId', cmtlikes.cmtlikeByID);

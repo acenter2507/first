@@ -46,4 +46,11 @@ CmtSchema.pre('save', function(next){
   next();
 });
 
+CmtSchema.statics.countLike = function(id, cnt, callback) {
+  return this.findById(id).exec(function(err, cmt) {
+    cmt.likeCnt += cnt;
+    return cmt.save();
+  });
+};
+
 mongoose.model('Cmt', CmtSchema);

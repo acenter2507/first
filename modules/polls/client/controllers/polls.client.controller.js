@@ -151,18 +151,33 @@
       }
       var _like;
       if (vm.like._id) {
-        vm.like.lastType = vm.like.type;
-        if (vm.like.type === 1) {
-          vm.like.type = 0;
-        } else {
-          vm.like.type = 1;
+        switch(vm.like.type) {
+          case 0:
+            vm.poll.likeCnt += 1;
+            vm.like.type = 1;
+            break;
+          case 1:
+            vm.poll.likeCnt -= 1;
+            vm.like.type = 0;
+            break;
+          case 2:
+            vm.poll.likeCnt += 2;
+            vm.like.type = 1;
+            break;
         }
-        _like = new Likes(vm.like);
-        _like.$update(successCallback, errorCallback);
-      } else {
-        _like = new Likes({ poll: vm.poll._id, user: vm.authentication.user._id, type: 1 });
-        _like.$save(successCallback, errorCallback);
       }
+      //   vm.like.lastType = vm.like.type;
+      //   if (vm.like.type === 1) {
+      //     vm.like.type = 0;
+      //   } else {
+      //     vm.like.type = 1;
+      //   }
+      //   _like = new Likes(vm.like);
+      //   _like.$update(successCallback, errorCallback);
+      // } else {
+      //   _like = new Likes({ poll: vm.poll._id, user: vm.authentication.user._id, type: 1 });
+      //   _like.$save(successCallback, errorCallback);
+      // }
 
       function successCallback(res) {
         vm.like = res.like;
@@ -182,17 +197,31 @@
       }
       var _dislike;
       if (vm.like._id) {
-        vm.like.lastType = vm.like.type;
-        if (vm.like.type === 2) {
-          vm.like.type = 0;
-        } else {
-          vm.like.type = 2;
+        switch(vm.like.type) {
+          case 0:
+            vm.poll.likeCnt -= 1;
+            vm.like.type = 2;
+            break;
+          case 1:
+            vm.poll.likeCnt -= 2;
+            vm.like.type = 2;
+            break;
+          case 2:
+            vm.poll.likeCnt += 1;
+            vm.like.type = 0;
+            break;
         }
-        _dislike = new Likes(vm.like);
-        _dislike.$update(successCallback, errorCallback);
-      } else {
-        _dislike = new Likes({ poll: vm.poll._id, user: vm.authentication.user._id, type: 2 });
-        _dislike.$save(successCallback, errorCallback);
+      //   vm.like.lastType = vm.like.type;
+      //   if (vm.like.type === 2) {
+      //     vm.like.type = 0;
+      //   } else {
+      //     vm.like.type = 2;
+      //   }
+      //   _dislike = new Likes(vm.like);
+      //   _dislike.$update(successCallback, errorCallback);
+      // } else {
+      //   _dislike = new Likes({ poll: vm.poll._id, user: vm.authentication.user._id, type: 2 });
+      //   _dislike.$save(successCallback, errorCallback);
       }
 
       function successCallback(res) {

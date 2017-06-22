@@ -40,6 +40,7 @@
       }
     }
 
+    init();
     // Init Socket
     function initSocket() {
       if (!Socket.socket) {
@@ -82,7 +83,7 @@
     }
 
     function loadTags() {
-      PollsApi.findTags(poll._id)
+      PollsApi.findTags(vm.poll._id)
         .then(res => {
           angular.forEach(res.data, (polltag, index) => {
             vm.poll.tags.push(polltag.tag);

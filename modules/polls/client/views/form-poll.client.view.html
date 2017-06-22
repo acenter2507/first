@@ -47,7 +47,6 @@
             <tags-input ng-model="vm.poll.tags" display-property="name" placeholder="{{placeholder}}" add-from-autocomplete-only="true" replace-spaces-with-dashes="false" min-length="1" enforce-max-tags class="tags-custom">
               <auto-complete source="loadItems($query)" min-length="1" debounce-delay="0" max-results="10"></auto-complete>
             </tags-input>
-            <pre>{{vm.poll.tags | json}}</pre>
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i>{{vm.poll._id ? ' Update' : ' Create'}}</button>

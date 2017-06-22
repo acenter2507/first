@@ -422,6 +422,7 @@
       if (!isLogged()) {
         return alert('You must login to reply this comment.');
       }
+      vm.tmp_cmt = {};
       vm.tmp_cmt.to = cmt.user._id;
       vm.tmp_cmt.toName = cmt.user.displayName;
       vm.tmp_cmt.discard = true;

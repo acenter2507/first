@@ -35,7 +35,7 @@ module.exports = function(io, socket) {
           return Poll.countUpCmt(_cmt.poll);
         }, handle_error)
         .then(_poll => {
-          io.emit('comment', new_cmt);
+          io.emit('comment');
           io.sockets.connected[socket.id].emit('comment_result', { success: true });
         }, handle_error);
     }

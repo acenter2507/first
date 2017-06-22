@@ -29,6 +29,31 @@
   function PollsController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $aside, Cmts, Votes, VotesApi, Opts, Likes, CmtsApi, Cmtlikes, PollsSocket, Socket) {
     var vm = this;
 
+    function loadLikeCmt(cmt) {
+      CmtsApi.findLike(cmt._id).then(res => {
+          cmt.like = res.data || {};
+        })
+        .catch(err => {
+          alert('error' + err);
+        });
+    }
+
+    function loadCmts() {
+      // Get all Cmts
+      PollsApi.findCmts(vm.poll._id)
+        .then(res => {
+          vm.cmts = res.data;
+          if (vm.authentication.user) {
+            vm.cmts.forEach(cmt => {
+              loadLikeCmt(cmt);
+            });
+          }
+        })
+        .catch(err => {
+          alert('error' + err);
+        });
+    }
+
     vm.authentication = Authentication;
     vm.poll = poll;
     vm.poll.close = (vm.poll.close) ? moment(vm.poll.close) : vm.poll.close;
@@ -53,15 +78,9 @@
       Socket.connect();
     }
     Socket.on('comment', (cmt) => {
-      CmtsApi.findLike(cmt._id).then(res => {
-        cmt.like = res.data || {};
-        if (_.contains(vm.cmts, cmt)) {
-          _.extend(_.findWhere(vm.cmts, { _id: cmt._id }), cmt);
-        } else {
-          vm.cmts.push(cmt);
-        }
-      });
+      loadCmts();
     });
+
     if (vm.poll._id) {
       // Get all Opts
       PollsApi.findOpts(poll._id)
@@ -81,20 +100,7 @@
           alert('error' + err);
         });
       // Get all Cmts
-      PollsApi.findCmts(poll._id)
-        .then(res => {
-          vm.cmts = res.data;
-          if (vm.authentication.user) {
-            vm.cmts.forEach(cmt => {
-              CmtsApi.findLike(cmt._id).then(res => {
-                cmt.like = res.data || {};
-              });
-            });
-          }
-        })
-        .catch(err => {
-          alert('error' + err);
-        });
+      loadCmts();
       // Get all Tags
       PollsApi.findTags(poll._id)
         .then(res => {

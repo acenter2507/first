@@ -349,7 +349,8 @@
         $state.go('authentication.signin');
         return false;
       }
-      PollsSocket.pushCmt(vm.comment);
+      
+      PollsSocket.pushCmt(vm.tmp_cmt);
       // if (vm.comment._id) {
       //   vm.comment.isEdited = true;
       //   vm.comment.updated = new Date();

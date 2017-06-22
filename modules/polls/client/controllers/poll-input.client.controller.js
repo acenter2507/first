@@ -53,8 +53,12 @@
         $state.go('poll.list');
       });
       Socket.on('poll_update', (res) => {
-        vm.poll = Polls.get({ pollId: vm.poll._id }).$promise.then(res => {
+        Polls.get({ pollId: vm.poll._id }, (_poll) => {
+          vm.poll = _poll;
+          vm.poll.close = (vm.poll.close) ? moment(vm.poll.close) : vm.poll.close;
+          vm.poll.tags = [];
           loadOpts();
+          loadTags();
         });
       });
       Socket.on('opts_update', (res) => {

@@ -32,7 +32,7 @@
 
     this.pushCmt = (cmt) => {
       this.verifyLogin();
-      Socket.emit('comment', { cmt: cmt, user: this.authentication.user._id });
+      Socket.emit('comment', cmt);
     };
     this.pushReplyNotif = (poll, userId) => {
       this.verifyLogin();

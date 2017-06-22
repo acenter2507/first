@@ -23,9 +23,10 @@
     'CmtsApi',
     'CmtlikesService',
     'PollsSocket',
+    'Socket'
   ];
 
-  function PollsController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $aside, Cmts, Votes, VotesApi, Opts, Likes, CmtsApi, Cmtlikes, PollsSocket) {
+  function PollsController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $aside, Cmts, Votes, VotesApi, Opts, Likes, CmtsApi, Cmtlikes, PollsSocket, Socket) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -47,7 +48,21 @@
     vm.votes = [];
     vm.voteopts = [];
     vm.votedTotal = 0;
-
+    // init socket
+    if (!Socket.socket) {
+      Socket.connect();
+    }
+    Socket.on('comment', (cmt) => {
+      console.log(cmt);
+      // CmtsApi.findLike(cmt._id).then(res => {
+      //   cmt.like = res.data || {};
+      //   if (_.contains(vm.cmts, cmt)) {
+      //     _.extend(_.findWhere(vm.cmts, { _id: cmt._id }), cmt);
+      //   } else {
+      //     vm.cmts.push(cmt);
+      //   }
+      // });
+    });
     if (vm.poll._id) {
       // Get all Opts
       PollsApi.findOpts(poll._id)
@@ -321,7 +336,7 @@
 
     vm.input_cmt = (cmt) => {
       if (vm.authentication.user) {
-        vm.comment = (!cmt) ? new Cmts() : new Cmts(cmt);
+        vm.comment = (!cmt) ? new Cmts({ poll: vm.poll._id, user: vm.authentication.user._id }) : new Cmts(cmt);
         comment_aside.$promise.then(comment_aside.show);
       } else {
         $state.go('authentication.signin');
@@ -334,24 +349,24 @@
         return false;
       }
       PollsSocket.pushCmt(vm.comment);
-      if (vm.comment._id) {
-        vm.comment.isEdited = true;
-        vm.comment.updated = new Date();
-        vm.comment.$update(successCallback, errorCallback);
-      } else {
-        vm.comment.poll = vm.poll._id;
-        vm.comment.$save(successCallback, errorCallback);
-      }
+      // if (vm.comment._id) {
+      //   vm.comment.isEdited = true;
+      //   vm.comment.updated = new Date();
+      //   vm.comment.$update(successCallback, errorCallback);
+      // } else {
+      //   vm.comment.poll = vm.poll._id;
+      //   vm.comment.$save(successCallback, errorCallback);
+      // }
 
-      function successCallback(res) {
-        comment_aside.$promise.then(comment_aside.hide);
-        $state.reload();
-      }
+      // function successCallback(res) {
+      //   comment_aside.$promise.then(comment_aside.hide);
+      //   $state.reload();
+      // }
 
-      function errorCallback(err) {
-        console.log(err);
-        //vm.error = res.data.message;
-      }
+      // function errorCallback(err) {
+      //   console.log(err);
+      //   //vm.error = res.data.message;
+      // }
     };
 
     vm.reply_cmt = (cmt) => {

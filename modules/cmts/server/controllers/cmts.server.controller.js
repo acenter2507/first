@@ -88,7 +88,7 @@ exports.delete = function(req, res) {
  * List of Cmts
  */
 exports.list = function(req, res) {
-  Cmt.find().sort('-created').populate('user', 'displayName').exec(function(err, cmts) {
+  Cmt.find().sort('-created').populate('user', 'displayName profileImageURL').exec(function(err, cmts) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -110,7 +110,7 @@ exports.cmtByID = function(req, res, next, id) {
     });
   }
 
-  Cmt.findById(id).populate('poll').populate('user', 'displayName').exec(function(err, cmt) {
+  Cmt.findById(id).populate('poll').populate('user', 'displayName profileImageURL').exec(function(err, cmt) {
     if (err) {
       return next(err);
     } else if (!cmt) {

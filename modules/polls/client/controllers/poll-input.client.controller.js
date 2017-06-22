@@ -108,7 +108,7 @@
         $scope.$broadcast('show-errors-check-validity', 'vm.form.pollForm');
         return false;
       }
-
+      var isNew = (!vm.poll._id) ? true : false;
       vm.poll.opts = vm.opts;
       if (vm.poll._id) {
         vm.poll.$update(successCallback, errorCallback);
@@ -117,7 +117,11 @@
       }
 
       function successCallback(res) {
-        Socket.emit('poll_update', { pollId: res._id });
+        if (isNew) {
+          Socket.emit('poll_create');
+        } else {
+          Socket.emit('poll_update', { pollId: res._id });
+        }
         $state.go('polls.view', {
           pollId: res._id
         });

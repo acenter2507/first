@@ -33,6 +33,16 @@
     this.pushCmt = (cmt) => {
       this.verifyLogin();
       Socket.emit('comment', cmt);
+      Socket.on('comment_result', this.pushCmtResponse);
+    };
+    this.pushCmtResponse = (res) => {
+      if (res.success) {
+        alert('Comment successed.');
+      } else {
+        alert('Comment failed.');
+        console.log(res.err);
+      }
+      Socket.removeListener('comment_result');
     };
     this.pushReplyNotif = (poll, userId) => {
       this.verifyLogin();

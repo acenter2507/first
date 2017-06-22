@@ -21,29 +21,27 @@ module.exports = function(io, socket) {
         .then(_cmt => {
           _cmt = _.extend(_cmt, cmt);
           return _cmt.save();
-        })
+        }, handle_error)
         .then(_cmt => {
           cmt = _cmt;
           io.emit('comment', _cmt);
           io.sockets.connected[socket.id].emit('comment_result', { success: true });
-        })
-        .catch(err => {
-          io.sockets.connected[socket.id].emit('comment_result', { success: fail, err: err });
-        });
+        }, handle_error);
     } else {
       var new_cmt = new Cmt(cmt);
       new_cmt.save()
         .then(_cmt => {
           new_cmt = _cmt;
           return Poll.countUpCmt(_cmt.poll);
-        })
+        }, handle_error)
         .then(_poll => {
           io.emit('comment', new_cmt);
           io.sockets.connected[socket.id].emit('comment_result', { success: true });
-        })
-        .catch(err => {
-          io.sockets.connected[socket.id].emit('comment_result', { success: fail, err: err });
-        });
+        }, handle_error);
+    }
+
+    function handle_error(err) {
+      io.sockets.connected[socket.id].emit('comment_result', { success: false, err: err });
     }
   });
 };

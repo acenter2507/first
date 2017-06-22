@@ -150,10 +150,11 @@
           return loadLikeCmt(_cmt);
         })
         .then(_cmt => {
-          console.log('3', _cmt);
           if (_.where(vm.cmts, _cmt).length > 0) {
+            console.log('3', _cmt);
             _.extend(_.findWhere(vm.cmts, { _id: _cmt._id }), _cmt);
           } else {
+            console.log('4', _cmt);
             vm.cmts.push(_cmt);
           }
         })

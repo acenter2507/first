@@ -29,6 +29,32 @@
   function PollsController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $aside, Cmts, Votes, VotesApi, Opts, Likes, CmtsApi, Cmtlikes, PollsSocket, Socket) {
     var vm = this;
 
+    function loadOpts() {
+      PollsApi.findOpts(vm.poll._id)
+        .then(res => {
+          vm.opts = _.where(res.data, { status: 1 });
+          loadVoteopts(vm.poll._id);
+        })
+        .catch(err => {
+          alert('error' + err);
+        });
+    }
+
+    function loadVoteopts() {
+      PollsApi.findVoteopts(poll._id)
+        .then(res => {
+          vm.votes = res.data.votes || [];
+          vm.voteopts = res.data.voteopts || [];
+          vm.votedTotal = vm.voteopts.length;
+          vm.opts.forEach(opt => {
+            opt.voteCnt = _.where(vm.voteopts, { opt: opt._id }).length || 0;
+          });
+        })
+        .catch(err => {
+          alert('error' + err);
+        });
+    }
+
     function loadLikeCmt(cmt) {
       CmtsApi.findLike(cmt._id).then(res => {
           cmt.like = res.data || {};
@@ -48,6 +74,18 @@
               loadLikeCmt(cmt);
             });
           }
+        })
+        .catch(err => {
+          alert('error' + err);
+        });
+    }
+
+    function loadTags() {
+      PollsApi.findTags(poll._id)
+        .then(res => {
+          angular.forEach(res.data, (polltag, index) => {
+            vm.poll.tags.push(polltag.tag);
+          });
         })
         .catch(err => {
           alert('error' + err);
@@ -81,36 +119,14 @@
       loadCmts();
     });
 
+    // Init data
     if (vm.poll._id) {
       // Get all Opts
-      PollsApi.findOpts(poll._id)
-        .then(res => {
-          vm.opts = _.where(res.data, { status: 1 });
-          return PollsApi.findVoteopts(poll._id);
-        })
-        .then(res => {
-          vm.votes = res.data.votes || [];
-          vm.voteopts = res.data.voteopts || [];
-          vm.votedTotal = vm.voteopts.length;
-          vm.opts.forEach(opt => {
-            opt.voteCnt = _.where(vm.voteopts, { opt: opt._id }).length || 0;
-          });
-        })
-        .catch(err => {
-          alert('error' + err);
-        });
+      loadOpts();
       // Get all Cmts
       loadCmts();
       // Get all Tags
-      PollsApi.findTags(poll._id)
-        .then(res => {
-          angular.forEach(res.data, (polltag, index) => {
-            vm.poll.tags.push(polltag.tag);
-          });
-        })
-        .catch(err => {
-          alert('error' + err);
-        });
+      loadTags()
     }
 
     // Remove existing Poll

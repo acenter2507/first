@@ -417,6 +417,7 @@
       }
       vm.tmp_cmt.to = cmt.user._id;
       vm.tmp_cmt.toName = cmt.user.displayName;
+      vm.tmp_cmt.discard = true;
     };
 
     vm.edit_cmt = (cmt) => {

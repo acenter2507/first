@@ -30,6 +30,10 @@ module.exports = function(io, socket) {
   socket.on('cmt_del', req => {
     io.sockets.in(req.pollId).emit('cmt_del', req.cmtId);
   });
+  // On comment deleted
+  socket.on('poll_like', req => {
+    io.sockets.in(req.pollId).emit('poll_like', { userId: req.userId, likeId: req.likeId });
+  });
 
   socket.on('sample', (cmt) => {
     if (cmt._id) {

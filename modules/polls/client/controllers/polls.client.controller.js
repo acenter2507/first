@@ -84,6 +84,12 @@
           _id: cmtId
         }));
       });
+      Socket.on('poll_like', (res) => {
+        vm.poll = vm.poll.get().$promise;
+        if (res.userId === vm.authentication.user._id) {
+          vm.like = Likes.get({likeId: res.likeId}).$promise;
+        }
+      });
       $scope.$on('$destroy', function() {
         Socket.emit('subscribe', { pollId: vm.poll._id, userId: vm.authentication.user._id });
       });
@@ -205,7 +211,7 @@
     };
 
     // LIKES
-    var like_processing = false;
+    vm.like_processing = false;
     var cnt = 0;
     vm.like_poll = () => {
       if (!vm.authentication.user) {
@@ -214,12 +220,12 @@
       if (vm.poll.isCurrentUserOwner) {
         return alert('You cannot like your poll.');
       }
-      if (like_processing) {
+      if (vm.like_processing) {
         return alert('You cannot interact continuously.');
       }
-      var _like;
-      like_processing = true;
-      var bk_like = vm.like;
+      var rs_like;
+      vm.like_processing = true;
+      var bk_like = _.clone(vm.like);
       if (vm.like._id) {
         switch (vm.like.type) {
           case 0:
@@ -236,28 +242,28 @@
             break;
         }
         vm.poll.likeCnt += cnt;
-        _like = new Likes(vm.like);
-        _like.cnt = cnt;
-        _like.$update(successCallback, errorCallback);
+        rs_like = new Likes(vm.like);
+        rs_like.cnt = cnt;
+        rs_like.$update(successCallback, errorCallback);
       } else {
         cnt = 1;
         vm.poll.likeCnt += cnt;
-        _like = new Likes({ poll: vm.poll._id, user: vm.authentication.user._id, type: 1 });
-        _like.cnt = cnt;
-        _like.$save(successCallback, errorCallback);
+        rs_like = new Likes({ poll: vm.poll._id, user: vm.authentication.user._id, type: 1 });
+        rs_like.cnt = cnt;
+        rs_like.$save(successCallback, errorCallback);
       }
 
       function successCallback(res) {
-        vm.like = res.like;
-        vm.poll.likeCnt = res.likeCnt;
-        like_processing = false;
-        console.log("liked");
+        Socket.emit('poll_like', {pollId: vm.poll._id, userId: vm.authentication.user_id, likeId: res.like._id});
+        // vm.like = res.like;
+        // vm.poll.likeCnt = res.likeCnt;
+        vm.like_processing = false;
       }
 
       function errorCallback(err) {
         vm.poll.likeCnt -= cnt;
-        vm.like = bk_like;
-        like_processing = false;
+        vm.like = _.clone(vm.bk_like);
+        vm.like_processing = false;
         console.log(err);
         //vm.error = res.data.message;
       }
@@ -270,11 +276,11 @@
       if (vm.poll.isCurrentUserOwner) {
         return alert('You cannot dislike your poll.');
       }
-      if (like_processing) {
+      if (vm.like_processing) {
         return alert('You cannot interact continuously.');
       }
       var _dislike;
-      like_processing = true;
+      vm.like_processing = true;
       var bk_like = vm.like;
       if (vm.like._id) {
         switch (vm.like.type) {
@@ -306,13 +312,13 @@
       function successCallback(res) {
         vm.like = res.like;
         vm.poll.likeCnt = res.likeCnt;
-        like_processing = false;
+        vm.like_processing = false;
         console.log("disliked");
       }
 
       function errorCallback(err) {
         vm.poll.likeCnt -= cnt;
-        like_processing = false;
+        vm.like_processing = false;
         vm.like = bk_like;
         console.log(err);
         //vm.error = res.data.message;
@@ -455,11 +461,11 @@
       if (vm.authentication.user._id === cmt.user._id) {
         return alert('You cannot like your comment.');
       }
-      if (like_processing) {
+      if (vm.like_processing) {
         return alert('You cannot interact continuously.');
       }
       var _like;
-      like_processing = true;
+      vm.like_processing = true;
       var bk_like = cmt.like;
       if (cmt.like._id) {
         switch (cmt.like.type) {
@@ -491,14 +497,14 @@
       function successCallback(res) {
         cmt.like = res.like;
         cmt.likeCnt = res.likeCnt;
-        like_processing = false;
+        vm.like_processing = false;
         console.log("liked");
       }
 
       function errorCallback(err) {
         cmt.likeCnt -= cnt;
         cmt.like = bk_like;
-        like_processing = false;
+        vm.like_processing = false;
         console.log(err);
         //vm.error = res.data.message;
       }
@@ -511,12 +517,12 @@
       if (vm.authentication.user._id === cmt.user._id) {
         return alert('You cannot dislike your comment.');
       }
-      if (like_processing) {
+      if (vm.like_processing) {
         return alert('You cannot interact continuously.');
       }
 
       var _dislike;
-      like_processing = true;
+      vm.like_processing = true;
       var bk_like = vm.like;
       if (cmt.like._id) {
         switch (cmt.like.type) {
@@ -548,14 +554,14 @@
       function successCallback(res) {
         cmt.like = res.like;
         cmt.likeCnt = res.likeCnt;
-        like_processing = false;
+        vm.like_processing = false;
         console.log("liked");
       }
 
       function errorCallback(err) {
         cmt.likeCnt -= cnt;
         cmt.like = bk_like;
-        like_processing = false;
+        vm.like_processing = false;
         console.log(err);
       }
     };

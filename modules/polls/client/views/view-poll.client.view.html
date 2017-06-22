@@ -74,7 +74,8 @@
     <form name="vm.form.cmtForm" class="form-horizontal" novalidate ng-submit="vm.save_cmt(vm.form.pollForm.$valid)">
       <fieldset>
         <div class="form-group" ng-if="vm.tmp_cmt.to">
-          <span>To:&nbsp;</span><a ui-sref="users.info({userId: vm.tmp_cmt.to})" ng-bind="vm.tmp_cmt.toName"></a>
+          <span>To:&nbsp;</span>
+          <a ui-sref="users.info({userId: vm.tmp_cmt.to})" ng-bind="vm.tmp_cmt.toName"></a>
         </div>
         <div class="form-group" show-errors>
           <textarea name="body" ng-model="vm.tmp_cmt.body" class="form-control" placeholder="Type your reply" required></textarea>

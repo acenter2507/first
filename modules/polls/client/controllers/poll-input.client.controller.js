@@ -12,6 +12,7 @@
     '$window',
     'Authentication',
     'pollResolve',
+    'PollsService',
     'PollsApi',
     'TagsService',
     '$aside',
@@ -19,7 +20,7 @@
     'Socket'
   ];
 
-  function PollInputController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $aside, Opts, Socket) {
+  function PollInputController($scope, $state, $window, Authentication, poll, Polls, PollsApi, Tags, $aside, Opts, Socket) {
     var vm = this;
 
     vm.authentication = Authentication;

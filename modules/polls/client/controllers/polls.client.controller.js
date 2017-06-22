@@ -72,12 +72,17 @@
         Socket.connect();
       }
       Socket.emit('subscribe', { pollId: vm.poll._id, userId: vm.authentication.user._id });
-      Socket.on('comment', (cmtId) => {
+      Socket.on('cmt_add', (cmtId) => {
         loadCmt(cmtId).then(_cmt => {
           console.log('Has new comment from: ' + _cmt.user.displayName);
         }, err => {
           console.log('Has new comment but error: ' + err);
         });
+      });
+      Socket.on('cmt_del', (cmtId) => {
+        vm.cmts = _.without(vm.cmts, _.findWhere(vm.cmts, {
+          _id: cmtId
+        }));
       });
       $scope.$on('$destroy', function() {
         Socket.emit('subscribe', { pollId: vm.poll._id, userId: vm.authentication.user._id });
@@ -399,7 +404,7 @@
       }
 
       function successCallback(res) {
-        Socket.emit('comment', { pollId: vm.poll._id, cmtId: res._id });
+        Socket.emit('cmt_add', { pollId: vm.poll._id, cmtId: res._id });
         vm.tmp_cmt = {};
         cmt_processing = false;
       }
@@ -430,8 +435,11 @@
     };
 
     vm.delete_cmt = (cmt) => {
-      console.log(cmt);
-      alert('delete_cmt');
+      if (confirm('Do you want to delete this comment ?')) {
+        cmt.$remove(() => {
+          Socket.emit('cmt_del', { pollId: vm.poll._id, cmtId: cmt._id });
+        });
+      }
     };
 
     vm.like_cmt = (cmt) => {

@@ -22,9 +22,13 @@ module.exports = function(io, socket) {
   socket.on('unsubscribe', req => {
     socket.leave(req.pollId);
   });
-  // On comment
-  socket.on('comment', req => {
-    io.sockets.in(req.pollId).emit('comment', req.cmtId);
+  // On comment added
+  socket.on('cmt_add', req => {
+    io.sockets.in(req.pollId).emit('cmt_add', req.cmtId);
+  });cmt_del
+  // On comment deleted
+  socket.on('cmt_del', req => {
+    io.sockets.in(req.pollId).emit('cmt_del', req.cmtId);
   });
 
   socket.on('sample', (cmt) => {

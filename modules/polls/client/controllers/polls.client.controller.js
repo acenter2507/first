@@ -22,11 +22,10 @@
     'LikesService',
     'CmtsApi',
     'CmtlikesService',
-    'PollsSocket',
     'Socket'
   ];
 
-  function PollsController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $aside, Cmts, Votes, VotesApi, Opts, Likes, CmtsApi, Cmtlikes, PollsSocket, Socket) {
+  function PollsController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $aside, Cmts, Votes, VotesApi, Opts, Likes, CmtsApi, Cmtlikes, Socket) {
     var vm = this;
     vm.authentication = Authentication;
     vm.poll = poll;
@@ -63,6 +62,22 @@
       loadTags();
       // Get like for this poll
       loadPollLike();
+      // Init socket
+      initSocket();
+    }
+
+    // Init data
+    function initSocket() {
+      if (!Socket.socket) {
+        Socket.connect();
+      }
+      Socket.emit('subscribe', { pollId: vm.poll._id, userId: vm.authentication.user._id });
+      Socket.on('comment', (cmtId) => {
+        loadCmt(cmtId);
+      });
+      scope.$on('$destroy', function() {
+        Socket.emit('subscribe', { pollId: vm.poll._id, userId: vm.authentication.user._id });
+      });
     }
 
     function isLogged() {
@@ -99,7 +114,7 @@
     }
 
     function loadLikeCmt(cmt) {
-      CmtsApi.findLike(cmt._id)
+      return CmtsApi.findLike(cmt._id)
         .then(res => {
           cmt.like = res.data || {};
         })
@@ -110,13 +125,30 @@
 
     function loadCmts() {
       // Get all Cmts
-      PollsApi.findCmts(vm.poll._id)
+      return PollsApi.findCmts(vm.poll._id)
         .then(res => {
           vm.cmts = res.data;
           if (vm.authentication.user) {
             vm.cmts.forEach(cmt => {
               loadLikeCmt(cmt);
             });
+          }
+        })
+        .catch(err => {
+          alert('error' + err);
+        });
+    }
+
+    function loadCmt(cmtId) {
+      return Cmts.get({ cmtId: cmtId })
+        .then(_cmt => {
+          loadLikeCmt(_cmt);
+        })
+        .then(_cmt => {
+          if (_.contains(vm.cmts, _cmt)) {
+            _.extend(_.findWhere(vm.cmts, { _id: _cmt._id }), _cmt);
+          } else {
+            vm.cmts.push(_cmt);
           }
         })
         .catch(err => {
@@ -149,14 +181,6 @@
           alert('error' + err);
         });
     }
-    // init socket
-    if (!Socket.socket) {
-      Socket.connect();
-    }
-    Socket.on('comment', (cmt) => {
-      loadCmts();
-    });
-
 
     // Remove existing Poll
     vm.remove = () => {
@@ -349,26 +373,25 @@
         $state.go('authentication.signin');
         return false;
       }
-      
-      PollsSocket.pushCmt(vm.tmp_cmt);
-      // if (vm.comment._id) {
-      //   vm.comment.isEdited = true;
-      //   vm.comment.updated = new Date();
-      //   vm.comment.$update(successCallback, errorCallback);
-      // } else {
-      //   vm.comment.poll = vm.poll._id;
-      //   vm.comment.$save(successCallback, errorCallback);
-      // }
+      var new_cmt = new Cmts(vm.tmp_cmt);
+      if (vm.tmp_cmt._id) {
+        new_cmt.isEdited = true;
+        new_cmt.updated = new Date();
+        new_cmt.$update(successCallback, errorCallback);
+      } else {
+        new_cmt.poll = vm.poll._id;
+        new_cmt.$save(successCallback, errorCallback);
+      }
 
-      // function successCallback(res) {
-      //   aside_cmt.$promise.then(aside_cmt.hide);
-      //   $state.reload();
-      // }
+      function successCallback(res) {
+        Socket.emit('comment', { pollId: vm.poll._id, cmtId: res._id });
+        vm.tmp_cmt = {};
+      }
 
-      // function errorCallback(err) {
-      //   console.log(err);
-      //   //vm.error = res.data.message;
-      // }
+      function errorCallback(err) {
+        alert(err.message);
+        //vm.error = res.data.message;
+      }
     };
 
     vm.reply_cmt = (cmt) => {

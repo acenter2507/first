@@ -14,8 +14,20 @@ var path = require('path'),
 
 // Create the chat configuration
 module.exports = function(io, socket) {
-  // On Comment
-  socket.on('comment', (cmt) => {
+  // On subscribe
+  socket.on('subscribe', req => {
+    socket.join(req.pollId);
+  });
+  // On unsubscribe
+  socket.on('unsubscribe', req => {
+    socket.leave(req.pollId);
+  });
+  // On comment
+  socket.on('comment', req => {
+    io.sockets.in(req.pollId).emit('comment', req.cmtId);
+  });
+
+  socket.on('sample', (cmt) => {
     if (cmt._id) {
       Cmt.findById(cmt._id)
         .then(_cmt => {

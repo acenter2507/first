@@ -28,6 +28,42 @@
 
   function PollsController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $aside, Cmts, Votes, VotesApi, Opts, Likes, CmtsApi, Cmtlikes, PollsSocket, Socket) {
     var vm = this;
+    vm.authentication = Authentication;
+    vm.poll = poll;
+    vm.poll.close = (vm.poll.close) ? moment(vm.poll.close) : vm.poll.close;
+    vm.error = null;
+    vm.form = {};
+    vm.cmt_sorts = [
+      { val: '-updated', name: 'Newest to oldest' },
+      { val: 'updated', name: 'Oldest to newest' },
+      { val: '-likeCnt', name: 'Most likes' }
+    ];
+    vm.cmt_sort = '-updated';
+
+    vm.poll.tags = [];
+    vm.like = {};
+    vm.opts = [];
+    vm.cmts = [];
+    vm.votes = [];
+    vm.voteopts = [];
+    vm.votedTotal = 0;
+
+    // Init data
+    function init() {
+      if (vm.poll._id) {
+        $state.go('');
+      }
+        // Get all Opts
+        loadOpts();
+        // Get all Cmts
+        loadCmts();
+        // Get all Tags
+        loadTags();
+        // Get like for this poll
+        loadPollLike();
+      }
+
+    }
 
     function loadOpts() {
       PollsApi.findOpts(vm.poll._id)
@@ -92,25 +128,21 @@
         });
     }
 
-    vm.authentication = Authentication;
-    vm.poll = poll;
-    vm.poll.close = (vm.poll.close) ? moment(vm.poll.close) : vm.poll.close;
-    vm.error = null;
-    vm.form = {};
-    vm.cmt_sorts = [
-      { val: '-updated', name: 'Newest to oldest' },
-      { val: 'updated', name: 'Oldest to newest' },
-      { val: '-likeCnt', name: 'Most likes' }
-    ];
-    vm.cmt_sort = '-updated';
+    function loadPollLike() {
+      if (!vm.authentication.user) {
+        vm.like = {};
+        return false;
+      }
+      PollsApi.findPollLike(poll._id)
+        .then(res => {
+          vm.like = res.data || {};
+        })
+        .catch(err => {
+          alert('error' + err);
+        });
 
-    vm.poll.tags = [];
-    vm.like = {};
-    vm.opts = [];
-    vm.cmts = [];
-    vm.votes = [];
-    vm.voteopts = [];
-    vm.votedTotal = 0;
+
+    }
     // init socket
     if (!Socket.socket) {
       Socket.connect();
@@ -119,15 +151,6 @@
       loadCmts();
     });
 
-    // Init data
-    if (vm.poll._id) {
-      // Get all Opts
-      loadOpts();
-      // Get all Cmts
-      loadCmts();
-      // Get all Tags
-      loadTags()
-    }
 
     // Remove existing Poll
     vm.remove = () => {
@@ -136,60 +159,7 @@
       }
     };
 
-    // Save Poll
-    vm.save = (isValid) => {
-      if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'vm.form.pollForm');
-        return false;
-      }
-      // TODO: move create/update logic to service
-      if (vm.poll._id) {
-        vm.poll.$update(successCallback, errorCallback);
-      } else {
-        vm.poll.$save(successCallback, errorCallback);
-      }
-
-      function successCallback(res) {
-        $state.go('polls.view', {
-          pollId: res._id
-        });
-      }
-
-      function errorCallback(res) {
-        vm.error = res.data.message;
-      }
-    };
-
-    // Discard edit or add poll
-    vm.discard = () => {
-      if (angular.equals(vm.poll, vm.bk_poll)) {
-        handle_discard();
-      } else {
-        if ($window.confirm('Are you sure you want to discard?')) {
-          handle_discard();
-        }
-      }
-    };
-
-    // Back to before screen
-    function handle_discard() {
-      if (vm.poll._id) {
-        $state.go('polls.view', { pollId: vm.poll._id });
-      } else {
-        $state.go('polls.list');
-      }
-    }
-
     // LIKES
-    if (vm.poll._id && vm.authentication.user) {
-      PollsApi.findPollLike(poll._id)
-        .then(res => {
-          vm.like = res.data || {};
-        })
-        .catch(err => {
-          alert('error' + err);
-        });
-    }
     var liking = false;
     var cnt = 0;
     vm.like_poll = () => {
@@ -309,7 +279,7 @@
     var opt_aside = $aside({
       scope: $scope,
       controllerAs: vm,
-      templateUrl: 'modules/opts/client/views/new-opt-in-poll.client.view.html',
+      templateUrl: 'modules/polls/client/views/new-opt.client.view.html',
       title: vm.poll.title,
       placement: 'bottom',
       animation: 'am-fade-and-slide-bottom',
@@ -343,7 +313,7 @@
     var comment_aside = $aside({
       scope: $scope,
       controllerAs: vm,
-      templateUrl: 'modules/cmts/client/views/new-cmt-in-poll.client.view.html',
+      templateUrl: 'modules/polls/client/views/new-cmt.client.view.html',
       title: vm.poll.title,
       placement: 'bottom',
       animation: 'am-fade-and-slide-bottom',

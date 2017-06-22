@@ -71,10 +71,10 @@
             }
           },
           'opts@polls.view': {
-            templateUrl: 'modules/opts/client/views/opts-in-poll.client.view.html'
+            templateUrl: 'modules/polls/client/views/list-opts.client.view.html'
           },
           'cmts@polls.view': {
-            templateUrl: 'modules/cmts/client/views/cmts-in-poll.client.view.html'
+            templateUrl: 'modules/polls/client/views/ist-cmts.client.view.html'
           }
         }
       });

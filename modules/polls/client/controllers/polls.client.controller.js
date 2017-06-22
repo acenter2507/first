@@ -355,7 +355,8 @@
     };
 
     // Comment
-    var cmt_processing = false;
+    vm.cmt_processing = false;
+    vm.cmt_typing = false;
     var aside_cmt = $aside({
       scope: $scope,
       controllerAs: vm,
@@ -389,10 +390,10 @@
         $state.go('authentication.signin');
         return false;
       }
-      if (cmt_processing) {
+      if (vm.cmt_processing) {
         return alert('Please wait until all comment be submit.');
       }
-      cmt_processing = true;
+      vm.cmt_processing = true;
       var rs_cmt = new Cmts(vm.tmp_cmt);
       if (vm.tmp_cmt._id) {
         rs_cmt.isEdited = true;
@@ -406,12 +407,13 @@
       function successCallback(res) {
         Socket.emit('cmt_add', { pollId: vm.poll._id, cmtId: res._id });
         vm.tmp_cmt = {};
-        cmt_processing = false;
+        vm.cmt_processing = false;
+        vm.cmt_typing = false;
       }
 
       function errorCallback(err) {
         alert('' + err);
-        cmt_processing = false;
+        vm.cmt_processing = false;
         //vm.error = res.data.message;
       }
     };
@@ -423,15 +425,18 @@
       vm.tmp_cmt.to = cmt.user._id;
       vm.tmp_cmt.toName = cmt.user.displayName;
       vm.tmp_cmt.discard = true;
+      vm.cmt_typing = true;
     };
 
     vm.edit_cmt = (cmt) => {
       vm.tmp_cmt = _.clone(cmt);
       vm.tmp_cmt.discard = true;
+      vm.cmt_typing = true;
     };
 
     vm.discard_cmt = () => {
       vm.tmp_cmt = {};
+      vm.cmt_typing = false;
     };
 
     vm.delete_cmt = (cmt) => {

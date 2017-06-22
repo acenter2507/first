@@ -79,7 +79,7 @@
           <a href="#" class="mg20l link_btn" ng-click="vm.discard_cmt()" ng-if="vm.tmp_cmt.discard">Discard</a>
         </div>
         <div class="form-group" show-errors>
-          <textarea name="body" ng-model="vm.tmp_cmt.body" class="form-control" placeholder="Type your reply and enter to send it" required ng-enter="vm.save_cmt(vm.form.cmtForm.$valid)"></textarea>
+          <textarea focusCmt="vm.cmt_typing" name="body" ng-model="vm.tmp_cmt.body" class="form-control" placeholder="Type your reply and enter to send it" required ng-enter="vm.save_cmt(vm.form.cmtForm.$valid)"></textarea>
           <div ng-messages="vm.form.cmtForm.body.$error" role="alert">
             <p class="help-block error-text" ng-message="required">You must type something to reply.</p>
           </div>

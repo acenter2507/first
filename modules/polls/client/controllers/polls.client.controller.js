@@ -381,11 +381,9 @@
       }
     };
 
-    vm.save_cmt = (isValid) => {
-      console.log("check save");
-      if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'vm.form.cmtForm');
-        return false;
+    vm.save_cmt = () => {
+      if (vm.tmp_cmt.body.length <= 0) {
+        return alert('You must type something to reply.')
       }
       if (!isLogged()) {
         $state.go('authentication.signin');

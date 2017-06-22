@@ -34,6 +34,7 @@
       this.verifyLogin();
       Socket.emit('comment', cmt);
       Socket.on('comment_result', this.pushCmtResponse);
+      
     };
     this.pushCmtResponse = (res) => {
       if (res.success) {

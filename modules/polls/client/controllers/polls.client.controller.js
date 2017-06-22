@@ -53,15 +53,14 @@
       Socket.connect();
     }
     Socket.on('comment', (cmt) => {
-      console.log(cmt);
-      // CmtsApi.findLike(cmt._id).then(res => {
-      //   cmt.like = res.data || {};
-      //   if (_.contains(vm.cmts, cmt)) {
-      //     _.extend(_.findWhere(vm.cmts, { _id: cmt._id }), cmt);
-      //   } else {
-      //     vm.cmts.push(cmt);
-      //   }
-      // });
+      CmtsApi.findLike(cmt._id).then(res => {
+        cmt.like = res.data || {};
+        if (_.contains(vm.cmts, cmt)) {
+          _.extend(_.findWhere(vm.cmts, { _id: cmt._id }), cmt);
+        } else {
+          vm.cmts.push(cmt);
+        }
+      });
     });
     if (vm.poll._id) {
       // Get all Opts
@@ -348,6 +347,7 @@
         $scope.$broadcast('show-errors-check-validity', 'vm.form.cmtForm');
         return false;
       }
+      comment_aside.$promise.then(comment_aside.hide);
       PollsSocket.pushCmt(vm.comment);
       // if (vm.comment._id) {
       //   vm.comment.isEdited = true;

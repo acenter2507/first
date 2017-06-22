@@ -28,6 +28,14 @@ var CmtSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'User'
   },
+  to: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  },
+  toName: {
+    type: String,
+    default: ''
+  },
   updated: {
     type: Date,
     default: Date.now

@@ -151,10 +151,8 @@
         })
         .then(_cmt => {
           if (_.where(vm.cmts, _cmt).length > 0) {
-            console.log('3', _cmt);
             _.extend(_.findWhere(vm.cmts, { _id: _cmt._id }), _cmt);
           } else {
-            console.log('4', _cmt);
             vm.cmts.push(_cmt);
           }
         })
@@ -402,7 +400,11 @@
     };
 
     vm.reply_cmt = (cmt) => {
-      alert('reply_cmt');
+      if (!isLogged()) {
+        return alert('You must login to reply this comment.');
+      }
+      vm.tmp_cmt.to = cmt.user._id;
+      vm.tmp_cmt.toName = cmt.user.displayName;
     };
 
     vm.edit_cmt = (cmt) => {

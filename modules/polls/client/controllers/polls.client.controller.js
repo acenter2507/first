@@ -86,8 +86,7 @@
         }));
       });
       Socket.on('poll_like', (res) => {
-        console.log(vm.poll);
-        vm.poll = Polls.get({pollId: vm.poll._id}).$promise;
+        vm.poll.likeCnt = res.likeCnt;
         if (res.userId === vm.authentication.user._id) {
           vm.like = Likes.get({likeId: res.likeId}).$promise;
         }
@@ -256,7 +255,7 @@
       }
 
       function successCallback(res) {
-        Socket.emit('poll_like', {pollId: vm.poll._id, userId: vm.authentication.user_id, likeId: res.like._id});
+        Socket.emit('poll_like', {pollId: vm.poll._id, userId: vm.authentication.user_id, likeCnt:  res.likeCnt});
         // vm.like = res.like;
         // vm.poll.likeCnt = res.likeCnt;
         vm.like_processing = false;
@@ -267,7 +266,6 @@
         vm.like = _.clone(vm.bk_like);
         vm.like_processing = false;
         console.log(err);
-        //vm.error = res.data.message;
       }
     };
 
@@ -281,9 +279,9 @@
       if (vm.like_processing) {
         return alert('You cannot interact continuously.');
       }
-      var _dislike;
+      var rs_dislike;
       vm.like_processing = true;
-      var bk_like = vm.like;
+      var bk_like = _.clone(vm.like);
       if (vm.like._id) {
         switch (vm.like.type) {
           case 0:
@@ -300,30 +298,28 @@
             break;
         }
         vm.poll.likeCnt += cnt;
-        _dislike = new Likes(vm.like);
-        _dislike.cnt = cnt;
-        _dislike.$update(successCallback, errorCallback);
+        rs_dislike = new Likes(vm.like);
+        rs_dislike.cnt = cnt;
+        rs_dislike.$update(successCallback, errorCallback);
       } else {
         cnt = -1;
         vm.poll.likeCnt += cnt;
-        _dislike = new Likes({ poll: vm.poll._id, user: vm.authentication.user._id, type: 2 });
-        _dislike.cnt = cnt;
-        _dislike.$save(successCallback, errorCallback);
+        rs_dislike = new Likes({ poll: vm.poll._id, user: vm.authentication.user._id, type: 2 });
+        rs_dislike.cnt = cnt;
+        rs_dislike.$save(successCallback, errorCallback);
       }
 
       function successCallback(res) {
-        vm.like = res.like;
-        vm.poll.likeCnt = res.likeCnt;
+        Socket.emit('poll_like', {pollId: vm.poll._id, userId: vm.authentication.user_id, likeCnt:  res.likeCnt});
         vm.like_processing = false;
         console.log("disliked");
       }
 
       function errorCallback(err) {
         vm.poll.likeCnt -= cnt;
+        vm.like = _.clone(vm.bk_like);
         vm.like_processing = false;
-        vm.like = bk_like;
         console.log(err);
-        //vm.error = res.data.message;
       }
     };
 

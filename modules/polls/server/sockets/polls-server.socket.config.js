@@ -32,7 +32,7 @@ module.exports = function(io, socket) {
   });
   // On comment deleted
   socket.on('poll_like', req => {
-    io.sockets.in(req.pollId).emit('poll_like', { userId: req.userId, likeId: req.likeId });
+    io.sockets.in(req.pollId).emit('poll_like', { userId: req.userId, likeCnt: req.likeCnt });
   });
 
   socket.on('sample', (cmt) => {

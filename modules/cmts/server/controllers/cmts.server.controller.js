@@ -72,16 +72,20 @@ exports.update = function(req, res) {
  */
 exports.delete = function(req, res) {
   var cmt = req.cmt;
-
-  cmt.remove(function(err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
+  const pollId = cmt.poll._id;
+  cmt.remove()
+    .then(() => {
+      return Poll.countDownCmt(pollId);
+    }, handleError)
+    .then(() => {
       res.jsonp(cmt);
-    }
-  });
+    }, handleError);
+
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 };
 
 /**

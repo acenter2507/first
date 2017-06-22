@@ -115,6 +115,13 @@ PollSchema.statics.countUpCmt = function(id, callback) {
   });
 };
 
+PollSchema.statics.countDownCmt = function(id, callback) {
+  return this.findById(id).exec(function(err, poll) {
+    poll.cmtCnt -= 1;
+    return poll.save();
+  });
+};
+
 PollSchema.statics.countLike = function(id, cnt, callback) {
   return this.findById(id).exec(function(err, poll) {
     poll.likeCnt += cnt;

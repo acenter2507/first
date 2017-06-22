@@ -85,7 +85,8 @@
         }));
       });
       Socket.on('poll_like', (res) => {
-        vm.poll = vm.poll.get().$promise;
+        console.log(vm.poll);
+        // vm.poll = vm.poll.get().$promise;
         if (res.userId === vm.authentication.user._id) {
           vm.like = Likes.get({likeId: res.likeId}).$promise;
         }

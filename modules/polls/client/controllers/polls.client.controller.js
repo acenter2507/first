@@ -151,7 +151,7 @@
         })
         .then(_cmt => {
           console.log('3', _cmt);
-          if (_.contains(vm.cmts, _cmt)) {
+          if (_.where(vm.cmts, _cmt).length > 0) {
             _.extend(_.findWhere(vm.cmts, { _id: _cmt._id }), _cmt);
           } else {
             vm.cmts.push(_cmt);

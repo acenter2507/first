@@ -48,6 +48,8 @@
     vm.voteopts = [];
     vm.votedTotal = 0;
 
+    init();
+
     // Init data
     function init() {
       if (vm.poll._id) {

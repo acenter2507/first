@@ -80,7 +80,7 @@
         </div>
         <div class="form-group" show-errors>
           <textarea focus-me="{{vm.cmt_typing}}" name="body" ng-model="vm.tmp_cmt.body" class="form-control" placeholder="Type your reply and enter to send it" required ng-enter="vm.save_cmt(vm.form.cmtForm.$valid)"></textarea>
-          <div ng-messages="vm.form.cmtForm.body.$error" role="alert">
+          <div ng-show="vm.form.cmtForm.$submitted" ng-messages="vm.form.cmtForm.body.$error" role="alert">
             <p class="help-block error-text" ng-message="required">You must type something to reply.</p>
           </div>
         </div>

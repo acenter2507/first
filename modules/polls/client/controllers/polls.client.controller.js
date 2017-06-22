@@ -420,7 +420,7 @@
     };
 
     vm.edit_cmt = (cmt) => {
-      vm.tmp_cmt = cmt;
+      vm.tmp_cmt = _.clone(cmt);
       vm.tmp_cmt.discard = true;
     };
 

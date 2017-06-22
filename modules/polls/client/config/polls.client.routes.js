@@ -74,7 +74,7 @@
             templateUrl: 'modules/polls/client/views/list-opts.client.view.html'
           },
           'cmts@polls.view': {
-            templateUrl: 'modules/polls/client/views/ist-cmts.client.view.html'
+            templateUrl: 'modules/polls/client/views/list-cmts.client.view.html'
           }
         }
       });

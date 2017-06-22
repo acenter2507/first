@@ -333,7 +333,7 @@
     vm.input_cmt = (cmt) => {
       if (isLogged()) {
         vm.tmp_cmt = (!cmt) ? new Cmts({ poll: vm.poll._id, user: vm.authentication.user._id }) : new Cmts(cmt);
-        cmt_aside.$promise.then(cmt_aside.show);
+        aside_cmt.$promise.then(aside_cmt.show);
       } else {
         $state.go('authentication.signin');
       }
@@ -359,7 +359,7 @@
       // }
 
       // function successCallback(res) {
-      //   cmt_aside.$promise.then(cmt_aside.hide);
+      //   aside_cmt.$promise.then(aside_cmt.hide);
       //   $state.reload();
       // }
 

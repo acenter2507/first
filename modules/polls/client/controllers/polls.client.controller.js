@@ -51,18 +51,23 @@
     // Init data
     function init() {
       if (vm.poll._id) {
-        $state.go('');
+        $state.go('polls.list');
       }
-        // Get all Opts
-        loadOpts();
-        // Get all Cmts
-        loadCmts();
-        // Get all Tags
-        loadTags();
-        // Get like for this poll
-        loadPollLike();
-      }
+      // Get all Opts
+      loadOpts();
+      // Get all Cmts
+      loadCmts();
+      // Get all Tags
+      loadTags();
+      // Get like for this poll
+      loadPollLike();
+    }
 
+    function isLogged() {
+      if (vm.authentication.user) {
+        return true;
+      }
+      return false;
     }
 
     function loadOpts() {
@@ -310,7 +315,7 @@
     };
 
     // Comment
-    var comment_aside = $aside({
+    var aside_cmt = $aside({
       scope: $scope,
       controllerAs: vm,
       templateUrl: 'modules/polls/client/views/new-cmt.client.view.html',
@@ -319,27 +324,30 @@
       animation: 'am-fade-and-slide-bottom',
       show: false
     });
-    vm.comment = {};
+    vm.tmp_cmt = {};
 
     vm.aside_full_screen = () => {
       alert(1);
     };
 
     vm.input_cmt = (cmt) => {
-      if (vm.authentication.user) {
-        vm.comment = (!cmt) ? new Cmts({ poll: vm.poll._id, user: vm.authentication.user._id }) : new Cmts(cmt);
-        comment_aside.$promise.then(comment_aside.show);
+      if (isLogged()) {
+        vm.tmp_cmt = (!cmt) ? new Cmts({ poll: vm.poll._id, user: vm.authentication.user._id }) : new Cmts(cmt);
+        cmt_aside.$promise.then(cmt_aside.show);
       } else {
         $state.go('authentication.signin');
       }
     };
 
-    vm.save_cmt = ($form) => {
-      if (!$form.$valid) {
+    vm.save_cmt = (isValid) => {
+      if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.cmtForm');
         return false;
       }
-      comment_aside.$promise.then(comment_aside.hide);
+      if (!isLogged()) {
+        $state.go('authentication.signin');
+        return false;
+      }
       PollsSocket.pushCmt(vm.comment);
       // if (vm.comment._id) {
       //   vm.comment.isEdited = true;
@@ -351,7 +359,7 @@
       // }
 
       // function successCallback(res) {
-      //   comment_aside.$promise.then(comment_aside.hide);
+      //   cmt_aside.$promise.then(cmt_aside.hide);
       //   $state.reload();
       // }
 

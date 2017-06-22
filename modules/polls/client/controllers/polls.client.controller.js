@@ -333,6 +333,7 @@
         $scope.$broadcast('show-errors-check-validity', 'vm.form.cmtForm');
         return false;
       }
+      PollsSocket.pushCmt();
       if (vm.comment._id) {
         vm.comment.isEdited = true;
         vm.comment.updated = new Date();

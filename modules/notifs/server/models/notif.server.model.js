@@ -18,6 +18,10 @@ var NotifSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'User'
   },
+  type: {
+    type: Number,
+    default: 0
+  },
   content: {
     type: String,
     default: '',

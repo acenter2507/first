@@ -30,17 +30,9 @@
       }
     };
 
-    this.pushCmtNotif = (poll) => {
+    this.pushCmt = (cmt) => {
       this.verifyLogin();
-      var notif = new NotifsService({
-        from: this.authentication.user._id,
-        to: poll.user._id,
-        content: 'has commented on your poll',
-        poll: poll._id
-      });
-      notif.$save().then(_notif => {
-        Socket.emit('notifs', _notif);
-      });
+      Socket.emit('comment', {cmt: cmt, user: this.authentication.user._id});
     };
     this.pushReplyNotif = (poll, userId) => {
       this.verifyLogin();
@@ -62,36 +54,9 @@
         content: 'has liked your poll',
         poll: poll._id
       });
-      //notif.$save().then(_notif => {
+      notif.$save().then(_notif => {
         Socket.emit('notifs', _notif);
       });
-    };
-
-
-
-
-    return {
-      // findOpts: (id) => {
-      //   return $http.get('/api/findOpts/' + id);
-      // },
-      // findCmts: (id) => {
-      //   return $http.get('/api/findCmts/' + id);
-      // },
-      // findTags: (id) => {
-      //   return $http.get('/api/findTags/' + id);
-      // },
-      // findVotes: (id) => {
-      //   return $http.get('/api/findVotes/' + id);
-      // },
-      // findOwnerVote: (id) => {
-      //   return $http.get('/api/findOwnerVote/' + id);
-      // },
-      // findVoteopts: (id) => {
-      //   return $http.get('/api/findVoteopts/' + id);
-      // },
-      // findPollLike: (id) => {
-      //   return $http.get('/api/findPollLike/' + id);
-      // }
     };
   }
 }());

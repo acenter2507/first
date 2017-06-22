@@ -25,7 +25,7 @@ module.exports = function(io, socket) {
   // On comment added
   socket.on('cmt_add', req => {
     io.sockets.in(req.pollId).emit('cmt_add', req.cmtId);
-  });cmt_del
+  });
   // On comment deleted
   socket.on('cmt_del', req => {
     io.sockets.in(req.pollId).emit('cmt_del', req.cmtId);

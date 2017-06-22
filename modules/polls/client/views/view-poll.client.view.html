@@ -73,9 +73,9 @@
   <div class="row">
     <div class="col-xs-12">
       <form name="vm.form.cmtForm" class="form-horizontal" novalidate ng-submit="vm.save_cmt(vm.form.cmtForm.$valid)">
-        <div class="form-group" ng-if="vm.tmp_cmt.to">
-          <span>To:&nbsp;</span>
-          <a href="#" class="link_btn" ui-sref="users.info({userId: vm.tmp_cmt.to})" ng-bind="vm.tmp_cmt.toName"></a>
+        <div class="form-group">
+          <span ng-if="vm.tmp_cmt.to">To:&nbsp;</span>
+          <a ng-if="vm.tmp_cmt.to" href="#" class="link_btn" ui-sref="users.info({userId: vm.tmp_cmt.to})" ng-bind="vm.tmp_cmt.toName"></a>
           <a href="#" class="mg20l link_btn" ng-click="vm.discard_cmt()" ng-if="vm.tmp_cmt.discard">Discard</a>
         </div>
         <div class="form-group" show-errors>
@@ -84,6 +84,7 @@
             <p class="help-block error-text" ng-message="required">You must type something to reply.</p>
           </div>
         </div>
+        <pre>{{vm.form.cmtForm.$valid}}</pre>
       </form>
     </div>
     <div class="clearfix"></div>

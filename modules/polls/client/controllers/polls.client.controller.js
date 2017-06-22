@@ -115,13 +115,16 @@
     }
 
     function loadLikeCmt(cmt) {
-      return CmtsApi.findLike(cmt._id)
-        .then(res => {
-          cmt.like = res.data || {};
-        })
-        .catch(err => {
-          alert('error' + err);
-        });
+      return new Promise((resolve, reject) => {
+        CmtsApi.findLike(cmt._id)
+          .then(res => {
+            cmt.like = res.data || {};
+            return resolve(cmt);
+          })
+          .catch(err => {
+            return reject('error' + err);
+          });
+      });
     }
 
     function loadCmts() {
@@ -143,7 +146,7 @@
     function loadCmt(cmtId) {
       return Cmts.get({ cmtId: cmtId }).$promise
         .then(_cmt => {
-          loadLikeCmt(_cmt);
+          return loadLikeCmt(_cmt);
         })
         .then(_cmt => {
           if (_.contains(vm.cmts, _cmt)) {

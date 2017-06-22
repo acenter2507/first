@@ -19,30 +19,18 @@
   }
 
   angular
-    .module('polls')
-    .directive('focusCmt', focusCmt);
-  focusCmt.$inject = [
-    '$timeout',
-    '$parse',
-  ];
-
-  function focusCmt($timeout, $parse) {
-    return {
-      link: function(scope, element, attrs) {
-        var model = $parse(attrs.focusMe);
-        scope.$watch(model, function(value) {
-          console.log('value=', value);
-          if (value === true) {
-            $timeout(function() {
-              element[0].focus();
-            });
-          }
-        });
-        element.bind('blur', function() {
-          console.log('blur')
-          scope.$apply(model.assign(scope, false));
-        })
-      }
-    };
-  }
+    .module('polls').directive('focusMe', function($timeout) {
+      return {
+        scope: { trigger: '@focusMe' },
+        link: function(scope, element) {
+          scope.$watch('trigger', function(value) {
+            if (value === "true") {
+              $timeout(function() {
+                element[0].focus();
+              });
+            }
+          });
+        }
+      };
+    });
 }());

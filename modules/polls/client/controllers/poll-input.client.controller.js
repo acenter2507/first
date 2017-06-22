@@ -62,6 +62,7 @@
         });
       });
       Socket.on('opts_update', (res) => {
+        console.log('opts_update');
         loadOpts();
       });
       Socket.on('opts_request', (res) => {

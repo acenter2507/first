@@ -482,6 +482,7 @@
       var rs_like;
       vm.like_processing = true;
       var bk_like = _.clone(cmt.like);
+      console.log(cmt.like);
       if (cmt.like._id) {
         switch (cmt.like.type) {
           case 0:
@@ -541,6 +542,7 @@
       var rs_dislike;
       vm.like_processing = true;
       var bk_like = _.clone(cmt.like);
+      console.log(cmt.like);
       if (cmt.like._id) {
         switch (cmt.like.type) {
           case 0:

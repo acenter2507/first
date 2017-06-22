@@ -15,35 +15,75 @@
     'PollsApi',
     'TagsService',
     '$aside',
-    'OptsService'
+    'OptsService',
+    'Socket'
   ];
 
-  function PollInputController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $aside, Opts) {
+  function PollInputController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $aside, Opts, Socket) {
     var vm = this;
 
     vm.authentication = Authentication;
     vm.poll = poll;
     vm.poll.close = (vm.poll.close) ? moment(vm.poll.close) : vm.poll.close;
     vm.poll.tags = [];
-    vm.bk_poll = angular.copy(poll);
+    vm.bk_poll = _.clone(poll);
     vm.error = null;
     vm.form = {};
-
     vm.opts = [];
 
-    if (vm.poll._id) {
-      // Get all Opts
-      PollsApi.findOpts(poll._id)
-        .then(opts => {
-          vm.opts = opts.data;
+    function init() {
+      if (vm.poll._id) {
+        loadOpts();
+        loadTags();
+        initSocket();
+      }
+    }
+
+    // Init Socket
+    function initSocket() {
+      if (!Socket.socket) {
+        Socket.connect();
+      }
+      Socket.emit('subscribe', { pollId: vm.poll._id, userId: vm.authentication.user._id });
+
+      Socket.on('poll_delete', (res) => {
+        alert('This poll has been deleted. Please back to list screen.');
+        $state.go('poll.list');
+      });
+      Socket.on('poll_update', (res) => {
+        vm.poll = Polls.get({ pollId: vm.poll._id }).$promise.then(res => {
+          loadOpts();
+        });
+      });
+      Socket.on('opts_update', (res) => {
+        loadOpts();
+      });
+      Socket.on('opts_request', (res) => {
+        loadOpts();
+      });
+      $scope.$on('$destroy', function() {
+        Socket.emit('unsubscribe', { pollId: vm.poll._id, userId: vm.authentication.user._id });
+        Socket.removeListener('poll_delete');
+        Socket.removeListener('poll_update');
+        Socket.removeListener('opts_update');
+        Socket.removeListener('opts_request');
+      });
+    }
+
+    function loadOpts() {
+      PollsApi.findOpts(vm.poll._id)
+        .then(res => {
+          vm.opts = res.data || [];
         })
         .catch(err => {
           alert('error' + err);
         });
-      // Get all Tags
+    }
+
+    function loadTags() {
       PollsApi.findTags(poll._id)
-        .then(polltags => {
-          angular.forEach(polltags.data, (polltag, index) => {
+        .then(res => {
+          angular.forEach(res.data, (polltag, index) => {
             vm.poll.tags.push(polltag.tag);
           });
         })
@@ -55,9 +95,13 @@
     // Function
     vm.remove = () => {
       if ($window.confirm('Are you sure you want to delete?')) {
-        vm.poll.$remove($state.go('polls.list'));
+        vm.poll.$remove(() => {
+          Socket.emit('poll_delete', { pollId: vm.poll._id });
+          $state.go('polls.list');
+        });
       }
     };
+
     vm.save = (isValid) => {
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.pollForm');
@@ -72,6 +116,7 @@
       }
 
       function successCallback(res) {
+        Socket.emit('poll_update', { pollId: res._id });
         $state.go('polls.view', {
           pollId: res._id
         });
@@ -81,6 +126,7 @@
         vm.error = res.data.message;
       }
     };
+
     vm.discard = () => {
       if (angular.equals(vm.poll, vm.bk_poll)) {
         handle_discard();
@@ -104,7 +150,7 @@
     var opt_aside = $aside({
       scope: $scope,
       controllerAs: vm,
-      templateUrl: 'modules/opts/client/views/new-opt-in-poll.client.view.html',
+      templateUrl: 'modules/polls/client/views/new-opt.client.view.html',
       title: vm.poll.title,
       placement: 'bottom',
       animation: 'am-fade-and-slide-bottom',
@@ -117,21 +163,27 @@
     vm.remove_opt = (opt) => {
       if ($window.confirm('Are you sure you want to remove?')) {
         var _opt = new Opts(opt);
-        _opt.$remove($state.reload());
+        _opt.$remove(() => {
+          Socket.emit('opts_update', { pollId: vm.poll._id });
+        });
       }
     };
     vm.approve_opt = (opt) => {
       if ($window.confirm('Are you sure you want to approve?')) {
         opt.status = 1;
         var _opt = new Opts(opt);
-        _opt.$update($state.reload());
+        _opt.$update(() => {
+          Socket.emit('opts_update', { pollId: vm.poll._id });
+        });
       }
     };
     vm.reject_opt = (opt) => {
       if ($window.confirm('Are you sure you want to reject?')) {
         opt.status = 3;
         var _opt = new Opts(opt);
-        _opt.$update($state.reload());
+        _opt.$update(() => {
+          Socket.emit('opts_update', { pollId: vm.poll._id });
+        });
       }
     };
     vm.save_opt = (isValid) => {

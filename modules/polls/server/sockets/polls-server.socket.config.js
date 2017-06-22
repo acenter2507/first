@@ -42,6 +42,13 @@ module.exports = function(io, socket) {
   socket.on('poll_vote', req => {
     io.sockets.in(req.pollId).emit('poll_vote');
   });
+  // On delete poll
+  socket.on('poll_delete', req => {
+    io.sockets.in(req.pollId).emit('poll_delete');
+  });
+  // On delete poll
+  socket.on('poll_update', req => {
+    io.sockets.in(req.pollId).emit('poll_update');
+  });
   // io.sockets.connected[socket.id].emit('comment_result', { success: true });
-
 };

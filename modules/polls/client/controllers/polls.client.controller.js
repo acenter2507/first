@@ -69,7 +69,7 @@
       initSocket();
     }
 
-    // Init data
+    // Init Socket
     function initSocket() {
       if (!Socket.socket) {
         Socket.connect();
@@ -88,6 +88,7 @@
         }));
       });
       Socket.on('poll_like', (likeCnt) => {
+        // Update poll like
         vm.poll.likeCnt = likeCnt;
       });
       Socket.on('cmt_like', (res) => {
@@ -101,8 +102,28 @@
       Socket.on('poll_vote', (res) => {
         loadVoteopts();
       });
+      Socket.on('poll_delete', (res) => {
+        alert('This poll has been deleted by owner. Please back to list screen.');
+        $state.go('poll.list');
+      });
+      Socket.on('poll_update', (res) => {
+        vm.poll = Polls.get({ pollId: vm.poll._id }).$promise.then(res => {
+          loadOpts();
+        });
+      });
+      Socket.on('opts_update', (res) => {
+        loadOpts();
+      });
       $scope.$on('$destroy', function() {
-        Socket.emit('subscribe', { pollId: vm.poll._id, userId: vm.authentication.user._id });
+        Socket.emit('unsubscribe', { pollId: vm.poll._id, userId: vm.authentication.user._id });
+        Socket.removeListener('cmt_add');
+        Socket.removeListener('cmt_del');
+        Socket.removeListener('poll_like');
+        Socket.removeListener('cmt_like');
+        Socket.removeListener('poll_vote');
+        Socket.removeListener('poll_delete');
+        Socket.removeListener('poll_update');
+        Socket.removeListener('opts_update');
       });
     }
 
@@ -248,7 +269,10 @@
     // Remove existing Poll
     vm.remove = () => {
       if ($window.confirm('Are you sure you want to delete?')) {
-        vm.poll.$remove($state.go('polls.list'));
+        vm.poll.$remove(() => {
+          Socket.emit('poll_delete');
+          $state.go('polls.list');
+        });
       }
     };
 

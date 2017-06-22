@@ -93,7 +93,7 @@
       });
       Socket.on('cmt_like', (res) => {
         var _cmt = _.find(vm.cmts, (cmt) => {
-          return cmt._id === res.cmtId
+          return cmt._id === res.cmtId;
         });
         if (_cmt) {
           _cmt.likeCnt = res.likeCnt;

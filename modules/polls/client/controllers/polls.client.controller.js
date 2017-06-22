@@ -393,14 +393,14 @@
         return alert('Please wait until all comment be submit.');
       }
       cmt_processing = true;
-      var new_cmt = new Cmts(vm.tmp_cmt);
+      var rs_cmt = new Cmts(vm.tmp_cmt);
       if (vm.tmp_cmt._id) {
-        new_cmt.isEdited = true;
-        new_cmt.updated = new Date();
-        new_cmt.$update(successCallback, errorCallback);
+        rs_cmt.isEdited = true;
+        rs_cmt.updated = new Date();
+        rs_cmt.$update(successCallback, errorCallback);
       } else {
-        new_cmt.poll = vm.poll._id;
-        new_cmt.$save(successCallback, errorCallback);
+        rs_cmt.poll = vm.poll._id;
+        rs_cmt.$save(successCallback, errorCallback);
       }
 
       function successCallback(res) {
@@ -436,7 +436,8 @@
 
     vm.delete_cmt = (cmt) => {
       if (confirm('Do you want to delete this comment ?')) {
-        cmt.$remove(() => {
+        var rs_cmt = new Cmts(cmt);
+        rs_cmt.$remove(() => {
           Socket.emit('cmt_del', { pollId: vm.poll._id, cmtId: cmt._id });
         });
       }

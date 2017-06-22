@@ -4,7 +4,7 @@
 module.exports = function(io, socket) {
   // Send a chat messages to all connected sockets when a message is received
   socket.on('comment', (req) => {
-    console.log(req);
+    console.log('comment', req.cmt);
     // Emit the 'chatMessage' event
     //    io.emit('chatMessage', message);
   });

@@ -20,7 +20,7 @@
           <li ng-show="cmt.user._id === vm.authentication.user._id"><a ng-click="vm.edit_cmt(cmt)"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
           <li ng-show="cmt.user._id === vm.authentication.user._id"><a ng-click="vm.delete_cmt(cmt)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
         </ul>
-        <span class="text-muted" ng-if="cmt.to">To:&nbsp;</span><a ui-sref="users.info({userId: cmt.to})" ng-bind="cmt.toName" ng-if="cmt.to"></a>
+        <span class="text-muted mg20l" ng-if="cmt.to">To:&nbsp;</span><a ui-sref="users.info({userId: cmt.to})" ng-bind="cmt.toName" ng-if="cmt.to"></a>
       </small>
       <br>
       <p class="text-justify" ng-bind="cmt.body"></p>

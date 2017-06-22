@@ -97,7 +97,8 @@
     }
 
     function loadLikeCmt(cmt) {
-      CmtsApi.findLike(cmt._id).then(res => {
+      CmtsApi.findLike(cmt._id)
+        .then(res => {
           cmt.like = res.data || {};
         })
         .catch(err => {
@@ -145,8 +146,6 @@
         .catch(err => {
           alert('error' + err);
         });
-
-
     }
     // init socket
     if (!Socket.socket) {

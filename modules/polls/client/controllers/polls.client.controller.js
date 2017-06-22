@@ -382,6 +382,7 @@
     };
 
     vm.save_cmt = (isValid) => {
+      console.log("check save");
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.cmtForm');
         return false;

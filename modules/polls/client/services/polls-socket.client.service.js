@@ -23,7 +23,7 @@
       }
     };
     this.init();
-    
+
     this.verifyLogin = () => {
       if (!this.authentication.user) {
         $state.go('authentication.signin');
@@ -32,7 +32,7 @@
 
     this.pushCmt = (cmt) => {
       this.verifyLogin();
-      Socket.emit('comment', {cmt: cmt, user: this.authentication.user._id});
+      Socket.emit('comment', { cmt: cmt, user: this.authentication.user._id });
     };
     this.pushReplyNotif = (poll, userId) => {
       this.verifyLogin();

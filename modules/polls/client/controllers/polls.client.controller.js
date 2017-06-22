@@ -52,7 +52,7 @@
 
     // Init data
     function init() {
-      if (vm.poll._id) {
+      if (!vm.poll._id) {
         $state.go('polls.list');
       }
       // Get all Opts

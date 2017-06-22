@@ -4,7 +4,7 @@
 
   angular
     .module('polls')
-    .factory('PollsSocket', PollsSocket);
+    .service('PollsSocket', PollsSocket);
 
   PollsSocket.$inject = [
     '$http',

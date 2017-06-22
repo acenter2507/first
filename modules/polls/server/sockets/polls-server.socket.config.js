@@ -32,7 +32,7 @@ module.exports = function(io, socket) {
         });
     } else {
       var new_cmt = new Cmt(cmt);
-      cmt.save()
+      new_cmt.save()
         .then(_cmt => {
           new_cmt = _cmt;
           return Poll.countUpCmt(_cmt.poll);

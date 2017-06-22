@@ -77,7 +77,8 @@ exports.update = function(req, res) {
 
   vote.save()
     .then(_vote => {
-      return Voteopt.remove({ vote: _vote._id });
+      vote = _vote;
+      return Voteopt.remove({ vote: vote._id });
     }, handleError)
     .then(() => {
       opts.forEach(opt => {

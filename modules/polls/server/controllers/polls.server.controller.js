@@ -83,6 +83,7 @@ exports.update = function(req, res) {
   var promises = [];
   poll.save()
     .then(_poll => {
+      poll = _poll;
       return Polltag.remove({ poll: _poll._id });
     }, handleError)
     .then(() => {

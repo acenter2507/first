@@ -421,6 +421,11 @@
 
     vm.edit_cmt = (cmt) => {
       vm.tmp_cmt = cmt;
+      vm.tmp_cmt.discard = true;
+    };
+
+    vm.discard_cmt = () => {
+      vm.tmp_cmt = {};
     };
 
     vm.delete_cmt = (cmt) => {

@@ -66,3 +66,8 @@
 .like_btn {
   cursor: pointer;
 }
+
+.link_btn {
+  text-decoration: none !important;
+  cursor: pointer !important;
+}

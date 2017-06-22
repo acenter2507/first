@@ -73,8 +73,11 @@
       }
       Socket.emit('subscribe', { pollId: vm.poll._id, userId: vm.authentication.user._id });
       Socket.on('comment', (cmtId) => {
-        console.log("Has push comment");
-        loadCmt(cmtId);
+        loadCmt(cmtId).then(_cmt => {
+          console.log('Has new comment from: ' + _cmt.user.displayName);
+        }, err => {
+          console.log('Has new comment but error: ' + err);
+        });
       });
       $scope.$on('$destroy', function() {
         Socket.emit('subscribe', { pollId: vm.poll._id, userId: vm.authentication.user._id });
@@ -144,20 +147,23 @@
     }
 
     function loadCmt(cmtId) {
-      return Cmts.get({ cmtId: cmtId }).$promise
-        .then(_cmt => {
-          return loadLikeCmt(_cmt);
-        })
-        .then(_cmt => {
-          if (_.where(vm.cmts, _cmt).length > 0) {
-            _.extend(_.findWhere(vm.cmts, { _id: _cmt._id }), _cmt);
-          } else {
-            vm.cmts.push(_cmt);
-          }
-        })
-        .catch(err => {
-          alert('error' + err);
-        });
+      return new Promise((resolve, reject) => {
+        Cmts.get({ cmtId: cmtId }).$promise
+          .then(_cmt => {
+            return loadLikeCmt(_cmt);
+          })
+          .then(_cmt => {
+            if (_.where(vm.cmts, _cmt).length > 0) {
+              _.extend(_.findWhere(vm.cmts, { _id: _cmt._id }), _cmt);
+            } else {
+              vm.cmts.push(_cmt);
+            }
+            resolve(_cmt);
+          })
+          .catch(err => {
+            reject(err);
+          });
+      });
     }
 
     function loadTags() {

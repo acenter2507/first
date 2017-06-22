@@ -57,9 +57,6 @@ exports.invokeRolesPolicies = function () {
 exports.isAllowed = function (req, res, next) {
   var roles = (req.user) ? req.user.roles : ['guest'];
 
-  console.log('req.cmt', req.cmt);
-  console.log('req.cmt.user.id', req.cmt.user.id);
-  console.log('req.user.id',req.user.id);
   // If an Cmt is being processed and the current user created it then allow any manipulation
   if (req.cmt && req.user && req.cmt.user && req.cmt.user.id === req.user.id) {
     return next();

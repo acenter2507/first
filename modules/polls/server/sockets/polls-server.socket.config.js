@@ -51,6 +51,14 @@ module.exports = function(io, socket) {
     io.sockets.in(req.pollId).emit('poll_update');
   });
   // On delete poll
+  socket.on('opts_update', req => {
+    io.sockets.in(req.pollId).emit('opts_update');
+  });
+  // On delete poll
+  socket.on('opts_request', req => {
+    io.sockets.in(req.pollId).emit('opts_request');
+  });
+  // On delete poll
   socket.on('poll_create', req => {
     io.sockets.in('polls').emit('poll_create');
   });

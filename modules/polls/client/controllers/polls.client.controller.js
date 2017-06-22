@@ -146,7 +146,6 @@
     function loadCmt(cmtId) {
       return Cmts.get({ cmtId: cmtId }).$promise
         .then(_cmt => {
-          console.log('2', _cmt);
           return loadLikeCmt(_cmt);
         })
         .then(_cmt => {

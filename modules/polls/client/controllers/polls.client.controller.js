@@ -73,6 +73,7 @@
       }
       Socket.emit('subscribe', { pollId: vm.poll._id, userId: vm.authentication.user._id });
       Socket.on('comment', (cmtId) => {
+        console.log("Has push comment");
         loadCmt(cmtId);
       });
       scope.$on('$destroy', function() {

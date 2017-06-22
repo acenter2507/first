@@ -389,7 +389,7 @@
 
     vm.save_cmt = () => {
       if (!vm.tmp_cmt.body || !vm.tmp_cmt.body.length || vm.tmp_cmt.body.length === 0) {
-        return alert('You must type something to reply.')
+        return alert('You must type something to reply.');
       }
       if (!isLogged()) {
         $state.go('authentication.signin');

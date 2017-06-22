@@ -97,9 +97,9 @@
         });
         if (_cmt) {
           _cmt.likeCnt = res.likeCnt;
-        }
-        if (res.userId === vm.authentication.user._id) {
-          loadLikeCmt(_cmt);
+          if (res.userId === vm.authentication.user._id) {
+            loadLikeCmt(_cmt);
+          }
         }
       });
       $scope.$on('$destroy', function() {

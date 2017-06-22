@@ -8,11 +8,11 @@
 
   PollsSocket.$inject = [
     '$http',
-    '$state'
+    '$state',
     'Authentication',
     'Socket',
     'NotifsService',
-    'PollsService'
+    'PollsService',
   ];
 
   function PollsSocket($http, $state, Authentication, Socket, NotifsService, PollsService) {

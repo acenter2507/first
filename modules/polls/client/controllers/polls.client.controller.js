@@ -76,7 +76,7 @@
         console.log("Has push comment");
         loadCmt(cmtId);
       });
-      scope.$on('$destroy', function() {
+      $scope.$on('$destroy', function() {
         Socket.emit('subscribe', { pollId: vm.poll._id, userId: vm.authentication.user._id });
       });
     }

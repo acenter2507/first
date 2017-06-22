@@ -52,13 +52,29 @@
         alert('This poll has been deleted. Please back to list screen.');
         $state.go('poll.list');
       });
-      Socket.on('opts_request', (res) => {
+      Socket.on('poll_update', (res) => {
+        console.log('poll_update');
+        Polls.get({ pollId: vm.poll._id }, (_poll) => {
+          vm.poll = _poll;
+          vm.poll.close = (vm.poll.close) ? moment(vm.poll.close) : vm.poll.close;
+          vm.poll.tags = [];
+          loadOpts();
+          loadTags();
+        });
+      });
+      Socket.on('opts_update', (res) => {
         console.log('opts_update');
+        loadOpts();
+      });
+      Socket.on('opts_request', (res) => {
+        console.log('opts_request');
         loadOpts();
       });
       $scope.$on('$destroy', function() {
         Socket.emit('unsubscribe', { pollId: vm.poll._id, userId: vm.authentication.user._id });
         Socket.removeListener('poll_delete');
+        Socket.removeListener('opts_request');
+        Socket.removeListener('opts_update');
         Socket.removeListener('opts_request');
       });
     }

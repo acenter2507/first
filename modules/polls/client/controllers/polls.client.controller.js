@@ -200,7 +200,7 @@
     };
 
     // LIKES
-    var liking = false;
+    var like_processing = false;
     var cnt = 0;
     vm.like_poll = () => {
       if (!vm.authentication.user) {
@@ -209,11 +209,11 @@
       if (vm.poll.isCurrentUserOwner) {
         return alert('You cannot like your poll.');
       }
-      if (liking) {
+      if (like_processing) {
         return alert('You cannot interact continuously.');
       }
       var _like;
-      liking = true;
+      like_processing = true;
       var bk_like = vm.like;
       if (vm.like._id) {
         switch (vm.like.type) {
@@ -245,14 +245,14 @@
       function successCallback(res) {
         vm.like = res.like;
         vm.poll.likeCnt = res.likeCnt;
-        liking = false;
+        like_processing = false;
         console.log("liked");
       }
 
       function errorCallback(err) {
         vm.poll.likeCnt -= cnt;
         vm.like = bk_like;
-        liking = false;
+        like_processing = false;
         console.log(err);
         //vm.error = res.data.message;
       }
@@ -265,11 +265,11 @@
       if (vm.poll.isCurrentUserOwner) {
         return alert('You cannot dislike your poll.');
       }
-      if (liking) {
+      if (like_processing) {
         return alert('You cannot interact continuously.');
       }
       var _dislike;
-      liking = true;
+      like_processing = true;
       var bk_like = vm.like;
       if (vm.like._id) {
         switch (vm.like.type) {
@@ -301,13 +301,13 @@
       function successCallback(res) {
         vm.like = res.like;
         vm.poll.likeCnt = res.likeCnt;
-        liking = false;
+        like_processing = false;
         console.log("disliked");
       }
 
       function errorCallback(err) {
         vm.poll.likeCnt -= cnt;
-        liking = false;
+        like_processing = false;
         vm.like = bk_like;
         console.log(err);
         //vm.error = res.data.message;
@@ -350,6 +350,7 @@
     };
 
     // Comment
+    var cmt_processing = false;
     var aside_cmt = $aside({
       scope: $scope,
       controllerAs: vm,
@@ -383,6 +384,10 @@
         $state.go('authentication.signin');
         return false;
       }
+      if (cmt_processing) {
+        return alert('Please wait until all comment be submit.');
+      }
+      cmt_processing = true;
       var new_cmt = new Cmts(vm.tmp_cmt);
       if (vm.tmp_cmt._id) {
         new_cmt.isEdited = true;
@@ -396,10 +401,12 @@
       function successCallback(res) {
         Socket.emit('comment', { pollId: vm.poll._id, cmtId: res._id });
         vm.tmp_cmt = {};
+        cmt_processing = false;
       }
 
       function errorCallback(err) {
-        alert(err.message);
+        alert('' + err);
+        cmt_processing = false;
         //vm.error = res.data.message;
       }
     };
@@ -413,10 +420,11 @@
     };
 
     vm.edit_cmt = (cmt) => {
-      vm.input_cmt(cmt);
+      vm.tmp_cmt = cmt;
     };
 
     vm.delete_cmt = (cmt) => {
+      console.log(cmt);
       alert('delete_cmt');
     };
 
@@ -427,11 +435,11 @@
       if (vm.authentication.user._id === cmt.user._id) {
         return alert('You cannot like your comment.');
       }
-      if (liking) {
+      if (like_processing) {
         return alert('You cannot interact continuously.');
       }
       var _like;
-      liking = true;
+      like_processing = true;
       var bk_like = cmt.like;
       if (cmt.like._id) {
         switch (cmt.like.type) {
@@ -463,14 +471,14 @@
       function successCallback(res) {
         cmt.like = res.like;
         cmt.likeCnt = res.likeCnt;
-        liking = false;
+        like_processing = false;
         console.log("liked");
       }
 
       function errorCallback(err) {
         cmt.likeCnt -= cnt;
         cmt.like = bk_like;
-        liking = false;
+        like_processing = false;
         console.log(err);
         //vm.error = res.data.message;
       }
@@ -483,12 +491,12 @@
       if (vm.authentication.user._id === cmt.user._id) {
         return alert('You cannot dislike your comment.');
       }
-      if (liking) {
+      if (like_processing) {
         return alert('You cannot interact continuously.');
       }
 
       var _dislike;
-      liking = true;
+      like_processing = true;
       var bk_like = vm.like;
       if (cmt.like._id) {
         switch (cmt.like.type) {
@@ -520,14 +528,14 @@
       function successCallback(res) {
         cmt.like = res.like;
         cmt.likeCnt = res.likeCnt;
-        liking = false;
+        like_processing = false;
         console.log("liked");
       }
 
       function errorCallback(err) {
         cmt.likeCnt -= cnt;
         cmt.like = bk_like;
-        liking = false;
+        like_processing = false;
         console.log(err);
       }
     };

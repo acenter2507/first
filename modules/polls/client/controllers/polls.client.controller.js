@@ -141,9 +141,8 @@
     }
 
     function loadCmt(cmtId) {
-      return Cmts.get({ cmtId: cmtId })
-        .then(_cmt => {
-          loadLikeCmt(_cmt);
+      return Cmts.get({ cmtId: cmtId }, _cmt => {
+          return loadLikeCmt(_cmt);
         })
         .then(_cmt => {
           if (_.contains(vm.cmts, _cmt)) {

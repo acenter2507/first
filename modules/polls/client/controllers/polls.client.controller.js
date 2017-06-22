@@ -12,6 +12,7 @@
     '$window',
     'Authentication',
     'pollResolve',
+    'PollsService',
     'PollsApi',
     'TagsService',
     '$aside',
@@ -25,7 +26,7 @@
     'Socket'
   ];
 
-  function PollsController($scope, $state, $window, Authentication, poll, PollsApi, Tags, $aside, Cmts, Votes, VotesApi, Opts, Likes, CmtsApi, Cmtlikes, Socket) {
+  function PollsController($scope, $state, $window, Authentication, poll, Polls, PollsApi, Tags, $aside, Cmts, Votes, VotesApi, Opts, Likes, CmtsApi, Cmtlikes, Socket) {
     var vm = this;
     vm.authentication = Authentication;
     vm.poll = poll;
@@ -86,7 +87,7 @@
       });
       Socket.on('poll_like', (res) => {
         console.log(vm.poll);
-        // vm.poll = vm.poll.get().$promise;
+        vm.poll = Polls.get({pollId: vm.poll._id}).$promise;
         if (res.userId === vm.authentication.user._id) {
           vm.like = Likes.get({likeId: res.likeId}).$promise;
         }

@@ -63,6 +63,8 @@
       loadTags();
       // Get like for this poll
       loadPollLike();
+      // Load owner vote
+      loadOwnerVote();
       // Init socket
       initSocket();
     }
@@ -85,11 +87,8 @@
           _id: cmtId
         }));
       });
-      Socket.on('poll_like', (res) => {
-        vm.poll.likeCnt = res.likeCnt;
-        if (res.userId === vm.authentication.user._id) {
-          vm.like = Likes.get({ likeId: res.likeId }).$promise;
-        }
+      Socket.on('poll_like', (likeCnt) => {
+        vm.poll.likeCnt = likeCnt;
       });
       Socket.on('cmt_like', (res) => {
         var _cmt = _.find(vm.cmts, (cmt) => {
@@ -97,10 +96,10 @@
         });
         if (_cmt) {
           _cmt.likeCnt = res.likeCnt;
-          if (res.userId === vm.authentication.user._id) {
-            loadLikeCmt(_cmt);
-          }
         }
+      });
+      Socket.on('poll_vote', (res) => {
+        loadVoteopts();
       });
       $scope.$on('$destroy', function() {
         Socket.emit('subscribe', { pollId: vm.poll._id, userId: vm.authentication.user._id });
@@ -215,6 +214,37 @@
         });
     }
 
+    function loadOwnerVote() {
+      return new Promise((resolve, reject) => {
+        PollsApi.findOwnerVote(poll._id)
+          .then(res => {
+            vm.ownVote = (res && res.data) ? new Votes(res.data) : new Votes({ poll: vm.poll._id });
+            return (vm.ownVote._id) ? loadVoteoopts(vm.ownVote._id) : resolve();
+          })
+          .then(res => {
+            vm.votedOpts = (res && res.data) ? _.pluck(res.data, 'opt') : [];
+            vm.selectedOpts = (res && res.data) ? _.pluck(res.data, 'opt') : [];
+            return resolve();
+          })
+          .catch(err => {
+            console.log(err);
+            return reject();
+          });
+      });
+    }
+
+    function loadVoteoopts(voteId) {
+      return new Promise((resolve, reject) => {
+        VotesApi.findOpts(vm.ownVote._id)
+          .then(res => {
+            resolve(res);
+          })
+          .catch(err => {
+            reject(err);
+          });
+      });
+    }
+
     // Remove existing Poll
     vm.remove = () => {
       if ($window.confirm('Are you sure you want to delete?')) {
@@ -266,7 +296,8 @@
       }
 
       function successCallback(res) {
-        Socket.emit('poll_like', { pollId: vm.poll._id, userId: vm.authentication.user._id, likeCnt: res.likeCnt });
+        vm.like = res.like;
+        Socket.emit('poll_like', { pollId: vm.poll._id, likeCnt: res.likeCnt });
         vm.like_processing = false;
         bk_like = null;
         cnt = 0;
@@ -323,7 +354,8 @@
       }
 
       function successCallback(res) {
-        Socket.emit('poll_like', { pollId: vm.poll._id, userId: vm.authentication.user._id, likeCnt: res.likeCnt });
+        vm.like = res.like;
+        Socket.emit('poll_like', { pollId: vm.poll._id, likeCnt: res.likeCnt });
         vm.like_processing = false;
         bk_like = null;
         cnt = 0;
@@ -378,28 +410,10 @@
     // Comment
     vm.cmt_processing = false;
     vm.cmt_typing = false;
-    var aside_cmt = $aside({
-      scope: $scope,
-      controllerAs: vm,
-      templateUrl: 'modules/polls/client/views/new-cmt.client.view.html',
-      title: vm.poll.title,
-      placement: 'bottom',
-      animation: 'am-fade-and-slide-bottom',
-      show: false
-    });
     vm.tmp_cmt = {};
 
     vm.aside_full_screen = () => {
       alert(1);
-    };
-
-    vm.input_cmt = (cmt) => {
-      if (isLogged()) {
-        vm.tmp_cmt = (!cmt) ? new Cmts({ poll: vm.poll._id, user: vm.authentication.user._id }) : new Cmts(cmt);
-        aside_cmt.$promise.then(aside_cmt.show);
-      } else {
-        $state.go('authentication.signin');
-      }
     };
 
     vm.save_cmt = () => {
@@ -482,7 +496,6 @@
       var rs_like;
       vm.like_processing = true;
       var bk_like = _.clone(cmt.like);
-      console.log(cmt.like);
       if (cmt.like._id) {
         switch (cmt.like.type) {
           case 0:
@@ -511,7 +524,8 @@
       }
 
       function successCallback(res) {
-        Socket.emit('cmt_like', { pollId: vm.poll._id, userId: vm.authentication.user._id, cmtId: cmt._id, likeCnt: res.likeCnt });
+        cmt.like = res.like;
+        Socket.emit('cmt_like', { pollId: vm.poll._id, cmtId: cmt._id, likeCnt: res.likeCnt });
         vm.like_processing = false;
         bk_like = null;
         cnt = 0;
@@ -542,7 +556,6 @@
       var rs_dislike;
       vm.like_processing = true;
       var bk_like = _.clone(cmt.like);
-      console.log(cmt.like);
       if (cmt.like._id) {
         switch (cmt.like.type) {
           case 0:
@@ -571,7 +584,8 @@
       }
 
       function successCallback(res) {
-        Socket.emit('cmt_like', { pollId: vm.poll._id, userId: vm.authentication.user_id, cmtId: cmt._id, likeCnt: res.likeCnt });
+        cmt.like = res.like;
+        Socket.emit('cmt_like', { pollId: vm.poll._id, cmtId: cmt._id, likeCnt: res.likeCnt });
         vm.like_processing = false;
         bk_like = null;
         cnt = 0;
@@ -589,27 +603,6 @@
     };
 
     // VOTE
-    if (vm.poll._id) {
-      // Get Voted
-      PollsApi.findOwnerVote(poll._id)
-        .then(res => {
-          if (res.data) {
-            vm.ownVote = new Votes(res.data);
-            return VotesApi.findOpts(vm.ownVote._id);
-          } else {
-            vm.ownVote = new Votes({ poll: vm.poll._id });
-          }
-        })
-        .then(res => {
-          vm.votedOpts = (res && res.data) ? _.pluck(res.data, 'opt') : [];
-          vm.selectedOpts = (res && res.data) ? _.pluck(res.data, 'opt') : [];
-        })
-        .catch(err => {
-          // alert('error' + err);
-          console.log(err);
-        });
-    }
-
     vm.checked = function(id) {
       if (_.contains(vm.selectedOpts, id)) {
         vm.selectedOpts = _.without(vm.selectedOpts, id);
@@ -641,7 +634,8 @@
       }
 
       function successCallback(res) {
-        $state.reload();
+        vm.ownVote = res;
+        Socket.emit('poll_vote', { pollId: vm.poll._id });
       }
 
       function errorCallback(res) {

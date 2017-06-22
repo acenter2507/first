@@ -61,7 +61,6 @@
         <a class="btn btn-danger" ng-click="vm.remove()" ng-if="vm.poll.isCurrentUserOwner || vm.poll.canEdit">
           <i class="glyphicon glyphicon-trash"></i> Delete
         </a>
-        <button class="btn btn-primary" ng-click="vm.input_cmt()"><i class="fa fa-reply" aria-hidden="true"></i> Reply</button>
         <button ng-if="!vm.poll.isCurrentUserOwner && !vm.poll.canEdit && vm.poll.allow_add && vm.authentication.user" class="btn btn-warning" ng-click="vm.input_opt()"><i class="fa fa-plus" aria-hidden="true"></i> Suggest option</button>
       </div>
     </div>
@@ -123,7 +122,6 @@
         <a class="btn btn-danger" ng-click="vm.remove()" ng-if="vm.poll.isCurrentUserOwner || vm.poll.canEdit">
           <i class="glyphicon glyphicon-trash"></i> Delete
         </a>
-        <button class="btn btn-primary" ng-click="vm.input_cmt()"><i class="fa fa-reply" aria-hidden="true"></i> Reply</button>
         <button ng-if="!vm.poll.isCurrentUserOwner && !vm.poll.canEdit && vm.poll.allow_add && vm.authentication.user" class="btn btn-warning" ng-click="vm.input_opt()"><i class="fa fa-plus" aria-hidden="true"></i> Suggest option</button>
       </div>
     </div>

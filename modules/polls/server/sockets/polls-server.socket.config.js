@@ -32,40 +32,16 @@ module.exports = function(io, socket) {
   });
   // On like poll
   socket.on('cmt_like', req => {
-    io.sockets.in(req.pollId).emit('cmt_like', { userId: req.userId, cmtId: req.cmtId, likeCnt: req.likeCnt });
+    io.sockets.in(req.pollId).emit('cmt_like', { cmtId: req.cmtId, likeCnt: req.likeCnt });
   });
   // On like poll
   socket.on('poll_like', req => {
-    io.sockets.in(req.pollId).emit('poll_like', { userId: req.userId, likeCnt: req.likeCnt });
+    io.sockets.in(req.pollId).emit('poll_like', req.likeCnt);
   });
-
-  socket.on('sample', (cmt) => {
-    if (cmt._id) {
-      Cmt.findById(cmt._id)
-        .then(_cmt => {
-          _cmt = _.extend(_cmt, cmt);
-          return _cmt.save();
-        }, handle_error)
-        .then(_cmt => {
-          cmt = _cmt;
-          io.emit('comment', _cmt);
-          io.sockets.connected[socket.id].emit('comment_result', { success: true });
-        }, handle_error);
-    } else {
-      var new_cmt = new Cmt(cmt);
-      new_cmt.save()
-        .then(_cmt => {
-          new_cmt = _cmt;
-          return Poll.countUpCmt(_cmt.poll);
-        }, handle_error)
-        .then(_poll => {
-          io.emit('comment');
-          io.sockets.connected[socket.id].emit('comment_result', { success: true });
-        }, handle_error);
-    }
-
-    function handle_error(err) {
-      io.sockets.connected[socket.id].emit('comment_result', { success: false, err: err });
-    }
+  // On vote poll
+  socket.on('poll_vote', req => {
+    io.sockets.in(req.pollId).emit('poll_vote');
   });
+  // io.sockets.connected[socket.id].emit('comment_result', { success: true });
+
 };

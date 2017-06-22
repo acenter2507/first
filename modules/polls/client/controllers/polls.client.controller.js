@@ -141,8 +141,9 @@
     }
 
     function loadCmt(cmtId) {
-      return Cmts.get({ cmtId: cmtId }, _cmt => {
-          return loadLikeCmt(_cmt);
+      return Cmts.get({ cmtId: cmtId }).$promise
+        .then(_cmt => {
+          loadLikeCmt(_cmt);
         })
         .then(_cmt => {
           if (_.contains(vm.cmts, _cmt)) {

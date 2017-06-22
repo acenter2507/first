@@ -72,14 +72,14 @@
   <!-- Comment input -->
   <div class="row">
     <div class="col-xs-12">
-      <form name="vm.form.cmtForm" class="form-horizontal" novalidate ng-submit="vm.save_cmt(vm.form.pollForm.$valid)">
+      <form name="vm.form.cmtForm" class="form-horizontal" novalidate ng-submit="vm.save_cmt(vm.form.cmtForm.$valid)">
         <fieldset>
           <div class="form-group" ng-if="vm.tmp_cmt.to">
             <span>To:&nbsp;</span>
             <a ui-sref="users.info({userId: vm.tmp_cmt.to})" ng-bind="vm.tmp_cmt.toName"></a>
           </div>
           <div class="form-group" show-errors>
-            <textarea name="body" ng-model="vm.tmp_cmt.body" class="form-control" placeholder="Type your reply and enter to send it" required ng-enter="vm.save_cmt(vm.form.pollForm.$valid)"></textarea>
+            <textarea name="body" ng-model="vm.tmp_cmt.body" class="form-control" placeholder="Type your reply and enter to send it" required ng-enter="vm.save_cmt(vm.form.cmtForm.$valid)"></textarea>
             <div ng-messages="vm.form.cmtForm.body.$error" role="alert">
               <p class="help-block error-text" ng-message="required">You must type something to reply.</p>
             </div>

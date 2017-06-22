@@ -88,7 +88,18 @@
       Socket.on('poll_like', (res) => {
         vm.poll.likeCnt = res.likeCnt;
         if (res.userId === vm.authentication.user._id) {
-          vm.like = Likes.get({likeId: res.likeId}).$promise;
+          vm.like = Likes.get({ likeId: res.likeId }).$promise;
+        }
+      });
+      Socket.on('cmt_like', (res) => {
+        var _cmt = _.find(vm.cmts, (cmt) => {
+          return cmt._id === res.cmtId
+        });
+        if (_cmt) {
+          _cmt.likeCnt = res.likeCnt;
+        }
+        if (res.userId === vm.authentication.user._id) {
+          loadLikeCmt(_cmt);
         }
       });
       $scope.$on('$destroy', function() {
@@ -255,16 +266,18 @@
       }
 
       function successCallback(res) {
-        Socket.emit('poll_like', {pollId: vm.poll._id, userId: vm.authentication.user_id, likeCnt:  res.likeCnt});
-        // vm.like = res.like;
-        // vm.poll.likeCnt = res.likeCnt;
+        Socket.emit('poll_like', { pollId: vm.poll._id, userId: vm.authentication.user_id, likeCnt: res.likeCnt });
         vm.like_processing = false;
+        bk_like = null;
+        cnt = 0;
       }
 
       function errorCallback(err) {
         vm.poll.likeCnt -= cnt;
-        vm.like = _.clone(vm.bk_like);
+        vm.like = _.clone(bk_like);
         vm.like_processing = false;
+        bk_like = null;
+        cnt = 0;
         console.log(err);
       }
     };
@@ -310,14 +323,18 @@
       }
 
       function successCallback(res) {
-        Socket.emit('poll_like', {pollId: vm.poll._id, userId: vm.authentication.user_id, likeCnt:  res.likeCnt});
+        Socket.emit('poll_like', { pollId: vm.poll._id, userId: vm.authentication.user_id, likeCnt: res.likeCnt });
         vm.like_processing = false;
+        bk_like = null;
+        cnt = 0;
         console.log("disliked");
       }
 
       function errorCallback(err) {
         vm.poll.likeCnt -= cnt;
-        vm.like = _.clone(vm.bk_like);
+        vm.like = _.clone(bk_like);
+        bk_like = null;
+        cnt = 0;
         vm.like_processing = false;
         console.log(err);
       }
@@ -462,9 +479,9 @@
       if (vm.like_processing) {
         return alert('You cannot interact continuously.');
       }
-      var _like;
+      var rs_like;
       vm.like_processing = true;
-      var bk_like = cmt.like;
+      var bk_like = _.clone(cmt.like);
       if (cmt.like._id) {
         switch (cmt.like.type) {
           case 0:
@@ -481,28 +498,33 @@
             break;
         }
         cmt.likeCnt += cnt;
-        _like = new Cmtlikes(cmt.like);
-        _like.cnt = cnt;
-        _like.$update(successCallback, errorCallback);
+        rs_like = new Cmtlikes(cmt.like);
+        rs_like.cnt = cnt;
+        rs_like.$update(successCallback, errorCallback);
       } else {
         cnt = 1;
         cmt.likeCnt += cnt;
-        _like = new Cmtlikes({ cmt: cmt._id, type: 1 });
-        _like.cnt = cnt;
-        _like.$save(successCallback, errorCallback);
+        rs_like = new Cmtlikes({ cmt: cmt._id, type: 1 });
+        rs_like.cnt = cnt;
+        rs_like.$save(successCallback, errorCallback);
       }
 
       function successCallback(res) {
-        cmt.like = res.like;
-        cmt.likeCnt = res.likeCnt;
+        Socket.emit('cmt_like', { pollId: vm.poll._id, userId: vm.authentication.user_id, cmtId: cmt._id, likeCnt: res.likeCnt });
+        // cmt.like = res.like;
+        // cmt.likeCnt = res.likeCnt;
         vm.like_processing = false;
+        bk_like = null;
+        cnt = 0;
         console.log("liked");
       }
 
       function errorCallback(err) {
         cmt.likeCnt -= cnt;
-        cmt.like = bk_like;
+        cmt.like = _.clone(bk_like);
         vm.like_processing = false;
+        bk_like = null;
+        cnt = 0;
         console.log(err);
         //vm.error = res.data.message;
       }
@@ -519,9 +541,9 @@
         return alert('You cannot interact continuously.');
       }
 
-      var _dislike;
+      var rs_dislike;
       vm.like_processing = true;
-      var bk_like = vm.like;
+      var bk_like = _.clone(cmt.like);
       if (cmt.like._id) {
         switch (cmt.like.type) {
           case 0:
@@ -538,28 +560,33 @@
             break;
         }
         cmt.likeCnt += cnt;
-        _dislike = new Cmtlikes(cmt.like);
-        _dislike.cnt = cnt;
-        _dislike.$update(successCallback, errorCallback);
+        rs_dislike = new Cmtlikes(cmt.like);
+        rs_dislike.cnt = cnt;
+        rs_dislike.$update(successCallback, errorCallback);
       } else {
         cnt = -1;
         cmt.likeCnt += cnt;
-        _dislike = new Cmtlikes({ cmt: cmt._id, type: 2 });
-        _dislike.cnt = cnt;
-        _dislike.$save(successCallback, errorCallback);
+        rs_dislike = new Cmtlikes({ cmt: cmt._id, type: 2 });
+        rs_dislike.cnt = cnt;
+        rs_dislike.$save(successCallback, errorCallback);
       }
 
       function successCallback(res) {
-        cmt.like = res.like;
-        cmt.likeCnt = res.likeCnt;
+        Socket.emit('cmt_like', { pollId: vm.poll._id, userId: vm.authentication.user_id, cmtId: cmt._id, likeCnt: res.likeCnt });
+        // cmt.like = res.like;
+        // cmt.likeCnt = res.likeCnt;
         vm.like_processing = false;
+        bk_like = null;
+        cnt = 0;
         console.log("liked");
       }
 
       function errorCallback(err) {
         cmt.likeCnt -= cnt;
-        cmt.like = bk_like;
+        cmt.like = _.clone(bk_like);
         vm.like_processing = false;
+        bk_like = null;
+        cnt = 0;
         console.log(err);
       }
     };

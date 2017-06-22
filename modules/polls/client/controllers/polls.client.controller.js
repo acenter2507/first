@@ -266,7 +266,7 @@
       }
 
       function successCallback(res) {
-        Socket.emit('poll_like', { pollId: vm.poll._id, userId: vm.authentication.user_id, likeCnt: res.likeCnt });
+        Socket.emit('poll_like', { pollId: vm.poll._id, userId: vm.authentication.user._id, likeCnt: res.likeCnt });
         vm.like_processing = false;
         bk_like = null;
         cnt = 0;
@@ -323,7 +323,7 @@
       }
 
       function successCallback(res) {
-        Socket.emit('poll_like', { pollId: vm.poll._id, userId: vm.authentication.user_id, likeCnt: res.likeCnt });
+        Socket.emit('poll_like', { pollId: vm.poll._id, userId: vm.authentication.user._id, likeCnt: res.likeCnt });
         vm.like_processing = false;
         bk_like = null;
         cnt = 0;
@@ -510,7 +510,7 @@
       }
 
       function successCallback(res) {
-        Socket.emit('cmt_like', { pollId: vm.poll._id, userId: vm.authentication.user_id, cmtId: cmt._id, likeCnt: res.likeCnt });
+        Socket.emit('cmt_like', { pollId: vm.poll._id, userId: vm.authentication.user._id, cmtId: cmt._id, likeCnt: res.likeCnt });
         // cmt.like = res.like;
         // cmt.likeCnt = res.likeCnt;
         vm.like_processing = false;

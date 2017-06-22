@@ -163,10 +163,14 @@
     };
     vm.remove_opt = (opt) => {
       if ($window.confirm('Are you sure you want to remove?')) {
-        var _opt = new Opts(opt);
-        _opt.$remove(() => {
-          Socket.emit('opts_update', { pollId: vm.poll._id });
-        });
+        if (opt._id) {
+          var _opt = new Opts(opt);
+          _opt.$remove(() => {
+            Socket.emit('opts_update', { pollId: vm.poll._id });
+          });
+        } else {
+          vm.opts = _.without(vm.opts, opt);
+        }
       }
     };
     vm.approve_opt = (opt) => {

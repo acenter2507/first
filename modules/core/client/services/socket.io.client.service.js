@@ -8,7 +8,7 @@ angular.module('core').service('Socket', ['Authentication', '$state', '$timeout'
       // Connect only when authenticated
       if (Authentication.user) {
         this.socket = io();
-        this.init();
+        this.socket.emit('init', { user: Authentication.user._id });
       }
     };
     this.connect();
@@ -35,12 +35,6 @@ angular.module('core').service('Socket', ['Authentication', '$state', '$timeout'
     this.removeListener = function (eventName) {
       if (this.socket) {
         this.socket.removeListener(eventName);
-      }
-    };
-
-    this.init = function () {
-      if (this.socket) {
-        this.socket.emit('init', { user: Authentication.user._id });
       }
     };
   }

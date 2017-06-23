@@ -5,7 +5,6 @@ const _ = require('lodash');
 module.exports = function(io, socket) {
   socket.on('init', function(req) {
     console.log('Has user join system');
-
   });
 
   // Emit the status event when a socket client is disconnected

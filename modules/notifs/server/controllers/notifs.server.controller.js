@@ -112,7 +112,8 @@ exports.countUnchecks = function(req, res) {
 };
 
 exports.findNotifs = function(req, res) {
-  var limit = parseInt(req.limit);
+  var limit = parseInt(req.params.limit);
+  console.log('limit', limit);
   Notif.find({ to: req.user._id })
     .sort('-created')
     .limit(limit)

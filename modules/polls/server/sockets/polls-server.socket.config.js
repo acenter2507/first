@@ -17,7 +17,7 @@ var path = require('path'),
   _ = require('underscore');
 
 // Create the chat configuration
-module.exports = function(io, socket) {
+module.exports = function (io, socket) {
   // On subscribe
   socket.on('subscribe', req => {
     socket.join(req.pollId);
@@ -94,6 +94,21 @@ module.exports = function(io, socket) {
   // On like poll
   socket.on('poll_like', req => {
     io.sockets.in(req.pollId).emit('poll_like', req.likeCnt);
+    if (req.type === 0) {
+      return;
+    }
+    var notif = new Notif({
+      from: req.from,
+      to: req.to,
+      content: 'has liked your comment on',
+      poll: req.pollId
+    });
+    notif.save().then(notif => {
+      var socketIds = _.where(global.socketUsers, { user: req.to });
+      socketIds.forEach(item => {
+        io.sockets.connected[item.socket].emit('notifs', notif._id);
+      });
+    });
   });
   // On vote poll
   socket.on('poll_vote', req => {

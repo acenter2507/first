@@ -449,7 +449,13 @@
 
       function successCallback(res) {
         vm.like = res.like;
-        Socket.emit('poll_like', { pollId: vm.poll._id, likeCnt: res.likeCnt });
+        Socket.emit('poll_like', { 
+          pollId: vm.poll._id,
+          likeCnt: res.likeCnt,
+          from: vm.authentication.user._id,
+          to: vm.poll.user._id,
+          type: res.type
+        });
         vm.like_processing = false;
         bk_like = null;
         cnt = 0;
@@ -513,11 +519,16 @@
 
       function successCallback(res) {
         vm.like = res.like;
-        Socket.emit('poll_like', { pollId: vm.poll._id, likeCnt: res.likeCnt });
+        Socket.emit('poll_like', { 
+          pollId: vm.poll._id,
+          likeCnt: res.likeCnt,
+          from: vm.authentication.user._id,
+          to: vm.poll.user._id,
+          type: res.type
+        });
         vm.like_processing = false;
         bk_like = null;
         cnt = 0;
-        console.log('disliked');
       }
 
       function errorCallback(err) {

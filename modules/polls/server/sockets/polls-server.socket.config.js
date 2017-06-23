@@ -29,11 +29,11 @@ module.exports = function(io, socket) {
     console.log(req);
     io.sockets.in(req.pollId).emit('cmt_add', req.cmtId);
     if (req.to) {
-      var notif = new Notif({from: req.from, to: req.to, content: 'has replied your comment on', poll: req.pollId});
+      var notif = new Notif({ from: req.from, to: req.to, content: 'has replied your comment on', poll: req.pollId });
       notif.save()
-      .then(notif => {
-        io.sockets.in(req.pollId).emit('cmt_add', req.cmtId);
-      });
+        .then(notif => {
+          io.sockets.in(req.pollId).emit('cmt_add', req.cmtId);
+        });
     }
   });
   // On comment deleted

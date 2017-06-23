@@ -48,7 +48,7 @@ exports.create = function(req, res) {
     }, handleError)
     .then(() => {
       promises = [];
-      var _polluser = new Polluser({poll: poll._id, user: req.user._id});
+      var _polluser = new Polluser({ poll: poll._id, user: req.user._id });
       return _polluser.save();
     }, handleError)
     .then((_polluser) => {

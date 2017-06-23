@@ -103,6 +103,12 @@
       var isNew = (!vm.poll._id) ? true : false;
       vm.poll.opts = vm.opts;
       if (vm.poll._id) {
+        const update = moment(vm.poll.updated);
+        const now = moment(new Date());
+        var duration = moment.duration(now.diff(update)).asHours();
+        if (duration < 1) {
+          alert('Bạn không thể update poll trong vòng một giờ kể từ lần update trước.');
+        }
         vm.poll.$update(successCallback, errorCallback);
       } else {
         vm.poll.$save(successCallback, errorCallback);
@@ -184,10 +190,7 @@
       if ($window.confirm('Are you sure you want to reject?')) {
         opt.status = 3;
         var _opt = new Opts(opt);
-        _opt.$update(() => {
-          Socket.emit('opts_update', { pollId: vm.poll._id });
-          $state.reload();
-        });
+        _opt.$update($state.reload());
       }
     };
     vm.save_opt = (isValid) => {

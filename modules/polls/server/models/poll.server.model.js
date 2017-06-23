@@ -70,6 +70,7 @@ var PollSchema = new Schema({
 
 PollSchema.pre('save', function(next) {
   this.summary = (this.body.length > 255) ? this.body.substring(0, 254) : this.body;
+  this.updated = new Date();
   next();
 });
 

@@ -44,22 +44,18 @@ module.exports = function(io, socket) {
   });
   // On delete poll
   socket.on('poll_delete', req => {
-    console.log('************** Poll delete');
     io.sockets.in(req.pollId).emit('poll_delete');
   });
   // On delete poll
   socket.on('poll_update', req => {
-    console.log('************** Poll update');
     io.sockets.in(req.pollId).emit('poll_update');
   });
   // On delete poll
   socket.on('opts_update', req => {
-    console.log('************** Opts update');
     io.sockets.in(req.pollId).emit('opts_update');
   });
   // On delete poll
   socket.on('opts_request', req => {
-    console.log('************** Opts request');
     io.sockets.in(req.pollId).emit('opts_request');
   });
   // On delete poll

@@ -169,9 +169,6 @@
     vm.remove_opt = (opt) => {
       if ($window.confirm('Are you sure you want to remove?')) {
         if (opt._id) {
-          if (!isCanUpdate()) {
-            return alert('Bạn không thể update poll trong vòng một giờ kể từ lần update trước.');
-          }
           var _opt = new Opts(opt);
           _opt.$remove(() => {
             Socket.emit('opts_update', { pollId: vm.poll._id });

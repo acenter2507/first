@@ -52,20 +52,6 @@
         alert('This poll has been deleted. Please back to list screen.');
         $state.go('poll.list');
       });
-      Socket.on('poll_update', (res) => {
-        console.log('poll_update');
-        Polls.get({ pollId: vm.poll._id }, (_poll) => {
-          vm.poll = _poll;
-          vm.poll.close = (vm.poll.close) ? moment(vm.poll.close) : vm.poll.close;
-          vm.poll.tags = [];
-          loadOpts();
-          loadTags();
-        });
-      });
-      Socket.on('opts_update', (res) => {
-        console.log('opts_update');
-        loadOpts();
-      });
       Socket.on('opts_request', (res) => {
         console.log('opts_request');
         loadOpts();
@@ -73,8 +59,6 @@
       $scope.$on('$destroy', function() {
         Socket.emit('unsubscribe', { pollId: vm.poll._id, userId: vm.authentication.user._id });
         Socket.removeListener('poll_delete');
-        Socket.removeListener('opts_request');
-        Socket.removeListener('opts_update');
         Socket.removeListener('opts_request');
       });
     }
@@ -128,7 +112,7 @@
         if (isNew) {
           Socket.emit('poll_create');
         } else {
-          Socket.emit('poll_update', { pollId: res._id });
+          Socket.emit('poll_update', { pollId: vm.poll._id });
         }
         $state.go('polls.view', {
           pollId: res._id
@@ -179,6 +163,7 @@
           var _opt = new Opts(opt);
           _opt.$remove(() => {
             Socket.emit('opts_update', { pollId: vm.poll._id });
+            $state.reload();
           });
         } else {
           vm.opts = _.without(vm.opts, opt);
@@ -191,6 +176,7 @@
         var _opt = new Opts(opt);
         _opt.$update(() => {
           Socket.emit('opts_update', { pollId: vm.poll._id });
+          $state.reload();
         });
       }
     };
@@ -200,6 +186,7 @@
         var _opt = new Opts(opt);
         _opt.$update(() => {
           Socket.emit('opts_update', { pollId: vm.poll._id });
+          $state.reload();
         });
       }
     };

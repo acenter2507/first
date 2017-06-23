@@ -26,7 +26,7 @@
   function NotifsApi($http) {
     return {
       findNotifs: limit => {
-        return $http.post('/api/findNotifs/:limit');
+        return $http.post('/api/findNotifs', { limit: limit });
       },
       countUnchecks: () => {
         return $http.get('/api/countUnchecks');

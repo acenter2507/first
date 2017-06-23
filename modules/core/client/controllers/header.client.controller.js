@@ -36,6 +36,7 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
       if (!Socket.socket) {
         Socket.connect();
       }
+      console.log('Controller Header loaded.');
       Socket.on('notifs', (res) => {
         console.log('has new notifs');
       });

@@ -12,10 +12,10 @@ var path = require('path'),
   Notif = mongoose.model('Notif'),
   Like = mongoose.model('Like'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
-  _ = require('lodash');
+  _ = require('underscore');
 
 // Create the chat configuration
-module.exports = function(io, socket) {
+module.exports = function (io, socket) {
   // On subscribe
   socket.on('subscribe', req => {
     socket.join(req.pollId);
@@ -32,7 +32,10 @@ module.exports = function(io, socket) {
       var notif = new Notif({ from: req.from, to: req.to, content: 'has replied your comment on', poll: req.pollId });
       notif.save()
         .then(notif => {
-          io.sockets.in(req.pollId).emit('cmt_add', req.cmtId);
+          var socketIds = _.where(global.socketUsers, { user: req.userId });
+          socketIds.forEach(socketId => {
+            io.sockets.connected[socketId].emit('notifs', notif._id);
+          });
         });
     }
   });

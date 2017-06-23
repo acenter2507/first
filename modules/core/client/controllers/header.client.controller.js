@@ -23,7 +23,9 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
     init();
 
     function init() {
-      initSocket()
+      if ($scope.authentication.user) {
+        initSocket();
+      }
     };
 
     function initSocket() {

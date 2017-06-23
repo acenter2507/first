@@ -15,7 +15,7 @@ var path = require('path'),
 /**
  * Create a Cmt
  */
-exports.create = function(req, res) {
+exports.create = function (req, res) {
   var cmt = new Cmt(req.body);
   cmt.user = req.user;
 
@@ -25,9 +25,9 @@ exports.create = function(req, res) {
       return Poll.countUpCmt(_cmt.poll);
     }, handleError)
     .then(() => {
-      Polluser.findOne({poll: cmt.poll, user: cmt.user}).exec((err, _polluser) => {
+      Polluser.findOne({ poll: cmt.poll, user: cmt.user }).exec((err, _polluser) => {
         if (!_polluser) {
-          _polluser = new Polluser({poll: cmt.poll, user: cmt.user});
+          _polluser = new Polluser({ poll: cmt.poll, user: cmt.user });
           return _polluser.save();
         }
       });
@@ -46,7 +46,7 @@ exports.create = function(req, res) {
 /**
  * Show the current Cmt
  */
-exports.read = function(req, res) {
+exports.read = function (req, res) {
   // convert mongoose document to JSON
   var cmt = req.cmt ? req.cmt.toJSON() : {};
 
@@ -60,12 +60,12 @@ exports.read = function(req, res) {
 /**
  * Update a Cmt
  */
-exports.update = function(req, res) {
+exports.update = function (req, res) {
   var cmt = req.cmt;
 
   cmt = _.extend(cmt, req.body);
 
-  cmt.save(function(err) {
+  cmt.save(function (err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -79,7 +79,7 @@ exports.update = function(req, res) {
 /**
  * Delete an Cmt
  */
-exports.delete = function(req, res) {
+exports.delete = function (req, res) {
   var cmt = req.cmt;
   const pollId = cmt.poll._id;
   cmt.remove()
@@ -100,8 +100,8 @@ exports.delete = function(req, res) {
 /**
  * List of Cmts
  */
-exports.list = function(req, res) {
-  Cmt.find().sort('-created').populate('user', 'displayName profileImageURL').exec(function(err, cmts) {
+exports.list = function (req, res) {
+  Cmt.find().sort('-created').populate('user', 'displayName profileImageURL').exec(function (err, cmts) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -115,7 +115,7 @@ exports.list = function(req, res) {
 /**
  * Cmt middleware
  */
-exports.cmtByID = function(req, res, next, id) {
+exports.cmtByID = function (req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
@@ -123,7 +123,7 @@ exports.cmtByID = function(req, res, next, id) {
     });
   }
 
-  Cmt.findById(id).populate('poll').populate('user', 'displayName profileImageURL').exec(function(err, cmt) {
+  Cmt.findById(id).populate('poll').populate('user', 'displayName profileImageURL').exec(function (err, cmt) {
     if (err) {
       return next(err);
     } else if (!cmt) {
@@ -139,9 +139,9 @@ exports.cmtByID = function(req, res, next, id) {
 /**
  * List of Cmts
  */
-exports.findLike = function(req, res) {
+exports.findLike = function (req, res) {
   var condition = { cmt: req.cmt._id, user: req.user._id };
-  Cmtlike.findOne(condition).exec(function(err, cmtlike) {
+  Cmtlike.findOne(condition).exec(function (err, cmtlike) {
     if (err) {
       handleError(err);
     } else {

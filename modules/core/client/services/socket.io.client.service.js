@@ -8,6 +8,7 @@ angular.module('core').service('Socket', ['Authentication', '$state', '$timeout'
       // Connect only when authenticated
       if (Authentication.user) {
         this.socket = io();
+        this.init();
       }
     };
     this.connect();
@@ -37,9 +38,9 @@ angular.module('core').service('Socket', ['Authentication', '$state', '$timeout'
       }
     };
 
-    this.init = function() {
+    this.init = function () {
       if (this.socket) {
-        this.socket.emit('init', {user: Authentication.user._id});
+        this.socket.emit('init', { user: Authentication.user._id });
       }
     };
   }

@@ -97,6 +97,7 @@ module.exports = function (io, socket) {
     if (req.type === 0) {
       return;
     }
+    console.log(req);
     var action = (req.type === 1) ? 'liked' : 'disliked';
     var notif = new Notif({
       from: req.from,

@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('core').controller('HeaderController', [
+  '$rootScope',
   '$scope',
   '$state',
   'Authentication',
@@ -8,7 +9,7 @@ angular.module('core').controller('HeaderController', [
   'Socket',
   'NotifsService',
   'NotifsApi',
-  function ($scope, $state, Authentication, Menus, Socket, Notifs, NotifsApi) {
+  function ($rootScope, $scope, $state, Authentication, Menus, Socket, Notifs, NotifsApi) {
     // Expose view variables
     $scope.$state = $state;
     $scope.authentication = Authentication;
@@ -21,14 +22,13 @@ angular.module('core').controller('HeaderController', [
     $scope.toggleCollapsibleMenu = function () {
       $scope.isCollapsed = !$scope.isCollapsed;
     };
-
-    // Collapsing the menu after navigation
-    $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-      $scope.isCollapsed = false;
+    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
       console.log('toState', toState);
     });
-
-    $scope.notifs = 0;
+    // Collapsing the menu after navigation
+    $scope.$on('$stateChangeSuccess', function () {
+      $scope.isCollapsed = false;
+    });
 
     init();
 

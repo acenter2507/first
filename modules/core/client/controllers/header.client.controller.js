@@ -44,16 +44,7 @@ angular.module('core').controller('HeaderController', [
         Socket.connect();
       }
       Socket.on('notifs', res => {
-        Notifs.get({ notifId: res })
-          .$promise.then(notif => {
-            if (notif) {
-              $scope.notifs.pop();
-              $scope.notifs.push(notif);
-            }
-          })
-          .catch(err => {
-            alert(err + '');
-          });
+        loadNotifs(10);
         loadUncheckNotifs();
         console.log('has new notifs');
       });

@@ -26,16 +26,40 @@ module.exports = function (io, socket) {
   });
   // On comment added
   socket.on('cmt_add', req => {
-    console.log(req);
     io.sockets.in(req.pollId).emit('cmt_add', req.cmtId);
     if (req.to) {
       var notif = new Notif({ from: req.from, to: req.to, content: 'has replied your comment on', poll: req.pollId });
       notif.save()
         .then(notif => {
           var socketIds = _.where(global.socketUsers, { user: req.userId });
-          socketIds.forEach(socketId => {
-            io.sockets.connected[socketId].emit('notifs', notif._id);
+          socketIds.forEach(item => {
+            io.sockets.connected[item.socket].emit('notifs', notif._id);
           });
+        });
+    } else {
+      // Tìm toàn bộ các member đang theo dõi poll
+      Polluser.find({ poll: req.pollId, following: true })
+        .then(pollusers => {
+          var notif;
+          // Tạo notif cho toàn bộ các member đang theo dõi
+          pollusers.forEach(polluser => {
+            if (polluser.user !== req.userId) {
+              notif = new Notif({ from: req.from, to: polluser.user, content: 'has posted a comment on', poll: req.pollId });
+              notif.save().then(_notif => {
+                // Kiểm tra member có online không, nếu có thì push notif
+                if (_.contains(global.socketUsers, { user: polluser.user })) {
+                  var socketIds = _.where(global.socketUsers, { user: polluser.user });
+                  socketIds.forEach(item => {
+                    io.sockets.connected[item.socket].emit('notifs', _notif._id);
+                  });
+                }
+              }, err => {
+                console.log('Has error when save notif comment');
+              });
+            }
+          });
+        }, err => {
+          console.log('Has error when get user in poll for comment');
         });
     }
   });

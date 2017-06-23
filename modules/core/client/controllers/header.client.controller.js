@@ -38,6 +38,8 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
       }
       console.log('Controller Header loaded.');
       Socket.on('notifs', (res) => {
+        loadNotifs();
+        loadUncheckNotifs();
         console.log('has new notifs');
       });
     }

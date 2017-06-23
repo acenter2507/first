@@ -10,6 +10,7 @@ var path = require('path'),
   Vote = mongoose.model('Vote'),
   Voteopt = mongoose.model('Voteopt'),
   Polltag = mongoose.model('Polltag'),
+  Polluser = mongoose.model('Polluser'),
   Like = mongoose.model('Like'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
@@ -47,6 +48,10 @@ exports.create = function(req, res) {
     }, handleError)
     .then(() => {
       promises = [];
+      var _polluser = new Polluser({poll: poll._id, user: req.user._id});
+      return _polluser.save();
+    }, handleError)
+    .then((_polluser) => {
       res.jsonp(poll);
     }, handleError);
 

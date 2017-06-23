@@ -31,7 +31,6 @@
     vm.authentication = Authentication;
     vm.poll = poll;
     vm.poll.close = (vm.poll.close) ? moment(vm.poll.close) : vm.poll.close;
-    vm.error = null;
     vm.form = {};
     vm.cmt_sorts = [
       { val: '-updated', name: 'Newest to oldest' },
@@ -47,6 +46,22 @@
     vm.votes = [];
     vm.voteopts = [];
     vm.votedTotal = 0;
+    vm.error = null;
+
+    vm.cmt_processing = false;
+    vm.cmt_typing = false;
+    vm.tmp_cmt = {};
+    vm.tmp_opt = {};
+    vm.like_processing = false;
+    var opt_aside = $aside({
+      scope: $scope,
+      controllerAs: vm,
+      templateUrl: 'modules/polls/client/views/new-opt.client.view.html',
+      title: vm.poll.title,
+      placement: 'bottom',
+      animation: 'am-fade-and-slide-bottom',
+      show: false
+    });
 
     init();
 
@@ -270,6 +285,70 @@
       });
     }
 
+    // Thao tác databse
+    function save_cmt() {
+      if (!vm.tmp_cmt.body || !vm.tmp_cmt.body.length || vm.tmp_cmt.body.length === 0) {
+        return alert('You must type something to reply.');
+      }
+      if (!isLogged()) {
+        $state.go('authentication.signin');
+        return false;
+      }
+      if (vm.cmt_processing) {
+        return alert('Please wait until all comment be submit.');
+      }
+      vm.cmt_processing = true;
+      var rs_cmt = new Cmts(vm.tmp_cmt);
+      var isNew = (!vm.tmp_cmt._id) ? true : false;
+      if (vm.tmp_cmt._id) {
+        rs_cmt.isEdited = true;
+        rs_cmt.updated = new Date();
+        rs_cmt.$update(successCallback, errorCallback);
+      } else {
+        rs_cmt.poll = vm.poll._id;
+        rs_cmt.$save(successCallback, errorCallback);
+      }
+
+      function successCallback(res) {
+        Socket.emit('cmt_add', { pollId: vm.poll._id, cmtId: res._id, isNew: isNew, from: vm.authentication.user._id, to: res.to });
+        vm.tmp_cmt = {};
+        vm.cmt_processing = false;
+        vm.cmt_typing = false;
+      }
+
+      function errorCallback(err) {
+        alert('' + err);
+        vm.cmt_processing = false;
+        //vm.error = res.data.message;
+      }
+    }
+
+    function save_vote() {
+      if (!vm.authentication.user && !vm.poll.allow_guest) {
+        return $state.go('authentication.signin');
+      }
+      if (!vm.selectedOpts.length || vm.selectedOpts.length === 0) {
+        return alert('You must vote at least one option.');
+      }
+      vm.ownVote.opts = vm.selectedOpts;
+      if (vm.ownVote._id) {
+        vm.ownVote.updateCnt += 1;
+        vm.ownVote.$update(successCallback, errorCallback);
+      } else {
+        vm.ownVote.$save(successCallback, errorCallback);
+      }
+
+      function successCallback(res) {
+        vm.ownVote = res;
+        Socket.emit('poll_vote', { pollId: vm.poll._id });
+      }
+
+      function errorCallback(res) {
+        vm.selectedOpts = angular.copy(vm.votedOpts) || [];
+        alert('Vote failed');
+      }
+    }
+
     // Remove existing Poll
     vm.remove = () => {
       if ($window.confirm('Are you sure you want to delete?')) {
@@ -281,7 +360,6 @@
     };
 
     // LIKES
-    vm.like_processing = false;
     var cnt = 0;
     vm.like_poll = () => {
       if (!vm.authentication.user) {
@@ -401,16 +479,6 @@
     };
 
     // OPTIONS
-    vm.tmp_opt = {};
-    var opt_aside = $aside({
-      scope: $scope,
-      controllerAs: vm,
-      templateUrl: 'modules/polls/client/views/new-opt.client.view.html',
-      title: vm.poll.title,
-      placement: 'bottom',
-      animation: 'am-fade-and-slide-bottom',
-      show: false
-    });
     // Click button add option
     vm.input_opt = (opt) => {
       vm.tmp_opt = (!opt) ? new Opts({ poll: vm.poll._id, title: '', body: '', image: 'modules/opts/client/img/option.png', status: 2 }) : new Opts(opt);
@@ -437,49 +505,12 @@
     };
 
     // Comment
-    vm.cmt_processing = false;
-    vm.cmt_typing = false;
-    vm.tmp_cmt = {};
 
     vm.aside_full_screen = () => {
       alert(1);
     };
 
-    vm.save_cmt = () => {
-      if (!vm.tmp_cmt.body || !vm.tmp_cmt.body.length || vm.tmp_cmt.body.length === 0) {
-        return alert('You must type something to reply.');
-      }
-      if (!isLogged()) {
-        $state.go('authentication.signin');
-        return false;
-      }
-      if (vm.cmt_processing) {
-        return alert('Please wait until all comment be submit.');
-      }
-      vm.cmt_processing = true;
-      var rs_cmt = new Cmts(vm.tmp_cmt);
-      if (vm.tmp_cmt._id) {
-        rs_cmt.isEdited = true;
-        rs_cmt.updated = new Date();
-        rs_cmt.$update(successCallback, errorCallback);
-      } else {
-        rs_cmt.poll = vm.poll._id;
-        rs_cmt.$save(successCallback, errorCallback);
-      }
-
-      function successCallback(res) {
-        Socket.emit('cmt_add', { pollId: vm.poll._id, cmtId: res._id });
-        vm.tmp_cmt = {};
-        vm.cmt_processing = false;
-        vm.cmt_typing = false;
-      }
-
-      function errorCallback(err) {
-        alert('' + err);
-        vm.cmt_processing = false;
-        //vm.error = res.data.message;
-      }
-    };
+    vm.save_cmt = save_cmt;
 
     vm.reply_cmt = (cmt) => {
       if (!isLogged()) {
@@ -647,30 +678,6 @@
         return _.contains(vm.votedOpts, opt._id);
       }), 'title');
     };
-    vm.save_vote = () => {
-      if (!vm.authentication.user && !vm.poll.allow_guest) {
-        return $state.go('authentication.signin');
-      }
-      if (!vm.selectedOpts.length || vm.selectedOpts.length === 0) {
-        return alert('You must vote at least one option.');
-      }
-      vm.ownVote.opts = vm.selectedOpts;
-      if (vm.ownVote._id) {
-        vm.ownVote.updateCnt += 1;
-        vm.ownVote.$update(successCallback, errorCallback);
-      } else {
-        vm.ownVote.$save(successCallback, errorCallback);
-      }
-
-      function successCallback(res) {
-        vm.ownVote = res;
-        Socket.emit('poll_vote', { pollId: vm.poll._id });
-      }
-
-      function errorCallback(res) {
-        vm.selectedOpts = angular.copy(vm.votedOpts) || [];
-        alert('Vote failed');
-      }
-    };
+    vm.save_vote = save_vote;
   }
 }());

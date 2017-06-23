@@ -8,6 +8,7 @@ var path = require('path'),
   Cmt = mongoose.model('Cmt'),
   Poll = mongoose.model('Poll'),
   Cmtlike = mongoose.model('Cmtlike'),
+  Polluser = mongoose.model('Polluser'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 
@@ -22,6 +23,14 @@ exports.create = function(req, res) {
     .then(_cmt => {
       cmt = _cmt;
       return Poll.countUpCmt(_cmt.poll);
+    }, handleError)
+    .then(() => {
+      Polluser.findOne({poll: cmt.poll, user: cmt.user}).exec((err, _polluser) => {
+        if (!_polluser) {
+          _polluser = new Polluser({poll: cmt.poll, user: cmt.user});
+          return _polluser.save();
+        }
+      })
     }, handleError)
     .then(() => {
       res.jsonp(cmt);

@@ -27,6 +27,7 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
     function init() {
       if ($scope.authentication.user) {
         loadNotifs();
+        loadUncheckNotifs();
         initSocket();
       }
     }

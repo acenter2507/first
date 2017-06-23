@@ -24,6 +24,7 @@ module.exports = function(io, socket) {
   });
   // On comment added
   socket.on('cmt_add', req => {
+    console.log(req);
     io.sockets.in(req.pollId).emit('cmt_add', req.cmtId);
   });
   // On comment deleted

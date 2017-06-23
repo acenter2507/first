@@ -401,7 +401,7 @@
     };
 
     // OPTIONS
-    vm.option = {};
+    vm.tmp_opt = {};
     var opt_aside = $aside({
       scope: $scope,
       controllerAs: vm,
@@ -413,7 +413,7 @@
     });
     // Click button add option
     vm.input_opt = (opt) => {
-      vm.option = (!opt) ? new Opts({ poll: vm.poll._id, title: '', body: '', image: 'modules/opts/client/img/option.png', status: 2 }) : new Opts(opt);
+      vm.tmp_opt = (!opt) ? new Opts({ poll: vm.poll._id, title: '', body: '', image: 'modules/opts/client/img/option.png', status: 2 }) : new Opts(opt);
       opt_aside.$promise.then(opt_aside.show);
     };
     // Click button save option
@@ -422,10 +422,11 @@
         $scope.$broadcast('show-errors-check-validity', 'vm.form.optForm');
         return false;
       }
-      vm.option.$save(successCallback, errorCallback);
+      vm.tmp_opt.$save(successCallback, errorCallback);
 
       function successCallback(res) {
         opt_aside.$promise.then(opt_aside.hide);
+        Socket.emit('opts_request', { pollId: vm.poll._id })
         alert('Your option is waiting for approve. Thanks.');
       }
 

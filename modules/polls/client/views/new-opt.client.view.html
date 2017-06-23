@@ -14,7 +14,7 @@
               <!-- Title -->
               <div class="form-group" show-errors>
                 <label class="control-label" for="title">Title</label>
-                <input name="title" type="text" ng-model="vm.option.title" class="form-control" placeholder="Title" required>
+                <input name="title" type="text" ng-model="vm.tmp_opt.title" class="form-control" placeholder="Title" required>
                 <div ng-messages="vm.form.optForm.title.$error" role="alert">
                   <p class="help-block error-text" ng-message="required">Opt title is required.</p>
                 </div>
@@ -22,7 +22,7 @@
               <!-- Body -->
               <div class="form-group">
                 <label class="control-label" for="body">Body</label>
-                <textarea name="body" ng-model="vm.option.body" class="form-control" placeholder="Body"></textarea>
+                <textarea name="body" ng-model="vm.tmp_opt.body" class="form-control" placeholder="Body"></textarea>
               </div>
             </fieldset>
           </form>

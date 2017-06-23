@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('core').controller('HeaderController', ['$scope', '$state', 'Authentication', 'Menus', 'Socket', 'NotifsService',
-  function($scope, $state, Authentication, Menus, Socket, Notifs) {
+angular.module('core').controller('HeaderController', ['$scope', '$state', 'Authentication', 'Menus', 'Socket', 'NotifsService', 'NotifsApi'
+  function($scope, $state, Authentication, Menus, Socket, Notifs, NotifsApi) {
     // Expose view variables
     $scope.$state = $state;
     $scope.authentication = Authentication;
@@ -46,21 +46,25 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
 
     function loadNotifs() {
       return new Promise((resolve, reject) => {
-        Notifs.query({ to: $scope.authentication.user._id }, { limit: 10 }, (notifs, responseHeaders) => {
+        Notifs.query({ limit: 1 }, (notifs, responseHeaders) => {
           $scope.notifs = notifs || [];
           console.log($scope.notifs);
-          resolve(notifs);
+          return resolve(notifs);
         });
       });
     }
 
     function loadUncheckNotifs() {
       return new Promise((resolve, reject) => {
-        Notifs.query({ to: $scope.authentication.user._id, status: 0 }, (notifs, responseHeaders) => {
-          $scope.uncheckNotifs = notifs || [];
-          console.log($scope.uncheckNotifs);
-          resolve(notifs);
-        });
+        NotifsApi.countUnchecks()
+          .then(res => {
+            $scope.uncheckNotifs = res.data || 0;
+            return resolve(res.data);
+          })
+          .catch(err => {
+            console.log(err + '');
+            return reject();
+          });
       });
     }
   }

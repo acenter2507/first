@@ -12,9 +12,23 @@
     return $resource('api/notifs/:notifId', {
       notifId: '@_id'
     }, {
-      update: {
-        method: 'PUT'
+        update: {
+          method: 'PUT'
+        }
+      });
+  }
+
+  angular
+    .module('notifs')
+    .factory('NotifsApi', NotifsApi);
+
+  NotifsApi.$inject = ['$http'];
+
+  function NotifsApi($http) {
+    return {
+      countUnchecks: () => {
+        return $http.get('/api/countUnchecks');
       }
-    });
+    };
   }
 }());

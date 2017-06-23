@@ -16,7 +16,7 @@ module.exports = function(app) {
     .get(notifs.read)
     .put(notifs.update)
     .delete(notifs.delete);
-
+  app.route('/api/countUnchecks').get(notifs.countUnchecks);
   // Finish by binding the Notif middleware
   app.param('notifId', notifs.notifByID);
 };

@@ -20,6 +20,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/notifs/:notifId',
       permissions: '*'
+    }, {
+      resources: '/api/countUnchecks',
+      permissions: '*'
     }]
   }, {
     roles: ['user'],
@@ -29,6 +32,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/notifs/:notifId',
       permissions: ['get']
+    }, {
+      resources: '/api/countUnchecks',
+      permissions: '*'
     }]
   }, {
     roles: ['guest'],

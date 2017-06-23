@@ -10,7 +10,8 @@
   </div>
   <nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
     <ul class="nav navbar-nav" ng-if="menu.shouldRender(authentication.user);">
-      <li ng-repeat="item in menu.items | orderBy: 'position'" ng-if="item.shouldRender(authentication.user);" ng-switch="item.type" ng-class="{ active: $state.includes(item.state), dropdown: item.type === 'dropdown' }" class="{{item.class}}" dropdown="item.type === 'dropdown'">
+      <li ng-repeat="item in menu.items | orderBy: 'position'" ng-if="item.shouldRender(authentication.user);" ng-switch="item.type"
+        ng-class="{ active: $state.includes(item.state), dropdown: item.type === 'dropdown' }" class="{{item.class}}" dropdown="item.type === 'dropdown'">
         <a ng-switch-when="dropdown" class="dropdown-toggle" dropdown-toggle role="button">{{::item.title}}&nbsp;<span class="caret"></span></a>
         <ul ng-switch-when="dropdown" class="dropdown-menu">
           <li ng-repeat="subitem in item.items | orderBy: 'position'" ng-if="subitem.shouldRender(authentication.user);" ui-sref-active="active">
@@ -60,25 +61,16 @@
       <li class="dropdown" dropdown ui-sref-active="active">
         <a class="dropdown-toggle notif-dropdown-toggle" dropdown-toggle role="button">
           <span class="fa fa-bell-o fa-lg"></span>
-          <span class="notif-number" ng-bind="uncheckNotifs.length" ng-show="uncheckNotifs.length > 0"></span>
+          <span class="notif-number" ng-bind="uncheckNotifs" ng-show="uncheckNotifs > 0"></span>
         </a>
         </a>
         <ul class="dropdown-menu" role="menu">
-          <li ui-sref-active="active">
-            <a ui-sref="settings.profile">Edit Profile</a>
-          </li>
-          <li ui-sref-active="active">
-            <a ui-sref="settings.picture">Change Profile Picture</a>
-          </li>
-          <li ui-sref-active="active" ng-show="authentication.user.provider === 'local'">
-            <a ui-sref="settings.password">Change Password</a>
-          </li>
-          <li ui-sref-active="active">
-            <a ui-sref="settings.accounts">Manage Social Accounts</a>
+          <li ui-sref-active="active" ng-repeat="notif in notifs">
+            <a ui-sref="polls.view({pollId: notif.poll._id})">{{notif.from.displayName + ' ' + notif.content + ' ' + notif.poll.title}}</a>
           </li>
           <li class="divider"></li>
           <li>
-            <a href="/api/auth/signout" target="_self">Signout</a>
+            <a ui-sref="notifs.list" target="_self">See all notifications</a>
           </li>
         </ul>
       </li>

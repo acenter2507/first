@@ -26,7 +26,7 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
       if ($scope.authentication.user) {
         initSocket();
       }
-    };
+    }
 
     function initSocket() {
       if (!Socket.socket) {

@@ -30,12 +30,12 @@ a:hover .header-profile-image {
   padding-top: 11px !important;
   padding-bottom: 11px !important;
 }
-.notif-toggle {
+.notif-dropdown-toggle {
   position: relative !important;
   background: green;
 }
 .notif-number {
-  position: fixed;
+  position: absolute;
   top: 5px;
   right: 5px;
   height: 15px;

@@ -21,7 +21,7 @@ var PolluserSchema = new Schema({
   following: {
     type: Boolean,
     default: true
-  }
+  },
   created: {
     type: Date,
     default: Date.now

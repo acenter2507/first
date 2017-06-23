@@ -49,10 +49,6 @@ module.exports = function(io, socket) {
           var notif;
           // Tạo notif cho toàn bộ các member đang theo dõi
           pollusers.forEach((polluser, index) => {
-            console.log('polluser', polluser);
-            console.log('index', index);
-            console.log('req.from', req.from);
-            console.log('-------------------------------');
             if (polluser.user.toString() !== req.from.toString()) {
               notif = new Notif({
                 from: req.from,
@@ -63,7 +59,7 @@ module.exports = function(io, socket) {
               notif.save().then(
                 _notif => {
                   var socketIds = _.where(global.socketUsers, {
-                    user: polluser.user
+                    user: polluser.user.toString()
                   });
                   socketIds.forEach(item => {
                     io.sockets.connected[item.socket].emit(

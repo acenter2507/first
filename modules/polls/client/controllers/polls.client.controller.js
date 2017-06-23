@@ -287,9 +287,7 @@
       return new Promise((resolve, reject) => {
         PollsApi.findOwnerVote(poll._id)
           .then(res => {
-            vm.ownVote = res && res.data
-              ? new Votes(res.data)
-              : new Votes({ poll: vm.poll._id });
+            vm.ownVote = (res && res.data) ? new Votes(res.data) : new Votes({ poll: vm.poll._id });
             return vm.ownVote._id ? loadVoteoopts(vm.ownVote._id) : resolve();
           })
           .then(res => {
@@ -535,15 +533,7 @@
     // OPTIONS
     // Click button add option
     vm.input_opt = opt => {
-      vm.tmp_opt = !opt
-        ? new Opts({
-          poll: vm.poll._id,
-          title: '',
-          body: '',
-          image: 'modules/opts/client/img/option.png',
-          status: 2
-        })
-        : new Opts(opt);
+      vm.tmp_opt = (!opt) ? new Opts({ poll: vm.poll._id, title: '', body: '', image: 'modules/opts/client/img/option.png', status: 2 }) : new Opts(opt);
       opt_aside.$promise.then(opt_aside.show);
     };
     // Click button save option

@@ -22,8 +22,9 @@ angular.module('core').controller('HeaderController', [
     $scope.toggleCollapsibleMenu = function () {
       $scope.isCollapsed = !$scope.isCollapsed;
     };
+    console.log('Headercontroller');
     $scope.$on('loginSuccess', () => {
-      console.log('loginSuccess');
+      console.log('loginSuccess 2');
       init();
     });
     // Collapsing the menu after navigation

@@ -160,6 +160,7 @@ var initGlobalConfigFiles = function (config, assets) {
 
 var initGlobalVariables = function() {
   global.socketUsers = [];
+  global.name = 'Ha Nhat Lenh';
 };
 
 /**

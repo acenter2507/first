@@ -9,6 +9,7 @@ module.exports = function (io, socket) {
       global.socketUsers.push({ socket: socket.id, user: req.user });
     }
     console.log('Online users: ', global.socketUsers.length);
+    console.log(global.name);
   });
 
   // Emit the status event when a socket client is disconnected
@@ -16,5 +17,6 @@ module.exports = function (io, socket) {
     global.socketUsers = _.without(global.socketUsers, { socket: socket.id });
     console.log('Has user out system');
     console.log('Online users: ', global.socketUsers.length);
+    console.log(global.name);
   });
 };

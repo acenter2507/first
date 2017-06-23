@@ -107,7 +107,7 @@
         const now = moment(new Date());
         var duration = moment.duration(now.diff(update)).asHours();
         if (duration < 1) {
-          alert('Bạn không thể update poll trong vòng một giờ kể từ lần update trước.');
+          return alert('Bạn không thể update poll trong vòng một giờ kể từ lần update trước.');
         }
         vm.poll.$update(successCallback, errorCallback);
       } else {

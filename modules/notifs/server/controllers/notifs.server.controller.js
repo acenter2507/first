@@ -126,6 +126,7 @@ exports.findNotifs = function(req, res) {
           message: errorHandler.getErrorMessage(err)
         });
       } else {
+        console.log(notifs);
         res.jsonp(notifs);
       }
     });

@@ -76,6 +76,7 @@ angular.module('core').controller('HeaderController', [
       return new Promise((resolve, reject) => {
         NotifsApi.countUnchecks()
           .then(res => {
+            console.log(res);
             $scope.uncheckNotifs = res.data || 0;
             return resolve(res.data);
           })

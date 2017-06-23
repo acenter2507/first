@@ -47,6 +47,7 @@ angular.module('core').controller('HeaderController', [
         Notifs.get({ notifId: res })
           .$promise.then(notif => {
             if (notif) {
+              scope.notifs.pop();
               $scope.notifs.push(notif);
             }
           })

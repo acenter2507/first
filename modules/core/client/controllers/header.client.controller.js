@@ -22,8 +22,9 @@ angular.module('core').controller('HeaderController', [
     $scope.toggleCollapsibleMenu = function () {
       $scope.isCollapsed = !$scope.isCollapsed;
     };
-    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-      console.log('toState', toState);
+    $scope.$watch('authentication', (newValue, oldValue) => {
+      console.log('newValue', newValue);
+      console.log('oldValue', oldValue);
     });
     // Collapsing the menu after navigation
     $scope.$on('$stateChangeSuccess', function () {

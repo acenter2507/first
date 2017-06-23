@@ -23,8 +23,9 @@ angular.module('core').controller('HeaderController', [
     };
 
     // Collapsing the menu after navigation
-    $scope.$on('$stateChangeSuccess', function () {
+    $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
       $scope.isCollapsed = false;
+      console.log('toState', toState);
     });
 
     $scope.notifs = 0;

@@ -30,7 +30,7 @@ exports.create = function(req, res) {
           _polluser = new Polluser({poll: cmt.poll, user: cmt.user});
           return _polluser.save();
         }
-      })
+      });
     }, handleError)
     .then(() => {
       res.jsonp(cmt);

@@ -160,7 +160,7 @@ var initGlobalConfigFiles = function (config, assets) {
 
 var initGlobalVariables = function() {
   global.socketUsers = [];
-}
+};
 
 /**
  * Initialize global configuration

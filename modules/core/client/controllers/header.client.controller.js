@@ -1,6 +1,13 @@
 'use strict';
 
-angular.module('core').controller('HeaderController', ['$scope', '$state', 'Authentication', 'Menus', 'Socket', 'NotifsService', 'NotifsApi',
+angular.module('core').controller('HeaderController', [
+  '$scope',
+  '$state',
+  'Authentication',
+  'Menus',
+  'Socket',
+  'NotifsService',
+  'NotifsApi',
   function ($scope, $state, Authentication, Menus, Socket, Notifs, NotifsApi) {
     // Expose view variables
     $scope.$state = $state;
@@ -26,7 +33,7 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
 
     function init() {
       if ($scope.authentication.user) {
-        loadNotifs();
+        loadNotifs(10);
         loadUncheckNotifs();
         initSocket();
       }
@@ -36,8 +43,16 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
       if (!Socket.socket) {
         Socket.connect();
       }
-      Socket.on('notifs', (res) => {
-        loadNotifs();
+      Socket.on('notifs', res => {
+        Notifs.get({ notifId: res })
+          .$promise.then(notif => {
+            if (notif) {
+              $scope.notifs.push(notif);
+            }
+          })
+          .catch(err => {
+            alert(err + '');
+          });
         loadUncheckNotifs();
         console.log('has new notifs');
       });
@@ -45,10 +60,15 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
 
     function loadNotifs() {
       return new Promise((resolve, reject) => {
-        Notifs.query({ limit: 1 }, (notifs, responseHeaders) => {
-          $scope.notifs = notifs || [];
-          return resolve(notifs);
-        });
+        NotifsApi.findNotifs()
+          .then(notifs => {
+            $scope.notifs = notifs || [];
+            return resolve(notifs);
+          })
+          .catch(err => {
+            alert(err + '');
+            return reject(err);
+          });
       });
     }
 

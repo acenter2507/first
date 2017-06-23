@@ -111,6 +111,25 @@ exports.countUnchecks = function(req, res) {
   });
 };
 
+exports.findNotifs = function(req, res) {
+  var limit = parseInt(req.params.limit);
+  Notif.find({ to: req.user._id })
+    .sort('-created')
+    .limit(limit)
+    .populate('poll', 'title')
+    .populate('from', 'displayName profileImageURL')
+    .populate('to', 'displayName profileImageURL')
+    .exec(function(err, notifs) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.jsonp(notifs);
+      }
+    });
+};
+
 /**
  * Notif middleware
  */

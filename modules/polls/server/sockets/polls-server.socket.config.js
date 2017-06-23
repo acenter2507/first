@@ -48,8 +48,12 @@ module.exports = function(io, socket) {
         pollusers => {
           var notif;
           // Tạo notif cho toàn bộ các member đang theo dõi
-          pollusers.forEach(polluser => {
-            if (polluser.user !== req.from) {
+          pollusers.forEach((polluser, index) => {
+            console.log('polluser', polluser);
+            console.log('index', index);
+            console.log('req.from', req.from);
+            console.log('-------------------------------');
+            if (polluser.user.toString() !== req.from.toString()) {
               notif = new Notif({
                 from: req.from,
                 to: polluser.user,
@@ -58,19 +62,15 @@ module.exports = function(io, socket) {
               });
               notif.save().then(
                 _notif => {
-                  // Kiểm tra member có online không, nếu có thì push notif
-                  if (_.contains(global.socketUsers, { user: polluser.user })) {
-                    var socketIds = _.where(global.socketUsers, {
-                      user: polluser.user
-                    });
-                    console.log('socketIds', socketIds);
-                    socketIds.forEach(item => {
-                      io.sockets.connected[item.socket].emit(
-                        'notifs',
-                        _notif._id
-                      );
-                    });
-                  }
+                  var socketIds = _.where(global.socketUsers, {
+                    user: polluser.user
+                  });
+                  socketIds.forEach(item => {
+                    io.sockets.connected[item.socket].emit(
+                      'notifs',
+                      _notif._id
+                    );
+                  });
                 },
                 err => {
                   console.log('Has error when save notif comment');

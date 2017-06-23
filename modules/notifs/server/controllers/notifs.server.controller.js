@@ -118,7 +118,7 @@ exports.findNotifs = function(req, res) {
     .populate('poll', 'title')
     .populate('from', 'displayName profileImageURL')
     .populate('to', 'displayName profileImageURL')
-    .limit(2)
+    .limit(limit)
     .exec(function(err, notifs) {
       if (err) {
         return res.status(400).send({

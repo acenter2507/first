@@ -166,6 +166,12 @@
     vm.remove_opt = (opt) => {
       if ($window.confirm('Are you sure you want to remove?')) {
         if (opt._id) {
+          const update = moment(vm.poll.updated);
+          const now = moment(new Date());
+          var duration = moment.duration(now.diff(update)).asHours();
+          if (duration < 1) {
+            return alert('Bạn không thể update poll trong vòng một giờ kể từ lần update trước.');
+          }
           var _opt = new Opts(opt);
           _opt.$remove(() => {
             Socket.emit('opts_update', { pollId: vm.poll._id });

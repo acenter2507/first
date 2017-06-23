@@ -30,6 +30,19 @@ a:hover .header-profile-image {
   padding-top: 11px !important;
   padding-bottom: 11px !important;
 }
+.notif-dropdown-toggle {
+  position: relative;
+}
+.notif-number {
+  position: fixed;
+  top: 5px;
+  right: 5px;
+  height: 15px;
+  width: 10px;
+  font-size: 0.9em;
+  background-color: red;
+  color: #fff;
+}
 .error-text {
   display: none;
 }

@@ -20,6 +20,8 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
       $scope.isCollapsed = false;
     });
 
+    $scope.notifs = 1;
+
     init();
 
     function init() {

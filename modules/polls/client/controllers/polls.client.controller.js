@@ -454,7 +454,7 @@
           likeCnt: res.likeCnt,
           from: vm.authentication.user._id,
           to: vm.poll.user._id,
-          type: res.type
+          type: res.like.type
         });
         vm.like_processing = false;
         bk_like = null;
@@ -524,7 +524,7 @@
           likeCnt: res.likeCnt,
           from: vm.authentication.user._id,
           to: vm.poll.user._id,
-          type: res.type
+          type: res.like.type
         });
         vm.like_processing = false;
         bk_like = null;

@@ -61,9 +61,8 @@ angular.module('core').controller('HeaderController', [
     function loadNotifs(limit) {
       return new Promise((resolve, reject) => {
         NotifsApi.findNotifs(limit)
-          .then(notifs => {
-            console.log(notifs);
-            $scope.notifs = notifs || [];
+          .then(res => {
+            $scope.notifs = res.data || [];
             return resolve(notifs);
           })
           .catch(err => {

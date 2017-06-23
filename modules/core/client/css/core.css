@@ -31,7 +31,7 @@ a:hover .header-profile-image {
   padding-bottom: 11px !important;
 }
 .notif-dropdown-toggle {
-  position: relative;
+  position: relative !important;
   background: green;
 }
 .notif-number {

@@ -1,11 +1,11 @@
 'use strict';
 
-const _ = require('lodash');
+const _ = require('underscore');
 // Create the chat configuration
 module.exports = function (io, socket) {
   socket.on('init', function (req) {
     console.log('Has user join system');
-    if (!_.constant(global.socketUsers, { socket: socket.id })) {
+    if (!_.contains(global.socketUsers, { socket: socket.id })) {
       global.socketUsers.push({ socket: socket.id, user: req.user });
     }
     console.log('Online users: ', global.socketUsers.length);

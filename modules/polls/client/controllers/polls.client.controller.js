@@ -426,7 +426,7 @@
 
       function successCallback(res) {
         opt_aside.$promise.then(opt_aside.hide);
-        Socket.emit('opts_request', { pollId: vm.poll._id })
+        Socket.emit('opts_request', { pollId: vm.poll._id });
         alert('Your option is waiting for approve. Thanks.');
       }
 

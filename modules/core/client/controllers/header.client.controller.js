@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('core').controller('HeaderController', ['$scope', '$state', 'Authentication', 'Menus', 'Socket', 'NotifsService', 'NotifsApi',
-  function($scope, $state, Authentication, Menus, Socket, Notifs, NotifsApi) {
+  function ($scope, $state, Authentication, Menus, Socket, Notifs, NotifsApi) {
     // Expose view variables
     $scope.$state = $state;
     $scope.authentication = Authentication;
@@ -36,7 +36,6 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
       if (!Socket.socket) {
         Socket.connect();
       }
-      console.log('Controller Header loaded.');
       Socket.on('notifs', (res) => {
         loadNotifs();
         loadUncheckNotifs();
@@ -48,7 +47,6 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
       return new Promise((resolve, reject) => {
         Notifs.query({ limit: 1 }, (notifs, responseHeaders) => {
           $scope.notifs = notifs || [];
-          console.log($scope.notifs);
           return resolve(notifs);
         });
       });

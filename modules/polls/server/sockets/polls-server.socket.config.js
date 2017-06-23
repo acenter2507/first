@@ -47,10 +47,9 @@ module.exports = function(io, socket) {
       Polluser.find({ poll: req.pollId, following: true }).then(
         pollusers => {
           var notif;
-          console.log('pollusers', pollusers);
           // Tạo notif cho toàn bộ các member đang theo dõi
           pollusers.forEach(polluser => {
-            if (polluser.user !== req.userId) {
+            if (polluser.user !== req.from) {
               notif = new Notif({
                 from: req.from,
                 to: polluser.user,
@@ -64,6 +63,7 @@ module.exports = function(io, socket) {
                     var socketIds = _.where(global.socketUsers, {
                       user: polluser.user
                     });
+                    console.log('socketIds', socketIds);
                     socketIds.forEach(item => {
                       io.sockets.connected[item.socket].emit(
                         'notifs',

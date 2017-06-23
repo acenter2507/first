@@ -654,7 +654,10 @@
         Socket.emit('cmt_like', {
           pollId: vm.poll._id,
           cmtId: cmt._id,
-          likeCnt: res.likeCnt
+          likeCnt: res.likeCnt,
+          from: vm.authentication.user._id,
+          to: cmt.user._id,
+          type: res.like.type
         });
         vm.like_processing = false;
         bk_like = null;
@@ -720,7 +723,10 @@
         Socket.emit('cmt_like', {
           pollId: vm.poll._id,
           cmtId: cmt._id,
-          likeCnt: res.likeCnt
+          likeCnt: res.likeCnt,
+          from: vm.authentication.user._id,
+          to: cmt.user._id,
+          type: res.like.type
         });
         vm.like_processing = false;
         bk_like = null;

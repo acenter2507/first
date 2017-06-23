@@ -30,7 +30,7 @@ a:hover .header-profile-image {
   padding-top: 11px !important;
   padding-bottom: 11px !important;
 }
-.notif-dropdown-toggle {
+.notif-toggle {
   position: relative !important;
   background: green;
 }

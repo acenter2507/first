@@ -58,9 +58,11 @@
     <!-- Notifs -->
     <ul class="nav navbar-nav navbar-right" ng-show="authentication.user">
       <li class="dropdown" dropdown ui-sref-active="active">
-        <a class="dropdown-toggle notif-dropdown-toggle" dropdown-toggle role="button">
-          <span class="fa fa-bell-o fa-lg"></span>
-          <span class="notif-number">{{notifs}}</span>
+        <a class="dropdown-toggle" dropdown-toggle role="button">
+          <div class="notif-toggle">
+            <span class="fa fa-bell-o fa-lg"></span>
+            <span class="notif-number">{{notifs}}</span>
+          </div>
         </a>
         </a>
         <ul class="dropdown-menu" role="menu">

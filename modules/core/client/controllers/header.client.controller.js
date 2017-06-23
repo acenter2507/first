@@ -23,7 +23,7 @@ angular.module('core').controller('HeaderController', [
       $scope.isCollapsed = !$scope.isCollapsed;
     };
     console.log('Headercontroller');
-    $scope.$on('loginSuccess', () => {
+    $rootScope.$on('loginSuccess', () => {
       console.log('loginSuccess 2');
       init();
     });

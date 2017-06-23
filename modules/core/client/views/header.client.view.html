@@ -65,7 +65,7 @@
         </a>
         </a>
         <ul class="dropdown-menu" role="menu">
-          <li ng-repeat="notif in notifs">
+          <li ng-repeat="notif in notifs | orderBy: 'created'">
             <a ui-sref="polls.view({pollId: notif.poll._id})">{{notif.from.displayName + ' ' + notif.content + ' ' + notif.poll.title}}</a>
           </li>
           <li class="divider"></li>

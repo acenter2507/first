@@ -158,10 +158,15 @@ var initGlobalConfigFiles = function (config, assets) {
   config.files.client.tests = getGlobbedPaths(assets.client.tests);
 };
 
+var initGlobalVariables = function() {
+  global.socketUsers = [];
+}
+
 /**
  * Initialize global configuration
  */
 var initGlobalConfig = function () {
+  initGlobalVariables();
   // Validate NODE_ENV existence
   validateEnvironmentVariable();
 

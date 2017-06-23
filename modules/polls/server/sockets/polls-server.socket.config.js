@@ -8,6 +8,8 @@ var path = require('path'),
   Vote = mongoose.model('Vote'),
   Voteopt = mongoose.model('Voteopt'),
   Polltag = mongoose.model('Polltag'),
+  Polluser = mongoose.model('Polluser'),
+  Notif = mongoose.model('Notif'),
   Like = mongoose.model('Like'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
@@ -26,6 +28,13 @@ module.exports = function(io, socket) {
   socket.on('cmt_add', req => {
     console.log(req);
     io.sockets.in(req.pollId).emit('cmt_add', req.cmtId);
+    if (req.to) {
+      var notif = new Notif({from: req.from, to: req.to, content: 'has replied your comment on', poll: req.pollId});
+      notif.save()
+      .then(notif => {
+        io.sockets.in(req.pollId).emit('cmt_add', req.cmtId);
+      });
+    }
   });
   // On comment deleted
   socket.on('cmt_del', req => {

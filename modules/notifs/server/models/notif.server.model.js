@@ -20,7 +20,7 @@ var NotifSchema = new Schema({
   },
   type: {
     type: Number,
-    default: 0
+    default: 0 // 0: comment to, 1: comment
   },
   content: {
     type: String,

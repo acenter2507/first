@@ -36,5 +36,11 @@ angular.module('core').service('Socket', ['Authentication', '$state', '$timeout'
         this.socket.removeListener(eventName);
       }
     };
+
+    this.init = function() {
+      if (this.socket) {
+        this.socket.emit('init', {user: Authentication.user._id});
+      }
+    }
   }
 ]);

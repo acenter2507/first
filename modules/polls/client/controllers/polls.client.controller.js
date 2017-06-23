@@ -764,5 +764,9 @@
       );
     };
     vm.save_vote = save_vote;
+
+    $scope.$watch('tmp_cmt', () => {
+      console.log('fkas;fk;ask;fakd;lka;sdk;aksd;las');
+    });
   }
 })();

@@ -85,6 +85,12 @@
         });
     }
 
+    function isCanUpdate() {
+      const update = moment(vm.poll.updated);
+      const now = moment(new Date());
+      var duration = moment.duration(now.diff(update)).asHours();
+      return (duration >= 1);
+    }
     // Function
     vm.remove = () => {
       if ($window.confirm('Are you sure you want to delete?')) {
@@ -103,10 +109,7 @@
       var isNew = (!vm.poll._id) ? true : false;
       vm.poll.opts = vm.opts;
       if (vm.poll._id) {
-        const update = moment(vm.poll.updated);
-        const now = moment(new Date());
-        var duration = moment.duration(now.diff(update)).asHours();
-        if (duration < 1) {
+        if (!isCanUpdate()) {
           return alert('Bạn không thể update poll trong vòng một giờ kể từ lần update trước.');
         }
         vm.poll.$update(successCallback, errorCallback);
@@ -166,10 +169,7 @@
     vm.remove_opt = (opt) => {
       if ($window.confirm('Are you sure you want to remove?')) {
         if (opt._id) {
-          const update = moment(vm.poll.updated);
-          const now = moment(new Date());
-          var duration = moment.duration(now.diff(update)).asHours();
-          if (duration < 1) {
+          if (!isCanUpdate()) {
             return alert('Bạn không thể update poll trong vòng một giờ kể từ lần update trước.');
           }
           var _opt = new Opts(opt);

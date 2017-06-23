@@ -97,10 +97,11 @@ module.exports = function (io, socket) {
     if (req.type === 0) {
       return;
     }
+    var action = (req.type === 1) ? 'liked' : 'disliked';
     var notif = new Notif({
       from: req.from,
       to: req.to,
-      content: 'has liked your comment on',
+      content: 'has ' + action + ' your comment on',
       poll: req.pollId
     });
     notif.save().then(notif => {

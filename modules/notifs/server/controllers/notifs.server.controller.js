@@ -116,10 +116,10 @@ exports.findNotifs = function(req, res) {
   console.log('limit', limit);
   Notif.find({ to: req.user._id })
     .sort('-created')
-    .limit(limit)
     .populate('poll', 'title')
     .populate('from', 'displayName profileImageURL')
     .populate('to', 'displayName profileImageURL')
+    .limit(2)
     .exec(function(err, notifs) {
       if (err) {
         return res.status(400).send({

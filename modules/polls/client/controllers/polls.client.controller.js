@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   // Polls controller
@@ -133,7 +133,7 @@
       Socket.on('opts_update', (res) => {
         loadOpts();
       });
-      $scope.$on('$destroy', function() {
+      $scope.$on('$destroy', function () {
         Socket.emit('unsubscribe', { pollId: vm.poll._id, userId: vm.authentication.user._id });
         Socket.removeListener('cmt_add');
         Socket.removeListener('cmt_del');
@@ -663,18 +663,18 @@
     };
 
     // VOTE
-    vm.checked = function(id) {
+    vm.checked = function (id) {
       if (_.contains(vm.selectedOpts, id)) {
         vm.selectedOpts = _.without(vm.selectedOpts, id);
       } else {
         vm.selectedOpts.push(id);
       }
     };
-    vm.is_voted = function(id) {
+    vm.is_voted = function (id) {
       return _.contains(vm.selectedOpts, id);
     };
-    vm.voted_title = function() {
-      return _.pluck(_.filter(vm.opts, function(opt) {
+    vm.voted_title = function () {
+      return _.pluck(_.filter(vm.opts, function (opt) {
         return _.contains(vm.votedOpts, opt._id);
       }), 'title');
     };

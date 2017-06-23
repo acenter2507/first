@@ -149,7 +149,7 @@
     }
 
     // OPTIONS
-    vm.option = {};
+    vm.tmp_opt = {};
     var opt_aside = $aside({
       scope: $scope,
       controllerAs: vm,
@@ -160,7 +160,7 @@
       show: false
     });
     vm.input_opt = (opt) => {
-      vm.option = (!opt) ? { poll: vm.poll._id, title: '', body: '', image: 'modules/opts/client/img/option.png', status: 1 } : opt;
+      vm.tmp_opt = (!opt) ? { poll: vm.poll._id, title: '', body: '', image: 'modules/opts/client/img/option.png', status: 1 } : opt;
       opt_aside.$promise.then(opt_aside.show);
     };
     vm.remove_opt = (opt) => {
@@ -204,8 +204,8 @@
         $scope.$broadcast('show-errors-check-validity', 'vm.form.optForm');
         return false;
       }
-      if (!vm.option._id && !_.contains(vm.opts, vm.option)) {
-        vm.opts.push(vm.option);
+      if (!vm.tmp_opt._id && !_.contains(vm.opts, vm.tmp_opt)) {
+        vm.opts.push(vm.tmp_opt);
       }
       opt_aside.$promise.then(opt_aside.hide);
     };

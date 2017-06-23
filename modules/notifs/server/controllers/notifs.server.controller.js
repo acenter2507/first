@@ -113,7 +113,6 @@ exports.countUnchecks = function(req, res) {
 
 exports.findNotifs = function(req, res) {
   var limit = parseInt(req.params.limit);
-  console.log('limit', limit);
   Notif.find({ to: req.user._id })
     .sort('-created')
     .populate('poll', 'title')
@@ -126,7 +125,6 @@ exports.findNotifs = function(req, res) {
           message: errorHandler.getErrorMessage(err)
         });
       } else {
-        console.log(notifs);
         res.jsonp(notifs);
       }
     });

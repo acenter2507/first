@@ -38,9 +38,7 @@ module.exports = function(io, socket) {
       });
       notif.save().then(notif => {
         var socketIds = _.where(global.socketUsers, { user: req.to });
-        console.log('socketIds', socketIds);
         socketIds.forEach(item => {
-          console.log('item.socket', item.socket);
           io.sockets.connected[item.socket].emit('notifs', notif._id);
         });
       });
@@ -49,6 +47,7 @@ module.exports = function(io, socket) {
       Polluser.find({ poll: req.pollId, following: true }).then(
         pollusers => {
           var notif;
+          console.log('pollusers', pollusers);
           // Tạo notif cho toàn bộ các member đang theo dõi
           pollusers.forEach(polluser => {
             if (polluser.user !== req.userId) {

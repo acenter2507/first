@@ -321,7 +321,7 @@
 
     function loadPolluser() {
       return new Promise((resolve, reject) => {
-        PollsApi.findPolluser(id)
+        PollsApi.findPolluser(vm.poll._id)
           .then(res => {
             vm.polluser = new Pollusers(res.data) || new Pollusers();
             return resolve(res);

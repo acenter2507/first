@@ -30,10 +30,12 @@
             </ul>
           </span>
           <br>
-          <h4 class="poll_item_title"><a ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a></h4>
+          <span ng-if="poll.allow_guest" class="fa fa-globe"></span>
+          <span ng-if="!poll.allow_guest" class="fa fa-users"></span>
           <div class="clearfix"></div>
         </div>
         <div clas="poll-body">
+          <h4 class="poll_item_title"><a ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a></h4>
           <p class="text-justify poll_item_body" ng-bind="poll.summary"></p>
           <p ng-show="poll.body.length > poll.summary.length" class="poll_item_body">...
             <a ui-sref="polls.view({ pollId: poll._id })">more</a>

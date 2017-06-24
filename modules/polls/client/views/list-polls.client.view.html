@@ -32,7 +32,7 @@
           <br>
           <span ng-if="poll.allow_guest" class="fa fa-globe"></span>
           <span ng-if="!poll.allow_guest" class="fa fa-users"></span>
-          <hr>
+          <hr class="mg10t mg10b">
           <div class="clearfix"></div>
         </div>
         <div clas="poll-body">
@@ -41,7 +41,7 @@
           <p ng-show="poll.body.length > poll.summary.length" class="poll_item_body">...
             <a ui-sref="polls.view({ pollId: poll._id })">more</a>
           </p>
-          <hr>
+          <hr class="mg10t mg10b">
           <div class="clearfix"></div>
         </div>
         <div clas="poll-footer">

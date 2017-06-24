@@ -16,8 +16,8 @@
           <span class="pull-left">
             <strong><a ui-sref="users.info({userId: poll.user._id})" ng-if="poll.user" ng-bind="poll.user.displayName"></a></strong>
             <span ng-if="!poll.user">Deleted User</span>
-          <span class="text-muted">&nbsp;created on</span>
-          <span class="text-muted" ng-bind="poll.created | date:'mediumDate'"></span>
+            <span class="text-muted">&nbsp;created on</span>
+            <span class="text-muted" ng-bind="poll.created | date:'mediumDate'"></span>
           </span>
           <span class="pull-right">
             <a href="#" bs-dropdown aria-haspopup="true" aria-expanded="false">
@@ -42,9 +42,8 @@
             <a ui-sref="polls.view({ pollId: poll._id })">more</a>
           </p>
           <br>
-          <div class="progress progress-danger progress-striped active">
-            <div style="width:40%;" class="bar"></div>
-          </div>
+          <div progress-bar="" data-total="50" data-complete-label=" hrs" data-complete="{{45}}" data-label="Tech Hours" title="Tech Hours Progress"></div>
+          <div progress-bar="" data-total="50" data-complete-label=" hrs"  data-bar-class="progress-bar-warning" data-complete="{{45}}" data-label="Tech Hours" title="Tech Hours Progress"></div>
           <hr class="mg10t mg10b">
           <div class="clearfix"></div>
         </div>

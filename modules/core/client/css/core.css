@@ -701,3 +701,12 @@ a:hover .header-profile-image {
 .bg-black {
   background-color: black;
 }
+.bg-green {
+  background-color: green;
+}
+.bg-blue {
+  background-color: blue;
+}
+.bg-main {
+  background-color: #f5f5f5;
+}

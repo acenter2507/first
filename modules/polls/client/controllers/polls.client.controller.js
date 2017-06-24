@@ -573,7 +573,6 @@
         vm.polluser.$save(successCallback, errorCallback);
       }
       function successCallback(res) {
-        alert('following success');
       }
 
       function errorCallback(err) {

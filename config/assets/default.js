@@ -29,7 +29,8 @@ module.exports = {
         'public/lib/ng-tags-input/ng-tags-input.js',
         'public/lib/underscore/underscore.js',
         'public/lib/moment/moment.js',
-        'public/lib/angular-moment-picker/dist/angular-moment-picker.js'
+        'public/lib/angular-moment-picker/dist/angular-moment-picker.js',
+        'public/lib/angular-tek-progress-bar/dist/tek.progress-bar.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

@@ -22,9 +22,7 @@ angular.module('core').controller('HeaderController', [
     $scope.toggleCollapsibleMenu = function () {
       $scope.isCollapsed = !$scope.isCollapsed;
     };
-    console.log('Headercontroller');
     $rootScope.$on('loginSuccess', () => {
-      console.log('loginSuccess 2');
       init();
     });
     // Collapsing the menu after navigation
@@ -49,7 +47,6 @@ angular.module('core').controller('HeaderController', [
       Socket.on('notifs', res => {
         loadNotifs(10);
         loadUncheckNotifs();
-        console.log('has new notifs');
       });
     }
 

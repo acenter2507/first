@@ -24,6 +24,7 @@ module.exports = function(app) {
   app.route('/api/findOwnerVote/:pollId').get(polls.findOwnerVote);
   app.route('/api/findVoteopts/:pollId').get(polls.findVoteopts);
   app.route('/api/findPollLike/:pollId').get(polls.findPollLike);
+  app.route('/api/findPolluser/:pollId').get(polls.findPolluser);
 
   // Finish by binding the Poll middleware
   app.param('pollId', polls.pollByID);

@@ -27,7 +27,7 @@ angular.module('users').controller('AuthenticationController', ['$rootScope', '$
         $scope.authentication.user = response;
 
         // And redirect to the previous or home page
-        $scope.$emit('loginSuccess');
+        $rootScope.$emit('loginSuccess');
         $state.go($state.previous.state.name || 'home', $state.previous.params);
       }).error(function (response) {
         $scope.error = response.message;
@@ -49,7 +49,6 @@ angular.module('users').controller('AuthenticationController', ['$rootScope', '$
 
         // And redirect to the previous or home page
         $rootScope.$emit('loginSuccess');
-        console.log('loginSuccess 1');
         $state.go($state.previous.state.name || 'home', $state.previous.params);
       }).error(function (response) {
         $scope.error = response.message;

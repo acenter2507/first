@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
   // Polls controller
   angular.module('polls').controller('PollsController', PollsController);
@@ -20,6 +20,7 @@
     'LikesService',
     'CmtsApi',
     'CmtlikesService',
+    'PollusersService',
     'Socket'
   ];
 
@@ -40,6 +41,7 @@
     Likes,
     CmtsApi,
     Cmtlikes,
+    Pollusers,
     Socket
   ) {
     var vm = this;
@@ -56,6 +58,7 @@
 
     vm.poll.tags = [];
     vm.like = {};
+    vm.polluser = {};
     vm.opts = [];
     vm.cmts = [];
     vm.votes = [];
@@ -95,6 +98,8 @@
       loadPollLike();
       // Load owner vote
       loadOwnerVote();
+      // load following info
+      loadPolluser();
       // Init socket
       initSocket();
     }
@@ -159,7 +164,7 @@
       Socket.on('opts_update', res => {
         loadOpts();
       });
-      $scope.$on('$destroy', function() {
+      $scope.$on('$destroy', function () {
         Socket.emit('unsubscribe', {
           pollId: vm.poll._id,
           userId: vm.authentication.user._id
@@ -314,6 +319,19 @@
       });
     }
 
+    function loadPolluser() {
+      return new Promise((resolve, reject) => {
+        PollsApi.findPolluser(id)
+          .then(res => {
+            vm.polluser = new Pollusers(res.data) || new Pollusers();
+            return resolve(res);
+          })
+          .catch(err => {
+            alert(err + '');
+            return reject(err);
+          });
+      });
+    }
     // Thao tác databse
     function save_cmt() {
       if (
@@ -449,7 +467,7 @@
 
       function successCallback(res) {
         vm.like = res.like;
-        Socket.emit('poll_like', { 
+        Socket.emit('poll_like', {
           pollId: vm.poll._id,
           likeCnt: res.likeCnt,
           from: vm.authentication.user._id,
@@ -519,7 +537,7 @@
 
       function successCallback(res) {
         vm.like = res.like;
-        Socket.emit('poll_like', { 
+        Socket.emit('poll_like', {
           pollId: vm.poll._id,
           likeCnt: res.likeCnt,
           from: vm.authentication.user._id,
@@ -538,6 +556,29 @@
         cnt = 0;
         vm.like_processing = false;
         console.log(err);
+      }
+    };
+
+    vm.follow_poll = () => {
+      if (!isLogged()) {
+        return alert('You must login to dislike this poll.');
+      }
+      if (vm.polluser._id) {
+        vm.polluser.following = !vm.polluser.following;
+        vm.polluser.$update(successCallback, errorCallback);
+      } else {
+        vm.polluser.poll = vm.poll._id;
+        vm.polluser.user = vm.authentication.user._id;
+        vm.polluser.following = true;
+        vm.polluser.$save(successCallback, errorCallback);
+      }
+      function successCallback(res) {
+        alert('following success');
+      }
+
+      function errorCallback(err) {
+        vm.polluser.following = !vm.polluser.following;
+        alert('following success:' + err);
       }
     };
 
@@ -745,19 +786,19 @@
     };
 
     // VOTE
-    vm.checked = function(id) {
+    vm.checked = function (id) {
       if (_.contains(vm.selectedOpts, id)) {
         vm.selectedOpts = _.without(vm.selectedOpts, id);
       } else {
         vm.selectedOpts.push(id);
       }
     };
-    vm.is_voted = function(id) {
+    vm.is_voted = function (id) {
       return _.contains(vm.selectedOpts, id);
     };
-    vm.voted_title = function() {
+    vm.voted_title = function () {
       return _.pluck(
-        _.filter(vm.opts, function(opt) {
+        _.filter(vm.opts, function (opt) {
           return _.contains(vm.votedOpts, opt._id);
         }),
         'title'
@@ -765,8 +806,5 @@
     };
     vm.save_vote = save_vote;
 
-    $scope.$watch('tmp_cmt', () => {
-      console.log('fkas;fk;ask;fakd;lka;sdk;aksd;las');
-    });
   }
 })();

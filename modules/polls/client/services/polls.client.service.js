@@ -1,5 +1,5 @@
 // Polls service used to communicate Polls REST endpoints
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -12,10 +12,10 @@
     return $resource('api/polls/:pollId', {
       pollId: '@_id'
     }, {
-      update: {
-        method: 'PUT'
-      }
-    });
+        update: {
+          method: 'PUT'
+        }
+      });
   }
 
   angular
@@ -26,26 +26,29 @@
 
   function PollsApi($http) {
     return {
-      findOpts: (id) => {
+      findOpts: id => {
         return $http.get('/api/findOpts/' + id);
       },
-      findCmts: (id) => {
+      findCmts: id => {
         return $http.get('/api/findCmts/' + id);
       },
-      findTags: (id) => {
+      findTags: id => {
         return $http.get('/api/findTags/' + id);
       },
-      findVotes: (id) => {
+      findVotes: id => {
         return $http.get('/api/findVotes/' + id);
       },
-      findOwnerVote: (id) => {
+      findOwnerVote: id => {
         return $http.get('/api/findOwnerVote/' + id);
       },
-      findVoteopts: (id) => {
+      findVoteopts: id => {
         return $http.get('/api/findVoteopts/' + id);
       },
-      findPollLike: (id) => {
+      findPollLike: id => {
         return $http.get('/api/findPollLike/' + id);
+      },
+      findPolluser: id => {
+        return $http.get('/api/findPolluser/' + id);
       }
     };
   }

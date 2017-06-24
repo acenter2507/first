@@ -18,7 +18,7 @@ var path = require('path'),
 /**
  * Create a Poll
  */
-exports.create = function(req, res) {
+exports.create = function (req, res) {
   var poll = new Poll(req.body);
   poll.user = req.user;
 
@@ -65,7 +65,7 @@ exports.create = function(req, res) {
 /**
  * Show the current Poll
  */
-exports.read = function(req, res) {
+exports.read = function (req, res) {
   // convert mongoose document to JSON
   var poll = req.poll ? req.poll.toJSON() : {};
 
@@ -80,7 +80,7 @@ exports.read = function(req, res) {
 /**
  * Update a Poll
  */
-exports.update = function(req, res) {
+exports.update = function (req, res) {
   var poll = req.poll;
   poll = _.extend(poll, req.body);
   var tags = req.body.tags || [];
@@ -134,7 +134,7 @@ exports.update = function(req, res) {
 /**
  * Delete an Poll
  */
-exports.delete = function(req, res) {
+exports.delete = function (req, res) {
   var poll = req.poll;
   poll.remove()
     .then(() => {
@@ -157,8 +157,8 @@ exports.delete = function(req, res) {
 /**
  * List of Polls
  */
-exports.list = function(req, res) {
-  Poll.find().sort('-created').populate('user', 'displayName').exec(function(err, polls) {
+exports.list = function (req, res) {
+  Poll.find().sort('-created').populate('user', 'displayName').exec(function (err, polls) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -172,8 +172,8 @@ exports.list = function(req, res) {
 /**
  * List of Opts in poll
  */
-exports.findOpts = function(req, res) {
-  Poll.findOpts(req.poll._id).populate('user', 'displayName').exec(function(err, opts) {
+exports.findOpts = function (req, res) {
+  Poll.findOpts(req.poll._id).populate('user', 'displayName').exec(function (err, opts) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -187,8 +187,8 @@ exports.findOpts = function(req, res) {
 /**
  * List of Cmts in poll
  */
-exports.findCmts = function(req, res) {
-  Poll.findCmts(req.poll._id).populate('user', 'displayName profileImageURL').exec(function(err, cmts) {
+exports.findCmts = function (req, res) {
+  Poll.findCmts(req.poll._id).populate('user', 'displayName profileImageURL').exec(function (err, cmts) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -202,8 +202,8 @@ exports.findCmts = function(req, res) {
 /**
  * List of Tags in poll
  */
-exports.findTags = function(req, res) {
-  Poll.findTags(req.poll._id).populate('tag').exec(function(err, polltags) {
+exports.findTags = function (req, res) {
+  Poll.findTags(req.poll._id).populate('tag').exec(function (err, polltags) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -217,8 +217,8 @@ exports.findTags = function(req, res) {
 /**
  * List of Votes in poll
  */
-exports.findVotes = function(req, res) {
-  Poll.findVotes(req.poll._id).exec(function(err, votes) {
+exports.findVotes = function (req, res) {
+  Poll.findVotes(req.poll._id).exec(function (err, votes) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -232,7 +232,7 @@ exports.findVotes = function(req, res) {
 /**
  * Vote in poll of user
  */
-exports.findOwnerVote = function(req, res) {
+exports.findOwnerVote = function (req, res) {
   var condition = {};
   condition.poll = req.poll._id;
   if (req.user) {
@@ -242,7 +242,7 @@ exports.findOwnerVote = function(req, res) {
     condition.ip = req.headers["X-Forwarded-For"] || req.headers["x-forwarded-for"] || req.client.remoteAddress;
     condition.guest = true;
   }
-  Poll.findOwnerVote(condition).exec(function(err, vote) {
+  Poll.findOwnerVote(condition).exec(function (err, vote) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -256,17 +256,17 @@ exports.findOwnerVote = function(req, res) {
 /**
  * Get all info of vote in poll
  */
-exports.findVoteopts = function(req, res) {
+exports.findVoteopts = function (req, res) {
   var rs = {},
     ids;
-  Poll.findVotes(req.poll._id).exec(function(err, _votes) {
+  Poll.findVotes(req.poll._id).exec(function (err, _votes) {
     if (err) {
       handleError(err);
     } else {
       rs.votes = _votes;
       rs.voteopts = [];
       ids = _.pluck(_votes, '_id');
-      Voteopt.find({ vote: { $in: ids } }).exec(function(err, opts) {
+      Voteopt.find({ vote: { $in: ids } }).exec(function (err, opts) {
         if (err) {
           handleError(err);
         } else {
@@ -287,9 +287,9 @@ exports.findVoteopts = function(req, res) {
 /**
  * Get Like of user on this poll
  */
-exports.findPollLike = function(req, res) {
+exports.findPollLike = function (req, res) {
   var condition = { poll: req.poll._id, user: req.user._id };
-  Like.findOne(condition).exec(function(err, like) {
+  Like.findOne(condition).exec(function (err, like) {
     if (err) {
       handleError(err);
     } else {
@@ -305,9 +305,28 @@ exports.findPollLike = function(req, res) {
 };
 
 /**
+ * Find pollusers
+ */
+exports.findPolluser = function (req, res) {
+  Polluser.findOne({ poll: req.poll._id, user: req.user._id })
+    .exec((err, _polluser) => {
+      if (err) {
+        handleError(err);
+      } else {
+        res.jsonp(_polluser);
+      }
+    });
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
+};
+
+/**
  * Poll middleware
  */
-exports.pollByID = function(req, res, next, id) {
+exports.pollByID = function (req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
@@ -315,7 +334,7 @@ exports.pollByID = function(req, res, next, id) {
     });
   }
 
-  Poll.findById(id).populate('user', 'displayName profileImageURL').exec(function(err, poll) {
+  Poll.findById(id).populate('user', 'displayName profileImageURL').exec(function (err, poll) {
     if (err) {
       return next(err);
     } else if (!poll) {

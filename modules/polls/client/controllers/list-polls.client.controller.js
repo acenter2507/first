@@ -4,12 +4,12 @@
     .module('polls')
     .controller('PollsListController', PollsListController);
 
-  PollsListController.$inject = ['PollsService', 'PollsApi', 'progressBarManager'];
+  PollsListController.$inject = ['PollsService', 'PollsApi'];
 
-  function PollsListController(PollsService, PollsApi, progressBarManager) {
+  function PollsListController(PollsService, PollsApi) {
     var vm = this;
     vm.polls = PollsService.query();
-    vm.bar = progressBarManager();
+    vm.bar2ProgressVal = 13;
     function loadOpts(pollID) {
       return new Promise((resolve, reject) => {
         PollsApi.findOpts(pollID)

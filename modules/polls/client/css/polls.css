@@ -34,22 +34,22 @@
     background-image: linear-gradient(to bottom, #ffc0cb 0%, #e5acb6 100%) !important;
 }
 .progress-bar-color-2 {
-    background-color: #008080 !important;
+    background-image: linear-gradient(to bottom, #008080 0%, #007373 100%) !important;
 }
 .progress-bar-color-3 {
-    background-color: #ff7373 !important;
+    background-image: linear-gradient(to bottom, #ff7373 0%, #E56767 100%) !important;
 }
 .progress-bar-color-4 {
-    background-color: #800080 !important;
+    background-image: linear-gradient(to bottom, #800080 0%, #730073 100%) !important;
 }
 .progress-bar-color-5 {
-    background-color: #40e0d0 !important;
+    background-image: linear-gradient(to bottom, #40e0d0 0%, #39c9bb 100%) !important;
 }
 .progress-bar-color-6 {
-    background-color: #f6546a !important;
+    background-image: linear-gradient(to bottom, #f6546a 0%, #dd4b5f 100%) !important;
 }
 .progress-bar-color-7 {
-    background-color: #66cdaa !important;
+    background-image: linear-gradient(to bottom, #66cdaa 0%, #5bb899 100%) !important;
 }
 
 

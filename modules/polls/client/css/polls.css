@@ -12,7 +12,6 @@
 }
 .poll-header {
   position: relative;
-  margin-bottom: 10px;
 }
 .user-avatar {
   margin-right: 10px;
@@ -26,10 +25,11 @@
   width: 46px;
   height: 46px;
 }
-/*.poll-body {
-  margin-bottom: 10px;
-}*/
+.poll-body {
+  position: relative;
+}
 .poll-footer {
+  position: relative;
   margin-bottom: 10px;
 }
 .poll_item_title {

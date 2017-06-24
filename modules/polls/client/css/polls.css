@@ -31,25 +31,25 @@
 }
 
 .progress-bar-color-1 {
-    background-color: #ffc0cb;
+    background-color: #ffc0cb !important;
 }
 .progress-bar-color-2 {
-    background-color: #008080;
+    background-color: #008080 !important;
 }
 .progress-bar-color-3 {
-    background-color: #ff7373;
+    background-color: #ff7373 !important;
 }
 .progress-bar-color-4 {
-    background-color: #800080;
+    background-color: #800080 !important;
 }
 .progress-bar-color-5 {
-    background-color: #40e0d0;
+    background-color: #40e0d0 !important;
 }
 .progress-bar-color-6 {
-    background-color: #f6546a;
+    background-color: #f6546a !important;
 }
 .progress-bar-color-7 {
-    background-color: #66cdaa;
+    background-color: #66cdaa !important;
 }
 
 

@@ -17,7 +17,7 @@
             <strong><a ui-sref="users.info({userId: poll.user._id})" ng-if="poll.user" ng-bind="poll.user.displayName"></a></strong>
             <span ng-if="!poll.user">Deleted User</span>
           <span class="text-muted">&nbsp;created on</span>
-          <span class="text-muted" ng-bind="cmt.created | date:'mediumDate'"></span>
+          <span class="text-muted" ng-bind="poll.created | date:'mediumDate'"></span>
           </span>
           <span class="pull-right">
             <a href="#" bs-dropdown aria-haspopup="true" aria-expanded="false">
@@ -29,7 +29,9 @@
               <li ng-show="cmt.user._id === vm.authentication.user._id"><a ng-click="vm.delete_cmt(cmt)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
             </ul>
           </span>
+          <br>
           <h4 class="poll_item_title"><a ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a></h4>
+          <div class="clearfix"></div>
         </div>
         <div clas="poll-body">
           <p class="text-justify poll_item_body" ng-bind="poll.summary"></p>

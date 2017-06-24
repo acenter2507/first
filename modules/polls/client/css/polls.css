@@ -6,15 +6,30 @@
 
 /*.aside .aside-dialog .aside-header .close {
 }*/
-.poll-item {
-  padding: 12px 12px 0;
-  min-height: 20px;
-  margin-bottom: 15px;
-  background-color: #fff;
-  color: #555;
-  border-radius: 3px;
-  cursor: pointer;
+/*.poll-item {
+}*/
+.poll-header {
+  position: relative;
 }
+.user-avatar {
+  margin-right: 15px;
+  position: relative;
+  border-radius: 3px;
+  min-width: 46px;
+  min-height: 46px;
+}
+.user-avatar img {
+  border-radius: 3px;
+  width: 46px;
+  height: 46px;
+}
+.poll-body {
+
+}
+.poll-footer {
+
+}
+
 
 .poll_item_title {
   margin-top: 0 !important;

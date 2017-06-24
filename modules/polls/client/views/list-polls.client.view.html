@@ -5,42 +5,64 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 h500 bg-white">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 h500 card">
     </div>
     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6">
-      <div ng-repeat="poll in vm.polls" class="card poll-item">
-        <h3 class="poll_item_title">
-          <a ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a>
-        </h3>
-        <p class="poll_item_info">
-          <i class="fa fa-heart-o" aria-hidden="true"></i>
-          <strong> Votes: </strong>{{poll.voteCnt}}
-        </p>
-        <p class="poll_item_info">
-          <i class="fa fa-eye" aria-hidden="true"></i>
-          <strong> Views: </strong>{{poll.viewCnt}}
-        </p>
-        <p class="poll_item_info">
-          <i class="fa fa-commenting" aria-hidden="true"></i>
-          <strong> Comments: </strong>{{poll.cmtCnt}}
-        </p>
-        <p class="poll_item_info">
+      <div ng-repeat="poll in vm.polls" class="card">
+        <div clas="poll-header">
+          <div class="user-avatar pull-left">
+            <img src="{{poll.user.profileImageURL}}" alt="{{poll.user.displayName}}">
+          </div>
+          <span class="pull-left">
+            <strong><a ui-sref="users.info({userId: poll.user._id})" ng-if="poll.user" ng-bind="poll.user.displayName"></a></strong>
+            <span ng-if="!poll.user">Deleted User</span>
+          <span class="text-muted">&nbsp;created on</span>
+          <span class="text-muted" ng-bind="cmt.created | date:'mediumDate'"></span>
+          </span>
+          <span class="pull-right">
+            <a href="#" bs-dropdown aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li ng-show="(vm.authentication.user) && cmt.user._id !== vm.authentication.user._id"><a ng-click="vm.reply_cmt(cmt)"><i class="fa fa-reply"></i>&nbsp;Reply</a></li>
+              <li ng-show="cmt.user._id === vm.authentication.user._id"><a ng-click="vm.edit_cmt(cmt)"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
+              <li ng-show="cmt.user._id === vm.authentication.user._id"><a ng-click="vm.delete_cmt(cmt)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
+            </ul>
+          </span>
+          <h4 class="poll_item_title"><a ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a></h4>
+        </div>
+        <div clas="poll-body">
+          <p class="text-justify poll_item_body" ng-bind="poll.summary"></p>
+          <p ng-show="poll.body.length > poll.summary.length" class="poll_item_body">...
+            <a ui-sref="polls.view({ pollId: poll._id })">more</a>
+          </p>
+        </div>
+        <div clas="poll-footer">
+          <p class="poll_item_info">
+            <i class="fa fa-heart-o" aria-hidden="true"></i>
+            <strong> Votes: </strong>{{poll.voteCnt}}
+          </p>
+          <p class="poll_item_info">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+            <strong> Views: </strong>{{poll.viewCnt}}
+          </p>
+          <p class="poll_item_info">
+            <i class="fa fa-commenting" aria-hidden="true"></i>
+            <strong> Comments: </strong>{{poll.cmtCnt}}
+          </p>
+        </div>
+        <!--<p class="poll_item_info">
           <i class="fa fa-user" aria-hidden="true"></i>
           <strong> Added by: </strong>
           <span ng-if="poll.user" ng-bind="poll.user.displayName"></span>
           <span ng-if="!poll.user">Deleted User</span>
-        </p>
-        <br>
-        <p class="text-justify poll_item_body" ng-bind="poll.summary"></p>
-        <p ng-show="poll.body.length > poll.summary.length" class="poll_item_body">...
-          <a ui-sref="polls.view({ pollId: poll._id })">more</a>
-        </p>
+        </p>-->
       </div>
       <div class="alert alert-warning text-center" ng-if="vm.polls.$resolved && !vm.polls.length">
         No Polls yet, why don't you <a ui-sref="polls.create">create one</a>?
       </div>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 h500 bg-white"></div>
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 h500 card"></div>
     <div class="clearfix"></div>
   </div>
 </section>

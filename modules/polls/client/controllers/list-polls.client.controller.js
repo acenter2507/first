@@ -9,7 +9,7 @@
   function PollsListController(PollsService, PollsApi) {
     var vm = this;
     vm.polls = PollsService.query();
-    vm.bar2ProgressVal = 13;
+    vm.progressVal = 0;
     function loadOpts(pollID) {
       return new Promise((resolve, reject) => {
         PollsApi.findOpts(pollID)

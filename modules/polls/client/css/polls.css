@@ -31,7 +31,7 @@
 }
 
 .progress-bar-color-1 {
-    background-color: #ffc0cb !important;
+    background-image: linear-gradient(to bottom, #ffc0cb 0%, #e5acb6 100%) !important;
 }
 .progress-bar-color-2 {
     background-color: #008080 !important;

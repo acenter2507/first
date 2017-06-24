@@ -4,9 +4,9 @@
     .module('polls')
     .controller('PollsListController', PollsListController);
 
-  PollsListController.$inject = ['PollsService'];
+  PollsListController.$inject = ['PollsService', 'PollsApi'];
 
-  function PollsListController(PollsService) {
+  function PollsListController(PollsService, PollsApi) {
     var vm = this;
     vm.polls = PollsService.query();
 

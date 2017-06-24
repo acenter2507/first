@@ -29,10 +29,42 @@
   position: relative;
   margin-bottom: 10px;
 }
+
+.progress-bar-color-1 {
+    background-color: #ffc0cb;
+}
+.progress-bar-color-2 {
+    background-color: #008080;
+}
+.progress-bar-color-3 {
+    background-color: #ff7373;
+}
+.progress-bar-color-4 {
+    background-color: #800080;
+}
+.progress-bar-color-5 {
+    background-color: #40e0d0;
+}
+.progress-bar-color-6 {
+    background-color: #f6546a;
+}
+.progress-bar-color-7 {
+    background-color: #66cdaa;
+}
+
+
+
+
 .poll_item_title {
   margin-top: 0 !important;
   text-decoration: none !important;
 }
+
+
+
+
+
+
 
 .poll_item_title a {
   text-decoration: none !important;

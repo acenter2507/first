@@ -16,7 +16,8 @@ var ApplicationConfiguration = (function() {
     'uiSwitch',
     'ngTagsInput',
     'moment-picker',
-    'mgcrea.ngStrap'
+    'mgcrea.ngStrap',
+    'Tek.progressBar'
   ];
 
   // Add a new vertical module

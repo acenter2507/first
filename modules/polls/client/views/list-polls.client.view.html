@@ -4,7 +4,7 @@
 
     </div>
     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6">
-      <div ng-repeat="poll in vm.polls" class="poll-item">
+      <div ng-repeat="poll in vm.polls" class="card">
         <h3 class="poll_item_title">
           <a ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a>
         </h3>

@@ -1,10 +1,14 @@
 <section class="container">
   <div class="row">
+    <div class="col-xs-12">
+      <button type="button" class="btn btn-primary">Create poll</button>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 h500 bg-white">
-
     </div>
     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6">
-      <div ng-repeat="poll in vm.polls" class="card">
+      <div ng-repeat="poll in vm.polls" class="card poll-item">
         <h3 class="poll_item_title">
           <a ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a>
         </h3>

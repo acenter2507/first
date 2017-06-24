@@ -1,7 +1,9 @@
 <section class="container">
   <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 bg-green"></div>
-    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 bg-main">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 h500">
+
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6">
       <div ng-repeat="poll in vm.polls" class="poll-item">
         <h3 class="poll_item_title">
           <a ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a>
@@ -34,7 +36,7 @@
         No Polls yet, why don't you <a ui-sref="polls.create">create one</a>?
       </div>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 bg-blue"></div>
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 h500"></div>
     <div class="clearfix"></div>
   </div>
 </section>

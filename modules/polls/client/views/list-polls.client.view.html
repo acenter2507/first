@@ -42,7 +42,11 @@
             <a ui-sref="polls.view({ pollId: poll._id })">more</a>
           </p>
           <br>
-          <tek-progress-bar ng-model="vm.progressVal"></tek-progress-bar>
+          <tek-progress-bar bar-class="progress-bar-primary" ng-model="vm.progressVal">Option title 1</tek-progress-bar>
+          <tek-progress-bar bar-class="progress-bar-warning" ng-model="vm.progressVal">Option title 2</tek-progress-bar>
+          <tek-progress-bar bar-class="progress-bar-info" ng-model="vm.progressVal">Option title 3</tek-progress-bar>
+          <tek-progress-bar bar-class="progress-bar-success" ng-model="vm.progressVal">Option title 4</tek-progress-bar>
+          <tek-progress-bar bar-class="progress-bar-danger" ng-model="vm.progressVal">Option title 5</tek-progress-bar>
           <hr class="mg10t mg10b">
           <div class="clearfix"></div>
         </div>

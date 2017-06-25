@@ -25,6 +25,9 @@
 
   function PollsApi($http) {
     return {
+      findPolls: limit => {
+        return $http.get('/api/findPolls/' + limit);
+      },
       findOpts: id => {
         return $http.get('/api/findOpts/' + id);
       },

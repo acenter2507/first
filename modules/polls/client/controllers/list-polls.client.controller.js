@@ -16,9 +16,8 @@
     vm.progressVal2 = 0;
 
     function loadPolls() {
-      PollsService.query()
+      PollsService.query({ limit: 5 })
         .$promise.then(_polls => {
-          console.log('Loaded info polls');
           vm.polls = _polls;
           var promises = [];
           vm.polls.forEach(poll => {
@@ -28,7 +27,6 @@
           return Promise.all(promises);
         })
         .then(res => {
-          console.log('Loaded info opts' ,res);
           var promises = [];
           vm.polls.forEach(poll => {
             promises.push(loadPolluser(poll));
@@ -36,7 +34,6 @@
           return Promise.all(promises);
         })
         .then(res => {
-          console.log('Loaded polluser' ,vm.polls);
         })
         .catch(err => {
           console.log(err);

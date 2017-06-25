@@ -37,7 +37,6 @@
 
     function loadPolls() {
       if (vm.stopped || vm.busy) return;
-      console.log('Start load poll');
       vm.busy = true;
       PollsApi.findPolls(vm.page)
         .then(res => {

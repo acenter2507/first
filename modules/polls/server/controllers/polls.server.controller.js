@@ -189,12 +189,11 @@ exports.list = function(req, res) {
  */
 exports.findPolls = function(req, res) {
   var page = req.params.page || 0;
-  var limit = req.params.limit || 5;
   Poll.find()
     .sort('-created')
     .populate('user', 'displayName profileImageURL')
-    .skip(limit * page)
-    .limit(limit)
+    .skip(5 * page)
+    .limit(5)
     .exec(function(err, polls) {
       if (err) {
         return res.status(400).send({

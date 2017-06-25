@@ -27,7 +27,7 @@
       if (vm.stopped || vm.busy) return;
       console.log('Start load poll');
       vm.busy = true;
-      PollsApi.findPolls(vm.page, vm.limit)
+      PollsApi.findPolls(vm.page)
         .then(res => {
           if (res.data.length === 0) {
             vm.stopped = true;

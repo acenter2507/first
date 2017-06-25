@@ -21,7 +21,7 @@ exports.invokeRolesPolicies = function() {
       resources: '/api/polls/:pollId',
       permissions: '*'
     }, {
-      resources: '/api/findPolls/:page/:limit',
+      resources: '/api/findPolls/:page',
       permissions: '*'
     }, {
       resources: '/api/findOpts/:pollId',
@@ -57,7 +57,7 @@ exports.invokeRolesPolicies = function() {
       resources: '/api/polls/:pollId',
       permissions: ['get', 'put']
     }, {
-      resources: '/api/findPolls/:page/:limit',
+      resources: '/api/findPolls/:page',
       permissions: '*'
     }, {
       resources: '/api/findOpts/:pollId',
@@ -93,7 +93,7 @@ exports.invokeRolesPolicies = function() {
       resources: '/api/polls/:pollId',
       permissions: ['get']
     }, {
-      resources: '/api/findPolls/:page/:limit',
+      resources: '/api/findPolls/:page',
       permissions: '*'
     }, {
       resources: '/api/findOpts/:pollId',

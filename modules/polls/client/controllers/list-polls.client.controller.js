@@ -78,11 +78,10 @@
       });
     }
 
-    function loadVoteopts(poll) {
+    function loadVoteopts(pollId) {
       return new Promise((resolve, reject) => {
-        PollsApi.findVoteopts(poll._id)
+        PollsApi.findVoteopts(pollId)
           .then(res => {
-            poll.polluser = new Pollusers(res.data) || new Pollusers();
             return resolve(res.data);
           })
           .catch(err => {
@@ -91,10 +90,11 @@
       });
     }
 
-    function loadPolluser(pollId) {
+    function loadPolluser(poll) {
       return new Promise((resolve, reject) => {
-        PollsApi.findPolluser(pollId)
+        PollsApi.findPolluser(poll._id)
           .then(res => {
+            poll.polluser = new Pollusers(res.data) || new Pollusers();
             return resolve(res.data);
           })
           .catch(err => {

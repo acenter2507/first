@@ -30,7 +30,7 @@ angular.module('core').directive('tekProgressBar', function() {
       '$element',
       function($scope, $element) {
         var bar = this;
-        console.log($scope);
+        console.log(bar);
 
         var settings = {
           fullClass: 'full-bar',

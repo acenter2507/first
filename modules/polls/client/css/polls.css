@@ -33,6 +33,13 @@
   height: 30px !important;
   margin-bottom: 10px !important;
 }
+.progress-bar {
+  font-size: 14px;
+  line-height: 25px;
+  color: #fff;
+  text-align: center;
+}
+
 .progress-bar-color-1 {
   background-image: linear-gradient(to bottom, #ffc0cb 0%, #e5acb6 100%) !important;
 }

@@ -144,7 +144,7 @@
         }
       });
       Socket.on('poll_vote', res => {
-        loadVoteopts();
+        loadVoteopts(vm.poll._id);
       });
       Socket.on('poll_delete', res => {
         alert(

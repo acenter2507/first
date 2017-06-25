@@ -102,6 +102,7 @@
       if (vm.authentication.user && !poll.polluser._id) {
         loadPolluser(poll._id).then(_polluser => {
           poll.polluser = new Pollusers(_polluser) || poll.polluser;
+          poll.following = (poll.polluser.following) ? 'Unfollow' : 'Follow';
         }, err => {
           alert(err + '');
         });

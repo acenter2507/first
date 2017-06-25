@@ -30,9 +30,8 @@
               <li><a ui-sref="polls.view({ pollId: poll._id })"><i class="fa fa-eye"></i>&nbsp;View</a></li>
               <li ng-show="vm.isLogged">
                 <a ng-click="vm.toggle_follow_poll(poll)">
-                  <i class="fa fa-rss"></i>
-                  <span ng-show="poll.polluser.following">&nbsp;Unfollow</span>
-                  <span ng-hide="poll.polluser.following">&nbsp;Follow</span>
+                  <i class="fa fa-rss"></i>&nbsp;
+                  <span ng-bind="poll.following"></span>
                 </a>
               </li>
               <li ng-show="vm.isLogged && !poll.isCurrentUserOwner"><a ng-click="vm.report_poll(poll)"><i class="fa fa-rexclamation-circless"></i>&nbsp;Report poll</a></li>

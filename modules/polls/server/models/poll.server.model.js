@@ -34,6 +34,10 @@ var PollSchema = new Schema({
     type: Boolean,
     default: false
   },
+  allow_multiple: {
+    type: Boolean,
+    default: false
+  },
   user: {
     type: Schema.ObjectId,
     ref: 'User'

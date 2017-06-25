@@ -4,12 +4,24 @@
     .module('polls')
     .controller('PollsListController', PollsListController);
 
-  PollsListController.$inject = ['Authentication', 'PollsService', 'PollsApi', 'PollusersService', '$timeout'];
+  PollsListController.$inject = [
+    'Authentication',
+    'PollsService',
+    'PollsApi',
+    'PollusersService',
+    '$timeout'
+  ];
 
-  function PollsListController(Authentication, PollsService, PollsApi, Pollusers, $timeout) {
+  function PollsListController(
+    Authentication,
+    PollsService,
+    PollsApi,
+    Pollusers,
+    $timeout
+  ) {
     var vm = this;
     vm.authentication = Authentication;
-    vm.isLogged = (vm.authentication.user) ? true : false;
+    vm.isLogged = vm.authentication.user ? true : false;
     vm.polls = [];
     vm.new_data = [];
     vm.page = 0;
@@ -37,7 +49,8 @@
           vm.new_data = res.data;
           var promises = [];
           vm.new_data.forEach(poll => {
-            poll.isCurrentUserOwner = (vm.isLogged && vm.authentication._id === poll.user._id);
+            poll.isCurrentUserOwner =
+              vm.isLogged && vm.authentication._id === poll.user._id;
             promises.push(loadPoll(poll));
           });
           return Promise.all(promises);
@@ -50,10 +63,12 @@
           return Promise.all(promises);
         })
         .then(res => {
-          vm.polls = _.union(vm.polls, vm.new_data);
-          vm.page += 1;
-          vm.busy = false;
-          vm.new_data = [];
+          $timeout(() => {
+            vm.polls = _.union(vm.polls, vm.new_data);
+            vm.page += 1;
+            vm.busy = false;
+            vm.new_data = [];
+          }, 4000);
         })
         .catch(err => {
           vm.busy = false;
@@ -128,19 +143,5 @@
       }
       return Math.floor(value * 100 / total) || 0;
     }
-
-    // vm.drop_menu = poll => {
-    //   if (vm.authentication.user && !poll.polluser._id) {
-    //     loadPolluser(poll._id).then(_polluser => {
-    //       poll.polluser = new Pollusers(_polluser) || poll.polluser;
-    //       poll.following = (poll.polluser.following) ? 'Unfollow' : 'Follow';
-    //     }, err => {
-    //       alert(err + '');
-    //     });
-    //   }
-    //   if (vm.authentication) {
-    //      poll.isCurrentUserOwner = (poll.user._id === vm.authentication.user._id);
-    //   }
-    // };
   }
 })();

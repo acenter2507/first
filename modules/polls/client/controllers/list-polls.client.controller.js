@@ -32,7 +32,7 @@
           vm.polls.forEach(poll => {
             promises.push(loadPolluser(poll));
           });
-          return $timeout(Promise.all(promises), 5000);
+          return Promise.all(promises);
         })
         .then(res => {
           console.log('Loaded polluser' ,res);

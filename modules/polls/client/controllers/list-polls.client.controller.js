@@ -11,14 +11,17 @@
     vm.authentication = Authentication;
     vm.isLogged = (vm.authentication.user) ? true : false;
     vm.polls = [];
-    loadPolls();
-    vm.progressVal = 57;
-    vm.progressVal2 = 0;
+    vm.offset = 0;
+    init();
+
+    function init() {
+      loadPolls();
+    }
 
     function loadPolls() {
-      PollsService.query({ limit: 5 })
-        .$promise.then(_polls => {
-          vm.polls = _polls;
+      PollsApi.findPolls(vm.offset)
+        .$promise.then(res => {
+          vm.polls = res.data || [];
           var promises = [];
           vm.polls.forEach(poll => {
             poll.isCurrentUserOwner = (vm.isLogged && vm.authentication._id === poll.user._id);

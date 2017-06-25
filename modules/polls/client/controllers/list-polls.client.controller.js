@@ -46,7 +46,7 @@
             poll.opts.forEach(opt => {
               opt.voteCnt =
                 _.where(poll.voteopts, { opt: opt._id }).length || 0;
-              opt.percent = calPercen(poll.total, opt.voteCnt);
+              opt.progressVal = calPercen(poll.total, opt.voteCnt);
             });
             return resolve(poll);
           })

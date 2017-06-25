@@ -45,7 +45,7 @@
           <!-- options -->
           <div class="mg10t">
             <div ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">
-              <pre>{{opt.percent | json}}</pre>
+              <pre>{{opt.percent}}</pre>
               <strong><span ng-bind="opt.title"></span></strong>
               <tek-progress-bar bar-class="progress-bar-primary" ng-model="poll.total">{{opt.voteCnt + '/' + poll.total + '   ' + opt.percent}}</tek-progress-bar>
             </div>

@@ -34,10 +34,8 @@
   margin-bottom: 10px !important;
 }
 .progress-bar {
-  font-size: 14px;
-  line-height: 25px;
-  color: #fff;
-  text-align: center;
+  font-size: 14px !important;
+  line-height: 25px !important;
 }
 
 .progress-bar-color-1 {

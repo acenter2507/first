@@ -14,43 +14,44 @@
     vm.progressVal2 = 0;
 
     function loadPolls() {
-      PollsService.query().$promise
-      .then(_polls => {
-        vm.polls = _polls;
-        var promises = [];
-        vm.polls.forEach(poll => {
-          promises.push(loadPoll(poll));
+      PollsService.query()
+        .$promise.then(_polls => {
+          vm.polls = _polls;
+          var promises = [];
+          vm.polls.forEach(poll => {
+            promises.push(loadPoll(poll));
+          });
+          return Promise.all(promises);
+        })
+        .then(res => {
+          console.log(res);
+          console.log('load done');
+        })
+        .catch(err => {
+          console.log(err);
         });
-        return Promise.all(promises);
-      })
-      .then(res => {
-        console.log(res);
-        console.log('load done');
-      })
-      .catch(err => {
-        console.log(err);
-      });
     }
 
     function loadPoll(poll) {
       return new Promise((resolve, reject) => {
         loadOpts(poll._id)
-        .then(_opts => {
-          poll.opts = _opts || [];
-          return loadVoteopts(poll._id);
-        })
-        .then(res => {
-          poll.votes = res.votes || [];
-          poll.voteopts = res.voteopts || [];
-          poll.total =  poll.voteopts;
-          poll.opts.forEach(opt => {
-            opt.voteCnt = _.where(poll.voteopts, { opt: opt._id }).length || 0;
+          .then(_opts => {
+            poll.opts = _opts || [];
+            return loadVoteopts(poll._id);
+          })
+          .then(res => {
+            poll.votes = res.votes || [];
+            poll.voteopts = res.voteopts || [];
+            poll.total = poll.voteopts;
+            poll.opts.forEach(opt => {
+              opt.voteCnt =
+                _.where(poll.voteopts, { opt: opt._id }).length || 0;
+            });
+            return resolve(poll);
+          })
+          .catch(err => {
+            return reject(err);
           });
-          return resolve(poll);
-        })
-        .catch(err => {
-          return reject(err);
-        });
       });
     }
 
@@ -69,12 +70,12 @@
     function loadVoteopts(pollId) {
       return new Promise((resolve, reject) => {
         PollsApi.findVoteopts(pollId)
-        .then(res => {
-          return resolve(res.data);
-        })
-        .catch(err => {
-          return reject(err);
-        });
+          .then(res => {
+            return resolve(res.data);
+          })
+          .catch(err => {
+            return reject(err);
+          });
       });
     }
   }

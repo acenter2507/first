@@ -22,6 +22,7 @@
           vm.polls = _polls;
           var promises = [];
           vm.polls.forEach(poll => {
+            poll.isCurrentUserOwner = (vm.isLogged && vm.authentication._id === poll.user._id);
             promises.push(loadPoll(poll));
           });
           return Promise.all(promises);

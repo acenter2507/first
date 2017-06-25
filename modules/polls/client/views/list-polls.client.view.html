@@ -47,7 +47,9 @@
             <div ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">
               <strong><span ng-bind="opt.title"></span></strong>
               <div class="progress">
-                <div class="progress-bar progress-bar-primary" ng-class="bar.barClass" ng-transclude="" ng-style="{width: opt.progressVal + '%'}">
+                <div class="progress-bar progress-bar-primary" ng-class="bar.barClass" ng-transclude ng-style="{width: opt.progressVal + '%'}">
+                  <span>{{opt.voteCnt + '/' + poll.total}}</span>
+                </div>
               </div>
               <!--<tek-progress-bar option="opt" value="vm.progressVal" bar-class="progress-bar-primary" ng-model="opt.progressVal" >
                 {{opt.voteCnt + '/' + poll.total}}

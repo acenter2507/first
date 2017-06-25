@@ -62,12 +62,10 @@
           return Promise.all(promises);
         })
         .then(res => {
-          $timeout(() => {
-            vm.polls = _.union(vm.polls, vm.new_data);
-            vm.page += 1;
-            vm.busy = false;
-            vm.new_data = [];
-          }, 4000);
+          vm.polls = _.union(vm.polls, vm.new_data);
+          vm.page += 1;
+          vm.busy = false;
+          vm.new_data = [];
         })
         .catch(err => {
           vm.busy = false;

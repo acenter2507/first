@@ -85,12 +85,6 @@
           </p>
         </div>
         <div class="clearfix"></div>
-        <!--<p class="poll_item_info">
-          <i class="fa fa-user" aria-hidden="true"></i>
-          <strong> Added by: </strong>
-          <span ng-if="poll.user" ng-bind="poll.user.displayName"></span>
-          <span ng-if="!poll.user">Deleted User</span>
-        </p>-->
       </div>
       <!--<div class="alert alert-warning text-center" ng-if="vm.polls.$resolved && !vm.polls.length">
         No Polls yet, why don't you <a ui-sref="polls.create">create one</a>?
@@ -111,6 +105,9 @@
         <label>	●</label>
         <label>	●</label>
       </div>
+    </div>
+    <div class="alert alert-warning text-center" ng-show="vm.stoped">
+      No Polls more, why don't you <a ui-sref="polls.create">create one</a>?
     </div>
   </div>
 </section>

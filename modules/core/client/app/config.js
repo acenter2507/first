@@ -16,7 +16,8 @@ var ApplicationConfiguration = (function() {
     'uiSwitch',
     'ngTagsInput',
     'moment-picker',
-    'mgcrea.ngStrap'
+    'mgcrea.ngStrap',
+    'infinite-scroll'
   ];
 
   // Add a new vertical module

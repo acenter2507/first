@@ -192,8 +192,8 @@ exports.findPolls = function(req, res) {
   Poll.find()
     .sort('-created')
     .populate('user', 'displayName profileImageURL')
-    .skip(5 * page)
-    .limit(5)
+    .skip(10 * page)
+    .limit(10)
     .exec(function(err, polls) {
       if (err) {
         return res.status(400).send({

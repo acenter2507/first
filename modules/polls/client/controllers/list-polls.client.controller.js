@@ -20,7 +20,7 @@
 
     function loadPolls() {
       PollsApi.findPolls(vm.offset)
-        .$promise.then(res => {
+        .then(res => {
           vm.polls = res.data || [];
           var promises = [];
           vm.polls.forEach(poll => {

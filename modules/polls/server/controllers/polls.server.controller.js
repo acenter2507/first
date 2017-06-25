@@ -193,7 +193,7 @@ exports.findPolls = function(req, res) {
     Poll.find()
       .sort('-created')
       .populate('user', 'displayName profileImageURL')
-      .litmit(10)
+      .limit(10)
       .exec(function(err, polls) {
         if (err) {
           return res.status(400).send({
@@ -208,7 +208,7 @@ exports.findPolls = function(req, res) {
       .sort('-created')
       .populate('user', 'displayName profileImageURL')
       .skip(parseInt(offset))
-      .litmit(10)
+      .limit(10)
       .exec(function(err, polls) {
         if (err) {
           return res.status(400).send({

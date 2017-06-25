@@ -158,6 +158,7 @@ exports.delete = function (req, res) {
  * List of Polls
  */
 exports.list = function (req, res) {
+  console.log(req);
   Poll.find().sort('-created').populate('user', 'displayName profileImageURL').exec(function (err, polls) {
     if (err) {
       return res.status(400).send({

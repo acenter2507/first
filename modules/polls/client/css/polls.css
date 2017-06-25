@@ -34,10 +34,12 @@
   margin-bottom: 10px !important;
 }
 .progress-bar {
-  padding: 5px;
+  padding: 5px 0px;
   font-size: 14px !important;
 }
-
+.progress-bar span {
+  margin-left: 12px;
+}
 .progress-bar-color-1 {
   background-image: linear-gradient(to bottom, #ffc0cb 0%, #e5acb6 100%) !important;
 }

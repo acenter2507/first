@@ -46,7 +46,7 @@
           <div class="mg10t">
             <div ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">
               <strong><span ng-bind="opt.title"></span></strong>
-              <tek-progress-bar bar-class="progress-bar-primary" ng-model="vm.progressVal">{{opt.voteCnt + '/' + poll.total}}</tek-progress-bar>
+              <tek-progress-bar bar-class="progress-bar-primary" bar-value="opt.progressVal" ng-model="vm.progressVal" >{{opt.voteCnt + '/' + poll.total}}</tek-progress-bar>
               <span ng-bind="opt.progressVal"></span>
             </div>
             <a ng-if="poll.opts.length > 3" ui-sref="polls.view({ pollId: poll._id })">and {{poll.opts.length - 3}} others</a>

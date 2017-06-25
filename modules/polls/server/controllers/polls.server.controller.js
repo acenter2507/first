@@ -188,37 +188,22 @@ exports.list = function(req, res) {
  * List of Offset
  */
 exports.findPolls = function(req, res) {
-  var offset = req.params.offset || 0;
-  if (parseInt(offset) === 0) {
-    Poll.find()
-      .sort('-created')
-      .populate('user', 'displayName profileImageURL')
-      .limit(3)
-      .exec(function(err, polls) {
-        if (err) {
-          return res.status(400).send({
-            message: errorHandler.getErrorMessage(err)
-          });
-        } else {
-          res.jsonp(polls);
-        }
-      });
-  } else {
-    Poll.find()
-      .sort('-created')
-      .populate('user', 'displayName profileImageURL')
-      .skip(parseInt(offset))
-      .limit(3)
-      .exec(function(err, polls) {
-        if (err) {
-          return res.status(400).send({
-            message: errorHandler.getErrorMessage(err)
-          });
-        } else {
-          res.jsonp(polls);
-        }
-      });
-  }
+  var page = req.params.page || 0;
+  var limit = req.params.limit || 5;
+  Poll.find()
+    .sort('-created')
+    .populate('user', 'displayName profileImageURL')
+    .skip(limit * page)
+    .limit(limit)
+    .exec(function(err, polls) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.jsonp(polls);
+      }
+    });
 };
 
 /**

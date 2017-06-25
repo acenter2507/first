@@ -17,10 +17,10 @@
           <span class="pull-left">
             <strong><a class="undecorated-link" ui-sref="users.info({userId: poll.user._id})" ng-if="poll.user" ng-bind="poll.user.displayName"></a></strong>
             <span ng-if="!poll.user">Deleted User</span>
-            </small>
-              <span class="text-muted"><small>&nbsp;created on</span>
-              <span class="text-muted" ng-bind="poll.created | date:'mediumDate'"></span>
-            </small>
+          </small>
+          <span class="text-muted"><small>&nbsp;created on</span>
+          <span class="text-muted" ng-bind="poll.created | date:'mediumDate'"></span>
+          </small>
           </span>
           <span class="pull-right">
             <a href="#" bs-dropdown aria-haspopup="true" aria-expanded="false">
@@ -98,5 +98,17 @@
     </div>
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 h500 card"></div>
     <div class="clearfix"></div>
+  </div>
+  <div class="row">
+    <div class="cs-loader" ng-show="vm.busy">
+      <div class="cs-loader-inner">
+        <label>	●</label>
+        <label>	●</label>
+        <label>	●</label>
+        <label>	●</label>
+        <label>	●</label>
+        <label>	●</label>
+      </div>
+    </div>
   </div>
 </section>

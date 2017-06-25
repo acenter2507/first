@@ -89,24 +89,6 @@
   background-image: linear-gradient(to bottom, #79d0cc 0%, #20b2aa 100%) !important;
 }
 
-
-
-
-.poll_item_title {
-  margin-top: 0 !important;
-  text-decoration: none !important;
-}
-
-
-
-
-
-
-
-.poll_item_title a {
-  text-decoration: none !important;
-}
-
 .poll_item_info {
   display: inline !important;
 }

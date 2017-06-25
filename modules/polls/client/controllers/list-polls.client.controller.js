@@ -12,7 +12,10 @@
     vm.isLogged = (vm.authentication.user) ? true : false;
     vm.polls = [];
     vm.new_data = [];
-    vm.offset = 0;
+    vm.page = 0;
+    vm.limit = 5;
+    vm.busy = false;
+    vm.stopped = false;
     vm.loadPolls = loadPolls;
     init();
 
@@ -21,10 +24,17 @@
     }
 
     function loadPolls() {
+      if (vm.stopped || vm.busy) return;
       console.log('Start load poll');
-      PollsApi.findPolls(vm.offset)
+      vm.busy = true;
+      PollsApi.findPolls(vm.page, vm.limit)
         .then(res => {
-          vm.new_data = res.data || [];
+          if (res.data.length === 0) {
+            vm.stopped = true;
+            vm.busy = true;
+            return;
+          }
+          vm.new_data = res.data;
           var promises = [];
           vm.new_data.forEach(poll => {
             poll.isCurrentUserOwner = (vm.isLogged && vm.authentication._id === poll.user._id);
@@ -41,7 +51,8 @@
         })
         .then(res => {
           vm.polls = _.union(vm.polls, vm.new_data);
-          vm.offset += vm.new_data.length;
+          vm.page += 1;
+          vm.busy = false;
           vm.new_data = [];
         })
         .catch(err => {

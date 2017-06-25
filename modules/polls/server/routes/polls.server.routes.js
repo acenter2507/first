@@ -17,7 +17,7 @@ module.exports = function(app) {
     .put(polls.update)
     .delete(polls.delete);
 
-  app.route('/api/findPolls/:offset').get(polls.findPolls);
+  app.route('/api/findPolls/:page/:limit').get(polls.findPolls);
   app.route('/api/findOpts/:pollId').get(polls.findOpts);
   app.route('/api/findCmts/:pollId').get(polls.findCmts);
   app.route('/api/findTags/:pollId').get(polls.findTags);

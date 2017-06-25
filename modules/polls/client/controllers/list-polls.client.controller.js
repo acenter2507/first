@@ -33,16 +33,15 @@
         })
         .then(res => {
           var promises = [];
-          vm.polls.forEach(poll => {
+          vm.new_data.forEach(poll => {
             promises.push(loadPolluser(poll));
           });
           return Promise.all(promises);
         })
         .then(res => {
-          console.log('Has new data: ', vm.new_data);
-          vm.polls.push(vm.new_data);
-          console.log('Has Total data: ', vm.polls);
+          vm.polls = _.union(vm.polls, vm.new_data);
           vm.offset += vm.new_data.length;
+          vm.new_data = [];
         })
         .catch(err => {
           console.log(err);

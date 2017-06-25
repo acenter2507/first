@@ -68,7 +68,7 @@
 
     function loadVoteopts(pollId) {
       return new Promise((resolve, reject) => {
-        PollsApi.findVoteopts(poll._id)
+        PollsApi.findVoteopts(pollId)
         .then(res => {
           return resolve(res.data);
         })

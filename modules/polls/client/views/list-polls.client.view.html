@@ -28,11 +28,17 @@
             </a>
             <ul class="dropdown-menu" role="menu">
               <li><a ui-sref="polls.view({ pollId: poll._id })"><i class="fa fa-eye"></i>&nbsp;View</a></li>
-              <li ng-if="vm.authentication.user"><a ng-click="vm.toggle_follow_poll(poll)"><i class="fa fa-rss"></i>&nbsp;{{(poll.polluser.following) ? 'Unfollow' : 'Follow'}}</a></li>
-              <li ng-if="!poll.isCurrentUserOwner"><a ng-click="vm.report_poll(poll)"><i class="fa fa-rexclamation-circless"></i>&nbsp;Report poll</a></li>
-              <li ng-if="poll.isCurrentUserOwner"><a ui-sref="polls.edit({ pollId: poll._id })"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
-              <li ng-if="poll.isCurrentUserOwner"><a ng-click="vm.delete_poll(poll)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
-              <li ng-if="!poll.isCurrentUserOwner && vm.authentication.user"><a ng-click="vm.add_bookmark(poll)"><i class="fa fa-bookmark"></i>&nbsp;Bookmark poll</a></li>
+              <li ng-show="vm.isLogged">
+                <a ng-click="vm.toggle_follow_poll(poll)">
+                  <i class="fa fa-rss"></i>
+                  <span ng-show="poll.polluser.following">&nbsp;Unfollow</span>
+                  <span ng-hide="poll.polluser.following">&nbsp;Follow</span>
+                </a>
+              </li>
+              <li ng-show="vm.isLogged && !poll.isCurrentUserOwner"><a ng-click="vm.report_poll(poll)"><i class="fa fa-rexclamation-circless"></i>&nbsp;Report poll</a></li>
+              <li ng-show="vm.isLogged && poll.isCurrentUserOwner"><a ui-sref="polls.edit({ pollId: poll._id })"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
+              <li ng-show="vm.isLogged && poll.isCurrentUserOwner"><a ng-click="vm.delete_poll(poll)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
+              <li ng-show="vm.isLogged && !poll.isCurrentUserOwner"><a ng-click="vm.add_bookmark(poll)"><i class="fa fa-bookmark"></i>&nbsp;Bookmark poll</a></li>
             </ul>
           </span>
           <br>

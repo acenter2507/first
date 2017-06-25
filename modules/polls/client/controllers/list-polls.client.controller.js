@@ -9,6 +9,7 @@
   function PollsListController(Authentication, PollsService, PollsApi, Pollusers) {
     var vm = this;
     vm.authentication = Authentication;
+    vm.isLogged = (vm.authentication.user) ? true : false;
     vm.polls = [];
     loadPolls();
     vm.progressVal = 57;

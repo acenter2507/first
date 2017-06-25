@@ -42,7 +42,7 @@
         .then(res => {
           if (res.data.length === 0) {
             vm.stopped = true;
-            vm.busy = true;
+            vm.busy = false;
             return;
           }
           vm.new_data = res.data;

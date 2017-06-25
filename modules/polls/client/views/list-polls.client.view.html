@@ -33,7 +33,7 @@
                   <i class="fa fa-rss"></i>&nbsp;{{(poll.polluser.following) ? 'Unfollow' : 'Follow'}}
                 </a>
               </li>
-              <li ng-show="vm.isLogged && !poll.isCurrentUserOwner"><a ng-click="vm.report_poll(poll)"><i class="fa fa-rexclamation-circless"></i>&nbsp;Report poll</a></li>
+              <li ng-show="vm.isLogged && !poll.isCurrentUserOwner"><a ng-click="vm.report_poll(poll)"><i class="fa fa-exclamation-circle"></i>&nbsp;Report poll</a></li>
               <li ng-show="vm.isLogged && poll.isCurrentUserOwner"><a ui-sref="polls.edit({ pollId: poll._id })"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
               <li ng-show="vm.isLogged && poll.isCurrentUserOwner"><a ng-click="vm.delete_poll(poll)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
               <li ng-show="vm.isLogged && !poll.isCurrentUserOwner"><a ng-click="vm.add_bookmark(poll)"><i class="fa fa-bookmark"></i>&nbsp;Bookmark poll</a></li>

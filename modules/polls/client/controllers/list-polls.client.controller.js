@@ -41,6 +41,7 @@
         .then(res => {
           console.log('Has new data: ', vm.new_data);
           vm.polls.push(vm.new_data);
+          console.log('Has Total data: ', vm.polls);
           vm.offset += vm.new_data.length;
         })
         .catch(err => {

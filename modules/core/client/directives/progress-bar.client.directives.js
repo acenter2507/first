@@ -24,13 +24,13 @@ angular.module('core').directive('tekProgressBar', function() {
     transclude: true,
     controllerAs: 'bar',
     templateUrl: 'Tek.progressBarDirective.html',
-    bindToController: true,
+    bindToController: true,  
     controller: [
       '$scope',
       '$element',
       function($scope, $element) {
         var bar = this;
-        console.log(bar.option.progressVal);
+        console.log($scope.option);
 
         var settings = {
           fullClass: 'full-bar',

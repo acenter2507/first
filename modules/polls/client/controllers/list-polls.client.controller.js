@@ -20,9 +20,9 @@
     }
 
     function loadPolls() {
+      console.log('Start load poll');
       PollsApi.findPolls(vm.offset)
         .then(res => {
-          vm.offset += res.data.length || 0;
           vm.new_data = res.data || [];
           var promises = [];
           vm.new_data.forEach(poll => {
@@ -39,6 +39,7 @@
           return Promise.all(promises);
         })
         .then(res => {
+          console.log('Has new data: ', vm.new_data);
           vm.polls.push(vm.new_data);
           vm.offset += vm.new_data.length;
         })

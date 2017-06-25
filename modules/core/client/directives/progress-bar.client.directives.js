@@ -17,6 +17,7 @@ angular.module('core').directive('tekProgressBar', function() {
       barClass: '@',
       option: '=',
       ngModel: '=',
+      value: '=',
       mode: '@'
     },
     restrict: 'E',
@@ -29,7 +30,7 @@ angular.module('core').directive('tekProgressBar', function() {
       '$element',
       function($scope, $element) {
         var bar = this;
-        console.log(bar.option);
+        console.log(bar.value);
 
         var settings = {
           fullClass: 'full-bar',

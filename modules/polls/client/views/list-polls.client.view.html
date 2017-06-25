@@ -47,7 +47,7 @@
             <div ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">
               <pre>{{opt.percent | json}}</pre>
               <strong><span ng-bind="opt.title"></span></strong>
-              <tek-progress-bar bar-class="progress-bar-primary" ng-model="opt.percent">{{opt.voteCnt + '/' + poll.total + '   ' + opt.percent}}</tek-progress-bar>
+              <tek-progress-bar bar-class="progress-bar-primary" ng-model="poll.total">{{opt.voteCnt + '/' + poll.total + '   ' + opt.percent}}</tek-progress-bar>
             </div>
             <a ng-if="poll.opts.length > 3" ui-sref="polls.view({ pollId: poll._id })">and {{poll.opts.length - 3}} others</a>
           </div>

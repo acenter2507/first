@@ -81,7 +81,10 @@
     }
 
     function calPercen(total, value) {
-      return Math.floor((value * 100) / total);
+      if (total === 0) {
+        return 0;
+      }
+      return Math.floor((value * 100) / total) || 0;
     }
   }
 })();

@@ -35,7 +35,7 @@
           return Promise.all(promises);
         })
         .then(res => {
-          console.log('Loaded polluser' ,res);
+          console.log('Loaded polluser' ,vm.polls);
         })
         .catch(err => {
           console.log(err);
@@ -94,7 +94,7 @@
       return new Promise((resolve, reject) => {
         PollsApi.findPolluser(poll._id)
           .then(res => {
-            poll.polluser = new Pollusers(res.data) || new Pollusers();
+            poll.polluser = new Pollusers(res.data);
             return resolve(res.data);
           })
           .catch(err => {

@@ -13,11 +13,11 @@
     vm.polls = [];
     vm.new_data = [];
     vm.offset = 0;
-    vm.loadPolls = loadOpts;
+    vm.loadPolls = loadPolls;
     init();
 
     function init() {
-      loadPolls();
+      //loadPolls();
     }
 
     function loadPolls() {

@@ -28,7 +28,7 @@
         })
         .then(res => {
           console.log('Loaded info opts' ,res);
-          promises = [];
+          var promises = [];
           vm.polls.forEach(poll => {
             promises.push(loadPolluser(poll));
           });

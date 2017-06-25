@@ -56,6 +56,8 @@
           vm.new_data = [];
         })
         .catch(err => {
+          vm.busy = false;
+          vm.stopped = true;
           console.log(err);
         });
     }

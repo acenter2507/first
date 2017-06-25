@@ -17,8 +17,8 @@
           <span class="pull-left">
             <strong><a ui-sref="users.info({userId: poll.user._id})" ng-if="poll.user" ng-bind="poll.user.displayName"></a></strong>
             <span ng-if="!poll.user">Deleted User</span>
-            <span class="text-muted">&nbsp;created on</span>
-            <span class="text-muted" ng-bind="poll.created | date:'mediumDate'"></span>
+          <span class="text-muted">&nbsp;created on</span>
+          <span class="text-muted" ng-bind="poll.created | date:'mediumDate'"></span>
           </span>
           <span class="pull-right">
             <a href="#" bs-dropdown aria-haspopup="true" aria-expanded="false">
@@ -42,20 +42,32 @@
           <p ng-show="poll.body.length > poll.summary.length" class="poll_item_body">...
             <a ui-sref="polls.view({ pollId: poll._id })">more</a>
           </p>
-
-          <strong><span>HTTPS プロトコルは、ネットワーク上での盗聴（機密性）や改ざん（完全性）といった脅威から、</span></strong>
-          <tek-progress-bar bar-class="progress-bar-primary" ng-model="vm.progressVal">46%</tek-progress-bar>
-          <strong><span>Option title 2</span></strong><tek-progress-bar bar-class="progress-bar-warning" ng-model="vm.progressVal2">{{vm.progressVal2 + '%'}}</tek-progress-bar>
-          <strong><span>Option title 3</span></strong><tek-progress-bar bar-class="progress-bar-info" ng-model="vm.progressVal">35%</tek-progress-bar>
-          <strong><span>Option title 4</span></strong><tek-progress-bar bar-class="progress-bar-success" ng-model="vm.progressVal">35%</tek-progress-bar>
-          <strong><span>Option title 5</span></strong><tek-progress-bar bar-class="progress-bar-danger" ng-model="vm.progressVal">35%</tek-progress-bar>
-          <strong><span>Option title 6</span></strong><tek-progress-bar bar-class="progress-bar-color-1" ng-model="vm.progressVal">35%</tek-progress-bar>
-          <strong><span>Option title 7</span></strong><tek-progress-bar bar-class="progress-bar-color-2" ng-model="vm.progressVal">35%</tek-progress-bar>
-          <strong><span>Option title 8</span></strong><tek-progress-bar bar-class="progress-bar-color-3" ng-model="vm.progressVal">35%</tek-progress-bar>
-          <strong><span>Option title 9</span></strong><tek-progress-bar bar-class="progress-bar-color-4" ng-model="vm.progressVal">35%</tek-progress-bar>
-          <strong><span>Option title 10</span></strong><tek-progress-bar bar-class="progress-bar-color-5" ng-model="vm.progressVal">35%</tek-progress-bar>
-          <strong><span>Option title 11</span></strong><tek-progress-bar bar-class="progress-bar-color-6" ng-model="vm.progressVal">35%</tek-progress-bar>
-          <strong><span>Option title 12</span></strong><tek-progress-bar bar-class="progress-bar-color-7" ng-model="vm.progressVal">35%</tek-progress-bar>
+          <div class="mg10t">
+            <strong><span>HTTPS プロトコルは、ネットワーク上での盗聴（機密性）や改ざん（完全性）といった脅威から、</span></strong>
+            <tek-progress-bar bar-class="progress-bar-primary" ng-model="vm.progressVal">46%</tek-progress-bar>
+            <strong><span>Option title 2</span></strong>
+            <tek-progress-bar bar-class="progress-bar-warning" ng-model="vm.progressVal2">{{vm.progressVal2 + '%'}}</tek-progress-bar>
+            <strong><span>Option title 3</span></strong>
+            <tek-progress-bar bar-class="progress-bar-info" ng-model="vm.progressVal">35%</tek-progress-bar>
+            <strong><span>Option title 4</span></strong>
+            <tek-progress-bar bar-class="progress-bar-success" ng-model="vm.progressVal">35%</tek-progress-bar>
+            <strong><span>Option title 5</span></strong>
+            <tek-progress-bar bar-class="progress-bar-danger" ng-model="vm.progressVal">35%</tek-progress-bar>
+            <strong><span>Option title 6</span></strong>
+            <tek-progress-bar bar-class="progress-bar-color-1" ng-model="vm.progressVal">35%</tek-progress-bar>
+            <strong><span>Option title 7</span></strong>
+            <tek-progress-bar bar-class="progress-bar-color-2" ng-model="vm.progressVal">35%</tek-progress-bar>
+            <strong><span>Option title 8</span></strong>
+            <tek-progress-bar bar-class="progress-bar-color-3" ng-model="vm.progressVal">35%</tek-progress-bar>
+            <strong><span>Option title 9</span></strong>
+            <tek-progress-bar bar-class="progress-bar-color-4" ng-model="vm.progressVal">35%</tek-progress-bar>
+            <strong><span>Option title 10</span></strong>
+            <tek-progress-bar bar-class="progress-bar-color-5" ng-model="vm.progressVal">35%</tek-progress-bar>
+            <strong><span>Option title 11</span></strong>
+            <tek-progress-bar bar-class="progress-bar-color-6" ng-model="vm.progressVal">35%</tek-progress-bar>
+            <strong><span>Option title 12</span></strong>
+            <tek-progress-bar bar-class="progress-bar-color-7" ng-model="vm.progressVal">35%</tek-progress-bar>
+          </div>
           <hr class="mg10t mg10b">
           <div class="clearfix"></div>
         </div>

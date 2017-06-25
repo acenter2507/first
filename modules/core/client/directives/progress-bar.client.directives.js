@@ -1,14 +1,4 @@
 'use strict';
-angular.module('core').run([
-  '$templateCache',
-  function($templateCache) {
-    $templateCache.put(
-      'Tek.progressBarDirective.html',
-      '<div class=\'progress\' ng-class=\'bar.containerClass\'><div class=\'progress-bar\' ng-class=\'bar.barClass\' ng-transclude></div></div>'
-    );
-  }
-]);
-
 angular.module('core').directive('tekProgressBar', function() {
   return {
     scope: {
@@ -23,8 +13,8 @@ angular.module('core').directive('tekProgressBar', function() {
     restrict: 'E',
     transclude: true,
     controllerAs: 'bar',
-    templateUrl: 'Tek.progressBarDirective.html',
-    bindToController: true,  
+    template: '<div class=\'progress\' ng-class=\'bar.containerClass\'><div class=\'progress-bar\' ng-class=\'bar.barClass\' ng-transclude></div></div>',
+    bindToController: true,
     controller: [
       '$scope',
       '$element',

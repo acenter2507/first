@@ -99,7 +99,9 @@
       // Load owner vote
       loadOwnerVote();
       // load following info
-      loadPolluser();
+      if (isLogged()) {
+        loadPolluser();
+      }
       // Init socket
       initSocket();
     }

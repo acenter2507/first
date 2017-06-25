@@ -42,8 +42,9 @@
           <p ng-show="poll.body.length > poll.summary.length" class="poll_item_body">...
             <a ui-sref="polls.view({ pollId: poll._id })">more</a>
           </p>
-          <br>
-          <strong><span>Option title 1</span></strong><tek-progress-bar bar-class="progress-bar-primary" ng-model="vm.progressVal">46%</tek-progress-bar>
+
+          <strong><span>HTTPS プロトコルは、ネットワーク上での盗聴（機密性）や改ざん（完全性）といった脅威から、</span></strong>
+          <tek-progress-bar bar-class="progress-bar-primary" ng-model="vm.progressVal">46%</tek-progress-bar>
           <strong><span>Option title 2</span></strong><tek-progress-bar bar-class="progress-bar-warning" ng-model="vm.progressVal2">{{vm.progressVal2 + '%'}}</tek-progress-bar>
           <strong><span>Option title 3</span></strong><tek-progress-bar bar-class="progress-bar-info" ng-model="vm.progressVal">35%</tek-progress-bar>
           <strong><span>Option title 4</span></strong><tek-progress-bar bar-class="progress-bar-success" ng-model="vm.progressVal">35%</tek-progress-bar>

@@ -96,6 +96,7 @@
 </section>
 <section class="container">
   <div class="row">
+    <p class="text-center" ng-show="vm.stopped">No Polls more, why don't you <a class="undecorated-link" ui-sref="polls.create">create one</a>?</p>
     <div class="cs-loader" ng-show="vm.busy">
       <div class="cs-loader-inner">
         <label>	●</label>
@@ -106,6 +107,5 @@
         <label>	●</label>
       </div>
     </div>
-    <p class="text-center" ng-show="vm.stopped">No Polls more, why don't you <a class="undecorated-link" ui-sref="polls.create">create one</a>?</p>
   </div>
 </section>

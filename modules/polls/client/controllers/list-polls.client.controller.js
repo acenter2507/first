@@ -67,7 +67,7 @@
             vm.page += 1;
             vm.busy = false;
             vm.new_data = [];
-          }, 3000 * vm.page);
+          }, 4000 * vm.page);
         })
         .catch(err => {
           vm.busy = false;

@@ -10,6 +10,8 @@
     var vm = this;
     vm.polls = PollsService.query();
     vm.progressVal = 57;
+    vm.progressVal2 = 0;
+
     function loadOpts(pollID) {
       return new Promise((resolve, reject) => {
         PollsApi.findOpts(pollID)

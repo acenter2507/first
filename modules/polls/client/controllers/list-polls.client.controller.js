@@ -28,7 +28,7 @@
         console.log('load done');
       })
       .catch(err => {
-        console.log(err + '');
+        console.log(err);
       });
     }
 

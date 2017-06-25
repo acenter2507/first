@@ -47,11 +47,11 @@
           <!-- options -->
           <div class="mg10t">
             <span class="text-muted" ng-if="poll.opts.length === 0"><small>No option yet</small></span>
-            <a class="undecorated-link" ng-if="poll.opts.length === 0 && poll.allow_add"><small>, why don't add some option</small></a>
+            <a ui-sref="polls.view({ pollId: poll._id })" class="undecorated-link" ng-if="poll.opts.length === 0 && poll.allow_add"><small>, why don't add some option</small></a>
             <div ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">
               <strong><span ng-bind="opt.title"></span></strong>
               <div class="progress">
-                <div class="progress-bar progress-bar-primary" ng-class="bar.barClass" ng-style="{width: opt.progressVal + '%'}">
+                <div ng-class="['progress-bar', opt.class]" ng-class="bar.barClass" ng-style="{width: opt.progressVal + '%'}">
                   <span>{{opt.voteCnt + '/' + poll.total}}</span>
                 </div>
               </div>

@@ -38,6 +38,10 @@ var OptSchema = new Schema({
     type : Number,
     default : 0
   },
+  class: {
+    type : String,
+    default : 'progress-bar-primary'
+  },
   status: {
     type : Number,
     default : 1 // 1: Approved, 2: Waiting, 3: Rejected

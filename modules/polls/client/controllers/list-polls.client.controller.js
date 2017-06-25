@@ -4,9 +4,9 @@
     .module('polls')
     .controller('PollsListController', PollsListController);
 
-  PollsListController.$inject = ['Authentication', 'PollsService', 'PollsApi', 'PollusersService'];
+  PollsListController.$inject = ['Authentication', 'PollsService', 'PollsApi', 'PollusersService', '$timeout'];
 
-  function PollsListController(Authentication, PollsService, PollsApi, Pollusers) {
+  function PollsListController(Authentication, PollsService, PollsApi, Pollusers, $timeout) {
     var vm = this;
     vm.authentication = Authentication;
     vm.isLogged = (vm.authentication.user) ? true : false;
@@ -18,15 +18,25 @@
     function loadPolls() {
       PollsService.query()
         .$promise.then(_polls => {
+          console.log('Loaded info polls');
           vm.polls = _polls;
           var promises = [];
           vm.polls.forEach(poll => {
-            poll.polluser = new Pollusers();
             promises.push(loadPoll(poll));
           });
           return Promise.all(promises);
         })
-        .then(res => {})
+        .then(res => {
+          console.log('Loaded info opts' ,res);
+          promises = [];
+          vm.polls.forEach(poll => {
+            promises.push(loadPolluser(poll));
+          });
+          return $timeout(Promise.all(promises), 5000);
+        })
+        .then(res => {
+          console.log('Loaded polluser' ,res);
+        })
         .catch(err => {
           console.log(err);
         });
@@ -68,10 +78,11 @@
       });
     }
 
-    function loadVoteopts(pollId) {
+    function loadVoteopts(poll) {
       return new Promise((resolve, reject) => {
-        PollsApi.findVoteopts(pollId)
+        PollsApi.findVoteopts(poll._id)
           .then(res => {
+            poll.polluser = new Pollusers(res.data) || new Pollusers();
             return resolve(res.data);
           })
           .catch(err => {
@@ -98,18 +109,18 @@
       return Math.floor(value * 100 / total) || 0;
     }
 
-    vm.drop_menu = poll => {
-      if (vm.authentication.user && !poll.polluser._id) {
-        loadPolluser(poll._id).then(_polluser => {
-          poll.polluser = new Pollusers(_polluser) || poll.polluser;
-          poll.following = (poll.polluser.following) ? 'Unfollow' : 'Follow';
-        }, err => {
-          alert(err + '');
-        });
-      }
-      if (vm.authentication) {
-         poll.isCurrentUserOwner = (poll.user._id === vm.authentication.user._id);
-      }
-    };
+    // vm.drop_menu = poll => {
+    //   if (vm.authentication.user && !poll.polluser._id) {
+    //     loadPolluser(poll._id).then(_polluser => {
+    //       poll.polluser = new Pollusers(_polluser) || poll.polluser;
+    //       poll.following = (poll.polluser.following) ? 'Unfollow' : 'Follow';
+    //     }, err => {
+    //       alert(err + '');
+    //     });
+    //   }
+    //   if (vm.authentication) {
+    //      poll.isCurrentUserOwner = (poll.user._id === vm.authentication.user._id);
+    //   }
+    // };
   }
 })();

@@ -114,7 +114,7 @@ angular.module('core').directive('tekProgressBar', function() {
             });
           }
 
-          if (bar.opt.progressVal !== undefined) {
+          if (bar.option.progressVal !== undefined) {
             $scope.$watch('bar.option.progressVal', function(newVal) {
               if (
                 typeof newVal !== 'number' || newVal < 0 || newVal !== newVal

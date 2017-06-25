@@ -6,7 +6,7 @@
 
   function ngEnter() {
     return function(scope, element, attrs) {
-      element.bind("keydown keypress", function(event) {
+      element.bind('keydown keypress', function(event) {
         if (event.which === 13) {
           scope.$apply(function() {
             scope.$eval(attrs.ngEnter);
@@ -24,7 +24,7 @@
         scope: { trigger: '@focusMe' },
         link: function(scope, element) {
           scope.$watch('trigger', function(value) {
-            if (value === "true") {
+            if (value === 'true') {
               $timeout(function() {
                 element[0].focus();
               });

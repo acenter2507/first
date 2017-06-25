@@ -35,8 +35,8 @@
           <br>
           <span ng-if="poll.allow_guest" class="fa fa-globe"></span>
           <span ng-if="!poll.allow_guest" class="fa fa-users"></span>
-          <hr class="mg10t mg10b">
           <div class="clearfix"></div>
+          <hr class="mg10t mg10b">
         </div>
         <div clas="poll-body">
           <h4 class="poll_item_title"><a ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a></h4>
@@ -58,9 +58,9 @@
             </div>
             <a class="pull-left undecorated-link" ng-if="poll.opts.length > 3" ui-sref="polls.view({ pollId: poll._id })">and {{poll.opts.length - 3}} others</a>
           </div>
+          <div class="clearfix"></div>
           <!-- #options -->
           <hr class="mg10t mg10b">
-          <div class="clearfix"></div>
         </div>
         <div clas="poll-footer">
           <p class="poll_item_info">
@@ -76,6 +76,7 @@
             <strong> Comments: </strong>{{poll.cmtCnt}}
           </p>
         </div>
+        <div class="clearfix"></div>
         <!--<p class="poll_item_info">
           <i class="fa fa-user" aria-hidden="true"></i>
           <strong> Added by: </strong>

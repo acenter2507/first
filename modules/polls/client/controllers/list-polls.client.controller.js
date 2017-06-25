@@ -36,7 +36,7 @@
       return new Promise((resolve, reject) => {
         loadOpts(poll._id)
           .then(_opts => {
-            poll.opts = _opts || [];
+            poll.opts = _.where(_opts, { status: 1 }) || [];
             return loadVoteopts(poll._id);
           })
           .then(res => {

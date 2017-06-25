@@ -86,5 +86,9 @@
       }
       return Math.floor((value * 100) / total) || 0;
     }
+
+    vm.drop_menu = (poll) => {
+      console.log(poll);
+    }
   }
 })();

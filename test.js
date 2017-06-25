@@ -13,4 +13,7 @@ app.init(function () {
 });
 
 
-//  Đang code màn hình edit poll ping socket
+// 1. Khi người vote là guest thì không push socket được.
+// 2. Sửa các progressbar trong màn hình detail.
+// 3. Tạo tooltip
+// 3. Lọc notif

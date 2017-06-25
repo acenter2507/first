@@ -123,7 +123,9 @@ a:hover .header-profile-image {
 .tag:hover::after {
    border-left-color: crimson; 
 }
-
+.text-black {
+  color: #555;
+}
 .mgn {
   margin: 0;
 }

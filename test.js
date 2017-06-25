@@ -17,3 +17,5 @@ app.init(function () {
 // 2. Sửa các progressbar trong màn hình detail.
 // 3. Tạo tooltip
 // 3. Lọc notif
+// 4. Infinity scroll
+// 5. Chức năng bookmark

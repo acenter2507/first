@@ -4,10 +4,11 @@
     .module('polls')
     .controller('PollsListController', PollsListController);
 
-  PollsListController.$inject = ['PollsService', 'PollsApi'];
+  PollsListController.$inject = ['Authentication', 'PollsService', 'PollsApi', 'PollusersService'];
 
-  function PollsListController(PollsService, PollsApi) {
+  function PollsListController(Authentication, PollsService, PollsApi, Pollusers) {
     var vm = this;
+    vm.authentication = Authentication;
     vm.polls = [];
     loadPolls();
     vm.progressVal = 57;
@@ -19,14 +20,12 @@
           vm.polls = _polls;
           var promises = [];
           vm.polls.forEach(poll => {
+            poll.polluser = new Pollusers();
             promises.push(loadPoll(poll));
           });
           return Promise.all(promises);
         })
-        .then(res => {
-          console.log(res);
-          console.log('load done');
-        })
+        .then(res => {})
         .catch(err => {
           console.log(err);
         });
@@ -80,15 +79,35 @@
       });
     }
 
+    function loadPolluser(pollId) {
+      return new Promise((resolve, reject) => {
+        PollsApi.findPolluser(pollId)
+          .then(res => {
+            return resolve(res.data);
+          })
+          .catch(err => {
+            return reject(err);
+          });
+      });
+    }
     function calPercen(total, value) {
       if (total === 0) {
         return 0;
       }
-      return Math.floor((value * 100) / total) || 0;
+      return Math.floor(value * 100 / total) || 0;
     }
 
-    vm.drop_menu = (poll) => {
-      console.log(poll);
-    }
+    vm.drop_menu = poll => {
+      if (vm.authentication.user && !poll.polluser._id) {
+        loadPolluser(poll._id).then(_polluser => {
+          poll.polluser = new Pollusers(_polluser) || poll.polluser;
+        }, err => {
+          alert(err + '');
+        });
+      }
+      if (vm.authentication) {
+         poll.isCurrentUserOwner = (poll.user._id === vm.authentication.user._id);
+      }
+    };
   }
 })();

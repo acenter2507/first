@@ -198,8 +198,8 @@
         });
     }
 
-    function loadVoteopts() {
-      PollsApi.findVoteopts(poll._id)
+    function loadVoteopts(pollId) {
+      PollsApi.findVoteopts(pollId)
         .then(res => {
           vm.votes = res.data.votes || [];
           vm.voteopts = res.data.voteopts || [];

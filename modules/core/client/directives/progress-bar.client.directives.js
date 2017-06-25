@@ -93,10 +93,10 @@ angular.module('core').directive('tekProgressBar', function() {
               return bar.progressObj.get();
             },
             set: function(newVal) {
-              if (bar.opt.progressVal !== undefined) {
+              if (bar.option.progressVal !== undefined) {
                 // todo setInterval problem
                 $scope.$evalAsync(function() {
-                  bar.opt.progressVal = newVal;
+                  bar.option.progressVal = newVal;
                 });
               } else {
                 bar.progressObj.set(newVal);
@@ -115,7 +115,7 @@ angular.module('core').directive('tekProgressBar', function() {
           }
 
           if (bar.opt.progressVal !== undefined) {
-            $scope.$watch('bar.opt.progressVal', function(newVal) {
+            $scope.$watch('bar.option.progressVal', function(newVal) {
               if (
                 typeof newVal !== 'number' || newVal < 0 || newVal !== newVal
               ) {

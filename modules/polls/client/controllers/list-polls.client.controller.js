@@ -42,7 +42,7 @@
           .then(res => {
             poll.votes = res.votes || [];
             poll.voteopts = res.voteopts || [];
-            poll.total = poll.voteopts;
+            poll.total = poll.voteopts.length;
             poll.opts.forEach(opt => {
               opt.voteCnt =
                 _.where(poll.voteopts, { opt: opt._id }).length || 0;

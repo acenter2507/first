@@ -225,8 +225,8 @@
   display: block;
 }
 .control--checkbox .control__indicator:after {
-  left: 9px;
-  top: 5px;
+  left: 8px;
+  top: 4px;
   width: 5px;
   height: 9px;
   border: solid #fff;

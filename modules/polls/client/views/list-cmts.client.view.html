@@ -7,10 +7,11 @@
       <img ng-if="!cmt.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
     </div>
     <span class="pull-left">
-      <strong><a class="undecorated-link" ui-sref="users.info({userId: vm.poll.user._id})" ng-if="vm.poll.user" ng-bind="vm.poll.user.displayName"></a></strong>
-      <span ng-if="!vm.poll.user">Deleted User</span>
+      <strong><a class="undecorated-link" ui-sref="users.info({userId: cmt.user._id})" ng-if="cmt.user" ng-bind="cmt.user.displayName"></a></strong>
+      <span ng-if="!cmt.user">Deleted User</span>
       <span class="text-muted"><small>&nbsp;replied on</small></span>
-      <span class="text-muted" ng-bind="vm.poll.created | date:'mediumDate'"></span>
+      <span class="text-muted" ng-bind="cmt.created | date:'mediumDate'"></span>
+      <span class="mg10l" ng-show="cmt.isEdited"><i class="fa fa-pencil-square-o"></i></span>
     </span>
     <span class="pull-right">
       <a class="undecorated-link" bs-dropdown aria-haspopup="true" aria-expanded="false"><i class="fa fa-chevron-down"></i></a>

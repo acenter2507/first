@@ -66,6 +66,7 @@
     vm.votes = [];
     vm.voteopts = [];
     vm.chart = {};
+    vm.chart.options = {};
     vm.votedTotal = 0;
     vm.error = null;
 

@@ -115,28 +115,22 @@
           </div>
         </div>
       </div>
+      <!-- Vote card -->
+      <div class="card">
+        <div class="form-group" ng-repeat="opt in vm.opts">
+          <label class="control control--checkbox" ng-click="vm.checked(opt._id)">
+            {{opt.title}}
+            <input type="checkbox" ng-checked="vm.is_voted(opt._id)"/>
+            <div class="control__indicator"></div>
+          </label>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-info" ng-click="vm.show_vote()">Vote</button>
+        </div>
+      </div>
       <!--Options-->
       <div class="card" id="poll_opts_card">
         <div ui-view="opts"></div>
-      </div>
-      <!-- Vote card -->
-      <div class="card">
-        <label class="control control--checkbox">First checkbox
-          <input type="checkbox" checked="checked"/>
-          <div class="control__indicator"></div>
-        </label>
-        <label class="control control--checkbox">Second checkbox
-          <input type="checkbox"/>
-          <div class="control__indicator"></div>
-        </label>
-        <label class="control control--checkbox">Disabled
-          <input type="checkbox" disabled="disabled"/>
-          <div class="control__indicator"></div>
-        </label>
-        <label class="control control--checkbox">Disabled & checked
-          <input type="checkbox" disabled="disabled" checked="checked"/>
-          <div class="control__indicator"></div>
-        </label>
       </div>
       <!-- Chart -->
       <div class="card" id="poll_chart_card">

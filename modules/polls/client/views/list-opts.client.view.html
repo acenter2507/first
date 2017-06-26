@@ -21,7 +21,7 @@
   <form ng-cloak>
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <h3>vm.poll.title</h3>
+        <h3>{{poll.title}}</h3>
       </div>
     </md-toolbar>
 
@@ -38,7 +38,7 @@
                         <span ng-if="vm.is_voted_all()">Un-</span>Select All
                       </md-checkbox>
                     </div>
-                    <div class="demo-select-all-checkboxes" flex="100" ng-repeat="opt in vm.opts">
+                    <div class="demo-select-all-checkboxes" flex="100" ng-repeat="opt in opts">
                       <md-checkbox ng-checked="vm.is_voted(opt._id)" ng-click="vm.checked(opt._id)">
                         {{ opt.title }}
                       </md-checkbox>

@@ -63,7 +63,10 @@
             <a class="undecorated-link" ng-click="vm.dislike_poll()" ng-show="vm.like.type == 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>&nbsp;Dislike</a>
             <span class="span_btn" ng-click="vm.dislike_poll()" ng-show="vm.like.type != 2"><i class="fa fa-thumbs-o-down" aria-hidden="true">&nbsp;Dislike</i></span>
           </span>
-          <span class="pull-right"></span>
+          <span class="pull-right">
+            <a ng-click="vm.focus_cmt()" class="undecorated-link"><i class="fa fa-commenting"></i>&nbsp;Comment</a>
+            <a ng-click="vm.reply_cmt(vm.poll)" class="undecorated-link mg5r"><i class="fa fa-reply"></i>&nbsp;Reply</a>
+          </span>
           <div class="clearfix"></div>
         </div>
       </div>

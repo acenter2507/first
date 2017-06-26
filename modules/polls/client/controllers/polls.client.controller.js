@@ -834,42 +834,6 @@
         'title'
       );
     };
-    vm.cancel_vote = () => {
-      $mdDialog.cancel();
-    };
-    vm.hide = () => {
-      $mdDialog.hide();
-    };
     vm.save_vote = save_vote;
-    vm.show_vote = (ev) => {
-      $mdDialog.show({
-        controller: DialogController,
-        templateUrl: 'vote.dialog.html',
-        parent: angular.element(document.body),
-        targetEvent: ev,
-        clickOutsideToClose:true,
-        locals: {
-          vm: vm
-        }
-      })
-      .then(function(answer) {
-        $scope.status = 'You said the information was "' + answer + '".';
-      }, function() {
-        $scope.status = 'You cancelled the dialog.';
-      });
-    };
-
-    function DialogController($scope, $mdDialog, vm) {
-      $scope.vm = vm;
-      $scope.hide = function() {
-        $mdDialog.hide();
-      };
-      $scope.cancel = function() {
-        $mdDialog.cancel();
-      };
-      $scope.answer = function(answer) {
-        $mdDialog.hide(answer);
-      };
-    }
   }
 })();

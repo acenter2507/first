@@ -138,7 +138,6 @@
   resize: none;
   min-height: 46px;
   max-height: 400px;
-  padding: 5px;
   transition: height 50ms ease-in-out;
   box-shadow: 0 0 2px rgba(0,0,0,0.2);
   border: none;

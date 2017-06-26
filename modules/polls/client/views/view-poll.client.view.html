@@ -64,8 +64,8 @@
             <span class="span_btn" ng-click="vm.dislike_poll()" ng-show="vm.like.type != 2"><i class="fa fa-thumbs-o-down" aria-hidden="true">&nbsp;Dislike</i></span>
           </span>
           <span class="pull-right">
-            <span ng-click="vm.focus_cmt()" class="span_btn"><i class="fa fa-commenting"></i>&nbsp;Comment</span>
-            <span ng-click="vm.reply_cmt(vm.poll)" class="span_btn mg5r"><i class="fa fa-reply"></i>&nbsp;Reply</span>
+            <span ng-if="!vm.poll.isCurrentUserOwner" ng-click="vm.reply_cmt(vm.poll)" class="span_btn"><i class="fa fa-reply"></i>&nbsp;Reply</span>
+            <span ng-click="vm.focus_cmt()" class="span_btn mg5r"><i class="fa fa-commenting"></i>&nbsp;Comment</span>
           </span>
           <div class="clearfix"></div>
         </div>
@@ -82,11 +82,14 @@
             <img src="{{vm.authentication.user.profileImageURL}}" alt="{{vm.authentication.user.displayName}}">
           </a>
           </div>
-          <textarea ng-is-enter="{{vm.enter_send}}" ng-enter="vm.save_cmt()" focus-me="{{vm.cmt_typing}}" class="msd-elastic: \n; reply-input" data-ng-model="vm.tmp_cmt.body" placeholder="Type your comment..."></textarea>
+          <textarea ng-is-enter="{{vm.enter_send}}" ng-enter="vm.save_cmt()" focus-me="{{vm.cmt_typing}}" class="msd-elastic: \n; reply-input"
+            data-ng-model="vm.tmp_cmt.body" placeholder="Type your comment..."></textarea>
         </div>
         <label class="text-muted"><input type="checkbox" ng-model="vm.enter_send"><small>&nbsp;Enter to send</small></label>
-        <a class="undecorated-link" ng-show="vm.enter_send" ng-click="vm.save_cmt()">Send</a>
-        <a class="mg20l undecorated-link" ng-click="vm.discard_cmt()" ng-if="vm.tmp_cmt.discard">Discard</a>
+        <span class="pull-right">
+          <a class="undecorated-link" ng-show="vm.enter_send" ng-click="vm.save_cmt()">Send</a>
+          <a class="mg20l undecorated-link" ng-click="vm.discard_cmt()" ng-if="vm.tmp_cmt.discard">Discard</a>
+        </span>
       </div>
     </div>
     <!-- Poll report -->

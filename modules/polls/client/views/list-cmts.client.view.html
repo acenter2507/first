@@ -9,10 +9,8 @@
     <span class="pull-left">
       <strong><a class="undecorated-link" ui-sref="users.info({userId: vm.poll.user._id})" ng-if="vm.poll.user" ng-bind="vm.poll.user.displayName"></a></strong>
       <span ng-if="!vm.poll.user">Deleted User</span>
-      <small>
-        <span class="text-muted"><small>&nbsp;created on</span>
-        <span class="text-muted" ng-bind="vm.poll.created | date:'mediumDate'"></span>
-      </small>
+      <span class="text-muted"><small>&nbsp;created on</small></span>
+      <span class="text-muted" ng-bind="vm.poll.created | date:'mediumDate'"></span>
     </span>
     <span class="pull-right">
       <a bs-dropdown aria-haspopup="true" aria-expanded="false"><i class="fa fa-chevron-down"></i></a>

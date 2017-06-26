@@ -859,7 +859,7 @@
       });
     };
 
-    function DialogController($scope, $mdDialog) {
+    function DialogController($scope, $mdDialog, vm) {
       $scope.vm = vm;
       $scope.hide = function() {
         $mdDialog.hide();

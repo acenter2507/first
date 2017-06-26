@@ -38,9 +38,9 @@ var OptSchema = new Schema({
     type : Number,
     default : 0
   },
-  class: {
+  color: {
     type : String,
-    default : 'progress-bar-primary'
+    default : '#267ED5'
   },
   status: {
     type : Number,

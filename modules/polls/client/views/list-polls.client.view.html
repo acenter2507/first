@@ -57,7 +57,7 @@
             <div ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">
               <strong><span ng-bind="opt.title"></span></strong>
               <div class="progress">
-                <div ng-class="['progress-bar', opt.class]" ng-class="bar.barClass" ng-style="{width: opt.progressVal + '%'}">
+                <div ng-class="['progress-bar']" ng-class="bar.barClass" ng-style="[{width: opt.progressVal + '%'}, {background-color: opt.color}]">
                   <span ng-if="poll.opts.length > 0">{{opt.voteCnt + '/' + poll.total}}</span>
                   <span class="text-black" ng-if="poll.opts.length === 0">{{opt.voteCnt + '/' + poll.total}}</span>
                 </div>

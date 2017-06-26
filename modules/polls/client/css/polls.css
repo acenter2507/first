@@ -153,11 +153,11 @@
   position: relative;
   min-width: 40px;
   min-height: 40px;
-  margin-top: 2px;
   background: transparent;
 }
 
 .opt_image img {
+  margin-top: 2px;
   margin-right: 5px;
   width: 40px;
   height: 40px;

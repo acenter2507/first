@@ -87,7 +87,7 @@
         </div>
         <label class="text-muted"><input type="checkbox" ng-model="vm.enter_send"><small>&nbsp;Enter to send</small></label>
         <span class="pull-right">
-          <a class="undecorated-link" ng-show="vm.enter_send" ng-click="vm.save_cmt()">Send</a>
+          <a class="undecorated-link" ng-hide="vm.enter_send" ng-click="vm.save_cmt()">Send</a>
           <a class="mg20l undecorated-link" ng-click="vm.discard_cmt()" ng-if="vm.tmp_cmt.discard">Discard</a>
         </span>
       </div>

@@ -20,7 +20,8 @@ var ApplicationConfiguration = (function() {
     'moment-picker',
     'mgcrea.ngStrap',
     'infinite-scroll',
-    'monospaced.elastic'
+    'monospaced.elastic',
+    'chart.js'
   ];
 
   // Add a new vertical module

@@ -644,6 +644,10 @@
       }
     };
 
+    vm.focus_cmt = () => {
+      vm.cmt_typing = true;
+    };
+
     vm.like_cmt = cmt => {
       if (!vm.authentication.user) {
         return alert('You must login to like this poll.');

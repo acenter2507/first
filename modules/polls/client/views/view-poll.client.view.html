@@ -68,17 +68,14 @@
       </div>
       <!-- Comment form -->
       <div class="card" id="poll_cmt_form_card">
-        <form name="vm.form.cmtForm" class="form-horizontal" novalidate ng-submit="vm.save_cmt(vm.form.cmtForm.$valid)">
-          <div class="form-group">
-            <span ng-if="vm.tmp_cmt.to">To:&nbsp;</span>
-            <a ng-if="vm.tmp_cmt.to" href="#" class="link_btn" ui-sref="users.info({userId: vm.tmp_cmt.to})" ng-bind="vm.tmp_cmt.toName"></a>
-            <a href="#" class="mg20l link_btn" ng-click="vm.discard_cmt()" ng-if="vm.tmp_cmt.discard">Discard</a>
-          </div>
-          <div class="form-group">
-            <textarea focus-me="{{vm.cmt_typing}}" name="body" ng-model="vm.tmp_cmt.body" class="form-control" placeholder="Type your reply and enter to send it"
-              ng-enter="vm.save_cmt()"></textarea>
-          </div>
-        </form>
+        <div class="form-group">
+          <span ng-if="vm.tmp_cmt.to">To:&nbsp;</span>
+          <a ng-if="vm.tmp_cmt.to" href="#" class="link_btn" ui-sref="users.info({userId: vm.tmp_cmt.to})" ng-bind="vm.tmp_cmt.toName"></a>
+          <a href="#" class="mg20l link_btn" ng-click="vm.discard_cmt()" ng-if="vm.tmp_cmt.discard">Discard</a>
+        </div>
+        <div class="form-group">
+          <textarea ng-enter="vm.save_cmt()" focus-me="{{vm.cmt_typing}}" class="msd-elastic: \n;" data-ng-model="vm.tmp_cmt.body" placeholder="Type your reply and enter to send it"></textarea>
+        </div>
       </div>
     </div>
     <!-- Poll report -->

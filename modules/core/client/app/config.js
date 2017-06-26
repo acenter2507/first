@@ -19,7 +19,8 @@ var ApplicationConfiguration = (function() {
     'ngMaterial',
     'moment-picker',
     'mgcrea.ngStrap',
-    'infinite-scroll'
+    'infinite-scroll',
+    'monospaced.elastic'
   ];
 
   // Add a new vertical module

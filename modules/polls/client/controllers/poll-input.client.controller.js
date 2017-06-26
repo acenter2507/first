@@ -16,7 +16,8 @@
     'TagsService',
     '$aside',
     'OptsService',
-    'Socket'
+    'Socket',
+    'CategorysService'
   ];
 
   function PollInputController(
@@ -30,7 +31,8 @@
     Tags,
     $aside,
     Opts,
-    Socket
+    Socket,
+    Categorys
   ) {
     var vm = this;
 
@@ -38,6 +40,7 @@
     vm.poll = poll;
     vm.poll.close = vm.poll.close ? moment(vm.poll.close) : vm.poll.close;
     vm.poll.tags = [];
+    vm.categorys = Categorys.query();
     vm.bk_poll = _.clone(poll);
     vm.error = null;
     vm.form = {};

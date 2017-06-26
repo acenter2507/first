@@ -13,7 +13,6 @@ module.exports = {
         'public/lib/angular-moment-picker/dist/angular-moment-picker.css'
       ],
       js: [
-        'public/lib/jquery/dist/jquery.min.js',
         'public/lib/angular/angular.js',
         'public/lib/angular-resource/angular-resource.js',
         'public/lib/angular-animate/angular-animate.js',

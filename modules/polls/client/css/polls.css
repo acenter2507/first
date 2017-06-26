@@ -7,7 +7,11 @@
 /*.aside .aside-dialog .aside-header .close {
 }*/
 
-.poll-header {
+.post-header,
+.post-body,
+.post-footer,
+.poll-header,
+.poll-body {
   position: relative;
 }
 .user-avatar {
@@ -22,9 +26,7 @@
   width: 46px;
   height: 46px;
 }
-.poll-body {
-  position: relative;
-}
+
 .poll-footer {
   position: relative;
   margin-bottom: 10px;
@@ -108,10 +110,6 @@
 
 .poll_item_info:not(:last-child) {
   margin-right: 10px;
-}
-
-.poll_item_body {
-  display: inline !important;
 }
 
 .sort {

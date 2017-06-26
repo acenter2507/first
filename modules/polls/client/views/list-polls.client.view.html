@@ -45,8 +45,8 @@
           <div class="clearfix"></div>
         </div>
         <div clas="poll-body">
-          <h4 class="poll_item_title"><a ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a></h4>
-          <p class="text-justify poll_item_body" ng-bind="poll.summary"></p>
+          <h4><a ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a></h4>
+          <p class="text-justify" ng-bind="poll.summary"></p>
           <p ng-show="poll.body.length > poll.summary.length" class="poll_item_body">...
             <a class="undecorated-link" ui-sref="polls.view({ pollId: poll._id })">see more</a>
           </p>

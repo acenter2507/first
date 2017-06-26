@@ -38,8 +38,12 @@
             </ul>
           </span>
           <br>
-          <span ng-if="poll.allow_guest" class="fa fa-globe"></span>
-          <span ng-if="!poll.allow_guest" class="fa fa-users"></span>
+          <span ng-if="poll.allow_guest" class="fa fa-globe">
+            <md-tooltip md-direction="bottom">This poll is public</md-tooltip>
+          </span>
+          <span ng-if="!poll.allow_guest" class="fa fa-users">
+            <md-tooltip md-direction="bottom">Only user can vote</md-tooltip>
+          </span>
           <hr class="mg10t mg10b">
           <div class="clearfix"></div>
         </div>

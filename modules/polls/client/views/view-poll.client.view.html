@@ -45,7 +45,11 @@
             </ul>
           </span>
           <br>
-          <span ng-if="vm.poll.allow_guest" class="fa fa-globe"></span>
+          <span ng-if="vm.poll.allow_guest" class="fa fa-globe">
+            <md-tooltip md-direction="bottom">
+              Insert Drive
+            </md-tooltip>
+          </span>
           <span ng-if="!vm.poll.allow_guest" class="fa fa-users"></span>
           <hr class="mg10t mg10b">
           <div class="clearfix"></div>
@@ -97,21 +101,21 @@
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 pdnl">
       <!-- Report -->
       <div class="card" id="poll_report_card">
-        <div class="col-xs-4">
+        <div class="col-xs-4 pdn">
           <div class="poll_info_item">
             <span class="text-center"><strong>VIEWS</strong></span>
             <span class="text-center" ng-bind="vm.poll.viewCnt"></span>
             <br>
           </div>
         </div>
-        <div class="col-xs-4">
+        <div class="col-xs-4 pdn">
           <div class="poll_info_item">
             <span class="text-center"><strong>VOTES</strong></span>
             <span class="text-center" ng-bind="vm.poll.voteCnt"></span>
             <br>
           </div>
         </div>
-        <div class="col-xs-4">
+        <div class="col-xs-4 pdn">
           <div class="poll_info_item">
             <span class="text-center"><strong>COMMENTS</strong></span>
             <span class="text-center" ng-bind="vm.cmts.length"></span>

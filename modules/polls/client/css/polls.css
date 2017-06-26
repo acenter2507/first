@@ -10,7 +10,9 @@
 .post-header,
 .post-body,
 .poll-header,
-.poll-body {
+.poll-body,
+.post-footer,
+.poll-footer {
   position: relative;
 }
 .user-avatar {
@@ -26,11 +28,6 @@
   height: 46px;
 }
 
-.post-footer,
-.poll-footer {
-  position: relative;
-  margin-bottom: 10px;
-}
 .progress {
   height: 30px !important;
   margin-bottom: 10px !important;

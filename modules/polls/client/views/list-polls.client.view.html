@@ -93,8 +93,10 @@
       <ul class="nav nav-list">
         <li class="nav-header"><strong>Categorys</strong></li>
         <li ng-repeat="category in vm.categorys">
-          <a class="undecorated-link" ui-sref="categorys.view({ categoryId: category._id })"><i ng-class="['fa', category.icon]"></i>&nbsp;{{category.name}}</a>
-          <span class="badge">5</span>
+          <a class="undecorated-link" ui-sref="categorys.view({ categoryId: category._id })">
+            <i ng-class="['fa', category.icon]"></i>&nbsp;{{category.name}}
+            <span class="badge">5</span>
+          </a>
         </li>
       </ul>
     </div>

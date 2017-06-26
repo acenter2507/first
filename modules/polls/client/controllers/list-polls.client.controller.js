@@ -149,21 +149,19 @@
       return Math.floor(value * 100 / total) || 0;
     }
 
-    $scope.settings = [
+    vm.settings = [
       {
         name: 'Wi-Fi',
         extraScreen: 'Wi-fi menu',
-        icon: 'device:network-wifi',
         enabled: true
       },
       {
         name: 'Bluetooth',
         extraScreen: 'Bluetooth menu',
-        icon: 'device:bluetooth',
         enabled: false
       }
     ];
-    $scope.navigateTo = function(to, event) {
+    vm.navigateTo = function(to, event) {
       $mdDialog.show(
         $mdDialog
           .alert()

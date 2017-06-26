@@ -29,11 +29,11 @@
 }
 
 .progress {
-  height: 30px !important;
+  height: 24px !important;
   margin-bottom: 10px !important;
 }
 .progress-bar {
-  padding: 5px 0;
+  padding: 2px 0;
   font-size: 14px !important;
 }
 .progress-bar span {

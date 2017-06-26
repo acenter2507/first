@@ -57,12 +57,13 @@
         </div>
         <div class="post-footer">
           <span class="like_tools">
-            <a class="undecorated-link" ng-click="vm.like_poll()" ng-show="vm.like.type == 1"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
-            <span class="span_btn" ng-click="vm.like_poll()" ng-show="vm.like.type != 1"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span>
-          <span class="mg5l mg5r" ng-bind="vm.poll.likeCnt"></span>
-          <a class="undecorated-link" ng-click="vm.dislike_poll()" ng-show="vm.like.type == 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>
-          <span class="span_btn" ng-click="vm.dislike_poll()" ng-show="vm.like.type != 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></span>
+            <a class="undecorated-link" ng-click="vm.like_poll()" ng-show="vm.like.type == 1"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;Like</a>
+            <span class="span_btn" ng-click="vm.like_poll()" ng-show="vm.like.type != 1"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;Like</span>
+            <span class="mg5l mg5r" ng-bind="vm.poll.likeCnt"></span>
+            <a class="undecorated-link" ng-click="vm.dislike_poll()" ng-show="vm.like.type == 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>&nbsp;Dislike</a>
+            <span class="span_btn" ng-click="vm.dislike_poll()" ng-show="vm.like.type != 2"><i class="fa fa-thumbs-o-down" aria-hidden="true">&nbsp;Dislike</i></span>
           </span>
+          <span class="pull-right"></span>
           <div class="clearfix"></div>
         </div>
       </div>
@@ -70,8 +71,7 @@
       <div class="card" id="poll_cmt_form_card">
         <div class="form-group">
           <span ng-if="vm.tmp_cmt.to">To:&nbsp;</span>
-          <a ng-if="vm.tmp_cmt.to" href="#" class="link_btn" ui-sref="users.info({userId: vm.tmp_cmt.to})" ng-bind="vm.tmp_cmt.toName"></a>
-          <a href="#" class="mg20l link_btn" ng-click="vm.discard_cmt()" ng-if="vm.tmp_cmt.discard">Discard</a>
+          <a class="undecorated-link" ng-if="vm.tmp_cmt.to" ui-sref="users.info({userId: vm.tmp_cmt.to})" ng-bind="vm.tmp_cmt.toName"></a>
         </div>
         <div class="form-group">
           <div class="user-avatar pull-left" ng-if="vm.authentication.user">
@@ -82,6 +82,8 @@
           <textarea ng-is-enter="{{vm.enter_send}}" ng-enter="vm.save_cmt()" focus-me="{{vm.cmt_typing}}" class="msd-elastic: \n; reply-input" data-ng-model="vm.tmp_cmt.body" placeholder="Type your comment..."></textarea>
         </div>
         <label class="text-muted"><input type="checkbox" ng-model="vm.enter_send"><small>&nbsp;Enter to send</small></label>
+        <a class="undecorated-link" ng-show="vm.enter_send" ng-click="vm.save_cmt()">Send</a>
+        <a class="mg20l undecorated-link" ng-click="vm.discard_cmt()" ng-if="vm.tmp_cmt.discard">Discard</a>
       </div>
     </div>
     <!-- Poll report -->

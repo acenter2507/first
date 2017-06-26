@@ -1,4 +1,4 @@
-(function () {
+(function() {
   'use strict';
   // Polls controller
   angular.module('polls').controller('PollsController', PollsController);
@@ -46,7 +46,7 @@
   ) {
     var vm = this;
     vm.authentication = Authentication;
-    vm.isLogged = (vm.authentication.user) ? true : false;
+    vm.isLogged = vm.authentication.user ? true : false;
     vm.poll = poll;
     vm.poll.close = vm.poll.close ? moment(vm.poll.close) : vm.poll.close;
     vm.form = {};
@@ -170,7 +170,7 @@
       Socket.on('opts_update', res => {
         loadOpts();
       });
-      $scope.$on('$destroy', function () {
+      $scope.$on('$destroy', function() {
         Socket.emit('unsubscribe', {
           pollId: vm.poll._id,
           userId: vm.authentication.user._id
@@ -213,7 +213,7 @@
             vm.chart.labels.push(opt.title);
             vm.chart.data.push(opt.voteCnt);
           });
-          vm.chart.datasetOverride = [{backgroundColor: vm.chart.colors}];
+          vm.chart.datasetOverride = [{ backgroundColor: vm.chart.colors }];
         })
         .catch(err => {
           alert('error' + err);
@@ -299,7 +299,9 @@
       return new Promise((resolve, reject) => {
         PollsApi.findOwnerVote(poll._id)
           .then(res => {
-            vm.ownVote = (res && res.data) ? new Votes(res.data) : new Votes({ poll: vm.poll._id });
+            vm.ownVote = res && res.data
+              ? new Votes(res.data)
+              : new Votes({ poll: vm.poll._id });
             return vm.ownVote._id ? loadVoteoopts(vm.ownVote._id) : resolve();
           })
           .then(res => {
@@ -587,8 +589,7 @@
         vm.polluser.following = true;
         vm.polluser.$save(successCallback, errorCallback);
       }
-      function successCallback(res) {
-      }
+      function successCallback(res) {}
 
       function errorCallback(err) {
         vm.polluser.following = !vm.polluser.following;
@@ -599,7 +600,15 @@
     // OPTIONS
     // Click button add option
     vm.input_opt = opt => {
-      vm.tmp_opt = (!opt) ? new Opts({ poll: vm.poll._id, title: '', body: '', image: 'modules/opts/client/img/option.png', status: 2 }) : new Opts(opt);
+      vm.tmp_opt = !opt
+        ? new Opts({
+          poll: vm.poll._id,
+          title: '',
+          body: '',
+          image: 'modules/opts/client/img/option.png',
+          status: 2
+        })
+        : new Opts(opt);
       opt_aside.$promise.then(opt_aside.show);
     };
     // Click button save option
@@ -804,25 +813,24 @@
     };
 
     // VOTE
-    vm.checked = function (id) {
+    vm.checked = function(id) {
       if (_.contains(vm.selectedOpts, id)) {
         vm.selectedOpts = _.without(vm.selectedOpts, id);
       } else {
         vm.selectedOpts.push(id);
       }
     };
-    vm.is_voted = function (id) {
+    vm.is_voted = function(id) {
       return _.contains(vm.selectedOpts, id);
     };
-    vm.voted_title = function () {
+    vm.voted_title = function() {
       return _.pluck(
-        _.filter(vm.opts, function (opt) {
+        _.filter(vm.opts, function(opt) {
           return _.contains(vm.votedOpts, opt._id);
         }),
         'title'
       );
     };
     vm.save_vote = save_vote;
-
   }
 })();

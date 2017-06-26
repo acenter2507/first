@@ -4,7 +4,7 @@
   <div class="opt_image pull-left">
     <img src="{{opt.image}}" alt="{{opt.title}}">
   </div>
-  <strong><a class="undecorated-link" href="" ng-bind="opt.title"></a></strong>
+  <strong><a class="undecorated-link" href="" ng-bind="opt.title"><md-tooltip md-direction="bottom">Click to view detail option</md-tooltip></a></strong>
   <div class="progress">
     <div ng-class="['progress-bar']" ng-class="bar.barClass" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}">
       <span ng-if="opt.voteCnt > 0">{{opt.voteCnt + '/' + vm.votedTotal}}</span>

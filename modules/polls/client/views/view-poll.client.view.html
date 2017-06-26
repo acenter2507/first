@@ -118,9 +118,9 @@
       <!-- Vote card -->
       <div class="card">
         <div class="form-group" ng-repeat="opt in vm.opts">
-          <label class="control control--checkbox" ng-click="vm.checked(opt._id)">
+          <label class="control control--checkbox">
             {{opt.title}}
-            <input type="checkbox" ng-checked="vm.is_voted(opt._id)"/>
+            <input type="checkbox" ng-checked="vm.is_voted(opt._id)" ng-click="vm.checked(opt._id)"/>
             <div class="control__indicator"></div>
           </label>
         </div>

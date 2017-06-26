@@ -5,7 +5,6 @@ module.exports = {
     lib: {
       css: [
         'public/lib/bootstrap/dist/css/bootstrap.css',
-        'public/lib/bootstrap/dist/css/bootstrap-theme.css',
         'public/lib/bootstrap-additions/dist/bootstrap-additions.css',
         'public/lib/components-font-awesome/css/font-awesome.css',
         'public/lib/angular-ui-switch/angular-ui-switch.css',
@@ -24,12 +23,13 @@ module.exports = {
         'public/lib/angular-file-upload/angular-file-upload.js',
         'public/lib/angular-strap/dist/angular-strap.js',
         'public/lib/angular-strap/dist/angular-strap.tpl.js',
-        'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
+        'public/lib/angular-material/angular-material.js',
         'public/lib/angular-ui-switch/angular-ui-switch.js',
         'public/lib/ng-tags-input/ng-tags-input.js',
         'public/lib/underscore/underscore.js',
         'public/lib/moment/moment.js',
         'public/lib/angular-moment-picker/dist/angular-moment-picker.js',
+        'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
         'public/lib/ngInfiniteScroll/build/ng-infinite-scroll.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']

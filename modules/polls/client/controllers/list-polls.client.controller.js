@@ -40,13 +40,13 @@
       vm.busy = true;
       PollsApi.findPolls(vm.page)
         .then(res => {
-          if (res.data.length === 0) {
+          if (!res.data.length || res.data.length === 0) {
             vm.stopped = true;
             vm.busy = false;
             return;
           }
           // Load options và tính vote cho các opt trong polls
-          vm.new_data = res.data;
+          vm.new_data = res.data || [];
           var promises = [];
           vm.new_data.forEach(poll => {
             poll.isCurrentUserOwner =
@@ -63,13 +63,11 @@
           // Load polluser (Người dùng đã follow poll hay chưa)
           var promises = [];
           vm.new_data.forEach(poll => {
-            poll.xxx = 0;
             promises.push(loadPolluser(poll));
           });
           return Promise.all(promises);
         })
         .then(res => {
-          console.log(vm.polls);
           vm.new_data = [];
         })
         .catch(err => {

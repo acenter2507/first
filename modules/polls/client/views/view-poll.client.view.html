@@ -119,7 +119,7 @@
       <div class="card">
         <div class="form-group" ng-repeat="opt in vm.opts">
           <label class="control control--checkbox">
-            {{opt.title}}
+            {{opt.title}}<span class="mg5l" ng-style="{color: opt.color}">&#9829;</span>
             <input type="checkbox" ng-checked="vm.is_voted(opt._id)" ng-click="vm.checked(opt._id)"/>
             <div class="control__indicator"></div>
           </label>

@@ -22,3 +22,4 @@ app.init(function () {
 // 6. Thêm tùy chọn vote multiple
 // 7. Chức năng private và share link
 // 8. Thêm nút bấm đổi kiểu biểu đồ tròn
+// 9. Danh sách các poll nổi bật

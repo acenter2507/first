@@ -239,15 +239,28 @@
 
     vm.loadCmts = loadCmts;
     function loadCmts() {
-      // Get all Cmts
-      return PollsApi.findCmts(vm.poll._id, vm.page)
+      if (vm.stopped || vm.busy) return;
+      vm.busy = true;
+      PollsApi.findCmts(vm.poll._id, vm.page)
         .then(res => {
-          vm.cmts = res.data;
-          if (vm.authentication.user) {
-            vm.cmts.forEach(cmt => {
-              loadLikeCmt(cmt);
-            });
+          if (!res.data.length || res.data.length === 0) {
+            vm.stopped = true;
+            vm.busy = false;
+            return;
           }
+          vm.cmts = _.union(vm.cmts, res.data);
+          vm.page += 1;
+          vm.busy = false;
+          if (vm.authentication.user) {
+            var promises = [];
+            vm.cmts.forEach(cmt => {
+              promises.push(loadLikeCmt(cmt));
+            });
+            return Promise.all(promises);
+          }
+        })
+        .then(res => {
+          console.log('Load comment done');
         })
         .catch(err => {
           alert('error' + err);

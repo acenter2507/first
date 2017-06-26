@@ -90,31 +90,35 @@
       </div>-->
     </div>
     <!-- Hot poll -->
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-lg-push-3 card">
-      <ul class="nav nav-list">
-        <li class="nav-header">
-          <strong>Hot polls</strong>
-          <span class="pull-right"><a class="undecorated-link" ui-sref="polls.list">See all</a></span>
-        </li>
-        <li ng-repeat="category in vm.categorys">
-          <a class="undecorated-link" ui-sref="categorys.view({ categoryId: category._id })">
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-lg-push-3">
+      <div class="card">
+        <ul class="nav nav-list">
+          <li class="nav-header">
+            <strong>Hot polls</strong>
+            <span class="pull-right"><a class="undecorated-link" ui-sref="polls.list">See all</a></span>
+          </li>
+          <li ng-repeat="category in vm.categorys">
+            <a class="undecorated-link" ui-sref="categorys.view({ categoryId: category._id })">
             <i ng-class="['fa', category.icon]"></i>&nbsp;{{category.name}}
             <span class="badge badge-info pull-right">5</span>
           </a>
-        </li>
-      </ul>
+          </li>
+        </ul>
+      </div>
     </div>
     <!-- Category -->
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-lg-pull-9 card">
-      <ul class="nav nav-list">
-        <li class="nav-header"><strong>Categorys</strong></li>
-        <li ng-repeat="category in vm.categorys">
-          <a class="undecorated-link" ui-sref="categorys.view({ categoryId: category._id })">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-lg-pull-9">
+      <div class="card">
+        <ul class="nav nav-list">
+          <li class="nav-header"><strong>Categorys</strong></li>
+          <li ng-repeat="category in vm.categorys">
+            <a class="undecorated-link" ui-sref="categorys.view({ categoryId: category._id })">
             <i ng-class="['fa', category.icon]"></i>&nbsp;{{category.name}}
             <span class="badge badge-info pull-right">5</span>
           </a>
-        </li>
-      </ul>
+          </li>
+        </ul>
+      </div>
     </div>
     <div class="clearfix"></div>
   </div>

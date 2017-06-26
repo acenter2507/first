@@ -105,6 +105,7 @@
   background-image: linear-gradient(to bottom, #79d0cc 0%, #20b2aa 100%) !important;
 }
 
+.poll_item_body,
 .poll_item_info {
   display: inline !important;
 }

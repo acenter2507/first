@@ -135,6 +135,7 @@
           <button class="btn btn-info pull-right" ng-click="vm.save_vote()">{{(vm.ownVote._id) ? 'Change vote' : 'Vote'}}</button>
           <button ng-if="vm.isLogged && vm.poll.allow_add" class="btn btn-warning pull-right" ng-click="vm.input_opt()">{{(vm.ownVote._id) ? 'Change vote' : 'Vote'}}</button>
         </div>
+        <div class="clearfix"></div>
       </div>
       <!--Options-->
       <div class="card" id="poll_opts_card">

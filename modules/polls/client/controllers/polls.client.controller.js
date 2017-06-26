@@ -813,6 +813,19 @@
     vm.is_voted = function(id) {
       return _.contains(vm.selectedOpts, id);
     };
+    vm.is_voted_all = () => {
+       return vm.selectedOpts.length === vm.opts.length;
+    };
+    vm.toggleAll = () => {
+      if (vm.selectedOpts.length === vm.opts.length) {
+        vm.selectedOpts = [];
+      } else if (vm.selectedOpts.length === 0 || vm.selectedOpts.length > 0) {
+        vm.selectedOpts = _.pluck(vm.opts, '_id');
+      }
+    };
+    vm.isIndeterminate = () => {
+      return (vm.selectedOpts.length !== 0 && vm.selectedOpts.length !== vm.opts.length);
+    };
     vm.voted_title = function() {
       return _.pluck(
         _.filter(vm.opts, function(opt) {

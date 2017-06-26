@@ -26,6 +26,10 @@ var PollSchema = new Schema({
     type: String,
     default: ''
   },
+  category: {
+    type: Schema.ObjectId,
+    ref: 'Category'
+  },
   allow_guest: {
     type: Boolean,
     default: false

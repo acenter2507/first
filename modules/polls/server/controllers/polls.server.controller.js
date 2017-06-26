@@ -172,6 +172,7 @@ exports.delete = function(req, res) {
 exports.list = function(req, res) {
   Poll.find()
     .sort('-created')
+    .populate('category', 'name icon')
     .populate('user', 'displayName profileImageURL')
     .exec(function(err, polls) {
       if (err) {
@@ -191,6 +192,7 @@ exports.findPolls = function(req, res) {
   var page = req.params.page || 0;
   Poll.find()
     .sort('-created')
+    .populate('category', 'name icon')
     .populate('user', 'displayName profileImageURL')
     .skip(10 * page)
     .limit(10)
@@ -378,6 +380,7 @@ exports.pollByID = function(req, res, next, id) {
   }
 
   Poll.findById(id)
+    .populate('category', 'name icon')
     .populate('user', 'displayName profileImageURL')
     .exec(function(err, poll) {
       if (err) {

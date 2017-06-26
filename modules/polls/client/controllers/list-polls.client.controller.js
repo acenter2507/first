@@ -8,16 +8,14 @@
     'Authentication',
     'PollsService',
     'PollsApi',
-    'PollusersService',
-    '$mdDialog'
+    'PollusersService'
   ];
 
   function PollsListController(
     Authentication,
     PollsService,
     PollsApi,
-    Pollusers,
-    $mdDialog
+    Pollusers
   ) {
     var vm = this;
     vm.authentication = Authentication;
@@ -148,29 +146,5 @@
       }
       return Math.floor(value * 100 / total) || 0;
     }
-
-    vm.settings = [
-      {
-        name: 'Wi-Fi',
-        extraScreen: 'Wi-fi menu',
-        enabled: true
-      },
-      {
-        name: 'Bluetooth',
-        extraScreen: 'Bluetooth menu',
-        enabled: false
-      }
-    ];
-    vm.navigateTo = function(to, event) {
-      $mdDialog.show(
-        $mdDialog
-          .alert()
-          .title('Navigating')
-          .textContent('Imagine being taken to ' + to)
-          .ariaLabel('Navigation demo')
-          .ok('Neat!')
-          .targetEvent(event)
-      );
-    };
   }
 })();

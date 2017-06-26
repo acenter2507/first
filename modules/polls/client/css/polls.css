@@ -137,7 +137,7 @@
 }
 
 .reply-input {
-  width: 100%;
+  width: calc(100% - 60px);
   resize: none;
   max-height: 400px;
   padding: 12px;

@@ -814,7 +814,7 @@
       return _.contains(vm.selectedOpts, id);
     };
     vm.is_voted_all = () => {
-       return vm.selectedOpts.length === vm.opts.length;
+      return vm.selectedOpts.length === vm.opts.length;
     };
     vm.toggleAll = () => {
       if (vm.selectedOpts.length === vm.opts.length) {

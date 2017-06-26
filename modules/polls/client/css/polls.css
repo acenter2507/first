@@ -181,7 +181,8 @@
   padding-left: 30px;
   margin-bottom: 15px;
   cursor: pointer;
-  font-size: 18px;
+  width: 100%;
+  /*font-size: 18px;*/
 }
 .control input {
   position: absolute;
@@ -224,9 +225,9 @@
   display: block;
 }
 .control--checkbox .control__indicator:after {
-  left: 8px;
+  left: 9px;
   top: 4px;
-  width: 3px;
+  width: 4px;
   height: 8px;
   border: solid #fff;
   border-width: 0 2px 2px 0;

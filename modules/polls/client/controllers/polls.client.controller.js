@@ -804,10 +804,16 @@
 
     // VOTE
     vm.checked = function(id) {
-      if (_.contains(vm.selectedOpts, id)) {
-        vm.selectedOpts = _.without(vm.selectedOpts, id);
+      if (vm.poll.allow_multiple) {
+        if (_.contains(vm.selectedOpts, id)) {
+          vm.selectedOpts = _.without(vm.selectedOpts, id);
+        } else {
+          vm.selectedOpts.push(id);
+        }
       } else {
-        vm.selectedOpts.push(id);
+        if (!_.contains(vm.selectedOpts, id)) {
+          vm.selectedOpts = [id];
+        }
       }
     };
     vm.is_voted = function(id) {

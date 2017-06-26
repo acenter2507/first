@@ -151,14 +151,13 @@
 
 .opt_image {
   position: relative;
-  min-width: 36px;
-  min-height: 36px;
-  margin-top: 2px;
+  min-width: 40px;
+  min-height: 40px;
   background: transparent;
 }
 
 .opt_image img {
-  margin-right: 15px;
-  width: 36px;
-  height: 36px;
+  margin-right: 5px;
+  width: 40px;
+  height: 40px;
 }

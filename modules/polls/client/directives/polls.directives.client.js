@@ -7,9 +7,8 @@
   function ngEnter() {
     return function(scope, element, attrs) {
       element.bind('keydown keypress', function(event) {
-        console.log(attrs.ngIsEnter);
         if (event.which === 13) {
-          if (attrs.ngIsEnter) {
+          if (attrs.ngIsEnter === 'true') {
             scope.$apply(function() {
               scope.$eval(attrs.ngEnter);
             });

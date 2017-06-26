@@ -237,6 +237,7 @@
       });
     }
 
+    vm.loadCmts = loadCmts;
     function loadCmts() {
       // Get all Cmts
       return PollsApi.findCmts(vm.poll._id, vm.page)

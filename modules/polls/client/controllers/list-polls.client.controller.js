@@ -45,6 +45,7 @@
             vm.busy = false;
             return;
           }
+          // Load options và tính vote cho các opt trong polls
           vm.new_data = res.data;
           var promises = [];
           vm.new_data.forEach(poll => {
@@ -55,6 +56,7 @@
           return Promise.all(promises);
         })
         .then(res => {
+          // Load polluser (Người dùng đã follow poll hay chưa)
           var promises = [];
           vm.new_data.forEach(poll => {
             promises.push(loadPolluser(poll));
@@ -62,12 +64,11 @@
           return Promise.all(promises);
         })
         .then(res => {
-          $timeout(() => {
-            vm.polls = _.union(vm.polls, vm.new_data);
-            vm.page += 1;
-            vm.busy = false;
-            vm.new_data = [];
-          }, 4000 * vm.page);
+          // Gán data vào list hiện tại
+          vm.polls = _.union(vm.polls, vm.new_data);
+          vm.page += 1;
+          vm.busy = false;
+          vm.new_data = [];
         })
         .catch(err => {
           vm.busy = false;
@@ -125,6 +126,10 @@
     }
 
     function loadPolluser(poll) {
+      if (!vm.isLogged) {
+        poll.polluser = new Pollusers();
+        return resolve();
+      }
       return new Promise((resolve, reject) => {
         PollsApi.findPolluser(poll._id)
           .then(res => {

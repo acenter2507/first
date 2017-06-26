@@ -1,6 +1,9 @@
 <span class="text-muted" ng-if="!vm.opts.length || vm.opts.length === 0"><small>No option yet</small></span>
 <a class="undecorated-link" ng-if="poll.opts.length === 0 && poll.allow_add" ng-click="vm.input_opt()"><small>, why don't add some option</small></a>
 <div ng-repeat="opt in vm.opts | orderBy: '-voteCnt'">
+  <div class="opt_image pull-left">
+    <img src="{{opt.image}}" alt="{{opt.title}}" class="img-rounded">
+  </div>
   <strong><span ng-bind="opt.title"></span></strong>
   <div class="progress">
     <div ng-class="['progress-bar']" ng-class="bar.barClass" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}">
@@ -12,8 +15,8 @@
 
 <!--<ul class="opts">
   <li ng-repeat="opt in vm.opts | orderBy: '-voteCnt'">
-    <div class="opt_image pull-left">
-      <img src="{{opt.image}}" alt="{{opt.title}}" class="img-rounded">
+    
+      
     </div>
     <span ng-bind="opt.title"></span>
     <span> ({{opt.voteCnt}}/{{vm.votedTotal}})</span>

@@ -15,6 +15,10 @@
 .poll-footer {
   position: relative;
 }
+.poll-body p,
+.post-body p{
+  display: inline-block;
+}
 .user-avatar {
   margin-right: 10px;
   position: relative;
@@ -143,4 +147,18 @@
   transition: height 50ms ease-in-out;
   box-shadow: 0 0 2px rgba(0,0,0,0.2);
   border: none;
+}
+
+.opt_image {
+  position: relative;
+  min-width: 36px;
+  min-height: 36px;
+  margin-top: 2px;
+  background: transparent;
+}
+
+.opt_image img {
+  margin-right: 15px;
+  width: 36px;
+  height: 36px;
 }

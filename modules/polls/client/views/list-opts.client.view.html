@@ -1,5 +1,20 @@
-<div class="row">
-  <p class="text-muted" ng-hide="vm.opts.length">Has no option added.</p>
+<p class="text-muted" ng-show="!vm.opts.length || vm.opts.length === 0">Has no option added.</p>
+<ul class="opts">
+  <li ng-repeat="opt in vm.opts | orderBy: '-voteCnt'">
+    <div class="opt_image pull-left">
+      <img src="{{opt.image}}" alt="{{opt.title}}" class="img-rounded">
+    </div>
+    <span ng-bind="opt.title"></span>
+    <span> ({{opt.voteCnt}}/{{vm.votedTotal}})</span>
+    <progressbar max="vm.votedTotal" value="opt.voteCnt"></progressbar>
+    <div class="clearfix"></div>
+  </li>
+</ul>
+
+
+
+<!--<div class="row">
+
   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 pdnl pdnr">
     <div class="form-group" ng-if="vm.opts.length">
       <label ng-repeat="opt in vm.opts">
@@ -13,18 +28,7 @@
     </div>
   </div>
   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 pdnl pdnr">
-    <ul class="opts" ng-controller="OptsInPollController">
-      <li ng-repeat="opt in vm.opts | orderBy: '-voteCnt'">
-        <div class="opt_image pull-left">
-          <img src="{{opt.image}}" alt="{{opt.title}}" class="img-rounded">
-        </div>
-        <span ng-bind="opt.title"></span>
-        <span> ({{opt.voteCnt}}/{{vm.votedTotal}})</span>
-        <progressbar max="vm.votedTotal" value="opt.voteCnt"></progressbar>
-        <div class="clearfix"></div>
-      </li>
-    </ul>
   </div>
   <div class="clearfix"></div>
   <hr>
-</div>
+</div>-->

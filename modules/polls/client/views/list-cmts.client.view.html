@@ -46,39 +46,3 @@
     <div class="clearfix"></div>
   </div>
 </div>
-<!--
-
-
-<div class="row">
-  <ul class="cmts">
-    <li ng-repeat="cmt in vm.cmts | orderBy: vm.cmt_sort">
-      <div class="icon pull-left">
-        <a ui-sref="users.info({userId: cmt.user._id})" ng-if="cmt.user">
-          <img src="{{cmt.user.profileImageURL}}" alt="{{cmt.user.displayName}}">
-        </a>
-      </div>
-      <small class="pull-left">
-        <strong><a ui-sref="users.info({userId: cmt.user._id})" ng-if="cmt.user" ng-bind="cmt.user.displayName"></a></strong>
-        <span ng-if="!cmt.user">Deleted User</span>
-        <span>&nbsp;on&nbsp;</span>
-        <span ng-bind="cmt.updated | date:'mediumDate'"></span>
-        <span class="mg10l" ng-show="cmt.isEdited"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
-        <a href="#" bs-dropdown aria-haspopup="true" aria-expanded="false" class="mg10l">
-          <i class="fa fa-ellipsis-v fa-lg" aria-hidden="true"></i>
-        </a>
-        <span class="text-muted mg20l" ng-if="cmt.to">To:&nbsp;</span><a ui-sref="users.info({userId: cmt.to})" ng-bind="cmt.toName" ng-if="cmt.to"></a>
-      </small>
-      <br>
-      
-      <span class="pull-right" class="like_tools">
-        <a class="like_btn" ng-click="vm.like_cmt(cmt)" ng-show="cmt.like.type == 1"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
-        <span class="like_btn" ng-click="vm.like_cmt(cmt)" ng-show="cmt.like.type != 1"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span>
-      <span class="mg5l mg5r" ng-bind="cmt.likeCnt"></span>
-      <a class="like_btn" ng-click="vm.dislike_cmt(cmt)" ng-show="cmt.like.type == 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>
-      <span class="like_btn" ng-click="vm.dislike_cmt(cmt)" ng-show="cmt.like.type != 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></span>
-      </span>
-      <div class="clearfix"></div>
-      <hr>
-    </li>
-  </ul>
-</div>-->

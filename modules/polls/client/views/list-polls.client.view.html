@@ -90,7 +90,10 @@
     </div>
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-lg-push-3 card">
       <ul class="nav nav-list">
-        <li class="nav-header"><strong>Hot polls</strong></li>
+        <li class="nav-header">
+          <strong>Hot polls</strong>
+          <a class="pull-right undecorated-link" ui-sref="polls.list">See all</a>
+        </li>
         <li ng-repeat="category in vm.categorys">
           <a class="undecorated-link" ui-sref="categorys.view({ categoryId: category._id })">
             <i ng-class="['fa', category.icon]"></i>&nbsp;{{category.name}}

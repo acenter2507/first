@@ -836,7 +836,7 @@
     };
     vm.show_vote = (ev) => {
       $mdDialog.show({
-        controller: DialogController,
+        controller: () => this,
         templateUrl: 'vote.dialog.html',
         parent: angular.element(document.body),
         targetEvent: ev,
@@ -848,18 +848,12 @@
         $scope.status = 'You cancelled the dialog.';
       });
     };
+    vm.cancel_vote = () => {
+      $mdDialog.cancel();
+    };
+    vm.hide = () => {
+      $mdDialog.hide();
+    };
     vm.save_vote = save_vote;
-
-    function DialogController($scope, $mdDialog) {
-      $scope.hide = function() {
-        $mdDialog.hide();
-      };
-      $scope.cancel = function() {
-        $mdDialog.cancel();
-      };
-      $scope.answer = function(answer) {
-        $mdDialog.hide(answer);
-      };
-    }
   }
 })();

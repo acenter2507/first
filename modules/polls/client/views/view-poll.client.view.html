@@ -3,8 +3,22 @@
     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
       <div class="card h500">
         <div class="page-header">
-          <a class="undecorated-link" ui-sref="polls.view({ pollId: vm.poll._id })"><h3 ng-bind="vm.poll.title"></h3></a>
+          <a class="undecorated-link" ui-sref="polls.view({ pollId: vm.poll._id })">
+            <h3 ng-bind="vm.poll.title"></h3>
+          </a>
         </div>
+        <div class="icon pull-left">
+          <a ui-sref="users.info({userId: cmt.user._id})" ng-if="vm.poll.user">
+            <img src="{{vm.poll.user.profileImageURL}}" alt="{{vm.poll.user.displayName}}">
+          </a>
+        </div>
+        <small class="pull-left">
+          <strong><a ui-sref="users.info({userId: vm.poll.user._id})" ng-if="vm.poll.user" ng-bind="vm.poll.user.displayName"></a></strong>
+          <span ng-if="!vm.poll.user">Deleted User</span>
+          <span>&nbsp;on&nbsp;</span>
+          <span ng-bind="vm.poll.created | date:'mediumDate'"></span>
+        </small>
+        <br>
       </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 pdnl">
@@ -14,18 +28,6 @@
     </div>
   </div>
   <div class="row">
-    <div class="icon pull-left">
-      <a ui-sref="users.info({userId: cmt.user._id})" ng-if="vm.poll.user">
-        <img src="{{vm.poll.user.profileImageURL}}" alt="{{vm.poll.user.displayName}}">
-      </a>
-    </div>
-    <small class="pull-left">
-      <strong><a ui-sref="users.info({userId: vm.poll.user._id})" ng-if="vm.poll.user" ng-bind="vm.poll.user.displayName"></a></strong>
-      <span ng-if="!vm.poll.user">Deleted User</span>
-      <span>&nbsp;on&nbsp;</span>
-      <span ng-bind="vm.poll.created | date:'mediumDate'"></span>
-    </small>
-    <br>
     <p class="text-justify" ng-bind="vm.poll.body"></p>
     <span class="pull-right" class="like_tools">
       <a class="like_btn" ng-click="vm.like_poll()" ng-show="vm.like.type == 1"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>

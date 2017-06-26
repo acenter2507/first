@@ -152,7 +152,7 @@
     }
     // Load Category cho màn hình chính
     function loadCategorys() {
-      vm.categorys = Categorys.query().$promise;
+      vm.categorys = Categorys.query();
     }
   }
 })();

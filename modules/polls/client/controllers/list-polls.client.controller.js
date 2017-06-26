@@ -8,19 +8,22 @@
     'Authentication',
     'PollsService',
     'PollsApi',
-    'PollusersService'
+    'PollusersService',
+    'CategorysService'
   ];
 
   function PollsListController(
     Authentication,
     PollsService,
     PollsApi,
-    Pollusers
+    Pollusers,
+    Categorys
   ) {
     var vm = this;
     vm.authentication = Authentication;
     vm.isLogged = vm.authentication.user ? true : false;
     vm.polls = [];
+    vm.categorys = [];
     vm.new_data = [];
     vm.page = 0;
     vm.limit = 5;
@@ -31,6 +34,7 @@
 
     function init() {
       //loadPolls();
+      loadCategorys();
     }
 
     function loadPolls() {
@@ -145,6 +149,10 @@
         return 0;
       }
       return Math.floor(value * 100 / total) || 0;
+    }
+    // Load Category cho màn hình chính
+    function loadCategorys() {
+      vm.categorys = Categorys.query().$promise;
     }
   }
 })();

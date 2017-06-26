@@ -74,12 +74,14 @@
           <a href="#" class="mg20l link_btn" ng-click="vm.discard_cmt()" ng-if="vm.tmp_cmt.discard">Discard</a>
         </div>
         <div class="form-group">
+          <div class="user-avatar pull-left" ng-if="vm.authentication.user">
+            <a ui-sref="users.info({userId: cmt.user._id})">
+            <img src="{{vm.authentication.user.profileImageURL}}" alt="{{vm.authentication.user.displayName}}">
+          </a>
+          </div>
           <textarea ng-is-enter="{{vm.enter_send}}" ng-enter="vm.save_cmt()" focus-me="{{vm.cmt_typing}}" class="msd-elastic: \n;" data-ng-model="vm.tmp_cmt.body" placeholder="Type your reply and enter to send it"></textarea>
         </div>
-        <label>
-          <input type="checkbox" ng-model="vm.enter_send">
-          &nbsp;Enter to send
-        </label>
+        <label class="text-muted"><input type="checkbox" ng-model="vm.enter_send">&nbsp;Enter to send</label>
         <pre>{{vm.enter_send}}</pre>
       </div>
     </div>

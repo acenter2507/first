@@ -203,17 +203,17 @@
           vm.votes = res.data.votes || [];
           vm.voteopts = res.data.voteopts || [];
           vm.votedTotal = vm.voteopts.length;
-          vm.chart.colors = [];
+          vm.chart.colours = [];
           vm.chart.labels = [];
           vm.chart.data = [];
           vm.opts.forEach(opt => {
             opt.voteCnt = _.where(vm.voteopts, { opt: opt._id }).length || 0;
             opt.progressVal = calPercen(vm.votedTotal, opt.voteCnt);
-            vm.chart.colors.push(opt.color);
+            vm.chart.colours.push(opt.color);
             vm.chart.labels.push(opt.title);
             vm.chart.data.push(opt.voteCnt);
           });
-          vm.chart.datasetOverride = [{ backgroundColor: vm.chart.colors }];
+          // vm.chart.datasetOverride = [{ backgroundColor: vm.chart.colors }];
         })
         .catch(err => {
           alert('error' + err);

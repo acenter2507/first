@@ -203,6 +203,7 @@
           vm.votedTotal = vm.voteopts.length;
           vm.opts.forEach(opt => {
             opt.voteCnt = _.where(vm.voteopts, { opt: opt._id }).length || 0;
+            opt.progressVal = calPercen(vm.votedTotal, opt.voteCnt);
           });
         })
         .catch(err => {
@@ -402,6 +403,14 @@
         vm.selectedOpts = angular.copy(vm.votedOpts) || [];
         alert('Vote failed');
       }
+    }
+
+    // Tính phần trăm tỉ lệ vote cho opt
+    function calPercen(total, value) {
+      if (total === 0) {
+        return 0;
+      }
+      return Math.floor(value * 100 / total) || 0;
     }
 
     // Remove existing Poll

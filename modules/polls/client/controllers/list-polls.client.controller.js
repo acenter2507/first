@@ -51,8 +51,7 @@
           vm.new_data = res.data || [];
           var promises = [];
           vm.new_data.forEach(poll => {
-            poll.isCurrentUserOwner =
-              vm.isLogged && vm.authentication._id === poll.user._id;
+            poll.isCurrentUserOwner = vm.isLogged && vm.authentication._id === poll.user._id;
             promises.push(loadPoll(poll));
           });
           return Promise.all(promises);
@@ -91,8 +90,7 @@
             poll.voteopts = res.voteopts || [];
             poll.total = poll.voteopts.length;
             poll.opts.forEach(opt => {
-              opt.voteCnt =
-                _.where(poll.voteopts, { opt: opt._id }).length || 0;
+              opt.voteCnt = _.where(poll.voteopts, { opt: opt._id }).length || 0;
               opt.progressVal = calPercen(poll.total, opt.voteCnt);
             });
             return resolve(poll);

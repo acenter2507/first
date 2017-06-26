@@ -74,13 +74,13 @@
             </ul>
           </span>
           <br>
-          <span ng-if="poll.allow_guest" class="fa fa-globe"></span>
-          <span ng-if="!poll.allow_guest" class="fa fa-users"></span>
+          <span ng-if="vm.poll.allow_guest" class="fa fa-globe"></span>
+          <span ng-if="!vm.poll.allow_guest" class="fa fa-users"></span>
           <hr class="mg10t mg10b">
           <div class="clearfix"></div>
         </div>
         <div class="post-body">
-          <p class="text-justify" ng-bind="poll.body"></p>
+          <p class="text-justify" ng-bind="vm.poll.body"></p>
           <hr class="mg10t mg10b">
         </div>
         <!--<small class="pull-left">

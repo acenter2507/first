@@ -56,6 +56,10 @@
           return Promise.all(promises);
         })
         .then(res => {
+          // Gán data vào list hiện tại
+          vm.polls = _.union(vm.polls, vm.new_data);
+          vm.page += 1;
+          vm.busy = false;
           // Load polluser (Người dùng đã follow poll hay chưa)
           var promises = [];
           vm.new_data.forEach(poll => {
@@ -64,10 +68,7 @@
           return Promise.all(promises);
         })
         .then(res => {
-          // Gán data vào list hiện tại
-          vm.polls = _.union(vm.polls, vm.new_data);
-          vm.page += 1;
-          vm.busy = false;
+          console.log(vm.polls);
           vm.new_data = [];
         })
         .catch(err => {

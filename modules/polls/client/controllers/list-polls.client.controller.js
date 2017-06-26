@@ -26,7 +26,6 @@
     vm.categorys = [];
     vm.new_data = [];
     vm.page = 0;
-    vm.limit = 5;
     vm.busy = false;
     vm.stopped = false;
     vm.loadPolls = loadPolls;

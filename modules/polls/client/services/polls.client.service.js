@@ -31,8 +31,8 @@
       findOpts: id => {
         return $http.get('/api/findOpts/' + id);
       },
-      findCmts: id => {
-        return $http.get('/api/findCmts/' + id);
+      findCmts: (id, page) => {
+        return $http.get('/api/findCmts/' + id + '/' + page);
       },
       findTags: id => {
         return $http.get('/api/findTags/' + id);

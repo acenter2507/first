@@ -228,8 +228,11 @@ exports.findOpts = function(req, res) {
  * List of Cmts in poll
  */
 exports.findCmts = function(req, res) {
+  var page = req.params.page || 0;
   Poll.findCmts(req.poll._id)
     .populate('user', 'displayName profileImageURL')
+    .skip(10 * page)
+    .limit(10)
     .exec(function(err, cmts) {
       if (err) {
         return res.status(400).send({

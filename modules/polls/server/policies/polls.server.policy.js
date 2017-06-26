@@ -27,7 +27,7 @@ exports.invokeRolesPolicies = function() {
       resources: '/api/findOpts/:pollId',
       permissions: '*'
     }, {
-      resources: '/api/findCmts/:pollId',
+      resources: '/api/findCmts/:pollId/:page',
       permissions: '*'
     }, {
       resources: '/api/findTags/:pollId',
@@ -63,7 +63,7 @@ exports.invokeRolesPolicies = function() {
       resources: '/api/findOpts/:pollId',
       permissions: '*'
     }, {
-      resources: '/api/findCmts/:pollId',
+      resources: '/api/findCmts/:pollId/:page',
       permissions: '*'
     }, {
       resources: '/api/findTags/:pollId',
@@ -99,7 +99,7 @@ exports.invokeRolesPolicies = function() {
       resources: '/api/findOpts/:pollId',
       permissions: '*'
     }, {
-      resources: '/api/findCmts/:pollId',
+      resources: '/api/findCmts/:pollId/:page',
       permissions: '*'
     }, {
       resources: '/api/findTags/:pollId',

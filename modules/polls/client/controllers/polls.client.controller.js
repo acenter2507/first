@@ -72,6 +72,11 @@
     vm.votedTotal = 0;
     vm.error = null;
 
+    // Infinity scroll
+    vm.page = 0;
+    vm.busy = false;
+    vm.stopped = false;
+
     vm.cmt_processing = false;
     vm.cmt_typing = false;
     vm.tmp_cmt = {};
@@ -96,8 +101,6 @@
       }
       // Get all Opts
       loadOpts();
-      // Get all Cmts
-      loadCmts();
       // Get all Tags
       loadTags();
       // Get like for this poll
@@ -236,7 +239,7 @@
 
     function loadCmts() {
       // Get all Cmts
-      return PollsApi.findCmts(vm.poll._id)
+      return PollsApi.findCmts(vm.poll._id, vm.page)
         .then(res => {
           vm.cmts = res.data;
           if (vm.authentication.user) {

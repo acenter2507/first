@@ -19,7 +19,7 @@ module.exports = function(app) {
 
   app.route('/api/findPolls/:page').get(polls.findPolls);
   app.route('/api/findOpts/:pollId').get(polls.findOpts);
-  app.route('/api/findCmts/:pollId').get(polls.findCmts);
+  app.route('/api/findCmts/:pollId/:page').get(polls.findCmts);
   app.route('/api/findTags/:pollId').get(polls.findTags);
   app.route('/api/findVotes/:pollId').get(polls.findVotes);
   app.route('/api/findOwnerVote/:pollId').get(polls.findOwnerVote);

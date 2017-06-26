@@ -47,7 +47,6 @@
     $mdDialog
   ) {
     var vm = this;
-    var self = this;
     vm.authentication = Authentication;
     vm.isLogged = vm.authentication.user ? true : false;
     vm.poll = poll;
@@ -835,23 +834,6 @@
         'title'
       );
     };
-    vm.show_vote = (ev) => {
-      $mdDialog.show({
-        controller: () => {
-          return self;
-        },
-        controllerAs: 'ctrl',
-        templateUrl: 'vote.dialog.html',
-        parent: angular.element(document.body),
-        targetEvent: ev,
-        clickOutsideToClose:true
-      })
-      .then(function(answer) {
-        alert(answer);
-      }, function() {
-        alert('closed');
-      });
-    };
     vm.cancel_vote = () => {
       $mdDialog.cancel();
     };
@@ -859,5 +841,35 @@
       $mdDialog.hide();
     };
     vm.save_vote = save_vote;
+    vm.show_vote = (ev) => {
+      $mdDialog.show({
+        controller: 'DialogController',
+        templateUrl: 'vote.dialog.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        locals: {
+          vm: vm
+        }
+      })
+      .then(function(answer) {
+        $scope.status = 'You said the information was "' + answer + '".';
+      }, function() {
+        $scope.status = 'You cancelled the dialog.';
+      });
+    };
+
+    function DialogController($scope, $mdDialog) {
+      $scope.vm = vm;
+      $scope.hide = function() {
+        $mdDialog.hide();
+      };
+      $scope.cancel = function() {
+        $mdDialog.cancel();
+      };
+      $scope.answer = function(answer) {
+        $mdDialog.hide(answer);
+      };
+    }
   }
 })();

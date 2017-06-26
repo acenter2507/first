@@ -92,7 +92,7 @@
       <ul class="nav nav-list">
         <li class="nav-header">
           <strong>Hot polls</strong>
-          <a class="pull-right undecorated-link" ui-sref="polls.list">See all</a>
+          <span class="pull-right"><a class="undecorated-link" ui-sref="polls.list">See all</a></span>
         </li>
         <li ng-repeat="category in vm.categorys">
           <a class="undecorated-link" ui-sref="categorys.view({ categoryId: category._id })">

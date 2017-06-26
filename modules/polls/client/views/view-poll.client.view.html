@@ -2,7 +2,7 @@
   <div class="row mg50t">
     <!-- Title and category -->
     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-      <div class="card">
+      <div class="card" id="poll_title_card">
         <p>
           <i ng-class="['fa', vm.poll.category.icon]"></i>&nbsp;
           <a class="undecorated-link" ui-sref="categorys.view({ categoryId: vm.poll.category._id })">
@@ -13,36 +13,8 @@
           <h3 class="mg5t mg5b" ng-bind="vm.poll.title"></h3>
         </a>
       </div>
-    </div>
-    <!-- Poll report -->
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 pdnl">
-      <div class="card">
-        <div class="poll_info">
-          <div class="poll_info_item">
-            <span class="text-center">VIEW</span>
-            <span class="text-center" ng-bind="vm.poll.viewCnt"></span>
-            <br>
-          </div>
-          <div class="poll_info_item">
-            <span class="text-center">VOTE</span>
-            <span class="text-center" ng-bind="vm.poll.voteCnt"></span>
-            <br>
-          </div>
-          <div class="poll_info_item">
-            <span class="text-center">COMMENT</span>
-            <span class="text-center" ng-bind="vm.cmts.length"></span>
-            <br>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="clearfix"></div>
-  </div>
-  <!-- Poll content -->
-  <div class="row">
-    <!-- Owner user post -->
-    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-      <div class="card">
+      <!-- First post -->
+      <div class="card" id="poll_first_post_card">
         <div clas="post-header">
           <div class="user-avatar pull-left">
             <a ui-sref="users.info({userId: cmt.user._id})" ng-if="vm.poll.user">
@@ -94,18 +66,8 @@
           <div class="clearfix"></div>
         </div>
       </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 pdnl">
-      <div class="card h500">
-        <div ui-view="opts"></div>
-      </div>
-    </div>
-    <div class="clearfix"></div>
-  </div>
-  <!-- Comment input -->
-  <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-      <div class="card">
+      <!-- Comment form -->
+      <div class="card" id="poll_cmt_form_card">
         <form name="vm.form.cmtForm" class="form-horizontal" novalidate ng-submit="vm.save_cmt(vm.form.cmtForm.$valid)">
           <div class="form-group">
             <span ng-if="vm.tmp_cmt.to">To:&nbsp;</span>
@@ -119,12 +81,35 @@
         </form>
       </div>
     </div>
+    <!-- Poll report -->
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 pdnl">
+      <!-- Report -->
+      <div class="card" id="poll_report_card">
+        <div class="poll_info">
+          <div class="poll_info_item">
+            <span class="text-center">VIEW</span>
+            <span class="text-center" ng-bind="vm.poll.viewCnt"></span>
+            <br>
+          </div>
+          <div class="poll_info_item">
+            <span class="text-center">VOTE</span>
+            <span class="text-center" ng-bind="vm.poll.voteCnt"></span>
+            <br>
+          </div>
+          <div class="poll_info_item">
+            <span class="text-center">COMMENT</span>
+            <span class="text-center" ng-bind="vm.cmts.length"></span>
+            <br>
+          </div>
+        </div>
+      </div>
+      <!--Options-->
+      <div class="card h500" id="poll_opts_card">
+        <div ui-view="opts"></div>
+      </div>
     </div>
     <div class="clearfix"></div>
-    <hr>
   </div>
-  <!-- #Comment input -->
   <!-- Control -->
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 pdnl pdnr">

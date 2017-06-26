@@ -79,10 +79,9 @@
             <img src="{{vm.authentication.user.profileImageURL}}" alt="{{vm.authentication.user.displayName}}">
           </a>
           </div>
-          <textarea ng-is-enter="{{vm.enter_send}}" ng-enter="vm.save_cmt()" focus-me="{{vm.cmt_typing}}" class="msd-elastic: \n;" data-ng-model="vm.tmp_cmt.body" placeholder="Type your reply and enter to send it"></textarea>
+          <textarea ng-is-enter="{{vm.enter_send}}" ng-enter="vm.save_cmt()" focus-me="{{vm.cmt_typing}}" class="msd-elastic: \n; reply-input" data-ng-model="vm.tmp_cmt.body" placeholder="Type your reply and enter to send it"></textarea>
         </div>
-        <label class="text-muted"><input type="checkbox" ng-model="vm.enter_send">&nbsp;Enter to send</label>
-        <pre>{{vm.enter_send}}</pre>
+        <label class="text-muted"><input type="checkbox" ng-model="vm.enter_send"><small>&nbsp;Enter to send</small></label>
       </div>
     </div>
     <!-- Poll report -->

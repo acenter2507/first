@@ -135,3 +135,11 @@
 .span_btn {
   cursor: pointer;
 }
+
+.reply-input {
+  width: 100%;
+  resize: none;
+  max-height: 400px;
+  padding: 12px;
+  transition: height 50ms ease-in-out;
+}

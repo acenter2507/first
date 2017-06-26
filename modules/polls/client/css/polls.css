@@ -226,9 +226,9 @@
 }
 .control--checkbox .control__indicator:after {
   left: 9px;
-  top: 4px;
-  width: 4px;
-  height: 8px;
+  top: 5px;
+  width: 5px;
+  height: 9px;
   border: solid #fff;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);

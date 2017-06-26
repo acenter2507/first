@@ -230,6 +230,7 @@ exports.findOpts = function(req, res) {
 exports.findCmts = function(req, res) {
   var page = req.params.page || 0;
   Poll.findCmts(req.poll._id)
+    .sort('-created')
     .populate('user', 'displayName profileImageURL')
     .skip(10 * page)
     .limit(10)

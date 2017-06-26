@@ -56,6 +56,7 @@
       { val: '-likeCnt', name: 'Most likes' }
     ];
     vm.cmt_sort = '-updated';
+    vm.enter_send = false;
 
     vm.poll.tags = [];
     vm.like = {};

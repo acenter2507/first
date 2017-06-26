@@ -15,6 +15,7 @@ var ApplicationConfiguration = (function() {
     'angularFileUpload',
     'uiSwitch',
     'ngTagsInput',
+    'ngAria',
     'ngMaterial',
     'moment-picker',
     'mgcrea.ngStrap',

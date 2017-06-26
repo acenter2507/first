@@ -843,7 +843,7 @@
     vm.save_vote = save_vote;
     vm.show_vote = (ev) => {
       $mdDialog.show({
-        controller: 'DialogController',
+        controller: DialogController,
         templateUrl: 'vote.dialog.html',
         parent: angular.element(document.body),
         targetEvent: ev,

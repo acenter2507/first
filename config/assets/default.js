@@ -28,6 +28,7 @@ module.exports = {
         'public/lib/angular-material/angular-material.js',
         'public/lib/angular-ui-switch/angular-ui-switch.js',
         'public/lib/angular-elastic/elastic.js',
+        'public/lib/chart.js/dist/Chart.js',
         'public/lib/angular-chart.js/dist/angular-chart.js',
         'public/lib/ng-tags-input/ng-tags-input.js',
         'public/lib/underscore/underscore.js',

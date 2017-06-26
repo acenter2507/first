@@ -213,7 +213,7 @@
             vm.chart.labels.push(opt.title);
             vm.chart.data.push(opt.voteCnt);
           });
-
+          vm.chart.datasetOverride = [{backgroundColor: vm.chart.colors}];
         })
         .catch(err => {
           alert('error' + err);

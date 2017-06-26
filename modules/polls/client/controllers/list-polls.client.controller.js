@@ -126,11 +126,11 @@
     }
 
     function loadPolluser(poll) {
-      if (!vm.isLogged) {
-        poll.polluser = new Pollusers();
-        return resolve();
-      }
       return new Promise((resolve, reject) => {
+        if (!vm.isLogged) {
+          poll.polluser = new Pollusers();
+          return resolve();
+        }
         PollsApi.findPolluser(poll._id)
           .then(res => {
             poll.polluser = new Pollusers(res.data);
@@ -141,6 +141,7 @@
           });
       });
     }
+    // Tính phần trăm tỉ lệ vote cho opt
     function calPercen(total, value) {
       if (total === 0) {
         return 0;

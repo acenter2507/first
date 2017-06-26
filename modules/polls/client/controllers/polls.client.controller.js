@@ -46,6 +46,7 @@
   ) {
     var vm = this;
     vm.authentication = Authentication;
+    vm.isLogged = (vm.authentication.user) ? true : false;
     vm.poll = poll;
     vm.poll.close = vm.poll.close ? moment(vm.poll.close) : vm.poll.close;
     vm.form = {};
@@ -99,7 +100,7 @@
       // Load owner vote
       loadOwnerVote();
       // load following info
-      if (isLogged()) {
+      if (vm.isLogged) {
         loadPolluser();
       }
       // Init socket
@@ -180,13 +181,6 @@
         Socket.removeListener('poll_update');
         Socket.removeListener('opts_update');
       });
-    }
-
-    function isLogged() {
-      if (vm.authentication.user) {
-        return true;
-      }
-      return false;
     }
 
     function loadOpts() {
@@ -343,7 +337,7 @@
       ) {
         return alert('You must type something to reply.');
       }
-      if (!isLogged()) {
+      if (!vm.isLogged) {
         $state.go('authentication.signin');
         return false;
       }
@@ -562,7 +556,7 @@
     };
 
     vm.follow_poll = () => {
-      if (!isLogged()) {
+      if (!vm.isLogged) {
         return alert('You must login to dislike this poll.');
       }
       if (vm.polluser._id) {
@@ -619,7 +613,7 @@
     vm.save_cmt = save_cmt;
 
     vm.reply_cmt = cmt => {
-      if (!isLogged()) {
+      if (!vm.isLogged) {
         return alert('You must login to reply this comment.');
       }
       vm.tmp_cmt = {};

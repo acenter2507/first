@@ -125,7 +125,7 @@
           </label>
         </div>
         <div class="form-group">
-          <button class="btn btn-info" ng-click="vm.save_vote()">Vote</button>
+          <button class="btn btn-info" ng-click="vm.save_vote()">{{(vm.ownVote._id) ? 'Vote' : 'Change vote'}}</button>
         </div>
       </div>
       <!--Options-->

@@ -115,6 +115,10 @@
           </div>
         </div>
       </div>
+      <!--Options-->
+      <div class="card" id="poll_opts_card">
+        <div ui-view="opts"></div>
+      </div>
       <!-- Chart -->
       <div class="card" id="poll_chart_card">
         <canvas id="pie" class="chart chart-pie"
@@ -123,10 +127,6 @@
           chart-options="vm.chart.options"
           chart-colors ="vm.chart.colors">
         </canvas> 
-      </div>
-      <!--Options-->
-      <div class="card" id="poll_opts_card">
-        <div ui-view="opts"></div>
       </div>
     </div>
     <div class="clearfix"></div>

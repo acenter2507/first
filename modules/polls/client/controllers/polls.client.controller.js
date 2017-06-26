@@ -21,7 +21,8 @@
     'CmtsApi',
     'CmtlikesService',
     'PollusersService',
-    'Socket'
+    'Socket',
+    '$mdDialog'
   ];
 
   function PollsController(
@@ -42,7 +43,8 @@
     CmtsApi,
     Cmtlikes,
     Pollusers,
-    Socket
+    Socket,
+    $mdDialog
   ) {
     var vm = this;
     vm.authentication = Authentication;
@@ -213,8 +215,6 @@
             vm.chart.labels.push(opt.title);
             vm.chart.data.push(opt.voteCnt);
           });
-          vm.chart.datasetOverride = [{ backgroundColor: angular.copy(vm.chart.colors) }];
-          console.log(vm.chart);
         })
         .catch(err => {
           alert('error' + err);
@@ -624,7 +624,6 @@
     };
 
     // Comment
-
     vm.aside_full_screen = () => {
       alert(1);
     };
@@ -821,6 +820,20 @@
         }),
         'title'
       );
+    };
+    vm.show_vote = (ev) => {
+      $mdDialog.show({
+        controller: DialogController,
+        templateUrl: 'vote.dialog.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true
+      })
+      .then(function(answer) {
+        $scope.status = 'You said the information was "' + answer + '".';
+      }, function() {
+        $scope.status = 'You cancelled the dialog.';
+      });
     };
     vm.save_vote = save_vote;
   }

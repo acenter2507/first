@@ -7,16 +7,14 @@
   function ngEnter() {
     return function(scope, element, attrs) {
       element.bind('keydown keypress', function(event) {
+        console.log(attrs.ngIsEnter);
         if (event.which === 13) {
-          console.log(attrs.ngIsEnter);
-          if (!attrs.ngIsEnter) {
-            return;
+          if (attrs.ngIsEnter) {
+            scope.$apply(function() {
+              scope.$eval(attrs.ngEnter);
+            });
+            event.preventDefault();
           }
-          scope.$apply(function() {
-            scope.$eval(attrs.ngEnter);
-          });
-
-          event.preventDefault();
         }
       });
     };

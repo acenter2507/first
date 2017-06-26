@@ -1,3 +1,55 @@
+<div class="card" ng-repeat="cmt in vm.cmts | orderBy: vm.cmt_sort">
+  <div clas="post-header">
+    <div class="user-avatar pull-left">
+      <a ui-sref="users.info({userId: cmt.user._id})" ng-if="cmt.user">
+        <img src="{{vm.poll.user.profileImageURL}}" alt="{{vm.poll.user.displayName}}">
+      </a>
+      <img ng-if="!cmt.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
+    </div>
+    <span class="pull-left">
+      <strong><a class="undecorated-link" ui-sref="users.info({userId: vm.poll.user._id})" ng-if="vm.poll.user" ng-bind="vm.poll.user.displayName"></a></strong>
+      <span ng-if="!vm.poll.user">Deleted User</span>
+      <small>
+        <span class="text-muted"><small>&nbsp;created on</span>
+        <span class="text-muted" ng-bind="vm.poll.created | date:'mediumDate'"></span>
+      </small>
+    </span>
+    <span class="pull-right">
+      <a bs-dropdown aria-haspopup="true" aria-expanded="false"><i class="fa fa-chevron-down"></i></a>
+      <ul class="dropdown-menu" role="menu">
+        <li ng-show="vm.isLogged && cmt.user._id !== vm.authentication.user._id"><a ng-click="vm.reply_cmt(cmt)"><i class="fa fa-reply"></i>&nbsp;Reply</a></li>
+        <li ng-show="cmt.user._id === vm.authentication.user._id"><a ng-click="vm.edit_cmt(cmt)"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
+        <li ng-show="cmt.user._id === vm.authentication.user._id"><a ng-click="vm.delete_cmt(cmt)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
+      </ul>
+    </span>
+    <br>
+    <small>
+      <span class="text-muted">To:&nbsp;</span>
+      <a ng-if="cmt.to" class="undecorated-link">{{cmt.toName}}</a>
+      <a ng-if="!cmt.to" class="text-muted">All</a>
+    </small>
+    <hr class="mg10t mg10b">
+    <div class="clearfix"></div>
+  </div>
+  <div class="post-body">
+    <p class="text-justify" ng-bind="cmt.body"></p>
+    <hr class="mg10t mg10b">
+  </div>
+  <div class="post-footer">
+    <span class="like_tools">
+      <a class="undecorated-link" ng-click="vm.like_cmt(cmt)" ng-show="cmt.like.type == 1"><i class="fa fa-thumbs-o-up"></i>&nbsp;Like</a>
+     <span class="span_btn" ng-click="vm.like_cmt(cmt)" ng-show="cmt.like.type != 1"><i class="fa fa-thumbs-o-up"></i>&nbsp;Like</span>
+      <span class="mg5l mg5r" ng-bind="cmt.likeCnt"></span>
+      <a class="undecorated-link" ng-click="vm.dislike_cmt(cmt)" ng-show="cmt.like.type == 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>&nbsp;Dislike</a>
+      <span class="span_btn" ng-click="vm.dislike_cmt(cmt)" ng-show="cmt.like.type != 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>&nbsp;Dislike</span>
+    </span>
+    <span ng-if="vm.isLogged && cmt.user._id !== vm.authentication.user._id" ng-click="vm.reply_cmt(cmt)" class="span_btn pull-right"><i class="fa fa-reply"></i>&nbsp;Reply</span>
+    <div class="clearfix"></div>
+  </div>
+</div>
+<!--
+
+
 <div class="row">
   <ul class="cmts">
     <li ng-repeat="cmt in vm.cmts | orderBy: vm.cmt_sort">
@@ -15,24 +67,19 @@
         <a href="#" bs-dropdown aria-haspopup="true" aria-expanded="false" class="mg10l">
           <i class="fa fa-ellipsis-v fa-lg" aria-hidden="true"></i>
         </a>
-        <ul class="dropdown-menu" role="menu">
-          <li ng-show="(vm.authentication.user) && cmt.user._id !== vm.authentication.user._id"><a ng-click="vm.reply_cmt(cmt)"><i class="fa fa-reply"></i>&nbsp;Reply</a></li>
-          <li ng-show="cmt.user._id === vm.authentication.user._id"><a ng-click="vm.edit_cmt(cmt)"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
-          <li ng-show="cmt.user._id === vm.authentication.user._id"><a ng-click="vm.delete_cmt(cmt)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
-        </ul>
         <span class="text-muted mg20l" ng-if="cmt.to">To:&nbsp;</span><a ui-sref="users.info({userId: cmt.to})" ng-bind="cmt.toName" ng-if="cmt.to"></a>
       </small>
       <br>
-      <p class="text-justify" ng-bind="cmt.body"></p>
+      
       <span class="pull-right" class="like_tools">
         <a class="like_btn" ng-click="vm.like_cmt(cmt)" ng-show="cmt.like.type == 1"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
         <span class="like_btn" ng-click="vm.like_cmt(cmt)" ng-show="cmt.like.type != 1"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span>
-        <span class="mg5l mg5r" ng-bind="cmt.likeCnt"></span>
-        <a class="like_btn" ng-click="vm.dislike_cmt(cmt)" ng-show="cmt.like.type == 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>
-        <span class="like_btn" ng-click="vm.dislike_cmt(cmt)" ng-show="cmt.like.type != 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></span>
+      <span class="mg5l mg5r" ng-bind="cmt.likeCnt"></span>
+      <a class="like_btn" ng-click="vm.dislike_cmt(cmt)" ng-show="cmt.like.type == 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>
+      <span class="like_btn" ng-click="vm.dislike_cmt(cmt)" ng-show="cmt.like.type != 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></span>
       </span>
       <div class="clearfix"></div>
       <hr>
     </li>
   </ul>
-</div>
+</div>-->

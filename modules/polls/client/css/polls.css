@@ -9,7 +9,6 @@
 
 .post-header,
 .post-body,
-.post-footer,
 .poll-header,
 .poll-body {
   position: relative;
@@ -27,6 +26,7 @@
   height: 46px;
 }
 
+.post-footer,
 .poll-footer {
   position: relative;
   margin-bottom: 10px;

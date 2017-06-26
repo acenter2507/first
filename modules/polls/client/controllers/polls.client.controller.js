@@ -47,6 +47,7 @@
     $mdDialog
   ) {
     var vm = this;
+    var self = this;
     vm.authentication = Authentication;
     vm.isLogged = vm.authentication.user ? true : false;
     vm.poll = poll;
@@ -837,17 +838,18 @@
     vm.show_vote = (ev) => {
       $mdDialog.show({
         controller: () => {
-          return vm;
+          return self;
         },
+        controllerAs: 'ctrl',
         templateUrl: 'vote.dialog.html',
         parent: angular.element(document.body),
         targetEvent: ev,
         clickOutsideToClose:true
       })
       .then(function(answer) {
-        $scope.status = 'You said the information was "' + answer + '".';
+        alert(answer);
       }, function() {
-        $scope.status = 'You cancelled the dialog.';
+        alert('closed');
       });
     };
     vm.cancel_vote = () => {

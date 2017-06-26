@@ -2,7 +2,7 @@
   <div clas="post-header">
     <div class="user-avatar pull-left">
       <a ui-sref="users.info({userId: cmt.user._id})" ng-if="cmt.user">
-        <img src="{{vm.poll.user.profileImageURL}}" alt="{{vm.poll.user.displayName}}">
+        <img src="{{cmt.user.profileImageURL}}" alt="{{cmt.user.displayName}}">
       </a>
       <img ng-if="!cmt.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
     </div>
@@ -13,7 +13,7 @@
       <span class="text-muted" ng-bind="vm.poll.created | date:'mediumDate'"></span>
     </span>
     <span class="pull-right">
-      <a bs-dropdown aria-haspopup="true" aria-expanded="false"><i class="fa fa-chevron-down"></i></a>
+      <a class="undecorated-link" bs-dropdown aria-haspopup="true" aria-expanded="false"><i class="fa fa-chevron-down"></i></a>
       <ul class="dropdown-menu" role="menu">
         <li ng-show="vm.isLogged && cmt.user._id !== vm.authentication.user._id"><a ng-click="vm.reply_cmt(cmt)"><i class="fa fa-reply"></i>&nbsp;Reply</a></li>
         <li ng-show="cmt.user._id === vm.authentication.user._id"><a ng-click="vm.edit_cmt(cmt)"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>

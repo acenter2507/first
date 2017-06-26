@@ -19,3 +19,5 @@ app.init(function () {
 // 3. Lọc notif
 // 4. Infinity scroll
 // 5. Chức năng bookmark
+// 6. Thêm tùy chọn vote multiple
+// 7. Chức năng private và share link

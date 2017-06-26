@@ -41,31 +41,40 @@
   margin-left: 12px;
 }
 .opt1 {
-  background-image: linear-gradient(to bottom, #ffb9c5 0%, #ff748c 100%) !important;
+  background-image: #d9edf7 !important;
+  /*background-image: linear-gradient(to bottom, #ffb9c5 0%, #ff748c 100%) !important;*/
 }
 .opt2 {
-  background-image: linear-gradient(to bottom, #008080 0%, #007373 100%) !important;
+  background-image: #d9edf7 !important;
+  /*background-image: linear-gradient(to bottom, #008080 0%, #007373 100%) !important;*/
 }
 .opt3 {
-  background-image: linear-gradient(to bottom, #ff7373 0%, #E56767 100%) !important;
+  background-image: #d9edf7 !important;
+  /*background-image: linear-gradient(to bottom, #ff7373 0%, #E56767 100%) !important;*/
 }
 .opt4 {
-  background-image: linear-gradient(to bottom, #800080 0%, #730073 100%) !important;
+  background-image: #d9edf7 !important;
+  /*background-image: linear-gradient(to bottom, #800080 0%, #730073 100%) !important;*/
 }
 .opt5 {
-  background-image: linear-gradient(to bottom, #40e0d0 0%, #39c9bb 100%) !important;
+  background-image: #d9edf7 !important;
+  /*background-image: linear-gradient(to bottom, #40e0d0 0%, #39c9bb 100%) !important;*/
 }
 .opt6 {
-  background-image: linear-gradient(to bottom, #f6546a 0%, #dd4b5f 100%) !important;
+  background-image: #d9edf7 !important;
+  /*background-image: linear-gradient(to bottom, #f6546a 0%, #dd4b5f 100%) !important;*/
 }
 .opt7 {
-  background-image: linear-gradient(to bottom, #66cdaa 0%, #5bb899 100%) !important;
+  background-image: #d9edf7 !important;
+  /*background-image: linear-gradient(to bottom, #66cdaa 0%, #5bb899 100%) !important;*/
 }
 .opt8 {
-  background-image: linear-gradient(to bottom, #79d0cc 0%, #20b2aa 100%) !important;
+  background-image: #d9edf7 !important;
+  /*background-image: linear-gradient(to bottom, #79d0cc 0%, #20b2aa 100%) !important;*/
 }
 .opt9 {
-  background-image: linear-gradient(to bottom, #ffa3a3 0%, #f6546a 100%) !important;
+  background-image: #d9edf7 !important;
+  /*background-image: linear-gradient(to bottom, #ffa3a3 0%, #f6546a 100%) !important;*/
 }
 .opt10 {
   background-image: linear-gradient(to bottom, #8c8c8c 0%, #404040 100%) !important;

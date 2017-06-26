@@ -91,7 +91,7 @@
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-lg-push-3 h500 card"></div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-lg-pull-9 card">
       <ul class="nav nav-list">
-        <li class="nav-header"><strong>Categorys</strong></li>
+        <li class="nav-header bg-info"><strong>Categorys</strong></li>
         <li ng-repeat="category in vm.categorys">
           <a class="undecorated-link" ui-sref="categorys.view({ categoryId: category._id })">
             <i ng-class="['fa', category.icon]"></i>&nbsp;{{category.name}}

@@ -836,7 +836,9 @@
     };
     vm.show_vote = (ev) => {
       $mdDialog.show({
-        controller: () => this,
+        controller: () => {
+          return vm;
+        },
         templateUrl: 'vote.dialog.html',
         parent: angular.element(document.body),
         targetEvent: ev,

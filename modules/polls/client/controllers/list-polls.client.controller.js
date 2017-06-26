@@ -63,6 +63,7 @@
           // Load polluser (Người dùng đã follow poll hay chưa)
           var promises = [];
           vm.new_data.forEach(poll => {
+            poll.xxx = 0;
             promises.push(loadPolluser(poll));
           });
           return Promise.all(promises);

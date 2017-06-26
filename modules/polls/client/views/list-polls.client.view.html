@@ -90,15 +90,72 @@
     </div>
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-lg-push-3 h500 card"></div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-lg-pull-9 card">
-      <md-subheader class="md-no-sticky">Clickable Items with Secondary Controls</md-subheader>
-      <md-list-item ng-click="vm.navigateTo(setting.extraScreen, $event)" ng-repeat="setting in vm.settings">
-        <p> {{ setting.name }} </p>
-        <md-switch class="md-secondary" ng-model="setting.enabled"></md-switch>
-      </md-list-item>
-      <md-list-item ng-click="navigateTo('data usage', $event)">
-        <md-icon md-svg-icon="cached"></md-icon>
-        <p>Data Usage</p>
-      </md-list-item>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <a class="undecorated-link" ui-sref="">Computer</a>
+          <span class="badge">12</span>
+        </li>
+        <li class="list-group-item">
+          <a class="undecorated-link" ui-sref="">Shopping</a>
+          <span class="badge">5</span>
+        </li>
+        <li class="list-group-item">
+          <a class="undecorated-link" ui-sref="">Sports</a>
+          <span class="badge">3</span>
+        </li>
+        <li class="list-group-item">
+          <a class="undecorated-link" ui-sref="">Games</a>
+          <span class="badge">3</span>
+        </li>
+        <li class="list-group-item">
+          <a class="undecorated-link" ui-sref="">Mobiles</a>
+          <span class="badge">3</span>
+        </li>
+        <li class="list-group-item">
+          <a class="undecorated-link" ui-sref="">Movies</a>
+          <span class="badge">3</span>
+        </li>
+        <li class="list-group-item">
+          <a class="undecorated-link" ui-sref="">Music</a>
+          <span class="badge">3</span>
+        </li>
+        <li class="list-group-item">
+          <a class="undecorated-link" ui-sref="">Books</a>
+          <span class="badge">3</span>
+        </li>
+        <li class="list-group-item">
+          <a class="undecorated-link" ui-sref="">Electronics</a>
+          <span class="badge">3</span>
+        </li>
+        <li class="list-group-item">
+          <a class="undecorated-link" ui-sref="">Electronics</a>
+          <span class="badge">3</span>
+        </li>
+        <li class="list-group-item">
+          <a class="undecorated-link" ui-sref="">Tools</a>
+          <span class="badge">3</span>
+        </li>
+        <li class="list-group-item">
+          <a class="undecorated-link" ui-sref="">Foods</a>
+          <span class="badge">3</span>
+        </li>
+        <li class="list-group-item">
+          <a class="undecorated-link" ui-sref="">Toys</a>
+          <span class="badge">3</span>
+        </li>
+        <li class="list-group-item">
+          <a class="undecorated-link" ui-sref="">Fashion</a>
+          <span class="badge">3</span>
+        </li>
+        <li class="list-group-item">
+          <a class="undecorated-link" ui-sref="">Cars and bikes</a>
+          <span class="badge">3</span>
+        </li>
+        <li class="list-group-item">
+          <a class="undecorated-link" ui-sref="">Travel</a>
+          <span class="badge">3</span>
+        </li>
+      </ul>
     </div>
     <div class="clearfix"></div>
   </div>

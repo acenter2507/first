@@ -46,26 +46,28 @@
   margin-top: 3px;
   margin-right: 5px;
   position: relative;
-  border-radius: 2px;
-  min-width: 46px;
-  min-height: 46px;
+  border-radius: 3px;
+  min-width: 36px;
+  min-height: 36px;
   text-align: center;
+  background-color: #dedede;
 }
 .rank .rank-number {
+  display:block;
   font-size: 1.5em;
-  margin: auto;
+  margin: 0 auto;
 }
 .rank-1 {
-  background-color: #267ED5;
+  color: #267ED5;
 }
 .rank-2 {
-  background-color: #5588ff;
+  color: #5588ff;
 }
 .rank-3 {
-  background-color: #77aaff;
+  color: #77aaff;
 }
 .rank-other {
-  background-color: #99ccff;
+  color: #99ccff;
 }
 
 .chart-block{

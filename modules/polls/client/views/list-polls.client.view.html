@@ -57,6 +57,14 @@
           <div class="mg10t">
             <span class="text-muted" ng-if="poll.opts.length === 0"><small>No option yet</small></span>
             <a ui-sref="polls.view({ pollId: poll._id })" class="undecorated-link" ng-if="poll.opts.length === 0 && poll.allow_add"><small>, why don't add some option</small></a>
+            <div class="a">
+              <canvas id="pie" class="chart chart-pie"
+                chart-data="poll.chart.data"
+                chart-labels="poll.chart.labels"
+                chart-options="poll.chart.options"
+                chart-colors ="poll.chart.colors">
+              </canvas>
+            </div>
             <div ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">
               <strong><span ng-bind="opt.title"></span></strong>
               <div class="progress">
@@ -91,7 +99,7 @@
       <!-- Loading indicator -->
       <div class="card" id="indicator_card" ng-show="vm.busy || vm.stopped">
         <p class="text-center" ng-show="vm.stopped">No Polls more, why don't you <a class="undecorated-link" ui-sref="polls.create">create one</a>?</p>
-        <md-progress-circular ng-if="!vm.busy" ng-disabled="!vm.busy" class="md-hue-2 center" md-diameter="20px"></md-progress-circular>
+        <md-progress-circular ng-disabled="!vm.busy" class="md-hue-2 center" md-diameter="20px"></md-progress-circular>
       </div>
     </div>
     <!-- Hot poll -->

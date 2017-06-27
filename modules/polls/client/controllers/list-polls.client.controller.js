@@ -51,6 +51,11 @@
           var promises = [];
           vm.new_data.forEach(poll => {
             poll.isCurrentUserOwner = vm.isLogged && vm.authentication._id === poll.user._id;
+            poll.chart = {};
+            poll.chart.options = {};
+            poll.chart.colors = [];
+            poll.chart.labels = [];
+            poll.chart.data = [];
             promises.push(loadPoll(poll));
           });
           return Promise.all(promises);
@@ -91,6 +96,9 @@
             poll.opts.forEach(opt => {
               opt.voteCnt = _.where(poll.voteopts, { opt: opt._id }).length || 0;
               opt.progressVal = calPercen(poll.total, opt.voteCnt);
+              poll.chart.data.push(opt.voteCnt);
+              poll.chart.colors.push(opt.color);
+              poll.chart.labels.push(opt.title);
             });
             return resolve(poll);
           })

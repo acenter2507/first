@@ -43,7 +43,8 @@
   height: 46px;
 }
 .user-avatar-small {
-  margin-right: 5px;
+  margin-top: 3px;
+  margin-right: 5px;  
   position: relative;
   border-radius: 2px;
   min-width: 36px;

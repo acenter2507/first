@@ -59,6 +59,8 @@
             <a ui-sref="polls.view({ pollId: poll._id })" class="undecorated-link" ng-if="poll.opts.length === 0 && poll.allow_add"><small>, why don't add some option</small></a>
             <div class="a">
               <canvas id="pie" class="chart chart-pie"
+                height="50"
+                width="50"
                 chart-data="poll.chart.data"
                 chart-labels="poll.chart.labels"
                 chart-options="poll.chart.options"

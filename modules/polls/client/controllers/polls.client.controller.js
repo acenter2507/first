@@ -126,7 +126,7 @@
         userId: vm.authentication.user._id
       });
       Socket.on('cmt_add', cmtId => {
-        loadCmt(cmtId).then(
+        loadNewCmt(cmtId).then(
           _cmt => {
             console.log('Has new comment from: ' + _cmt.user.displayName);
           },
@@ -272,7 +272,7 @@
         });
     }
 
-    function loadCmt(cmtId) {
+    function loadNewCmt(cmtId) {
       return new Promise((resolve, reject) => {
         Cmts.get({ cmtId: cmtId })
           .$promise.then(_cmt => {
@@ -283,6 +283,7 @@
               _.extend(_.findWhere(vm.cmts, { _id: _cmt._id }), _cmt);
             } else {
               vm.cmts.push(_cmt);
+              vm.poll.cmtCnt += 1;
             }
             resolve(_cmt);
           })

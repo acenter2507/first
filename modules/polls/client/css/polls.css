@@ -58,18 +58,6 @@
   font-size: 1.3em;
   margin: 0 auto;
 }
-.rank-1 {
-  color: #ee4035;
-}
-.rank-2 {
-  color: #f37736;
-}
-.rank-3 {
-  color: #fdf498;
-}
-.rank-other {
-  color: #555;
-}
 
 .chart-block{
   height: 140px;
@@ -133,6 +121,7 @@
   transition: height 50ms ease-in-out;
   box-shadow: 0 0 2px rgba(0,0,0,0.2);
   border: none;
+  margin-top: 3px;
 }
 
 .opt_color {

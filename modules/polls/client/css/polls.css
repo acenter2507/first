@@ -42,18 +42,30 @@
   width: 46px;
   height: 46px;
 }
-.user-avatar-small {
+.rank {
   margin-top: 3px;
   margin-right: 5px;
   position: relative;
   border-radius: 2px;
   min-width: 46px;
   min-height: 46px;
+  text-align: center;
 }
-.user-avatar-small img {
-  border-radius: 2px;
-  width: 46px;
-  height: 46px;
+.rank .rank-number {
+  font-size: 1.5em;
+  margin: auto;
+}
+.rank-1 {
+  background-color: #267ED5;
+}
+.rank-2 {
+  background-color: #5588ff;
+}
+.rank-3 {
+  background-color: #77aaff;
+}
+.rank-other {
+  background-color: #99ccff;
 }
 
 .chart-block{

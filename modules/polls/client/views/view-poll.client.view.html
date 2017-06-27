@@ -108,7 +108,7 @@
         </div>
       </div>
       <!-- Comment form -->
-      <div class="card" id="poll_cmt_form_card">
+      <div class="card" id="poll_cmt_form_card" ng-if="vm.isLogged">
         <div class="form-group">
           <span ng-if="vm.tmp_cmt.to">To:&nbsp;</span>
           <a class="undecorated-link" ng-if="vm.tmp_cmt.to" ui-sref="users.info({userId: vm.tmp_cmt.to})" ng-bind="vm.tmp_cmt.toName"></a>

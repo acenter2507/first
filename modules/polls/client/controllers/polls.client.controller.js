@@ -679,6 +679,9 @@
     };
 
     vm.focus_cmt = () => {
+      if (!vm.isLogged) {
+        alert('You must login to comment.');
+      }
       vm.cmt_typing = true;
     };
 

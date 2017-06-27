@@ -57,7 +57,7 @@
           <div class="mg10t">
             <span class="text-muted" ng-if="poll.opts.length === 0"><small>No option yet</small></span>
             <a ui-sref="polls.view({ pollId: poll._id })" class="undecorated-link" ng-if="poll.opts.length === 0 && poll.allow_add"><small>, why don't add some option</small></a>
-            <div class="poll_info">
+            <div>
               <div class="inline pull-right">
                 <canvas id="pie" class="chart chart-pie"
                   height="50"

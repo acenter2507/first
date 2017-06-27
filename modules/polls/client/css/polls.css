@@ -195,6 +195,6 @@
 }
 
 .custom-panel .panel-heading {
-  background-color: #267ED5;
-  color: #fff;
+  background-color: #267ED5 !important;
+  color: #fff !important;
 }

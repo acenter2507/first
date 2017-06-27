@@ -13,7 +13,7 @@
   });
 
   // Chuyển đổi nội dung comment giữ nguyên line break
-  angular.module('polls').filter('nl2br', function($sce) {
+  angular.module('core').filter('nl2br', function($sce) {
     return function(msg, is_xhtml) {
       var is_xhtml = is_xhtml || true;
       var breakTag = is_xhtml ? '<br />' : '<br>';

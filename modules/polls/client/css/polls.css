@@ -197,7 +197,8 @@
 .custom-panel .panel-heading {
   background-color: #267ED5 !important;
   color: #fff !important;
+  border-radius: 3px;
 }
-.text-muted-white {
-  color: #e5e5e5;
+.custom-panel .panel-body {
+  border: none !important;
 }

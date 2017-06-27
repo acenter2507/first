@@ -80,18 +80,27 @@
       </div>
       <!-- Options -->
       <div class="card" id="opts_detail_card">
-        <strong><span>Options:&nbsp;</span></strong><small class="text-muted">{{(!vm.opts.length || vm.opts.length === 0) ? 'Has no option added' : ''}}</small>
+        <span class="mg10b"><strong>Options:&nbsp;</strong><small class="text-muted">{{(!vm.opts.length || vm.opts.length === 0) ? 'Has no option added' : ''}}</small></span>
         <div class="panel-group" role="tablist" aria-multiselectable="true" bs-collapse ng-if="vm.opts.length !== 0">
           <div class="panel panel-default custom-panel" ng-repeat="opt in vm.opts">
             <div class="panel-heading" role="tab">
               <h4 class="panel-title">
                 <a class="undecorated-link" bs-collapse-toggle>Option&nbsp;{{$index + 1}}:&nbsp;{{ opt.title }}</a>
+                <md-tooltip md-direction="bottom">Click to view detail</md-tooltip>
               </h4>
-              <p class="text-muted-white mgnb"><small>Added by {{opt.user.displayName}}</small></p>
             </div>
             <div class="panel-collapse" role="tabpanel" bs-collapse-target>
               <div class="panel-body">
-                {{ opt.body }}
+                <span class="pull-right text-muted">
+                  <small>Added by&nbsp;</small>
+                  <a class="undecorated-link" ui-sref="users.info({userId: opt.user._id})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>
+                  <a ui-sref="users.info({userId: vm.poll.user._id})" ng-if="opt.user"></a>
+                  <span ng-if="!opt.user">Deleted User</span>
+                  <small>&nbsp;on</small>
+                  <small ng-bind="opt.created | date:'mediumDate'"></small>
+                </span><br>
+                <div class="clearfix"></div>
+                <p class="text-justify" ng-bind="opt.body"></p>
               </div>
             </div>
           </div>

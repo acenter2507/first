@@ -279,7 +279,8 @@
             return loadLikeCmt(_cmt);
           })
           .then(_cmt => {
-            if (_.where(vm.cmts, _cmt).length > 0) {
+            var item = _.findWhere(vm.cmts, { _id: _cmt._id });
+            if (item) {
               _.extend(_.findWhere(vm.cmts, { _id: _cmt._id }), _cmt);
             } else {
               vm.cmts.push(_cmt);

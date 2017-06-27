@@ -110,7 +110,38 @@
     <!-- Hot poll -->
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-lg-push-3">
       <div class="card">
-        
+        <div ng-repeat="poll in vm.hot_polls">
+          <div class="user-avatar pull-left">
+            <img ng-if="poll.user" src="{{poll.user.profileImageURL}}" alt="{{poll.user.displayName}}">
+            <img ng-if="!poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
+          </div>
+          <h3><a class="undecorated-link" ui-sref="polls.view({pollId: poll._id})" ng-bind="poll.title"></a></h3>
+          <span class="pull-left">
+            <strong><a class="undecorated-link" ui-sref="users.info({userId: poll.user._id})" ng-if="poll.user" ng-bind="poll.user.displayName"></a></strong>
+            <span ng-if="!poll.user">Deleted User</span>
+            <span class="text-muted"><small>&nbsp;created on</small></span>
+            <span class="text-muted" ng-bind="poll.created | date:'mediumDate'"></span>
+          </span>
+          <!--<span class="pull-right">
+            <a href="#" bs-dropdown aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a ui-sref="polls.view({ pollId: poll._id })"><i class="fa fa-eye"></i>&nbsp;View</a></li>
+              <li ng-show="vm.isLogged">
+                <a ng-click="vm.toggle_follow_poll(poll)" class="undecorated-link">
+                  <i class="fa fa-rss"></i>&nbsp;{{(poll.polluser.following) ? 'Unfollow' : 'Follow'}}
+                </a>
+              </li>
+              <li ng-show="vm.isLogged && !poll.isCurrentUserOwner"><a class="undecorated-link" ng-click="vm.report_poll(poll)"><i class="fa fa-exclamation-circle"></i>&nbsp;Report poll</a></li>
+              <li ng-show="vm.isLogged && poll.isCurrentUserOwner"><a class="undecorated-link" ui-sref="polls.edit({ pollId: poll._id })"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
+              <li ng-show="vm.isLogged && poll.isCurrentUserOwner"><a class="undecorated-link" ng-click="vm.delete_poll(poll)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
+              <li ng-show="vm.isLogged && !poll.isCurrentUserOwner"><a class="undecorated-link" ng-click="vm.add_bookmark(poll)"><i class="fa fa-bookmark"></i>&nbsp;Bookmark poll</a></li>
+            </ul>
+          </span>-->
+          <hr class="mg10t mg10b">
+          <div class="clearfix"></div>
+        </div>
       </div>
     </div>
     <!-- Category -->

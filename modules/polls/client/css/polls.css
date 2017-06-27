@@ -51,7 +51,7 @@
   min-height: 46px;
   text-align: center;
   background-color: #dedede;
-  padding: 11px;
+  padding-top: 11px;
 }
 .rank .rank-number {
   display:block;

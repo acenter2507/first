@@ -145,6 +145,10 @@
       </div>
       <!-- List comments -->
       <div ui-view="cmts"></div>
+      <!-- Load indicator -->
+      <div class="text-center">
+        <md-progress-circular ng-disabled="!vm.busy" class="md-hue-2" md-diameter="20px"></md-progress-circular>
+      </div>
     </div>
     <!-- Poll report -->
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 pdnl">
@@ -203,12 +207,11 @@
         <strong><span>Tags: </span></strong><small>{{(!vm.poll.tags.length || vm.poll.tags.length === 0) ? 'Has no tag added' : ''}}</small>
         <ul class="tags" ng-show="vm.poll.tags.length">
           <li ng-repeat="tag in vm.poll.tags"><a ui-sref="tags.view({ tagId: tag._id })" class="tag">{{tag.name}}</a></li>
-      </ul>
+        </ul>
       </div>
+      <!-- Ad -->
+      <div class="card h1000"></div>
     </div>
     <div class="clearfix"></div>
-  </div>
-  <div class="row mg10t mg10b text-center">
-    <md-progress-circular ng-disabled="!vm.busy" class="md-hue-2" md-diameter="20px"></md-progress-circular>
   </div>
 </section>

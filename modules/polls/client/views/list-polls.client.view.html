@@ -115,7 +115,7 @@
             <img ng-if="poll.user" src="{{poll.user.profileImageURL}}" alt="{{poll.user.displayName}}">
             <img ng-if="!poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
           </div>
-          <span class="pull-left">
+          <span>
             <a class="undecorated-link" ui-sref="polls.view({pollId: poll._id})" ng-bind="poll.title"></a><br>
             <small class="text-muted">
               <span>Posted by&nbsp;</span>
@@ -126,25 +126,6 @@
           </span>
           <br>
           <!--<p class="text-muted auto-text" auto-adjust ng-bind="poll.summary"></p>-->
-          <div class="clearfix"></div>
-          <!--<span class="pull-right">
-            <a href="#" bs-dropdown aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-chevron-down" aria-hidden="true"></i>
-            </a>
-            <ul class="dropdown-menu" role="menu">
-              <li><a ui-sref="polls.view({ pollId: poll._id })"><i class="fa fa-eye"></i>&nbsp;View</a></li>
-              <li ng-show="vm.isLogged">
-                <a ng-click="vm.toggle_follow_poll(poll)" class="undecorated-link">
-                  <i class="fa fa-rss"></i>&nbsp;{{(poll.polluser.following) ? 'Unfollow' : 'Follow'}}
-                </a>
-              </li>
-              <li ng-show="vm.isLogged && !poll.isCurrentUserOwner"><a class="undecorated-link" ng-click="vm.report_poll(poll)"><i class="fa fa-exclamation-circle"></i>&nbsp;Report poll</a></li>
-              <li ng-show="vm.isLogged && poll.isCurrentUserOwner"><a class="undecorated-link" ui-sref="polls.edit({ pollId: poll._id })"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
-              <li ng-show="vm.isLogged && poll.isCurrentUserOwner"><a class="undecorated-link" ng-click="vm.delete_poll(poll)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
-              <li ng-show="vm.isLogged && !poll.isCurrentUserOwner"><a class="undecorated-link" ng-click="vm.add_bookmark(poll)"><i class="fa fa-bookmark"></i>&nbsp;Bookmark poll</a></li>
-            </ul>
-          </span>-->
-          <hr class="mg10t mg10b">
         </div>
       </div>
     </div>

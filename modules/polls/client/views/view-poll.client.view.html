@@ -64,14 +64,15 @@
           <hr class="mg10t mg10b">
         </div>
         <div class="post-footer">
-          <span class="like_tools">
+          <small class="like_tools">
             <a class="undecorated-link" ng-click="vm.like_poll()" ng-show="vm.like.type == 1"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;Like</a>
             <span class="span_btn" ng-click="vm.like_poll()" ng-show="vm.like.type != 1"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;Like</span>
             <span class="mg5l mg5r" ng-bind="vm.poll.likeCnt"></span>
             <a class="undecorated-link" ng-click="vm.dislike_poll()" ng-show="vm.like.type == 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>&nbsp;Dislike</a>
             <span class="span_btn" ng-click="vm.dislike_poll()" ng-show="vm.like.type != 2"><i class="fa fa-thumbs-o-down" aria-hidden="true">&nbsp;Dislike</i></span>
-          </span>
-          <span class="pull-right mg10l">
+          </small>
+          <small class="pull-right mg10l">
+            Sort:&nbsp;
             <a href="#" bs-dropdown aria-haspopup="true" aria-expanded="false">
               {{vm.cmt_sort.name}}
             </a>
@@ -80,11 +81,11 @@
                 <a class="undecorated-link" ng-click="vm.cmt_sort = vm.cmt_sorts[$index]">{{cmt_sort.name}}</a>
               </li>
             </ul>
-          </span>
-          <span class="pull-right">
+          </small>
+          <small class="pull-right">
             <span ng-if="!vm.poll.isCurrentUserOwner" ng-click="vm.reply_cmt(vm.poll)" class="span_btn"><i class="fa fa-reply"></i>&nbsp;Reply</span>
             <span ng-click="vm.focus_cmt()" class="span_btn mg10r"><i class="fa fa-commenting"></i>&nbsp;Comment</span>
-          </span>
+          </small>
           <div class="clearfix"></div>
         </div>
       </div>

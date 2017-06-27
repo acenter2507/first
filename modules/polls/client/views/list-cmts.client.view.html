@@ -35,14 +35,14 @@
     <hr class="mg10t mg10b">
   </div>
   <div class="post-footer">
-    <span class="like_tools">
+    <small class="like_tools">
       <a class="undecorated-link" ng-click="vm.like_cmt(cmt)" ng-show="cmt.like.type == 1"><i class="fa fa-thumbs-o-up"></i>&nbsp;Like</a>
      <span class="span_btn" ng-click="vm.like_cmt(cmt)" ng-show="cmt.like.type != 1"><i class="fa fa-thumbs-o-up"></i>&nbsp;Like</span>
       <span class="mg5l mg5r" ng-bind="cmt.likeCnt"></span>
       <a class="undecorated-link" ng-click="vm.dislike_cmt(cmt)" ng-show="cmt.like.type == 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>&nbsp;Dislike</a>
       <span class="span_btn" ng-click="vm.dislike_cmt(cmt)" ng-show="cmt.like.type != 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>&nbsp;Dislike</span>
-    </span>
-    <span ng-if="vm.isLogged && cmt.user._id !== vm.authentication.user._id" ng-click="vm.reply_cmt(cmt)" class="span_btn pull-right"><i class="fa fa-reply"></i>&nbsp;Reply</span>
+    </small>
+    <small ng-if="vm.isLogged && cmt.user._id !== vm.authentication.user._id" ng-click="vm.reply_cmt(cmt)" class="span_btn pull-right"><i class="fa fa-reply"></i>&nbsp;Reply</small>
     <div class="clearfix"></div>
   </div>
 </div>

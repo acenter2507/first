@@ -197,7 +197,7 @@
         </div>
         <div class="form-group">
           <button ng-if="vm.opts.length > 0" class="btn btn-info pull-right" ng-click="vm.save_vote()">{{(vm.ownVote._id) ? 'Change vote' : 'Vote'}}</button>
-          <button ng-if="vm.isLogged && vm.poll.allow_add" class="btn btn-warning pull-right mg10r" ng-click="vm.input_opt()">Suggest options</button>
+          <button ng-if="vm.isLogged && vm.poll.allow_add && !vm.poll.isCurrentUserOwner" class="btn btn-warning pull-right mg10r" ng-click="vm.input_opt()">Suggest options</button>
         </div>
         <div class="clearfix"></div>
       </div>

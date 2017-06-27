@@ -19,7 +19,7 @@
     </div>
   </div>
   <div class="form-group mg10t">
-    <button class="btn btn-success pull-right" ng-click="vm.toggle_chart()">Change chart</button>
+    <button ng-if="vm.votedTotal > 0" class="btn btn-success pull-right" ng-click="vm.toggle_chart()">Change chart</button>
   </div>
   <div class="clearfix"></div>
 </div>

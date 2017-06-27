@@ -109,8 +109,8 @@ angular
   // Chuyển đổi nội dung comment giữ nguyên line break
   .filter('nl2br', function($sce) {
     return function(msg, is_xhtml) {
-      var is_xhtml = is_xhtml || true;
-      var breakTag = is_xhtml ? '<br />' : '<br>';
+      var _is_xhtml = is_xhtml || true;
+      var breakTag = _is_xhtml ? '<br />' : '<br>';
       var msg = (msg + '').replace(
         /([^>\r\n]?)(\r\n|\n\r|\r|\n)/g,
         '$1' + breakTag + '$2'

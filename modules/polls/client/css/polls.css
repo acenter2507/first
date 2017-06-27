@@ -136,6 +136,7 @@
   left: 0;
   height: 20px;
   width: 20px;
+  border-radius: 2px;
   background: #e6e6e6;
 }
 .control--radio .control__indicator {

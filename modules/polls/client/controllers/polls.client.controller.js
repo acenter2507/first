@@ -22,7 +22,8 @@
     'CmtlikesService',
     'PollusersService',
     'Socket',
-    '$mdDialog'
+    '$mdDialog',
+    '$timeout'
   ];
 
   function PollsController(
@@ -44,7 +45,8 @@
     Cmtlikes,
     Pollusers,
     Socket,
-    $mdDialog
+    $mdDialog,
+    $timeout
   ) {
     var vm = this;
     vm.authentication = Authentication;
@@ -64,7 +66,6 @@
     vm.like = {};
     vm.polluser = {};
     vm.opts = [];
-    vm.cmts = [];
     vm.votes = [];
     vm.voteopts = [];
     vm.chart = {};
@@ -73,6 +74,8 @@
     vm.error = null;
 
     // Infinity scroll
+    vm.cmts = [];
+    vm.new_cmts = [];
     vm.page = 0;
     vm.busy = false;
     vm.stopped = false;
@@ -248,12 +251,18 @@
             vm.busy = false;
             return;
           }
-          vm.cmts = _.union(vm.cmts, res.data);
-          vm.page += 1;
-          vm.busy = false;
+          // Lấy data trả về
+          vm.new_cmts = res.data || [];
+          // Gán data vào danh sách comment hiện tại
+          $timeout(() => {
+            vm.cmts = _.union(vm.cmts, vm.new_cmts);
+            vm.page += 1;
+            vm.busy = false;
+          }, 5000);
+          // Load thông tin like cho các comment mới
           if (vm.authentication.user) {
             var promises = [];
-            vm.cmts.forEach(cmt => {
+            vm.new_cmts.forEach(cmt => {
               promises.push(loadLikeCmt(cmt));
             });
             return Promise.all(promises);

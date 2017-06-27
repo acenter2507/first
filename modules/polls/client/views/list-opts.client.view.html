@@ -6,16 +6,17 @@
 </canvas>
 <div ng-repeat="opt in vm.opts | orderBy: '-voteCnt'">
   <div class="opt_color pull-left" ng-style="{'background-color': opt.color}">
-    <md-tooltip md-direction="bottom">{{opt.title}}</md-tooltip>
+    <md-tooltip md-direction="bottom">{{opt.title + ':' + opt.voteCnt}}</md-tooltip>
   </div>
   <div class="progress">
+    <md-tooltip md-direction="bottom">{{opt.title + ':' + opt.voteCnt}}</md-tooltip>
     <div ng-class="['progress-bar']" ng-class="bar.barClass" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}">
       <span ng-if="opt.voteCnt > 0">{{opt.voteCnt + '/' + vm.votedTotal}}</span>
       <span class="text-black" ng-if="opt.voteCnt === 0">{{opt.voteCnt + '/' + vm.votedTotal}}</span>
-      <md-tooltip md-direction="bottom">{{opt.title}}</md-tooltip>
     </div>
   </div>
 </div>
 <div class="form-group mg10t">
-  <button class="btn btn-success" ng-click="vm.toggle_chart()">Change chart</button>
+  <button class="btn btn-success pull-right" ng-click="vm.toggle_chart()">Change chart</button>
 </div>
+<div class="clearfix"></div>

@@ -161,7 +161,6 @@
       </div>
       <!-- Vote card -->
       <div class="card">
-        <span><strong>Vote</strong></span>
         <span class="text-muted" ng-if="!vm.opts.length || vm.opts.length === 0"><small>No option to vote.</small></span>
         <div class="form-group" ng-repeat="opt in vm.opts" ng-if="!vm.poll.allow_multiple">
           <label class="control control--radio">

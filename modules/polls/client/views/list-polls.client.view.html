@@ -57,7 +57,7 @@
           <div class="mg10t">
             <span class="text-muted" ng-if="poll.opts.length === 0"><small>No option yet</small></span>
             <a ui-sref="polls.view({ pollId: poll._id })" class="undecorated-link" ng-if="poll.opts.length === 0 && poll.allow_add"><small>, why don't add some option</small></a>
-            <div class="col-xs-12 col-md-8 pdn">
+            <div class="col-xs-12 col-md-9 pdn">
               <div class="inline" ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">
                 <strong><span ng-bind="opt.title"></span></strong>
                 <div class="progress">
@@ -68,13 +68,15 @@
                 </div>
               </div>
             </div>
-            <div class="col-xs-12 col-md-4 pdn">
+            <div class="col-xs-12 col-md-3 pdn">
+              <div class="chart-block">
                 <canvas id="pie" class="chart chart-pie"
                   chart-data="poll.chart.data"
                   chart-labels="poll.chart.labels"
                   chart-options="poll.chart.options"
                   chart-colors ="poll.chart.colors">
                 </canvas>
+              </div>
             </div>
             <div class="clearfix"></div>
             <a class="pull-right undecorated-link" ng-if="poll.opts.length > 3" ui-sref="polls.view({ pollId: poll._id })">...and {{poll.opts.length - 3}} others</a>
@@ -108,18 +110,7 @@
     <!-- Hot poll -->
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-lg-push-3">
       <div class="card">
-        <ul class="nav nav-list">
-          <li class="nav-header">
-            <strong>Hot polls</strong>
-            <span class="pull-right"><a class="undecorated-link" ui-sref="polls.list">See all</a></span>
-          </li>
-          <li ng-repeat="category in vm.categorys">
-            <a class="undecorated-link" ui-sref="categorys.view({ categoryId: category._id })">
-            <i ng-class="['fa', category.icon]"></i>&nbsp;{{category.name}}
-            <span class="badge badge-info pull-right">5</span>
-          </a>
-          </li>
-        </ul>
+        
       </div>
     </div>
     <!-- Category -->

@@ -23,6 +23,7 @@
     vm.authentication = Authentication;
     vm.isLogged = vm.authentication.user ? true : false;
     vm.polls = [];
+    vm.hot_polls = [];
     vm.categorys = [];
     vm.new_data = [];
     vm.page = 0;
@@ -34,6 +35,8 @@
     function init() {
       //loadPolls();
       loadCategorys();
+      // load Hot poll
+      loadHotPolls();
     }
 
     function loadPolls() {
@@ -78,6 +81,16 @@
         .catch(err => {
           vm.busy = false;
           vm.stopped = true;
+          console.log(err);
+        });
+    }
+
+    function loadHotPolls() {
+      PollsApi.findHotPolls(0)
+        .then(res => {
+          vm.hot_polls = res.data || [];
+        })
+        .catch(err => {
           console.log(err);
         });
     }

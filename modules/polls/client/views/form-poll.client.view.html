@@ -1,4 +1,44 @@
 <section class="container">
+  <div class="row mg20t mg20b">
+    <div class="col-xs-12">
+      <div class="form-group">
+          <button class="btn btn-danger pull-right" ng-show="vm.poll._id" ng-click="vm.remove()">Delete</button>
+          <button class="btn btn-default pull-right mg10r" ng-click="vm.discard()">Discard</button>
+          <button class="btn btn-primary pull-right mg10r">{{vm.poll._id ? ' Update' : ' Create'}}</button>
+      </div>
+    </div>
+  </div>
+  <div class="row ">
+    <div class="col-xs-12">
+      <div class="card h1000">
+        <form name="vm.form.pollForm" class="form-horizontal" ng-submit="vm.save(vm.form.pollForm.$valid)" novalidate>
+          <div class="form-group" show-errors>
+            <label class="control-label" for="category">Category</label>
+            <select id="category" name="category" ng-model="vm.poll.category" class="form-control" ng-options="category as category.name for category in vm.categorys" required>
+          </select>
+            <div ng-messages="vm.form.pollForm.title.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Category is required.</p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <div class="row">
     <div class="page-header">
       <h3>{{vm.poll._id ? 'Edit Poll' : 'New Poll'}}</h3>

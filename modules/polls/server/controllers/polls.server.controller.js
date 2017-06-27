@@ -208,6 +208,28 @@ exports.findPolls = function(req, res) {
 };
 
 /**
+ * List of Hot
+ */
+exports.findHotPolls = function(req, res) {
+  var page = req.params.page || 0;
+  Poll.find()
+    .sort('-likeCnt')
+    .populate('category', 'name icon')
+    .populate('user', 'displayName profileImageURL')
+    .skip(10 * page)
+    .limit(10)
+    .exec(function(err, polls) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.jsonp(polls);
+      }
+    });
+};
+
+/**
  * List of Opts in poll
  */
 exports.findOpts = function(req, res) {

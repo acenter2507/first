@@ -18,6 +18,7 @@ module.exports = function(app) {
     .delete(polls.delete);
 
   app.route('/api/findPolls/:page').get(polls.findPolls);
+  app.route('/api/findHotPolls/:page').get(polls.findHotPolls);
   app.route('/api/findOpts/:pollId').get(polls.findOpts);
   app.route('/api/findCmts/:pollId/:page').get(polls.findCmts);
   app.route('/api/findTags/:pollId').get(polls.findTags);

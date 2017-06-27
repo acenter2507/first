@@ -15,6 +15,7 @@
           </a>
           <a class="undecorated-link pull-right" ng-click="vm.toggle_follow_poll()">
             <i class="fa fa-rss"></i>&nbsp;{{(vm.polluser.following) ? 'Unfollow' : 'Follow'}}
+            <md-tooltip md-direction="bottom">{{(vm.polluser.following) ? 'Following this poll' : 'You not follow this poll yet'}}</md-tooltip>
           </a>
         </p>
         <a class="undecorated-link" ui-sref="polls.view({ pollId: vm.poll._id })">
@@ -74,7 +75,7 @@
             <a class="undecorated-link" ng-click="vm.dislike_poll()" ng-show="vm.like.type == 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>&nbsp;Dislike</a>
             <span class="span_btn" ng-click="vm.dislike_poll()" ng-show="vm.like.type != 2"><i class="fa fa-thumbs-o-down" aria-hidden="true">&nbsp;Dislike</i></span>
           </small>
-          <small class="pull-right mg10l">
+          <small class="pull-right mg10l" ng-show="vm.stopped">
             Sort:&nbsp;
             <a class="undecorated-link" bs-dropdown aria-haspopup="true" aria-expanded="false">
               {{vm.cmt_sort.name}}&nbsp;<i class="fa fa-angle-down"></i>
@@ -171,7 +172,7 @@
         <div class="col-xs-4 pdn">
           <div class="poll_info_item pull-right">
             <span class="text-center"><strong>COMMENTS</strong></span>
-            <span class="text-center" ng-bind="vm.cmts.length"></span>
+            <span class="text-center" ng-bind="vm.poll.cmtCnt"></span>
             <br>
           </div>
         </div>

@@ -28,7 +28,7 @@
       findPolls: (page) => {
         return $http.get('/api/findPolls/' + page);
       },
-      findPolls: (page) => {
+      findHotPolls: (page) => {
         return $http.get('/api/findHotPolls/' + page);
       },
       findOpts: id => {

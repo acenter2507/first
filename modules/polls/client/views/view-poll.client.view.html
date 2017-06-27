@@ -84,9 +84,7 @@
           <div class="panel panel-default" ng-repeat="opt in vm.opts">
             <div class="panel-heading" role="tab">
               <h4 class="panel-title">
-                <a bs-collapse-toggle>
-                  {{ opt.title }}
-                </a>
+                <a class="undecorated-link" bs-collapse-toggle>Option&nbsp;{{$index}}:&nbsp;{{ opt.title }}</a>
               </h4>
             </div>
             <div class="panel-collapse" role="tabpanel" bs-collapse-target>

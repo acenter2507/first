@@ -19,6 +19,15 @@
 .post-body p{
   display: inline-block;
 }
+.side-list-poll {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.side-list-poll:not(:last-child) {
+  margin-bottom: 5px;
+}
 .user-avatar {
   margin-right: 10px;
   position: relative;
@@ -38,7 +47,6 @@
   margin: auto;
   margin-top: 15px;
 }
-
 
 .progress {
   height: 24px !important;

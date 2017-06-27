@@ -90,8 +90,8 @@
       </div>
       <!-- Loading indicator -->
       <div class="card" id="indicator_card" ng-show="vm.busy || vm.stopped">
-        <md-progress-circular ng-disabled="!vm.busy" class="md-hue-2 center" md-diameter="20px"></md-progress-circular>
         <p class="text-center" ng-show="vm.stopped">No Polls more, why don't you <a class="undecorated-link" ui-sref="polls.create">create one</a>?</p>
+        <md-progress-circular ng-disabled="!vm.busy" class="md-hue-2 center" md-diameter="20px"></md-progress-circular>
       </div>
     </div>
     <!-- Hot poll -->
@@ -126,20 +126,5 @@
       </div>
     </div>
     <div class="clearfix"></div>
-  </div>
-</section>
-<section class="container">
-  <div class="row">
-    <p class="text-center" ng-show="vm.stopped">No Polls more, why don't you <a class="undecorated-link" ui-sref="polls.create">create one</a>?</p>
-    <div class="cs-loader" ng-show="vm.busy">
-      <div class="cs-loader-inner">
-        <label>	●</label>
-        <label>	●</label>
-        <label>	●</label>
-        <label>	●</label>
-        <label>	●</label>
-        <label>	●</label>
-      </div>
-    </div>
   </div>
 </section>

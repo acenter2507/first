@@ -101,7 +101,7 @@
                   <span ng-bind="opt.created | date:'mediumDate'"></span>
                 </small><br>
                 <div class="clearfix"></div>
-                <img ng-if="opt.image !== 'modules/opts/client/img/option.png'" src="opt.image" alt="opt.title">
+                <img ng-if="opt.image" src="{{opt.image}}" alt="{{opt.title}}">
                 <p class="text-justify" ng-bind="opt.body"></p>
               </div>
             </div>

@@ -1,9 +1,6 @@
 (function() {
   'use strict';
-
-  angular
-    .module('polls')
-    .config(routeConfig);
+  angular.module('polls').config(routeConfig);
 
   routeConfig.$inject = ['$stateProvider'];
 
@@ -25,22 +22,15 @@
       })
       .state('polls.create', {
         url: '/create',
-        views: {
-          '': {
-            templateUrl: 'modules/polls/client/views/form-poll.client.view.html',
-            controller: 'PollInputController',
-            controllerAs: 'vm',
-            resolve: {
-              pollResolve: newPoll
-            },
-            data: {
-              roles: ['user', 'admin'],
-              pageTitle: 'Polls Create'
-            }
-          },
-          'options@polls.create': {
-            templateUrl: 'modules/core/client/views/test.client.view.html'
-          }
+        templateUrl: 'modules/polls/client/views/form-poll.client.view.html',
+        controller: 'PollInputController',
+        controllerAs: 'vm',
+        resolve: {
+          pollResolve: newPoll
+        },
+        data: {
+          roles: ['user', 'admin'],
+          pageTitle: 'Polls Create'
         }
       })
       .state('polls.edit', {
@@ -93,4 +83,4 @@
   function newPoll(PollsService) {
     return new PollsService();
   }
-}());
+})();

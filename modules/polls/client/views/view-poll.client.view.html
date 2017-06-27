@@ -93,12 +93,12 @@
             <div class="panel-collapse" role="tabpanel" bs-collapse-target>
               <div class="panel-body">
                 <small class="pull-right text-muted">
-                  <small>Added by&nbsp;</small>
+                  <span>Added by&nbsp;</span>
                   <a class="undecorated-link" ui-sref="users.info({userId: opt.user._id})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>
                   <a ui-sref="users.info({userId: vm.poll.user._id})" ng-if="opt.user"></a>
                   <span ng-if="!opt.user">Deleted User</span>
-                  <small>&nbsp;on</small>
-                  <small ng-bind="opt.created | date:'mediumDate'"></small>
+                  <span>&nbsp;on</span>
+                  <span ng-bind="opt.created | date:'mediumDate'"></span>
                 </small><br>
                 <div class="clearfix"></div>
                 <p class="text-justify" ng-bind="opt.body"></p>

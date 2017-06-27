@@ -79,7 +79,7 @@
         </div>
       </div>
       <!-- Options -->
-      <div class="card" id="opts_detail_card" ng-if="vm.opts.length === 0">
+      <div class="card" id="opts_detail_card" ng-if="vm.opts.length !== 0">
         <div class="panel-group" role="tablist" aria-multiselectable="true" bs-collapse>
           <div class="panel panel-default" ng-repeat="opt in vm.opts">
             <div class="panel-heading" role="tab">

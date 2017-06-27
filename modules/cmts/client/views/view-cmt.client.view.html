@@ -23,5 +23,5 @@
       <span ng-bind="vm.cmt.poll.title"></span>
     </em>
   </small>
-  <p class="text-justify" ng-bind="vm.cmt.body"></p>
+  <p class="text-justify" ng-bind-html="vm.cmt.body | nl2br"></p>
 </section>

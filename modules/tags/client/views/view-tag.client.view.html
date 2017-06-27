@@ -20,5 +20,5 @@
       <span ng-if="!vm.tag.user">Deleted User</span>
     </em>
   </small>
-  <p class="text-justify" ng-bind="vm.tag.des"></p>
+  <p class="text-justify" ng-bind-html="vm.tag.des | nl2br"></p>
 </section>

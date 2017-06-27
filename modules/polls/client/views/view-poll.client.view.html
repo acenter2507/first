@@ -85,8 +85,9 @@
           <div class="panel panel-default custom-panel" ng-repeat="opt in vm.opts">
             <div class="panel-heading" role="tab">
               <h4 class="panel-title">
-                <a class="undecorated-link" bs-collapse-toggle>Option&nbsp;{{$index + 1}}:&nbsp;{{ opt.title }}</a>
-                <md-tooltip md-direction="bottom">Click to view detail</md-tooltip>
+                <a class="undecorated-link" bs-collapse-toggle>Option&nbsp;{{$index + 1}}:&nbsp;{{ opt.title }}
+                  <md-tooltip md-direction="bottom">Click to view detail</md-tooltip>
+                </a>
               </h4>
             </div>
             <div class="panel-collapse" role="tabpanel" bs-collapse-target>

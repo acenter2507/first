@@ -78,6 +78,25 @@
           <div class="clearfix"></div>
         </div>
       </div>
+      <!-- Options -->
+      <div class="card" id="opts_detail_card" ng-if="vm.opts.length === 0">
+        <div class="panel-group" role="tablist" aria-multiselectable="true" bs-collapse>
+          <div class="panel panel-default" ng-repeat="opt in vm.opts">
+            <div class="panel-heading" role="tab">
+              <h4 class="panel-title">
+                <a bs-collapse-toggle>
+                  {{ opt.title }}
+                </a>
+              </h4>
+            </div>
+            <div class="panel-collapse" role="tabpanel" bs-collapse-target>
+              <div class="panel-body">
+                {{ opt.body }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- Comment form -->
       <div class="card" id="poll_cmt_form_card">
         <div class="form-group">
@@ -168,6 +187,13 @@
         </div>
         
       </div>
+      <!-- Tag -->
+      <div class="card" id="poll_tags_card">
+        <strong><span>Tags: </span></strong><small>{{(!vm.poll.tags.length) ? 'Has no tag added' : ''}}</small>
+        <ul class="tags" ng-show="vm.poll.tags.length">
+          <li ng-repeat="tag in vm.poll.tags"><a ui-sref="tags.view({ tagId: tag._id })" class="tag">{{tag.name}}</a></li>
+      </ul>
+      </div>
     </div>
     <div class="clearfix"></div>
   </div>
@@ -250,14 +276,5 @@
     </div>
     <div class="clearfix"></div>
     <hr>
-  </div>
-  <!-- #Control -->
-  <div class="row">
-    <div class="col-xs-12">
-      <h4>Tags: <small>{{(!vm.poll.tags.length) ? 'Has no tag added' : ''}}</small></h4>
-      <ul class="tags" ng-show="vm.poll.tags.length">
-        <li ng-repeat="tag in vm.poll.tags"><a ui-sref="tags.view({ tagId: tag._id })" class="tag">{{tag.name}}</a></li>
-      </ul>
-    </div>
   </div>
 </section>

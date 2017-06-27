@@ -19,14 +19,14 @@
 .post-body p{
   display: inline-block;
 }
-.side-list-poll {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
 
 .side-list-poll:not(:last-child) {
   margin-bottom: 5px;
+}
+.auto-text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .user-avatar {
   margin-right: 10px;

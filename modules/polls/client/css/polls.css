@@ -201,5 +201,5 @@
 }
 
 .center {
-  margin: auto;
+  margin: auto !important;
 }

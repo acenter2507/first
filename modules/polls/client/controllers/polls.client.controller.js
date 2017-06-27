@@ -57,7 +57,7 @@
       { val: 'updated', name: 'Oldest to newest' },
       { val: '-likeCnt', name: 'Most likes' }
     ];
-    vm.cmt_sort = '-updated';
+    vm.cmt_sort = vm.cmt_sorts[0];
     vm.enter_send = false;
 
     vm.poll.tags = [];

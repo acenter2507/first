@@ -75,6 +75,14 @@
             <span ng-if="!vm.poll.isCurrentUserOwner" ng-click="vm.reply_cmt(vm.poll)" class="span_btn"><i class="fa fa-reply"></i>&nbsp;Reply</span>
             <span ng-click="vm.focus_cmt()" class="span_btn mg5r"><i class="fa fa-commenting"></i>&nbsp;Comment</span>
           </span>
+          <span class="pull-right">
+            <a href="#" bs-dropdown aria-haspopup="true" aria-expanded="false">
+              {{vm.cmt_sort.name}}
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li ng-repeat="cmt_sort in vm.cmt_sorts" ng-click="vm.cmt_sort = vm.cmt_sorts[$index]">cmt_sort.name</li>
+            </ul>
+          </span>
           <div class="clearfix"></div>
         </div>
       </div>
@@ -183,9 +191,7 @@
         <div class="clearfix"></div>
       </div>
       <!-- Chart -->
-      <div class="card" id="poll_chart_card" ng-if="vm.opts.length > 0">
-        <div ui-view="opts"></div>
-      </div>
+      <div ui-view="opts"></div>
       <!-- Tag -->
       <div class="card" id="poll_tags_card">
         <strong><span>Tags: </span></strong><small>{{(!vm.poll.tags.length || vm.poll.tags.length === 0) ? 'Has no tag added' : ''}}</small>

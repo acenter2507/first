@@ -115,7 +115,10 @@
             <img ng-if="poll.user" src="{{poll.user.profileImageURL}}" alt="{{poll.user.displayName}}">
             <img ng-if="!poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
           </div>
-          <h3><a class="undecorated-link" ui-sref="polls.view({pollId: poll._id})" ng-bind="poll.title"></a></h3>
+          <span class="pull-left">
+            <h4><a class="undecorated-link" ui-sref="polls.view({pollId: poll._id})" ng-bind="poll.title"></a></h4>
+          </span>
+          <br>
           <span class="pull-left">
             <strong><a class="undecorated-link" ui-sref="users.info({userId: poll.user._id})" ng-if="poll.user" ng-bind="poll.user.displayName"></a></strong>
             <span ng-if="!poll.user">Deleted User</span>

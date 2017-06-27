@@ -3,7 +3,8 @@
     chart-data="vm.chart.data"
     chart-labels="vm.chart.labels"
     chart-options="vm.chart.options"
-    chart-colors ="vm.chart.colors">
+    chart-colors ="vm.chart.colors"
+    ng-if="vm.votedTotal > 0">
   </canvas>
   <div ng-repeat="opt in vm.opts | orderBy: '-voteCnt'">
     <div class="opt_color pull-left" ng-style="{'background-color': opt.color}">

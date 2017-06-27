@@ -52,7 +52,7 @@
           vm.new_data.forEach(poll => {
             poll.isCurrentUserOwner = vm.isLogged && vm.authentication._id === poll.user._id;
             poll.chart = {};
-            poll.chart.options = {};
+            poll.chart.options = { responsive: true };
             poll.chart.colors = [];
             poll.chart.labels = [];
             poll.chart.data = [];

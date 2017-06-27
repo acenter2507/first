@@ -91,7 +91,7 @@
       <!-- Loading indicator -->
       <div class="card" id="indicator_card" ng-show="vm.busy || vm.stopped">
         <p class="text-center" ng-show="vm.stopped">No Polls more, why don't you <a class="undecorated-link" ui-sref="polls.create">create one</a>?</p>
-        <md-progress-circular ng-show="!vm.busy" ng-disabled="!vm.busy" class="md-hue-2 center" md-diameter="20px"></md-progress-circular>
+        <md-progress-circular ng-if="!vm.busy" ng-disabled="!vm.busy" class="md-hue-2 center" md-diameter="20px"></md-progress-circular>
       </div>
     </div>
     <!-- Hot poll -->

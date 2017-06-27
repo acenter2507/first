@@ -23,3 +23,4 @@ app.init(function () {
 // 7. Chức năng private và share link
 // 8. Thêm nút bấm đổi kiểu biểu đồ tròn
 // 9. Danh sách các poll nổi bật
+// 10. Việc lưu và type post

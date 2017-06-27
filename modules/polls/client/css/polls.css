@@ -203,3 +203,7 @@
 .center {
   margin: auto !important;
 }
+
+.inline {
+  display: inline !important;
+}

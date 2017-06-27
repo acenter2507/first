@@ -69,7 +69,7 @@
     vm.votes = [];
     vm.voteopts = [];
     vm.chart = {};
-    vm.chart.options = {responsive: true};
+    vm.chart.options = { responsive: true };
     vm.votedTotal = 0;
     vm.error = null;
 

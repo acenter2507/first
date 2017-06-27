@@ -83,8 +83,8 @@
             </ul>
           </small>
           <small class="pull-right">
-            <span ng-if="!vm.poll.isCurrentUserOwner" ng-click="vm.reply_cmt(vm.poll)" class="span_btn">Reply</span>
-            <span ng-click="vm.focus_cmt()" class="span_btn mg10r">Comment</span>
+            <a ng-if="!vm.poll.isCurrentUserOwner" ng-click="vm.reply_cmt(vm.poll)" class="undecorated-link">Reply</a>
+            <a ng-click="vm.focus_cmt()" class="undecorated-link mg10l">Comment</a>
           </small>
           <div class="clearfix"></div>
         </div>

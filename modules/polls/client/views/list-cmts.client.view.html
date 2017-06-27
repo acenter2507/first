@@ -42,7 +42,9 @@
       <a class="undecorated-link" ng-click="vm.dislike_cmt(cmt)" ng-show="cmt.like.type == 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>&nbsp;Dislike</a>
       <span class="span_btn" ng-click="vm.dislike_cmt(cmt)" ng-show="cmt.like.type != 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>&nbsp;Dislike</span>
     </small>
-    <small ng-if="vm.isLogged && cmt.user._id !== vm.authentication.user._id" ng-click="vm.reply_cmt(cmt)" class="span_btn pull-right">Reply</small>
+    <small class="pull-right">
+      <a ng-if="vm.isLogged && cmt.user._id !== vm.authentication.user._id" class="undecorated-link" ng-click="vm.reply_cmt(cmt)" >Reply</a>
+    </small>
     <div class="clearfix"></div>
   </div>
 </div>

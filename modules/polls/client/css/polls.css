@@ -189,3 +189,12 @@
 .control--radio input:disabled ~ .control__indicator:after {
   background: #7b7b7b;
 }
+
+.custom-panel {
+  border: none !important;
+}
+
+.custom-panel .panel-heading {
+  background-color: #267ED5;
+  color: #fff;
+}

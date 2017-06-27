@@ -79,12 +79,13 @@
         </div>
       </div>
       <!-- Options -->
-      <div class="card" id="opts_detail_card" ng-if="vm.opts.length !== 0">
-        <div class="panel-group" role="tablist" aria-multiselectable="true" bs-collapse>
-          <div class="panel panel-default" ng-repeat="opt in vm.opts">
+      <div class="card" id="opts_detail_card">
+        <strong><span>Options:&nbsp;</span></strong><small class="text-muted">{{(!vm.opts.length || vm.opts.length === 0) ? 'Has no option added' : ''}}</small>
+        <div class="panel-group" role="tablist" aria-multiselectable="true" bs-collapse ng-if="vm.opts.length !== 0">
+          <div class="panel panel-default custom-panel" ng-repeat="opt in vm.opts">
             <div class="panel-heading" role="tab">
               <h4 class="panel-title">
-                <a class="undecorated-link" bs-collapse-toggle>Option&nbsp;{{$index}}:&nbsp;{{ opt.title }}</a>
+                <a class="undecorated-link" bs-collapse-toggle>Option&nbsp;{{$index + 1}}:&nbsp;{{ opt.title }}</a>
               </h4>
             </div>
             <div class="panel-collapse" role="tabpanel" bs-collapse-target>
@@ -187,7 +188,7 @@
       </div>
       <!-- Tag -->
       <div class="card" id="poll_tags_card">
-        <strong><span>Tags: </span></strong><small>{{(!vm.poll.tags.length) ? 'Has no tag added' : ''}}</small>
+        <strong><span>Tags: </span></strong><small>{{(!vm.poll.tags.length || vm.poll.tags.length === 0) ? 'Has no tag added' : ''}}</small>
         <ul class="tags" ng-show="vm.poll.tags.length">
           <li ng-repeat="tag in vm.poll.tags"><a ui-sref="tags.view({ tagId: tag._id })" class="tag">{{tag.name}}</a></li>
       </ul>

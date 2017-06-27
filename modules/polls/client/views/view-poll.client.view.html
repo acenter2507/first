@@ -13,6 +13,9 @@
           <a class="undecorated-link" ui-sref="categorys.view({ categoryId: vm.poll.category._id })">
             {{vm.poll.category.name}}
           </a>
+          <a class="undecorated-link pull-right" ng-click="vm.toggle_follow_poll()">
+            <i class="fa fa-rss"></i>&nbsp;{{(vm.polluser.following) ? 'Unfollow' : 'Follow'}}
+          </a>
         </p>
         <a class="undecorated-link" ui-sref="polls.view({ pollId: vm.poll._id })">
           <h3 class="mg5t mg5b" ng-bind="vm.poll.title"></h3>

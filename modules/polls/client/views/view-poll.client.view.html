@@ -80,7 +80,9 @@
               {{vm.cmt_sort.name}}
             </a>
             <ul class="dropdown-menu" role="menu">
-              <li ng-repeat="cmt_sort in vm.cmt_sorts" ng-click="vm.cmt_sort = vm.cmt_sorts[$index]">cmt_sort.name</li>
+              <li ng-repeat="cmt_sort in vm.cmt_sorts" ng-click="vm.cmt_sort = vm.cmt_sorts[$index]">
+                <a class="undecorated-link" ng-click="vm.cmt_sort = vm.cmt_sorts[$index]">{{cmt_sort.name}}</a>
+              </li>
             </ul>
           </span>
           <div class="clearfix"></div>

@@ -53,8 +53,8 @@
     vm.poll.close = vm.poll.close ? moment(vm.poll.close) : vm.poll.close;
     vm.form = {};
     vm.cmt_sorts = [
-      { val: '-updated', name: 'Newest to oldest' },
-      { val: 'updated', name: 'Oldest to newest' },
+      { val: '-created', name: 'Newest to oldest' },
+      { val: 'created', name: 'Oldest to newest' },
       { val: '-likeCnt', name: 'Most likes' }
     ];
     vm.cmt_sort = vm.cmt_sorts[0];

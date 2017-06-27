@@ -185,6 +185,7 @@
 
 .custom-panel {
   border: none !important;
+  margin-bottom: 0;
 }
 
 .custom-panel .panel-heading {

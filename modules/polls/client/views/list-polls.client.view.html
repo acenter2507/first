@@ -57,7 +57,7 @@
           <div class="mg10t">
             <span class="text-muted" ng-if="poll.opts.length === 0"><small>No option yet</small></span>
             <a ui-sref="polls.view({ pollId: poll._id })" class="undecorated-link" ng-if="poll.opts.length === 0 && poll.allow_add"><small>, why don't add some option</small></a>
-            <div class="progress_block">
+            <div class="col-xs-8">
               <div class="inline" ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">
                 <strong><span ng-bind="opt.title"></span></strong>
                 <div class="progress">
@@ -68,7 +68,7 @@
                 </div>
               </div>
             </div>
-            <div class="chart_block">
+            <div class="col-xs-4">
                 <canvas id="pie" class="chart chart-pie"
                   chart-data="poll.chart.data"
                   chart-labels="poll.chart.labels"

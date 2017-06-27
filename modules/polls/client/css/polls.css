@@ -33,11 +33,11 @@
 }
 
 .poll-body .chart_block{
-  min-width: 30%;
+  max-width: 30%;
   display: inline;
 }
 .poll-body .progress_block{
-  min-width: 70%;
+  max-width: 70%;
   display: inline;
 }
 

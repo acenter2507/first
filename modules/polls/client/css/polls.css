@@ -89,11 +89,10 @@
   border: none;
 }
 
-.opt_image {
-  position: relative;
-  min-width: 40px;
-  min-height: 40px;
-  background: transparent;
+.opt_color {
+  min-width: 30px;
+  min-height: 30px;
+  border-radius: 2px;
 }
 
 .opt_image img {

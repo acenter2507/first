@@ -195,3 +195,7 @@
 .custom-panel .panel-body {
   border: none !important;
 }
+.custom-panel img {
+  max-width: 100%;
+  max-height: 100%;
+}

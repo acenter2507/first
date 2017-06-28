@@ -7,7 +7,7 @@
     chart-type ="vm.chart.type"
     ng-if="vm.votedTotal > 0">
   </canvas>
-  <div class="mgt10"></div>
+  <div class="h10"></div>
   <div ng-repeat="opt in vm.opts | orderBy: '-voteCnt'">
     <div class="opt_color pull-left" ng-style="{'background-color': opt.color}">
       <md-tooltip md-direction="bottom">{{opt.title + ':' + opt.voteCnt}}</md-tooltip>

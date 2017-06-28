@@ -125,7 +125,7 @@
 }
 
 .opt-body-input {
-  width: 100%;
+  max-width: 100%;
   resize: none;
   min-height: 46px;
   max-height: 400px;

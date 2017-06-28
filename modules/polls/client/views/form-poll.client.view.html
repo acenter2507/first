@@ -23,6 +23,10 @@
         </div>
         <div class="clearfix"></div>
         <div class="control-group">
+          <label class="control control--checkbox inline-block">Public
+            <input type="checkbox" name="allow_public" ng-model="vm.poll.allow_public"/>
+            <div class="control__indicator"></div>
+          </label>
           <label class="control control--checkbox inline-block">Allow multiple vote
             <input type="checkbox" name="allow_multiple" ng-model="vm.poll.allow_multiple"/>
             <div class="control__indicator"></div>
@@ -63,8 +67,8 @@
           </div>
         </form>-->
         <!-- Tags -->
+        <div class="h15"></div>
         <div class="form-group" ng-controller="AutocompleteTagController">
-          <label class="control-label" for="#">Current tags: {{(!vm.poll.tags.length) ? 'Has no tag was added' : ''}}</label>
           <tags-input ng-model="vm.poll.tags" display-property="name" placeholder="{{placeholder}}" add-from-autocomplete-only="true"
             replace-spaces-with-dashes="false" min-length="1" enforce-max-tags class="tags-custom">
             <auto-complete source="loadItems($query)" min-length="1" debounce-delay="0" max-results="10"></auto-complete>

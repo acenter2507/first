@@ -244,6 +244,7 @@
 .select select:focus {
   color: #000;
   background: #ccc;
+  outline: none;
 }
 .select select:disabled {
   opacity: 0.5;

@@ -13,12 +13,12 @@
       <div class="card">
         <!-- Category -->
         <div class="pull-right w200">
-            <select ng-model="vm.poll.category" id="category" name="category" class="form-control">
-              <option ng-selected="category._id === vm.poll.category" ng-repeat="category in vm.categorys" value="{{category._id}}">{{category.name}}</option>
+          <div class="select">
+            <select ng-model="vm.poll.category" id="category" name="category" ng-options="category as category.name for category in vm.categorys">
+              <!--<option ng-repeat="category in vm.categorys" value="{{category._id}}">{{category.name}}</option>-->
             </select>
-          <!--<div class="select">
             <div class="select__arrow"></div>
-          </div>-->
+          </div>
         </div>
         <div class="clearfix"></div>
         <!-- Checkbox -->
@@ -54,6 +54,7 @@
             <auto-complete source="loadItems($query)" min-length="1" debounce-delay="0" max-results="10"></auto-complete>
           </tags-input>
         </div>
+        <div class="h25"></div>
         <!-- Option -->
         <div class="panel-group mgnb" role="tablist" aria-multiselectable="true" bs-collapse ng-if="vm.opts.length > 0">
           <div class="panel panel-default custom-panel" ng-repeat="opt in vm.opts">

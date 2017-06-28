@@ -16,7 +16,8 @@
     'TagsService',
     'OptsService',
     'Socket',
-    'CategorysService'
+    'CategorysService',
+    '$aside'
   ];
 
   function PollInputController(
@@ -30,7 +31,8 @@
     Tags,
     Opts,
     Socket,
-    Categorys
+    Categorys,
+    $aside
   ) {
     var vm = this;
 
@@ -181,18 +183,18 @@
 
     // OPTIONS
     vm.tmp_opt = {};
-    // var opt_aside = $aside({
-    //   scope: $scope,
-    //   controllerAs: vm,
-    //   templateUrl: 'modules/polls/client/views/new-opt.client.view.html',
-    //   title: vm.poll.title,
-    //   placement: 'bottom',
-    //   animation: 'am-fade-and-slide-bottom',
-    //   show: false
-    // });
+    var opt_aside = $aside({
+      scope: $scope,
+      controllerAs: vm,
+      templateUrl: 'modules/polls/client/views/new-opt.client.view.html',
+      title: vm.poll.title,
+      placement: 'bottom',
+      animation: 'am-fade-and-slide-bottom',
+      show: false
+    });
     vm.input_opt = opt => {
       vm.tmp_opt = (!opt) ? { poll: vm.poll._id, title: '', body: '', image: 'modules/opts/client/img/option.png', status: 1 } : opt;
-      // opt_aside.$promise.then(opt_aside.show);
+      opt_aside.$promise.then(opt_aside.show);
     };
     vm.remove_opt = opt => {
       if ($window.confirm('Are you sure you want to remove?')) {

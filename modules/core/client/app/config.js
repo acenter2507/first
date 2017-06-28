@@ -21,8 +21,7 @@ var ApplicationConfiguration = (function() {
     'mgcrea.ngStrap',
     'infinite-scroll',
     'monospaced.elastic',
-    'chart.js',
-    'simditor'
+    'chart.js'
   ];
 
   // Add a new vertical module

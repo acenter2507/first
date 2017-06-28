@@ -4,90 +4,88 @@
       <div class="form-group">
         <button class="btn btn-danger pull-right" ng-show="vm.poll._id" ng-click="vm.remove()">Delete</button>
         <button class="btn btn-default pull-right mg10r" ng-click="vm.discard()">Discard</button>
-        <button class="btn btn-primary pull-right mg10r" ng-click="vm.save(vm.form.pollForm.$valid)">{{vm.poll._id ? ' Update' : ' Create'}}</button>
+        <button class="btn btn-primary pull-right mg10r" ng-click="vm.save(true)">{{vm.poll._id ? ' Update' : ' Create'}}</button>
       </div>
     </div>
   </div>
   <div class="row ">
     <div class="col-xs-12">
       <div class="card">
-        <form name="vm.form.pollForm" class="form-horizontal" novalidate>
-          <!-- Category -->
-          <div class="pull-right w200">
-            <!-- Trường hợp edit poll -->
-            <div class="select" ng-if="vm.poll._id">
-              <select ng-model="vm.poll.category._id" id="category" name="category" ng-options="category._id as category.name for category in vm.categorys" required></select>
-              <div class="select__arrow"></div>
-            </div>
-            <!-- Trường hợp create poll -->
-            <div class="select" ng-if="!vm.poll._id">
-              <select ng-model="vm.poll.category" id="category" name="category" required>
+        <!-- Category -->
+        <div class="pull-right w200">
+          <!-- Trường hợp edit poll -->
+          <div class="select" ng-if="vm.poll._id">
+            <select ng-model="vm.poll.category._id" id="category" name="category" ng-options="category._id as category.name for category in vm.categorys"></select>
+            <div class="select__arrow"></div>
+          </div>
+          <!-- Trường hợp create poll -->
+          <div class="select" ng-if="!vm.poll._id">
+            <select ng-model="vm.poll.category" id="category" name="category">
               <option value="" selected>Category</option>
               <option ng-repeat="category in vm.categorys" value="{{category._id}}">{{category.name}}</option>
             </select>
-              <div class="select__arrow"></div>
-            </div>
-            <div ng-messages="vm.form.optForm.title.$error" role="alert">
-              <p class="help-block error-text" ng-message="required">Category is required.</p>
-            </div>
+            <div class="select__arrow"></div>
           </div>
-          <div class="clearfix"></div>
-          <!-- Checkbox -->
-          <div class="control-group">
-            <label class="control control--checkbox inline-block">Public
-            <input type="checkbox" name="isPublic" ng-model="vm.poll.isPublic"/>
-            <div class="control__indicator"></div>
-          </label>
-            <label class="control control--checkbox inline-block mg20l">Allow multiple vote
-            <input type="checkbox" name="allow_multiple" ng-model="vm.poll.allow_multiple"/>
-            <div class="control__indicator"></div>
-          </label>
-            <label class="control control--checkbox inline-block mg20l">Allow guest vote
-            <input type="checkbox" name="allow_guest" ng-model="vm.poll.allow_guest"/>
-            <div class="control__indicator"></div>
-          </label>
-            <label class="control control--checkbox inline-block mg20l">Allow members suggest option
-            <input type="checkbox" name="allow_add" ng-model="vm.poll.allow_add"/>
-            <div class="control__indicator"></div>
-          </label>
+          <div role="alert">
+            <p class="help-block error-text" ng-if="vm.validateCategory()">Category is required.</p>
           </div>
-          <div class="h25"></div>
-          <!-- Title -->
-          <input type="text" class="form-control input-large" name="title" ng-model="vm.poll.title" placeholder="Enter your poll tilte here"
-          />
-          <div class="h25"></div>
-          <!-- Body -->
-          <text-angular class="text-body" name="body" ng-model="vm.poll.body"></text-angular>
-          <div class="h25"></div>
-          <!-- Tags -->
-          <div class="form-group" ng-controller="AutocompleteTagController">
-            <tags-input ng-model="vm.poll.tags" display-property="name" placeholder="{{placeholder}}" add-from-autocomplete-only="true"
-              replace-spaces-with-dashes="false" min-length="1" enforce-max-tags class="tags-custom">
-              <auto-complete source="loadItems($query)" min-length="1" debounce-delay="0" max-results="10"></auto-complete>
-            </tags-input>
-          </div>
-          <div class="h25"></div>
-          <!-- Option -->
-          <div class="panel-group mgnb" role="tablist" aria-multiselectable="true" bs-collapse ng-if="vm.opts.length > 0">
-            <div class="panel panel-default custom-panel" ng-repeat="opt in vm.opts">
-              <div class="panel-heading" role="tab">
-                <h4 class="panel-title">
-                  <a class="undecorated-link" bs-collapse-toggle>
+        </div>
+        <div class="clearfix"></div>
+        <!-- Checkbox -->
+        <div class="control-group">
+          <label class="control control--checkbox inline-block">Public
+              <input type="checkbox" name="isPublic" ng-model="vm.poll.isPublic"/>
+              <div class="control__indicator"></div>
+            </label>
+          <label class="control control--checkbox inline-block mg20l">Allow multiple vote
+              <input type="checkbox" name="allow_multiple" ng-model="vm.poll.allow_multiple"/>
+              <div class="control__indicator"></div>
+            </label>
+          <label class="control control--checkbox inline-block mg20l">Allow guest vote
+              <input type="checkbox" name="allow_guest" ng-model="vm.poll.allow_guest"/>
+              <div class="control__indicator"></div>
+            </label>
+          <label class="control control--checkbox inline-block mg20l">Allow members suggest option
+              <input type="checkbox" name="allow_add" ng-model="vm.poll.allow_add"/>
+              <div class="control__indicator"></div>
+            </label>
+        </div>
+        <div class="h25"></div>
+        <!-- Title -->
+        <input type="text" class="form-control input-large" name="title" ng-model="vm.poll.title" placeholder="Enter your poll tilte here"
+        />
+        <div class="h25"></div>
+        <!-- Body -->
+        <text-angular class="text-body" name="body" ng-model="vm.poll.body"></text-angular>
+        <div class="h25"></div>
+        <!-- Tags -->
+        <div class="form-group" ng-controller="AutocompleteTagController">
+          <tags-input ng-model="vm.poll.tags" display-property="name" placeholder="{{placeholder}}" add-from-autocomplete-only="true"
+            replace-spaces-with-dashes="false" min-length="1" enforce-max-tags class="tags-custom">
+            <auto-complete source="loadItems($query)" min-length="1" debounce-delay="0" max-results="10"></auto-complete>
+          </tags-input>
+        </div>
+        <div class="h25"></div>
+        <!-- Option -->
+        <div class="panel-group mgnb" role="tablist" aria-multiselectable="true" bs-collapse ng-if="vm.opts.length > 0">
+          <div class="panel panel-default custom-panel" ng-repeat="opt in vm.opts">
+            <div class="panel-heading" role="tab">
+              <h4 class="panel-title">
+                <a class="undecorated-link" bs-collapse-toggle>
                   {{ (opt.title) ? opt.title : 'New option ' + ($index + 1) }}
                 </a>
-                </h4>
-              </div>
-              <div class="panel-collapse" role="tabpanel" bs-collapse-target>
-                <div class="panel-body">
-                  <div class="text-body" ta-bind="text" ng-model="opt.body" ta-readonly="true"></div>
-                </div>
+              </h4>
+            </div>
+            <div class="panel-collapse" role="tabpanel" bs-collapse-target>
+              <div class="panel-body">
+                <div class="text-body" ta-bind="text" ng-model="opt.body" ta-readonly="true"></div>
               </div>
             </div>
           </div>
-          <div class="h25"></div>
-          <button class="btn btn-primary pull-right" ng-click="vm.input_opt()">Add Option</button>
-          <div class="clearfix"></div>
-        </form>
+        </div>
+        <div class="h25"></div>
+        <button class="btn btn-primary pull-right" ng-click="vm.input_opt()">Add Option</button>
+        <div class="clearfix"></div>
       </div>
     </div>
   </div>

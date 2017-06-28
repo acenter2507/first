@@ -125,7 +125,11 @@
       }
     };
 
-    vm.save = isValid => {
+    vm.save = () => {
+      var error = false;
+      if (!vm.poll.category) {
+        vm.poll.categoryError = true;
+      }
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.pollForm');
         return false;
@@ -159,6 +163,9 @@
       }
     };
 
+    vm.validateCategory = () => {
+      return (vm.category) ? true : false;
+    };
     vm.discard = () => {
       if (angular.equals(vm.poll, vm.bk_poll)) {
         handle_discard();

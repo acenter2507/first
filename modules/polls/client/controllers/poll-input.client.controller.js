@@ -203,7 +203,7 @@
       autoClose: true
     });
     vm.toggle_colorpicker = () => {
-
+      opt_color.$promise.then(opt_color.toggle);
     };
     vm.input_opt = opt => {
       vm.tmp_opt = (!opt) ? { poll: vm.poll._id, title: '', body: '', image: 'modules/opts/client/img/option.png', status: 1 } : opt;

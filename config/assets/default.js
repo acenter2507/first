@@ -10,8 +10,7 @@ module.exports = {
         'public/lib/components-font-awesome/css/font-awesome.css',
         'public/lib/angular-ui-switch/angular-ui-switch.css',
         'public/lib/ng-tags-input/ng-tags-input.css',
-        'public/lib/angular-moment-picker/dist/angular-moment-picker.css',
-        'public/lib/angular-editor/stylesheets/simditor.css'
+        'public/lib/angular-moment-picker/dist/angular-moment-picker.css'
       ],
       js: [
         'public/lib/angular/angular.js',
@@ -36,8 +35,7 @@ module.exports = {
         'public/lib/moment/moment.js',
         'public/lib/angular-moment-picker/dist/angular-moment-picker.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
-        'public/lib/ngInfiniteScroll/build/ng-infinite-scroll.js',
-        'public/lib/angular-editor/javascripts/angular-editor.js'
+        'public/lib/ngInfiniteScroll/build/ng-infinite-scroll.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

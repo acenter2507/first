@@ -26,9 +26,7 @@
             </select>
             <div class="select__arrow"></div>
           </div>
-          <div role="alert">
-            <p class="help-block error-text">Category is required.</p>
-          </div>
+          <p class="text-danger" ng-show="vm.validateCategory()">Category is required.</p>
         </div>
         <div class="clearfix"></div>
         <!-- Checkbox -->

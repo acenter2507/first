@@ -17,7 +17,7 @@
     'OptsService',
     'Socket',
     'CategorysService',
-    '$aside'
+    '$asideProvider'
   ];
 
   function PollInputController(

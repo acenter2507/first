@@ -126,7 +126,7 @@
     };
 
     vm.save = () => {
-      if (!vm.validateBody || !vm.validateCategory || !vm.validateTitle) {
+      if (!vm.validateBody() || !vm.validateCategory() || !vm.validateTitle()) {
         return alert('Vui lòng xem lại bạn chưa nhập đủ thông tin');
       }
 

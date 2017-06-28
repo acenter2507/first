@@ -14,7 +14,7 @@
         <!-- Category -->
         <div class="pull-right w200">
           <div class="select">
-            <select ng-model="vm.poll.category" id="category" name="category" ng-options="category as category.name for category in vm.categorys">
+            <select ng-model="vm.poll.category._id" id="category" name="category" ng-options="category._id as category.name for category in vm.categorys">
               <!--<option ng-repeat="category in vm.categorys" value="{{category._id}}">{{category.name}}</option>-->
             </select>
             <div class="select__arrow"></div>

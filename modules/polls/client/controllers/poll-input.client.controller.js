@@ -238,21 +238,9 @@
         return false;
       }
       if (!vm.tmp_opt._id && !_.contains(vm.opts, vm.tmp_opt)) {
-        vm.tmp_opt.class = randomClass();
         vm.opts.push(vm.tmp_opt);
       }
       opt_aside.$promise.then(opt_aside.hide);
     };
-
-    function randomClass() {
-      var optClass =
-        'opt' +
-        vm.classRandoms[Math.floor(Math.random() * vm.classRandoms.length)];
-      if (!_.contains(vm.optClass, optClass)) {
-        vm.optClass.push(optClass);
-        return optClass;
-      }
-      return randomClass();
-    }
   }
 })();

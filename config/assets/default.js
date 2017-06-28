@@ -35,7 +35,8 @@ module.exports = {
         'public/lib/moment/moment.js',
         'public/lib/angular-moment-picker/dist/angular-moment-picker.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
-        'public/lib/ngInfiniteScroll/build/ng-infinite-scroll.js'
+        'public/lib/ngInfiniteScroll/build/ng-infinite-scroll.js',
+        'public/lib/angular-editor/javascripts/angular-editor.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

@@ -24,6 +24,8 @@
 .text-body img,
 .text-body span {
   max-width: 100%;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .side-list-poll:not(:last-child) {

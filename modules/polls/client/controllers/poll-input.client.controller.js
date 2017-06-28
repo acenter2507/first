@@ -126,14 +126,10 @@
     };
 
     vm.save = () => {
-      var error = false;
-      if (!vm.poll.category) {
-        vm.poll.categoryError = true;
+      if (!vm.validateBody || !vm.validateCategory || !vm.validateTitle) {
+        return alert('Vui lòng xem lại bạn chưa nhập đủ thông tin');
       }
-      if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'vm.form.pollForm');
-        return false;
-      }
+
       var isNew = !vm.poll._id ? true : false;
       vm.poll.opts = vm.opts;
       if (vm.poll._id) {
@@ -164,13 +160,13 @@
     };
 
     vm.validateCategory = () => {
-      return (vm.poll.category) ? false : true;
+      return (vm.poll.category) ? true : false;
     };
     vm.validateTitle = () => {
-      return (vm.poll.title) ? false : true;
+      return (vm.poll.title) ? true : false;
     };
     vm.validateBody = () => {
-      return (vm.poll.body) ? false : true;
+      return (vm.poll.body) ? true : false;
     };
     vm.discard = () => {
       if (angular.equals(vm.poll, vm.bk_poll)) {

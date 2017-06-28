@@ -16,6 +16,7 @@
     'TagsService',
     '$bsModal',
     '$bsAside',
+    '$bsPopover',
     'OptsService',
     'Socket',
     'CategorysService'
@@ -32,6 +33,7 @@
     Tags,
     $bsModal,
     $bsAside,
+    $bsPopover,
     Opts,
     Socket,
     Categorys
@@ -194,6 +196,15 @@
       animation: 'am-fade-and-slide-bottom',
       show: false
     });
+    var opt_color = $bsPopover({
+      templateUrl: 'modules/opts/client/views/opt.color-picker.view.html',
+      placement: 'bottom',
+      trigger: 'manual',
+      autoClose: true
+    });
+    vm.toggle_colorpicker = () => {
+
+    };
     vm.input_opt = opt => {
       vm.tmp_opt = (!opt) ? { poll: vm.poll._id, title: '', body: '', image: 'modules/opts/client/img/option.png', status: 1 } : opt;
       opt_aside.$promise.then(opt_aside.show);
@@ -239,10 +250,6 @@
         vm.opts.push(vm.tmp_opt);
       }
       opt_aside.$promise.then(opt_aside.hide);
-    };
-
-    vm.aside_full_screen = () => {
-      alert(1);
     };
 
     function randomClass() {

@@ -310,7 +310,11 @@
   padding: 10px 12px !important;
 }
 
-
+.opt-color-preview {
+  height: 34px;
+  width: 34px;
+  border-radius: 3px;
+}
 
 .materialpicker-colors {
   -webkit-user-select: none;

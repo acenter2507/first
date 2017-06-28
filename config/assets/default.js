@@ -22,6 +22,7 @@ module.exports = {
         'public/lib/angular-ui-router/release/angular-ui-router.js',
         'public/lib/angular-ui-utils/ui-utils.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
+        'public/lib/angular-bootstrap/ui.bootstrap.materialPicker.js',
         'public/lib/angular-strap/dist/angular-strap.js',
         'public/lib/angular-strap/dist/angular-strap.tpl.js',
         'public/lib/angular-strap/dist/angular-strap.compat.js',

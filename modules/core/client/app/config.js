@@ -21,7 +21,8 @@ var ApplicationConfiguration = (function() {
     'infinite-scroll',
     'monospaced.elastic',
     'chart.js',
-    'textAngular'
+    'textAngular',
+    'ui.bootstrap.materialPicker'
   ];
 
   // Add a new vertical module

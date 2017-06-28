@@ -190,7 +190,7 @@
       show: false
     });
     vm.input_opt = opt => {
-      vm.tmp_opt = (!opt) ? { poll: vm.poll._id, title: '', body: '', image: 'modules/opts/client/img/option.png', status: 1 } : opt;
+      vm.tmp_opt = (!opt) ? { poll: vm.poll._id, title: '', body: '', status: 1 } : opt;
       opt_aside.$promise.then(opt_aside.show);
     };
     vm.remove_opt = opt => {
@@ -209,7 +209,6 @@
     vm.approve_opt = opt => {
       if ($window.confirm('Are you sure you want to approve?')) {
         opt.status = 1;
-        opt.class = randomClass();
         var _opt = new Opts(opt);
         _opt.$update(() => {
           Socket.emit('opts_update', { pollId: vm.poll._id });

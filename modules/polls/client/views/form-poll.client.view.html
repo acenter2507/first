@@ -8,6 +8,7 @@
       </div>
     </div>
   </div>
+  <pre>{{ vm.poll | json }}</pre>
   <div class="row ">
     <div class="col-xs-12">
       <div class="card h1000">
@@ -19,6 +20,7 @@
             <div class="select__arrow"></div>
           </div>
         </div>
+        <div class="clearfix"></div>
         <text-angular name="body" ng-model="vm.poll.body"></text-angular>
         <!--<form name="vm.form.pollForm" class="form-horizontal" ng-submit="vm.save(vm.form.pollForm.$valid)" novalidate>
           <div class="form-group" show-errors>

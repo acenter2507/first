@@ -872,6 +872,6 @@
     vm.toggle_chart = () => {
       vm.chart.type = vm.chart.type === 'polarArea' ? 
         'pie' : 'polarArea';
-    }
+    };
   }
 })();

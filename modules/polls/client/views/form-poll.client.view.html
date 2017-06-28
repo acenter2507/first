@@ -66,13 +66,16 @@
               <div class="panel-body">
                 <input type="text" class="form-control" ng-model="opt.title" placeholder="Enter your option tilte here"/>
                 <div class="h10"></div>
-                <textarea class="msd-elastic: \n; opt-body-input"data-ng-model="cmt.body" placeholder="Enter your option body here..."></textarea>
+                <textarea class="msd-elastic: \n; opt-body-input"data-ng-model="cmt.body" placeholder="Enter your option body here..." ng-hide="!opt.inputType"></textarea>
+                <text-angular name="body" ng-model="cmt.body"></text-angular ng-hide="opt.inputType">
+                <a class="undecorated-link pull-right" ng-click="opt.inputType = !opt.inputType">Change editor</a>
+                <div class="clearfix"></div>
               </div>
             </div>
           </div>
         </div>
         <div class="h10"></div>
-        <button class="btn btn-primary pull-right" ng-click="vm.opts.push({})">Add Option</button>
+        <button class="btn btn-primary pull-right" ng-click="vm.opts.push({ inputType: true })">Add Option</button>
         <div class="clearfix"></div>
       </div>
     </div>

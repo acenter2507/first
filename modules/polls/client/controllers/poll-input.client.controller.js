@@ -9,12 +9,12 @@
     '$scope',
     '$state',
     '$window',
-    '$modal',
     'Authentication',
     'pollResolve',
     'PollsService',
     'PollsApi',
     'TagsService',
+    '$aside',
     'OptsService',
     'Socket',
     'CategorysService'
@@ -24,12 +24,12 @@
     $scope,
     $state,
     $window,
-    $modal,
     Authentication,
     poll,
     Polls,
     PollsApi,
     Tags,
+    $aside,
     Opts,
     Socket,
     Categorys
@@ -195,11 +195,6 @@
     vm.input_opt = opt => {
       vm.tmp_opt = (!opt) ? { poll: vm.poll._id, title: '', body: '', image: 'modules/opts/client/img/option.png', status: 1 } : opt;
       // opt_aside.$promise.then(opt_aside.show);
-      $modal({
-      title: 'My Title', 
-      content: 'My Content', 
-      show: true
-    });
     };
     vm.remove_opt = opt => {
       if ($window.confirm('Are you sure you want to remove?')) {

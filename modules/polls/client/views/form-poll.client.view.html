@@ -11,6 +11,7 @@
   <div class="row ">
     <div class="col-xs-12">
       <div class="card">
+        <!-- Category -->
         <div class="pull-right w200">
           <div class="select">
             <select ng-model="vm.poll.category" id="category" name="category">
@@ -21,6 +22,7 @@
           </div>
         </div>
         <div class="clearfix"></div>
+        <!-- Checkbox -->
         <div class="control-group">
           <label class="control control--checkbox inline-block">Public
             <input type="checkbox" name="isPublic" ng-model="vm.poll.isPublic"/>
@@ -40,11 +42,13 @@
           </label>
         </div>
         <div class="h15"></div>
+        <!-- Title -->
         <input type="text" class="form-control input-large" name="title" ng-model="vm.poll.title" placeholder="Enter your poll tilte here"/>
         <div class="h15"></div>
-        <text-angular name="body" ng-model="vm.poll.body"></text-angular>
-        <!-- Tags -->
+        <!-- Body -->
+        <text-angular class="text-body" name="body" ng-model="vm.poll.body"></text-angular>
         <div class="h15"></div>
+        <!-- Tags -->
         <div class="form-group" ng-controller="AutocompleteTagController">
           <tags-input ng-model="vm.poll.tags" display-property="name" placeholder="{{placeholder}}" add-from-autocomplete-only="true"
             replace-spaces-with-dashes="false" min-length="1" enforce-max-tags class="tags-custom">
@@ -59,7 +63,6 @@
                 <a class="undecorated-link" bs-collapse-toggle>
                   {{ (opt.title) ? opt.title : 'New option ' + ($index + 1) }}
                 </a>
-                <span class="fa fa-frown-o pull-right" style="color: #ff4040;"></span>
               </h4>
             </div>
             <div class="panel-collapse" role="tabpanel" bs-collapse-target>

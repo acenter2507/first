@@ -12,7 +12,13 @@ app.init(function () {
   console.log('Initialized test automation');
 });
 
+/*
+ Ưu tiên:
+1. Màn hình create poll
+  - Thêm xóa sửa option
+  - Hạn vote
 
+*/
 // 1. Khi người vote là guest thì không push socket được.
 // 2. Sửa các progressbar trong màn hình detail. => Đã sửa xong
 // 3. Tạo tooltip => da tao

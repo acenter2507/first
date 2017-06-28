@@ -21,6 +21,8 @@
     'CmtlikesService',
     'PollusersService',
     'Socket',
+    '$bsModal',
+    '$bsAside',
     '$mdDialog'
   ];
 
@@ -42,6 +44,8 @@
     Cmtlikes,
     Pollusers,
     Socket,
+    $bsModal,
+    $bsAside,
     $mdDialog
   ) {
     var vm = this;
@@ -49,7 +53,14 @@
     vm.isLogged = vm.authentication.user ? true : false;
     vm.poll = poll;
     vm.poll.close = vm.poll.close ? moment(vm.poll.close) : vm.poll.close;
+    vm.poll.tags = [];
     vm.form = {};
+    
+    // Options variable
+    vm.opts = [];
+    vm.tmp_opt = {};
+    vm.opt_aside = {};
+
     vm.cmt_sorts = [
       { val: '-created', name: 'Newest to oldest' },
       { val: 'created', name: 'Oldest to newest' },
@@ -58,10 +69,8 @@
     vm.cmt_sort = vm.cmt_sorts[0];
     vm.enter_send = false;
 
-    vm.poll.tags = [];
     vm.like = {};
     vm.polluser = {};
-    vm.opts = [];
     vm.votes = [];
     vm.voteopts = [];
     vm.chart = { type: 'pie' };
@@ -79,17 +88,7 @@
     vm.cmt_processing = false;
     vm.cmt_typing = false;
     vm.tmp_cmt = {};
-    vm.tmp_opt = {};
     vm.like_processing = false;
-    // var opt_aside = $aside({
-    //   scope: $scope,
-    //   controllerAs: vm,
-    //   templateUrl: 'modules/polls/client/views/new-opt.client.view.html',
-    //   title: vm.poll.title,
-    //   placement: 'bottom',
-    //   animation: 'am-fade-and-slide-bottom',
-    //   show: false
-    // });
 
     init();
 
@@ -619,10 +618,20 @@
     };
 
     // OPTIONS
+    vm.opt_aside = $bsAside({
+      scope: $scope,
+      controllerAs: vm,
+      templateUrl: 'modules/polls/client/views/new-opt.client.view.html',
+      title: 'Suggest new option',
+      placement: 'bottom',
+      animation: 'am-fade-and-slide-bottom',
+      show: false
+    });
+
     // Click button add option
     vm.input_opt = opt => {
-      vm.tmp_opt = (!opt) ? new Opts({ poll: vm.poll._id, title: '', body: '', image: 'modules/opts/client/img/option.png', status: 2 }) : new Opts(opt);
-      //opt_aside.$promise.then(opt_aside.show);
+      vm.tmp_opt = (!opt) ? new Opts({ poll: vm.poll._id, title: '', body: '', status: 2 }) : new Opts(opt);
+      vm.opt_aside.$promise.then(vm.opt_aside.show);
     };
     // Click button save option
     vm.save_opt = isValid => {
@@ -633,25 +642,18 @@
       vm.tmp_opt.$save(successCallback, errorCallback);
 
       function successCallback(res) {
-        //opt_aside.$promise.then(opt_aside.hide);
+        vm.opt_aside.$promise.then(vm.opt_aside.hide);
         Socket.emit('opts_request', { pollId: vm.poll._id });
         alert('Your option is waiting for approve. Thanks.');
       }
 
       function errorCallback(err) {
         console.log(err);
-
         //vm.error = res.data.message;
       }
     };
 
-    // Comment
-    vm.aside_full_screen = () => {
-      alert(1);
-    };
-
     vm.save_cmt = save_cmt;
-
     vm.reply_cmt = cmt => {
       if (!vm.isLogged) {
         return alert('You must login to reply this comment.');

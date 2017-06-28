@@ -12,7 +12,6 @@
     'PollsService',
     'PollsApi',
     'TagsService',
-    '$aside',
     'CmtsService',
     'VotesService',
     'VotesApi',
@@ -34,7 +33,6 @@
     Polls,
     PollsApi,
     Tags,
-    $aside,
     Cmts,
     Votes,
     VotesApi,
@@ -83,15 +81,15 @@
     vm.tmp_cmt = {};
     vm.tmp_opt = {};
     vm.like_processing = false;
-    var opt_aside = $aside({
-      scope: $scope,
-      controllerAs: vm,
-      templateUrl: 'modules/polls/client/views/new-opt.client.view.html',
-      title: vm.poll.title,
-      placement: 'bottom',
-      animation: 'am-fade-and-slide-bottom',
-      show: false
-    });
+    // var opt_aside = $aside({
+    //   scope: $scope,
+    //   controllerAs: vm,
+    //   templateUrl: 'modules/polls/client/views/new-opt.client.view.html',
+    //   title: vm.poll.title,
+    //   placement: 'bottom',
+    //   animation: 'am-fade-and-slide-bottom',
+    //   show: false
+    // });
 
     init();
 
@@ -624,7 +622,7 @@
     // Click button add option
     vm.input_opt = opt => {
       vm.tmp_opt = (!opt) ? new Opts({ poll: vm.poll._id, title: '', body: '', image: 'modules/opts/client/img/option.png', status: 2 }) : new Opts(opt);
-      opt_aside.$promise.then(opt_aside.show);
+      //opt_aside.$promise.then(opt_aside.show);
     };
     // Click button save option
     vm.save_opt = isValid => {
@@ -635,7 +633,7 @@
       vm.tmp_opt.$save(successCallback, errorCallback);
 
       function successCallback(res) {
-        opt_aside.$promise.then(opt_aside.hide);
+        //opt_aside.$promise.then(opt_aside.hide);
         Socket.emit('opts_request', { pollId: vm.poll._id });
         alert('Your option is waiting for approve. Thanks.');
       }

@@ -80,7 +80,7 @@
             <div class="panel-heading" role="tab">
               <h4 class="panel-title">
                 <a class="undecorated-link" bs-collapse-toggle>
-                  {{(opt.title) ? opt.title : 'New option ' + $index}}
+                  {{ (opt.title) ? opt.title : 'New option ' + ($index + 1) }}
                 </a>
               </h4>
             </div>
@@ -92,6 +92,7 @@
           </div>
         </div>
         <button class="btn btn-primary pull-right" ng-click="vm.opts.push({})">Add Option</button>
+        <div class="clearfix"></div>
       </div>
     </div>
   </div>

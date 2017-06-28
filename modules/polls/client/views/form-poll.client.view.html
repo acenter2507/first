@@ -56,7 +56,7 @@
           <div class="panel panel-default custom-panel" ng-repeat="opt in vm.opts">
             <div class="panel-heading" role="tab">
               <h4 class="panel-title">
-                <a ng-class="{'undecorated-link': true, 'text-danger': opt.error" bs-collapse-toggle>
+                <a ng-class="{'undecorated-link': true, 'text-danger': true" bs-collapse-toggle>
                   {{ (opt.title) ? opt.title : 'New option ' + ($index + 1) }}
                 </a>
                 <span class="fa fa-frown-o"></span>

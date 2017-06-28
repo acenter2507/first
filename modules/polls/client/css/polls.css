@@ -234,6 +234,8 @@
   background: #e6e6e6;
   color: #7b7b7b;
   appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 .select select::-ms-expand {
   display: none;

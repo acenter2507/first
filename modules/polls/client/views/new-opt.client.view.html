@@ -13,7 +13,7 @@
             <fieldset>
               <div class="form-group">
                 <button class="btn btn-default pull-right" ng-click="vm.show_colorpicker = !vm.show_colorpicker">Select color</button>
-                <div class="opt-color-preview pull-right mg10r" ng-style="{'background-color': vm.tmp_opt.color}"></div>
+                <div class="opt-color-preview pull-right" ng-style="{'background-color': vm.tmp_opt.color}"></div>
                 <material-picker class="pull-right" format="'hex'" ng-model="vm.tmp_opt.color" size="15" ng-show="vm.show_colorpicker"></material-picker>
               </div>
               <div class="clearfix"></div>
@@ -29,7 +29,6 @@
                 <text-angular ng-model="vm.tmp_opt.body"></text-angular>
                 <!--<textarea class="msd-elastic: \n; opt-body-input" data-ng-model="vm.tmp_opt.body" placeholder="Enter your option body here..."></textarea>-->
               </div>
-              <pre>{{vm.tmp_opt | json}}</pre>
             </fieldset>
           </form>
         </div>

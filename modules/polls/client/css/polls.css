@@ -314,6 +314,8 @@
   height: 34px;
   width: 34px;
   border-radius: 3px;
+  margin-right: 12px;
+  margin-left: 12px;
 }
 
 .materialpicker-colors {

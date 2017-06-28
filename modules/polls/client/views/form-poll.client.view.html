@@ -15,7 +15,7 @@
         <div class="pull-right w200">
           <div class="select">
             <select ng-model="vm.poll.category" id="category" name="category">
-              <option value="" disabled selected>Category</option>
+              <option value="" disabled selected="{{(vm.poll.category)}}">Category</option>
               <option ng-repeat="category in vm.categorys" value="{{category._id}}">{{category.name}}</option>
             </select>
             <div class="select__arrow"></div>

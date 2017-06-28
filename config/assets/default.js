@@ -24,6 +24,7 @@ module.exports = {
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
         'public/lib/angular-strap/dist/angular-strap.js',
         'public/lib/angular-strap/dist/angular-strap.tpl.js',
+        'public/lib/angular-strap/dist/angular-strap.compat.js',
         'public/lib/angular-file-upload/angular-file-upload.js',
         'public/lib/angular-aria/angular-aria.js',
         'public/lib/angular-material/angular-material.js',

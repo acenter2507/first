@@ -289,6 +289,10 @@
   display: inline !important;
 }
 
+.inline-block  {
+  display: flex;
+}
+
 .input-large {
   height: 44px;
   font-size: 1.2em !important;

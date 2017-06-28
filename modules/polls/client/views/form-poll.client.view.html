@@ -13,12 +13,12 @@
       <div class="card">
         <!-- Category -->
         <div class="pull-right w200">
-          <div class="select">
-            <select ng-model="vm.poll.category" id="category" name="category">
+            <select ng-model="vm.poll.category" id="category" name="category" class="form-control">
               <option ng-selected="category._id === vm.poll.category" ng-repeat="category in vm.categorys" value="{{category._id}}">{{category.name}}</option>
             </select>
+          <!--<div class="select">
             <div class="select__arrow"></div>
-          </div>
+          </div>-->
         </div>
         <div class="clearfix"></div>
         <!-- Checkbox -->
@@ -40,13 +40,13 @@
             <div class="control__indicator"></div>
           </label>
         </div>
-        <div class="h15"></div>
+        <div class="h25"></div>
         <!-- Title -->
         <input type="text" class="form-control input-large" name="title" ng-model="vm.poll.title" placeholder="Enter your poll tilte here"/>
-        <div class="h15"></div>
+        <div class="h25"></div>
         <!-- Body -->
         <text-angular class="text-body" name="body" ng-model="vm.poll.body"></text-angular>
-        <div class="h15"></div>
+        <div class="h25"></div>
         <!-- Tags -->
         <div class="form-group" ng-controller="AutocompleteTagController">
           <tags-input ng-model="vm.poll.tags" display-property="name" placeholder="{{placeholder}}" add-from-autocomplete-only="true"
@@ -71,7 +71,7 @@
             </div>
           </div>
         </div>
-        <div class="h10"></div>
+        <div class="h25"></div>
         <button class="btn btn-primary pull-right" ng-click="vm.input_opt()">Add Option</button>
         <div class="clearfix"></div>
       </div>

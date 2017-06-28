@@ -14,13 +14,23 @@
         <form name="vm.form.pollForm" class="form-horizontal" ng-submit="vm.save(vm.form.pollForm.$valid)" novalidate>
           <div class="form-group" show-errors>
             <label class="control-label" for="category">Category</label>
-            <select id="category" name="category" ng-model="vm.poll.category" class="form-control" ng-options="category as category.name for category in vm.categorys" required>
-          </select>
+            <div class="select" >
+              <select ng-options="category._id as category.name for category in vm.categorys" ng-model="vm.poll.category" id="category" name="category">
+                <option ng-repeat="category in vm.categorys">{{category,name}}</option>
+              </select>
+              <div class="select__arrow"></div>
+            </div>
             <div ng-messages="vm.form.pollForm.title.$error" role="alert">
               <p class="help-block error-text" ng-message="required">Category is required.</p>
             </div>
           </div>
-          <text-angular name="body" ng-model="vm.poll.body"></text-angular>
+          <div class="form-group" show-errors>
+            <label class="control-label" for="body">Body</label>
+            <text-angular name="body" ng-model="vm.poll.body"></text-angular>
+            <div ng-messages="vm.form.pollForm.title.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Category is required.</p>
+            </div>
+          </div>
         </form>
       </div>
     </div>

@@ -19,12 +19,13 @@
 .post-body p{
   display: inline-block;
 }
-.text-body {
+.text-body,
+.text-body p,
+.text-body img,
+.text-body span {
   max-width: 100%;
 }
-.text-body p{
-  max-width: 100%;
-}
+
 .side-list-poll:not(:last-child) {
   margin-bottom: 5px;
 }

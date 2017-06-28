@@ -8,7 +8,7 @@
     </button>
     <a ui-sref="home" class="navbar-brand">MEAN.JS</a>
   </div>
-  <nav class="collapse navbar-collapse" uib-collapse="!isCollapsed" bs-collapse-target >
+  <nav class="collapse navbar-collapse" bs-collapse-target >
 
     <ul class="nav navbar-nav" ng-if="menu.shouldRender(authentication.user);">
       <li ng-repeat="item in menu.items | orderBy: 'position'" ng-if="item.shouldRender(authentication.user);" ng-switch="item.type"

@@ -189,7 +189,7 @@
       scope: $scope,
       controllerAs: vm,
       templateUrl: 'modules/polls/client/views/new-opt.client.view.html',
-      title: vm.poll.title,
+      title: 'Add new option',
       placement: 'bottom',
       animation: 'am-fade-and-slide-bottom',
       show: false

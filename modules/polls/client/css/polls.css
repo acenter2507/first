@@ -308,3 +308,36 @@
   font-size: 1.2em !important;
   padding: 10px 12px !important;
 }
+
+
+
+.materialpicker-colors {
+  -webkit-user-select: none;
+  user-select: none;
+  position: relative;
+  border: 1px solid #FFF;
+  border-radius: 2px;
+  display: inline-block;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.5);
+  cursor: default;
+}
+.materialpicker-colors div.selected {
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 0 4px #000;
+  border: 2px solid #FFF;
+}
+div.materialpicker-white.selected {
+  border-color: #78909C;
+}
+.colorpicker-preview {
+  width: 40px;
+  height: 40px;
+  border-radius: 2px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.materialpicker.ng-invalid .materialpicker-colors {
+  border-color: #a94442;
+  box-shadow: 0 1px 5px #a94442;
+}

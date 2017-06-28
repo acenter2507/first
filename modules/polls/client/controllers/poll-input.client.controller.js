@@ -164,7 +164,7 @@
     };
 
     vm.validateCategory = () => {
-      return (vm.category) ? true : false;
+      return (vm.category) ? false : true;
     };
     vm.discard = () => {
       if (angular.equals(vm.poll, vm.bk_poll)) {

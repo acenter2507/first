@@ -448,7 +448,7 @@
     vm.remove = () => {
       if ($window.confirm('Are you sure you want to delete?')) {
         vm.poll.$remove(() => {
-          Socket.emit('poll_delete');
+          Socket.emit('poll_delete', { pollId: vm.poll._id });
           $state.go('polls.list');
         });
       }

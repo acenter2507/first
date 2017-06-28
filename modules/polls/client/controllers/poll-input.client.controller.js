@@ -16,7 +16,6 @@
     'TagsService',
     '$bsModal',
     '$bsAside',
-    '$bsTooltip',
     '$bsPopover',
     'OptsService',
     'Socket',
@@ -34,7 +33,6 @@
     Tags,
     $bsModal,
     $bsAside,
-    $bsTooltip,
     $bsPopover,
     Opts,
     Socket,
@@ -189,6 +187,7 @@
 
     // OPTIONS
     vm.tmp_opt = {};
+    vm.show_colorpicker = false;
     var opt_aside = $bsAside({
       scope: $scope,
       controllerAs: vm,
@@ -198,15 +197,6 @@
       animation: 'am-fade-and-slide-bottom',
       show: false
     });
-    var opt_color = $bsPopover({
-      templateUrl: 'modules/opts/client/views/opt.color-picker.view.html',
-      placement: 'bottom',
-      trigger: 'manual',
-      autoClose: true
-    });
-    vm.toggle_colorpicker = () => {
-      opt_color.$promise.then(opt_color.toggle);
-    };
     vm.input_opt = opt => {
       vm.tmp_opt = (!opt) ? { poll: vm.poll._id, title: '', body: '', image: 'modules/opts/client/img/option.png', status: 1 } : opt;
       opt_aside.$promise.then(opt_aside.show);

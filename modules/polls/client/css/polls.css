@@ -19,7 +19,9 @@
 .post-body p{
   display: inline-block;
 }
-
+.text-body {
+  max-width: 100%;
+}
 .side-list-poll:not(:last-child) {
   margin-bottom: 5px;
 }

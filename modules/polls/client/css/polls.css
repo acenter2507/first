@@ -238,7 +238,6 @@
 .select {
   position: relative;
   display: inline-block;
-  margin-bottom: 15px;
   width: 100%;
 }
 .select select {

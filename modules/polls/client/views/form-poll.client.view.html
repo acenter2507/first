@@ -2,9 +2,9 @@
   <div class="row mg20t mg20b">
     <div class="col-xs-12">
       <div class="form-group">
-          <button class="btn btn-danger pull-right" ng-show="vm.poll._id" ng-click="vm.remove()">Delete</button>
-          <button class="btn btn-default pull-right mg10r" ng-click="vm.discard()">Discard</button>
-          <button class="btn btn-primary pull-right mg10r">{{vm.poll._id ? ' Update' : ' Create'}}</button>
+        <button class="btn btn-danger pull-right" ng-show="vm.poll._id" ng-click="vm.remove()">Delete</button>
+        <button class="btn btn-default pull-right mg10r" ng-click="vm.discard()">Discard</button>
+        <button class="btn btn-primary pull-right mg10r">{{vm.poll._id ? ' Update' : ' Create'}}</button>
       </div>
     </div>
   </div>
@@ -13,7 +13,7 @@
     <div class="col-xs-12">
       <div class="card h1000">
         <div class="pull-right w200">
-          <div class="select" >
+          <div class="select">
             <select ng-model="vm.poll.category" id="category" name="category">
               <option value="" disabled selected>Category</option>
               <option ng-repeat="category in vm.categorys" value="{{category._id}}">{{category.name}}</option>
@@ -22,9 +22,26 @@
           </div>
         </div>
         <div class="clearfix"></div>
-        <input type="text" class="form-control input-large" name="title" ng-model="vm.poll.title" placeholder="Enter your poll tilte here"/>
+        <input type="text" class="form-control input-large" name="title" ng-model="vm.poll.title" placeholder="Enter your poll tilte here"
+        />
         <div class="h15"></div>
         <text-angular name="body" ng-model="vm.poll.body"></text-angular>
+        <div class="h15"></div>
+        <fieldset>
+          <legend>Setting your poll:</legend>
+          <label class="control control--checkbox">Allow multiple vote
+            <input type="checkbox" name="allow_multiple" ng-model="vm.poll.allow_multiple"/>
+            <div class="control__indicator"></div>
+          </label>
+          <label class="control control--checkbox">Allow guest vote
+            <input type="checkbox" name="allow_guest" ng-model="vm.poll.allow_guest"/>
+            <div class="control__indicator"></div>
+          </label>
+          <label class="control control--checkbox">Allow members suggest option
+            <input type="checkbox" name="allow_add" ng-model="vm.poll.allow_add"/>
+            <div class="control__indicator"></div>
+          </label>
+        </fieldset>
         <!--<form name="vm.form.pollForm" class="form-horizontal" ng-submit="vm.save(vm.form.pollForm.$valid)" novalidate>
           <div class="form-group" show-errors>
             <label class="control-label" for="category">Category</label>
@@ -76,7 +93,8 @@
           <!-- Category -->
           <div class="form-group" show-errors>
             <label class="control-label" for="category">Category</label>
-            <select id="category" name="category" ng-model="vm.poll.category" class="form-control" ng-options="category as category.name for category in vm.categorys" required>
+            <select id="category" name="category" ng-model="vm.poll.category" class="form-control" ng-options="category as category.name for category in vm.categorys"
+              required>
           </select>
             <div ng-messages="vm.form.pollForm.title.$error" role="alert">
               <p class="help-block error-text" ng-message="required">Category is required.</p>
@@ -113,12 +131,14 @@
           <!-- Close date -->
           <div class="form-group">
             <label class="control-label" for="close">Stop voting at:</label>
-            <input id="close" name="close" class="form-control" moment-picker="vm.poll.close" ng-model="vm.poll.close" format="YYYY/MM/DD HH:mm" start-view="month" placeholder="Select a date...">
+            <input id="close" name="close" class="form-control" moment-picker="vm.poll.close" ng-model="vm.poll.close" format="YYYY/MM/DD HH:mm"
+              start-view="month" placeholder="Select a date...">
           </div>
           <!-- Tags -->
           <div class="form-group" ng-controller="AutocompleteTagController">
             <label class="control-label" for="#">Current tags: {{(!vm.poll.tags.length) ? 'Has no tag was added' : ''}}</label>
-            <tags-input ng-model="vm.poll.tags" display-property="name" placeholder="{{placeholder}}" add-from-autocomplete-only="true" replace-spaces-with-dashes="false" min-length="1" enforce-max-tags class="tags-custom">
+            <tags-input ng-model="vm.poll.tags" display-property="name" placeholder="{{placeholder}}" add-from-autocomplete-only="true"
+              replace-spaces-with-dashes="false" min-length="1" enforce-max-tags class="tags-custom">
               <auto-complete source="loadItems($query)" min-length="1" debounce-delay="0" max-results="10"></auto-complete>
             </tags-input>
           </div>

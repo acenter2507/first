@@ -66,7 +66,7 @@
     vm.opts = [];
     vm.votes = [];
     vm.voteopts = [];
-    vm.chart = {};
+    vm.chart = { type: 'pie' };
     vm.chart.options = { responsive: true };
     vm.votedTotal = 0;
     vm.error = null;
@@ -868,5 +868,10 @@
       );
     };
     vm.save_vote = save_vote;
+
+    vm.toggle_chart = () => {
+      vm.chart.type = vm.chart.type === 'polarArea' ? 
+        'pie' : 'polarArea';
+    }
   }
 })();

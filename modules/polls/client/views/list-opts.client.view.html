@@ -1,9 +1,10 @@
 <div class="card" id="poll_chart_card" ng-if="vm.opts.length > 0">
-  <canvas id="pie" class="chart chart-pie"
+  <canvas id="pie" class="chart-base"
     chart-data="vm.chart.data"
     chart-labels="vm.chart.labels"
     chart-options="vm.chart.options"
     chart-colors ="vm.chart.colors"
+    chart-type ="vm.chart.type"
     ng-if="vm.votedTotal > 0">
   </canvas>
   <div ng-repeat="opt in vm.opts | orderBy: '-voteCnt'">

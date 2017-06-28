@@ -295,6 +295,7 @@
 }
 
 .input-large {
+  height: 44px;
   font-size: 1.2em !important;
   padding: 10px 12px !important;
 }

@@ -290,7 +290,7 @@
 }
 
 .inline-block  {
-  display: flex;
+  display: flex !important;
 }
 
 .input-large {

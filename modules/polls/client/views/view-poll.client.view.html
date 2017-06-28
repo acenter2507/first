@@ -182,7 +182,7 @@
       <div class="card">
         <span class="text-muted" ng-if="!vm.opts.length || vm.opts.length === 0"><small>No option to vote.</small></span>
         <div class="form-group" ng-repeat="opt in vm.opts" ng-if="!vm.poll.allow_multiple">
-          <label class="control control--radio">
+          <label class="control control--radio w100p">
             {{opt.title}}<span class="mg5l" ng-style="{color: opt.color}"><strong>●</strong></span>
             <input type="radio" name="vote_radio" ng-checked="vm.is_voted(opt._id)" ng-click="vm.checked(opt._id)"/>
             <div class="control__indicator"></div>

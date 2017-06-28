@@ -702,6 +702,11 @@ a:hover .header-profile-image {
 .h1000 {
   height: 1000px;
 }
+
+.w100p {
+  width: 100%;
+}
+
 .lineh1 {
   line-height: 1px
 }

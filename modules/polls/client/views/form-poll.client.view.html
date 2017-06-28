@@ -26,9 +26,9 @@
             </select>
             <div class="select__arrow"></div>
           </div>
-          <p class="text-danger text-" ng-show="vm.validateCategory()"><small>Category is required</small></p>
+          <p class="text-danger" ng-show="vm.validateCategory()">Category is required</p>
         </div>
-        <div class="clearfix"></div>
+        <div class="clearfix h25"></div>
         <!-- Checkbox -->
         <div class="control-group">
           <label class="control control--checkbox inline-block">Public
@@ -52,9 +52,11 @@
         <!-- Title -->
         <input type="text" class="form-control input-large" name="title" ng-model="vm.poll.title" placeholder="Enter your poll tilte here"
         />
+        <p class="text-danger" ng-show="vm.validateTitle()">You must type somthing for title</p>
         <div class="h25"></div>
         <!-- Body -->
         <text-angular class="text-body" name="body" ng-model="vm.poll.body"></text-angular>
+        <p class="text-danger" ng-show="vm.validateBody()">You must type somthing for body</p>
         <div class="h25"></div>
         <!-- Tags -->
         <div class="form-group" ng-controller="AutocompleteTagController">

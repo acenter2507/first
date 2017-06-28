@@ -22,28 +22,25 @@
           </div>
         </div>
         <div class="clearfix"></div>
+        <div class="control-group">
+          <label class="control control--checkbox inline-block">Allow multiple vote
+            <input type="checkbox" name="allow_multiple" ng-model="vm.poll.allow_multiple"/>
+            <div class="control__indicator"></div>
+          </label>
+          <label class="control control--checkbox inline-block mg20l">Allow guest vote
+            <input type="checkbox" name="allow_guest" ng-model="vm.poll.allow_guest"/>
+            <div class="control__indicator"></div>
+          </label>
+          <label class="control control--checkbox inline-block mg20l">Allow members suggest option
+            <input type="checkbox" name="allow_add" ng-model="vm.poll.allow_add"/>
+            <div class="control__indicator"></div>
+          </label>
+        </div>
+        <div class="h15"></div>
         <input type="text" class="form-control input-large" name="title" ng-model="vm.poll.title" placeholder="Enter your poll tilte here"
         />
         <div class="h15"></div>
         <text-angular name="body" ng-model="vm.poll.body"></text-angular>
-        <div class="h15"></div>
-        <fieldset>
-          <legend>Setting your poll:</legend>
-          <div class="control-group">
-            <label class="control control--checkbox inline-block">Allow multiple vote
-              <input type="checkbox" name="allow_multiple" ng-model="vm.poll.allow_multiple"/>
-              <div class="control__indicator"></div>
-            </label>
-            <label class="control control--checkbox inline-block mg20l">Allow guest vote
-              <input type="checkbox" name="allow_guest" ng-model="vm.poll.allow_guest"/>
-              <div class="control__indicator"></div>
-            </label>
-            <label class="control control--checkbox inline-block mg20l">Allow members suggest option
-              <input type="checkbox" name="allow_add" ng-model="vm.poll.allow_add"/>
-              <div class="control__indicator"></div>
-            </label>
-          </div>
-        </fieldset>
         <!--<form name="vm.form.pollForm" class="form-horizontal" ng-submit="vm.save(vm.form.pollForm.$valid)" novalidate>
           <div class="form-group" show-errors>
             <label class="control-label" for="category">Category</label>

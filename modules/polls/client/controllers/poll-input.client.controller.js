@@ -238,7 +238,7 @@
         vm.tmp_opt.class = randomClass();
         vm.opts.push(vm.tmp_opt);
       }
-      // opt_aside.$promise.then(opt_aside.hide);
+      opt_aside.$promise.then(opt_aside.hide);
     };
 
     vm.aside_full_screen = () => {

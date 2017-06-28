@@ -4,7 +4,7 @@
       <div class="form-group">
         <button class="btn btn-danger pull-right" ng-show="vm.poll._id" ng-click="vm.remove()">Delete</button>
         <button class="btn btn-default pull-right mg10r" ng-click="vm.discard()">Discard</button>
-        <button class="btn btn-primary pull-right mg10r">{{vm.poll._id ? ' Update' : ' Create'}}</button>
+        <button class="btn btn-primary pull-right mg10r" ng-click="vm.save(true)">{{vm.poll._id ? ' Update' : ' Create'}}</button>
       </div>
     </div>
   </div>

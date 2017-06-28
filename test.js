@@ -17,6 +17,7 @@ app.init(function () {
 1. Màn hình create poll
   - Thêm xóa sửa option
   - Hạn vote
+  - Test các trường hợp socket
 
 */
 // 1. Khi người vote là guest thì không push socket được.

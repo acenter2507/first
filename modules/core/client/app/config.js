@@ -18,7 +18,6 @@ var ApplicationConfiguration = (function() {
     'ngAria',
     'ngMaterial',
     'moment-picker',
-    'mgcrea.ngStrap',
     'infinite-scroll',
     'monospaced.elastic',
     'chart.js',

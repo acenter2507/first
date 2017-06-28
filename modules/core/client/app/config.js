@@ -21,7 +21,8 @@ var ApplicationConfiguration = (function() {
     'mgcrea.ngStrap',
     'infinite-scroll',
     'monospaced.elastic',
-    'chart.js'
+    'chart.js',
+    'textAngular'
   ];
 
   // Add a new vertical module

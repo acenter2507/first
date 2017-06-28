@@ -14,8 +14,9 @@
       <div class="card h1000">
         <div class="pull-right w200">
           <div class="select" >
-            <select ng-options="category._id as category.name for category in vm.categorys" ng-model="vm.poll.category" id="category" name="category">
-              <option ng-repeat="category in vm.categorys">{{category.name}}</option>
+            <select ng-model="vm.poll.category" id="category" name="category">
+              <option>Category</option>
+              <option ng-repeat="category in vm.categorys" value="{{category._id}}">{{category.name}}</option>
             </select>
             <div class="select__arrow"></div>
           </div>

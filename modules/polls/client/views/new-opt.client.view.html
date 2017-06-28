@@ -13,7 +13,6 @@
             <fieldset>
               <!-- Title -->
               <div class="form-group" show-errors>
-                <label class="control-label" for="title">Title</label>
                 <input name="title" type="text" ng-model="vm.tmp_opt.title" class="form-control" placeholder="Title" required>
                 <div ng-messages="vm.form.optForm.title.$error" role="alert">
                   <p class="help-block error-text" ng-message="required">Opt title is required.</p>
@@ -21,9 +20,8 @@
               </div>
               <!-- Body -->
               <div class="form-group">
-                <label class="control-label" for="body">Body</label>
-                <text-angular ng-model="vm.tmp_opt.body"></text-angular>
-                <!--<textarea class="msd-elastic: \n; opt-body-input"data-ng-model="cmt.body" placeholder="Enter your option body here..."></textarea>-->
+                <!--<text-angular ng-model="vm.tmp_opt.body"></text-angular>-->
+                <textarea class="msd-elastic: \n; opt-body-input" data-ng-model="vm.tmp_opt.body" placeholder="Enter your option body here..."></textarea>
               </div>
               <material-picker ng-model="vm.tmp_opt.color" size="15"></material-picker>
               <pre>{{vm.tmp_cmt | json}}</pre>

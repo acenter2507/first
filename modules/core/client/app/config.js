@@ -9,7 +9,6 @@ var ApplicationConfiguration = (function() {
     'ngAnimate',
     'ngMessages',
     'ngSanitize',
-    'ngTouch',
     'ui.router',
     'ui.bootstrap',
     'mgcrea.ngStrap',

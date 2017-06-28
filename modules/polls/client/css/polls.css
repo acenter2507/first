@@ -21,12 +21,15 @@
 }
 .text-body,
 .text-body p,
-.text-body img,
 .text-body span {
   max-width: 100%;
   text-align: justify;
   text-justify: inter-word;
-  font-size: 1.0em;
+  font-size: 1.0em !important;
+}
+
+.text-body img {
+  max-width: 100%;
 }
 
 .side-list-poll:not(:last-child) {

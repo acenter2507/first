@@ -230,12 +230,10 @@
   padding: 10px 15px;
   outline: 0;
   border: 0;
-  border-radius: 0;
+  border-radius: 3px;
   background: #e6e6e6;
   color: #7b7b7b;
   appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
 }
 .select select::-ms-expand {
   display: none;

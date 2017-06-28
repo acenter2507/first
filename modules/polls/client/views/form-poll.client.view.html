@@ -74,40 +74,24 @@
             <auto-complete source="loadItems($query)" min-length="1" debounce-delay="0" max-results="10"></auto-complete>
           </tags-input>
         </div>
-        <div>
-          <md-button ng-click="toggleRight()"
-            ng-hide="isOpenRight()"
-            class="md-primary">
-            Toggle right
-          </md-button>
-        </div>
         <!-- Option -->
         <div class="panel-group mgnb" role="tablist" aria-multiselectable="true" bs-collapse ng-if="vm.opts.length > 0">
           <div class="panel panel-default custom-panel" ng-repeat="opt in vm.opts">
             <div class="panel-heading" role="tab">
               <h4 class="panel-title">
-                <a class="undecorated-link" bs-collapse-toggle>Option&nbsp;{{$index + 1}}:&nbsp;{{ opt.title }}
-                  <md-tooltip md-direction="bottom">Click to view detail</md-tooltip>
+                <a class="undecorated-link" bs-collapse-toggle>
+                  {{(opt.title) ? opt.title : 'New option ' + $index}}
                 </a>
               </h4>
             </div>
             <div class="panel-collapse" role="tabpanel" bs-collapse-target>
               <div class="panel-body">
-                <small class="pull-right text-muted">
-                  <span>Added by&nbsp;</span>
-                  <a class="undecorated-link" ui-sref="users.info({userId: opt.user._id})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>
-                  <a ui-sref="users.info({userId: vm.poll.user._id})" ng-if="opt.user"></a>
-                  <span ng-if="!opt.user">Deleted User</span>
-                  <span>&nbsp;on</span>
-                  <span ng-bind="opt.created | date:'mediumDate'"></span>
-                </small><br>
-                <div class="clearfix"></div>
-                <img ng-if="opt.image" src="{{opt.image}}" alt="{{opt.title}}">
-                <p class="text-justify" ng-bind-html="opt.body | nl2br"></p>
+                <input type="text" class="form-control input-large" ng-model="opt.title" placeholder="Enter your option tilte here"/>
               </div>
             </div>
           </div>
         </div>
+        <button class="btn btn-primary pull-right" ng-click="vm.opts.push({})">Add Option</button>
       </div>
     </div>
   </div>

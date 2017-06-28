@@ -49,8 +49,6 @@
     vm.error = null;
     vm.form = {};
     vm.opts = [];
-    vm.classRandoms = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-    vm.optClass = [];
 
     function init() {
       if (vm.poll._id) {
@@ -93,12 +91,6 @@
       PollsApi.findOpts(vm.poll._id)
         .then(res => {
           vm.opts = res.data || [];
-          vm.opts.forEach(opt => {
-            if (opt.status === 1 && !_.contains(vm.optClass, opt.class)) {
-              vm.optClass.push(opt.class);
-            }
-          });
-          console.log(vm.optClass);
         })
         .catch(err => {
           alert('error' + err);

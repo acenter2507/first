@@ -14,8 +14,8 @@
     'PollsService',
     'PollsApi',
     'TagsService',
-    '$modal',
-    '$aside',
+    '$bsModal',
+    '$bsAside',
     'OptsService',
     'Socket',
     'CategorysService'
@@ -30,8 +30,8 @@
     Polls,
     PollsApi,
     Tags,
-    $modal,
-    $aside,
+    $bsModal,
+    $bsAside,
     Opts,
     Socket,
     Categorys

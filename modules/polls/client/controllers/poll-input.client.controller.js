@@ -9,6 +9,7 @@
     '$scope',
     '$state',
     '$window',
+    '$aside',
     'Authentication',
     'pollResolve',
     'PollsService',
@@ -16,14 +17,14 @@
     'TagsService',
     'OptsService',
     'Socket',
-    'CategorysService',
-    '$asideProvider'
+    'CategorysService'
   ];
 
   function PollInputController(
     $scope,
     $state,
     $window,
+    $aside,
     Authentication,
     poll,
     Polls,
@@ -31,8 +32,7 @@
     Tags,
     Opts,
     Socket,
-    Categorys,
-    $aside
+    Categorys
   ) {
     var vm = this;
 

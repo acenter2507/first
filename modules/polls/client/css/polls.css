@@ -26,6 +26,7 @@
   max-width: 100%;
   text-align: justify;
   text-justify: inter-word;
+  font-size: 1.0em;
 }
 
 .side-list-poll:not(:last-child) {

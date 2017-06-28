@@ -8,11 +8,11 @@
       </div>
     </div>
   </div>
-  <pre>{{ vm.poll | json }}</pre>
+  <!--<pre>{{ vm.poll | json }}</pre>-->
   <div class="row ">
     <div class="col-xs-12">
       <div class="card">
-        <div class="pull-right w200">
+        <!--<div class="pull-right w200">
           <div class="select">
             <select ng-model="vm.poll.category" id="category" name="category">
               <option value="" disabled selected>Category</option>
@@ -20,7 +20,7 @@
             </select>
             <div class="select__arrow"></div>
           </div>
-        </div>
+        </div>-->
         <div class="clearfix"></div>
         <div class="control-group">
           <label class="control control--checkbox inline-block">Public
@@ -45,27 +45,6 @@
         />
         <div class="h15"></div>
         <text-angular name="body" ng-model="vm.poll.body"></text-angular>
-        <!--<form name="vm.form.pollForm" class="form-horizontal" ng-submit="vm.save(vm.form.pollForm.$valid)" novalidate>
-          <div class="form-group" show-errors>
-            <label class="control-label" for="category">Category</label>
-            <div class="select" >
-              <select ng-options="category._id as category.name for category in vm.categorys" ng-model="vm.poll.category" id="category" name="category">
-                <option ng-repeat="category in vm.categorys">{{category.name}}</option>
-              </select>
-              <div class="select__arrow"></div>
-            </div>
-            <div ng-messages="vm.form.pollForm.title.$error" role="alert">
-              <p class="help-block error-text" ng-message="required">Category is required.</p>
-            </div>
-          </div>
-          <div class="form-group" show-errors>
-            <label class="control-label" for="body">Body</label>
-            <text-angular name="body" ng-model="vm.poll.body"></text-angular>
-            <div ng-messages="vm.form.pollForm.title.$error" role="alert">
-              <p class="help-block error-text" ng-message="required">Category is required.</p>
-            </div>
-          </div>
-        </form>-->
         <!-- Tags -->
         <div class="h15"></div>
         <div class="form-group" ng-controller="AutocompleteTagController">
@@ -75,7 +54,7 @@
           </tags-input>
         </div>
         <!-- Option -->
-        <!--<div class="panel-group mgnb" role="tablist" aria-multiselectable="true" bs-collapse ng-if="vm.opts.length > 0">
+        <div class="panel-group mgnb" role="tablist" aria-multiselectable="true" bs-collapse ng-if="vm.opts.length > 0">
           <div class="panel panel-default custom-panel" ng-repeat="opt in vm.opts">
             <div class="panel-heading" role="tab">
               <h4 class="panel-title">
@@ -90,7 +69,7 @@
               </div>
             </div>
           </div>
-        </div>-->
+        </div>
         <button class="btn btn-primary pull-right" ng-click="vm.opts.push({})">Add Option</button>
         <div class="clearfix"></div>
       </div>

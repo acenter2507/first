@@ -133,7 +133,9 @@ exports.update = function(req, res) {
       return Promise.all(promises);
     }, handleError)
     .then(_opts => {
-      console.log('result', _opts);
+      _opts.forEach(obj => {
+        console.log('result', obj);
+      });
       promises = [];
       res.jsonp(poll);
     }, handleError);

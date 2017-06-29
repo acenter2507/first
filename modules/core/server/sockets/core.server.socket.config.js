@@ -19,7 +19,7 @@ module.exports = function (io, socket) {
 
   // Emit the status event when a socket client is disconnected
   socket.on('disconnect', function () {
-    if (_.contains(global.socketGuest, socket.id)) {
+    if (_.contains(global.socketGuests, socket.id)) {
       global.socketGuests = _.without(global.socketGuests, _.findWhere(global.socketGuests, socket.id));
       console.log('Has guest offline: ', global.socketGuests.length);
     } else {

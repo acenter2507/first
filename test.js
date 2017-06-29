@@ -18,6 +18,7 @@ app.init(function () {
   - Thêm xóa sửa option
   - Hạn vote
   - Test các trường hợp socket
+  - Lỗi chuyển state không được.
 
 */
 // 1. Khi người vote là guest thì không push socket được.

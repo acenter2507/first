@@ -80,6 +80,14 @@
               <div class="panel-body">
                 <div class="text-body" ta-bind="text" ng-model="opt.body" ta-readonly="true"></div>
               </div>
+              <div class="panel-footer">
+                <div class="pull-right">
+                  <a class="btn btn-info" ng-if="opt.status == 1" ng-click="vm.input_opt(opt)">Edit</a>
+                  <a class="btn btn-danger" ng-if="opt.status == 1" ng-click="vm.remove_opt(opt)">Remove&nbsp;&nbsp;</a>
+                  <a class="btn btn-success" ng-if="opt.status == 2" ng-click="vm.approve_opt(opt)">Approve&nbsp;&nbsp;</a>
+                  <a class="btn btn-warning" ng-if="opt.status == 2" ng-click="vm.reject_opt(opt)">Reject&nbsp;&nbsp;</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>

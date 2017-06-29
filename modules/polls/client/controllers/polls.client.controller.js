@@ -118,7 +118,7 @@
       if (!Socket.socket) {
         Socket.connect();
       }
-      Socket.emit('subscribe', {
+      Socket.emit('subscribe_poll', {
         pollId: vm.poll._id,
         userId: vm.authentication.user._id
       });
@@ -156,9 +156,7 @@
         loadVoteopts(vm.poll._id);
       });
       Socket.on('poll_delete', res => {
-        alert(
-          'This poll has been deleted by owner. Please back to list screen.'
-        );
+        alert('This poll has been deleted by owner. Please back to list screen.');
         $state.go('poll.list');
       });
       Socket.on('poll_update', res => {
@@ -174,7 +172,7 @@
         loadOpts();
       });
       $scope.$on('$destroy', function() {
-        Socket.emit('unsubscribe', {
+        Socket.emit('unsubscribe_poll', {
           pollId: vm.poll._id,
           userId: vm.authentication.user._id
         });
@@ -262,7 +260,6 @@
           }
         })
         .then(res => {
-          console.log('Load comment done');
         })
         .catch(err => {
           alert('error' + err);
@@ -868,7 +865,7 @@
       );
     };
     vm.save_vote = save_vote;
-
+    
     vm.toggle_chart = () => {
       vm.chart.type = vm.chart.type === 'polarArea' ? 
         'pie' : 'polarArea';

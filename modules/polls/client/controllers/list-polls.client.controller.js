@@ -5,6 +5,7 @@
     .controller('PollsListController', PollsListController);
 
   PollsListController.$inject = [
+    'Socket',
     'Authentication',
     'PollsService',
     'PollsApi',
@@ -13,6 +14,7 @@
   ];
 
   function PollsListController(
+    Socket,
     Authentication,
     PollsService,
     PollsApi,
@@ -37,6 +39,18 @@
       loadCategorys();
       // load Hot poll
       loadHotPolls();
+    }
+
+    function initSocket() {
+      if (!Socket.socket) {
+        Socket.connect();
+      }
+      Socket.emit('subscribe_public');
+      Socket.on('poll_create', socketHandlePollCreate);
+      $scope.$on('$destroy', function() {
+        Socket.emit('unsubscribe_public', { pollId: vm.poll._id });
+        Socket.removeListener('poll_create');
+      });
     }
 
     function loadPolls() {
@@ -171,6 +185,10 @@
     // Load Category cho màn hình chính
     function loadCategorys() {
       vm.categorys = Categorys.query();
+    }
+
+    function socketHandlePollCreate(res) {
+      console.log('Has new poll');
     }
   }
 })();

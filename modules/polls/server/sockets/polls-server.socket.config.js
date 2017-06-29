@@ -19,12 +19,19 @@ var path = require('path'),
 // Create the chat configuration
 module.exports = function (io, socket) {
   // On subscribe
-  socket.on('subscribe', req => {
+  socket.on('subscribe_poll', req => {
     socket.join(req.pollId);
   });
+  socket.on('subscribe_public', req => {
+    socket.join('public');
+  });
   // On unsubscribe
-  socket.on('unsubscribe', req => {
+  socket.on('unsubscribe_poll', req => {
     socket.leave(req.pollId);
+  });
+  // On unsubscribe
+  socket.on('unsubscribe_public', req => {
+    socket.leave('public');
   });
   // On comment added
   socket.on('cmt_add', req => {
@@ -150,7 +157,7 @@ module.exports = function (io, socket) {
   });
   // On delete poll
   socket.on('poll_create', req => {
-    io.sockets.in('polls').emit('poll_create');
+    io.sockets.in('public').emit('poll_create');
   });
 
   // io.sockets.connected[socket.id].emit('comment_result', { success: true });

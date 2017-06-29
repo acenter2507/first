@@ -41,6 +41,7 @@
     var vm = this;
 
     vm.authentication = Authentication;
+    vm.isLogged = vm.authentication.user ? true : false;
     vm.poll = poll;
     vm.poll.close = vm.poll.close ? moment(vm.poll.close) : vm.poll.close;
     vm.poll.tags = [];
@@ -51,10 +52,10 @@
     vm.opts = [];
 
     function init() {
+      initSocket();
       if (vm.poll._id) {
         loadOpts();
         loadTags();
-        initSocket();
       }
     }
 
@@ -64,11 +65,10 @@
       if (!Socket.socket) {
         Socket.connect();
       }
-      Socket.emit('subscribe', {
+      Socket.emit('subscribe_poll', {
         pollId: vm.poll._id,
         userId: vm.authentication.user._id
       });
-
       Socket.on('poll_delete', res => {
         alert('This poll has been deleted. Please back to list screen.');
         $state.go('poll.list');

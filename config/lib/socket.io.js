@@ -84,21 +84,22 @@ module.exports = function (app, db) {
         socket.request.session = session;
 
         // Use Passport to populate the user details
-        passport.initialize()(socket.request, {}, function () {
-          passport.session()(socket.request, {}, function () {
+        // passport.initialize()(socket.request, {}, function () {
+        //   passport.session()(socket.request, {}, function () {
             // if (socket.request.user) {
             //   next(null, true);
             // } else {
             //   next(new Error('User is not authenticated'), false);
             // }
-          });
-        });
+        //   });
+        // });
       });
     });
   });
 
   // Add an event listener to the 'connection' event
   io.on('connection', function (socket) {
+    console.log('Has connection');
     config.files.server.sockets.forEach(function (socketConfiguration) {
       require(path.resolve(socketConfiguration))(io, socket);
     });

@@ -112,28 +112,6 @@ exports.update = function(req, res) {
       });
       return Promise.all(promises);
     }, handleError)
-    // .then(() => {
-    //   promises = [];
-    //   opts.forEach(opt => {
-    //     if (opt._id) {
-    //       update_opts.push(opt);
-    //     } else {
-    //       new_opts.push(opt);
-    //     }
-    //   });
-    //   new_opts.forEach(opt => {
-    //     var _opt = new Opt(opt);
-    //     _opt.user = req.user;
-    //     _opt.poll = poll;
-    //     promises.push(_opt.save());
-    //   });
-    //   return Promise.all(promises);
-    // })
-    // .then(() => {
-    //   update_opts.forEach(opt => {
-
-    //   });
-    // })
     .then(() => {
       promises = [];
       opts.forEach(opt => {
@@ -162,9 +140,6 @@ exports.update = function(req, res) {
       return Promise.all(promises);
     }, handleError)
     .then(_opts => {
-      _opts.forEach(obj => {
-        console.log('result', obj);
-      });
       promises = [];
       res.jsonp(poll);
     }, handleError);

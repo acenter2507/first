@@ -113,19 +113,18 @@ exports.update = function(req, res) {
     }, handleError)
     .then(() => {
       promises = [];
-      var _opt;
       opts.forEach(opt => {
         if (opt._id) {
-          _opt = new Opt(opt);
-          promises.push(_opt.save());
-          // promises.push(() => {
-          //   Opt.findById(opt._id).exec((err, _opt) => {
-          //     _opt = _.extend(_opt, opt);
-          //     return _opt.save();
-          //   });
-          // });
+          var _opt = new Opt(opt);
+          promises.push(() => {
+            Opt.findById(opt._id).exec()
+            .then(_opt => {
+              _opt = _.extend(_opt, opt);
+              return _opt.save();
+            });
+          });
         } else {
-          _opt = new Opt(opt);
+          var _opt = new Opt(opt);
           _opt.user = req.user;
           _opt.poll = poll;
           promises.push(_opt.save());
@@ -140,7 +139,6 @@ exports.update = function(req, res) {
     }, handleError);
 
   function handleError(err) {
-    console.log(err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });

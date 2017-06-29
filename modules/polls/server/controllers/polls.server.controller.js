@@ -98,8 +98,7 @@ exports.update = function(req, res) {
   // var update_opts = [];
   // var new_opts = [];
   var promises = [];
-  poll
-    .save()
+  poll.save()
     .then(_poll => {
       poll = _poll;
       return Polltag.remove({ poll: _poll._id });
@@ -139,7 +138,6 @@ exports.update = function(req, res) {
       promises = [];
       opts.forEach(opt => {
         if (opt._id) {
-          var _opt = new Opt(opt);
           promises.push(
             Opt.update(
               {

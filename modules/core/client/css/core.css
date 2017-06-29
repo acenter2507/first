@@ -584,7 +584,7 @@ a:hover .header-profile-image {
 }
 
 .w100 {
-  width: 100px;
+  width: 100px !important;
 }
 
 .w150 {

@@ -10,6 +10,7 @@ module.exports = function (io, socket) {
     }
   });
   socket.on('guest', function (req) {
+    console.log('guest');
     if (!_.contains(global.socketGuests, socket.id)) {
       global.socketGuests.push(socket.id);
       console.log('Has guest online: ', global.socketGuests.length);

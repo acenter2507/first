@@ -17,9 +17,9 @@ app.init(function () {
 1. Màn hình create poll
   - Thêm xóa sửa option
   - Hạn vote
-  - Test các trường hợp socket
+  - Test các trường hợp socket => done
   - Lỗi chuyển state không được.
-  - Sửa option không được.
+  - Sửa option không được. => done
 
 */
 // 1. Khi người vote là guest thì không push socket được.

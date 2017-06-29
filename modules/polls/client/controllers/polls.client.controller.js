@@ -251,7 +251,7 @@
           vm.page += 1;
           vm.busy = false;
           // Load thông tin like cho các comment mới
-          if (vm.authentication.user) {
+          if (vm.isLogged) {
             var promises = [];
             vm.new_cmts.forEach(cmt => {
               promises.push(loadLikeCmt(cmt));
@@ -270,9 +270,12 @@
       return new Promise((resolve, reject) => {
         Cmts.get({ cmtId: cmtId })
           .$promise.then(_cmt => {
-            return loadLikeCmt(_cmt);
+            if (vm.isLogged) {
+              return loadLikeCmt(_cmt);
+            }
           })
           .then(_cmt => {
+            console.log(_cmt);
             var item = _.findWhere(vm.cmts, { _id: _cmt._id });
             if (item) {
               _.extend(_.findWhere(vm.cmts, { _id: _cmt._id }), _cmt);
@@ -301,7 +304,7 @@
     }
 
     function loadPollLike() {
-      if (!vm.authentication.user) {
+      if (!vm.isLogged) {
         vm.like = {};
         return false;
       }
@@ -454,7 +457,7 @@
     // LIKES
     var cnt = 0;
     vm.like_poll = () => {
-      if (!vm.authentication.user) {
+      if (!vm.isLogged) {
         return alert('You must login to like this poll.');
       }
       if (vm.poll.isCurrentUserOwner) {
@@ -524,7 +527,7 @@
     };
 
     vm.dislike_poll = () => {
-      if (!vm.authentication.user) {
+      if (!vm.isLogged) {
         return alert('You must login to dislike this poll.');
       }
       if (vm.poll.isCurrentUserOwner) {
@@ -690,7 +693,7 @@
     };
 
     vm.like_cmt = cmt => {
-      if (!vm.authentication.user) {
+      if (!vm.isLogged) {
         return alert('You must login to like this poll.');
       }
       if (vm.authentication.user._id === cmt.user._id) {
@@ -758,7 +761,7 @@
     };
 
     vm.dislike_cmt = cmt => {
-      if (!vm.authentication.user) {
+      if (!vm.isLogged) {
         return alert('You must login to dislike this poll.');
       }
       if (vm.authentication.user._id === cmt.user._id) {

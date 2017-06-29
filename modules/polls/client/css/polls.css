@@ -374,3 +374,11 @@ div.materialpicker-white.selected {
   margin-bottom: 0;
   font-size: 14px;
 }
+.form-poll-setting {
+  display: inline-block;
+  margin-left: 12px;
+  height: 50px;
+  padding: 5px;
+  text-align: center;
+  vertical-align: auto;
+}

@@ -50,7 +50,7 @@
       Socket.emit('subscribe_public');
       Socket.on('poll_create', socketHandlePollCreate);
       $scope.$on('$destroy', function() {
-        Socket.emit('unsubscribe_public', { pollId: vm.poll._id });
+        Socket.emit('unsubscribe_public');
         Socket.removeListener('poll_create');
       });
     }

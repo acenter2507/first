@@ -69,7 +69,7 @@
         <!-- Option -->
         <div class="panel-group mgnb" role="tablist" aria-multiselectable="true" bs-collapse ng-if="vm.opts.length > 0">
           <div class="panel panel-default custom-panel" ng-repeat="opt in vm.opts">
-            <div class="panel-heading" role="tab">
+            <div ng-class="{'panel-heading': true, 'public': (opt.status == 1), 'watting': (opt.status == 2)}" role="tab">
               <h4 class="panel-title">
                 <a class="undecorated-link" bs-collapse-toggle>
                   {{ (opt.title) ? opt.title : 'New option ' + ($index + 1) }}

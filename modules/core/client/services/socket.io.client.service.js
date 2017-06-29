@@ -11,7 +11,7 @@ angular.module('core').service('Socket', ['Authentication', '$state', '$timeout'
         this.socket.emit('init', { user: Authentication.user._id });
       } else {
         console.log('Emit with guest');
-        this.socket.emit('guest');
+        this.socket.emit('guest', {});
       }
     };
     this.connect();

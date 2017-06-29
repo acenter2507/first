@@ -5,6 +5,7 @@
     .controller('PollsListController', PollsListController);
 
   PollsListController.$inject = [
+    '$scope',
     'Socket',
     'Authentication',
     'PollsService',
@@ -14,6 +15,7 @@
   ];
 
   function PollsListController(
+    $scope,
     Socket,
     Authentication,
     PollsService,

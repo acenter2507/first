@@ -14,7 +14,7 @@
       {
         update: {
           method: 'PUT',
-          isArray: false;
+          isArray: false
         }
       }
     );

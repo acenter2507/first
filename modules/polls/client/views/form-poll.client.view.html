@@ -16,7 +16,14 @@
       <div class="card">
         <div>
            <div class="inline-block">
-             asdasdasdasd
+          <!-- Trường hợp create poll -->
+            <div class="select" ng-if="!vm.poll._id">
+              <select ng-model="vm.poll.category" id="category" name="category">
+                <option value="" selected>Category</option>
+                <option ng-repeat="category in vm.categorys" value="{{category._id}}">{{category.name}}</option>
+              </select>
+              <div class="select__arrow"></div>
+            </div>
            </div>
            <div class="inline-block">
              aaaaaaaaaaaaaaaa
@@ -27,14 +34,6 @@
           <!-- Trường hợp edit poll -->
           <div class="select" ng-if="vm.poll._id">
             <select ng-model="vm.poll.category._id" id="category" name="category" ng-options="category._id as category.name for category in vm.categorys"></select>
-            <div class="select__arrow"></div>
-          </div>
-          <!-- Trường hợp create poll -->
-          <div class="select" ng-if="!vm.poll._id">
-            <select ng-model="vm.poll.category" id="category" name="category">
-              <option value="" selected>Category</option>
-              <option ng-repeat="category in vm.categorys" value="{{category._id}}">{{category.name}}</option>
-            </select>
             <div class="select__arrow"></div>
           </div>
           <p class="text-danger" ng-hide="vm.validateCategory()">Category is required</p>

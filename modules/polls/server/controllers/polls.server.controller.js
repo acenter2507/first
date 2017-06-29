@@ -114,11 +114,12 @@ exports.update = function(req, res) {
     .then(() => {
       promises = [];
       opts.forEach(opt => {
+        console.log('before change', opt);
         if (opt._id) {
           promises.push(() => {
             Opt.findById(opt._id).exec((err, _opt) => {
               _opt = _.extend(_opt, opt);
-              console.log(_opt);
+              console.log('after change', _opt);
               return _opt.save();
             });
           });
@@ -132,7 +133,7 @@ exports.update = function(req, res) {
       return Promise.all(promises);
     }, handleError)
     .then(_opts => {
-      console.log(res);
+      console.log('result', _opts);
       promises = [];
       res.jsonp(_opts);
     }, handleError);

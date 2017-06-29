@@ -163,11 +163,6 @@
   margin-bottom: 15px;
   cursor: pointer;
 }
-.custom--checkbox {
-  font-weight: normal;
-  margin-bottom: 0;
-  font-size: 14px;
-}
 .control input {
   position: absolute;
   z-index: -1;
@@ -373,4 +368,9 @@ div.materialpicker-white.selected {
 }
 .dropdown-menu.custom-dropdown li{
   padding: 5px 12px;
+}
+.custom--checkbox {
+  font-weight: normal;
+  margin-bottom: 0;
+  font-size: 14px;
 }

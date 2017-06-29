@@ -118,6 +118,7 @@ exports.update = function(req, res) {
           promises.push(() => {
             Opt.findById(opt._id).exec((err, _opt) => {
               _opt = _.extend(_opt, opt);
+              console.log(_opt);
               return _opt.save();
             });
           });

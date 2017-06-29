@@ -15,7 +15,7 @@
     <div class="col-xs-12">
       <div class="card">
         <!-- Category -->
-        <div class="col-xs-9 col-sm-10 col-md-10 col-lg-10">
+        <div class="col-xs-9 col-sm-10 col-md-10 col-lg-10 pdn">
           <div class="w200">
             <!-- Trường hợp edit poll -->
             <div class="select" ng-if="vm.poll._id">
@@ -33,11 +33,11 @@
             <p class="text-danger" ng-hide="vm.validateCategory()">Category is required</p>
           </div>
         </div>
-        <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
+        <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 pdn">
           <span class="pull-right">
-            <a bs-dropdown aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-cog fa-2x"></i>
-            </a>
+              <i class="fa fa-cog fa-2x" bs-dropdown aria-haspopup="true" aria-expanded="false" data-placement="bottom"></i>
+            <!--<a >
+            </a>-->
             <ul class="dropdown-menu" role="menu">
               <li>
                 <label class="control control--checkbox inline-block">Public

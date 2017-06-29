@@ -114,8 +114,8 @@ exports.update = function(req, res) {
     .then(() => {
       promises = [];
       opts.forEach(opt => {
-        console.log('before change', opt);
         if (opt._id) {
+          console.log('before change', opt);
           promises.push(() => {
             Opt.findById(opt._id).exec((err, _opt) => {
               _opt = _.extend(_opt, opt);
@@ -135,7 +135,7 @@ exports.update = function(req, res) {
     .then(_opts => {
       console.log('result', _opts);
       promises = [];
-      res.jsonp(_opts);
+      res.jsonp(poll);
     }, handleError);
 
   function handleError(err) {

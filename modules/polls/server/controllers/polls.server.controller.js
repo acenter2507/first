@@ -128,12 +128,12 @@ exports.update = function(req, res) {
           promises.push(_opt.save());
         }
       });
-      console.log(promises);
       return Promise.all(promises);
     }, handleError)
-    .then(() => {
+    .then(_opts => {
+      console.log(res);
       promises = [];
-      res.jsonp(poll);
+      res.jsonp(_opts);
     }, handleError);
 
   function handleError(err) {

@@ -14,9 +14,8 @@
   <div class="row ">
     <div class="col-xs-12">
       <div class="card">
-        <div>
-           <div class="form-poll-category">
-            <!-- Category -->
+        <!-- Category -->
+        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 pdn">
             <!-- Trường hợp edit poll -->
             <div class="select" ng-if="vm.poll._id">
               <select ng-model="vm.poll.category._id" id="category" name="category" ng-options="category._id as category.name for category in vm.categorys"></select>
@@ -30,39 +29,40 @@
               </select>
               <div class="select__arrow"></div>
             </div>
-            <span class="text-danger" ng-hide="vm.validateCategory()">Category is required</span>
-           </div>
-           <div class="form-poll-setting">
-          <a class="undecorated-link" bs-dropdown aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-cog fa-2x"></i>
-          </a>
-           <ul class="dropdown-menu custom-dropdown" role="menu">
-            <li>
-              <label class="control control--checkbox custom--checkbox">Public
-                <input type="checkbox" name="isPublic" ng-model="vm.poll.isPublic"/>
-                <div class="control__indicator"></div>
-              </label>
-            </li>
-            <li>
-              <label class="control control--checkbox custom--checkbox">Allow guest vote
-                <input type="checkbox" name="allow_guest" ng-model="vm.poll.allow_guest"/>
-                <div class="control__indicator"></div>
-              </label>
-            </li>
-            <li>
-              <label class="control control--checkbox custom--checkbox">Allow multiple vote
-                <input type="checkbox" name="allow_multiple" ng-model="vm.poll.allow_multiple"/>
-                <div class="control__indicator"></div>
-              </label>
-            </li>
-            <li>
-              <label class="control control--checkbox custom--checkbox">Allow members suggest option
-                <input type="checkbox" name="allow_add" ng-model="vm.poll.allow_add"/>
-                <div class="control__indicator"></div>
-              </label>
-            </li>
-          </ul>
-           </div>
+            <p class="text-danger" ng-hide="vm.validateCategory()">Category is required</p>
+        </div>
+        <div class="col-xs-6 col-sm-8 col-md-9 col-lg-10 pdn">
+          <div class="pull-left">
+            <a class="undecorated-link" bs-dropdown aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-cog fa-2x"></i>
+            </a>
+             <ul class="dropdown-menu custom-dropdown" role="menu">
+              <li>
+                <label class="control control--checkbox custom--checkbox">Public
+                  <input type="checkbox" name="isPublic" ng-model="vm.poll.isPublic"/>
+                  <div class="control__indicator"></div>
+                </label>
+              </li>
+              <li>
+                <label class="control control--checkbox custom--checkbox">Allow guest vote
+                  <input type="checkbox" name="allow_guest" ng-model="vm.poll.allow_guest"/>
+                  <div class="control__indicator"></div>
+                </label>
+              </li>
+              <li>
+                <label class="control control--checkbox custom--checkbox">Allow multiple vote
+                  <input type="checkbox" name="allow_multiple" ng-model="vm.poll.allow_multiple"/>
+                  <div class="control__indicator"></div>
+                </label>
+              </li>
+              <li>
+                <label class="control control--checkbox custom--checkbox">Allow members suggest option
+                  <input type="checkbox" name="allow_add" ng-model="vm.poll.allow_add"/>
+                  <div class="control__indicator"></div>
+                </label>
+              </li>
+            </ul>
+          </div>
         </div>
         <div class="clearfix h20"></div>
         <!-- Checkbox -->

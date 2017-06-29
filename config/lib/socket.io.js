@@ -82,17 +82,17 @@ module.exports = function (app, db) {
 
         // Set the Socket.io session information
         socket.request.session = session;
-        next(null, true);
         // Use Passport to populate the user details
-        // passport.initialize()(socket.request, {}, function () {
-        //   passport.session()(socket.request, {}, function () {
-        //     if (socket.request.user) {
-        //       next(null, true);
-        //     } else {
-        //       next(new Error('User is not authenticated'), false);
-        //     }
-        //   });
-        // });
+        passport.initialize()(socket.request, {}, function () {
+          passport.session()(socket.request, {}, function () {
+            next(null, true);
+            // if (socket.request.user) {
+            //   next(null, true);
+            // } else {
+            //   next(new Error('User is not authenticated'), false);
+            // }
+          });
+        });
       });
     });
   });

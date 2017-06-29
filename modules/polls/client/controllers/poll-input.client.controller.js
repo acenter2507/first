@@ -110,10 +110,11 @@
     }
 
     function isCanUpdate() {
-      const update = moment(vm.poll.updated);
-      const now = moment(new Date());
-      var duration = moment.duration(now.diff(update)).asHours();
-      return duration >= 1;
+      return true;
+      // const update = moment(vm.poll.updated);
+      // const now = moment(new Date());
+      // var duration = moment.duration(now.diff(update)).asHours();
+      // return duration >= 1;
     }
     // Function
     vm.remove = () => {

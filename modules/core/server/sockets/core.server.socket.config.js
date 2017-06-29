@@ -4,6 +4,7 @@ const _ = require('underscore');
 // Create the chat configuration
 module.exports = function (io, socket) {
   socket.on('init', function (req) {
+    console.log('guest');
     if (!_.contains(global.socketUsers, { socket: socket.id })) {
       global.socketUsers.push({ socket: socket.id, user: req.user });
       console.log('Has user online: ', global.socketUsers.length);

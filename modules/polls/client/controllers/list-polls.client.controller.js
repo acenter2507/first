@@ -35,7 +35,7 @@
     init();
 
     function init() {
-      //loadPolls();
+      initSocket();
       loadCategorys();
       // load Hot poll
       loadHotPolls();

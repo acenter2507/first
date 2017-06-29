@@ -84,15 +84,15 @@ module.exports = function (app, db) {
         socket.request.session = session;
 
         // Use Passport to populate the user details
-        passport.initialize()(socket.request, {}, function () {
-          passport.session()(socket.request, {}, function () {
-            if (socket.request.user) {
-              next(null, true);
-            } else {
-              next(new Error('User is not authenticated'), false);
-            }
-          });
-        });
+        // passport.initialize()(socket.request, {}, function () {
+        //   passport.session()(socket.request, {}, function () {
+        //     if (socket.request.user) {
+        //       next(null, true);
+        //     } else {
+        //       next(new Error('User is not authenticated'), false);
+        //     }
+        //   });
+        // });
       });
     });
   });

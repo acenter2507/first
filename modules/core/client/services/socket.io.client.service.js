@@ -1,11 +1,21 @@
 'use strict';
 
 // Create the Socket.io wrapper service
-angular.module('core').service('Socket', ['$location', 'Authentication', '$state', '$timeout', 'socketFactory',
-  function ($location, Authentication, $state, $timeout, socketFactory) {
+angular.module('core').service('Socket', [
+  '$location',
+  'Authentication',
+  '$state',
+  '$timeout',
+  'socketFactory',
+  function($location, Authentication, $state, $timeout, socketFactory) {
     // Connect to Socket.io server
-    this.connect = function () {
-      this.socket = socketFactory();
+    this.connect = function() {
+      this.socket = socketFactory({
+        prefix: '',
+        ioSocket: io.connect(
+          $location.protocol() + '://' + $location.host() + ':' + $location.port()
+        )
+      });
       if (Authentication.user) {
         this.socket.emit('init', { user: Authentication.user._id });
       } else {
@@ -15,10 +25,10 @@ angular.module('core').service('Socket', ['$location', 'Authentication', '$state
     this.connect();
 
     // Wrap the Socket.io 'on' method
-    this.on = function (eventName, callback) {
+    this.on = function(eventName, callback) {
       if (this.socket) {
-        this.socket.on(eventName, function (data) {
-          $timeout(function () {
+        this.socket.on(eventName, function(data) {
+          $timeout(function() {
             callback(data);
           });
         });
@@ -26,14 +36,14 @@ angular.module('core').service('Socket', ['$location', 'Authentication', '$state
     };
 
     // Wrap the Socket.io 'emit' method
-    this.emit = function (eventName, data) {
+    this.emit = function(eventName, data) {
       if (this.socket) {
         this.socket.emit(eventName, data);
       }
     };
 
     // Wrap the Socket.io 'removeListener' method
-    this.removeListener = function (eventName) {
+    this.removeListener = function(eventName) {
       if (this.socket) {
         this.socket.removeListener(eventName);
       }

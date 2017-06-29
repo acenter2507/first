@@ -12,6 +12,7 @@ var ApplicationConfiguration = (function() {
     'ui.router',
     'ui.bootstrap',
     'ui.utils',
+    'btford.socket-io',
     'angularFileUpload',
     'ngTagsInput',
     'ngAria',

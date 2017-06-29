@@ -380,8 +380,10 @@ div.materialpicker-white.selected {
   height: 50px;
   padding: 5px;
   text-align: center;
+  background-color: blue;
 }
 .form-poll-category {
   display: inline-block;
   width: 200px;
+  background-color: yellow;
 }

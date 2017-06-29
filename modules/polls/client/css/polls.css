@@ -375,14 +375,14 @@ div.materialpicker-white.selected {
   font-size: 14px;
 }
 .form-poll-setting {
-  display: inline-block;
+  display: inline;
   margin-left: 12px;
   height: 70px;
   width: 50px;
   background-color: blue;
 }
 .form-poll-category {
-  display: inline-block;
+  display: inline;
   height: 70px;
   width: 200px;
   background-color: yellow;

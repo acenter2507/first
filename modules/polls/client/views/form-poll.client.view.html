@@ -75,19 +75,24 @@
                   {{ (opt.title) ? opt.title : 'New option ' + ($index + 1) }}
                 </a>
               </h4>
+              <small ng-if="opt.status == 2">
+                Add by&nbsp;
+                <a class="undecorated-link" ui-sref="users.info({userId: opt.user._id})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>
+                <span ng-if="!opt.user">Deleted User</span>
+                <span>&nbsp;on&nbsp;</span>
+                <span ng-bind="opt.created | date:'mediumDate'"></span>
+              </small>
             </div>
             <div class="panel-collapse" role="tabpanel" bs-collapse-target>
               <div class="panel-body">
-                <div class="text-body" ta-bind="text" ng-model="opt.body" ta-readonly="true"></div>
-              </div>
-              <div class="panel-footer">
-                <div class="pull-right">
-                  <a class="btn btn-info" ng-if="opt.status == 1" ng-click="vm.input_opt(opt)">Edit</a>
-                  <a class="btn btn-danger" ng-if="opt.status == 1" ng-click="vm.remove_opt(opt)">Remove&nbsp;&nbsp;</a>
-                  <a class="btn btn-success" ng-if="opt.status == 2" ng-click="vm.approve_opt(opt)">Approve&nbsp;&nbsp;</a>
-                  <a class="btn btn-warning" ng-if="opt.status == 2" ng-click="vm.reject_opt(opt)">Reject&nbsp;&nbsp;</a>
+                <div class="pull-right mg10b">
+                  <a class="btn btn-info btn-sm" ng-if="opt.status == 1" ng-click="vm.input_opt(opt)">Edit</a>
+                  <a class="btn btn-danger btn-sm" ng-if="opt.status == 1" ng-click="vm.remove_opt(opt)">Remove</a>
+                  <a class="btn btn-success btn-sm" ng-if="opt.status == 2" ng-click="vm.approve_opt(opt)">Approve</a>
+                  <a class="btn btn-warning btn-sm" ng-if="opt.status == 2" ng-click="vm.reject_opt(opt)">Reject</a>
                 </div>
                 <div class="clearfix"></div>
+                <div class="text-body" ta-bind="text" ng-model="opt.body" ta-readonly="true"></div>
               </div>
             </div>
           </div>

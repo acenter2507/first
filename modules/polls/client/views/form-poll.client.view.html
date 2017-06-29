@@ -7,6 +7,30 @@
       <li><a href="#anotherAction"><i class="fa fa-download"></i>&nbsp;Some action</a></li>
       <li><a ng-click="$alert('Holy guacamole')"><i class="fa fa-globe"></i>&nbsp;Display an alert</a></li>
       <li ng-repeat="i in ['Foo', 'Bar', 'Baz']"><a ng-href="#action{{i}}"><i class="fa fa-chevron-right"></i>&nbsp;{{i}}</a></li>
+              <li>
+                <label class="control control--checkbox custom--checkbox">Public
+                  <input type="checkbox" name="isPublic" ng-model="vm.poll.isPublic"/>
+                  <div class="control__indicator"></div>
+                </label>
+              </li>
+              <li>
+                <label class="control control--checkbox custom--checkbox">Allow guest vote
+                  <input type="checkbox" name="allow_guest" ng-model="vm.poll.allow_guest"/>
+                  <div class="control__indicator"></div>
+                </label>
+              </li>
+              <li>
+                <label class="control control--checkbox custom--checkbox">Allow multiple vote
+                  <input type="checkbox" name="allow_multiple" ng-model="vm.poll.allow_multiple"/>
+                  <div class="control__indicator"></div>
+                </label>
+              </li>
+              <li>
+                <label class="control control--checkbox custom--checkbox">Allow members suggest option
+                  <input type="checkbox" name="allow_add" ng-model="vm.poll.allow_add"/>
+                  <div class="control__indicator"></div>
+                </label>
+              </li>
     </ul>
   <!-- Toolbar -->
   <div class="row mg20t mg20b">

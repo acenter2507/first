@@ -11,10 +11,10 @@ angular.module('core').service('Socket', [
     // Connect to Socket.io server
     this.connect = function() {
       this.socket = socketFactory({
-        prefix: '',
-        ioSocket: io.connect(
-          $location.protocol() + '://' + $location.host() + ':' + $location.port()
-        )
+        // prefix: '',
+        // ioSocket: io.connect(
+        //   $location.protocol() + '://' + $location.host() + ':' + $location.port()
+        // )
       });
       if (Authentication.user) {
         this.socket.emit('init', { user: Authentication.user._id });

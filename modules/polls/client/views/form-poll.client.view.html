@@ -34,7 +34,7 @@
           </div>
           <div class="col-xs-6 col-sm-8 col-md-9 col-lg-10">
             <div class="pull-left mg5t">
-              <a class="undecorated-link" bs-dropdown aria-haspopup="true" aria-expanded="false">
+              <a class="undecorated-link" bs-dropdown aria-haspopup="true" aria-expanded="false" data-trigger="manual">
                 <i class="fa fa-cog fa-2x"></i>
               </a>
                <ul class="dropdown-menu custom-dropdown" role="menu">
@@ -67,19 +67,6 @@
           </div>
         </div>
         <div class="clearfix h20"></div>
-        <!-- Checkbox -->
-        <!--<div class="control-group">
-          <label class="control control--checkbox inline-block mg20l">Allow guest vote
-            <input type="checkbox" name="allow_guest" ng-model="vm.poll.allow_guest"/>
-            <div class="control__indicator"></div>
-            <md-tooltip md-direction="bottom">Everyone can vote your poll</md-tooltip>
-          </label>
-          <label class="control control--checkbox inline-block mg20l">Allow members suggest option
-            <input type="checkbox" name="allow_add" ng-model="vm.poll.allow_add"/>
-            <div class="control__indicator"></div>
-            <md-tooltip md-direction="bottom">You will get suggestions from members</md-tooltip>
-          </label>
-        </div>-->
         <!-- Title -->
         <input type="text" class="form-control input-large" name="title" ng-model="vm.poll.title" placeholder="Enter your poll tilte here"
         />

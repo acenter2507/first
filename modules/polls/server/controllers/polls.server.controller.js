@@ -115,14 +115,14 @@ exports.update = function(req, res) {
       promises = [];
       opts.forEach(opt => {
         if (opt._id) {
-          console.log('before change', opt);
-          promises.push(() => {
-            Opt.findById(opt._id).exec((err, _opt) => {
-              _opt = _.extend(_opt, opt);
-              console.log('after change', _opt);
-              return _opt.save();
-            });
-          });
+          var _opt = new Opt(opt);
+          promises.push(_opt.save());
+          // promises.push(() => {
+          //   Opt.findById(opt._id).exec((err, _opt) => {
+          //     _opt = _.extend(_opt, opt);
+          //     return _opt.save();
+          //   });
+          // });
         } else {
           var _opt = new Opt(opt);
           _opt.user = req.user;

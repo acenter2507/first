@@ -16,6 +16,7 @@
       <div class="card">
         <div>
            <div class="inline-block">
+            <!-- Category -->
             <!-- Trường hợp edit poll -->
             <div class="select" ng-if="vm.poll._id">
               <select ng-model="vm.poll.category._id" id="category" name="category" ng-options="category._id as category.name for category in vm.categorys"></select>
@@ -32,13 +33,6 @@
             <p class="text-danger" ng-hide="vm.validateCategory()">Category is required</p>
            </div>
            <div class="inline-block">
-             aaaaaaaaaaaaaaaa
-           </div>
-        </div>
-        <!-- Category -->
-        <div class="inline w200">
-        </div>
-        <div class="inline w100">
           <a class="undecorated-link" bs-dropdown aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-cog fa-2x"></i>
           </a>
@@ -68,6 +62,7 @@
               </label>
             </li>
           </ul>
+           </div>
         </div>
         <div class="clearfix h20"></div>
         <!-- Checkbox -->

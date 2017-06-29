@@ -222,14 +222,19 @@
 
     function loadLikeCmt(cmt) {
       return new Promise((resolve, reject) => {
-        CmtsApi.findLike(cmt._id)
-          .then(res => {
-            cmt.like = res.data || {};
-            return resolve(cmt);
-          })
-          .catch(err => {
-            return reject('error' + err);
-          });
+        if (!vm.isLogged) {
+          cmt.like = {};
+          return resolve(cmt);
+        } else {
+          CmtsApi.findLike(cmt._id)
+            .then(res => {
+              cmt.like = res.data || {};
+              return resolve(cmt);
+            })
+            .catch(err => {
+              return reject('error' + err);
+            });
+        }
       });
     }
 
@@ -251,13 +256,11 @@
           vm.page += 1;
           vm.busy = false;
           // Load thông tin like cho các comment mới
-          if (vm.isLogged) {
-            var promises = [];
-            vm.new_cmts.forEach(cmt => {
-              promises.push(loadLikeCmt(cmt));
-            });
-            return Promise.all(promises);
-          }
+          var promises = [];
+          vm.new_cmts.forEach(cmt => {
+            promises.push(loadLikeCmt(cmt));
+          });
+          return Promise.all(promises);
         })
         .then(res => {
         })
@@ -270,12 +273,9 @@
       return new Promise((resolve, reject) => {
         Cmts.get({ cmtId: cmtId })
           .$promise.then(_cmt => {
-            if (vm.isLogged) {
-              return loadLikeCmt(_cmt);
-            }
+            return loadLikeCmt(_cmt);
           })
           .then(_cmt => {
-            console.log(_cmt);
             var item = _.findWhere(vm.cmts, { _id: _cmt._id });
             if (item) {
               _.extend(_.findWhere(vm.cmts, { _id: _cmt._id }), _cmt);

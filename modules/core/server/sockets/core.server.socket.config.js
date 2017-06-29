@@ -3,21 +3,10 @@
 const _ = require('underscore');
 // Create the chat configuration
 module.exports = function (io, socket) {
-  io.on('connection', function(socket) {
-    console.log('has connection *******************');
-  });
   socket.on('init', function (req) {
-    console.log('init');
     if (!_.contains(global.socketUsers, { socket: socket.id })) {
       global.socketUsers.push({ socket: socket.id, user: req.user });
       console.log('Has user online: ', global.socketUsers.length);
-    }
-  });
-  socket.on('xxxxxx', function () {
-    console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
-    if (!_.contains(global.socketGuests, socket.id)) {
-      global.socketGuests.push(socket.id);
-      console.log('Has guest online: ', global.socketGuests.length);
     }
   });
 

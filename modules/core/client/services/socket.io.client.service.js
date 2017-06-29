@@ -8,6 +8,8 @@ angular.module('core').service('Socket', ['Authentication', '$state', '$timeout'
       this.socket = io();
       if (Authentication.user) {
         this.socket.emit('init', { user: Authentication.user._id });
+      } else {
+        this.socket.emit('guest');
       }
     };
     this.connect();

@@ -31,7 +31,7 @@
           </div>
           <p class="text-danger" ng-hide="vm.validateCategory()">Category is required</p>
         </div>
-        <div class="clearfix h25"></div>
+        <div class="clearfix h20"></div>
         <!-- Checkbox -->
         <div class="control-group">
           <label class="control control--checkbox inline-block">Public
@@ -55,24 +55,46 @@
             <md-tooltip md-direction="bottom">You will get suggestions from members</md-tooltip>
           </label>
         </div>
-        <div class="h25"></div>
+        <div class="h20"></div>
         <!-- Title -->
         <input type="text" class="form-control input-large" name="title" ng-model="vm.poll.title" placeholder="Enter your poll tilte here"
         />
         <p class="text-danger" ng-hide="vm.validateTitle()">You must type somthing for title</p>
-        <div class="h25"></div>
+        <div class="h20"></div>
         <!-- Body -->
         <text-angular class="text-body" ng-model="vm.poll.body"></text-angular>
         <p class="text-danger" ng-hide="vm.validateBody()">You must type somthing for body</p>
-        <div class="h25"></div>
+        <div class="h20"></div>
         <!-- Tags -->
-        <div class="form-group" ng-controller="AutocompleteTagController">
-          <tags-input ng-model="vm.poll.tags" display-property="name" placeholder="{{placeholder}}" add-from-autocomplete-only="true"
-            replace-spaces-with-dashes="false" min-length="1" enforce-max-tags class="tags-custom">
-            <auto-complete source="loadItems($query)" min-length="1" debounce-delay="0" max-results="10"></auto-complete>
-          </tags-input>
+        <div class="panel-group mgnb" role="tablist" bs-collapse>
+          <div class="panel panel-default custom-panel" ng-repeat="opt in vm.opts">
+            <div class="panel-heading public" role="tab">
+              <h4 class="panel-title">
+                <a class="undecorated-link" bs-collapse-toggle>Other</a>
+              </h4>
+            </div>
+            <div class="panel-collapse" role="tabpanel" bs-collapse-target>
+              <div class="panel-body">
+                <div class="form-group">
+                  <label class="control-label" for="close">Stop voting at:</label>
+                  <input class="form-control" moment-picker="vm.poll.close" ng-model="vm.poll.close" format="YYYY/MM/DD HH:mm" 
+                    start-view="month" placeholder="Select a date...">
+                </div>
+                <div class="form-group" ng-controller="AutocompleteTagController">
+                  <label class="form-label" for="#">Tags</label>
+                  <tags-input ng-model="vm.poll.tags" display-property="name" placeholder="{{placeholder}}" add-from-autocomplete-only="true"
+                    replace-spaces-with-dashes="false" min-length="1" enforce-max-tags class="tags-custom">
+                    <auto-complete source="loadItems($query)" min-length="1" debounce-delay="0" max-results="10"></auto-complete>
+                  </tags-input>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="h25"></div>
+        <div class="h20"></div>
+        <button class="btn btn-primary pull-right" ng-click="vm.input_opt()">Add Option</button>
+        <div class="clearfix"></div>
+        <div class="h20"></div>
         <!-- Option -->
         <div class="panel-group mgnb" role="tablist" aria-multiselectable="true" bs-collapse ng-if="vm.opts.length > 0">
           <div class="panel panel-default custom-panel" ng-repeat="opt in vm.opts">
@@ -104,9 +126,6 @@
             </div>
           </div>
         </div>
-        <div class="h25"></div>
-        <button class="btn btn-primary pull-right" ng-click="vm.input_opt()">Add Option</button>
-        <div class="clearfix"></div>
       </div>
     </div>
   </div>

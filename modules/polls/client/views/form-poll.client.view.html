@@ -35,21 +35,25 @@
         <!-- Checkbox -->
         <div class="control-group">
           <label class="control control--checkbox inline-block">Public
-              <input type="checkbox" name="isPublic" ng-model="vm.poll.isPublic"/>
-              <div class="control__indicator"></div>
-            </label>
+            <input type="checkbox" name="isPublic" ng-model="vm.poll.isPublic"/>
+            <div class="control__indicator"></div>
+            <md-tooltip md-direction="bottom">Everyone can see your poll</md-tooltip>
+          </label>
           <label class="control control--checkbox inline-block mg20l">Allow multiple vote
-              <input type="checkbox" name="allow_multiple" ng-model="vm.poll.allow_multiple"/>
-              <div class="control__indicator"></div>
-            </label>
+            <input type="checkbox" name="allow_multiple" ng-model="vm.poll.allow_multiple"/>
+            <div class="control__indicator"></div>
+            <md-tooltip md-direction="bottom">You can vote more than 1 option</md-tooltip>
+          </label>
           <label class="control control--checkbox inline-block mg20l">Allow guest vote
-              <input type="checkbox" name="allow_guest" ng-model="vm.poll.allow_guest"/>
-              <div class="control__indicator"></div>
-            </label>
+            <input type="checkbox" name="allow_guest" ng-model="vm.poll.allow_guest"/>
+            <div class="control__indicator"></div>
+            <md-tooltip md-direction="bottom">Everyone can vote your poll</md-tooltip>
+          </label>
           <label class="control control--checkbox inline-block mg20l">Allow members suggest option
-              <input type="checkbox" name="allow_add" ng-model="vm.poll.allow_add"/>
-              <div class="control__indicator"></div>
-            </label>
+            <input type="checkbox" name="allow_add" ng-model="vm.poll.allow_add"/>
+            <div class="control__indicator"></div>
+            <md-tooltip md-direction="bottom">You will get suggestions from members</md-tooltip>
+          </label>
         </div>
         <div class="h25"></div>
         <!-- Title -->

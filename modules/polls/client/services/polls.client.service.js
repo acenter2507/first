@@ -13,7 +13,8 @@
       },
       {
         update: {
-          method: 'PUT'
+          method: 'PUT',
+          isArray: false;
         }
       }
     );

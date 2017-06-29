@@ -95,6 +95,8 @@ exports.update = function(req, res) {
   poll = _.extend(poll, req.body);
   var tags = req.body.tags || [];
   var opts = req.body.opts || [];
+  // var update_opts = [];
+  // var new_opts = [];
   var promises = [];
   poll
     .save()
@@ -111,17 +113,46 @@ exports.update = function(req, res) {
       });
       return Promise.all(promises);
     }, handleError)
+    // .then(() => {
+    //   promises = [];
+    //   opts.forEach(opt => {
+    //     if (opt._id) {
+    //       update_opts.push(opt);
+    //     } else {
+    //       new_opts.push(opt);
+    //     }
+    //   });
+    //   new_opts.forEach(opt => {
+    //     var _opt = new Opt(opt);
+    //     _opt.user = req.user;
+    //     _opt.poll = poll;
+    //     promises.push(_opt.save());
+    //   });
+    //   return Promise.all(promises);
+    // })
+    // .then(() => {
+    //   update_opts.forEach(opt => {
+
+    //   });
+    // })
     .then(() => {
       promises = [];
       opts.forEach(opt => {
         if (opt._id) {
           var _opt = new Opt(opt);
           promises.push(() => {
-            Opt.findById(opt._id).exec()
-            .then(_opt => {
-              _opt = _.extend(_opt, opt);
-              return _opt.save();
-            });
+            Opt.update(
+              {
+                _id: opt._id
+              },
+              {
+                $set: {
+                  title: opt.title,
+                  color: opt.color,
+                  body: opt.body
+                }
+              }
+            ).exec();
           });
         } else {
           var _opt = new Opt(opt);

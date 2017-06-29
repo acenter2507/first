@@ -178,7 +178,6 @@
         }
       }
     };
-    // Back to before screen
     function handle_discard() {
       if (vm.poll._id) {
         $state.go('polls.view', { pollId: vm.poll._id });

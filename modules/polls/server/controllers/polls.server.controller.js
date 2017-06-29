@@ -140,7 +140,7 @@ exports.update = function(req, res) {
       opts.forEach(opt => {
         if (opt._id) {
           var _opt = new Opt(opt);
-          promises.push(() => {
+          promises.push(
             Opt.update(
               {
                 _id: opt._id
@@ -152,8 +152,8 @@ exports.update = function(req, res) {
                   body: opt.body
                 }
               }
-            ).exec();
-          });
+            ).exec()
+          );
         } else {
           var _opt = new Opt(opt);
           _opt.user = req.user;

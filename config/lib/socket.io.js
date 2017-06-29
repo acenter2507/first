@@ -82,7 +82,7 @@ module.exports = function (app, db) {
 
         // Set the Socket.io session information
         socket.request.session = session;
-
+        next(null, true);
         // Use Passport to populate the user details
         // passport.initialize()(socket.request, {}, function () {
         //   passport.session()(socket.request, {}, function () {

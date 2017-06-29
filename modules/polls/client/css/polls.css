@@ -375,3 +375,6 @@ div.materialpicker-white.selected {
   margin-bottom: 0;
   font-size: 14px;
 }
+.autocomplete {
+  z-index: 1000;
+}

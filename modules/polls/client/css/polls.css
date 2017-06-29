@@ -163,6 +163,11 @@
   margin-bottom: 15px;
   cursor: pointer;
 }
+.custom--checkbox {
+  font-weight: normal;
+  margin-bottom: 0;
+  font-size: 1.0em;
+}
 .control input {
   position: absolute;
   z-index: -1;
@@ -177,6 +182,7 @@
   border-radius: 2px;
   background: #e6e6e6;
 }
+
 .control--radio .control__indicator {
   border-radius: 50%;
 }

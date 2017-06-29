@@ -113,9 +113,10 @@ exports.update = function(req, res) {
     }, handleError)
     .then(() => {
       promises = [];
+      var _opt;
       opts.forEach(opt => {
         if (opt._id) {
-          var _opt = new Opt(opt);
+          _opt = new Opt(opt);
           promises.push(_opt.save());
           // promises.push(() => {
           //   Opt.findById(opt._id).exec((err, _opt) => {
@@ -124,7 +125,7 @@ exports.update = function(req, res) {
           //   });
           // });
         } else {
-          var _opt = new Opt(opt);
+          _opt = new Opt(opt);
           _opt.user = req.user;
           _opt.poll = poll;
           promises.push(_opt.save());

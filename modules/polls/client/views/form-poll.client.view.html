@@ -1,4 +1,14 @@
 <section class="container">
+  <button type="button" class="btn btn-lg btn-primary" data-animation="am-flip-x" bs-dropdown aria-haspopup="true" aria-expanded="false">Click to toggle dropdown
+      <br />
+      <small>(using inlined sibling template)</small>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+      <li>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</li>
+      <li><a href="#anotherAction"><i class="fa fa-download"></i>&nbsp;Some action</a></li>
+      <li><a ng-click="$alert('Holy guacamole')"><i class="fa fa-globe"></i>&nbsp;Display an alert</a></li>
+      <li ng-repeat="i in ['Foo', 'Bar', 'Baz']"><a ng-href="#action{{i}}"><i class="fa fa-chevron-right"></i>&nbsp;{{i}}</a></li>
+    </ul>
   <!-- Toolbar -->
   <div class="row mg20t mg20b">
     <div class="col-xs-12">

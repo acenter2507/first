@@ -382,3 +382,7 @@ div.materialpicker-white.selected {
   text-align: center;
   vertical-align: auto;
 }
+.form-poll-category {
+  display: inline-block;
+  width: 200px;
+}

@@ -1,4 +1,5 @@
 <section class="container">
+  <!-- Toolbar -->
   <div class="row mg20t mg20b">
     <div class="col-xs-12">
       <div class="form-group">
@@ -8,6 +9,8 @@
       </div>
     </div>
   </div>
+
+  <!-- Form -->
   <div class="row ">
     <div class="col-xs-12">
       <div class="card">
@@ -103,7 +106,17 @@
       </div>
     </div>
   </div>
-  <div class="row h20"></div>
+
+  <!-- Toolbar -->
+  <div class="row mg20t mg20b">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <button class="btn btn-danger pull-right" ng-show="vm.poll._id" ng-click="vm.remove()">Delete</button>
+        <button class="btn btn-default pull-right mg10r" ng-click="vm.discard()">Discard</button>
+        <button class="btn btn-primary pull-right mg10r" ng-click="vm.save(true)">{{vm.poll._id ? ' Update' : ' Create'}}</button>
+      </div>
+    </div>
+  </div>
 </section>
 
 

@@ -95,6 +95,7 @@ exports.update = function(req, res) {
   poll = _.extend(poll, req.body);
   var tags = req.body.tags || [];
   var opts = req.body.opts || [];
+  console.log(opts);
   var promises = [];
   poll
     .save()

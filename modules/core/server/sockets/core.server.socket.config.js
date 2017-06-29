@@ -13,8 +13,8 @@ module.exports = function (io, socket) {
       console.log('Has user online: ', global.socketUsers.length);
     }
   });
-  socket.on('guest', function () {
-    console.log('guest');
+  socket.on('xxxxxx', function () {
+    console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
     if (!_.contains(global.socketGuests, socket.id)) {
       global.socketGuests.push(socket.id);
       console.log('Has guest online: ', global.socketGuests.length);

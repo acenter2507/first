@@ -446,11 +446,12 @@ md-menu-content {
   width: 100%;
   height: 70px;
   text-align: justify;
+  text-justify: distribute-all-lines;
 }
 .poll-remaining-time {
   margin: 0;
   display: inline-block;
   *display: inline;
-  width: 24%;
+  width: 23%;
   height: 100%;
 }

@@ -451,7 +451,12 @@ md-menu-content {
 .poll-remaining-time {
   margin: 0;
   display: inline-block;
-  *display: inline;
   width: 23%;
   height: 100%;
+}
+.poll-remaining span{
+  width: 100%;
+  display: inline-block;
+  font-size: 0;
+  line-height: 0
 }

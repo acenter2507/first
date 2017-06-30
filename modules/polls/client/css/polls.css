@@ -292,6 +292,10 @@
   color: #fff !important;
   border-radius: 3px;
 }
+.custom-panel .panel-heading h4 {
+  max-width: 90%;
+  word-wrap: break-word;
+}
 .custom-panel .panel-heading.public {
   background-color: #267ED5 !important;
 }

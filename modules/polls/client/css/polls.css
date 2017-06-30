@@ -445,3 +445,7 @@ md-menu-content {
   width: 100%;
   height: 70px;
 }
+.poll-remaining-time {
+  width: 33.3%;
+  height: 100%;
+}

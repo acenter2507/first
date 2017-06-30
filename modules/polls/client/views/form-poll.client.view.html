@@ -76,21 +76,6 @@
         <text-angular class="text-body" ng-model="vm.poll.body"></text-angular>
         <p class="text-danger" ng-hide="vm.validateBody()">You must type somthing for body</p>
         <div class="h20"></div>
-        <!-- Close time -->
-        <div class="form-group">
-          <label class="control-label" for="close">Stop voting at:</label>
-          <input class="form-control" moment-picker="vm.poll.close" ng-model="vm.poll.close" format="YYYY/MM/DD HH:mm" 
-            start-view="month" placeholder="Select a date...">
-        </div>
-        <!-- Tags -->
-        <div class="form-group" ng-controller="AutocompleteTagController">
-          <label class="form-label" for="#">Tags</label>
-          <tags-input ng-model="vm.poll.tags" display-property="name" placeholder="{{placeholder}}" add-from-autocomplete-only="true"
-            replace-spaces-with-dashes="false" min-length="1" enforce-max-tags class="tags-custom">
-            <auto-complete source="loadItems($query)" min-length="1" debounce-delay="0" max-results="10"></auto-complete>
-          </tags-input>
-        </div>
-        <div class="h20"></div>
         <button class="btn btn-primary pull-right" ng-click="vm.input_opt()">Add Option</button>
         <div class="clearfix"></div>
         <div class="h20"></div>
@@ -124,6 +109,21 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="h20"></div>
+        <!-- Close time -->
+        <div class="form-group">
+          <label class="control-label" for="close">Stop voting at:</label>
+          <input class="form-control" moment-picker="vm.poll.close" ng-model="vm.poll.close" format="YYYY/MM/DD HH:mm" 
+            start-view="month" placeholder="Select a date...">
+        </div>
+        <!-- Tags -->
+        <div class="form-group" ng-controller="AutocompleteTagController">
+          <label class="form-label" for="#">Tags</label>
+          <tags-input ng-model="vm.poll.tags" display-property="name" placeholder="{{placeholder}}" add-from-autocomplete-only="true"
+            replace-spaces-with-dashes="false" min-length="1" enforce-max-tags class="tags-custom">
+            <auto-complete source="loadItems($query)" min-length="1" debounce-delay="0" max-results="10"></auto-complete>
+          </tags-input>
         </div>
       </div>
     </div>

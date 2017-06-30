@@ -170,7 +170,7 @@
     vm.validateBody = () => {
       return (vm.poll.body) ? true : false;
     };
-    vm.validateCloseDate = () => {.
+    vm.validateCloseDate = () => {
       console.log(vm.poll.close);
       return (vm.poll.close) ? true : false;
     };

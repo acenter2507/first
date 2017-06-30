@@ -20,13 +20,39 @@
             <md-button aria-label="Open demo menu" class="md-raised" ng-click="$mdMenu.open($event)">Open
             </md-button>
             <md-menu-content width="4" >
-              <md-menu-item ng-repeat="item in [1, 2, 3]">
+               <ul>
+                <li>
+                  <label class="control control--checkbox custom--checkbox">Public
+                    <input type="checkbox" name="isPublic" ng-model="vm.poll.isPublic"/>
+                    <div class="control__indicator"></div>
+                  </label>
+                </li>
+                <li>
+                  <label class="control control--checkbox custom--checkbox">Allow guest vote
+                    <input type="checkbox" name="allow_guest" ng-model="vm.poll.allow_guest"/>
+                    <div class="control__indicator"></div>
+                  </label>
+                </li>
+                <li>
+                  <label class="control control--checkbox custom--checkbox">Allow multiple vote
+                    <input type="checkbox" name="allow_multiple" ng-model="vm.poll.allow_multiple"/>
+                    <div class="control__indicator"></div>
+                  </label>
+                </li>
+                <li>
+                  <label class="control control--checkbox custom--checkbox">Allow members suggest option
+                    <input type="checkbox" name="allow_add" ng-model="vm.poll.allow_add"/>
+                    <div class="control__indicator"></div>
+                  </label>
+                </li>
+              </ul>
+              <!--<md-menu-item ng-repeat="item in [1, 2, 3]">
                 <md-button ng-click="ctrl.announceClick($index)">
                     <div layout="row" flex>
                       <p flex>Option {{item}}</p>
                     </div>
                 </md-button>
-              </md-menu-item>
+              </md-menu-item>-->
             </md-menu-content>
           </md-menu>
         </div>

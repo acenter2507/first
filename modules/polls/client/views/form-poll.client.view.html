@@ -80,7 +80,7 @@
         <div class="clearfix"></div>
         <div class="h20"></div>
         <!-- Option -->
-        <div class="panel-group mgnb" role="tablist" aria-multiselectable="true" bs-collapse ng-if="vm.opts.length > 0">
+        <div class="panel-group" role="tablist" aria-multiselectable="true" bs-collapse ng-if="vm.opts.length > 0">
           <div class="panel panel-default custom-panel" ng-repeat="opt in vm.opts">
             <div ng-class="{'panel-heading': true, 'public': (opt.status == 1), 'watting': (opt.status == 2)}" role="tab">
               <h4 class="panel-title">
@@ -110,7 +110,6 @@
             </div>
           </div>
         </div>
-        <div class="h20"></div>
         <!-- Close time -->
         <div class="form-group">
           <label class="control-label" for="close">Stop voting at:</label>

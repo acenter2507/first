@@ -164,6 +164,8 @@
   padding-top: 3px;
   margin-bottom: 15px;
   cursor: pointer;
+  max-width: 100%;
+  word-wrap: break-word;
 }
 .control input {
   position: absolute;

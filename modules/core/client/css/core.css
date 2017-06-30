@@ -297,7 +297,7 @@ a:hover .header-profile-image {
 }
 
 .mg5b {
-  margin-bottom: 5px;
+  margin-bottom: 5px !important;
 }
 
 .mg10b {

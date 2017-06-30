@@ -155,7 +155,7 @@
       <!-- List comments -->
       <div ui-view="cmts"></div>
       <!-- Load indicator -->
-      <div class="card" id="indicator_card" ng-show="vm.busy || vm.stopped">
+      <div class="card" id="indicator_card" ng-show="vm.busy">
         <md-progress-circular ng-disabled="!vm.busy" class="md-hue-2 center" md-diameter="20px"></md-progress-circular>
       </div>
     </div>

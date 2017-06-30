@@ -385,10 +385,15 @@ div.materialpicker-white.selected {
 .menu-list li {
   list-style:none;
   padding: 5px 12px;
+  cursor: pointer;
+}
+
+.menu-list li:hover {
+  background-color: #eee;
 }
 
 .menu-list li a {
-  color: #555;
+  color: #666;
   text-decoration: none;
   cursor: pointer;
   outline: none;

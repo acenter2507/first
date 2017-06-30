@@ -37,6 +37,7 @@ module.exports = {
         'public/lib/ng-tags-input/ng-tags-input.js',
         'public/lib/underscore/underscore.js',
         'public/lib/moment/moment.js',
+        'public/lib/angular-moment/angular-moment.js',
         'public/lib/angular-moment-picker/dist/angular-moment-picker.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
         'public/lib/ngInfiniteScroll/build/ng-infinite-scroll.js',

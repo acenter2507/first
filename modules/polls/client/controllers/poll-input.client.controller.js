@@ -171,7 +171,7 @@
       return (vm.poll.body) ? true : false;
     };
     vm.validateCloseDate = () => {
-      return vm.poll.close.isAfter(new moment());
+      return moment(vm.poll.close).isAfter(new moment());
     };
     vm.discard = () => {
       if (angular.equals(vm.poll, vm.bk_poll)) {

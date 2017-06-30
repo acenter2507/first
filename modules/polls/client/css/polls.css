@@ -453,10 +453,15 @@ md-menu-content {
   display: inline-block;
   width: 23%;
   height: 100%;
+  text-align: center;
 }
 .poll-remaining span.middle{
   width: 100%;
   display: inline-block;
   font-size: 0;
   line-height: 0
+}
+.poll-remaining span.countdown {
+  margin: auto;
+  font-size: 1.5em;
 }

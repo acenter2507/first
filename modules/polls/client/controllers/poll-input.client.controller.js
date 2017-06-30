@@ -170,6 +170,9 @@
     vm.validateBody = () => {
       return (vm.poll.body) ? true : false;
     };
+    vm.validateBody = () => {
+      return (vm.poll.close) ? true : false;
+    };
     vm.discard = () => {
       if (angular.equals(vm.poll, vm.bk_poll)) {
         handle_discard();

@@ -30,7 +30,7 @@
                 </select>
                 <div class="select__arrow"></div>
               </div>
-              <p class="text-danger" ng-hide="vm.validateCategory()">Category is required</p>
+              <span class="text-danger" ng-hide="vm.validateCategory()">Category is required</span>
           </div>
           <div class="col-xs-6 col-sm-8 col-md-9 col-lg-10">
             <div class="pull-left mg5t">
@@ -68,13 +68,17 @@
         </div>
         <div class="clearfix h20"></div>
         <!-- Title -->
-        <input type="text" class="form-control input-large" name="title" ng-model="vm.poll.title" placeholder="Enter your poll tilte here"
+        <div class="form-group">
+          <input type="text" class="form-control input-large" name="title" ng-model="vm.poll.title" placeholder="Enter your poll tilte here"
         />
-        <p class="text-danger" ng-hide="vm.validateTitle()">You must type somthing for title</p>
+          <span class="text-danger" ng-hide="vm.validateTitle()">You must type somthing for title</span>
+        </div>
         <div class="h20"></div>
         <!-- Body -->
-        <text-angular class="text-body" ng-model="vm.poll.body"></text-angular>
-        <p class="text-danger" ng-hide="vm.validateBody()">You must type somthing for body</p>
+        <div class="form-group">
+          <text-angular class="text-body" ng-model="vm.poll.body"></text-angular>
+          <span class="text-danger" ng-hide="vm.validateBody()">You must type somthing for body</span>
+        </div>
         <div class="h20"></div>
         <button class="btn btn-primary pull-right" ng-click="vm.input_opt()">Add Option</button>
         <div class="clearfix"></div>
@@ -115,6 +119,7 @@
           <label class="control-label" for="close">Stop voting at:</label>
           <input class="form-control" moment-picker="vm.poll.close" ng-model="vm.poll.close" format="YYYY/MM/DD HH:mm" 
             start-view="month" placeholder="Select a date...">
+          <span class="text-danger" ng-hide="vm.validateCloseDate()">Datetime is invalid</span>
         </div>
         <!-- Tags -->
         <div class="form-group" ng-controller="AutocompleteTagController">

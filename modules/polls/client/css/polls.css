@@ -440,3 +440,8 @@ md-menu-content {
 .btn-poll-color:hover {
   opacity: 0.8;
 }
+
+.poll-remaining {
+  width: 100%;
+  height: 70px;
+}

@@ -155,7 +155,7 @@
       <!-- List comments -->
       <div ui-view="cmts"></div>
       <!-- Load indicator -->
-      <div class="card" id="indicator_card" ng-show="vm.busy">
+      <div class="card" id="indicator_card" ng-show="vm.busy || vm.stopped">
         <md-progress-circular ng-disabled="!vm.busy" class="md-hue-2 center" md-diameter="20px"></md-progress-circular>
       </div>
     </div>
@@ -218,8 +218,6 @@
           <li ng-repeat="tag in vm.poll.tags"><a ui-sref="tags.view({ tagId: tag._id })" class="tag">{{tag.name}}</a></li>
         </ul>
       </div>
-      <!-- Ad -->
-      <div class="card h1000"></div>
     </div>
     <div class="clearfix"></div>
   </div>

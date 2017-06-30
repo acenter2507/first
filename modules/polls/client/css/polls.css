@@ -386,7 +386,7 @@ div.materialpicker-white.selected {
 
 .menu-list li {
   list-style:none;
-  padding: 5px 0px;
+  padding: 5px;
   cursor: pointer;
 }
 
@@ -416,7 +416,7 @@ md-menu-content {
   min-width: 160px;
   overflow-y: hidden !important;
   z-index: 2000 !important;
-  padding: 5px 10px !important;
+  padding: 8px 10px !important;
 }
 
 .btn-poll-color {

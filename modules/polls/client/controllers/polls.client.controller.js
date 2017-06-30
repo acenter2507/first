@@ -23,7 +23,8 @@
     'Socket',
     '$bsModal',
     '$bsAside',
-    '$mdDialog'
+    '$mdDialog',
+    '$timeout'
   ];
 
   function PollsController(
@@ -46,7 +47,8 @@
     Socket,
     $bsModal,
     $bsAside,
-    $mdDialog
+    $mdDialog,
+    $timeout
   ) {
     var vm = this;
     vm.authentication = Authentication;
@@ -91,6 +93,12 @@
     vm.tmp_cmt = {};
     vm.optionToggle = -1;
 
+    vm.days = 0;
+    vm.hours = 0;
+    vm.minutes = 0;
+    vm.seconds = 0;
+    vm.remaining = 1;
+
     init();
 
     // Init data
@@ -109,6 +117,9 @@
       // load following info
       if (vm.isLogged) {
         loadPolluser();
+      }
+      if (!vm.isClosed && vm.poll.close) {
+        loadRemaining();
       }
       // Init socket
       initSocket();
@@ -362,6 +373,21 @@
           });
       });
     }
+
+    function loadRemaining() {
+      vm.remaining = $timeout(makeRemaining, 1000);
+    }
+
+    function makeRemaining() {
+      const now = moment(new Date());
+      var duration = moment.duration(now.diff(vm.poll.close));
+      console.log(duration);
+      vm.remaining = $timeout(makeRemaining, 1000);
+      // vm.days = duration.da
+      // return duration >= 1;
+      // var duration = moment.duration(duration - interval, 'milliseconds');
+    }
+
     // Thao tác databse
     function save_cmt() {
       if (

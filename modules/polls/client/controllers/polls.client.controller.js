@@ -376,7 +376,7 @@
 
     function loadRemaining() {
       vm.remaining = $timeout(makeRemaining, 1000);
-      $scope.$on('destroy', () => {
+      $scope.$on('$destroy', () => {
         $timeout.cancle(vm.remaining);
       });
     }

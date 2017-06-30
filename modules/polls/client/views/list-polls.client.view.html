@@ -18,7 +18,7 @@
             <strong><a class="undecorated-link" ui-sref="users.info({userId: poll.user._id})" ng-if="poll.user" ng-bind="poll.user.displayName"></a></strong>
             <span ng-if="!poll.user">Deleted User</span>
             <span class="text-muted"><small>&nbsp;created on</small></span>
-            <span class="text-muted" ng-bind="poll.created | date:'mediumDate'"></span>
+            <span class="text-muted" am-time-ago="poll.created"></span>
           </span>
           <span class="pull-right">
             <a href="#" bs-dropdown aria-haspopup="true" aria-expanded="false">

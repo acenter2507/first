@@ -442,11 +442,12 @@ md-menu-content {
 }
 
 .poll-remaining {
+  position: relative;
   width: 100%;
   height: 70px;
 }
 .poll-remaining-time {
   display: inline-block;
-  width: 33%;
+  width: 30%;
   height: 100%;
 }

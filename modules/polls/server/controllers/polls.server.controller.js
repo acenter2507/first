@@ -199,7 +199,7 @@ exports.list = function(req, res) {
  */
 exports.findPolls = function(req, res) {
   var page = req.params.page || 0;
-  Poll.find()
+  Poll.find({ isPublic: true })
     .sort('-created')
     .populate('category', 'name icon')
     .populate('user', 'displayName profileImageURL')

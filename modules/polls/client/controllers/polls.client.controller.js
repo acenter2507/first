@@ -87,8 +87,9 @@
 
     vm.cmt_processing = false;
     vm.cmt_typing = false;
-    vm.tmp_cmt = {};
     vm.like_processing = false;
+    vm.tmp_cmt = {};
+    vm.optionToggle = -1;
 
     init();
 

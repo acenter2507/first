@@ -51,6 +51,8 @@
     vm.form = {};
     vm.opts = [];
 
+    vm.optionToggle = -1;
+
     $scope.sharedDate = new Date(new Date().setMinutes(0, 0));
     function init() {
       initSocket();
@@ -128,7 +130,7 @@
     };
 
     vm.save = () => {
-      if (!vm.validateBody() || !vm.validateCategory() || !vm.validateTitle()) {
+      if (!vm.validateBody() || !vm.validateCategory() || !vm.validateTitle() || !vm.validateCloseDate()) {
         return alert('Vui lòng xem lại bạn chưa nhập đủ thông tin');
       }
 
@@ -147,7 +149,9 @@
 
       function successCallback(res) {
         if (isNew) {
-          Socket.emit('poll_create');
+          if (res.isPublic) {
+            Socket.emit('poll_create');
+          }
         } else {
           Socket.emit('poll_update', { pollId: vm.poll._id });
         }

@@ -13,47 +13,9 @@
             <fieldset>
               <div class="form-group">
               <md-menu md-offset="10 30">
-                <a class="undecorated-link span-link" ng-click="$mdMenu.open($event)" aria-label="Open setting menu">
-                  <i class="fa fa-cog fa-2x"></i>
-                </a>
+                <button class="btn-poll-color" ng-click="$mdMenu.open($event)" ng-style="{'background-color': (vm.tmp_opt.color) ? vm.tmp_opt.color : '#ccc'}">Option's color</button>
                 <md-menu-content>
-                  <ul class="menu-list">
-                    <li>
-                      <label class="control control--checkbox custom--checkbox">Public
-                        <input type="checkbox" name="isPublic" ng-model="vm.poll.isPublic"/>
-                        <div class="control__indicator"></div>
-                      </label>
-                    </li>
-                    <li>
-                      <label class="control control--checkbox custom--checkbox">Allow guest vote
-                        <input type="checkbox" name="allow_guest" ng-model="vm.poll.allow_guest"/>
-                        <div class="control__indicator"></div>
-                      </label>
-                    </li>
-                    <li>
-                      <label class="control control--checkbox custom--checkbox">Allow multiple vote
-                        <input type="checkbox" name="allow_multiple" ng-model="vm.poll.allow_multiple"/>
-                        <div class="control__indicator"></div>
-                      </label>
-                    </li>
-                    <li>
-                      <label class="control control--checkbox custom--checkbox">Allow members suggest option
-                        <input type="checkbox" name="allow_add" ng-model="vm.poll.allow_add"/>
-                        <div class="control__indicator"></div>
-                      </label>
-                    </li>
-                  </ul>
-                </md-menu-content>
-              </md-menu>
-              <md-menu md-offset="10 30">
-                <a class="btn-poll-color" ng-click="$mdMenu.open($event)" ng-style="{'background-color': (vm.tmp_opt.color) ? vm.tmp_opt.color : '#ccc'}">Option's color</a>
-                <md-menu-content>
-                  <ul>
-                    <li>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</li>
-                    <li>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</li>
-                    <li>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</li>
-                    <li>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</li>
-                  </ul>
+                  <material-picker class="pull-right" format="'hex'" ng-model="vm.tmp_opt.color" size="15" ng-show="vm.show_colorpicker"></material-picker>
                 </md-menu-content>
               </md-menu>
 

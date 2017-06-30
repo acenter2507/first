@@ -411,8 +411,8 @@ div.materialpicker-white.selected {
 }
 md-menu-content {
   max-height: 400px !important;
-  overflow-y: hidden;
-  z-index: 10001;
+  overflow-y: hidden !important;
+  z-index: 2000 !important;
 }
 
 .btn-poll-color {

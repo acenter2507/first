@@ -19,7 +19,6 @@ var ApplicationConfiguration = (function() {
     'mgcrea.ngStrap',
     'ngMaterial',
     'angularMoment',
-    'timer',
     'moment-picker',
     'infinite-scroll',
     'monospaced.elastic',

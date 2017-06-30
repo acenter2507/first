@@ -48,8 +48,9 @@
           <span ng-if="!poll.allow_guest" class="fa fa-users">
             <md-tooltip md-direction="bottom">Only user can vote</md-tooltip>
           </span>
-          <hr class="mg10t mg10b">
+          <small ng-if="poll.close">Can vote still {{poll.close | date:'mediumDate'}}</small>
           <div class="clearfix"></div>
+          <hr class="mg5t mg10b">
         </div>
         <div clas="poll-body">
           <h4><a ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a></h4>

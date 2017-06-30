@@ -15,11 +15,12 @@ app.init(function () {
 /*
  Ưu tiên:
 1. Màn hình create poll
-  - Thêm xóa sửa option
+  - Thêm xóa sửa option => done
   - Hạn vote
   - Test các trường hợp socket => done
   - Lỗi chuyển state không được.
   - Sửa option không được. => done
+  - Các thao tác: unfollow, follow, bookmark, 
 
 */
 // 1. Khi người vote là guest thì không push socket được.

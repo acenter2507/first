@@ -171,6 +171,9 @@
       return (vm.poll.body) ? true : false;
     };
     vm.validateCloseDate = () => {
+      if (!vm.poll.close) {
+        return true;
+      }
       return moment(vm.poll.close).isAfter(new moment());
     };
     vm.discard = () => {

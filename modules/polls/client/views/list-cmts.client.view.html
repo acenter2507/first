@@ -23,9 +23,9 @@
         </a>
         <md-menu-content>
           <ul class="menu-list">
-            <li ng-show="vm.isLogged && cmt.user._id !== vm.authentication.user._id"><a class="undecorated-link" ng-click="vm.reply_cmt(cmt)"><i class="fa fa-reply"></i>&nbsp;Reply</a></li>
-            <li ng-show="cmt.user._id === vm.authentication.user._id"><a class="undecorated-link" ng-click="vm.edit_cmt(cmt)"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
-            <li ng-show="cmt.user._id === vm.authentication.user._id"><a class="undecorated-link" ng-click="vm.delete_cmt(cmt)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
+            <li ng-if="vm.isLogged && cmt.user._id !== vm.authentication.user._id"><a class="undecorated-link" ng-click="vm.reply_cmt(cmt)"><i class="fa fa-reply"></i>&nbsp;Reply</a></li>
+            <li ng-if="cmt.user._id === vm.authentication.user._id"><a class="undecorated-link" ng-click="vm.edit_cmt(cmt)"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
+            <li ng-if="cmt.user._id === vm.authentication.user._id"><a class="undecorated-link" ng-click="vm.delete_cmt(cmt)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
           </ul>
         </md-menu-content>
       </md-menu>

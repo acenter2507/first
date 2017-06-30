@@ -9,17 +9,33 @@
     <span class="pull-left">
       <strong><a class="undecorated-link" ui-sref="users.info({userId: cmt.user._id})" ng-if="cmt.user" ng-bind="cmt.user.displayName"></a></strong>
       <span ng-if="!cmt.user">Deleted User</span>
-      <span class="text-muted"><small>&nbsp;replied on</small></span>
-      <span class="text-muted" ng-bind="cmt.created | date:'mediumDate'"></span>
-      <span class="mg10l" ng-show="cmt.isEdited"><i class="fa fa-pencil-square-o"></i></span>
+      <small class="text-muted">replied on</small>
+      <small class="text-muted" am-time-ago="cmt.created"></small>
+      <span class="mg10l" ng-show="cmt.isEdited">
+        <i class="fa fa-pencil-square-o"></i>
+        <md-tooltip md-direction="bottom">{{cmt.updated | date:'mediumDate'}}</md-tooltip>
+      </span>
     </span>
     <span class="pull-right">
-      <a class="undecorated-link" bs-dropdown aria-haspopup="true" aria-expanded="false"><i class="fa fa-chevron-down"></i></a>
+      <md-menu md-offset="-12 25" md-position-mode="target-right target">
+        <a class="undecorated-link span-link" ng-click="$mdMenu.open($event)" aria-label="Open comment menu">
+          <i class="fa fa-chevron-down"></i>
+        </a>
+        <md-menu-content>
+          <ul class="menu-list">
+            <li ng-show="vm.isLogged && cmt.user._id !== vm.authentication.user._id"><a class="undecorated-link" ng-click="vm.reply_cmt(cmt)"><i class="fa fa-reply"></i>&nbsp;Reply</a></li>
+            <li ng-show="cmt.user._id === vm.authentication.user._id"><a class="undecorated-link" ng-click="vm.edit_cmt(cmt)"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
+            <li ng-show="cmt.user._id === vm.authentication.user._id"><a class="undecorated-link" ng-click="vm.delete_cmt(cmt)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
+          </ul>
+        </md-menu-content>
+      </md-menu>
+
+      <!--<a class="undecorated-link" bs-dropdown aria-haspopup="true" aria-expanded="false"><i class="fa fa-chevron-down"></i></a>
       <ul class="dropdown-menu" role="menu">
         <li ng-show="vm.isLogged && cmt.user._id !== vm.authentication.user._id"><a class="undecorated-link" ng-click="vm.reply_cmt(cmt)"><i class="fa fa-reply"></i>&nbsp;Reply</a></li>
         <li ng-show="cmt.user._id === vm.authentication.user._id"><a class="undecorated-link" ng-click="vm.edit_cmt(cmt)"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
         <li ng-show="cmt.user._id === vm.authentication.user._id"><a class="undecorated-link" ng-click="vm.delete_cmt(cmt)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
-      </ul>
+      </ul>-->
     </span>
     <br>
     <small>

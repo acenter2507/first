@@ -387,6 +387,7 @@ div.materialpicker-white.selected {
   list-style:none;
   padding: 5px 12px;
 }
-.md-menu-content {
-  max-height: 90vh;
+
+md-menu-content {
+  max-height: 90vh !important;
 }

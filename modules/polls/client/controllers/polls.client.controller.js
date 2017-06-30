@@ -93,10 +93,10 @@
     vm.tmp_cmt = {};
     vm.optionToggle = -1;
 
-    vm.days = 0;
-    vm.hours = 0;
-    vm.minutes = 0;
-    vm.seconds = 0;
+    vm.remaining_days = 0;
+    vm.remaining_hours = 0;
+    vm.remaining_minutes = 0;
+    vm.remaining_seconds = 0;
     vm.remaining = 1;
 
     init();
@@ -384,6 +384,10 @@
     function makeRemaining() {
       const now = moment(new Date());
       var duration = moment.duration(now.diff(vm.poll.close));
+      vm.remaining_days = duration.days();
+      vm.remaining_hours = duration.hours();
+      vm.remaining_minutes = duration.minutes();
+      vm.remaining_seconds = duration.seconds();
       console.log(duration);
       vm.remaining = $timeout(makeRemaining, 1000);
       // vm.days = duration.da

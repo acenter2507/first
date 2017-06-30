@@ -336,8 +336,8 @@
   -webkit-user-select: none;
   user-select: none;
   position: relative;
-  border: 1px solid #FFF;
-  border-radius: 2px;
+  border: none;
+  border-radius: 3px;
   display: inline-block;
   box-shadow: 0 1px 5px rgba(0,0,0,0.5);
   cursor: default;
@@ -380,7 +380,7 @@ div.materialpicker-white.selected {
 }
 
 .menu-list {
-  margin: 0 10px;
+  margin: auto;
   padding: 0 5px;
 }
 
@@ -415,7 +415,7 @@ md-menu-content {
   max-height: 400px !important;
   overflow-y: hidden !important;
   z-index: 2000 !important;
-  padding: 0;
+  padding: 0 10px;
 }
 
 .btn-poll-color {

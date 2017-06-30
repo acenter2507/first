@@ -446,6 +446,7 @@ md-menu-content {
   height: 70px;
 }
 .poll-remaining-time {
+  display: inline-block;
   width: 33.3%;
   height: 100%;
 }

@@ -5,7 +5,8 @@
   Remaining.$inject = ['$timeout'];
 
   function Remaining($timeout) {
-    var duration = function(timeSpan) {
+    var duration = function(endTime) {
+      var timeSpan = getRemainigTime(endTime);
       var days = Math.floor(timeSpan / 86400000);
       var diff = timeSpan - days * 86400000;
       var hours = Math.floor(diff / 3600000);
@@ -15,13 +16,12 @@
       var secs = Math.floor(diff / 1000);
       return { days: days, hours: hours, minutes: minutes, seconds: secs };
     };
-    function getRemainigTime(referenceTime) {
+    function getRemainigTime(endTime) {
       var now = moment().utc();
-      return moment(referenceTime) - now;
+      return moment(endTime) - now;
     }
     return {
-      duration: duration,
-      getRemainigTime: getRemainigTime
+      duration: duration
     };
   }
 })();

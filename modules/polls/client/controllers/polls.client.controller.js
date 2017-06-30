@@ -386,7 +386,7 @@
     }
 
     function makeRemaining() {
-      vm.close_duration = Remaining.getRemainigTime(vm.poll.close);
+      vm.close_duration = Remaining.duration(vm.poll.close);
       console.log(vm.close_duration);
       vm.remaining = $timeout(makeRemaining, 1000);
     }

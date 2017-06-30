@@ -93,10 +93,12 @@
     vm.tmp_cmt = {};
     vm.optionToggle = -1;
 
-    vm.remaining_days = 0;
-    vm.remaining_hours = 0;
-    vm.remaining_minutes = 0;
-    vm.remaining_seconds = 0;
+    vm.one_second_duration = moment.duration(1, 'seconds');
+    vm.close_duration = moment.duration(vm.poll.close);
+    // vm.remaining_days = 0;
+    // vm.remaining_hours = 0;
+    // vm.remaining_minutes = 0;
+    // vm.remaining_seconds = 0;
     vm.remaining = 1;
 
     init();
@@ -377,22 +379,13 @@
     function loadRemaining() {
       vm.remaining = $timeout(makeRemaining, 1000);
       $scope.$on('$destroy', () => {
-        $timeout.cancle(vm.remaining);
+        $timeout.cancel(vm.remaining);
       });
     }
 
     function makeRemaining() {
-      const now = moment(new Date());
-      var duration = moment.duration(now.diff(vm.poll.close));
-      vm.remaining_days = duration.days();
-      vm.remaining_hours = duration.hours();
-      vm.remaining_minutes = duration.minutes();
-      vm.remaining_seconds = duration.seconds();
-      console.log(duration);
+      vm.close_duration.subtract(vm.one_second_duration);
       vm.remaining = $timeout(makeRemaining, 1000);
-      // vm.days = duration.da
-      // return duration >= 1;
-      // var duration = moment.duration(duration - interval, 'milliseconds');
     }
 
     // Thao tác databse

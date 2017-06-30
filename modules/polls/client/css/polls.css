@@ -416,16 +416,17 @@ md-menu-content {
 
 .btn-poll-color {
   font-size: 1.1em;
-  padding: 15px 30px;
+  padding: 10px 15px;
   margin: 0;
   border: none;
   position: relative;
   display: inline-block;
   text-decoration: none;
   background-color: #ccc;
+  border-radius: 3px;
 }
 
 .btn-poll-color:focus,
 .btn-poll-color:hover {
-  opacity: 1.1;
+  opacity: 0.8;
 }

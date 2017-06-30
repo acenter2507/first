@@ -406,7 +406,9 @@ div.materialpicker-white.selected {
   text-decoration: none;
   cursor: pointer;
 }
-
+.span-link {
+  color: #666;
+}
 md-menu-content {
   max-height: 400px !important;
   overflow-y: hidden;

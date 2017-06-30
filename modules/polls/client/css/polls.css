@@ -444,9 +444,14 @@ md-menu-content {
 .poll-remaining {
   position: relative;
   width: 100%;
-  height: 70px;
+  height: 50px;
   text-align: justify;
   text-justify: distribute-all-lines;
+}
+.poll-remaining p {
+  width: 100%;
+  font-size: 1.5em;
+  text-align: center;
 }
 .poll-remaining-time {
   margin: 0;
@@ -464,4 +469,5 @@ md-menu-content {
 .poll-remaining span.countdown {
   margin: auto;
   font-size: 1.5em;
+
 }

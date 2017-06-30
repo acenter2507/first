@@ -389,5 +389,5 @@ div.materialpicker-white.selected {
 }
 
 md-menu-content {
-  max-height: 100% !important;
+  max-height: 400px !important;
 }

@@ -448,6 +448,7 @@ md-menu-content {
   text-align: justify;
 }
 .poll-remaining-time {
+  margin: 0;
   display: inline-block;
   *display: inline;
   width: 25%;

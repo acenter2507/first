@@ -82,12 +82,12 @@
           <small class="pull-right mg10l" ng-show="vm.stopped">
             Sort:&nbsp;
             <md-menu md-offset="-12 25" md-position-mode="target-right target">
-              <a class="undecorated-link span-link" ng-click="$mdMenu.open($event)" aria-label="Open setting menu">
+              <a class="undecorated-link" ng-click="$mdMenu.open($event)" aria-label="Open setting menu">
                 {{vm.cmt_sort.name}}&nbsp;<i class="fa fa-angle-down"></i>
               </a>
               <md-menu-content>
                 <ul class="menu-list">
-                  <li ng-repeat="cmt_sort in vm.cmt_sorts" ng-click="vm.cmt_sort = vm.cmt_sorts[$index]">
+                  <li ng-repeat="cmt_sort in vm.cmt_sorts">
                     <a class="undecorated-link" ng-click="vm.cmt_sort = vm.cmt_sorts[$index]">{{cmt_sort.name}}</a>
                   </li>
                 </ul>

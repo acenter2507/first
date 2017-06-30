@@ -56,20 +56,6 @@
                 </ul>
               </md-menu-content>
             </md-menu>
-            <!--<a href="#" bs-dropdown aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-chevron-down" aria-hidden="true"></i>
-            </a>
-            <ul class="dropdown-menu" role="menu">
-              <li ng-show="vm.isLogged">
-                <a ng-click="vm.follow_poll()" class="undecorated-link">
-                  <i class="fa fa-rss"></i>&nbsp;{{(vm.polluser._id && vm.polluser.following) ? 'Unfollow' : 'Follow'}}
-                </a>
-              </li>
-              <li ng-show="vm.isLogged && !vm.poll.isCurrentUserOwner"><a class="undecorated-link" ng-click="vm.report_poll()"><i class="fa fa-exclamation-circle"></i>&nbsp;Report poll</a></li>
-              <li ng-show="vm.poll.isCurrentUserOwner || vm.poll.canEdit"><a class="undecorated-link" ui-sref="polls.edit({ pollId: vm.poll._id })"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
-              <li ng-show="vm.poll.isCurrentUserOwner || vm.poll.canEdit"><a class="undecorated-link" ng-click="vm.remove()"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
-              <li ng-show="vm.isLogged && !vm.poll.isCurrentUserOwner"><a class="undecorated-link" ng-click="vm.add_bookmark(poll)"><i class="fa fa-bookmark"></i>&nbsp;Bookmark poll</a></li>
-            </ul>-->
           </span>
           <br>
           <span ng-if="vm.poll.allow_guest" class="fa fa-globe">
@@ -95,14 +81,26 @@
           </small>
           <small class="pull-right mg10l" ng-show="vm.stopped">
             Sort:&nbsp;
-            <a class="undecorated-link" bs-dropdown aria-haspopup="true" aria-expanded="false">
+            <md-menu md-offset="-12 25" md-position-mode="target-right target">
+              <a class="undecorated-link span-link" ng-click="$mdMenu.open($event)" aria-label="Open setting menu">
+                {{vm.cmt_sort.name}}&nbsp;<i class="fa fa-angle-down"></i>
+              </a>
+              <md-menu-content>
+                <ul class="menu-list">
+                  <li ng-repeat="cmt_sort in vm.cmt_sorts" ng-click="vm.cmt_sort = vm.cmt_sorts[$index]">
+                    <a class="undecorated-link" ng-click="vm.cmt_sort = vm.cmt_sorts[$index]">{{cmt_sort.name}}</a>
+                  </li>
+                </ul>
+              </md-menu-content>
+            </md-menu>
+            <!--<a class="undecorated-link" bs-dropdown aria-haspopup="true" aria-expanded="false">
               {{vm.cmt_sort.name}}&nbsp;<i class="fa fa-angle-down"></i>
             </a>
             <ul class="dropdown-menu" role="menu">
               <li ng-repeat="cmt_sort in vm.cmt_sorts" ng-click="vm.cmt_sort = vm.cmt_sorts[$index]">
                 <a class="undecorated-link" ng-click="vm.cmt_sort = vm.cmt_sorts[$index]">{{cmt_sort.name}}</a>
               </li>
-            </ul>
+            </ul>-->
           </small>
           <small class="pull-right">
             <a ng-if="!vm.poll.isCurrentUserOwner" ng-click="vm.reply_cmt(vm.poll)" class="undecorated-link">Reply</a>

@@ -12,8 +12,8 @@
           <form name="vm.form.optForm" class="form-horizontal" novalidate>
             <fieldset>
               <div class="form-group">
-                <button class="btn btn-default pull-right" ng-click="vm.show_colorpicker = !vm.show_colorpicker">Select color</button>
-                <div class="opt-color-preview pull-right" ng-style="{'background-color': vm.tmp_opt.color}"></div>
+                <button class="btn-poll-color" ng-click="vm.show_colorpicker = !vm.show_colorpicker">Option's color</button>
+                <div class="opt-color-preview" ng-style="{'background-color': vm.tmp_opt.color}"></div>
                 <material-picker class="pull-right" format="'hex'" ng-model="vm.tmp_opt.color" size="15" ng-show="vm.show_colorpicker"></material-picker>
               </div>
               <div class="clearfix"></div>

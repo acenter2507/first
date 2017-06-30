@@ -339,7 +339,6 @@
   border: none;
   border-radius: 3px;
   display: inline-block;
-  box-shadow: 0 1px 5px rgba(0,0,0,0.5);
   cursor: default;
 }
 .materialpicker-colors div.selected {
@@ -386,7 +385,7 @@ div.materialpicker-white.selected {
 
 .menu-list li {
   list-style:none;
-  padding: 5px 12px;
+  padding: 5px 0px;
   cursor: pointer;
 }
 

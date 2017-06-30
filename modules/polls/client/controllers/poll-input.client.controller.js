@@ -51,6 +51,7 @@
     vm.form = {};
     vm.opts = [];
 
+    $scope.sharedDate = new Date(new Date().setMinutes(0, 0));
     function init() {
       initSocket();
       if (vm.poll._id) {

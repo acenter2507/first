@@ -9,6 +9,11 @@ body {
 .undecorated-link:hover {
   text-decoration: none;
   cursor: pointer;
+  outline: none;
+}
+.undecorated-link:focus {
+  text-decoration: none;
+  outline: none;
 }
 [ng\:cloak],
 [ng-cloak],

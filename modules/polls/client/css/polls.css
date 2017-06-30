@@ -413,6 +413,7 @@ div.materialpicker-white.selected {
 }
 md-menu-content {
   max-height: 400px !important;
+  min-width: 160px;
   overflow-y: hidden !important;
   z-index: 2000 !important;
   padding: 10px !important;

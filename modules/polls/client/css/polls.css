@@ -388,10 +388,6 @@ div.materialpicker-white.selected {
   cursor: pointer;
 }
 
-.menu-list li:hover {
-  background-color: #eee;
-}
-
 .menu-list li a {
   color: #666;
   text-decoration: none;
@@ -402,6 +398,7 @@ div.materialpicker-white.selected {
 .menu-list li a:hover {
   text-decoration: none;
   cursor: pointer;
+  color: #267ED5;
 }
 
 .menu-list li a:focus {

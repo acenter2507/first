@@ -415,7 +415,7 @@ md-menu-content {
   max-height: 400px !important;
   overflow-y: hidden !important;
   z-index: 2000 !important;
-  padding: 0 10px;
+  padding: 10px !important;
 }
 
 .btn-poll-color {

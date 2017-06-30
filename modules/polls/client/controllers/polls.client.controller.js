@@ -95,12 +95,7 @@
     vm.tmp_cmt = {};
     vm.optionToggle = -1;
 
-    vm.one_second_duration = moment.duration(1, 'seconds');
-    vm.close_duration = moment.duration(vm.poll.close);
-    // vm.remaining_days = 0;
-    // vm.remaining_hours = 0;
-    // vm.remaining_minutes = 0;
-    // vm.remaining_seconds = 0;
+    vm.close_duration = {};
     vm.remaining = 1;
 
     init();
@@ -387,7 +382,6 @@
 
     function makeRemaining() {
       vm.close_duration = Remaining.duration(vm.poll.close);
-      console.log(vm.close_duration);
       vm.remaining = $timeout(makeRemaining, 1000);
     }
 

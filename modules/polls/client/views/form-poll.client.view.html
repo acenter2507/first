@@ -16,6 +16,21 @@
       <div class="card">
         <!-- Category -->
         <div class="row">
+          <md-menu md-position-mode="target-right target" >
+            <md-button aria-label="Open demo menu" class="md-raised" ng-click="$mdMenu.open($event)">Open
+            </md-button>
+            <md-menu-content width="4" >
+              <md-menu-item ng-repeat="item in [1, 2, 3]">
+                <md-button ng-click="ctrl.announceClick($index)">
+                    <div layout="row" flex>
+                      <p flex>Option {{item}}</p>
+                    </div>
+                </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+        </div>
+        <div class="row">
           <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
               <!-- Trường hợp edit poll -->
               <div class="select" ng-if="vm.poll._id">

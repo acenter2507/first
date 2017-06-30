@@ -12,17 +12,13 @@
           <form name="vm.form.optForm" class="form-horizontal" novalidate>
             <fieldset>
               <div class="form-group">
-              <md-menu md-offset="100 50">
-                <button class="btn-poll-color" ng-click="$mdMenu.open($event)" ng-style="{'background-color': (vm.tmp_opt.color) ? vm.tmp_opt.color : '#ccc'}">
-                  {{(vm.tmp_opt.color) ? vm.tmp_opt.color : 'Select color'}}</button>
-                <md-menu-content>
-                  <material-picker format="'hex'" ng-model="vm.tmp_opt.color" size="15"></material-picker>
-                </md-menu-content>
-              </md-menu>
-
-                
-                <div class="opt-color-preview" ng-style="{'background-color': vm.tmp_opt.color}"></div>
-                
+                <md-menu md-offset="102 52">
+                  <button class="btn-poll-color" ng-click="$mdMenu.open($event)" ng-style="{'background-color': (vm.tmp_opt.color) ? vm.tmp_opt.color : '#ccc'}">
+                    {{(vm.tmp_opt.color) ? vm.tmp_opt.color : 'Select color'}}</button>
+                  <md-menu-content>
+                    <material-picker format="'hex'" ng-model="vm.tmp_opt.color" size="15"></material-picker>
+                  </md-menu-content>
+                </md-menu>
               </div>
               <div class="clearfix"></div>
               <!-- Title -->

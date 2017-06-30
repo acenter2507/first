@@ -379,8 +379,9 @@ div.materialpicker-white.selected {
 }
 
 .menu-list {
-  margin: auto;
+  margin: 0;
   padding: 0 5px;
+  margin-bottom: 5px;
 }
 
 .menu-list li {

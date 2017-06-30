@@ -24,7 +24,8 @@
     '$bsModal',
     '$bsAside',
     '$mdDialog',
-    '$timeout'
+    '$timeout',
+    'Remaining'
   ];
 
   function PollsController(
@@ -48,7 +49,8 @@
     $bsModal,
     $bsAside,
     $mdDialog,
-    $timeout
+    $timeout,
+    Remaining
   ) {
     var vm = this;
     vm.authentication = Authentication;
@@ -384,7 +386,8 @@
     }
 
     function makeRemaining() {
-      vm.close_duration.subtract(vm.one_second_duration);
+      vm.close_duration = Remaining.getRemainigTime(vm.poll.close);
+      console.log(vm.close_duration);
       vm.remaining = $timeout(makeRemaining, 1000);
     }
 

@@ -193,7 +193,6 @@
       <div class="card" ng-if="!vm.isClosed">
         <span class="text-muted" ng-if="!vm.opts.length || vm.opts.length === 0"><small>No option to vote.</small></span>
         <div class="poll-remaining" ng-if="vm.poll.close">
-          <timer end-time="{{vm.poll.close}}">
             <div class="poll-remaining-time bg-primary">
               <span>{{days}}</span>
             </div>
@@ -206,7 +205,6 @@
             <div class="poll-remaining-time bg-success">
               <span>{{seconds}}</span>
             </div><span class="middle"></span>
-          </timer>
         </div>
         <div class="form-group" ng-repeat="opt in vm.opts" ng-if="!vm.poll.allow_multiple">
           <label class="control control--radio w100p">

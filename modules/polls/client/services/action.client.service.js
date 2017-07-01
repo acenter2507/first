@@ -28,7 +28,7 @@
     Opts,
     Likes,
     Cmtlikes,
-    Pollusers,
+    Follows,
     PollsApi,
     VotesApi,
     CmtsApi
@@ -130,9 +130,25 @@
       });
     };
     this.save_like_cmt = likeCmt => {
-
     };
-    this.save_follow = polluser => {};
+    this.save_follow = follow => {
+      return new Promise((resolve, reject) => {
+        var rs_follow = new Follows(follow);
+        if (follow._id) {
+          rs_follow.following = !follow.following;
+          rs_follow.$update(successCb, errorCb);
+        } else {
+          rs_follow.following = true;
+          rs_follow.$save(successCb, errorCb);
+        }
+        function successCb(res) {
+          resolve(res);
+        }
+        function errorCb(err) {
+          reject(err);
+        }
+      });
+    };
     this.save_report = report => {};
     this.save_vote = (vote, opts) => {
       return new Promise((resolve, reject) => {

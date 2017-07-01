@@ -17,9 +17,13 @@
           <a class="undecorated-link" ui-sref="categorys.view({ categoryId: vm.poll.category._id })">
             {{vm.poll.category.name}}
           </a>
-          <a class="undecorated-link pull-right" ng-click="vm.toggle_follow_poll()">
-            <i class="fa fa-rss"></i>&nbsp;{{(vm.follow.following) ? 'Unfollow' : 'Follow'}}
-            <md-tooltip md-direction="bottom">{{(vm.follow.following) ? 'Following this poll' : 'You not follow this poll yet'}}</md-tooltip>
+          <a class="undecorated-link pull-right" ng-click="vm.follow_poll()" ng-show="vm.follow.following">
+            <i class="fa fa-rss"></i>&nbsp;Unfollow
+            <md-tooltip md-direction="bottom">Following this poll</md-tooltip>
+          </a>
+          <a class="undecorated-link pull-right" ng-click="vm.follow_poll()" ng-hide="vm.follow.following">
+            <i class="fa fa-rss"></i>&nbsp;Follow
+            <md-tooltip md-direction="bottom">You not follow this poll yet</md-tooltip>
           </a>
         </p>
         <a class="undecorated-link" ui-sref="polls.view({ pollId: vm.poll._id })">

@@ -562,7 +562,7 @@
         });
       }
     };
-
+    var cnt = 0;
     vm.focus_cmt = () => {
       if (!vm.isLogged) {
         alert('You must login to comment.');

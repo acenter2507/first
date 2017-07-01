@@ -37,13 +37,6 @@
       return new Promise((resolve, reject) => {
         //(successCb, errorCb);
         function successCb(res) {
-          Socket.emit('cmt_add', {
-            pollId: pollId,
-            cmtId: res._id,
-            isNew: isNew,
-            from: Authentication.user._id,
-            to: res.to
-          });
           resolve(res);
         }
         function errorCb(err) {
@@ -87,25 +80,25 @@
         if (like._id) {
           switch (like.type) {
             case 0:
-              cnt = (type == 1) ? 1 : -1;
+              cnt = (type === 1) ? 1 : -1;
               like.type = type;
               break;
 
             case 1:
-              cnt = (type == 1) ? -1 : -2;
-              like.type = (type == 1) ? 0 : 2;
+              cnt = (type === 1) ? -1 : -2;
+              like.type = (type === 1) ? 0 : 2;
               break;
 
             case 2:
-              cnt = (type == 1) ? 2 : 1;
-              like.type = (type == 1) ? 1 : 0;
+              cnt = (type === 1) ? 2 : 1;
+              like.type = (type === 1) ? 1 : 0;
               break;
           }
           rs_like = new Likes(like);
           rs_like.cnt = cnt;
           rs_like.$update(successCb, successCb);
         } else {
-          cnt = (type == 1) ? 1 : -1;
+          cnt = (type === 1) ? 1 : -1;
           rs_like = new Likes({
             poll: poll._id,
             user: Authentication.user._id,

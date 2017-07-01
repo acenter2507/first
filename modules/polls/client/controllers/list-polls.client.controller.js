@@ -202,7 +202,7 @@
     };
 
     vm.toggle_follow_poll = (poll) => {
-      
-    }
+
+    };
   }
 })();

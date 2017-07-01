@@ -20,6 +20,7 @@
 
   function Action(
     Authentication,
+    Socket,
     Polls,
     Tags,
     Cmts,

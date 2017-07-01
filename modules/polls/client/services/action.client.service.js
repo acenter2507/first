@@ -86,11 +86,12 @@
     this.save_vote = (vote, opts) => {
       return new Promise((resolve, reject) => {
         vote.opts = opts;
-        if (vm.vote._id) {
-          vm.vote.updateCnt += 1;
-          vm.vote.$update(successCb, errorCb);
+        var rs_vote = new Votes(vote);
+        if (vote._id) {
+          rs_vote.updateCnt += 1;
+          rs_vote.$update(successCb, errorCb);
         } else {
-          vm.vote.$save(successCb, errorCb);
+          rs_vote.$save(successCb, errorCb);
         }
         function successCb(res) {
           Socket.emit('poll_vote', { pollId: res.poll });

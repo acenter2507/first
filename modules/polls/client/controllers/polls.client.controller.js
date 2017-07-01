@@ -335,7 +335,7 @@
       return new Promise((resolve, reject) => {
         PollsApi.findOwnerVote(poll._id)
           .then(res => {
-            vm.ownVote = res && res.data ? new Votes(res.data) : new Votes({ poll: vm.poll._id });
+            vm.ownVote = res && res.data ? res.data : { poll: vm.poll._id };
             return vm.ownVote._id ? loadVoteoopts(vm.ownVote._id) : resolve();
           })
           .then(res => {

@@ -3,19 +3,19 @@
   angular.module('polls').factory('Action', Action);
 
   Action.$inject = [
-    // 'Authentication',
-    // 'Socket',
-    // 'PollsService',
-    // 'TagsService',
-    // 'CmtsService',
-    // 'VotesService',
-    // 'OptsService',
-    // 'LikesService',
-    // 'CmtlikesService',
-    // 'PollusersService',
-    // 'PollsApi',
-    // 'VotesApi',
-    // 'CmtsApi'
+    'Authentication',
+    'Socket',
+    'PollsService',
+    'TagsService',
+    'CmtsService',
+    'VotesService',
+    'OptsService',
+    'LikesService',
+    'CmtlikesService',
+    'PollusersService',
+    'PollsApi',
+    'VotesApi',
+    'CmtsApi'
   ];
 
   function Action(

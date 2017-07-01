@@ -471,3 +471,11 @@ md-menu-content {
   font-size: 1.5em;
 
 }
+.fade-in-out {
+  transition: 1s linear all;  
+  opacity: 1;
+}
+
+.fade-in-out.ng-hide {
+  opacity: 0;
+}

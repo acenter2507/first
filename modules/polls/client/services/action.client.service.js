@@ -44,6 +44,7 @@
         }
       });
     };
+    // Lưu comment vào db
     this.save_cmt = (pollId, cmt) => {
       return new Promise((resolve, reject) => {
         var rs_cmt = new Cmts(cmt);
@@ -72,6 +73,16 @@
         }
       });
     };
+    this.delete_cmt = cmt => {
+      return new Promise((resolve, reject) => {
+        var rs_cmt = new Cmts(cmt);
+        rs_cmt.$remove(() => {
+          Socket.emit('cmt_del', { pollId: cmt.poll, cmtId: cmt._id });
+          return resolve();
+        });
+      });
+    };
+    // Lưu like vào db
     this.save_like = (like, type, poll) => {
       // type: 1: like - 2: dislike;
       return new Promise((resolve, reject) => {
@@ -124,6 +135,7 @@
     };
     this.save_like_cmt = likeCmt => {
     };
+    // Lưu follow vào db
     this.save_follow = follow => {
       return new Promise((resolve, reject) => {
         var rs_follow = new Follows(follow);
@@ -143,6 +155,7 @@
       });
     };
     this.save_report = report => {};
+    // Lưu vote vào db
     this.save_vote = (vote, opts) => {
       return new Promise((resolve, reject) => {
         vote.opts = opts;
@@ -155,6 +168,23 @@
         }
         function successCb(res) {
           Socket.emit('poll_vote', { pollId: res.poll });
+          resolve(res);
+        }
+        function errorCb(err) {
+          reject(err);
+        }
+      });
+    };
+    this.save_opt = opt => {
+      return new Promise((resolve, reject) => {
+        var rs_opt = new Opts(opt);
+        if (opt._id) {
+          rs_opt.$update(successCb, errorCb);
+        } else {
+          rs_opt.$save(successCb, errorCb);
+        }
+        function successCb(res) {
+          Socket.emit('opts_request', { pollId: res.poll });
           resolve(res);
         }
         function errorCb(err) {

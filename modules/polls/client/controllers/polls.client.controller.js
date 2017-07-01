@@ -428,6 +428,7 @@
       Action.save_vote(vm.ownVote, vm.selectedOpts)
         .then(res => {
           vm.ownVote = res;
+          $scope.$apply();
         })
         .catch(err => {
           vm.selectedOpts = angular.copy(vm.votedOpts) || [];
@@ -453,7 +454,6 @@
       }
     };
 
-    // LIKES
     vm.like_poll = type => {
       if (!vm.isLogged) {
         return alert('You must login to like this poll.');
@@ -465,16 +465,15 @@
         return alert('You cannot interact continuously.');
       }
       vm.like_processing = true;
-      var bk_like = _.clone(vm.like);
       Action.save_like(vm.like, type, vm.poll)
         .then(res => {
           vm.poll.likeCnt = res.likeCnt;
           vm.like = res.like;
           vm.like_processing = false;
           bk_like = null;
+          $scope.$apply();
         })
         .catch(err => {
-          vm.like = _.clone(bk_like);
           vm.like_processing = false;
           bk_like = null;
           alert(err);
@@ -509,7 +508,7 @@
 
     // Click button add option
     vm.input_opt = opt => {
-      vm.tmp_opt = (!opt) ? new Opts({ poll: vm.poll._id, title: '', body: '', status: 2 }) : new Opts(opt);
+      vm.tmp_opt = (!opt) ? { poll: vm.poll._id, title: '', body: '', status: 2 } : opt;
       vm.opt_aside.$promise.then(vm.opt_aside.show);
     };
     // Click button save option
@@ -518,18 +517,14 @@
         $scope.$broadcast('show-errors-check-validity', 'vm.form.optForm');
         return false;
       }
-      vm.tmp_opt.$save(successCallback, errorCallback);
-
-      function successCallback(res) {
-        vm.opt_aside.$promise.then(vm.opt_aside.hide);
-        Socket.emit('opts_request', { pollId: vm.poll._id });
-        alert('Your option is waiting for approve. Thanks.');
-      }
-
-      function errorCallback(err) {
-        console.log(err);
-        //vm.error = res.data.message;
-      }
+      Action.save_opt(vm.tmp_opt)
+        .then(res => {
+          vm.opt_aside.$promise.then(vm.opt_aside.hide);
+          alert('Your option is waiting for approve. Thanks.');
+        })
+        .catch(err => {
+          alert(err);
+        });
     };
 
     vm.save_cmt = save_cmt;
@@ -557,10 +552,7 @@
 
     vm.delete_cmt = cmt => {
       if (confirm('Do you want to delete this comment ?')) {
-        var rs_cmt = new Cmts(cmt);
-        rs_cmt.$remove(() => {
-          Socket.emit('cmt_del', { pollId: vm.poll._id, cmtId: cmt._id });
-        });
+        Action.delete_cmt(cmt);
       }
     };
     var cnt = 0;

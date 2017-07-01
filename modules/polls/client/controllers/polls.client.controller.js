@@ -415,6 +415,9 @@
         .catch(err => {
           alert('' + err);
           vm.cmt_processing = false;
+        })
+        .finally(() => {
+          $scope.$apply();
         });
     }
 
@@ -432,6 +435,9 @@
         .catch(err => {
           vm.selectedOpts = angular.copy(vm.votedOpts) || [];
           alert(err);
+        })
+        .finally(() => {
+          $scope.$apply();
         });
     }
 
@@ -492,6 +498,9 @@
         })
         .catch(err => {
           alert(err);
+        })
+        .finally(() => {
+          $scope.$apply();
         });
     };
 

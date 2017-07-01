@@ -384,7 +384,11 @@
     function makeRemaining() {
       vm.close_duration = Remaining.duration(vm.poll.close);
       vm.isClosed = moment(vm.poll.close).isBefore(new moment());
-      vm.remaining = $timeout(makeRemaining, 1000);
+      if (!vm.isClosed) {
+        vm.remaining = $timeout(makeRemaining, 1000);
+      } else {
+        $timeout.cancel(vm.remaining);
+      }
     }
 
     // Thao tác databse

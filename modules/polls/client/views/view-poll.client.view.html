@@ -187,10 +187,10 @@
         <div class="clearfix"></div>
       </div>
       <!-- Vote card -->
-      <div class="card fade-in-out" ng-if="vm.isClosed">
+      <div class="card" ng-if="vm.isClosed">
         <h4 ng-if="vm.isClosed">This poll has closed.</h4>
       </div>
-      <div class="card fade-in-out" ng-if="!vm.isClosed">
+      <div class="card" ng-if="!vm.isClosed">
         <span class="text-muted" ng-if="!vm.opts.length || vm.opts.length === 0"><small>No option to vote.</small></span>
         <div class="poll-remaining" ng-if="vm.poll.close">
           <p>{{vm.close_duration.days}}d:{{vm.close_duration.hours}}h:{{vm.close_duration.minutes}}m:{{vm.close_duration.seconds}}s</p>

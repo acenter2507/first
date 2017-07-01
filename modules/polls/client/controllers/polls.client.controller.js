@@ -470,12 +470,10 @@
           vm.poll.likeCnt = res.likeCnt;
           vm.like = res.like;
           vm.like_processing = false;
-          bk_like = null;
           $scope.$apply();
         })
         .catch(err => {
           vm.like_processing = false;
-          bk_like = null;
           alert(err);
         });
     };

@@ -73,6 +73,7 @@
         }
       });
     };
+    // Xóa comment
     this.delete_cmt = cmt => {
       return new Promise((resolve, reject) => {
         var rs_cmt = new Cmts(cmt);

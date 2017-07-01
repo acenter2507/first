@@ -79,8 +79,59 @@
         }
       });
     };
-    this.save_like = like => {};
-    this.save_like_cmt = likeCmt => {};
+    this.save_like = (like, type, poll) => {
+      // type: 1: like - 2: dislike;
+      return new Promise((resolve, reject) => {
+        var cnt = 0;
+        var rs_like;
+        if (like._id) {
+          switch (like.type) {
+            case 0:
+              cnt = (type == 1) ? 1 : -1;
+              like.type = type;
+              break;
+
+            case 1:
+              cnt = (type == 1) ? -1 : -2;
+              like.type = (type == 1) ? 0 : 2;
+              break;
+
+            case 2:
+              cnt = (type == 1) ? 2 : 1;
+              like.type = (type == 1) ? 1 : 0;
+              break;
+          }
+          rs_like = new Likes(like);
+          rs_like.cnt = cnt;
+          rs_like.$update(successCb, successCb);
+        } else {
+          cnt = (type == 1) ? 1 : -1;
+          rs_like = new Likes({
+            poll: poll._id,
+            user: Authentication.user._id,
+            type: type
+          });
+          rs_like.cnt = cnt;
+          rs_like.$save(successCb, successCb);
+        }
+        function successCb(res) {
+          Socket.emit('poll_like', {
+            pollId: poll._id,
+            likeCnt: res.likeCnt,
+            from: Authentication.user._id,
+            to: poll.user._id,
+            type: res.like.type
+          });
+          resolve(res);
+        }
+        function errorCb(err) {
+          reject(err);
+        }
+      });
+    };
+    this.save_like_cmt = likeCmt => {
+
+    };
     this.save_follow = polluser => {};
     this.save_report = report => {};
     this.save_vote = (vote, opts) => {

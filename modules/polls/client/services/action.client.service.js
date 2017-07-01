@@ -41,12 +41,12 @@
         if (cmt._id) {
           rs_cmt.isEdited = true;
           rs_cmt.updated = new Date();
-          promise = rs_cmt.$update().$promise;
+          promise = rs_cmt.$update(successCb, errorCb);
         } else {
           rs_cmt.poll = pollId;
-          promise = rs_cmt.$save().$promise;
+          promise = rs_cmt.$save(successCb, errorCb);
         }
-        promise.then(res => {
+        function successCb(res) {
           Socket.emit('cmt_add', {
             pollId: pollId,
             cmtId: res._id,
@@ -54,22 +54,11 @@
             from: Authentication.user._id,
             to: res.to
           });
-          return resolve(res);
-        }).catch(err => {
-          return reject(err);
-        });
-        // function successCb(res) {
-        // }
-        // function errorCb(err) {
-        //   Socket.emit('cmt_add', {
-        //     pollId: pollId,
-        //     cmtId: res._id,
-        //     isNew: isNew,
-        //     from: Authentication.user._id,
-        //     to: res.to
-        //   });
-        //   resolve(res);
-        // }
+          resolve(res);
+        }
+        function errorCb(err) {
+          reject(err);
+        }
       });
     };
     this.save_like = like => {};

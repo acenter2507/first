@@ -411,45 +411,15 @@
       }
       vm.cmt_processing = true;
       Action.save_cmt(vm.poll._id, vm.tmp_cmt)
-      .then(res => {
-        vm.tmp_cmt = {};
-        vm.cmt_processing = false;
-        vm.cmt_typing = false;
-      })
-      .catch(err => {
-        alert('' + err);
-        vm.cmt_processing = false;
-      });
-      // var rs_cmt = new Cmts(vm.tmp_cmt);
-      // var isNew = !vm.tmp_cmt._id ? true : false;
-      // if (vm.tmp_cmt._id) {
-      //   rs_cmt.isEdited = true;
-      //   rs_cmt.updated = new Date();
-      //   rs_cmt.$update(successCallback, errorCallback);
-      // } else {
-      //   rs_cmt.poll = vm.poll._id;
-      //   rs_cmt.$save(successCallback, errorCallback);
-      // }
-
-      // function successCallback(res) {
-      //   Socket.emit('cmt_add', {
-      //     pollId: vm.poll._id,
-      //     cmtId: res._id,
-      //     isNew: isNew,
-      //     from: vm.authentication.user._id,
-      //     to: res.to
-      //   });
-      //   vm.tmp_cmt = {};
-      //   vm.cmt_processing = false;
-      //   vm.cmt_typing = false;
-      // }
-
-      // function errorCallback(err) {
-      //   alert('' + err);
-      //   vm.cmt_processing = false;
-
-      //   //vm.error = res.data.message;
-      // }
+        .then(res => {
+          vm.tmp_cmt = {};
+          vm.cmt_processing = false;
+          vm.cmt_typing = false;
+        })
+        .catch(err => {
+          alert('' + err);
+          vm.cmt_processing = false;
+        });
     }
 
     function save_vote() {
@@ -459,23 +429,21 @@
       if (!vm.selectedOpts.length || vm.selectedOpts.length === 0) {
         return alert('You must vote at least one option.');
       }
-      vm.ownVote.opts = vm.selectedOpts;
-      if (vm.ownVote._id) {
-        vm.ownVote.updateCnt += 1;
-        vm.ownVote.$update(successCallback, errorCallback);
-      } else {
-        vm.ownVote.$save(successCallback, errorCallback);
-      }
-
-      function successCallback(res) {
-        vm.ownVote = res;
-        Socket.emit('poll_vote', { pollId: vm.poll._id });
-      }
-
-      function errorCallback(res) {
-        vm.selectedOpts = angular.copy(vm.votedOpts) || [];
-        alert('Vote failed');
-      }
+      // vm.ownVote.opts = vm.selectedOpts;
+      // if (vm.ownVote._id) {
+      //   vm.ownVote.updateCnt += 1;
+      //   vm.ownVote.$update(successCallback, errorCallback);
+      // } else {
+      //   vm.ownVote.$save(successCallback, errorCallback);
+      // }
+      Action.save_vote(vm.ownVote, vm.selectedOpts)
+        .then(res => {
+          vm.ownVote = res;
+        })
+        .catch(err => {
+          vm.selectedOpts = angular.copy(vm.votedOpts) || [];
+          alert(err);
+        });
     }
 
     // Tính phần trăm tỉ lệ vote cho opt

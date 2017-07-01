@@ -33,6 +33,24 @@
     VotesApi,
     CmtsApi
   ) {
+    this.template = () => {
+      return new Promise((resolve, reject) => {
+        //(successCb, errorCb);
+        function successCb(res) {
+          Socket.emit('cmt_add', {
+            pollId: pollId,
+            cmtId: res._id,
+            isNew: isNew,
+            from: Authentication.user._id,
+            to: res.to
+          });
+          resolve(res);
+        }
+        function errorCb(err) {
+          reject(err);
+        }
+      });
+    };
     this.save_cmt = (pollId, cmt) => {
       return new Promise((resolve, reject) => {
         var rs_cmt = new Cmts(cmt);
@@ -65,7 +83,24 @@
     this.save_like_cmt = likeCmt => {};
     this.save_follow = polluser => {};
     this.save_report = report => {};
-    this.save_vote = vote => {};
+    this.save_vote = (vote, opts) => {
+      return new Promise((resolve, reject) => {
+        vote.opts = opts;
+        if (vm.vote._id) {
+          vm.vote.updateCnt += 1;
+          vm.vote.$update(successCb, errorCb);
+        } else {
+          vm.vote.$save(successCb, errorCb);
+        }
+        function successCb(res) {
+          Socket.emit('poll_vote', { pollId: res.poll });
+          resolve(res);
+        }
+        function errorCb(err) {
+          reject(err);
+        }
+      });
+    };
     return this;
   }
 })();

@@ -429,13 +429,6 @@
       if (!vm.selectedOpts.length || vm.selectedOpts.length === 0) {
         return alert('You must vote at least one option.');
       }
-      // vm.ownVote.opts = vm.selectedOpts;
-      // if (vm.ownVote._id) {
-      //   vm.ownVote.updateCnt += 1;
-      //   vm.ownVote.$update(successCallback, errorCallback);
-      // } else {
-      //   vm.ownVote.$save(successCallback, errorCallback);
-      // }
       Action.save_vote(vm.ownVote, vm.selectedOpts)
         .then(res => {
           vm.ownVote = res;

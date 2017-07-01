@@ -25,7 +25,8 @@
     '$bsAside',
     '$mdDialog',
     '$timeout',
-    'Remaining'
+    'Remaining',
+    'Action'
   ];
 
   function PollsController(
@@ -50,7 +51,8 @@
     $bsAside,
     $mdDialog,
     $timeout,
-    Remaining
+    Remaining,
+    Action
   ) {
     var vm = this;
     vm.authentication = Authentication;
@@ -408,36 +410,46 @@
         return alert('Please wait until all comment be submit.');
       }
       vm.cmt_processing = true;
-      var rs_cmt = new Cmts(vm.tmp_cmt);
-      var isNew = !vm.tmp_cmt._id ? true : false;
-      if (vm.tmp_cmt._id) {
-        rs_cmt.isEdited = true;
-        rs_cmt.updated = new Date();
-        rs_cmt.$update(successCallback, errorCallback);
-      } else {
-        rs_cmt.poll = vm.poll._id;
-        rs_cmt.$save(successCallback, errorCallback);
-      }
-
-      function successCallback(res) {
-        Socket.emit('cmt_add', {
-          pollId: vm.poll._id,
-          cmtId: res._id,
-          isNew: isNew,
-          from: vm.authentication.user._id,
-          to: res.to
-        });
+      Action.save_cmt(vm.poll._id, vm.tmp_cmt)
+      .then(res => {
         vm.tmp_cmt = {};
         vm.cmt_processing = false;
         vm.cmt_typing = false;
-      }
-
-      function errorCallback(err) {
+      })
+      .catch(err => {
         alert('' + err);
         vm.cmt_processing = false;
+      });
+      // var rs_cmt = new Cmts(vm.tmp_cmt);
+      // var isNew = !vm.tmp_cmt._id ? true : false;
+      // if (vm.tmp_cmt._id) {
+      //   rs_cmt.isEdited = true;
+      //   rs_cmt.updated = new Date();
+      //   rs_cmt.$update(successCallback, errorCallback);
+      // } else {
+      //   rs_cmt.poll = vm.poll._id;
+      //   rs_cmt.$save(successCallback, errorCallback);
+      // }
 
-        //vm.error = res.data.message;
-      }
+      // function successCallback(res) {
+      //   Socket.emit('cmt_add', {
+      //     pollId: vm.poll._id,
+      //     cmtId: res._id,
+      //     isNew: isNew,
+      //     from: vm.authentication.user._id,
+      //     to: res.to
+      //   });
+      //   vm.tmp_cmt = {};
+      //   vm.cmt_processing = false;
+      //   vm.cmt_typing = false;
+      // }
+
+      // function errorCallback(err) {
+      //   alert('' + err);
+      //   vm.cmt_processing = false;
+
+      //   //vm.error = res.data.message;
+      // }
     }
 
     function save_vote() {

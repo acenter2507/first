@@ -192,5 +192,17 @@
     function socketHandlePollCreate(res) {
       console.log('Has new poll');
     }
+
+    // Thao tác khác
+    vm.report_poll = (poll) => {
+
+    };
+    vm.report_poll = (poll) => {
+
+    };
+
+    vm.toggle_follow_poll = (poll) => {
+      
+    }
   }
 })();

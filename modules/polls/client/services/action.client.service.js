@@ -77,5 +77,6 @@
     this.save_follow = polluser => {};
     this.save_report = report => {};
     this.save_vote = vote => {};
+    return this;
   }
 })();

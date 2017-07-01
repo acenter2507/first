@@ -194,18 +194,6 @@
         <span class="text-muted" ng-if="!vm.opts.length || vm.opts.length === 0"><small>No option to vote.</small></span>
         <div class="poll-remaining" ng-if="vm.poll.close">
           <p>{{vm.close_duration.days}}d:{{vm.close_duration.hours}}h:{{vm.close_duration.minutes}}m:{{vm.close_duration.seconds}}s</p>
-            <!--<div class="poll-remaining-time bg-primary">
-              <span>{{vm.close_duration.days}}</span>
-            </div>
-            <div class="poll-remaining-time bg-danger">
-              <span>{{vm.close_duration.hours}}</span>
-            </div>
-            <div class="poll-remaining-time bg-success">
-              <span>{{vm.close_duration.minutes}}</span>
-            </div>
-            <div class="poll-remaining-time bg-success">
-              <span>{{vm.close_duration.seconds}}</span>
-            </div><span class="middle"></span>-->
         </div>
         <div class="form-group" ng-repeat="opt in vm.opts" ng-if="!vm.poll.allow_multiple">
           <label class="control control--radio w100p">

@@ -1,5 +1,5 @@
 <div class="card" id="poll_chart_card" ng-if="vm.opts.length > 0">
-  <canvas id="pie" class="chart-base"
+  <canvas id="pie" class="chart-base mg10t mg10b"
     chart-data="vm.chart.data"
     chart-labels="vm.chart.labels"
     chart-options="vm.chart.options"
@@ -7,7 +7,6 @@
     chart-type ="vm.chart.type"
     ng-if="vm.votedTotal > 0">
   </canvas>
-  <div class="h10"></div>
   <div ng-repeat="opt in vm.opts | orderBy: '-voteCnt'">
     <div class="opt_color pull-left" ng-style="{'background-color': opt.color}">
       <md-tooltip md-direction="bottom">{{opt.title + ':' + opt.voteCnt}}</md-tooltip>

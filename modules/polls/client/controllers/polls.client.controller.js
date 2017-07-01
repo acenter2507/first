@@ -57,6 +57,7 @@
     vm.isLogged = vm.authentication.user ? true : false;
     vm.poll = poll;
     vm.poll.close = vm.poll.close ? moment(vm.poll.close) : vm.poll.close;
+    vm.isClosed = moment(vm.poll.close).isAfter(new moment());
     vm.poll.tags = [];
     vm.form = {};
     
@@ -382,6 +383,7 @@
 
     function makeRemaining() {
       vm.close_duration = Remaining.duration(vm.poll.close);
+      vm.isClosed = moment(vm.poll.close).isAfter(new moment());
       vm.remaining = $timeout(makeRemaining, 1000);
     }
 
@@ -865,6 +867,13 @@
         if (!_.contains(vm.selectedOpts, id)) {
           vm.selectedOpts = [id];
         }
+      }
+    };
+    vm.is_can_vote = () => {
+      if (vm.poll.allow_guest) {
+        return true;
+      } else {
+        return vm.isLogged;
       }
     };
     vm.is_voted = function(id) {

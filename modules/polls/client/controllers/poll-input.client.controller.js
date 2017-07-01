@@ -44,7 +44,6 @@
     vm.isLogged = vm.authentication.user ? true : false;
     vm.poll = poll;
     vm.poll.close = vm.poll.close ? moment(vm.poll.close) : vm.poll.close;
-    vm.isClosed = moment(vm.poll.close).isAfter(new moment());
     vm.poll.tags = [];
     vm.categorys = Categorys.query();
     vm.bk_poll = _.clone(poll);

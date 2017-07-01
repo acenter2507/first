@@ -3,9 +3,8 @@
     <div class="col-xs-12">
       <div class="form-group">
         <a ui-sref="polls.create" class="btn btn-primary pull-right">Create poll</a>
-        <a ng-if="vm.poll.isCurrentUserOwner || vm.poll.canEdit" ui-sref="polls.edit({ pollId: vm.poll._id })" class="btn btn-primary pull-right">Edit</a>
-        <a ng-if="vm.poll.isCurrentUserOwner || vm.poll.canEdit" ui-sref="polls.edit({ pollId: vm.poll._id })" class="btn btn-primary pull-right">Edit</a>
-        <a ng-if="vm.poll.isCurrentUserOwner || vm.poll.canEdit" ng-click="vm.remove()" class="btn btn-primary pull-right">Delete</a>
+        <a ng-if="vm.poll.isCurrentUserOwner || vm.poll.canEdit" ui-sref="polls.edit({ pollId: vm.poll._id })" class="btn btn-primary pull-right mg10r">Edit</a>
+        <a ng-if="vm.poll.isCurrentUserOwner || vm.poll.canEdit" ng-click="vm.remove()" class="btn btn-primary pull-right mg10r">Delete</a>
       </div>
     </div>
   </div>

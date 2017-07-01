@@ -45,11 +45,11 @@
   </div>
   <div class="post-footer">
     <small class="like_tools">
-      <a class="undecorated-link" ng-click="vm.like_cmt(cmt)" ng-show="cmt.like.type == 1"><i class="fa fa-thumbs-o-up"></i>&nbsp;Like</a>
-     <span class="span_btn" ng-click="vm.like_cmt(cmt)" ng-show="cmt.like.type != 1"><i class="fa fa-thumbs-o-up"></i>&nbsp;Like</span>
+      <a class="undecorated-link" ng-click="vm.like_cmt(cmt, 1)" ng-show="cmt.like.type == 1"><i class="fa fa-thumbs-o-up"></i>&nbsp;Like</a>
+     <span class="span_btn" ng-click="vm.like_cmt(cmt, 1)" ng-show="cmt.like.type != 1"><i class="fa fa-thumbs-o-up"></i>&nbsp;Like</span>
       <span class="mg5l mg5r" ng-bind="cmt.likeCnt"></span>
-      <a class="undecorated-link" ng-click="vm.dislike_cmt(cmt)" ng-show="cmt.like.type == 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>&nbsp;Dislike</a>
-      <span class="span_btn" ng-click="vm.dislike_cmt(cmt)" ng-show="cmt.like.type != 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>&nbsp;Dislike</span>
+      <a class="undecorated-link" ng-click="vm.like_cmt(cmt, 2)" ng-show="cmt.like.type == 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>&nbsp;Dislike</a>
+      <span class="span_btn" ng-click="vm.like_cmt(cmt, 2)" ng-show="cmt.like.type != 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>&nbsp;Dislike</span>
     </small>
     <small class="pull-right">
       <a ng-if="vm.isLogged && cmt.user._id !== vm.authentication.user._id" class="undecorated-link" ng-click="vm.reply_cmt(cmt)" >Reply</a>

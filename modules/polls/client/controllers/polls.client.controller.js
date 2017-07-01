@@ -362,7 +362,7 @@
       return new Promise((resolve, reject) => {
         PollsApi.findPolluser(vm.poll._id)
           .then(res => {
-            vm.follow = res.data || { poll: vm.poll._id, user: vm.authentication.user._id };
+            vm.follow = res.data || { poll: vm.poll._id };
             return resolve(res);
           })
           .catch(err => {
@@ -561,7 +561,7 @@
       vm.cmt_typing = true;
     };
 
-    vm.like_cmt = cmt => {
+    vm.like_cmt = (cmt, type) => {
       if (!vm.isLogged) {
         return alert('You must login to like this poll.');
       }
@@ -571,132 +571,143 @@
       if (vm.like_processing) {
         return alert('You cannot interact continuously.');
       }
-      var rs_like;
       vm.like_processing = true;
-      var bk_like = _.clone(cmt.like);
-      if (cmt.like._id) {
-        switch (cmt.like.type) {
-          case 0:
-            cnt = 1;
-            cmt.like.type = 1;
-            break;
-
-          case 1:
-            cnt = -1;
-            cmt.like.type = 0;
-            break;
-
-          case 2:
-            cnt = 2;
-            cmt.like.type = 1;
-            break;
-        }
-        cmt.likeCnt += cnt;
-        rs_like = new Cmtlikes(cmt.like);
-        rs_like.cnt = cnt;
-        rs_like.$update(successCallback, errorCallback);
-      } else {
-        cnt = 1;
-        cmt.likeCnt += cnt;
-        rs_like = new Cmtlikes({ cmt: cmt._id, type: 1 });
-        rs_like.cnt = cnt;
-        rs_like.$save(successCallback, errorCallback);
-      }
-
-      function successCallback(res) {
-        cmt.like = res.like;
-        Socket.emit('cmt_like', {
-          pollId: vm.poll._id,
-          cmtId: cmt._id,
-          likeCnt: res.likeCnt,
-          from: vm.authentication.user._id,
-          to: cmt.user._id,
-          type: res.like.type
+      Action.save_like_cmt(cmt, type)
+        .then(res => {
+          cmt.like = res.like;
+          cmt.likeCnt = res.likeCnt;
+          vm.like_processing = false;
+          $scope.$apply();
+        })
+        .catch(err => {
+          vm.like_processing = false;
+          alert(err);
         });
-        vm.like_processing = false;
-        bk_like = null;
-        cnt = 0;
-        console.log('liked');
-      }
+      // var rs_like;
+      // var bk_like = _.clone(cmt.like);
+      // if (cmt.like._id) {
+      //   switch (cmt.like.type) {
+      //     case 0:
+      //       cnt = 1;
+      //       cmt.like.type = 1;
+      //       break;
 
-      function errorCallback(err) {
-        cmt.likeCnt -= cnt;
-        cmt.like = _.clone(bk_like);
-        vm.like_processing = false;
-        bk_like = null;
-        cnt = 0;
-        console.log(err);
-      }
+      //     case 1:
+      //       cnt = -1;
+      //       cmt.like.type = 0;
+      //       break;
+
+      //     case 2:
+      //       cnt = 2;
+      //       cmt.like.type = 1;
+      //       break;
+      //   }
+      //   cmt.likeCnt += cnt;
+      //   rs_like = new Cmtlikes(cmt.like);
+      //   rs_like.cnt = cnt;
+      //   rs_like.$update(successCallback, errorCallback);
+      // } else {
+      //   cnt = 1;
+      //   cmt.likeCnt += cnt;
+      //   rs_like = new Cmtlikes({ cmt: cmt._id, type: 1 });
+      //   rs_like.cnt = cnt;
+      //   rs_like.$save(successCallback, errorCallback);
+      // }
+
+      // function successCallback(res) {
+      //   cmt.like = res.like;
+      //   Socket.emit('cmt_like', {
+      //     pollId: vm.poll._id,
+      //     cmtId: cmt._id,
+      //     likeCnt: res.likeCnt,
+      //     from: vm.authentication.user._id,
+      //     to: cmt.user._id,
+      //     type: res.like.type
+      //   });
+      //   vm.like_processing = false;
+      //   bk_like = null;
+      //   cnt = 0;
+      //   console.log('liked');
+      // }
+
+      // function errorCallback(err) {
+      //   cmt.likeCnt -= cnt;
+      //   cmt.like = _.clone(bk_like);
+      //   vm.like_processing = false;
+      //   bk_like = null;
+      //   cnt = 0;
+      //   console.log(err);
+      // }
     };
 
-    vm.dislike_cmt = cmt => {
-      if (!vm.isLogged) {
-        return alert('You must login to dislike this poll.');
-      }
-      if (vm.authentication.user._id === cmt.user._id) {
-        return alert('You cannot dislike your comment.');
-      }
-      if (vm.like_processing) {
-        return alert('You cannot interact continuously.');
-      }
+    // vm.dislike_cmt = cmt => {
+    //   if (!vm.isLogged) {
+    //     return alert('You must login to dislike this poll.');
+    //   }
+    //   if (vm.authentication.user._id === cmt.user._id) {
+    //     return alert('You cannot dislike your comment.');
+    //   }
+    //   if (vm.like_processing) {
+    //     return alert('You cannot interact continuously.');
+    //   }
 
-      var rs_dislike;
-      vm.like_processing = true;
-      var bk_like = _.clone(cmt.like);
-      if (cmt.like._id) {
-        switch (cmt.like.type) {
-          case 0:
-            cnt = -1;
-            cmt.like.type = 2;
-            break;
+    //   var rs_dislike;
+    //   vm.like_processing = true;
+    //   var bk_like = _.clone(cmt.like);
+    //   if (cmt.like._id) {
+    //     switch (cmt.like.type) {
+    //       case 0:
+    //         cnt = -1;
+    //         cmt.like.type = 2;
+    //         break;
 
-          case 1:
-            cnt = -2;
-            cmt.like.type = 2;
-            break;
+    //       case 1:
+    //         cnt = -2;
+    //         cmt.like.type = 2;
+    //         break;
 
-          case 2:
-            cnt = 1;
-            cmt.like.type = 0;
-            break;
-        }
-        cmt.likeCnt += cnt;
-        rs_dislike = new Cmtlikes(cmt.like);
-        rs_dislike.cnt = cnt;
-        rs_dislike.$update(successCallback, errorCallback);
-      } else {
-        cnt = -1;
-        cmt.likeCnt += cnt;
-        rs_dislike = new Cmtlikes({ cmt: cmt._id, type: 2 });
-        rs_dislike.cnt = cnt;
-        rs_dislike.$save(successCallback, errorCallback);
-      }
+    //       case 2:
+    //         cnt = 1;
+    //         cmt.like.type = 0;
+    //         break;
+    //     }
+    //     cmt.likeCnt += cnt;
+    //     rs_dislike = new Cmtlikes(cmt.like);
+    //     rs_dislike.cnt = cnt;
+    //     rs_dislike.$update(successCallback, errorCallback);
+    //   } else {
+    //     cnt = -1;
+    //     cmt.likeCnt += cnt;
+    //     rs_dislike = new Cmtlikes({ cmt: cmt._id, type: 2 });
+    //     rs_dislike.cnt = cnt;
+    //     rs_dislike.$save(successCallback, errorCallback);
+    //   }
 
-      function successCallback(res) {
-        cmt.like = res.like;
-        Socket.emit('cmt_like', {
-          pollId: vm.poll._id,
-          cmtId: cmt._id,
-          likeCnt: res.likeCnt,
-          from: vm.authentication.user._id,
-          to: cmt.user._id,
-          type: res.like.type
-        });
-        vm.like_processing = false;
-        bk_like = null;
-        cnt = 0;
-        console.log('liked');
-      }
+    //   function successCallback(res) {
+    //     cmt.like = res.like;
+    //     Socket.emit('cmt_like', {
+    //       pollId: vm.poll._id,
+    //       cmtId: cmt._id,
+    //       likeCnt: res.likeCnt,
+    //       from: vm.authentication.user._id,
+    //       to: cmt.user._id,
+    //       type: res.like.type
+    //     });
+    //     vm.like_processing = false;
+    //     bk_like = null;
+    //     cnt = 0;
+    //     console.log('liked');
+    //   }
 
-      function errorCallback(err) {
-        cmt.likeCnt -= cnt;
-        cmt.like = _.clone(bk_like);
-        vm.like_processing = false;
-        bk_like = null;
-        cnt = 0;
-        console.log(err);
-      }
-    };
+    //   function errorCallback(err) {
+    //     cmt.likeCnt -= cnt;
+    //     cmt.like = _.clone(bk_like);
+    //     vm.like_processing = false;
+    //     bk_like = null;
+    //     cnt = 0;
+    //     console.log(err);
+    //   }
+    // };
 
     // VOTE
     vm.checked = function(id) {

@@ -58,9 +58,8 @@
       });
     };
     this.get_polls = (_page) => {
-      var page = _page || 0;
       return new Promise((resolve, reject) => {
-        var page = page || 0;
+        var page = _page || 0;
         PollsApi.findPolls(page)
           .then(res => {
             return resolve(res);
@@ -70,7 +69,7 @@
           });
       });
     };
-    this.get_hot_polls = (page) => {
+    this.get_hot_polls = (_page) => {
       return new Promise((resolve, reject) => {
         var page = _page || 0;
         PollsApi.findHotPolls(page)

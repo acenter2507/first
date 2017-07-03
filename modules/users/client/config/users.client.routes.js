@@ -73,6 +73,7 @@
       .state('profile', {
         url: '/profile/:userId',
         templateUrl: 'modules/users/client/views/public/profile.client.view.html',
+        controller: 'ProfileController',
         resolve: {
           userResolve: getUser
         }

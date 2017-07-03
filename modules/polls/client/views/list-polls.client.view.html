@@ -30,13 +30,13 @@
                   <li><a ui-sref="polls.view({ pollId: poll._id })"><i class="fa fa-eye"></i>&nbsp;View</a></li>
                   <li ng-if="vm.isLogged">
                     <a ng-click="vm.toggle_follow_poll(poll)" class="undecorated-link">
-                      <i class="fa fa-rss"></i>&nbsp;{{(poll.polluser.following) ? 'Unfollow' : 'Follow'}}
+                      <i class="fa fa-rss"></i>&nbsp;{{(poll.follow.following) ? 'Unfollow' : 'Follow'}}
                     </a>
                   </li>
-                  <li ng-if="vm.isLogged && !poll.isCurrentUserOwner"><a class="undecorated-link" ng-click="vm.report_poll(poll)"><i class="fa fa-exclamation-circle"></i>&nbsp;Report poll</a></li>
+                  <li ng-if="vm.isLogged && !poll.isCurrentUserOwner && !poll.reported"><a class="undecorated-link" ng-click="vm.report_poll(poll)"><i class="fa fa-exclamation-circle"></i>&nbsp;Report poll</a></li>
                   <li ng-if="vm.isLogged && poll.isCurrentUserOwner"><a class="undecorated-link" ui-sref="polls.edit({ pollId: poll._id })"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
                   <li ng-if="vm.isLogged && poll.isCurrentUserOwner"><a class="undecorated-link" ng-click="vm.delete_poll(poll)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
-                  <li ng-if="vm.isLogged && !poll.isCurrentUserOwner"><a class="undecorated-link" ng-click="vm.add_bookmark(poll)"><i class="fa fa-bookmark"></i>&nbsp;Bookmark poll</a></li>
+                  <li ng-if="vm.isLogged && !poll.isCurrentUserOwner && !poll.bookmarked"><a class="undecorated-link" ng-click="vm.bookmark_poll(poll)"><i class="fa fa-bookmark"></i>&nbsp;Bookmark poll</a></li>
                 </ul>
               </md-menu-content>
             </md-menu>

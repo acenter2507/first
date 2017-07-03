@@ -96,7 +96,7 @@
       loadOwnerVote();
       // load following info
       if (vm.isLogged) {
-        loadPolluser();
+        loadFollow();
         loadReported();
         loadBookmarked();
       }
@@ -194,7 +194,7 @@
     }
 
     function loadVoteopts(pollId) {
-      Action.get_vote_for_opt(pollId)
+      Action.get_voteopts(pollId)
         .then(res => {
           vm.votes = res.data.votes || [];
           vm.voteopts = res.data.voteopts || [];
@@ -331,7 +331,7 @@
       });
     } 
 
-    function loadPolluser() {
+    function loadFollow() {
       return new Promise((resolve, reject) => {
         Action.get_follow(vm.poll._id)
           .then(res => {

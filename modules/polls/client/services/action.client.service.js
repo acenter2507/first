@@ -55,11 +55,36 @@
         });
       });
     };
-    // api get comments
-    this.get_cmts = (pollId, _page) => {
+    this.get_polls = (_page) => {
       var page = _page || 0;
       return new Promise((resolve, reject) => {
         var page = page || 0;
+        PollsApi.findPolls(page)
+          .then(res => {
+            return resolve(res);
+          })
+          .catch(err => {
+            return reject(err);
+          });
+      });
+    };
+    this.get_hot_polls = (page) => {
+      return new Promise((resolve, reject) => {
+        var page = _page || 0;
+        PollsApi.findHotPolls(page)
+          .then(res => {
+            return resolve(res);
+          })
+          .catch(err => {
+            return reject(err);
+          });
+      });
+    };
+
+    // api get comments
+    this.get_cmts = (pollId, _page) => {
+      return new Promise((resolve, reject) => {
+        var page = _page || 0;
         PollsApi.findCmts(pollId, page)
           .then(res => {
             return resolve(res);
@@ -121,6 +146,7 @@
         });
       });
     };
+
     this.get_like = pollId => {
       return new Promise((resolve, reject) => {
         PollsApi.findPollLike(pollId)
@@ -182,36 +208,7 @@
         }
       });
     };
-    this.get_follow = pollId => {
-      return new Promise((resolve, reject) => {
-        PollsApi.findPolluser(pollId)
-          .then(res => {
-            return resolve(res);
-          })
-          .catch(err => {
-            return reject(err);
-          });
-      });
-    };
-    // Lưu follow vào db
-    this.save_follow = follow => {
-      return new Promise((resolve, reject) => {
-        var rs_follow = new Follows(follow);
-        if (follow._id) {
-          rs_follow.following = !follow.following;
-          rs_follow.$update(successCb, errorCb);
-        } else {
-          rs_follow.following = true;
-          rs_follow.$save(successCb, errorCb);
-        }
-        function successCb(res) {
-          resolve(res);
-        }
-        function errorCb(err) {
-          reject(err);
-        }
-      });
-    };
+
     this.get_opts_for_vote = voteId => {
       return new Promise((resolve, reject) => {
         VotesApi.findOpts(voteId)
@@ -235,7 +232,7 @@
       });
     };
     // get all vote for option in poll
-    this.get_vote_for_opt = pollId => {
+    this.get_voteopts = pollId => {
       return new Promise((resolve, reject) => {
         PollsApi.findVoteopts(pollId)
           .then(res => {
@@ -266,6 +263,7 @@
         }
       });
     };
+
     // api get all options in poll
     this.get_opts = pollId => {
       return new Promise((resolve, reject) => {
@@ -296,6 +294,7 @@
         }
       });
     };
+
     // api get comments
     this.get_like_cmt = cmtId => {
       return new Promise((resolve, reject) => {
@@ -388,6 +387,37 @@
       });
     };
 
+    this.get_follow = pollId => {
+      return new Promise((resolve, reject) => {
+        PollsApi.findPolluser(pollId)
+          .then(res => {
+            return resolve(res);
+          })
+          .catch(err => {
+            return reject(err);
+          });
+      });
+    };
+    // Lưu follow vào db
+    this.save_follow = follow => {
+      return new Promise((resolve, reject) => {
+        var rs_follow = new Follows(follow);
+        if (follow._id) {
+          rs_follow.following = !follow.following;
+          rs_follow.$update(successCb, errorCb);
+        } else {
+          rs_follow.following = true;
+          rs_follow.$save(successCb, errorCb);
+        }
+        function successCb(res) {
+          resolve(res);
+        }
+        function errorCb(err) {
+          reject(err);
+        }
+      });
+    };
+
     // get info bookmark of user
     this.get_bookmark = pollId => {
       return new Promise((resolve, reject) => {
@@ -425,6 +455,15 @@
           .catch(err => {
             return reject(err);
           });
+      });
+    };
+
+    // get categorys
+    this.get_categorys = () => {
+      return new Promise((resolve, reject) => {
+        Categorys.query().$promise.then(res => {
+          return resolve(res);
+        });
       });
     };
     return this;

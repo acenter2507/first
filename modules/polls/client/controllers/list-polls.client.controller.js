@@ -161,7 +161,7 @@
         }
         Action.get_follow(poll._id)
           .then(res => {
-            poll.follow = res.data || { poll: vm.poll._id };
+            poll.follow = res.data || { poll: poll._id };
             return resolve(res.data);
           })
           .catch(err => {

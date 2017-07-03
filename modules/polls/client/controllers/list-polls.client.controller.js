@@ -109,6 +109,7 @@
         })
         .then(res => {
           vm.new_data = [];
+          console.log(vm.polls);
         })
         .catch(err => {
           vm.busy = false;

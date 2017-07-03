@@ -64,11 +64,12 @@
           var promises = [];
           vm.new_data.forEach(poll => {
             poll.isCurrentUserOwner = vm.isLogged && vm.authentication.user._id === poll.user._id;
-            poll.chart = {};
-            poll.chart.options = { responsive: true };
-            poll.chart.colors = [];
-            poll.chart.labels = [];
-            poll.chart.data = [];
+            poll.chart = {
+              options: { responsive: true },
+              colors: [],
+              labels: [],
+              data: []
+            };
             promises.push(loadOpts(poll));
           });
           return Promise.all(promises);
@@ -78,6 +79,14 @@
           vm.polls = _.union(vm.polls, vm.new_data);
           vm.page += 1;
           vm.busy = false;
+          
+          var promises = [];
+          vm.new_data.forEach(poll => {
+            promises.push(loadVoteOpts(poll));
+          });
+          return Promise.all(promises);
+        })
+        .then(res => {
           // Load polluser (Người dùng đã follow poll hay chưa)
           var promises = [];
           vm.new_data.forEach(poll => {
@@ -124,8 +133,17 @@
         Action.get_opts(poll._id)
           .then(res => {
             poll.opts = _.where(res.data, { status: 1 }) || [];
-            return Action.get_voteopts(poll._id);
+            return resolve(poll);
           })
+          .catch(err => {
+            return reject(err);
+          });
+      });
+    }
+
+    function loadVoteOpts(poll) {
+      return new Promise((resolve, reject) => {
+        Action.get_voteopts(poll._id)
           .then(res => {
             poll.votes = res.data.votes || [];
             poll.voteopts = res.data.voteopts || [];
@@ -142,7 +160,6 @@
           .catch(err => {
             return reject(err);
           });
-      });
     }
 
     function loadFollow(poll) {

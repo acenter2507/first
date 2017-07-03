@@ -160,6 +160,7 @@
           .catch(err => {
             return reject(err);
           });
+      });
     }
 
     function loadFollow(poll) {

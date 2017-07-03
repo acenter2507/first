@@ -15,6 +15,7 @@
     'PollusersService',
     'ReportsService',
     'BookmarksService',
+    'CategorysService',
     'PollsApi',
     'VotesApi',
     'CmtsApi'
@@ -33,6 +34,7 @@
     Follows,
     Reports,
     Bookmarks,
+    Categorys,
     PollsApi,
     VotesApi,
     CmtsApi

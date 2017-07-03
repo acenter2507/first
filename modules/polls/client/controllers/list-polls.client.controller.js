@@ -11,7 +11,8 @@
     'PollsService',
     'PollsApi',
     'PollusersService',
-    'CategorysService'
+    'CategorysService',
+    'Action'
   ];
 
   function PollsListController(
@@ -21,7 +22,8 @@
     PollsService,
     PollsApi,
     Pollusers,
-    Categorys
+    Categorys,
+    Action
   ) {
     var vm = this;
     vm.authentication = Authentication;

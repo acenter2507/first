@@ -50,6 +50,12 @@ exports.invokeRolesPolicies = function() {
     }, {
       resources: '/api/findPolluser/:pollId',
       permissions: '*'
+    }, {
+      resources: '/api/findReport/:pollId',
+      permissions: '*'
+    }, {
+      resources: '/api/findBookmark/:pollId',
+      permissions: '*'
     }]
   }, {
     roles: ['user'],
@@ -88,6 +94,12 @@ exports.invokeRolesPolicies = function() {
       permissions: '*'
     }, {
       resources: '/api/findPolluser/:pollId',
+      permissions: '*'
+    }, {
+      resources: '/api/findReport/:pollId',
+      permissions: '*'
+    }, {
+      resources: '/api/findBookmark/:pollId',
       permissions: '*'
     }]
   }, {

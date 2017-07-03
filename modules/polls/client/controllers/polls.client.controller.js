@@ -72,6 +72,8 @@
     vm.cmt_sort = vm.cmt_sorts[0];
     vm.enter_send = false;
 
+    vm.reported = false;
+    vm.bookmarked = false;
     vm.like = {};
     vm.follow = {};
     vm.votes = [];
@@ -115,6 +117,8 @@
       // load following info
       if (vm.isLogged) {
         loadPolluser();
+        loadReported();
+        loadBookmarked();
       }
       if (!vm.isClosed && vm.poll.close) {
         loadRemaining();
@@ -372,6 +376,30 @@
       });
     }
 
+    function loadReported() {
+      return new Promise((resolve, reject) => {
+        PollsApi.findReport(vm.poll._id)
+          .then(res => {
+            vm.reported = (res.data) ? res.data : false;
+          })
+          .catch(err => {
+            alert(err);
+          });
+      });
+    }
+
+    function loadBookmarked() {
+      return new Promise((resolve, reject) => {
+        PollsApi.findBookmark(vm.poll._id)
+          .then(res => {
+            vm.bookmarked = (res.data) ? res.data : false;
+          })
+          .catch(err => {
+            alert(err);
+          });
+      });
+    }
+
     function loadRemaining() {
       vm.remaining = $timeout(makeRemaining, 1000);
       $scope.$on('$destroy', () => {
@@ -493,6 +521,35 @@
         });
     };
 
+    vm.report_poll = () => {
+      if (vm.reported) {
+        return alert('You are already report this poll');
+      }
+      Action.save_report(vm.poll._id)
+        .then(res => {
+          vm.reported = (res) ? true : false;
+          $scope.$apply();
+          console.log('report success:');
+        })
+        .catch(err => {
+          alert(err);
+        });
+    }
+
+    vm.bookmark_poll = () => {
+      if (vm.bookmarked) {
+        return alert('You are already report this poll');
+      }
+      Action.save_bookmark(vm.poll._id)
+        .then(res => {
+          vm.bookmarked = (res) ? true : false;
+          $scope.$apply();
+          console.log('report success:');
+        })
+        .catch(err => {
+          alert(err);
+        });
+    }
     // OPTIONS
     vm.opt_aside = $bsAside({
       scope: $scope,
@@ -640,75 +697,6 @@
       // }
     };
 
-    // vm.dislike_cmt = cmt => {
-    //   if (!vm.isLogged) {
-    //     return alert('You must login to dislike this poll.');
-    //   }
-    //   if (vm.authentication.user._id === cmt.user._id) {
-    //     return alert('You cannot dislike your comment.');
-    //   }
-    //   if (vm.like_processing) {
-    //     return alert('You cannot interact continuously.');
-    //   }
-
-    //   var rs_dislike;
-    //   vm.like_processing = true;
-    //   var bk_like = _.clone(cmt.like);
-    //   if (cmt.like._id) {
-    //     switch (cmt.like.type) {
-    //       case 0:
-    //         cnt = -1;
-    //         cmt.like.type = 2;
-    //         break;
-
-    //       case 1:
-    //         cnt = -2;
-    //         cmt.like.type = 2;
-    //         break;
-
-    //       case 2:
-    //         cnt = 1;
-    //         cmt.like.type = 0;
-    //         break;
-    //     }
-    //     cmt.likeCnt += cnt;
-    //     rs_dislike = new Cmtlikes(cmt.like);
-    //     rs_dislike.cnt = cnt;
-    //     rs_dislike.$update(successCallback, errorCallback);
-    //   } else {
-    //     cnt = -1;
-    //     cmt.likeCnt += cnt;
-    //     rs_dislike = new Cmtlikes({ cmt: cmt._id, type: 2 });
-    //     rs_dislike.cnt = cnt;
-    //     rs_dislike.$save(successCallback, errorCallback);
-    //   }
-
-    //   function successCallback(res) {
-    //     cmt.like = res.like;
-    //     Socket.emit('cmt_like', {
-    //       pollId: vm.poll._id,
-    //       cmtId: cmt._id,
-    //       likeCnt: res.likeCnt,
-    //       from: vm.authentication.user._id,
-    //       to: cmt.user._id,
-    //       type: res.like.type
-    //     });
-    //     vm.like_processing = false;
-    //     bk_like = null;
-    //     cnt = 0;
-    //     console.log('liked');
-    //   }
-
-    //   function errorCallback(err) {
-    //     cmt.likeCnt -= cnt;
-    //     cmt.like = _.clone(bk_like);
-    //     vm.like_processing = false;
-    //     bk_like = null;
-    //     cnt = 0;
-    //     console.log(err);
-    //   }
-    // };
-
     // VOTE
     vm.checked = function(id) {
       if (vm.poll.allow_multiple) {
@@ -755,7 +743,6 @@
       );
     };
     vm.save_vote = save_vote;
-    
     vm.toggle_chart = () => {
       vm.chart.type = vm.chart.type === 'polarArea' ? 
         'pie' : 'polarArea';

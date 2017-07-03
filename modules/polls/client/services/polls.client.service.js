@@ -54,6 +54,9 @@
       },
       findPolluser: id => {
         return $http.get('/api/findPolluser/' + id);
+      },
+      findReport: id => {
+        return $http.get('/api/findReport/' + id);
       }
     };
   }

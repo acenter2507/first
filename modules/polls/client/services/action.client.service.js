@@ -13,6 +13,8 @@
     'LikesService',
     'CmtlikesService',
     'PollusersService',
+    'ReportsService',
+    'BookmarksService',
     'PollsApi',
     'VotesApi',
     'CmtsApi'
@@ -29,6 +31,8 @@
     Likes,
     Cmtlikes,
     Follows,
+    Reports,
+    Bookmarks,
     PollsApi,
     VotesApi,
     CmtsApi
@@ -92,25 +96,25 @@
         if (like._id) {
           switch (like.type) {
             case 0:
-              cnt = (type === 1) ? 1 : -1;
+              cnt = type === 1 ? 1 : -1;
               like.type = type;
               break;
 
             case 1:
-              cnt = (type === 1) ? -1 : -2;
-              like.type = (type === 1) ? 0 : 2;
+              cnt = type === 1 ? -1 : -2;
+              like.type = type === 1 ? 0 : 2;
               break;
 
             case 2:
-              cnt = (type === 1) ? 2 : 1;
-              like.type = (type === 1) ? 1 : 0;
+              cnt = type === 1 ? 2 : 1;
+              like.type = type === 1 ? 1 : 0;
               break;
           }
           rs_like = new Likes(like);
           rs_like.cnt = cnt;
           rs_like.$update(successCb, successCb);
         } else {
-          cnt = (type === 1) ? 1 : -1;
+          cnt = type === 1 ? 1 : -1;
           rs_like = new Likes({
             poll: poll._id,
             type: type
@@ -198,25 +202,25 @@
         if (cmt.like._id) {
           switch (cmt.like.type) {
             case 0:
-              cnt = (type === 1) ? 1 : -1;
+              cnt = type === 1 ? 1 : -1;
               cmt.like.type = type;
               break;
 
             case 1:
-              cnt = (type === 1) ? -1 : -2;
-              cmt.like.type = (type === 1) ? 0 : 2;
+              cnt = type === 1 ? -1 : -2;
+              cmt.like.type = type === 1 ? 0 : 2;
               break;
 
             case 2:
-              cnt = (type === 1) ? 2 : 1;
-              cmt.like.type = (type === 1) ? 1 : 0;
+              cnt = type === 1 ? 2 : 1;
+              cmt.like.type = type === 1 ? 1 : 0;
               break;
           }
           rs_like = new Cmtlikes(cmt.like);
           rs_like.cnt = cnt;
           rs_like.$update(successCb, successCb);
         } else {
-          cnt = (type === 1) ? 1 : -1;
+          cnt = type === 1 ? 1 : -1;
           rs_like = new Cmtlikes({
             cmt: cmt._id,
             type: type
@@ -240,7 +244,36 @@
         }
       });
     };
-    this.save_report = report => {};
+    this.save_report = pollId => {
+      return new Promise((resolve, reject) => {
+        var rs_report = new Reports({
+          poll: pollId
+        });
+        rs_report.$save(
+          res => {
+            return resolve(res);
+          },
+          err => {
+            return reject(err);
+          }
+        );
+      });
+    };
+    this.save_bookmark = pollId => {
+      return new Promise((resolve, reject) => {
+        var rs_bookmark = new Reports({
+          poll: pollId
+        });
+        rs_bookmark.$save(
+          res => {
+            return resolve(res);
+          },
+          err => {
+            return reject(err);
+          }
+        );
+      });
+    };
     return this;
   }
 })();

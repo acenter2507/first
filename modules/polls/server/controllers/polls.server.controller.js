@@ -11,6 +11,8 @@ var path = require('path'),
   Voteopt = mongoose.model('Voteopt'),
   Polltag = mongoose.model('Polltag'),
   Polluser = mongoose.model('Polluser'),
+  Report = mongoose.model('Report'),
+  Bookmark = mongoose.model('Bookmark'),
   Like = mongoose.model('Like'),
   errorHandler = require(path.resolve(
     './modules/core/server/controllers/errors.server.controller'
@@ -404,6 +406,49 @@ exports.findPolluser = function(req, res) {
   }
 };
 
+/**
+ * Find report
+ */
+exports.findReport = function(req, res) {
+  Report.findOne({
+    poll: req.poll._id,
+    user: req.user._id
+  }).exec((err, _report) => {
+    if (err) {
+      handleError(err);
+    } else {
+      var result = (_report) ? true : false;
+      res.jsonp(result);
+    }
+  });
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
+};
+
+/**
+ * Find report
+ */
+exports.findBookmark = function(req, res) {
+  Bookmark.findOne({
+    poll: req.poll._id,
+    user: req.user._id
+  }).exec((err, _bookmark) => {
+    if (err) {
+      handleError(err);
+    } else {
+      var result = (_bookmark) ? true : false;
+      res.jsonp(result);
+    }
+  });
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
+};
 /**
  * Poll middleware
  */

@@ -10,11 +10,9 @@ var mongoose = require('mongoose'),
  * Report Schema
  */
 var ReportSchema = new Schema({
-  name: {
-    type: String,
-    default: '',
-    required: 'Please fill Report name',
-    trim: true
+  poll: {
+    type : Schema.ObjectId,
+    ref : 'Poll'
   },
   created: {
     type: Date,

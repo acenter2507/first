@@ -35,3 +35,7 @@ app.init(function () {
 // 9. Danh sách các poll nổi bật
 // 10. Việc lưu và type post
 // 11. Hang doi cac request tu socket
+
+/* Bổ sung
+1. Chức năng nhập lý do khi report
+*/

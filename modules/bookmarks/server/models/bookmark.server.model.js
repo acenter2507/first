@@ -10,11 +10,9 @@ var mongoose = require('mongoose'),
  * Bookmark Schema
  */
 var BookmarkSchema = new Schema({
-  name: {
-    type: String,
-    default: '',
-    required: 'Please fill Bookmark name',
-    trim: true
+  poll: {
+    type : Schema.ObjectId,
+    ref : 'Poll'
   },
   created: {
     type: Date,

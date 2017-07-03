@@ -178,9 +178,10 @@
         Action.get_report(poll._id)
           .then(res => {
             poll.reported = (res.data) ? res.data : false;
+            return resolve(res.data);
           })
           .catch(err => {
-            alert(err);
+            return reject(err);
           });
       });
     }
@@ -190,9 +191,10 @@
         Action.get_bookmark(poll._id)
           .then(res => {
             poll.bookmarked = (res.data) ? res.data : false;
+            return resolve(res.data);
           })
           .catch(err => {
-            alert(err);
+            return reject(err);
           });
       });
     }

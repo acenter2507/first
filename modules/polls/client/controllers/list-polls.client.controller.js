@@ -164,6 +164,10 @@
 
     function loadReported(poll) {
       return new Promise((resolve, reject) => {
+        if (!vm.isLogged) {
+          poll.reported = false;
+          return resolve();
+        }
         Action.get_report(poll._id)
           .then(res => {
             poll.reported = (res.data) ? res.data : false;
@@ -177,6 +181,10 @@
 
     function loadBookmarked(poll) {
       return new Promise((resolve, reject) => {
+        if (!vm.isLogged) {
+          poll.bookmarked = false;
+          return resolve();
+        }
         Action.get_bookmark(poll._id)
           .then(res => {
             poll.bookmarked = (res.data) ? res.data : false;

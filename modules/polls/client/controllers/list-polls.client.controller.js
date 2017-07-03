@@ -124,19 +124,6 @@
         Action.get_opts(poll._id)
           .then(res => {
             poll.opts = _.where(res.data, { status: 1 }) || [];
-            if (!vm.isLogged) {
-              poll.votes = [];
-              poll.voteopts = [];
-              poll.total = 0;
-              poll.opts.forEach(opt => {
-                opt.voteCnt = _.where(poll.voteopts, { opt: opt._id }).length || 0;
-                opt.progressVal = calPercen(poll.total, opt.voteCnt);
-                poll.chart.data.push(opt.voteCnt);
-                poll.chart.colors.push(opt.color);
-                poll.chart.labels.push(opt.title);
-              });
-              return resolve(poll);
-            }
             return Action.get_voteopts(poll._id);
           })
           .then(res => {

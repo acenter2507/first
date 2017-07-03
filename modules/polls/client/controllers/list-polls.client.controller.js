@@ -161,7 +161,7 @@
         }
         Action.get_follow(poll._id)
           .then(res => {
-            poll.follow = res.data;
+            poll.follow = res.data || { poll: vm.poll._id };
             return resolve(res.data);
           })
           .catch(err => {
@@ -243,5 +243,20 @@
           alert(err);
         });
     };
+    vm.follow_poll = (poll) => {
+      if (!vm.isLogged) {
+        return alert('You must login to follow this poll.');
+      }
+      Action.save_follow(poll.follow)
+        .then(res => {
+          poll.follow = res;
+          $scope.$apply();
+          console.log('follow success:');
+        })
+        .catch(err => {
+          alert(err);
+        });
+    };
+
   }
 })();

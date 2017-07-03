@@ -477,7 +477,7 @@
 
     vm.follow_poll = () => {
       if (!vm.isLogged) {
-        return alert('You must login to dislike this poll.');
+        return alert('You must login to follow this poll.');
       }
       Action.save_follow(vm.follow)
         .then(res => {

@@ -154,13 +154,14 @@
         $state.go('poll.list');
       });
       Socket.on('poll_update', res => {
-        Polls.get({ pollId: vm.poll._id }, _poll => {
-          vm.poll = _poll;
-          vm.poll.close = vm.poll.close ? moment(vm.poll.close) : vm.poll.close;
-          vm.poll.tags = [];
-          loadOpts();
-          loadTags();
-        });
+        Action.get_poll(vm.poll._id)
+          .then(_poll => {
+            vm.poll = _poll;
+            vm.poll.close = vm.poll.close ? moment(vm.poll.close) : vm.poll.close;
+            vm.poll.tags = [];
+            loadOpts();
+            loadTags();
+          });
       });
       Socket.on('opts_update', res => {
         loadOpts();
@@ -182,7 +183,7 @@
     }
 
     function loadOpts() {
-      Acrion.get_opts(vm.poll._id)
+      Action.get_opts(vm.poll._id)
         .then(res => {
           vm.opts = _.where(res.data, { status: 1 });
           loadVoteopts(vm.poll._id);

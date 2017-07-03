@@ -48,9 +48,16 @@
         }
       });
     };
+    this.get_poll = pollId => {
+      return new Promise((resolve, reject) => {
+        Polls.get({ pollId: vm.poll._id }, _poll => {
+          return resolve(_poll)
+        });
+      });
+    };
     // api get comments
-    this.get_cmts = (pollId, page) => {
-      var page = page || 0;
+    this.get_cmts = (pollId, _page) => {
+      var page = _page || 0;
       return new Promise((resolve, reject) => {
         var page = page || 0;
         PollsApi.findCmts(pollId, page)
@@ -419,7 +426,7 @@
             return reject(err);
           });
       });
-    }
+    };
     return this;
   }
 })();

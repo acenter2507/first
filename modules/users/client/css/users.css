@@ -38,12 +38,13 @@
 .cover {
   background-size: cover;
   background-repeat: no-repeat;
-  height: 200px;
+  height: 250px;
   position: relative;
   margin-bottom: 1em;
   background-origin: content-box;
   width: 100%;
   position: absolute;
+  top: 50px;
   left: auto;
   right: 0;
 }

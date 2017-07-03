@@ -71,7 +71,7 @@
           vm.new_data = res.data || [];
           var promises = [];
           vm.new_data.forEach(poll => {
-            poll.isCurrentUserOwner = vm.isLogged && vm.authentication._id === poll.user._id;
+            poll.isCurrentUserOwner = vm.isLogged && vm.authentication.user._id === poll.user._id;
             poll.chart = {};
             poll.chart.options = { responsive: true };
             poll.chart.colors = [];

@@ -34,13 +34,13 @@
       <div class="card" id="poll_first_post_card">
         <div clas="post-header">
           <div class="user-avatar pull-left">
-            <a ui-sref="users.info({userId: vm.poll.user._id})" ng-if="vm.poll.user">
+            <a ui-sref="user({userId: vm.poll.user._id})" ng-if="vm.poll.user">
               <img src="{{vm.poll.user.profileImageURL}}" alt="{{vm.poll.user.displayName}}">
             </a>
             <img ng-if="!vm.poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
           </div>
           <span class="pull-left">
-            <strong><a class="undecorated-link" ui-sref="users.info({userId: vm.poll.user._id})" ng-if="vm.poll.user" ng-bind="vm.poll.user.displayName"></a></strong>
+            <strong><a class="undecorated-link" ui-sref="user({userId: vm.poll.user._id})" ng-if="vm.poll.user" ng-bind="vm.poll.user.displayName"></a></strong>
             <span ng-if="!vm.poll.user">Deleted User</span>
             <small class="text-muted">created on</small>
             <small class="text-muted" am-time-ago="vm.poll.created"></small>
@@ -126,8 +126,8 @@
               <div class="panel-body">
                 <small class="pull-right text-muted">
                   <span>Added by&nbsp;</span>
-                  <a class="undecorated-link" ui-sref="users.info({userId: opt.user._id})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>
-                  <a ui-sref="users.info({userId: vm.poll.user._id})" ng-if="opt.user"></a>
+                  <a class="undecorated-link" ui-sref="user({userId: opt.user._id})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>
+                  <a ui-sref="user({userId: vm.poll.user._id})" ng-if="opt.user"></a>
                   <span ng-if="!opt.user">Deleted User</span>
                   <span>&nbsp;on</span>
                   <span ng-bind="opt.created | date:'mediumDate'"></span>
@@ -143,11 +143,11 @@
       <div class="card" id="poll_cmt_form_card" ng-if="vm.isLogged">
         <div class="form-group">
           <span ng-if="vm.tmp_cmt.to">To:&nbsp;</span>
-          <a class="undecorated-link" ng-if="vm.tmp_cmt.to" ui-sref="users.info({userId: vm.tmp_cmt.to})" ng-bind="vm.tmp_cmt.toName"></a>
+          <a class="undecorated-link" ng-if="vm.tmp_cmt.to" ui-sref="user({userId: vm.tmp_cmt.to})" ng-bind="vm.tmp_cmt.toName"></a>
         </div>
         <div class="form-group">
           <div class="user-avatar pull-left" ng-if="vm.authentication.user">
-            <a ui-sref="users.info({userId: cmt.user._id})">
+            <a ui-sref="user({userId: cmt.user._id})">
             <img src="{{vm.authentication.user.profileImageURL}}" alt="{{vm.authentication.user.displayName}}">
           </a>
           </div>

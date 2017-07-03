@@ -20,7 +20,7 @@ app.init(function () {
   - Test các trường hợp socket => done
   - Lỗi chuyển state không được.
   - Sửa option không được. => done
-  - Các thao tác: unfollow, follow, bookmark, 
+  - Các thao tác: unfollow, follow, bookmark => done
 
 */
 // 1. Khi người vote là guest thì không push socket được. => done
@@ -28,11 +28,11 @@ app.init(function () {
 // 3. Tạo tooltip => done
 // 3. Lọc notif
 // 4. Infinity scroll => done
-// 5. Chức năng bookmark
+// 5. Chức năng bookmark => done
 // 6. Thêm tùy chọn vote multiple => done
 // 7. Chức năng private và share link
-// 8. Thêm nút bấm đổi kiểu biểu đồ tròn
-// 9. Danh sách các poll nổi bật
+// 8. Thêm nút bấm đổi kiểu biểu đồ tròn => done
+// 9. Danh sách các poll nổi bật => done
 // 10. Việc lưu và type post
 // 11. Hang doi cac request tu socket
 

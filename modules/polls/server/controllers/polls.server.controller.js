@@ -223,7 +223,7 @@ exports.findPolls = function(req, res) {
  */
 exports.findHotPolls = function(req, res) {
   var page = req.params.page || 0;
-  Poll.find()
+  Poll.find({ isPublic: true })
     .sort('-likeCnt')
     .populate('category', 'name icon')
     .populate('user', 'displayName profileImageURL')

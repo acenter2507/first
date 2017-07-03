@@ -50,8 +50,8 @@
     };
     this.get_poll = pollId => {
       return new Promise((resolve, reject) => {
-        Polls.get({ pollId: vm.poll._id }, _poll => {
-          return resolve(_poll)
+        Polls.get({ pollId: pollId }, _poll => {
+          return resolve(_poll);
         });
       });
     };

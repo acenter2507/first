@@ -1,0 +1,22 @@
+<section>
+  <div class="page-header">
+    <h1>Bookmarks</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="bookmark in vm.bookmarks"
+       ui-sref="bookmarks.view({ bookmarkId: bookmark._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="bookmark.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="bookmark.user" ng-bind="bookmark.user.displayName"></span>
+        <span ng-if="!bookmark.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="bookmark.name"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="vm.bookmarks.$resolved && !vm.bookmarks.length">
+    No Bookmarks yet, why don't you <a ui-sref="bookmarks.create">create one</a>?
+  </div>
+</section>

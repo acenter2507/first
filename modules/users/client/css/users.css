@@ -34,3 +34,16 @@
   min-height: 150px;
   max-height: 150px;
 }
+
+.cover {
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 200px;
+  position: relative;
+  margin-bottom: 1em;
+  background-origin: content-box;
+  width: 100%;
+  position: absolute;
+  left: auto;
+  right: 0;
+}

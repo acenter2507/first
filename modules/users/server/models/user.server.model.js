@@ -72,7 +72,7 @@ var UserSchema = new Schema({
   },
   coverImageURL: {
     type: String,
-    default: 'modules/users/client/img/covers/default.png'
+    default: 'modules/users/client/img/covers/default.jpg'
   },
   provider: {
     type: String,

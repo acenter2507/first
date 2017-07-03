@@ -11,6 +11,14 @@ angular.module('users').factory('Users', ['$resource',
   }
 ]);
 
+angular.module('users').factory('Profile', ['$resource',
+  function ($resource) {
+    return $resource('api/profile/:userId', {}, {
+      userId: '@_id'
+    });
+  }
+]);
+
 //TODO this should be Users service
 angular.module('users.admin').factory('Admin', ['$resource',
   function ($resource) {

@@ -502,7 +502,7 @@
         .catch(err => {
           alert(err);
         });
-    }
+    };
 
     vm.bookmark_poll = () => {
       if (vm.bookmarked) {
@@ -517,7 +517,7 @@
         .catch(err => {
           alert(err);
         });
-    }
+    };
     // OPTIONS
     vm.opt_aside = $bsAside({
       scope: $scope,

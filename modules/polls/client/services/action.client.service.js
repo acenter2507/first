@@ -48,6 +48,33 @@
         }
       });
     };
+    // api get comments
+    this.get_cmts = (pollId, page) => {
+      var page = page || 0;
+      return new Promise((resolve, reject) => {
+        var page = page || 0;
+        PollsApi.findCmts(pollId, page)
+          .then(res => {
+            return resolve(res);
+          })
+          .catch(err => {
+            return reject(err);
+          });
+      });
+    };
+    // api get comment by Id
+    this.get_cmt = (id) => {
+      return new Promise((resolve, reject) => {
+        var page = page || 0;
+        Cmts.get({ cmtId: id }).$promise
+          .then(res => {
+            return resolve(res);
+          })
+          .catch(err => {
+            return reject(err);
+          });
+      });
+    };
     // Lưu comment vào db
     this.save_cmt = (pollId, cmt) => {
       return new Promise((resolve, reject) => {
@@ -85,6 +112,17 @@
           Socket.emit('cmt_del', { pollId: cmt.poll, cmtId: cmt._id });
           return resolve();
         });
+      });
+    };
+    this.get_like = pollId => {
+      return new Promise((resolve, reject) => {
+        PollsApi.findPollLike(pollId)
+          .then(res => {
+            return resolve(res);
+          })
+          .catch(err => {
+            return reject(err);
+          });
       });
     };
     // Lưu like vào db
@@ -137,6 +175,17 @@
         }
       });
     };
+    this.get_follow = pollId => {
+      return new Promise((resolve, reject) => {
+        PollsApi.findPolluser(pollId)
+          .then(res => {
+            return resolve(res);
+          })
+          .catch(err => {
+            return reject(err);
+          });
+      });
+    };
     // Lưu follow vào db
     this.save_follow = follow => {
       return new Promise((resolve, reject) => {
@@ -154,6 +203,40 @@
         function errorCb(err) {
           reject(err);
         }
+      });
+    };
+    this.get_opts_for_vote = voteId => {
+      return new Promise((resolve, reject) => {
+        VotesApi.findOpts(voteId)
+          .then(res => {
+            return resolve(res);
+          })
+          .catch(err => {
+            return reject(err);
+          });
+      });
+    };
+    this.get_vote = pollId => {
+      return new Promise((resolve, reject) => {
+        PollsApi.findOwnerVote(pollId)
+          .then(res => {
+            return resolve(res);
+          })
+          .catch(err => {
+            return reject(err);
+          });
+      });
+    };
+    // get all vote for option in poll
+    this.get_vote_for_opt = pollId => {
+      return new Promise((resolve, reject) => {
+        PollsApi.findVoteopts(pollId)
+          .then(res => {
+            return resolve(res);
+          })
+          .catch(err => {
+            return reject(err);
+          });
       });
     };
     // Lưu vote vào db
@@ -176,6 +259,18 @@
         }
       });
     };
+    // api get all options in poll
+    this.get_opts = pollId => {
+      return new Promise((resolve, reject) => {
+        PollsApi.findOpts(pollId)
+        .then(res => {
+          return resolve(res);
+        })
+        .catch(err => {
+          return reject(err);
+        });
+      });
+    };
     // Lưu option
     this.save_opt = opt => {
       return new Promise((resolve, reject) => {
@@ -194,6 +289,19 @@
         }
       });
     };
+    // api get comments
+    this.get_like_cmt = cmtId => {
+      return new Promise((resolve, reject) => {
+        CmtsApi.findLike(cmtId)
+          .then(res => {
+            return resolve(res);
+          })
+          .catch(err => {
+            return reject(err);
+          });
+      });
+    };
+    // Save like of comment
     this.save_like_cmt = (cmt, type) => {
       // type: 1: like - 2: dislike;
       return new Promise((resolve, reject) => {
@@ -244,6 +352,19 @@
         }
       });
     };
+
+    // get report info for user in poll
+    this.get_report = pollId => {
+      return new Promise((resolve, reject) => {
+        PollsApi.findReport(pollId)
+          .then(res => {
+            return resolve(res);
+          })
+          .catch(err => {
+            return reject(err);
+          });
+      });
+    };
     this.save_report = pollId => {
       return new Promise((resolve, reject) => {
         var rs_report = new Reports({
@@ -257,6 +378,19 @@
             return reject(err);
           }
         );
+      });
+    };
+
+    // get info bookmark of user
+    this.get_bookmark = pollId => {
+      return new Promise((resolve, reject) => {
+        PollsApi.findBookmark(pollId)
+          .then(res => {
+            return resolve(res);
+          })
+          .catch(err => {
+            return reject(err);
+          });
       });
     };
     this.save_bookmark = pollId => {
@@ -274,6 +408,18 @@
         );
       });
     };
+    // get all tags in poll
+    this.get_tags = pollId => {
+      return new Promise((resolve, reject) => {
+        PollsApi.findTags(pollId)
+          .then(res => {
+            return resolve(res);
+          })
+          .catch(err => {
+            return reject(err);
+          });
+      });
+    }
     return this;
   }
 })();

@@ -9,19 +9,9 @@
     '$window',
     'Authentication',
     'pollResolve',
-    'PollsService',
-    'PollsApi',
-    'TagsService',
-    'CmtsService',
-    'VotesService',
-    'VotesApi',
-    'OptsService',
-    'CmtsApi',
-    'CmtlikesService',
     'Socket',
     '$bsModal',
     '$bsAside',
-    '$mdDialog',
     '$timeout',
     'Remaining',
     'Action'
@@ -33,19 +23,9 @@
     $window,
     Authentication,
     poll,
-    Polls,
-    PollsApi,
-    Tags,
-    Cmts,
-    Votes,
-    VotesApi,
-    Opts,
-    CmtsApi,
-    Cmtlikes,
     Socket,
     $bsModal,
     $bsAside,
-    $mdDialog,
     $timeout,
     Remaining,
     Action
@@ -202,7 +182,7 @@
     }
 
     function loadOpts() {
-      PollsApi.findOpts(vm.poll._id)
+      Acrion.get_opts(vm.poll._id)
         .then(res => {
           vm.opts = _.where(res.data, { status: 1 });
           loadVoteopts(vm.poll._id);
@@ -213,7 +193,7 @@
     }
 
     function loadVoteopts(pollId) {
-      PollsApi.findVoteopts(pollId)
+      Action.get_vote_for_opt(pollId)
         .then(res => {
           vm.votes = res.data.votes || [];
           vm.voteopts = res.data.voteopts || [];
@@ -240,7 +220,7 @@
           cmt.like = {};
           return resolve(cmt);
         } else {
-          CmtsApi.findLike(cmt._id)
+          Action.get_like_cmt(cmt._id)
             .then(res => {
               cmt.like = res.data || {};
               return resolve(cmt);
@@ -256,7 +236,7 @@
     function loadCmts() {
       if (vm.stopped || vm.busy) return;
       vm.busy = true;
-      PollsApi.findCmts(vm.poll._id, vm.page)
+      Action.get_cmts(vm.poll._id, vm.page)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
             vm.stopped = true;
@@ -285,9 +265,9 @@
 
     function loadNewCmt(cmtId) {
       return new Promise((resolve, reject) => {
-        Cmts.get({ cmtId: cmtId })
-          .$promise.then(_cmt => {
-            return loadLikeCmt(_cmt);
+        Action.get_cmt(cmtId)
+          .then(res => {
+            return loadLikeCmt(res);
           })
           .then(_cmt => {
             var item = _.findWhere(vm.cmts, { _id: _cmt._id });
@@ -306,7 +286,7 @@
     }
 
     function loadTags() {
-      PollsApi.findTags(poll._id)
+      Action.get_tags(poll._id)
         .then(res => {
           angular.forEach(res.data, (polltag, index) => {
             vm.poll.tags.push(polltag.tag);
@@ -322,7 +302,7 @@
         vm.like = {};
         return false;
       }
-      PollsApi.findPollLike(poll._id)
+      Action.get_like(poll._id)
         .then(res => {
           vm.like = res.data || {};
         })
@@ -333,10 +313,10 @@
 
     function loadOwnerVote() {
       return new Promise((resolve, reject) => {
-        PollsApi.findOwnerVote(poll._id)
+        Action.get_vote(poll._id)
           .then(res => {
             vm.ownVote = res && res.data ? res.data : { poll: vm.poll._id };
-            return vm.ownVote._id ? loadVoteoopts(vm.ownVote._id) : resolve();
+            return vm.ownVote._id ? Action.get_opts_for_vote(vm.ownVote._id) : resolve();
           })
           .then(res => {
             vm.votedOpts = res && res.data ? _.pluck(res.data, 'opt') : [];
@@ -348,23 +328,11 @@
             return reject();
           });
       });
-    }
-
-    function loadVoteoopts(voteId) {
-      return new Promise((resolve, reject) => {
-        VotesApi.findOpts(vm.ownVote._id)
-          .then(res => {
-            resolve(res);
-          })
-          .catch(err => {
-            reject(err);
-          });
-      });
-    }
+    } 
 
     function loadPolluser() {
       return new Promise((resolve, reject) => {
-        PollsApi.findPolluser(vm.poll._id)
+        Action.get_follow(vm.poll._id)
           .then(res => {
             vm.follow = res.data || { poll: vm.poll._id };
             return resolve(res);
@@ -378,7 +346,7 @@
 
     function loadReported() {
       return new Promise((resolve, reject) => {
-        PollsApi.findReport(vm.poll._id)
+        Action.get_report(vm.poll._id)
           .then(res => {
             vm.reported = (res.data) ? res.data : false;
           })
@@ -390,7 +358,7 @@
 
     function loadBookmarked() {
       return new Promise((resolve, reject) => {
-        PollsApi.findBookmark(vm.poll._id)
+        Action.get_bookmark(vm.poll._id)
           .then(res => {
             vm.bookmarked = (res.data) ? res.data : false;
           })
@@ -640,61 +608,6 @@
           vm.like_processing = false;
           alert(err);
         });
-      // var rs_like;
-      // var bk_like = _.clone(cmt.like);
-      // if (cmt.like._id) {
-      //   switch (cmt.like.type) {
-      //     case 0:
-      //       cnt = 1;
-      //       cmt.like.type = 1;
-      //       break;
-
-      //     case 1:
-      //       cnt = -1;
-      //       cmt.like.type = 0;
-      //       break;
-
-      //     case 2:
-      //       cnt = 2;
-      //       cmt.like.type = 1;
-      //       break;
-      //   }
-      //   cmt.likeCnt += cnt;
-      //   rs_like = new Cmtlikes(cmt.like);
-      //   rs_like.cnt = cnt;
-      //   rs_like.$update(successCallback, errorCallback);
-      // } else {
-      //   cnt = 1;
-      //   cmt.likeCnt += cnt;
-      //   rs_like = new Cmtlikes({ cmt: cmt._id, type: 1 });
-      //   rs_like.cnt = cnt;
-      //   rs_like.$save(successCallback, errorCallback);
-      // }
-
-      // function successCallback(res) {
-      //   cmt.like = res.like;
-      //   Socket.emit('cmt_like', {
-      //     pollId: vm.poll._id,
-      //     cmtId: cmt._id,
-      //     likeCnt: res.likeCnt,
-      //     from: vm.authentication.user._id,
-      //     to: cmt.user._id,
-      //     type: res.like.type
-      //   });
-      //   vm.like_processing = false;
-      //   bk_like = null;
-      //   cnt = 0;
-      //   console.log('liked');
-      // }
-
-      // function errorCallback(err) {
-      //   cmt.likeCnt -= cnt;
-      //   cmt.like = _.clone(bk_like);
-      //   vm.like_processing = false;
-      //   bk_like = null;
-      //   cnt = 0;
-      //   console.log(err);
-      // }
     };
 
     // VOTE

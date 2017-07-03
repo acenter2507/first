@@ -94,6 +94,7 @@
           return Promise.all(promises);
         })
         .then(res => {
+          console.log('Load follow ok', vm.polls);
           var promises = [];
           vm.new_data.forEach(poll => {
             promises.push(loadReported(poll));
@@ -101,6 +102,7 @@
           return Promise.all(promises);
         })
         .then(res => {
+          console.log('Load report ok', vm.polls);
           var promises = [];
           vm.new_data.forEach(poll => {
             promises.push(loadBookmarked(poll));
@@ -109,7 +111,7 @@
         })
         .then(res => {
           vm.new_data = [];
-          console.log(vm.polls);
+          console.log('Load bookmark ok', vm.polls);
         })
         .catch(err => {
           vm.busy = false;

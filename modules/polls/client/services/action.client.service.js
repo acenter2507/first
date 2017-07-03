@@ -261,7 +261,7 @@
     };
     this.save_bookmark = pollId => {
       return new Promise((resolve, reject) => {
-        var rs_bookmark = new Reports({
+        var rs_bookmark = new Bookmarks({
           poll: pollId
         });
         rs_bookmark.$save(

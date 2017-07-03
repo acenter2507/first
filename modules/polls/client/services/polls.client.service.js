@@ -57,6 +57,9 @@
       },
       findReport: id => {
         return $http.get('/api/findReport/' + id);
+      },
+      findBookmark: id => {
+        return $http.get('/api/findBookmark/' + id);
       }
     };
   }

@@ -538,7 +538,7 @@
 
     vm.bookmark_poll = () => {
       if (vm.bookmarked) {
-        return alert('You are already report this poll');
+        return alert('You are already bookmark this poll');
       }
       Action.save_bookmark(vm.poll._id)
         .then(res => {

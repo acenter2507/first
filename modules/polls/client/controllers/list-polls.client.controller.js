@@ -8,10 +8,6 @@
     '$scope',
     'Socket',
     'Authentication',
-    'PollsService',
-    'PollsApi',
-    'PollusersService',
-    'CategorysService',
     'Action'
   ];
 
@@ -19,10 +15,6 @@
     $scope,
     Socket,
     Authentication,
-    PollsService,
-    PollsApi,
-    Pollusers,
-    Categorys,
     Action
   ) {
     var vm = this;

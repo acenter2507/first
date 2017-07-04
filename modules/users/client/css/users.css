@@ -76,11 +76,11 @@
 
 @media (max-width: 479px) {
   .cover {
-    height: 120px;
+    height: 100px;
   }
   .profile-avatar {
     left: calc(50% - 32px);
-    top: 98px;
+    top: 68px;
     height: 64px;
     width: 64px;
   }

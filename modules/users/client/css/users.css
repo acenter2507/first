@@ -62,3 +62,19 @@
   height: 100%;
   border-radius: 5px;
 }
+
+@media (min-width: 768px) {
+  .cover {
+    height: 200px;
+  }
+  .profile-avatar {
+    left: calc(50% - 48px);
+    top: 152px;
+    height: 96px;
+    width: 96px;
+  }
+}
+@media (min-width: 992px) {
+}
+@media (min-width: 1200px) {
+}

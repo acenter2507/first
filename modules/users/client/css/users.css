@@ -100,6 +100,15 @@
   .cover .container {
     height: 200px;
   }
+  .cover .container .profile-menu {
+    bottom: -18px;
+    height: 36px;
+    width: 36px;
+  }
+  .cover .container .btn-fab {
+    height: 36px;
+    width: 36px;
+  }
   .profile-avatar {
     top: 152px;
     height: 96px;
@@ -111,6 +120,15 @@
   .cover,
   .cover .container {
     height: 100px;
+  }
+  .cover .container .profile-menu {
+    bottom: -12px;
+    height: 24px;
+    width: 24px;
+  }
+  .cover .container .btn-fab {
+    height: 24px;
+    width: 24px;
   }
   .profile-avatar {
     top: 68px;

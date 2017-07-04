@@ -117,6 +117,12 @@
   .cover .container {
     height: 200px;
   }
+  .profile-info {
+    margin-top: 200px;
+  }
+  .profile-info .breadcrumb {
+    margin-left: 91px;
+  }
   .cover .container .profile-menu {
     bottom: -18px;
     height: 36px;
@@ -147,6 +153,12 @@
   .profile-name {
     left: 70px;
     bottom: 2px;
+  }
+  .profile-info {
+    margin-top: 100px;
+  }
+  .profile-info .breadcrumb {
+    margin-left: 55px;
   }
   .profile-name span {
     font-size: 18px;

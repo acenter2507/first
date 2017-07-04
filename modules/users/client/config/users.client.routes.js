@@ -17,7 +17,7 @@
         }
       })
       .state('profile.info', {
-        url: '/profile/:userId/info',
+        url: '/info',
         templateUrl: 'modules/users/client/views/profiles/profile.info.client.view.html'
       })
       .state('profile.polls', {

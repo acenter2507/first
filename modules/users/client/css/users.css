@@ -121,3 +121,32 @@
 }
 @media (min-width: 1200px) {
 }*/
+
+
+.profile-list {
+  margin: 0;
+  padding: 0;
+}
+
+.profile-list li {
+  list-style:none;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.profile-list li a {
+  color: #666;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.menu-list li:hover {
+  color: #267ED5;
+}
+
+.menu-list li a:focus {
+  outline: none;
+  text-decoration: none;
+  cursor: pointer;
+}

@@ -31,6 +31,7 @@ angular.module('users').controller('ProfilePollsController', [
             $scope.stoped = false;
             return;
           }
+          console.log(res);
           $scope.new_data = res || [];
           var promises = [];
           $scope.new_data.forEach(poll => {

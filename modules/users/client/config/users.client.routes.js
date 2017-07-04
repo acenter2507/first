@@ -25,7 +25,7 @@
         templateUrl: 'modules/users/client/views/profiles/profile.polls.client.view.html'
       })
       .state('profile.cmts', {
-        url: '/cmts',
+        url: '/comments',
         templateUrl: 'modules/users/client/views/profiles/profile.cmts.client.view.html'
       })
       .state('profile.votes', {

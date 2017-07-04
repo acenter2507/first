@@ -16,7 +16,7 @@
             <img ng-if="!poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
           </div>
           <span class="pull-left">
-            <strong><a class="undecorated-link" ui-sref="profile({userId: poll.user._id})" ng-if="poll.user" ng-bind="poll.user.displayName"></a></strong>
+            <strong><a class="undecorated-link" ui-sref="profile.info({userId: poll.user._id})" ng-if="poll.user" ng-bind="poll.user.displayName"></a></strong>
             <span ng-if="!poll.user">Deleted User</span>
             <small class="text-muted">&nbsp;created on</small>
             <small class="text-muted" am-time-ago="poll.created"></small>

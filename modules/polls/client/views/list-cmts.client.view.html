@@ -1,13 +1,13 @@
 <div class="card" ng-repeat="cmt in vm.cmts | orderBy: vm.cmt_sort.val">
   <div clas="post-header">
     <div class="user-avatar pull-left">
-      <a ui-sref="profile({userId: cmt.user._id})" ng-if="cmt.user">
+      <a ui-sref="profile.info({userId: cmt.user._id})" ng-if="cmt.user">
         <img src="{{cmt.user.profileImageURL}}" alt="{{cmt.user.displayName}}">
       </a>
       <img ng-if="!cmt.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
     </div>
     <span class="pull-left">
-      <strong><a class="undecorated-link" ui-sref="profile({userId: cmt.user._id})" ng-if="cmt.user" ng-bind="cmt.user.displayName"></a></strong>
+      <strong><a class="undecorated-link" ui-sref="profile.info({userId: cmt.user._id})" ng-if="cmt.user" ng-bind="cmt.user.displayName"></a></strong>
       <span ng-if="!cmt.user">Deleted User</span>
       <small class="text-muted">replied on</small>
       <small class="text-muted" am-time-ago="cmt.created"></small>

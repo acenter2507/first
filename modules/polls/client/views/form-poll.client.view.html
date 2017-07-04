@@ -97,7 +97,7 @@
               </h4>
               <small ng-if="opt.status == 2">
                 Add by&nbsp;
-                <a class="undecorated-link" ui-sref="profile({userId: opt.user._id})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>
+                <a class="undecorated-link" ui-sref="profile.info({userId: opt.user._id})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>
                 <span ng-if="!opt.user">Deleted User</span>
                 <span>&nbsp;on&nbsp;</span>
                 <span ng-bind="opt.created | date:'mediumDate'"></span>

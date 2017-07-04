@@ -21,7 +21,7 @@
         templateUrl: 'modules/users/client/views/profiles/profile.info.client.view.html'
       })
       .state('profile.polls', {
-        url: '/profile/:userId/polls',
+        url: '/polls',
         templateUrl: 'modules/users/client/views/profiles/profile.polls.client.view.html'
       })
       .state('settings', {

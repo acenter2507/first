@@ -6,7 +6,7 @@ angular.module('users').controller('ProfileController', [
   '$location',
   'Users',
   'Authentication',
-  'profileResolve'
+  'profileResolve',
   function ($scope, $http, $location, Users, Authentication, profile) {
     $scope.profile = profile;
     $scope.isCurrentOwner = profile._id === Authentication.user._id;

@@ -7,7 +7,7 @@ angular.module('users').controller('ProfileInfoController', [
   'Users',
   'Authentication',
   'UserApi',
-  function ($scope, $http, $location, Users, Authentication,UserApi) {
+  function ($scope, $http, $location, Users, Authentication, UserApi) {
     $scope.polls = [];
     // $scope.isCurrentOwner = profile._id === Authentication.user._id;
     // $scope.isLogged = (Authentication.user) ? true : false;

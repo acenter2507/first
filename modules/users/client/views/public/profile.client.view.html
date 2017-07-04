@@ -67,7 +67,92 @@
   </div>
   <div class="row"><hr></div>
   <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 pdn h500">
+    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 pdn">
+      <div ng-repeat="poll in polls | filter: poll_filter" class="card">
+        <div clas="poll-header">
+          <div class="user-avatar pull-left">
+            <img src="{{user.profileImageURL}}" alt="{{user.displayName}}">
+          </div>
+          <span class="pull-left">
+            <strong><a class="undecorated-link" ui-sref="profile({userId: user._id})" ng-bind="user.displayName"></a></strong>
+            <small class="text-muted">&nbsp;created on</small>
+            <small class="text-muted" am-time-ago="poll.created"></small>
+          </span>
+          <br>
+          <span ng-if="poll.allow_guest" class="fa fa-globe">
+            <md-tooltip md-direction="bottom">This poll is public</md-tooltip>
+          </span>
+          <span ng-if="!poll.allow_guest" class="fa fa-users">
+            <md-tooltip md-direction="bottom">Only user can vote</md-tooltip>
+          </span>
+          <div class="clearfix"></div>
+          <hr class="mg5t mg10b">
+        </div>
+        <div clas="poll-body">
+          <h4><a ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a></h4>
+          <!--<p class="text-justify poll_item_body" ng-bind-html="poll.summary | nl2br"></p>-->
+          <div class="text-body" ta-bind="text" ng-model="poll.summary" ta-readonly="true"></div>
+          <p ng-show="poll.body.length > poll.summary.length" class="poll_item_body">...
+            <a class="undecorated-link" ui-sref="polls.view({ pollId: poll._id })">see more</a>
+          </p>
+          <!-- options -->
+          <div class="mg10t">
+            <span class="text-muted" ng-if="poll.opts.length === 0"><small>No option yet</small></span>
+            <div class="col-xs-12 pdn" ng-if="poll.total === 0">
+              <div ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">
+                <strong><span ng-bind="opt.title"></span></strong>
+                <div class="progress">
+                  <div ng-class="['progress-bar']" ng-class="bar.barClass" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}">
+                    <span ng-if="opt.voteCnt > 0">{{opt.voteCnt + '/' + poll.total}}</span>
+                    <span class="text-black" ng-if="opt.voteCnt === 0">{{opt.voteCnt + '/' + poll.total}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-9 pdn" ng-if="poll.total > 0">
+              <div ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">
+                <strong><span ng-bind="opt.title"></span></strong>
+                <div class="progress">
+                  <div ng-class="['progress-bar']" ng-class="bar.barClass" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}">
+                    <span ng-if="opt.voteCnt > 0">{{opt.voteCnt + '/' + poll.total}}</span>
+                    <span class="text-black" ng-if="opt.voteCnt === 0">{{opt.voteCnt + '/' + poll.total}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-3 pdn" ng-if="poll.total > 0">
+              <div class="chart-block">
+                <canvas id="pie" class="chart chart-pie"
+                  chart-data="poll.chart.data"
+                  chart-labels="poll.chart.labels"
+                  chart-options="poll.chart.options"
+                  chart-colors ="poll.chart.colors">
+                </canvas>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <a class="pull-right undecorated-link" ng-if="poll.opts.length > 3" ui-sref="polls.view({ pollId: poll._id })">...and {{poll.opts.length - 3}} others</a>
+          </div>
+          <div class="clearfix"></div>
+          <!-- #options -->
+          <hr class="mg10t mg10b">
+        </div>
+        <div clas="poll-footer">
+          <p class="poll_item_info">
+            <i class="fa fa-heart-o" aria-hidden="true"></i>
+            <strong> Votes: </strong>{{poll.voteCnt}}
+          </p>
+          <p class="poll_item_info">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+            <strong> Views: </strong>{{poll.viewCnt}}
+          </p>
+          <p class="poll_item_info">
+            <i class="fa fa-commenting" aria-hidden="true"></i>
+            <strong> Comments: </strong>{{poll.cmtCnt}}
+          </p>
+        </div>
+        <div class="clearfix"></div>
+      </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 pdn h500">
     </div>

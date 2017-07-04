@@ -11,6 +11,7 @@ angular.module('users').controller('ProfileController', [
   function ($scope, $http, $location, Users, Authentication, user, UserApi) {
     $scope.user = user;
     $scope.isCurrentOwner = user._id === Authentication.user._id;
+    $scope.isLogged = (Authentication.user) ? true : false;
     $scope.page = 0;
     
     init();
@@ -22,11 +23,19 @@ angular.module('users').controller('ProfileController', [
     function get_polls() {
       UserApi.get_polls($scope.user._id, $scope.page)
         .success(res => {
-          console.log(res);
+          $scope.polls = res || [];
         })
         .error(err => {
-          console.log(err);
+          alert(err);
         });
     }
+
+    $scope.poll_filter = (poll) => {
+      if (poll.isPublic) {
+        return true;
+      } else {
+        return $scope.isCurrentOwner;
+      }
+    };
   }
 ]);

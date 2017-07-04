@@ -39,10 +39,10 @@
   background-size: cover;
   background-repeat: no-repeat;
   height: 250px;
-  position: relative;
   margin-bottom: 1em;
   background-origin: content-box;
   width: 100%;
+  position: absolute;
   left: auto;
   right: 0;
 }
@@ -61,17 +61,6 @@
   height: 100%;
   border-radius: 5px;
 }
-@media (max-width: 479px) {
-  .cover {
-    height: 120px;
-  }
-  .profile-avatar {
-    left: calc(50% - 32px);
-    top: 98px;
-    height: 64px;
-    width: 64px;
-  }
-}
 
 @media (max-width: 767px) {
   .cover {
@@ -82,6 +71,18 @@
     top: 152px;
     height: 96px;
     width: 96px;
+  }
+}
+
+@media (max-width: 479px) {
+  .cover {
+    height: 120px;
+  }
+  .profile-avatar {
+    left: calc(50% - 32px);
+    top: 98px;
+    height: 64px;
+    width: 64px;
   }
 }
 @media (min-width: 992px) {

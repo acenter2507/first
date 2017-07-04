@@ -229,3 +229,10 @@
   text-transform: uppercase;
   color: #777;
 }
+
+.profile-joined {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #777;
+  margin-top: 25px;
+}

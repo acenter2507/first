@@ -104,11 +104,13 @@
   color: #fff;
 }
 
-.profile-info {
+.profile-breadcrumb {
   margin-top: 250px;
+  height: 64px;
+  background-color: #398122;
 }
 
-.profile-info .breadcrumb {
+.profile-breadcrumb .breadcrumb {
   margin-left: 125px;
 }
 
@@ -117,10 +119,11 @@
   .cover .container {
     height: 200px;
   }
-  .profile-info {
+  .profile-breadcrumb {
     margin-top: 200px;
+    height: 48px;
   }
-  .profile-info .breadcrumb {
+  .profile-breadcrumb .breadcrumb {
     margin-left: 91px;
   }
   .cover .container .profile-menu {
@@ -154,10 +157,11 @@
     left: 70px;
     bottom: 2px;
   }
-  .profile-info {
+  .profile-breadcrumb {
     margin-top: 100px;
+    height: 32px;
   }
-  .profile-info .breadcrumb {
+  .profile-breadcrumb .breadcrumb {
     margin-left: 55px;
   }
   .profile-name span {

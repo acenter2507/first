@@ -107,7 +107,6 @@
 .profile-breadcrumb {
   margin-top: 250px;
   height: 64px;
-  background-color: #398122;
 }
 
 .profile-breadcrumb .breadcrumb {
@@ -208,4 +207,21 @@
 
 .profile-menu-list li:hover {
   background-color: #EEEEEE;
+}
+
+.profile-stats {
+  text-align: center;
+  font-size: 35px;
+  line-height: 25px;
+  margin-top: 25px;
+  /*margin-bottom: -20px;*/
+}
+.profile-stats .stat {
+  display: inline-block;
+  min-width: 100px;
+  margin-bottom: 20px;
+}
+
+.profile-stats .stat .stat-label{
+
 }

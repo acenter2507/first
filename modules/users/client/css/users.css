@@ -231,6 +231,7 @@
 }
 
 .profile-joined {
+  text-align: center;
   font-size: 10px;
   text-transform: uppercase;
   color: #777;

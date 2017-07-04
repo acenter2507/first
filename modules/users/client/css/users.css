@@ -54,9 +54,6 @@
   top: 178px;
   border: 4px solid white;
   border-radius: 5px;
-  background-color: green;
-  height: 128px;
-  width: 128px;
 }
 .profile-avatar img {
   display: inline-block;

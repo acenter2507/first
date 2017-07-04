@@ -136,7 +136,8 @@
     height: 100px;
   }
   .profile-name {
-    left: 78px;
+    left: 70px;
+    bottom: 2px;
   }
   .profile-name span {
     font-size: 18px;

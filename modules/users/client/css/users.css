@@ -96,7 +96,8 @@
 }
 
 @media (max-width: 767px) {
-  .cover {
+  .cover,
+  .cover .container {
     height: 200px;
   }
   .profile-avatar {
@@ -107,7 +108,8 @@
 }
 
 @media (max-width: 479px) {
-  .cover {
+  .cover,
+  .cover .container {
     height: 100px;
   }
   .profile-avatar {

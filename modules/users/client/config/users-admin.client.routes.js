@@ -3,7 +3,6 @@
 // Setting up route
 angular.module('users.admin.routes').config(['$stateProvider',
   function ($stateProvider) {
-    console.log('config admin router');
     $stateProvider
       .state('admin.users', {
         url: '/users',

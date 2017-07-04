@@ -11,13 +11,18 @@
               <i class="fa fa-ellipsis-v fa-lg"></i>
             </button>
             <md-menu-content>
-              <div class="list-group profile-list">
-                <a class="list-group-item" ng-if="isCurrentOwner" ui-sref="settings.profile">Edit profile</a>
-                <a class="list-group-item" ui-sref="settings.profile">Edit profile</a>
-                <a class="list-group-item" ui-sref="settings.profile">Polls</a>
-                <a class="list-group-item" ui-sref="settings.profile">Comments</a>
-                <a class="list-group-item" ui-sref="settings.profile">Following</a>
-              </div>
+              <ul class="list-group profile-list">
+                <li ng-if="isCurrentOwner"><a ui-sref="settings.profile">Edit profile</a></li>
+                <li><a ui-sref="settings.profile">Profile</a></li>
+                <li><a ui-sref="settings.profile">Polls</a></li>
+                <li><a ui-sref="settings.profile">Comments</a></li>
+                <li><a ui-sref="settings.profile">Voted</a></li>
+                <li><a ui-sref="settings.profile">Following</a></li>
+                <li ng-if="isCurrentOwner"><a ui-sref="settings.profile">Bookmarks</a></li>
+                <li ng-if="isCurrentOwner"><a ui-sref="settings.profile">Viewed</a></li>
+                <li ng-if="isCurrentOwner"><a ui-sref="settings.profile">Liked</a></li>
+                <li ng-if="isCurrentOwner"><a ui-sref="settings.profile">Disliked</a></li>
+              </ul>
             </md-menu-content>
           </md-menu>
         </div>

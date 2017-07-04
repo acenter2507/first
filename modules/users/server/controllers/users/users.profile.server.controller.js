@@ -10,7 +10,17 @@ var _ = require('lodash'),
   mongoose = require('mongoose'),
   multer = require('multer'),
   config = require(path.resolve('./config/config')),
-  User = mongoose.model('User');
+  User = mongoose.model('User'),
+  Poll = mongoose.model('Poll'),
+  Opt = mongoose.model('Opt'),
+  Cmt = mongoose.model('Cmt'),
+  Vote = mongoose.model('Vote'),
+  Voteopt = mongoose.model('Voteopt'),
+  Polltag = mongoose.model('Polltag'),
+  Polluser = mongoose.model('Polluser'),
+  Report = mongoose.model('Report'),
+  Bookmark = mongoose.model('Bookmark'),
+  Like = mongoose.model('Like');
 
 /**
  * Update user details
@@ -107,4 +117,46 @@ exports.me = function (req, res) {
  */
 exports.profile = function (req, res) {
   res.json(req.profile || null);
+};
+
+/**
+ * Get polls of user
+ */
+exports.polls = function (req, res) {
+  var page = req.params.page || 0;
+  Poll.find({ user: req.profile._id })
+    .sort('-created')
+    .populate('category', 'name icon')
+    .skip(10 * page)
+    .limit(10)
+    .exec(function(err, polls) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.jsonp(polls);
+      }
+    });
+};
+
+/**
+ * Get cmts of user
+ */
+exports.cmts = function (req, res) {
+  var page = req.params.page || 0;
+  Cmt.find({ user: req.profile._id })
+    .sort('-created')
+    .populate('poll')
+    .skip(10 * page)
+    .limit(10)
+    .exec(function(err, polls) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.jsonp(polls);
+      }
+    });
 };

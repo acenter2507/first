@@ -12,9 +12,6 @@
         url: '/profile/:userId',
         templateUrl: 'modules/users/client/views/profiles/profile.client.view.html',
         controller: 'ProfileController',
-        data: {
-          roles: ['*']
-        },
         resolve: {
           profileResolve: getProfile
         }

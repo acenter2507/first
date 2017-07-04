@@ -36,10 +36,9 @@
 }
 
 .cover {
-  background-size: cover;
+  /*background-size: cover;*/
   background-repeat: no-repeat;
   height: 250px;
-  position: relative;
   margin-bottom: 1em;
   background-origin: content-box;
   width: 100%;

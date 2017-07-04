@@ -50,7 +50,6 @@
 .cover .container {
   height: 250px;
   position: relative;
-  pointer-events: none;
 }
 
 .cover .container .profile-menu {

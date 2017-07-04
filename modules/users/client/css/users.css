@@ -67,6 +67,16 @@
   color: #fff;
   border-radius: 50%;
   border: none;
+  outline: none;
+}
+
+.cover .container .btn-fab:hover {
+  background-color: #1a5895;
+  outline: none;
+}
+.cover .container .btn-fab:focus {
+  background-color: #267ED5;
+  outline: none;
 }
 
 .profile-avatar {

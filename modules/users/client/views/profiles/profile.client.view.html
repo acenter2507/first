@@ -15,18 +15,18 @@
             </button>
             <md-menu-content>
               <ul class="profile-menu-list">
-                <li ng-if="isCurrentOwner"><a ui-sref="settings.profile">Edit profile</a></li>
-                <li><a ui-sref="settings.profile">Profile</a></li>
+                <li ui-sref-active="active" ng-if="isCurrentOwner"><a ui-sref="profile.edit">Edit profile</a></li>
+                <li ui-sref-active="active"><a ui-sref="profile.info">Profile</a></li>
                 <hr class="mg10t mg10b"/>
-                <li><a ui-sref="settings.profile">Polls</a></li>
-                <li><a ui-sref="settings.profile">Comments</a></li>
-                <li><a ui-sref="settings.profile">Voted</a></li>
+                <li ui-sref-active="active"><a ui-sref="profile.polls">Polls</a></li>
+                <li ui-sref-active="active"><a ui-sref="profile.cmts">Comments</a></li>
+                <li ui-sref-active="active"><a ui-sref="profile.votes">Voted</a></li>
                 <hr class="mg10t mg10b"/>
-                <li><a ui-sref="settings.profile">Following</a></li>
-                <li ng-if="isCurrentOwner"><a ui-sref="settings.profile">Bookmarks</a></li>
-                <li ng-if="isCurrentOwner"><a ui-sref="settings.profile">Viewed</a></li>
-                <li ng-if="isCurrentOwner"><a ui-sref="settings.profile">Liked</a></li>
-                <li ng-if="isCurrentOwner"><a ui-sref="settings.profile">Disliked</a></li>
+                <li ui-sref-active="active"><a ui-sref="profile.follows">Following</a></li>
+                <li ui-sref-active="active" ng-if="isCurrentOwner"><a ui-sref="profile.bookmarks">Bookmarks</a></li>
+                <li ui-sref-active="active" ng-if="isCurrentOwner"><a ui-sref="profile.views">Viewed</a></li>
+                <li ui-sref-active="active" ng-if="isCurrentOwner"><a ui-sref="profile.likes">Liked</a></li>
+                <li ui-sref-active="active" ng-if="isCurrentOwner"><a ui-sref="profile.dislikes">Disliked</a></li>
               </ul>
             </md-menu-content>
           </md-menu>

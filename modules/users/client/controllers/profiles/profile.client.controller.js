@@ -6,36 +6,11 @@ angular.module('users').controller('ProfileController', [
   '$location',
   'Users',
   'Authentication',
-  'profileResolve',
-  'UserApi',
-  function ($scope, $http, $location, Users, Authentication, profile, UserApi) {
+  'profileResolve'
+  function ($scope, $http, $location, Users, Authentication, profile) {
     $scope.profile = profile;
     $scope.isCurrentOwner = profile._id === Authentication.user._id;
     $scope.isLogged = (Authentication.user) ? true : false;
-    $scope.page = 0;
-    
-    init();
-
-    function init() {
-      get_polls();
-    }
-
-    function get_polls() {
-      UserApi.get_polls($scope.profile._id, $scope.page)
-        .success(res => {
-          $scope.polls = res || [];
-        })
-        .error(err => {
-          alert(err);
-        });
-    }
-
-    $scope.poll_filter = (poll) => {
-      if (poll.isPublic) {
-        return true;
-      } else {
-        return $scope.isCurrentOwner;
-      }
-    };
+  
   }
 ]);

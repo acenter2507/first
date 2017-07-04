@@ -6,9 +6,9 @@
           <img src="{{user.profileImageURL}}" alt="{{user.displayName}}">
         </div>
         <md-menu md-offset="-20 25" md-position-mode="target-right target">
-          <a class="btn btn-fab" ng-click="$mdMenu.open($event)" aria-label="Open comment menu">
+          <button class="btn-fab" ng-click="$mdMenu.open($event)" aria-label="Open profile menu">
             <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-          </a>
+          </button>
           <md-menu-content>
             <ul class="menu-list">
               <li><i class="fa fa-reply"></i>&nbsp;Reply</a></li>

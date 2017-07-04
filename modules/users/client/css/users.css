@@ -55,12 +55,11 @@
 
 .cover .container .btn-fab {
   position: absolute;
-  bottom: -18px;
-  height: 36px;
-  width: 36px;
+  bottom: -34px;
+  height: 48px;
+  width: 48px;
   right: 0;
-  background-color: #267ED5;
-  color: #fff;
+  background-color: #fff;
   border-radius: 50%;
 }
 

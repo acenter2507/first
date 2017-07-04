@@ -46,6 +46,13 @@
   left: auto;
   right: 0;
 }
+
+.cover .container {
+  height: 250px;
+  position: relative;
+  pointer-events: none;
+}
+
 .profile-avatar {
   position: absolute;
   left: calc(50% - 64px);

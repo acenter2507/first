@@ -2,11 +2,11 @@
   <div class="row profile-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="home">Home</a></li>
-      <!--<li class="breadcrumb-item"><a href="#">Library</a></li>-->
-      <li class="breadcrumb-item active">{{profile.displayName}}</li>
+      <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="profile.info({ userId: profile._id })">{{profile.displayName}}</a></li>
+      <li class="breadcrumb-item active">Polls</li>
     </ol>
   </div>
-  <div class="row profile-poll" infinite-scroll="get_polls()" infinite-scroll-distance='1'>
+  <div class="row" infinite-scroll="get_polls()" infinite-scroll-distance='1'>
     <div ng-repeat="poll in polls | filter: poll_filter" class="card">
 
       <div clas="poll-header">

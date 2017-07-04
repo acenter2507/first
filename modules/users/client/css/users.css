@@ -121,15 +121,6 @@
   .cover .container {
     height: 100px;
   }
-  .cover .container .profile-menu {
-    bottom: -12px;
-    height: 24px;
-    width: 24px;
-  }
-  .cover .container .btn-fab {
-    height: 24px;
-    width: 24px;
-  }
   .profile-avatar {
     top: 68px;
     height: 64px;

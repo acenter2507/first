@@ -147,7 +147,7 @@ exports.cmts = function (req, res) {
   var page = req.params.page || 0;
   Cmt.find({ user: req.profile._id })
     .sort('-created')
-    .populate('poll')
+    .populate('poll', 'title isPublic')
     .skip(10 * page)
     .limit(10)
     .exec(function(err, polls) {

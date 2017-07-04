@@ -12,7 +12,6 @@ angular.module('users').controller('ProfileInfoController', [
     // $scope.isCurrentOwner = profile._id === Authentication.user._id;
     // $scope.isLogged = (Authentication.user) ? true : false;
     // $scope.page = 0;
-    console.log($scope.profile);
     // init();
 
     // function init() {

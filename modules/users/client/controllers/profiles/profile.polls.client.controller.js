@@ -2,20 +2,15 @@
 
 angular.module('users').controller('ProfilePollsController', [
   '$scope',
-  '$http',
-  '$location',
-  'Users',
-  'Authentication',
   'UserApi',
   'Action',
-  function($scope, $http, $location, Users, Authentication, UserApi, Action) {
+  function($scope, UserApi, Action) {
     $scope.polls = [];
     $scope.page = 0;
     $scope.busy = false;
     $scope.stoped = false;
     $scope.new_data = [];
 
-    console.log($scope.profile);
     init();
 
     function init() {}
@@ -33,7 +28,6 @@ angular.module('users').controller('ProfilePollsController', [
             $scope.stoped = false;
             return;
           }
-          console.log(res);
           $scope.new_data = res || [];
           var promises = [];
           $scope.new_data.forEach(poll => {

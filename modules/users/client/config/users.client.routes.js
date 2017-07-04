@@ -24,6 +24,34 @@
         url: '/polls',
         templateUrl: 'modules/users/client/views/profiles/profile.polls.client.view.html'
       })
+      .state('profile.cmts', {
+        url: '/polls',
+        templateUrl: 'modules/users/client/views/profiles/profile.cmts.client.view.html'
+      })
+      .state('profile.votes', {
+        url: '/polls',
+        templateUrl: 'modules/users/client/views/profiles/profile.votes.client.view.html'
+      })
+      .state('profile.follows', {
+        url: '/polls',
+        templateUrl: 'modules/users/client/views/profiles/profile.follows.client.view.html'
+      })
+      .state('profile.bookmarks', {
+        url: '/polls',
+        templateUrl: 'modules/users/client/views/profiles/profile.bookmarks.client.view.html'
+      })
+      .state('profile.views', {
+        url: '/polls',
+        templateUrl: 'modules/users/client/views/profiles/profile.views.client.view.html'
+      })
+      .state('profile.likes', {
+        url: '/polls',
+        templateUrl: 'modules/users/client/views/profiles/profile.likes.client.view.html'
+      })
+      .state('profile.dislikes', {
+        url: '/polls',
+        templateUrl: 'modules/users/client/views/profiles/profile.dislikes.client.view.html'
+      })
       .state('settings', {
         abstract: true,
         url: '/settings',

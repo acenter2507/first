@@ -2,15 +2,12 @@
 
 angular.module('users').controller('ProfileController', [
   '$scope',
-  '$http',
-  '$location',
-  'Users',
   'Authentication',
   'profileResolve',
-  function ($scope, $http, $location, Users, Authentication, profile) {
+  function ($scope, Authentication, profile) {
     $scope.profile = profile;
-    $scope.isCurrentOwner = profile._id === Authentication.user._id;
-    $scope.isLogged = (Authentication.user) ? true : false;
-  
+    $scope.user = Authentication.user;
+    $scope.isCurrentOwner = profile._id === $scope.user._id;
+    $scope.isLogged = ($scope.user) ? true : false;
   }
 ]);

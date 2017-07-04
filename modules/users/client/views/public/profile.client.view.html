@@ -11,12 +11,13 @@
               <i class="fa fa-ellipsis-v fa-lg"></i>
             </button>
             <md-menu-content>
-              <md-menu-item>Edit profile</md-menu-item>
-              <md-menu-item>Edit profile</md-menu-item>
-              <md-menu-item>Edit profile</md-menu-item>
-              <md-menu-item>Edit profile</md-menu-item>
-              <md-menu-item>Edit profile</md-menu-item>
-              <md-menu-item>Edit profile</md-menu-item>
+              <div class="list-group profile-list">
+                <a class="list-group-item" ng-if="isCurrentOwner" ui-sref="settings.profile">Edit profile</a>
+                <a class="list-group-item" ui-sref="settings.profile">Edit profile</a>
+                <a class="list-group-item" ui-sref="settings.profile">Polls</a>
+                <a class="list-group-item" ui-sref="settings.profile">Comments</a>
+                <a class="list-group-item" ui-sref="settings.profile">Following</a>
+              </div>
             </md-menu-content>
           </md-menu>
         </div>

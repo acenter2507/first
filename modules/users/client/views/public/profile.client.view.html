@@ -5,6 +5,9 @@
         <div class="profile-avatar">
           <img src="{{user.profileImageURL}}" alt="{{user.displayName}}">
         </div>
+        <div class="profile-name">
+          <span>{{user.displayName}}</span>
+        </div>
         <div class="profile-menu">
           <md-menu md-offset="-10 60" md-position-mode="target-right target">
             <button class=" btn-fab" ng-click="$mdMenu.open($event)" aria-label="Open profile menu">
@@ -32,6 +35,6 @@
     </div>
   </div>
   <div class="row">
-    
+
   </div>
 </div>

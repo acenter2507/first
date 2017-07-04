@@ -94,7 +94,15 @@
   height: 100%;
   border-radius: 5px;
 }
-
+.profile-name {
+  position: absolute;
+  left: 140px;
+  top: 260px;
+}
+.profile-name span {
+  font-size: 40px;
+  color: #666;
+}
 @media (max-width: 767px) {
   .cover,
   .cover .container {

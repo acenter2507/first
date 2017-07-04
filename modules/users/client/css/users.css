@@ -117,6 +117,12 @@
     height: 36px;
     width: 36px;
   }
+  .profile-name {
+    left: 106px;
+  }
+  .profile-name span {
+    font-size: 24px;
+  }
   .profile-avatar {
     top: 152px;
     height: 96px;
@@ -128,6 +134,12 @@
   .cover,
   .cover .container {
     height: 100px;
+  }
+  .profile-name {
+    left: 78px;
+  }
+  .profile-name span {
+    font-size: 18px;
   }
   .profile-avatar {
     top: 68px;

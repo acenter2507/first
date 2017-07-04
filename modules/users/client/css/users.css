@@ -97,11 +97,11 @@
 .profile-name {
   position: absolute;
   left: 140px;
-  top: 260px;
+  bottom: 12px;
 }
 .profile-name span {
-  font-size: 40px;
-  color: #666;
+  font-size: 36px;
+  color: #fff;
 }
 @media (max-width: 767px) {
   .cover,

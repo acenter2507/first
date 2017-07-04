@@ -11,6 +11,7 @@ angular.module('users').controller('ProfileController', [
   function ($scope, $http, $location, Users, Authentication, user, UserApi) {
     $scope.user = user;
     $scope.isCurrentOwner = user._id === Authentication.user._id;
+    $scope.page = 0;
     
     init();
 
@@ -19,7 +20,7 @@ angular.module('users').controller('ProfileController', [
     }
 
     function get_polls() {
-      UserApi.get_polls($scope.user._id)
+      UserApi.get_polls($scope.user._id, $scope.page)
         .success(res => {
           console.log(res);
         })

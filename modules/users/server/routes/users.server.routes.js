@@ -20,13 +20,6 @@ module.exports = function (app) {
   app.route('/api/profile/:userId/follows/:page').get(users.follows);
   app.route('/api/profile/:userId/votes/:page').get(users.votes);
 
-
-
-
-
-
-
-
   // Finish by binding the user middleware
   app.param('userId', users.userByID);
 };

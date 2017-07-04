@@ -160,3 +160,12 @@ exports.cmts = function (req, res) {
       }
     });
 };
+
+/**
+ * Get likes of user
+ */
+exports.likes = function (req, res) {};
+exports.dislikes = function (req, res) {};
+exports.bookmarks = function (req, res) {};
+exports.follows = function (req, res) {};
+exports.votes = function (req, res) {};

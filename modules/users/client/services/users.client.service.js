@@ -35,25 +35,25 @@ angular.module('users.admin').factory('Admin', ['$resource',
 angular.module('users').factory('UserApi', ['$http',
   function ($http) {
     this.get_polls = (userId, page) => {
-      return $http.get('/api/profile/' + userId + 'polls/' + page);
+      return $http.get('/api/profile/' + userId + '/polls/' + page);
     };
     this.get_cmts = (userId, page) => {
-      return $http.get('/api/profile/' + userId + 'cmts/' + page);
+      return $http.get('/api/profile/' + userId + '/cmts/' + page);
     };
     this.get_likes = (userId, page) => {
-      return $http.get('/api/profile/' + userId + 'likes/' + page);
+      return $http.get('/api/profile/' + userId + '/likes/' + page);
     };
     this.get_dislikes = (userId, page) => {
-      return $http.get('/api/profile/' + userId + 'dislikes/' + page);
+      return $http.get('/api/profile/' + userId + '/dislikes/' + page);
     };
     this.get_bookmarks = (userId, page) => {
-      return $http.get('/api/profile/' + userId + 'bookmarks/' + page);
+      return $http.get('/api/profile/' + userId + '/bookmarks/' + page);
     };
     this.get_follows = (userId, page) => {
-      return $http.get('/api/profile/' + userId + 'follows/' + page);
+      return $http.get('/api/profile/' + userId + '/follows/' + page);
     };
     this.get_votes = (userId, page) => {
-      return $http.get('/api/profile/' + userId + 'votes/' + page);
+      return $http.get('/api/profile/' + userId + '/votes/' + page);
     };
     return this;
   }

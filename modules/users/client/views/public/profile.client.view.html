@@ -5,7 +5,18 @@
         <div class="profile-avatar">
           <img src="{{user.profileImageURL}}" alt="{{user.displayName}}">
         </div>
-        <button class="btn btn-danger pull-right">Tool</button>
+        <md-menu md-offset="-20 25" md-position-mode="target-right target">
+          <a class="btn btn-fab" ng-click="$mdMenu.open($event)" aria-label="Open comment menu">
+            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+          </a>
+          <md-menu-content>
+            <ul class="menu-list">
+              <li ng-if="vm.isLogged && cmt.user._id !== vm.authentication.user._id"><a class="undecorated-link" ng-click="vm.reply_cmt(cmt)"><i class="fa fa-reply"></i>&nbsp;Reply</a></li>
+              <li ng-if="cmt.user._id === vm.authentication.user._id"><a class="undecorated-link" ng-click="vm.edit_cmt(cmt)"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
+              <li ng-if="cmt.user._id === vm.authentication.user._id"><a class="undecorated-link" ng-click="vm.delete_cmt(cmt)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
+            </ul>
+          </md-menu-content>
+        </md-menu>
       </div>
     </div>
   </div>

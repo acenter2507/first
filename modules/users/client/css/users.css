@@ -103,6 +103,15 @@
   font-size: 32px;
   color: #fff;
 }
+
+.profile-info {
+  margin-top: 250px;
+}
+
+.profile-info .breadcrumb {
+  margin-left: 140px;
+}
+
 @media (max-width: 767px) {
   .cover,
   .cover .container {
@@ -155,36 +164,32 @@
 }*/
 
 
-.profile-list {
+.profile-menu-list {
   border: none !important;
   margin: 0;
   border-radius: 0;
 }
-.profile-list .list-group-item {
+.profile-menu-list .list-group-item {
   border: none !important;
   border-radius: 0;
 }
 
-.profile-list {
+.profile-menu-list {
   margin: 0;
   padding: 0;
 }
 
-.profile-list li {
+.profile-menu-list li {
   list-style:none;
   padding: 5px;
   cursor: pointer;
 }
 
-.profile-list li a {
+.profile-menu-list li a {
   color: #666;
   text-decoration: none;
 }
 
-.profile-list li:hover {
+.profile-menu-list li:hover {
   background-color: #EEEEEE;
-}
-
-.profile-info {
-  margin-top: 250px;
 }

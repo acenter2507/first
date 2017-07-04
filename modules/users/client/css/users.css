@@ -221,7 +221,8 @@
   min-width: 100px;
   margin-bottom: 20px;
 }
-
 .profile-stats .stat .stat-label{
-
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #777;
 }

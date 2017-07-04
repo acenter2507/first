@@ -210,6 +210,10 @@
   background-color: #EEEEEE;
 }
 
+.profile-menu-list li:active {
+  background-color: #d6d6d6;
+}
+
 .profile-stats {
   text-align: center;
   font-size: 35px;

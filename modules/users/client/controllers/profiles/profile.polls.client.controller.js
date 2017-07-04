@@ -14,6 +14,8 @@ angular.module('users').controller('ProfilePollsController', [
     $scope.busy = false;
     $scope.stoped = false;
     $scope.new_data = [];
+
+    console.log($scope.profile);
     init();
 
     function init() {}
@@ -25,7 +27,7 @@ angular.module('users').controller('ProfilePollsController', [
       }
       $scope.busy = true;
       UserApi.get_polls($scope.profile._id, $scope.page)
-        .then(res => {
+        .success(res => {
           if (!res || !res.length || res.length === 0) {
             $scope.busy = false;
             $scope.stoped = false;
@@ -43,25 +45,30 @@ angular.module('users').controller('ProfilePollsController', [
             };
             promises.push(get_opts(poll));
           });
-          return Promise.all(promises);
+          Promise.all(promises)
+            .then(res => {
+              // Gán data vào list hiện tại
+              $scope.polls = _.union($scope.polls, $scope.new_data);
+              $scope.page += 1;
+              $scope.busy = false;
+
+              var promises = [];
+              $scope.new_data.forEach(poll => {
+                promises.push(get_voteOpts(poll));
+              });
+              return Promise.all(promises);
+            })
+            .then(res => {
+              console.log(
+                'Load new success: ' + $scope.new_data.length + ' polls'
+              );
+              $scope.new_data.length = [];
+            })
+            .catch(err => {
+              alert(err);
+            });
         })
-        .then(res => {
-          // Gán data vào list hiện tại
-          $scope.polls = _.union($scope.polls, $scope.new_data);
-          $scope.page += 1;
-          $scope.busy = false;
-          
-          var promises = [];
-          $scope.new_data.forEach(poll => {
-            promises.push(get_voteOpts(poll));
-          });
-          return Promise.all(promises);
-        })
-        .then(res => {
-          console.log('Load new success: ' + $scope.new_data.length + ' polls');
-          $scope.new_data.length = [];
-        })
-        .catch(err => {
+        .error(err => {
           alert(err);
         });
     }
@@ -85,7 +92,8 @@ angular.module('users').controller('ProfilePollsController', [
             poll.voteopts = res.data.voteopts || [];
             poll.total = poll.voteopts.length;
             poll.opts.forEach(opt => {
-              opt.voteCnt = _.where(poll.voteopts, { opt: opt._id }).length || 0;
+              opt.voteCnt =
+                _.where(poll.voteopts, { opt: opt._id }).length || 0;
               opt.progressVal = calPercen(poll.total, opt.voteCnt);
               poll.chart.data.push(opt.voteCnt);
               poll.chart.colors.push(opt.color);
@@ -105,7 +113,7 @@ angular.module('users').controller('ProfilePollsController', [
         return $scope.isCurrentOwner;
       }
     };
-        // Tính phần trăm tỉ lệ vote cho opt
+    // Tính phần trăm tỉ lệ vote cho opt
     function calPercen(total, value) {
       if (total === 0) {
         return 0;

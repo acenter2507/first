@@ -49,11 +49,11 @@
 }
 .profile-avatar {
   position: absolute;
-  left: 50%;
-  margin-left: -64px;
-  top: 128px;
+  left: 0;
+  /*margin-left: -64px;*/
+  top: 178px;
   border: 4px solid white;
-  border-radius: 50%;
+  border-radius: 5px;
   background-color: green;
   height: 128px;
   width: 128px;
@@ -62,4 +62,5 @@
   display: inline-block;
   width: 128px;
   height: 128px;
+  border-radius: 5px;
 }

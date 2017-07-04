@@ -184,3 +184,7 @@
 .profile-list li:hover {
   background-color: #EEEEEE;
 }
+
+.profile-info {
+  margin-top: 250px;
+}

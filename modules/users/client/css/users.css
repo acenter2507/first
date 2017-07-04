@@ -63,7 +63,7 @@
   border-radius: 5px;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
   .cover {
     height: 200px;
   }

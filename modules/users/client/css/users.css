@@ -124,6 +124,11 @@
 
 
 .profile-list {
-  border: none;
+  border: none !important;
   margin: 0;
+  border-radius: 0;
+}
+.profile-list .list-group-item {
+  border: none !important;
+  border-radius: 0;
 }

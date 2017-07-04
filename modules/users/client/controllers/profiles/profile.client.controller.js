@@ -6,11 +6,11 @@ angular.module('users').controller('ProfileController', [
   '$location',
   'Users',
   'Authentication',
-  'userResolve',
+  'profileResolve',
   'UserApi',
-  function ($scope, $http, $location, Users, Authentication, user, UserApi) {
-    $scope.user = user;
-    $scope.isCurrentOwner = user._id === Authentication.user._id;
+  function ($scope, $http, $location, Users, Authentication, profile, UserApi) {
+    $scope.profile = profile;
+    $scope.isCurrentOwner = profile._id === Authentication.user._id;
     $scope.isLogged = (Authentication.user) ? true : false;
     $scope.page = 0;
     
@@ -21,7 +21,7 @@ angular.module('users').controller('ProfileController', [
     }
 
     function get_polls() {
-      UserApi.get_polls($scope.user._id, $scope.page)
+      UserApi.get_polls($scope.profile._id, $scope.page)
         .success(res => {
           $scope.polls = res || [];
         })

@@ -7,6 +7,22 @@
   function routeConfig($stateProvider) {
     // Users state routing
     $stateProvider
+      .state('profile', {
+        abstract: true,
+        url: '/profile/:userId',
+        templateUrl: 'modules/users/client/views/profiles/profile.client.view.html',
+        controller: 'ProfileController',
+        data: {
+          roles: ['*']
+        },
+        resolve: {
+          profileResolve: getProfile
+        }
+      })
+      .state('profile.polls', {
+        url: '/profile/:userId/polls',
+        templateUrl: 'modules/users/client/views/profiles/profile.polls.client.view.html'
+      })
       .state('settings', {
         abstract: true,
         url: '/settings',
@@ -69,20 +85,12 @@
       .state('password.reset.form', {
         url: '/:token',
         templateUrl: 'modules/users/client/views/password/reset-password.client.view.html'
-      })
-      .state('profile', {
-        url: '/profile/:userId',
-        templateUrl: 'modules/users/client/views/public/profile.client.view.html',
-        controller: 'ProfileController',
-        resolve: {
-          userResolve: getUser
-        }
       });
   }
 
-  getUser.$inject = ['$stateParams', 'Profile'];
+  getProfile.$inject = ['$stateParams', 'Profile'];
 
-  function getUser($stateParams, Profile) {
+  function getProfile($stateParams, Profile) {
     return Profile.get({
       userId: $stateParams.userId
     }).$promise;

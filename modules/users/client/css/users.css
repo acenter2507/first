@@ -55,12 +55,13 @@
 
 .cover .container .btn-fab {
   position: absolute;
-  bottom: -34px;
+  bottom: -24px;
   height: 48px;
   width: 48px;
   right: 0;
   background-color: #fff;
   border-radius: 50%;
+  z-index: 1000;
 }
 
 .profile-avatar {

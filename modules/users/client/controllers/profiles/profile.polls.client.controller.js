@@ -8,7 +8,7 @@ angular.module('users').controller('ProfilePollsController', [
     $scope.polls = [];
     $scope.page = 0;
     $scope.busy = false;
-    $scope.stoped = false;
+    $scope.stopped = false;
     $scope.new_data = [];
 
     init();
@@ -19,7 +19,7 @@ angular.module('users').controller('ProfilePollsController', [
 
     $scope.get_polls = get_polls;
     function get_polls() {
-      if ($scope.busy || $scope.stoped) {
+      if ($scope.busy || $scope.stopped) {
         return;
       }
       $scope.busy = true;
@@ -27,7 +27,7 @@ angular.module('users').controller('ProfilePollsController', [
         .success(res => {
           if (!res || !res.length || res.length === 0) {
             $scope.busy = false;
-            $scope.stoped = true;
+            $scope.stopped = true;
             return;
           }
           $scope.new_data = res || [];

@@ -109,6 +109,7 @@
           return Promise.all(promises);
         })
         .then(res => {
+          $scope.$apply();
           vm.new_data = [];
         })
         .catch(err => {
@@ -248,7 +249,6 @@
           alert(err);
         });
     };
-    
     vm.bookmark_poll = (poll) => {
       if (poll.bookmarked) {
         return alert('You are already bookmark this poll');

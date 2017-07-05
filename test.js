@@ -18,9 +18,17 @@ app.init(function () {
   - Thêm xóa sửa option => done
   - Hạn vote => done
   - Test các trường hợp socket => done
-  - Lỗi chuyển state không được.
+  - Lỗi chuyển state không được. => done
   - Sửa option không được. => done
   - Các thao tác: unfollow, follow, bookmark => done
+2. Tổng thể
+  - Edit profile
+  - Upload ảnh + chèn vào editor poll, options
+  - Message thông báo
+  - Chức năng nhập lý do khi report
+  - Đếm view poll, poll user đã view
+  - Đếm view profile
+  - Chức năng private và share link
 
 */
 // 1. Khi người vote là guest thì không push socket được. => done

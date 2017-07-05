@@ -11,8 +11,10 @@
     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 col-lg-push-3 pdn">
       <div ng-repeat="poll in vm.polls" class="card">
         <div clas="poll-header">
-          <div class="user-avatar pull-left">
-            <img ng-if="poll.user" src="{{poll.user.profileImageURL}}" alt="{{poll.user.displayName}}">
+          <div ng-if="poll.user" class="user-avatar pull-left">
+            <a ui-sref="profile.info({userId: poll.user._id})">
+              <img src="{{poll.user.profileImageURL}}" alt="{{poll.user.displayName}}">
+            </a>
             <img ng-if="!poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
           </div>
           <span class="pull-left">
@@ -49,6 +51,7 @@
           <span ng-if="!poll.allow_guest" class="fa fa-users">
             <md-tooltip md-direction="bottom">Only user can vote</md-tooltip>
           </span>
+          <a class="undecorated-link" ui-sref="categorys.view({ categoryId: poll.category._id })">{{ poll.category.name }}</a>
           <div class="clearfix"></div>
           <hr class="mg5t mg10b">
         </div>
@@ -119,7 +122,7 @@
         <div class="clearfix"></div>
       </div>
       <!-- Loading indicator -->
-      <div class="card" id="indicator_card" ng-show="vm.busy">
+      <div class="row text-center" ng-show="vm.busy">
         <md-progress-circular ng-disabled="!vm.busy" class="md-hue-2 center" md-diameter="20px"></md-progress-circular>
       </div>
     </div>

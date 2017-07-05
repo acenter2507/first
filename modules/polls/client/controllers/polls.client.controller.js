@@ -279,6 +279,7 @@
             } else {
               vm.cmts.push(_cmt);
               vm.poll.cmtCnt += 1;
+              $scope.$apply();
             }
             resolve(_cmt);
           })

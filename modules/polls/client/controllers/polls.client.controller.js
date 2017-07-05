@@ -321,10 +321,15 @@
             return vm.ownVote._id ? Action.get_opts_for_vote(vm.ownVote._id) : resolve();
           })
           .then(res => {
-            vm.votedOpts = res && res.data ? _.pluck(res.data, 'opt') : [];
-            vm.selectedOpts = res && res.data ? _.pluck(res.data, 'opt') : [];
-            console.log(vm.votedOpts);
-            console.log(vm.ownVote);
+            if (!res || !res.data) {
+              vm.votedOpts = [];
+              vm.selectedOpts = [];
+            } else {
+              res.data.forEach(voteopt => {
+                vm.votedOpts.push(voteopt.opt._id);
+                vm.selectedOpts.push(voteopt.opt._id);
+              });
+            }
             return resolve();
           })
           .catch(err => {
@@ -636,7 +641,7 @@
       }
     };
     vm.is_voted = function(id) {
-      return _.findWhere(vm.selectedOpts, { '_id': id }) ? true : false;
+      return _.contains(vm.selectedOpts, id);
     };
     vm.is_voted_all = () => {
       return vm.selectedOpts.length === vm.opts.length;
@@ -650,14 +655,6 @@
     };
     vm.isIndeterminate = () => {
       return (vm.selectedOpts.length !== 0 && vm.selectedOpts.length !== vm.opts.length);
-    };
-    vm.voted_title = function() {
-      return _.pluck(
-        _.filter(vm.opts, function(opt) {
-          return _.contains(vm.votedOpts, opt._id.toString());
-        }),
-        'title'
-      );
     };
     vm.save_vote = save_vote;
     vm.toggle_chart = () => {

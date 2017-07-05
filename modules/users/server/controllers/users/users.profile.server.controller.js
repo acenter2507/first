@@ -20,6 +20,7 @@ var _ = require('lodash'),
   Polluser = mongoose.model('Polluser'),
   Report = mongoose.model('Report'),
   Bookmark = mongoose.model('Bookmark'),
+  Category = mongoose.model('Category'),
   View = mongoose.model('View'),
   Like = mongoose.model('Like');
 
@@ -261,7 +262,10 @@ exports.dislikes = function (req, res) {
     .populate({
       path: 'poll',
       model: 'Poll',
-      populate: { path: 'user', select: 'displayName profileImageURL', model: 'User' }
+      populate: [
+        { path: 'user', select: 'displayName profileImageURL', model: 'User' },
+        { path: 'category', select: 'name icon', model: 'Category' }
+      ]
     })
     .skip(10 * page)
     .exec(function(err, dislikes) {

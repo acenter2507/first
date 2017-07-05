@@ -323,6 +323,8 @@
           .then(res => {
             vm.votedOpts = res && res.data ? _.pluck(res.data, 'opt') : [];
             vm.selectedOpts = res && res.data ? _.pluck(res.data, 'opt') : [];
+            console.log(vm.votedOpts);
+            console.log(vm.ownVote);
             return resolve();
           })
           .catch(err => {

@@ -120,6 +120,7 @@
       Socket.on('cmt_add', cmtId => {
         loadNewCmt(cmtId).then(
           _cmt => {
+            $scope.$apply();
             console.log('Has new comment from: ' + _cmt.user.displayName);
           },
           err => {
@@ -128,16 +129,13 @@
         );
       });
       Socket.on('cmt_del', cmtId => {
-        vm.cmts = _.without(
-          vm.cmts,
-          _.findWhere(vm.cmts, {
-            _id: cmtId
-          })
-        );
+        vm.cmts = _.without(vm.cmts, _.findWhere(vm.cmts, { _id: cmtId }));
+        $scope.$apply();
       });
       Socket.on('poll_like', likeCnt => {
         // Update poll like
         vm.poll.likeCnt = likeCnt;
+        $scope.$apply();
       });
       Socket.on('cmt_like', res => {
         var _cmt = _.find(vm.cmts, cmt => {
@@ -145,6 +143,7 @@
         });
         if (_cmt) {
           _cmt.likeCnt = res.likeCnt;
+          $scope.$apply();
         }
       });
       Socket.on('poll_vote', res => {
@@ -279,7 +278,6 @@
             } else {
               vm.cmts.push(_cmt);
               vm.poll.cmtCnt += 1;
-              $scope.$apply();
             }
             resolve(_cmt);
           })

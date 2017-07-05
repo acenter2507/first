@@ -30,6 +30,7 @@ angular.module('users').controller('ProfileFollowsController', [
             $scope.stoped = true;
             return;
           }
+          console.log(res);
           $scope.new_data = _.pluck(res, 'poll') || [];
           var promises = [];
           $scope.new_data.forEach(poll => {

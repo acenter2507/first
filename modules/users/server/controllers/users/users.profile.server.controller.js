@@ -184,7 +184,7 @@ exports.votes = function (req, res) {
 
 exports.follows = function (req, res) {
   var page = req.params.page || 0;
-  Polluser.find({ user: req.profile._id, following: true })
+  Polluser.find({ user: req.profile._id, following: true, poll: { $ne: null} })
     .sort('-created')
     .populate('poll')
     .skip(10 * page)

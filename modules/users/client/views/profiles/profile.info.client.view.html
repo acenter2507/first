@@ -35,7 +35,7 @@
   </div>
   <div class="row">
     <ul class="timeline">
-      <li class="event" ng-repeat="activity in activitys | filter: activity_filter">
+      <li class="event" ng-repeat="activity in activitys | filter: activity_filter | orderBy: '-created'">
         <h3>Created: <a class="undecorated-link" ui-sref="polls.view({ pollId: activity._id })">{{ activity.title }}</a></h3>
         <small class="text-muted" am-time-ago="activity.created"></small>
         <!-- Poll -->

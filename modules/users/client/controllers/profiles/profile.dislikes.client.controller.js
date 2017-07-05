@@ -30,6 +30,7 @@ angular.module('users').controller('ProfileDislikesController', [
             $scope.stoped = true;
             return;
           }
+          console.log(res);
           res.forEach(item => {
             if (item.poll) {
               $scope.new_data.push(item.poll);

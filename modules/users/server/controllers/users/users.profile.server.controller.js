@@ -221,4 +221,3 @@ exports.bookmarks = function (req, res) {
  */
 exports.likes = function (req, res) {};
 exports.dislikes = function (req, res) {};
-exports.bookmarks = function (req, res) {};

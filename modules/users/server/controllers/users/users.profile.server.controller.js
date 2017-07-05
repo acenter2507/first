@@ -261,7 +261,7 @@ exports.dislikes = function (req, res) {
     .populate({
       path: 'poll',
       model: 'Poll',
-      populate: { path: 'user', model: 'User' }
+      populate: { path: 'user', select: 'displayName profileImageURL', model: 'User' }
     })
     .skip(10 * page)
     .exec(function(err, dislikes) {

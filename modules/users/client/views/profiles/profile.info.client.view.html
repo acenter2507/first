@@ -36,8 +36,13 @@
   <div class="row">
     <ul class="timeline">
       <li class="event" ng-repeat="activity in activitys | filter: activity_filter | orderBy: '-created'">
-        <h3>Created: <a class="undecorated-link" ui-sref="polls.view({ pollId: activity._id })">{{ activity.title }}</a></h3>
-        <small class="text-muted" am-time-ago="activity.created"></small>
+        <h3>
+          <span ng-if="activity.type === 1">Created: </span>
+          <span ng-if="activity.type === 2">Re: </span>
+          <span ng-if="activity.type === 3">Vote: </span>
+          <a class="undecorated-link" ui-sref="polls.view({ pollId: activity._id })">{{ activity.title }}</a>
+        </h3>
+        <p class="text-muted" am-time-ago="activity.created"></p>
         <!-- Poll -->
         <div ng-if="activity.type === 1" class="text-body" ta-bind="text" ng-model="activity.body" ta-readonly="true"></div>
         <!-- Comment -->

@@ -21,7 +21,6 @@ angular.module('users').controller('ProfileInfoController', [
           merge_activity();
           $scope.busy = false;
           $scope.$apply();
-          console.log('Load finish: ', $scope.activitys);
         })
         .catch(err => {
           alert(err);

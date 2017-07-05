@@ -4,7 +4,7 @@ angular.module('users').controller('ProfileInfoController', [
   '$scope',
   'UserApi',
   'Action',
-  function ($scope, UserApi, Action) {
+  function($scope, UserApi, Action) {
     $scope.polls = [];
     $scope.cmts = [];
     $scope.votes = [];
@@ -12,15 +12,17 @@ angular.module('users').controller('ProfileInfoController', [
 
     $scope.page = 0;
     $scope.busy = false;
-    $scope.stoped = false;
 
     get_data();
     function get_data() {
-      Promise.all([ get_polls(), get_cmts(), get_votes() ])
+      if ($scope.busy) return;
+      $scope.busy = true;
+      Promise.all([get_polls(), get_cmts(), get_votes()])
         .then(res => {
-          console.log(res);
-          merge_activity();
-          console.log($scope.activitys);
+          return merge_activity();
+        })
+        .then(() => {
+          $scope.busy = false;
         })
         .catch(err => {
           alert(err);
@@ -87,41 +89,44 @@ angular.module('users').controller('ProfileInfoController', [
     }
 
     function merge_activity() {
-      $scope.polls.forEach(function(poll) {
-        if (poll) {
-          $scope.activitys.push({
-            _id: poll._id,
-            title: poll.title,
-            body: poll.body,
-            created: poll.created,
-            isPublic: poll.isPublic,
-            opts: null
-          });
-        }
-      });
-      $scope.cmts.forEach(function(cmt) {
-        if (cmt) {
-          $scope.activitys.push({
-            _id: (cmt.poll) ? cmt.poll._id : null,
-            title: (cmt.poll) ? cmt.poll.title : '',
-            body: cmt.body,
-            created: cmt.created,
-            isPublic: (cmt.poll) ? cmt.poll.isPublic : false,
-            opts: null
-          });
-        }
-      });
-      $scope.votes.forEach(function(vote) {
-        if (vote) {
-          $scope.activitys.push({
-            _id: (vote.poll) ? vote.poll._id : null,
-            title: (vote.poll) ? vote.poll.title : '',
-            body: null,
-            created: vote.created,
-            isPublic: (vote.poll) ? vote.poll.isPublic : false,
-            opts: vote.opts
-          });
-        }
+      return new Promise((resolve, reject) => {
+        $scope.polls.forEach(function(poll) {
+          if (poll) {
+            $scope.activitys.push({
+              _id: poll._id,
+              title: poll.title,
+              body: poll.body,
+              created: poll.created,
+              isPublic: poll.isPublic,
+              opts: null
+            });
+          }
+        });
+        $scope.cmts.forEach(function(cmt) {
+          if (cmt) {
+            $scope.activitys.push({
+              _id: cmt.poll ? cmt.poll._id : null,
+              title: cmt.poll ? cmt.poll.title : '',
+              body: cmt.body,
+              created: cmt.created,
+              isPublic: cmt.poll ? cmt.poll.isPublic : false,
+              opts: null
+            });
+          }
+        });
+        $scope.votes.forEach(function(vote) {
+          if (vote) {
+            $scope.activitys.push({
+              _id: vote.poll ? vote.poll._id : null,
+              title: vote.poll ? vote.poll.title : '',
+              body: null,
+              created: vote.created,
+              isPublic: vote.poll ? vote.poll.isPublic : false,
+              opts: vote.opts
+            });
+          }
+        });
+        return resolve();
       });
     }
   }

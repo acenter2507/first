@@ -97,4 +97,7 @@
       <strong>Sorry</strong> You has not liked any polls.
     </div>
   </div>
+  <div class="row text-center" ng-show="busy">
+    <md-progress-circular ng-disabled="!busy" class="md-hue-2 center" md-diameter="20px"></md-progress-circular>
+  </div>
 </div>

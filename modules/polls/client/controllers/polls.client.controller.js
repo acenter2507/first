@@ -636,7 +636,7 @@
       }
     };
     vm.is_voted = function(id) {
-      return _.findWhere(vm.selectedOpts, { '_id': id });
+      return _.findWhere(vm.selectedOpts, { '_id': id }) ? true : false;
     };
     vm.is_voted_all = () => {
       return vm.selectedOpts.length === vm.opts.length;

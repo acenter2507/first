@@ -37,6 +37,7 @@ angular.module('users').controller('ProfileVotesController', [
             .then(res => {
               // Gán data vào list hiện tại
               $scope.votes = _.union($scope.votes, $scope.new_data);
+              console.log($scope.new_data);
               $scope.page += 1;
               $scope.busy = false;
               $scope.new_data = [];

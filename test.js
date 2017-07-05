@@ -38,4 +38,6 @@ app.init(function () {
 
 /* Bổ sung
 1. Chức năng nhập lý do khi report
+2. Đếm view poll, poll user đã view
+3. Đếm view profile
 */

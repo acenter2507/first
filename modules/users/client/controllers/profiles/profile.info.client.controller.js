@@ -2,12 +2,9 @@
 
 angular.module('users').controller('ProfileInfoController', [
   '$scope',
-  '$http',
-  '$location',
-  'Users',
-  'Authentication',
   'UserApi',
-  function ($scope, $http, $location, Users, Authentication, UserApi) {
+  'Action',
+  function ($scope, UserApi, Action) {
     $scope.polls = [];
     $scope.cmts = [];
     $scope.votes = [];
@@ -63,10 +60,13 @@ angular.module('users').controller('ProfileInfoController', [
             $scope.votes.forEach(vote => {
               promises.push(get_opts(vote));
             });
-            return Promise.all(promises);
-          })
-          .then(res => {
-            return resolve(res);
+            Promise.all(promises)
+              .then(res => {
+                return resolve(res);
+              })
+              .catch(er => {
+                return reject(err);
+              });
           })
           .error(err => {
             return reject(err);
@@ -124,32 +124,5 @@ angular.module('users').controller('ProfileInfoController', [
         }
       });
     }
-
-    // $scope.isCurrentOwner = profile._id === Authentication.user._id;
-    // $scope.isLogged = (Authentication.user) ? true : false;
-    // $scope.page = 0;
-    // init();
-
-    // function init() {
-    //   get_polls();
-    // }
-
-    // function get_polls() {
-    //   UserApi.get_polls($scope.profile._id, $scope.page)
-    //     .success(res => {
-    //       $scope.polls = res || [];
-    //     })
-    //     .error(err => {
-    //       alert(err);
-    //     });
-    // }
-
-    // $scope.poll_filter = (poll) => {
-    //   if (poll.isPublic) {
-    //     return true;
-    //   } else {
-    //     return $scope.isCurrentOwner;
-    //   }
-    // };
   }
 ]);

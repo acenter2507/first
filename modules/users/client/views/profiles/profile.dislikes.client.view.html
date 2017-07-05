@@ -11,10 +11,10 @@
 
       <div clas="poll-header">
         <div class="user-avatar pull-left">
-          <img src="{{profile.profileImageURL}}" alt="{{profile.displayName}}">
+          <img src="{{poll.user.profileImageURL}}" alt="{{poll.user.displayName}}">
         </div>
         <span class="pull-left">
-            <strong><a class="undecorated-link" ui-sref="profile.info({userId: profile._id})" ng-bind="profile.displayName"></a></strong>
+            <strong><a class="undecorated-link" ui-sref="profile.info({userId: poll.user._id})" ng-bind="poll.user.displayName"></a></strong>
             <small class="text-muted">created on</small>
             <small class="text-muted" am-time-ago="poll.created"></small>
           </span>

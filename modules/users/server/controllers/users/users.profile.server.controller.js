@@ -258,7 +258,10 @@ exports.dislikes = function (req, res) {
   var page = req.params.page || 0;
   Like.find({ user: req.profile._id, type: 2 })
     .sort('-created')
-    .populate('poll')
+    .populate({
+      path: 'poll',
+      populate: { path: 'user'}
+    })
     .skip(10 * page)
     .exec(function(err, dislikes) {
       if (err) {

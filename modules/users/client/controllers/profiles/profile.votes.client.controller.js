@@ -13,7 +13,9 @@ angular.module('users').controller('ProfileVotesController', [
 
     init();
 
-    function init() {}
+    function init() {
+      get_votes();
+    }
 
     $scope.get_votes = get_votes;
     function get_votes() {
@@ -41,6 +43,7 @@ angular.module('users').controller('ProfileVotesController', [
               $scope.page += 1;
               $scope.busy = false;
               $scope.new_data = [];
+              $scope.$apply();
             })
             .catch(err => {
               alert(err);

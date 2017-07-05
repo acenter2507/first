@@ -6,7 +6,7 @@
       <li class="breadcrumb-item active">Comments</li>
     </ol>
   </div>
-  <div class="row mg50t" infinite-scroll="get_cmts()" infinite-scroll-distance='2'>
+  <div class="row mg50t" infinite-scroll="get_cmts()">
     <div ng-repeat="cmt in cmts | filter: cmt_filter" class="card">
       <div clas="post-header">
         <div class="user-avatar pull-left">

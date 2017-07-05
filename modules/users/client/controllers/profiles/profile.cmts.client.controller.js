@@ -9,6 +9,13 @@ angular.module('users').controller('ProfileCmtsController', [
     $scope.busy = false;
     $scope.stoped = false;
     $scope.get_cmts = get_cmts;
+    
+    init();
+
+    function init() {
+      get_cmts();
+    }
+
     function get_cmts() {
       if ($scope.busy || $scope.stoped) {
         return;
@@ -24,6 +31,7 @@ angular.module('users').controller('ProfileCmtsController', [
           $scope.cmts = _.union($scope.cmts, res);
           $scope.page += 1;
           $scope.busy = false;
+          $scope.$apply();
         })
         .error(err => {
           alert(err);

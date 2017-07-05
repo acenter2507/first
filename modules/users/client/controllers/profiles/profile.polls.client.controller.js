@@ -13,7 +13,9 @@ angular.module('users').controller('ProfilePollsController', [
 
     init();
 
-    function init() {}
+    function init() {
+      get_polls();
+    }
 
     $scope.get_polls = get_polls;
     function get_polls() {

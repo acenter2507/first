@@ -43,6 +43,8 @@
     vm.opts = [];
     vm.tmp_opt = {};
     vm.opt_aside = {};
+    vm.votedOpts = [];
+    vm.selectedOpts = [];
 
     vm.cmt_sorts = [
       { val: '-created', name: 'Newest to oldest' },
@@ -321,15 +323,10 @@
             return vm.ownVote._id ? Action.get_opts_for_vote(vm.ownVote._id) : resolve();
           })
           .then(res => {
-            if (!res || !res.data) {
-              vm.votedOpts = [];
-              vm.selectedOpts = [];
-            } else {
-              res.data.forEach(voteopt => {
-                vm.votedOpts.push(voteopt.opt._id);
-                vm.selectedOpts.push(voteopt.opt._id);
-              });
-            }
+            res.data.forEach(voteopt => {
+              vm.votedOpts.push(voteopt.opt._id);
+              vm.selectedOpts.push(voteopt.opt._id);
+            });
             return resolve();
           })
           .catch(err => {

@@ -14,7 +14,7 @@ angular.module('users').controller('ProfileDislikesController', [
     init();
 
     function init() {
-      get_polls();
+      // get_polls();
     }
 
     $scope.get_polls = get_polls;

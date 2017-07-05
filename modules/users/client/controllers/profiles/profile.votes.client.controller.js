@@ -14,7 +14,7 @@ angular.module('users').controller('ProfileVotesController', [
     init();
 
     function init() {
-      get_votes();
+      // get_votes();
     }
 
     $scope.get_votes = get_votes;

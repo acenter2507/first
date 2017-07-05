@@ -14,7 +14,7 @@ angular.module('users').controller('ProfileBookmarksController', [
     init();
 
     function init() {
-      get_polls();
+      // get_polls();
     }
 
     $scope.get_polls = get_polls;

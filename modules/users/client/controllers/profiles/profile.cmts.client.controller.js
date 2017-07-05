@@ -12,7 +12,7 @@ angular.module('users').controller('ProfileCmtsController', [
     init();
 
     function init() {
-      get_cmts();
+      // get_cmts();
     }
 
     $scope.get_cmts = get_cmts;

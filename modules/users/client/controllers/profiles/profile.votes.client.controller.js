@@ -43,6 +43,7 @@ angular.module('users').controller('ProfileVotesController', [
               $scope.page += 1;
               $scope.busy = false;
               $scope.new_data = [];
+              $scope.$apply();
             })
             .catch(err => {
               alert(err);

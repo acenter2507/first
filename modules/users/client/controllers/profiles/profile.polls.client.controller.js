@@ -54,6 +54,7 @@ angular.module('users').controller('ProfilePollsController', [
               $scope.polls = _.union($scope.polls, $scope.new_data);
               $scope.page += 1;
               $scope.busy = false;
+              $scope.$apply();
 
               console.log(
                 'Load new success: ' + $scope.new_data.length + ' polls'

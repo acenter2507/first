@@ -251,7 +251,7 @@
         var rs_vote = new Votes(vote);
         if (vote._id) {
           rs_vote.updateCnt += 1;
-          rs_vote.updated += new Date();
+          rs_vote.updated = new Date();
           rs_vote.$update(successCb, errorCb);
         } else {
           rs_vote.$save(successCb, errorCb);

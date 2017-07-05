@@ -3,7 +3,7 @@
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="home">Home</a></li>
       <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="profile.info({ userId: profile._id })">{{profile.displayName}}</a></li>
-      <li class="breadcrumb-item active">Liked</li>
+      <li class="breadcrumb-item active">Disliked</li>
     </ol>
   </div>
   <div class="row mg50t" infinite-scroll="get_polls()">
@@ -93,7 +93,7 @@
 
       <div class="clearfix"></div>
     </div>
-    <div class="notice notice-warning" ng-if="polls.length === 0 && stopped">
+    <div class="notice notice-warning" ng-if="polls.length === 0 && stoped">
       <strong>Sorry</strong> You has not disliked any polls.
     </div>
   </div>

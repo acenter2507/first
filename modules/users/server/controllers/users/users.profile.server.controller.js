@@ -120,7 +120,23 @@ exports.me = function (req, res) {
 exports.profile = function (req, res) {
   res.json(req.profile || null);
 };
-
+/**
+ * Get polls of user for activity
+ */
+exports.all_polls = function (req, res) {
+  Poll.find({ user: req.profile._id })
+    .sort('-created')
+    .select('title created body isPublic')
+    .exec(function(err, polls) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.jsonp(polls);
+      }
+    });
+};
 /**
  * Get polls of user
  */
@@ -143,6 +159,24 @@ exports.polls = function (req, res) {
 };
 
 /**
+ * Get cmts of user for activity
+ */
+exports.all_cmts = function (req, res) {
+  Cmt.find({ user: req.profile._id })
+    .sort('-created')
+    .select('created body')
+    .populate('poll', 'title isPublic')
+    .exec(function(err, cmts) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.jsonp(cmts);
+      }
+    });
+};
+/**
  * Get cmts of user
  */
 exports.cmts = function (req, res) {
@@ -163,6 +197,24 @@ exports.cmts = function (req, res) {
     });
 };
 
+/**
+ * Get cmts of user for activity
+ */
+exports.all_votes = function (req, res) {
+  Vote.find({ user: req.profile._id })
+    .sort('-created')
+    .select('created')
+    .populate('poll', 'title isPublic')
+    .exec(function(err, votes) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.jsonp(votes);
+      }
+    });
+};
 /**
  * Get likes of user
  */

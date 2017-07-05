@@ -616,15 +616,16 @@
 
     // VOTE
     vm.checked = function(id) {
+      let _id = id.toString();
       if (vm.poll.allow_multiple) {
-        if (_.contains(vm.selectedOpts, id)) {
-          vm.selectedOpts = _.without(vm.selectedOpts, id);
+        if (_.contains(vm.selectedOpts, _id)) {
+          vm.selectedOpts = _.without(vm.selectedOpts, _id);
         } else {
-          vm.selectedOpts.push(id);
+          vm.selectedOpts.push(_id);
         }
       } else {
-        if (!_.contains(vm.selectedOpts, id)) {
-          vm.selectedOpts = [id];
+        if (!_.contains(vm.selectedOpts, _id)) {
+          vm.selectedOpts = [_id];
         }
       }
     };
@@ -636,7 +637,8 @@
       }
     };
     vm.is_voted = function(id) {
-      return _.contains(vm.selectedOpts, id);
+      let _id = id.toString();
+      return _.contains(vm.selectedOpts, _id);
     };
     vm.is_voted_all = () => {
       return vm.selectedOpts.length === vm.opts.length;
@@ -654,7 +656,7 @@
     vm.voted_title = function() {
       return _.pluck(
         _.filter(vm.opts, function(opt) {
-          return _.contains(vm.votedOpts, opt._id);
+          return _.contains(vm.votedOpts, opt._id.toString());
         }),
         'title'
       );

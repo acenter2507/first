@@ -30,6 +30,10 @@ var PollSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'Category'
   },
+  report: {
+    type: Schema.ObjectId,
+    ref: 'PollReport'
+  },
   allow_guest: {
     type: Boolean,
     default: false
@@ -49,22 +53,6 @@ var PollSchema = new Schema({
   user: {
     type: Schema.ObjectId,
     ref: 'User'
-  },
-  viewCnt: {
-    type: 'Number',
-    default: 0
-  },
-  voteCnt: {
-    type: 'Number',
-    default: 0
-  },
-  cmtCnt: {
-    type: 'Number',
-    default: 0
-  },
-  likeCnt: {
-    type: 'Number',
-    default: 0
   },
   created: {
     type: Date,
@@ -112,34 +100,6 @@ PollSchema.statics.findTags = function(id, callback) {
 
 PollSchema.statics.findOwnerVote = function(condition, callback) {
   return this.model('Vote').findOne(condition, callback);
-};
-
-PollSchema.statics.countUpVote = function(id, callback) {
-  return this.findById(id).exec(function(err, poll) {
-    poll.voteCnt += 1;
-    return poll.save();
-  });
-};
-
-PollSchema.statics.countUpCmt = function(id, callback) {
-  return this.findById(id).exec(function(err, poll) {
-    poll.cmtCnt += 1;
-    return poll.save();
-  });
-};
-
-PollSchema.statics.countDownCmt = function(id, callback) {
-  return this.findById(id).exec(function(err, poll) {
-    poll.cmtCnt -= 1;
-    return poll.save();
-  });
-};
-
-PollSchema.statics.countLike = function(id, cnt, callback) {
-  return this.findById(id).exec(function(err, poll) {
-    poll.likeCnt += cnt;
-    return poll.save();
-  });
 };
 
 mongoose.model('Poll', PollSchema);

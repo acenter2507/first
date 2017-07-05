@@ -117,7 +117,7 @@ module.exports = function (io, socket) {
   });
   // On like poll
   socket.on('poll_like', req => {
-    io.sockets.in(req.pollId).emit('poll_like', req.likeCnt);
+    io.sockets.in(req.pollId).emit('poll_like', req.report);
     if (req.type === 0) {
       return;
     }

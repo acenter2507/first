@@ -7,6 +7,7 @@ var path = require('path'),
   mongoose = require('mongoose'),
   Like = mongoose.model('Like'),
   Poll = mongoose.model('Poll'),
+  PollReport = mongoose.model('PollReport'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 
@@ -21,10 +22,10 @@ exports.create = function(req, res) {
   like.save()
     .then(_like => {
       like = _like;
-      return Poll.countLike(_like.poll, cnt);
+      return PollReport.countLike(_like.poll, cnt);
     }, handleError)
-    .then(poll => {
-      res.jsonp({ like: like, likeCnt: poll.likeCnt });
+    .then(report => {
+      res.jsonp({ like: like, report: report });
     }, handleError);
 
   function handleError(err) {
@@ -60,10 +61,10 @@ exports.update = function(req, res) {
   like.save()
     .then(_like => {
       like = _like;
-      return Poll.countLike(_like.poll, cnt);
+      return PollReport.countLike(_like.poll, cnt);
     }, handleError)
-    .then(poll => {
-      res.jsonp({ like: like, likeCnt: poll.likeCnt });
+    .then(report => {
+      res.jsonp({ like: like, report: report });
     }, handleError);
 
   function handleError(err) {

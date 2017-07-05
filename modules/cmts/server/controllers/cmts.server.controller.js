@@ -7,6 +7,7 @@ var path = require('path'),
   mongoose = require('mongoose'),
   Cmt = mongoose.model('Cmt'),
   Poll = mongoose.model('Poll'),
+  PollReport = mongoose.model('PollReport'),
   Cmtlike = mongoose.model('Cmtlike'),
   Polluser = mongoose.model('Polluser'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
@@ -19,12 +20,15 @@ exports.create = function (req, res) {
   var cmt = new Cmt(req.body);
   cmt.user = req.user;
 
+  // Lưu comment vào db
   cmt.save()
     .then(_cmt => {
       cmt = _cmt;
-      return Poll.countUpCmt(_cmt.poll);
+      // Tăng số comemnt trong reprort
+      return PollReport.countUpCmt(_cmt.poll);
     }, handleError)
-    .then(() => {
+    .then(report => {
+      // Tạo record follow
       Polluser.findOne({ poll: cmt.poll, user: cmt.user }).exec((err, _polluser) => {
         if (!_polluser) {
           _polluser = new Polluser({ poll: cmt.poll, user: cmt.user });
@@ -33,6 +37,7 @@ exports.create = function (req, res) {
       });
     }, handleError)
     .then(() => {
+      // Trả về comment
       res.jsonp(cmt);
     }, handleError);
 
@@ -84,7 +89,7 @@ exports.delete = function (req, res) {
   const pollId = cmt.poll._id;
   cmt.remove()
     .then(() => {
-      return Poll.countDownCmt(pollId);
+      return PollReport.countDownCmt(pollId);
     }, handleError)
     .then(() => {
       res.jsonp(cmt);

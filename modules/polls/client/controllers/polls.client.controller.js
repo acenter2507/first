@@ -134,9 +134,9 @@
         vm.cmts = _.without(vm.cmts, _.findWhere(vm.cmts, { _id: cmtId }));
         $scope.$apply();
       });
-      Socket.on('poll_like', likeCnt => {
+      Socket.on('poll_like', report => {
         // Update poll like
-        vm.poll.likeCnt = likeCnt;
+        vm.poll.report = report;
         $scope.$apply();
       });
       Socket.on('cmt_like', res => {

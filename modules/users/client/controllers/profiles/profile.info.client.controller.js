@@ -64,7 +64,7 @@ angular.module('users').controller('ProfileInfoController', [
               .then(res => {
                 return resolve(res);
               })
-              .catch(er => {
+              .catch(err => {
                 return reject(err);
               });
           })

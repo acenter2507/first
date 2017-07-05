@@ -54,7 +54,7 @@ angular.module('users').controller('ProfileVotesController', [
       return new Promise((resolve, reject) => {
         Action.get_opts_for_vote(vote._id)
           .then(res => {
-            vote.opts = res.data || [];
+            vote.opts = _.pluck(res.data, 'opt') || [];
             return resolve(vote);
           })
           .catch(err => {

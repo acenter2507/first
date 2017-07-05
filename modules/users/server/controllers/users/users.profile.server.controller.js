@@ -182,10 +182,27 @@ exports.votes = function (req, res) {
     });
 };
 
+exports.follows = function (req, res) {
+  var page = req.params.page || 0;
+  Polluser.find({ user: req.profile._id })
+    .sort('-created')
+    .populate('poll')
+    .skip(10 * page)
+    .exec(function(err, follows) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.jsonp(follows);
+      }
+    });
+
+};
+
 /**
  * Get likes of user
  */
 exports.likes = function (req, res) {};
 exports.dislikes = function (req, res) {};
 exports.bookmarks = function (req, res) {};
-exports.follows = function (req, res) {};

@@ -260,7 +260,8 @@ exports.dislikes = function (req, res) {
     .sort('-created')
     .populate({
       path: 'poll',
-      populate: { path: 'user' }
+      model: 'Poll',
+      populate: { path: 'user', model: 'User' }
     })
     .skip(10 * page)
     .exec(function(err, dislikes) {

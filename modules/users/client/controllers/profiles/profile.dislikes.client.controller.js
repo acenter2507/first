@@ -65,7 +65,7 @@ angular.module('users').controller('ProfileDislikesController', [
               console.log(
                 'Load new success: ' + $scope.new_data.length + ' polls'
               );
-              $scope.new_data.length = [];
+              $scope.new_data = [];
             })
             .catch(err => {
               alert(err);

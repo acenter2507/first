@@ -150,13 +150,13 @@ exports.cmts = function (req, res) {
     .populate('poll', 'title isPublic')
     .skip(10 * page)
     .limit(10)
-    .exec(function(err, polls) {
+    .exec(function(err, cmts) {
       if (err) {
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)
         });
       } else {
-        res.jsonp(polls);
+        res.jsonp(cmts);
       }
     });
 };
@@ -164,7 +164,23 @@ exports.cmts = function (req, res) {
 /**
  * Get likes of user
  */
-exports.votes = function (req, res) {};
+exports.votes = function (req, res) {
+  var page = req.params.page || 0;
+  Vote.find({ user: req.profile._id })
+    .sort('-created')
+    .populate('poll', 'title isPublic')
+    .skip(10 * page)
+    .limit(10)
+    .exec(function(err, votes) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.jsonp(votes);
+      }
+    });
+};
 
 /**
  * Get likes of user

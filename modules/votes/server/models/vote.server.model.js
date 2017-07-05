@@ -30,6 +30,10 @@ var VoteSchema = new Schema({
     type: Number,
     default: 0
   },
+  updated: {
+    type: Date,
+    default: Date.now
+  },
   created: {
     type: Date,
     default: Date.now

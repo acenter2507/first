@@ -139,7 +139,9 @@ exports.list = function(req, res) {
  * List of Opts voted
  */
 exports.findOpts = function(req, res) {
-  Vote.findOpts(req.vote._id).exec(function(err, opts) {
+  Vote.findOpts(req.vote._id)
+  .populate('opt', 'title')
+  .exec(function(err, opts) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)

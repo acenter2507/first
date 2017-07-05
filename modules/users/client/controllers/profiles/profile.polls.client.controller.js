@@ -41,11 +41,6 @@ angular.module('users').controller('ProfilePollsController', [
           });
           Promise.all(promises)
             .then(res => {
-              // Gán data vào list hiện tại
-              $scope.polls = _.union($scope.polls, $scope.new_data);
-              $scope.page += 1;
-              $scope.busy = false;
-
               var promises = [];
               $scope.new_data.forEach(poll => {
                 promises.push(get_voteOpts(poll));
@@ -53,6 +48,11 @@ angular.module('users').controller('ProfilePollsController', [
               return Promise.all(promises);
             })
             .then(res => {
+              // Gán data vào list hiện tại
+              $scope.polls = _.union($scope.polls, $scope.new_data);
+              $scope.page += 1;
+              $scope.busy = false;
+
               console.log(
                 'Load new success: ' + $scope.new_data.length + ' polls'
               );

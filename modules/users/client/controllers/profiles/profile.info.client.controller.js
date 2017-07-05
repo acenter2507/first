@@ -17,6 +17,7 @@ angular.module('users').controller('ProfileInfoController', [
     $scope.busy = false;
     $scope.stoped = false;
 
+    get_data();
     function get_data() {
       Promise.all([ get_polls(), get_cmts(), get_votes() ])
         .then(res => {

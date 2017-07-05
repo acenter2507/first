@@ -30,6 +30,7 @@ app.init(function () {
   - Đếm view profile
   - Chức năng private và share link
   - Trigger khi xóa: poll, option, vote, comment
+  - Chức năng activity: những hoạt động đang diễn ra
 */
 // 1. Khi người vote là guest thì không push socket được. => done
 // 2. Sửa các progressbar trong màn hình detail. => done

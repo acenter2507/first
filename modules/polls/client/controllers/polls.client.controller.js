@@ -50,9 +50,11 @@
       { val: '-likeCnt', name: 'Most likes' }
     ];
     vm.cmt_sort = vm.cmt_sorts[0];
+    // Biến tự động gửi khi enter
     vm.enter_send = false;
-
+    // Người dùng đã report poll hiện tại
     vm.reported = false;
+    // Người dùng đã bookmark poll hiện tại
     vm.bookmarked = false;
     vm.like = {};
     vm.follow = {};
@@ -61,7 +63,6 @@
     vm.chart = { type: 'pie' };
     vm.chart.options = { responsive: true };
     vm.votedTotal = 0;
-    vm.error = null;
 
     // Infinity scroll
     vm.cmts = [];

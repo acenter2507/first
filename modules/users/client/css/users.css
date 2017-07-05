@@ -213,6 +213,8 @@
 .profile-menu-list li a {
   color: #666;
   text-decoration: none;
+  width: 100%;
+  display: block;
 }
 
 .profile-menu-list li:hover {

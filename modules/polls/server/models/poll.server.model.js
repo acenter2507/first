@@ -30,10 +30,6 @@ var PollSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'Category'
   },
-  report: {
-    type: Schema.ObjectId,
-    ref: 'PollReport'
-  },
   allow_guest: {
     type: Boolean,
     default: false

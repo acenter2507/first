@@ -7,7 +7,7 @@ var path = require('path'),
   mongoose = require('mongoose'),
   Cmt = mongoose.model('Cmt'),
   Poll = mongoose.model('Poll'),
-  PollReport = mongoose.model('PollReport'),
+  Pollreport = mongoose.model('Pollreport'),
   Cmtlike = mongoose.model('Cmtlike'),
   Polluser = mongoose.model('Polluser'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
@@ -25,7 +25,7 @@ exports.create = function (req, res) {
     .then(_cmt => {
       cmt = _cmt;
       // Tăng số comemnt trong reprort
-      return PollReport.countUpCmt(_cmt.poll);
+      return Pollreport.countUpCmt(_cmt.poll);
     }, handleError)
     .then(report => {
       // Tạo record follow
@@ -89,7 +89,7 @@ exports.delete = function (req, res) {
   const pollId = cmt.poll._id;
   cmt.remove()
     .then(() => {
-      return PollReport.countDownCmt(pollId);
+      return Pollreport.countDownCmt(pollId);
     }, handleError)
     .then(() => {
       res.jsonp(cmt);

@@ -10,6 +10,7 @@ var path = require('path'),
   Vote = mongoose.model('Vote'),
   Voteopt = mongoose.model('Voteopt'),
   Polltag = mongoose.model('Polltag'),
+  Pollreport = mongoose.model('Pollreport'),
   Polluser = mongoose.model('Polluser'),
   Report = mongoose.model('Report'),
   Bookmark = mongoose.model('Bookmark'),
@@ -18,7 +19,6 @@ var path = require('path'),
     './modules/core/server/controllers/errors.server.controller'
   )),
   _ = require('lodash');
-
 /**
  * Create a Poll
  */
@@ -26,32 +26,38 @@ exports.create = function(req, res) {
   var poll = new Poll(req.body);
   poll.user = req.user;
 
-  var tags = req.body.tags;
-  var opts = req.body.opts;
+  var tags = req.body.tags || [];
+  var opts = req.body.opts || [];
   var promises = [];
-  poll
-    .save()
+  
+  poll.save()
     .then(_poll => {
       poll = _poll;
+      // Tạo report cho poll
+      var report = new Pollreport({ poll: poll._id });
+      return report.save();
+    }, handleError)
+    .then(_report => {
+      // Lưu tag vào db
       tags.forEach(tag => {
-        var polltag = new Polltag();
-        polltag.tag = tag;
-        polltag.poll = _poll;
+        var polltag = new Polltag({ tag: tag, poll: poll._id });
         promises.push(polltag.save());
       });
       return Promise.all(promises);
     }, handleError)
     .then(() => {
+      // Lưu options vào db
       promises = [];
       opts.forEach(opt => {
         var _opt = new Opt(opt);
         _opt.user = req.user;
-        _opt.poll = poll;
+        _opt.poll = poll._id;
         promises.push(_opt.save());
       });
       return Promise.all(promises);
     }, handleError)
     .then(() => {
+      // Tạo biến follow mới
       promises = [];
       var _polluser = new Polluser({ poll: poll._id, user: req.user._id });
       return _polluser.save();
@@ -97,8 +103,6 @@ exports.update = function(req, res) {
   poll = _.extend(poll, req.body);
   var tags = req.body.tags || [];
   var opts = req.body.opts || [];
-  // var update_opts = [];
-  // var new_opts = [];
   var promises = [];
   poll.save()
     .then(_poll => {
@@ -107,9 +111,7 @@ exports.update = function(req, res) {
     }, handleError)
     .then(() => {
       tags.forEach(tag => {
-        var polltag = new Polltag();
-        polltag.tag = tag;
-        polltag.poll = poll;
+        var polltag = new Polltag({ tag: tag, poll: poll._id });
         promises.push(polltag.save());
       });
       return Promise.all(promises);
@@ -158,13 +160,36 @@ exports.update = function(req, res) {
  */
 exports.delete = function(req, res) {
   var poll = req.poll;
-  poll
-    .remove()
+  poll.remove()
     .then(() => {
       return Opt.remove({ poll: poll._id });
     }, handleError)
     .then(() => {
+      var promises = [];
+      Vote.find({ poll: poll._id }).exec((err, votes) => {
+        votes.forEach(vote => {
+          promises.push(Voteopt.remove({ vote: vote._id }));
+        });
+      });
+      return Promise.all(promises);
+    }, handleError)
+    .then(() => {
       return Vote.remove({ poll: poll._id });
+    }, handleError)
+    .then(() => {
+      return Pollreport.remove({ poll: poll._id });
+    }, handleError)
+    .then(() => {
+      return Polltag.remove({ poll: poll._id });
+    }, handleError)
+    .then(() => {
+      return Report.remove({ poll: poll._id });
+    }, handleError)
+    .then(() => {
+      return Bookmark.remove({ poll: poll._id });
+    }, handleError)
+    .then(() => {
+      return Like.remove({ poll: poll._id });
     }, handleError)
     .then(() => {
       res.jsonp(poll);
@@ -458,6 +483,24 @@ exports.pollByID = function(req, res, next, id) {
       message: 'Poll is invalid'
     });
   }
+
+/**
+ * Find report
+ */
+exports.findPollreport = function(req, res) {
+  Pollreport.findOne({ poll: req.poll._id }).exec((err, _report) => {
+    if (err) {
+      handleError(err);
+    } else {
+      res.jsonp(_report);
+    }
+  });
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
+};
 
   Poll.findById(id)
     .populate('category', 'name icon')

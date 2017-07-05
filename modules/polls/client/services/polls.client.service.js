@@ -60,6 +60,9 @@
       },
       findBookmark: id => {
         return $http.get('/api/findBookmark/' + id);
+      },
+      findPollreport: id => {
+        return $http.get('/api/findPollreport/' + id);
       }
     };
   }

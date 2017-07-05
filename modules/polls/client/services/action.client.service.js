@@ -82,6 +82,17 @@
       });
     };
 
+    this.get_poll_report = pollId => {
+      return new Promise((resolve, reject) => {
+        PollsApi.findPollreport(pollId)
+          .then(res => {
+            return resolve(res);
+          })
+          .catch(err => {
+            return reject(err);
+          });
+      });
+    };
     // api get comments
     this.get_cmts = (pollId, _page) => {
       return new Promise((resolve, reject) => {

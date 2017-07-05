@@ -616,16 +616,15 @@
 
     // VOTE
     vm.checked = function(id) {
-      let _id = id.toString();
       if (vm.poll.allow_multiple) {
-        if (_.contains(vm.selectedOpts, _id)) {
-          vm.selectedOpts = _.without(vm.selectedOpts, _id);
+        if (_.contains(vm.selectedOpts, id)) {
+          vm.selectedOpts = _.without(vm.selectedOpts, id);
         } else {
-          vm.selectedOpts.push(_id);
+          vm.selectedOpts.push(id);
         }
       } else {
-        if (!_.contains(vm.selectedOpts, _id)) {
-          vm.selectedOpts = [_id];
+        if (!_.contains(vm.selectedOpts, id)) {
+          vm.selectedOpts = [id];
         }
       }
     };
@@ -637,8 +636,8 @@
       }
     };
     vm.is_voted = function(id) {
-      let _id = id.toString();
-      return _.contains(vm.selectedOpts, _id);
+      console.log(vm.selectedOpts);
+      return _.contains(vm.selectedOpts, id);
     };
     vm.is_voted_all = () => {
       return vm.selectedOpts.length === vm.opts.length;

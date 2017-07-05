@@ -1,0 +1,22 @@
+<section>
+  <div class="page-header">
+    <h1>Pollreports</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="pollreport in vm.pollreports"
+       ui-sref="pollreports.view({ pollreportId: pollreport._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="pollreport.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="pollreport.user" ng-bind="pollreport.user.displayName"></span>
+        <span ng-if="!pollreport.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="pollreport.name"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="vm.pollreports.$resolved && !vm.pollreports.length">
+    No Pollreports yet, why don't you <a ui-sref="pollreports.create">create one</a>?
+  </div>
+</section>

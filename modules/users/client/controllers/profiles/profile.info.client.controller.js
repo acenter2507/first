@@ -129,7 +129,7 @@ angular.module('users').controller('ProfileInfoController', [
       });
     }
 
-    vm.activity_filter = (activity) => {
+    $scope.activity_filter = (activity) => {
       if (activity.isPublic) return true;
       return $scope.isCurrentOwner;
     };

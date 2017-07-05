@@ -10,11 +10,9 @@ var mongoose = require('mongoose'),
  * View Schema
  */
 var ViewSchema = new Schema({
-  name: {
-    type: String,
-    default: '',
-    required: 'Please fill View name',
-    trim: true
+  poll: {
+    type: Schema.ObjectId,
+    ref: 'Poll'
   },
   created: {
     type: Date,

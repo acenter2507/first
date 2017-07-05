@@ -3,7 +3,7 @@
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="home">Home</a></li>
       <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="profile.info({ userId: profile._id })">{{profile.displayName}}</a></li>
-      <li class="breadcrumb-item active">Follows</li>
+      <li class="breadcrumb-item active">Bookmarks</li>
     </ol>
   </div>
   <div class="row mg50t" infinite-scroll="get_polls()">
@@ -93,7 +93,7 @@
       <div class="clearfix"></div>
     </div>
     <div class="notice notice-warning" ng-if="polls.length === 0">
-      <strong>Sorry</strong> {{profile.displayName}} has not followed any polls.
+      <strong>Sorry</strong> You has not bookmark any polls.
     </div>
   </div>
 </div>

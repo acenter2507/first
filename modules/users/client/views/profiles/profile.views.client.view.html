@@ -1,12 +1,12 @@
-<div class="container" ng-controller="ProfilePollsController">
+<div class="container" ng-controller="ProfileViewsController">
   <div class="row profile-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="home">Home</a></li>
       <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="profile.info({ userId: profile._id })">{{profile.displayName}}</a></li>
-      <li class="breadcrumb-item active">Polls</li>
+      <li class="breadcrumb-item active">Viewed</li>
     </ol>
   </div>
-  <div class="row mg50t" infinite-scroll="get_polls()" infinite-scroll-distance='1'>
+  <div class="row mg50t" infinite-scroll="get_polls()">
     <div ng-repeat="poll in polls | filter: poll_filter" class="card">
 
       <div clas="poll-header">
@@ -15,7 +15,7 @@
         </div>
         <span class="pull-left">
             <strong><a class="undecorated-link" ui-sref="profile.info({userId: profile._id})" ng-bind="profile.displayName"></a></strong>
-            <small class="text-muted">&nbsp;created on</small>
+            <small class="text-muted">created on</small>
             <small class="text-muted" am-time-ago="poll.created"></small>
           </span>
         <br>
@@ -25,14 +25,12 @@
         <span ng-if="!poll.allow_guest" class="fa fa-users">
           <md-tooltip md-direction="bottom">Only user can vote</md-tooltip>
         </span>
-        <a class="undecorated-link" ui-sref="categorys.view({ categoryId: poll.category._id })">{{ poll.category.name }}</a>
         <div class="clearfix"></div>
         <hr class="mg5t mg10b">
       </div>
 
       <div clas="poll-body">
         <h4><a ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a></h4>
-        <!--<p class="text-justify poll_item_body" ng-bind-html="poll.summary | nl2br"></p>-->
         <div class="text-body" ta-bind="text" ng-model="poll.summary" ta-readonly="true"></div>
         <p ng-show="poll.body.length > poll.summary.length" class="poll_item_body">...
           <a class="undecorated-link" ui-sref="polls.view({ pollId: poll._id })">see more</a>
@@ -95,7 +93,7 @@
       <div class="clearfix"></div>
     </div>
     <div class="notice notice-warning" ng-if="polls.length === 0">
-      <strong>Sorry</strong> {{profile.displayName}} has not create any polls.
+      <strong>Sorry</strong> You has not viewed any polls.
     </div>
   </div>
 </div>

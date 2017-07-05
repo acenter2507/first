@@ -20,6 +20,7 @@ var _ = require('lodash'),
   Polluser = mongoose.model('Polluser'),
   Report = mongoose.model('Report'),
   Bookmark = mongoose.model('Bookmark'),
+  View = mongoose.model('View'),
   Like = mongoose.model('Like');
 
 /**
@@ -216,8 +217,56 @@ exports.bookmarks = function (req, res) {
       }
     });
 };
+
+exports.views = function (req, res) {
+  var page = req.params.page || 0;
+  View.find({ user: req.profile._id })
+    .sort('-created')
+    .populate('poll')
+    .skip(10 * page)
+    .exec(function(err, views) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.jsonp(views);
+      }
+    });
+};
 /**
  * Get likes of user
  */
-exports.likes = function (req, res) {};
-exports.dislikes = function (req, res) {};
+exports.likes = function (req, res) {
+  var page = req.params.page || 0;
+  Like.find({ user: req.profile._id, type: 1 })
+    .sort('-created')
+    .populate('poll')
+    .skip(10 * page)
+    .exec(function(err, likes) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.jsonp(likes);
+      }
+    });
+};
+
+exports.dislikes = function (req, res) {
+  var page = req.params.page || 0;
+  Like.find({ user: req.profile._id, type: 2 })
+    .sort('-created')
+    .populate('poll')
+    .skip(10 * page)
+    .exec(function(err, dislikes) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.jsonp(dislikes);
+      }
+    });
+};

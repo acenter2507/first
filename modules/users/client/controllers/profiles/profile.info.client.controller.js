@@ -20,6 +20,7 @@ angular.module('users').controller('ProfileInfoController', [
         .then(res => {
           merge_activity();
           $scope.busy = false;
+          $scope.$apply();
           console.log('Load finish: ', $scope.activitys);
         })
         .catch(err => {

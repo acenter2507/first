@@ -6,7 +6,7 @@
       <li class="breadcrumb-item active">Liked</li>
     </ol>
   </div>
-  <div class="row mg50t" infinite-scroll="get_polls()">
+  <div class="row mg50t" infinite-scroll="get_polls()" infinite-scroll-distance='2'>
     <div ng-repeat="poll in polls | filter: poll_filter" class="card">
 
       <div clas="poll-header">

@@ -61,7 +61,7 @@ angular.module('users').controller('ProfileFollowsController', [
               $scope.$apply();
 
               console.log(
-                'Load new success: ' + $scope.new_data.length + ' polls', $scope.new_data
+                'Load new success: ' + $scope.new_data.length + ' polls'
               );
               $scope.new_data.length = [];
             })

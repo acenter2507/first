@@ -200,6 +200,22 @@ exports.follows = function (req, res) {
 
 };
 
+exports.bookmarks = function (req, res) {
+  var page = req.params.page || 0;
+  Bookmark.find({ user: req.profile._id })
+    .sort('-created')
+    .populate('poll')
+    .skip(10 * page)
+    .exec(function(err, bookmarks) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.jsonp(bookmarks);
+      }
+    });
+};
 /**
  * Get likes of user
  */

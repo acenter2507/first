@@ -636,6 +636,7 @@
       }
     };
     vm.is_voted = function(id) {
+      console.log('id' ,id);
       console.log(vm.selectedOpts);
       return _.contains(vm.selectedOpts, id);
     };

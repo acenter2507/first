@@ -18,7 +18,7 @@ angular.module('users').controller('ProfileCmtsController', [
         .success(res => {
           if (!res || !res.length || res.length === 0) {
             $scope.busy = false;
-            $scope.stoped = false;
+            $scope.stoped = true;
             return;
           }
           $scope.cmts = _.union($scope.cmts, res);

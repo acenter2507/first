@@ -25,7 +25,7 @@ angular.module('users').controller('ProfileVotesController', [
         .success(res => {
           if (!res || !res.length || res.length === 0) {
             $scope.busy = false;
-            $scope.stoped = false;
+            $scope.stoped = true;
             return;
           }
           $scope.new_data = res || [];

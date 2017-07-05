@@ -35,7 +35,20 @@
   </div>
   <div class="row">
     <ul class="timeline">
-      <li class="event" data-date="2015/Present">
+      <li class="event" ng-repeat="activity in activitys | filter: activity_filter">
+        <h3>Created: <a class="undecorated-link" ui-sref="polls.view({ pollId: activity._id })">{{ activity.title }}</a></h3>
+        <small class="text-muted" am-time-ago="activity.created"></small>
+        <!-- Poll -->
+        <div ng-if="activity.type === 1" class="text-body" ta-bind="text" ng-model="activity.body" ta-readonly="true"></div>
+        <!-- Comment -->
+        <p ng-if="activity.type === 2" class="text-justify" ng-bind-html="activity.body | nl2br"></p>
+        <!-- Vote -->
+        <span ng-if="activity.type === 3">Voted for:</span>
+        <span ng-if="activity.type === 3" ng-repeat="opt in activity.opts" ng-class="{'mg5l': !$first}">
+          <strong>{{ opt.title }}</strong>
+        </span>
+      </li>
+      <!--<li class="event" data-date="2015/Present">
         <h3>Management and Entreprenurship (MSc)</h3>
         <p>
           This September 2015 I will begin an MSc in Management and Entrepreneurship at University of Sussex, to broaden my knowledge
@@ -73,7 +86,7 @@
         <p>This is where my interest in building things for interactive media began. During my first computing course I studied
           a range of core topics including multimedia design, database design, computer games development, computer networks
           and object oriented programming.</p>
-      </li>
+      </li>-->
     </ul>
   </div>
   <div class="row text-center" ng-show="busy">

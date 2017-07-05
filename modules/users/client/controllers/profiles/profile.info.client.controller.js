@@ -96,34 +96,42 @@ angular.module('users').controller('ProfileInfoController', [
             body: poll.body,
             created: poll.created,
             isPublic: poll.isPublic,
-            opts: null
+            opts: null,
+            type: 1
           });
         }
       });
       $scope.cmts.forEach(function(cmt) {
-        if (cmt) {
+        if (cmt && cmt.poll) {
           $scope.activitys.push({
             _id: cmt.poll ? cmt.poll._id : null,
             title: cmt.poll ? cmt.poll.title : '',
             body: cmt.body,
             created: cmt.created,
             isPublic: cmt.poll ? cmt.poll.isPublic : false,
-            opts: null
+            opts: null,
+            type: 2
           });
         }
       });
       $scope.votes.forEach(function(vote) {
-        if (vote) {
+        if (vote && vote.poll) {
           $scope.activitys.push({
             _id: vote.poll ? vote.poll._id : null,
             title: vote.poll ? vote.poll.title : '',
             body: null,
             created: vote.created,
             isPublic: vote.poll ? vote.poll.isPublic : false,
-            opts: vote.opts
+            opts: vote.opts,
+            type: 3
           });
         }
       });
     }
+
+    vm.activity_filter = (activity) => {
+      if (activity.isPublic) return true;
+      return $scope.isCurrentOwner;
+    };
   }
 ]);

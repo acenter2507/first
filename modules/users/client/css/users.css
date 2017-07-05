@@ -261,7 +261,6 @@
   border-top-right-radius: 2px;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   color: #666;
-  margin: 50px auto;
   letter-spacing: 0.5px;
   position: relative;
   line-height: 1.4em;
@@ -309,7 +308,7 @@
 }
 
 .timeline .event:after {
-  box-shadow: 0 0 0 8px #42A5F5;
+  box-shadow: 0 0 0 8px #267ED5;
   left: -30px;
   background: #212121;
   border-radius: 50%;

@@ -19,9 +19,7 @@ angular.module('users').controller('ProfileInfoController', [
       $scope.busy = true;
       Promise.all([get_polls(), get_cmts(), get_votes()])
         .then(res => {
-          return merge_activity();
-        })
-        .then(() => {
+          merge_activity();
           $scope.busy = false;
         })
         .catch(err => {
@@ -89,44 +87,41 @@ angular.module('users').controller('ProfileInfoController', [
     }
 
     function merge_activity() {
-      return new Promise((resolve, reject) => {
-        $scope.polls.forEach(function(poll) {
-          if (poll) {
-            $scope.activitys.push({
-              _id: poll._id,
-              title: poll.title,
-              body: poll.body,
-              created: poll.created,
-              isPublic: poll.isPublic,
-              opts: null
-            });
-          }
-        });
-        $scope.cmts.forEach(function(cmt) {
-          if (cmt) {
-            $scope.activitys.push({
-              _id: cmt.poll ? cmt.poll._id : null,
-              title: cmt.poll ? cmt.poll.title : '',
-              body: cmt.body,
-              created: cmt.created,
-              isPublic: cmt.poll ? cmt.poll.isPublic : false,
-              opts: null
-            });
-          }
-        });
-        $scope.votes.forEach(function(vote) {
-          if (vote) {
-            $scope.activitys.push({
-              _id: vote.poll ? vote.poll._id : null,
-              title: vote.poll ? vote.poll.title : '',
-              body: null,
-              created: vote.created,
-              isPublic: vote.poll ? vote.poll.isPublic : false,
-              opts: vote.opts
-            });
-          }
-        });
-        return resolve();
+      $scope.polls.forEach(function(poll) {
+        if (poll) {
+          $scope.activitys.push({
+            _id: poll._id,
+            title: poll.title,
+            body: poll.body,
+            created: poll.created,
+            isPublic: poll.isPublic,
+            opts: null
+          });
+        }
+      });
+      $scope.cmts.forEach(function(cmt) {
+        if (cmt) {
+          $scope.activitys.push({
+            _id: cmt.poll ? cmt.poll._id : null,
+            title: cmt.poll ? cmt.poll.title : '',
+            body: cmt.body,
+            created: cmt.created,
+            isPublic: cmt.poll ? cmt.poll.isPublic : false,
+            opts: null
+          });
+        }
+      });
+      $scope.votes.forEach(function(vote) {
+        if (vote) {
+          $scope.activitys.push({
+            _id: vote.poll ? vote.poll._id : null,
+            title: vote.poll ? vote.poll.title : '',
+            body: null,
+            created: vote.created,
+            isPublic: vote.poll ? vote.poll.isPublic : false,
+            opts: vote.opts
+          });
+        }
       });
     }
   }

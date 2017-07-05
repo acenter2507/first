@@ -188,7 +188,14 @@ exports.follows = function (req, res) {
   var page = req.params.page || 0;
   Polluser.find({ user: req.profile._id, following: true })
     .sort('-created')
-    .populate('poll')
+    .populate({
+      path: 'poll',
+      model: 'Poll',
+      populate: [
+        { path: 'user', select: 'displayName profileImageURL', model: 'User' },
+        { path: 'category', select: 'name icon', model: 'Category' }
+      ]
+    })
     .skip(10 * page)
     .exec(function(err, follows) {
       if (err) {
@@ -206,7 +213,14 @@ exports.bookmarks = function (req, res) {
   var page = req.params.page || 0;
   Bookmark.find({ user: req.profile._id })
     .sort('-created')
-    .populate('poll')
+    .populate({
+      path: 'poll',
+      model: 'Poll',
+      populate: [
+        { path: 'user', select: 'displayName profileImageURL', model: 'User' },
+        { path: 'category', select: 'name icon', model: 'Category' }
+      ]
+    })
     .skip(10 * page)
     .exec(function(err, bookmarks) {
       if (err) {
@@ -223,7 +237,14 @@ exports.views = function (req, res) {
   var page = req.params.page || 0;
   View.find({ user: req.profile._id })
     .sort('-created')
-    .populate('poll')
+    .populate({
+      path: 'poll',
+      model: 'Poll',
+      populate: [
+        { path: 'user', select: 'displayName profileImageURL', model: 'User' },
+        { path: 'category', select: 'name icon', model: 'Category' }
+      ]
+    })
     .skip(10 * page)
     .exec(function(err, views) {
       if (err) {
@@ -242,7 +263,14 @@ exports.likes = function (req, res) {
   var page = req.params.page || 0;
   Like.find({ user: req.profile._id, type: 1 })
     .sort('-created')
-    .populate('poll')
+    .populate({
+      path: 'poll',
+      model: 'Poll',
+      populate: [
+        { path: 'user', select: 'displayName profileImageURL', model: 'User' },
+        { path: 'category', select: 'name icon', model: 'Category' }
+      ]
+    })
     .skip(10 * page)
     .exec(function(err, likes) {
       if (err) {

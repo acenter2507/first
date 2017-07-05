@@ -10,7 +10,6 @@ angular.module('users').controller('ProfileInfoController', [
     $scope.votes = [];
     $scope.activitys = [];
 
-    $scope.page = 0;
     $scope.busy = false;
 
     get_data();
@@ -21,6 +20,7 @@ angular.module('users').controller('ProfileInfoController', [
         .then(res => {
           merge_activity();
           $scope.busy = false;
+          console.log('Load finish: ', $scope.activitys);
         })
         .catch(err => {
           alert(err);

@@ -118,6 +118,7 @@
               vm.cmts.push(_cmt);
               vm.poll.report.cmtCnt += 1;
             }
+            console.log(vm.cmts);
             $scope.$apply();
           })
           .catch(err => {
@@ -383,6 +384,7 @@
           vm.cmts = _.union(vm.cmts, vm.new_cmts);
           vm.page += 1;
           vm.busy = false;
+          vm.new_cmts = [];
           $scope.$apply();
         })
         .catch(err => {
@@ -619,8 +621,6 @@
         return alert('You cannot interact continuously.');
       }
       vm.like_processing = true;
-      console.log(cmt);
-      console.log(vm.cmts);
       Action.save_like_cmt(cmt, type)
         .then(res => {
           cmt.like = res.like;

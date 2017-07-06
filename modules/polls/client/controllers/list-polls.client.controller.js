@@ -216,7 +216,8 @@
       return Math.floor(value * 100 / total) || 0;
     }
     function socketHandlePollCreate(res) {
-      console.log('Has new poll');
+      toaster.pop('info', "title", "Has new poll");
+      // console.log('Has new poll');
     }
     // Thao tác khác
     vm.delete_poll = (poll) => {

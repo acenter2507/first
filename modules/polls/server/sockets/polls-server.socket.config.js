@@ -97,7 +97,6 @@ module.exports = function (io, socket) {
     io.sockets
       .in(req.pollId)
       .emit('cmt_like', { cmtId: req.cmtId, likeCnt: req.likeCnt });
-    console.log(req);
     if (req.type === 0) {
       return;
     }

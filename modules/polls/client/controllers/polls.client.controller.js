@@ -291,7 +291,7 @@
             console.log(res);
             vm.ownVote = res && res.data ? res.data : { poll: vm.poll._id };
             if (vm.ownVote._id) {
-              Action.get_opts_for_vote(vm.ownVote._id);
+              return Action.get_opts_for_vote(vm.ownVote._id);
             } else {
               return next();
             }

@@ -118,8 +118,6 @@
               vm.cmts.push(_cmt);
               vm.poll.report.cmtCnt += 1;
             }
-            console.log(vm.cmts);
-            $scope.$apply();
           })
           .catch(err => {
             alert('error');

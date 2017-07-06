@@ -320,51 +320,51 @@
     }
 
 
-    function loadOpts() {
-      Action.get_opts(vm.poll._id)
-        .then(res => {
-          vm.opts = _.where(res.data, { status: 1 });
-          loadVoteopts(vm.poll._id);
-        })
-        .catch(err => {
-          alert('error' + err);
-        });
-    }
+    // function loadOpts() {
+    //   Action.get_opts(vm.poll._id)
+    //     .then(res => {
+    //       vm.opts = _.where(res.data, { status: 1 });
+    //       loadVoteopts(vm.poll._id);
+    //     })
+    //     .catch(err => {
+    //       alert('error' + err);
+    //     });
+    // }
 
-    function loadVoteopts(pollId) {
-      Action.get_voteopts(pollId)
-        .then(res => {
-          vm.votes = res.data.votes || [];
-          vm.voteopts = res.data.voteopts || [];
-          vm.votedTotal = vm.voteopts.length;
-          vm.chart.colors = [];
-          vm.chart.labels = [];
-          vm.chart.data = [];
-          vm.opts.forEach(opt => {
-            opt.voteCnt = _.where(vm.voteopts, { opt: opt._id }).length || 0;
-            opt.progressVal = calPercen(vm.votedTotal, opt.voteCnt);
-            vm.chart.colors.push(opt.color);
-            vm.chart.labels.push(opt.title);
-            vm.chart.data.push(opt.voteCnt);
-          });
-          $scope.$apply();
-        })
-        .catch(err => {
-          alert('error' + err);
-        });
-    }
+    // function loadVoteopts(pollId) {
+    //   Action.get_voteopts(pollId)
+    //     .then(res => {
+    //       vm.votes = res.data.votes || [];
+    //       vm.voteopts = res.data.voteopts || [];
+    //       vm.votedTotal = vm.voteopts.length;
+    //       vm.chart.colors = [];
+    //       vm.chart.labels = [];
+    //       vm.chart.data = [];
+    //       vm.opts.forEach(opt => {
+    //         opt.voteCnt = _.where(vm.voteopts, { opt: opt._id }).length || 0;
+    //         opt.progressVal = calPercen(vm.votedTotal, opt.voteCnt);
+    //         vm.chart.colors.push(opt.color);
+    //         vm.chart.labels.push(opt.title);
+    //         vm.chart.data.push(opt.voteCnt);
+    //       });
+    //       $scope.$apply();
+    //     })
+    //     .catch(err => {
+    //       alert('error' + err);
+    //     });
+    // }
 
-    function loadTags() {
-      Action.get_tags(poll._id)
-        .then(res => {
-          angular.forEach(res.data, (polltag, index) => {
-            vm.poll.tags.push(polltag.tag);
-          });
-        })
-        .catch(err => {
-          alert('error' + err);
-        });
-    }
+    // function loadTags() {
+    //   Action.get_tags(poll._id)
+    //     .then(res => {
+    //       angular.forEach(res.data, (polltag, index) => {
+    //         vm.poll.tags.push(polltag.tag);
+    //       });
+    //     })
+    //     .catch(err => {
+    //       alert('error' + err);
+    //     });
+    // }
 
     function loadLikeCmt(cmt) {
       return new Promise((resolve, reject) => {

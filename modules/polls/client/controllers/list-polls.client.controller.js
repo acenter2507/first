@@ -87,7 +87,6 @@
         .catch(err => {
           vm.busy = false;
           vm.stopped = true;
-          toaster.pop('info', "title", "text");
           console.log(err);
         });
     }

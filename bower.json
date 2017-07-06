@@ -33,7 +33,8 @@
     "textAngular": "^1.5.16",
     "angular-socket-io": "^0.7.0",
     "angular-moment": "^1.0.1",
-    "AngularJS-Toaster": "angularjs-toaster#^2.1.0"
+    "AngularJS-Toaster": "angularjs-toaster#^2.1.0",
+    "angular-toastr": "^2.1.1"
   },
   "resolutions": {
     "angular": "1.3.20",

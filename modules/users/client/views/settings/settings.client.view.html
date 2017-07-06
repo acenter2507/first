@@ -1,4 +1,43 @@
 <section ng-controller="SettingsController" class="container">
+  <div class="row">
+    <div class="cover" style="background-image: url({{user.coverImageURL}});">
+      <div class="container">
+        <div class="profile-avatar">
+          <img src="{{user.profileImageURL}}" alt="{{user.displayName}}">
+        </div>
+        <div class="profile-name">
+          <span>{{profile.displayName}}</span>
+        </div>
+        <div class="profile-menu">
+          <md-menu md-offset="-10 60" md-position-mode="target-right target">
+            <button class=" btn-fab" ng-click="$mdMenu.open($event)" aria-label="Open profile menu">
+              <i class="fa fa-ellipsis-v fa-lg"></i>
+            </button>
+            <md-menu-content>
+              <ul class="profile-menu-list">
+                <li ui-sref-active="active">
+                  <a ui-sref="profile.info({ userId: user._id })">View Profile</a>
+                </li>
+                <li ui-sref-active="active">
+                  <a ui-sref="settings.profile">Edit Profile</a>
+                </li>
+                <li ui-sref-active="active">
+                  <a ui-sref="settings.picture">Change Profile Picture</a>
+                </li>
+                <li ui-sref-active="active" ng-show="user.provider === 'local'">
+                  <a ui-sref="settings.password">Change Password</a>
+                </li>
+                <li ui-sref-active="active">
+                  <a ui-sref="settings.accounts">Manage Social Accounts</a>
+                </li>
+              </ul>
+            </md-menu-content>
+          </md-menu>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="page-header">
     <h1>Settings</h1>
   </div>

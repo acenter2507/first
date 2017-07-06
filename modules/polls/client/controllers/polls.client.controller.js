@@ -124,7 +124,6 @@
             alert('error');
             console.log(err);
           });
-        );
       });
       Socket.on('cmt_del', cmtId => {
         vm.cmts = _.without(vm.cmts, _.findWhere(vm.cmts, { _id: cmtId }));

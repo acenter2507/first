@@ -135,6 +135,7 @@
         $scope.$apply();
       });
       Socket.on('cmt_like', res => {
+        console.log(res);
         var _cmt = _.findWhere(vm.cmts, { _id: res.cmtId });
         if (_cmt) {
           _cmt.likeCnt = res.likeCnt;

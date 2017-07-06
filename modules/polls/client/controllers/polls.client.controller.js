@@ -130,7 +130,6 @@
       Socket.on('poll_like', report => {
         // Update poll like
         vm.poll.report = report;
-        $scope.$apply();
       });
       Socket.on('cmt_like', res => {
         console.log(vm.cmts);

@@ -16,6 +16,10 @@
           profileResolve: getProfile
         }
       })
+      .state('profile.edit', {
+        url: '/edit',
+        templateUrl: 'modules/users/client/views/profiles/profile.edit.client.view.html'
+      })
       .state('profile.info', {
         url: '/info',
         templateUrl: 'modules/users/client/views/profiles/profile.info.client.view.html'

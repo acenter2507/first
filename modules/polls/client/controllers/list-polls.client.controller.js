@@ -64,12 +64,6 @@
           var promises = [];
           vm.new_data.forEach(poll => {
             poll.isCurrentUserOwner = vm.isLogged && vm.authentication.user._id === poll.user._id;
-            poll.chart = {
-              options: { responsive: true },
-              colors: [],
-              labels: [],
-              data: []
-            };
             promises.push(get_opts(poll));
             promises.push(get_poll_report(poll));
             promises.push(get_vote_for_poll(poll));
@@ -163,6 +157,12 @@
       return new Promise((resolve, reject) => {
         Action.get_voteopts(poll._id)
           .then(res => {
+            poll.chart = {
+              options: { responsive: true },
+              colors: [],
+              labels: [],
+              data: []
+            };
             poll.votes = res.data.votes || [];
             poll.voteopts = res.data.voteopts || [];
             poll.total = poll.voteopts.length;

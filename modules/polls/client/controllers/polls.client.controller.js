@@ -136,7 +136,7 @@
       });
       Socket.on('cmt_like', res => {
         vm.cmts.forEach(cmt => {
-          if (cmt._id === res.cmtId) {
+          if (cmt._id.toString() === res.cmtId.toString()) {
             cmt.likeCnt = res.likeCnt;
           }
         });

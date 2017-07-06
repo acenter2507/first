@@ -195,6 +195,9 @@ exports.delete = function(req, res) {
       return Like.remove({ poll: poll._id });
     }, handleError)
     .then(() => {
+      return Polluser.remove({ poll: poll._id });
+    }, handleError)
+    .then(() => {
       res.jsonp(poll);
     }, handleError);
 

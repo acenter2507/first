@@ -388,6 +388,13 @@
         });
     }
 
+    function loadRemaining() {
+      vm.remaining = $timeout(makeRemaining, 1000);
+      $scope.$on('$destroy', () => {
+        $timeout.cancel(vm.remaining);
+      });
+    }
+
     function makeRemaining() {
       vm.close_duration = Remaining.duration(vm.poll.close);
       vm.isClosed = moment(vm.poll.close).isBefore(new moment());

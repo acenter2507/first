@@ -335,7 +335,7 @@
     function next() {
       return new Promise((resolve, reject) => {
         return resolve();
-      })
+      });
     }
 
     function get_like_cmt(cmt) {

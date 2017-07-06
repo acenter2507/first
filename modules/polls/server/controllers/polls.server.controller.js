@@ -15,6 +15,7 @@ var path = require('path'),
   Report = mongoose.model('Report'),
   Bookmark = mongoose.model('Bookmark'),
   Like = mongoose.model('Like'),
+  Cmt = mongoose.model('Cmt'),
   Cmtlike = mongoose.model('Cmtlike'),
   errorHandler = require(path.resolve(
     './modules/core/server/controllers/errors.server.controller'

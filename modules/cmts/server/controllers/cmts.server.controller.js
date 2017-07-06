@@ -92,6 +92,9 @@ exports.delete = function (req, res) {
       return Pollreport.countDownCmt(pollId);
     }, handleError)
     .then(() => {
+      return Cmtlike.remove({ cmt: cmt._id });
+    }, handleError)
+    .then(() => {
       res.jsonp(cmt);
     }, handleError);
 

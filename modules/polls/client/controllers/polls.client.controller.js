@@ -56,12 +56,8 @@
     vm.reported = false;
     // Người dùng đã bookmark poll hiện tại
     vm.bookmarked = false;
-    vm.like = {};
-    vm.follow = {};
     vm.votes = [];
     vm.voteopts = [];
-    vm.chart = { type: 'pie' };
-    vm.chart.options = { responsive: true };
     vm.votedTotal = 0;
 
     // Infinity scroll
@@ -249,7 +245,7 @@
             return Action.get_voteopts(vm.poll._id);
           })
           .then(res => { // Lấy tags
-            poll.chart = {
+            vm.poll.chart = {
               type: 'pie',
               options: { responsive: true },
               colors: [],
@@ -282,33 +278,53 @@
       });
     }
     function get_owner_info() {
+      vm.votedOpts = [];
+      vm.selectedOpts = [];
+      vm.follow = { poll: vm.poll._id };
+      vm.reported = false;
+      vm.bookmarked = false;
+      vm.like = {};
       return new Promise((resolve, reject) => {
-        Action.get_like(vm.poll._id)
-          .then(res => {
-            vm.like = res.data || {};
-            return Action.get_follow(vm.poll._id);
-          })
-          .then(res => {
-            vm.follow = res.data || { poll: vm.poll._id };
-            return Action.get_report(vm.poll._id);
-          })
-          .then(res => {
-            vm.reported = (res.data) ? res.data : false;
-            return Action.get_bookmark(vm.poll._id);
-          })
-          .then(res => {
-            vm.bookmarked = (res.data) ? res.data : false;
-            return Action.get_vote(vm.poll._id);
-          })
-          .then(res => {
+         Action.get_vote(vm.poll._id)
+          .then(res => { // Get ownVote
             vm.ownVote = res && res.data ? res.data : { poll: vm.poll._id };
-            return vm.ownVote._id ? Action.get_opts_for_vote(vm.ownVote._id) : resolve();
+            if (vm.ownVote._id) {
+              Action.get_opts_for_vote(vm.ownVote._id);
+            } else {
+              return next();
+            }
           })
-          .then(res => {
-            res.data.forEach(voteopt => {
-              vm.votedOpts.push(voteopt.opt._id);
-              vm.selectedOpts.push(voteopt.opt._id);
-            });
+          .then(res => { // Get votedOpts
+            if (res && res.data) {
+              res.data.forEach(voteopt => {
+                vm.votedOpts.push(voteopt.opt._id);
+                vm.selectedOpts.push(voteopt.opt._id);
+              });
+            }
+            return (vm.isLogged) ? Action.get_follow(vm.poll._id) : next();
+          })
+          .then(res => { // Get follow
+            if (res && res.data) {
+              vm.follow = res.data;
+            }
+            return (vm.isLogged) ? Action.get_report(vm.poll._id); : next();
+          })
+          .then(res => { // Get reported
+            if (res && res.data) {
+              vm.reported = res.data;
+            }
+            return (vm.isLogged) ? Action.get_bookmark(vm.poll._id); : next();
+          })
+          .then(res => { // Get bookmarked
+            if (res && res.data) {
+              vm.bookmarked = res.data;
+            }
+            return (vm.isLogged) ? Action.get_like(vm.poll._id); : next();
+          })
+          .then(res => { // Get like
+            if (res && res.data) {
+              vm.like = res.data;
+            }
             $scope.$apply();
             return resolve();
           })
@@ -319,6 +335,11 @@
       });
     }
 
+    function next() {
+      return new Promise((resolve, reject) => {
+        return resolve();
+      })
+    }
 
     // function loadOpts() {
     //   Action.get_opts(vm.poll._id)

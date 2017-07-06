@@ -64,9 +64,8 @@
           var promises = [];
           vm.new_data.forEach(poll => {
             poll.isCurrentUserOwner = vm.isLogged && vm.authentication.user._id === poll.user._id;
-            promises.push(get_opts(poll));
             promises.push(get_poll_report(poll));
-            promises.push(get_vote_for_poll(poll));
+            promises.push(get_opts(poll));
             promises.push(get_owner_follow(poll));
             promises.push(get_reported(poll));
             promises.push(get_bookmarked(poll));
@@ -146,6 +145,9 @@
         Action.get_opts(poll._id)
           .then(res => {
             poll.opts = _.where(res.data, { status: 1 }) || [];
+            return get_vote_for_poll(poll);
+          })
+          .then(res => {
             return resolve(poll);
           })
           .catch(err => {

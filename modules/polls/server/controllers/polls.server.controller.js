@@ -15,6 +15,7 @@ var path = require('path'),
   Report = mongoose.model('Report'),
   Bookmark = mongoose.model('Bookmark'),
   Like = mongoose.model('Like'),
+  Cmtlike = mongoose.model('Cmtlike'),
   errorHandler = require(path.resolve(
     './modules/core/server/controllers/errors.server.controller'
   )),
@@ -162,12 +163,24 @@ exports.update = function(req, res) {
  */
 exports.delete = function(req, res) {
   var poll = req.poll;
-  poll
-    .remove()
-    .then(() => {
+  poll.remove()
+    .then(() => { // Delete option
+      res.jsonp(poll);
       return Opt.remove({ poll: poll._id });
     }, handleError)
-    .then(() => {
+    .then(() => { // Xóa like của các commetn trong poll
+      var promises = [];
+      Cmt.find({ poll: poll._id }).exec((err, cmts) => {
+        cmts.forEach(cmt => {
+          promises.push(Cmtlike.remove({ cmt: cmt._id }));
+        });
+      });
+      return Promise.all(promises);
+    }, handleError)
+    .then(() => { // Xóa comment
+      return Cmt.remove({ poll: poll._id });
+    }, handleError)
+    .then(() => { // Xóa thông tin của vote
       var promises = [];
       Vote.find({ poll: poll._id }).exec((err, votes) => {
         votes.forEach(vote => {
@@ -176,29 +189,26 @@ exports.delete = function(req, res) {
       });
       return Promise.all(promises);
     }, handleError)
-    .then(() => {
+    .then(() => { // Xóa votes
       return Vote.remove({ poll: poll._id });
     }, handleError)
-    .then(() => {
+    .then(() => { // Xóa thông tin report của poll
       return Pollreport.remove({ poll: poll._id });
     }, handleError)
-    .then(() => {
+    .then(() => { // Xóa thông tin tag của poll
       return Polltag.remove({ poll: poll._id });
     }, handleError)
-    .then(() => {
+    .then(() => { // Xóa thông tin report về poll
       return Report.remove({ poll: poll._id });
     }, handleError)
-    .then(() => {
+    .then(() => { // Xóa thông tin bookmark về poll
       return Bookmark.remove({ poll: poll._id });
     }, handleError)
-    .then(() => {
+    .then(() => { // Xóa thông tin like
       return Like.remove({ poll: poll._id });
     }, handleError)
-    .then(() => {
+    .then(() => { // Xóa thông tin follow
       return Polluser.remove({ poll: poll._id });
-    }, handleError)
-    .then(() => {
-      res.jsonp(poll);
     }, handleError);
 
   function handleError(err) {

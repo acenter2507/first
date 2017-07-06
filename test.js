@@ -31,6 +31,7 @@ app.init(function () {
   - Chức năng private và share link
   - Trigger khi xóa: poll, option, vote, comment
   - Chức năng activity: những hoạt động đang diễn ra
+  - Đếm và quản lý số lần bị report của user
 */
 // 1. Khi người vote là guest thì không push socket được. => done
 // 2. Sửa các progressbar trong màn hình detail. => done

@@ -37,7 +37,13 @@
       </div>
     </div>
   </div>
-  <div class="row profile-breadcrumb"></div>
+  <div class="row profile-breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="home">Home</a></li>
+      <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="profile.info({ userId: user._id })">Profile</a></li>
+      <li class="breadcrumb-item active">Edit</li>
+    </ol>
+  </div>
   <div class="row">
     <div ui-view></div>
   </div>

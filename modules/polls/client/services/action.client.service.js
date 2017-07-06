@@ -85,6 +85,7 @@
       return new Promise((resolve, reject) => {
         var rs_poll = new Polls(poll);
         rs_poll.$remove(() => {
+          Socket.emit('poll_delete', { pollId: poll._id });
           return resolve();
         });
       });

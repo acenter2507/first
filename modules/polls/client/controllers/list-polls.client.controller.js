@@ -155,7 +155,6 @@
           });
       });
     }
-
     function get_vote_for_poll(poll) {
       return new Promise((resolve, reject) => {
         Action.get_voteopts(poll._id)
@@ -183,7 +182,6 @@
           });
       });
     }
-
     function loadHotPolls() {
       Action.get_hot_polls(0)
         .then(res => {
@@ -193,14 +191,12 @@
           console.log(err);
         });
     }
-    // Load Category cho màn hình chính
     function loadCategorys() {
       Action.get_categorys()
         .then(res => {
           vm.categorys = res;
         });
     }
-
     function get_owner_follow(poll) {
       return new Promise((resolve, reject) => {
         if (!vm.isLogged) {
@@ -217,7 +213,6 @@
           });
       });
     }
-
     function get_reported(poll) {
       return new Promise((resolve, reject) => {
         if (!vm.isLogged) {
@@ -234,7 +229,6 @@
           });
       });
     }
-
     function get_bookmarked(poll) {
       return new Promise((resolve, reject) => {
         if (!vm.isLogged) {
@@ -251,7 +245,6 @@
           });
       });
     }
-
     // Tính phần trăm tỉ lệ vote cho opt
     function calPercen(total, value) {
       if (total === 0) {
@@ -259,17 +252,17 @@
       }
       return Math.floor(value * 100 / total) || 0;
     }
-
     function socketHandlePollCreate(res) {
       console.log('Has new poll');
     }
-
     // Thao tác khác
     vm.delete_poll = (poll) => {
       if (!poll.isCurrentUserOwner) {
         return alert('You are not authorized');
       }
-      Action.delete_poll(poll)
+      if ($window.confirm('Are you sure you want to delete?')) {
+        Action.delete_poll(poll);
+      }
     };
     vm.report_poll = (poll) => {
       if (poll.reported) {

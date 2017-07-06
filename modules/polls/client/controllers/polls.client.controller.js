@@ -620,17 +620,18 @@
       console.log(cmt);
       //vm.like_processing = true;
       
-      // Action.save_like_cmt(cmt, type)
-      //   .then(res => {
-      //     cmt.like = res.like;
-      //     cmt.likeCnt = res.likeCnt;
-      //     vm.like_processing = false;
-      //     $scope.$apply();
-      //   })
-      //   .catch(err => {
-      //     vm.like_processing = false;
-      //     alert(err);
-      //   });
+      Action.save_like_cmt(cmt, type)
+        .then(res => {
+          console.log('res', res);
+          // cmt.like = res.like;
+          // cmt.likeCnt = res.likeCnt;
+          // vm.like_processing = false;
+          // $scope.$apply();
+        })
+        .catch(err => {
+          vm.like_processing = false;
+          alert(err);
+        });
     };
 
     // VOTE

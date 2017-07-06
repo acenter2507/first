@@ -282,7 +282,7 @@
       vm.bookmarked = false;
       vm.like = {};
       return new Promise((resolve, reject) => {
-         Action.get_vote(vm.poll._id)
+        Action.get_vote(vm.poll._id)
           .then(res => { // Get ownVote
             vm.ownVote = res && res.data ? res.data : { poll: vm.poll._id };
             if (vm.ownVote._id) {

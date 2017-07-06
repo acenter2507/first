@@ -29,8 +29,9 @@ exports.create = function(req, res) {
   var tags = req.body.tags || [];
   var opts = req.body.opts || [];
   var promises = [];
-  
-  poll.save()
+
+  poll
+    .save()
     .then(_poll => {
       poll = _poll;
       // Tạo report cho poll
@@ -104,7 +105,8 @@ exports.update = function(req, res) {
   var tags = req.body.tags || [];
   var opts = req.body.opts || [];
   var promises = [];
-  poll.save()
+  poll
+    .save()
     .then(_poll => {
       poll = _poll;
       return Polltag.remove({ poll: _poll._id });
@@ -160,7 +162,8 @@ exports.update = function(req, res) {
  */
 exports.delete = function(req, res) {
   var poll = req.poll;
-  poll.remove()
+  poll
+    .remove()
     .then(() => {
       return Opt.remove({ poll: poll._id });
     }, handleError)
@@ -442,7 +445,7 @@ exports.findReport = function(req, res) {
     if (err) {
       handleError(err);
     } else {
-      var result = (_report) ? true : false;
+      var result = _report ? true : false;
       res.jsonp(result);
     }
   });
@@ -464,7 +467,7 @@ exports.findBookmark = function(req, res) {
     if (err) {
       handleError(err);
     } else {
-      var result = (_bookmark) ? true : false;
+      var result = _bookmark ? true : false;
       res.jsonp(result);
     }
   });
@@ -484,23 +487,23 @@ exports.pollByID = function(req, res, next, id) {
     });
   }
 
-/**
+  /**
  * Find report
  */
-exports.findPollreport = function(req, res) {
-  Pollreport.findOne({ poll: req.poll._id }).exec((err, _report) => {
-    if (err) {
-      handleError(err);
-    } else {
-      res.jsonp(_report);
-    }
-  });
-  function handleError(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
+  exports.findPollreport = function(req, res) {
+    Pollreport.findOne({ poll: req.poll._id }).exec((err, _report) => {
+      if (err) {
+        handleError(err);
+      } else {
+        res.jsonp(_report);
+      }
     });
-  }
-};
+    function handleError(err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    }
+  };
 
   Poll.findById(id)
     .populate('category', 'name icon')

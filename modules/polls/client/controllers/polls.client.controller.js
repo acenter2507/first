@@ -126,7 +126,6 @@
       });
       Socket.on('cmt_del', cmtId => {
         vm.cmts = _.without(vm.cmts, _.findWhere(vm.cmts, { _id: cmtId }));
-        $scope.$apply();
       });
       Socket.on('poll_like', report => {
         // Update poll like

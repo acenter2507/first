@@ -211,7 +211,7 @@
             vm.chart.labels.push(opt.title);
             vm.chart.data.push(opt.voteCnt);
           });
-        $scope.$apply();
+          $scope.$apply();
         })
         .catch(err => {
           alert('error' + err);

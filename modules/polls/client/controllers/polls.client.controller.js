@@ -135,12 +135,12 @@
         $scope.$apply();
       });
       Socket.on('cmt_like', res => {
-        console.log(res);
-        var _cmt = _.findWhere(vm.cmts, { _id: res.cmtId });
-        if (_cmt) {
-          _cmt.likeCnt = res.likeCnt;
-          $scope.$apply();
-        }
+        vm.cmts.forEach(cmt => {
+          if (cmt._id === res.cmtId) {
+            cmt.likeCnt = res.likeCnt;
+          }
+        });
+        $scope.$apply();
       });
       Socket.on('poll_vote', res => {
         Action.get_voteopts(vm.poll._id)

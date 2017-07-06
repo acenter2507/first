@@ -81,6 +81,14 @@
           });
       });
     };
+    this.delete_poll = poll => {
+      return new Promise((resolve, reject) => {
+        var rs_poll = new Polls(poll);
+        rs_poll.$remove(() => {
+          return resolve();
+        });
+      });
+    };
 
     this.get_poll_report = pollId => {
       return new Promise((resolve, reject) => {

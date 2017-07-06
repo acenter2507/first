@@ -267,6 +267,7 @@
       if (!poll.isCurrentUserOwner) {
         return alert('You are not authorized');
       }
+      Action.delete_poll(poll)
     };
     vm.report_poll = (poll) => {
       if (poll.reported) {

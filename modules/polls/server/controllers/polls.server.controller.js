@@ -174,8 +174,8 @@ exports.delete = function(req, res) {
         cmts.forEach(cmt => {
           promises.push(Cmtlike.remove({ cmt: cmt._id }));
         });
+        return Promise.all(promises);
       });
-      return Promise.all(promises);
     }, handleError)
     .then(() => { // Xóa comment
       return Cmt.remove({ poll: poll._id });
@@ -186,8 +186,8 @@ exports.delete = function(req, res) {
         votes.forEach(vote => {
           promises.push(Voteopt.remove({ vote: vote._id }));
         });
+        return Promise.all(promises);
       });
-      return Promise.all(promises);
     }, handleError)
     .then(() => { // Xóa votes
       return Vote.remove({ poll: poll._id });

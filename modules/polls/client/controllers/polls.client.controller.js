@@ -136,6 +136,7 @@
         $scope.$apply();
       });
       Socket.on('cmt_like', res => {
+        console.log(vm.cmts);
         console.log(res);
         vm.cmts.forEach(cmt => {
           if (cmt._id.toString() === res.cmtId.toString()) {

@@ -358,14 +358,14 @@
           rs_like.$save(successCb, successCb);
         }
         function successCb(res) {
-          // Socket.emit('cmt_like', {
-          //   pollId: cmt.poll,
-          //   cmtId: cmt._id,
-          //   likeCnt: res.likeCnt,
-          //   from: res.like.user,
-          //   to: cmt.user._id,
-          //   type: res.like.type
-          // });
+          Socket.emit('cmt_like', {
+            pollId: cmt.poll._id,
+            cmtId: cmt._id,
+            likeCnt: res.likeCnt,
+            from: res.like.user._id,
+            to: cmt.user._id,
+            type: res.like.type
+          });
           resolve(res);
         }
         function errorCb(err) {

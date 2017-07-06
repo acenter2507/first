@@ -94,7 +94,7 @@ module.exports = function (io, socket) {
   });
   // On like poll
   socket.on('cmt_like', req => {
-    console.log(req);
+    console.log('********************************', req);
     io.sockets
       .in(req.pollId)
       .emit('cmt_like', { cmtId: req.cmtId, likeCnt: req.likeCnt });

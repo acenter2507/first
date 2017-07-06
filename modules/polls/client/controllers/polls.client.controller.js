@@ -126,13 +126,7 @@
       });
       Socket.on('cmt_del', cmtId => {
         vm.cmts = _.without(vm.cmts, _.findWhere(vm.cmts, { _id: cmtId }));
-        Action.get_poll_report(vm.poll._id)
-          .then(res => {
-            vm.poll.report = res.data;
-          })
-          .catch(err => {
-            alert(err);
-          });
+        vm.poll.report.cmtCnt -= 1;
       });
       Socket.on('poll_like', report => {
         // Update poll like

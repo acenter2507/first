@@ -9,7 +9,8 @@
     '$window',
     'Socket',
     'Authentication',
-    'Action'
+    'Action',
+    'toaster'
   ];
 
   function PollsListController(
@@ -17,7 +18,8 @@
     $window,
     Socket,
     Authentication,
-    Action
+    Action,
+    toaster
   ) {
     var vm = this;
     vm.authentication = Authentication;
@@ -74,47 +76,6 @@
           });
           return Promise.all(promises);
         })
-        // .then(res => {
-        //   var promises = [];
-        //   vm.new_data.forEach(poll => {
-        //     promises.push(get_poll_report(poll));
-        //   });
-        //   return Promise.all(promises);
-        // })
-        // .then(res => {
-        //   // Gán data vào list hiện tại
-        //   vm.polls = _.union(vm.polls, vm.new_data);
-        //   vm.page += 1;
-        //   vm.busy = false;
-          
-        //   var promises = [];
-        //   vm.new_data.forEach(poll => {
-        //     promises.push(get_vote_for_poll(poll));
-        //   });
-        //   return Promise.all(promises);
-        // })
-        // .then(res => {
-        //   // Load polluser (Người dùng đã follow poll hay chưa)
-        //   var promises = [];
-        //   vm.new_data.forEach(poll => {
-        //     promises.push(get_owner_follow(poll));
-        //   });
-        //   return Promise.all(promises);
-        // })
-        // .then(res => {
-        //   var promises = [];
-        //   vm.new_data.forEach(poll => {
-        //     promises.push(get_reported(poll));
-        //   });
-        //   return Promise.all(promises);
-        // })
-        // .then(res => {
-        //   var promises = [];
-        //   vm.new_data.forEach(poll => {
-        //     promises.push(get_bookmarked(poll));
-        //   });
-        //   return Promise.all(promises);
-        // })
         .then(res => {
           // Gán data vào list hiện tại
           vm.polls = _.union(vm.polls, vm.new_data);
@@ -126,6 +87,7 @@
         .catch(err => {
           vm.busy = false;
           vm.stopped = true;
+          toaster.pop('info', "title", "text");
           console.log(err);
         });
     }

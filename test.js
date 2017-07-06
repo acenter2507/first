@@ -22,7 +22,7 @@ app.init(function () {
   - Sửa option không được. => done
   - Các thao tác: unfollow, follow, bookmark => done
 2. Tổng thể
-  - Edit profile
+  - Edit profile => done
   - Upload ảnh + chèn vào editor poll, options
   - Message thông báo
   - Chức năng nhập lý do khi report

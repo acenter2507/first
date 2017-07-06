@@ -617,18 +617,20 @@
       if (vm.like_processing) {
         return alert('You cannot interact continuously.');
       }
-      vm.like_processing = true;
-      Action.save_like_cmt(cmt, type)
-        .then(res => {
-          cmt.like = res.like;
-          cmt.likeCnt = res.likeCnt;
-          vm.like_processing = false;
-          $scope.$apply();
-        })
-        .catch(err => {
-          vm.like_processing = false;
-          alert(err);
-        });
+      console.log(cmt);
+      //vm.like_processing = true;
+      
+      // Action.save_like_cmt(cmt, type)
+      //   .then(res => {
+      //     cmt.like = res.like;
+      //     cmt.likeCnt = res.likeCnt;
+      //     vm.like_processing = false;
+      //     $scope.$apply();
+      //   })
+      //   .catch(err => {
+      //     vm.like_processing = false;
+      //     alert(err);
+      //   });
     };
 
     // VOTE

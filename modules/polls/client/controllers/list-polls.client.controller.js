@@ -6,6 +6,7 @@
 
   PollsListController.$inject = [
     '$scope',
+    '$window',
     'Socket',
     'Authentication',
     'Action'
@@ -13,6 +14,7 @@
 
   function PollsListController(
     $scope,
+    $window,
     Socket,
     Authentication,
     Action

@@ -623,9 +623,9 @@
       Action.save_like_cmt(cmt, type)
         .then(res => {
           console.log('res', res);
-          // cmt.like = res.like;
+          cmt.like = res.like;
           // cmt.likeCnt = res.likeCnt;
-          // vm.like_processing = false;
+          vm.like_processing = false;
           // $scope.$apply();
         })
         .catch(err => {

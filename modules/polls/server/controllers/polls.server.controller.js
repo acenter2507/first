@@ -477,6 +477,25 @@ exports.findBookmark = function(req, res) {
     });
   }
 };
+
+/**
+ * Find report
+ */
+exports.findPollreport = function(req, res) {
+  Pollreport.findOne({ poll: req.poll._id }).exec((err, _report) => {
+    if (err) {
+      handleError(err);
+    } else {
+      res.jsonp(_report);
+    }
+  });
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
+};
+
 /**
  * Poll middleware
  */
@@ -486,24 +505,6 @@ exports.pollByID = function(req, res, next, id) {
       message: 'Poll is invalid'
     });
   }
-
-  /**
- * Find report
- */
-  exports.findPollreport = function(req, res) {
-    Pollreport.findOne({ poll: req.poll._id }).exec((err, _report) => {
-      if (err) {
-        handleError(err);
-      } else {
-        res.jsonp(_report);
-      }
-    });
-    function handleError(err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    }
-  };
 
   Poll.findById(id)
     .populate('category', 'name icon')

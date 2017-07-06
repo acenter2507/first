@@ -117,6 +117,7 @@
         .then(res => {
           // Gán data vào list hiện tại
           vm.polls = _.union(vm.polls, vm.new_data);
+          console.log(vm.polls);
           vm.page += 1;
           vm.busy = false;
           $scope.$apply();
@@ -262,6 +263,11 @@
     }
 
     // Thao tác khác
+    vm.delete_poll = (poll) => {
+      if (!poll.isCurrentUserOwner) {
+        return alert('You are not authorized');
+      }
+    };
     vm.report_poll = (poll) => {
       if (poll.reported) {
         return alert('You are already report this poll');

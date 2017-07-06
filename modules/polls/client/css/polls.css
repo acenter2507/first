@@ -400,6 +400,7 @@ div.materialpicker-white.selected {
   text-decoration: none;
   cursor: pointer;
   outline: none;
+  width: 100%;
 }
 
 .menu-list li a:hover {

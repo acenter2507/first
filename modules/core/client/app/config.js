@@ -25,7 +25,7 @@ var ApplicationConfiguration = (function() {
     'chart.js',
     'textAngular',
     'ui.bootstrap.materialPicker',
-    'toaster'
+    'toastr'
   ];
 
   // Add a new vertical module

@@ -10,7 +10,7 @@
     'Socket',
     'Authentication',
     'Action',
-    'toaster'
+    'toastr'
   ];
 
   function PollsListController(
@@ -19,7 +19,7 @@
     Socket,
     Authentication,
     Action,
-    toaster
+    toastr
   ) {
     var vm = this;
     vm.authentication = Authentication;
@@ -216,7 +216,7 @@
       return Math.floor(value * 100 / total) || 0;
     }
     function socketHandlePollCreate(res) {
-      toaster.pop('info', "title", "Has new poll");
+      toastr.info('Has new poll', 'Inform');
       // console.log('Has new poll');
     }
     // Thao tác khác

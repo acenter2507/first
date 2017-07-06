@@ -15,7 +15,7 @@
     '$timeout',
     'Remaining',
     'Action',
-    'toaster'
+    'toastr'
   ];
 
   function PollsController(
@@ -30,7 +30,7 @@
     $timeout,
     Remaining,
     Action,
-    toaster
+    toastr
   ) {
     var vm = this;
     vm.authentication = Authentication;
@@ -108,12 +108,7 @@
         userId: vm.authentication.user._id
       });
       Socket.on('cmt_add', cmtId => {
-        toaster.pop({
-                type: 'error',
-                title: 'Title text',
-                body: 'Body text',
-                timeout: 3000
-            });
+        toastr.info('We are open today from 10 to 22', 'Information');
         Action.get_cmt(cmtId)
           .then(res => {
             return get_like_cmt(res.data);

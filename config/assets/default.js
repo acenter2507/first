@@ -11,7 +11,7 @@ module.exports = {
         'public/lib/ng-tags-input/ng-tags-input.css',
         'public/lib/angular-moment-picker/dist/angular-moment-picker.css',
         'public/lib/textAngular/dist/textAngular.css',
-        'public/lib/AngularJS-Toaster/toaster.css'
+        'public/lib/angular-toastr/dist/angular-toastr.css'
       ],
       js: [
         'public/lib/angular/angular.js',
@@ -46,7 +46,7 @@ module.exports = {
         'public/lib/textAngular/dist/textAngular-sanitize.min.js',
         'public/lib/textAngular/dist/textAngular.js',
         'public/lib/textAngular/dist/textAngularSetup.js',
-        'public/lib/AngularJS-Toaster/toaster.js'
+        'public/lib/angular-toastr/dist/angular-toastr.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

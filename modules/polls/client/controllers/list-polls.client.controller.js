@@ -27,7 +27,7 @@
     vm.page = 0;
     vm.busy = false;
     vm.stopped = false;
-    vm.loadPolls = loadPolls;
+    vm.get_polls = get_polls;
     init();
 
     function init() {
@@ -49,7 +49,7 @@
       });
     }
 
-    function loadPolls() {
+    function get_polls() {
       if (vm.stopped || vm.busy) return;
       vm.busy = true;
       Action.get_polls(vm.page)
@@ -70,45 +70,61 @@
               labels: [],
               data: []
             };
-            promises.push(loadOpts(poll));
+            promises.push(get_opts(poll));
+            promises.push(get_poll_report(poll));
+            promises.push(get_vote_for_poll(poll));
+            promises.push(get_owner_follow(poll));
+            promises.push(get_reported(poll));
+            promises.push(get_bookmarked(poll));
           });
           return Promise.all(promises);
         })
+        // .then(res => {
+        //   var promises = [];
+        //   vm.new_data.forEach(poll => {
+        //     promises.push(get_poll_report(poll));
+        //   });
+        //   return Promise.all(promises);
+        // })
+        // .then(res => {
+        //   // Gán data vào list hiện tại
+        //   vm.polls = _.union(vm.polls, vm.new_data);
+        //   vm.page += 1;
+        //   vm.busy = false;
+          
+        //   var promises = [];
+        //   vm.new_data.forEach(poll => {
+        //     promises.push(get_vote_for_poll(poll));
+        //   });
+        //   return Promise.all(promises);
+        // })
+        // .then(res => {
+        //   // Load polluser (Người dùng đã follow poll hay chưa)
+        //   var promises = [];
+        //   vm.new_data.forEach(poll => {
+        //     promises.push(get_owner_follow(poll));
+        //   });
+        //   return Promise.all(promises);
+        // })
+        // .then(res => {
+        //   var promises = [];
+        //   vm.new_data.forEach(poll => {
+        //     promises.push(get_reported(poll));
+        //   });
+        //   return Promise.all(promises);
+        // })
+        // .then(res => {
+        //   var promises = [];
+        //   vm.new_data.forEach(poll => {
+        //     promises.push(get_bookmarked(poll));
+        //   });
+        //   return Promise.all(promises);
+        // })
         .then(res => {
           // Gán data vào list hiện tại
           vm.polls = _.union(vm.polls, vm.new_data);
           vm.page += 1;
           vm.busy = false;
-          
-          var promises = [];
-          vm.new_data.forEach(poll => {
-            promises.push(loadVoteOpts(poll));
-          });
-          return Promise.all(promises);
-        })
-        .then(res => {
-          // Load polluser (Người dùng đã follow poll hay chưa)
-          var promises = [];
-          vm.new_data.forEach(poll => {
-            promises.push(loadFollow(poll));
-          });
-          return Promise.all(promises);
-        })
-        .then(res => {
-          var promises = [];
-          vm.new_data.forEach(poll => {
-            promises.push(loadReported(poll));
-          });
-          return Promise.all(promises);
-        })
-        .then(res => {
-          var promises = [];
-          vm.new_data.forEach(poll => {
-            promises.push(loadBookmarked(poll));
-          });
-          return Promise.all(promises);
-        })
-        .then(res => {
           $scope.$apply();
           vm.new_data = [];
         })
@@ -118,18 +134,19 @@
           console.log(err);
         });
     }
-
-    function loadHotPolls() {
-      Action.get_hot_polls(0)
-        .then(res => {
-          vm.hot_polls = res.data || [];
-        })
-        .catch(err => {
-          console.log(err);
-        });
+    function get_poll_report(poll) {
+      return new Promise((resolve, reject) => {
+        Action.get_poll_report(poll._id)
+          .then(res => {
+            poll.report = res.data;
+            return resolve(res);
+          })
+          .catch(err => {
+            return reject(err);
+          });
+      });
     }
-
-    function loadOpts(poll) {
+    function get_opts(poll) {
       return new Promise((resolve, reject) => {
         Action.get_opts(poll._id)
           .then(res => {
@@ -142,7 +159,7 @@
       });
     }
 
-    function loadVoteOpts(poll) {
+    function get_vote_for_poll(poll) {
       return new Promise((resolve, reject) => {
         Action.get_voteopts(poll._id)
           .then(res => {
@@ -164,7 +181,24 @@
       });
     }
 
-    function loadFollow(poll) {
+    function loadHotPolls() {
+      Action.get_hot_polls(0)
+        .then(res => {
+          vm.hot_polls = res.data || [];
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+    // Load Category cho màn hình chính
+    function loadCategorys() {
+      Action.get_categorys()
+        .then(res => {
+          vm.categorys = res;
+        });
+    }
+
+    function get_owner_follow(poll) {
       return new Promise((resolve, reject) => {
         if (!vm.isLogged) {
           poll.follow = {};
@@ -181,7 +215,7 @@
       });
     }
 
-    function loadReported(poll) {
+    function get_reported(poll) {
       return new Promise((resolve, reject) => {
         if (!vm.isLogged) {
           poll.reported = false;
@@ -198,7 +232,7 @@
       });
     }
 
-    function loadBookmarked(poll) {
+    function get_bookmarked(poll) {
       return new Promise((resolve, reject) => {
         if (!vm.isLogged) {
           poll.bookmarked = false;
@@ -221,13 +255,6 @@
         return 0;
       }
       return Math.floor(value * 100 / total) || 0;
-    }
-    // Load Category cho màn hình chính
-    function loadCategorys() {
-      Action.get_categorys()
-        .then(res => {
-          vm.categorys = res;
-        });
     }
 
     function socketHandlePollCreate(res) {

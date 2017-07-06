@@ -135,6 +135,7 @@
         $scope.$apply();
       });
       Socket.on('cmt_like', res => {
+        console.log(res);
         vm.cmts.forEach(cmt => {
           if (cmt._id.toString() === res.cmtId.toString()) {
             cmt.likeCnt = res.likeCnt;

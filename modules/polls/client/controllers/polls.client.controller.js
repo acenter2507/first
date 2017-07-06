@@ -272,7 +272,8 @@
             return resolve();
           })
           .catch(err => {
-            alert('error' + err);
+            alert('error');
+            console.log(err);
             return reject();
           });
       });

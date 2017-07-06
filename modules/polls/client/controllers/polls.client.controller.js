@@ -288,6 +288,7 @@
       return new Promise((resolve, reject) => {
          Action.get_vote(vm.poll._id)
           .then(res => { // Get ownVote
+            console.log(res);
             vm.ownVote = res && res.data ? res.data : { poll: vm.poll._id };
             if (vm.ownVote._id) {
               Action.get_opts_for_vote(vm.ownVote._id);
@@ -296,6 +297,7 @@
             }
           })
           .then(res => { // Get votedOpts
+            console.log(res);
             if (res && res.data) {
               res.data.forEach(voteopt => {
                 vm.votedOpts.push(voteopt.opt._id);

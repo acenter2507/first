@@ -14,7 +14,8 @@
     '$bsAside',
     '$timeout',
     'Remaining',
-    'Action'
+    'Action',
+    'toaster'
   ];
 
   function PollsController(
@@ -28,7 +29,8 @@
     $bsAside,
     $timeout,
     Remaining,
-    Action
+    Action,
+    toaster
   ) {
     var vm = this;
     vm.authentication = Authentication;
@@ -106,6 +108,7 @@
         userId: vm.authentication.user._id
       });
       Socket.on('cmt_add', cmtId => {
+        toaster.pop('info', "title", "Has new comment");
         Action.get_cmt(cmtId)
           .then(res => {
             return get_like_cmt(res.data);

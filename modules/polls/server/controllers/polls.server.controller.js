@@ -165,7 +165,6 @@ exports.delete = function(req, res) {
   var poll = req.poll;
   poll.remove()
     .then(() => { // Delete option
-      res.jsonp(poll);
       return Opt.remove({ poll: poll._id });
     }, handleError)
     .then(() => { // Xóa like của các commetn trong poll
@@ -209,6 +208,9 @@ exports.delete = function(req, res) {
     }, handleError)
     .then(() => { // Xóa thông tin follow
       return Polluser.remove({ poll: poll._id });
+    }, handleError)
+    .then(() => {
+      res.jsonp(poll);
     }, handleError);
 
   function handleError(err) {

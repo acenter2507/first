@@ -118,16 +118,8 @@
       });
     };
     // api get comment by Id
-    this.get_cmt = (id) => {
-      return new Promise((resolve, reject) => {
-        return $http.get('api/cmts/' + id)
-          .then(res => {
-            return resolve(res);
-          })
-          .catch(err => {
-            return reject(err);
-          });
-      });
+    this.get_cmt = cmtId => {
+      return $http.get('api/cmts/' + cmtId);
     };
     // Lưu comment vào db
     this.save_cmt = (pollId, cmt) => {

@@ -106,8 +106,10 @@
         userId: vm.authentication.user._id
       });
       Socket.on('cmt_add', cmtId => {
+        console.log('cmtId', cmtId);
         Action.get_cmt(cmtId)
           .then(res => {
+            console.log('Action.get_cmt', res);
             return get_like_cmt(res);
           })
           .then(_cmt => {

@@ -619,6 +619,8 @@
         return alert('You cannot interact continuously.');
       }
       vm.like_processing = true;
+      console.log(cmt);
+      console.log(vm.cmts);
       Action.save_like_cmt(cmt, type)
         .then(res => {
           cmt.like = res.like;

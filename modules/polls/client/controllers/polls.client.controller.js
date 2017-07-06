@@ -148,7 +148,7 @@
       Socket.on('poll_vote', res => {
         Action.get_voteopts(vm.poll._id)
           .then(res => { // lấy thông tin vote
-            poll.chart = {
+            vm.chart = {
               type: 'pie',
               options: { responsive: true },
               colors: [],
@@ -189,7 +189,7 @@
             return Action.get_voteopts(vm.poll._id);
           })
           .then(res => { // lấy thông tin vote
-            poll.chart = {
+            vm.chart = {
               type: 'pie',
               options: { responsive: true },
               colors: [],
@@ -245,7 +245,7 @@
             return Action.get_voteopts(vm.poll._id);
           })
           .then(res => { // Lấy tags
-            vm.poll.chart = {
+            vm.chart = {
               type: 'pie',
               options: { responsive: true },
               colors: [],

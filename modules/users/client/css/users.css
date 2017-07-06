@@ -221,7 +221,7 @@
   background-color: #EEEEEE;
 }
 
-.profile-menu-list li:active {
+.profile-menu-list li.active {
   background-color: #d6d6d6;
 }
 

@@ -307,19 +307,19 @@
             if (res && res.data) {
               vm.follow = res.data;
             }
-            return (vm.isLogged) ? Action.get_report(vm.poll._id); : next();
+            return (vm.isLogged) ? Action.get_report(vm.poll._id) : next();
           })
           .then(res => { // Get reported
             if (res && res.data) {
               vm.reported = res.data;
             }
-            return (vm.isLogged) ? Action.get_bookmark(vm.poll._id); : next();
+            return (vm.isLogged) ? Action.get_bookmark(vm.poll._id) : next();
           })
           .then(res => { // Get bookmarked
             if (res && res.data) {
               vm.bookmarked = res.data;
             }
-            return (vm.isLogged) ? Action.get_like(vm.poll._id); : next();
+            return (vm.isLogged) ? Action.get_like(vm.poll._id) : next();
           })
           .then(res => { // Get like
             if (res && res.data) {

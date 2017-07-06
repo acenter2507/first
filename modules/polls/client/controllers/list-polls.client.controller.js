@@ -118,7 +118,6 @@
         .then(res => {
           // Gán data vào list hiện tại
           vm.polls = _.union(vm.polls, vm.new_data);
-          console.log(vm.polls);
           vm.page += 1;
           vm.busy = false;
           $scope.$apply();
@@ -263,6 +262,7 @@
         return alert('You are not authorized');
       }
       if ($window.confirm('Are you sure you want to delete?')) {
+        vm.polls = _.without(vm.polls, poll);
         Action.delete_poll(poll);
       }
     };

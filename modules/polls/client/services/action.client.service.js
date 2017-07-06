@@ -3,6 +3,7 @@
   angular.module('polls').factory('Action', Action);
 
   Action.$inject = [
+    '$http',
     'Authentication',
     'Socket',
     'PollsService',
@@ -22,6 +23,7 @@
   ];
 
   function Action(
+    $http,
     Authentication,
     Socket,
     Polls,
@@ -118,8 +120,7 @@
     // api get comment by Id
     this.get_cmt = (id) => {
       return new Promise((resolve, reject) => {
-        var page = page || 0;
-        Cmts.get({ cmtId: id }).$promise
+        return $http.get('api/cmts/' + id)
           .then(res => {
             return resolve(res);
           })

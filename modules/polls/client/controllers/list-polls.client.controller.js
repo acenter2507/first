@@ -276,6 +276,7 @@
         });
     };
     vm.load_new = () => {
+      console.log(vm.polls);
       var tmp_list = _.clone(vm.new_polls);
       vm.new_polls = [];
       angular.forEach(tmp_list, (item, index) => {
@@ -297,7 +298,9 @@
             console.log(_poll);
             if (_poll._id) {
               vm.polls.push(_poll);
+              console.log('Add new poll to polls');
             }
+            console.log(vm.polls);
           })
           .catch(err => {
             toast.error(err.message, 'Error!');

@@ -219,9 +219,6 @@
       }
       return Math.floor(value * 100 / total) || 0;
     }
-    function socketHandlePollCreate(res) {
-      vm.new_polls
-    }
     // Thao tác khác
     vm.delete_poll = (poll) => {
       if (!poll.isCurrentUserOwner) {

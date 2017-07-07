@@ -151,7 +151,7 @@
       function successCallback(res) {
         if (isNew) {
           if (res.isPublic) {
-            Socket.emit('poll_create');
+            Socket.emit('poll_create', { pollId: res._id });
           }
         } else {
           Socket.emit('poll_update', { pollId: vm.poll._id });

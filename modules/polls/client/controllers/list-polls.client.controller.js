@@ -294,6 +294,7 @@
           })
           .then(poll => {
             console.log(poll);
+            console.log(_poll);
             if (_poll._id) {
               vm.polls.push(_poll);
             }

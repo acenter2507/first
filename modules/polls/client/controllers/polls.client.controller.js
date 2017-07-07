@@ -675,7 +675,7 @@
     };
 
     vm.toast = () => {
-      console.log(toast);
+      console.log('toast', toast);
       toast.success('Hello world!' + new Date().getTime(), 'Toastr fun!');
     };
   }

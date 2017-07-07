@@ -58,7 +58,7 @@
   min-height: 46px;
 }
 .user-avatar img {
-  border-radius: 3px;
+  /*border-radius: 3px;*/
   width: 46px;
   height: 46px;
 }

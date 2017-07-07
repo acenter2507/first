@@ -19,7 +19,8 @@
     '$bsPopover',
     'OptsService',
     'Socket',
-    'CategorysService'
+    'CategorysService',
+    'toastr'
   ];
 
   function PollInputController(
@@ -36,7 +37,8 @@
     $bsPopover,
     Opts,
     Socket,
-    Categorys
+    Categorys,
+    toastr
   ) {
     var vm = this;
 

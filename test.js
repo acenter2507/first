@@ -24,7 +24,7 @@ app.init(function () {
 2. Tổng thể
   - Edit profile => done
   - Upload ảnh + chèn vào editor poll, options
-  - Message thông báo
+  - Message thông báo => done
   - Chức năng nhập lý do khi report
   - Đếm view poll, poll user đã view
   - Đếm view profile

@@ -14,7 +14,8 @@
     '$bsAside',
     '$timeout',
     'Remaining',
-    'Action'
+    'Action',
+    'toastr'
   ];
 
   function PollsController(
@@ -28,7 +29,8 @@
     $bsAside,
     $timeout,
     Remaining,
-    Action
+    Action,
+    toast
   ) {
     var vm = this;
     vm.authentication = Authentication;
@@ -670,6 +672,10 @@
     vm.toggle_chart = () => {
       vm.chart.type = vm.chart.type === 'polarArea' ? 
         'pie' : 'polarArea';
+    };
+
+    vm.toast = () => {
+      toast.success('Hello world!' + new Date().getTime(), 'Toastr fun!');
     };
   }
 })();

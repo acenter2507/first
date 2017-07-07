@@ -9,8 +9,7 @@
     '$window',
     'Socket',
     'Authentication',
-    'Action',
-    'toastr'
+    'Action'
   ];
 
   function PollsListController(
@@ -18,8 +17,7 @@
     $window,
     Socket,
     Authentication,
-    Action,
-    toastr
+    Action
   ) {
     var vm = this;
     vm.authentication = Authentication;
@@ -215,7 +213,6 @@
       return Math.floor(value * 100 / total) || 0;
     }
     function socketHandlePollCreate(res) {
-      toastr.info('Has new poll', 'Inform');
       // console.log('Has new poll');
     }
     // Thao tác khác
@@ -269,9 +266,6 @@
         .catch(err => {
           alert(err);
         });
-    };
-    vm.show_toast = () => {
-      toastr.info('We are open today from 10 to 22' + new Date().getTime(), 'Information');
     };
   }
 })();

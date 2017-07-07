@@ -10,8 +10,7 @@ module.exports = {
         'public/lib/components-font-awesome/css/font-awesome.css',
         'public/lib/ng-tags-input/ng-tags-input.css',
         'public/lib/angular-moment-picker/dist/angular-moment-picker.css',
-        'public/lib/textAngular/dist/textAngular.css',
-        'public/lib/angular-toastr/dist/angular-toastr.css'
+        'public/lib/textAngular/dist/textAngular.css'
       ],
       js: [
         'public/lib/angular/angular.js',

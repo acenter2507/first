@@ -30,7 +30,7 @@
     $timeout,
     Remaining,
     Action,
-    toast
+    toasty
   ) {
     var vm = this;
     vm.authentication = Authentication;

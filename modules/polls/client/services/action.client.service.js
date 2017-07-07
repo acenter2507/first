@@ -59,6 +59,9 @@
         });
       });
     };
+    this.get_poll_http = pollId => {
+      return $http.get('api/polls/' + pollId);
+    };
     this.get_polls = (_page) => {
       return new Promise((resolve, reject) => {
         var page = _page || 0;

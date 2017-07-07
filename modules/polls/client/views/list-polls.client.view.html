@@ -1,5 +1,5 @@
 <section class="container mg10b" infinite-scroll="vm.get_polls()" infinite-scroll-distance='1'>
-  <div class="row mg20t mg20b">
+  <div class="row mg12t mg12b">
     <div class="col-xs-12">
       <div class="form-group">
         <a ui-sref="polls.create" class="btn btn-primary pull-right">Create poll</a>
@@ -8,8 +8,15 @@
       </div>
     </div>
   </div>
+  <div class="row mg12b">
+    <div class="col-xs-12">
+      <div class="notice notice-info" ng-show="vm.new_polls.length > 0">
+        New poll has just been added, <a class="undecorated-link" ng-click="vm.load_new()">load now</a>.
+      </div>
+    </div>
+  </div>
   <div class="row">
-    <!-- New feeds -->
+    <!-- New feeds <--></-->
     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 col-lg-push-3 pdn">
       <div ng-repeat="poll in vm.polls" class="card">
         <div clas="poll-header">

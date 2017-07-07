@@ -34,6 +34,7 @@
     vm.busy = false;
     vm.stopped = false;
     vm.get_polls = get_polls;
+    vm.new_polls = [];
     init();
 
     function init() {
@@ -48,7 +49,9 @@
         Socket.connect();
       }
       Socket.emit('subscribe_public');
-      Socket.on('poll_create', socketHandlePollCreate);
+      Socket.on('poll_create', pollId => {
+        vm.new_polls.push(pollId);
+      });
       $scope.$on('$destroy', function () {
         Socket.emit('unsubscribe_public');
         Socket.removeListener('poll_create');
@@ -89,7 +92,7 @@
         .catch(err => {
           vm.busy = false;
           vm.stopped = true;
-          console.log(err);
+          toast.error(err.message, 'Error!');
         });
     }
     function get_poll_report(poll) {
@@ -152,7 +155,7 @@
           vm.hot_polls = res.data || [];
         })
         .catch(err => {
-          console.log(err);
+          toast.error(err.message, 'Error!');
         });
     }
     function loadCategorys() {
@@ -205,7 +208,7 @@
             return resolve(res.data);
           })
           .catch(err => {
-            alert(err);
+            return reject(err);
           });
       });
     }
@@ -217,12 +220,13 @@
       return Math.floor(value * 100 / total) || 0;
     }
     function socketHandlePollCreate(res) {
-      // console.log('Has new poll');
+      vm.new_polls
     }
     // Thao tác khác
     vm.delete_poll = (poll) => {
       if (!poll.isCurrentUserOwner) {
-        return alert('You are not authorized');
+        toast.error('You are not authorized.', 'Error!');
+        return;
       }
       if ($window.confirm('Are you sure you want to delete?')) {
         vm.polls = _.without(vm.polls, poll);
@@ -231,47 +235,70 @@
     };
     vm.report_poll = (poll) => {
       if (poll.reported) {
-        return alert('You are already report this poll');
+        toast.error('You are already report this poll.', 'Error!');
+        return;
       }
       Action.save_report(poll._id)
         .then(res => {
           poll.reported = (res) ? true : false;
           $scope.$apply();
-          console.log('report success:');
+          toast.success('You have successfully reported this poll.', 'Thank you!');
         })
         .catch(err => {
-          alert(err);
+          toast.error(err.message, 'Error!');
         });
     };
     vm.bookmark_poll = (poll) => {
       if (poll.bookmarked) {
-        return alert('You are already bookmark this poll');
+        toast.error('You are already bookmark this poll.', 'Error!');
+        return;
       }
       Action.save_bookmark(poll._id)
         .then(res => {
           poll.bookmarked = (res) ? true : false;
           $scope.$apply();
-          console.log('report success:');
+          toast.success('Added to bookmarks.', 'Success!');
         })
         .catch(err => {
-          alert(err);
+          toast.error(err.message, 'Error!');
         });
     };
     vm.follow_poll = (poll) => {
       if (!vm.isLogged) {
-        return alert('You must login to follow this poll.');
+        toast.error('You must login to follow this poll.', 'Error!');
+        return;
       }
       Action.save_follow(poll.follow)
         .then(res => {
           poll.follow = res;
           $scope.$apply();
-          console.log('follow success:');
+          toast.success('You followed this poll.', 'Success!');
         })
         .catch(err => {
-          alert(err);
+          toast.error(err.message, 'Error!');
         });
     };
-
+    vm.reload = () => {
+      angular.forEach(vm.new_polls, (item, index) => {
+        Action.get_poll_http(item)
+          .then(_poll => {
+            _poll.isCurrentUserOwner = vm.isLogged && vm.authentication.user._id === _poll.user._id;
+            promises.push(get_poll_report(_poll));
+            promises.push(get_opts(_poll));
+            promises.push(get_owner_follow(_poll));
+            promises.push(get_reported(_poll));
+            promises.push(get_bookmarked(_poll));
+            return Promise.all(promises);
+          })
+          .then(poll => {
+            vm.polls.push(poll);
+          })
+          .catch(err => {
+            toast.error(err.message, 'Error!');
+          });
+      });
+      vm.new_polls = [];
+    };
     vm.themes = [{
       name: 'Default Theme',
       code: 'default'

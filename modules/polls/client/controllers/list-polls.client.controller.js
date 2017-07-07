@@ -279,9 +279,10 @@
       var tmp_list = _.clone(vm.new_polls);
       vm.new_polls = [];
       angular.forEach(tmp_list, (item, index) => {
+        var _poll = {};
         Action.get_poll_http(item)
           .then(res => {
-            var _poll = res.data || {};
+            _poll = res.data || {};
             var promises = [];
             _poll.isCurrentUserOwner = vm.isLogged && vm.authentication.user._id === _poll.user._id;
             promises.push(get_poll_report(_poll));
@@ -292,8 +293,9 @@
             return Promise.all(promises);
           })
           .then(poll => {
-            if (poll._id) {
-              vm.polls.push(poll);
+            console.log(poll);
+            if (_poll._id) {
+              vm.polls.push(_poll);
             }
           })
           .catch(err => {

@@ -24,8 +24,7 @@ var ApplicationConfiguration = (function() {
     'monospaced.elastic',
     'chart.js',
     'textAngular',
-    'ui.bootstrap.materialPicker',
-    'ngToast'
+    'ui.bootstrap.materialPicker'
   ];
 
   // Add a new vertical module

@@ -10,8 +10,7 @@ module.exports = {
         'public/lib/components-font-awesome/css/font-awesome.css',
         'public/lib/ng-tags-input/ng-tags-input.css',
         'public/lib/angular-moment-picker/dist/angular-moment-picker.css',
-        'public/lib/textAngular/dist/textAngular.css',
-        'public/lib/ngToast/dist/ngToast.css'
+        'public/lib/textAngular/dist/textAngular.css'
       ],
       js: [
         'public/lib/angular/angular.js',
@@ -45,8 +44,7 @@ module.exports = {
         'public/lib/textAngular/dist/textAngular-rangy.min.js',
         'public/lib/textAngular/dist/textAngular-sanitize.min.js',
         'public/lib/textAngular/dist/textAngular.js',
-        'public/lib/textAngular/dist/textAngularSetup.js',
-        'public/lib/ngToast/dist/ngToast.js'
+        'public/lib/textAngular/dist/textAngularSetup.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

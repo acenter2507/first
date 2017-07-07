@@ -9,8 +9,7 @@
     '$window',
     'Socket',
     'Authentication',
-    'Action',
-    'ngToast'
+    'Action'
   ];
 
   function PollsListController(
@@ -18,8 +17,7 @@
     $window,
     Socket,
     Authentication,
-    Action,
-    ngToast
+    Action
   ) {
     var vm = this;
     vm.authentication = Authentication;
@@ -39,7 +37,6 @@
       loadCategorys();
       // load Hot poll
       loadHotPolls();
-      ngToast.create('a toast message...');
     }
 
     function initSocket() {

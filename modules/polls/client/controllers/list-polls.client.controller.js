@@ -303,6 +303,7 @@
           });
       });
       vm.polls = _.union(vm.polls, tmp_polls);
+      $scope.$apply();
     };
     vm.themes = [{
       name: 'Default Theme',

@@ -254,11 +254,15 @@ a:hover .header-profile-image {
   /*background-color: #030303;*/
   border-left: 6px solid #7f7f84;
 }
+.toast .toast-close-button {
+  color: #7f7f84;
+}
 
 .toast-success {
   /*background-color: #51a351;*/
   border-left: 6px solid #80D651;
 }
+.toast-success .toast-close-button,
 .toast-success .toast-message,
 .toast-success .toast-title {
   color: #80D651;
@@ -268,6 +272,7 @@ a:hover .header-profile-image {
   /*background-color: #bd362f;*/
   border-left: 6px solid #d73814;
 }
+.toast-error .toast-close-button,
 .toast-error .toast-message,
 .toast-error .toast-title {
   color: #d73814;
@@ -277,6 +282,7 @@ a:hover .header-profile-image {
   /*background-color: #2f96b4;*/
   border-left: 6px solid #45ABCD;
 }
+.toast-info .toast-close-button,
 .toast-info .toast-message,
 .toast-info .toast-title {
   color: #45ABCD;
@@ -286,6 +292,7 @@ a:hover .header-profile-image {
   /*background-color: #2f96b4;*/
   border-left: 6px solid #267ED5;
 }
+.toast-wait .toast-close-button,
 .toast-wait .toast-message,
 .toast-wait .toast-title {
   color: #267ED5;
@@ -295,6 +302,7 @@ a:hover .header-profile-image {
   /*background-color: #f89406;*/
   border-left: 6px solid #FEAF20;
 }
+.toast-warning .toast-close-button,
 .toast-warning .toast-message,
 .toast-warning .toast-title {
   color: #FEAF20;

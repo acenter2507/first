@@ -716,6 +716,7 @@
 		  type: vm.toastyTypes[0].code
 	  };
     vm.toast = () => {
+      console.log('dkm');
       toasty[vm.toastyOpts.type]({
         title: vm.toastyOpts.title,
 			  msg: vm.toastyOpts.msg,

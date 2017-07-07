@@ -278,7 +278,8 @@
         });
     };
     vm.load_new = () => {
-      $state.reload();
+      vm.page = 0;
+      get_polls();
       // var tmp_list = _.clone(vm.new_polls);
       // vm.new_polls = [];
       // var tmp_polls = [];

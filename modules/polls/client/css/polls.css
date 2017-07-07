@@ -141,6 +141,7 @@
   box-shadow: 0 0 2px rgba(0,0,0,0.2);
   border: none;
   margin-top: 3px;
+  border-radius: 0;
 }
 
 .opt_color {

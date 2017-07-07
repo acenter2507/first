@@ -14,7 +14,8 @@
     '$bsAside',
     '$timeout',
     'Remaining',
-    'Action'
+    'Action',
+    'toastr'
   ];
 
   function PollsController(
@@ -28,7 +29,8 @@
     $bsAside,
     $timeout,
     Remaining,
-    Action
+    Action,
+    toast
   ) {
     var vm = this;
     vm.authentication = Authentication;
@@ -120,8 +122,7 @@
             }
           })
           .catch(err => {
-            alert('error');
-            console.log(err);
+            toast.error(err.message, 'Error!');
           });
       });
       Socket.on('cmt_del', cmtId => {
@@ -163,7 +164,7 @@
             $scope.$apply();
           })
           .catch(err => {
-            alert(err);
+            toast.error(err.message, 'Error!');
           });
       });
       Socket.on('poll_delete', res => {
@@ -204,7 +205,7 @@
             $scope.$apply();
           })
           .catch(err => {
-            alert(err);
+            toast.error(err.message, 'Error!');
           });
       });
       $scope.$on('$destroy', function() {
@@ -267,8 +268,7 @@
             return resolve();
           })
           .catch(err => {
-            alert('error');
-            console.log(err);
+            toast.error(err.message, 'Error!');
             return reject();
           });
       });
@@ -325,7 +325,7 @@
             return resolve();
           })
           .catch(err => {
-            alert('error' + err);
+            toast.error(err.message, 'Error!');
             return reject();
           });
       });
@@ -349,7 +349,7 @@
               return resolve(cmt);
             })
             .catch(err => {
-              return reject('error' + err);
+              return reject(err);
             });
         }
       });
@@ -384,7 +384,7 @@
           $scope.$apply();
         })
         .catch(err => {
-          alert('error' + err);
+          toast.error(err.message, 'Error!');
         });
     }
 
@@ -412,14 +412,16 @@
         !vm.tmp_cmt.body.length ||
         vm.tmp_cmt.body.length === 0
       ) {
-        return alert('You must type something to reply.');
+        toast.error('You must type something to reply.', 'Error!');
+        return;
       }
       if (!vm.isLogged) {
         $state.go('authentication.signin');
         return false;
       }
       if (vm.cmt_processing) {
-        return alert('Please wait until all comment be submit.');
+        toast.error('Please wait until all comment be submit.', 'Error!');
+        return;
       }
       vm.cmt_processing = true;
       Action.save_cmt(vm.poll._id, vm.tmp_cmt)
@@ -429,7 +431,7 @@
           vm.cmt_typing = false;
         })
         .catch(err => {
-          alert('' + err);
+          toast.error(err.message, 'Error!');
           vm.cmt_processing = false;
         });
     }
@@ -439,7 +441,8 @@
         return $state.go('authentication.signin');
       }
       if (!vm.selectedOpts.length || vm.selectedOpts.length === 0) {
-        return alert('You must vote at least one option.');
+        toast.error('You must vote at least one option.', 'Error!');
+        return;
       }
       Action.save_vote(vm.ownVote, vm.selectedOpts)
         .then(res => {
@@ -447,8 +450,8 @@
           $scope.$apply();
         })
         .catch(err => {
+          toast.error(err.message, 'Error!');
           vm.selectedOpts = angular.copy(vm.votedOpts) || [];
-          alert(err);
         });
     }
 
@@ -472,13 +475,16 @@
 
     vm.like_poll = type => {
       if (!vm.isLogged) {
-        return alert('You must login to like this poll.');
+        toast.error('You must login to like this poll.', 'Error!');
+        return;
       }
       if (vm.poll.isCurrentUserOwner) {
-        return alert('You cannot like your poll.');
+        toast.error('You cannot like your poll.', 'Error!');
+        return;
       }
       if (vm.like_processing) {
-        return alert('You cannot interact continuously.');
+        toast.error('You cannot interact continuously.', 'Error!');
+        return;
       }
       vm.like_processing = true;
       Action.save_like(vm.like, type, vm.poll)
@@ -489,53 +495,57 @@
           $scope.$apply();
         })
         .catch(err => {
+          toast.error(err.message, 'Error!');
           vm.like_processing = false;
-          alert(err);
         });
     };
 
     vm.follow_poll = () => {
       if (!vm.isLogged) {
-        return alert('You must login to follow this poll.');
+        toast.error('You must login to follow this poll.', 'Error!');
+        return;
       }
       Action.save_follow(vm.follow)
         .then(res => {
           vm.follow = res;
           $scope.$apply();
-          console.log('follow success:');
+          if (res.following) {
+            toast.success('You have following this poll.', 'Thank you!');
+          }
         })
         .catch(err => {
-          alert(err);
+          toast.error(err.message, 'Error!');
         });
     };
 
     vm.report_poll = () => {
       if (vm.reported) {
-        return alert('You are already report this poll');
+        toast.error('You are already report this poll.', 'Error!');
+        return;
       }
       Action.save_report(vm.poll._id)
         .then(res => {
           vm.reported = (res) ? true : false;
           $scope.$apply();
-          console.log('report success:');
         })
         .catch(err => {
-          alert(err);
+          toast.error(err.message, 'Error!');
         });
     };
 
     vm.bookmark_poll = () => {
       if (vm.bookmarked) {
-        return alert('You are already bookmark this poll');
+        toast.error('You are already bookmark this poll.', 'Error!');
+        return;
       }
       Action.save_bookmark(vm.poll._id)
         .then(res => {
           vm.bookmarked = (res) ? true : false;
           $scope.$apply();
-          console.log('report success:');
+          toast.success('Added to bookmarks.', 'Success!');
         })
         .catch(err => {
-          alert(err);
+          toast.error(err.message, 'Error!');
         });
     };
     // OPTIONS
@@ -563,17 +573,18 @@
       Action.save_opt(vm.tmp_opt)
         .then(res => {
           vm.opt_aside.$promise.then(vm.opt_aside.hide);
-          alert('Your option is waiting for approve. Thanks.');
+          toast.success('Your option is waiting for approve.', 'Thank you!');
         })
         .catch(err => {
-          alert(err);
+          toast.error(err.message, 'Error!');
         });
     };
 
     vm.save_cmt = save_cmt;
     vm.reply_cmt = cmt => {
       if (!vm.isLogged) {
-        return alert('You must login to reply this comment.');
+        toast.error('You must login to reply this comment.', 'Error!');
+        return;
       }
       vm.tmp_cmt = {};
       vm.tmp_cmt.to = cmt.user._id;
@@ -601,20 +612,24 @@
     var cnt = 0;
     vm.focus_cmt = () => {
       if (!vm.isLogged) {
-        alert('You must login to comment.');
+        toast.error('You must login to comment.', 'Error!');
+        return;
       }
       vm.cmt_typing = true;
     };
 
     vm.like_cmt = (cmt, type) => {
       if (!vm.isLogged) {
-        return alert('You must login to like this poll.');
+        toast.error('You must login to like this comment.', 'Error!');
+        return;
       }
       if (vm.authentication.user._id === cmt.user._id) {
-        return alert('You cannot like your comment.');
+        toast.error('You cannot like your comment.', 'Error!');
+        return;
       }
       if (vm.like_processing) {
-        return alert('You cannot interact continuously.');
+        toast.error('You cannot interact continuously.', 'Error!');
+        return;
       }
       vm.like_processing = true;
       Action.save_like_cmt(cmt, type)
@@ -625,7 +640,7 @@
         })
         .catch(err => {
           vm.like_processing = false;
-          alert(err);
+          toast.error(err.message, 'Error!');
         });
     };
 

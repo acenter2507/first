@@ -327,7 +327,7 @@
       });
     };
     vm.show_toastr = () => {
-      toastr.success('Hello world!', 'Toastr fun!');
+      toast.success('Hello world!', 'Toastr fun!');
     };
   }
 })();

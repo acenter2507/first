@@ -279,7 +279,9 @@
         });
     };
     vm.reload = () => {
-      angular.forEach(vm.new_polls, (item, index) => {
+      var tmp_list = _.clone(vm.new_polls);
+      vm.new_polls = [];
+      angular.forEach(vm.tmp_list, (item, index) => {
         Action.get_poll_http(item)
           .then(_poll => {
             _poll.isCurrentUserOwner = vm.isLogged && vm.authentication.user._id === _poll.user._id;
@@ -297,7 +299,6 @@
             toast.error(err.message, 'Error!');
           });
       });
-      vm.new_polls = [];
     };
     vm.themes = [{
       name: 'Default Theme',

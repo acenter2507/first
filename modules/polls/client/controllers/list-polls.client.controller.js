@@ -304,13 +304,13 @@
     vm.toastyOpts = {
       title: 'Toast It!',
       msg: 'Mmmm, tasties...',
-      showClose: true,
-      clickToClose: false,
+      showClose: false,
+      clickToClose: true,
       timeout: 5000,
       sound: true,
       html: false,
-      shake: false,
-      theme: vm.themes[0].code,
+      shake: true,
+      theme: vm.themes[1].code,
       type: vm.toastyTypes[0].code
     };
     vm.show_toasty = () => {

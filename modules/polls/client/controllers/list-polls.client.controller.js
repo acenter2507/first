@@ -275,7 +275,7 @@
           toast.error(err.message, 'Error!');
         });
     };
-    vm.reload = () => {
+    vm.load_new = () => {
       var tmp_list = _.clone(vm.new_polls);
       vm.new_polls = [];
       angular.forEach(vm.tmp_list, (item, index) => {

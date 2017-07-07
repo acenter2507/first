@@ -52,7 +52,7 @@
   margin-right: 10px;
   margin-top: 3px;
   position: relative;
-  border-radius: 3px;
+  /*border-radius: 3px;*/
   min-width: 46px;
   min-height: 46px;
 }
@@ -143,9 +143,10 @@
   padding-right: 5px;
   transition: height 50ms ease-in-out;
   box-shadow: 0 0 2px rgba(0,0,0,0.2);
-  border: none;
+  border: 1px solid #d5d5d5;
   margin-top: 3px;
   border-radius: 0;
+  color: #b8b8b8;
 }
 
 .opt_color {

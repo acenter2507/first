@@ -12,7 +12,8 @@ module.exports = {
         'public/lib/angular-moment-picker/dist/angular-moment-picker.css',
         'public/lib/textAngular/dist/textAngular.css',
         'public/lib/angular-toasty/dist/angular-toasty.css',
-        'public/lib/angular-toastr/dist/angular-toastr.css'
+        'public/lib/angular-toastr/dist/angular-toastr.css',
+        'public/lib/ng-dialog/css/ngDialog.min.css'
       ],
       js: [
         'public/lib/angular/angular.js',
@@ -48,7 +49,8 @@ module.exports = {
         'public/lib/textAngular/dist/textAngular.js',
         'public/lib/textAngular/dist/textAngularSetup.js',
         'public/lib/angular-toasty/dist/angular-toasty.js',
-        'public/lib/angular-toastr/dist/angular-toastr.tpls.js'
+        'public/lib/angular-toastr/dist/angular-toastr.tpls.js',
+        'public/lib/ng-dialog/js/ngDialog.min.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

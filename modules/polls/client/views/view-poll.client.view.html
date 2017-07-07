@@ -87,21 +87,6 @@
             <a class="undecorated-link" ng-click="vm.like_poll(2)" ng-show="vm.like.type == 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>&nbsp;Dislike</a>
             <span class="span_btn" ng-click="vm.like_poll(2)" ng-show="vm.like.type != 2"><i class="fa fa-thumbs-o-down" aria-hidden="true">&nbsp;Dislike</i></span>
           </small>
-          <small class="pull-right mg10l" ng-show="vm.stopped">
-            Sort:&nbsp;
-            <md-menu md-offset="-12 25" md-position-mode="target-right target">
-              <a class="undecorated-link" ng-click="$mdMenu.open($event)" aria-label="Open setting menu">
-                {{vm.cmt_sort.name}}&nbsp;<i class="fa fa-angle-down"></i>
-              </a>
-              <md-menu-content>
-                <ul class="menu-list">
-                  <li ng-repeat="cmt_sort in vm.cmt_sorts">
-                    <a class="undecorated-link" ng-click="vm.cmt_sort = vm.cmt_sorts[$index]">{{cmt_sort.name}}</a>
-                  </li>
-                </ul>
-              </md-menu-content>
-            </md-menu>
-          </small>
           <small class="pull-right">
             <a ng-if="!vm.poll.isCurrentUserOwner" ng-click="vm.reply_cmt(vm.poll)" class="undecorated-link">Reply</a>
             <a ng-click="vm.focus_cmt()" class="undecorated-link mg10l">Comment</a>

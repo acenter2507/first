@@ -53,7 +53,7 @@
     ];
     vm.cmt_sort = vm.cmt_sorts[0];
     // Biến tự động gửi khi enter
-    vm.enter_send = false;
+    vm.enter_send = true;
     // Người dùng đã report poll hiện tại
     vm.reported = false;
     // Người dùng đã bookmark poll hiện tại

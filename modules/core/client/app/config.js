@@ -9,6 +9,7 @@ var ApplicationConfiguration = (function() {
     'ngAnimate',
     'ngMessages',
     'ngSanitize',
+    'ngDialog',
     'ui.router',
     'ui.bootstrap',
     'angular-toasty',

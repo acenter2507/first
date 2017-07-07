@@ -278,6 +278,7 @@
     vm.load_new = () => {
       var tmp_list = _.clone(vm.new_polls);
       vm.new_polls = [];
+      var tmp_polls = [];
       angular.forEach(tmp_list, (item, index) => {
         var _poll = {};
         Action.get_poll_http(item)
@@ -294,14 +295,14 @@
           })
           .then(poll => {
             if (_poll._id) {
-              vm.polls.push(_poll);
+              tmp_polls.push(_poll);
             }
           })
           .catch(err => {
             toast.error(err.message, 'Error!');
           });
       });
-      $scope.$apply();
+      vm.polls = _.union(vm.polls, tmp_polls);
     };
     vm.themes = [{
       name: 'Default Theme',

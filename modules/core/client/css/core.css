@@ -61,6 +61,9 @@ a:hover .header-profile-image {
 .has-error .help-inline.error-text {
   display: inline;
 }
+.highlight-text {
+  color: #267ED5;
+}
 
 .card {
   background-color: #fff;

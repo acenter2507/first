@@ -124,27 +124,6 @@
           </div>
         </div>
       </div>
-      <!-- Comment form -->
-      <div class="card" id="poll_cmt_form_card" ng-if="vm.isLogged">
-        <div class="form-group">
-          <span ng-if="vm.tmp_cmt.to">To:&nbsp;</span>
-          <a class="undecorated-link" ng-if="vm.tmp_cmt.to" ui-sref="profile.info({userId: vm.tmp_cmt.to})" ng-bind="vm.tmp_cmt.toName"></a>
-        </div>
-        <div class="form-group">
-          <div class="user-avatar pull-left" ng-if="vm.authentication.user">
-            <a ui-sref="profile.info({userId: vm.authentication.user._id})">
-              <img src="{{vm.authentication.user.profileImageURL}}" alt="{{vm.authentication.user.displayName}}">
-            </a>
-          </div>
-          <textarea ng-is-enter="{{vm.enter_send}}" ng-enter="vm.save_cmt()" focus-me="{{vm.cmt_typing}}" class="msd-elastic: \n; reply-input"
-            data-ng-model="vm.tmp_cmt.body" placeholder="Type your comment..."></textarea>
-        </div>
-        <label class="text-muted"><input type="checkbox" ng-model="vm.enter_send"><small>&nbsp;Enter to send</small></label>
-        <span class="pull-right">
-          <a class="undecorated-link" ng-hide="vm.enter_send" ng-click="vm.save_cmt()">Send</a>
-          <a class="mg20l undecorated-link" ng-click="vm.discard_cmt()" ng-if="vm.tmp_cmt.discard">Discard</a>
-        </span>
-      </div>
       <!-- List comments -->
       <div ui-view="cmts"></div>
       <!-- Load indicator -->

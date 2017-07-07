@@ -281,17 +281,18 @@
       angular.forEach(tmp_list, (item, index) => {
         Action.get_poll_http(item)
           .then(_poll => {
-            var promises = [];
-            _poll.isCurrentUserOwner = vm.isLogged && vm.authentication.user._id === _poll.user._id;
-            promises.push(get_poll_report(_poll));
-            promises.push(get_opts(_poll));
-            promises.push(get_owner_follow(_poll));
-            promises.push(get_reported(_poll));
-            promises.push(get_bookmarked(_poll));
-            return Promise.all(promises);
-          })
-          .then(poll => {
-            vm.polls.push(poll);
+            console.log(_poll);
+          //   var promises = [];
+          //   _poll.isCurrentUserOwner = vm.isLogged && vm.authentication.user._id === _poll.user._id;
+          //   promises.push(get_poll_report(_poll));
+          //   promises.push(get_opts(_poll));
+          //   promises.push(get_owner_follow(_poll));
+          //   promises.push(get_reported(_poll));
+          //   promises.push(get_bookmarked(_poll));
+          //   return Promise.all(promises);
+          // })
+          // .then(poll => {
+          //   vm.polls.push(poll);
           })
           .catch(err => {
             toast.error(err.message, 'Error!');

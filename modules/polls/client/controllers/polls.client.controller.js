@@ -14,7 +14,8 @@
     '$bsAside',
     '$timeout',
     'Remaining',
-    'Action'
+    'Action',
+    'toasty'
   ];
 
   function PollsController(
@@ -28,7 +29,8 @@
     $bsAside,
     $timeout,
     Remaining,
-    Action
+    Action,
+    toast
   ) {
     var vm = this;
     vm.authentication = Authentication;
@@ -673,6 +675,10 @@
     };
 
     vm.toast = () => {
+      toasty.success({
+			  title: 'User added!',
+			  msg: 'User has been added!'
+		  });
     };
   }
 })();

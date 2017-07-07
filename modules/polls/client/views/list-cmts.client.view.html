@@ -77,65 +77,6 @@
       <a class="undecorated-link" ng-click="vm.like_cmt(cmt, 2)" ng-show="cmt.like.type == 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>&nbsp;Dislike</a>
       <span class="span_btn" ng-click="vm.like_cmt(cmt, 2)" ng-show="cmt.like.type != 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>&nbsp;Dislike</span>
     </small>
-    <div class="clearfix h20"></div>
+    <div class="clearfix h30"></div>
   </div>
 </div>
-<!--<div class="card" ng-repeat="cmt in vm.cmts | orderBy: vm.cmt_sort.val">
-  <div clas="post-header">
-    <div class="user-avatar pull-left">
-      <a ng-if="cmt.user" ui-sref="profile.info({userId: cmt.user._id})">
-        <img src="{{cmt.user.profileImageURL}}" alt="{{cmt.user.displayName}}">
-      </a>
-      <img ng-if="!cmt.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
-    </div>
-    <span class="pull-left">
-      <strong><a class="undecorated-link" ui-sref="profile.info({userId: cmt.user._id})" ng-if="cmt.user" ng-bind="cmt.user.displayName"></a></strong>
-      <span ng-if="!cmt.user">Deleted User</span>
-    <small class="text-muted">replied on</small>
-    <small class="text-muted" am-time-ago="cmt.created"></small>
-    <span class="mg10l" ng-show="cmt.isEdited">
-        <i class="fa fa-pencil-square-o"></i>
-        <md-tooltip md-direction="bottom">{{cmt.updated | date:'mediumDate'}}</md-tooltip>
-      </span>
-    </span>
-    <span class="pull-right">
-      <md-menu md-offset="-20 25" md-position-mode="target-right target">
-        <a class="undecorated-link span-link" ng-click="$mdMenu.open($event)" aria-label="Open comment menu">
-          <i class="fa fa-chevron-down"></i>
-        </a>
-        <md-menu-content>
-          <ul class="menu-list">
-            <li ng-if="vm.isLogged && cmt.user._id !== vm.authentication.user._id"><a class="undecorated-link" ng-click="vm.reply_cmt(cmt)"><i class="fa fa-reply"></i>&nbsp;Reply</a></li>
-            <li ng-if="cmt.user._id === vm.authentication.user._id"><a class="undecorated-link" ng-click="vm.edit_cmt(cmt)"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
-            <li ng-if="cmt.user._id === vm.authentication.user._id"><a class="undecorated-link" ng-click="vm.delete_cmt(cmt)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
-          </ul>
-        </md-menu-content>
-      </md-menu>
-    </span>
-    <br>
-    <small>
-      <span class="text-muted">To:&nbsp;</span>
-      <a ng-if="cmt.to" class="undecorated-link">{{cmt.toName}}</a>
-      <a ng-if="!cmt.to" class="text-muted">All</a>
-    </small>
-    <hr class="mg10t mg10b">
-    <div class="clearfix"></div>
-  </div>
-  <div class="post-body">
-    <p class="text-justify" ng-bind-html="cmt.body | nl2br"></p>
-    <hr class="mg10t mg10b">
-  </div>
-  <div class="post-footer">
-    <small class="like_tools">
-      <a class="undecorated-link" ng-click="vm.like_cmt(cmt, 1)" ng-show="cmt.like.type == 1"><i class="fa fa-thumbs-o-up"></i>&nbsp;Like</a>
-     <span class="span_btn" ng-click="vm.like_cmt(cmt, 1)" ng-show="cmt.like.type != 1"><i class="fa fa-thumbs-o-up"></i>&nbsp;Like</span>
-      <span class="mg5l mg5r" ng-bind="cmt.likeCnt"></span>
-      <a class="undecorated-link" ng-click="vm.like_cmt(cmt, 2)" ng-show="cmt.like.type == 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>&nbsp;Dislike</a>
-      <span class="span_btn" ng-click="vm.like_cmt(cmt, 2)" ng-show="cmt.like.type != 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>&nbsp;Dislike</span>
-    </small>
-    <small class="pull-right">
-      <a ng-if="vm.isLogged && cmt.user._id !== vm.authentication.user._id" class="undecorated-link" ng-click="vm.reply_cmt(cmt)" >Reply</a>
-    </small>
-    <div class="clearfix"></div>
-  </div>
-</div>-->

@@ -257,22 +257,27 @@ a:hover .header-profile-image {
 .toast-success {
   /*background-color: #51a351;*/
   border-left: 6px solid #80D651;
+  color: #80D651;
 }
 .toast-error {
   /*background-color: #bd362f;*/
   border-left: 6px solid #d73814;
+  color: #d73814;
 }
 .toast-info {
   /*background-color: #2f96b4;*/
   border-left: 6px solid #45ABCD;
+  color: #45ABCD;
 }
 .toast-wait {
   /*background-color: #2f96b4;*/
   border-left: 6px solid #267ED5;
+  color: #267ED5;
 }
 .toast-warning {
   /*background-color: #f89406;*/
   border-left: 6px solid #FEAF20;
+  color: #FEAF20;
 }
 
 .text-black {

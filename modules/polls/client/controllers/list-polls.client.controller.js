@@ -278,7 +278,7 @@
     vm.load_new = () => {
       var tmp_list = _.clone(vm.new_polls);
       vm.new_polls = [];
-      angular.forEach(vm.tmp_list, (item, index) => {
+      angular.forEach(tmp_list, (item, index) => {
         Action.get_poll_http(item)
           .then(_poll => {
             var promises = [];

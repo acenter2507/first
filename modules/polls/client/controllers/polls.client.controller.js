@@ -14,8 +14,7 @@
     '$bsAside',
     '$timeout',
     'Remaining',
-    'Action',
-    'toastr'
+    'Action'
   ];
 
   function PollsController(
@@ -29,8 +28,7 @@
     $bsAside,
     $timeout,
     Remaining,
-    Action,
-    toast
+    Action
   ) {
     var vm = this;
     vm.authentication = Authentication;
@@ -675,8 +673,6 @@
     };
 
     vm.toast = () => {
-      console.log('toast', toast);
-      toast.success('Hello world!' + new Date().getTime(), 'Toastr fun!');
     };
   }
 })();

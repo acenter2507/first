@@ -10,7 +10,8 @@
     'Socket',
     'Authentication',
     'Action',
-    'toasty'
+    'toasty',
+    'toastr'
   ];
 
   function PollsListController(
@@ -19,7 +20,8 @@
     Socket,
     Authentication,
     Action,
-    toasty
+    toasty,
+    toast
   ) {
     var vm = this;
     vm.authentication = Authentication;
@@ -311,8 +313,7 @@
       theme: vm.themes[0].code,
       type: vm.toastyTypes[0].code
     };
-    vm.toast = () => {
-      console.log('dkm');
+    vm.show_toasty = () => {
       toasty[vm.toastyOpts.type]({
         title: vm.toastyOpts.title,
         msg: vm.toastyOpts.msg,
@@ -324,6 +325,9 @@
         html: vm.toastyOpts.html,
         theme: vm.toastyOpts.theme
       });
+    };
+    vm.show_toastr = () => {
+      toastr.success('Hello world!', 'Toastr fun!');
     };
   }
 })();

@@ -11,6 +11,7 @@ var ApplicationConfiguration = (function() {
     'ngSanitize',
     'ui.router',
     'ui.bootstrap',
+    'angular-toasty',
     'ui.utils',
     'btford.socket-io',
     'angularFileUpload',

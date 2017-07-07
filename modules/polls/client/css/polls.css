@@ -84,7 +84,10 @@
   margin: auto;
   margin-top: 15px;
 }
-
+.chart-base {
+  max-height: 200px;
+  max-width: 200px;
+}
 .progress {
   height: 24px !important;
   margin-bottom: 10px !important;

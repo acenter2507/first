@@ -156,7 +156,7 @@ module.exports = function (io, socket) {
   });
   // On delete poll
   socket.on('poll_create', req => {
-    io.sockets.in('public').emit('poll_create', req.pollId);
+    io.sockets.in('public').emit('poll_create');
   });
 
   // io.sockets.connected[socket.id].emit('comment_result', { success: true });

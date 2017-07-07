@@ -36,7 +36,7 @@
     vm.busy = false;
     vm.stopped = false;
     vm.get_polls = get_polls;
-    vm.new_polls = [];
+    vm.is_has_new_polls = false;
     init();
 
     function init() {
@@ -51,8 +51,8 @@
         Socket.connect();
       }
       Socket.emit('subscribe_public');
-      Socket.on('poll_create', pollId => {
-        vm.new_polls.push(pollId);
+      Socket.on('poll_create', () => {
+        vm.is_has_new_polls = true;
       });
       $scope.$on('$destroy', function () {
         Socket.emit('unsubscribe_public');
@@ -278,8 +278,7 @@
         });
     };
     vm.load_new = () => {
-      vm.page = 0;
-      get_polls();
+      $state.reload();
       // var tmp_list = _.clone(vm.new_polls);
       // vm.new_polls = [];
       // var tmp_polls = [];

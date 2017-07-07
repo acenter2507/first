@@ -363,9 +363,9 @@
       });
     };
     vm.show_toastr = () => {
-      toast.success('Hello world!', 'Toastr fun!');
-      toast.error('Hello world!', 'Toastr fun!');
-      toast.info('Hello world!', 'Toastr fun!');
+      toast.success('Hello world!' + new Date().getSeconds(), 'Toastr fun!');
+      toast.error('Hello world!' + new Date().getSeconds(), 'Toastr fun!');
+      toast.info('Hello world!' + new Date().getSeconds(), 'Toastr fun!');
     };
   }
 })();

@@ -14,8 +14,7 @@
     '$bsAside',
     '$timeout',
     'Remaining',
-    'Action',
-    'toasty'
+    'Action'
   ];
 
   function PollsController(
@@ -29,8 +28,7 @@
     $bsAside,
     $timeout,
     Remaining,
-    Action,
-    toasty
+    Action
   ) {
     var vm = this;
     vm.authentication = Authentication;

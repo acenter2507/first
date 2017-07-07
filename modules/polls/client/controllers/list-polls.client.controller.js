@@ -9,7 +9,8 @@
     '$window',
     'Socket',
     'Authentication',
-    'Action'
+    'Action',
+    'toasty'
   ];
 
   function PollsListController(
@@ -17,7 +18,8 @@
     $window,
     Socket,
     Authentication,
-    Action
+    Action,
+    toasty
   ) {
     var vm = this;
     vm.authentication = Authentication;

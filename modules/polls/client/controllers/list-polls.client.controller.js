@@ -309,7 +309,7 @@
       timeout: 5000,
       sound: true,
       html: false,
-      shake: true,
+      shake: false,
       theme: vm.themes[1].code,
       type: vm.toastyTypes[0].code
     };

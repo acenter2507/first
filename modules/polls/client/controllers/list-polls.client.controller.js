@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
   angular
     .module('polls')
@@ -47,7 +47,7 @@
       }
       Socket.emit('subscribe_public');
       Socket.on('poll_create', socketHandlePollCreate);
-      $scope.$on('$destroy', function() {
+      $scope.$on('$destroy', function () {
         Socket.emit('unsubscribe_public');
         Socket.removeListener('poll_create');
       });
@@ -269,60 +269,60 @@
           alert(err);
         });
     };
-    
+
     vm.themes = [{
-	  	name: 'Default Theme',
-	  	code: 'default'
-	  }, {
-	  	name: 'Material Design',
-	  	code: 'material'
-	  }, {
-	  	name: 'Bootstrap 3',
-	  	code: 'bootstrap'
-	  }];
+      name: 'Default Theme',
+      code: 'default'
+    }, {
+      name: 'Material Design',
+      code: 'material'
+    }, {
+      name: 'Bootstrap 3',
+      code: 'bootstrap'
+    }];
     vm.toastyTypes = [{
-	  	name: 'Default',
-	  	code: 'default',
-	  }, {
-	  	name: 'Info',
-	  	code: 'info'
-	  }, {
-	  	name: 'Success',
-	  	code: 'success'
-	  }, {
-	  	name: 'Wait',
-	  	code: 'wait'
-	  }, {
-	  	name: 'Error',
-	  	code: 'error'
-	  }, {
-	  	name: 'Warning',
-	  	code: 'warning'
-	  }];
+      name: 'Default',
+      code: 'default',
+    }, {
+      name: 'Info',
+      code: 'info'
+    }, {
+      name: 'Success',
+      code: 'success'
+    }, {
+      name: 'Wait',
+      code: 'wait'
+    }, {
+      name: 'Error',
+      code: 'error'
+    }, {
+      name: 'Warning',
+      code: 'warning'
+    }];
     vm.toastyOpts = {
-		  title: 'Toast It!',
-		  msg: 'Mmmm, tasties...',
-		  showClose: true,
-		  clickToClose: false,
-		  timeout: 5000,
-		  sound: true,
-		  html: false,
-		  shake: false,
-		  theme: vm.themes[0].code,
-		  type: vm.toastyTypes[0].code
-	  };
+      title: 'Toast It!',
+      msg: 'Mmmm, tasties...',
+      showClose: true,
+      clickToClose: false,
+      timeout: 5000,
+      sound: true,
+      html: false,
+      shake: false,
+      theme: vm.themes[0].code,
+      type: vm.toastyTypes[0].code
+    };
     vm.toast = () => {
       console.log('dkm');
       toasty[vm.toastyOpts.type]({
         title: vm.toastyOpts.title,
-			  msg: vm.toastyOpts.msg,
-			  showClose: vm.toastyOpts.showClose,
-			  clickToClose: vm.toastyOpts.clickToClose,
-			  sound: vm.toastyOpts.sound,
-			  shake: vm.toastyOpts.shake,
-			  timeout: vm.toastyOpts.timeout || false,
-			  html: vm.toastyOpts.html,
-			  theme: vm.toastyOpts.theme
+        msg: vm.toastyOpts.msg,
+        showClose: vm.toastyOpts.showClose,
+        clickToClose: vm.toastyOpts.clickToClose,
+        sound: vm.toastyOpts.sound,
+        shake: vm.toastyOpts.shake,
+        timeout: vm.toastyOpts.timeout || false,
+        html: vm.toastyOpts.html,
+        theme: vm.toastyOpts.theme
       });
     };
   }

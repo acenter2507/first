@@ -46,7 +46,7 @@ module.exports = {
         'public/lib/textAngular/dist/textAngular-sanitize.min.js',
         'public/lib/textAngular/dist/textAngular.js',
         'public/lib/textAngular/dist/textAngularSetup.js',
-        'public/lib/angular-toastr/dist/angular-toastr.tpls.js'
+        'public/lib/angular-toastr/dist/angular-toastr.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

@@ -36,6 +36,7 @@
 <body class="ng-cloak">
   <header ng-include="'/modules/core/client/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
   <section class="content">{% block content %}{% endblock %}</section>
+  <toasty></toasty>
   <!--<footer ng-include="'/modules/core/client/views/footer.client.view.html'" class="footer"></footer>-->
   <!--Embedding The User Object-->
   <script type="text/javascript">
@@ -50,7 +51,6 @@
   <!--Livereload script rendered -->
   <script type="text/javascript" src="{{host}}:35729/livereload.js"></script>
   {% endif %}
-  <toasty></toasty>
 </body>
 
 </html>

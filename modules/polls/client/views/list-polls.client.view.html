@@ -17,7 +17,7 @@
   </div>
   <div class="row">
     <!-- New feeds <--></-->
-    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 col-lg-push-3">
+    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 col-lg-push-3 pdn">
       <div ng-repeat="poll in vm.polls" class="card">
         <div clas="poll-header">
           <div class="user-avatar pull-left">
@@ -139,7 +139,7 @@
       </div>
     </div>
     <!-- Hot poll -->
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-lg-push-3">
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-lg-push-3 pdn">
       <div class="card">
         <div class="side-list-poll" ng-repeat="poll in vm.hot_polls">
           <div class="rank pull-left"><span class="rank-number"><strong>{{$index + 1}}</strong></span></div>
@@ -149,7 +149,7 @@
       </div>
     </div>
     <!-- Category -->
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-lg-pull-9">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-lg-pull-9 pdn">
       <div class="card">
         <ul class="nav nav-list">
           <li class="nav-header"><strong>Categorys</strong></li>

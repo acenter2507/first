@@ -250,6 +250,16 @@ a:hover .header-profile-image {
   cursor: pointer;
 }
 
+.toast-close-button {
+  opacity: 0.5;
+}
+
+.toast-close-button:hover,
+.toast-close-button:focus {
+  outline: none;
+  opacity: 0.8;
+}
+
 .toast {
   /*background-color: #030303;*/
   border-left: 6px solid #7f7f84;

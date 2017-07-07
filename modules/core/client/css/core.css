@@ -254,29 +254,49 @@ a:hover .header-profile-image {
   /*background-color: #030303;*/
   border-left: 6px solid #7f7f84;
 }
+
 .toast-success {
   /*background-color: #51a351;*/
   border-left: 6px solid #80D651;
+}
+.toast-success .toast-message,
+.toast-success .toast-title {
   color: #80D651;
 }
+
 .toast-error {
   /*background-color: #bd362f;*/
   border-left: 6px solid #d73814;
+}
+.toast-error .toast-message,
+.toast-error .toast-title {
   color: #d73814;
 }
+
 .toast-info {
   /*background-color: #2f96b4;*/
   border-left: 6px solid #45ABCD;
+}
+.toast-info .toast-message,
+.toast-info .toast-title {
   color: #45ABCD;
 }
+
 .toast-wait {
   /*background-color: #2f96b4;*/
   border-left: 6px solid #267ED5;
+}
+.toast-wait .toast-message,
+.toast-wait .toast-title {
   color: #267ED5;
 }
+
 .toast-warning {
   /*background-color: #f89406;*/
   border-left: 6px solid #FEAF20;
+}
+.toast-warning .toast-message,
+.toast-warning .toast-title {
   color: #FEAF20;
 }
 

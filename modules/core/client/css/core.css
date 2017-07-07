@@ -241,13 +241,12 @@ a:hover .header-profile-image {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   color: #555;
   background-color: #fff;
-  opacity: 0.8;
+  opacity: 1;
+  cursor: pointer;
 }
 
 #toast-container .toast:hover {
   box-shadow: 0 0 12px #000000;
-  opacity: 1;
-  cursor: pointer;
 }
 
 .toast-close-button {

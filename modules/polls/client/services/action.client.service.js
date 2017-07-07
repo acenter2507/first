@@ -95,7 +95,6 @@
         });
       });
     };
-
     this.get_poll_report = pollId => {
       return new Promise((resolve, reject) => {
         PollsApi.findPollreport(pollId)
@@ -281,7 +280,6 @@
         }
       });
     };
-
     // api get all options in poll
     this.get_opts = pollId => {
       return new Promise((resolve, reject) => {
@@ -312,7 +310,6 @@
         }
       });
     };
-
     // api get comments
     this.get_like_cmt = cmtId => {
       return new Promise((resolve, reject) => {
@@ -376,7 +373,6 @@
         }
       });
     };
-
     // get report info for user in poll
     this.get_report = pollId => {
       return new Promise((resolve, reject) => {
@@ -404,7 +400,6 @@
         );
       });
     };
-
     this.get_follow = pollId => {
       return new Promise((resolve, reject) => {
         PollsApi.findPolluser(pollId)
@@ -435,7 +430,6 @@
         }
       });
     };
-
     // get info bookmark of user
     this.get_bookmark = pollId => {
       return new Promise((resolve, reject) => {
@@ -475,7 +469,6 @@
           });
       });
     };
-
     // get categorys
     this.get_categorys = () => {
       return new Promise((resolve, reject) => {

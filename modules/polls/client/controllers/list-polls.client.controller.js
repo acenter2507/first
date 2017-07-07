@@ -366,7 +366,6 @@
       toast.success('Hello world!', 'Toastr fun!');
       toast.error('Hello world!', 'Toastr fun!');
       toast.info('Hello world!', 'Toastr fun!');
-      toast.wait('Hello world!', 'Toastr fun!');
     };
   }
 })();

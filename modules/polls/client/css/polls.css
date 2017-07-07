@@ -87,6 +87,7 @@
 .chart-base {
   max-height: 200px;
   max-width: 200px;
+  margin: auto;
 }
 .progress {
   height: 24px !important;

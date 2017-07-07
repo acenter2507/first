@@ -131,8 +131,8 @@
         <div class="clearfix"></div>
       </div>
       <!-- Loading indicator -->
-      <div class="row text-center" ng-show="vm.busy">
-        <md-progress-circular ng-disabled="!vm.busy" class="md-hue-2 center mg6l mg6r" md-diameter="20px"></md-progress-circular>
+      <div class="row text-center pd6l pd6r" ng-show="vm.busy">
+        <md-progress-circular ng-disabled="!vm.busy" class="md-hue-2 center" md-diameter="20px"></md-progress-circular>
       </div>
       <div class="notice notice-warning" ng-show="vm.polls.length === 0 && vm.stopped">
         No polls yet, why don't you <a ui-sref="polls.create">create one</a>?

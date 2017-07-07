@@ -587,6 +587,10 @@ a:hover .header-profile-image {
   padding-top: 5px;
 }
 
+.pd6t {
+  padding-top: 6px;
+}
+
 .pd10t {
   padding-top: 10px;
 }
@@ -629,6 +633,10 @@ a:hover .header-profile-image {
 
 .pd5b {
   padding-bottom: 5px;
+}
+
+.pd6b {
+  padding-bottom: 6px;
 }
 
 .pd10b {
@@ -675,6 +683,10 @@ a:hover .header-profile-image {
   padding-left: 5px;
 }
 
+.pd6l {
+  padding-left: 6px;
+}
+
 .pd10l {
   padding-left: 10px;
 }
@@ -697,6 +709,54 @@ a:hover .header-profile-image {
 
 .pd50l {
   padding-left: 50px;
+}
+
+.pd1r {
+  padding-right: 1px;
+}
+
+.pd2r {
+  padding-right: 2px;
+}
+
+.pd3r {
+  padding-right: 3px;
+}
+
+.pd4r {
+  padding-right: 4px;
+}
+
+.pd5r {
+  padding-right: 5px;
+}
+
+.pd6r {
+  padding-right: 6px;
+}
+
+.pd10r {
+  padding-right: 10px;
+}
+
+.pd15r {
+  padding-right: 15px;
+}
+
+.pd20r {
+  padding-right: 20px;
+}
+
+.pd30r {
+  padding-right: 30px;
+}
+
+.pd40r {
+  padding-right: 40px;
+}
+
+.pd50r {
+  padding-right: 50px;
 }
 
 .w10 {

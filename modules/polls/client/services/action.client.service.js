@@ -86,6 +86,29 @@
           });
       });
     };
+    this.save_poll = poll => {
+      return new Promise((resolve, reject) => {
+        var isNew = !poll._id ? true : false;
+        if (!isNew) {
+          poll.$update(successCb, errorCb);
+        } else {
+          poll.$save(successCb, errorCb);
+        }
+        function successCb(res) {
+          if (isNew) {
+            if (res.isPublic) {
+              Socket.emit('poll_create');
+            }
+          } else {
+            Socket.emit('poll_update', { pollId: res._id });
+          }
+          resolve(res);
+        }
+        function errorCb(err) {
+          reject(err);
+        }
+      });
+    };
     this.delete_poll = poll => {
       return new Promise((resolve, reject) => {
         var rs_poll = new Polls(poll);

@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
   // Polls controller
   angular
@@ -11,16 +11,13 @@
     '$window',
     'Authentication',
     'pollResolve',
-    'PollsService',
-    'PollsApi',
-    'TagsService',
     '$bsModal',
     '$bsAside',
-    '$bsPopover',
     'OptsService',
     'Socket',
     'CategorysService',
-    'toastr'
+    'toastr',
+    'Action'
   ];
 
   function PollInputController(
@@ -29,16 +26,13 @@
     $window,
     Authentication,
     poll,
-    Polls,
-    PollsApi,
-    Tags,
     $bsModal,
     $bsAside,
-    $bsPopover,
     Opts,
     Socket,
     Categorys,
-    toastr
+    toast,
+    Action
   ) {
     var vm = this;
 
@@ -50,7 +44,6 @@
     vm.poll.tags = [];
     vm.categorys = Categorys.query();
     vm.bk_poll = _.clone(poll);
-    vm.error = null;
     vm.form = {};
     vm.opts = [];
 
@@ -58,10 +51,10 @@
 
     $scope.sharedDate = new Date(new Date().setMinutes(0, 0));
     function init() {
-      initSocket();
       if (vm.poll._id) {
-        loadOpts();
-        loadTags();
+        initSocket();
+        get_opts();
+        get_tags();
       }
     }
 
@@ -80,10 +73,9 @@
         $state.go('poll.list');
       });
       Socket.on('opts_request', res => {
-        console.log('opts_request');
-        loadOpts();
+        get_opts();
       });
-      $scope.$on('$destroy', function() {
+      $scope.$on('$destroy', function () {
         Socket.emit('unsubscribe', {
           pollId: vm.poll._id,
           userId: vm.authentication.user._id
@@ -93,25 +85,25 @@
       });
     }
 
-    function loadOpts() {
-      PollsApi.findOpts(vm.poll._id)
+    function get_opts() {
+      Action.get_opts(vm.poll._id)
         .then(res => {
           vm.opts = res.data || [];
         })
         .catch(err => {
-          alert('error' + err);
+          toast.error(err.message, 'Error!');
         });
     }
 
-    function loadTags() {
-      PollsApi.findTags(vm.poll._id)
+    function get_tags() {
+      Action.get_tags(vm.poll._id)
         .then(res => {
           angular.forEach(res.data, (polltag, index) => {
             vm.poll.tags.push(polltag.tag);
           });
         })
         .catch(err => {
-          alert('error' + err);
+          toast.error(err.message, 'Error!');
         });
     }
 
@@ -134,38 +126,18 @@
 
     vm.save = () => {
       if (!vm.validateBody() || !vm.validateCategory() || !vm.validateTitle() || !vm.validateCloseDate()) {
-        return alert('Vui lòng xem lại bạn chưa nhập đủ thông tin');
+        toast.error('You have not entered enough information.', 'Error!');
+        return;
       }
 
-      var isNew = !vm.poll._id ? true : false;
       vm.poll.opts = vm.opts;
-      if (vm.poll._id) {
-        if (!isCanUpdate()) {
-          return alert(
-            'Bạn không thể update poll trong vòng một giờ kể từ lần update trước.'
-          );
-        }
-        vm.poll.$update(successCallback, errorCallback);
-      } else {
-        vm.poll.$save(successCallback, errorCallback);
-      }
-
-      function successCallback(res) {
-        if (isNew) {
-          if (res.isPublic) {
-            Socket.emit('poll_create');
-          }
-        } else {
-          Socket.emit('poll_update', { pollId: vm.poll._id });
-        }
-        $state.go('polls.view', {
-          pollId: res._id
+      Action.save_poll(vm.poll)
+        .then(res => {
+          $state.go('polls.view', { pollId: res._id });
+        })
+        .catch(err => {
+          toast.error(err.message, 'Error!');
         });
-      }
-
-      function errorCallback(res) {
-        vm.error = res.data.message;
-      }
     };
 
     vm.validateCategory = () => {

@@ -2,6 +2,7 @@
   <div class="row mg20t mg20b">
     <div class="col-xs-12">
       <div class="form-group">
+        <a ng-click="vm.show_toast()" class="btn btn-primary pull-right">Create poll</a>
         <a ui-sref="polls.create" class="btn btn-primary pull-right">Create poll</a>
         <a ng-if="vm.poll.isCurrentUserOwner || vm.poll.canEdit" ui-sref="polls.edit({ pollId: vm.poll._id })" class="btn btn-success pull-right mg10r">Edit</a>
         <a ng-if="vm.poll.isCurrentUserOwner || vm.poll.canEdit" ng-click="vm.remove()" class="btn btn-danger pull-right mg10r">Delete</a>

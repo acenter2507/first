@@ -270,6 +270,8 @@
           alert(err);
         });
     };
-
+    vm.show_toast = () => {
+      toastr.info('We are open today from 10 to 22' + new Date().getTime(), 'Information');
+    };
   }
 })();

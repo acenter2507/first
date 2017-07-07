@@ -108,7 +108,6 @@
         userId: vm.authentication.user._id
       });
       Socket.on('cmt_add', cmtId => {
-        toastr.info('We are open today from 10 to 22', 'Information');
         Action.get_cmt(cmtId)
           .then(res => {
             return get_like_cmt(res.data);

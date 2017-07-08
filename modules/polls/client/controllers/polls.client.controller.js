@@ -441,7 +441,6 @@
         toast.error('You must vote at least one option.', 'Error!');
         return;
       }
-      console.log(vm.ownVote);
       Action.save_vote(vm.ownVote, vm.selectedOpts)
         .then(res => {
           vm.ownVote = res;

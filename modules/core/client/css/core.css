@@ -323,6 +323,11 @@ a:hover .header-profile-image {
   color: #FEAF20;
 }
 
+/*ngDialog*/
+.ngdialog.ngdialog-theme-default .ngdialog-close {
+  display: none;
+}
+
 .text-black {
   color: #555;
 }

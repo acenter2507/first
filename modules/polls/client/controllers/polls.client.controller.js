@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
   // Polls controller
   angular.module('polls').controller('PollsController', PollsController);
@@ -15,7 +15,8 @@
     '$timeout',
     'Remaining',
     'Action',
-    'toastr'
+    'toastr',
+    'ngDialog'
   ];
 
   function PollsController(
@@ -30,7 +31,8 @@
     $timeout,
     Remaining,
     Action,
-    toast
+    toast,
+    dialog
   ) {
     var vm = this;
     vm.authentication = Authentication;
@@ -38,7 +40,7 @@
 
     vm.poll = poll;
     vm.form = {};
-    
+
     // Options variable
     vm.opts = [];
     vm.tmp_opt = {};
@@ -205,7 +207,7 @@
             toast.error(err.message, 'Error!');
           });
       });
-      $scope.$on('$destroy', function() {
+      $scope.$on('$destroy', function () {
         Socket.emit('unsubscribe_poll', {
           pollId: vm.poll._id,
           userId: vm.authentication.user._id
@@ -227,7 +229,7 @@
         vm.poll.close = vm.poll.close ? moment(vm.poll.close) : vm.poll.close;
         vm.isClosed = vm.poll.close ? moment(vm.poll.close).isBefore(new moment()) : false;
         vm.poll.tags = [];
-         // Lấy thông tin options
+        // Lấy thông tin options
         Action.get_opts(vm.poll._id)
           .then(res => { // lấy thông tin report
             vm.opts = _.where(res.data, { status: 1 });
@@ -462,12 +464,28 @@
 
     // Remove existing Poll
     vm.remove = () => {
-      if ($window.confirm('Are you sure you want to delete?')) {
-        vm.poll.$remove(() => {
-          Socket.emit('poll_delete', { pollId: vm.poll._id });
-          $state.go('polls.list');
-        });
-      }
+      dialog.openConfirm({
+        scope: $scope,
+        template:
+        '<div class="ngdialog-message">' +
+        '  <h2 class="confirmation-title"><i class="fa fa-exclamation-triangle orange"></i> Are you sure?</h2>' +
+        '  <span>Are you sure you want to delete?</span>' +
+        '    <div class="ngdialog-buttons">' +
+        '      <button type="button" class="ngdialog-button" ng-click="confirm(confirmValue)">Delete</button>' +
+        '      <button type="button" class="ngdialog-button" ng-click="closeThisDialog()">Cancel</button>' +
+        '    </div>' +
+        '</div>',
+      }).then(function (confirm) {
+        alert('Confirmed')
+      }, function (reject) {
+        alert('Rejected')
+      });
+      // if ($window.confirm('Are you sure you want to delete?')) {
+      //   vm.poll.$remove(() => {
+      //     Socket.emit('poll_delete', { pollId: vm.poll._id });
+      //     $state.go('polls.list');
+      //   });
+      // }
     };
 
     vm.like_poll = type => {
@@ -642,7 +660,7 @@
     };
 
     // VOTE
-    vm.checked = function(id) {
+    vm.checked = function (id) {
       if (vm.poll.allow_multiple) {
         if (_.contains(vm.selectedOpts, id)) {
           vm.selectedOpts = _.without(vm.selectedOpts, id);
@@ -662,7 +680,7 @@
         return vm.isLogged;
       }
     };
-    vm.is_voted = function(id) {
+    vm.is_voted = function (id) {
       return _.contains(vm.selectedOpts, id);
     };
     vm.is_voted_all = () => {
@@ -680,7 +698,7 @@
     };
     vm.save_vote = save_vote;
     vm.toggle_chart = () => {
-      vm.chart.type = vm.chart.type === 'polarArea' ? 
+      vm.chart.type = vm.chart.type === 'polarArea' ?
         'pie' : 'polarArea';
     };
 

@@ -61,10 +61,6 @@ a:hover .header-profile-image {
 .has-error .help-inline.error-text {
   display: inline;
 }
-.highlight-text {
-  color: #267ED5;
-}
-
 .card {
   background-color: #fff;
   position: relative;
@@ -373,7 +369,6 @@ a:hover .header-profile-image {
 }
 
 .toast-wait {
-  /*background-color: #2f96b4;*/
   border-left: 6px solid #267ED5;
 }
 .toast-wait .toast-close-button,
@@ -383,7 +378,6 @@ a:hover .header-profile-image {
 }
 
 .toast-warning {
-  /*background-color: #f89406;*/
   border-left: 6px solid #FEAF20;
 }
 .toast-warning .toast-close-button,
@@ -391,16 +385,29 @@ a:hover .header-profile-image {
 .toast-warning .toast-title {
   color: #FEAF20;
 }
-
 /*ngDialog*/
 .ngdialog.ngdialog-theme-default .ngdialog-close {
   display: none;
 }
 .ngdialog.ngdialog-theme-default .ngdialog-content {
   border-radius: 0px;
-
 }
-.text-black {
+.highlight-text {
+  color: #267ED5;
+}
+.warning-text {
+  color: #FEAF20;
+}
+.danger-text {
+  color: #d73814;
+}
+.success-text {
+  color: #80D651;
+}
+.info-text {
+  color: #45ABCD;
+}
+.default-text {
   color: #555;
 }
 .mgn {

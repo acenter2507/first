@@ -464,12 +464,21 @@
 
     // Remove existing Poll
     vm.remove = () => {
-      // if ($window.confirm('Are you sure you want to delete?')) {
-      //   vm.poll.$remove(() => {
-      //     Socket.emit('poll_delete', { pollId: vm.poll._id });
-      //     $state.go('polls.list');
-      //   });
-      // }
+      $scope.message_title = 'Delete poll!';
+      $scope.message_content = 'Are you sure you want to delete?';
+      dialog.openConfirm({
+        scope: $scope,
+        templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
+      }).then(confirm => {
+        handle_delete();
+      }, reject => {
+      });
+      function handle_delete() {
+        vm.poll.$remove(() => {
+          Socket.emit('poll_delete', { pollId: vm.poll._id });
+          $state.go('polls.list');
+        });
+      }
     };
 
     vm.like_poll = type => {
@@ -684,22 +693,6 @@
     vm.toggle_chart = () => {
       vm.chart.type = vm.chart.type === 'polarArea' ?
         'pie' : 'polarArea';
-    };
-
-    vm.show_dialog = () => {
-      $scope.message_title = 'Delete poll!';
-      $scope.message_content = 'Are you sure you want to delete?';
-      dialog.openConfirm({
-        scope: $scope,
-        templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
-      }).then(confirm => {
-        vm.handle();
-      }, reject => {
-      });
-    };
-
-    vm.handle = () => {
-      alert('aaaaaaaaaaaaaaaaaaaaaaaaa');
     };
   }
 })();

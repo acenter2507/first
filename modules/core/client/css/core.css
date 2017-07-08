@@ -327,7 +327,9 @@ a:hover .header-profile-image {
 .ngdialog.ngdialog-theme-default .ngdialog-close {
   display: none;
 }
-
+.ngdialog.ngdialog-theme-default .ngdialog-content {
+  border-radius: 0px;
+}
 .text-black {
   color: #555;
 }

@@ -692,9 +692,9 @@
       dialog.openConfirm({
         scope: $scope,
         templateUrl: 'modules/core/client/views/templates/dialog.confirm.view.html'
-      }).then(function (confirm) {
+      }).then(confirm => {
         vm.handle();
-      }, function (reject) {
+      }, reject => {
       });
     };
 

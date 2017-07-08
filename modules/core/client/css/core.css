@@ -158,6 +158,20 @@ a:hover .header-profile-image {
   display:inline-block;
 }
 
+.btn { 
+  position: relative;
+  overflow:hidden;
+  text-transform: uppercase;
+  border-radius: 0;
+  border: none;
+}
+.btn:hover,
+.btn:focus {
+  box-shadow: 0 1px 6px 0 rgba(0,0,0,.12),0 1px 6px 0 rgba(0,0,0,.12);
+  outline: none;
+}
+
+
 @keyframes lol {
   0% {
     opacity: 0;
@@ -329,7 +343,7 @@ a:hover .header-profile-image {
 }
 .ngdialog.ngdialog-theme-default .ngdialog-content {
   border-radius: 0px;
-  
+
 }
 .text-black {
   color: #555;

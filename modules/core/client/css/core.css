@@ -164,6 +164,7 @@ a:hover .header-profile-image {
   text-transform: uppercase;
   border-radius: 0;
   border: none;
+  font-weight: normal;
 }
 .btn:hover,
 .btn:focus {

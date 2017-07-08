@@ -690,7 +690,7 @@
       // dialog.open({ template: 'templateId' });
       dialog.openConfirm({
         scope: $scope,
-        templateUrl: ''
+        templateUrl: 'modules/core/client/views/templates/dialog.confirm.view.html'
       }).then(function (confirm) {
         alert('Confirmed');
       }, function (reject) {

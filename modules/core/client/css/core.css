@@ -214,13 +214,13 @@ a:hover .header-profile-image {
   background-color: #FEAF20;
 }
 .btn-danger {
-  background-color: #d73814;
+  background-color: #f44336;
 }
 .btn-danger:hover {
-  background-color: lighten(#d73814, 5%);
+  background-color: lighten(#f44336, 5%);
 }
 .btn-danger:focus {
-  background-color: #d73814;
+  background-color: #f44336;
 }
 
 @keyframes lol {
@@ -300,10 +300,10 @@ a:hover .header-profile-image {
     color: #FEAF20;
 }
 .notice-danger {
-    border-color: #d73814;
+    border-color: #f44336;
 }
 .notice-danger>strong {
-    color: #d73814;
+    color: #f44336;
 }
 
 #toast-container .toast {
@@ -401,7 +401,7 @@ a:hover .header-profile-image {
   color: #FEAF20;
 }
 .danger-text {
-  color: #d73814;
+  color: #f44336;
 }
 .success-text {
   color: #80D651;

@@ -690,15 +690,7 @@
       // dialog.open({ template: 'templateId' });
       dialog.openConfirm({
         scope: $scope,
-        template:
-        '<div class="ngdialog-message">' +
-        '  <h2 class="confirmation-title"><i class="fa fa-exclamation-triangle orange"></i> Are you sure?</h2>' +
-        '  <span>Are you sure you want to delete?</span>' +
-        '    <div class="ngdialog-buttons">' +
-        '      <button type="button" class="ngdialog-button" ng-click="confirm(confirmValue)">Delete</button>' +
-        '      <button type="button" class="ngdialog-button" ng-click="closeThisDialog()">Cancel</button>' +
-        '    </div>' +
-        '</div>',
+        templateUrl: ''
       }).then(function (confirm) {
         alert('Confirmed');
       }, function (reject) {

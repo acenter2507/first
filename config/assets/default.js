@@ -14,7 +14,7 @@ module.exports = {
         'public/lib/angular-toasty/dist/angular-toasty.css',
         'public/lib/angular-toastr/dist/angular-toastr.css',
         'public/lib/ng-dialog/css/ngDialog.min.css',
-        'public/lib/ng-dialog/css/ngDialog-theme-default.min.css'
+        'public/lib/ng-dialog/css/ngDialog-theme-plain.min.css'
       ],
       js: [
         'public/lib/angular/angular.js',

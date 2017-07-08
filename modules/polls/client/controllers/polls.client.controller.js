@@ -694,12 +694,11 @@
       }).then(function (confirm) {
         vm.handle();
       }, function (reject) {
-        alert('Rejected');
       });
     };
 
     vm.handle = () => {
-      alert('Confirmed');
+      alert('aaaaaaaaaaaaaaaaaaaaaaaaa');
     };
   }
 })();

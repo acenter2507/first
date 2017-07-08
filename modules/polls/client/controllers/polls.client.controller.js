@@ -691,7 +691,7 @@
       $scope.message_content = 'Are you sure you want to delete?';
       dialog.openConfirm({
         scope: $scope,
-        templateUrl: 'modules/core/client/views/templates/dialog.confirm.view.html'
+        templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
       }).then(confirm => {
         vm.handle();
       }, reject => {

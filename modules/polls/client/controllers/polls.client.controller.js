@@ -692,10 +692,14 @@
         scope: $scope,
         templateUrl: 'modules/core/client/views/templates/dialog.confirm.view.html'
       }).then(function (confirm) {
-        alert('Confirmed');
+        vm.handle();
       }, function (reject) {
         alert('Rejected');
       });
+    };
+
+    vm.handle = () => {
+      alert('Confirmed');
     };
   }
 })();

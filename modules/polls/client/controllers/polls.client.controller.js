@@ -687,8 +687,8 @@
     };
 
     vm.show_dialog = () => {
-      $cope.message_title = 'Delete poll!';
-      $cope.message_content = 'Are you sure you want to delete?';
+      $scope.message_title = 'Delete poll!';
+      $scope.message_content = 'Are you sure you want to delete?';
       dialog.openConfirm({
         scope: $scope,
         templateUrl: 'modules/core/client/views/templates/dialog.confirm.view.html'

@@ -187,7 +187,6 @@
   border-radius: 2px;
   background: #e6e6e6;
 }
-
 .control--radio .control__indicator {
   border-radius: 50%;
 }
@@ -293,7 +292,6 @@
   border: none !important;
   outline: none;
 }
-
 .custom-panel .panel-heading {
   color: #fff !important;
   border-radius: 3px;
@@ -305,11 +303,9 @@
 .custom-panel .panel-heading.public {
   background-color: #267ED5 !important;
 }
-
 .custom-panel .panel-heading.watting {
   background-color: #f57f17 !important;
 }
-
 .custom-panel .panel-body {
   border: none !important;
 }
@@ -321,15 +317,12 @@
 .center {
   margin: auto !important;
 }
-
 .inline {
   display: inline !important;
 }
-
 .inline-block  {
   display: inline-block !important;
 }
-
 .input-large {
   height: 44px;
   font-size: 1.2em !important;
@@ -459,22 +452,4 @@ md-menu-content {
   width: 100%;
   font-size: 1.8em;
   text-align: center;
-}
-.poll-remaining-time {
-  margin: 0;
-  display: inline-block;
-  width: 23%;
-  height: 100%;
-  text-align: center;
-}
-.poll-remaining span.middle{
-  width: 100%;
-  display: inline-block;
-  font-size: 0;
-  line-height: 0
-}
-.poll-remaining span.countdown {
-  margin: auto;
-  font-size: 1.5em;
-
 }

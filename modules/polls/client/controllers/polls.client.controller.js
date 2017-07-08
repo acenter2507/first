@@ -86,10 +86,7 @@
         $state.go('polls.list');
       }
       get_info_poll();
-
-      if (vm.isLogged) {
-        get_owner_info();
-      }
+      get_owner_info();
 
       if (!vm.isClosed && vm.poll.close) {
         loadRemaining();

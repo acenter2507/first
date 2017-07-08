@@ -157,6 +157,12 @@ a:hover .header-profile-image {
   opacity: 0;
   display:inline-block;
 }
+$default-color: #fff;
+$primary-color: #009688;
+$success-color: #4caf50;
+$info-color: #03a9f4;
+$warning-color: #ff5722;
+$danger-color: #f44336;
 
 .btn { 
   position: relative;
@@ -172,6 +178,60 @@ a:hover .header-profile-image {
   outline: none;
 }
 
+.btn-default {
+  background-color: #d6d6d6;
+}
+.btn-default:hover {
+  background-color: darken(#d6d6d6, 5%);
+}
+.btn-default:focus {
+  background-color: #d6d6d6;
+}
+.btn-primary {
+  background-color: #267ED5;
+}
+.btn-primary:hover {
+  background-color: lighten(#267ED5, 5%);
+}
+.btn-primary:focus {
+  background-color: #267ED5;
+}
+.btn-success {
+  background-color: #4caf50;
+}
+.btn-success:hover {
+  background-color: lighten(#4caf50, 5%);
+}
+.btn-success:focus {
+  background-color: #4caf50;
+}
+.btn-info {
+  background-color: #03a9f4;
+}
+.btn-info:hover {
+  background-color: lighten(#03a9f4, 5%);
+}
+.btn-info:focus {
+  background-color: #03a9f4;
+}
+.btn-warning {
+  background-color: #ff5722;
+}
+.btn-warning:hover {
+  background-color: lighten(#ff5722, 5%);
+}
+.btn-warning:focus {
+  background-color: #ff5722;
+}
+.btn-danger {
+  background-color: #f44336;
+}
+.btn-danger:hover {
+  background-color: lighten(#f44336, 5%);
+}
+.btn-danger:focus {
+  background-color: #f44336;
+}
 
 @keyframes lol {
   0% {

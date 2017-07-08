@@ -369,6 +369,7 @@ a:hover .header-profile-image {
 }
 
 .toast-wait {
+  /*background-color: #2f96b4;*/
   border-left: 6px solid #267ED5;
 }
 .toast-wait .toast-close-button,
@@ -378,6 +379,7 @@ a:hover .header-profile-image {
 }
 
 .toast-warning {
+  /*background-color: #f89406;*/
   border-left: 6px solid #FEAF20;
 }
 .toast-warning .toast-close-button,

@@ -81,7 +81,7 @@
                 <div class="progress">
                   <div ng-class="['progress-bar']" ng-class="bar.barClass" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}">
                     <span ng-if="opt.voteCnt > 0">{{opt.voteCnt + '/' + poll.total}}</span>
-                    <span class="text-black" ng-if="opt.voteCnt === 0">{{opt.voteCnt + '/' + poll.total}}</span>
+                    <span class="default-text" ng-if="opt.voteCnt === 0">{{opt.voteCnt + '/' + poll.total}}</span>
                   </div>
                 </div>
               </div>
@@ -92,7 +92,7 @@
                 <div class="progress">
                   <div ng-class="['progress-bar']" ng-class="bar.barClass" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}">
                     <span ng-if="opt.voteCnt > 0">{{opt.voteCnt + '/' + poll.total}}</span>
-                    <span class="text-black" ng-if="opt.voteCnt === 0">{{opt.voteCnt + '/' + poll.total}}</span>
+                    <span class="default-text" ng-if="opt.voteCnt === 0">{{opt.voteCnt + '/' + poll.total}}</span>
                   </div>
                 </div>
               </div>

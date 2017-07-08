@@ -702,5 +702,8 @@
         'pie' : 'polarArea';
     };
 
+    vm.show_dialog = () => {
+      dialog.open({ template: 'templateId' });
+    };
   }
 })();

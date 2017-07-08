@@ -476,9 +476,9 @@
         '    </div>' +
         '</div>',
       }).then(function (confirm) {
-        alert('Confirmed')
+        alert('Confirmed');
       }, function (reject) {
-        alert('Rejected')
+        alert('Rejected');
       });
       // if ($window.confirm('Are you sure you want to delete?')) {
       //   vm.poll.$remove(() => {

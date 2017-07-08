@@ -157,12 +157,6 @@ a:hover .header-profile-image {
   opacity: 0;
   display:inline-block;
 }
-$default-color: #fff;
-$primary-color: #009688;
-$success-color: #4caf50;
-$info-color: #03a9f4;
-$warning-color: #ff5722;
-$danger-color: #f44336;
 
 .btn { 
   position: relative;

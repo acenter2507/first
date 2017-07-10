@@ -18,7 +18,7 @@ angular.module('core').config(['toastrConfig',
 
 angular.module('core').config(['$provide',
   function ($provide) {
-    $provide.decorator('taOptions', ['taRegisterTool', '$modal', '$delegate',
+    $provide.decorator('taOptions', ['taRegisterTool', '$mdDialog', '$delegate',
       function (taRegisterTool, $modal, taOptions) {
         // $delegate is the taOptions we are decorating
         // here we override the default toolbars specified in taOptions.
@@ -34,7 +34,7 @@ angular.module('core').config(['$provide',
           iconclass: "fa fa-picture-o",
           action: function () {
             var textAngular = this;
-            console.log('Clicked', textAngular);
+
             // var savedSelection = rangy.saveSelection();
             // var modalInstance = $modal.open({
             //   // Put a link to your template here or whatever
@@ -59,7 +59,25 @@ angular.module('core').config(['$provide',
             return false;
           },
         });
-
+        taRegisterTool('uploadImage', {
+          buttontext: 'Select Image',
+          iconclass: "fa fa-image",
+          action: function (deferred, restoreSelection) {
+            var self = this;
+            var sel = rangy.getSelection();
+            $mdDialog.show({
+              templateUrl: 'uploadImagesCont.tmpl.html',
+              parent: angular.element(document.body),
+              //controller: textAngularUploadImage,
+              clickOutsideToClose: false
+            }).then(function (result) {
+              sel.collapseToEnd();
+              self.$editor().wrapSelection('insertImage', $rootScope.ImageResult);
+              deferred.resolve();
+            });
+            return false;
+          }
+        });
         // Now add the button to the default toolbar definition
         // Note: It'll be the last button
         taOptions.toolbar[3].push('customInsertImage');

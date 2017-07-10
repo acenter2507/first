@@ -80,7 +80,7 @@ angular.module('core').config(['$provide',
         });
         // Now add the button to the default toolbar definition
         // Note: It'll be the last button
-        taOptions.toolbar[3].push('customInsertImage');
+        taOptions.toolbar[3].push('customInsertImage', 'uploadImage');
         return taOptions;
       }
     ]);

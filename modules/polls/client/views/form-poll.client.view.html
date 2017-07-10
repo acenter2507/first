@@ -17,20 +17,20 @@
         <!-- Category -->
         <div class="row">
           <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-              <!-- Trường hợp edit poll -->
-              <div class="select" ng-if="vm.poll._id">
-                <select ng-model="vm.poll.category._id" id="category" name="category" ng-options="category._id as category.name for category in vm.categorys"></select>
-                <div class="select__arrow"></div>
-              </div>
-              <!-- Trường hợp create poll -->
-              <div class="select" ng-if="!vm.poll._id">
-                <select ng-model="vm.poll.category" id="category" name="category">
+            <!-- Trường hợp edit poll -->
+            <div class="select" ng-if="vm.poll._id">
+              <select ng-model="vm.poll.category._id" id="category" name="category" ng-options="category._id as category.name for category in vm.categorys"></select>
+              <div class="select__arrow"></div>
+            </div>
+            <!-- Trường hợp create poll -->
+            <div class="select" ng-if="!vm.poll._id">
+              <select ng-model="vm.poll.category" id="category" name="category">
                   <option value="" selected>Category</option>
                   <option ng-repeat="category in vm.categorys" value="{{category._id}}">{{category.name}}</option>
                 </select>
-                <div class="select__arrow"></div>
-              </div>
-              <span class="text-danger" ng-hide="vm.validateCategory()">Category is required</span>
+              <div class="select__arrow"></div>
+            </div>
+            <span class="text-danger" ng-hide="vm.validateCategory()">Category is required</span>
           </div>
           <div class="col-xs-6 col-sm-8 col-md-9 col-lg-10">
             <div class="pull-left mg5t">
@@ -74,12 +74,19 @@
         <!-- Title -->
         <div class="form-group">
           <input type="text" class="form-control input-large" name="title" ng-model="vm.poll.title" placeholder="Enter your poll tilte here"
-        />
+          />
           <span class="text-danger" ng-hide="vm.validateTitle()">You must type somthing for title</span>
         </div>
         <!-- Body -->
         <div class="form-group">
-          <text-angular class="text-body" ng-model="vm.poll.body"></text-angular>
+          <text-angular class="text-body" ng-model="vm.poll.body">
+            <div class="ta-toolbar btn-toolbar">
+              <div class="btn-group">
+                <button type="button" class="btn btn-default">Upload Images</button>
+                <!--<button type="button" class="btn btn-default active">...</button>-->
+              </div>
+            </div>
+          </text-angular>
           <span class="text-danger" ng-hide="vm.validateBody()">You must type somthing for body</span>
         </div>
         <div class="form-group">
@@ -120,8 +127,8 @@
         <!-- Close time -->
         <div class="form-group">
           <label class="control-label" for="close">Stop voting at:</label>
-          <input class="form-control" moment-picker="vm.poll.close" ng-model="vm.poll.close" format="YYYY/MM/DD HH:mm" 
-            start-view="month" placeholder="Select a date...">
+          <input class="form-control" moment-picker="vm.poll.close" ng-model="vm.poll.close" format="YYYY/MM/DD HH:mm" start-view="month"
+            placeholder="Select a date...">
           <span class="text-danger" ng-hide="vm.validateCloseDate()">Datetime is invalid</span>
         </div>
         <!-- Tags -->

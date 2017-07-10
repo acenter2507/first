@@ -15,3 +15,55 @@ angular.module('core').config(['toastrConfig',
     });
   }
 ]);
+
+angular.module('core').config(['$provide',
+  function ($provide) {
+    $provide.decorator('taOptions', ['taRegisterTool', '$modal', '$delegate',
+      function (taRegisterTool, $modal, taOptions) {
+        // $delegate is the taOptions we are decorating
+        // here we override the default toolbars specified in taOptions.
+        taOptions.toolbar = [
+          ['clear', 'h1', 'h2', 'h3'],
+          ['ul', 'ol'],
+          ['bold', 'italics'],
+          ['insertLink', 'insertVideo']
+        ];
+
+        // Create our own insertImage button
+        taRegisterTool('customInsertImage', {
+          iconclass: "fa fa-picture-o",
+          action: function () {
+            var textAngular = this;
+            var savedSelection = rangy.saveSelection();
+            var modalInstance = $modal.open({
+              // Put a link to your template here or whatever
+              template: '<label>Enter the url to your image:</label><input type="text" ng-model="img.url"><button ng-click="submit()">OK</button>',
+              size: 'sm',
+              controller: ['$modalInstance', '$scope',
+                function ($modalInstance, $scope) {
+                  $scope.img = {
+                    url: ''
+                  };
+                  $scope.submit = function () {
+                    $modalInstance.close($scope.img.url);
+                  };
+                }
+              ]
+            });
+
+            modalInstance.result.then(function (imgUrl) {
+              rangy.restoreSelection(savedSelection);
+              textAngular.$editor().wrapSelection('insertImage', imgUrl);
+            });
+            return false;
+          },
+        });
+
+        // Now add the button to the default toolbar definition
+        // Note: It'll be the last button
+        taOptions.toolbar[3].push('customInsertImage');
+        return taOptions;
+      }
+    ]);
+  }
+]);

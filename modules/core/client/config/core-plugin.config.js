@@ -18,7 +18,7 @@ angular.module('core').config(['toastrConfig',
 
 angular.module('core').config(['$provide',
   function ($provide) {
-    $provide.decorator('taOptions', ['taRegisterTool', '$bsModal', '$delegate',
+    $provide.decorator('taOptions', ['taRegisterTool', '$bsModal', '$delegate', '$rootScope',
       function (taRegisterTool, $modal, taOptions) {
         // $delegate is the taOptions we are decorating
         // here we override the default toolbars specified in taOptions.
@@ -34,7 +34,7 @@ angular.module('core').config(['$provide',
           iconclass: "fa fa-picture-o",
           action: function () {
             var textAngular = this;
-
+            
             // var savedSelection = rangy.saveSelection();
             // var modalInstance = $modal.open({
             //   // Put a link to your template here or whatever

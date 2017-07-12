@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
   angular.module('polls').factory('Action', Action);
 
@@ -18,6 +18,7 @@
     'BookmarksService',
     'CategorysService',
     'PollreportsService',
+    'ViewsService',
     'PollsApi',
     'VotesApi',
     'CmtsApi'
@@ -39,6 +40,7 @@
     Bookmarks,
     Categorys,
     Pollreports,
+    Views,
     PollsApi,
     VotesApi,
     CmtsApi
@@ -142,6 +144,17 @@
         function errorCb(err) {
           reject(err);
         }
+      });
+    };
+    this.save_view_poll = pollId => {
+      return new Promise((resolve, reject) => {
+        var view = Views.get({ poll: pollId, user: Authentication.user._id });
+        view.$promise.then(view => {
+          if (!view || !view._id) {
+            var rs_view = new Views({ poll: pollId, user: Authentication.user._id });
+            rs_view.$save();
+          }
+        });
       });
     };
     // api get comments
@@ -322,12 +335,12 @@
     this.get_opts = pollId => {
       return new Promise((resolve, reject) => {
         PollsApi.findOpts(pollId)
-        .then(res => {
-          return resolve(res);
-        })
-        .catch(err => {
-          return reject(err);
-        });
+          .then(res => {
+            return resolve(res);
+          })
+          .catch(err => {
+            return reject(err);
+          });
       });
     };
     // Lưu option

@@ -38,7 +38,7 @@
     Reports,
     Bookmarks,
     Categorys,
-    'Pollreport',
+    Pollreports,
     PollsApi,
     VotesApi,
     CmtsApi
@@ -134,7 +134,7 @@
     this.count_up_poll_view = report => {
       return new Promise((resolve, reject) => {
         report.viewCnt += 1;
-        var rs_report = new Pollreport(report);
+        var rs_report = new Pollreports(report);
         rs_report.$update(successCb, errorCb);
         function successCb(res) {
           resolve(res);

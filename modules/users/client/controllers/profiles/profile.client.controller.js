@@ -18,8 +18,9 @@ angular.module('users').controller('ProfileController', [
 
     function init() {
       get_user_report();
-
-      var timer = $timeout(count_up_view_profile, 30000);
+      if ($scope.isLogged && !$scope.isCurrentOwner) {
+        var timer = $timeout(count_up_view_profile, 30000);
+      }
     }
 
     function get_user_report() {

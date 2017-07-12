@@ -466,6 +466,8 @@
     vm.remove = () => {
       $scope.message_title = 'Delete poll!';
       $scope.message_content = 'Are you sure you want to delete?';
+      $scope.dialog_type = 3;
+      $scope.buton_label = 'delete';
       dialog.openConfirm({
         scope: $scope,
         templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
@@ -613,7 +615,18 @@
     };
 
     vm.delete_cmt = cmt => {
-      if (confirm('Do you want to delete this comment ?')) {
+      $scope.message_title = 'Delete comment!';
+      $scope.message_content = 'Are you sure you want to delete this comment?';
+      $scope.dialog_type = 3;
+      $scope.buton_label = 'delete';
+      dialog.openConfirm({
+        scope: $scope,
+        templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
+      }).then(confirm => {
+        handle_delete_cmt();
+      }, reject => {
+      });
+      function handle_delete_cmt() {
         Action.delete_cmt(cmt);
       }
     };

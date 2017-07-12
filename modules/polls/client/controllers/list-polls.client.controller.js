@@ -12,7 +12,8 @@
     'Authentication',
     'Action',
     'toasty',
-    'toastr'
+    'toastr',
+    'ngDialog'
   ];
 
   function PollsListController(
@@ -23,7 +24,8 @@
     Authentication,
     Action,
     toasty,
-    toast
+    toast,
+    dialog
   ) {
     var vm = this;
     vm.authentication = Authentication;

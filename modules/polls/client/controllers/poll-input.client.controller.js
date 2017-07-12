@@ -17,7 +17,8 @@
     'Socket',
     'CategorysService',
     'toastr',
-    'Action'
+    'Action',
+    'ngDialog'
   ];
 
   function PollInputController(
@@ -32,7 +33,8 @@
     Socket,
     Categorys,
     toast,
-    Action
+    Action,
+    dialog
   ) {
     var vm = this;
 

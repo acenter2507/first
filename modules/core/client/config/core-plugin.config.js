@@ -19,8 +19,8 @@ angular.module('core').config(['toastrConfig',
 
 angular.module('core').config(['$provide',
   function ($provide) {
-    $provide.decorator('taOptions', ['taRegisterTool', 'taToolFunctions', 'ngDialog', '$delegate',
-      function (taRegisterTool, taToolFunctions, dialog, taOptions) {
+    $provide.decorator('taOptions', ['taRegisterTool', 'taToolFunctions', '$delegate',
+      function (taRegisterTool, taToolFunctions, taOptions) {
         taRegisterTool('uploadImage', {
           iconclass: "fa fa-upload",
           tooltiptext: 'Upload an image',

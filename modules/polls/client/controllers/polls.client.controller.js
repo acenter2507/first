@@ -91,7 +91,7 @@
       }
       get_info_poll()
         .then(() => {
-          return $interval(() => {
+          return $timeout(() => {
             Action.count_up_poll_view(vm.poll.report);
           }, 30000);
         });

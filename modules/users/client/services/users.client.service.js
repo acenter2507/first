@@ -11,6 +11,16 @@ angular.module('users').factory('Users', ['$resource',
   }
 ]);
 
+angular.module('users').factory('Userreport', ['$resource',
+  function ($resource) {
+    return $resource('api/userreports', {}, {
+      update: {
+        method: 'PUT'
+      }
+    });
+  }
+]);
+
 angular.module('users').factory('Profile', ['$resource',
   function ($resource) {
     return $resource('api/profile/:userId', {}, {
@@ -57,6 +67,9 @@ angular.module('users').factory('UserApi', ['$http',
     };
     this.get_views = (userId, page) => {
       return $http.get('/api/profile/' + userId + '/views/' + page);
+    };
+    this.get_user_report = userId => {
+      return $http.get('/api/profile/' + userId + '/report');
     };
     return this;
   }

@@ -21,7 +21,8 @@
     'ViewsService',
     'PollsApi',
     'VotesApi',
-    'CmtsApi'
+    'CmtsApi',
+    'UserApi'
   ];
 
   function Action(
@@ -43,7 +44,8 @@
     Views,
     PollsApi,
     VotesApi,
-    CmtsApi
+    CmtsApi,
+    UserApi
   ) {
     this.template = () => {
       return new Promise((resolve, reject) => {
@@ -56,6 +58,19 @@
         }
       });
     };
+
+    this.get_user_report = () => {
+      return new Promise((resolve, reject) => {
+        UserApi.get_user_report(Authentication.user._id)
+          .then(res => {
+            resolve(res);
+          })
+          .catch(err => {
+            reject(err);
+          });
+      });
+    };
+
     this.get_poll = pollId => {
       return new Promise((resolve, reject) => {
         Polls.get({ pollId: pollId }, _poll => {

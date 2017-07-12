@@ -22,7 +22,8 @@ var _ = require('lodash'),
   Bookmark = mongoose.model('Bookmark'),
   Category = mongoose.model('Category'),
   View = mongoose.model('View'),
-  Like = mongoose.model('Like');
+  Like = mongoose.model('Like'),
+  Userreport = mongoose.model('Userreport');
 
 /**
  * Update user details
@@ -70,13 +71,13 @@ exports.changeProfilePicture = function (req, res) {
   var message = null;
   var upload = multer(config.uploads.profileUpload).single('newProfilePicture');
   var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
-  
+
   // Filtering to upload only images
   upload.fileFilter = profileUploadFileFilter;
 
   if (user) {
     upload(req, res, function (uploadError) {
-      if(uploadError) {
+      if (uploadError) {
         return res.status(400).send({
           message: 'Error occurred while uploading profile picture'
         });
@@ -127,7 +128,7 @@ exports.all_polls = function (req, res) {
   Poll.find({ user: req.profile._id })
     .sort('-created')
     .select('title created body isPublic')
-    .exec(function(err, polls) {
+    .exec(function (err, polls) {
       if (err) {
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)
@@ -147,7 +148,7 @@ exports.polls = function (req, res) {
     .populate('category', 'name icon')
     .skip(10 * page)
     .limit(10)
-    .exec(function(err, polls) {
+    .exec(function (err, polls) {
       if (err) {
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)
@@ -166,7 +167,7 @@ exports.all_cmts = function (req, res) {
     .sort('-created')
     .select('created body')
     .populate('poll', 'title isPublic')
-    .exec(function(err, cmts) {
+    .exec(function (err, cmts) {
       if (err) {
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)
@@ -186,7 +187,7 @@ exports.cmts = function (req, res) {
     .populate('poll', 'title isPublic')
     .skip(10 * page)
     .limit(10)
-    .exec(function(err, cmts) {
+    .exec(function (err, cmts) {
       if (err) {
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)
@@ -205,7 +206,7 @@ exports.all_votes = function (req, res) {
     .sort('-created')
     .select('created')
     .populate('poll', 'title isPublic')
-    .exec(function(err, votes) {
+    .exec(function (err, votes) {
       if (err) {
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)
@@ -225,7 +226,7 @@ exports.votes = function (req, res) {
     .populate('poll', 'title isPublic')
     .skip(10 * page)
     .limit(10)
-    .exec(function(err, votes) {
+    .exec(function (err, votes) {
       if (err) {
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)
@@ -249,7 +250,7 @@ exports.follows = function (req, res) {
       ]
     })
     .skip(10 * page)
-    .exec(function(err, follows) {
+    .exec(function (err, follows) {
       if (err) {
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)
@@ -274,7 +275,7 @@ exports.bookmarks = function (req, res) {
       ]
     })
     .skip(10 * page)
-    .exec(function(err, bookmarks) {
+    .exec(function (err, bookmarks) {
       if (err) {
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)
@@ -298,7 +299,7 @@ exports.views = function (req, res) {
       ]
     })
     .skip(10 * page)
-    .exec(function(err, views) {
+    .exec(function (err, views) {
       if (err) {
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)
@@ -324,7 +325,7 @@ exports.likes = function (req, res) {
       ]
     })
     .skip(10 * page)
-    .exec(function(err, likes) {
+    .exec(function (err, likes) {
       if (err) {
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)
@@ -348,13 +349,26 @@ exports.dislikes = function (req, res) {
       ]
     })
     .skip(10 * page)
-    .exec(function(err, dislikes) {
+    .exec(function (err, dislikes) {
       if (err) {
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)
         });
       } else {
         res.jsonp(dislikes);
+      }
+    });
+};
+
+exports.report = function (req, res) {
+  Userreport.findOne({ user: req.profile._id })
+    .exec(function (err, report) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.jsonp(report);
       }
     });
 };

@@ -7,7 +7,8 @@ var path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   mongoose = require('mongoose'),
   passport = require('passport'),
-  User = mongoose.model('User');
+  User = mongoose.model('User'),
+  Userreport = mongoose.model('Userreport');
 
 // URLs for which user can't be redirected on signin
 var noReturnUrls = [
@@ -31,16 +32,14 @@ exports.signup = function (req, res) {
   user.displayName = user.firstName + ' ' + user.lastName;
 
   // Then save the user
-  user.save(function (err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      // Remove sensitive data before login
+  user.save()
+    .then(_user => {
       user.password = undefined;
       user.salt = undefined;
-
+      var report = new Userreport({ user: _user._id });
+      return report.save();
+    }, handleError)
+    .then(res => {
       req.login(user, function (err) {
         if (err) {
           res.status(400).send(err);
@@ -48,8 +47,25 @@ exports.signup = function (req, res) {
           res.json(user);
         }
       });
-    }
-  });
+    }, handleError);
+  // user.save(function (err) {
+  //   if (err) {
+  //     return res.status(400).send({
+  //       message: errorHandler.getErrorMessage(err)
+  //     });
+  //   } else {
+  //     // Remove sensitive data before login
+  //     user.password = undefined;
+  //     user.salt = undefined;
+
+      
+  //   }
+  // });
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 };
 
 /**

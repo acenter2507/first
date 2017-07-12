@@ -24,7 +24,7 @@ angular.module('users').controller('ProfileController', [
     }
 
     function get_user_report() {
-      Action.get_user_report()
+      Action.get_user_report($scope.profile._id)
         .then(res => {
           $scope.report = res.data || {};
           console.log('get_user_report', $scope.report);
@@ -34,7 +34,7 @@ angular.module('users').controller('ProfileController', [
         });
     }
     function count_up_view_profile() {
-      Action.count_up_view_profile($scope.report);
+      Action.count_up_view_profile($scope.report, $scope.profile._id);
     }
   }
 ]);

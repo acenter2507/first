@@ -61,9 +61,9 @@
       });
     };
 
-    this.get_user_report = () => {
+    this.get_user_report = userId => {
       return new Promise((resolve, reject) => {
-        UserApi.get_user_report(Authentication.user._id)
+        UserApi.get_user_report(userId)
           .then(res => {
             resolve(res);
           })
@@ -72,7 +72,7 @@
           });
       });
     };
-    this.count_up_view_profile = report => {
+    this.count_up_view_profile = (report, userId) => {
       return new Promise((resolve, reject) => {
         console.log('count_up_view_profile', report);
         var rs_report;
@@ -81,7 +81,7 @@
           rs_report = new Userreport(report);
           rs_report.$update();
         } else {
-          rs_report = new Userreport({ user: Authentication.user._id });
+          rs_report = new Userreport({ user: userId });
           rs_report.viewCnt = 1;
           rs_report.$save();
         }

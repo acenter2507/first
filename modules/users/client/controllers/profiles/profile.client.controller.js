@@ -27,6 +27,7 @@ angular.module('users').controller('ProfileController', [
       Action.get_user_report()
         .then(res => {
           $scope.report = res.data || {};
+          console.log('get_user_report', $scope.report);
         })
         .catch(err => {
           toast.error(err.message, 'Error!');

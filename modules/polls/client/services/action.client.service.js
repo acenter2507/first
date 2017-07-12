@@ -74,6 +74,7 @@
     };
     this.count_up_view_profile = report => {
       return new Promise((resolve, reject) => {
+        console.log('count_up_view_profile', report);
         var rs_report;
         if (report._id) {
           report.viewCnt += 1;

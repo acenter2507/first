@@ -74,11 +74,10 @@
     };
     this.count_up_view_profile = (report, userId) => {
       return new Promise((resolve, reject) => {
-        console.log('count_up_view_profile', report);
         var rs_report;
         if (report._id) {
-          report.viewCnt += 1;
           rs_report = new Userreport(report);
+          rs_report.viewCnt += 1;
           rs_report.$update();
         } else {
           rs_report = new Userreport({ user: userId });
@@ -168,8 +167,8 @@
     };
     this.count_up_poll_view = report => {
       return new Promise((resolve, reject) => {
-        report.viewCnt += 1;
         var rs_report = new Pollreports(report);
+        rs_report.viewCnt += 1;
         rs_report.$update(successCb, errorCb);
         function successCb(res) {
           resolve(res);

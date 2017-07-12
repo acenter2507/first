@@ -89,10 +89,17 @@
       }
       get_info_poll()
         .then(() => {
-          return $timeout(() => {
-            Action.count_up_poll_view(vm.poll.report);
-            Action.save_view_poll(vm.poll._id);
-          }, 30000);
+          if (!vm.poll.isCurrentUserOwner) {
+            var count_up = $timeout(() => {
+              Action.count_up_poll_view(vm.poll.report);
+              if (vm.isLogged) {
+                Action.save_view_poll(vm.poll._id);
+              }
+            }, 30000);
+            $scope.$on('$destroy', () => {
+              $timeout.cancel(count_up);
+            });
+          }
         });
       get_owner_info();
 

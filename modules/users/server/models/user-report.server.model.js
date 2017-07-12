@@ -43,7 +43,7 @@ UserreportSchema.statics.countUpPoll = function(id, callback) {
 };
 
 UserreportSchema.statics.countDownPoll = function(id, callback) {
-  return this.findOne({ poll: id }).exec(function(err, report) {
+  return this.findOne({ user: id }).exec(function(err, report) {
     report.pollCnt -= 1;
     return report.save();
   });
@@ -57,7 +57,7 @@ UserreportSchema.statics.countUpCmt = function(id, callback) {
 };
 
 UserreportSchema.statics.countDownCmt = function(id, callback) {
-  return this.findOne({ poll: id }).exec(function(err, report) {
+  return this.findOne({ user: id }).exec(function(err, report) {
     report.cmtCnt -= 1;
     return report.save();
   });

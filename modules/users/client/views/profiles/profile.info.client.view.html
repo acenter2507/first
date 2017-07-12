@@ -8,15 +8,15 @@
   </div>
   <div class="row profile-stats">
     <div class="stat">
-      <div class="stat-value">{{report.pollCnt}}</div>
+      <div class="stat-value">{{report.pollCnt || 0}}</div>
       <span class="stat-label">Polls</span>
     </div>
     <div class="stat">
-      <div class="stat-value">{{report.viewCnt}}</div>
+      <div class="stat-value">{{report.viewCnt || 0}}</div>
       <span class="stat-label">Profile visits</span>
     </div>
     <div class="stat">
-      <div class="stat-value">{{report.cmtCnt}}</div>
+      <div class="stat-value">{{report.cmtCnt || 0}}</div>
       <span class="stat-label">Comments</span>
     </div>
     <div class="stat">

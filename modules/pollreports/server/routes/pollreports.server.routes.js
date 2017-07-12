@@ -8,7 +8,7 @@ var pollreportsPolicy = require('../policies/pollreports.server.policy'),
 
 module.exports = function(app) {
   // Pollreports Routes
-  app.route('/api/pollreports').all(pollreportsPolicy.isAllowed)
+  app.route('/api/pollreports')
     .get(pollreports.list)
     .post(pollreports.create);
 

@@ -12,7 +12,7 @@ module.exports = function(app) {
     .get(pollreports.list)
     .post(pollreports.create);
 
-  app.route('/api/pollreports/:pollreportId').all(pollreportsPolicy.isAllowed)
+  app.route('/api/pollreports/:pollreportId')
     .get(pollreports.read)
     .put(pollreports.update)
     .delete(pollreports.delete);

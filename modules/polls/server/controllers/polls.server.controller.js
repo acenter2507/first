@@ -11,6 +11,7 @@ var path = require('path'),
   Voteopt = mongoose.model('Voteopt'),
   Polltag = mongoose.model('Polltag'),
   Pollreport = mongoose.model('Pollreport'),
+  Userreport = mongoose.model('Userreport'),
   Polluser = mongoose.model('Polluser'),
   Report = mongoose.model('Report'),
   Bookmark = mongoose.model('Bookmark'),
@@ -40,6 +41,9 @@ exports.create = function(req, res) {
       // Tạo report cho poll
       var report = new Pollreport({ poll: poll._id });
       return report.save();
+    }, handleError)
+    .then(_report => {
+      return Userreport.countUpPoll(poll.user);
     }, handleError)
     .then(_report => {
       // Lưu tag vào db
@@ -210,6 +214,9 @@ exports.delete = function(req, res) {
     }, handleError)
     .then(() => { // Xóa thông tin follow
       return Polluser.remove({ poll: poll._id });
+    }, handleError)
+    .then(() => {
+      return Userreport.countDownPoll(poll.user);
     }, handleError)
     .then(() => {
       res.jsonp(poll);

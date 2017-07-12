@@ -1,4 +1,5 @@
 'use strict';
+
 angular.module('core').config(['toastrConfig',
   function (toastrConfig) {
     angular.extend(toastrConfig, {
@@ -65,7 +66,7 @@ angular.module('core').config(['$provide',
           action: function (deferred, restoreSelection) {
             var self = this;
             dialog.openConfirm({
-              controller: 'PollInputController',
+              // controller: 'PollInputController',
               templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
             }).then(confirm => {
               alert(1);
@@ -85,7 +86,38 @@ angular.module('core').config(['$provide',
             return false;
           }
         });
-        taOptions.toolbar[3].push('customInsertImage', 'uploadImage');
+        taRegisterTool('uploadImage2', {
+        iconclass: "fa fa-picture-o",
+        tooltiptext: 'Upload an image',
+        onElementSelect: {
+          element: 'img',
+          action: taToolFunctions.imgOnSelectAction
+        },
+        action: function() {
+          var $editor = this.$editor;
+
+          // Create a virtual input element.
+          var input = document.createElement('input');
+          input.type = 'file';
+          input.accept = "image/*";
+
+          input.onchange = function() {
+            var reader = new FileReader();
+
+            if (this.files && this.files[0]) {
+              reader.onload = function(e) {
+                $editor().wrapSelection('insertHtml', '<img src=' + e.target.result + '>', true);
+              };
+
+              reader.readAsDataURL(this.files[0]);
+            }
+          };
+
+          // Click on a virtual input element.
+          input.click();
+        }
+      });
+        taOptions.toolbar[3].push('customInsertImage', 'uploadImage', 'uploadImage2');
         return taOptions;
       }
     ]);

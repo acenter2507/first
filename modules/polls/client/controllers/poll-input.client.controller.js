@@ -142,17 +142,21 @@
         toast.error('You have not entered enough information.', 'Error!');
         return;
       }
-      $scope.message_title = 'Save poll!';
-      $scope.message_content = 'You want to save a private poll?';
-      $scope.dialog_type = 1;
-      $scope.buton_label = 'Save';
-      dialog.openConfirm({
-        scope: $scope,
-        templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
-      }).then(confirm => {
+      if (!vm.poll.isPublic) {
+        $scope.message_title = 'Save poll!';
+        $scope.message_content = 'You want to save a private poll?';
+        $scope.dialog_type = 1;
+        $scope.buton_label = 'Save';
+        dialog.openConfirm({
+          scope: $scope,
+          templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
+        }).then(confirm => {
+          handle_save();
+        }, reject => {
+        });
+      } else {
         handle_save();
-      }, reject => {
-      });
+      }
       function handle_save() {
         vm.poll.opts = vm.opts;
         Action.save_poll(vm.poll)

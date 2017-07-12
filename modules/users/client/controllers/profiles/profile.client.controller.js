@@ -13,6 +13,8 @@ angular.module('users').controller('ProfileController', [
     $scope.isCurrentOwner = profile._id === $scope.user._id;
     $scope.isLogged = ($scope.user) ? true : false;
 
+    init();
+
     function init() {
       get_user_report();
     }

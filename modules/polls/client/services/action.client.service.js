@@ -148,13 +148,13 @@
     };
     this.save_view_poll = pollId => {
       return new Promise((resolve, reject) => {
-        var view = Views.get({ poll: pollId, user: Authentication.user._id });
-        view.$promise.then(view => {
-          if (!view || !view._id) {
-            var rs_view = new Views({ poll: pollId, user: Authentication.user._id });
-            rs_view.$save();
-          }
-        });
+        PollsApi.findView(pollId)
+          .then(res => {
+            if (!res.data || !res.data._id) {
+              var rs_view = new Views({ poll: pollId, user: Authentication.user._id });
+              rs_view.$save();
+            }
+          });
       });
     };
     // api get comments

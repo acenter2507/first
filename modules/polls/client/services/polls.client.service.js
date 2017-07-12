@@ -63,6 +63,9 @@
       },
       findPollreport: id => {
         return $http.get('/api/findPollreport/' + id);
+      },
+      findView: id => {
+        return $http.get('/api/findView/' + id);
       }
     };
   }

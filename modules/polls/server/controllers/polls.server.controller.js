@@ -17,6 +17,7 @@ var path = require('path'),
   Like = mongoose.model('Like'),
   Cmt = mongoose.model('Cmt'),
   Cmtlike = mongoose.model('Cmtlike'),
+  View = mongoose.model('View'),
   errorHandler = require(path.resolve(
     './modules/core/server/controllers/errors.server.controller'
   )),
@@ -503,6 +504,27 @@ exports.findPollreport = function(req, res) {
       handleError(err);
     } else {
       res.jsonp(_report);
+    }
+  });
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
+};
+
+/**
+ * Find view
+ */
+exports.findView = function(req, res) {
+  View.findOne({
+    poll: req.poll._id,
+    user: req.user._id
+  }).exec((err, _view) => {
+    if (err) {
+      handleError(err);
+    } else {
+      res.jsonp(_view);
     }
   });
   function handleError(err) {

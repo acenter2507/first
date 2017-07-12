@@ -25,8 +25,7 @@ app.init(function () {
   - Edit profile => done
   - Upload ảnh + chèn vào editor poll, options => done
   - Message thông báo => done
-  - Chức năng nhập lý do khi report
-  - Đếm view poll, poll user đã view
+  - Đếm view poll, poll user đã view => done
   - Đếm view profile
   - Chức năng private và share link
   - Trigger khi xóa: poll, option, vote, comment
@@ -34,6 +33,7 @@ app.init(function () {
   - Đếm và quản lý số lần bị report của user
   - Chức năng report comment
   - Share mạng xã hội
+  - Chức năng nhập lý do khi report
 */
 // 1. Khi người vote là guest thì không push socket được. => done
 // 2. Sửa các progressbar trong màn hình detail. => done

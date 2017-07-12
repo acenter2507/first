@@ -121,6 +121,61 @@ exports.me = function (req, res) {
 exports.profile = function (req, res) {
   res.json(req.profile || null);
 };
+
+exports.reportByID = function(req, res, next, id) {
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).send({
+      message: 'Report is invalid'
+    });
+  }
+
+  Userreport.findById(id).exec(function(err, report) {
+    if (err) {
+      return next(err);
+    } else if (!report) {
+      return res.status(404).send({
+        message: 'No Report with that identifier has been found'
+      });
+    }
+    req.report = report;
+    next();
+  });
+};
+
+exports.read_report = function (req, res) {
+  res.json(req.report || null);
+};
+exports.create_report = function(req, res) {
+  var report = new Userreport(req.body);
+  report.save(function(err) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(report);
+    }
+  });
+};
+exports.update_report = function (req, res) {
+  var report = req.report;
+
+  report = _.extend(report, req.body);
+  report.save()
+    .then(_report => {
+      res.jsonp(_report);
+    }, handleError);
+
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
+};
+exports.delete_report = function (req, res) {
+  res.json(req.report || null);
+};
 /**
  * Get polls of user for activity
  */

@@ -18,6 +18,7 @@
     'BookmarksService',
     'CategorysService',
     'PollreportsService',
+    'Userreport',
     'ViewsService',
     'PollsApi',
     'VotesApi',
@@ -41,6 +42,7 @@
     Bookmarks,
     Categorys,
     Pollreports,
+    Userreport,
     Views,
     PollsApi,
     VotesApi,
@@ -68,6 +70,20 @@
           .catch(err => {
             reject(err);
           });
+      });
+    };
+    this.count_up_view_profile = report => {
+      return new Promise((resolve, reject) => {
+        if (report._id) {
+          report.viewCnt += 1;
+          var rs_report = new Userreport(report);
+          rs_report.$update();
+        } else {
+          var rs_report = new Userreport({ user: Authentication.user._id });
+          rs_report.viewCnt = 1;
+          rs_report.$save();
+        }
+        resolve();
       });
     };
 

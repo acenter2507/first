@@ -7,6 +7,11 @@ module.exports = function (app) {
   // Setting up the users profile api
   app.route('/api/users/me').get(users.me);
   app.route('/api/users').put(users.update);
+  app.route('/api/userreports')
+    .post(users.create_report);
+  app.route('/api/userreports/:userreportId')
+    .get(users.read_report)
+    .put(users.update_report);
   app.route('/api/users/accounts').delete(users.removeOAuthProvider);
   app.route('/api/users/password').post(users.changePassword);
   app.route('/api/users/picture').post(users.changeProfilePicture);
@@ -27,4 +32,5 @@ module.exports = function (app) {
 
   // Finish by binding the user middleware
   app.param('userId', users.userByID);
+  app.param('userreportId', users.reportByID);
 };

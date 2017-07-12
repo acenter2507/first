@@ -13,7 +13,7 @@ angular.module('users').factory('Users', ['$resource',
 
 angular.module('users').factory('Userreport', ['$resource',
   function ($resource) {
-    return $resource('api/userreports', {}, {
+    return $resource('api/userreports/:userreportId', {}, {
       update: {
         method: 'PUT'
       }

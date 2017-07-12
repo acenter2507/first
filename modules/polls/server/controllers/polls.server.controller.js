@@ -216,7 +216,7 @@ exports.delete = function(req, res) {
       return Polluser.remove({ poll: poll._id });
     }, handleError)
     .then(() => {
-      return Userreport.countDownPoll(poll.user);
+      return Userreport.countDownPoll(poll.user._id);
     }, handleError)
     .then(() => {
       res.jsonp(poll);

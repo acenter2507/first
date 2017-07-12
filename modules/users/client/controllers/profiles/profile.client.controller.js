@@ -20,7 +20,11 @@ angular.module('users').controller('ProfileController', [
       get_user_report();
       if ($scope.isLogged && !$scope.isCurrentOwner) {
         var timer = $timeout(count_up_view_profile, 30000);
+        $scope.$on('$destroy', () => {
+          $timeout.cancel(timer);
+        });
       }
+
     }
 
     function get_user_report() {

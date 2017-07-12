@@ -161,6 +161,7 @@ a:hover .header-profile-image {
   border-radius: 0;
   border: none;
   font-weight: normal;
+  padding: 8px 12px;
 }
 .btn:hover,
 .btn:focus {

@@ -227,7 +227,18 @@
         toast.error('You are not authorized.', 'Error!');
         return;
       }
-      if ($window.confirm('Are you sure you want to delete?')) {
+      $scope.message_title = 'Delete poll!';
+      $scope.message_content = 'Are you sure you want to delete this poll?';
+      $scope.dialog_type = 3;
+      $scope.buton_label = 'delete';
+      dialog.openConfirm({
+        scope: $scope,
+        templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
+      }).then(confirm => {
+        handle_delete();
+      }, reject => {
+      });
+      function handle_delete() {
         vm.polls = _.without(vm.polls, poll);
         Action.delete_poll(poll);
       }
@@ -279,34 +290,6 @@
     };
     vm.load_new = () => {
       $state.reload();
-      // var tmp_list = _.clone(vm.new_polls);
-      // vm.new_polls = [];
-      // var tmp_polls = [];
-      // angular.forEach(tmp_list, (item, index) => {
-      //   var _poll = {};
-      //   Action.get_poll_http(item)
-      //     .then(res => {
-      //       _poll = res.data || {};
-      //       var promises = [];
-      //       _poll.isCurrentUserOwner = vm.isLogged && vm.authentication.user._id === _poll.user._id;
-      //       promises.push(get_poll_report(_poll));
-      //       promises.push(get_opts(_poll));
-      //       promises.push(get_owner_follow(_poll));
-      //       promises.push(get_reported(_poll));
-      //       promises.push(get_bookmarked(_poll));
-      //       return Promise.all(promises);
-      //     })
-      //     .then(poll => {
-      //       if (_poll._id) {
-      //         tmp_polls.push(_poll);
-      //       }
-      //     })
-      //     .catch(err => {
-      //       toast.error(err.message, 'Error!');
-      //     });
-      // });
-      // vm.polls = _.union(vm.polls, tmp_polls);
-      // $scope.$apply();
     };
     vm.themes = [{
       name: 'Default Theme',

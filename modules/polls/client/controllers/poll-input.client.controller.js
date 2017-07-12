@@ -71,8 +71,8 @@
         userId: vm.authentication.user._id
       });
       Socket.on('poll_delete', res => {
-        alert('This poll has been deleted. Please back to list screen.');
-        $state.go('poll.list');
+        toast.error('This poll has been deleted.', 'Error!');
+        $state.go('polls.list');
       });
       Socket.on('opts_request', res => {
         get_opts();

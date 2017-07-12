@@ -167,7 +167,7 @@
           });
       });
       Socket.on('poll_delete', res => {
-        alert('This poll has been deleted by owner. Please back to list screen.');
+        toast.error('This poll has been deleted.', 'Error!');
         $state.go('polls.list');
       });
       Socket.on('poll_update', res => {

@@ -116,7 +116,16 @@
     }
     // Function
     vm.remove = () => {
-      if ($window.confirm('Are you sure you want to delete?')) {
+      $scope.message_title = 'Delete poll!';
+      $scope.message_content = 'Are you sure you want to delete?';
+      dialog.openConfirm({
+        scope: $scope,
+        templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
+      }).then(confirm => {
+        handle_delete();
+      }, reject => {
+      });
+      function handle_delete() {
         vm.poll.$remove(() => {
           Socket.emit('poll_delete', { pollId: vm.poll._id });
           $state.go('polls.list');
@@ -129,15 +138,25 @@
         toast.error('You have not entered enough information.', 'Error!');
         return;
       }
-
-      vm.poll.opts = vm.opts;
-      Action.save_poll(vm.poll)
-        .then(res => {
-          $state.go('polls.view', { pollId: res._id });
-        })
-        .catch(err => {
-          toast.error(err.message, 'Error!');
-        });
+      $scope.message_title = 'Save poll!';
+      $scope.message_content = 'You want to save a private poll?';
+      dialog.openConfirm({
+        scope: $scope,
+        templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
+      }).then(confirm => {
+        handle_save();
+      }, reject => {
+      });
+      function handle_save() {
+        vm.poll.opts = vm.opts;
+        Action.save_poll(vm.poll)
+          .then(res => {
+            $state.go('polls.view', { pollId: res._id });
+          })
+          .catch(err => {
+            toast.error(err.message, 'Error!');
+          });
+      }
     };
 
     vm.validateCategory = () => {
@@ -159,9 +178,15 @@
       if (angular.equals(vm.poll, vm.bk_poll)) {
         handle_discard();
       } else {
-        if ($window.confirm('Are you sure you want to discard?')) {
+        $scope.message_title = 'Discard poll!';
+        $scope.message_content = 'Are you sure you want to discard?';
+        dialog.openConfirm({
+          scope: $scope,
+          templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
+        }).then(confirm => {
           handle_discard();
-        }
+        }, reject => {
+        });
       }
     };
     function handle_discard() {
@@ -228,8 +253,5 @@
       }
       opt_aside.$promise.then(opt_aside.hide);
     };
-
-    // Image upload
-
   }
 })();

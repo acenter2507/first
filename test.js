@@ -23,7 +23,7 @@ app.init(function () {
   - Các thao tác: unfollow, follow, bookmark => done
 2. Tổng thể
   - Edit profile => done
-  - Upload ảnh + chèn vào editor poll, options
+  - Upload ảnh + chèn vào editor poll, options => done
   - Message thông báo => done
   - Chức năng nhập lý do khi report
   - Đếm view poll, poll user đã view
@@ -33,6 +33,7 @@ app.init(function () {
   - Chức năng activity: những hoạt động đang diễn ra
   - Đếm và quản lý số lần bị report của user
   - Chức năng report comment
+  - Share mạng xã hội
 */
 // 1. Khi người vote là guest thì không push socket được. => done
 // 2. Sửa các progressbar trong màn hình detail. => done

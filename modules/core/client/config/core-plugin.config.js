@@ -19,8 +19,8 @@ angular.module('core').config(['toastrConfig',
 
 angular.module('core').config(['$provide',
   function ($provide) {
-    $provide.decorator('taOptions', ['taRegisterTool', 'ngDialog', '$delegate',
-      function (taRegisterTool, dialog, taOptions) {
+    $provide.decorator('taOptions', ['taRegisterTool', 'taToolFunctions', 'ngDialog', '$delegate',
+      function (taRegisterTool, taToolFunctions, dialog, taOptions) {
         // $delegate is the taOptions we are decorating
         // here we override the default toolbars specified in taOptions.
         taOptions.toolbar = [

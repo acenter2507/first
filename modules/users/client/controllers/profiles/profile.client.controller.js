@@ -26,7 +26,7 @@ angular.module('users').controller('ProfileController', [
     function get_user_report() {
       Action.get_user_report($scope.profile._id)
         .then(res => {
-          $scope.report = res.data || {};
+          $scope.report = res.data || { viewCnt: 0, pollCnt: 0, cmtCnt: 0 };
           console.log('get_user_report', $scope.report);
         })
         .catch(err => {

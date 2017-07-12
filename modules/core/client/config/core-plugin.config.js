@@ -41,7 +41,7 @@ angular.module('core').config(['$provide',
 
               if (this.files && this.files[0]) {
                 reader.onload = function (e) {
-                  $editor().wrapSelection('insertHtml', '<img src=' + e.target.result + '>', true);
+                  $editor().wrapSelection('insertHtml', '<img src=' + e.target.result + '><br>', true);
                 };
                 reader.readAsDataURL(this.files[0]);
               }

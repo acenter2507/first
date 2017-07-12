@@ -394,6 +394,7 @@ a:hover .header-profile-image {
 }
 .ngdialog.ngdialog-theme-default .ngdialog-content {
   border-radius: 0px;
+  background-color: #fff;
 }
 .highlight-text {
   color: #267ED5;

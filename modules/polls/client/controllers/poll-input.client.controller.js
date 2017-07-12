@@ -120,6 +120,8 @@
     vm.remove = () => {
       $scope.message_title = 'Delete poll!';
       $scope.message_content = 'Are you sure you want to delete?';
+      $scope.dialog_type = 3;
+      $scope.buton_label = 'Delete';
       dialog.openConfirm({
         scope: $scope,
         templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
@@ -142,6 +144,8 @@
       }
       $scope.message_title = 'Save poll!';
       $scope.message_content = 'You want to save a private poll?';
+      $scope.dialog_type = 1;
+      $scope.buton_label = 'Save';
       dialog.openConfirm({
         scope: $scope,
         templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
@@ -182,6 +186,8 @@
       } else {
         $scope.message_title = 'Discard poll!';
         $scope.message_content = 'Are you sure you want to discard?';
+        scope.dialog_type = 2;
+        $scope.buton_label = 'Discard';
         dialog.openConfirm({
           scope: $scope,
           templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
@@ -216,7 +222,18 @@
       opt_aside.$promise.then(opt_aside.show);
     };
     vm.remove_opt = opt => {
-      if ($window.confirm('Are you sure you want to remove?')) {
+      $scope.message_title = 'Delete option!';
+      $scope.message_content = 'Are you sure you want to delete this option?';
+      scope.dialog_type = 3;
+      $scope.buton_label = 'Delete';
+      dialog.openConfirm({
+        scope: $scope,
+        templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
+      }).then(confirm => {
+        handle_delete();
+      }, reject => {
+      });
+      function handle_delete() {
         if (opt._id) {
           var _opt = new Opts(opt);
           _opt.$remove(() => {
@@ -229,7 +246,18 @@
       }
     };
     vm.approve_opt = opt => {
-      if ($window.confirm('Are you sure you want to approve?')) {
+      $scope.message_title = 'Approve option!';
+      $scope.message_content = 'Are you sure you want to approve this option?';
+      scope.dialog_type = 1;
+      $scope.buton_label = 'Approve';
+      dialog.openConfirm({
+        scope: $scope,
+        templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
+      }).then(confirm => {
+        handle_approve();
+      }, reject => {
+      });
+      function handle_approve() {
         opt.status = 1;
         var _opt = new Opts(opt);
         _opt.$update(() => {
@@ -239,7 +267,18 @@
       }
     };
     vm.reject_opt = opt => {
-      if ($window.confirm('Are you sure you want to reject?')) {
+      $scope.message_title = 'Reject option!';
+      $scope.message_content = 'Are you sure you want to reject this option?';
+      scope.dialog_type = 2;
+      $scope.buton_label = 'Reject';
+      dialog.openConfirm({
+        scope: $scope,
+        templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
+      }).then(confirm => {
+        handle_reject();
+      }, reject => {
+      });
+      function handle_reject() {
         opt.status = 3;
         var _opt = new Opts(opt);
         _opt.$update($state.reload());

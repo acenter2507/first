@@ -2,7 +2,9 @@
   <h3 class="confirmation-title"><i class="fa fa-exclamation-triangle warning-text"></i> {{message_title}}</h3>
   <span>{{message_content}}</span>
   <div class="ngdialog-buttons mg20t">
-    <button class="btn btn-danger pull-right" ng-click="confirm(confirmValue)">Delete</button>
+    <button ng-if="dialog_type === 1" class="btn btn-primary pull-right" ng-click="confirm(confirmValue)">{{buton_label}}</button>
+    <button ng-if="dialog_type === 2" class="btn btn-warning pull-right" ng-click="confirm(confirmValue)">{{buton_label}}</button>
+    <button ng-if="dialog_type === 3" class="btn btn-danger pull-right" ng-click="confirm(confirmValue)">{{buton_label}}</button>
     <button class="btn btn-default pull-right mg5r" ng-click="closeThisDialog()">Cancel</button>
   </div>
 </div>

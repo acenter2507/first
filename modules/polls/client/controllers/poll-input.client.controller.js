@@ -190,7 +190,7 @@
       } else {
         $scope.message_title = 'Discard poll!';
         $scope.message_content = 'Are you sure you want to discard?';
-        scope.dialog_type = 2;
+        $scope.dialog_type = 2;
         $scope.buton_label = 'Discard';
         dialog.openConfirm({
           scope: $scope,
@@ -228,7 +228,7 @@
     vm.remove_opt = opt => {
       $scope.message_title = 'Delete option!';
       $scope.message_content = 'Are you sure you want to delete this option?';
-      scope.dialog_type = 3;
+      $scope.dialog_type = 3;
       $scope.buton_label = 'Delete';
       dialog.openConfirm({
         scope: $scope,
@@ -252,7 +252,7 @@
     vm.approve_opt = opt => {
       $scope.message_title = 'Approve option!';
       $scope.message_content = 'Are you sure you want to approve this option?';
-      scope.dialog_type = 1;
+      $scope.dialog_type = 1;
       $scope.buton_label = 'Approve';
       dialog.openConfirm({
         scope: $scope,
@@ -273,7 +273,7 @@
     vm.reject_opt = opt => {
       $scope.message_title = 'Reject option!';
       $scope.message_content = 'Are you sure you want to reject this option?';
-      scope.dialog_type = 2;
+      $scope.dialog_type = 2;
       $scope.buton_label = 'Reject';
       dialog.openConfirm({
         scope: $scope,

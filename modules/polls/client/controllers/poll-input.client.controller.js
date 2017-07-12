@@ -228,5 +228,8 @@
       }
       opt_aside.$promise.then(opt_aside.hide);
     };
+
+    // Image upload
+
   }
 })();

@@ -13,6 +13,7 @@
     '$bsModal',
     '$bsAside',
     '$timeout',
+    '$interval',
     'Remaining',
     'Action',
     'toastr',
@@ -29,6 +30,7 @@
     $bsModal,
     $bsAside,
     $timeout,
+    $interval,
     Remaining,
     Action,
     toast,
@@ -87,7 +89,12 @@
       if (!vm.poll._id) {
         $state.go('polls.list');
       }
-      get_info_poll();
+      get_info_poll()
+        .then(() => {
+          return $interval(() => {
+            Action.count_up_poll_view(vm.poll.report);
+          }, 30000);
+        });
       get_owner_info();
 
       if (!vm.isClosed && vm.poll.close) {

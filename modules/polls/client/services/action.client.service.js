@@ -129,6 +129,19 @@
           });
       });
     };
+    this.count_up_poll_view = report => {
+      return new Promise((resolve, reject) => {
+        report.viewCnt += 1;
+        var rs_report = new Reports(report);
+        rs_report.$update(successCb, errorCb);
+        function successCb(res) {
+          resolve(res);
+        }
+        function errorCb(err) {
+          reject(err);
+        }
+      });
+    };
     // api get comments
     this.get_cmts = (pollId, _page) => {
       return new Promise((resolve, reject) => {
@@ -155,10 +168,10 @@
         if (cmt._id) {
           rs_cmt.isEdited = true;
           rs_cmt.updated = new Date();
-          promise = rs_cmt.$update(successCb, errorCb);
+          rs_cmt.$update(successCb, errorCb);
         } else {
           rs_cmt.poll = pollId;
-          promise = rs_cmt.$save(successCb, errorCb);
+          rs_cmt.$save(successCb, errorCb);
         }
         function successCb(res) {
           Socket.emit('cmt_add', {

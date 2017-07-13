@@ -70,22 +70,20 @@
           <span class="notif-number" ng-bind="uncheckNotifs" ng-show="uncheckNotifs > 0"></span>
         </a>
         <ul class="dropdown-menu notifis-list" role="menu">
-          <a ng-repeat="notif in notifs">
-            <a ui-sref="polls.view({pollId: notif.poll._id})">
-              <div class="user-avatar pull-left">
-                <img src="{{notif.from.profileImageURL}}" alt="{{notif.from.displayName}}">
-              </div>
-              <span class="pull-left">
-                <a class="undecorated-link" ui-sref="profile.info({userId: vm.poll.user._id})" ng-bind="notif.from.displayName"></a>
-                <small>{{notif.content}}</small>
-                <span>{{notif.poll.title}}</span>
-              </span>
-            </a>
+          <a ng-repeat="notif in notifs" ui-sref="polls.view({pollId: notif.poll._id})" class="list-group-item">
+            <div class="user-avatar pull-left">
+              <img src="{{notif.from.profileImageURL}}" alt="{{notif.from.displayName}}">
+            </div>
+            <span class="pull-left">
+              <a class="undecorated-link" ui-sref="profile.info({userId: vm.poll.user._id})" ng-bind="notif.from.displayName"></a>
+              <small>{{notif.content}}</small>
+              <span>{{notif.poll.title}}</span>
+            </span>
           </a>
-          <li class="divider"></li>
+          <!--<li class="divider"></li>
           <li>
             <a ui-sref="notifs.list" target="_self">See all notifications</a>
-          </li>
+          </li>-->
         </ul>
       </li>
     </ul>

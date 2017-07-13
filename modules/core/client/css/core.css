@@ -67,6 +67,9 @@ a.notifis-list-item {
   display: block;
   padding: 4px 12px;
 }
+a.notifis-list-item:not(:last-child) {
+  border-bottom: 1px solid #999;
+}
 a.notifis-list-item:hover,
 a.notifis-list-item:focus {
   text-decoration: none;

@@ -47,7 +47,7 @@
         }
       })
       .state('polls.view', {
-        url: '/:pollId?notifId',
+        url: '/:pollId?notifiId',
         views: {
           '': {
             templateUrl: 'modules/polls/client/views/view-poll.client.view.html',

@@ -9,6 +9,7 @@
     '$window',
     'Authentication',
     'pollResolve',
+    'notifResolve',
     'Socket',
     '$bsModal',
     '$bsAside',
@@ -26,6 +27,7 @@
     $window,
     Authentication,
     poll,
+    notif,
     Socket,
     $bsModal,
     $bsAside,
@@ -45,7 +47,7 @@
     console.log('pollId', $stateParams.pollId);
     console.log('notif', $stateParams.notif);
     console.log('notif', $state.params.notif);
-    // console.log(notif);
+    console.log(notif);
     // Options variable
     vm.opts = [];
     vm.tmp_opt = {};

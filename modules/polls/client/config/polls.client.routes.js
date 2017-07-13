@@ -54,7 +54,8 @@
             controller: 'PollsController',
             controllerAs: 'vm',
             resolve: {
-              pollResolve: getPoll
+              pollResolve: getPoll,
+              notifResolve: getNotif
             },
             data: {
               pageTitle: 'Poll {{ pollResolve.name }}'
@@ -77,7 +78,13 @@
       pollId: $stateParams.pollId
     }).$promise;
   }
+  getNotif.$inject = ['$stateParams', 'PollsService'];
 
+  function getNotif($stateParams, NotifsService) {
+    return $stateParams.notif ? NotifsService.get({
+      notifId: $stateParams.notif
+    }).$promise : null;
+  }
   newPoll.$inject = ['PollsService'];
 
   function newPoll(PollsService) {

@@ -219,6 +219,9 @@ exports.delete = function(req, res) {
       return Userreport.countDownPoll(poll.user);
     }, handleError)
     .then(() => {
+      return View.remove({ poll: poll._id });
+    }, handleError)
+    .then(() => {
       res.jsonp(poll);
     }, handleError);
 

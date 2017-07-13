@@ -10,6 +10,7 @@ var path = require('path'),
   Pollreport = mongoose.model('Pollreport'),
   Cmtlike = mongoose.model('Cmtlike'),
   Polluser = mongoose.model('Polluser'),
+  Userreport = mongoose.model('Userreport'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 

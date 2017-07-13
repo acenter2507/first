@@ -6,6 +6,7 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Tag = mongoose.model('Tag'),
+  Polltag = mongoose.model('Polltag'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 
@@ -66,15 +67,19 @@ exports.update = function(req, res) {
 exports.delete = function(req, res) {
   var tag = req.tag;
 
-  tag.remove(function(err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
+  tag.remove()
+    .then(() => {
+      return Polltag.remove({ tag: tag._id });
+    }, handleError)
+    .then(() => {
       res.jsonp(tag);
-    }
-  });
+    }, handleError);
+    
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 };
 
 /**

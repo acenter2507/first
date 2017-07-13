@@ -26,14 +26,18 @@ app.init(function () {
   - Upload ảnh + chèn vào editor poll, options => done
   - Message thông báo => done
   - Đếm view poll, poll user đã view => done
-  - Đếm view profile -> Còn phần đếm số comment của 1 user
-  - Chức năng private và share link
-  - Trigger khi xóa: poll, option, vote, comment => Xong poll, vote, comment
+  - Đếm view profile -> done
+  - Trigger khi xóa: poll, option, vote, comment => done
+  - Test lại all case socket
+
   - Chức năng activity: những hoạt động đang diễn ra
+
+  - Chức năng nhập lý do khi report
   - Đếm và quản lý số lần bị report của user
   - Chức năng report comment
+  
   - Share mạng xã hội
-  - Chức năng nhập lý do khi report
+  - Chức năng private và share link
 */
 // 1. Khi người vote là guest thì không push socket được. => done
 // 2. Sửa các progressbar trong màn hình detail. => done

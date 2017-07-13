@@ -44,6 +44,7 @@
     vm.form = {};
     console.log('pollId', $stateParams.pollId);
     console.log('notifiId', $stateParams.notifiId);
+    console.log('notifiId', $state.params.notifiId);
     // console.log(notif);
     // Options variable
     vm.opts = [];

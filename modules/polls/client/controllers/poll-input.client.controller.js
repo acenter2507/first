@@ -244,7 +244,7 @@
           var _opt = new Opts(opt);
           _opt.$remove(() => {
             Socket.emit('opts_update', { pollId: vm.poll._id });
-            $state.reload();
+            get_opts();
           });
         } else {
           vm.opts = _.without(vm.opts, opt);
@@ -268,7 +268,7 @@
         var _opt = new Opts(opt);
         _opt.$update(() => {
           Socket.emit('opts_update', { pollId: vm.poll._id });
-          $state.reload();
+          get_opts();
         });
       }
     };

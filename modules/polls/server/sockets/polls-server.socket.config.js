@@ -129,7 +129,6 @@ module.exports = function (io, socket) {
   });
   // On comment deleted
   socket.on('cmt_del', req => {
-    console.log('Has comment deleted: ', req);
     io.sockets.in(req.pollId).emit('cmt_del', req.cmtId);
   });
   // On like poll

@@ -47,14 +47,15 @@
         }
       })
       .state('polls.view', {
-        url: '/:pollId',
+        url: '/:pollId/:notifiId',
         views: {
           '': {
             templateUrl: 'modules/polls/client/views/view-poll.client.view.html',
             controller: 'PollsController',
             controllerAs: 'vm',
             resolve: {
-              pollResolve: getPoll
+              pollResolve: getPoll,
+              notifiResolve: getNotifi
             },
             data: {
               pageTitle: 'Poll {{ pollResolve.name }}'
@@ -76,6 +77,15 @@
     return PollsService.get({
       pollId: $stateParams.pollId
     }).$promise;
+  }
+
+  getNotifi.$inject = ['$stateParams', 'NotifisService'];
+
+  function getNotifi($stateParams, PollsService) {
+    const notifiId = $stateParams.notifiId;
+    return notifiId ? NotifisService.get({
+      notifiId: $stateParams.notifiId
+    }).$promise : null;
   }
 
   newPoll.$inject = ['PollsService'];

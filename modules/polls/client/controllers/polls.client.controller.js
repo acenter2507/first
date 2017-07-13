@@ -17,7 +17,8 @@
     'Remaining',
     'Action',
     'toastr',
-    'ngDialog'
+    'ngDialog',
+    '$stateParams'
   ];
 
   function PollsController(
@@ -34,7 +35,8 @@
     Remaining,
     Action,
     toast,
-    dialog
+    dialog,
+    $stateParams
   ) {
     var vm = this;
     vm.authentication = Authentication;
@@ -42,7 +44,9 @@
 
     vm.poll = poll;
     vm.form = {};
-    console.log(notif);
+    console.log('pollId', $stateParams.pollId);
+    console.log('notifiId', $stateParams.notifiId);
+    // console.log(notif);
     // Options variable
     vm.opts = [];
     vm.tmp_opt = {};

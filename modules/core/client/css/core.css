@@ -63,6 +63,7 @@ a:hover .header-profile-image {
 .notifis-list li a {
   position: relative;
   width: 100%;
+  display: block;
 }
 .error-text {
   display: none;

@@ -26,10 +26,10 @@ exports.create = function (req, res) {
     .then(_cmt => {
       cmt = _cmt;
       // Tăng số comemnt trong reprort
-      return Pollreport.countUpCmt(_cmt.poll);
+      return Pollreport.countUpCmt(cmt.poll);
     }, handleError)
     .then(report => {
-      return Userreport.countUpCmt(_cmt.user);
+      return Userreport.countUpCmt(cmt.user);
     }, handleError)
     .then(report => {
       // Tạo record follow

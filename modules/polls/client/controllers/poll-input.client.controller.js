@@ -241,14 +241,12 @@
       }, reject => {
       });
       function handle_delete() {
+        vm.opts = _.without(vm.opts, opt);
         if (opt._id) {
           var _opt = new Opts(opt);
           _opt.$remove(() => {
             Socket.emit('opts_update', { pollId: vm.poll._id });
-            get_opts();
           });
-        } else {
-          vm.opts = _.without(vm.opts, opt);
         }
       }
     };

@@ -93,6 +93,7 @@
       Action.get_opts(vm.poll._id)
         .then(res => {
           vm.opts = res.data || [];
+          $scope.$apply();
         })
         .catch(err => {
           toast.error(err.message, 'Error!');

@@ -67,6 +67,12 @@ a.notifis-list-item {
   display: block;
   padding: 6px 12px;
 }
+a.notifis-list-item:hover,
+a.notifis-list-item:focus {
+  text-decoration: none;
+  background-color: #f5f5f5;
+}
+
 .error-text {
   display: none;
 }

@@ -66,7 +66,6 @@
       if (!Socket.socket) {
         Socket.connect();
       }
-      console.log()
       Socket.emit('subscribe_poll', {
         pollId: vm.poll._id,
         userId: vm.authentication.user._id

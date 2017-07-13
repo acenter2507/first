@@ -20,7 +20,6 @@ var path = require('path'),
 module.exports = function (io, socket) {
   // On subscribe
   socket.on('subscribe_poll', req => {
-    console.log('Has user subcribe poll');
     socket.join(req.pollId);
   });
   socket.on('subscribe_public', req => {
@@ -130,6 +129,7 @@ module.exports = function (io, socket) {
   });
   // On comment deleted
   socket.on('cmt_del', req => {
+    console.log('Has comment deleted: ', req);
     io.sockets.in(req.pollId).emit('cmt_del', req.cmtId);
   });
   // On like poll
@@ -161,7 +161,6 @@ module.exports = function (io, socket) {
   });
   // On delete poll
   socket.on('opts_request', req => {
-    console.log('Has option request: ', req);
     io.sockets.in(req.pollId).emit('opts_request');
   });
 

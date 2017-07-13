@@ -28,8 +28,9 @@ app.init(function () {
   - Đếm view poll, poll user đã view => done
   - Đếm view profile -> done
   - Trigger khi xóa: poll, option, vote, comment => done
-  - Test lại all case socket
-
+  - Test lại all case socket => done
+  - Notifis 
+  
   - Chức năng activity: những hoạt động đang diễn ra
 
   - Chức năng nhập lý do khi report

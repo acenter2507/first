@@ -70,7 +70,7 @@
           <span class="notif-number" ng-bind="uncheckNotifs" ng-show="uncheckNotifs > 0"></span>
         </a>
         <ul class="dropdown-menu notifis-list" role="menu">
-          <li ng-repeat="notif in notifs">
+          <a ng-repeat="notif in notifs">
             <a ui-sref="polls.view({pollId: notif.poll._id})">
               <div class="user-avatar pull-left">
                 <img src="{{notif.from.profileImageURL}}" alt="{{notif.from.displayName}}">
@@ -81,7 +81,7 @@
                 <span>{{notif.poll.title}}</span>
               </span>
             </a>
-          </li>
+          </a>
           <li class="divider"></li>
           <li>
             <a ui-sref="notifs.list" target="_self">See all notifications</a>

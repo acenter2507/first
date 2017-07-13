@@ -20,31 +20,27 @@ var path = require('path'),
 module.exports = function (io, socket) {
   // On subscribe
   socket.on('subscribe_poll', req => {
-    console.log('Has user subscribe poll');
     socket.join(req.pollId);
   });
   socket.on('subscribe_public', req => {
-    console.log('Has user subscribe public');
     socket.join('public');
   });
   // On unsubscribe
   socket.on('unsubscribe_poll', req => {
-    console.log('Has user unstb poll');
     socket.leave(req.pollId);
   });
   // On unsubscribe
   socket.on('unsubscribe_public', req => {
-    console.log('Has user unstb public room');
     socket.leave('public');
   });
 
   // On like poll
   socket.on('poll_like', req => {
-    console.log('Has poll like event: ', req);
     io.sockets.in(req.pollId).emit('poll_like', req.report);
     if (req.type === 0) {
       return;
     }
+    // Create notifis
     var action = (req.type === 1) ? 'liked' : 'disliked';
     var notif = new Notif({
       from: req.from,
@@ -61,22 +57,18 @@ module.exports = function (io, socket) {
   });
   // On vote poll
   socket.on('poll_vote', req => {
-    console.log('Has poll vote event');
     io.sockets.in(req.pollId).emit('poll_vote');
   });
   // On delete poll
   socket.on('poll_delete', req => {
-    console.log('Has poll delete event');
     io.sockets.in(req.pollId).emit('poll_delete');
   });
   // On delete poll
   socket.on('poll_update', req => {
-    console.log('Has poll update event');
     io.sockets.in(req.pollId).emit('poll_update');
   });
   // On delete poll
   socket.on('poll_create', req => {
-    console.log('Has poll poll_create event');
     io.sockets.in('public').emit('poll_create');
   });
 
@@ -168,6 +160,7 @@ module.exports = function (io, socket) {
   });
   // On delete poll
   socket.on('opts_request', req => {
+    console.log('Has option request: ', req);
     io.sockets.in(req.pollId).emit('opts_request');
   });
 

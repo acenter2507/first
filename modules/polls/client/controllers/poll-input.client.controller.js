@@ -75,6 +75,7 @@
         $state.go('polls.list');
       });
       Socket.on('opts_request', res => {
+        console.log('Has request', res);
         get_opts();
       });
       $scope.$on('$destroy', function () {

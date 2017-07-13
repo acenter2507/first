@@ -240,7 +240,7 @@
       return new Promise((resolve, reject) => {
         var rs_cmt = new Cmts(cmt);
         rs_cmt.$remove(() => {
-          Socket.emit('cmt_del', { pollId: cmt.poll, cmtId: cmt._id });
+          Socket.emit('cmt_del', { pollId: cmt.poll._id, cmtId: cmt._id });
           return resolve();
         });
       });

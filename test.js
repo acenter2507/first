@@ -30,8 +30,9 @@ app.init(function () {
   - Trigger khi xóa: poll, option, vote, comment => done
   - Test lại all case socket => done
   - Notifis 
-  
+
   - Chức năng activity: những hoạt động đang diễn ra
+  - Hoàn thiện màn hình home
 
   - Chức năng nhập lý do khi report
   - Đếm và quản lý số lần bị report của user

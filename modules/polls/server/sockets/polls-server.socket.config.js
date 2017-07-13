@@ -38,23 +38,61 @@ module.exports = function (io, socket) {
   socket.on('poll_like', req => {
     io.sockets.in(req.pollId).emit('poll_like', req.report);
     if (req.type === 0) {
+      Notif.remove({ poll: req.pollId, type: { $in: [0, 1] }, from: req.from });
       return;
     }
     // Create notifis
     var action = (req.type === 1) ? 'liked' : 'disliked';
-    // Notif.find({ poll: req.pollId, type: 0, status: 0 });
-    var notif = new Notif({
-      from: req.from,
-      to: req.to,
-      content: 'has ' + action + ' your poll ',
-      poll: req.pollId
-    });
-    notif.save().then(notif => {
-      var socketIds = _.where(global.socketUsers, { user: req.to });
-      socketIds.forEach(item => {
-        io.sockets.connected[item.socket].emit('notifs', notif._id);
+    var type = req.type - 1;
+    Notif.findOne({ poll: req.pollId, type: { $in: [0, 1] }, from: req.from })
+      .then(_nof => {
+        if (_nof) {
+          if (_nof.type !== type) {
+            _nof.type = type;
+            _nof.status = 0;
+            _nof.save().then(notif => {
+              var socketIds = _.where(global.socketUsers, { user: req.to });
+              socketIds.forEach(item => {
+                io.sockets.connected[item.socket].emit('notifs', notif._id);
+              });
+            });
+          }
+        } else {
+          Notif.findOne({ poll: req.pollId, type: type, status: 0 })
+            .then(_nof => {
+              if (_nof) {
+                _nof.from = req.from;
+                _nof.count += 1;
+                _nof.content = 'and ' + _nof.count + ' other people recently ' + action + ' your poll:';
+                _nof.save().then(notif => {
+                  var socketIds = _.where(global.socketUsers, { user: req.to });
+                  socketIds.forEach(item => {
+                    io.sockets.connected[item.socket].emit('notifs', notif._id);
+                  });
+                });
+              } else {
+                _nof = new Notif({
+                  from: req.from,
+                  to: req.to,
+                  content: action + ' your poll:',
+                  poll: req.pollId
+                });
+                _nof.save().then(notif => {
+                  var socketIds = _.where(global.socketUsers, { user: req.to });
+                  socketIds.forEach(item => {
+                    io.sockets.connected[item.socket].emit('notifs', notif._id);
+                  });
+                });
+              }
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        }
+      })
+      .catch(err => {
+        console.log(err);
       });
-    });
   });
   // On vote poll
   socket.on('poll_vote', req => {
@@ -165,4 +203,9 @@ module.exports = function (io, socket) {
   });
 
   // io.sockets.connected[socket.id].emit('comment_result', { success: true });
+  function next() {
+    return new Promise((resolve, reject) => {
+      return resolve();
+    });
+  }
 };

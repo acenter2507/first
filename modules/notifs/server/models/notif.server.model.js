@@ -20,7 +20,7 @@ var NotifSchema = new Schema({
   },
   type: {
     type: Number,
-    default: 0 // 0: like poll, 1: reply, 2: comment, 3: inform
+    default: 0 // 0: like poll, 1: dislike, 2: reply, 3: comment, 4: inform
   },
   content: {
     type: String,
@@ -29,6 +29,10 @@ var NotifSchema = new Schema({
     trim: true
   },
   status: {
+    type: Number,
+    default: 0
+  },
+  count: {
     type: Number,
     default: 0
   },

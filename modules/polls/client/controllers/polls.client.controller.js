@@ -640,6 +640,7 @@
       }, reject => {
       });
       function handle_delete_cmt() {
+        vm.cmts = _.without(vm.cmts, cmt);
         Action.delete_cmt(cmt);
       }
     };

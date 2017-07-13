@@ -287,7 +287,9 @@
       function handle_reject() {
         opt.status = 3;
         var _opt = new Opts(opt);
-        _opt.$update($state.reload());
+        _opt.$update(() => {
+          get_opts();
+        });
       }
     };
     vm.save_opt = isValid => {

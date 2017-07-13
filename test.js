@@ -26,9 +26,9 @@ app.init(function () {
   - Upload ảnh + chèn vào editor poll, options => done
   - Message thông báo => done
   - Đếm view poll, poll user đã view => done
-  - Đếm view profile
+  - Đếm view profile -> Còn phần đếm số comment của 1 user
   - Chức năng private và share link
-  - Trigger khi xóa: poll, option, vote, comment
+  - Trigger khi xóa: poll, option, vote, comment => Xong poll, vote, comment
   - Chức năng activity: những hoạt động đang diễn ra
   - Đếm và quản lý số lần bị report của user
   - Chức năng report comment

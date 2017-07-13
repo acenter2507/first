@@ -28,6 +28,9 @@ exports.create = function (req, res) {
       return Pollreport.countUpCmt(_cmt.poll);
     }, handleError)
     .then(report => {
+      return Userreport.countUpCmt(_cmt.user);
+    }, handleError)
+    .then(report => {
       // Tạo record follow
       Polluser.findOne({ poll: cmt.poll, user: cmt.user }).exec((err, _polluser) => {
         if (!_polluser) {
@@ -93,6 +96,9 @@ exports.delete = function (req, res) {
     }, handleError)
     .then(() => {
       return Cmtlike.remove({ cmt: cmt._id });
+    }, handleError)
+    .then(() => {
+      return Userreport.countDownCmt(cmt.user);
     }, handleError)
     .then(() => {
       res.jsonp(cmt);

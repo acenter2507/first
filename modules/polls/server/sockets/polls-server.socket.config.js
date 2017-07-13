@@ -20,6 +20,7 @@ var path = require('path'),
 module.exports = function (io, socket) {
   // On subscribe
   socket.on('subscribe_poll', req => {
+    console.log('Has user subcribe poll');
     socket.join(req.pollId);
   });
   socket.on('subscribe_public', req => {

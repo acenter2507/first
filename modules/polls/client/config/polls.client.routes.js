@@ -78,15 +78,6 @@
     }).$promise;
   }
 
-  getNotifi.$inject = ['$stateParams', 'NotifisService'];
-
-  function getNotifi($stateParams, PollsService) {
-    const notifiId = $stateParams.notifiId;
-    return notifiId ? NotifisService.get({
-      notifiId: $stateParams.notifiId
-    }).$promise : null;
-  }
-
   newPoll.$inject = ['PollsService'];
 
   function newPoll(PollsService) {

@@ -42,6 +42,7 @@ module.exports = function (io, socket) {
     }
     // Create notifis
     var action = (req.type === 1) ? 'liked' : 'disliked';
+    // Notif.find({ poll: req.pollId, type: 0, status: 0 });
     var notif = new Notif({
       from: req.from,
       to: req.to,

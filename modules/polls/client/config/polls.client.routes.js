@@ -47,15 +47,14 @@
         }
       })
       .state('polls.view', {
-        url: '/:pollId/:notifiId',
+        url: '/:pollId',
         views: {
           '': {
             templateUrl: 'modules/polls/client/views/view-poll.client.view.html',
             controller: 'PollsController',
             controllerAs: 'vm',
             resolve: {
-              pollResolve: getPoll,
-              notifiResolve: getNotifi
+              pollResolve: getPoll
             },
             data: {
               pageTitle: 'Poll {{ pollResolve.name }}'

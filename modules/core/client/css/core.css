@@ -67,6 +67,7 @@ a.notifis-list-item {
   height: 60px;
   display: block;
   padding: 4px 12px;
+  line-height: 1.3em;
 }
 a.notifis-list-item:not(:last-child) {
   border-bottom: 1px solid #eee;

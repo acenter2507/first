@@ -46,15 +46,11 @@
   margin-bottom: 5px;
 }
 .activitys {
-  width: 100%;
-  max-height: 380px;
-  overflow: hidden;
-}
-.activity-list {
-  height: 100%;
-  width: 100%;
+  max-height: 385px;
   overflow: auto;
-  padding-right: 17px;
+}
+.activitys::-webkit-scrollbar {
+  display: none;
 }
 .auto-text {
   font-size: 0.8em;

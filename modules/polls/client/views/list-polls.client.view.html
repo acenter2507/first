@@ -137,16 +137,14 @@
     <!-- Hot poll -->
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-lg-push-3 pdn">
       <div class="card activitys" ng-if="vm.activitys.length > 0">
-        <div class="activity-list">
-          <div class="side-list-poll" ng-repeat="activity in vm.activitys">
-            <div class="user-avatar pull-left">
-              <img src="{{activity.profileImageURL}}" alt="{{activity.displayName}}">
-            </div>
-            <small><strong><a ui-sref="profile.info({userId: activity.user})">{{activity.displayName}}</a></strong></small>
-            <small>{{activity.action}}</small>
-            <small><strong><a ui-sref="polls.view({pollId: activity.poll})">{{activity.title}}</a></strong></small>
-            <div class="clearfix"></div>
+        <div class="side-list-poll" ng-repeat="activity in vm.activitys">
+          <div class="user-avatar pull-left">
+            <img src="{{activity.profileImageURL}}" alt="{{activity.displayName}}">
           </div>
+          <small><strong><a ui-sref="profile.info({userId: activity.user})">{{activity.displayName}}</a></strong></small>
+          <small>{{activity.action}}</small>
+          <small><strong><a ui-sref="polls.view({pollId: activity.poll})">{{activity.title}}</a></strong></small>
+          <div class="clearfix"></div>
         </div>
       </div>
       <div class="card">

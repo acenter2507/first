@@ -289,14 +289,21 @@
 .select select:disabled ~ .select__arrow {
   border-top-color: #ccc;
 }
-
+.panel-group:focus {
+  outline: none;
+}
 .custom-panel {
   border: none !important;
+  outline: none;
+}
+.custom-panel:focus {
   outline: none;
 }
 .custom-panel .panel-heading {
   color: #555 !important;
   border-radius: 3px;
+  background-color: #d6d6d6 !important;
+  
 }
 .custom-panel .panel-heading h4 {
   max-width: 100%;

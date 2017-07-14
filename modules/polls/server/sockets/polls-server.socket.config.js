@@ -84,9 +84,6 @@ module.exports = function (io, socket) {
                   });
                 });
               }
-            })
-            .catch(err => {
-              console.log(err);
             });
         }
       })

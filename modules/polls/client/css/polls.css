@@ -306,7 +306,7 @@
   
 }
 .custom-panel .panel-heading h4 {
-  max-width: 100%;
+  width: 100%;
   word-wrap: break-word;
 }
 .custom-panel .panel-heading.public {

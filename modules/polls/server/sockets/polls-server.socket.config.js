@@ -145,10 +145,10 @@ module.exports = function (io, socket) {
               Notif.findOne({ to: polluser.user, type: 2, status: 0, poll: req.pollId })
                 .then(_nof => {
                   if (_nof) {
-                    if (_nof.from !== req.from) {
+                    if (_nof.from.toString() !== req.from) {
                       _nof.from = req.from;
                       _nof.count += 1;
-                      _nof.content = 'and ' + _nof.count + 'other people recently commented on:';
+                      _nof.content = 'and ' + _nof.count + ' other people recently commented on:';
                       _nof.save().then(
                         _notif => {
                           var socketIds = _.where(global.socketUsers, {

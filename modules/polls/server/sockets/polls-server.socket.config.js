@@ -142,7 +142,7 @@ module.exports = function (io, socket) {
           pollusers.forEach((polluser, index) => {
             if (polluser.user.toString() !== req.from.toString()) {
               console.log(polluser);
-              Notif.findOne({ to: polluser.user, type: 2, status: 0, poll: req.pollId })
+              Notif.findOne({ to: polluser.user, type: 3, status: 0, poll: req.pollId })
                 .then(_nof => {
                   if (_nof) {
                     if (_nof.from.toString() !== req.from) {
@@ -164,7 +164,7 @@ module.exports = function (io, socket) {
                       from: req.from,
                       to: polluser.user,
                       content: 'commented on',
-                      type: 2,
+                      type: 3,
                       poll: req.pollId
                     });
                     _nof.save().then(

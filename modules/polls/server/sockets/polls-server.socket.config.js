@@ -56,7 +56,7 @@ module.exports = function (io, socket) {
             _nof.status = 0;
             _nof.save().then(notif => {
               var socketIds = _.where(global.socketUsers, { user: req.to });
-                  console.log('socketIds', socketIds);
+              console.log('socketIds', socketIds);
               socketIds.forEach(item => {
                 io.sockets.connected[item.socket].emit('notifs', notif._id);
               });

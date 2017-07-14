@@ -25,6 +25,11 @@ angular.module('core').controller('HeaderController', [
     $rootScope.$on('loginSuccess', () => {
       init();
     });
+    $rootScope.$on('changeNotif', () => {
+      if ($scope.authentication.user) {
+        loadUncheckNotifs();
+      }
+    });
     // Collapsing the menu after navigation
     $scope.$on('$stateChangeSuccess', function () {
       $scope.isCollapsed = false;
@@ -36,9 +41,6 @@ angular.module('core').controller('HeaderController', [
       if ($scope.authentication.user) {
         loadNotifs(10);
         loadUncheckNotifs();
-        $rootScope.$on('changeNotif', () => {
-          loadUncheckNotifs();
-        });
         initSocket();
       }
     }

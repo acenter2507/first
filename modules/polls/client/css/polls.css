@@ -295,7 +295,7 @@
   outline: none;
 }
 .custom-panel .panel-heading {
-  color: #fff !important;
+  color: #555 !important;
   border-radius: 3px;
 }
 .custom-panel .panel-heading h4 {
@@ -303,10 +303,12 @@
   word-wrap: break-word;
 }
 .custom-panel .panel-heading.public {
+  color: #fff !important;
   background-color: #267ED5 !important;
 }
 .custom-panel .panel-heading.watting {
-  background-color: #f57f17 !important;
+  color: #555 !important;
+  background-color: #FEAF20 !important;
 }
 .custom-panel .panel-body {
   border: none !important;

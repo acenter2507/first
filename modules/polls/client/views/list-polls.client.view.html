@@ -142,9 +142,9 @@
           <div class="user-avatar pull-left">
             <img src="{{activity.profileImageURL}}" alt="{{activity.displayName}}">
           </div>
-          <small><strong><a ui-sref="profile.info({userId: activity.user})">{{activity.displayName}}</a></strong></small>
+          <small><strong><a class="undecorated-link" ui-sref="profile.info({userId: activity.user})">{{activity.displayName}}</a></strong></small>
           <small>{{activity.action}}</small>
-          <small><strong><a ui-sref="polls.view({pollId: activity.poll})">{{activity.title}}</a></strong></small>
+          <small><strong><a class="undecorated-link" ui-sref="polls.view({pollId: activity.poll})">{{activity.title}}</a></strong></small>
           <div class="clearfix"></div>
         </div>
       </div>

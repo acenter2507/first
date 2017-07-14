@@ -32,9 +32,6 @@
   text-justify: inter-word;
   font-size: 1.0em !important;
 }
-.text-body {
-  outline: none;
-}
 .text-body:focus {
   outline: none;
 }
@@ -256,7 +253,6 @@
   width: 100%;
   cursor: pointer;
   padding: 10px;
-  outline: none;
   border: 0;
   border-radius: 3px;
   background: #e6e6e6;
@@ -301,7 +297,6 @@
 }
 .custom-panel {
   border: none !important;
-  outline: none;
 }
 .custom-panel:focus {
   outline: none;
@@ -416,7 +411,6 @@ div.materialpicker-white.selected {
   color: #666;
   text-decoration: none;
   cursor: pointer;
-  outline: none;
   width: 100%;
 }
 

@@ -14,10 +14,6 @@ var NotifSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'User'
   },
-  lastfrom: {
-    type: Schema.ObjectId,
-    ref: 'User'
-  },
   to: {
     type: Schema.ObjectId,
     ref: 'User'

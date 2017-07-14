@@ -38,7 +38,7 @@ module.exports = function (io, socket) {
   socket.on('poll_like', req => {
     io.sockets.in(req.pollId).emit('poll_like', req.report);
     if (req.type === 0) {
-      Notif.findOne({ poll: req.pollId, type: { $in: [0, 1] }, from: req.from })
+      Notif.findOne({ poll: req.pollId, type: { $in: [0, 1] }, from: req.from, count: 0 })
         .then(_nof => {
           _nof.remove();
         });
@@ -50,7 +50,7 @@ module.exports = function (io, socket) {
     Notif.findOne({ poll: req.pollId, type: { $in: [0, 1] }, from: req.from })
       .then(_nof => {
         if (_nof) {
-          if (_nof.type !== type) {
+          if (_nof.type !== type && _nof.count === 0) {
             _nof.type = type;
             _nof.content = action + ' your poll:';
             _nof.status = 0;

@@ -69,7 +69,7 @@ module.exports = function (io, socket) {
                   socketIds.forEach(item => {
                     io.sockets.connected[item.socket].emit('notifs', notif._id);
                   });
-                });
+                }, handlerError);
               } else {
                 _nof = new Notif({
                   from: req.from,
@@ -82,13 +82,10 @@ module.exports = function (io, socket) {
                   socketIds.forEach(item => {
                     io.sockets.connected[item.socket].emit('notifs', notif._id);
                   });
-                });
+                }, handlerError);
               }
-            });
+            }, handlerError);
         }
-      })
-      .catch(err => {
-        console.log(err);
       });
   });
   // On vote poll
@@ -204,5 +201,9 @@ module.exports = function (io, socket) {
     return new Promise((resolve, reject) => {
       return resolve();
     });
+  }
+
+  function handlerError(err) {
+    console.log(err);
   }
 };

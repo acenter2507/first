@@ -32,14 +32,33 @@ exports.signup = function (req, res) {
   user.displayName = user.firstName + ' ' + user.lastName;
 
   // Then save the user
-  user.save()
-    .then(_user => {
+  // user.save()
+  //   .then(_user => {
+  //     user.password = undefined;
+  //     user.salt = undefined;
+  //     var report = new Userreport({ user: _user._id });
+  //     return report.save();
+  //   }, handleError)
+  //   .then(res => {
+  //     req.login(user, function (err) {
+  //       if (err) {
+  //         res.status(400).send(err);
+  //       } else {
+  //         res.json(user);
+  //       }
+  //     });
+  //   }, handleError);
+
+  
+  user.save(function (err) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      // Remove sensitive data before login
       user.password = undefined;
       user.salt = undefined;
-      var report = new Userreport({ user: _user._id });
-      return report.save();
-    }, handleError)
-    .then(res => {
       req.login(user, function (err) {
         if (err) {
           res.status(400).send(err);
@@ -47,17 +66,8 @@ exports.signup = function (req, res) {
           res.json(user);
         }
       });
-    }, handleError);
-  // user.save(function (err) {
-  //   if (err) {
-  //     return res.status(400).send({
-  //       message: errorHandler.getErrorMessage(err)
-  //     });
-  //   } else {
-  //     // Remove sensitive data before login
-  //     user.password = undefined;
-  //     user.salt = undefined;
-
+    }
+  });
       
   //   }
   // });

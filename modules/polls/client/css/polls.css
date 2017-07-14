@@ -309,6 +309,9 @@
   width: 100%;
   word-wrap: break-word;
 }
+.custom-panel .panel-heading h4 a {
+  width: 90%;
+}
 .custom-panel .panel-heading.public {
   color: #fff !important;
   background-color: #267ED5 !important;

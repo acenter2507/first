@@ -49,7 +49,7 @@ exports.signup = function (req, res) {
   //     });
   //   }, handleError);
 
-  
+
   user.save(function (err) {
     if (err) {
       return res.status(400).send({
@@ -57,6 +57,8 @@ exports.signup = function (req, res) {
       });
     } else {
       // Remove sensitive data before login
+      var report = new Userreport({ user: _user._id });
+      report.save();
       user.password = undefined;
       user.salt = undefined;
       req.login(user, function (err) {

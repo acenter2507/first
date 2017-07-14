@@ -122,6 +122,7 @@ module.exports = function (io, socket) {
             _nof = new Notif({
               from: req.from,
               to: req.to,
+              type: 2,
               content: 'replied your comment on:',
               poll: req.pollId
             });

@@ -56,7 +56,7 @@ module.exports = function (io, socket) {
             _nof.status = 0;
             _nof.save().then(notif => {
               var socketIds = _.where(global.socketUsers, { user: req.to });
-              console.log('socketIds', socketIds);
+              console.log('socketIds 1', socketIds);
               socketIds.forEach(item => {
                 io.sockets.connected[item.socket].emit('notifs', notif._id);
               });
@@ -71,7 +71,7 @@ module.exports = function (io, socket) {
                 _nof.content = 'and ' + _nof.count + ' other people recently ' + action + ' your poll:';
                 _nof.save().then(notif => {
                   var socketIds = _.where(global.socketUsers, { user: req.to });
-                  console.log('socketIds', socketIds);
+                  console.log('socketIds 2', socketIds);
                   socketIds.forEach(item => {
                     io.sockets.connected[item.socket].emit('notifs', notif._id);
                   });
@@ -85,7 +85,7 @@ module.exports = function (io, socket) {
                 });
                 _nof.save().then(notif => {
                   var socketIds = _.where(global.socketUsers, { user: req.to });
-                  console.log('socketIds', socketIds);
+                  console.log('socketIds 3', socketIds);
                   socketIds.forEach(item => {
                     io.sockets.connected[item.socket].emit('notifs', notif._id);
                   });

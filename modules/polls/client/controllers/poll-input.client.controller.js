@@ -6,11 +6,13 @@
     .controller('PollInputController', PollInputController);
 
   PollInputController.$inject = [
+    '$rootScope',
     '$scope',
     '$state',
     '$window',
     'Authentication',
     'pollResolve',
+    'notifResolve',
     '$bsModal',
     '$bsAside',
     'OptsService',
@@ -22,11 +24,13 @@
   ];
 
   function PollInputController(
+    $rootScope,
     $scope,
     $state,
     $window,
     Authentication,
     poll,
+    notif,
     $bsModal,
     $bsAside,
     Opts,
@@ -58,6 +62,7 @@
         get_opts();
         get_tags();
       }
+      analysic_nofif();
     }
 
     init();
@@ -87,6 +92,16 @@
       });
     }
 
+    function analysic_nofif() {
+      if (notif) {
+        if (notif.status === 0) {
+          notif.status = 1;
+          notif.$update(() => {
+            $rootScope.$emit('changeNotif');
+          });
+        }
+      }
+    }
     function get_opts() {
       Action.get_opts(vm.poll._id)
         .then(res => {

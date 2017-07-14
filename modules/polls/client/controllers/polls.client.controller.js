@@ -355,11 +355,12 @@
     }
     function analysic_nofif() {
       if (notif) {
-        notif.status = 1;
-        notif.$update(() => {
-          $rootScope.$emit('changeNotif');
-        });
-        
+        if (notif.status === 0) {
+          notif.status = 1;
+          notif.$update(() => {
+            $rootScope.$emit('changeNotif');
+          });
+        }
       }
     }
     function get_like_cmt(cmt) {

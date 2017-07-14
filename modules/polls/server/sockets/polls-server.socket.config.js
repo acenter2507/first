@@ -56,7 +56,6 @@ module.exports = function (io, socket) {
             _nof.status = 0;
             _nof.save().then(notif => {
               var socketIds = _.where(global.socketUsers, { user: req.to });
-              console.log('socketIds 1', socketIds);
               socketIds.forEach(item => {
                 io.sockets.connected[item.socket].emit('notifs', notif._id);
               });
@@ -71,7 +70,6 @@ module.exports = function (io, socket) {
                 _nof.content = 'and ' + _nof.count + ' other people recently ' + action + ' your poll:';
                 _nof.save().then(notif => {
                   var socketIds = _.where(global.socketUsers, { user: req.to });
-                  console.log('socketIds 2', socketIds);
                   socketIds.forEach(item => {
                     io.sockets.connected[item.socket].emit('notifs', notif._id);
                   });
@@ -81,11 +79,11 @@ module.exports = function (io, socket) {
                   from: req.from,
                   to: req.to,
                   content: action + ' your poll:',
-                  poll: req.pollId
+                  poll: req.pollId,
+                  state: 'polls.view'
                 });
                 _nof.save().then(notif => {
                   var socketIds = _.where(global.socketUsers, { user: req.to });
-                  console.log('socketIds 3', socketIds);
                   socketIds.forEach(item => {
                     io.sockets.connected[item.socket].emit('notifs', notif._id);
                   });
@@ -124,7 +122,8 @@ module.exports = function (io, socket) {
               to: req.to,
               type: 2,
               content: 'replied your comment on:',
-              poll: req.pollId
+              poll: req.pollId,
+              state: 'polls.view'
             });
             _nof.save().then(_nof => {
               var socketIds = _.where(global.socketUsers, { user: req.to });
@@ -142,7 +141,6 @@ module.exports = function (io, socket) {
           // Tạo notif cho toàn bộ các member đang theo dõi
           pollusers.forEach((polluser, index) => {
             if (polluser.user.toString() !== req.from.toString()) {
-              console.log(polluser);
               Notif.findOne({ to: polluser.user, type: 3, status: 0, poll: req.pollId })
                 .then(_nof => {
                   if (_nof) {
@@ -166,7 +164,8 @@ module.exports = function (io, socket) {
                       to: polluser.user,
                       content: 'commented on',
                       type: 3,
-                      poll: req.pollId
+                      poll: req.pollId,
+                      state: 'polls.view'
                     });
                     _nof.save().then(
                       _notif => {
@@ -228,7 +227,8 @@ module.exports = function (io, socket) {
             to: req.to,
             content: 'suggested on',
             type: 4,
-            poll: req.pollId
+            poll: req.pollId,
+            state: 'polls.edit'
           });
           _nof.save().then(
             _notif => {

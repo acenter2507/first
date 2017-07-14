@@ -28,6 +28,10 @@ var NotifSchema = new Schema({
     required: 'Please fill Notif content',
     trim: true
   },
+  state: {
+    type: String,
+    default: ''
+  },
   status: {
     type: Number,
     default: 0

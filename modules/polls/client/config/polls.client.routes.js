@@ -34,12 +34,13 @@
         }
       })
       .state('polls.edit', {
-        url: '/:pollId/edit',
+        url: '/:pollId/edit?notif',
         templateUrl: 'modules/polls/client/views/form-poll.client.view.html',
         controller: 'PollInputController',
         controllerAs: 'vm',
         resolve: {
-          pollResolve: getPoll
+          pollResolve: getPoll,
+          notifResolve: getNotif
         },
         data: {
           roles: ['user', 'admin'],

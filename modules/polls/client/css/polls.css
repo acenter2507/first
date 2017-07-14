@@ -46,8 +46,9 @@
   margin-bottom: 5px;
 }
 .activitys {
-  height: 500px;
+  max-height: 400px;
   overflow: scroll;
+  padding-right: 17px
 }
 .auto-text {
   font-size: 0.8em;

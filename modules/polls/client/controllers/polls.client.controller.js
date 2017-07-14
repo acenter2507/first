@@ -600,7 +600,7 @@
         $scope.$broadcast('show-errors-check-validity', 'vm.form.optForm');
         return false;
       }
-      Action.save_opt(vm.tmp_opt)
+      Action.save_opt(vm.tmp_opt, vm.poll)
         .then(res => {
           vm.opt_aside.$promise.then(vm.opt_aside.hide);
           toast.success('Your option is waiting for approve.', 'Thank you!');

@@ -376,7 +376,7 @@
       });
     };
     // Lưu option
-    this.save_opt = opt => {
+    this.save_opt = (opt, poll) => {
       return new Promise((resolve, reject) => {
         var rs_opt = new Opts(opt);
         if (opt._id) {
@@ -385,7 +385,7 @@
           rs_opt.$save(successCb, errorCb);
         }
         function successCb(res) {
-          Socket.emit('opts_request', { pollId: res.poll, from: res.user._id, to: res.poll });
+          Socket.emit('opts_request', { pollId: res.poll, from: res.user._id, to: poll.user._id });
           resolve(res);
         }
         function errorCb(err) {

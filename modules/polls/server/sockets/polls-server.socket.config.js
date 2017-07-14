@@ -116,18 +116,23 @@ module.exports = function (io, socket) {
   socket.on('cmt_add', req => {
     io.sockets.in(req.pollId).emit('cmt_add', req.cmtId);
     if (req.to) {
-      var notif = new Notif({
-        from: req.from,
-        to: req.to,
-        content: 'has replied your comment on',
-        poll: req.pollId
-      });
-      notif.save().then(notif => {
-        var socketIds = _.where(global.socketUsers, { user: req.to });
-        socketIds.forEach(item => {
-          io.sockets.connected[item.socket].emit('notifs', notif._id);
+      Notif.findOne({ poll: req.pollId, type: 2, from: req.from, status: 0 })
+        .then(_nof => {
+          if (!_nof) {
+            var _nof = new Notif({
+              from: req.from,
+              to: req.to,
+              content: 'replied your comment on:',
+              poll: req.pollId
+            });
+            _nof.save().then(_nof => {
+              var socketIds = _.where(global.socketUsers, { user: req.to });
+              socketIds.forEach(item => {
+                io.sockets.connected[item.socket].emit('notifs', _nof._id);
+              });
+            });
+          }
         });
-      });
     } else {
       // Tìm toàn bộ các member đang theo dõi poll
       Polluser.find({ poll: req.pollId, following: true }).then(
@@ -136,35 +141,47 @@ module.exports = function (io, socket) {
           // Tạo notif cho toàn bộ các member đang theo dõi
           pollusers.forEach((polluser, index) => {
             if (polluser.user.toString() !== req.from.toString()) {
-              notif = new Notif({
-                from: req.from,
-                to: polluser.user,
-                content: 'has posted a comment on',
-                poll: req.pollId
-              });
-              notif.save().then(
-                _notif => {
-                  var socketIds = _.where(global.socketUsers, {
-                    user: polluser.user.toString()
-                  });
-                  socketIds.forEach(item => {
-                    io.sockets.connected[item.socket].emit(
-                      'notifs',
-                      _notif._id
-                    );
-                  });
-                },
-                err => {
-                  console.log('Has error when save notif comment');
-                }
-              );
+              Notif.findOne({ to: polluser.user, type: 2, status: 0, poll: req.pollId })
+                .then(_nof => {
+                  if (_nof) {
+                    if (_nof.from !== req.from) {
+                      _nof.from = req.from;
+                      _nof.count += 1;
+                      _nof.content = 'and ' + _nof.count + 'other people recently commented on:';
+                      _nof.save().then(
+                        _notif => {
+                          var socketIds = _.where(global.socketUsers, {
+                            user: polluser.user.toString()
+                          });
+                          socketIds.forEach(item => {
+                            io.sockets.connected[item.socket].emit('notifs', _notif._id);
+                          });
+                        });
+                    }
+                  } else {
+                    _nof = new Notif({
+                      from: req.from,
+                      to: polluser.user,
+                      content: 'commented on',
+                      poll: req.pollId
+                    });
+                    _nof.save().then(
+                      _notif => {
+                        var socketIds = _.where(global.socketUsers, {
+                          user: polluser.user.toString()
+                        });
+                        socketIds.forEach(item => {
+                          io.sockets.connected[item.socket].emit(
+                            'notifs',
+                            _notif._id
+                          );
+                        });
+                      });
+                  }
+                });
             }
           });
-        },
-        err => {
-          console.log('Has error when get user in poll for comment');
-        }
-      );
+        });
     }
   });
   // On comment deleted

@@ -164,6 +164,7 @@ module.exports = function (io, socket) {
                       from: req.from,
                       to: polluser.user,
                       content: 'commented on',
+                      type: 2,
                       poll: req.pollId
                     });
                     _nof.save().then(

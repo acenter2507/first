@@ -133,7 +133,7 @@
         function successCb(res) {
           if (isNew) {
             if (res.isPublic) {
-              Socket.emit('poll_create');
+              Socket.emit('poll_create', res);
             }
           } else {
             Socket.emit('poll_update', { pollId: res._id });
@@ -207,7 +207,7 @@
       return $http.get('api/cmts/' + cmtId);
     };
     // Lưu comment vào db
-    this.save_cmt = (pollId, cmt) => {
+    this.save_cmt = (poll, cmt) => {
       return new Promise((resolve, reject) => {
         var rs_cmt = new Cmts(cmt);
         var isNew = !cmt._id ? true : false;
@@ -217,16 +217,19 @@
           rs_cmt.updated = new Date();
           rs_cmt.$update(successCb, errorCb);
         } else {
-          rs_cmt.poll = pollId;
+          rs_cmt.poll = poll._id;
           rs_cmt.$save(successCb, errorCb);
         }
         function successCb(res) {
           Socket.emit('cmt_add', {
-            pollId: pollId,
+            pollId: poll._id,
             cmtId: res._id,
             isNew: isNew,
             from: Authentication.user._id,
-            to: res.to
+            to: res.to,
+            displayName: Authentication.user.displayName,
+            profileImageURL: Authentication.user.profileImageURL,
+            title: poll.title
           });
           resolve(res);
         }

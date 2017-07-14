@@ -33,6 +33,7 @@ app.init(function () {
 
   - Chức năng activity: những hoạt động đang diễn ra
   - Hoàn thiện màn hình home
+  - Màn hình category
 
   - Chức năng nhập lý do khi report
   - Đếm và quản lý số lần bị report của user

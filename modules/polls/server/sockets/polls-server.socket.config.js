@@ -108,11 +108,30 @@ module.exports = function (io, socket) {
   // On delete poll
   socket.on('poll_create', req => {
     io.sockets.in('public').emit('poll_create');
+    io.sockets.in('public').emit('activity', {
+      poll: req._id,
+      user: req.user._id,
+      displayName: req.user.displayName,
+      action: 'created poll:',
+      profileImageURL: req.user.profileImageURL,
+      title: req.title
+    });
   });
 
   // On comment added
   socket.on('cmt_add', req => {
     io.sockets.in(req.pollId).emit('cmt_add', req.cmtId);
+    if (!req.isNew) {
+      return;
+    }
+    io.sockets.in('public').emit('activity', {
+      poll: req.pollId,
+      user: req.from,
+      displayName: req.displayName,
+      action: 'commented in',
+      profileImageURL: req.profileImageURL,
+      title: req.title
+    });
     if (req.to) {
       Notif.findOne({ poll: req.pollId, type: 2, from: req.from, status: 0 })
         .then(_nof => {

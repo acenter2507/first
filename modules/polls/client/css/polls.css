@@ -45,6 +45,10 @@
 .side-list-poll:not(:last-child) {
   margin-bottom: 5px;
 }
+.activitys {
+  height: 500px;
+  overflow: scroll;
+}
 .auto-text {
   font-size: 0.8em;
   overflow: hidden;
@@ -306,11 +310,8 @@
   
 }
 .custom-panel .panel-heading h4 {
-  width: 100%;
+  max-width: 100%;
   word-wrap: break-word;
-}
-.custom-panel .panel-heading h4 a {
-  width: 90%;
 }
 .custom-panel .panel-heading.public {
   color: #fff !important;

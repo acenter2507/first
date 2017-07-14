@@ -450,7 +450,7 @@
         return;
       }
       vm.cmt_processing = true;
-      Action.save_cmt(vm.poll._id, vm.tmp_cmt)
+      Action.save_cmt(vm.poll, vm.tmp_cmt)
         .then(res => {
           vm.tmp_cmt = {};
           vm.cmt_processing = false;

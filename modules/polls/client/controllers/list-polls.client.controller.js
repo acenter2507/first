@@ -56,6 +56,9 @@
       Socket.on('poll_create', () => {
         vm.is_has_new_polls = true;
       });
+      Socket.on('activity', res => {
+        vm.activitys.push(res);
+      });
       $scope.$on('$destroy', function () {
         Socket.emit('unsubscribe_public');
         Socket.removeListener('poll_create');

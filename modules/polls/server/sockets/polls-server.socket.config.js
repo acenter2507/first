@@ -141,6 +141,7 @@ module.exports = function (io, socket) {
           // Tạo notif cho toàn bộ các member đang theo dõi
           pollusers.forEach((polluser, index) => {
             if (polluser.user.toString() !== req.from.toString()) {
+              console.log(polluser);
               Notif.findOne({ to: polluser.user, type: 2, status: 0, poll: req.pollId })
                 .then(_nof => {
                   if (_nof) {

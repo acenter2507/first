@@ -50,14 +50,14 @@ exports.signup = function (req, res) {
   //   }, handleError);
 
 
-  user.save(function (err) {
+  user.save(function (err, user) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
       // Remove sensitive data before login
-      var report = new Userreport({ user: _user._id });
+      var report = new Userreport({ user: user._id });
       report.save();
       user.password = undefined;
       user.salt = undefined;

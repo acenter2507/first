@@ -137,7 +137,7 @@
     <!-- Hot poll -->
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-lg-push-3 pdn">
       <div class="card activitys" ng-if="vm.activitys.length > 0">
-        <span>Ticker</span>
+        <strong>Ticker</strong>
         <div class="side-list-poll" ng-repeat="activity in vm.activitys">
           <div class="user-avatar pull-left">
             <img src="{{activity.profileImageURL}}" alt="{{activity.displayName}}">
@@ -149,7 +149,7 @@
         </div>
       </div>
       <div class="card">
-        <span>Hot poll</span>
+        <strong>Hot polls</strong>
         <div class="side-list-poll" ng-repeat="poll in vm.hot_polls">
           <div class="rank pull-left"><span class="rank-number"><strong>{{$index + 1}}</strong></span></div>
           <a class="undecorated-link" ui-sref="polls.view({pollId: poll._id})" ng-bind="poll.title"></a>

@@ -32,6 +32,7 @@
     vm.isLogged = vm.authentication.user ? true : false;
     vm.polls = [];
     vm.hot_polls = [];
+    vm.activitys = [];
     vm.categorys = [];
     vm.new_data = [];
     vm.page = 0;

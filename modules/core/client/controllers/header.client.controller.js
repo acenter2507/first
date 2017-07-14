@@ -36,6 +36,9 @@ angular.module('core').controller('HeaderController', [
       if ($scope.authentication.user) {
         loadNotifs(10);
         loadUncheckNotifs();
+        $rootScope.$on('changeNotif', () => {
+          loadUncheckNotifs();
+        });
         initSocket();
       }
     }

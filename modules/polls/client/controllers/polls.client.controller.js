@@ -4,6 +4,7 @@
   angular.module('polls').controller('PollsController', PollsController);
 
   PollsController.$inject = [
+    '$rootScope',
     '$scope',
     '$state',
     '$window',
@@ -22,6 +23,7 @@
   ];
 
   function PollsController(
+    $rootScope,
     $scope,
     $state,
     $window,
@@ -44,10 +46,6 @@
 
     vm.poll = poll;
     vm.form = {};
-    console.log('pollId', $stateParams.pollId);
-    console.log('notif', $stateParams.notif);
-    console.log('notif', $state.params.notif);
-    console.log(notif);
     // Options variable
     vm.opts = [];
     vm.tmp_opt = {};
@@ -115,6 +113,7 @@
       }
       // Init socket
       initSocket();
+      analysic_nofif();
     }
 
     // Init Socket
@@ -349,13 +348,17 @@
           });
       });
     }
-
     function next() {
       return new Promise((resolve, reject) => {
         return resolve();
       });
     }
-
+    function analysic_nofif() {
+      if (notif) {
+        notif.status = 1;
+        notif.$update($rootScope.$emit('changeNotif'));
+      }
+    }
     function get_like_cmt(cmt) {
       return new Promise((resolve, reject) => {
         if (!vm.isLogged) {

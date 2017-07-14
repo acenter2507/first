@@ -46,7 +46,7 @@
   margin-bottom: 5px;
 }
 .activitys {
-  max-height: 385px;
+  max-height: 390px;
   overflow: auto;
 }
 .activitys::-webkit-scrollbar {

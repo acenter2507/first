@@ -206,6 +206,45 @@ module.exports = function (io, socket) {
   socket.on('opts_request', req => {
     io.sockets.in(req.pollId).emit('opts_request');
     console.log(req);
+    Notif.findOne({ poll: req.pollId, to: req.to, type: 4, status: 0 })
+      .then(_nof => {
+        if (_nof) {
+          if (_nof.from.toString() !== req.from) {
+            _nof.from = req.from;
+            _nof.count += 1;
+            _nof.content = 'and ' + _nof.count + ' other people recently suggested on:';
+            _nof.save().then(
+              _notif => {
+                var socketIds = _.where(global.socketUsers, {
+                  user: req.to
+                });
+                socketIds.forEach(item => {
+                  io.sockets.connected[item.socket].emit('notifs', _notif._id);
+                });
+              });
+          }
+        } else {
+          _nof = new Notif({
+            from: req.from,
+            to: req.to,
+            content: 'suggested on',
+            type: 4,
+            poll: req.pollId
+          });
+          _nof.save().then(
+            _notif => {
+              var socketIds = _.where(global.socketUsers, {
+                user: req.to
+              });
+              socketIds.forEach(item => {
+                io.sockets.connected[item.socket].emit(
+                  'notifs',
+                  _notif._id
+                );
+              });
+            });
+        }
+      });
   });
 
   // io.sockets.connected[socket.id].emit('comment_result', { success: true });

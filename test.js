@@ -29,7 +29,7 @@ app.init(function () {
   - Đếm view profile -> done
   - Trigger khi xóa: poll, option, vote, comment => done
   - Test lại all case socket => done
-  - Notifis 
+  - Notifis: Like/dislike poll, comment, reply, suggest => done
 
   - Chức năng activity: những hoạt động đang diễn ra
   - Hoàn thiện màn hình home

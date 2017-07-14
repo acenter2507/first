@@ -422,6 +422,10 @@ a.notifis-list-item:focus {
   border-radius: 0px;
   background-color: #fff;
 }
+.ngdialog-open{
+  height: auto !important;
+}
+
 .highlight-text {
   color: #267ED5;
 }

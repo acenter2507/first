@@ -30,26 +30,6 @@ exports.signup = function (req, res) {
   // Add missing user fields
   user.provider = 'local';
   user.displayName = user.firstName + ' ' + user.lastName;
-
-  // Then save the user
-  // user.save()
-  //   .then(_user => {
-  //     user.password = undefined;
-  //     user.salt = undefined;
-  //     var report = new Userreport({ user: _user._id });
-  //     return report.save();
-  //   }, handleError)
-  //   .then(res => {
-  //     req.login(user, function (err) {
-  //       if (err) {
-  //         res.status(400).send(err);
-  //       } else {
-  //         res.json(user);
-  //       }
-  //     });
-  //   }, handleError);
-
-
   user.save(function (err, user) {
     if (err) {
       return res.status(400).send({

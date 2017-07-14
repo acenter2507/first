@@ -119,7 +119,7 @@ module.exports = function (io, socket) {
       Notif.findOne({ poll: req.pollId, type: 2, from: req.from, status: 0 })
         .then(_nof => {
           if (!_nof) {
-            var _nof = new Notif({
+            _nof = new Notif({
               from: req.from,
               to: req.to,
               content: 'replied your comment on:',

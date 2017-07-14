@@ -356,7 +356,10 @@
     function analysic_nofif() {
       if (notif) {
         notif.status = 1;
-        notif.$update($rootScope.$emit('changeNotif'));
+        notif.$update(() => {
+          $rootScope.$emit('changeNotif');
+        });
+        
       }
     }
     function get_like_cmt(cmt) {

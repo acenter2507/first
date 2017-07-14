@@ -46,9 +46,15 @@
   margin-bottom: 5px;
 }
 .activitys {
-  max-height: 400px;
+  width: 100%;
+  max-height: 380px;
+  overflow: hidden;
+}
+.activity-list {
+  height: 100%;
+  width: 100%;
   overflow: auto;
-  padding-right: 0;
+  padding-right: 17px;
 }
 .auto-text {
   font-size: 0.8em;

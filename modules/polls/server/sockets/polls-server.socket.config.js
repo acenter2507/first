@@ -196,22 +196,6 @@ module.exports = function (io, socket) {
     io.sockets
       .in(req.pollId)
       .emit('cmt_like', { cmtId: req.cmtId, likeCnt: req.likeCnt });
-    if (req.type === 0) {
-      return;
-    }
-    var action = (req.type === 1) ? 'liked' : 'disliked';
-    var notif = new Notif({
-      from: req.from,
-      to: req.to,
-      content: 'has ' + action + ' your comment on',
-      poll: req.pollId
-    });
-    notif.save().then(notif => {
-      var socketIds = _.where(global.socketUsers, { user: req.to });
-      socketIds.forEach(item => {
-        io.sockets.connected[item.socket].emit('notifs', notif._id);
-      });
-    });
   });
 
   // On delete poll
@@ -221,6 +205,7 @@ module.exports = function (io, socket) {
   // On delete poll
   socket.on('opts_request', req => {
     io.sockets.in(req.pollId).emit('opts_request');
+    console.log(req);
   });
 
   // io.sockets.connected[socket.id].emit('comment_result', { success: true });

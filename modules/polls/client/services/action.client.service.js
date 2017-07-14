@@ -385,7 +385,7 @@
           rs_opt.$save(successCb, errorCb);
         }
         function successCb(res) {
-          Socket.emit('opts_request', { pollId: res.poll });
+          Socket.emit('opts_request', { pollId: res.poll, from: res.user });
           resolve(res);
         }
         function errorCb(err) {

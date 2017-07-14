@@ -40,6 +40,9 @@ app.init(function () {
   
   - Share mạng xã hội
   - Chức năng private và share link
+
+3. Test
+  - Test các cài đặt của poll
 */
 // 1. Khi người vote là guest thì không push socket được. => done
 // 2. Sửa các progressbar trong màn hình detail. => done

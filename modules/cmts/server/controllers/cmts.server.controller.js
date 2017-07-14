@@ -29,7 +29,7 @@ exports.create = function (req, res) {
       return Pollreport.countUpCmt(cmt.poll);
     }, handleError)
     .then(report => {
-      return Userreport.countUpCmt(cmt.user);
+      return Userreport.countUpCmt(req.user._id);
     }, handleError)
     .then(report => {
       // Tạo record follow

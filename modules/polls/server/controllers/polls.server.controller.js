@@ -43,7 +43,7 @@ exports.create = function(req, res) {
       return report.save();
     }, handleError)
     .then(_report => {
-      return Userreport.countUpPoll(poll.user);
+      return Userreport.countUpPoll(req.user._id);
     }, handleError)
     .then(_report => {
       // Lưu tag vào db

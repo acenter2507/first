@@ -38,7 +38,10 @@ module.exports = function (io, socket) {
   socket.on('poll_like', req => {
     io.sockets.in(req.pollId).emit('poll_like', req.report);
     if (req.type === 0) {
-      Notif.remove({ poll: req.pollId, type: { $in: [0, 1] }, from: req.from });
+      Notif.findOne({ poll: req.pollId, type: { $in: [0, 1] }, from: req.from })
+        .then(_nof => {
+          _nof.remove();
+        });
       return;
     }
     // Create notifis

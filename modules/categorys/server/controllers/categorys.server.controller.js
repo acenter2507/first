@@ -6,6 +6,7 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Category = mongoose.model('Category'),
+  Poll = mongoose.model('Poll'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 
@@ -89,6 +90,15 @@ exports.list = function(req, res) {
     } else {
       res.jsonp(categorys);
     }
+  });
+};
+
+/**
+ * List of Categorys
+ */
+exports.count_polls = function(req, res) {
+  Poll.find({ category: req.category._id }).count(function(err, count) {
+    res.jsonp(count);
   });
 };
 

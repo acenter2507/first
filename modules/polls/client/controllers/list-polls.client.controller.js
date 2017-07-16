@@ -170,6 +170,15 @@
       Action.get_categorys()
         .then(res => {
           vm.categorys = res;
+          vm.categorys.forEach(category => {
+            Action.count_poll_for_category(category._id)
+              .then(res => {
+                category.count = res.data || 0;
+              })
+              .catch(err => {
+                toast.error(err.message, 'Error!');
+              });
+          });
         });
     }
     function get_owner_follow(poll) {

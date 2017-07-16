@@ -165,7 +165,7 @@
           <li ng-repeat="category in vm.categorys">
             <a class="undecorated-link" ui-sref="categorys.view({ categoryId: category._id })">
             <i ng-class="['fa', category.icon]"></i>&nbsp;{{category.name}}
-            <span class="badge badge-info pull-right">5</span>
+            <span class="badge badge-info pull-right" ng-bind="category.count"></span>
           </a>
           </li>
         </ul>

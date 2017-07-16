@@ -13,14 +13,14 @@
       title: 'Categorys',
       state: 'categorys',
       type: 'dropdown',
-      roles: ['admin']
+      roles: ['*']
     });
 
     // Add the dropdown list item
     menuService.addSubMenuItem('topbar', 'categorys', {
       title: 'List Categorys',
       state: 'categorys.list',
-      roles: ['admin']
+      roles: ['*']
     });
 
     // Add the dropdown create item

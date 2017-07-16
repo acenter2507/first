@@ -476,7 +476,7 @@
       Action.save_vote(vm.ownVote, vm.selectedOpts, vm.poll)
         .then(res => {
           vm.ownVote = res;
-          vm.votedOpts  = _.clone(vm.selectedOpts);
+          vm.votedOpts = _.clone(vm.selectedOpts);
           $scope.$apply();
         })
         .catch(err => {

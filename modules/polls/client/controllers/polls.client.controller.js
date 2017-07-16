@@ -470,6 +470,9 @@
         toast.error('You must vote at least one option.', 'Error!');
         return;
       }
+      if (angular.equals(vm.votedOpts, vm.selectedOpts)) {
+        return;
+      }
       Action.save_vote(vm.ownVote, vm.selectedOpts, vm.poll)
         .then(res => {
           vm.ownVote = res;

@@ -26,7 +26,8 @@
         controller: 'PollInputController',
         controllerAs: 'vm',
         resolve: {
-          pollResolve: newPoll
+          pollResolve: newPoll,
+          notifResolve: null
         },
         data: {
           roles: ['user', 'admin'],

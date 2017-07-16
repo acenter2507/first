@@ -27,7 +27,7 @@
         controllerAs: 'vm',
         resolve: {
           pollResolve: newPoll,
-          notifResolve: null
+          notifResolve: getNotif
         },
         data: {
           roles: ['user', 'admin'],

@@ -96,6 +96,14 @@ module.exports = function (io, socket) {
   // On vote poll
   socket.on('poll_vote', req => {
     io.sockets.in(req.pollId).emit('poll_vote');
+    io.sockets.in('public').emit('activity', {
+      poll: req.pollId,
+      user: req.from,
+      displayName: req.displayName,
+      action: 'voted in',
+      profileImageURL: req.profileImageURL,
+      title: req.title
+    });
   });
   // On delete poll
   socket.on('poll_delete', req => {

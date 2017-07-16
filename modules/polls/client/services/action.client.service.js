@@ -346,7 +346,7 @@
       });
     };
     // Lưu vote vào db
-    this.save_vote = (vote, opts) => {
+    this.save_vote = (vote, opts, poll) => {
       return new Promise((resolve, reject) => {
         vote.opts = opts;
         var rs_vote = new Votes(vote);
@@ -358,7 +358,13 @@
           rs_vote.$save(successCb, errorCb);
         }
         function successCb(res) {
-          Socket.emit('poll_vote', { pollId: res.poll });
+          Socket.emit('poll_vote', {
+            pollId: res.poll,
+            from: Authentication.user._id,
+            displayName: Authentication.user.displayName,
+            profileImageURL: Authentication.user.profileImageURL,
+            title: poll.title
+          });
           resolve(res);
         }
         function errorCb(err) {

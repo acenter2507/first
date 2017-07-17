@@ -457,7 +457,7 @@ a.notifis-list-item:focus {
 .count {
   min-width: 46px;
   min-height: 46px;
-  background-color: #80D651;
+  border: 1px solid #eee;
 }
 .count-value {
   text-align: center;

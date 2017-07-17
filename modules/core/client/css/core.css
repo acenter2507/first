@@ -469,6 +469,9 @@ a.notifis-list-item:focus {
 .count-label {
   font-size: 1.1em;
   text-align: center;
+  text-transform: uppercase;
+  color: #777;
+  padding-top: 5px;
 }
 .h4-text {
   font-size: 1.3em;

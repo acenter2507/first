@@ -25,6 +25,10 @@ var CategorySchema = new Schema({
     type: String,
     default: 'fa-question'
   },
+  color: {
+    type: String,
+    default: '#ECEFF1'
+  },
   created: {
     type: Date,
     default: Date.now

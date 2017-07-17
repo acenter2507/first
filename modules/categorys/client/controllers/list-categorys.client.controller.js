@@ -7,11 +7,17 @@
 
   CategorysListController.$inject = [
     'CategorysService',
+    'Authentication',
     'Action'
   ];
 
-  function CategorysListController(CategorysService, Action) {
+  function CategorysListController(CategorysService, Authentication, Action) {
     var vm = this;
+    vm.user = Authentication.user;
+    console.log(vm.user);
+    vm.isAdmin = () => {
+
+    };
 
     var promise = CategorysService.query().$promise;
     promise.then(_categorys => {

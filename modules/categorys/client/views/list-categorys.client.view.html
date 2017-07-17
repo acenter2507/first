@@ -11,7 +11,8 @@
     <div class="col-xs-12">
       <div class="card" ng-repeat="category in vm.categorys">
         <div class="avatar pull-left" ng-style="{ 'background-color': category.color }"><i ng-class="['fa', category.icon]"></i></div>
-        <a ui-sref="categorys.view({ categoryId: category._id })" class="undecorated-link h4-text">{{category.name}}</a>
+        <a ui-sref="categorys.view({ categoryId: category._id })" class="undecorated-link h4-text">{{category.name}}</a><br>
+        <a ui-sref="categorys.edit({ categoryId: category._id })" class="undecorated-link">Edit</a>
         <div class="count pull-right">
           <div class="count-value">{{category.count}}</div>
           <div class="count-label">Polls</div>

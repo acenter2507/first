@@ -454,6 +454,12 @@ a.notifis-list-item:focus {
   min-height: 46px;
   margin-top: 2px;
 }
+.h4-text {
+  font-size: 1.3em;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.1;
+}
 
 .mgn {
   margin: 0;

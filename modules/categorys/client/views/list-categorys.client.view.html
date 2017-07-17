@@ -13,7 +13,8 @@
           <div class="icon pull-left">
             <i ng-class="['fa', category.icon, category.color]"></i>
           </div>
-          <h3><a ui-sref="categorys.view({ categoryId: category._id })" class="undecorated-link">{{category.name}}</a></h3>
+          <a ui-sref="categorys.view({ categoryId: category._id })" class="undecorated-link h4-text">{{category.name}}</a><br>
+          <p class="text-muted">{{category.des}}</p>
         </div>
     </div>
   </div>

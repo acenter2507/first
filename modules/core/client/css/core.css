@@ -480,6 +480,12 @@ a.notifis-list-item:focus {
   font-weight: 500;
   line-height: 1.1;
 }
+.custom-breadcrumb {
+  padding: 0;
+  margin-bottom: 0;
+  background-color: transparent;
+  border-radius: 0;
+}
 .mgn {
   margin: 0;
 }

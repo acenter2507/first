@@ -6,13 +6,22 @@
     .controller('CategorysListController', CategorysListController);
 
   CategorysListController.$inject = [
+    '$scope',
     'CategorysService',
     'Authentication',
     'Action',
-    'toastr'
+    'toastr',
+    'ngDialog'
   ];
 
-  function CategorysListController(CategorysService, Authentication, Action, toast) {
+  function CategorysListController(
+    $scope,
+    CategorysService,
+    Authentication,
+    Action,
+    toast,
+    dialog
+    ) {
     var vm = this;
     vm.user = Authentication.user;
     console.log(vm.user);
@@ -31,5 +40,27 @@
           });
       }, this);
     });
+
+    vm.remove = category => {
+      if (!vm.isAdmin) {
+        toast.error('You are not authorized.', 'Error!');
+        return;
+      }
+      $scope.message_title = 'Delete category!';
+      $scope.message_content = 'Are you sure you want to delete this category?';
+      $scope.dialog_type = 3;
+      $scope.buton_label = 'delete';
+      dialog.openConfirm({
+        scope: $scope,
+        templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
+      }).then(confirm => {
+        handle_delete();
+      }, reject => {
+      });
+      function handle_delete() {
+        vm.categorys = _.without(vm.categorys, category);
+        Action.delete_category(category);
+      }
+    };
   }
 }());

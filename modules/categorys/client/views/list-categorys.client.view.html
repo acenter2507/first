@@ -2,13 +2,16 @@
   <div class="row mg10t mg10b">
     <div class="col-xs-12">
       <div class="form-group">
-        <a ui-sref="polls.create" class="btn btn-primary pull-right">Create poll</a>
+        <a ng-if="vm.isAdmin" ui-sref="categorys.create" class="btn btn-primary pull-right">Create category</a>
       </div>
     </div>
   </div>
 
   <div class="row">
     <div class="col-xs-12 pdn">
+      <div class="notice notice-warning" ng-show="vm.categorys.length === 0">
+        No categorys yet, why don't you <a ui-sref="categorys.create">create one</a>?
+      </div>
       <div class="card" ng-repeat="category in vm.categorys">
         <div class="col-xs-9 pdn">
           <div class="avatar pull-left" ng-style="{ 'background-color': category.color }"><i ng-class="['fa', category.icon]"></i></div>

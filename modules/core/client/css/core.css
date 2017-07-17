@@ -449,14 +449,15 @@ a.notifis-list-item:focus {
   font-size: 17px;
   line-height: 17px;
   padding: 13px;
-  margin-right: 15px;
+  text-align: center;
+  margin-right: 12px;
   min-width: 46px;
   min-height: 46px;
   margin-top: 2px;
   background-color: #FEAF20;
 }
 .h4-text {
-  font-size: 1.3rem;
+  font-size: 1.3em;
   font-family: inherit;
   font-weight: 500;
   line-height: 1.1;

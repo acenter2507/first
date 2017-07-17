@@ -13,7 +13,7 @@
         <div class="avatar pull-left" ng-style="{ 'background-color': category.color }"><i ng-class="['fa', category.icon]"></i></div>
         <a ui-sref="categorys.view({ categoryId: category._id })" class="undecorated-link h4-text">{{category.name}}</a>
         <p class="text-muted">{{category.des}}</p>
-        <div class="stat pull-right">
+        <div class="count pull-right">
           <div class="stat-value">{{category.count}}</div>
           <span class="stat-label">Polls</span>
         </div>

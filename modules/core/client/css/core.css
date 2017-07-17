@@ -454,6 +454,11 @@ a.notifis-list-item:focus {
   min-height: 46px;
   margin-top: 2px;
 }
+.count {
+  min-width: 46px;
+  min-height: 46px;
+  display: inline;
+}
 .h4-text {
   font-size: 1.3em;
   font-family: inherit;

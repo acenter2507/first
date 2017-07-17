@@ -457,6 +457,7 @@ a.notifis-list-item:focus {
 .count {
   min-width: 46px;
   min-height: 46px;
+  display: inline-block;
 }
 .count-value {
   text-align: center;

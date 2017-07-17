@@ -444,7 +444,6 @@ a.notifis-list-item:focus {
 .default-text {
   color: #555;
 }
-
 .avatar {
   font-size: 17px;
   line-height: 17px;
@@ -454,7 +453,6 @@ a.notifis-list-item:focus {
   min-width: 46px;
   min-height: 46px;
   margin-top: 2px;
-  background-color: #FEAF20;
 }
 .h4-text {
   font-size: 1.3em;
@@ -462,7 +460,6 @@ a.notifis-list-item:focus {
   font-weight: 500;
   line-height: 1.1;
 }
-
 .mgn {
   margin: 0;
 }

@@ -1,3 +1,38 @@
+<section class="container mg10b">
+  <div class="row mg10t mg10b">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <a ng-if="vm.isAdmin" ui-sref="categorys.create" class="btn btn-primary pull-right">Create poll</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 pdn">
+      <div class="notice notice-warning" ng-show="vm.categorys.length === 0">
+        No categorys yet, why don't you <a ui-sref="categorys.create">create one</a>?
+      </div>
+      <div class="card" ng-repeat="category in vm.categorys">
+        <div class="col-xs-9 pdn">
+          <div class="avatar pull-left" ng-style="{ 'background-color': category.color }"><i ng-class="['fa', category.icon]"></i></div>
+          <a ui-sref="categorys.view({ categoryId: category._id })" class="undecorated-link h4-text">{{category.name}}</a><br>
+          <span class="mg20t">
+            <a ng-if="vm.isAdmin" ui-sref="categorys.edit({ categoryId: category._id })" class="undecorated-link">Edit</a>
+            <a ng-if="vm.isAdmin" ng-click="vm.remove(category)" class="undecorated-link mg5l">Delete</a>
+          </span>
+        </div>
+        <div class="col-xs-3 pdn">
+          <div class="count pull-right">
+            <div class="count-value">{{category.count}}</div>
+            <div class="count-label">Polls</div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section>
   <div class="page-header">
     <h1 ng-bind="vm.category.name"></h1>

@@ -8,10 +8,11 @@
   CategorysListController.$inject = [
     'CategorysService',
     'Authentication',
-    'Action'
+    'Action',
+    'toastr'
   ];
 
-  function CategorysListController(CategorysService, Authentication, Action) {
+  function CategorysListController(CategorysService, Authentication, Action, toast) {
     var vm = this;
     vm.user = Authentication.user;
     console.log(vm.user);

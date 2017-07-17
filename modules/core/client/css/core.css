@@ -461,13 +461,13 @@ a.notifis-list-item:focus {
 }
 .count-value {
   text-align: center;
-  font-size: 1.3em;
+  font-size: 1.4em;
   font-family: inherit;
   font-weight: 500;
   line-height: 1.1;
 }
 .count-label {
-  font-size: 1.1em;
+  font-size: 1.0em;
   text-align: center;
   text-transform: uppercase;
   color: #777;

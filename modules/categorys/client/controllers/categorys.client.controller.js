@@ -73,7 +73,6 @@
           vm.polls = _.union(vm.polls, vm.new_data);
           vm.page += 1;
           vm.busy = false;
-          $scope.$apply();
           vm.new_data = [];
         })
         .catch(err => {

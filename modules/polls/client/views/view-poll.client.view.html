@@ -14,7 +14,7 @@
       <div class="card" id="poll_title_card">
         <p>
           <i ng-class="['fa', vm.poll.category.icon]"></i>&nbsp;
-          <a class="undecorated-link" ui-sref="categorys.view({ categoryId: vm.poll.category._id })">
+          <a class="undecorated-link" ui-sref="categorys.polls({ categoryId: vm.poll.category._id })">
             {{vm.poll.category.name}}
           </a>
           <a class="undecorated-link pull-right" ng-click="vm.follow_poll()" ng-show="vm.follow.following">

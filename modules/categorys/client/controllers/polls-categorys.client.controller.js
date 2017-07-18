@@ -4,9 +4,9 @@
   // Categorys controller
   angular
     .module('categorys')
-    .controller('CategorysController', CategorysController);
+    .controller('CategoryPollsController', CategoryPollsController);
 
-  CategorysController.$inject = [
+  CategoryPollsController.$inject = [
     '$scope',
     '$state',
     '$window',
@@ -17,7 +17,7 @@
     'ngDialog'
   ];
 
-  function CategorysController(
+  function CategoryPollsController(
     $scope,
     $state,
     $window,

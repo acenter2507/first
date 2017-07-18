@@ -25,7 +25,7 @@
         <span ng-if="!poll.allow_guest" class="fa fa-users">
           <md-tooltip md-direction="bottom">Only user can vote</md-tooltip>
         </span>
-        <a class="undecorated-link" ui-sref="categorys.view({ categoryId: poll.category._id })">{{ poll.category.name }}</a>
+        <a class="undecorated-link" ui-sref="categorys.polls({ categoryId: poll.category._id })">{{ poll.category.name }}</a>
         <div class="clearfix"></div>
         <hr class="mg5t mg10b">
       </div>

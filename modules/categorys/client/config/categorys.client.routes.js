@@ -23,6 +23,18 @@
           pageTitle: 'Categorys List'
         }
       })
+      .state('categorys.polls', {
+        url: '/:categoryId/polls',
+        templateUrl: 'modules/categorys/client/views/polls-category.client.view.html',
+        controller: 'CategoryPollsController',
+        controllerAs: 'vm',
+        resolve: {
+          categoryResolve: newCategory
+        },
+        data: {
+          pageTitle: 'Categorys Polls'
+        }
+      })
       .state('categorys.create', {
         url: '/create',
         templateUrl: 'modules/categorys/client/views/form-category.client.view.html',
@@ -32,7 +44,7 @@
           categoryResolve: newCategory
         },
         data: {
-          roles: ['user', 'admin'],
+          roles: ['admin'],
           pageTitle: 'Categorys Create'
         }
       })
@@ -45,7 +57,7 @@
           categoryResolve: getCategory
         },
         data: {
-          roles: ['user', 'admin'],
+          roles: ['admin'],
           pageTitle: 'Edit Category {{ categoryResolve.name }}'
         }
       })
@@ -58,6 +70,7 @@
           categoryResolve: getCategory
         },
         data: {
+          roles: ['admin'],
           pageTitle: 'Category {{ categoryResolve.name }}'
         }
       });

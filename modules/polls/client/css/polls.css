@@ -445,7 +445,6 @@ md-menu-content {
   display: inline-block;
   text-decoration: none;
   background-color: #ccc;
-  border-radius: 3px;
 }
 
 .btn-poll-color:focus,

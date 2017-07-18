@@ -26,7 +26,7 @@
       <div class="card" ng-repeat="category in vm.categorys">
         <div class="col-xs-9 pdn">
           <div class="avatar pull-left" ng-style="{ 'background-color': category.color }"><i ng-class="['fa', category.icon]"></i></div>
-          <a ui-sref="categorys.view({ categoryId: category._id })" class="undecorated-link h4-text">{{category.name}}</a><br>
+          <a ui-sref="categorys.polls({ categoryId: category._id })" class="undecorated-link h4-text">{{category.name}}</a><br>
           <span class="mg20t">
             <a ng-if="vm.isAdmin" ui-sref="categorys.edit({ categoryId: category._id })" class="undecorated-link">Edit</a>
             <a ng-if="vm.isAdmin" ng-click="vm.remove(category)" class="undecorated-link mg5l">Delete</a>

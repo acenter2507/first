@@ -1,35 +1,42 @@
 <section class="container mg10b" infinite-scroll="vm.get_polls()" infinite-scroll-distance='2'>
-  <div class="row mg10t mg10b">
-    <div class="col-xs-12">
-      <div class="form-group">
-        <a ui-sref="polls.create" class="btn btn-primary pull-right">Create poll</a>
-        <a ng-click="vm.show_toasty()" class="btn btn-warning pull-right mg10r">Toasty</a>
-        <a ng-click="vm.show_toastr()" class="btn btn-danger pull-right mg10r">Toastr</a>
+  <div class="row mg10t">
+    <div class="col-xs-12 pdn">
+      <div class="card">
+        <ol class="breadcrumb custom-breadcrumb">
+          <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="home">Home</a></li>
+          <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="categorys.list">Categorys</a></li>
+          <li class="breadcrumb-item active">{{vm.category.name}}</li>
+        </ol>
       </div>
     </div>
   </div>
-  <div class="row mg10b">
-    <div class="col-xs-12">
-      <div class="notice notice-info" ng-show="vm.is_has_new_polls">
-        New poll has just been added, <a class="undecorated-link" ng-click="vm.load_new()">load now</a>.
-      </div>
-    </div>
-  </div>
+
   <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 col-lg-push-3 pdn">
+    <div class="col-xs-12 pdn">
+      <div class="custom-toolbar">
+        <a ui-sref="polls.create" class="btn btn-primary pull-right">Create poll</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 pdn">
+      <div class="notice notice-warning" ng-show="vm.polls.length === 0">
+        No polls yet, why don't you <a ui-sref="polls.create">create one</a>?
+      </div>
       <div ng-repeat="poll in vm.polls" class="card">
         <div clas="poll-header">
           <div class="user-avatar pull-left">
             <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user._id})">
-              <img src="{{poll.user.profileImageURL}}" alt="{{poll.user.displayName}}">
-            </a>
+                <img src="{{poll.user.profileImageURL}}" alt="{{poll.user.displayName}}">
+              </a>
             <img ng-if="!poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
           </div>
           <span class="pull-left">
             <strong><a class="undecorated-link" ui-sref="profile.info({userId: poll.user._id})" ng-if="poll.user" ng-bind="poll.user.displayName"></a></strong>
             <span ng-if="!poll.user">Deleted User</span>
-          <small class="text-muted">&nbsp;created on</small>
-          <small class="text-muted" am-time-ago="poll.created"></small>
+            <small class="text-muted">&nbsp;created on</small>
+            <small class="text-muted" am-time-ago="poll.created"></small>
           </span>
           <span class="pull-right">
             <md-menu md-offset="-12 25" md-position-mode="target-right target">
@@ -55,19 +62,17 @@
           <br>
           <div class="mg5t">
             <span ng-if="poll.allow_guest" class="fa fa-globe">
-              <md-tooltip md-direction="bottom">This poll is public</md-tooltip>
-            </span>
+                <md-tooltip md-direction="bottom">This poll is public</md-tooltip>
+              </span>
             <span ng-if="!poll.allow_guest" class="fa fa-users">
-              <md-tooltip md-direction="bottom">Only user can vote</md-tooltip>
-            </span>
-            <a class="undecorated-link" ui-sref="categorys.polls({ categoryId: poll.category._id })">{{ poll.category.name }}</a>
+                <md-tooltip md-direction="bottom">Only user can vote</md-tooltip>
+              </span>
           </div>
           <div class="clearfix"></div>
           <hr class="mg5t mg10b">
         </div>
         <div clas="poll-body">
           <h4><a ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a></h4>
-          <!--<p class="text-justify poll_item_body" ng-bind-html="poll.summary | nl2br"></p>-->
           <div class="text-body" ta-bind="text" ng-model="poll.summary" ta-readonly="true"></div>
           <p ng-show="poll.body.length > poll.summary.length" class="poll_item_body">...
             <a class="undecorated-link" ui-sref="polls.view({ pollId: poll._id })">see more</a>
@@ -128,54 +133,6 @@
         </div>
         <div class="clearfix"></div>
       </div>
-      <!-- Loading indicator -->
-      <div class="row text-center pd6l pd6r" ng-show="vm.busy">
-        <md-progress-circular ng-disabled="!vm.busy" class="md-hue-2 center" md-diameter="20px"></md-progress-circular>
-      </div>
-      <div class="notice notice-warning" ng-show="vm.polls.length === 0 && vm.stopped">
-        No polls yet, why don't you <a ui-sref="polls.create">create one</a>?
-      </div>
     </div>
-    <!-- Hot poll -->
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-lg-push-3 pdn">
-      <div class="card activitys">
-        <strong>Ticker</strong>
-        <div class="side-list-poll" ng-repeat="activity in vm.activitys">
-          <div class="user-avatar pull-left">
-            <img src="{{activity.profileImageURL}}" alt="{{activity.displayName}}">
-          </div>
-          <small><strong><a class="undecorated-link" ui-sref="profile.info({userId: activity.user})">{{activity.displayName}}</a></strong></small>
-          <small>{{activity.action}}</small>
-          <small><strong><a class="undecorated-link" ui-sref="polls.view({pollId: activity.poll})">{{activity.title}}</a></strong></small>
-          <div class="clearfix"></div>
-        </div>
-      </div>
-      <div class="card">
-        <strong>Hot polls</strong>
-        <div class="side-list-poll" ng-repeat="poll in vm.hot_polls">
-          <div class="rank pull-left"><span class="rank-number"><strong>{{$index + 1}}</strong></span></div>
-          <a class="undecorated-link" ui-sref="polls.view({pollId: poll._id})" ng-bind="poll.title"></a>
-          <div class="clearfix"></div>
-        </div>
-      </div>
-    </div>
-    <!-- Category -->
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-lg-pull-9 pdn">
-      <div class="card">
-        <ul class="nav nav-list">
-          <li class="nav-header">
-            <strong>Categorys</strong>
-            <small class="pull-right"><a ui-sref="categorys.list">View all</a></small>
-          </li>
-          <li ng-repeat="category in vm.categorys">
-            <a class="undecorated-link" ui-sref="categorys.polls({ categoryId: category._id })">
-            <i ng-class="['fa', category.icon]"></i>&nbsp;{{category.name}}
-            <span class="badge badge-info pull-right" ng-bind="category.count"></span>
-          </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="clearfix"></div>
   </div>
 </section>

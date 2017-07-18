@@ -105,7 +105,12 @@ a.notifis-list-item:focus {
   margin-right: 6px;
   margin-bottom: 12px;
 }
-
+.custom-toolbar::after { 
+   content: " ";
+   display: block; 
+   height: 0; 
+   clear: both;
+}
 .tags {
   list-style: none;
   margin: 0;

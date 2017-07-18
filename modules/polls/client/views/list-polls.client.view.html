@@ -10,9 +10,9 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" ng-show="vm.is_has_new_polls">
     <div class="col-xs-12 pdn pd6l pd6r">
-      <div class="notice notice-info" ng-show="vm.is_has_new_polls">
+      <div class="notice notice-info">
         New poll has just been added, <a class="undecorated-link" ng-click="vm.load_new()">load now</a>.
       </div>
     </div>

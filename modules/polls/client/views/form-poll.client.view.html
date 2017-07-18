@@ -1,8 +1,24 @@
 <section class="container">
+  <!-- Breadcrumb -->
+  <div class="row mg10t">
+    <div class="col-xs-12 pdn">
+      <div class="card">
+        <ol class="breadcrumb custom-breadcrumb">
+          <li class="breadcrumb-item">
+            <a class="undecorated-link" ui-sref="home">
+              <i class="fa fa-home"></i> Home
+            </a>
+          </li>
+          <li class="breadcrumb-item active">{{vm.poll._id ? vm.poll.title : 'New poll'}}</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
   <!-- Toolbar -->
-  <div class="row mg20t mg20b">
-    <div class="col-xs-12">
-      <div class="form-group">
+  <div class="row">
+    <div class="col-xs-12 pdn">
+      <div class="custom-toolbar">
         <button class="btn btn-danger pull-right" ng-show="vm.poll._id" ng-click="vm.remove()">Delete</button>
         <button class="btn btn-default pull-right mg10r" ng-click="vm.discard()">Discard</button>
         <button class="btn btn-primary pull-right mg10r" ng-click="vm.save(true)">{{vm.poll._id ? ' Update' : ' Create'}}</button>
@@ -12,7 +28,7 @@
 
   <!-- Form -->
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-12 pdn">
       <div class="card">
         <!-- Category -->
         <div class="row">

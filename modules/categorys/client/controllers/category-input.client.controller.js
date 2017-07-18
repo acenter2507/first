@@ -57,7 +57,7 @@
       function handle_delete() {
         Action.delete_category(vm.category)
           .then(() => {
-            $state.go('categorys.list')
+            $state.go('categorys.list');
           });
       }
     };

@@ -10,14 +10,14 @@
     </div>
   </div>
 
-  <div class="row mg10b" ng-if="vm.isAdmin">
+  <div class="row" ng-if="vm.isAdmin">
     <div class="col-xs-12 pdn">
-      <div class="form-group">
+      <div class="custom-toolbar">
         <a ui-sref="categorys.create" class="btn btn-primary pull-right">Create category</a>
       </div>
     </div>
   </div>
-
+  
   <div class="row">
     <div class="col-xs-12 pdn">
       <div class="notice notice-warning" ng-show="vm.categorys.length === 0">

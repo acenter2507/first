@@ -5,9 +5,8 @@ angular.module(ApplicationConfiguration.applicationModuleName, ApplicationConfig
 
 // Setting HTML5 Location Mode
 angular.module(ApplicationConfiguration.applicationModuleName).config(['$locationProvider', '$httpProvider',
-  function ($locationProvider, $httpProvider) {
+  function ($locationProvider, $httpProvider, webStorage) {
     $locationProvider.html5Mode(true).hashPrefix('!');
-
     $httpProvider.interceptors.push('authInterceptor');
   }
 ]);

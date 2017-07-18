@@ -27,7 +27,8 @@ var ApplicationConfiguration = (function() {
     'chart.js',
     'textAngular',
     'ui.bootstrap.materialPicker',
-    'toastr'
+    'toastr',
+    'webStorageModule'
   ];
 
   // Add a new vertical module

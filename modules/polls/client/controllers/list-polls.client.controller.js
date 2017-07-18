@@ -13,7 +13,9 @@
     'Action',
     'toasty',
     'toastr',
-    'ngDialog'
+    'ngDialog',
+    'Storages',
+    'Constants'
   ];
 
   function PollsListController(
@@ -25,14 +27,16 @@
     Action,
     toasty,
     toast,
-    dialog
+    dialog,
+    Storages,
+    Constants
   ) {
     var vm = this;
     vm.authentication = Authentication;
     vm.isLogged = vm.authentication.user ? true : false;
     vm.polls = [];
     vm.hot_polls = [];
-    vm.activitys = [];
+    vm.activitys = Storages.get_session(Constants.storages.activitys, []);
     vm.categorys = [];
     vm.new_data = [];
     vm.page = 0;
@@ -59,6 +63,7 @@
       });
       Socket.on('activity', res => {
         vm.activitys.push(res);
+        Storages.get_session(Constants.storages.activitys, [])
       });
       $scope.$on('$destroy', function () {
         Socket.emit('unsubscribe_public');

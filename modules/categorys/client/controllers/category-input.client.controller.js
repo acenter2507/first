@@ -81,7 +81,7 @@
 
     function handle_discard() {
       if (vm.category._id) {
-        $state.go('categorys.view', { pollId: vm.category._id });
+        $state.go('categorys.view', { categoryId: vm.category._id });
       } else {
         $state.go('categorys.list');
       }

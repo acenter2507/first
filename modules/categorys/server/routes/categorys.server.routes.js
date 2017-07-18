@@ -18,6 +18,7 @@ module.exports = function(app) {
     .delete(categorys.delete);
 
   app.route('/api/count_polls/:categoryId').get(categorys.count_polls);
+  app.route('/api/categorys/:categoryId/polls/:page/:sort').get(categorys.polls);
 
   // Finish by binding the Category middleware
   app.param('categoryId', categorys.categoryByID);

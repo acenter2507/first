@@ -13,11 +13,11 @@ var path = require('path'),
 /**
  * Create a Category
  */
-exports.create = function(req, res) {
+exports.create = function (req, res) {
   var category = new Category(req.body);
   category.user = req.user;
 
-  category.save(function(err) {
+  category.save(function (err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -31,7 +31,7 @@ exports.create = function(req, res) {
 /**
  * Show the current Category
  */
-exports.read = function(req, res) {
+exports.read = function (req, res) {
   // convert mongoose document to JSON
   var category = req.category ? req.category.toJSON() : {};
 
@@ -45,12 +45,12 @@ exports.read = function(req, res) {
 /**
  * Update a Category
  */
-exports.update = function(req, res) {
+exports.update = function (req, res) {
   var category = req.category;
 
   category = _.extend(category, req.body);
 
-  category.save(function(err) {
+  category.save(function (err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -64,10 +64,10 @@ exports.update = function(req, res) {
 /**
  * Delete an Category
  */
-exports.delete = function(req, res) {
+exports.delete = function (req, res) {
   var category = req.category;
 
-  category.remove(function(err) {
+  category.remove(function (err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -81,8 +81,8 @@ exports.delete = function(req, res) {
 /**
  * List of Categorys
  */
-exports.list = function(req, res) {
-  Category.find().sort('-created').populate('user', 'displayName').exec(function(err, categorys) {
+exports.list = function (req, res) {
+  Category.find().sort('-created').populate('user', 'displayName').exec(function (err, categorys) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -96,16 +96,36 @@ exports.list = function(req, res) {
 /**
  * List of Categorys
  */
-exports.count_polls = function(req, res) {
-  Poll.find({ category: req.category._id }).count(function(err, count) {
+exports.count_polls = function (req, res) {
+  Poll.find({ category: req.category._id }).count(function (err, count) {
     res.jsonp(count);
   });
 };
-
+/**
+ * List of Categorys
+ */
+exports.polls = function (req, res) {
+  var page = req.params.page || 0;
+  var sort = req.params.sort || '-created';
+  Poll.find({ category: req.category._id, isPublic: true })
+    .sort(sort)
+    .populate('user', 'displayName profileImageURL')
+    .skip(10 * page)
+    .limit(10)
+    .exec(function (err, polls) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.jsonp(polls);
+      }
+    });
+};
 /**
  * Category middleware
  */
-exports.categoryByID = function(req, res, next, id) {
+exports.categoryByID = function (req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({

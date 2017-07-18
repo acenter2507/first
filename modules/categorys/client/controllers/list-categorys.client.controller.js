@@ -24,7 +24,8 @@
     ) {
     var vm = this;
     vm.user = Authentication.user;
-    vm.isAdmin = _.contains(vm.user.roles, 'admin');
+    vm.isLogged = vm.user ? true : false;
+    vm.isAdmin = vm.isLogged && _.contains(vm.user.roles, 'admin');
 
     var promise = CategorysService.query().$promise;
     promise.then(_categorys => {

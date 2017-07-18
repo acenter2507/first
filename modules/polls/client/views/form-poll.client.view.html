@@ -19,9 +19,9 @@
   <div class="row">
     <div class="col-xs-12 pdn">
       <div class="custom-toolbar">
-        <button class="btn btn-danger pull-right" ng-show="vm.poll._id" ng-click="vm.remove()">Delete</button>
-        <button class="btn btn-default pull-right mg10r" ng-click="vm.discard()">Discard</button>
+        <button class="btn btn-default pull-right" ng-click="vm.discard()">Discard</button>
         <button class="btn btn-primary pull-right mg10r" ng-click="vm.save(true)">{{vm.poll._id ? ' Update' : ' Create'}}</button>
+        <button class="btn btn-danger pull-right mg10r" ng-show="vm.poll._id" ng-click="vm.remove()">Delete</button>
       </div>
     </div>
   </div>

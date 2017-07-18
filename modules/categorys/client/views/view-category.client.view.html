@@ -1,5 +1,5 @@
 <section class="container mg10b" infinite-scroll="vm.get_polls()" infinite-scroll-distance='2'>
-  <div class="row mg10t mg10b">
+  <div class="row mg10t">
     <div class="col-xs-12 pdn">
       <div class="card">
         <ol class="breadcrumb custom-breadcrumb">
@@ -12,7 +12,7 @@
   </div>
 
   <div class="row mg10b" ng-if="vm.isAdmin">
-    <div class="col-xs-12">
+    <div class="col-xs-12 pdn">
       <div class="form-group">
         <a ui-sref="polls.create" class="btn btn-primary pull-right">Create poll</a>
       </div>

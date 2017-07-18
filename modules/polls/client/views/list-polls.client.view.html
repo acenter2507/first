@@ -155,7 +155,12 @@
       <div class="card">
         <strong>Hot polls</strong>
         <div class="side-list-poll" ng-repeat="poll in vm.hot_polls">
-          <div class="rank pull-left"><span class="rank-number"><strong>{{$index + 1}}</strong></span></div>
+          <div class="user-avatar pull-left">
+            <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user._id})">
+              <img src="{{poll.user.profileImageURL}}" alt="{{poll.user.displayName}}">
+            </a>
+            <img ng-if="!poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
+          </div>
           <a class="undecorated-link" ui-sref="polls.view({pollId: poll._id})" ng-bind="poll.title"></a>
           <div class="clearfix"></div>
         </div>

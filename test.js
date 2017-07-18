@@ -31,9 +31,9 @@ app.init(function () {
   - Test lại all case socket => done
   - Notifis: Like/dislike poll, comment, reply, suggest => done
   - Chức năng activity: những hoạt động đang diễn ra => done
+  - Màn hình category => done
 
   - Hoàn thiện màn hình home
-  - Màn hình category
 
   - Chức năng nhập lý do khi report
   - Đếm và quản lý số lần bị report của user

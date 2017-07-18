@@ -26,7 +26,7 @@
       .state('categorys.create', {
         url: '/create',
         templateUrl: 'modules/categorys/client/views/form-category.client.view.html',
-        controller: 'CategorysController',
+        controller: 'CategoryInputController',
         controllerAs: 'vm',
         resolve: {
           categoryResolve: newCategory
@@ -39,7 +39,7 @@
       .state('categorys.edit', {
         url: '/:categoryId/edit',
         templateUrl: 'modules/categorys/client/views/form-category.client.view.html',
-        controller: 'CategorysController',
+        controller: 'CategoryInputController',
         controllerAs: 'vm',
         resolve: {
           categoryResolve: getCategory

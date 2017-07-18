@@ -1,9 +1,69 @@
+<section class="container mg10b">
+  <div class="row mg10t">
+    <div class="col-xs-12 pdn">
+      <div class="card">
+        <ol class="breadcrumb custom-breadcrumb">
+          <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="home">Home</a></li>
+          <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="categorys.list">Categorys</a></li>
+          <li class="breadcrumb-item active">New category</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <!-- Tool bar -->
+  <div class="row" ng-if="vm.isAdmin">
+    <div class="col-xs-12 pdn">
+      <div class="custom-toolbar">
+        <button class="btn btn-danger pull-right" ng-if="vm.category._id" ng-click="vm.remove()">Delete</button>
+        <button class="btn btn-default pull-right mg10r" ng-click="vm.discard()">Discard</button>
+        <button class="btn btn-primary pull-right mg10r" ng-click="vm.save(true)">{{vm.category._id ? ' Update' : ' Create'}}</button>
+      </div>
+    </div>
+  </div>
+  <!-- Form -->
+  <div class="row">
+    <div class="col-xs-12 pdn">
+      <form name="vm.form.categoryForm" class="form-horizontal" ng-submit="vm.save(vm.form.categoryForm.$valid)" novalidate>
+        <!-- Name -->
+        <div class="form-group" show-errors>
+          <label class="control-label" for="name">Name</label>
+          <input name="name" type="text" ng-model="vm.category.name" id="name" class="form-control" placeholder="Name" required>
+          <div ng-messages="vm.form.categoryForm.name.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Category name is required.</p>
+          </div>
+        </div>
+        <!-- Color -->
+        <div class="form-group" show-errors>
+          <input type="hidden" name="color" ng-model="vm.category.color" required>
+          <md-menu md-offset="102 52">
+            <button class="btn-poll-color" ng-click="$mdMenu.open($event)" ng-style="{'background-color': (vm.category.color) ? vm.category.color : '#ccc'}">
+                    {{(vm.category.color) ? vm.category.color : 'Select color'}}</button>
+            <md-menu-content>
+              <material-picker format="'hex'" ng-model="vm.category.color" size="15"></material-picker>
+            </md-menu-content>
+          </md-menu>
+          <div ng-messages="vm.form.categoryForm.color.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">You must select color for category</p>
+          </div>
+        </div>
+        <!-- Icon class -->
+        <div class="form-group" show-errors>
+          <label class="control-label" for="name">Icon</label>
+          <input name="name" type="text" ng-model="vm.category.icon" id="name" class="form-control" placeholder="Awesome class" required>
+          <div ng-messages="vm.form.categoryForm.icon.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Category icon is required.</p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
 <section>
   <div class="page-header">
     <h1>{{vm.category._id ? 'Edit Category' : 'New Category'}}</h1>
   </div>
   <div class="col-md-12">
-    <form name="vm.form.categoryForm" class="form-horizontal" ng-submit="vm.save(vm.form.categoryForm.$valid)" novalidate>
+    <form name="vm.form.categoryForm" class="form-horizontal" novalidate>
       <fieldset>
         <div class="form-group" show-errors>
           <label class="control-label" for="name">Name</label>

@@ -16,11 +16,6 @@ var CategorySchema = new Schema({
     required: 'Please fill Category name',
     trim: true
   },
-  description: {
-    type: String,
-    default: '',
-    trim: true
-  },
   icon: {
     type: String,
     default: 'fa-question'

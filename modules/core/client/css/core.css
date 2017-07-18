@@ -859,7 +859,7 @@ a.notifis-list-item:focus {
 }
 
 .pd6l {
-  padding-left: 6px;
+  padding-left: 6px !important;
 }
 
 .pd10l {
@@ -907,7 +907,7 @@ a.notifis-list-item:focus {
 }
 
 .pd6r {
-  padding-right: 6px;
+  padding-right: 6px !important;
 }
 
 .pd10r {

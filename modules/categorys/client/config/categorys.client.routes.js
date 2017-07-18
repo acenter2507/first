@@ -29,10 +29,10 @@
         controller: 'CategoryPollsController',
         controllerAs: 'vm',
         resolve: {
-          categoryResolve: newCategory
+          categoryResolve: getCategory
         },
         data: {
-          pageTitle: 'Categorys Polls'
+          pageTitle: '{{ categoryResolve.name }}'
         }
       })
       .state('categorys.create', {

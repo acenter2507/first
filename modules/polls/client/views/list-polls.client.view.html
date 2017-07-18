@@ -1,17 +1,21 @@
 <section class="container mg10b" infinite-scroll="vm.get_polls()" infinite-scroll-distance='2'>
-  <div class="row mg10t mg10b">
-    <div class="col-xs-12">
-      <div class="form-group">
+  <!-- Toolbar -->
+  <div class="row mg10t">
+    <div class="col-xs-12 pdn">
+      <div class="custom-toolbar">
         <a ui-sref="polls.create" class="btn btn-primary pull-right">Create poll</a>
-        <a ng-click="vm.show_toasty()" class="btn btn-warning pull-right mg10r">Toasty</a>
-        <a ng-click="vm.show_toastr()" class="btn btn-danger pull-right mg10r">Toastr</a>
+        <!--<a ng-click="vm.show_toasty()" class="btn btn-warning pull-right mg10r">Toasty</a>-->
+        <!--<a ng-click="vm.show_toastr()" class="btn btn-danger pull-right mg10r">Toastr</a>-->
       </div>
     </div>
   </div>
+
   <div class="row mg10b">
-    <div class="col-xs-12">
-      <div class="notice notice-info" ng-show="vm.is_has_new_polls">
-        New poll has just been added, <a class="undecorated-link" ng-click="vm.load_new()">load now</a>.
+    <div class="col-xs-12 pdn">
+      <div class="custom-toolbar">
+        <div class="notice notice-info" ng-show="vm.is_has_new_polls">
+          New poll has just been added, <a class="undecorated-link" ng-click="vm.load_new()">load now</a>.
+        </div>
       </div>
     </div>
   </div>

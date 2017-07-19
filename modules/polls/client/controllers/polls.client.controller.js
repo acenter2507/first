@@ -43,11 +43,10 @@
     $stateParams
   ) {
     var vm = this;
-    console.log('Start');
     vm.authentication = Authentication;
     vm.isLogged = vm.authentication.user ? true : false;
-
     vm.poll = poll;
+
     vm.form = {};
     // Options variable
     vm.opts = [];
@@ -87,7 +86,7 @@
 
     vm.close_duration = {};
     vm.remaining = 1;
-    console.log('Start 2');
+    
     init();
 
     // Init data
@@ -95,6 +94,13 @@
       if (!vm.poll._id) {
         $state.go('polls.list');
       }
+      // Verify parameters
+      if (!vm.poll.isPublic && $stateParams.share !== vm.poll.share_code) {
+        vm.isShow = false;
+        return;
+      }
+      vm.isShow = true;
+      verify_params();
       get_info_poll()
         .then(() => {
           if (!vm.poll.isCurrentUserOwner) {
@@ -772,6 +778,5 @@
       vm.chart.type = vm.chart.type === 'polarArea' ?
         'pie' : 'polarArea';
     };
-    console.log('Start 3');
   }
 })();

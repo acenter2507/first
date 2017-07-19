@@ -526,7 +526,7 @@
     vm.share = () => {
       if (!vm.poll.share_code || vm.poll.share_code === '') {
         vm.poll.share_code = make_code();
-        vm.poll.$save(() => {
+        vm.poll.$update(() => {
           show_dialog();
         }, err => {
           toast.error(err.message, 'Error!');

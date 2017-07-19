@@ -195,7 +195,7 @@
     function loadBookmarks() {
       UserApi.get_bookmarks(vm.authentication.user._id, 0)
         .success(res => {
-          console.log(res);
+          vm.bookmarks = _.pluck(res, 'poll');
         })
         .error(err => {
           toast.error(err.message, 'Error!');
@@ -326,64 +326,64 @@
     vm.load_new = () => {
       $state.reload();
     };
-    vm.themes = [{
-      name: 'Default Theme',
-      code: 'default'
-    }, {
-      name: 'Material Design',
-      code: 'material'
-    }, {
-      name: 'Bootstrap 3',
-      code: 'bootstrap'
-    }];
-    vm.toastyTypes = [{
-      name: 'Default',
-      code: 'default',
-    }, {
-      name: 'Info',
-      code: 'info'
-    }, {
-      name: 'Success',
-      code: 'success'
-    }, {
-      name: 'Wait',
-      code: 'wait'
-    }, {
-      name: 'Error',
-      code: 'error'
-    }, {
-      name: 'Warning',
-      code: 'warning'
-    }];
-    vm.toastyOpts = {
-      title: 'Toast It!',
-      msg: 'Mmmm, tasties...',
-      showClose: false,
-      clickToClose: true,
-      timeout: 5000,
-      sound: true,
-      html: false,
-      shake: false,
-      theme: vm.themes[1].code,
-      type: vm.toastyTypes[0].code
-    };
-    vm.show_toasty = () => {
-      toasty[vm.toastyOpts.type]({
-        title: vm.toastyOpts.title,
-        msg: vm.toastyOpts.msg,
-        showClose: vm.toastyOpts.showClose,
-        clickToClose: vm.toastyOpts.clickToClose,
-        sound: vm.toastyOpts.sound,
-        shake: vm.toastyOpts.shake,
-        timeout: vm.toastyOpts.timeout || false,
-        html: vm.toastyOpts.html,
-        theme: vm.toastyOpts.theme
-      });
-    };
-    vm.show_toastr = () => {
-      toast.success('Hello world! ' + new Date().getSeconds(), 'Toastr fun!');
-      toast.error('Hello world! ' + new Date().getSeconds(), 'Toastr fun!');
-      toast.info('Hello world! ' + new Date().getSeconds(), 'Toastr fun!');
-    };
+    // vm.themes = [{
+    //   name: 'Default Theme',
+    //   code: 'default'
+    // }, {
+    //   name: 'Material Design',
+    //   code: 'material'
+    // }, {
+    //   name: 'Bootstrap 3',
+    //   code: 'bootstrap'
+    // }];
+    // vm.toastyTypes = [{
+    //   name: 'Default',
+    //   code: 'default',
+    // }, {
+    //   name: 'Info',
+    //   code: 'info'
+    // }, {
+    //   name: 'Success',
+    //   code: 'success'
+    // }, {
+    //   name: 'Wait',
+    //   code: 'wait'
+    // }, {
+    //   name: 'Error',
+    //   code: 'error'
+    // }, {
+    //   name: 'Warning',
+    //   code: 'warning'
+    // }];
+    // vm.toastyOpts = {
+    //   title: 'Toast It!',
+    //   msg: 'Mmmm, tasties...',
+    //   showClose: false,
+    //   clickToClose: true,
+    //   timeout: 5000,
+    //   sound: true,
+    //   html: false,
+    //   shake: false,
+    //   theme: vm.themes[1].code,
+    //   type: vm.toastyTypes[0].code
+    // };
+    // vm.show_toasty = () => {
+    //   toasty[vm.toastyOpts.type]({
+    //     title: vm.toastyOpts.title,
+    //     msg: vm.toastyOpts.msg,
+    //     showClose: vm.toastyOpts.showClose,
+    //     clickToClose: vm.toastyOpts.clickToClose,
+    //     sound: vm.toastyOpts.sound,
+    //     shake: vm.toastyOpts.shake,
+    //     timeout: vm.toastyOpts.timeout || false,
+    //     html: vm.toastyOpts.html,
+    //     theme: vm.toastyOpts.theme
+    //   });
+    // };
+    // vm.show_toastr = () => {
+    //   toast.success('Hello world! ' + new Date().getSeconds(), 'Toastr fun!');
+    //   toast.error('Hello world! ' + new Date().getSeconds(), 'Toastr fun!');
+    //   toast.info('Hello world! ' + new Date().getSeconds(), 'Toastr fun!');
+    // };
   }
 })();

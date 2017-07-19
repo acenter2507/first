@@ -15,7 +15,8 @@
     'toastr',
     'ngDialog',
     'Storages',
-    'Constants'
+    'Constants',
+    'UserApi'
   ];
 
   function PollsListController(
@@ -29,7 +30,8 @@
     toast,
     dialog,
     Storages,
-    Constants
+    Constants,
+    UserApi
   ) {
     var vm = this;
     vm.authentication = Authentication;
@@ -38,6 +40,7 @@
     vm.hot_polls = [];
     vm.activitys = JSON.parse(Storages.get_session(Constants.storages.activitys, JSON.stringify([])));
     vm.categorys = [];
+    vm.bookmarks = [];
     vm.new_data = [];
     vm.page = 0;
     vm.busy = false;
@@ -51,6 +54,9 @@
       loadCategorys();
       // load Hot poll
       loadHotPolls();
+      if (vm.isLogged) {
+        loadBookmarks();
+      }
     }
 
     function initSocket() {
@@ -184,6 +190,15 @@
                 toast.error(err.message, 'Error!');
               });
           });
+        });
+    }
+    function loadBookmarks() {
+      UserApi.get_bookmarks(vm.authentication.user._id, 0)
+        .success(res => {
+          console.log(res);
+        })
+        .error(err => {
+          toast.error(err.message, 'Error!');
         });
     }
     function get_owner_follow(poll) {

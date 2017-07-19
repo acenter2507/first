@@ -189,6 +189,7 @@
       <!-- Bookmark -->
       <div class="card" ng-if="vm.isLogged">
         <strong class="card-title">Bookmarks</strong>
+        <small class="pull-right"><a ui-sref="profile.bookmarks({ userId: vm.authentication.user._id })">View all</a></small>
       </div>
     </div>
     <div class="clearfix"></div>

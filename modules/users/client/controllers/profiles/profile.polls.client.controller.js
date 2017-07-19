@@ -26,13 +26,12 @@ angular.module('users').controller('ProfilePollsController', [
       $scope.busy = true;
       UserApi.get_polls($scope.profile._id, $scope.page)
         .then(res => {
-          console.log(res);
-          if (!res || !res.length || res.length === 0) {
+          if (!res.data.length || res.data.length === 0) {
             $scope.busy = false;
             $scope.stopped = true;
             return;
           }
-          $scope.new_data = res || [];
+          $scope.new_data = res.data || [];
           var promises = [];
           $scope.new_data.forEach(poll => {
             poll.isCurrentUserOwner = $scope.isLogged && $scope.user._id === poll.user._id;

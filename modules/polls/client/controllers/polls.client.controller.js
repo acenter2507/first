@@ -95,7 +95,7 @@
         $state.go('polls.list');
       }
       // Verify parameters
-      if (!vm.poll.isPublic && $stateParams.share !== vm.poll.share_code) {
+      if (!vm.poll.isCurrentUserOwner && !vm.poll.isPublic && $stateParams.share !== vm.poll.share_code) {
         vm.isShow = false;
         return;
       }

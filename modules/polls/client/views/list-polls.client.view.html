@@ -150,6 +150,7 @@
           <small>{{activity.action}}</small>
           <small><strong><a class="undecorated-link" ui-sref="polls.view({pollId: activity.poll})">{{activity.title}}</a></strong></small>
           <div class="clearfix"></div>
+          <hr class="mg5t mg5b">
         </div>
       </div>
       <div class="card">
@@ -163,6 +164,7 @@
           </div>
           <a class="undecorated-link" ui-sref="polls.view({pollId: poll._id})" ng-bind="poll.title"></a>
           <div class="clearfix"></div>
+          <hr class="mg5t mg5b">
         </div>
       </div>
     </div>
@@ -185,7 +187,7 @@
         </ul>
       </div>
       <!-- Bookmark -->
-      <div class="card">
+      <div class="card" ng-if="vm.isLogged">
         <strong class="card-title">Bookmarks</strong>
       </div>
     </div>

@@ -1,4 +1,5 @@
 <div class="container" ng-controller="ProfilePollsController">
+  <!-- Breadcrumb -->
   <div class="row profile-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="home">Home</a></li>
@@ -7,6 +8,7 @@
     </ol>
   </div>
   <hr>
+  <!-- List poll -->
   <div class="row" infinite-scroll="get_polls()" infinite-scroll-distance='2'>
     <div ng-repeat="poll in polls | filter: poll_filter" class="card">
       <div clas="poll-header">
@@ -34,7 +36,7 @@
                 <li ng-if="isLogged && !poll.isCurrentUserOwner && !poll.reported"><a class="undecorated-link" ng-click="report_poll(poll)"><i class="fa fa-exclamation-circle"></i>&nbsp;Report poll</a></li>
                 <li ng-if="isCurrentOwner"><a class="undecorated-link" ui-sref="polls.edit({ pollId: poll._id })"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
                 <li ng-if="isCurrentOwner"><a class="undecorated-link" ng-click="delete_poll(poll)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
-                <li ng-if="vm.isLogged && !poll.isCurrentUserOwner && !poll.bookmarked"><a class="undecorated-link" ng-click="bookmark_poll(poll)"><i class="fa fa-bookmark"></i>&nbsp;Bookmark poll</a></li>
+                <li ng-if="isLogged && !poll.isCurrentUserOwner && !poll.bookmarked"><a class="undecorated-link" ng-click="bookmark_poll(poll)"><i class="fa fa-bookmark"></i>&nbsp;Bookmark poll</a></li>
               </ul>
             </md-menu-content>
           </md-menu>
@@ -52,7 +54,6 @@
         <div class="clearfix"></div>
         <hr class="mg5t mg10b">
       </div>
-
       <div clas="poll-body">
         <h4><a ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a></h4>
         <div class="text-body" ta-bind="text" ng-model="poll.summary" ta-readonly="true"></div>
@@ -98,7 +99,6 @@
         <!-- #options -->
         <hr class="mg10t mg10b">
       </div>
-
       <div clas="poll-footer">
         <p class="poll_item_info">
           <i class="fa fa-heart-o" aria-hidden="true"></i>

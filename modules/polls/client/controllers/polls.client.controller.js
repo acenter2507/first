@@ -537,7 +537,7 @@
       function show_dialog() {
         $scope.message_title = 'Share poll!';
         $scope.message_content = 'Send url for anyone you want to share this poll.';
-        $scope.message_url = $location.path();
+        $scope.message_url = $location.absUrl().split('?')[0];
         dialog.openConfirm({
           scope: $scope,
           templateUrl: 'modules/core/client/views/templates/share.dialog.template.html'

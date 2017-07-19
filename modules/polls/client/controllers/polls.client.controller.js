@@ -100,7 +100,6 @@
         return;
       }
       vm.isShow = true;
-      verify_params();
       get_info_poll()
         .then(() => {
           if (!vm.poll.isCurrentUserOwner) {

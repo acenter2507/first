@@ -46,6 +46,10 @@ var PollSchema = new Schema({
     type: Boolean,
     default: false
   },
+  share_code: {
+    type: String,
+    default: ''
+  },
   user: {
     type: Schema.ObjectId,
     ref: 'User'

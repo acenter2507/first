@@ -4,6 +4,7 @@
   angular.module('polls').controller('PollsController', PollsController);
 
   PollsController.$inject = [
+    '$location',
     '$rootScope',
     '$scope',
     '$state',
@@ -23,6 +24,7 @@
   ];
 
   function PollsController(
+    $location,
     $rootScope,
     $scope,
     $state,
@@ -492,6 +494,14 @@
       }
       return Math.floor(value * 100 / total) || 0;
     }
+    // Random code share poll
+    function make_code() {
+      var text = "";
+      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      for (var i = 0; i < 10; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+      return text;
+    }
 
     // Remove existing Poll
     vm.remove = () => {
@@ -513,7 +523,29 @@
         });
       }
     };
-
+    vm.share = () => {
+      if (!vm.poll.share_code || vm.poll.share_code === '') {
+        vm.poll.share_code = make_code();
+        vm.poll.$save(() => {
+          show_dialog();
+        }, err => {
+          toast.error(err.message, 'Error!');
+        });
+      } else {
+        show_dialog();
+      }
+      function show_dialog() {
+        $scope.message_title = 'Share poll!';
+        $scope.message_content = 'Send url for anyone you want to share this poll.';
+        $scope.message_url = $location.path();
+        dialog.openConfirm({
+          scope: $scope,
+          templateUrl: 'modules/core/client/views/templates/share.dialog.template.html'
+        }).then(confirm => {
+        }, reject => {
+        });
+      }
+    };
     vm.like_poll = type => {
       if (!vm.isLogged) {
         toast.error('You must login to like this poll.', 'Error!');

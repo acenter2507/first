@@ -499,6 +499,19 @@ a.notifis-list-item:focus {
   background-color: transparent;
   border-radius: 0;
 }
+.badge-count {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  line-height: 1;
+  color: #337ab7;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-color: transparent;
+}
+
 .mgn {
   margin: 0 !important;
 }

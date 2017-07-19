@@ -48,7 +48,6 @@ angular.module('users').controller('ProfilePollsController', [
           $scope.polls = _.union($scope.polls, $scope.new_data);
           $scope.page += 1;
           $scope.busy = false;
-          $scope.$apply();
           $scope.new_data = [];
         })
         .catch(err => {

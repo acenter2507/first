@@ -63,7 +63,7 @@
       });
       Socket.on('activity', res => {
         vm.activitys.push(res);
-        Storages.get_session(Constants.storages.activitys, [])
+        Storages.set_session(Constants.storages.activitys, vm.activitys);
       });
       $scope.$on('$destroy', function () {
         Socket.emit('unsubscribe_public');

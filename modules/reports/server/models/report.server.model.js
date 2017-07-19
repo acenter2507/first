@@ -14,6 +14,10 @@ var ReportSchema = new Schema({
     type : Schema.ObjectId,
     ref : 'Poll'
   },
+  reason: {
+    type: String,
+    default: ''
+  },
   created: {
     type: Date,
     default: Date.now

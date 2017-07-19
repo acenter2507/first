@@ -17,6 +17,7 @@
       </div>
     </div>
   </div>
+
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 col-lg-push-3 pdn">
       <div ng-repeat="poll in vm.polls" class="card">
@@ -67,11 +68,12 @@
           <div class="clearfix"></div>
           <hr class="mg5t mg10b">
         </div>
+
         <div clas="poll-body">
           <h4><a ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a></h4>
           <!--<p class="text-justify poll_item_body" ng-bind-html="poll.summary | nl2br"></p>-->
           <div class="text-body" ta-bind="text" ng-model="poll.summary" ta-readonly="true"></div>
-          <p ng-show="poll.body.length > poll.summary.length" class="poll_item_body">...
+          <p ng-show="poll.body.length > poll.summary.length" class="poll_item_body">
             <a class="undecorated-link" ui-sref="polls.view({ pollId: poll._id })">see more</a>
           </p>
           <!-- options -->
@@ -114,6 +116,7 @@
           <!-- #options -->
           <hr class="mg10t mg10b">
         </div>
+
         <div clas="poll-footer">
           <p class="poll_item_info">
             <i class="fa fa-heart-o" aria-hidden="true"></i>

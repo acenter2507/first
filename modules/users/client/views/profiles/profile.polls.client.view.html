@@ -11,7 +11,7 @@
     <div ng-repeat="poll in polls | filter: poll_filter" class="card">
       <div clas="poll-header">
         <div class="user-avatar pull-left">
-          <img src="{{profile.profileImageURL}}" alt="{{profile.displayName}}">
+          <img src="{{poll.user.profileImageURL}}" alt="{{poll.user.displayName}}">
         </div>
         <span class="pull-left">
           <strong><a class="undecorated-link" ui-sref="profile.info({userId: profile._id})" ng-bind="profile.displayName"></a></strong>
@@ -40,22 +40,23 @@
           </md-menu>
         </span>
         <br>
-        <span ng-if="poll.allow_guest" class="fa fa-globe">
-          <md-tooltip md-direction="bottom">This poll is public</md-tooltip>
-        </span>
-        <span ng-if="!poll.allow_guest" class="fa fa-users">
-          <md-tooltip md-direction="bottom">Only user can vote</md-tooltip>
-        </span>
-        <a class="undecorated-link" ui-sref="categorys.polls({ categoryId: poll.category._id })">{{ poll.category.name }}</a>
+        <div class="mg5t">
+          <span ng-if="poll.allow_guest" class="fa fa-globe">
+            <md-tooltip md-direction="bottom">This poll is public</md-tooltip>
+          </span>
+          <span ng-if="!poll.allow_guest" class="fa fa-users">
+            <md-tooltip md-direction="bottom">Only user can vote</md-tooltip>
+          </span>
+          <a class="undecorated-link" ui-sref="categorys.polls({ categoryId: poll.category._id })">{{ poll.category.name }}</a>
+        </div>
         <div class="clearfix"></div>
         <hr class="mg5t mg10b">
       </div>
 
       <div clas="poll-body">
         <h4><a ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a></h4>
-        <!--<p class="text-justify poll_item_body" ng-bind-html="poll.summary | nl2br"></p>-->
         <div class="text-body" ta-bind="text" ng-model="poll.summary" ta-readonly="true"></div>
-        <p ng-show="poll.body.length > poll.summary.length" class="poll_item_body">...
+        <p ng-show="poll.body.length > poll.summary.length" class="poll_item_body">
           <a class="undecorated-link" ui-sref="polls.view({ pollId: poll._id })">see more</a>
         </p>
         <!-- options -->
@@ -101,20 +102,20 @@
       <div clas="poll-footer">
         <p class="poll_item_info">
           <i class="fa fa-heart-o" aria-hidden="true"></i>
-          <strong> Votes: </strong>{{poll.voteCnt}}
+          <strong> Votes: </strong>{{poll.report.voteCnt}}
         </p>
         <p class="poll_item_info">
           <i class="fa fa-eye" aria-hidden="true"></i>
-          <strong> Views: </strong>{{poll.viewCnt}}
+          <strong> Views: </strong>{{poll.report.viewCnt}}
         </p>
         <p class="poll_item_info">
           <i class="fa fa-commenting" aria-hidden="true"></i>
-          <strong> Comments: </strong>{{poll.cmtCnt}}
+          <strong> Comments: </strong>{{poll.report.cmtCnt}}
         </p>
       </div>
-
       <div class="clearfix"></div>
     </div>
+
     <div class="notice notice-warning" ng-show="polls.length === 0 && stopped">
       <strong>Sorry</strong> {{profile.displayName}} has not create any polls.
     </div>

@@ -33,10 +33,11 @@ app.init(function () {
   - Chức năng activity: những hoạt động đang diễn ra => done
   - Màn hình category => done
   - Chức năng private và share link => done
+  - Chức năng nhập lý do khi report => done
 
-  - Chức năng nhập lý do khi report
+  - Chức năng quản lý toàn bộ thông tin của user
   - Đếm và quản lý số lần bị report của user
-  - Chức năng report comment
+  - Chức năng report comment ** Version 2
 
   - Hoàn thiện màn hình home
   - Share mạng xã hội

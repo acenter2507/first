@@ -26,6 +26,7 @@ angular.module('users').controller('ProfilePollsController', [
       $scope.busy = true;
       UserApi.get_polls($scope.profile._id, $scope.page)
         .then(res => {
+          console.log(res);
           if (!res || !res.length || res.length === 0) {
             $scope.busy = false;
             $scope.stopped = true;

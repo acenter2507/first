@@ -426,7 +426,7 @@ div.materialpicker-white.selected {
   cursor: pointer;
 }
 .span-link {
-  color: #ddd;
+  color: #999;
 }
 md-menu-content {
   max-height: 400px !important;

@@ -597,19 +597,29 @@
         });
     };
 
-    vm.report_poll = () => {
+    vm.report_poll = (poll) => {
       if (vm.reported) {
         toast.error('You are already report this poll.', 'Error!');
         return;
       }
-      Action.save_report(vm.poll._id)
-        .then(res => {
-          vm.reported = (res) ? true : false;
-          $scope.$apply();
-        })
-        .catch(err => {
-          toast.error(err.message, 'Error!');
-        });
+      dialog.openConfirm({
+        scope: $scope,
+        templateUrl: 'modules/core/client/views/templates/report.dialog.template.html'
+      }).then(reason => {
+        handle_confirm(reason);
+      }, reject => {
+      });
+      function handle_confirm(reason) {
+        Action.save_report(vm.poll._id, reason)
+          .then(res => {
+            vm.reported = (res) ? true : false;
+            $scope.$apply();
+            toast.success('You have successfully reported this poll.', 'Thank you!');
+          })
+          .catch(err => {
+            toast.error(err.message, 'Error!');
+          });
+      }
     };
 
     vm.bookmark_poll = () => {

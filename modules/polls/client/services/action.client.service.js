@@ -477,10 +477,11 @@
           });
       });
     };
-    this.save_report = pollId => {
+    this.save_report = (pollId, reason) => {
       return new Promise((resolve, reject) => {
         var rs_report = new Reports({
-          poll: pollId
+          poll: pollId,
+          reason: reason
         });
         rs_report.$save(
           res => {

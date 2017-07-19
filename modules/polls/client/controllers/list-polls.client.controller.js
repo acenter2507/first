@@ -291,18 +291,16 @@
       }, reject => {
       });
       function handle_confirm(reason) {
-        console.log(reason);
+        Action.save_report(poll._id, reason)
+          .then(res => {
+            poll.reported = (res) ? true : false;
+            $scope.$apply();
+            toast.success('You have successfully reported this poll.', 'Thank you!');
+          })
+          .catch(err => {
+            toast.error(err.message, 'Error!');
+          });
       }
-
-      // Action.save_report(poll._id)
-      //   .then(res => {
-      //     poll.reported = (res) ? true : false;
-      //     $scope.$apply();
-      //     toast.success('You have successfully reported this poll.', 'Thank you!');
-      //   })
-      //   .catch(err => {
-      //     toast.error(err.message, 'Error!');
-      //   });
     };
     vm.bookmark_poll = (poll) => {
       if (poll.bookmarked) {

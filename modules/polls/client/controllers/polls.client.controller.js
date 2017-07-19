@@ -43,6 +43,7 @@
     $stateParams
   ) {
     var vm = this;
+    console.log('Start');
     vm.authentication = Authentication;
     vm.isLogged = vm.authentication.user ? true : false;
 
@@ -86,7 +87,7 @@
 
     vm.close_duration = {};
     vm.remaining = 1;
-
+    console.log('Start 2');
     init();
 
     // Init data
@@ -537,7 +538,7 @@
       function show_dialog() {
         $scope.message_title = 'Share poll!';
         $scope.message_content = 'Send url for anyone you want to share this poll.';
-        $scope.message_url = $location.absUrl().split('?')[0];
+        $scope.message_url = $location.absUrl().split('?')[0] + '?share=' + vm.poll.share_code;
         dialog.openConfirm({
           scope: $scope,
           templateUrl: 'modules/core/client/views/templates/share.dialog.template.html'
@@ -771,5 +772,6 @@
       vm.chart.type = vm.chart.type === 'polarArea' ?
         'pie' : 'polarArea';
     };
+    console.log('Start 3');
   }
 })();

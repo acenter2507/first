@@ -36,7 +36,7 @@
     vm.isLogged = vm.authentication.user ? true : false;
     vm.polls = [];
     vm.hot_polls = [];
-    vm.activitys = Storages.get_session(Constants.storages.activitys, []);
+    vm.activitys = JSON.parse(Storages.get_session(Constants.storages.activitys, JSON.stringify([])));
     vm.categorys = [];
     vm.new_data = [];
     vm.page = 0;
@@ -63,7 +63,7 @@
       });
       Socket.on('activity', res => {
         vm.activitys.push(res);
-        Storages.set_session(Constants.storages.activitys, vm.activitys);
+        Storages.set_session(Constants.storages.activitys, JSON.stringify(namesvm.activitys));
       });
       $scope.$on('$destroy', function () {
         Socket.emit('unsubscribe_public');

@@ -6,9 +6,9 @@
       <li class="breadcrumb-item active">Polls</li>
     </ol>
   </div>
-  <div class="row mg50t" infinite-scroll="get_polls()" infinite-scroll-distance='2'>
+  <hr>
+  <div class="row" infinite-scroll="get_polls()" infinite-scroll-distance='2'>
     <div ng-repeat="poll in polls | filter: poll_filter" class="card">
-
       <div clas="poll-header">
         <div class="user-avatar pull-left">
           <img src="{{profile.profileImageURL}}" alt="{{profile.displayName}}">

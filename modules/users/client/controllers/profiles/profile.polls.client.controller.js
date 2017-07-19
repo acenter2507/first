@@ -4,7 +4,8 @@ angular.module('users').controller('ProfilePollsController', [
   '$scope',
   'UserApi',
   'Action',
-  function($scope, UserApi, Action) {
+  'toastr',
+  function($scope, UserApi, Action, toast) {
     $scope.polls = [];
     $scope.page = 0;
     $scope.busy = false;
@@ -51,8 +52,8 @@ angular.module('users').controller('ProfilePollsController', [
           $scope.new_data = [];
         })
         .catch(err => {
-          vm.busy = false;
-          vm.stopped = true;
+          $scope.busy = false;
+          $scope.stopped = true;
           toast.error(err.message, 'Error!');
         });
     }

@@ -32,15 +32,14 @@ app.init(function () {
   - Notifis: Like/dislike poll, comment, reply, suggest => done
   - Chức năng activity: những hoạt động đang diễn ra => done
   - Màn hình category => done
-
-  - Hoàn thiện màn hình home
+  - Chức năng private và share link => done
 
   - Chức năng nhập lý do khi report
   - Đếm và quản lý số lần bị report của user
   - Chức năng report comment
-  
+
+  - Hoàn thiện màn hình home
   - Share mạng xã hội
-  - Chức năng private và share link
 
 3. Test
   - Test các cài đặt của poll

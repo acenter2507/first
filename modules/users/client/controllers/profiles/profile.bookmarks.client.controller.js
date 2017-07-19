@@ -4,7 +4,8 @@ angular.module('users').controller('ProfileBookmarksController', [
   '$scope',
   'UserApi',
   'Action',
-  function($scope, UserApi, Action) {
+  'toastr',
+  function($scope, UserApi, Action, toast) {
     $scope.polls = [];
     $scope.page = 0;
     $scope.busy = false;

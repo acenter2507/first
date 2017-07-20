@@ -88,7 +88,9 @@
 
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown" uib-dropdown ui-sref-active="active">
-        <input type="text" name="search" placeholder="Search..">
+        <form class="navbar-form" role="search" ng-submit="search()">
+          <input type="text" name="search" id="txt-search">
+        </form>
       </li>
     </ul>
   </nav>

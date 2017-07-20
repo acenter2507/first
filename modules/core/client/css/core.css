@@ -521,6 +521,20 @@ a.notifis-list-item:focus {
   border-radius: 0;
   font-size: 14px;
 }
+input#txt-search {
+  width: 130px;
+  box-sizing: border-box;
+  font-size: 1.0em;
+  background-image: url('/modules/core/client/img/brand/search.png');
+  background-position: 10px 10px;
+  background-repeat:no-repeat;
+  background-position:right center;
+  padding: 12px 40px 12px 12px;
+  transition: width 0.4s ease-in-out;
+}
+input#txt-search:focus {
+  width: 100%;
+}
 .mgn {
   margin: 0 !important;
 }

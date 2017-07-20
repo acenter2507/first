@@ -332,7 +332,9 @@ angular.module('users').controller('ProfileFollowsController', [
           if (poll.follow.following) {
             toast.success('You followed ' + poll.title, 'Success!');
           } else {
-            $scope.polls = _.without($scope.polls, poll);
+            if ($scope.isCurrentOwner) {
+              $scope.polls = _.without($scope.polls, poll);
+            }
           }
         })
         .catch(err => {

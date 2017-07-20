@@ -582,9 +582,8 @@ exports.search = function (req, res) {
     and_arr.push({ user: condition.by });
   }
   if (condition.created) {
-    var today = new Date();
-    today -= parseInt(condition.created);
-    var created = new Date(today);
+    var today = new Date().getTime();
+    var created = new Date(today - parseInt(condition.created));
     console.log(created);
     if (condition.timing === 'old') {
       and_arr.push({ created: { $lt: created } });

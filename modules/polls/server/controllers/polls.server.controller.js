@@ -562,6 +562,12 @@ exports.findView = function(req, res) {
   }
 };
 
+
+exports.search = function(req, res) {
+  console.log(req.body.condition);
+  res.jsonp();
+};
+
 /**
  * Poll middleware
  */

@@ -591,6 +591,9 @@
     this.delete_category = category => {
       category.$remove();
     };
+    this.search = condition => {
+      return $http.post('/api/search', { condition: condition });
+    };
     return this;
   }
 })();

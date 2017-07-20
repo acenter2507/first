@@ -628,6 +628,7 @@ exports.search = function (req, res) {
         if (err) {
           return reject(err);
         } else {
+          console.log(_report);
           poll.report = _report;
           return resolve(poll);
         }

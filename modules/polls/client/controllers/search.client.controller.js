@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('polls').controller('PollsSearchController', [
+  '$location',
   '$scope',
   '$state',
   'Authentication',
@@ -9,7 +10,7 @@ angular.module('polls').controller('PollsSearchController', [
   '$stateParams',
   'Storages',
   'Constants',
-  function ($scope, $state, Authentication, Categorys, Action, $stateParams, Storages, Constants) {
+  function ($location, $scope, $state, Authentication, Categorys, Action, $stateParams, Storages, Constants) {
     $scope.detailToggle = -1;
     $scope.form = {};
     $scope.categorys = Categorys.query();
@@ -60,6 +61,7 @@ angular.module('polls').controller('PollsSearchController', [
     }
 
     $scope.clear_preferences = () => {
+      $location.absUrl($location.absUrl().split('?')[0]);
       $scope.condition = {};
     };
     $scope.save_preferences = () => {

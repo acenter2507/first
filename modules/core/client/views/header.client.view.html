@@ -90,24 +90,14 @@
       </li>
     </ul>
 
-    <!-- Search -->
-    <ul class="nav navbar-nav navbar-right">
-      <li class="dropdown" uib-dropdown ui-sref-active="active">
-        <a class="dropdown-toggle notif-dropdown-toggle" uib-dropdown-toggle role="button">
-          <span class="fa fa-search fa-lg"></span>
-        </a>
-        <ul class="dropdown-menu" role="menu">
-          <li>
-            <form>
-              <input type="text" class="form-control" placeholder="Search" name="q">
-            </form>
-          </li>
-          <li class="text-center">
-            <a ui-sref="search">Full search</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
+    <form class="navbar-form">
+      <div class="form-group" style="display:inline;">
+        <div class="input-group">
+          <input type="text" class="form-control">
+          <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+        </div>
+      </div>
+    </form>
 
   </nav>
   <div class="clearfix"></div>

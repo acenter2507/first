@@ -596,7 +596,7 @@ exports.search = function (req, res) {
     .then(_polls => {
       polls = _polls;
       var promise = [];
-      _polls.forEach(poll => {
+      polls.forEach(poll => {
         promise.push(_poll_report(poll));
       });
       return Promise.all(promise);

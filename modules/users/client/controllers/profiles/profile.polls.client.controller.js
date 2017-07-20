@@ -4,8 +4,9 @@ angular.module('users').controller('ProfilePollsController', [
   '$scope',
   'UserApi',
   'Action',
+  'ngDialog',
   'toastr',
-  function($scope, UserApi, Action, toast) {
+  function($scope, UserApi, Action, dialog, toast) {
     $scope.polls = [];
     $scope.page = 0;
     $scope.busy = false;
@@ -176,6 +177,44 @@ angular.module('users').controller('ProfilePollsController', [
         .then(res => {
           poll.follow = res;
           toast.success('You followed ' + poll.title, 'Success!');
+        })
+        .catch(err => {
+          toast.error(err.message, 'Error!');
+        });
+    };
+    $scope.report_poll = poll => {
+      if (poll.reported) {
+        toast.error('You are already reported ' + poll.title, 'Error!');
+        return;
+      }
+      dialog.openConfirm({
+        scope: $scope,
+        templateUrl: 'modules/core/client/views/templates/report.dialog.template.html'
+      }).then(reason => {
+        handle_confirm(reason);
+      }, reject => {
+      });
+      function handle_confirm(reason) {
+        Action.save_report(poll._id, reason)
+          .then(res => {
+            poll.reported = (res) ? true : false;
+            toast.success('You have successfully reported ' + poll.title, 'Thank you!');
+          })
+          .catch(err => {
+            toast.error(err.message, 'Error!');
+          });
+      }
+    };
+    $scope.bookmark_poll = poll => {
+      if (poll.bookmarked) {
+        toast.error('You are already bookmark ' + poll.title, 'Error!');
+        return;
+      }
+      Action.save_bookmark(poll._id)
+        .then(res => {
+          poll.bookmarked = (res) ? true : false;
+          $scope.$apply();
+          toast.success('Added ' + poll.title + ' to bookmarks.', 'Success!');
         })
         .catch(err => {
           toast.error(err.message, 'Error!');

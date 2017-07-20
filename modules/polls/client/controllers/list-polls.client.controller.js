@@ -280,7 +280,7 @@
     };
     vm.report_poll = (poll) => {
       if (poll.reported) {
-        toast.error('You are already report this poll.', 'Error!');
+        toast.error('You are already reported ' + poll.title, 'Error!');
         return;
       }
       dialog.openConfirm({
@@ -295,7 +295,7 @@
           .then(res => {
             poll.reported = (res) ? true : false;
             $scope.$apply();
-            toast.success('You have successfully reported this poll.', 'Thank you!');
+            toast.success('You have successfully reported ' + poll.title, 'Thank you!');
           })
           .catch(err => {
             toast.error(err.message, 'Error!');
@@ -304,14 +304,14 @@
     };
     vm.bookmark_poll = (poll) => {
       if (poll.bookmarked) {
-        toast.error('You are already bookmark this poll.', 'Error!');
+        toast.error('You are already bookmark ' + poll.title, 'Error!');
         return;
       }
       Action.save_bookmark(poll._id)
         .then(res => {
           poll.bookmarked = (res) ? true : false;
           $scope.$apply();
-          toast.success('Added to bookmarks.', 'Success!');
+          toast.success('Added ' + poll.title + ' to bookmarks.', 'Success!');
         })
         .catch(err => {
           toast.error(err.message, 'Error!');

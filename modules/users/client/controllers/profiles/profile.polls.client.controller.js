@@ -29,7 +29,7 @@ angular.module('users').controller('ProfilePollsController', [
           $scope.new_data = res.data || [];
           var promises = [];
           $scope.new_data.forEach(poll => {
-            poll.isCurrentUserOwner = $scope.isLogged && $scope.user._id === poll.user._id;
+            poll.isCurrentUserOwner = $scope.isLogged && ($scope.user._id === poll.user._id);
             promises.push(get_poll_report(poll));
             promises.push(get_opts(poll));
             promises.push(get_owner_follow(poll));
@@ -40,6 +40,7 @@ angular.module('users').controller('ProfilePollsController', [
         })
         .then(res => {
           // Gán data vào list hiện tại
+          console.log($scope.new_data);
           $scope.polls = _.union($scope.polls, $scope.new_data);
           $scope.page += 1;
           $scope.busy = false;

@@ -26,13 +26,11 @@ angular.module('users').controller('ProfileBookmarksController', [
             $scope.stopped = true;
             return;
           }
-          console.log(res);
-          // res.forEach(item => {
-          //   if (item.poll) {
-          //     $scope.new_data.push(item.poll);
-          //   }
-          // });
-          $scope.new_data = res.data || [];
+          res.data.forEach(item => {
+            if (item.poll) {
+              $scope.new_data.push(item.poll);
+            }
+          });
           var promises = [];
           $scope.new_data.forEach(poll => {
             poll.isCurrentUserOwner = $scope.isLogged && $scope.user._id === poll.user._id;

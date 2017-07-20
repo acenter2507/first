@@ -10,6 +10,7 @@
   </div>
   <nav class="collapse navbar-collapse" uib-collapse="!isCollapsed" role="navigation">
 
+    <!-- Main menu -->
     <ul class="nav navbar-nav" ng-if="menu.shouldRender(authentication.user);">
       <li ng-repeat="item in menu.items | orderBy: 'position'" ng-if="item.shouldRender(authentication.user);" ng-switch="item.type"
         ng-class="{ active: $state.includes(item.state), dropdown: item.type === 'dropdown' }" class="{{item.class}}" uib-dropdown="item.type === 'dropdown'">
@@ -23,6 +24,7 @@
       </li>
     </ul>
 
+    <!-- User login -->
     <ul class="nav navbar-nav navbar-right" ng-hide="authentication.user">
       <li ui-sref-active="active">
         <a ui-sref="authentication.signup">Sign Up</a>
@@ -33,6 +35,7 @@
       </li>
     </ul>
 
+    <!-- User profile -->
     <ul class="nav navbar-nav navbar-right" ng-show="authentication.user">
       <li class="dropdown" uib-dropdown>
         <a class="dropdown-toggle user-header-dropdown-toggle" uib-dropdown-toggle role="button">
@@ -63,6 +66,7 @@
       </li>
     </ul>
 
+    <!-- Notifications -->
     <ul class="nav navbar-nav navbar-right" ng-show="authentication.user">
       <li class="dropdown" uib-dropdown ui-sref-active="active">
         <a class="dropdown-toggle notif-dropdown-toggle" uib-dropdown-toggle role="button">
@@ -86,13 +90,24 @@
       </li>
     </ul>
 
-    <ul class="nav navbar-nav navbar-right">
+    <!--<ul class="nav navbar-nav navbar-right">
       <li class="dropdown" uib-dropdown ui-sref-active="active">
         <form class="navbar-form" role="search" ng-submit="search()">
           <input type="text" name="search" id="txt-search" placeholder="Quick search...">
         </form>
       </li>
-    </ul>
+    </ul>-->
+
+    <form class="navbar-form" role="search">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search...">
+        <span class="input-group-btn">
+					<button type="submit" class="btn btn-default">
+					  <span class="glyphicon glyphicon-search"><span class="sr-only">Search...</span></span>
+          </button>
+        </span>
+      </div>
+    </form>
   </nav>
   <div class="clearfix"></div>
 </div>

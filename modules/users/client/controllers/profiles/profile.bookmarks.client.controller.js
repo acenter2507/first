@@ -177,10 +177,43 @@ angular.module('users').controller('ProfileBookmarksController', [
       
     };
     $scope.follow_poll = poll => {
-      
+      if (!$scope.isLogged) {
+        toast.error('You must login to follow poll.', 'Error!');
+        return;
+      }
+      Action.save_follow(poll.follow)
+        .then(res => {
+          poll.follow = res;
+          if (poll.follow.following) {
+            toast.success('You followed ' + poll.title, 'Success!');
+          }
+        })
+        .catch(err => {
+          toast.error(err.message, 'Error!');
+        });
     };
     $scope.report_poll = poll => {
-      
+      if (poll.reported) {
+        toast.error('You are already reported ' + poll.title, 'Error!');
+        return;
+      }
+      dialog.openConfirm({
+        scope: $scope,
+        templateUrl: 'modules/core/client/views/templates/report.dialog.template.html'
+      }).then(reason => {
+        handle_confirm(reason);
+      }, reject => {
+      });
+      function handle_confirm(reason) {
+        Action.save_report(poll._id, reason)
+          .then(res => {
+            poll.reported = (res) ? true : false;
+            toast.success('You have successfully reported ' + poll.title, 'Thank you!');
+          })
+          .catch(err => {
+            toast.error(err.message, 'Error!');
+          });
+      }
     };
     $scope.remove_bookmark = poll => {
       $scope.message_title = 'Remove bookmark!';

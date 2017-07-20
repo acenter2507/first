@@ -40,6 +40,7 @@ angular.module('polls').controller('PollsSearchController', [
         $scope.busy = true;
         Action.search($scope.condition)
           .then(res => {
+            console.log(res);
             $scope.busy = false;
           })
           .catch(err => {

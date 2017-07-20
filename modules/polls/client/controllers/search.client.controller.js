@@ -4,16 +4,18 @@ angular.module('polls').controller('PollsSearchController', [
   '$scope',
   '$state',
   'Authentication',
+  'CategorysService',
   '$stateParams',
-  function ($scope, $state, Authentication, $stateParams) {
+  function ($scope, $state, Authentication, Categorys, $stateParams) {
     $scope.detailToggle = -1;
     $scope.form = {};
+    $scope.categorys = Categorys.query();
 
     console.log('heheheheheh');
     $scope.key = $stateParams.key;
     $scope.in = $stateParams.in;
     $scope.by = $stateParams.by;
-    $scope.category = $stateParams.category;
+    $scope.ctgr = $stateParams.ctgr;
     $scope.cmt = $stateParams.cmt;
     $scope.compare = $stateParams.compare;
     $scope.created = $stateParams.created;

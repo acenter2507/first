@@ -72,7 +72,7 @@
         }
       })
       .state('search', {
-        url: '/search?key?in?by?category?cmt?compare?created?sort?sortkind',
+        url: '/search?key?in?by?ctgr?cmt?compare?created?sort?sortkind',
         templateUrl: 'modules/polls/client/views/search.client.view.html',
         controller: 'PollsSearchController',
         data: {

@@ -29,7 +29,7 @@ angular.module('users').controller('ProfilePollsController', [
           $scope.new_data = res.data || [];
           var promises = [];
           $scope.new_data.forEach(poll => {
-            poll.isCurrentUserOwner = $scope.isLogged && ($scope.user._id === poll.user._id);
+            poll.isCurrentUserOwner = $scope.isLogged && ($scope.user._id === poll.user);
             promises.push(get_poll_report(poll));
             promises.push(get_opts(poll));
             promises.push(get_owner_follow(poll));

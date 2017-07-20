@@ -26,7 +26,7 @@ var path = require('path'),
 /**
  * Create a Poll
  */
-exports.create = function(req, res) {
+exports.create = function (req, res) {
   var poll = new Poll(req.body);
   poll.user = req.user;
 
@@ -84,7 +84,7 @@ exports.create = function(req, res) {
 /**
  * Show the current Poll
  */
-exports.read = function(req, res) {
+exports.read = function (req, res) {
   // convert mongoose document to JSON
   var poll = req.poll ? req.poll.toJSON() : {};
 
@@ -106,7 +106,7 @@ exports.read = function(req, res) {
 /**
  * Update a Poll
  */
-exports.update = function(req, res) {
+exports.update = function (req, res) {
   var poll = req.poll;
   poll = _.extend(poll, req.body);
   var tags = req.body.tags || [];
@@ -167,7 +167,7 @@ exports.update = function(req, res) {
 /**
  * Delete an Poll
  */
-exports.delete = function(req, res) {
+exports.delete = function (req, res) {
   var poll = req.poll;
   poll.remove()
     .then(() => { // Delete option
@@ -235,12 +235,12 @@ exports.delete = function(req, res) {
 /**
  * List of Polls
  */
-exports.list = function(req, res) {
+exports.list = function (req, res) {
   Poll.find()
     .sort('-created')
     .populate('category', 'name icon')
     .populate('user', 'displayName profileImageURL')
-    .exec(function(err, polls) {
+    .exec(function (err, polls) {
       if (err) {
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)
@@ -254,7 +254,7 @@ exports.list = function(req, res) {
 /**
  * List of Offset
  */
-exports.findPolls = function(req, res) {
+exports.findPolls = function (req, res) {
   var page = req.params.page || 0;
   Poll.find({ isPublic: true })
     .sort('-created')
@@ -262,7 +262,7 @@ exports.findPolls = function(req, res) {
     .populate('user', 'displayName profileImageURL')
     .skip(10 * page)
     .limit(10)
-    .exec(function(err, polls) {
+    .exec(function (err, polls) {
       if (err) {
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)
@@ -276,7 +276,7 @@ exports.findPolls = function(req, res) {
 /**
  * List of Hot
  */
-exports.findHotPolls = function(req, res) {
+exports.findHotPolls = function (req, res) {
   var page = req.params.page || 0;
   Poll.find({ isPublic: true })
     .sort('-likeCnt')
@@ -284,7 +284,7 @@ exports.findHotPolls = function(req, res) {
     .populate('user', 'displayName profileImageURL')
     .skip(10 * page)
     .limit(10)
-    .exec(function(err, polls) {
+    .exec(function (err, polls) {
       if (err) {
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)
@@ -298,10 +298,10 @@ exports.findHotPolls = function(req, res) {
 /**
  * List of Opts in poll
  */
-exports.findOpts = function(req, res) {
+exports.findOpts = function (req, res) {
   Poll.findOpts(req.poll._id)
     .populate('user', 'displayName')
-    .exec(function(err, opts) {
+    .exec(function (err, opts) {
       if (err) {
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)
@@ -315,14 +315,14 @@ exports.findOpts = function(req, res) {
 /**
  * List of Cmts in poll
  */
-exports.findCmts = function(req, res) {
+exports.findCmts = function (req, res) {
   var page = req.params.page || 0;
   Poll.findCmts(req.poll._id)
     .sort('-created')
     .populate('user', 'displayName profileImageURL')
     .skip(10 * page)
     .limit(10)
-    .exec(function(err, cmts) {
+    .exec(function (err, cmts) {
       if (err) {
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)
@@ -336,8 +336,8 @@ exports.findCmts = function(req, res) {
 /**
  * List of Tags in poll
  */
-exports.findTags = function(req, res) {
-  Poll.findTags(req.poll._id).populate('tag').exec(function(err, polltags) {
+exports.findTags = function (req, res) {
+  Poll.findTags(req.poll._id).populate('tag').exec(function (err, polltags) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -351,8 +351,8 @@ exports.findTags = function(req, res) {
 /**
  * List of Votes in poll
  */
-exports.findVotes = function(req, res) {
-  Poll.findVotes(req.poll._id).exec(function(err, votes) {
+exports.findVotes = function (req, res) {
+  Poll.findVotes(req.poll._id).exec(function (err, votes) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -366,7 +366,7 @@ exports.findVotes = function(req, res) {
 /**
  * Vote in poll of user
  */
-exports.findOwnerVote = function(req, res) {
+exports.findOwnerVote = function (req, res) {
   var condition = {};
   condition.poll = req.poll._id;
   if (req.user) {
@@ -379,7 +379,7 @@ exports.findOwnerVote = function(req, res) {
       req.client.remoteAddress;
     condition.guest = true;
   }
-  Poll.findOwnerVote(condition).exec(function(err, vote) {
+  Poll.findOwnerVote(condition).exec(function (err, vote) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -393,16 +393,16 @@ exports.findOwnerVote = function(req, res) {
 /**
  * Get all info of vote in poll
  */
-exports.findVoteopts = function(req, res) {
+exports.findVoteopts = function (req, res) {
   var rs = {}, ids;
-  Poll.findVotes(req.poll._id).exec(function(err, _votes) {
+  Poll.findVotes(req.poll._id).exec(function (err, _votes) {
     if (err) {
       handleError(err);
     } else {
       rs.votes = _votes;
       rs.voteopts = [];
       ids = _.pluck(_votes, '_id');
-      Voteopt.find({ vote: { $in: ids } }).exec(function(err, opts) {
+      Voteopt.find({ vote: { $in: ids } }).exec(function (err, opts) {
         if (err) {
           handleError(err);
         } else {
@@ -423,9 +423,9 @@ exports.findVoteopts = function(req, res) {
 /**
  * Get Like of user on this poll
  */
-exports.findPollLike = function(req, res) {
+exports.findPollLike = function (req, res) {
   var condition = { poll: req.poll._id, user: req.user._id };
-  Like.findOne(condition).exec(function(err, like) {
+  Like.findOne(condition).exec(function (err, like) {
     if (err) {
       handleError(err);
     } else {
@@ -443,7 +443,7 @@ exports.findPollLike = function(req, res) {
 /**
  * Find pollusers
  */
-exports.findPolluser = function(req, res) {
+exports.findPolluser = function (req, res) {
   Polluser.findOne({
     poll: req.poll._id,
     user: req.user._id
@@ -464,7 +464,7 @@ exports.findPolluser = function(req, res) {
 /**
  * Find report
  */
-exports.findReport = function(req, res) {
+exports.findReport = function (req, res) {
   Report.findOne({
     poll: req.poll._id,
     user: req.user._id
@@ -486,7 +486,7 @@ exports.findReport = function(req, res) {
 /**
  * Find Bookmark
  */
-exports.findBookmark = function(req, res) {
+exports.findBookmark = function (req, res) {
   Bookmark.findOne({
     poll: req.poll._id,
     user: req.user._id
@@ -505,7 +505,7 @@ exports.findBookmark = function(req, res) {
   }
 };
 
-exports.removeBookmark = function(req, res) {
+exports.removeBookmark = function (req, res) {
   Bookmark.findOne({
     poll: req.poll._id,
     user: req.user._id
@@ -526,7 +526,7 @@ exports.removeBookmark = function(req, res) {
 /**
  * Find report
  */
-exports.findPollreport = function(req, res) {
+exports.findPollreport = function (req, res) {
   Pollreport.findOne({ poll: req.poll._id }).exec((err, _report) => {
     if (err) {
       handleError(err);
@@ -544,7 +544,7 @@ exports.findPollreport = function(req, res) {
 /**
  * Find view
  */
-exports.findView = function(req, res) {
+exports.findView = function (req, res) {
   View.findOne({
     poll: req.poll._id,
     user: req.user._id
@@ -563,15 +563,23 @@ exports.findView = function(req, res) {
 };
 
 
-exports.search = function(req, res) {
-  console.log(req.body.condition);
-  res.jsonp();
+exports.search = function (req, res) {
+  const condition = req.body.condition;
+  var search = {};
+  var and_arr = [];
+  if (condition.key) {
+    if (!condition.in || condition.in === 'polltitle') {
+      and_arr.push({ title: { $regex: '.*' + condition.key + '.*' }});
+    } else if (condition.in === 'pollcontent') {
+      and_arr.push({ $or: [{title: { $regex: '.*' + condition.key + '.*' }}, { body: { $regex: '.*' + condition.key + '.*' }}] })
+    }
+  }
 };
 
 /**
  * Poll middleware
  */
-exports.pollByID = function(req, res, next, id) {
+exports.pollByID = function (req, res, next, id) {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
       message: 'Poll is invalid'
@@ -581,7 +589,7 @@ exports.pollByID = function(req, res, next, id) {
   Poll.findById(id)
     .populate('category', 'name icon')
     .populate('user', 'displayName profileImageURL')
-    .exec(function(err, poll) {
+    .exec(function (err, poll) {
       if (err) {
         return next(err);
       } else if (!poll) {

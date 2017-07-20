@@ -168,7 +168,7 @@ angular.module('users').controller('ProfilePollsController', [
     }
 
     $scope.follow_poll = poll => {
-      if ($scope.isLogged) {
+      if (!$scope.isLogged) {
         toast.error('You must login to follow this poll.', 'Error!');
         return;
       }

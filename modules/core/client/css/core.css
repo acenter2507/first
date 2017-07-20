@@ -9,7 +9,6 @@ body {
 .undecorated-link:hover {
   text-decoration: none;
   cursor: pointer;
-  outline: none;
 }
 .undecorated-link:focus {
   text-decoration: none;
@@ -204,9 +203,10 @@ a.notifis-list-item:focus {
 .btn:hover,
 .btn:focus {
   box-shadow: 0 1px 6px 0 rgba(0,0,0,.12),0 1px 6px 0 rgba(0,0,0,.12);
+}
+.btn:focus {
   outline: none;
 }
-
 .btn-default {
   background-color: #d6d6d6;
 }
@@ -365,10 +365,11 @@ a.notifis-list-item:focus {
 
 .toast-close-button:hover,
 .toast-close-button:focus {
-  outline: none;
   opacity: 0.8;
 }
-
+.toast-close-button:focus {
+  outline: none;
+}
 .toast {
   /*background-color: #030303;*/
   border-left: 6px solid #7f7f84;

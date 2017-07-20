@@ -7,6 +7,11 @@ angular.module('core.admin').run(['Menus',
       state: 'admin.manage',
       // type: 'dropdown',
       roles: ['admin'],
+      position: 4
+    });
+    Menus.addMenuItem('topbar', {
+      title: 'Search',
+      state: 'search',
       position: 3
     });
   }

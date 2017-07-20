@@ -565,10 +565,11 @@ exports.findView = function (req, res) {
 
 exports.search = function (req, res) {
   const condition = req.body.condition;
+  console.log(search);
   var search = {};
   var and_arr = [];
-  if (condition.crgr) {
-    and_arr.push({ category: condition.crgr });
+  if (condition.ctgr) {
+    and_arr.push({ category: condition.ctgr });
   }
   if (condition.status) {
     if (condition.status === 'opening') {

@@ -63,7 +63,8 @@ angular.module('polls').controller('PollsSearchController', [
     $scope.clear_preferences = () => {
       $scope.condition = {};
       Storages.set_local(Constants.storages.preferences, JSON.stringify($scope.condition));
-      $state.go('search');
+      // $state.go('search');
+      $location.url($location.path())
     };
     $scope.save_preferences = () => {
       Storages.set_local(Constants.storages.preferences, JSON.stringify($scope.condition));

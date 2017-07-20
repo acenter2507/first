@@ -49,7 +49,7 @@ angular.module('polls').controller('PollsSearchController', [
             $scope.busy = false;
           });
       } else {
-        $scope.condition = JSON.parse(Storages.get_local(Constants.storages.preferences, {}));
+        $scope.condition = JSON.parse(Storages.get_local(Constants.storages.preferences, JSON.stringify({})));
       }
     }
     function check_params() {

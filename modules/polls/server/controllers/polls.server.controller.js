@@ -583,6 +583,7 @@ exports.search = function (req, res) {
   }
   if (condition.created) {
     var today = new Date().getTime();
+    console.log(new Date());
     console.log(today);
     console.log(today - condition.created);
     var created = new Date(today - condition.created);

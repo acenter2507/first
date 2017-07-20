@@ -600,9 +600,9 @@ exports.search = function (req, res) {
       });
       return Promise.all(promise);
     })
-    .then(_polls => {
-      console.log(_polls);
-      res.jsonp(_polls);
+    .then(xxx => {
+      console.log(xxx);
+      res.jsonp(xxx);
     })
     .catch(err => {
       return res.status(400).send({

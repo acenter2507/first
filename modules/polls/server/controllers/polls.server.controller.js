@@ -594,15 +594,14 @@ exports.search = function (req, res) {
   var polls = [];
   _polls(search)
     .then(_polls => {
-      polls = _polls;
       var promise = [];
-      polls.forEach(poll => {
+      _polls.forEach(poll => {
         promise.push(_poll_report(poll));
       });
       return Promise.all(promise);
     })
-    .then(result => {
-      console.log(polls);
+    .then(_polls => {
+      console.log(_polls);
     })
     .catch(err => {
       return res.status(400).send({
@@ -630,7 +629,7 @@ exports.search = function (req, res) {
           return reject(err);
         } else {
           poll.report = _report;
-          return resolve(_report);
+          return resolve(poll);
         }
       });
     });

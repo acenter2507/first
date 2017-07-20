@@ -198,7 +198,9 @@ angular.module('users').controller('ProfilePollsController', [
         Action.save_report(poll._id, reason)
           .then(res => {
             poll.reported = (res) ? true : false;
-            toast.success('You have successfully reported ' + poll.title, 'Thank you!');
+            if (poll.reported.following) {
+              toast.success('You have successfully reported ' + poll.title, 'Thank you!');
+            }
           })
           .catch(err => {
             toast.error(err.message, 'Error!');

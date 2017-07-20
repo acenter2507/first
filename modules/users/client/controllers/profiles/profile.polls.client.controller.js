@@ -222,5 +222,26 @@ angular.module('users').controller('ProfilePollsController', [
           toast.error(err.message, 'Error!');
         });
     };
+    $scope.delete_poll = (poll) => {
+      if (!poll.isCurrentUserOwner) {
+        toast.error('You are not authorized.', 'Error!');
+        return;
+      }
+      $scope.message_title = 'Delete poll!';
+      $scope.message_content = 'Are you sure you want to delete this poll?';
+      $scope.dialog_type = 3;
+      $scope.buton_label = 'delete';
+      dialog.openConfirm({
+        scope: $scope,
+        templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
+      }).then(confirm => {
+        handle_delete();
+      }, reject => {
+      });
+      function handle_delete() {
+        vm.polls = _.without(vm.polls, poll);
+        Action.delete_poll(poll);
+      }
+    };
   }
 ]);

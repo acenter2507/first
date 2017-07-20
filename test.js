@@ -12,6 +12,9 @@ app.init(function () {
   console.log('Initialized test automation');
 });
 
+// WebStorage: https://github.com/fredricrylander/angular-webstorage
+
+
 /*
  Ưu tiên:
 1. Màn hình create poll

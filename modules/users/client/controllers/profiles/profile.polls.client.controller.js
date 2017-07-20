@@ -166,5 +166,20 @@ angular.module('users').controller('ProfilePollsController', [
       }
       return Math.floor(value * 100 / total) || 0;
     }
+
+    $scope.follow_poll = poll => {
+      if ($scope.isLogged) {
+        toast.error('You must login to follow this poll.', 'Error!');
+        return;
+      }
+      Action.save_follow(poll.follow)
+        .then(res => {
+          poll.follow = res;
+          toast.success('You followed ' + poll.title, 'Success!');
+        })
+        .catch(err => {
+          toast.error(err.message, 'Error!');
+        });
+    };
   }
 ]);

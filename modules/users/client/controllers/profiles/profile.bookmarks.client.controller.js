@@ -195,7 +195,7 @@ angular.module('users').controller('ProfileBookmarksController', [
       });
       function handle_delete() {
         $scope.polls = _.without($scope.polls, poll);
-        Action.remove_bookmark(pollId);
+        Action.remove_bookmark(poll._id);
       }
     };
   }

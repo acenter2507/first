@@ -12,7 +12,7 @@
     menuService.addMenuItem('topbar', {
       title: 'Categorys',
       state: 'categorys.list',
-      roles: ['*']
+      position: 1
     });
 
     // // Add the dropdown list item

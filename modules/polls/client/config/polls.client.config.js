@@ -11,7 +11,8 @@
     // Set top bar menu items
     Menus.addMenuItem('topbar', {
       title: 'Polls',
-      state: 'polls.list'
+      state: 'polls.list',
+      position: 0
     });
     // Menus.addMenuItem('topbar', {
     //   title: 'Polls',

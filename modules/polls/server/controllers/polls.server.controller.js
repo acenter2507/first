@@ -565,7 +565,7 @@ exports.findView = function (req, res) {
 
 exports.search = function (req, res) {
   const condition = req.body.condition;
-  console.log(search);
+  console.log(condition);
   var search = {};
   var and_arr = [];
   if (condition.ctgr) {
@@ -583,7 +583,8 @@ exports.search = function (req, res) {
   }
   if (condition.created) {
     var today = new Date().getTime();
-
+    console.log(created);
+    console.log(today - condition.created);
     var created = new Date(today - condition.created);
     console.log(created);
     if (condition.timing === 'old') {

@@ -7,7 +7,9 @@ angular.module('polls').controller('PollsSearchController', [
   'CategorysService',
   'Action',
   '$stateParams',
-  function ($scope, $state, Authentication, Categorys, Action, $stateParams) {
+  'Storages',
+  'Constants',
+  function ($scope, $state, Authentication, Categorys, Action, $stateParams, Storages, Constants) {
     $scope.detailToggle = -1;
     $scope.form = {};
     $scope.categorys = Categorys.query();
@@ -29,7 +31,7 @@ angular.module('polls').controller('PollsSearchController', [
     $scope.condition.sortkind = $stateParams.sortkind;
 
     $scope.search = () => {
-      $state.go('search',  $scope.condition);
+      $state.go('search', $scope.condition);
     };
 
     $scope.busy = false;
@@ -46,14 +48,22 @@ angular.module('polls').controller('PollsSearchController', [
           .catch(err => {
             $scope.busy = false;
           });
+      } else {
+        $scope.condition = JSON.parse(Storages.get_local(Constants.storages.preferences, {}));
       }
     }
-
     function check_params() {
       if ($scope.condition.key || $scope.condition.status || $scope.condition.by || $scope.condition.ctgr || $scope.condition.cmt || $scope.condition.created) {
         return true;
       }
       return false;
     }
+
+    $scope.clear_preferences = () => {
+      $scope.condition = {};
+    };
+    $scope.save_preferences = () => {
+      Storages.set_local(Constants.storages.preferences, JSON.stringify($scope.condition));
+    };
   }
 ]);

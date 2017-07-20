@@ -583,9 +583,7 @@ exports.search = function (req, res) {
   }
   if (condition.created) {
     var today = new Date().getTime();
-    console.log(new Date());
     var created = new Date(today - (parseInt(condition.created) * 1000));
-    console.log(created);
     if (condition.timing === 'old') {
       and_arr.push({ created: { $lt: created } });
     } else {
@@ -593,22 +591,50 @@ exports.search = function (req, res) {
     }
   }
   search = { $and: and_arr };
-  console.log(search);
-  Poll.find(search).exec((err, polls) => {
-    if (err) {
-      handleError(err);
-    } else {
-      res.jsonp(polls);
-    }
-  });
-  function handleError(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
+  var polls = [];
+  _polls(search)
+    .then(_polls => {
+      polls = _polls;
+      var promise = [];
+      _polls.forEach(poll => {
+        promise.push(_poll_report(poll));
+      });
+      return Promise.all(promise);
+    })
+    .then(result => {
+      console.log(polls);
+    })
+    .catch(err => {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    });
+  res.jsonp(polls);
+
+  function _polls(con) {
+    return new Promise((resolve, reject) => {
+      Poll.find(con).exec((err, polls) => {
+        if (err) {
+          return reject(err);
+        } else {
+          return resolve(polls);
+        }
+      });
     });
   }
 
-
-
+  function _poll_report(poll) {
+    return new Promise((resolve, reject) => {
+      Pollreport.findOne({ poll: poll._id }).exec((err, _report) => {
+        if (err) {
+          return reject(err);
+        } else {
+          poll.report = _report;
+          return resolve(_report);
+        }
+      });
+    });
+  }
 
 
 

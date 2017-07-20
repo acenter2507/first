@@ -590,9 +590,19 @@ exports.search = function (req, res) {
       and_arr.push({ created: { $gte: created } });
     }
   }
-
-  console.log(condition);
-  res.jsonp();
+  search = { $and: and_arr };
+  Poll.find(search).exec((err, polls) => {
+    if (err) {
+      handleError(err);
+    } else {
+      res.jsonp(polls);
+    }
+  });
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 
 
 

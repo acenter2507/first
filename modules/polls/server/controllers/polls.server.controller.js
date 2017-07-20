@@ -591,6 +591,7 @@ exports.search = function (req, res) {
     }
   }
   search = { $and: and_arr };
+  console.log(search);
   Poll.find(search).exec((err, polls) => {
     if (err) {
       handleError(err);

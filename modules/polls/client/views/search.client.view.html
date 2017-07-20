@@ -50,6 +50,18 @@
               <div class="panel-collapse" role="tabpanel" bs-collapse-target>
                 <!-- User -->
                 <div class="panel-body">
+                  <!-- Status -->
+                  <div class="form-group">
+                    <div class="col-xs-12">
+                      <label>Status</label>
+                      <select class="form-control" ng-model="status">
+							        	<option value="unlimited">Unlimited</option>
+							        	<option value="opening">Opening</option>
+							        	<option value="closed">Closed</option>
+							        </select>
+                    </div>
+                  </div>
+                  <!-- User -->
                   <div class="form-group">
                     <div class="col-xs-12">
                       <label>Posted by</label>
@@ -63,7 +75,7 @@
                       <select class="form-control" ng-model="ctgr" name="ctgr" ng-options="category._id as category.name for category in categorys"></select>
                     </div>
                   </div>
-                  <!-- Category -->
+                  <!-- Comment -->
                   <div class="form-group">
                     <div class="col-xs-12"><label>Comment count</label></div>
                     <div class="col-md-6">
@@ -74,6 +86,46 @@
                     </div>
                     <div class="col-md-6">
                       <input name="cmt" class="form-control" ng-model="cmt" type="number">
+                    </div>
+                  </div>
+                  <!-- Time -->
+                  <div class="form-group">
+                    <div class="col-xs-12"><label>Created time</label></div>
+                    <div class="col-md-6">
+                      <select class="form-control" ng-model="timing">
+							        	<option value="new">Newer than</option>
+							        	<option value="old">Older than</option>
+							        </select>
+                    </div>
+                    <div class="col-md-6">
+                      <select class="form-control" ng-model="created">
+							        	<option value="86400">Yesterday</option>
+							        	<option value="604800">One week</option>
+							        	<option value="1209600">Two week</option>
+							        	<option value="2592000">One month</option>
+							        	<option value="7776000">Three months</option>
+							        	<option value="15552000">Six monthst</option>
+							        	<option value="31104000">One year</option>
+							        </select>
+                    </div>
+                  </div>
+                  <!-- Sort -->
+                  <div class="form-group">
+                    <div class="col-xs-12"><label>Sort by</label></div>
+                    <div class="col-md-6">
+                      <select class="form-control" ng-model="sort">
+							        	<option value="created">Created time</option>
+							        	<option value="cmtCnt">Number of comments</option>
+							        	<option value="likeCnt">Number of likes</option>
+							        	<option value="voteCnt">Number of votes</option>
+							        	<option value="optCnt">Number of options</option>
+							        </select>
+                    </div>
+                    <div class="col-md-6">
+                      <select class="form-control" ng-model="sortkind">
+							        	<option value="desc">In descending order</option>
+							        	<option value="asc">In ascending order</option>
+							        </select>
                     </div>
                   </div>
                 </div>

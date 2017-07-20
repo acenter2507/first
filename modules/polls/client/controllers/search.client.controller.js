@@ -14,11 +14,13 @@ angular.module('polls').controller('PollsSearchController', [
     console.log('heheheheheh');
     $scope.key = $stateParams.key;
     $scope.in = $stateParams.in;
+    $scope.status = $stateParams.status;
     $scope.by = $stateParams.by;
     $scope.ctgr = $stateParams.ctgr;
     $scope.cmt = $stateParams.cmt;
     $scope.compare = $stateParams.compare;
     $scope.created = $stateParams.created;
+    $scope.timing = $stateParams.timing;
     $scope.sort = $stateParams.sort;
     $scope.sortkind = $stateParams.sortkind;
 

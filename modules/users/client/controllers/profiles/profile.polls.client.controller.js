@@ -239,7 +239,7 @@ angular.module('users').controller('ProfilePollsController', [
       }, reject => {
       });
       function handle_delete() {
-        vm.polls = _.without(vm.polls, poll);
+         $scope.polls = _.without( $scope.polls, poll);
         Action.delete_poll(poll);
       }
     };

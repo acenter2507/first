@@ -14,10 +14,39 @@
           <img src="{{poll.user.profileImageURL}}" alt="{{poll.user.displayName}}">
         </div>
         <span class="pull-left">
-            <strong><a class="undecorated-link" ui-sref="profile.info({userId: poll.user._id})" ng-bind="poll.user.displayName"></a></strong>
-            <small class="text-muted">created on</small>
-            <small class="text-muted" am-time-ago="poll.created"></small>
-          </span>
+          <strong><a class="undecorated-link" ui-sref="profile.info({userId: poll.user._id})" ng-bind="poll.user.displayName"></a></strong>
+          <small class="text-muted">created on</small>
+          <small class="text-muted" am-time-ago="poll.created"></small>
+        </span>
+        <span class="pull-right">
+          <md-menu md-offset="-12 20" md-position-mode="target-right target">
+            <a class="undecorated-link span-link" ng-click="$mdMenu.open($event)" aria-label="Open setting menu">
+              <i class="fa fa-angle-down"></i>
+            </a>
+            <md-menu-content>
+              <ul class="menu-list">
+                <li><a ui-sref="polls.view({ pollId: poll._id })"><i class="fa fa-eye"></i>&nbsp;View</a></li>
+                <li ng-if="poll.isCurrentUserOwner">
+                  <a class="undecorated-link" ui-sref="polls.edit({ pollId: poll._id })">
+                    <i class="fa fa-pencil-square-o"></i>&nbsp;Edit
+                  </a>
+                </li>
+                <li ng-if="poll.isCurrentUserOwner">
+                  <a class="undecorated-link" ng-click="delete_poll(poll)">
+                    <i class="fa fa-trash"></i>&nbsp;Delete
+                  </a>
+                </li>
+                <li ng-if="isLogged">
+                  <a ng-click="follow_poll(poll)" class="undecorated-link">
+                    <i class="fa fa-rss"></i>&nbsp;{{(poll.follow.following) ? 'Unfollow' : 'Follow'}}
+                  </a>
+                </li>
+                <li ng-if="isLogged && !poll.isCurrentUserOwner && !poll.reported"><a class="undecorated-link" ng-click="report_poll(poll)"><i class="fa fa-exclamation-circle"></i>&nbsp;Report poll</a></li>
+                <li ng-if="isLogged && !poll.isCurrentUserOwner && !poll.bookmarked"><a class="undecorated-link" ng-click="bookmark_poll(poll)"><i class="fa fa-bookmark"></i>&nbsp;Bookmark poll</a></li>
+              </ul>
+            </md-menu-content>
+          </md-menu>
+        </span>
         <br>
         <span ng-if="poll.allow_guest" class="fa fa-globe">
           <md-tooltip md-direction="bottom">This poll is public</md-tooltip>
@@ -79,15 +108,15 @@
       <div clas="poll-footer">
         <p class="poll_item_info">
           <i class="fa fa-heart-o" aria-hidden="true"></i>
-          <strong> Votes: </strong>{{poll.voteCnt}}
+          <strong> Votes: </strong>{{poll.report.voteCnt}}
         </p>
         <p class="poll_item_info">
           <i class="fa fa-eye" aria-hidden="true"></i>
-          <strong> Views: </strong>{{poll.viewCnt}}
+          <strong> Views: </strong>{{poll.report.viewCnt}}
         </p>
         <p class="poll_item_info">
           <i class="fa fa-commenting" aria-hidden="true"></i>
-          <strong> Comments: </strong>{{poll.cmtCnt}}
+          <strong> Comments: </strong>{{poll.report.cmtCnt}}
         </p>
       </div>
 

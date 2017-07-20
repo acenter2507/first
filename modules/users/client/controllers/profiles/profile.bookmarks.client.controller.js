@@ -38,7 +38,6 @@ angular.module('users').controller('ProfileBookmarksController', [
             promises.push(get_opts(poll));
             promises.push(get_owner_follow(poll));
             promises.push(get_reported(poll));
-            promises.push(get_bookmarked(poll));
           });
           return Promise.all(promises);
         })
@@ -141,22 +140,6 @@ angular.module('users').controller('ProfileBookmarksController', [
           });
       });
     }
-    function get_bookmarked(poll) {
-      return new Promise((resolve, reject) => {
-        if (!$scope.isLogged) {
-          poll.bookmarked = false;
-          return resolve();
-        }
-        Action.get_bookmark(poll._id)
-          .then(res => {
-            poll.bookmarked = (res.data) ? res.data : false;
-            return resolve(res.data);
-          })
-          .catch(err => {
-            return reject(err);
-          });
-      });
-    }
     $scope.poll_filter = poll => {
       if (poll.isPublic) {
         return true;
@@ -189,7 +172,7 @@ angular.module('users').controller('ProfileBookmarksController', [
       }, reject => {
       });
       function handle_delete() {
-        vm.polls = _.without(vm.polls, poll);
+        $scope.polls = _.without($scope.polls, poll);
         Action.delete_poll(poll);
       }
     };

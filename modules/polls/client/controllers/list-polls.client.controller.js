@@ -326,7 +326,9 @@
         .then(res => {
           poll.follow = res;
           $scope.$apply();
-          toast.success('You followed ' + poll.title, 'Success!');
+          if (poll.follow.following) {
+            toast.success('You followed ' + poll.title, 'Success!');
+          }
         })
         .catch(err => {
           toast.error(err.message, 'Error!');

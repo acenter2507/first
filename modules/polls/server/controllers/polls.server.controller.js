@@ -602,13 +602,13 @@ exports.search = function (req, res) {
     })
     .then(_polls => {
       console.log(_polls);
+      res.jsonp(_polls);
     })
     .catch(err => {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     });
-  res.jsonp(polls);
 
   function _polls(con) {
     return new Promise((resolve, reject) => {

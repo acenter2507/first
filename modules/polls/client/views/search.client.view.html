@@ -48,6 +48,7 @@
                 </h4>
               </div>
               <div class="panel-collapse" role="tabpanel" bs-collapse-target>
+                <!-- User -->
                 <div class="panel-body">
                   <div class="form-group">
                     <div class="col-xs-12">
@@ -55,10 +56,24 @@
                       <input name="by" type="text" class="form-control" placeholder="Posted by" ng-model="by">
                     </div>
                   </div>
+                  <!-- Category -->
                   <div class="form-group">
                     <div class="col-xs-12">
                       <label>Category</label>
                       <select class="form-control" ng-model="ctgr" name="ctgr" ng-options="category._id as category.name for category in categorys"></select>
+                    </div>
+                  </div>
+                  <!-- Category -->
+                  <div class="form-group">
+                    <div class="col-xs-12"><label>Comment count</label></div>
+                    <div class="col-md-6">
+                      <select class="form-control" ng-model="compare">
+							        	<option value="least">At least</option>
+							        	<option value="most">As most</option>
+							        </select>
+                    </div>
+                    <div class="col-md-6">
+                      <input name="cmt" class="form-control" ng-model="cmt" type="number">
                     </div>
                   </div>
                 </div>

@@ -4,7 +4,9 @@ angular.module('users').controller('ProfileViewsController', [
   '$scope',
   'UserApi',
   'Action',
-  function($scope, UserApi, Action) {
+  'ngDialog',
+  'toastr',
+  function($scope, UserApi, Action, dialog, toast) {
     $scope.polls = [];
     $scope.page = 0;
     $scope.busy = false;

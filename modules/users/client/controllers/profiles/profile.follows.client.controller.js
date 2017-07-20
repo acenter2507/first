@@ -322,6 +322,9 @@ angular.module('users').controller('ProfileFollowsController', [
         });
     };
      $scope.follow_poll = (poll) => {
+      if ($scope.isCurrentOwner) {
+        $scope.polls = _.without($scope.polls, poll);
+      }
       if (!$scope.isLogged) {
         toast.error('You must login to follow poll.', 'Error!');
         return;
@@ -331,10 +334,6 @@ angular.module('users').controller('ProfileFollowsController', [
           poll.follow = res;
           if (poll.follow.following) {
             toast.success('You followed ' + poll.title, 'Success!');
-          } else {
-            if ($scope.isCurrentOwner) {
-              $scope.polls = _.without($scope.polls, poll);
-            }
           }
         })
         .catch(err => {

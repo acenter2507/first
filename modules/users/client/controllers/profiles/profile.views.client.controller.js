@@ -6,7 +6,7 @@ angular.module('users').controller('ProfileViewsController', [
   'Action',
   'ngDialog',
   'toastr',
-  function($scope, UserApi, Action, dialog, toast) {
+  function ($scope, UserApi, Action, dialog, toast) {
     $scope.polls = [];
     $scope.page = 0;
     $scope.busy = false;
@@ -178,7 +178,7 @@ angular.module('users').controller('ProfileViewsController', [
       return Math.floor(value * 100 / total) || 0;
     }
 
-     $scope.delete_poll = (poll) => {
+    $scope.delete_poll = (poll) => {
       if (!poll.isCurrentUserOwner) {
         toast.error('You are not authorized.', 'Error!');
         return;
@@ -199,7 +199,7 @@ angular.module('users').controller('ProfileViewsController', [
         Action.delete_poll(poll);
       }
     };
-     $scope.report_poll = (poll) => {
+    $scope.report_poll = (poll) => {
       if (poll.reported) {
         toast.error('You are already reported ' + poll.title, 'Error!');
         return;
@@ -223,7 +223,7 @@ angular.module('users').controller('ProfileViewsController', [
           });
       }
     };
-     $scope.bookmark_poll = (poll) => {
+    $scope.bookmark_poll = (poll) => {
       if (poll.bookmarked) {
         toast.error('You are already bookmark ' + poll.title, 'Error!');
         return;
@@ -238,7 +238,7 @@ angular.module('users').controller('ProfileViewsController', [
           toast.error(err.message, 'Error!');
         });
     };
-     $scope.follow_poll = (poll) => {
+    $scope.follow_poll = (poll) => {
       if ($scope.isCurrentOwner) {
         $scope.polls = _.without($scope.polls, poll);
       }

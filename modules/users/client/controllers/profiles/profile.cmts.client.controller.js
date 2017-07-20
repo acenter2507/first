@@ -3,12 +3,12 @@
 angular.module('users').controller('ProfileCmtsController', [
   '$scope',
   'UserApi',
-  function($scope, UserApi) {
+  function ($scope, UserApi) {
     $scope.cmts = [];
     $scope.page = 0;
     $scope.busy = false;
     $scope.stopped = false;
-    
+
     init();
 
     function init() {

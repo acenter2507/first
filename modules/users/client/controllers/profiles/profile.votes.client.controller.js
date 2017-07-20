@@ -4,7 +4,7 @@ angular.module('users').controller('ProfileVotesController', [
   '$scope',
   'UserApi',
   'Action',
-  function($scope, UserApi, Action) {
+  function ($scope, UserApi, Action) {
     $scope.votes = [];
     $scope.page = 0;
     $scope.busy = false;

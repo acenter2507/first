@@ -5,7 +5,7 @@ angular.module('users').controller('ProfileDislikesController', [
   'UserApi',
   'Action',
   'toastr',
-  function($scope, UserApi, Action, toast) {
+  function ($scope, UserApi, Action, toast) {
     $scope.polls = [];
     $scope.page = 0;
     $scope.busy = false;

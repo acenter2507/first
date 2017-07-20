@@ -6,7 +6,7 @@ angular.module('users').controller('ProfilePollsController', [
   'Action',
   'ngDialog',
   'toastr',
-  function($scope, UserApi, Action, dialog, toast) {
+  function ($scope, UserApi, Action, dialog, toast) {
     $scope.polls = [];
     $scope.page = 0;
     $scope.busy = false;
@@ -239,7 +239,7 @@ angular.module('users').controller('ProfilePollsController', [
       }, reject => {
       });
       function handle_delete() {
-         $scope.polls = _.without( $scope.polls, poll);
+        $scope.polls = _.without($scope.polls, poll);
         Action.delete_poll(poll);
       }
     };

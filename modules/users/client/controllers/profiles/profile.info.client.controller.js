@@ -4,7 +4,7 @@ angular.module('users').controller('ProfileInfoController', [
   '$scope',
   'UserApi',
   'Action',
-  function($scope, UserApi, Action) {
+  function ($scope, UserApi, Action) {
     $scope.polls = [];
     $scope.cmts = [];
     $scope.votes = [];
@@ -87,7 +87,7 @@ angular.module('users').controller('ProfileInfoController', [
     }
 
     function merge_activity() {
-      $scope.polls.forEach(function(poll) {
+      $scope.polls.forEach(function (poll) {
         if (poll) {
           $scope.activitys.push({
             _id: poll._id,
@@ -100,7 +100,7 @@ angular.module('users').controller('ProfileInfoController', [
           });
         }
       });
-      $scope.cmts.forEach(function(cmt) {
+      $scope.cmts.forEach(function (cmt) {
         if (cmt && cmt.poll) {
           $scope.activitys.push({
             _id: cmt.poll ? cmt.poll._id : null,
@@ -113,7 +113,7 @@ angular.module('users').controller('ProfileInfoController', [
           });
         }
       });
-      $scope.votes.forEach(function(vote) {
+      $scope.votes.forEach(function (vote) {
         if (vote && vote.poll) {
           $scope.activitys.push({
             _id: vote.poll ? vote.poll._id : null,

@@ -583,7 +583,8 @@ exports.search = function (req, res) {
   }
   if (condition.created) {
     var today = new Date().getTime();
-    var created = new Date(today - parseInt(condition.created));
+
+    var created = new Date(today - condition.created);
     console.log(created);
     if (condition.timing === 'old') {
       and_arr.push({ created: { $lt: created } });

@@ -530,7 +530,7 @@ input#txt-search {
   background-repeat:no-repeat;
   background-position:right center;
   padding: 12px 40px 12px 12px;
-  transition: width 0.4s ease-in-out;
+  transition: width 0.4s;
 }
 input#txt-search:focus {
   width: 100%;

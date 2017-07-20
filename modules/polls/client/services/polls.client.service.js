@@ -66,6 +66,9 @@
       },
       findView: id => {
         return $http.get('/api/findView/' + id);
+      },
+      removeBookmark: id => {
+        return $http.get('/api/removeBookmark/' + id);
       }
     };
   }

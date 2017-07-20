@@ -484,7 +484,7 @@ exports.findReport = function(req, res) {
 };
 
 /**
- * Find report
+ * Find Bookmark
  */
 exports.findBookmark = function(req, res) {
   Bookmark.findOne({
@@ -496,6 +496,24 @@ exports.findBookmark = function(req, res) {
     } else {
       var result = _bookmark ? true : false;
       res.jsonp(result);
+    }
+  });
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
+};
+
+exports.removeBookmark = function(req, res) {
+  Bookmark.findOne({
+    poll: req.poll._id,
+    user: req.user._id
+  }).remove().exec((err, res) => {
+    if (err) {
+      handleError(err);
+    } else {
+      res.jsonp(res);
     }
   });
   function handleError(err) {

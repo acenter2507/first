@@ -550,6 +550,17 @@
         );
       });
     };
+    this.remove_bookmark = pollId => {
+      return new Promise((resolve, reject) => {
+        PollsApi.removeBookmark(pollId)
+          .then(res => {
+            return resolve(res);
+          })
+          .catch(err => {
+            return reject(err);
+          });
+      });
+    };
     // get all tags in poll
     this.get_tags = pollId => {
       return new Promise((resolve, reject) => {

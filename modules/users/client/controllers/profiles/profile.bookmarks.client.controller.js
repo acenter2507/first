@@ -171,5 +171,32 @@ angular.module('users').controller('ProfileBookmarksController', [
       }
       return Math.floor(value * 100 / total) || 0;
     }
+
+    $scope.delete_poll = poll => {
+      
+    };
+    $scope.follow_poll = poll => {
+      
+    };
+    $scope.report_poll = poll => {
+      
+    };
+    $scope.remove_bookmark = poll => {
+      $scope.message_title = 'Remove bookmark!';
+      $scope.message_content = 'Are you sure you want to remove this poll from bookmark?';
+      $scope.dialog_type = 3;
+      $scope.buton_label = 'remove';
+      dialog.openConfirm({
+        scope: $scope,
+        templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
+      }).then(confirm => {
+        handle_delete();
+      }, reject => {
+      });
+      function handle_delete() {
+        $scope.polls = _.without($scope.polls, poll);
+        Action.remove_bookmark(pollId);
+      }
+    };
   }
 ]);

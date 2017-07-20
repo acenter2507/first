@@ -29,6 +29,7 @@ module.exports = function(app) {
   app.route('/api/findPolluser/:pollId').get(polls.findPolluser);
   app.route('/api/findReport/:pollId').get(polls.findReport);
   app.route('/api/findBookmark/:pollId').get(polls.findBookmark);
+  app.route('/api/removeBookmark/:pollId').get(polls.removeBookmark);
   app.route('/api/findPollreport/:pollId').get(polls.findPollreport);
   app.route('/api/findView/:pollId').get(polls.findView);
 

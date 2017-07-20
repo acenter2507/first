@@ -82,5 +82,10 @@ angular.module('core').controller('HeaderController', [
           });
       });
     }
+
+    $scope.search_key = '';
+    $scope.search = () => {
+      console.log(search_key);
+    };
   }
 ]);

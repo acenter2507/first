@@ -90,10 +90,10 @@
       </li>
     </ul>
 
-    <form class="navbar-form">
+    <form class="navbar-form" ng-submit="search()">
       <div class="form-group" style="display:inline;">
         <div class="input-group">
-          <input type="text" class="form-control" name="search" placeholder="Search...">
+          <input ng-model="search_key" type="text" class="form-control" name="search" placeholder="Search...">
           <span class="input-group-addon"><a class="btn-secondary undecorated-link" type="button" ui-sref="search"><i class="fa fa-cogs"></i></a></span>
         </div>
       </div>

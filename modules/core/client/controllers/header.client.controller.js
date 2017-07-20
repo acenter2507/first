@@ -85,7 +85,9 @@ angular.module('core').controller('HeaderController', [
 
     $scope.search_key = '';
     $scope.search = () => {
-      console.log($scope.search_key);
+      if ($scope.search_key !== '') {
+        $state.go('search', { key: $scope.search_key, in: 'polltitle' });
+      }
     };
   }
 ]);

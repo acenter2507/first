@@ -70,6 +70,14 @@
             templateUrl: 'modules/polls/client/views/list-cmts.client.view.html'
           }
         }
+      })
+      .state('search', {
+        url: '/search?key?in?by?category?cmt?created?sort',
+        templateUrl: 'modules/polls/client/views/search.client.view.html',
+        controller: 'PollsSearchController',
+        data: {
+          pageTitle: 'Search'
+        }
       });
   }
 

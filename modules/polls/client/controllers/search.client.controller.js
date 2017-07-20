@@ -39,13 +39,17 @@ angular.module('polls').controller('PollsSearchController', [
       if (check_params()) {
         $scope.busy = true;
         Action.search($scope.condition)
-          .then()
-          .catch();
+          .then(res => {
+            $scope.busy = false;
+          })
+          .catch(err => {
+            $scope.busy = false;
+          });
       }
     }
 
     function check_params() {
-      if ($scope.key || $scope.status || $scope.by || $scope.ctgr || $scope.cmt || $scope.created) {
+      if ($scope.condition.key || $scope.condition.status || $scope.condition.by || $scope.condition.ctgr || $scope.condition.cmt || $scope.condition.created) {
         return true;
       }
       return false;

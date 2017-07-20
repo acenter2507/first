@@ -176,7 +176,9 @@ angular.module('users').controller('ProfilePollsController', [
       Action.save_follow(poll.follow)
         .then(res => {
           poll.follow = res;
-          toast.success('You followed ' + poll.title, 'Success!');
+          if (poll.follow.following) {
+            toast.success('You followed ' + poll.title, 'Success!');
+          }
         })
         .catch(err => {
           toast.error(err.message, 'Error!');
@@ -197,11 +199,8 @@ angular.module('users').controller('ProfilePollsController', [
       function handle_confirm(reason) {
         Action.save_report(poll._id, reason)
           .then(res => {
-            console.log(res);
             poll.reported = (res) ? true : false;
-            if (res.data.following) {
-              toast.success('You have successfully reported ' + poll.title, 'Thank you!');
-            }
+            toast.success('You have successfully reported ' + poll.title, 'Thank you!');
           })
           .catch(err => {
             toast.error(err.message, 'Error!');

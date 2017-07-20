@@ -567,13 +567,50 @@ exports.search = function (req, res) {
   const condition = req.body.condition;
   var search = {};
   var and_arr = [];
-  if (condition.key) {
-    if (!condition.in || condition.in === 'polltitle') {
-      and_arr.push({ title: { $regex: '.*' + condition.key + '.*' }});
-    } else if (condition.in === 'pollcontent') {
-      and_arr.push({ $or: [{title: { $regex: '.*' + condition.key + '.*' }}, { body: { $regex: '.*' + condition.key + '.*' }}] })
+  if (condition.crgr) {
+    and_arr.push({ category: condition.crgr });
+  }
+  if (condition.status) {
+    if (condition.status === 'opening') {
+      and_arr.push({ $or: [{ close: { $exists: false } }, { close: { $gte: new Date() } }] });
+    } else {
+      and_arr.push({ $and: [{ close: { $exists: true } }, { close: { $lt: new Date() } }] });
     }
   }
+  if (condition.by) {
+    and_arr.push({ user: condition.by });
+  }
+  if (condition.created) {
+    var today = new Date();
+    today -= parseInt(condition.created);
+    var created = new Date(today);
+    if (condition.timing === 'old') {
+      and_arr.push({ created: { $lt: created } });
+    } else {
+      and_arr.push({ created: { $gte: created } });
+    }
+  }
+
+  console.log(condition);
+  res.jsonp();
+
+
+
+
+
+
+
+
+
+  // if (condition.key) {
+  //   if (!condition.in || condition.in === 'polltitle') {
+  //     and_arr.push({ title: { $regex: '.*' + condition.key + '.*' } });
+  //   } else if (condition.in === 'pollcontent') {
+  //     and_arr.push({ $or: [{ title: { $regex: '.*' + condition.key + '.*' } }, { body: { $regex: '.*' + condition.key + '.*' } }] })
+  //   } else if (condition.in === 'pollcmt') {
+  //     and_arr.push({ $or: [{ title: { $regex: '.*' + condition.key + '.*' } }, { body: { $regex: '.*' + condition.key + '.*' } }] })
+  //   }
+  // }
 };
 
 /**

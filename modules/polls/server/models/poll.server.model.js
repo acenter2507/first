@@ -64,7 +64,7 @@ var PollSchema = new Schema({
   },
   close: {
     type: 'Date',
-    required: false
+    default: null
   }
 });
 

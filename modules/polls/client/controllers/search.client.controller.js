@@ -34,6 +34,7 @@ angular.module('polls').controller('PollsSearchController', [
 
     $scope.busy = false;
     $scope.polls = [];
+    excute();
     function excute() {
       if (check_params()) {
         $scope.busy = true;

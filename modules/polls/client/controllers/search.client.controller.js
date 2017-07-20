@@ -29,7 +29,7 @@ angular.module('polls').controller('PollsSearchController', [
     $scope.condition.sortkind = $stateParams.sortkind;
 
     $scope.search = () => {
-
+      $state.go('search',  $scope.condition);
     };
 
     $scope.busy = false;

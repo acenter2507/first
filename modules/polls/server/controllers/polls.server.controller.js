@@ -509,11 +509,11 @@ exports.removeBookmark = function(req, res) {
   Bookmark.findOne({
     poll: req.poll._id,
     user: req.user._id
-  }).remove().exec((err, res) => {
+  }).remove().exec((err, result) => {
     if (err) {
       handleError(err);
     } else {
-      res.jsonp(res);
+      res.jsonp(result);
     }
   });
   function handleError(err) {

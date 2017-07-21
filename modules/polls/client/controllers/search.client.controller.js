@@ -43,6 +43,7 @@ angular.module('polls').controller('PollsSearchController', [
     $scope.polls = [];
     $scope.sort = '-poll.created';
     excute();
+    localSearch('Admin');
     function excute() {
       if (check_params()) {
         $scope.busy = true;
@@ -131,9 +132,10 @@ angular.module('polls').controller('PollsSearchController', [
           });
       });
     }
-    $scope.localSearch = function (str) {
+    function localSearch(str) {
       Action.search_user_by_name(str)
         .then(res => {
+          console.log(res);
           return res.data;
         })
         .catch(err => {

@@ -84,10 +84,7 @@
                   <div class="form-group">
                     <div class="col-xs-12">
                       <label>Category</label>
-                      <select class="form-control" ng-model="condition.ctgr" name="ctgr">
-							        	<option value></option>
-                        <option ng-repeat="category in categorys" value="{{category._id}}">{{category.name}}</option>
-                      </select>
+                      <select class="form-control" ng-model="condition.ctgr" name="ctgr" ng-options="category._id as category.name for category in categorys"></select>
                     </div>
                   </div>
                   <!-- Comment -->

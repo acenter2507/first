@@ -132,15 +132,15 @@ angular.module('polls').controller('PollsSearchController', [
       });
     }
     $scope.localSearch = function (str) {
-      // var matches = [];
-      console.log(str);
-      Action.search_user_by_name(str)
-        .then(res => {
-          return res.data;
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      var matches = [$scope.user];
+      return matches;
+      // Action.search_user_by_name(str)
+      //   .then(res => {
+      //     return res.data;
+      //   })
+      //   .catch(err => {
+      //     console.log(err);
+      //   });
       // people.forEach(function (person) {
       //   var fullName = person.firstName + ' ' + person.surname;
       //   if ((person.firstName.toLowerCase().indexOf(str.toString().toLowerCase()) >= 0) ||

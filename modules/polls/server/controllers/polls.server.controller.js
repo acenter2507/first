@@ -680,8 +680,8 @@ exports.search = function (req, res) {
           var filter = 'viewCnt,voteCnt,cmtCnt,likeCnt';
           var report = __.pick(_report, filter.split(','));
           console.log(report);
-          poll = _.extend(poll, report);
-          return resolve(poll);
+          var obj = Object.assign({}, poll, report);
+          return resolve(obj);
         }
       });
     });

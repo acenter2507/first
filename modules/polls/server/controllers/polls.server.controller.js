@@ -616,6 +616,7 @@ exports.search = function (req, res) {
         _polls.forEach(item => {
           if (condition.compare === 'most') {
             console.log('most');
+            console.log('cmtCnt: ', item.cmtCnt);
             if (item.cmtCnt >= cmtCnt) {
               console.log('has poll: ', item.cmtCnt);
               polls.push(item);

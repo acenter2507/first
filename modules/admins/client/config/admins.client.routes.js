@@ -7,7 +7,7 @@ angular.module('admin.routes').config(['$stateProvider',
       .state('admin.manage', {
         url: '/manage',
         templateUrl: 'modules/users/client/views/admin/manage.client.view.html',
-        controller: 'ManageListController'
+        controller: 'ManageController'
       })
       .state('admin.users', {
         url: '/users',

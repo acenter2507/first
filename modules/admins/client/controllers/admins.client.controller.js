@@ -2,15 +2,15 @@
   'use strict';
   angular
     .module('admin')
-    .controller('ManageController', ManageController);
+    .controller('AdminsController', AdminsController);
 
-  ManageController.$inject = [
+  AdminsController.$inject = [
     '$state',
     '$scope',
     'Authentication'
   ];
 
-  function ManageController(
+  function AdminsController(
     $state,
     $scope,
     Authentication

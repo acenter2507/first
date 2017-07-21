@@ -7,7 +7,8 @@ angular.module('core.admin.routes').config(['$stateProvider',
       .state('admin', {
         abstract: true,
         url: '/admin',
-        template: '<ui-view/>',
+        templateUrl: 'modules/admins/client/views/admin.client.view.html',
+        controller: 'AdminsController',
         data: {
           roles: ['admin']
         }

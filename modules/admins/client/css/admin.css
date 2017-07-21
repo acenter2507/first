@@ -1,0 +1,28 @@
+.admin-sidebar ul li {
+  border-bottom: 1px solid #f0f4f7;
+}
+.admin-sidebar ul li:last-child {
+  border-bottom: none;
+}
+.admin-sidebar ul li a {
+  color: #93a3b5;
+  font-size: 14px;
+  font-weight: 400;
+}
+.admin-sidebar ul li a i {
+  margin-right: 8px;
+  font-size: 14px;
+}
+.admin-sidebar ul li a:hover {
+  background-color: #fafcfd;
+  color: #5b9bd1;
+}
+.admin-sidebar ul li.active {
+  border-bottom: none;
+}
+.admin-sidebar ul li.active a {
+  color: #5b9bd1;
+  background-color: #f6f9fb;
+  border-left: 2px solid #5b9bd1;
+  margin-left: -2px;
+}

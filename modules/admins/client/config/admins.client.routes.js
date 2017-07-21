@@ -4,10 +4,10 @@
 angular.module('admin.routes').config(['$stateProvider',
   function ($stateProvider) {
     $stateProvider
-      .state('admin.manage', {
-        url: '/manage',
-        templateUrl: 'modules/admins/client/views/manage.client.view.html',
-        controller: 'ManageController'
+      .state('admin.dashboard', {
+        url: '/dashboard',
+        templateUrl: 'modules/admins/client/views/dashboard.client.view.html',
+        controller: 'DashboardController'
       })
       .state('admin.users', {
         url: '/users',

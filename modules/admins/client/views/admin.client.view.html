@@ -1,7 +1,53 @@
-<div class="container">
-  <h1>Admin page</h1>
-  <a ui-sref="admin.manage">Manage</a>
-  <a ui-sref="admin.users">Users</a>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+      <div class="card admin-sidebar">
+        <ul class="nav">
+          <li ui-sref-active="active">
+            <a ui-sref="admin.dashboard">
+              <i class="glyphicon glyphicon-home"></i>
+							Dashboard
+            </a>
+          </li>
+          <li ui-sref-active="active">
+            <a ui-sref="admin.users">
+              <i class="glyphicon glyphicon-user"></i>
+							Users
+            </a>
+          </li>
+          <li ui-sref-active="active">
+            <a ui-sref="admin.dashboard">
+							<i class="glyphicon glyphicon-ok"></i>
+							Tasks
+            </a>
+          </li>
+          <li ui-sref-active="active">
+            <a ui-sref="admin.dashboard">
+							<i class="glyphicon glyphicon-flag"></i>
+							Help
+            </a>
+          </li>
+          <li ui-sref-active="active">
+            <a href="#" id="btn-1" data-toggle="collapse" data-target="#submenu1" aria-expanded="false">
+							<i class="glyphicon glyphicon-flag"></i>
+							Link 2 (toggle)
+            </a>
+            <ul class="nav collapse" id="submenu1" role="menu" aria-labelledby="btn-1">
+              <li><a href="#">Link 2.1</a></li>
+              <li><a href="#">Link 2.2</a></li>
+              <li><a href="#">Link 2.3</a></li>
+            </ul>
+          </li>
+        </ul>
+        <!-- END MENU -->
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+      <div ui-view></div>
+    </div>
+  </div>
+</div>
+
   <!--<div class="row">
     <div class="cover" style="background-image: url({{profile.coverImageURL}});">
       <div class="container">
@@ -37,5 +83,3 @@
       </div>
     </div>
   </div>-->
-</div>
-<div ui-view></div>

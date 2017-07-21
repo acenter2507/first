@@ -5,13 +5,13 @@
   padding: 5px 0;
 }
 .admin-sidebar ul li {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #f0f4f7;
 }
 .admin-sidebar ul li:last-child {
   border-bottom: none;
 }
 .admin-sidebar ul li a {
-  color: #555;
+  color: #93a3b5;
   font-size: 14px;
   font-weight: 400;
 }

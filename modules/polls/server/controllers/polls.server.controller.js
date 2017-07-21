@@ -612,9 +612,25 @@ exports.search = function (req, res) {
       return Promise.all(promise);
     })
     .then(_polls => {
-      console.log(_polls);
+      var result = [];
+      if (condition.cmt && parseInt(condition.cmt)) {
+        var cmtCnt = parseInt(condition.cmt);
+        _polls.forEach(item => {
+          if (condition.compare === 'most') {
+            if (item.report.cmtCnt >= cmtCnt) {
+              result.push(item);
+            }
+          } else {
+            if (item.report.cmtCnt < cmtCnt) {
+              result.push(item);
+            }
+          }
+        });
+      } else {
+        result = _polls;
+      }
       // polls = _polls;
-      return _filter_cmt(_polls, condition);
+      // return _filter_cmt(_polls, condition);
       // var cmtCnt = parseInt(condition.cmt);
       // if (cmtCnt) {
       //   _polls.forEach(item => {
@@ -648,11 +664,11 @@ exports.search = function (req, res) {
       // } else {
       //   polls = _polls;
       // }
-      // res.jsonp(polls);
+      return res.jsonp(result);
     })
-    .then(_polls => {
-      res.jsonp(_polls);
-    })
+    // .then(_polls => {
+    //   res.jsonp(_polls);
+    // })
     .catch(err => {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)

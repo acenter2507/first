@@ -133,6 +133,7 @@ angular.module('polls').controller('PollsSearchController', [
     }
     $scope.localSearch = function (str) {
       // var matches = [];
+      console.log(str);
       Action.search_user_by_name(str)
         .then(res => {
           return res.data;

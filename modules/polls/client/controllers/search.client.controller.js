@@ -12,7 +12,8 @@ angular.module('polls').controller('PollsSearchController', [
   'Constants',
   'toastr',
   'ngDialog',
-  function ($location, $scope, $state, Authentication, Categorys, Action, $stateParams, Storages, Constants, toast, dialog) {
+  'Profile',
+  function ($location, $scope, $state, Authentication, Categorys, Action, $stateParams, Storages, Constants, toast, dialog, Profile) {
     $scope.user = Authentication.user;
     $scope.isLogged = ($scope.user) ? true : false;
     $scope.detailToggle = -1;
@@ -23,7 +24,6 @@ angular.module('polls').controller('PollsSearchController', [
     $scope.condition.key = $stateParams.key;
     $scope.condition.in = $stateParams.in;
     $scope.condition.status = $stateParams.status;
-    $scope.condition.by = $stateParams.by;
     $scope.condition.ctgr = $stateParams.ctgr;
 
     $scope.condition.cmt = $stateParams.cmt;
@@ -35,6 +35,10 @@ angular.module('polls').controller('PollsSearchController', [
     $scope.condition.sort = $stateParams.sort;
     $scope.condition.sortkind = $stateParams.sortkind;
 
+    $scope.condition.by = $stateParams.by;
+    if ($scope.condition.by) {
+      $scope.selectedUser = Profile.get({ id: $scope.condition.by });
+    }
     $scope.search = () => {
       $state.go('search', $scope.condition);
     };
@@ -131,9 +135,14 @@ angular.module('polls').controller('PollsSearchController', [
           });
       });
     }
-    $scope.sellectedUser = function (selected) {
-      $scope.condition.by = selected._id;
-      console.log(selected);
+    $scope.selectedUserFn = function (selected) {
+      if (selected) {
+        $scope.condition.by = selected.originalObject._id;
+        $scope.selectedUser = selected.originalObject;
+      } else {
+        $scope.condition.by = undefined;
+        $scope.selectedUser = undefined;
+      }
     };
     $scope.clear_preferences = () => {
       $scope.condition = {};

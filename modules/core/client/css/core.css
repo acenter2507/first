@@ -533,9 +533,11 @@ a.notifis-list-item:focus {
     margin-top: 0px;
 }
 .angucomplete-selected-row {
-    background-color: #d5d5d5;
+    background-color: #eeeeee;
 }
-
+.form-control {
+  border-radius: 0;
+}
 .mgn {
   margin: 0 !important;
 }

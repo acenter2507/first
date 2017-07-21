@@ -430,6 +430,7 @@ exports.report = function (req, res) {
 
 exports.search_user_by_name = function (req, res) {
   const name = req.query.s;
+  console.log(name);
   if (!name || name === '') {
     return res.jsonp();
   }

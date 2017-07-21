@@ -676,7 +676,7 @@ exports.search = function (req, res) {
         if (err) {
           return reject(err);
         } else {
-          var filter = 'viewCnt,voteCnt,cmtCnt,likeCnt',
+          var filter = 'viewCnt,voteCnt,cmtCnt,likeCnt';
           var report = _.pick(_report, filter.split(','));
           var oj = _.merge(poll, report);
           return resolve(oj);

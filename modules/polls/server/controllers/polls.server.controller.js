@@ -680,7 +680,7 @@ exports.search = function (req, res) {
           var filter = 'viewCnt,voteCnt,cmtCnt,likeCnt';
           var report = __.pick(_report, filter.split(','));
           console.log(report);
-          _.merge(poll, report);
+          poll = _.extend(poll, report);
           return resolve(poll);
         }
       });

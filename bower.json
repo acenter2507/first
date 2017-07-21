@@ -36,7 +36,8 @@
     "angular-toasty": "^1.0.6",
     "angular-toastr": "^2.1.1",
     "ng-dialog": "^1.3.0",
-    "angular-webstorage": "^0.14.0"
+    "angular-webstorage": "^0.14.0",
+    "angucomplete": "*"
   },
   "resolutions": {
     "angular": "1.3.20",

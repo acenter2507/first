@@ -704,11 +704,17 @@ exports.search = function (req, res) {
         } else {
           var pollIds = _.pluck(_reports, 'poll');
           console.log('pollIds', pollIds);
-          polls = __.reject(polls, function(poll){ return pollIds.indexOf(poll._id.toString()) < 0; });
+          var new_polls = [];
+          polls.forEach(poll => {
+            if (__.contains(pollIds, poll._id)) {
+              new_polls.push(poll);
+            }
+          });
+          // polls = __.reject(polls, function(poll){ return pollIds.indexOf(poll._id.toString()) < 0; });
           // _.filter(polls, poll => {
           //   return pollIds.indexOf(poll._id.toString()) >= 0;
           // });
-          return resolve(polls);
+          return resolve(new_polls);
         }
       });
     });

@@ -706,7 +706,7 @@ exports.search = function (req, res) {
           console.log('pollIds', pollIds);
           var new_polls = [];
           polls.forEach(poll => {
-            console.log(poll);
+            console.log(poll._id);
             if (__.contains(pollIds, poll._id)) {
               new_polls.push(poll);
             }

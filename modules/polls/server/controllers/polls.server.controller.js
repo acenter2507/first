@@ -612,6 +612,7 @@ exports.search = function (req, res) {
       return Promise.all(promise);
     })
     .then(_polls => {
+      console.log(_polls);
       // polls = _polls;
       return _filter_cmt(_polls, condition);
       // var cmtCnt = parseInt(condition.cmt);
@@ -677,7 +678,7 @@ exports.search = function (req, res) {
           return reject(err);
         } else {
           var filter = 'viewCnt,voteCnt,cmtCnt,likeCnt';
-          var report = _.pick(_report, filter.split(','));
+          var report = __.pick(_report, filter.split(','));
           var oj = _.merge(poll, report);
           return resolve(oj);
         }

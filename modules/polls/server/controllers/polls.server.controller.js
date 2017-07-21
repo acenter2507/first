@@ -647,7 +647,34 @@ exports.search = function (req, res) {
       return Promise.all(promise);
     })
     .then(_polls => {
-      res.jsonp(_polls);
+      var result = [];
+      if (condition.key && condition.in === 'pollcontent') {
+        _polls.forEach(item => {
+          var check = false;
+          if (item.poll.title.indexOf(condition.key) >= 0) check = true;
+          if (item.poll.body.indexOf(condition.key) >= 0) check = true;
+          item.opts.forEach(opt => {
+            if (opt.title.indexOf(condition.key) >= 0 || opt.body.indexOf(condition.key) >= 0) check = true;
+          });
+          if (check) result.push(item);
+        });
+      } else if (condition.key && condition.in === 'pollcmt') {
+        _polls.forEach(item => {
+          var check = false;
+          if (item.poll.title.indexOf(condition.key) >= 0) check = true;
+          if (item.poll.body.indexOf(condition.key) >= 0) check = true;
+          item.opts.forEach(opt => {
+            if (opt.title.indexOf(condition.key) >= 0 || opt.body.indexOf(condition.key) >= 0) check = true;
+          });
+          item.cmts.forEach(cmt => {
+            if (cmt.body.indexOf(condition.key) >= 0) check = true;
+          });
+          if (check) result.push(item);
+        });
+      } else {
+        result = _polls;
+      }
+      res.jsonp(result);
     })
     .catch(err => {
       return res.status(400).send({

@@ -611,20 +611,19 @@ exports.search = function (req, res) {
       return Promise.all(promise);
     })
     .then(_polls => {
-      polls = _polls;
       var cmtCnt = parseInt(condition.cmt);
       if (cmtCnt) {
         if (condition.compare === 'most') {
-          _.filter(polls, poll => {
+          _.filter(_polls, poll => {
             return poll.cmtCnt >= cmtCnt;
           });
         } else {
-          _.filter(polls, poll => {
+          _.filter(_polls, poll => {
             return poll.cmtCnt < cmtCnt;
           });
         }
       }
-      res.jsonp(polls);
+      res.jsonp(_polls);
     })
     .catch(err => {
       return res.status(400).send({

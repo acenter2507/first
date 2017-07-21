@@ -64,10 +64,19 @@
                     <div class="col-xs-12">
                       <label>Posted by</label>
                       <!--<input name="by" type="text" class="form-control" placeholder="Posted by" ng-model="condition.by">-->
-                      <div angucomplete-alt id="ex2" placeholder="Search people" pause="300" selected-object="selectedPerson" local-data="people"
-                        local-search="localSearch" title-field="displayName" description-field="username" image-field="profileImageURL"
-                        minlength="1" input-class="form-control" match-class="highlight">
-                      </div>
+                      <angucomplete 
+                        id="ex2"
+                        placeholder="Search people"
+                        pause="300"
+                        selected-object="selectedPerson"
+                        local-data="people"
+                        local-search="localSearch"
+                        title-field="displayName"
+                        description-field="username"
+                        image-field="profileImageURL"
+                        minlength="1"
+                        input-class="form-control"
+                        match-class="highlight" />
                     </div>
                   </div>
                   <!-- Category -->

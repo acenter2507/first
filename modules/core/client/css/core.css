@@ -168,6 +168,9 @@ a.notifis-list-item:focus {
 .tag:hover::after {
    border-left-color: crimson; 
 }
+.tags-custom .tags {
+  border-radius: 0;
+}
 
 .cs-loader {
   position: relative;

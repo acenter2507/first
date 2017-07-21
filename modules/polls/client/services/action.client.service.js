@@ -594,8 +594,8 @@
     this.search = condition => {
       return $http.post('/api/search', { condition: condition });
     };
-    this.search_user_by_name = (str, timeoutPromise) => {
-      return $http.post('/api/users/search', { s: str }, { timeout: timeoutPromise });
+    this.search_user_by_name = name => {
+      return $http.get('/api/users/search/s=' + name);
     };
     return this;
   }

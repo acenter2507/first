@@ -441,7 +441,8 @@ exports.search_user_by_name = function (req, res) {
           message: errorHandler.getErrorMessage(err)
         });
       } else {
-        res.jsonp(users);
+        // res.jsonp(users);
+        res.send(JSON.stringify({ users: users }));
       }
     });
 };

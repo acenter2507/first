@@ -299,14 +299,13 @@
 }
 .custom-panel {
   border: none !important;
-  border-radius: 0 !important;
 }
 .custom-panel:focus {
   outline: none;
 }
 .custom-panel .panel-heading {
   color: #555 !important;
-  border-radius: 3px;
+  border-radius: 0 !important;
   background-color: #d6d6d6 !important;
   
 }

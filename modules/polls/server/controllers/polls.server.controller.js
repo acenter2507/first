@@ -612,7 +612,7 @@ exports.search = function (req, res) {
       return Promise.all(promise);
     })
     .then(_polls => {
-      // console.log(_polls);
+      console.log(_polls);
       // polls = _polls;
       return _filter_cmt(_polls, condition);
       // var cmtCnt = parseInt(condition.cmt);

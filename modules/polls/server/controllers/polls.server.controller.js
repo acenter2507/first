@@ -695,7 +695,7 @@ exports.search = function (req, res) {
         if (err) {
           return reject(err);
         } else {
-          return resolve({ poll: poll.poll, report: poll.report, opts: opts, cmts: cmts });
+          return resolve({ poll: poll.poll, report: poll.report, opts: poll.opts, cmts: cmts });
         }
       });
     });

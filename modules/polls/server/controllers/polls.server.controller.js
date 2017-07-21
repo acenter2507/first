@@ -613,17 +613,30 @@ exports.search = function (req, res) {
     .then(_polls => {
       var cmtCnt = parseInt(condition.cmt);
       if (cmtCnt) {
-        if (condition.compare === 'most') {
-          _.filter(_polls, poll => {
-            return poll.cmtCnt >= cmtCnt;
-          });
-        } else {
-          _.filter(_polls, poll => {
-            return poll.cmtCnt < cmtCnt;
-          });
-        }
+        _polls.forEach(poll => {
+          if (condition.compare === 'most') {
+            if (poll.cmtCnt >= cmtCnt) {
+              polls.push(poll);
+            }
+          } else {
+            if (poll.cmtCnt < cmtCnt) {
+              polls.push(poll);
+            }
+          }
+        });
+        // if (condition.compare === 'most') {
+        //   _.filter(_polls, poll => {
+        //     return poll.cmtCnt >= cmtCnt;
+        //   });
+        // } else {
+        //   _.filter(_polls, poll => {
+        //     return poll.cmtCnt < cmtCnt;
+        //   });
+        // }
+      } else {
+        polls = _polls;
       }
-      res.jsonp(_polls);
+      res.jsonp(polls);
     })
     .catch(err => {
       return res.status(400).send({

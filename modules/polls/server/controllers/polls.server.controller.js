@@ -613,6 +613,7 @@ exports.search = function (req, res) {
     .then(_polls => {
       polls = _polls;
       var cmtCnt = parseInt(condition.cmt);
+      console.log(cmtCnt);
       if (cmtCnt) {
         if (condition.compare === 'most') {
           polls = _.filter(_polls, poll => {
@@ -624,6 +625,7 @@ exports.search = function (req, res) {
           });
         }
       }
+      console.log(polls);
       res.jsonp(polls);
     })
     .catch(err => {

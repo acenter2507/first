@@ -26,30 +26,3 @@
   border-left: 2px solid #5b9bd1;
   margin-left: -2px;
 }
-.admin-sidebar .dropdown-menu {
-  position: relative;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  border: none;
-  border-radius: 0;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-.admin-sidebar .dropdown > .dropdown-menu {
-  background-color: #e0e0e0;
-}
-.admin-sidebar .dropdown > .dropdown-menu > li > a:focus {
-  background-color: #e0e0e0;
-  color: #212121;
-}
-.admin-sidebar .dropdown > .dropdown-menu > li > a:hover {
-  background-color: #cecece;
-  color: #212121;
-}
-.admin-sidebar .dropdown > .dropdown-menu > .active > a,
-.admin-sidebar .dropdown > .dropdown-menu > .active > a:hover,
-.admin-sidebar .dropdown > .dropdown-menu > .active > a:focus {
-  color: #212121;
-  background-color: #e0e0e0;
-}

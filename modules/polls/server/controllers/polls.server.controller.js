@@ -22,7 +22,8 @@ var path = require('path'),
   errorHandler = require(path.resolve(
     './modules/core/server/controllers/errors.server.controller'
   )),
-  _ = require('lodash');
+  _ = require('lodash'),
+  __ = require('underscore');
 /**
  * Create a Poll
  */
@@ -704,7 +705,7 @@ exports.search = function (req, res) {
           var pollIds = _.pluck(_reports, 'poll');
           console.log('pollIds', pollIds);
           _.filter(polls, poll => {
-            return pollIds.indexOf(poll._id) >= 0;
+            return pollIds.indexOf(poll._id.toString()) >= 0;
           });
           return resolve(polls);
         }

@@ -82,9 +82,13 @@
                   </div>
                   <!-- Category -->
                   <div class="form-group">
-                    <div class="col-xs-12">
+                    <div class="col-xs-10">
                       <label>Category</label>
                       <select class="form-control" ng-model="condition.ctgr" name="ctgr" ng-options="category._id as category.name for category in categorys"></select>
+                    </div>
+                    <div class="col-xs-2">
+                      <label>&nbsp;</label>
+                      <button type="button" ng-click="clear_ctgr()" class="btn btn-default form-control">clear</button>
                     </div>
                   </div>
                   <!-- Comment -->

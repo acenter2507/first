@@ -54,9 +54,12 @@ angular.module('polls').controller('PollsSearchController', [
               promise.push(get_reported(item.poll));
               promise.push(get_bookmarked(item.poll));
             }, this);
+          })
+          .then(res => {
             $scope.busy = false;
           })
           .catch(err => {
+            console.log(err);
             $scope.busy = false;
           });
       } else {

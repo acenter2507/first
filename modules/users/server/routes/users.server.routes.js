@@ -15,7 +15,7 @@ module.exports = function (app) {
   app.route('/api/users/accounts').delete(users.removeOAuthProvider);
   app.route('/api/users/password').post(users.changePassword);
   app.route('/api/users/picture').post(users.changeProfilePicture);
-  app.route('/api/users/search').post(users.search_user_by_name);
+  app.route('/api/users/search').get(users.search_user_by_name);
 
   app.route('/api/profile/:userId').get(users.profile);
   app.route('/api/profile/:userId/polls').get(users.all_polls);

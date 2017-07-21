@@ -67,8 +67,9 @@
                       <angucomplete 
                         placeholder="Search user"
                         pause="300"
-                        selected-object="selectedPerson"
-                        local-search="localSearch"
+                        selected-object="user"
+                        remote-url="/api/user/search?s="
+                        remote-url-data-field="data"
                         title-field="displayName"
                         description-field="username"
                         image-field="profileImageURL"

@@ -429,7 +429,10 @@ exports.report = function (req, res) {
 };
 
 exports.search_user_by_name = function (req, res) {
-  const name = req.body.name;
+  const name = req.query.s;
+  if (!name || name === '') {
+    return res.jsonp();
+  }
   User.find({ displayName: { $regex: '.*' + name + '.*' } })
     .exec(function (err, users) {
       if (err) {

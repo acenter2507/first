@@ -161,9 +161,10 @@ angular.module('polls').controller('PollsSearchController', [
       });
       function handle_delete() {
         // $scope.polls = _.without($scope.polls, _.findWhere($scope.polls, poll));
-        _.reject($scope.polls, function(item) {
+        $scope.polls = _.reject($scope.polls, function(item) {
           return item.poll._id === poll._id;
         });
+        console.log($scope.polls);
         // Action.delete_poll(poll);
       }
     };

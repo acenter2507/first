@@ -11,6 +11,8 @@ angular.module('polls').controller('PollsSearchController', [
   'Storages',
   'Constants',
   function ($location, $scope, $state, Authentication, Categorys, Action, $stateParams, Storages, Constants) {
+    $scope.user = Authentication.user;
+    $scope.isLogged = ($scope.user) ? true : false;
     $scope.detailToggle = -1;
     $scope.form = {};
     $scope.categorys = Categorys.query();
@@ -37,6 +39,7 @@ angular.module('polls').controller('PollsSearchController', [
 
     $scope.busy = false;
     $scope.polls = [];
+    $scope.sort;
     excute();
     function excute() {
       if (check_params()) {
@@ -44,6 +47,13 @@ angular.module('polls').controller('PollsSearchController', [
         Action.search($scope.condition)
           .then(res => {
             console.log(res);
+            $scope.polls = res.data;
+            var promise = [];
+            $scope.polls.forEach(function(item) {
+              promise.push(get_owner_follow(item.poll));
+              promise.push(get_reported(item.poll));
+              promise.push(get_bookmarked(item.poll));
+            }, this);
             $scope.busy = false;
           })
           .catch(err => {
@@ -60,6 +70,54 @@ angular.module('polls').controller('PollsSearchController', [
       return false;
     }
 
+    function get_owner_follow(poll) {
+      return new Promise((resolve, reject) => {
+        if (!vm.isLogged) {
+          poll.follow = {};
+          return resolve();
+        }
+        Action.get_follow(poll._id)
+          .then(res => {
+            poll.follow = res.data || { poll: poll._id };
+            return resolve(res.data);
+          })
+          .catch(err => {
+            return reject(err);
+          });
+      });
+    }
+    function get_reported(poll) {
+      return new Promise((resolve, reject) => {
+        if (!vm.isLogged) {
+          poll.reported = false;
+          return resolve();
+        }
+        Action.get_report(poll._id)
+          .then(res => {
+            poll.reported = (res.data) ? res.data : false;
+            return resolve(res.data);
+          })
+          .catch(err => {
+            return reject(err);
+          });
+      });
+    }
+    function get_bookmarked(poll) {
+      return new Promise((resolve, reject) => {
+        if (!vm.isLogged) {
+          poll.bookmarked = false;
+          return resolve();
+        }
+        Action.get_bookmark(poll._id)
+          .then(res => {
+            poll.bookmarked = (res.data) ? res.data : false;
+            return resolve(res.data);
+          })
+          .catch(err => {
+            return reject(err);
+          });
+      });
+    }
     $scope.clear_preferences = () => {
       $scope.condition = {};
       Storages.set_local(Constants.storages.preferences, JSON.stringify($scope.condition));

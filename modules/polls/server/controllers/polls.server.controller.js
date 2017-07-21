@@ -568,6 +568,7 @@ exports.search = function (req, res) {
   const condition = req.body.condition;
   var search = {};
   var and_arr = [];
+  and_arr.push({ isPublic: true });
   // Search by category
   if (condition.ctgr) {
     and_arr.push({ category: condition.ctgr });
@@ -692,7 +693,6 @@ exports.search = function (req, res) {
       res.jsonp(result);
     })
     .catch(err => {
-      console.log(err);
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
@@ -700,7 +700,10 @@ exports.search = function (req, res) {
 
   function _polls(con) {
     return new Promise((resolve, reject) => {
-      Poll.find(con).exec((err, polls) => {
+      Poll.find(con)
+      .populate('category', 'name icon')
+      .populate('user', 'displayName profileImageURL')
+      .exec((err, polls) => {
         if (err) {
           return reject(err);
         } else {
@@ -784,21 +787,6 @@ exports.search = function (req, res) {
       });
     });
   }
-
-
-
-
-
-
-  // if (condition.key) {
-  //   if (!condition.in || condition.in === 'polltitle') {
-  //     and_arr.push({ title: { $regex: '.*' + condition.key + '.*' } });
-  //   } else if (condition.in === 'pollcontent') {
-  //     and_arr.push({ $or: [{ title: { $regex: '.*' + condition.key + '.*' } }, { body: { $regex: '.*' + condition.key + '.*' } }] })
-  //   } else if (condition.in === 'pollcmt') {
-  //     and_arr.push({ $or: [{ title: { $regex: '.*' + condition.key + '.*' } }, { body: { $regex: '.*' + condition.key + '.*' } }] })
-  //   }
-  // }
 };
 
 /**

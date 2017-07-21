@@ -299,6 +299,7 @@
 }
 .custom-panel {
   border: none !important;
+  border-radius: 0 !important;
 }
 .custom-panel:focus {
   outline: none;

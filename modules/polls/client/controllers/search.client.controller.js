@@ -131,9 +131,9 @@ angular.module('polls').controller('PollsSearchController', [
           });
       });
     }
-    $scope.searchAPI = function (userInputString, timeoutPromise) {
-      var str = userInputString.replace(' ', '.');
-      return Action.search_user_by_name(str, timeoutPromise);
+    $scope.sellectedUser = function (selected) {
+      $scope.condition.by = selected._id;
+      console.log(selected);
     };
     $scope.clear_preferences = () => {
       $scope.condition = {};

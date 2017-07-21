@@ -676,7 +676,9 @@ exports.search = function (req, res) {
         if (err) {
           return reject(err);
         } else {
-          var oj = _.extend(poll, { report: _report });
+          var filter = 'viewCnt,voteCnt,cmtCnt,likeCnt',
+          var report = _.pick(_report, filter.split(','));
+          var oj = _.merge(poll, report);
           return resolve(oj);
         }
       });

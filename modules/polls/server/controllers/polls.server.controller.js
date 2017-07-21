@@ -572,7 +572,7 @@ exports.search = function (req, res) {
     and_arr.push({ category: condition.ctgr });
   }
   if (condition.status) {
-    if (condition.status === 'opening') {
+    if(condition.status === 'opening') {
       and_arr.push({ $or: [{ close: { $exists: false } }, { close: { $gte: new Date() } }] });
     } else {
       and_arr.push({ $and: [{ close: { $exists: true } }, { close: { $lt: new Date() } }] });
@@ -628,9 +628,9 @@ exports.search = function (req, res) {
         if (err) {
           return reject(err);
         } else {
-          console.log(_report);
-          poll.report = _report;
-          return resolve(poll);
+          var oj = _.clone(poll);
+          oj.report = _report;
+          return resolve(oj);
         }
       });
     });

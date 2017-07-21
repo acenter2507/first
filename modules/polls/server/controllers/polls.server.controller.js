@@ -649,7 +649,7 @@ exports.search = function (req, res) {
       // res.jsonp(polls);
     })
     .then(_polls => {
-      res.jsonp(polls);
+      res.jsonp(_polls);
     })
     .catch(err => {
       return res.status(400).send({

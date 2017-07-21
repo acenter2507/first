@@ -10,7 +10,21 @@ angular.module('polls').controller('PollsSearchController', [
   '$stateParams',
   'Storages',
   'Constants',
-  function ($location, $scope, $state, Authentication, Categorys, Action, $stateParams, Storages, Constants) {
+  'toastr',
+  'ngDialog',
+  function (
+    $location,
+    $scope,
+    $state,
+    Authentication,
+    Categorys,
+    Action,
+    $stateParams,
+    Storages,
+    Constants,
+    toast,
+    dialog,
+  ) {
     $scope.user = Authentication.user;
     $scope.isLogged = ($scope.user) ? true : false;
     $scope.detailToggle = -1;
@@ -45,10 +59,9 @@ angular.module('polls').controller('PollsSearchController', [
         $scope.busy = true;
         Action.search($scope.condition)
           .then(res => {
-            console.log(res);
             $scope.polls = res.data;
             var promise = [];
-            $scope.polls.forEach(function(item) {
+            $scope.polls.forEach(function (item) {
               promise.push(get_owner_follow(item.poll));
               promise.push(get_reported(item.poll));
               promise.push(get_bookmarked(item.poll));
@@ -70,11 +83,6 @@ angular.module('polls').controller('PollsSearchController', [
         return true;
       }
       return false;
-    }
-    function aaa() {
-      if ($scope.condition.key) {
-        
-      }
     }
 
     function get_owner_follow(poll) {
@@ -132,6 +140,80 @@ angular.module('polls').controller('PollsSearchController', [
     };
     $scope.save_preferences = () => {
       Storages.set_local(Constants.storages.preferences, JSON.stringify($scope.condition));
+    };
+    $scope.delete_poll = (poll) => {
+      if (poll._id !== $scope.user._id) {
+        toast.error('You are not authorized.', 'Error!');
+        return;
+      }
+      $scope.message_title = 'Delete poll!';
+      $scope.message_content = 'Are you sure you want to delete this poll?';
+      $scope.dialog_type = 3;
+      $scope.buton_label = 'delete';
+      dialog.openConfirm({
+        scope: $scope,
+        templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
+      }).then(confirm => {
+        handle_delete();
+      }, reject => {
+      });
+      function handle_delete() {
+        $scope.polls = _.without($scope.polls, _.findWhere($scope.polls, poll));
+        // Action.delete_poll(poll);
+      }
+    };
+    $scope.report_poll = (poll) => {
+      if (poll.reported) {
+        toast.error('You are already reported ' + poll.title, 'Error!');
+        return;
+      }
+      dialog.openConfirm({
+        scope: $scope,
+        templateUrl: 'modules/core/client/views/templates/report.dialog.template.html'
+      }).then(reason => {
+        handle_confirm(reason);
+      }, reject => {
+      });
+      function handle_confirm(reason) {
+        Action.save_report(poll._id, reason)
+          .then(res => {
+            poll.reported = (res) ? true : false;
+            toast.success('You have successfully reported ' + poll.title, 'Thank you!');
+          })
+          .catch(err => {
+            toast.error(err.message, 'Error!');
+          });
+      }
+    };
+    $scope.bookmark_poll = (poll) => {
+      if (poll.bookmarked) {
+        toast.error('You are already bookmark ' + poll.title, 'Error!');
+        return;
+      }
+      Action.save_bookmark(poll._id)
+        .then(res => {
+          poll.bookmarked = (res) ? true : false;
+          toast.success('Added ' + poll.title + ' to bookmarks.', 'Success!');
+        })
+        .catch(err => {
+          toast.error(err.message, 'Error!');
+        });
+    };
+    $scope.follow_poll = (poll) => {
+      if (!$scope.isLogged) {
+        toast.error('You must login to follow poll.', 'Error!');
+        return;
+      }
+      Action.save_follow(poll.follow)
+        .then(res => {
+          poll.follow = res;
+          if (poll.follow.following) {
+            toast.success('You followed ' + poll.title, 'Success!');
+          }
+        })
+        .catch(err => {
+          toast.error(err.message, 'Error!');
+        });
     };
   }
 ]);

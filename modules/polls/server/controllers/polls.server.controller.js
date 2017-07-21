@@ -568,19 +568,23 @@ exports.search = function (req, res) {
   console.log(condition);
   var search = {};
   var and_arr = [];
+  // Search by category
   if (condition.ctgr) {
     and_arr.push({ category: condition.ctgr });
   }
+  // Search by status
   if (condition.status) {
-    if(condition.status === 'opening') {
+    if (condition.status === 'opening') {
       and_arr.push({ $or: [{ close: { $exists: false } }, { close: { $gte: new Date() } }] });
     } else {
       and_arr.push({ $and: [{ close: { $exists: true } }, { close: { $lt: new Date() } }] });
     }
   }
+  // Search by user
   if (condition.by) {
     and_arr.push({ user: condition.by });
   }
+  // Search by created time
   if (condition.created) {
     var today = new Date().getTime();
     var created = new Date(today - (parseInt(condition.created) * 1000));
@@ -588,6 +592,12 @@ exports.search = function (req, res) {
       and_arr.push({ created: { $lt: created } });
     } else {
       and_arr.push({ created: { $gte: created } });
+    }
+  }
+  // Search by key in title
+  if (condition.key) {
+    if (!condition.in || condition.in === 'polltitle') {
+      and_arr.push({ title: { $regex: '.*' + condition.key + '.*' } });
     }
   }
   search = { $and: and_arr };
@@ -600,9 +610,20 @@ exports.search = function (req, res) {
       });
       return Promise.all(promise);
     })
-    .then(xxx => {
-      console.log(xxx);
-      res.jsonp(xxx);
+    .then(_polls => {
+      if (condition.cmt) {
+        var cmtCnt = parseInt(condition.cmt);
+        if (condition.compare === 'most') {
+          polls = _.filter(_polls, poll => {
+            return poll.cmtCnt >= cmtCnt;
+          });
+        } else {
+          polls = _.filter(_polls, poll => {
+            return poll.cmtCnt < cmtCnt;
+          });
+        }
+      }
+      res.jsonp(polls);
     })
     .catch(err => {
       return res.status(400).send({
@@ -629,13 +650,19 @@ exports.search = function (req, res) {
           return reject(err);
         } else {
           var oj = _.merge(poll, _report);
-          // oj.report = _report;
           return resolve(oj);
         }
       });
     });
   }
 
+  function _filter_key(polls, condition) {
+    return new Promise((resolve, reject) => {
+      if (polls.length === 0) {
+        return resolve(polls);
+      }
+    });
+  }
 
 
 

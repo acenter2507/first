@@ -169,7 +169,7 @@ a.notifis-list-item:focus {
    border-left-color: crimson; 
 }
 .tags-custom .tags {
-  border-radius: 0;
+  border-radius: 0 !important;
 }
 
 .cs-loader {

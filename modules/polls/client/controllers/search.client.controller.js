@@ -71,6 +71,11 @@ angular.module('polls').controller('PollsSearchController', [
       }
       return false;
     }
+    function aaa() {
+      if ($scope.condition.key) {
+        
+      }
+    }
 
     function get_owner_follow(poll) {
       return new Promise((resolve, reject) => {

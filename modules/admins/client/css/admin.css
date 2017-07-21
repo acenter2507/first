@@ -1,3 +1,9 @@
+.admin-sidebar ul li.sidebar-header {
+  font-size: 14px;
+  font-weight: bold;
+  color: #93a3b5;
+  padding: 5px 0;
+}
 .admin-sidebar ul li {
   border-bottom: 1px solid #f0f4f7;
 }

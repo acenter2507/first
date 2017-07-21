@@ -179,8 +179,8 @@
               <md-menu-content>
                 <ul class="menu-list">
                   <li><a ui-sref="polls.view({ pollId: item.poll._id })"><i class="fa fa-eye"></i>&nbsp;View</a></li>
-                  <li ng-if="user._id === item.poll._id"><a class="undecorated-link" ui-sref="polls.edit({ pollId: item.poll._id })"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
-                  <li ng-if="user._id === item.poll._id"><a class="undecorated-link" ng-click="delete_poll(item.poll)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
+                  <li ng-if="user._id === item.poll.user._id"><a class="undecorated-link" ui-sref="polls.edit({ pollId: item.poll._id })"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
+                  <li ng-if="user._id === item.poll.user._id"><a class="undecorated-link" ng-click="delete_poll(item.poll)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
                   <li ng-if="isLogged">
                     <a ng-click="follow_poll(item.poll)" class="undecorated-link">
                       <i class="fa fa-rss"></i>&nbsp;{{(item.poll.follow.following) ? 'Unfollow' : 'Follow'}}

@@ -144,7 +144,7 @@ angular.module('polls').controller('PollsSearchController', [
       Storages.set_local(Constants.storages.preferences, JSON.stringify($scope.condition));
     };
     $scope.delete_poll = (poll) => {
-      if (poll._id !== $scope.user._id) {
+      if (poll.user._id !== $scope.user._id) {
         toast.error('You are not authorized.', 'Error!');
         return;
       }

@@ -28,7 +28,8 @@ var ApplicationConfiguration = (function() {
     'textAngular',
     'ui.bootstrap.materialPicker',
     'toastr',
-    'webStorageModule'
+    'webStorageModule',
+    'angucomplete'
   ];
 
   // Add a new vertical module

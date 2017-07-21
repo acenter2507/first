@@ -634,15 +634,15 @@ exports.search = function (req, res) {
       //       }
       //     }
       //   });
-        // if (condition.compare === 'most') {
-        //   _.filter(_polls, poll => {
-        //     return poll.cmtCnt >= cmtCnt;
-        //   });
-        // } else {
-        //   _.filter(_polls, poll => {
-        //     return poll.cmtCnt < cmtCnt;
-        //   });
-        // }
+      // if (condition.compare === 'most') {
+      //   _.filter(_polls, poll => {
+      //     return poll.cmtCnt >= cmtCnt;
+      //   });
+      // } else {
+      //   _.filter(_polls, poll => {
+      //     return poll.cmtCnt < cmtCnt;
+      //   });
+      // }
       // } else {
       //   polls = _polls;
       // }

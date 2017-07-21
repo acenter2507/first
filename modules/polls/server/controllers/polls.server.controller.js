@@ -611,6 +611,7 @@ exports.search = function (req, res) {
       return Promise.all(promise);
     })
     .then(_polls => {
+      polls = _polls;
       if (condition.cmt) {
         var cmtCnt = parseInt(condition.cmt);
         if (condition.compare === 'most') {

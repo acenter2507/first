@@ -22,8 +22,7 @@ var path = require('path'),
   errorHandler = require(path.resolve(
     './modules/core/server/controllers/errors.server.controller'
   )),
-  _ = require('lodash'),
-  __ = require('underscore');
+  _ = require('lodash');
 /**
  * Create a Poll
  */
@@ -629,7 +628,7 @@ exports.search = function (req, res) {
         if (err) {
           return reject(err);
         } else {
-          var oj = __.clone(poll);
+          var oj = _.extend(poll);
           oj.report = _report;
           return resolve(oj);
         }

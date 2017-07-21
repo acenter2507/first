@@ -617,6 +617,7 @@ exports.search = function (req, res) {
       if (cmtCnt) {
         if (condition.compare === 'most') {
           polls = _.filter(_polls, poll => {
+            console.log(poll);
             return poll.cmtCnt >= cmtCnt;
           });
         } else {

@@ -37,7 +37,9 @@ angular.module('polls').controller('PollsSearchController', [
 
     $scope.condition.by = $stateParams.by;
     if ($scope.condition.by) {
-      $scope.selectedUser = Profile.get({ userId: $scope.condition.by });
+      Profile.get({ userId: $scope.condition.by }, _user => {
+        $scope.selectedUser = _user;
+      });
     }
     $scope.search = () => {
       $state.go('search', $scope.condition);

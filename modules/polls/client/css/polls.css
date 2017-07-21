@@ -294,12 +294,11 @@
 .select select:disabled ~ .select__arrow {
   border-top-color: #ccc;
 }
-.panel-group:focus {
-  outline: none;
-}
 .custom-panel {
-  border: none !important;
+  border: 1px solid #f6f6f6 !important;
+
 }
+.panel-group:focus,
 .custom-panel:focus {
   outline: none;
 }

@@ -628,8 +628,8 @@ exports.search = function (req, res) {
         if (err) {
           return reject(err);
         } else {
-          var oj = _.extend(poll);
-          oj.report = _report;
+          var oj = _.merge(poll, _report);
+          // oj.report = _report;
           return resolve(oj);
         }
       });

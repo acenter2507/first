@@ -615,11 +615,11 @@ exports.search = function (req, res) {
       var cmtCnt = parseInt(condition.cmt);
       if (cmtCnt) {
         if (condition.compare === 'most') {
-          _.filter(_polls, poll => {
+          _.filter(polls, poll => {
             return poll.cmtCnt >= cmtCnt;
           });
         } else {
-          _.filter(_polls, poll => {
+          _.filter(polls, poll => {
             return poll.cmtCnt < cmtCnt;
           });
         }

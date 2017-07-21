@@ -613,14 +613,18 @@ exports.search = function (req, res) {
     .then(_polls => {
       var cmtCnt = parseInt(condition.cmt);
       if (cmtCnt) {
-        _polls.forEach(poll => {
+        _polls.forEach(item => {
           if (condition.compare === 'most') {
-            if (poll.cmtCnt >= cmtCnt) {
-              polls.push(poll);
+            console.log('most');
+            if (item.cmtCnt >= cmtCnt) {
+              console.log('has poll: ', item.cmtCnt);
+              polls.push(item);
             }
           } else {
-            if (poll.cmtCnt < cmtCnt) {
-              polls.push(poll);
+            console.log('least');
+            if (item.cmtCnt < cmtCnt) {
+              console.log('has poll: ', item.cmtCnt);
+              polls.push(item);
             }
           }
         });

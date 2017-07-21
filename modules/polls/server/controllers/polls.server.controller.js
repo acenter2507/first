@@ -676,7 +676,7 @@ exports.search = function (req, res) {
         if (err) {
           return reject(err);
         } else {
-          var oj = _.merge(poll, { 'report': _report });
+          var oj = Object.assign(poll, { report: _report });
           return resolve(oj);
         }
       });
@@ -688,10 +688,8 @@ exports.search = function (req, res) {
       if (!condition.cmt) return resolve(polls);
       const cmtCnt = parseInt(condition.cmt);
       if (!cmtCnt) return resolve(polls);
-      console.log('cmtCnt', cmtCnt);
       var con = {};
       var ids = _.pluck(polls, '_id');
-      console.log('ids', ids);
       con.poll = { $in: ids };
       if (condition.compare === 'most') {
         con.cmtCnt = { $gte: cmtCnt };
@@ -712,10 +710,6 @@ exports.search = function (req, res) {
               new_polls.push(poll);
             }
           });
-          // polls = __.reject(polls, function(poll){ return pollIds.indexOf(poll._id.toString()) < 0; });
-          // _.filter(polls, poll => {
-          //   return pollIds.indexOf(poll._id.toString()) >= 0;
-          // });
           return resolve(new_polls);
         }
       });

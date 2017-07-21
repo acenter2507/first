@@ -670,7 +670,7 @@ exports.search = function (req, res) {
         if (err) {
           return reject(err);
         } else {
-          var oj = _.merge(poll, { report: _report });
+          var oj = _.merge(poll, { 'report': _report });
           return resolve(oj);
         }
       });

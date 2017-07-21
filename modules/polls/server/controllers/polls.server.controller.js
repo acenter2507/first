@@ -612,8 +612,8 @@ exports.search = function (req, res) {
     })
     .then(_polls => {
       polls = _polls;
-      if (condition.cmt) {
-        var cmtCnt = parseInt(condition.cmt);
+      var cmtCnt = parseInt(condition.cmt);
+      if (cmtCnt) {
         if (condition.compare === 'most') {
           polls = _.filter(_polls, poll => {
             return poll.cmtCnt >= cmtCnt;

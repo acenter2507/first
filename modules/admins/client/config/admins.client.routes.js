@@ -6,17 +6,17 @@ angular.module('admin.routes').config(['$stateProvider',
     $stateProvider
       .state('admin.manage', {
         url: '/manage',
-        templateUrl: 'modules/users/client/views/admin/manage.client.view.html',
+        templateUrl: 'modules/admins/client/views/manage.client.view.html',
         controller: 'ManageController'
       })
       .state('admin.users', {
         url: '/users',
-        templateUrl: 'modules/users/client/views/admin/list-users.client.view.html',
+        templateUrl: 'modules/admins/client/views/list-users.client.view.html',
         controller: 'UserListController'
       })
       .state('admin.user', {
         url: '/users/:userId',
-        templateUrl: 'modules/users/client/views/admin/view-user.client.view.html',
+        templateUrl: 'modules/admins/client/views/view-user.client.view.html',
         controller: 'UserController',
         resolve: {
           userResolve: ['$stateParams', 'Admin', function ($stateParams, Admin) {
@@ -28,7 +28,7 @@ angular.module('admin.routes').config(['$stateProvider',
       })
       .state('admin.user-edit', {
         url: '/users/:userId/edit',
-        templateUrl: 'modules/users/client/views/admin/edit-user.client.view.html',
+        templateUrl: 'modules/admins/client/views/edit-user.client.view.html',
         controller: 'UserController',
         resolve: {
           userResolve: ['$stateParams', 'Admin', function ($stateParams, Admin) {

@@ -22,7 +22,7 @@ var path = require('path'),
   errorHandler = require(path.resolve(
     './modules/core/server/controllers/errors.server.controller'
   )),
-  _ = require('lodash');
+  _ = require('lodash'),
   __ = require('underscore');
 /**
  * Create a Poll

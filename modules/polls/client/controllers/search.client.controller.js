@@ -143,6 +143,24 @@ angular.module('polls').controller('PollsSearchController', [
           });
       });
     }
+    $scope.localSearch = function (str) {
+      // var matches = [];
+      Action.search_user_by_name(str)
+        .then(res => {
+          return res.data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      // people.forEach(function (person) {
+      //   var fullName = person.firstName + ' ' + person.surname;
+      //   if ((person.firstName.toLowerCase().indexOf(str.toString().toLowerCase()) >= 0) ||
+      //     (person.surname.toLowerCase().indexOf(str.toString().toLowerCase()) >= 0) ||
+      //     (fullName.toLowerCase().indexOf(str.toString().toLowerCase()) >= 0)) {
+      //     matches.push(person);
+      //   }
+      // });
+    };
     $scope.clear_preferences = () => {
       $scope.condition = {};
       Storages.set_local(Constants.storages.preferences, JSON.stringify($scope.condition));
@@ -168,7 +186,7 @@ angular.module('polls').controller('PollsSearchController', [
       }, reject => {
       });
       function handle_delete() {
-        $scope.polls = _.reject($scope.polls, function(item) {
+        $scope.polls = _.reject($scope.polls, function (item) {
           return item.poll._id === poll._id;
         });
         // Action.delete_poll(poll);

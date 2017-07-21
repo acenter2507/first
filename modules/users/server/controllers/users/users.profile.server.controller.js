@@ -122,7 +122,7 @@ exports.profile = function (req, res) {
   res.json(req.profile || null);
 };
 
-exports.reportByID = function(req, res, next, id) {
+exports.reportByID = function (req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
@@ -130,7 +130,7 @@ exports.reportByID = function(req, res, next, id) {
     });
   }
 
-  Userreport.findById(id).exec(function(err, report) {
+  Userreport.findById(id).exec(function (err, report) {
     if (err) {
       return next(err);
     } else if (!report) {
@@ -146,9 +146,9 @@ exports.reportByID = function(req, res, next, id) {
 exports.read_report = function (req, res) {
   res.json(req.report || null);
 };
-exports.create_report = function(req, res) {
+exports.create_report = function (req, res) {
   var report = new Userreport(req.body);
-  report.save(function(err) {
+  report.save(function (err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -424,6 +424,20 @@ exports.report = function (req, res) {
         });
       } else {
         res.jsonp(report);
+      }
+    });
+};
+
+exports.search_user_by_name = function (req, res) {
+  const name = req.body.name;
+  User.find({ displayName: { $regex: '.*' + name + '.*' } })
+    .exec(function (err, users) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.jsonp(users);
       }
     });
 };

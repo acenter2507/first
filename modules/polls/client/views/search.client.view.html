@@ -48,7 +48,6 @@
                 </h4>
               </div>
               <div class="panel-collapse" role="tabpanel" bs-collapse-target>
-                <!-- User -->
                 <div class="panel-body">
                   <!-- Status -->
                   <div class="form-group">
@@ -64,7 +63,11 @@
                   <div class="form-group">
                     <div class="col-xs-12">
                       <label>Posted by</label>
-                      <input name="by" type="text" class="form-control" placeholder="Posted by" ng-model="condition.by">
+                      <!--<input name="by" type="text" class="form-control" placeholder="Posted by" ng-model="condition.by">-->
+                      <div angucomplete-alt id="ex2" placeholder="Search people" pause="300" selected-object="selectedPerson" local-data="people"
+                        local-search="localSearch" title-field="displayName" description-field="username" image-field="profileImageURL"
+                        minlength="1" input-class="form-control" match-class="highlight">
+                      </div>
                     </div>
                   </div>
                   <!-- Category -->
@@ -168,8 +171,8 @@
           <span class="pull-left">
             <strong><a class="undecorated-link" ui-sref="profile.info({userId: item.poll.user._id})" ng-if="item.poll.user" ng-bind="item.poll.user.displayName"></a></strong>
             <span ng-if="!item.poll.user">Deleted User</span>
-            <small class="text-muted">&nbsp;created on</small>
-            <small class="text-muted" am-time-ago="item.poll.created"></small>
+          <small class="text-muted">&nbsp;created on</small>
+          <small class="text-muted" am-time-ago="item.poll.created"></small>
           </span>
           <span class="pull-right">
             <md-menu md-offset="-12 20" md-position-mode="target-right target">

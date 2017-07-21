@@ -14,7 +14,8 @@ module.exports = {
         'public/lib/angular-toasty/dist/angular-toasty.css',
         'public/lib/angular-toastr/dist/angular-toastr.css',
         'public/lib/ng-dialog/css/ngDialog.min.css',
-        'public/lib/ng-dialog/css/ngDialog-theme-default.min.css'
+        'public/lib/ng-dialog/css/ngDialog-theme-default.min.css',
+        'public/lib/angucomplete/angucomplete.css'
       ],
       js: [
         'public/lib/angular/angular.js',
@@ -52,7 +53,8 @@ module.exports = {
         'public/lib/textAngular/dist/textAngularSetup.js',
         'public/lib/angular-toasty/dist/angular-toasty.js',
         'public/lib/angular-toastr/dist/angular-toastr.tpls.js',
-        'public/lib/ng-dialog/js/ngDialog.min.js'
+        'public/lib/ng-dialog/js/ngDialog.min.js',
+        'public/lib/angucomplete/angucomplete.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

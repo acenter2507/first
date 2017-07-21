@@ -566,7 +566,6 @@ exports.findView = function (req, res) {
 
 exports.search = function (req, res) {
   const condition = req.body.condition;
-  console.log(condition);
   var search = {};
   var and_arr = [];
   // Search by category
@@ -629,46 +628,27 @@ exports.search = function (req, res) {
       } else {
         result = _polls;
       }
-      // polls = _polls;
-      // return _filter_cmt(_polls, condition);
-      // var cmtCnt = parseInt(condition.cmt);
-      // if (cmtCnt) {
-      //   _polls.forEach(item => {
-      //     if (condition.compare === 'most') {
-      //       console.log('most');
-      //       console.log('item.cmtCnt: ', item.cmtCnt);
-      //       console.log('cmtCnt: ', cmtCnt);
-      //       console.log('poll: ', item);
-
-      //       if (item.cmtCnt >= cmtCnt) {
-      //         console.log('has poll: ', item.cmtCnt);
-      //         polls.push(item);
-      //       }
-      //     } else {
-      //       console.log('least');
-      //       if (item.cmtCnt < cmtCnt) {
-      //         console.log('has poll: ', item.cmtCnt);
-      //         polls.push(item);
-      //       }
-      //     }
-      //   });
-      // if (condition.compare === 'most') {
-      //   _.filter(_polls, poll => {
-      //     return poll.cmtCnt >= cmtCnt;
-      //   });
-      // } else {
-      //   _.filter(_polls, poll => {
-      //     return poll.cmtCnt < cmtCnt;
-      //   });
-      // }
-      // } else {
-      //   polls = _polls;
-      // }
-      return res.jsonp(result);
+      return new Promise((resolve, reject) => {
+        return resolve(result);
+      });
     })
-    // .then(_polls => {
-    //   res.jsonp(_polls);
-    // })
+    .then(_polls => {
+      var promise = [];
+      _polls.forEach(poll => {
+        promise.push(_poll_opts(poll));
+      });
+      return Promise.all(promise);
+    })
+    .then(_polls => {
+      var promise = [];
+      _polls.forEach(poll => {
+        promise.push(_poll_cmts(poll));
+      });
+      return Promise.all(promise);
+    })
+    .then(_polls => {
+      res.jsonp(_polls);
+    })
     .catch(err => {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -693,14 +673,33 @@ exports.search = function (req, res) {
         if (err) {
           return reject(err);
         } else {
-          var filter = 'viewCnt,voteCnt,cmtCnt,likeCnt';
-          var report = __.pick(_report, filter.split(','));
-          return resolve({ poll: poll, report: report });
+          return resolve({ poll: poll, report: _report });
         }
       });
     });
   }
-
+  function _poll_opts(poll) {
+    return new Promise((resolve, reject) => {
+      Opt.find({ poll: poll.poll._id, status: 1 }).exec((err, opts) => {
+        if (err) {
+          return reject(err);
+        } else {
+          return resolve({ poll: poll.poll, report: poll.report, opts: opts });
+        }
+      });
+    });
+  }
+  function _poll_cmts(poll) {
+    return new Promise((resolve, reject) => {
+      Cmt.find({ poll: poll.poll._id }).exec((err, cmts) => {
+        if (err) {
+          return reject(err);
+        } else {
+          return resolve({ poll: poll.poll, report: poll.report, opts: opts, cmts: cmts });
+        }
+      });
+    });
+  }
   function _filter_cmt(polls, condition) {
     return new Promise((resolve, reject) => {
       if (!condition.cmt) return resolve(polls);
@@ -736,9 +735,10 @@ exports.search = function (req, res) {
 
   function _filter_key(polls, condition) {
     return new Promise((resolve, reject) => {
-      if (polls.length === 0) {
-        return resolve(polls);
-      }
+      if (polls.length === 0) return resolve(polls);
+      polls.forEach(item => {
+
+      });
     });
   }
 

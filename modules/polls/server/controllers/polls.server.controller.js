@@ -613,11 +613,9 @@ exports.search = function (req, res) {
     .then(_polls => {
       polls = _polls;
       var cmtCnt = parseInt(condition.cmt);
-      console.log(cmtCnt);
       if (cmtCnt) {
         if (condition.compare === 'most') {
           _.filter(_polls, poll => {
-            console.log(poll);
             return poll.cmtCnt >= cmtCnt;
           });
         } else {
@@ -626,7 +624,6 @@ exports.search = function (req, res) {
           });
         }
       }
-      console.log(polls);
       res.jsonp(polls);
     })
     .catch(err => {

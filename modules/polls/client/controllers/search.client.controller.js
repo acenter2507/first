@@ -132,23 +132,9 @@ angular.module('polls').controller('PollsSearchController', [
           });
       });
     }
-    function localSearch(str) {
-      Action.search_user_by_name(str)
-        .then(res => {
-          console.log(res);
-          return res.data;
-        })
-        .catch(err => {
-          console.log(err);
-        });
-      // people.forEach(function (person) {
-      //   var fullName = person.firstName + ' ' + person.surname;
-      //   if ((person.firstName.toLowerCase().indexOf(str.toString().toLowerCase()) >= 0) ||
-      //     (person.surname.toLowerCase().indexOf(str.toString().toLowerCase()) >= 0) ||
-      //     (fullName.toLowerCase().indexOf(str.toString().toLowerCase()) >= 0)) {
-      //     matches.push(person);
-      //   }
-      // });
+    $scope.searchAPI = function (userInputString, timeoutPromise) {
+      str = userInputString.replace(' ', '.');
+      return Action.search_user_by_name(str, timeoutPromise);
     };
     $scope.clear_preferences = () => {
       $scope.condition = {};

@@ -68,8 +68,7 @@
                         placeholder="Search user"
                         pause="300"
                         selected-object="user"
-                        remote-url="/api/users/search?s="
-                        remote-url-data-field="data"
+                        local-search="localSearch"
                         title-field="displayName"
                         description-field="username"
                         image-field="profileImageURL"
@@ -77,6 +76,9 @@
                         input-class="form-control"
                         match-class="highlight" />
                     </div>
+                    
+                        <!--remote-url="/api/users/search?s="
+                        remote-url-data-field="data"-->
                   </div>
                   <!-- Category -->
                   <div class="form-group">

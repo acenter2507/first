@@ -595,7 +595,7 @@
       return $http.post('/api/search', { condition: condition });
     };
     this.search_user_by_name = name => {
-      return $http.post('/api/users/search', { name: name });
+      return $http.get('/api/users/search?s=' + name);
     };
     return this;
   }

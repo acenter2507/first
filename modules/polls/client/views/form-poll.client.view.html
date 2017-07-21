@@ -144,7 +144,7 @@
         <div class="form-group" ng-controller="AutocompleteTagController">
           <label class="form-label" for="#">Tags</label>
           <tags-input ng-model="vm.poll.tags" display-property="name" placeholder="{{placeholder}}" add-from-autocomplete-only="true"
-            replace-spaces-with-dashes="false" min-length="1" enforce-max-tags class="tags-custom">
+            replace-spaces-with-dashes="false" min-length="1" enforce-max-tags class="tags-custom form-control">
             <auto-complete source="loadItems($query)" min-length="1" debounce-delay="0" max-results="10"></auto-complete>
           </tags-input>
         </div>

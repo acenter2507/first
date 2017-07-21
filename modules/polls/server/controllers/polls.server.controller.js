@@ -676,7 +676,7 @@ exports.search = function (req, res) {
         if (err) {
           return reject(err);
         } else {
-          var oj = Object.assign(poll, { report: _report });
+          var oj = _.extend(poll, { report: _report });
           return resolve(oj);
         }
       });

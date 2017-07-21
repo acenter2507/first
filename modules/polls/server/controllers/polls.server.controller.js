@@ -655,9 +655,13 @@ exports.search = function (req, res) {
           var check = false;
           if (item.poll.title.indexOf(condition.key) >= 0) check = true;
           if (item.poll.body.indexOf(condition.key) >= 0) check = true;
-          item.opts.forEach(opt => {
-            if (opt.title.indexOf(condition.key) >= 0 || opt.body.indexOf(condition.key) >= 0) check = true;
-          });
+          for (let index = 0; index < item.opts.length; index++) {
+            let element = item.opts[index];
+            if (element.title.indexOf(condition.key) >= 0 || element.body.indexOf(condition.key) >= 0) {
+              check = true;
+              break;
+            }
+          }
           if (check) result.push(item);
         });
       } else if (condition.key && condition.in === 'pollcmt') {
@@ -665,12 +669,20 @@ exports.search = function (req, res) {
           var check = false;
           if (item.poll.title.indexOf(condition.key) >= 0) check = true;
           if (item.poll.body.indexOf(condition.key) >= 0) check = true;
-          item.opts.forEach(opt => {
-            if (opt.title.indexOf(condition.key) >= 0 || opt.body.indexOf(condition.key) >= 0) check = true;
-          });
-          item.cmts.forEach(cmt => {
-            if (cmt.body.indexOf(condition.key) >= 0) check = true;
-          });
+          for (let index = 0; index < item.opts.length; index++) {
+            let element = item.opts[index];
+            if (element.title.indexOf(condition.key) >= 0 || element.body.indexOf(condition.key) >= 0) {
+              check = true;
+              break;
+            }
+          }
+          for (let index = 0; index < item.cmts.length; index++) {
+            let element = item.cmts[index];
+            if (element.body.indexOf(condition.key) >= 0) {
+              check = true;
+              break;
+            }
+          }
           if (check) result.push(item);
         });
       } else {

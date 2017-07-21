@@ -679,9 +679,7 @@ exports.search = function (req, res) {
         } else {
           var filter = 'viewCnt,voteCnt,cmtCnt,likeCnt';
           var report = __.pick(_report, filter.split(','));
-          console.log(report);
-          var obj = Object.assign({}, poll, report);
-          return resolve(obj);
+          return resolve({ poll: poll, report: report });
         }
       });
     });

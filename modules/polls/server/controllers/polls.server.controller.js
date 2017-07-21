@@ -704,9 +704,10 @@ exports.search = function (req, res) {
         } else {
           var pollIds = _.pluck(_reports, 'poll');
           console.log('pollIds', pollIds);
-          _.filter(polls, poll => {
-            return pollIds.indexOf(poll._id.toString()) >= 0;
-          });
+          polls = __.reject(polls, function(poll){ return pollIds.indexOf(poll._id.toString()) < 0; });
+          // _.filter(polls, poll => {
+          //   return pollIds.indexOf(poll._id.toString()) >= 0;
+          // });
           return resolve(polls);
         }
       });

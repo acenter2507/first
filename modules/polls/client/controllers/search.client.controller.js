@@ -39,7 +39,6 @@ angular.module('polls').controller('PollsSearchController', [
 
     $scope.busy = false;
     $scope.polls = [];
-    $scope.sort;
     excute();
     function excute() {
       if (check_params()) {
@@ -75,7 +74,7 @@ angular.module('polls').controller('PollsSearchController', [
 
     function get_owner_follow(poll) {
       return new Promise((resolve, reject) => {
-        if (!vm.isLogged) {
+        if (!$scope.isLogged) {
           poll.follow = {};
           return resolve();
         }
@@ -91,7 +90,7 @@ angular.module('polls').controller('PollsSearchController', [
     }
     function get_reported(poll) {
       return new Promise((resolve, reject) => {
-        if (!vm.isLogged) {
+        if (!$scope.isLogged) {
           poll.reported = false;
           return resolve();
         }
@@ -107,7 +106,7 @@ angular.module('polls').controller('PollsSearchController', [
     }
     function get_bookmarked(poll) {
       return new Promise((resolve, reject) => {
-        if (!vm.isLogged) {
+        if (!$scope.isLogged) {
           poll.bookmarked = false;
           return resolve();
         }

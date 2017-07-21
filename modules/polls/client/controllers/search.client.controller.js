@@ -150,7 +150,6 @@ angular.module('polls').controller('PollsSearchController', [
     $scope.clear_preferences = () => {
       $scope.condition = {};
       $scope.selectedUser = undefined;
-      // $rootScope.$broadcast('angucomplete-alt:clearSearch');
       $scope.$broadcast('angucomplete-alt:clearInput');
       Storages.set_local(Constants.storages.preferences, JSON.stringify($scope.condition));
       $location.url($location.path());

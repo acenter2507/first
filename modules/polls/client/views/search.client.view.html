@@ -28,9 +28,8 @@
               <label>In</label>
               <select class="form-control" ng-model="condition.in">
 								<option value="polltitle">Poll's title only</option>
-								<option value="pollcontent">Poll's content (include title)</option>
+								<option value="pollcontent">Poll's content (include options)</option>
 								<option value="pollcmt">Poll content and all comments</option>
-								<option value="tags">Tags</option>
 							</select>
             </div>
             <div class="col-md-2">
@@ -54,6 +53,7 @@
                     <div class="col-xs-12">
                       <label>Status</label>
                       <select class="form-control" ng-model="condition.status">
+							        	<option value></option>
 							        	<option value="opening">Opening</option>
 							        	<option value="closed">Closed</option>
 							        </select>
@@ -92,6 +92,7 @@
                     <div class="col-xs-12"><label>Comment count</label></div>
                     <div class="col-md-6">
                       <select class="form-control" ng-model="condition.compare">
+							        	<option value></option>
 							        	<option value="least">At least</option>
 							        	<option value="most">As most</option>
 							        </select>
@@ -105,12 +106,14 @@
                     <div class="col-xs-12"><label>Created time</label></div>
                     <div class="col-md-6">
                       <select class="form-control" ng-model="condition.timing">
+							        	<option value></option>
 							        	<option value="new">Newer than</option>
 							        	<option value="old">Older than</option>
 							        </select>
                     </div>
                     <div class="col-md-6">
                       <select class="form-control" ng-model="condition.created">
+							        	<option value></option>
 							        	<option value="86400">Yesterday</option>
 							        	<option value="604800">One week</option>
 							        	<option value="1209600">Two week</option>
@@ -126,6 +129,7 @@
                     <div class="col-xs-12"><label>Sort by</label></div>
                     <div class="col-md-6">
                       <select class="form-control" ng-model="condition.sort">
+							        	<option value></option>
 							        	<option value="created">Created time</option>
 							        	<option value="cmtCnt">Number of comments</option>
 							        	<option value="likeCnt">Number of likes</option>
@@ -135,6 +139,7 @@
                     </div>
                     <div class="col-md-6">
                       <select class="form-control" ng-model="condition.sortkind">
+							        	<option value></option>
 							        	<option value="desc">In descending order</option>
 							        	<option value="asc">In ascending order</option>
 							        </select>

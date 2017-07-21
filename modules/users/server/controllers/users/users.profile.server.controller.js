@@ -434,7 +434,7 @@ exports.search_user_by_name = function (req, res) {
   if (!name || name === '') {
     return res.jsonp();
   }
-  User.find({ displayName: { $regex: '.*' + name + '.*' } })
+  User.find()
     .exec(function (err, users) {
       if (err) {
         return res.status(400).send({

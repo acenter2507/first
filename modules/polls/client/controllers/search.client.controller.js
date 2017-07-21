@@ -2,6 +2,7 @@
 
 angular.module('polls').controller('PollsSearchController', [
   '$location',
+  '$rootScope',
   '$scope',
   '$state',
   'Authentication',
@@ -13,7 +14,7 @@ angular.module('polls').controller('PollsSearchController', [
   'toastr',
   'ngDialog',
   'Profile',
-  function ($location, $scope, $state, Authentication, Categorys, Action, $stateParams, Storages, Constants, toast, dialog, Profile) {
+  function ($location, $rootScope, $scope, $state, Authentication, Categorys, Action, $stateParams, Storages, Constants, toast, dialog, Profile) {
     $scope.user = Authentication.user;
     $scope.isLogged = ($scope.user) ? true : false;
     $scope.detailToggle = -1;
@@ -149,6 +150,7 @@ angular.module('polls').controller('PollsSearchController', [
     $scope.clear_preferences = () => {
       $scope.condition = {};
       $scope.selectedUser = undefined;
+      $rootScope.$broadcast('angucomplete-alt:clearSearch');
       Storages.set_local(Constants.storages.preferences, JSON.stringify($scope.condition));
       // $location.url($location.path());
       $state.go('search', {}, { notify: false });

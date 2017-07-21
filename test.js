@@ -48,6 +48,12 @@ app.init(function () {
 3. Test
   - Test các cài đặt của poll
 */
+/*
+VERSION 2
+1. Tối ưu hóa chức năng tìm kiếm
+2. Chức năng report comment
+ */
+
 // 1. Khi người vote là guest thì không push socket được. => done
 // 2. Sửa các progressbar trong màn hình detail. => done
 // 3. Tạo tooltip => done

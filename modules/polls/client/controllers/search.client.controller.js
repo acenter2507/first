@@ -53,6 +53,7 @@ angular.module('polls').controller('PollsSearchController', [
 
     $scope.busy = false;
     $scope.polls = [];
+    $scope.sort = '-poll.created';
     excute();
     function excute() {
       if (check_params()) {
@@ -60,7 +61,6 @@ angular.module('polls').controller('PollsSearchController', [
         Action.search($scope.condition)
           .then(res => {
             $scope.polls = res.data;
-            console.log($scope.polls);
             var promise = [];
             $scope.polls.forEach(function (item) {
               promise.push(get_owner_follow(item.poll));
@@ -70,11 +70,12 @@ angular.module('polls').controller('PollsSearchController', [
             return Promise.all(promise);
           })
           .then(res => {
+            create_sort();
             $scope.busy = false;
           })
           .catch(err => {
-            console.log(err);
             $scope.busy = false;
+            console.log(err);
           });
       } else {
         $scope.condition = JSON.parse(Storages.get_local(Constants.storages.preferences, JSON.stringify({})));
@@ -85,6 +86,13 @@ angular.module('polls').controller('PollsSearchController', [
         return true;
       }
       return false;
+    }
+    function create_sort() {
+      if ($scope.condition.sort) {
+        var prefix = ($scope.condition.sort === 'created') ? 'poll.' : 'report.';
+        var kind = ($scope.condition.sortkind === 'desc') ? '-' : '';
+        $scope.sort = kind + prefix + $scope.condition.sort;
+      }
     }
 
     function get_owner_follow(poll) {
@@ -160,11 +168,9 @@ angular.module('polls').controller('PollsSearchController', [
       }, reject => {
       });
       function handle_delete() {
-        // $scope.polls = _.without($scope.polls, _.findWhere($scope.polls, poll));
         $scope.polls = _.reject($scope.polls, function(item) {
           return item.poll._id === poll._id;
         });
-        console.log($scope.polls);
         // Action.delete_poll(poll);
       }
     };

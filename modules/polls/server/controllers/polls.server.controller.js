@@ -653,8 +653,8 @@ exports.search = function (req, res) {
       if (condition.key && condition.in === 'pollcontent') {
         _polls.forEach(item => {
           var check = false;
-          if (item.poll.title.indexOf(condition.key) >= 0) check = true;
-          if (item.poll.body.indexOf(condition.key) >= 0) check = true;
+          if (item.poll.title.indexOf(condition.key) >= 0) return result.push(item);
+          if (item.poll.body.indexOf(condition.key) >= 0) return result.push(item);
           for (let index = 0; index < item.opts.length; index++) {
             let element = item.opts[index];
             if (element.title.indexOf(condition.key) >= 0 || element.body.indexOf(condition.key) >= 0) {
@@ -662,13 +662,13 @@ exports.search = function (req, res) {
               break;
             }
           }
-          if (check) result.push(item);
+          if (check) return result.push(item);
         });
       } else if (condition.key && condition.in === 'pollcmt') {
         _polls.forEach(item => {
           var check = false;
-          if (item.poll.title.indexOf(condition.key) >= 0) check = true;
-          if (item.poll.body.indexOf(condition.key) >= 0) check = true;
+          if (item.poll.title.indexOf(condition.key) >= 0) return result.push(item);
+          if (item.poll.body.indexOf(condition.key) >= 0) return result.push(item);
           for (let index = 0; index < item.opts.length; index++) {
             let element = item.opts[index];
             if (element.title.indexOf(condition.key) >= 0 || element.body.indexOf(condition.key) >= 0) {
@@ -676,6 +676,7 @@ exports.search = function (req, res) {
               break;
             }
           }
+          if (check) return result.push(item);
           for (let index = 0; index < item.cmts.length; index++) {
             let element = item.cmts[index];
             if (element.body.indexOf(condition.key) >= 0) {
@@ -683,7 +684,7 @@ exports.search = function (req, res) {
               break;
             }
           }
-          if (check) result.push(item);
+          if (check) return result.push(item);
         });
       } else {
         result = _polls;

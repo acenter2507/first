@@ -618,6 +618,8 @@ exports.search = function (req, res) {
             console.log('most');
             console.log('item.cmtCnt: ', item.cmtCnt);
             console.log('cmtCnt: ', cmtCnt);
+            console.log('poll: ', item);
+
             if (item.cmtCnt >= cmtCnt) {
               console.log('has poll: ', item.cmtCnt);
               polls.push(item);

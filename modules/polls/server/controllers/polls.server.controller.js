@@ -616,12 +616,12 @@ exports.search = function (req, res) {
       console.log(cmtCnt);
       if (cmtCnt) {
         if (condition.compare === 'most') {
-          polls = _.filter(_polls, poll => {
+          _.filter(_polls, poll => {
             console.log(poll);
             return poll.cmtCnt >= cmtCnt;
           });
         } else {
-          polls = _.filter(_polls, poll => {
+          _.filter(_polls, poll => {
             return poll.cmtCnt < cmtCnt;
           });
         }

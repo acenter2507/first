@@ -705,7 +705,7 @@ exports.search = function (req, res) {
           var pollIds = _.pluck(_reports, 'poll');
           console.log('pollIds', pollIds);
           pollIds.forEach(id => {
-            console.log(typeof poll._id);
+            console.log(typeof id);
           })
           var new_polls = [];
           polls.forEach(poll => {

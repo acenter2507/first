@@ -435,6 +435,7 @@ exports.search_user_by_name = function (req, res) {
     return res.jsonp();
   }
   User.find({ displayName: { $regex: '.*' + name + '.*' } })
+    .select('displayName profileImageURL username')
     .exec(function (err, users) {
       if (err) {
         return res.status(400).send({

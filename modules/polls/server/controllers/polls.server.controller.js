@@ -611,8 +611,8 @@ exports.search = function (req, res) {
       return Promise.all(promise);
     })
     .then(_polls => {
-      polls = _polls;
-      return _filter_cmt(polls, condition);
+      // polls = _polls;
+      return _filter_cmt(_polls, condition);
       // var cmtCnt = parseInt(condition.cmt);
       // if (cmtCnt) {
       //   _polls.forEach(item => {

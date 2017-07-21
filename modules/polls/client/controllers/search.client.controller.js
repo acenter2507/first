@@ -12,19 +12,7 @@ angular.module('polls').controller('PollsSearchController', [
   'Constants',
   'toastr',
   'ngDialog',
-  function (
-    $location,
-    $scope,
-    $state,
-    Authentication,
-    Categorys,
-    Action,
-    $stateParams,
-    Storages,
-    Constants,
-    toast,
-    dialog,
-  ) {
+  function ($location, $scope, $state, Authentication, Categorys, Action, $stateParams, Storages, Constants, toast, dialog) {
     $scope.user = Authentication.user;
     $scope.isLogged = ($scope.user) ? true : false;
     $scope.detailToggle = -1;

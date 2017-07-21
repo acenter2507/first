@@ -29,7 +29,7 @@ var ApplicationConfiguration = (function() {
     'ui.bootstrap.materialPicker',
     'toastr',
     'webStorageModule',
-    'angucomplete'
+    'angucomplete-alt'
   ];
 
   // Add a new vertical module

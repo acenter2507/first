@@ -611,27 +611,29 @@ exports.search = function (req, res) {
       return Promise.all(promise);
     })
     .then(_polls => {
-      var cmtCnt = parseInt(condition.cmt);
-      if (cmtCnt) {
-        _polls.forEach(item => {
-          if (condition.compare === 'most') {
-            console.log('most');
-            console.log('item.cmtCnt: ', item.cmtCnt);
-            console.log('cmtCnt: ', cmtCnt);
-            console.log('poll: ', item);
+      polls = _polls;
+      return _filter_cmt(polls);
+      // var cmtCnt = parseInt(condition.cmt);
+      // if (cmtCnt) {
+      //   _polls.forEach(item => {
+      //     if (condition.compare === 'most') {
+      //       console.log('most');
+      //       console.log('item.cmtCnt: ', item.cmtCnt);
+      //       console.log('cmtCnt: ', cmtCnt);
+      //       console.log('poll: ', item);
 
-            if (item.cmtCnt >= cmtCnt) {
-              console.log('has poll: ', item.cmtCnt);
-              polls.push(item);
-            }
-          } else {
-            console.log('least');
-            if (item.cmtCnt < cmtCnt) {
-              console.log('has poll: ', item.cmtCnt);
-              polls.push(item);
-            }
-          }
-        });
+      //       if (item.cmtCnt >= cmtCnt) {
+      //         console.log('has poll: ', item.cmtCnt);
+      //         polls.push(item);
+      //       }
+      //     } else {
+      //       console.log('least');
+      //       if (item.cmtCnt < cmtCnt) {
+      //         console.log('has poll: ', item.cmtCnt);
+      //         polls.push(item);
+      //       }
+      //     }
+      //   });
         // if (condition.compare === 'most') {
         //   _.filter(_polls, poll => {
         //     return poll.cmtCnt >= cmtCnt;
@@ -641,9 +643,12 @@ exports.search = function (req, res) {
         //     return poll.cmtCnt < cmtCnt;
         //   });
         // }
-      } else {
-        polls = _polls;
-      }
+      // } else {
+      //   polls = _polls;
+      // }
+      // res.jsonp(polls);
+    })
+    .then(_polls => {
       res.jsonp(polls);
     })
     .catch(err => {
@@ -677,6 +682,33 @@ exports.search = function (req, res) {
     });
   }
 
+  function _filter_cmt(polls, condition) {
+    return new Promise((resolve, reject) => {
+      if (!condition.cmt) return resolve(polls);
+      const cmtCnt = parseInt(condition.cmt);
+      if (!cmtCnt) return resolve(polls);
+      var con = {};
+      var ids = _.pluck(polls, '_id');
+      con.poll = { $in: ids };
+      if (condition.compare === 'most') {
+        con.cmtCnt = { $gte: cmtCnt };
+      } else {
+        con.cmtCnt = { $lt: cmtCnt };
+      }
+      Pollreport.find(con).exec((err, _reports) => {
+        if (err) {
+          return reject(err);
+        } else {
+          var pollIds = _.pluck(_reports, 'poll');
+          _.filter(polls, poll => {
+            return pollIds.indexOf(poll._id) >= 0;
+          });
+          return resolve(polls);
+        }
+      });
+    });
+  }
+
   function _filter_key(polls, condition) {
     return new Promise((resolve, reject) => {
       if (polls.length === 0) {
@@ -684,6 +716,7 @@ exports.search = function (req, res) {
       }
     });
   }
+
 
 
 

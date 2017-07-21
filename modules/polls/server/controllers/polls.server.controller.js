@@ -600,7 +600,9 @@ exports.search = function (req, res) {
       and_arr.push({ title: { $regex: '.*' + condition.key + '.*' } });
     }
   }
-  search = { $and: and_arr };
+  if (and_arr.length > 0) {
+    search = { $and: and_arr };
+  }
   var polls = [];
   _polls(search)
     .then(_polls => {

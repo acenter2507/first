@@ -687,8 +687,10 @@ exports.search = function (req, res) {
       if (!condition.cmt) return resolve(polls);
       const cmtCnt = parseInt(condition.cmt);
       if (!cmtCnt) return resolve(polls);
+      console.log('cmtCnt', cmtCnt);
       var con = {};
       var ids = _.pluck(polls, '_id');
+      console.log('ids', ids);
       con.poll = { $in: ids };
       if (condition.compare === 'most') {
         con.cmtCnt = { $gte: cmtCnt };
@@ -700,6 +702,7 @@ exports.search = function (req, res) {
           return reject(err);
         } else {
           var pollIds = _.pluck(_reports, 'poll');
+          console.log('pollIds', pollIds);
           _.filter(polls, poll => {
             return pollIds.indexOf(poll._id) >= 0;
           });

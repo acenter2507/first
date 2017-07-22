@@ -15,6 +15,6 @@
     $scope,
     Authentication
   ) {
-    // Code
+    $scope.state = $state;
   }
 })();

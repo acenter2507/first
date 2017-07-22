@@ -55,7 +55,7 @@
               </td>
               <td class="text-center">0</td>
               <td>
-                <div class="text-muted">Last login</div>
+                <div class="text-muted"><small>Last login</small></div>
                 <strong>5 minutes ago</strong>
               </td>
               <td>
@@ -68,48 +68,9 @@
             </tr>
           </tbody>
         </table>
-        <!--<ul class="pagination">
-          <li class="page-item"><a class="page-link" href="#">Prev</a>
-          </li>
-          <li class="page-item active">
-            <a class="page-link" href="#">1</a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">2</a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">3</a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">4</a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">Next</a>
-          </li>
-        </ul>-->
         <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage"
           ng-change="pageChanged()"></uib-pagination>
       </div>
     </div>
   </div>
 </div>
-
-
-
-
-<!--<section class="card">
-  <div class="page-header">
-    <div class="row">
-      <div class="col-md-4">
-        <h1>Users</h1>
-      </div>
-      <div class="col-md-4" style="margin-top: 2em">
-        <input class="form-control col-md-4" type="text" ng-model="search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />
-      </div>
-    </div>
-  </div>
-  <div class="list-group">
-    <a ng-repeat="user in pagedItems" ui-sref="admin.user({userId: user._id})" class="list-group-item">
-      <h4 class="list-group-item-heading" ng-bind="user.username"></h4>
-      <p class="list-group-item-text pull-right small" ng-bind="user.roles"></p>
-      <p class="list-group-item-text" ng-bind="user.email"></p>
-    </a>
-  </div>
-  <pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage" ng-change="pageChanged()"></pagination>
-</section>-->

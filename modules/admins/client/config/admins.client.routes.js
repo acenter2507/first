@@ -27,6 +27,6 @@ angular.module('admin.routes').config(['$stateProvider', '$breadcrumbProvider',
         ncyBreadcrumb: {
           label: 'Users'
         }
-      })
+      });
   }
 ]);

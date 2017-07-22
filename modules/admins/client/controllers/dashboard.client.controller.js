@@ -195,5 +195,62 @@
       };
       return chart;
     }
+
+    /* Social */
+    $scope.fb = {};
+    $scope.tw = {};
+    $scope.lk = {};
+    $scope.gg = {};
+    init_social();
+    function init_social() {
+      $scope.fb.users = 12344;
+      $scope.fb.share = 5123;
+      $scope.tw.users = 1232;
+      $scope.tw.share = 7445;
+      $scope.lk.users = 2523;
+      $scope.lk.share = 12342;
+      $scope.gg.users = 35243;
+      $scope.gg.share = 23421;
+      $scope.social_chart = {};
+      $scope.social_chart.labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+      $scope.social_chart.colors = [{
+        backgroundColor: 'rgba(255,255,255,.1)',
+        borderColor: 'rgba(255,255,255,.55)',
+        pointHoverBackgroundColor: '#fff'
+      }];
+      $scope.social_chart.options = {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          xAxes: [{
+            display: false,
+          }],
+          yAxes: [{
+            display: false,
+          }]
+        },
+        elements: {
+          point: {
+            radius: 0,
+            hitRadius: 10,
+            hoverRadius: 4,
+            hoverBorderWidth: 3,
+          }
+        },
+      };
+      $scope.fb.data = [
+        [65, 59, 84, 84, 51, 55, 40]
+      ];
+      $scope.tw.data = [
+        [1, 13, 9, 17, 34, 41, 38]
+      ];
+      $scope.lk.data = [
+        [78, 81, 80, 45, 34, 12, 40]
+      ];
+      $scope.gg.data = [
+        [35, 23, 56, 22, 97, 23, 64]
+      ];
+    }
+
   }
 })();

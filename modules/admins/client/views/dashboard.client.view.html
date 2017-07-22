@@ -16,8 +16,8 @@
         <p ng-bind="users_chart.title"></p>
       </div>
       <div class="chart-wrapper pd12x h70">
-        <canvas class="chart chart-line" chart-data="users_chart.data" chart-labels="users_chart.labels" chart-legend="false" chart-series="series" chart-options="users_chart.options"
-          chart-colors="users_chart.colors" height="70"></canvas>
+        <canvas class="chart chart-line" chart-data="users_chart.data" chart-labels="users_chart.labels" chart-legend="false" chart-series="series"
+          chart-options="users_chart.options" chart-colors="users_chart.colors" height="70"></canvas>
       </div>
     </div>
   </div>
@@ -33,8 +33,8 @@
         <p ng-bind="polls_chart.title"></p>
       </div>
       <div class="chart-wrapper pd12x h70">
-        <canvas class="chart chart-line" chart-data="polls_chart.data" chart-labels="polls_chart.labels" chart-legend="false" chart-series="series" chart-options="polls_chart.options"
-          chart-colors="polls_chart.colors" height="70"></canvas>
+        <canvas class="chart chart-line" chart-data="polls_chart.data" chart-labels="polls_chart.labels" chart-legend="false" chart-series="series"
+          chart-options="polls_chart.options" chart-colors="polls_chart.colors" height="70"></canvas>
       </div>
     </div>
   </div>
@@ -57,8 +57,8 @@
         <p ng-bind="cmts_chart.title"></p>
       </div>
       <div class="chart-wrapper h70">
-        <canvas class="chart chart-line" chart-data="cmts_chart.data" chart-labels="cmts_chart.labels" chart-legend="false" chart-series="series" chart-options="cmts_chart.options"
-          chart-colors="cmts_chart.colors" height="70"></canvas>
+        <canvas class="chart chart-line" chart-data="cmts_chart.data" chart-labels="cmts_chart.labels" chart-legend="false" chart-series="series"
+          chart-options="cmts_chart.options" chart-colors="cmts_chart.colors" height="70"></canvas>
       </div>
     </div>
   </div>
@@ -81,13 +81,103 @@
         <p ng-bind="visit_chart.title"></p>
       </div>
       <div class="chart-wrapper pd12x h70">
-        <canvas class="chart chart-bar" chart-data="visit_chart.data" chart-labels="visit_chart.labels" chart-options="visit_chart.options" chart-colors="visit_chart.colors" height="70"></canvas>
+        <canvas class="chart chart-bar" chart-data="visit_chart.data" chart-labels="visit_chart.labels" chart-options="visit_chart.options"
+          chart-colors="visit_chart.colors" height="70"></canvas>
       </div>
     </div>
   </div>
   <!--/.col-->
 </div>
+<div class="row">
+  <div class="col-sm-6 col-lg-3">
+    <div class="social-box facebook">
+      <i class="fa fa-facebook"></i>
+      <div class="chart-wrapper">
+        <canvas class="chart chart-line" chart-data="fb.data" chart-labels="social_chart.labels" chart-legend="false" chart-series="series" chart-options="social_chart.options"
+          chart-colors="social_chart.colors" height="90"></canvas>
+      </div>
+      <ul>
+        <li>
+          <strong ng-bind="fb.users"></strong>
+          <span>Users</span>
+        </li>
+        <li>
+          <strong ng-bind="fb.share"></strong>
+          <span>Share</span>
+        </li>
+      </ul>
+    </div>
+    <!--/.social-box-->
+  </div>
+  <!--/.col-->
 
+  <div class="col-sm-6 col-lg-3">
+    <div class="social-box twitter">
+      <i class="fa fa-twitter"></i>
+      <div class="chart-wrapper">
+        <canvas class="chart chart-line" chart-data="tw.data" chart-labels="social_chart.labels" chart-legend="false" chart-series="series" chart-options="social_chart.options"
+          chart-colors="social_chart.colors" height="90"></canvas>
+      </div>
+      <ul>
+        <li>
+          <strong ng-bind="tw.users"></strong>
+          <span>Users</span>
+        </li>
+        <li>
+          <strong ng-bind="tw.share"></strong>
+          <span>Share</span>
+        </li>
+      </ul>
+    </div>
+    <!--/.social-box-->
+  </div>
+  <!--/.col-->
+
+  <div class="col-sm-6 col-lg-3">
+
+    <div class="social-box linkedin">
+      <i class="fa fa-linkedin"></i>
+      <div class="chart-wrapper">
+        <canvas class="chart chart-line" chart-data="lk.data" chart-labels="social_chart.labels" chart-legend="false" chart-series="series" chart-options="social_chart.options"
+          chart-colors="social_chart.colors" height="90"></canvas>
+      </div>
+      <ul>
+        <li>
+          <strong ng-bind="lk.users"></strong>
+          <span>Users</span>
+        </li>
+        <li>
+          <strong ng-bind="lk.share"></strong>
+          <span>Share</span>
+        </li>
+      </ul>
+    </div>
+    <!--/.social-box-->
+  </div>
+  <!--/.col-->
+
+  <div class="col-sm-6 col-lg-3">
+    <div class="social-box google-plus">
+      <i class="fa fa-google-plus"></i>
+      <div class="chart-wrapper">
+        <canvas class="chart chart-line" chart-data="gg.data" chart-labels="social_chart.labels" chart-legend="false" chart-series="series" chart-options="social_chart.options"
+          chart-colors="social_chart.colors" height="90"></canvas>
+      </div>
+      <ul>
+        <li>
+          <strong ng-bind="gg.users"></strong>
+          <span>Users</span>
+        </li>
+        <li>
+          <strong ng-bind="gg.share"></strong>
+          <span>Share</span>
+        </li>
+      </ul>
+    </div>
+    <!--/.social-box-->
+  </div>
+  <!--/.col-->
+</div>
 <!--<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 pdn">
     <div class="card h100 title-stats">
       <span class="text-muted"><i class="fa fa-user"></i> Total Users</span>

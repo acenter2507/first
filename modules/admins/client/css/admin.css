@@ -644,6 +644,59 @@
         display: inline-block;
         width: 100%; } }
 
+.chart-wrapper canvas {
+  width: 100% !important; }
+
+base-chart.chart {
+  display: block !important; }
+
+.social-box {
+  min-height: 160px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #cfd8dc; }
+  .social-box i {
+    display: block;
+    margin: -1px -1px 0;
+    font-size: 40px;
+    line-height: 90px;
+    background: #cfd8dc; }
+  .social-box .chart-wrapper {
+    height: 90px;
+    margin: -90px 0 0; }
+    .social-box .chart-wrapper canvas {
+      width: 100% !important;
+      height: 90px !important; }
+  .social-box ul {
+    padding: 10px 0;
+    list-style: none; }
+    .social-box ul li {
+      display: block;
+      float: left;
+      width: 50%; }
+      .social-box ul li:first-child {
+        border-right: 1px solid #cfd8dc; }
+      .social-box ul li strong {
+        display: block;
+        font-size: 20px; }
+      .social-box ul li span {
+        font-size: 10px;
+        font-weight: 500;
+        color: #cfd8dc;
+        text-transform: uppercase; }
+  .social-box.facebook i {
+    color: #fff;
+    background: #3b5998; }
+  .social-box.twitter i {
+    color: #fff;
+    background: #00aced; }
+  .social-box.linkedin i {
+    color: #fff;
+    background: #4875b4; }
+  .social-box.google-plus i {
+    color: #fff;
+    background: #bb4b39; }
 
 /* rtl */
 *[dir="rtl"] {

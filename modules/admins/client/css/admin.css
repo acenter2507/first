@@ -118,7 +118,7 @@
           margin-top: 2px; }
         .sidebar .nav .nav-item .nav-link.nav-dropdown-toggle::before, .sidebar .nav .nav-item .navbar .nav-dropdown-toggle.dropdown-toggle::before, .navbar .sidebar .nav .nav-item .nav-dropdown-toggle.dropdown-toggle::before {
           position: absolute;
-          top: 1.5rem;
+          top: 1.6rem;
           right: 1rem;
           display: block;
           width: 0.875rem;

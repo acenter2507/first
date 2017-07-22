@@ -372,8 +372,6 @@
   .breadcrumb-menu::before {
     display: none; }
   .breadcrumb-menu .breadcrumb-btn {
-    text-decoration: none;
-    cursor: pointer;
     padding-top: 0.75rem;
     padding-bottom: 0.75rem; }
   .breadcrumb-menu .breadcrumb-btn.btn-secondary {

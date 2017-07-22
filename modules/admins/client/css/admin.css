@@ -367,6 +367,27 @@
 @media (max-width: 767px) {
   .admin-body {
     margin-top: 50px; } }
+.breadcrumb-menu {
+  position: absolute;
+  top: 0;
+  right: 1rem; }
+  .breadcrumb-menu::before {
+    display: none; }
+  .breadcrumb-menu .btn {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem; }
+  .breadcrumb-menu .btn.btn-secondary {
+    color: #b0bec5;
+    border: 0; }
+    .breadcrumb-menu .btn.btn-secondary:hover, .breadcrumb-menu .btn.btn-secondary.active {
+      color: #263238;
+      background: transparent; }
+  .breadcrumb-menu .open .btn.btn-secondary {
+    color: #263238;
+    background: transparent; }
+  .breadcrumb-menu .dropdown-menu {
+    min-width: 180px;
+    line-height: 1.5; }
 .breadcrumb-item.root {
   margin-left: 12px; }
   .breadcrumb-item.root::before {

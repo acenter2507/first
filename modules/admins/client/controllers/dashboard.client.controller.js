@@ -61,8 +61,8 @@
             display: false,
             ticks: {
               display: false,
-              min: Math.min.apply(Math, $scope.data[0]) - 5,
-              max: Math.max.apply(Math, $scope.data[0]) + 5,
+              min: Math.min.apply(Math, chart.data[0]) - 5,
+              max: Math.max.apply(Math, chart.data[0]) + 5,
             }
           }],
         },
@@ -109,8 +109,8 @@
             display: false,
             ticks: {
               display: false,
-              min: Math.min.apply(Math, $scope.data[0]) - 5,
-              max: Math.max.apply(Math, $scope.data[0]) + 5
+              min: Math.min.apply(Math, chart.data[0]) - 5,
+              max: Math.max.apply(Math, chart.data[0]) + 5
             }
           }],
         },

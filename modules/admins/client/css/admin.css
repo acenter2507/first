@@ -343,11 +343,13 @@
     width: 220px;
     height: 100%;
     z-index: 999;
-    margin-top: 44px;
-    /*margin-left: -220px;*/ }
+    margin-top: 44px; }
     .sidebar .sidebar-nav,
     .sidebar .nav {
       width: 220px !important; }
+  .sidebar-hidden .sidebar {
+    margin-left: -220px;
+  }
   .main, .app-footer {
     margin-left: 0 !important; }
   .aside-menu {

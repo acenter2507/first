@@ -16,5 +16,10 @@
     Authentication
   ) {
     $scope.$state = $state;
+    $scope.$on('$stateChangeSuccess', function () {
+      if (!angular.element('body').hasClass('sidebar-hidden')) {
+        angular.element('body').addClass('sidebar-hidden');
+      }
+    });
   }
 })();

@@ -381,28 +381,6 @@
   transition: margin-left 0.25s, margin-right 0.25s, width 0.25s, flex 0.25s; }
 
 @media (max-width: 991px) {
-  .app-header {
-    position: fixed !important;
-    z-index: 1020;
-    width: 100%; }
-    .app-header .navbar-toggler {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 70px;
-      height: inherit; }
-    .app-header .navbar-toggler {
-      color: rgba(0, 0, 0, 0.3); }
-    .app-header .navbar-brand {
-      width: 100% !important;
-      margin: 0 auto !important; }
-    .app-header .navbar-nav {
-      position: absolute;
-      top: 0;
-      right: 15px;
-      height: inherit; }
-  .admin-body {
-    margin-top: 100px; }
   .sidebar {
     position: fixed;
     width: 220px;

@@ -373,16 +373,16 @@
   right: 1rem; }
   .breadcrumb-menu::before {
     display: none; }
-  .breadcrumb-menu .btn {
+  .breadcrumb-menu .breadcrumb-btn {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem; }
-  .breadcrumb-menu .btn.btn-secondary {
+  .breadcrumb-menu .breadcrumb-btn.btn-secondary {
     color: #b0bec5;
     border: 0; }
-    .breadcrumb-menu .btn.btn-secondary:hover, .breadcrumb-menu .btn.btn-secondary.active {
+    .breadcrumb-menu .breadcrumb-btn.btn-secondary:hover, .breadcrumb-menu .breadcrumb-btn.btn-secondary.active {
       color: #263238;
       background: transparent; }
-  .breadcrumb-menu .open .btn.btn-secondary {
+  .breadcrumb-menu .open .breadcrumb-btn.btn-secondary {
     color: #263238;
     background: transparent; }
   .breadcrumb-menu .dropdown-menu {

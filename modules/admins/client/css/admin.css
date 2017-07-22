@@ -365,8 +365,10 @@
 @media (max-width: 767px) {
   .admin-body {
     margin-top: 50px; } }
-.breadcrumb-item.root::before {
-  display: none; }
+.breadcrumb-item.root {
+  margin-left: 12px; }
+  .breadcrumb-item.root::before {
+    display: none; }
 *[dir="rtl"] {
   direction: rtl;
   unicode-bidi: embed; }

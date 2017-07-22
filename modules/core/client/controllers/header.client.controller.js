@@ -89,5 +89,9 @@ angular.module('core').controller('HeaderController', [
         $state.go('search', { key: $scope.search_key, in: 'polltitle' });
       }
     };
+
+    $scope.click = () => {
+      console.log('click');
+    };
   }
 ]);

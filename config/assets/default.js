@@ -55,7 +55,8 @@ module.exports = {
         'public/lib/angular-toasty/dist/angular-toasty.js',
         'public/lib/angular-toastr/dist/angular-toastr.tpls.js',
         'public/lib/ng-dialog/js/ngDialog.min.js',
-        'public/lib/angucomplete-alt/angucomplete-alt.js'
+        'public/lib/angucomplete-alt/angucomplete-alt.js',
+        'public/lib/angular-breadcrumb/dist/angular-breadcrumb.min.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

@@ -17,7 +17,8 @@
     "io": true,
     "ApplicationConfiguration": true,
     "_": true,
-    "moment": false
+    "moment": false,
+    "$": false
   },
   "predef": [ // Extra globals.
     "inject",

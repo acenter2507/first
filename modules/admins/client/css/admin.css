@@ -68,7 +68,7 @@
       color: #bac2c6;
       text-transform: uppercase; }
     .sidebar .nav .nav-dropdown-items .nav-item {
-      margin-left: 12px;
+      padding-left: 12px;
     }
     .sidebar .nav .divider {
       height: 10px; }

@@ -50,16 +50,15 @@
                     'fa fa-linkedin-square' : user.provider === 'linkedin',
                     'fa fa-google-plus-square' : user.provider === 'google',
                     'fa fa-git-square' : user.provider === 'github',
-                    'fa fa-sign-in' : user.provider === 'local',
-                    'fa-3x': true }">
+                    'fa fa-sign-in' : user.provider === 'local'}">
                 </i>
               </td>
               <td class="text-center">0</td>
-              <td class="text-center">
+              <td>
                 <div class="text-muted">Last login</div>
                 <strong>5 minutes ago</strong>
               </td>
-              <td class="text-center">
+              <td>
                 <div class="btn-group" role="group">
                   <a class="btn-secondary undecorated-link" ui-sref="admin.users.view({ userId: user._id })"><i class="icon-eye icons"></i></a>
                   <a class="btn-secondary undecorated-link" ui-sref="admin.users.edit({ userId: user._id })"><i class="icon-note icons"></i></a>

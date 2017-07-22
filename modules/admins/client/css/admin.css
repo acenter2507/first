@@ -368,9 +368,7 @@
   .admin-body {
     margin-top: 50px; } }
 .breadcrumb-menu {
-  position: absolute;
-  top: 0;
-  right: 1rem; }
+  float: right; }
   .breadcrumb-menu::before {
     display: none; }
   .breadcrumb-menu .breadcrumb-btn {

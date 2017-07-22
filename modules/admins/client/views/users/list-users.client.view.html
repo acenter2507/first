@@ -4,7 +4,7 @@
       <div class="admin-card-header">
         List users
       </div>
-      <div class="card-block">
+      <div class="admin-card-block">
         <table class="table table-hover table-outline">
           <thead class="thead-default">
             <tr>
@@ -13,9 +13,9 @@
               <th>Joined date</th>
               <th>Role</th>
               <th class="text-center">Provider</th>
-              <td class="text-center">Reported</th>
-                <th>Activity</th>
-                <th>Action</th>
+              <th class="text-center">Reported</th>
+              <th>Activity</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -84,7 +84,8 @@
           <li class="page-item"><a class="page-link" href="#">Next</a>
           </li>
         </ul>-->
-        <pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage" ng-change="pageChanged()"></pagination>
+        <pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage"
+          ng-change="pageChanged()"></pagination>
       </div>
     </div>
   </div>

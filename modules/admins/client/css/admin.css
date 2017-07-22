@@ -67,7 +67,7 @@
       font-weight: 600;
       color: #bac2c6;
       text-transform: uppercase; }
-    .sidebar .nav .nav-dropdown-items .nav-item {
+    .sidebar .nav .nav-dropdown-items .nav-item .nav-link {
       padding-left: 12px;
     }
     .sidebar .nav .divider {

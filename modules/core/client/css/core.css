@@ -5,6 +5,9 @@ body {
 .content {
   position: relative; }
 
+.navbar {
+  margin-bottom: 0; }
+
 .undecorated-link:hover {
   text-decoration: none;
   cursor: pointer; }

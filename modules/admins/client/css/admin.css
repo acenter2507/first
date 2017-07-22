@@ -426,6 +426,7 @@
       color: #263238;
       background: transparent; }
   .breadcrumb-menu .open .breadcrumb-btn.btn-secondary {
+    font-size: 1.2rem;
     color: #263238;
     background: transparent; }
   .breadcrumb-menu .dropdown-menu {

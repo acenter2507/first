@@ -377,7 +377,7 @@
     padding-top: 0.75rem;
     padding-bottom: 0.75rem; }
   .breadcrumb-menu .breadcrumb-btn:not(:last-child) {
-    margin-right: 5px; }
+    margin-right: 10px; }
   .breadcrumb-menu .breadcrumb-btn.btn-secondary {
     color: #b0bec5;
     border: 0; }

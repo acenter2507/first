@@ -1,4 +1,99 @@
-<section class="card">
+<div class="row">
+  <div class="col-xs-12">
+    <div class="admin-card">
+      <div class="admin-card-header">
+        List users
+      </div>
+      <div class="card-block">
+        <table class="table table-hover table-outline">
+          <thead class="thead-default">
+            <tr>
+              <th class="text-center"><i class="icon-people"></i></th>
+              <th>Display Name</th>
+              <th>Joined date</th>
+              <th>Role</th>
+              <th class="text-center">Provider</th>
+              <td class="text-center">Reported</th>
+                <th>Activity</th>
+                <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="user in pagedItems">
+              <td class="text-center">
+                <div class="admin-avatar">
+                  <img src="{{ user.profileImageURL }}" alt="{{ user.displayName }}" class="img-admin-avatar">
+                  <span class="admin-avatar-status" ng-class="{
+                        'badge-success' : user.status === 'active',
+                        'badge-warning' : user.status == 'away',
+                        'badge-danger'  : user.status == 'busy',
+                        'badge-default' : user.status == 'offline' }">
+                    </span>
+                </div>
+              </td>
+
+              <td>
+                <div>{{ user.displayName }}</div>
+                <div class="text-muted">
+                  <small>{{ user.email }}</small>
+                </div>
+              </td>
+              <td>
+                <span ng-bind="user.created | date:'mediumDate'"></span>
+              </td>
+              <td>
+                <span ng-bind="user.roles"></span>
+              </td>
+              <td class="text-center">
+                <i class="fa" ng-class="{ 'fa fa-facebook-square' : user.provider === 'facebook',
+                    'fa fa-twitter-square' : user.provider === 'twitter',
+                    'fa fa-linkedin-square' : user.provider === 'linkedin',
+                    'fa fa-google-plus-square' : user.provider === 'google',
+                    'fa fa-git-square' : user.provider === 'github',
+                    'fa fa-sign-in' : user.provider === 'local',
+                    'fa-3x': true }">
+                </i>
+              </td>
+              <td class="text-center">0</td>
+              <td class="text-center">
+                <div class="text-muted">Last login</div>
+                <strong>5 minutes ago</strong>
+              </td>
+              <td class="text-center">
+                <div class="btn-group" role="group">
+                  <a class="btn-secondary undecorated-link" ui-sref="admin.users.view({ userId: user._id })"><i class="icon-eye icons"></i></a>
+                  <a class="btn-secondary undecorated-link" ui-sref="admin.users.edit({ userId: user._id })"><i class="icon-note icons"></i></a>
+                  <a class="btn-secondary undecorated-link" ng-click="delete_user(user)"><i class="icon-trash icons"></i></a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!--<ul class="pagination">
+          <li class="page-item"><a class="page-link" href="#">Prev</a>
+          </li>
+          <li class="page-item active">
+            <a class="page-link" href="#">1</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">2</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">3</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">4</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">Next</a>
+          </li>
+        </ul>-->
+        <pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage" ng-change="pageChanged()"></pagination>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!--<section class="card">
   <div class="page-header">
     <div class="row">
       <div class="col-md-4">
@@ -17,4 +112,4 @@
     </a>
   </div>
   <pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage" ng-change="pageChanged()"></pagination>
-</section>
+</section>-->

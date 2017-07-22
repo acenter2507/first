@@ -1,9 +1,9 @@
 <div class="row">
   <div class="col-sm-6 col-lg-3">
     <div class="admin-card admin-card-inverse admin-card-primary">
-      <div class="admin-card-block pb-0">
-        <div class="btn-group float-right">
-          <button type="button" class="btn btn-transparent dropdown-toggle p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <div class="admin-card-block pdnb">
+        <div class="btn-group pull-right">
+          <button type="button" class="btn btn-transparent dropdown-toggle pdn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="icon-settings"></i>
           </button>
           <div class="dropdown-menu dropdown-menu-right">
@@ -12,39 +12,39 @@
             <a class="dropdown-item" href="#">Something else here</a>
           </div>
         </div>
-        <h4 class="mb-0">9.823</h4>
-        <p>Members online</p>
+        <h4 class="mgnb">9.823</h4>
+        <p ng-bind="users_chart.title"></p>
       </div>
-      <div class="chart-wrapper px-3" style="height:70px;">
-        <canvas class="chart chart-line" chart-data="data" chart-labels="labels" chart-legend="false" chart-series="series" chart-options="options"
-          chart-colors="colors" height="70"></canvas>
+      <div class="chart-wrapper pd12x h70">
+        <canvas class="chart chart-line" chart-data="users_chart.data" chart-labels="users_chart.labels" chart-legend="false" chart-series="series" chart-options="users_chart.options"
+          chart-colors="users_chart.colors" height="70"></canvas>
       </div>
     </div>
   </div>
   <!--/.col-->
 
   <div class="col-sm-6 col-lg-3">
-    <div class="admin-card admin-card-inverse admin-card-info" ng-controller="cardChartCtrl2">
-      <div class="admin-card-block pb-0">
-        <button type="button" class="btn btn-transparent p-0 float-right">
+    <div class="admin-card admin-card-inverse admin-card-info">
+      <div class="admin-card-block pdnb">
+        <button type="button" class="btn btn-transparent pdn pull-right">
           <i class="icon-location-pin"></i>
         </button>
-        <h4 class="mb-0">9.823</h4>
-        <p>Members online</p>
+        <h4 class="mgnb">9.823</h4>
+        <p ng-bind="polls_chart.title"></p>
       </div>
-      <div class="chart-wrapper px-3" style="height:70px;">
-        <canvas class="chart chart-line" chart-data="data" chart-labels="labels" chart-legend="false" chart-series="series" chart-options="options"
-          chart-colors="colors" height="70"></canvas>
+      <div class="chart-wrapper pd12x h70">
+        <canvas class="chart chart-line" chart-data="polls_chart.data" chart-labels="polls_chart.labels" chart-legend="false" chart-series="series" chart-options="polls_chart.options"
+          chart-colors="polls_chart.colors" height="70"></canvas>
       </div>
     </div>
   </div>
   <!--/.col-->
 
   <div class="col-sm-6 col-lg-3">
-    <div class="admin-card admin-card-inverse admin-card-warning" ng-controller="cardChartCtrl3">
-      <div class="admin-card-block pb-0">
-        <div class="btn-group float-right">
-          <button type="button" class="btn btn-transparent dropdown-toggle p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <div class="admin-card admin-card-inverse admin-card-warning">
+      <div class="admin-card-block pdnb">
+        <div class="btn-group pull-right">
+          <button type="button" class="btn btn-transparent dropdown-toggle pdn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="icon-settings"></i>
           </button>
           <div class="dropdown-menu dropdown-menu-right">
@@ -53,12 +53,12 @@
             <a class="dropdown-item" href="#">Something else here</a>
           </div>
         </div>
-        <h4 class="mb-0">9.823</h4>
-        <p>Members online</p>
+        <h4 class="mgnb">9.823</h4>
+        <p ng-bind="cmts_chart.title"></p>
       </div>
-      <div class="chart-wrapper" style="height:70px;">
-        <canvas class="chart chart-line" chart-data="data" chart-labels="labels" chart-legend="false" chart-series="series" chart-options="options"
-          chart-colors="colors" height="70"></canvas>
+      <div class="chart-wrapper h70">
+        <canvas class="chart chart-line" chart-data="cmts_chart.data" chart-labels="cmts_chart.labels" chart-legend="false" chart-series="series" chart-options="cmts_chart.options"
+          chart-colors="cmts_chart.colors" height="70"></canvas>
       </div>
     </div>
   </div>
@@ -66,9 +66,9 @@
 
   <div class="col-sm-6 col-lg-3">
     <div class="admin-card admin-card-inverse admin-card-danger" ng-controller="cardChartCtrl4">
-      <div class="admin-card-block pb-0">
-        <div class="btn-group float-right">
-          <button type="button" class="btn btn-transparent dropdown-toggle p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <div class="admin-card-block pdnb">
+        <div class="btn-group pull-right">
+          <button type="button" class="btn btn-transparent dropdown-toggle pdn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="icon-settings"></i>
           </button>
           <div class="dropdown-menu dropdown-menu-right">
@@ -77,11 +77,11 @@
             <a class="dropdown-item" href="#">Something else here</a>
           </div>
         </div>
-        <h4 class="mb-0">9.823</h4>
-        <p>Members online</p>
+        <h4 class="mgnb">9.823</h4>
+        <p ng-bind="visit_chart.title"></p>
       </div>
-      <div class="chart-wrapper px-3" style="height:70px;">
-        <canvas class="chart chart-bar" chart-data="data" chart-labels="labels" chart-options="options" chart-colors="colors" height="70"></canvas>
+      <div class="chart-wrapper pd12x h70">
+        <canvas class="chart chart-bar" chart-data="visit_chart.data" chart-labels="visit_chart.labels" chart-options="visit_chart.options" chart-colors="visit_chart.colors" height="70"></canvas>
       </div>
     </div>
   </div>

@@ -15,7 +15,8 @@ module.exports = {
         'public/lib/angular-toastr/dist/angular-toastr.css',
         'public/lib/ng-dialog/css/ngDialog.min.css',
         'public/lib/ng-dialog/css/ngDialog-theme-default.min.css',
-        'public/lib/angucomplete-alt/angucomplete-alt.css'
+        'public/lib/angucomplete-alt/angucomplete-alt.css',
+        'public/lib/simple-line-icons/css/simple-line-icons.css'
       ],
       js: [
         'public/lib/jquery/dist/jquery.min.js',

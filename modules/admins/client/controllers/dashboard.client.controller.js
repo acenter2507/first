@@ -34,6 +34,7 @@
 
     function init_usersChart() {
       var chart = {};
+      chart.title = 'Total users';
       chart.mode = 'day'; // week, month, year
       chart.labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
       chart.data = [
@@ -80,6 +81,7 @@
     }
     function init_pollsChart() {
       var chart = {};
+      chart.title = 'Total polls';
       chart.mode = 'day'; // week, month, year
       chart.labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
       chart.data = [
@@ -129,6 +131,7 @@
     }
     function init_cmtsChart() {
       var chart = {};
+      chart.title = 'Total comments';
       chart.mode = 'day'; // week, month, year
       chart.labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
       chart.data = [
@@ -163,10 +166,10 @@
     }
     function init_visitChart() {
       var chart = {};
+      chart.title = 'Total visited';
       var elements = 16;
       var labels = [];
       var data = [];
-      //
       for (var i = 2000; i <= 2000 + elements; i++) {
         labels.push(i);
         data.push(_.random(40, 100));

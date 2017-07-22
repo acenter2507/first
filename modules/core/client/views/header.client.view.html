@@ -95,7 +95,7 @@
         <a href="#" class="dropdown-toggle" role="button" uib-dropdown-toggle>
           <span class="glyphicon glyphicon-search"></span>
         </a>
-        <ul class="dropdown-menu" role="menu">
+        <ul class="dropdown-menu" role="menu" ng-click="$event.stopPropagation()">
           <form class="form-inline" ng-submit="search()">
             <div class="form-group">
               <div class="input-group">

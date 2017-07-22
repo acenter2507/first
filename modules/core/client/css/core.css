@@ -3,7 +3,8 @@ body {
 }
 
 .content {
-  position: relative; }
+  position: relative;
+  margin-top: 50px; }
 
 .navbar {
   margin-bottom: 0 !important; }
@@ -1148,12 +1149,6 @@ a:hover .header-profile-image {
       border-color: transparent; }
 
 /* Responsive*/
-@media (min-width: 992px) {
-  .content {
-    margin-top: 50px; }}
-@media (max-width: 991px) {
-  .content {
-    margin-top: 70px; }}
-@media (max-width: 767px) {
-  .content {
-    margin-top: 50px; }}
+@media (min-width: 992px) {}
+@media (max-width: 991px) {}
+@media (max-width: 767px) {}

@@ -15,6 +15,5 @@
     $scope,
     Authentication
   ) {
-    // Code
   }
 })();

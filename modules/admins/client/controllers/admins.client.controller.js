@@ -15,6 +15,6 @@
     $scope,
     Authentication
   ) {
-    $scope.state = $state;
+    $scope.$state = $state;
   }
 })();

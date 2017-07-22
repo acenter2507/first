@@ -118,13 +118,13 @@
           margin-top: 2px; }
         .sidebar .nav .nav-item .nav-link.nav-dropdown-toggle::before, .sidebar .nav .nav-item .navbar .nav-dropdown-toggle.dropdown-toggle::before, .navbar .sidebar .nav .nav-item .nav-dropdown-toggle.dropdown-toggle::before {
           position: absolute;
-          top: 0.96875rem;
+          top: 1rem;
           right: 1rem;
           display: block;
           width: 0.875rem;
           height: 0.875rem;
           padding: 0;
-          font-size: 0.875rem;
+          font-size: 1rem;
           line-height: 0.65625rem;
           text-align: center;
           content: "\2039";

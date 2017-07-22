@@ -39,7 +39,7 @@ function bootstrapCollapseDirective() {
   return directive;
 
   function link(scope, element, attrs) {
-    if (attrs.toggle == 'collapse') {
+    if (attrs.toggle === 'collapse') {
       element.attr('href', 'javascript;;').attr('data-target', attrs.href.replace('index.html', ''));
     }
   }
@@ -92,7 +92,7 @@ function sidebarNavDynamicResizeDirective($window, $timeout) {
         } else {
           element.css('height', bodyHeight - headerHeight);
         }
-      })
+      });
 
       angular.element($window).bind('resize', function () {
         var bodyHeight = angular.element(window).height();
@@ -144,9 +144,9 @@ function collapseMenuTogglerDirective() {
   function link(scope, element, attrs) {
     element.on('click', function () {
       if (element.hasClass('navbar-toggler') && !element.hasClass('layout-toggler')) {
-        angular.element('body').toggleClass('sidebar-mobile-show')
+        angular.element('body').toggleClass('sidebar-mobile-show');
       }
-    })
+    });
   }
 }
 
@@ -159,7 +159,7 @@ function bootstrapCarouselDirective() {
   return directive;
 
   function link(scope, element, attrs) {
-    if (attrs.ride == 'carousel') {
+    if (attrs.ride === 'carousel') {
       element.find('a').each(function () {
         $(this).attr('data-target', $(this).attr('href').replace('index.html', '')).attr('href', 'javascript;;')
       });
@@ -176,10 +176,10 @@ function bootstrapTooltipsPopoversDirective() {
   return directive;
 
   function link(scope, element, attrs) {
-    if (attrs.toggle == 'tooltip') {
+    if (attrs.toggle === 'tooltip') {
       angular.element(element).tooltip();
     }
-    if (attrs.toggle == 'popover') {
+    if (attrs.toggle === 'popover') {
       angular.element(element).popover();
     }
   }
@@ -210,19 +210,19 @@ function cardCollapseDirective() {
   return directive;
 
   function link(scope, element, attrs) {
-    if (attrs.toggle == 'collapse' && element.parent().hasClass('card-actions')) {
+    if (attrs.toggle === 'collapse' && element.parent().hasClass('card-actions')) {
 
       if (element.parent().parent().parent().find('.card-block').hasClass('in')) {
         element.find('i').addClass('r180');
       }
 
       var id = 'collapse-' + Math.floor((Math.random() * 1000000000) + 1);
-      element.attr('data-target', '#' + id)
+      element.attr('data-target', '#' + id);
       element.parent().parent().parent().find('.card-block').attr('id', id);
 
       element.on('click', function () {
         element.find('i').toggleClass('r180');
-      })
+      });
     }
   }
 }

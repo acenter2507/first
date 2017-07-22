@@ -1,5 +1,93 @@
 <div class="row">
-  <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 pdn">
+  <div class="col-sm-6 col-lg-3">
+    <div class="admin-card admin-card-inverse admin-card-primary">
+      <div class="admin-card-block pb-0">
+        <div class="btn-group float-right">
+          <button type="button" class="btn btn-transparent dropdown-toggle p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="icon-settings"></i>
+          </button>
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>
+        <h4 class="mb-0">9.823</h4>
+        <p>Members online</p>
+      </div>
+      <div class="chart-wrapper px-3" style="height:70px;">
+        <canvas class="chart chart-line" chart-data="data" chart-labels="labels" chart-legend="false" chart-series="series" chart-options="options"
+          chart-colors="colors" height="70"></canvas>
+      </div>
+    </div>
+  </div>
+  <!--/.col-->
+
+  <div class="col-sm-6 col-lg-3">
+    <div class="admin-card admin-card-inverse admin-card-info" ng-controller="cardChartCtrl2">
+      <div class="admin-card-block pb-0">
+        <button type="button" class="btn btn-transparent p-0 float-right">
+          <i class="icon-location-pin"></i>
+        </button>
+        <h4 class="mb-0">9.823</h4>
+        <p>Members online</p>
+      </div>
+      <div class="chart-wrapper px-3" style="height:70px;">
+        <canvas class="chart chart-line" chart-data="data" chart-labels="labels" chart-legend="false" chart-series="series" chart-options="options"
+          chart-colors="colors" height="70"></canvas>
+      </div>
+    </div>
+  </div>
+  <!--/.col-->
+
+  <div class="col-sm-6 col-lg-3">
+    <div class="admin-card admin-card-inverse admin-card-warning" ng-controller="cardChartCtrl3">
+      <div class="admin-card-block pb-0">
+        <div class="btn-group float-right">
+          <button type="button" class="btn btn-transparent dropdown-toggle p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="icon-settings"></i>
+          </button>
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>
+        <h4 class="mb-0">9.823</h4>
+        <p>Members online</p>
+      </div>
+      <div class="chart-wrapper" style="height:70px;">
+        <canvas class="chart chart-line" chart-data="data" chart-labels="labels" chart-legend="false" chart-series="series" chart-options="options"
+          chart-colors="colors" height="70"></canvas>
+      </div>
+    </div>
+  </div>
+  <!--/.col-->
+
+  <div class="col-sm-6 col-lg-3">
+    <div class="admin-card admin-card-inverse admin-card-danger" ng-controller="cardChartCtrl4">
+      <div class="admin-card-block pb-0">
+        <div class="btn-group float-right">
+          <button type="button" class="btn btn-transparent dropdown-toggle p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="icon-settings"></i>
+          </button>
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>
+        <h4 class="mb-0">9.823</h4>
+        <p>Members online</p>
+      </div>
+      <div class="chart-wrapper px-3" style="height:70px;">
+        <canvas class="chart chart-bar" chart-data="data" chart-labels="labels" chart-options="options" chart-colors="colors" height="70"></canvas>
+      </div>
+    </div>
+  </div>
+  <!--/.col-->
+</div>
+<!--<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 pdn">
     <div class="card h100 title-stats">
       <span class="text-muted"><i class="fa fa-user"></i> Total Users</span>
       <span class="title-icon pull-right"><i class="fa fa-user"></i></span><br>
@@ -30,5 +118,4 @@
       <span class="text-lg">{{total_visit}}</span>
       <p></p>
     </div>
-  </div>
-</div>
+  </div>-->

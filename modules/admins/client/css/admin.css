@@ -405,9 +405,7 @@
   .sidebar-mobile-show .main {
     margin-right: -220px !important;
     margin-left: 220px !important; } }
-@media (max-width: 767px) {
-  .admin-body {
-    margin-top: 50px; } }
+
 
 /* Breadcrumb */
 .breadcrumb-menu {

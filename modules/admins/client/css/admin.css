@@ -365,7 +365,7 @@
 @media (max-width: 767px) {
   .admin-body {
     margin-top: 50px; } }
-.sidebar-btn::after {
+.breadcrumb-item.root::before {
   display: none; }
 *[dir="rtl"] {
   direction: rtl;

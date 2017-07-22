@@ -2,59 +2,47 @@
   <nav class="sidebar-nav">
     <ul class="nav">
       <li class="nav-item">
-        <a class="nav-link" ui-sref-active="active" ui-sref="app.main"><i class="icon-speedometer"></i> Dashboard <span class="badge badge-info">NEW</span></a>
+        <a class="nav-link" ui-sref-active="active" ui-sref="admin.dashboard"><i class="fa fa-tachometer"></i> Dashboard</a>
       </li>
 
       <li class="divider"></li>
       <li class="nav-title">
-        UI Elements
+        Manage data
       </li>
-      <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('app.components')}">
-        <a class="nav-link nav-dropdown-toggle" ng-class="{active: $state.includes('app.components')}" href="#"><i class="icon-puzzle"></i> Components</a>
+      <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('admin.users')}">
+        <a class="nav-link nav-dropdown-toggle" ng-class="{active: $state.includes('admin.users')}" href="#"><i class="fa fa-users"></i> Users</a>
         <ul class="nav-dropdown-items">
           <li class="nav-item">
-            <a class="nav-link" ui-sref-active="active" ui-sref="app.components.buttons"><i class="icon-puzzle"></i> Buttons</a>
+            <a class="nav-link" ui-sref-active="active" ui-sref="admin.users.list"><i class="fa fa-list-alt"></i> List</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" ui-sref-active="active" ui-sref="app.components.social-buttons"><i class="icon-puzzle"></i> Social Buttons</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" ui-sref-active="active" ui-sref="app.components.cards"><i class="icon-puzzle"></i> Cards</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" ui-sref-active="active" ui-sref="app.components.forms"><i class="icon-puzzle"></i> Forms</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" ui-sref-active="active" ui-sref="app.components.switches"><i class="icon-puzzle"></i> Switches</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" ui-sref-active="active" ui-sref="app.components.tables"><i class="icon-puzzle"></i> Tables</a>
+            <a class="nav-link" ui-sref-active="active" ui-sref="admin.users.new"><i class="fa fa-plus"></i> Add</a>
           </li>
         </ul>
       </li>
-      <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('app.icons')}">
-        <a class="nav-link nav-dropdown-toggle" ng-class="{active: $state.includes('app.icons')}" href="#"><i class="icon-star"></i> Icons</a>
+      <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('admin.polls')}">
+        <a class="nav-link nav-dropdown-toggle" ng-class="{active: $state.includes('admin.polls')}" href="#"><i class="fa fa-list"></i> Polls</a>
         <ul class="nav-dropdown-items">
           <li class="nav-item">
-            <a class="nav-link" ui-sref-active="active" ui-sref="app.icons.fontawesome"><i class="icon-star"></i> Font Awesome</a>
+            <a class="nav-link" ui-sref-active="active" ui-sref="admin.polls.list"><i class="fa fa-list-alt"></i> List</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" ui-sref-active="active" ui-sref="app.icons.simplelineicons"><i class="icon-star"></i> Simple Line Icons</a>
+            <a class="nav-link" ui-sref-active="active" ui-sref="admin.polls.new"><i class="fa fa-plus"></i> Add</a>
           </li>
         </ul>
       </li>
       <li class="nav-item">
-        <a class="nav-link" ui-sref-active="active" ui-sref="app.widgets"><i class="icon-calculator"></i> Widgets <span class="badge badge-info">NEW</span></a>
+        <a class="nav-link" ui-sref-active="active" ui-sref="admin.widgets"><i class="icon-calculator"></i> Widgets <span class="badge badge-info">NEW</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" ui-sref-active="active" ui-sref="app.charts"><i class="icon-pie-chart"></i> Charts</a>
+        <a class="nav-link" ui-sref-active="active" ui-sref="admin.charts"><i class="icon-pie-chart"></i> Charts</a>
       </li>
       <li class="divider"></li>
       <li class="nav-title">
         Extras
       </li>
-      <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('app.pages')}">
-        <a class="nav-link nav-dropdown-toggle" ng-class="{active: $state.includes('app.pages')}" href="#"><i class="icon-star"></i> Pages</a>
+      <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('admin.pages')}">
+        <a class="nav-link nav-dropdown-toggle" ng-class="{active: $state.includes('admin.pages')}" href="#"><i class="icon-star"></i> Pages</a>
         <ul class="nav-dropdown-items">
           <li class="nav-item">
             <a class="nav-link" ui-sref-active="active" ui-sref="appSimple.login"><i class="icon-star"></i> Login</a>

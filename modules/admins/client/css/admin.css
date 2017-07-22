@@ -8,10 +8,10 @@
   flex: 1;
   min-width: 0;
 }
-/*.admin-body .sidebar {
+.admin-body .sidebar {
   flex: 0 0 200px;
   order: -1;
-}*/
+}
 /*.app-body .aside-menu {
   flex: 0 0 250px;
 }*/

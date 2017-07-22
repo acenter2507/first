@@ -831,6 +831,8 @@ base-chart.chart {
   .page-item:first-child .page-link, .pagination-datatables li:first-child .page-link, .pagination li:first-child .page-link, .page-item:first-child .pagination-datatables li a, .pagination-datatables li .page-item:first-child a, .pagination-datatables li:first-child a, .page-item:first-child .pagination li a, .pagination li .page-item:first-child a, .pagination li:first-child a {
     margin-left: 0;
     border-radius: 0; }
+  .page-item:last-child .page-link, .pagination-datatables li:last-child .page-link, .pagination li:last-child .page-link, .page-item:last-child .pagination-datatables li a, .pagination-datatables li .page-item:last-child a, .pagination-datatables li:last-child a, .page-item:last-child .pagination li a, .pagination li .page-item:last-child a, .pagination li:last-child a {
+    border-radius: 0; }
   .page-item.active .page-link, .pagination-datatables li.active .page-link, .pagination li.active .page-link, .page-item.active .pagination-datatables li a, .pagination-datatables li .page-item.active a, .pagination-datatables li.active a, .page-item.active .pagination li a, .pagination li .page-item.active a, .pagination li.active a {
     z-index: 2;
     color: #fff;

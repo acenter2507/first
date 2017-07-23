@@ -84,5 +84,34 @@ function UserListController($scope, $filter, Admin, AdminApi, toast, dialog) {
     $scope.filter = {};
     $scope.figureOutItemsToDisplay();
   };
+  $scope.delete_user = user => {
+    $scope.message_title = 'Delete user!';
+    $scope.message_content = 'Are you sure you want to delete this user?';
+    $scope.dialog_type = 3;
+    $scope.buton_label = 'delete';
+    dialog.openConfirm({
+      scope: $scope,
+      templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
+    }).then(() => {
+      handle_confirm();
+    }, reject => {
+    });
+    function handle_confirm() {
+      user.$remove(() => {
+        $scope.users = _.without($scope.users, user);
+        $scope.figureOutItemsToDisplay();
+        toast.success('You have deleted: ' + user.displayName, 'Thank you!');
+      });
+      Action.save_report(vm.poll, reason)
+        .then(res => {
+          vm.reported = (res) ? true : false;
+          $scope.$apply();
+          toast.success('You have successfully reported this poll.', 'Thank you!');
+        })
+        .catch(err => {
+          toast.error(err.message, 'Error!');
+        });
+    }
+  };
 }
 

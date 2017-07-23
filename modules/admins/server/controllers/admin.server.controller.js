@@ -115,7 +115,7 @@ exports.users_report = function (req, res) {
 /**
  * Lấy reported của user
  */
-exports.users_report = function (req, res) {
+exports.users_reported = function (req, res) {
   Report.find({ victim: req.model._id })
     .count(function (err, count) {
       if (err) {

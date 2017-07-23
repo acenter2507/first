@@ -8,20 +8,47 @@ var path = require('path'),
   User = mongoose.model('User'),
   Report = mongoose.model('Report'),
   Userreport = mongoose.model('Userreport'),
+  Notif = mongoose.model('Notif'),
+  Bookmark = mongoose.model('Bookmark'),
+  View = mongoose.model('View'),
   Poll = mongoose.model('Poll'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
  * Show the current user
  */
-exports.read = function (req, res) {
+exports.user = function (req, res) {
   res.json(req.model);
 };
 
 /**
  * Update a User
  */
-exports.update = function (req, res) {
+exports.user_add = function (req, res) {
+  console.log(req.body);
+  var user = new User(req.body);
+  user.provider = 'local';
+  user.displayName = user.firstName + ' ' + user.lastName;
+  user.save(function (err, user) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      // Remove sensitive data before login
+      var report = new Userreport({ user: user._id });
+      report.save();
+      user.password = undefined;
+      user.salt = undefined;
+      res.json(user);
+    }
+  });
+};
+
+/**
+ * Update a User
+ */
+exports.user_update = function (req, res) {
   var user = req.model;
 
   //For security purposes only merge these parameters
@@ -44,24 +71,36 @@ exports.update = function (req, res) {
 /**
  * Delete a user
  */
-exports.delete = function (req, res) {
+exports.user_delete = function (req, res) {
   var user = req.model;
+  user.remove()
+    .then(() => {
+      Userreport.remove({ user: user._id });
+    }, handleError)
+    .then(() => {
+      Notif.remove({ to: user._id });
+    }, handleError)
+    .then(() => {
+      Bookmark.remove({ user: user._id });
+    }, handleError)
+    .then(() => {
+      View.remove({ user: user._id });
+    }, handleError)
+    .then(() => {
+      res.json(user);
+    }, handleError);
 
-  user.remove(function (err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    }
-
-    res.json(user);
-  });
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 };
 
 /**
  * List of Users
  */
-exports.list = function (req, res) {
+exports.users = function (req, res) {
   User.find({}, '-salt -password').sort('-created').exec(function (err, users) {
     if (err) {
       return res.status(400).send({
@@ -77,7 +116,6 @@ exports.list = function (req, res) {
  * User middleware
  */
 exports.userByID = function (req, res, next, id) {
-  console.log('******************************************* admin');
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
       message: 'User is invalid'

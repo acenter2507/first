@@ -32,9 +32,7 @@ exports.signup = function (req, res) {
   user.displayName = user.firstName + ' ' + user.lastName;
   user.save(function (err, user) {
     if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
+      handleError(err);
     } else {
       // Remove sensitive data before login
       var report = new Userreport({ user: user._id });

@@ -10,14 +10,16 @@ module.exports = function (app) {
   // User route registration first. Ref: #713
   require('../../../users/server/routes/users.server.routes.js')(app);
 
+  /* Users manage */
   // Users collection routes
-  app.route('/api/users').get(adminPolicy.isAllowed, admin.list);
-
+  app.route('/api/users')
+    .get(adminPolicy.isAllowed, admin.users)
+    .post(adminPolicy.isAllowed, admin.user_add);
   // Single user routes
   app.route('/api/users/:aduserId')
-    .get(adminPolicy.isAllowed, admin.read)
-    .put(adminPolicy.isAllowed, admin.update)
-    .delete(adminPolicy.isAllowed, admin.delete);
+    .get(adminPolicy.isAllowed, admin.user)
+    .put(adminPolicy.isAllowed, admin.user_update)
+    .delete(adminPolicy.isAllowed, admin.user_delete);
 
   app.route('/api/admins/users/:aduserId/report').get(adminPolicy.isAllowed, admin.users_report);
   app.route('/api/admins/users/:aduserId/reported').get(adminPolicy.isAllowed, admin.users_reported);

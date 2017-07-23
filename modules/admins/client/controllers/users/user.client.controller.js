@@ -1,40 +1,81 @@
 'use strict';
+angular.module('admin')
+  .controller('UserListController', UserController);
+UserController.$inject = ['$window', '$scope', '$state', 'Authentication', 'userResolve', 'AdminApi', 'Constants', 'FileUploader', 'toastr', 'ngDialog'];
 
-angular.module('admin').controller('UserController', ['$scope', '$state', 'Authentication', 'userResolve',
-  function ($scope, $state, Authentication, userResolve) {
-    $scope.authentication = Authentication;
-    $scope.user = userResolve;
 
-    $scope.remove = function (user) {
-      if (confirm('Are you sure you want to delete this user?')) {
-        if (user) {
-          user.$remove();
+function UserController($window, $scope, $state, Authentication, userResolve, AdminApi, Constants, FileUploader, toast, dialog) {
+  $scope.authentication = Authentication;
+  $scope.user = userResolve;
 
-          $scope.users.splice($scope.users.indexOf(user), 1);
-        } else {
-          $scope.user.$remove(function () {
-            $state.go('admin.users');
-          });
-        }
-      }
-    };
+  $scope.imageURL = $scope.user.profileImageURL || Constants.defaultProfileImageURL;
+  $scope.uploader = new FileUploader({
+    url: 'api/users/picture',
+    alias: 'newProfilePicture'
+  });
+  // Called after the user selected a new picture file
+  $scope.uploader.onAfterAddingFile = function (fileItem) {
+    if ($window.FileReader) {
+      var fileReader = new FileReader();
+      fileReader.readAsDataURL(fileItem._file);
 
-    $scope.update = function (isValid) {
-      if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'userForm');
+      fileReader.onload = function (fileReaderEvent) {
+        $timeout(function () {
+          $scope.imageURL = fileReaderEvent.target.result;
+        }, 0);
+      };
+    }
+  };
 
-        return false;
-      }
 
-      var user = $scope.user;
+  $scope.save = isValid => {
+    if (!isValid) {
+      $scope.$broadcast('show-errors-check-validity', 'userForm');
+      return false;
+    }
+    var user = $scope.user;
+    if (user._id) {
+      user.$update(successCb, errorCb);
+    } else {
+      user.$save(successCb, errorCb);
+    }
 
-      user.$update(function () {
-        $state.go('admin.user', {
-          userId: user._id
+    function successCb(res) {
+      $state.reload();
+    }
+    function errorCb(err) {
+      toast.error('Can\'t save user: ' + err.message, 'Error!');
+    }
+  };
+  $scope.remove = function (user) {
+    if (confirm('Are you sure you want to delete this user?')) {
+      if (user) {
+        user.$remove();
+
+        $scope.users.splice($scope.users.indexOf(user), 1);
+      } else {
+        $scope.user.$remove(function () {
+          $state.go('admin.users.list');
         });
-      }, function (errorResponse) {
-        $scope.error = errorResponse.data.message;
-      });
-    };
-  }
-]);
+      }
+    }
+  };
+
+  // $scope.update = function (isValid) {
+  //   if (!isValid) {
+  //     $scope.$broadcast('show-errors-check-validity', 'userForm');
+
+  //     return false;
+  //   }
+
+  //   var user = $scope.user;
+
+  //   user.$update(function () {
+  //     $state.go('admin.user', {
+  //       userId: user._id
+  //     });
+  //   }, function (errorResponse) {
+  //     $scope.error = errorResponse.data.message;
+  //   });
+  // };
+}

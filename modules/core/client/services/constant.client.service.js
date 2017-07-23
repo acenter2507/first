@@ -7,5 +7,6 @@ angular.module('core').service('Constants', [
       activitys: '9123881758910274823',
       preferences: '9218391509124jkd8324',
     };
+    this.defaultProfileImageURL = 'modules/users/client/img/profile/default.png';
   }
 ]);

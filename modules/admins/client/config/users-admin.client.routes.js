@@ -14,7 +14,7 @@ angular.module('admin.routes').config(['$stateProvider',
       })
       .state('admin.users.new', {
         url: '/new',
-        templateUrl: 'modules/admins/client/views/users/new-user.client.view.html',
+        templateUrl: 'modules/admins/client/views/users/form-user.client.view.html',
         controller: 'UserController',
         ncyBreadcrumb: {
           label: 'Add new'
@@ -42,7 +42,7 @@ angular.module('admin.routes').config(['$stateProvider',
       })
       .state('admin.users.edit', {
         url: '/:userId/edit',
-        templateUrl: 'modules/admins/client/views/users/edit-user.client.view.html',
+        templateUrl: 'modules/admins/client/views/users/form-user.client.view.html',
         controller: 'UserController',
         ncyBreadcrumb: {
           label: 'Edit {{ userResolve.displayName }}'

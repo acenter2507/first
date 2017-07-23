@@ -19,8 +19,6 @@ angular.module('admin').controller('UserListController', ['$scope', '$filter', '
       // $scope.filteredItems = $filter('filter')($scope.users, {
       //   $: $scope.search
       // });
-      console.log($scope.users);
-      console.log($scope.filter);
       $scope.filteredItems = $filter('users_filter')($scope.users, $scope.filter);
       $scope.filterLength = $scope.filteredItems.length;
       var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);

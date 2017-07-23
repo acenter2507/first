@@ -2,6 +2,66 @@
   <div class="col-xs-12">
     <div class="admin-card">
       <div class="admin-card-header">
+        Filter control
+      </div>
+      <div class="admin-card-block">
+        <div class="row">
+          <div class="form-group col-xs-12">
+            <label for="search">Search</label>
+            <input name="search" id="search" class="form-control" type="text" ng-model="search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-4">
+            <label for="status">Status</label>
+            <select id="status" name="status" class="form-control" ng-model="filter.status">
+              <option value>All</option>
+              <option value="active">Online</option>
+              <option value="offline">Offline</option>
+            </select>
+          </div>
+          <div class="form-group col-sm-4">
+            <label for="provider">Provider</label>
+            <select id="provider" name="provider" class="form-control" ng-model="filter.provider">
+              <option value>All</option>
+              <option value="local">Local</option>
+              <option value="facebook">Facebook</option>
+              <option value="twitter">Twitter</option>
+              <option value="linkedin">Linkedin</option>
+              <option value="google">Google plus</option>
+              <option value="github">Github</option>
+            </select>
+          </div>
+          <div class="form-group col-sm-4">
+            <label for="created">Joined date</label>
+            <input id="created" name="created" class="form-control" moment-picker="filter.created" ng-model="filter.created" format="YYYY/MM/DD HH:mm" start-view="month"
+            placeholder="Select a date...">
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-6">
+            <label for="polls_pref">Compare prefix</label>
+            <select id="polls_pref" name="polls_pref" class="form-control" ng-model="filter.polls_pref">
+              <option value>None</option>
+              <option value="least">As least</option>
+              <option value="most">As most</option>
+            </select>
+          </div>
+          <div class="form-group col-sm-6">
+            <label for="polls">Number of polls</label>
+            <input name="polls" id="polls" type="text" class="form-control" placeholder="Enter number of polls" ng-model="filter.polls">
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+          <button class="btn btn-sm btn-primary pull-right" ng-click="excute_filter()">Filter</button>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  <div class="col-xs-12">
+    <div class="admin-card">
+      <div class="admin-card-header">
         List users
       </div>
       <div class="admin-card-block">
@@ -74,3 +134,27 @@
     </div>
   </div>
 </div>
+
+
+
+
+<!--<section class="card">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-md-4">
+        <h1>Users</h1>
+      </div>
+      <div class="col-md-4" style="margin-top: 2em">
+        <input class="form-control col-md-4" type="text" ng-model="search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />
+      </div>
+    </div>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="user in pagedItems" ui-sref="admin.user({userId: user._id})" class="list-group-item">
+      <h4 class="list-group-item-heading" ng-bind="user.username"></h4>
+      <p class="list-group-item-text pull-right small" ng-bind="user.roles"></p>
+      <p class="list-group-item-text" ng-bind="user.email"></p>
+    </a>
+  </div>
+  <pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage" ng-change="pageChanged()"></pagination>
+</section>-->

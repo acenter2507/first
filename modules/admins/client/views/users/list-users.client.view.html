@@ -10,7 +10,7 @@
         <div class="row">
           <div class="form-group col-xs-12">
             <label for="search">Search</label>
-            <input name="search" id="search" class="form-control" type="text" ng-model="search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />
+            <input name="search" id="search" class="form-control" type="text" ng-model="filter.search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />
           </div>
         </div>
         <div class="row">
@@ -58,8 +58,8 @@
             <label for="roles">Role</label>
             <select id="roles" name="roles" class="form-control input-sm" ng-model="filter.roles">
               <option value>All</option>
-              <option value="admin">Admin</option>
-              <option value="user">User</option>
+              <option value="['admin', 'user']">Admin</option>
+              <option value="['user']">User</option>
             </select>
           </div>
         </div>

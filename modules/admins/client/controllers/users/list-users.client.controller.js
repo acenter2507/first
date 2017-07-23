@@ -75,5 +75,9 @@ function UserListController($scope, $filter, Admin, AdminApi, toast, dialog) {
   };
 
   $scope.filter_min = true;
+  $scope.clear_filter = () => {
+    $scope.filter = {};
+    $scope.figureOutItemsToDisplay();
+  }
 }
 

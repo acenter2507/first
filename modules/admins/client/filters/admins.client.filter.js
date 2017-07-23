@@ -59,6 +59,6 @@ function users_filter($filter) {
       }
     }
     return out;
-  }
+  };
 
 }

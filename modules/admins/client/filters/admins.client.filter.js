@@ -29,7 +29,7 @@ function users_filter($filter) {
     }
     if (filter.roles) {
       out.forEach(item => {
-        if (!angular.equal(item.roles, filter.roles)) {
+        if (!angular.equals(item.roles, filter.roles)) {
           out = _.without(out, item);
         }
       });

@@ -13,21 +13,21 @@ function users_filter($filter) {
     out = $filter('filter')(users, {
       $: filter.search
     });
-    if (filter.status) {
+    if (filter.status && filter.status !== '') {
       out.forEach(item => {
         if (item.status !== filter.status) {
           out = _.without(out, item);
         }
       });
     }
-    if (filter.provider) {
+    if (filter.provider && filter.provider !== '') {
       out.forEach(item => {
         if (item.provider !== filter.provider) {
           out = _.without(out, item);
         }
       });
     }
-    if (filter.roles) {
+    if (filter.roles && filter.roles !== '') {
       if (filter.roles === 'user') {
         out.forEach(item => {
           if (item.roles.indexOf(filter.roles) < 0 || item.roles.length > 1) {
@@ -42,7 +42,7 @@ function users_filter($filter) {
         });
       }
     }
-    if (filter.created) {
+    if (moment(filter.created, 'YYYY/MM/DD', true).isValid()) {
       var create = moment(filter.created, 'YYYY/MM/DD');
       out.forEach(item => {
         let item_create = moment(item.created, 'YYYY/MM/DD');

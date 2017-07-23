@@ -15,9 +15,21 @@
       </div>
       <div class="admin-card-block" ng-class="{ 'minium': filter_min }" >
         <div class="row">
-          <div class="form-group col-xs-12">
+          <div class="form-group col-sm-6">
             <label for="search">Search</label>
             <input name="search" id="search" class="form-control" type="text" ng-model="filter.search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />
+          </div>
+          <div class="form-group col-sm-6">
+            <label for="sort">Sort by</label>
+            <select id="sort" name="sort" class="form-control" ng-model="filter.sort"  ng-change="figureOutItemsToDisplay()">
+              <option value>Default</option>
+              <option value="-created">Newest to oldest</option>
+              <option value="created">Oldest to newest</option>
+              <option value="-report.pollCnt">Most polls</option>
+              <option value="report.pollCnt">Least polls</option>
+              <option value="-report.cmtCnt">Most comments</option>
+              <option value="report.cmtCnt">Least comments</option>
+            </select>
           </div>
         </div>
         <div class="row">

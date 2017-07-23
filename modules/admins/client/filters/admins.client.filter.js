@@ -68,6 +68,9 @@ function users_filter($filter) {
         });
       }
     }
+    if (filter.sort && filter.sort !== '') {
+      out = $filter('orderBy')(out, filter.sort, false);
+    }
     return out;
   };
 

@@ -15,6 +15,7 @@ function UserListController($scope, $filter, Admin, AdminApi, toast, dialog) {
       var promise = [];
       $scope.users.forEach(user => {
         promise.push(get_user_report(user));
+        promise.push(get_user_reported(user));
       });
       Promise.all(promise)
         .then(res => {

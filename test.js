@@ -37,7 +37,8 @@ app.init(function () {
   - Màn hình category => done
   - Chức năng private và share link => done
   - Chức năng nhập lý do khi report => done
-  - Chức năng search
+  - Chức năng search => done
+  - Đang code màn hình admin add user
 
   - Chức năng quản lý toàn bộ thông tin của user
   - Đếm và quản lý số lần bị report của user

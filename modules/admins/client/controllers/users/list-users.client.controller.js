@@ -16,11 +16,6 @@ angular.module('admin').controller('UserListController', ['$scope', '$filter', '
     };
 
     $scope.figureOutItemsToDisplay = function () {
-      // $scope.filteredItems = $filter('filter')($scope.users, {
-      //   $: $scope.search
-      // });
-      console.log($scope.users);
-      console.log($scope.filter);
       $scope.filteredItems = $filter('users_filter')($scope.users, $scope.filter);
       $scope.filterLength = $scope.filteredItems.length;
       var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
@@ -31,5 +26,7 @@ angular.module('admin').controller('UserListController', ['$scope', '$filter', '
     $scope.pageChanged = function () {
       $scope.figureOutItemsToDisplay();
     };
+
+    $scope.filter_min = true;
   }
 ]);

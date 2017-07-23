@@ -7,7 +7,6 @@ function UserListController($scope, $filter, Admin, AdminApi, toast, dialog) {
   Admin.query(function (data) {
     $scope.users = data;
     get_users_info().then(() => {
-      console.log($scope.users);
       $scope.buildPager();
     });
   });
@@ -59,6 +58,7 @@ function UserListController($scope, $filter, Admin, AdminApi, toast, dialog) {
     $scope.itemsPerPage = 15;
     $scope.currentPage = 1;
     $scope.filter = {};
+    console.log($scope.users);
     $scope.figureOutItemsToDisplay();
   };
 

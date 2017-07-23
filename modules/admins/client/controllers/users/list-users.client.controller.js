@@ -78,6 +78,6 @@ function UserListController($scope, $filter, Admin, AdminApi, toast, dialog) {
   $scope.clear_filter = () => {
     $scope.filter = {};
     $scope.figureOutItemsToDisplay();
-  }
+  };
 }
 

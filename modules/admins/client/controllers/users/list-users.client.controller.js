@@ -30,7 +30,7 @@ function UserListController($scope, $filter, Admin, AdminApi, toast, dialog) {
   }
   function get_user_report(user) {
     return new Promise((resolve, reject) => {
-      AdminApi.get_user_report(user._id)
+      AdminApi.user_report(user._id)
         .then(res => {
           console.log(res);
           return resolve();

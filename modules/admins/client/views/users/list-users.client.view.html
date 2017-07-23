@@ -8,6 +8,9 @@
         <a class="undecorated-link pull-right" ng-click="filter_min = !filter_min">
           <i ng-class="{ 'icon-minus': !filter_min, 'icon-plus': filter_min }"></i>
         </a>
+        <a class="undecorated-link pull-right" ng-click="filter = {}">
+          Clear
+        </a>
         <div class="clearfix"></div>
       </div>
       <div class="admin-card-block" ng-class="{ 'minium': filter_min }" >

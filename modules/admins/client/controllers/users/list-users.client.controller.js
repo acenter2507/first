@@ -58,7 +58,6 @@ function UserListController($scope, $filter, Admin, AdminApi, toast, dialog) {
     $scope.itemsPerPage = 15;
     $scope.currentPage = 1;
     $scope.filter = {};
-    console.log($scope.users);
     $scope.figureOutItemsToDisplay();
   };
 
@@ -68,6 +67,7 @@ function UserListController($scope, $filter, Admin, AdminApi, toast, dialog) {
     var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
     var end = begin + $scope.itemsPerPage;
     $scope.pagedItems = $scope.filteredItems.slice(begin, end);
+    $scope.$apply();
   };
 
   $scope.pageChanged = function () {

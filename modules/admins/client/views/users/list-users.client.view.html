@@ -40,16 +40,25 @@
         </div>
         <div class="row">
           <div class="form-group col-sm-6">
-            <label for="polls_pref">Compare prefix</label>
-            <select id="polls_pref" name="polls_pref" class="form-control input-sm" ng-model="filter.polls_pref">
-              <option value>None</option>
-              <option value="least">As least</option>
-              <option value="most">As most</option>
-            </select>
+            <div class="col-md-12 pdn"><label>Compare prefix</label></div>
+            <div class="col-md-6 pdn">
+              <select class="form-control input-sm" ng-model="filter.polls_pref">
+                <option value>None</option>
+                <option value="least">As least</option>
+                <option value="most">As most</option>
+              </select>
+            </div>
+            <div class="col-md-6 pdn">
+              <input name="polls" id="polls" type="text" class="form-control input-sm" placeholder="Enter number of polls" ng-model="filter.polls">
+            </div>
           </div>
           <div class="form-group col-sm-6">
-            <label for="polls">Number of polls</label>
-            <input name="polls" id="polls" type="text" class="form-control input-sm" placeholder="Enter number of polls" ng-model="filter.polls">
+            <label for="roles">Role</label>
+            <select id="roles" name="roles" class="form-control input-sm" ng-model="filter.roles">
+              <option value>All</option>
+              <option value="admin">Admin</option>
+              <option value="user">User</option>
+            </select>
           </div>
         </div>
       </div>

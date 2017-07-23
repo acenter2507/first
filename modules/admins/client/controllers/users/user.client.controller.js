@@ -1,10 +1,10 @@
 'use strict';
 angular.module('admin')
   .controller('UserListController', UserController);
-UserController.$inject = ['$window', '$scope', '$state', 'Authentication', 'userResolve', 'AdminApi', 'Constants', 'FileUploader', 'toastr', 'ngDialog'];
+UserController.$inject = ['$window', '$timeout', '$scope', '$state', 'Authentication', 'userResolve', 'AdminApi', 'Constants', 'FileUploader', 'toastr', 'ngDialog'];
 
 
-function UserController($window, $scope, $state, Authentication, userResolve, AdminApi, Constants, FileUploader, toast, dialog) {
+function UserController($window, $timeout, $scope, $state, Authentication, userResolve, AdminApi, Constants, FileUploader, toast, dialog) {
   $scope.authentication = Authentication;
   $scope.user = userResolve;
 

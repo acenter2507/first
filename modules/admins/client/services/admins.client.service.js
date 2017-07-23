@@ -7,13 +7,11 @@ angular.module('admin')
 
 admin.$inject = ['$resource'];
 function admin($resource) {
-  return $resource('api/users/:userId', {
-    userId: '@_id'
-  }, {
-      update: {
-        method: 'PUT'
-      }
-    });
+  return $resource('api/users/:userId', { userId: '@_id' }, {
+    update: {
+      method: 'PUT'
+    }
+  });
 }
 AdminApi.$inject = ['$http'];
 function AdminApi($http) {

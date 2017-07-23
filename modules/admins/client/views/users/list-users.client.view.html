@@ -20,7 +20,7 @@
         <div class="row">
           <div class="form-group col-sm-4">
             <label for="status">Status</label>
-            <select id="status" name="status" class="form-control input-sm" ng-model="filter.status" ng-change="figureOutItemsToDisplay()">
+            <select id="status" name="status" class="form-control input-sm" ng-model="filter.status" ng-change="figureOutItemsToDisplay()" disabled>
               <option value>All</option>
               <option value="active">Online</option>
               <option value="offline">Offline</option>

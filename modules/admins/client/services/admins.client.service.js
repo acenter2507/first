@@ -1,18 +1,26 @@
 'use strict';
 
 //TODO this should be Users service
-angular.module('admin').factory('Admin', ['$resource',
-  function ($resource) {
-    return $resource('api/users/:userId', {
-      userId: '@_id'
-    }, {
+angular.module('admin')
+  .factory('Admin', admin)
+  .factory('AdminApi', AdminApi);
+
+admin.$inject = ['$resource'];
+function admin($resource) {
+  return $resource('api/users/:userId', {
+    userId: '@_id'
+  }, {
       update: {
         method: 'PUT'
       }
     });
-  }
-]);
-
+}
+AdminApi.$inject = ['$http'];
+function AdminApi($http) {
+  this.user_report = userId => {
+    return $http.get('/api/admins/users/' + userId + '/report');
+  };
+}
 // angular.module('admin').factory('AdminApi', ['$http',
 //   function ($http) {
 //     this.get_polls = (userId, page) => {

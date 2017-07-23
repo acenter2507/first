@@ -6,6 +6,9 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   User = mongoose.model('User'),
+  Report = mongoose.model('Report'),
+  Userreport = mongoose.model('Userreport'),
+  Poll = mongoose.model('Poll'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
@@ -59,7 +62,7 @@ exports.delete = function (req, res) {
  * List of Users
  */
 exports.list = function (req, res) {
-  User.find({}, '-salt -password').sort('-created').populate('user', 'displayName').exec(function (err, users) {
+  User.find({}, '-salt -password').sort('-created').exec(function (err, users) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -91,4 +94,21 @@ exports.userByID = function (req, res, next, id) {
     req.model = user;
     next();
   });
+};
+
+/**
+ * User Api
+ * Lấy report của user
+ */
+exports.users_report = function (req, res) {
+  Userreport.findOne({ user: req.model._id })
+    .exec(function (err, user) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      }
+
+      res.json(user);
+    });
 };

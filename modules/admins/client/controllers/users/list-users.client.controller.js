@@ -18,12 +18,10 @@ function UserListController($scope, $filter, Admin, AdminApi, toast, dialog) {
       });
       Promise.all(promise)
         .then(res => {
-          console.log(res);
           return resolve();
         })
         .catch(err => {
           toast.error(err.message, 'Error!');
-          console.log(err);
           return reject();
         });
     });
@@ -32,7 +30,7 @@ function UserListController($scope, $filter, Admin, AdminApi, toast, dialog) {
     return new Promise((resolve, reject) => {
       AdminApi.user_report(user._id)
         .then(res => {
-          console.log(res);
+          user.report = res.data;
           return resolve();
         })
         .catch(err => {

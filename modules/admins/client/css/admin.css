@@ -447,9 +447,10 @@
   .admin-card-block {
     flex: 1 1 auto;
     padding: 1.25rem;
-    transition: height 0.5s; }
+    transition: height 0.5s, visibility 0s linear 500ms; }
     .admin-card-block.minium {
-      height: 0px; }
+      height: 0px;
+      visibility: hidden; }
   .admin-card-title {
     margin-bottom: 0.75rem;
     word-break: break-all; }

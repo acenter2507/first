@@ -4,9 +4,11 @@ angular.module('admin')
 UserListController.$inject = ['$scope', '$filter', 'Admin', 'AdminApi', 'toastr', 'ngDialog'];
 
 function UserListController($scope, $filter, Admin, AdminApi, toast, dialog) {
+  $scope.busy = true;
   Admin.query(function (data) {
     $scope.users = data;
     get_users_info().then(() => {
+      $scope.busy = false;
       $scope.buildPager();
     });
   });
@@ -63,11 +65,14 @@ function UserListController($scope, $filter, Admin, AdminApi, toast, dialog) {
   };
 
   $scope.figureOutItemsToDisplay = function () {
+    if ($scope.busy) return;
+    $scope.busy = true;
     $scope.filteredItems = $filter('users_filter')($scope.users, $scope.filter);
     $scope.filterLength = $scope.filteredItems.length;
     var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
     var end = begin + $scope.itemsPerPage;
     $scope.pagedItems = $scope.filteredItems.slice(begin, end);
+    $scope.busy = false;
   };
 
   $scope.pageChanged = function () {

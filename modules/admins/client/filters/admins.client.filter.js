@@ -28,11 +28,19 @@ function users_filter($filter) {
       });
     }
     if (filter.roles) {
-      out.forEach(item => {
-        if (!angular.equals(item.roles, filter.roles)) {
-          out = _.without(out, item);
-        }
-      });
+      if (filter.roles === 'user') {
+        out.forEach(item => {
+          if (item.roles.indexOf(filter.roles) < 0 || item.roles.length > 1) {
+            out = _.without(out, item);
+          }
+        });
+      } else {
+        out.forEach(item => {
+          if (item.roles.indexOf(filter.roles) < 0) {
+            out = _.without(out, item);
+          }
+        });
+      }
     }
     if (filter.created) {
       var create = moment(filter.created);

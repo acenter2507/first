@@ -14,44 +14,51 @@ function users_filter($filter) {
       $: filter.search
     });
     if (filter.status) {
-      users.forEach(item => {
+      out.forEach(item => {
         if (item.status !== filter.status) {
-          out = _.without(users, item);
+          out = _.without(out, item);
         }
       });
     }
     if (filter.provider) {
-      users.forEach(item => {
+      out.forEach(item => {
         if (item.provider !== filter.provider) {
-          out = _.without(users, item);
+          out = _.without(out, item);
         }
       });
     }
     if (filter.roles) {
-      users.forEach(item => {
-        if (item.roles !== filter.roles) {
-          out = _.without(users, item);
+      out.forEach(item => {
+        if (!angular.equal(item.roles, filter.roles)) {
+          out = _.without(out, item);
         }
       });
     }
-    if (isNaN(input)) {
-      // If the input data is not a number, perform the operations to capitalize the correct letter.
-      var char = char - 1 || 0;
-      var letter = input.charAt(char).toUpperCase();
-      var out = [];
-
-      for (var i = 0; i < input.length; i++) {
-
-        if (i == char) {
-          out.push(letter);
-        } else {
-          out.push(input[i]);
+    if (filter.created) {
+      var create = moment(filter.created);
+      out.forEach(item => {
+        let item_create = moment(item.created);
+        if (!item_create.isSame(create, 'd')) {
+          out = _.without(out, item);
         }
-      }
-      return out.join('');
-    } else {
-      return input;
+      });
     }
+    if (filter.polls && parseInt(filter.polls)) {
+      if (filter.polls_pref === 'least') {
+        out.forEach(item => {
+          if (item.pollCnt >= parseInt(filter.polls)) {
+            out = _.without(out, item);
+          }
+        });
+      } else {
+        out.forEach(item => {
+          if (item.pollCnt < parseInt(filter.polls)) {
+            out = _.without(out, item);
+          }
+        });
+      }
+    }
+    return out;
   }
 
 }

@@ -37,7 +37,7 @@
           <div class="form-group col-sm-4">
             <label for="created">Joined date</label>
             <input id="created" name="created" class="form-control input-sm" today="true" moment-picker="filter.created" ng-model="filter.created" format="YYYY/MM/DD" start-view="month"
-            placeholder="Select a date..." change="figureOutItemsToDisplay()">
+            placeholder="Select a date..." change="figureOutItemsToDisplay()" additions="{ bottom: 'bottom-template-url' }">
           </div>
         </div>
         <div class="row">
@@ -152,3 +152,9 @@
     </div>
   </div>
 </div>
+<script type="text/ng-template" id="bottom-template-url">
+  <button class="btn btn-info btn-sm btn-block"
+    ng-click="filter.created = undefined">
+    Clear
+  </button>
+</script>

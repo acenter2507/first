@@ -43,10 +43,10 @@ function users_filter($filter) {
       }
     }
     if (filter.created) {
-      console.log(filter.created.getDate());
+      var create = moment(filter.created, 'YYYY/MM/DD');
       out.forEach(item => {
         let item_create = moment(item.created, 'YYYY/MM/DD');
-        if (!item_create.isSame(create, 'd')) {
+        if (!item_create.isSame(create)) {
           out = _.without(out, item);
         }
       });

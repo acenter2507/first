@@ -102,15 +102,6 @@ function UserListController($scope, $filter, Admin, AdminApi, toast, dialog) {
         $scope.figureOutItemsToDisplay();
         toast.success('You have deleted: ' + user.displayName, 'Thank you!');
       });
-      Action.save_report(vm.poll, reason)
-        .then(res => {
-          vm.reported = (res) ? true : false;
-          $scope.$apply();
-          toast.success('You have successfully reported this poll.', 'Thank you!');
-        })
-        .catch(err => {
-          toast.error(err.message, 'Error!');
-        });
     }
   };
 }

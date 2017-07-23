@@ -7,7 +7,7 @@ angular.module('admin')
 
 admin.$inject = ['$resource'];
 function admin($resource) {
-  return $resource('api/users/:userId', { userId: '@_id' }, {
+  return $resource('api/users/:aduserId', { aduserId: '@_id' }, {
     update: {
       method: 'PUT'
     }

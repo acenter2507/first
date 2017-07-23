@@ -81,7 +81,7 @@
               <div class="form-group text-center col-sm-6">
                 <img ng-src="{{imageURL}}" alt="{{user.displayName}}" class="img-thumbnail user-profile-picture">
               </div>
-              <div class="text-center form-group" ng-hide="uploader.queue.length">
+              <div class="text-center form-group">
                 <span class="btn btn-default btn-file">Select Image <input type="file" nv-file-select uploader="uploader"></span>
               </div>
             </div>
@@ -92,7 +92,7 @@
       <!-- Footer -->
       <div class="admin-card-footer">
         <div class="form-group">
-          <button class="btn btn-primary" ng-click="save(userForm.$valid)">{{ (user._id) ? 'Save' : 'Update' }}</button>
+          <button class="btn btn-primary" ng-click="save(userForm.$valid)">{{ (user._id) ? 'Update' : 'Save' }}</button>
         </div>
       </div>
     </div>

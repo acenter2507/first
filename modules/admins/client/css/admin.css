@@ -447,7 +447,7 @@
   .admin-card-block {
     flex: 1 1 auto;
     padding: 1.25rem;
-    transition: height 0.5s, visibility 0s linear 500ms; }
+    transition: height 0.5s, visibility 0.5s linear; }
     .admin-card-block.minium {
       height: 0px;
       visibility: hidden; }

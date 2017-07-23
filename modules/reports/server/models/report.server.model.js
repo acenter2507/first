@@ -14,6 +14,10 @@ var ReportSchema = new Schema({
     type : Schema.ObjectId,
     ref : 'Poll'
   },
+  victim: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  },
   reason: {
     type: String,
     default: ''

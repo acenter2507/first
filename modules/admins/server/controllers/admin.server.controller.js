@@ -112,3 +112,18 @@ exports.users_report = function (req, res) {
       res.json(user);
     });
 };
+/**
+ * Lấy reported của user
+ */
+exports.users_report = function (req, res) {
+  Report.find({ victim: req.model._id })
+    .count(function (err, count) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      }
+
+      res.json(count);
+    });
+};

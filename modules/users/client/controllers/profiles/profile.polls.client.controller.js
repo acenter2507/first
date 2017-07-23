@@ -197,7 +197,7 @@ angular.module('users').controller('ProfilePollsController', [
       }, reject => {
       });
       function handle_confirm(reason) {
-        Action.save_report(poll._id, reason)
+        Action.save_report(poll, reason)
           .then(res => {
             poll.reported = (res) ? true : false;
             toast.success('You have successfully reported ' + poll.title, 'Thank you!');

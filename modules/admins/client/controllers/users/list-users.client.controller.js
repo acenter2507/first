@@ -38,6 +38,20 @@ function UserListController($scope, $filter, Admin, AdminApi, toast, dialog) {
         });
     });
   }
+  // Đã bị report
+  function get_user_reported(user) {
+    return new Promise((resolve, reject) => {
+      AdminApi.user_reported(user._id)
+        .then(res => {
+          console.log(res);
+          user.reported = res.data;
+          return resolve();
+        })
+        .catch(err => {
+          return reject();
+        });
+    });
+  }
 
   $scope.buildPager = function () {
     $scope.pagedItems = [];

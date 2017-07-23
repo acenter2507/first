@@ -206,7 +206,7 @@ angular.module('users').controller('ProfileFollowsController', [
       }, reject => {
       });
       function handle_confirm(reason) {
-        Action.save_report(poll._id, reason)
+        Action.save_report(poll, reason)
           .then(res => {
             poll.reported = (res) ? true : false;
             $scope.$apply();

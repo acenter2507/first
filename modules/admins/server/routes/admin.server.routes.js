@@ -21,6 +21,7 @@ module.exports = function (app) {
     .delete(adminPolicy.isAllowed, admin.delete);
 
   app.route('/api/admins/users/:userId/report').get(adminPolicy.isAllowed, admin.users_report);
+  app.route('/api/admins/users/:userId/reported').get(adminPolicy.isAllowed, admin.users_reported);
 
   // Finish by binding the user middleware
   app.param('userId', admin.userByID);

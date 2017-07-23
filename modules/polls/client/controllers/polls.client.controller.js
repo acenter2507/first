@@ -610,7 +610,7 @@
       }, reject => {
       });
       function handle_confirm(reason) {
-        Action.save_report(vm.poll._id, reason)
+        Action.save_report(vm.poll, reason)
           .then(res => {
             vm.reported = (res) ? true : false;
             $scope.$apply();

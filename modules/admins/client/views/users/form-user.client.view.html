@@ -65,7 +65,7 @@
               <div class="form-group col-sm-6" show-errors>
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" class="form-control" ng-model="user.password" placeholder="Password"
-                  popover="{{popoverMsg}}" popover-trigger="focus" password-validator required>
+                  popover="{{popoverMsg}}" popover-trigger="focus" password-validator="{{(!user._id)}}" required="{{(!user._id)}}">
                 <div class="form-group" ng-show="!userForm.password.$error.required">
                   <uib-progressbar class="h10" value="requirementsProgress" type="{{requirementsColor}}"><span style="color:white; white-space:nowrap;">{{requirementsProgress}}%</span></uib-progressbar>
                 </div>
@@ -75,12 +75,6 @@
                     <p class="help-block error-text" ng-show="userForm.password.$error.requirements">{{passwordError}}</p>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-sm-6">
-                <img ng-src="{{imageURL}}" alt="{{user.displayName}}" class="img-thumbnail user-profile-picture">
-                <span class="btn btn-default btn-file">Select Image <input type="file" nv-file-select uploader="uploader"></span>
               </div>
             </div>
           </fieldset>

@@ -8,45 +8,6 @@ function UserController($window, $timeout, $scope, $state, Authentication, userR
   $scope.authentication = Authentication;
   $scope.user = userResolve;
 
-  $scope.imageURL = $scope.user.profileImageURL || Constants.defaultProfileImageURL;
-  $scope.uploader = new FileUploader({
-    url: '',
-    alias: 'profilePicture'
-  });
-  // Called after the user selected a new picture file
-  $scope.uploader.onAfterAddingFile = function (fileItem) {
-    $scope.uploader.queue.splice(0, $scope.uploader.queue.length - 1);
-    if ($window.FileReader) {
-      var fileReader = new FileReader();
-      fileReader.readAsDataURL(fileItem._file);
-
-      fileReader.onload = function (fileReaderEvent) {
-        $timeout(function () {
-          $scope.imageURL = fileReaderEvent.target.result;
-        }, 0);
-      };
-    }
-  };
-  // Change user profile picture
-  $scope.uploadProfilePicture = function () {
-    // Clear messages
-    $scope.success = $scope.error = null;
-    // Start upload
-    $scope.uploader.uploadAll();
-  };
-  // Called after the user has successfully uploaded a new picture
-  $scope.uploader.onSuccessItem = function (fileItem, response, status, headers) {
-    // Show success message
-    $state.reload();
-  };
-
-  // Called after the user has failed to uploaded a new picture
-  $scope.uploader.onErrorItem = function (fileItem, response, status, headers) {
-    // Show error message
-    $scope.error = response.message;
-    console.log(response);
-    toast.error('Can\'t save profile image.');
-  };
   $scope.save = isValid => {
     if (!isValid) {
       $scope.$broadcast('show-errors-check-validity', 'userForm');
@@ -72,6 +33,7 @@ function UserController($window, $timeout, $scope, $state, Authentication, userR
       toast.error('Can\'t save user: ' + err.message, 'Error!');
     }
   };
+  $scope.enable_passcode = () => {};
   $scope.remove = function (user) {
     if (confirm('Are you sure you want to delete this user?')) {
       if (user) {
@@ -104,3 +66,44 @@ function UserController($window, $timeout, $scope, $state, Authentication, userR
   //   });
   // };
 }
+
+
+
+  // $scope.imageURL = $scope.user.profileImageURL || Constants.defaultProfileImageURL;
+  // $scope.uploader = new FileUploader({
+  //   url: '',
+  //   alias: 'profilePicture'
+  // });
+  // // Called after the user selected a new picture file
+  // $scope.uploader.onAfterAddingFile = function (fileItem) {
+  //   $scope.uploader.queue.splice(0, $scope.uploader.queue.length - 1);
+  //   if ($window.FileReader) {
+  //     var fileReader = new FileReader();
+  //     fileReader.readAsDataURL(fileItem._file);
+
+  //     fileReader.onload = function (fileReaderEvent) {
+  //       $timeout(function () {
+  //         $scope.imageURL = fileReaderEvent.target.result;
+  //       }, 0);
+  //     };
+  //   }
+  // };
+  // // Change user profile picture
+  // $scope.uploadProfilePicture = function () {
+  //   // Clear messages
+  //   $scope.success = $scope.error = null;
+  //   // Start upload
+  //   $scope.uploader.uploadAll();
+  // };
+  // // Called after the user has successfully uploaded a new picture
+  // $scope.uploader.onSuccessItem = function (fileItem, response, status, headers) {
+  //   // Show success message
+  //   $state.reload();
+  // };
+
+  // // Called after the user has failed to uploaded a new picture
+  // $scope.uploader.onErrorItem = function (fileItem, response, status, headers) {
+  //   // Show error message
+  //   $scope.error = response.message;
+  //   toast.error('Can\'t save profile image.');
+  // };

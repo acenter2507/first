@@ -266,18 +266,18 @@ exports.users_votes = function (req, res) {
       console.log(votes);
       var data = votes.toJSON();
       console.log('data', data);
-      votes.forEach(function (vote) {
-        Voteopt.find({ vote: vote._id })
-          .populate('opt', 'title')
-          .exec()
-          .then(voteopts => {
-            var opts = [];
-            voteopts.forEach(function (voteopt) {
-              opts.push(voteopt.opt);
-            });
-            vote.opts = opts;
-          }, handleError);
-      });
+      // votes.forEach(function (vote) {
+      //   Voteopt.find({ vote: vote._id })
+      //     .populate('opt', 'title')
+      //     .exec()
+      //     .then(voteopts => {
+      //       var opts = [];
+      //       voteopts.forEach(function (voteopt) {
+      //         opts.push(voteopt.opt);
+      //       });
+      //       vote.opts = opts;
+      //     }, handleError);
+      // });
       res.json(votes);
     }, handleError);
 

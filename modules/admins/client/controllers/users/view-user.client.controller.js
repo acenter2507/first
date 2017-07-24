@@ -7,6 +7,15 @@ ViewUserController.$inject = ['$window', '$timeout', '$scope', '$state', '$filte
 function ViewUserController($window, $timeout, $scope, $state, $filter, Authentication, userResolve, AdminApi, Action, toast, dialog) {
   $scope.authentication = Authentication;
   $scope.user = userResolve;
+  $scope.loginCnt = 0;
+  $scope.pollCnt = 0;
+  $scope.cmtCnt = 0;
+  $scope.voteCnt = 0;
+  $scope.reportCnt = 0;
+  $scope.bereportCnt = 0;
+  $scope.likeCnt = 0;
+  $scope.suggestCnt = 0;
+
   $scope.itemsPerPage = 15;
 
   /* User basic info control */
@@ -18,6 +27,7 @@ function ViewUserController($window, $timeout, $scope, $state, $filter, Authenti
     AdminApi.get_polls_by_user($scope.user._id)
       .then(res => {
         $scope.polls = res.data || [];
+        $scope.pollCnt = $scope.polls.length;
         $scope.buildPollPager();
       })
       .catch(err => {

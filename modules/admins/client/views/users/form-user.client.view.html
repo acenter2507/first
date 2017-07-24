@@ -65,15 +65,15 @@
               <div class="form-group col-sm-6" show-errors>
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" class="form-control" ng-model="user.password" placeholder="Password"
-                  popover="{{popoverMsg}}" popover-trigger="focus" password-validator="{{(!user._id)}}" required="{{(!user._id)}}">
-                <div class="form-group" ng-show="!userForm.password.$error.required">
-                  <uib-progressbar class="h10" value="requirementsProgress" type="{{requirementsColor}}"><span style="color:white; white-space:nowrap;">{{requirementsProgress}}%</span></uib-progressbar>
-                </div>
+                  popover="{{popoverMsg}}" popover-trigger="focus" password-validator required disabled="{{ (user._id) ? true : false }}">
                 <div ng-messages="userForm.password.$error" role="alert">
                   <p class="help-block error-text" ng-message="required">Password is required.</p>
                   <div ng-repeat="passwordError in passwordErrors">
                     <p class="help-block error-text" ng-show="userForm.password.$error.requirements">{{passwordError}}</p>
                   </div>
+                </div>
+                <div class="form-group" ng-show="!userForm.password.$error.required">
+                  <uib-progressbar class="h10" value="requirementsProgress" type="{{requirementsColor}}"><span style="color:white; white-space:nowrap;">{{requirementsProgress}}%</span></uib-progressbar>
                 </div>
               </div>
             </div>

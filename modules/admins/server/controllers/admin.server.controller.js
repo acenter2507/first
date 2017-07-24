@@ -266,7 +266,7 @@ function users_be_report(user) {
 // Thông tin report của user
 function users_report(user) {
   return new Promise((resolve, reject) => {
-    Userreport.findOne({ user: req.model._id })
+    Userreport.findOne({ user: user._id })
       .exec(function (err, report) {
         if (err) {
           return reject(err);

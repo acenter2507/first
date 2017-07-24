@@ -263,10 +263,14 @@ exports.users_votes = function (req, res) {
     // .lean()
     .exec()
     .then((votes) => {
-      console.log(votes);
-      var data = votes.toObject();
-      data.hehe = 'aaa';
-      console.log(data);
+      votes.forEach(function (instance, index, array) {
+        array[index] = instance.toObject();
+        array[index].foo = '<some method or value>';
+      });
+      // console.log(votes);
+      // var data = votes.toObject();
+      // data.hehe = 'aaa';
+      // console.log(data);
 
       // votes.forEach(function (vote) {
       //   Voteopt.find({ vote: vote._id })

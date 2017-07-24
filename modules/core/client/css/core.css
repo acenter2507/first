@@ -371,24 +371,19 @@ a:hover .header-profile-image {
 
 .angucomplete-image {
     border-radius: 0;
-    border: none;
-}
-.angucomplete-dropdown {
-    border-radius: 0;
-    border: none;
-    box-shadow: 0 1px 2px rgba(0,0,0,.1);
-    margin-top: 0px;
-}
-.angucomplete-row {
-  color: #555;
-}
-.angucomplete-selected-row {
-  background-color: #eeeeee;
-  color: #555;
-}
+    border: none; }
+  .angucomplete-dropdown {
+      border-radius: 0;
+      border: none;
+      box-shadow: 0 1px 2px rgba(0,0,0,.1);
+      margin-top: 0px; }
+  .angucomplete-row {
+    color: #555; }
+  .angucomplete-selected-row {
+    background-color: #eeeeee;
+    color: #555; }
 .form-control {
-  border-radius: 0;
-}
+  border-radius: 0; }
 .bg-black {
   background-color: black;
 }
@@ -705,6 +700,8 @@ a:hover .header-profile-image {
     padding-top: 16px !important; }
   .pd20t {
     padding-top: 20px !important; }
+  .pd24t {
+    padding-top: 24px !important; }
   .pd30t {
     padding-top: 30px !important; }
   .pd40t {
@@ -739,6 +736,8 @@ a:hover .header-profile-image {
     padding-bottom: 16px !important; }
   .pd20b {
     padding-bottom: 20px !important; }
+  .pd24b {
+    padding-bottom: 24px !important; }
   .pd30b {
     padding-bottom: 30px !important; }
   .pd40b {
@@ -776,6 +775,8 @@ a:hover .header-profile-image {
     padding-left: 16px !important; }
   .pd20l {
     padding-left: 20px !important; }
+  .pd24l {
+    padding-left: 24px !important; }
   .pd30l {
     padding-left: 30px !important; }
   .pd40l {
@@ -813,6 +814,8 @@ a:hover .header-profile-image {
     padding-right: 16px !important; }
   .pd20r {
     padding-right: 20px !important; }
+  .pd24r {
+    padding-right: 24px !important; }
   .pd30r {
     padding-right: 30px !important; }
   .pd40r {
@@ -861,12 +864,18 @@ a:hover .header-profile-image {
   .pd20x {
     padding-left: 20px !important;
     padding-right: 20px !important; }
+  .pd24x {
+    padding-left: 24px !important;
+    padding-right: 24px !important; }
   .pd30x {
     padding-left: 30px !important;
     padding-right: 30px !important; }
   .pd40x {
     padding-left: 40px !important;
     padding-right: 40px !important; }
+  .pd48x {
+    padding-left: 48px !important;
+    padding-right: 48px !important; }
   .pd50x {
     padding-left: 50px !important;
     padding-right: 50px !important; }
@@ -914,6 +923,9 @@ a:hover .header-profile-image {
   .pd20y {
     padding-top: 20px !important;
     padding-bottom: 20px !important; }
+  .pd24y {
+    padding-top: 24px !important;
+    padding-bottom: 24px !important; }
   .pd30y {
     padding-top: 30px !important;
     padding-bottom: 30px !important; }
@@ -933,6 +945,75 @@ a:hover .header-profile-image {
     padding-top: 250px !important;
     padding-bottom: 250px !important; }
 
+.pd1 {
+  padding: 1px !important;}
+  .pd2 {
+    padding: 2px !important;}
+  .pd3 {
+    padding: 3px !important;}
+  .pd4 {
+    padding: 4px !important;}
+  .pd5 {
+    padding: 5px !important;}
+  .pd6 {
+    padding: 6px !important;}
+  .pd7 {
+    padding: 7px !important;}
+  .pd8 {
+    padding: 8px !important;}
+  .pd9 {
+    padding: 9px !important;}
+  .pd10 {
+    padding: 10px !important;}
+  .pd12 {
+    padding: 12px !important;}
+  .pd16 {
+    padding: 16px !important;}
+  .pd20 {
+    padding: 20px !important;}
+  .pd24 {
+    padding: 24px !important;}
+  .pd30 {
+    padding: 30px !important;}
+  .pd48 {
+    padding: 48px !important;}
+  .pd100 {
+    padding: 100px !important;}
+
+.mg1 {
+  margin: 1px !important;}
+  .mg2 {
+    margin: 2px !important;}
+  .mg3 {
+    margin: 3px !important;}
+  .mg4 {
+    margin: 4px !important;}
+  .mg5 {
+    margin: 5px !important;}
+  .mg6 {
+    margin: 6px !important;}
+  .mg7 {
+    margin: 7px !important;}
+  .mg8 {
+    margin: 8px !important;}
+  .mg9 {
+    margin: 9px !important;}
+  .mg10 {
+    margin: 10px !important;}
+  .mg12 {
+    margin: 12px !important;}
+  .mg16 {
+    margin: 16px !important;}
+  .mg20 {
+    margin: 20px !important;}
+  .mg24 {
+    margin: 24px !important;}
+  .mg30 {
+    margin: 30px !important;}
+  .mg48 {
+    margin: 48px !important;}
+  .mg100 {
+    margin: 100px !important;}
 .w1 {
   width: 1px !important; }
   .w2 {
@@ -1078,6 +1159,42 @@ a:hover .header-profile-image {
     line-height: 400px !important; }
   .lineh500 {
     line-height: 500px !important; }
+
+.font-xs {
+  font-size: .75rem !important; }
+  .font-sm {
+    font-size: .85rem !important; }
+  .font-lg {
+    font-size: 1rem !important; }
+  .font-xl {
+    font-size: 1.25rem !important; }
+  .font-2xl {
+    font-size: 1.5rem !important; }
+  .font-3xl {
+    font-size: 1.75rem !important; }
+  .font-4xl {
+    font-size: 2rem !important; }
+  .font-5xl {
+    font-size: 2.5rem !important; }
+
+.text-lowercase {
+  text-transform: lowercase !important; }
+
+.text-uppercase {
+  text-transform: uppercase !important; }
+
+.text-capitalize {
+  text-transform: capitalize !important; }
+
+.font-weight-normal {
+  font-weight: normal; }
+
+.font-weight-bold {
+  font-weight: bold; }
+
+.font-italic {
+  font-style: italic; }
+
 
 /* Buttons */
 .btn { 

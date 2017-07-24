@@ -28,7 +28,7 @@ angular.module('admin.routes').config(['$stateProvider',
       .state('admin.users.view', {
         url: '/:userId',
         templateUrl: 'modules/admins/client/views/users/view-user.client.view.html',
-        controller: 'UserController',
+        controller: 'ViewUserController',
         ncyBreadcrumb: {
           label: '{{ userResolve.displayName }}'
         },

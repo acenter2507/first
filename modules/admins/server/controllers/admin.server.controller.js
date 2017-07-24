@@ -260,7 +260,7 @@ exports.users_votes = function (req, res) {
   Vote.find({ user: req.model._id })
     .sort('-created')
     .populate('poll', 'title')
-    .lean()
+    // .lean()
     .exec()
     .then((votes) => {
       console.log(votes);

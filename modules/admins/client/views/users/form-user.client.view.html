@@ -63,7 +63,7 @@
                 </div>
               </div>
               <!-- Password-->
-              <div class="form-group col-sm-6" show-errors="{{ (user._id) ? false : true }}" ng-if="!user._id">
+              <div class="form-group col-sm-6" show-errors ng-if="!user._id">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" class="form-control" ng-model="user.password" placeholder="Password"
                   popover="{{popoverMsg}}" popover-trigger="focus" password-validator required>
@@ -77,7 +77,7 @@
                   <uib-progressbar class="h10" value="requirementsProgress" type="{{requirementsColor}}"><span style="color:white; white-space:nowrap;">{{requirementsProgress}}%</span></uib-progressbar>
                 </div>
               </div>
-              <div class="form-group col-sm-6" show-errors ng-if="user._id">
+              <div class="form-group col-sm-6" ng-if="user._id">
                 <label>&nbsp;</label>
                 <a class="btn btn-default btn-block" ui-sref="admin.users.resetpass({ userId: user._id })">Reset password</a>
               </div>

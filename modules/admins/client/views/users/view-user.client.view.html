@@ -121,13 +121,13 @@
     <div class="admin-card">
       <div class="admin-card-header">
         <i class="fa fa-filter"></i> User basic info
-        <a class="undecorated-link pull-right" ng-click="filter_min = !filter_min">
-          <i ng-class="{ 'icon-minus': !filter_min, 'icon-plus': filter_min }"></i>
-          <md-tooltip md-direction="bottom">Show info panel</md-tooltip>
+        <a class="undecorated-link pull-right" ui-sref="profile.info({ userId: user._id })">
+          <i class="icon-user"></i>
+          <md-tooltip md-direction="bottom">View in profile page</md-tooltip>
         </a>
         <div class="clearfix"></div>
       </div>
-      <div class="admin-card-block" ng-class="{ 'minium': filter_min }">
+      <div class="admin-card-block">
         <div class="row">
           <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
             <div class="form-group">
@@ -467,64 +467,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-<!--
-<section class="card">
-  <div class="page-header">
-    <div class="row">
-      <div class="col-md-6">
-        <h1 ng-bind="user.username"></h1>
-      </div>
-      <div class="col-md-4">
-        <a class="btn btn-primary" ui-sref="admin.user-edit({userId: user._id})">
-          <i class="glyphicon glyphicon-edit"></i>
-        </a>
-        <a class="btn btn-primary" ng-click="remove();" ng-if="user._id !== authentication.user._id">
-          <i class="glyphicon glyphicon-trash"></i>
-        </a>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-8">
-      <div class="row">
-        <div class="col-md-3"><strong>First Name</strong></div>
-        <div class="col-md-6" ng-bind="user.firstName"></div>
-      </div>
-      <hr/>
-      <div class="row">
-        <div class="col-md-3"><strong>Last Name</strong></div>
-        <div class="col-md-6" ng-bind="user.lastName"></div>
-      </div>
-      <hr/>
-      <div class="row">
-        <div class="col-md-3"><strong>Email</strong></div>
-        <div class="col-md-6" ng-bind="user.email"></div>
-      </div>
-      <hr/>
-      <div class="row">
-        <div class="col-md-3"><strong>Provider</strong></div>
-        <div class="col-md-6" ng-bind="user.provider"></div>
-      </div>
-      <hr/>
-      <div class="row">
-        <div class="col-md-3"><strong>Created</strong></div>
-        <div class="col-md-6" ng-bind="user.created"></div>
-      </div>
-      <hr/>
-      <div class="row">
-        <div class="col-md-3"><strong>Roles</strong></div>
-        <div class="col-md-6" ng-bind="user.roles"></div>
-      </div>
-    </div>
-  </div>
-</section>-->

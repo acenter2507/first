@@ -41,7 +41,7 @@ function ViewUserController($window, $timeout, $scope, $state, $filter, Authenti
   $scope.figureOutItemsToDisplay_polls = function () {
     let filteredItems = $filter('filter')($scope.polls, {
       $: $scope.pollSearch
-    });
+    }) || [];
 
     $scope.pollFilterLength = filteredItems.length;
     var begin = (($scope.pollsCurrentPage - 1) * $scope.itemsPerPage);
@@ -75,7 +75,7 @@ function ViewUserController($window, $timeout, $scope, $state, $filter, Authenti
   $scope.figureOutItemsToDisplay_votes = function () {
     let filteredItems = $filter('filter')($scope.votes, {
       $: $scope.voteSearch
-    });
+    }) || [];
 
     $scope.voteFilterLength = filteredItems.length;
     var begin = (($scope.votesCurrentPage - 1) * $scope.itemsPerPage);

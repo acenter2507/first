@@ -243,37 +243,37 @@
             <tr>
               <th>Poll title</th>
               <th>Content</th>
-              <th>Updated</th>
+              <th>Like count</th>
               <th>Created</th>
               <th>Last edited</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr ng-show="votesPagedItems.length === 0">
+            <tr ng-show="cmtsPagedItems.length === 0">
               <td class="text-center" colspan="6">Has no data found.</td>
             </tr>
-            <tr ng-repeat="vote in votesPagedItems">
-              <td>{{ vote.poll.title }}</td>
-              <td><span ng-bind="vote.opts"></span></td>
-              <td>{{ vote.updateCnt }}</td>
-              <td><span ng-bind="user.updated | date:'mediumDate'"></span></td>
-              <td><span ng-bind="user.created | date:'mediumDate'"></span></td>
+            <tr ng-repeat="cmt in cmtsPagedItems">
+              <td>{{ cmt.poll.title }}</td>
+              <td><span ng-bind="cmt.body"></span></td>
+              <td>{{ cmt.likeCnt }}</td>
+              <td><span ng-bind="cmt.created"></span></td>
+              <td><span ng-bind="cmt.updated"></span></td>
               <td>
                 <div class="btn-group" role="group">
-                  <a class="undecorated-link" ui-sref="admin.polls.view({ pollId: poll._id })"><i class="icon-eye icons"></i>
-                    <md-tooltip md-direction="bottom">View detail of poll</md-tooltip>
+                  <a class="undecorated-link" ui-sref="admin.polls.view({ pollId: cmt.poll._id })"><i class="icon-eye icons"></i>
+                    <md-tooltip md-direction="bottom">View detail in poll</md-tooltip>
                   </a>
-                  <a class="undecorated-link mg5l" ng-click="delete_poll(poll)"><i class="icon-trash icons"></i>
-                    <md-tooltip md-direction="bottom">Delete poll</md-tooltip>
+                  <a class="undecorated-link mg5l" ng-click="delete_cmt(cmt)"><i class="icon-trash icons"></i>
+                    <md-tooltip md-direction="bottom">Delete comment</md-tooltip>
                   </a>
                 </div>
               </td>
             </tr>
           </tbody>
         </table>
-        <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="voteFilterLength" ng-model="votesCurrentPage"
-          ng-change="votePageChanged()"></uib-pagination>
+        <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="cmtFilterLength" ng-model="cmtsCurrentPage"
+          ng-change="cmtPageChanged()"></uib-pagination>
       </div>
     </div>
   </div>
@@ -311,15 +311,15 @@
               <td>{{ vote.poll.title }}</td>
               <td><span ng-bind="vote.opts"></span></td>
               <td>{{ vote.updateCnt }}</td>
-              <td><span ng-bind="user.updated | date:'mediumDate'"></span></td>
-              <td><span ng-bind="user.created | date:'mediumDate'"></span></td>
+              <td><span ng-bind="vote.updated"></span></td>
+              <td><span ng-bind="vote.created"></span></td>
               <td>
                 <div class="btn-group" role="group">
-                  <a class="undecorated-link" ui-sref="admin.polls.view({ pollId: poll._id })"><i class="icon-eye icons"></i>
-                    <md-tooltip md-direction="bottom">View detail of poll</md-tooltip>
+                  <a class="undecorated-link" ui-sref="admin.polls.view({ pollId: vote.poll._id })"><i class="icon-eye icons"></i>
+                    <md-tooltip md-direction="bottom">View detail poll</md-tooltip>
                   </a>
-                  <a class="undecorated-link mg5l" ng-click="delete_poll(poll)"><i class="icon-trash icons"></i>
-                    <md-tooltip md-direction="bottom">Delete poll</md-tooltip>
+                  <a class="undecorated-link mg5l" ng-click="delete_vote(vote)"><i class="icon-trash icons"></i>
+                    <md-tooltip md-direction="bottom">Delete vote</md-tooltip>
                   </a>
                 </div>
               </td>

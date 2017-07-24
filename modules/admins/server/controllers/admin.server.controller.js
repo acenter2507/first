@@ -299,19 +299,7 @@ exports.users_cmts = function (req, res) {
     .populate('poll', 'title')
     .exec()
     .then((cmts) => {
-      if (cmts.length === 0) return res.json(cmts);
-      var length = cmts.length;
-      var counter = 0;
-      cmts.forEach(function (instance, index, array) {
-        array[index] = instance.toObject();
-        Cmtlike.find({ cmt: array[index]._id }).exec().count()
-          .then(cnt => {
-            array[index].likeCnt = cnt;
-            if (++counter === length) {
-              res.json(cmts);
-            }
-          }, handleError);
-      });
+      res.json(cmts);
     }, handleError);
   function handleError(err) {
     return res.status(400).send({

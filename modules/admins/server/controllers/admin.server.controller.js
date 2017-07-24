@@ -264,8 +264,6 @@ exports.users_votes = function (req, res) {
     .exec()
     .then((votes) => {
       console.log(votes);
-      var data = votes.toJSON();
-      console.log('data', data);
       // votes.forEach(function (vote) {
       //   Voteopt.find({ vote: vote._id })
       //     .populate('opt', 'title')

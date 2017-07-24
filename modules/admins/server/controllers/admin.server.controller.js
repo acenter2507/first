@@ -262,6 +262,7 @@ exports.users_votes = function (req, res) {
     .populate('poll', 'title')
     .exec()
     .then((votes) => {
+      if (votes.length === 0) return res.json(votes);
       var length = votes.length;
       var counter = 0;
       votes.forEach(function (instance, index, array) {

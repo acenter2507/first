@@ -16,6 +16,7 @@ var path = require('path'),
   Poll = mongoose.model('Poll'),
   Vote = mongoose.model('Vote'),
   Voteopt = mongoose.model('Voteopt'),
+  Cmt = mongoose.model('Cmt'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
@@ -251,7 +252,7 @@ exports.users_polls = function (req, res) {
     });
 };
 /**
- * Lấy polls của user
+ * Lấy votes của user
  */
 exports.users_votes = function (req, res) {
   Vote.find({ user: req.model._id })
@@ -281,6 +282,23 @@ exports.users_votes = function (req, res) {
             });
         });
         res.json(votes);
+      }
+    });
+};
+/**
+ * Lấy cmts của user
+ */
+exports.users_cmts = function (req, res) {
+  Cmt.find({ user: req.model._id })
+    .sort('-created')
+    .populate('poll', 'title')
+    .exec(function (err, cmts) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.json(cmts);
       }
     });
 };

@@ -19,6 +19,8 @@ var path = require('path'),
   Cmt = mongoose.model('Cmt'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
+  _ = require('underscore');
+
 /**
  * Show the current user
  */
@@ -262,13 +264,13 @@ exports.users_votes = function (req, res) {
     .exec()
     .then((votes) => {
       console.log(votes);
-      _.each(votes, function (vote) {
+      _.forEach(votes, function (vote) {
         Voteopt.find({ vote: vote._id })
           .populate('opt', 'title')
           .exec()
           .then(voteopts => {
             var opts = [];
-            _.each(voteopts, function (voteopt) {
+            _.forEach(voteopts, function (voteopt) {
               opts.push(voteopt.opt);
             });
             vote.opts = opts;

@@ -66,6 +66,7 @@ function UserListController($scope, $filter, Admin, AdminApi, toast, dialog) {
 
   $scope.figureOutItemsToDisplay = function () {
     if ($scope.busy) return;
+    console.log($scope.filter);
     $scope.busy = true;
     $scope.filteredItems = $filter('users_filter')($scope.users, $scope.filter);
     $scope.filterLength = $scope.filteredItems.length;

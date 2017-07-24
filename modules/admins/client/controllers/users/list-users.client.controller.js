@@ -9,11 +9,12 @@ function UserListController($scope, $filter, Admin, AdminApi, toast, dialog) {
   function get_users() {
     AdminApi.get_users()
       .then(res => {
-        $scope.users = res;
+        $scope.users = res.data;
+        $scope.busy = false;
+        $scope.buildPager();
       })
       .catch(err => {
-        console.log(err);
-        toast.error(err.message, 'Error!');
+        toast.error('Can\'t load users: ' + err.message, 'Error!');
       });
   }
   // Admin.query(function (data) {

@@ -59,7 +59,7 @@ function UserListController($scope, $filter, Admin, AdminApi, toast, dialog) {
     }, reject => {
     });
     function handle_confirm() {
-      var rs_user = new Admin(user);
+      var rs_user = new Admin( { _id: user._id });
       user.$remove(() => {
         $scope.users = _.without($scope.users, user);
         $scope.figureOutItemsToDisplay();

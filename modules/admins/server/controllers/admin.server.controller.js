@@ -265,25 +265,17 @@ exports.users_votes = function (req, res) {
     .then((votes) => {
       votes.forEach(function (instance, index, array) {
         array[index] = instance.toObject();
-        array[index].foo = '<some method or value>';
+        Voteopt.find({ vote: array[index]._id })
+          .populate('opt', 'title')
+          .exec()
+          .then(voteopts => {
+            var opts = [];
+            voteopts.forEach(function (voteopt) {
+              opts.push(voteopt.opt);
+            });
+            array[index].opts = opts;
+          }, handleError);
       });
-      // console.log(votes);
-      // var data = votes.toObject();
-      // data.hehe = 'aaa';
-      // console.log(data);
-
-      // votes.forEach(function (vote) {
-      //   Voteopt.find({ vote: vote._id })
-      //     .populate('opt', 'title')
-      //     .exec()
-      //     .then(voteopts => {
-      //       var opts = [];
-      //       voteopts.forEach(function (voteopt) {
-      //         opts.push(voteopt.opt);
-      //       });
-      //       vote.opts = opts;
-      //     }, handleError);
-      // });
       res.json(votes);
     }, handleError);
 

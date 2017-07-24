@@ -443,10 +443,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="suggest in suggestsPagedItems" ng-class="{ 'bg-primary': suggest.status === 1, 'bg-warning': suggest.status === 2, 'bg-danger': suggest.status === 3 }">
+            <tr ng-repeat="suggest in suggestsPagedItems">
               <td>{{ suggest.poll.title }}</td>
               <td><span ng-bind="suggest.title"></span></td>
-              <td>{{ (suggest.status === 1) ? 'Approved' : (suggest.status === 2) ? 'Waiting' : 'Rejected' }}</td>
+              <td ng-class="{ 'bg-primary': suggest.status === 1, 'bg-warning': suggest.status === 2, 'bg-danger': suggest.status === 3 }">{{ (suggest.status === 1) ? 'Approved' : (suggest.status === 2) ? 'Waiting' : 'Rejected' }}</td>
               <td><span ng-bind="suggest.created"></span></td>
               <td>
                 <div class="btn-group" role="group">

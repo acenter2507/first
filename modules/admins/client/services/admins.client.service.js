@@ -25,9 +25,11 @@ function AdminApi($http) {
     return $http.post('/api/admins/users/' + userId + '/resetpass', { password: pass });
   };
   this.get_polls_by_user = userId => {
+    console.log('userId1', userId);
     return $http.get('/api/admins/users/' + userId + '/polls');
   };
   this.get_votes_by_user = userId => {
+    console.log('userId2', userId);
     return $http.get('/api/admins/users/' + userId + '/votes');
   };
   return this;

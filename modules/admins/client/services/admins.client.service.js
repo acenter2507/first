@@ -24,6 +24,9 @@ function AdminApi($http) {
   this.reset_pass = (userId, pass) => {
     return $http.post('/api/admins/users/' + userId + '/resetpass', { password: pass });
   };
+  this.get_polls_by_user = userId => {
+    return $http.get('/api/admins/users/' + userId + '/polls');
+  };
   return this;
 }
 // angular.module('admin').factory('AdminApi', ['$http',

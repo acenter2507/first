@@ -21,7 +21,7 @@
         <div class="text-muted text-uppercase font-weight-bold ">Polls</div>
       </div>
       <div class="admin-card-footer pd12x pd4y">
-        <a class="font-weight-bold font-sm btn-block text-muted undecorated-link" href="#">View More <i class="fa fa-angle-right pull-right font-lg"></i></a>
+        <a class="font-weight-bold font-sm btn-block text-muted undecorated-link" href="#polls">View More <i class="fa fa-angle-right pull-right font-lg"></i></a>
       </div>
     </div>
   </div>
@@ -90,7 +90,7 @@
       <div class="admin-card-block pd12 clearfix">
         <i class="fa fa-moon-o bg-warning pd12 font-2xl mg12r pull-left"></i>
         <h4 class="text-warning mgnb mg4t">$1.999,50</h4>
-        <div class="text-muted text-uppercase font-weight-bold ">Suggested</div>
+        <div class="text-muted text-uppercase font-weight-bold ">Total like</div>
       </div>
       <div class="admin-card-footer pd12x pd4y">
         <a class="font-weight-bold font-sm btn-block text-muted undecorated-link" href="#">View More <i class="fa fa-angle-right pull-right font-lg"></i></a>
@@ -104,7 +104,7 @@
       <div class="admin-card-block pd12 clearfix">
         <i class="fa fa-bell bg-danger pd12 font-2xl mg12r pull-left"></i>
         <h4 class="text-danger mgnb mg4t">$1.999,50</h4>
-        <div class="text-muted text-uppercase font-weight-bold ">Income</div>
+        <div class="text-muted text-uppercase font-weight-bold ">Suggested</div>
       </div>
       <div class="admin-card-footer pd12x pd4y">
         <a class="font-weight-bold font-sm btn-block text-muted undecorated-link" href="#">View More <i class="fa fa-angle-right pull-right font-lg"></i></a>
@@ -113,6 +113,115 @@
   </div>
   <!--/.col-->
 
+</div>
+
+<!-- basic Info-->
+<div class="row">
+  <div class="col-xs-12">
+    <div class="admin-card">
+      <div class="admin-card-header">
+        <i class="fa fa-filter"></i> User basic info
+        <a class="undecorated-link pull-right" ng-click="filter_min = !filter_min">
+          <i ng-class="{ 'icon-minus': !filter_min, 'icon-plus': filter_min }"></i>
+          <md-tooltip md-direction="bottom">Show info panel</md-tooltip>
+        </a>
+        <div class="clearfix"></div>
+      </div>
+      <div class="admin-card-block" ng-class="{ 'minium': filter_min }">
+        <div class="row">
+          <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <div class="form-group">
+              <img src="{{user.profileImageURL}}" alt="{{user.displayName}}" class="img-thumbnail user-profile-picture">
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
+            <table class="table">
+              <tr>
+                <td>First name:</td>
+                <td>{{ user.firstname }}</td>
+              </tr>
+              <tr>
+                <td>Last name:</td>
+                <td>{{ user.lastname }}</td>
+              </tr>
+              <tr>
+                <td>Email:</td>
+                <td>{{ user.email }}</td>
+              </tr>
+              <tr>
+                <td>Provider:</td>
+                <td>{{ user.provider }}</td>
+              </tr>
+              <tr>
+                <td>Roles:</td>
+                <td><span ng-bind="user.roles"></span></td>
+              </tr>
+              <tr>
+                <td>Created:</td>
+                <td><span ng-bind="user.created"></span></td>
+              </tr>
+            </table>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Polls -->
+<div class="row mg12t">
+  <div class="col-xs-12">
+    <div class="admin-card">
+      <div class="admin-card-header">
+        <i class="fa fa-list-alt"></i> List polls
+        <input class="form-control w200 mg12l" ng-model="pollSearch" ng-change="figureOutItemsToDisplay_polls()">
+        <a class="undecorated-link pull-right" ui-sref="profile.polls({ userId: user._id })">
+          <i class="icon-user"></i>
+          <md-tooltip md-direction="bottom">View in profile page</md-tooltip>
+        </a>
+        <div class="clearfix"></div>
+      </div>
+      <div class="admin-card-block">
+        <table class="table table-hover table-outline" id="polls">
+          <thead class="thead-default">
+            <tr>
+              <th>Title</th>
+              <th>Category</th>
+              <th>Sercurity</th>
+              <th>Created</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-show="pollsPagedItems.length === 0">
+              <td class="text-center" colspan="8">Has no data found.</td>
+            </tr>
+            <tr ng-repeat="poll in pollsPagedItems">
+              <td>{{ poll.title }}</td>
+              <td>{{ poll.category.name }}</td>
+              <td>{{ (poll.isPublic) ? 'Public' : 'Private' }}</td>
+              <td><span ng-bind="user.created | date:'mediumDate'"></span></td>
+              <td>
+                <div class="btn-group" role="group">
+                  <a class="undecorated-link" ui-sref="admin.polls.view({ pollId: poll._id })"><i class="icon-eye icons"></i>
+                    <md-tooltip md-direction="bottom">View detail of poll</md-tooltip>
+                  </a>
+                  <a class="undecorated-link mg5l" ui-sref="admin.polls.edit({ pollId: poll._id })"><i class="icon-note icons"></i>
+                    <md-tooltip md-direction="bottom">Edit info of poll</md-tooltip>
+                  </a>
+                  <a class="undecorated-link mg5l" ng-click="delete_poll(poll)"><i class="icon-trash icons"></i>
+                    <md-tooltip md-direction="bottom">Delete poll</md-tooltip>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="pollsCurrentPage"
+          ng-change="pollPageChanged()"></uib-pagination>
+      </div>
+    </div>
+  </div>
 </div>
 
 
@@ -126,8 +235,7 @@
 
 
 
-
-
+<!--
 <section class="card">
   <div class="page-header">
     <div class="row">
@@ -177,4 +285,4 @@
       </div>
     </div>
   </div>
-</section>
+</section>-->

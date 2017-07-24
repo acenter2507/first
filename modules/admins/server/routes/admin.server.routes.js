@@ -25,6 +25,7 @@ module.exports = function (app) {
   app.route('/api/admins/users/:aduserId/resetpass').post(adminPolicy.isAllowed, admin.user_resetpass);
   app.route('/api/admins/users/:aduserId/report').get(adminPolicy.isAllowed, admin.users_report);
   app.route('/api/admins/users/:aduserId/reported').get(adminPolicy.isAllowed, admin.users_reported);
+  app.route('/api/admins/users/:aduserId/polls').get(adminPolicy.isAllowed, admin.users_polls);
 
   // Finish by binding the user middleware
   app.param('aduserId', admin.userByID);

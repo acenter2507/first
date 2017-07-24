@@ -8,6 +8,7 @@ function UserController($window, $timeout, $scope, $state, Authentication, userR
   $scope.authentication = Authentication;
   $scope.user = userResolve;
 
+  $scope.password_required = (user._id) ? false : true;
   $scope.save = isValid => {
     if (!isValid) {
       $scope.$broadcast('show-errors-check-validity', 'userForm');

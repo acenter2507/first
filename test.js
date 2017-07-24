@@ -38,7 +38,8 @@ app.init(function () {
   - Chức năng private và share link => done
   - Chức năng nhập lý do khi report => done
   - Chức năng search => done
-  - Đang code màn hình admin add user
+  - Đang code màn hình admin user (Mấy cái button xóa trong màn hình view)
+  - Rà soát lại toàn bộ các request lấy db, tổng hợp và dọn sạch
 
   - Chức năng quản lý toàn bộ thông tin của user
   - Đếm và quản lý số lần bị report của user

@@ -15,6 +15,7 @@ function UserController($window, $timeout, $scope, $state, Authentication, userR
   });
   // Called after the user selected a new picture file
   $scope.uploader.onAfterAddingFile = function (fileItem) {
+    console.log($scope.uploader.queue.length);
     if ($window.FileReader) {
       var fileReader = new FileReader();
       fileReader.readAsDataURL(fileItem._file);
@@ -26,7 +27,13 @@ function UserController($window, $timeout, $scope, $state, Authentication, userR
       };
     }
   };
-
+  // Change user profile picture
+  $scope.uploadProfilePicture = function () {
+    // Clear messages
+    $scope.success = $scope.error = null;
+    // Start upload
+    $scope.uploader.uploadAll();
+  };
 
   $scope.save = isValid => {
     if (!isValid) {

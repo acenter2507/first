@@ -1,10 +1,10 @@
 'use strict';
 angular.module('admin')
   .controller('ViewUserController', ViewUserController);
-ViewUserController.$inject = ['$window', '$timeout', '$scope', '$state', 'Authentication', 'userResolve', 'AdminApi', 'Action', 'toastr', 'ngDialog'];
+ViewUserController.$inject = ['$window', '$timeout', '$scope', '$state', '$filter', 'Authentication', 'userResolve', 'AdminApi', 'Action', 'toastr', 'ngDialog'];
 
 
-function ViewUserController($window, $timeout, $scope, $state, Authentication, userResolve, AdminApi, Action, toast, dialog) {
+function ViewUserController($window, $timeout, $scope, $state, $filter, Authentication, userResolve, AdminApi, Action, toast, dialog) {
   $scope.authentication = Authentication;
   $scope.user = userResolve;
   $scope.itemsPerPage = 15;
@@ -13,6 +13,7 @@ function ViewUserController($window, $timeout, $scope, $state, Authentication, u
   $scope.filter_min = true;
 
   /* Polls */
+  get_polls();
   function get_polls() {
     AdminApi.get_polls_by_user($scope.user._id)
       .then(res => {

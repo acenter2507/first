@@ -21,19 +21,12 @@ function UserController($window, $timeout, $scope, $state, Authentication, userR
     }
 
     function successCb(res) {
-      if ($scope.uploader.queue.length > 0) {
-        console.log($scope.uploader);
-        $scope.uploader.url = '/api/admins/users/' + res._id + '/picture';
-        $scope.uploadProfilePicture();
-      } else {
-        $state.reload();
-      }
+      $state.reload();
     }
     function errorCb(err) {
       toast.error('Can\'t save user: ' + err.message, 'Error!');
     }
   };
-  $scope.enable_passcode = () => {};
   $scope.remove = function (user) {
     if (confirm('Are you sure you want to delete this user?')) {
       if (user) {

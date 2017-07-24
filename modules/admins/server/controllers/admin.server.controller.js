@@ -263,22 +263,24 @@ exports.users_votes = function (req, res) {
     // .lean()
     .exec()
     .then((votes) => {
+      var length = votes.length;
+      var counter = 0;
       votes.forEach(function (instance, index, array) {
         array[index] = instance.toObject();
-        array[index].opts = [];
         Voteopt.find({ vote: array[index]._id })
           .populate('opt', 'title')
           .exec()
           .then(voteopts => {
-            console.log(voteopts);
             var opts = [];
             voteopts.forEach(function (instance, index, array) {
               opts.push(array[index].opt);
             });
             array[index].opts = opts;
+            if (++counter === length) {
+              res.json(votes);
+            }
           }, handleError);
       });
-      res.json(votes);
     }, handleError);
 
   function handleError(err) {

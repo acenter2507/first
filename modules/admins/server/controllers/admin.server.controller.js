@@ -17,7 +17,7 @@ var path = require('path'),
   Vote = mongoose.model('Vote'),
   Voteopt = mongoose.model('Voteopt'),
   Cmt = mongoose.model('Cmt'),
-  Likecmt = mongoose.model('Likecmt'),
+  Cmtlike = mongoose.model('Cmtlike'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 var _ = require('underscore');
@@ -304,7 +304,7 @@ exports.users_cmts = function (req, res) {
       var counter = 0;
       cmts.forEach(function (instance, index, array) {
         array[index] = instance.toObject();
-        Likecmt.find({ cmt: array[index]._id }).exec().count()
+        Cmtlike.find({ cmt: array[index]._id }).exec().count()
           .then(cnt => {
             array[index].likeCnt = cnt;
             if (++counter === length) {

@@ -269,18 +269,6 @@ exports.users_polls = function (req, res) {
     });
   }
 
-  Poll.find({ user: req.model._id })
-    .sort('-created')
-    .populate('category', 'name')
-    .exec(function (err, polls) {
-      if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      } else {
-        res.json(polls);
-      }
-    });
 };
 /**
  * Lấy votes của user

@@ -260,7 +260,6 @@ exports.users_votes = function (req, res) {
   Vote.find({ user: req.model._id })
     .sort('-created')
     .populate('poll', 'title')
-    // .lean()
     .exec()
     .then((votes) => {
       var length = votes.length;
@@ -272,8 +271,8 @@ exports.users_votes = function (req, res) {
           .exec()
           .then(voteopts => {
             var opts = [];
-            voteopts.forEach(function (instance, index, array) {
-              opts.push(array[index].opt.title);
+            voteopts.forEach(function (voteopt) {
+              opts.push(voteopt.opt.title);
             });
             array[index].opts = opts;
             if (++counter === length) {

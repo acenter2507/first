@@ -22,6 +22,7 @@ function ViewUserController($window, $timeout, $scope, $state, $filter, Authenti
   $scope.votes = [];
   $scope.reports = [];
   $scope.bereports = [];
+  $scope.suggests = [];
   /* User basic info control */
   $scope.filter_min = true;
 
@@ -192,6 +193,40 @@ function ViewUserController($window, $timeout, $scope, $state, $filter, Authenti
   $scope.bereportPageChanged = function () {
     $scope.figureOutItemsToDisplay_bereports();
   };
+
+  
+  /* Suggested */
+  get_suggests();
+  function get_suggests() {
+    AdminApi.get_suggests_by_user($scope.user._id)
+      .then(res => {
+        $scope.suggests = res.data || [];
+        $scope.suggestCnt = $scope.suggests.length;
+        $scope.buildSuggestPager();
+      })
+      .catch(err => {
+        toast.error('Load suggests error: ' + err.message, 'Error!');
+      });
+  }
+  $scope.buildSuggestPager = () => {
+    $scope.suggestsPagedItems = [];
+    $scope.suggestsCurrentPage = 1;
+    $scope.figureOutItemsToDisplay_suggests();
+  };
+  $scope.figureOutItemsToDisplay_suggests = function () {
+    let filteredItems = $filter('filter')($scope.suggests, {
+      $: $scope.suggestSearch
+    }) || [];
+
+    $scope.suggestFilterLength = filteredItems.length;
+    var begin = (($scope.suggestsCurrentPage - 1) * $scope.itemsPerPage);
+    var end = begin + $scope.itemsPerPage;
+    $scope.suggestsPagedItems = filteredItems.slice(begin, end);
+  };
+  $scope.suggestPageChanged = function () {
+    $scope.figureOutItemsToDisplay_suggests();
+  };
+
   $scope.remove = function (user) {
     if (confirm('Are you sure you want to delete this user?')) {
       if (user) {

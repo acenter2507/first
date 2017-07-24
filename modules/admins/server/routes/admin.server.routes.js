@@ -30,6 +30,7 @@ module.exports = function (app) {
   app.route('/api/admins/users/:aduserId/votes').get(adminPolicy.isAllowed, admin.users_votes);
   app.route('/api/admins/users/:aduserId/reports').get(adminPolicy.isAllowed, admin.users_reports);
   app.route('/api/admins/users/:aduserId/bereports').get(adminPolicy.isAllowed, admin.users_bereports);
+  app.route('/api/admins/users/:aduserId/suggests').get(adminPolicy.isAllowed, admin.users_suggests);
 
   // Finish by binding the user middleware
   app.param('aduserId', admin.userByID);

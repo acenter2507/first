@@ -19,6 +19,7 @@ var path = require('path'),
   Voteopt = mongoose.model('Voteopt'),
   Cmt = mongoose.model('Cmt'),
   Cmtlike = mongoose.model('Cmtlike'),
+  Opt = mongoose.model('Opt'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 var _ = require('underscore');
@@ -268,7 +269,6 @@ exports.users_polls = function (req, res) {
       message: errorHandler.getErrorMessage(err)
     });
   }
-
 };
 /**
  * Lấy votes của user
@@ -341,7 +341,7 @@ exports.users_reports = function (req, res) {
   }
 };
 /**
- * Lấy reported của user
+ * Lấy be report của user
  */
 exports.users_bereports = function (req, res) {
   Report.find({ victim: req.model._id })
@@ -350,6 +350,28 @@ exports.users_bereports = function (req, res) {
     .exec()
     .then((reports) => {
       res.json(reports);
+    }, handleError);
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
+};
+/**
+ * Lấy suggests của user
+ */
+exports.users_suggests = function (req, res) {
+  Poll.find({ user: req.model._id })
+    .exec()
+    .then(polls => {
+      var ids = _.pluck(polls, '_id');
+      return Opt.find({ user: req.model._id, poll: { $nin: ids } })
+        .sort('-created')
+        .populate('poll', 'title')
+        .exec();
+    }, handleError)
+    .then((opts) => {
+      res.json(opts);
     }, handleError);
   function handleError(err) {
     return res.status(400).send({

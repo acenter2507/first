@@ -47,6 +47,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/admins/users/:aduserId/bereports',
       permissions: '*'
+    }, {
+      resources: '/api/admins/users/:aduserId/suggests',
+      permissions: '*'
     }]
   }]);
 };

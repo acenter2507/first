@@ -170,7 +170,7 @@
 </div>
 <hr>
 <!-- Polls -->
-<div class="row mg12t">
+<div class="row mg12t" ng-show="pollsPagedItems.length > 0">
   <div class="col-xs-12">
     <div class="admin-card">
       <div class="admin-card-header">
@@ -198,9 +198,6 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-show="pollsPagedItems.length === 0">
-              <td class="text-center" colspan="9">Has no data found.</td>
-            </tr>
             <tr ng-repeat="poll in pollsPagedItems">
               <td>{{ poll.title }}</td>
               <td>{{ poll.category.name }}</td>
@@ -234,7 +231,7 @@
 </div>
 <hr>
 <!-- Comments -->
-<div class="row mg12t">
+<div class="row mg12t" ng-show="cmtsPagedItems.length > 0">
   <div class="col-xs-12">
     <div class="admin-card">
       <div class="admin-card-header">
@@ -259,9 +256,6 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-show="cmtsPagedItems.length === 0">
-              <td class="text-center" colspan="6">Has no data found.</td>
-            </tr>
             <tr ng-repeat="cmt in cmtsPagedItems">
               <td>{{ cmt.poll.title }}</td>
               <td><span ng-bind="cmt.body"></span></td>
@@ -289,7 +283,7 @@
 </div>
 <hr>
 <!-- Votes -->
-<div class="row mg12t">
+<div class="row mg12t" ng-show="votesPagedItems.length >== 0">
   <div class="col-xs-12">
     <div class="admin-card">
       <div class="admin-card-header">
@@ -314,9 +308,6 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-show="votesPagedItems.length === 0">
-              <td class="text-center" colspan="6">Has no data found.</td>
-            </tr>
             <tr ng-repeat="vote in votesPagedItems">
               <td>{{ vote.poll.title }}</td>
               <td><span ng-bind="vote.opts"></span></td>
@@ -344,7 +335,7 @@
 </div>
 <hr>
 <!-- Poll reports -->
-<div class="row mg12t">
+<div class="row mg12t" ng-show="reportsPagedItems.length > 0">
   <div class="col-xs-12">
     <div class="admin-card">
       <div class="admin-card-header">
@@ -363,9 +354,6 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-show="reportsPagedItems.length === 0">
-              <td class="text-center" colspan="4">Has no data found.</td>
-            </tr>
             <tr ng-repeat="report in reportsPagedItems">
               <td>{{ report.poll.title }}</td>
               <td><span ng-bind="report.reason"></span></td>
@@ -391,7 +379,7 @@
 </div>
 <hr>
 <!-- Poll bereports -->
-<div class="row mg12t">
+<div class="row mg12t" ng-show="bereportsPagedItems.length > 0">
   <div class="col-xs-12">
     <div class="admin-card">
       <div class="admin-card-header">
@@ -410,9 +398,6 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-show="bereportsPagedItems.length === 0">
-              <td class="text-center" colspan="4">Has no data found.</td>
-            </tr>
             <tr ng-repeat="bereport in bereportsPagedItems">
               <td>{{ bereport.poll.title }}</td>
               <td><span ng-bind="bereport.reason"></span></td>
@@ -432,6 +417,52 @@
         </table>
         <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="bereportFilterLength" ng-model="bereportsCurrentPage"
           ng-change="bereportPageChanged()"></uib-pagination>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<!-- Poll suggested -->
+<div class="row mg12t" ng-show="suggestsPagedItems.length > 0">
+  <div class="col-xs-12">
+    <div class="admin-card">
+      <div class="admin-card-header">
+        <i class="fa fa-list-alt"></i> List suggested options
+        <input class="inline form-control w200 mg12l input-sm" ng-model="suggestSearch" ng-change="figureOutItemsToDisplay_suggests()" placeholder="Search key...">
+        <div class="clearfix"></div>
+      </div>
+      <div class="admin-card-block">
+        <table class="table table-hover table-outline" id="suggests">
+          <thead class="thead-default">
+            <tr>
+              <th>Poll title</th>
+              <th>Option title</th>
+              <th>Status</th>
+              <th>Created</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="suggest in suggestsPagedItems">
+              <td>{{ suggest.poll.title }}</td>
+              <td><span ng-bind="suggest.title"></span></td>
+              <td>{{ (suggest.status === 1) ? 'Approved' : (suggest.status === 2) ? 'Waiting' : 'Rejected' }}</td>
+              <td><span ng-bind="suggest.created"></span></td>
+              <td>
+                <div class="btn-group" role="group">
+                  <a class="undecorated-link" ui-sref="admin.polls.view({ pollId: suggest.poll._id })"><i class="icon-eye icons"></i>
+                    <md-tooltip md-direction="bottom">View detail poll</md-tooltip>
+                  </a>
+                  <a class="undecorated-link mg5l" ng-click="delete_suggest(suggest)"><i class="icon-trash icons"></i>
+                    <md-tooltip md-direction="bottom">Delete suggest</md-tooltip>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="suggestFilterLength" ng-model="suggestsCurrentPage"
+          ng-change="suggestPageChanged()"></uib-pagination>
       </div>
     </div>
   </div>

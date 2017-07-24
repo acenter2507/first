@@ -277,7 +277,7 @@ exports.users_votes = function (req, res) {
                 voteopt.forEach(function(element) {
                   opts.push(element.opt);
                 });
-                vote['opt'] = opts;
+                vote.opts = opts;
               }
             });
         });

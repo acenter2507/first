@@ -61,7 +61,7 @@ function ViewUserController($window, $timeout, $scope, $state, $filter, Authenti
       .then(res => {
         $scope.votes = res.data || [];
         $scope.voteCnt = $scope.votes.length;
-        console.log(votes);
+        console.log(res);
         $scope.buildVotePager();
       })
       .catch(err => {

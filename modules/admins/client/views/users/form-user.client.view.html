@@ -65,7 +65,7 @@
               <div class="form-group col-sm-6" show-errors>
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" class="form-control" ng-model="user.password" placeholder="Password"
-                  popover="{{popoverMsg}}" popover-trigger="focus" password-validator ng-required="password_required">
+                  popover="{{popoverMsg}}" popover-trigger="focus" password-validator="{{password_required}}" ng-required="password_required">
                 <div ng-messages="userForm.password.$error" role="alert">
                   <p class="help-block error-text" ng-message="required">Password is required.</p>
                   <div ng-repeat="passwordError in passwordErrors">

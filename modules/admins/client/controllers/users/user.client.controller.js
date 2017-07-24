@@ -10,13 +10,12 @@ function UserController($window, $timeout, $scope, $state, Authentication, userR
 
   $scope.imageURL = $scope.user.profileImageURL || Constants.defaultProfileImageURL;
   $scope.uploader = new FileUploader({
-    url: 'api/users/picture',
-    alias: 'newProfilePicture'
+    url: '',
+    alias: 'profilePicture'
   });
   // Called after the user selected a new picture file
   $scope.uploader.onAfterAddingFile = function (fileItem) {
     $scope.uploader.queue.splice(0, $scope.uploader.queue.length - 1);
-    console.log($scope.uploader.queue);
     if ($window.FileReader) {
       var fileReader = new FileReader();
       fileReader.readAsDataURL(fileItem._file);
@@ -35,7 +34,18 @@ function UserController($window, $timeout, $scope, $state, Authentication, userR
     // Start upload
     $scope.uploader.uploadAll();
   };
+  // Called after the user has successfully uploaded a new picture
+  $scope.uploader.onSuccessItem = function (fileItem, response, status, headers) {
+    // Show success message
+    $state.reload();
+  };
 
+  // Called after the user has failed to uploaded a new picture
+  $scope.uploader.onErrorItem = function (fileItem, response, status, headers) {
+    // Show error message
+    $scope.error = response.message;
+    toast.error('Can\'t save profile image.');
+  };
   $scope.save = isValid => {
     if (!isValid) {
       $scope.$broadcast('show-errors-check-validity', 'userForm');
@@ -49,7 +59,12 @@ function UserController($window, $timeout, $scope, $state, Authentication, userR
     }
 
     function successCb(res) {
-      $state.reload();
+      if ($scope.uploader.queue.length > 0) {
+        $scope.uploader.url = '/api/admins/users/' + res._id + '/picture';
+        $scope.uploadProfilePicture();
+      } else {
+        $state.reload();
+      }
     }
     function errorCb(err) {
       toast.error('Can\'t save user: ' + err.message, 'Error!');

@@ -21,6 +21,7 @@ module.exports = function (app) {
     .put(adminPolicy.isAllowed, admin.user_update)
     .delete(adminPolicy.isAllowed, admin.user_delete);
 
+  app.route('/api/admins/users/:aduserId/picture').post(adminPolicy.isAllowed, admin.users_profile_image);
   app.route('/api/admins/users/:aduserId/report').get(adminPolicy.isAllowed, admin.users_report);
   app.route('/api/admins/users/:aduserId/reported').get(adminPolicy.isAllowed, admin.users_reported);
 

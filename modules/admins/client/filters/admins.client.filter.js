@@ -54,6 +54,7 @@ function users_filter($filter) {
       });
     }
     if (filter.polls && parseInt(filter.polls)) {
+      console.log(parseInt(filter.polls));
       if (filter.polls_pref === 'least') {
         out.forEach(item => {
           if (item.pollCnt >= parseInt(filter.polls)) {

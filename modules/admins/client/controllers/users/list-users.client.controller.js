@@ -60,7 +60,7 @@ function UserListController($scope, $filter, Admin, AdminApi, toast, dialog) {
     });
     function handle_confirm() {
       var rs_user = new Admin({ _id: user._id });
-      user.$remove(() => {
+      rs_user.$remove(() => {
         $scope.users = _.without($scope.users, user);
         $scope.figureOutItemsToDisplay();
         toast.success('You have deleted: ' + user.displayName, 'Thank you!');

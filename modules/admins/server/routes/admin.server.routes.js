@@ -22,6 +22,9 @@ module.exports = function (app) {
     .delete(adminPolicy.isAllowed, admin.user_delete);
 
   // app.route('/api/admins/users/:aduserId/picture').post(adminPolicy.isAllowed, admin.users_profile_image);
+  // Lấy danh sách user cho page admin.user.list
+  app.route('/api/admins/users').get(adminPolicy.isAllowed, admin.users_list);
+  
   app.route('/api/admins/users/:aduserId/resetpass').post(adminPolicy.isAllowed, admin.user_resetpass);
   app.route('/api/admins/users/:aduserId/report').get(adminPolicy.isAllowed, admin.users_report);
   app.route('/api/admins/users/:aduserId/reported').get(adminPolicy.isAllowed, admin.users_reported);

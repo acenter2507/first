@@ -209,6 +209,74 @@ exports.userByID = function (req, res, next, id) {
 };
 
 /**
+ * Lấy all users
+ */
+exports.users_list = function (req, res) {
+  User.find({}, '-salt -password')
+    .sort('-created').exec()
+    .then((users) => {
+      if (users.length === 0) return res.json(users);
+      var length = users.length;
+      var counter = 0;
+      users.forEach(function (instance, index, array) {
+        array[index] = instance.toObject();
+        users_be_report(array[index])
+          .then(res => {
+            return users_report(array[index]);
+          })
+          .then(res => {
+            if (++counter === length) {
+              res.json(users);
+            }
+          })
+          .catch(err => {
+            return handleError(err);
+          });
+        // Userreport.findOne({ user: array[index]._id })
+        //   .exec()
+        //   .then(report => {
+        //     array[index].report = report;
+        //     if (++counter === length) {
+        //       res.json(users);
+        //     }
+        //   }, handleError);
+      });
+    }, handleError);
+
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
+};
+
+// Đếm số lần bị report
+function users_be_report(user) {
+  return new Promise((resolve, reject) => {
+    Report.find({ victim: user._id })
+      .count(function (err, count) {
+        if (err) {
+          return reject(err);
+        }
+        user.bereportCnt = count;
+        return resolve(user);
+      });
+  });
+}
+// Thông tin report của user
+function users_report(user) {
+  return new Promise((resolve, reject) => {
+    Userreport.findOne({ user: req.model._id })
+      .exec(function (err, report) {
+        if (err) {
+          return reject(err);
+        }
+        user.report = report;
+        return resolve(user);
+      });
+  });
+}
+/**
  * User Api
  * Lấy report của user
  */

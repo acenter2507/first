@@ -15,6 +15,9 @@ function admin($resource) {
 }
 AdminApi.$inject = ['$http'];
 function AdminApi($http) {
+  this.get_users = () => {
+    return $http.get('/api/admins/users');
+  };
   this.user_report = userId => {
     return $http.get('/api/admins/users/' + userId + '/report');
   };

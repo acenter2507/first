@@ -15,7 +15,7 @@ function UserController($window, $timeout, $scope, $state, Authentication, userR
   });
   // Called after the user selected a new picture file
   $scope.uploader.onAfterAddingFile = function (fileItem) {
-    console.log($scope.uploader.queue.length);
+    console.log($scope.uploader.queue);
     if ($window.FileReader) {
       var fileReader = new FileReader();
       fileReader.readAsDataURL(fileItem._file);

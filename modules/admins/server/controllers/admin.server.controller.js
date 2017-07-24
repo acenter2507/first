@@ -222,17 +222,15 @@ exports.users_list = function (req, res) {
       users.forEach(function (instance, index, array) {
         array[index] = instance.toObject();
         users_be_report(array[index])
-          .then(res => {
+          .then(_res => {
             return users_report(array[index]);
           })
-          .then(res => {
-            console.log(counter, array[index]);
+          .then(_res => {
             if (++counter === length) {
-              return res.json(users);
+              res.json(users);
             }
           })
           .catch(err => {
-            console.log(err);
             return handleError(err);
           });
       });

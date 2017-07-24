@@ -73,7 +73,6 @@ function UserListController($scope, $filter, Admin, AdminApi, toast, dialog) {
     $scope.currentPage = 1;
     $scope.filter = {};
     $scope.figureOutItemsToDisplay();
-    $scope.$apply();
   };
 
   $scope.figureOutItemsToDisplay = function () {

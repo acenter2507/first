@@ -27,6 +27,7 @@ exports.user = function (req, res) {
  * Update a User
  */
 exports.user_add = function (req, res) {
+  console.log(req.body);
   var user = new User(req.body);
   user.provider = 'local';
   user.displayName = user.firstName + ' ' + user.lastName;

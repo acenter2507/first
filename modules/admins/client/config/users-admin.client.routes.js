@@ -30,7 +30,7 @@ angular.module('admin.routes').config(['$stateProvider',
         templateUrl: 'modules/admins/client/views/users/view-user.client.view.html',
         controller: 'ViewUserController',
         ncyBreadcrumb: {
-          label: '{{ userResolve.displayName }}'
+          label: 'View user info'
         },
         resolve: {
           userResolve: ['$stateParams', 'Admin', function ($stateParams, Admin) {

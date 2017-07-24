@@ -44,6 +44,7 @@ function UserController($window, $timeout, $scope, $state, Authentication, userR
   $scope.uploader.onErrorItem = function (fileItem, response, status, headers) {
     // Show error message
     $scope.error = response.message;
+    console.log(response);
     toast.error('Can\'t save profile image.');
   };
   $scope.save = isValid => {

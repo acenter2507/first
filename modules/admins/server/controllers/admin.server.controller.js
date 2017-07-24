@@ -19,6 +19,7 @@ var path = require('path'),
   Cmt = mongoose.model('Cmt'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
+  mongoose.Promise = require('mongoose');
 /**
  * Show the current user
  */
@@ -258,6 +259,7 @@ exports.users_votes = function (req, res) {
   Vote.find({ user: req.model._id })
     .sort('-created')
     .populate('poll', 'title')
+    .lean()
     .exec(function (err, votes) {
       if (err) {
         return res.status(400).send({
@@ -284,6 +286,12 @@ exports.users_votes = function (req, res) {
         res.json(votes);
       }
     });
+
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 };
 /**
  * Lấy cmts của user

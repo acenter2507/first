@@ -263,9 +263,9 @@ exports.users_votes = function (req, res) {
     .lean()
     .exec()
     .then((votes) => {
-      console.log(votes);
       _.each(votes, function (vote) {
         vote = vote.toObject();
+        console.log(vote);
         Voteopt.find({ vote: vote._id })
           .populate('opt', 'title')
           .exec()

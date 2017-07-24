@@ -12,6 +12,7 @@ function UserListController($scope, $filter, Admin, AdminApi, toast, dialog) {
         console.log(res);
       })
       .catch(err => {
+        console.log(err);
         toast.error(err.message, 'Error!');
       });
   }

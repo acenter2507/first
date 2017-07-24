@@ -36,7 +36,7 @@ angular.module('admin.routes').config(['$stateProvider',
           userResolve: ['$stateParams', 'Admin', function ($stateParams, Admin) {
             return Admin.get({
               aduserId: $stateParams.userId
-            });
+            }).$promise;
           }]
         }
       })
@@ -51,7 +51,7 @@ angular.module('admin.routes').config(['$stateProvider',
           userResolve: ['$stateParams', 'Admin', function ($stateParams, Admin) {
             return Admin.get({
               aduserId: $stateParams.userId
-            });
+            }).$promise;
           }]
         }
       })
@@ -66,7 +66,7 @@ angular.module('admin.routes').config(['$stateProvider',
           userResolve: ['$stateParams', 'Admin', function ($stateParams, Admin) {
             return Admin.get({
               aduserId: $stateParams.userId
-            });
+            }).$promise;
           }]
         }
       });

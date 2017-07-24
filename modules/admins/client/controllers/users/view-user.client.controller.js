@@ -6,7 +6,6 @@ ViewUserController.$inject = ['$window', '$timeout', '$scope', '$state', '$filte
 
 function ViewUserController($window, $timeout, $scope, $state, $filter, Authentication, userResolve, AdminApi, Action, toast, dialog) {
   $scope.authentication = Authentication;
-  $scope.user = userResolve;
   $scope.loginCnt = 0;
   $scope.pollCnt = 0;
   $scope.cmtCnt = 0;
@@ -15,14 +14,17 @@ function ViewUserController($window, $timeout, $scope, $state, $filter, Authenti
   $scope.bereportCnt = 0;
   $scope.likeCnt = 0;
   $scope.suggestCnt = 0;
-
   $scope.itemsPerPage = 15;
-
+  
+  userResolve.then((user) => {
+    $scope.user = user;
+    get_polls();
+    get_votes();
+  });
   /* User basic info control */
   $scope.filter_min = true;
 
   /* Polls */
-  get_polls();
   function get_polls() {
     console.log($scope.user);
     AdminApi.get_polls_by_user($scope.user._id)
@@ -56,7 +58,6 @@ function ViewUserController($window, $timeout, $scope, $state, $filter, Authenti
   };
 
   /* Votes */
-  get_votes();
   function get_votes() {
     console.log($scope.user);
     AdminApi.get_votes_by_user($scope.user._id)

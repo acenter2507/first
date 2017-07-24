@@ -66,11 +66,11 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" class="form-control" ng-model="user.password" placeholder="Password"
                   popover="{{popoverMsg}}" popover-trigger="focus" password-validator required>
+                <div class="form-group" ng-show="!userForm.password.$error.required">
+                  <progressbar value="requirementsProgress" type="{{requirementsColor}}"><span style="color:white; white-space:nowrap;">{{requirementsProgress}}%</span></progressbar>
+                </div>
                 <div ng-messages="userForm.password.$error" role="alert">
                   <p class="help-block error-text" ng-message="required">Password is required.</p>
-                  <div class="form-group" ng-show="!userForm.password.$error.required">
-                    <progressbar value="requirementsProgress" type="{{requirementsColor}}"><span style="color:white; white-space:nowrap;">{{requirementsProgress}}%</span></progressbar>
-                  </div>
                   <div ng-repeat="passwordError in passwordErrors">
                     <p class="help-block error-text" ng-show="userForm.password.$error.requirements">{{passwordError}}</p>
                   </div>

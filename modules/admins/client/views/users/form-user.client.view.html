@@ -2,9 +2,10 @@
   <div class="col-xs-12">
     <div class="admin-card">
       <div class="admin-card-header">
-        <i class="fa fa-filter"></i> Filter control
-        <a class="undecorated-link pull-right" ng-click="clear_form()">
-          Clear
+        <i class="fa fa-user-circle-o"></i> {{ (user._id) ? 'Edit user' : 'Add new' }}
+        <a class="undecorated-link pull-right" ui-sref="admin.users.list">
+          <i class="icon-arrow-left-circle"></i>
+          <md-tooltip md-direction="bottom">Back to list screen</md-tooltip>
         </a>
         <div class="clearfix"></div>
       </div>

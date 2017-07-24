@@ -29,6 +29,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/admins/users/:aduserId/picture',
       permissions: '*'
+    }, {
+      resources: '/api/admins/users/:aduserId/resetpass',
+      permissions: '*'
     }]
   }]);
 };

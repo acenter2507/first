@@ -54,6 +54,21 @@ angular.module('admin.routes').config(['$stateProvider',
             });
           }]
         }
+      })
+      .state('admin.users.resetpass', {
+        url: '/:userId/resetpass',
+        templateUrl: 'modules/admins/client/views/users/resetpass-user.client.view.html',
+        controller: 'UserController',
+        ncyBreadcrumb: {
+          label: 'Reset password'
+        },
+        resolve: {
+          userResolve: ['$stateParams', 'Admin', function ($stateParams, Admin) {
+            return Admin.get({
+              aduserId: $stateParams.userId
+            });
+          }]
+        }
       });
   }
 ]);

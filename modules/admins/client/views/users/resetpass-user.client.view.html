@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="admin-card">
+      <div class="admin-card-header">
+        <i class="fa fa-refresh"></i> Reset password
+        <a class="undecorated-link pull-right" ui-sref="admin.users.list">
+          <i class="icon-arrow-left-circle"></i>
+          <md-tooltip md-direction="bottom">Back to list screen</md-tooltip>
+        </a>
+        <div class="clearfix"></div>
+      </div>
+      <div class="admin-card-block">
+        <form name="userForm" ng-submit="update_pass(userForm.$valid)" novalidate autocomplete="off">
+          <fieldset>
+            <div class="row">
+              <!-- Password-->
+              <div class="form-group col-sm-6 col-sm-offset-3" show-errors>
+                <label for="password">Enter new password</label>
+                <input type="password" id="password" name="password" class="form-control" ng-model="newPassword" placeholder="New password"
+                  popover="{{popoverMsg}}" popover-trigger="focus" password-validator required>
+                <div ng-messages="userForm.password.$error" role="alert">
+                  <p class="help-block error-text" ng-message="required">Password is required.</p>
+                  <div ng-repeat="passwordError in passwordErrors">
+                    <p class="help-block error-text" ng-show="userForm.password.$error.requirements">{{passwordError}}</p>
+                  </div>
+                </div>
+                <div class="form-group" ng-show="!userForm.password.$error.required">
+                  <uib-progressbar class="h10" value="requirementsProgress" type="{{requirementsColor}}"><span style="color:white; white-space:nowrap;">{{requirementsProgress}}%</span></uib-progressbar>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+        <div class="clearfix"></div>
+      </div>
+      <!-- Footer -->
+      <div class="admin-card-footer">
+        <div class="form-group">
+          <button class="btn btn-primary" ng-click="update_pass(userForm.$valid)">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

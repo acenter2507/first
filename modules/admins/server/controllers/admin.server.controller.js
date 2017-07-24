@@ -110,6 +110,31 @@ exports.user_update = function (req, res) {
 };
 
 /**
+ * Reset password
+ */
+exports.user_resetpass = function (req, res) {
+  var user = req.model;
+  var password = req.body.password;
+
+  if (user && password) {
+    user.password = password;
+    user.save(function (err) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.end();
+      }
+    });
+  } else {
+    res.status(400).send({
+      message: 'Passwords do not match'
+    });
+  }
+};
+
+/**
  * Delete a user
  */
 exports.user_delete = function (req, res) {

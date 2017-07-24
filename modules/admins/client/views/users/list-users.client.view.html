@@ -7,9 +7,11 @@
         Filter control
         <a class="undecorated-link pull-right" ng-click="filter_min = !filter_min">
           <i ng-class="{ 'icon-minus': !filter_min, 'icon-plus': filter_min }"></i>
+          <md-tooltip md-direction="bottom">Show filter panel</md-tooltip>
         </a>
         <a class="undecorated-link pull-right mg5r" ng-click="clear_filter()">
           Clear
+          <md-tooltip md-direction="bottom">Clear all filter info</md-tooltip>
         </a>
         <div class="clearfix"></div>
       </div>
@@ -162,9 +164,18 @@
               </td>
               <td>
                 <div class="btn-group" role="group">
-                  <a class="undecorated-link" ui-sref="admin.users.view({ userId: user._id })"><i class="icon-eye icons"></i></a>
-                  <a class="undecorated-link mg5l" ui-sref="admin.users.edit({ userId: user._id })"><i class="icon-note icons"></i></a>
-                  <a class="undecorated-link mg5l" ng-click="delete_user(user)"><i class="icon-trash icons"></i></a>
+                  <a class="undecorated-link" ui-sref="admin.users.view({ userId: user._id })"><i class="icon-eye icons"></i>
+                    <md-tooltip md-direction="bottom">View detail of user</md-tooltip>
+                  </a>
+                  <a class="undecorated-link mg5l" ui-sref="admin.users.edit({ userId: user._id })"><i class="icon-note icons"></i>
+                    <md-tooltip md-direction="bottom">Edit info of user</md-tooltip>
+                  </a>
+                  <a class="undecorated-link mg5l" ng-click="delete_user(user)"><i class="icon-trash icons"></i>
+                    <md-tooltip md-direction="bottom">Delete user</md-tooltip>
+                  </a>
+                  <a ng-if="user.provider === 'local'" class="undecorated-link mg5l" ui-sref="admin.users.changepass({ userId: user._id })"><i class="icon-refresh icons"></i>
+                    <md-tooltip md-direction="bottom">Reset password of user</md-tooltip>
+                  </a>
                 </div>
               </td>
             </tr>

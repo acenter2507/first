@@ -323,4 +323,4 @@ exports.users_reports = function (req, res) {
       message: errorHandler.getErrorMessage(err)
     });
   }
-};reports
+};

@@ -123,7 +123,7 @@ function ViewUserController($window, $timeout, $scope, $state, $filter, Authenti
 
   /* Reports */
   get_reports();
-  function get_votes() {
+  function get_reports() {
     AdminApi.get_reports_by_user($scope.user._id)
       .then(res => {
         $scope.reports = res.data || [];

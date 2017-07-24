@@ -263,6 +263,7 @@ exports.users_votes = function (req, res) {
     .lean()
     .exec()
     .then((votes) => {
+      console.log(votes);
       var data = votes.toJSON();
       console.log(data);
       votes.forEach(function (vote) {

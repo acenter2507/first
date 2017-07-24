@@ -67,7 +67,7 @@
                 <input type="password" id="password" name="password" class="form-control" ng-model="user.password" placeholder="Password"
                   popover="{{popoverMsg}}" popover-trigger="focus" password-validator required>
                 <div class="form-group" ng-show="!userForm.password.$error.required">
-                  <progressbar class="h10" value="requirementsProgress" type="{{requirementsColor}}"><span style="color:white; white-space:nowrap;">{{requirementsProgress}}%</span></progressbar>
+                  <uib-progressbar class="h10" value="requirementsProgress" type="{{requirementsColor}}"><span style="color:white; white-space:nowrap;">{{requirementsProgress}}%</span></uib-progressbar>
                 </div>
                 <div ng-messages="userForm.password.$error" role="alert">
                   <p class="help-block error-text" ng-message="required">Password is required.</p>

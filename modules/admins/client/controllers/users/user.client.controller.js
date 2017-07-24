@@ -60,6 +60,7 @@ function UserController($window, $timeout, $scope, $state, Authentication, userR
 
     function successCb(res) {
       if ($scope.uploader.queue.length > 0) {
+        console.log($scope.uploader);
         $scope.uploader.url = '/api/admins/users/' + res._id + '/picture';
         $scope.uploadProfilePicture();
       } else {

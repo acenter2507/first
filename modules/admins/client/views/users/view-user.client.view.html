@@ -168,6 +168,7 @@
     </div>
   </div>
 </div>
+<hr>
 <!-- Polls -->
 <div class="row mg12t">
   <div class="col-xs-12">
@@ -223,7 +224,7 @@
     </div>
   </div>
 </div>
-
+<hr>
 <!-- Comments -->
 <div class="row mg12t">
   <div class="col-xs-12">
@@ -278,6 +279,7 @@
     </div>
   </div>
 </div>
+<hr>
 <!-- Votes -->
 <div class="row mg12t">
   <div class="col-xs-12">
@@ -328,6 +330,53 @@
         </table>
         <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="voteFilterLength" ng-model="votesCurrentPage"
           ng-change="votePageChanged()"></uib-pagination>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<!-- Poll reports -->
+<div class="row mg12t">
+  <div class="col-xs-12">
+    <div class="admin-card">
+      <div class="admin-card-header">
+        <i class="fa fa-list-alt"></i> List reported
+        <input class="inline form-control w200 mg12l input-sm" ng-model="reportSearch" ng-change="figureOutItemsToDisplay_reports()" placeholder="Search key...">
+        <div class="clearfix"></div>
+      </div>
+      <div class="admin-card-block">
+        <table class="table table-hover table-outline" id="reports">
+          <thead class="thead-default">
+            <tr>
+              <th>Poll title</th>
+              <th>Reason</th>
+              <th>Created</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-show="reportsPagedItems.length === 0">
+              <td class="text-center" colspan="4">Has no data found.</td>
+            </tr>
+            <tr ng-repeat="report in reportsPagedItems">
+              <td>{{ report.poll.title }}</td>
+              <td><span ng-bind="report.reason"></span></td>
+              <td><span ng-bind="report.created"></span></td>
+              <td>
+                <div class="btn-group" role="group">
+                  <a class="undecorated-link" ui-sref="admin.polls.view({ pollId: report.poll._id })"><i class="icon-eye icons"></i>
+                    <md-tooltip md-direction="bottom">View detail poll</md-tooltip>
+                  </a>
+                  <a class="undecorated-link mg5l" ng-click="delete_report(report)"><i class="icon-trash icons"></i>
+                    <md-tooltip md-direction="bottom">Delete report</md-tooltip>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="reportFilterLength" ng-model="reportsCurrentPage"
+          ng-change="reportPageChanged()"></uib-pagination>
       </div>
     </div>
   </div>

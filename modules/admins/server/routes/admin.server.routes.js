@@ -28,6 +28,7 @@ module.exports = function (app) {
   app.route('/api/admins/users/:aduserId/polls').get(adminPolicy.isAllowed, admin.users_polls);
   app.route('/api/admins/users/:aduserId/cmts').get(adminPolicy.isAllowed, admin.users_cmts);
   app.route('/api/admins/users/:aduserId/votes').get(adminPolicy.isAllowed, admin.users_votes);
+  app.route('/api/admins/users/:aduserId/reports').get(adminPolicy.isAllowed, admin.users_reports);
 
   // Finish by binding the user middleware
   app.param('aduserId', admin.userByID);

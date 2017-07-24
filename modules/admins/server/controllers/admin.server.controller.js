@@ -307,3 +307,20 @@ exports.users_cmts = function (req, res) {
     });
   }
 };
+/**
+ * Lấy cmts của user
+ */
+exports.users_reports = function (req, res) {
+  Report.find({ user: req.model._id })
+    .sort('-created')
+    .populate('poll', 'title')
+    .exec()
+    .then((reports) => {
+      res.json(reports);
+    }, handleError);
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
+};reports

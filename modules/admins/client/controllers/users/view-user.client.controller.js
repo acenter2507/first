@@ -17,6 +17,10 @@ function ViewUserController($window, $timeout, $scope, $state, $filter, Authenti
   $scope.itemsPerPage = 15;
 
   $scope.user = userResolve;
+  $scope.polls = [];
+  $scope.cmts = [];
+  $scope.votes = [];
+  $scope.reports = [];
   /* User basic info control */
   $scope.filter_min = true;
 
@@ -53,7 +57,7 @@ function ViewUserController($window, $timeout, $scope, $state, $filter, Authenti
     $scope.figureOutItemsToDisplay_polls();
   };
 
-  /* Votes */
+  /* Comments */
   get_cmts();
   function get_cmts() {
     AdminApi.get_cmts_by_user($scope.user._id)
@@ -115,6 +119,38 @@ function ViewUserController($window, $timeout, $scope, $state, $filter, Authenti
   };
   $scope.votePageChanged = function () {
     $scope.figureOutItemsToDisplay_votes();
+  };
+
+  /* Reports */
+  get_reports();
+  function get_votes() {
+    AdminApi.get_reports_by_user($scope.user._id)
+      .then(res => {
+        $scope.reports = res.data || [];
+        $scope.voteCnt = $scope.reports.length;
+        $scope.buildReportPager();
+      })
+      .catch(err => {
+        toast.error('Load reports error: ' + err.message, 'Error!');
+      });
+  }
+  $scope.buildReportPager = () => {
+    $scope.reportsPagedItems = [];
+    $scope.reportsCurrentPage = 1;
+    $scope.figureOutItemsToDisplay_reports();
+  };
+  $scope.figureOutItemsToDisplay_reports = function () {
+    let filteredItems = $filter('filter')($scope.reports, {
+      $: $scope.reportSearch
+    }) || [];
+
+    $scope.reportFilterLength = filteredItems.length;
+    var begin = (($scope.reportsCurrentPage - 1) * $scope.itemsPerPage);
+    var end = begin + $scope.itemsPerPage;
+    $scope.reportsPagedItems = filteredItems.slice(begin, end);
+  };
+  $scope.reportPageChanged = function () {
+    $scope.figureOutItemsToDisplay_reports();
   };
 
   $scope.remove = function (user) {

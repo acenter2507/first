@@ -127,7 +127,7 @@ function ViewUserController($window, $timeout, $scope, $state, $filter, Authenti
     AdminApi.get_reports_by_user($scope.user._id)
       .then(res => {
         $scope.reports = res.data || [];
-        $scope.voteCnt = $scope.reports.length;
+        $scope.reportCnt = $scope.reports.length;
         $scope.buildReportPager();
       })
       .catch(err => {

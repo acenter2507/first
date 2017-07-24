@@ -263,7 +263,7 @@ exports.users_votes = function (req, res) {
     .lean()
     .exec()
     .then((votes) => {
-      _.each(votes, function (vote) {
+      votes.forEach(function (vote) {
         vote = vote.toObject();
         console.log(vote);
         Voteopt.find({ vote: vote._id })
@@ -271,7 +271,7 @@ exports.users_votes = function (req, res) {
           .exec()
           .then(voteopts => {
             var opts = [];
-            _.each(voteopts, function (voteopt) {
+            voteopts.forEach(function (voteopt) {
               opts.push(voteopt.opt);
             });
             vote.opts = opts;

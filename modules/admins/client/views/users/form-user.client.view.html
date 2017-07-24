@@ -22,7 +22,7 @@
                 </div>
               </div>
               <!-- Last name-->
-              <div class="form-group col-sm-6">
+              <div class="form-group col-sm-6" show-errors>
                 <label for="lastName">Last Name</label>
                 <input type="text" id="lastName" name="lastName" class="form-control" ng-model="user.lastName" placeholder="Last Name"
                   required>
@@ -43,7 +43,7 @@
                 </div>
               </div>
               <!-- Roles-->
-              <div class="form-group col-sm-6">
+              <div class="form-group col-sm-6" show-errors>
                 <label class="control-label" for="roles">Roles</label>
                 <div class="controls">
                   <input class="form-control" type="text" name="roles" ng-model="user.roles" id="roles" ng-list required />
@@ -64,7 +64,7 @@
                 </div>
               </div>
               <!-- Password-->
-              <div class="form-group col-sm-6">
+              <div class="form-group col-sm-6" show-errors>
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" class="form-control" ng-model="user.password" placeholder="Password"
                   popover="{{popoverMsg}}" popover-trigger="focus" password-validator required>

@@ -28,7 +28,6 @@ function ViewUserController($window, $timeout, $scope, $state, $filter, Authenti
     $scope.pollsPagedItems = [];
     $scope.pollsCurrentPage = 1;
     $scope.figureOutItemsToDisplay_polls();
-    $scope.$apply();
   };
   $scope.figureOutItemsToDisplay_polls = function () {
     let filteredItems = $filter('filter')($scope.polls, {

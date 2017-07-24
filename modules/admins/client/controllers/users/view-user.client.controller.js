@@ -24,6 +24,7 @@ function ViewUserController($window, $timeout, $scope, $state, $filter, Authenti
   /* Polls */
   get_polls();
   function get_polls() {
+    console.log($scope.user);
     AdminApi.get_polls_by_user($scope.user._id)
       .then(res => {
         $scope.polls = res.data || [];
@@ -57,6 +58,7 @@ function ViewUserController($window, $timeout, $scope, $state, $filter, Authenti
   /* Votes */
   get_votes();
   function get_votes() {
+    console.log($scope.user);
     AdminApi.get_votes_by_user($scope.user._id)
       .then(res => {
         $scope.votes = res.data || [];

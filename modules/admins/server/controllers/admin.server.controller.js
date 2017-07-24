@@ -216,7 +216,6 @@ exports.users_list = function (req, res) {
   User.find({}, '-salt -password')
     .sort('-created').exec()
     .then((users) => {
-      console.log(users);
       if (users.length === 0) return res.json(users);
       var length = users.length;
       var counter = 0;
@@ -227,6 +226,7 @@ exports.users_list = function (req, res) {
             return users_report(array[index]);
           })
           .then(res => {
+            console.log(counter, array[index]);
             if (++counter === length) {
               res.json(users);
             }
@@ -254,7 +254,6 @@ exports.users_list = function (req, res) {
 
 // Đếm số lần bị report
 function users_be_report(user) {
-  console.log('users_be_report', user);
   return new Promise((resolve, reject) => {
     Report.find({ victim: user._id })
       .count(function (err, count) {
@@ -268,7 +267,6 @@ function users_be_report(user) {
 }
 // Thông tin report của user
 function users_report(user) {
-  console.log('users_report', user);
   return new Promise((resolve, reject) => {
     Userreport.findOne({ user: user._id })
       .exec(function (err, report) {

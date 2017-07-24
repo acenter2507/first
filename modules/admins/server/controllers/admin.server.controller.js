@@ -5,6 +5,8 @@
  */
 var path = require('path'),
   mongoose = require('mongoose'),
+  multer = require('multer'),
+  config = require(path.resolve('./config/config')),
   User = mongoose.model('User'),
   Report = mongoose.model('Report'),
   Userreport = mongoose.model('Userreport'),

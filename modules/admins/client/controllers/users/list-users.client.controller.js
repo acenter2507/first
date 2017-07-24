@@ -9,7 +9,7 @@ function UserListController($scope, $filter, Admin, AdminApi, toast, dialog) {
   function get_users() {
     AdminApi.get_users()
       .then(res => {
-        console.log(res);
+        $scope.users = res;
       })
       .catch(err => {
         console.log(err);

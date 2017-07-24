@@ -1,5 +1,15 @@
 <div class="row">
   <div class="col-xs-12">
+    <div class="form-group">
+      <a ui-sref="admin.users.list" class="btn btn-default pull-right">List</a>
+      <a ng-if="user._id" ui-sref="admin.users.view({ userId: user._id })" class="btn btn-success pull-right mg10r">View</a>
+      <a ng-if="user._id" ng-click="remove()" class="btn btn-danger pull-right mg10r">Delete</a>
+    </div>
+  </div>
+</div>
+
+<div class="row mg12t">
+  <div class="col-xs-12">
     <div class="admin-card">
       <div class="admin-card-header">
         <i class="fa fa-user-circle-o"></i> {{ (user._id) ? 'Edit user' : 'Add new' }}

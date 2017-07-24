@@ -17,55 +17,6 @@ function UserListController($scope, $filter, Admin, AdminApi, toast, dialog) {
         toast.error('Can\'t load users: ' + err.message, 'Error!');
       });
   }
-  // Admin.query(function (data) {
-  //   $scope.users = data;
-  //   get_users_info().then(() => {
-  //     $scope.busy = false;
-  //     $scope.buildPager();
-  //   });
-  // });
-  // function get_users_info() {
-  //   return new Promise((resolve, reject) => {
-  //     var promise = [];
-  //     $scope.users.forEach(user => {
-  //       promise.push(get_user_report(user));
-  //       promise.push(get_user_reported(user));
-  //     });
-  //     Promise.all(promise)
-  //       .then(res => {
-  //         return resolve();
-  //       })
-  //       .catch(err => {
-  //         toast.error(err.message, 'Error!');
-  //         return reject();
-  //       });
-  //   });
-  // }
-  // function get_user_report(user) {
-  //   return new Promise((resolve, reject) => {
-  //     AdminApi.user_report(user._id)
-  //       .then(res => {
-  //         user.report = res.data;
-  //         return resolve();
-  //       })
-  //       .catch(err => {
-  //         return reject();
-  //       });
-  //   });
-  // }
-  // // Đã bị report
-  // function get_user_reported(user) {
-  //   return new Promise((resolve, reject) => {
-  //     AdminApi.user_reported(user._id)
-  //       .then(res => {
-  //         user.reported = res.data;
-  //         return resolve();
-  //       })
-  //       .catch(err => {
-  //         return reject();
-  //       });
-  //   });
-  // }
 
   $scope.buildPager = function () {
     $scope.pagedItems = [];
@@ -108,6 +59,7 @@ function UserListController($scope, $filter, Admin, AdminApi, toast, dialog) {
     }, reject => {
     });
     function handle_confirm() {
+      var rs_user = new Admin(user);
       user.$remove(() => {
         $scope.users = _.without($scope.users, user);
         $scope.figureOutItemsToDisplay();

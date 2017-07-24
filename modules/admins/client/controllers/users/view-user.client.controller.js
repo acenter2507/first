@@ -194,7 +194,7 @@ function ViewUserController($window, $timeout, $scope, $state, $filter, Authenti
     $scope.figureOutItemsToDisplay_bereports();
   };
 
-  
+
   /* Suggested */
   get_suggests();
   function get_suggests() {
@@ -227,17 +227,22 @@ function ViewUserController($window, $timeout, $scope, $state, $filter, Authenti
     $scope.figureOutItemsToDisplay_suggests();
   };
 
-  $scope.remove = function (user) {
-    if (confirm('Are you sure you want to delete this user?')) {
-      if (user) {
-        user.$remove();
-
-        $scope.users.splice($scope.users.indexOf(user), 1);
-      } else {
-        $scope.user.$remove(function () {
-          $state.go('admin.users.list');
-        });
-      }
+  $scope.remove = () => {
+    $scope.message_title = 'Delete user!';
+    $scope.message_content = 'Are you sure you want to delete this user?';
+    $scope.dialog_type = 3;
+    $scope.buton_label = 'delete';
+    dialog.openConfirm({
+      scope: $scope,
+      templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
+    }).then(() => {
+      handle_confirm();
+    }, reject => {
+    });
+    function handle_confirm() {
+      $scope.user.$remove(function () {
+        $state.go('admin.users.list');
+      });
     }
   };
 }

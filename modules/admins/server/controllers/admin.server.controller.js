@@ -28,7 +28,15 @@ var _ = require('underscore');
  * Show the current user
  */
 exports.user = function (req, res) {
-  res.json(req.model);
+  // res.json(req.model);
+  var user = req.model.toObject();
+  users_report(user).then(_user => {
+    res.json(_user);
+  }).catch(err => {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  });
 };
 
 /**
@@ -212,7 +220,6 @@ exports.userByID = function (req, res, next, id) {
  * Lấy all users
  */
 exports.users_list = function (req, res) {
-  console.log('askdkajshdkjahsdkjahdkjahsd**************');
   User.find({}, '-salt -password')
     .sort('-created').exec()
     .then((users) => {

@@ -42,7 +42,7 @@ function UserController($window, $timeout, $scope, $state, Authentication, userR
       .catch(err => {
         toast.error('Can\'t reset password: ' + err.message, 'Error!');
       });
-  }
+  };
   $scope.remove = function (user) {
     if (confirm('Are you sure you want to delete this user?')) {
       if (user) {

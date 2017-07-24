@@ -261,25 +261,22 @@ exports.users_votes = function (req, res) {
     .lean()
     .exec()
     .then((votes) => {
-      votes.forEach(vote => {
+      console.log(votes);
+      _.each(votes, function (vote) {
         Voteopt.find({ vote: vote._id })
           .populate('opt', 'title')
-          .exec(function (err, voteopt) {
-            if (err) {
-              return res.status(400).send({
-                message: errorHandler.getErrorMessage(err)
-              });
-            } else {
-              var opts = [];
-              voteopt.forEach(function (element) {
-                opts.push(element.opt);
-              });
-              vote.opts = opts;
-            }
-          });
+          .exec()
+          .then(voteopts => {
+            var opts = [];
+            _.each(voteopts, function (voteopt) {
+              opts.push(voteopt.opt);
+            });
+            vote.opts = opts;
+          }, handleError);
       });
       res.json(votes);
     }, handleError);
+
   function handleError(err) {
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)

@@ -19,7 +19,7 @@ var path = require('path'),
   Cmt = mongoose.model('Cmt'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
-  _ = require('underscore');
+_ = require('underscore');
 
 /**
  * Show the current user

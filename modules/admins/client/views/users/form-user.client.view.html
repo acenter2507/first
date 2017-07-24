@@ -76,6 +76,9 @@
                   <uib-progressbar class="h10" value="requirementsProgress" type="{{requirementsColor}}"><span style="color:white; white-space:nowrap;">{{requirementsProgress}}%</span></uib-progressbar>
                 </div>
               </div>
+              <div class="form-group col-sm-6" show-errors ng-if="user._id">
+                <a class="btn btn-default btn-block" ui-sref="admin.users.resetpass({ userId: user._id })">Reset password</a>
+              </div>
             </div>
           </fieldset>
         </form>

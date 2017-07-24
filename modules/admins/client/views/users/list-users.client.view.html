@@ -173,7 +173,7 @@
                   <a class="undecorated-link mg5l" ng-click="delete_user(user)"><i class="icon-trash icons"></i>
                     <md-tooltip md-direction="bottom">Delete user</md-tooltip>
                   </a>
-                  <a ng-if="user.provider === 'local'" class="undecorated-link mg5l" ui-sref="admin.users.changepass({ userId: user._id })"><i class="icon-refresh icons"></i>
+                  <a ng-if="user.provider === 'local'" class="undecorated-link mg5l" ui-sref="admin.users.resetpass({ userId: user._id })"><i class="icon-refresh icons"></i>
                     <md-tooltip md-direction="bottom">Reset password of user</md-tooltip>
                   </a>
                 </div>

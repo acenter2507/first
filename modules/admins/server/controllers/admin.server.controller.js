@@ -264,13 +264,13 @@ exports.users_votes = function (req, res) {
     .exec()
     .then((votes) => {
       console.log(votes);
-      _.forEach(votes, function (vote) {
+      _.each(votes, function (vote) {
         Voteopt.find({ vote: vote._id })
           .populate('opt', 'title')
           .exec()
           .then(voteopts => {
             var opts = [];
-            _.forEach(voteopts, function (voteopt) {
+            _.each(voteopts, function (voteopt) {
               opts.push(voteopt.opt);
             });
             vote.opts = opts;

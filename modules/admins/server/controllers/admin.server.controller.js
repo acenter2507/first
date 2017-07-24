@@ -27,7 +27,6 @@ exports.user = function (req, res) {
  * Update a User
  */
 exports.user_add = function (req, res) {
-  console.log(req.body);
   var user = new User(req.body);
   user.provider = 'local';
   user.displayName = user.firstName + ' ' + user.lastName;
@@ -50,41 +49,41 @@ exports.user_add = function (req, res) {
 /**
  * Update a User
  */
-exports.users_profile_image = function (req, res) {
-  var user = req.model;
-  var message = null;
-  var upload = multer(config.uploads.profileUpload).single('profilePicture');
-  var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
+// exports.users_profile_image = function (req, res) {
+//   var user = req.model;
+//   var message = null;
+//   var upload = multer(config.uploads.profileUpload).single('profilePicture');
+//   var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
 
-  // Filtering to upload only images
-  upload.fileFilter = profileUploadFileFilter;
+//   // Filtering to upload only images
+//   upload.fileFilter = profileUploadFileFilter;
 
-  if (user) {
-    upload(req, res, function (uploadError) {
-      if (uploadError) {
-        return res.status(400).send({
-          message: 'Error occurred while uploading profile picture'
-        });
-      } else {
-        user.profileImageURL = config.uploads.profileUpload.dest + req.file.filename;
+//   if (user) {
+//     upload(req, res, function (uploadError) {
+//       if (uploadError) {
+//         return res.status(400).send({
+//           message: 'Error occurred while uploading profile picture'
+//         });
+//       } else {
+//         user.profileImageURL = config.uploads.profileUpload.dest + req.file.filename;
 
-        user.save(function (saveError) {
-          if (saveError) {
-            return res.status(400).send({
-              message: errorHandler.getErrorMessage(saveError)
-            });
-          } else {
-            res.end();
-          }
-        });
-      }
-    });
-  } else {
-    res.status(400).send({
-      message: 'User is not signed in'
-    });
-  }
-};
+//         user.save(function (saveError) {
+//           if (saveError) {
+//             return res.status(400).send({
+//               message: errorHandler.getErrorMessage(saveError)
+//             });
+//           } else {
+//             res.end();
+//           }
+//         });
+//       }
+//     });
+//   } else {
+//     res.status(400).send({
+//       message: 'User is not signed in'
+//     });
+//   }
+// };
 
 /**
  * Update a User
@@ -96,6 +95,7 @@ exports.user_update = function (req, res) {
   user.firstName = req.body.firstName;
   user.lastName = req.body.lastName;
   user.displayName = user.firstName + ' ' + user.lastName;
+  user.username = req.body.username;
   user.roles = req.body.roles;
 
   user.save(function (err) {

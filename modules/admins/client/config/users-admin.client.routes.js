@@ -35,7 +35,7 @@ angular.module('admin.routes').config(['$stateProvider',
         resolve: {
           userResolve: ['$stateParams', 'Admin', function ($stateParams, Admin) {
             return Admin.get({
-              userId: $stateParams.userId
+              aduserId: $stateParams.userId
             });
           }]
         }
@@ -50,7 +50,7 @@ angular.module('admin.routes').config(['$stateProvider',
         resolve: {
           userResolve: ['$stateParams', 'Admin', function ($stateParams, Admin) {
             return Admin.get({
-              userId: $stateParams.userId
+              aduserId: $stateParams.userId
             });
           }]
         }

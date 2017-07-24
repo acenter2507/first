@@ -42,7 +42,7 @@
               </div>
               <!-- Roles-->
               <div class="form-group col-sm-6" show-errors>
-                <label class="control-label" for="roles">Roles</label>
+                <label class="control-label" for="roles">Roles <small>(Formart: 'user', 'user, admin')</small></label>
                 <div class="controls">
                   <input class="form-control" type="text" name="roles" ng-model="user.roles" id="roles" ng-list required />
                   <div ng-messages="userForm.roles.$error" role="alert">

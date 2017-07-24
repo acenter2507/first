@@ -24,10 +24,10 @@ module.exports = function (app) {
   // app.route('/api/admins/users/:aduserId/picture').post(adminPolicy.isAllowed, admin.users_profile_image);
   // Lấy danh sách user cho page admin.user.list
   app.route('/api/admins/users').get(adminPolicy.isAllowed, admin.users_list);
-  
+
   app.route('/api/admins/users/:aduserId/resetpass').post(adminPolicy.isAllowed, admin.user_resetpass);
-  app.route('/api/admins/users/:aduserId/report').get(adminPolicy.isAllowed, admin.users_report);
-  app.route('/api/admins/users/:aduserId/reported').get(adminPolicy.isAllowed, admin.users_reported);
+  // app.route('/api/admins/users/:aduserId/report').get(adminPolicy.isAllowed, admin.users_report);
+  // app.route('/api/admins/users/:aduserId/reported').get(adminPolicy.isAllowed, admin.users_reported);
   app.route('/api/admins/users/:aduserId/polls').get(adminPolicy.isAllowed, admin.users_polls);
   app.route('/api/admins/users/:aduserId/cmts').get(adminPolicy.isAllowed, admin.users_cmts);
   app.route('/api/admins/users/:aduserId/votes').get(adminPolicy.isAllowed, admin.users_votes);

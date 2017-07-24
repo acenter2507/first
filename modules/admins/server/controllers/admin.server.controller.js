@@ -215,6 +215,7 @@ exports.users_list = function (req, res) {
   User.find({}, '-salt -password')
     .sort('-created').exec()
     .then((users) => {
+      console.log(users);
       if (users.length === 0) return res.json(users);
       var length = users.length;
       var counter = 0;
@@ -252,6 +253,7 @@ exports.users_list = function (req, res) {
 
 // Đếm số lần bị report
 function users_be_report(user) {
+  console.log('users_be_report', user);
   return new Promise((resolve, reject) => {
     Report.find({ victim: user._id })
       .count(function (err, count) {
@@ -265,6 +267,7 @@ function users_be_report(user) {
 }
 // Thông tin report của user
 function users_report(user) {
+  console.log('users_report', user);
   return new Promise((resolve, reject) => {
     Userreport.findOne({ user: user._id })
       .exec(function (err, report) {
@@ -280,33 +283,33 @@ function users_report(user) {
  * User Api
  * Lấy report của user
  */
-exports.users_report = function (req, res) {
-  Userreport.findOne({ user: req.model._id })
-    .exec(function (err, user) {
-      if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      }
+// exports.users_report = function (req, res) {
+//   Userreport.findOne({ user: req.model._id })
+//     .exec(function (err, user) {
+//       if (err) {
+//         return res.status(400).send({
+//           message: errorHandler.getErrorMessage(err)
+//         });
+//       }
 
-      res.json(user);
-    });
-};
+//       res.json(user);
+//     });
+// };
 /**
  * Lấy reported của user
  */
-exports.users_reported = function (req, res) {
-  Report.find({ victim: req.model._id })
-    .count(function (err, count) {
-      if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      }
+// exports.users_reported = function (req, res) {
+//   Report.find({ victim: req.model._id })
+//     .count(function (err, count) {
+//       if (err) {
+//         return res.status(400).send({
+//           message: errorHandler.getErrorMessage(err)
+//         });
+//       }
 
-      res.json(count);
-    });
-};
+//       res.json(count);
+//     });
+// };
 /**
  * Lấy polls của user
  */

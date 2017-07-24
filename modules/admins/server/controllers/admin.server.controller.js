@@ -228,20 +228,13 @@ exports.users_list = function (req, res) {
           .then(res => {
             console.log(counter, array[index]);
             if (++counter === length) {
-              res.json(users);
+              return res.json(users);
             }
           })
           .catch(err => {
+            console.log(err);
             return handleError(err);
           });
-        // Userreport.findOne({ user: array[index]._id })
-        //   .exec()
-        //   .then(report => {
-        //     array[index].report = report;
-        //     if (++counter === length) {
-        //       res.json(users);
-        //     }
-        //   }, handleError);
       });
     }, handleError);
 

@@ -273,7 +273,7 @@ exports.users_votes = function (req, res) {
           .then(voteopts => {
             var opts = [];
             voteopts.forEach(function (instance, index, array) {
-              opts.push(array[index].opt);
+              opts.push(array[index].opt.title);
             });
             array[index].opts = opts;
             if (++counter === length) {

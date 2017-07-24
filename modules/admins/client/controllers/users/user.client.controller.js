@@ -7,7 +7,7 @@ UserController.$inject = ['$window', '$timeout', '$scope', '$state', 'Authentica
 function UserController($window, $timeout, $scope, $state, Authentication, userResolve, AdminApi, Constants, FileUploader, toast, dialog) {
   $scope.authentication = Authentication;
   $scope.user = userResolve;
-
+  console.log($scope.user);
   $scope.password_required = ($scope.user._id) ? false : true;
   $scope.save = isValid => {
     if (!isValid) {

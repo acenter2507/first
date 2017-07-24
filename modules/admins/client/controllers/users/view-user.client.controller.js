@@ -54,13 +54,44 @@ function ViewUserController($window, $timeout, $scope, $state, $filter, Authenti
   };
 
   /* Votes */
+  get_cmts();
+  function get_cmts() {
+    AdminApi.get_cmts_by_user($scope.user._id)
+      .then(res => {
+        $scope.cmts = res.data || [];
+        $scope.cmtCnt = $scope.cmts.length;
+        $scope.buildCmtPager();
+      })
+      .catch(err => {
+        toast.error('Load cmts error: ' + err.message, 'Error!');
+      });
+  }
+  $scope.buildCmtPager = () => {
+    $scope.cmtsPagedItems = [];
+    $scope.cmtsCurrentPage = 1;
+    $scope.figureOutItemsToDisplay_cmts();
+  };
+  $scope.figureOutItemsToDisplay_cmts = function () {
+    let filteredItems = $filter('filter')($scope.cmts, {
+      $: $scope.cmtSearch
+    }) || [];
+
+    $scope.cmtFilterLength = filteredItems.length;
+    var begin = (($scope.cmtsCurrentPage - 1) * $scope.itemsPerPage);
+    var end = begin + $scope.itemsPerPage;
+    $scope.cmtsPagedItems = filteredItems.slice(begin, end);
+  };
+  $scope.cmtPageChanged = function () {
+    $scope.figureOutItemsToDisplay_cmts();
+  };
+
+  /* Votes */
   get_votes();
   function get_votes() {
     AdminApi.get_votes_by_user($scope.user._id)
       .then(res => {
         $scope.votes = res.data || [];
         $scope.voteCnt = $scope.votes.length;
-        console.log(res);
         $scope.buildVotePager();
       })
       .catch(err => {

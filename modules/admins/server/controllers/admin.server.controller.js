@@ -17,6 +17,7 @@ var path = require('path'),
   Vote = mongoose.model('Vote'),
   Voteopt = mongoose.model('Voteopt'),
   Cmt = mongoose.model('Cmt'),
+  Likecmt = mongoose.model('Likecmt'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 var _ = require('underscore');
@@ -296,13 +297,25 @@ exports.users_cmts = function (req, res) {
   Cmt.find({ user: req.model._id })
     .sort('-created')
     .populate('poll', 'title')
-    .exec(function (err, cmts) {
-      if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      } else {
-        res.json(cmts);
-      }
+    .exec()
+    .then((cmts) => {
+      if (cmts.length === 0) return res.json(cmts);
+      var length = cmts.length;
+      var counter = 0;
+      cmts.forEach(function (instance, index, array) {
+        array[index] = instance.toObject();
+        Likecmt.find({ cmt: array[index]._id }).exec().count()
+          .then(cnt => {
+            array[index].likeCnt = cnt;
+            if (++counter === length) {
+              res.json(cmts);
+            }
+          }, handleError);
+      });
+    }, handleError);
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
     });
+  }
 };

@@ -27,6 +27,9 @@ function AdminApi($http) {
   this.get_polls_by_user = userId => {
     return $http.get('/api/admins/users/' + userId + '/polls');
   };
+  this.get_cmts_by_user = userId => {
+    return $http.get('/api/admins/users/' + userId + '/cmts');
+  };
   this.get_votes_by_user = userId => {
     return $http.get('/api/admins/users/' + userId + '/votes');
   };

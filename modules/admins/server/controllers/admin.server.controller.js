@@ -10,6 +10,7 @@ var path = require('path'),
   User = mongoose.model('User'),
   Report = mongoose.model('Report'),
   Userreport = mongoose.model('Userreport'),
+  Pollreport = mongoose.model('Pollreport'),
   Notif = mongoose.model('Notif'),
   Bookmark = mongoose.model('Bookmark'),
   View = mongoose.model('View'),
@@ -244,6 +245,33 @@ exports.users_polls = function (req, res) {
   Poll.find({ user: req.model._id })
     .sort('-created')
     .populate('category', 'name')
+    .exec()
+    .then((polls) => {
+      if (polls.length === 0) return res.json(polls);
+      var length = polls.length;
+      var counter = 0;
+      polls.forEach(function (instance, index, array) {
+        array[index] = instance.toObject();
+        Pollreport.findOne({ poll: array[index]._id })
+          .exec()
+          .then(report => {
+            array[index].report = report;
+            if (++counter === length) {
+              res.json(polls);
+            }
+          }, handleError);
+      });
+    }, handleError);
+
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
+
+  Poll.find({ user: req.model._id })
+    .sort('-created')
+    .populate('category', 'name')
     .exec(function (err, polls) {
       if (err) {
         return res.status(400).send({
@@ -308,10 +336,27 @@ exports.users_cmts = function (req, res) {
   }
 };
 /**
- * Lấy cmts của user
+ * Lấy report của user
  */
 exports.users_reports = function (req, res) {
   Report.find({ user: req.model._id })
+    .sort('-created')
+    .populate('poll', 'title')
+    .exec()
+    .then((reports) => {
+      res.json(reports);
+    }, handleError);
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
+};
+/**
+ * Lấy reported của user
+ */
+exports.users_bereports = function (req, res) {
+  Report.find({ victim: req.model._id })
     .sort('-created')
     .populate('poll', 'title')
     .exec()

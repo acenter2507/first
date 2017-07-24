@@ -189,18 +189,26 @@
               <th>Title</th>
               <th>Category</th>
               <th>Sercurity</th>
+              <th>Likes count</th>
+              <th>Views count</th>
+              <th>Comments count</th>
+              <th>Votes count</th>
               <th>Created</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             <tr ng-show="pollsPagedItems.length === 0">
-              <td class="text-center" colspan="5">Has no data found.</td>
+              <td class="text-center" colspan="9">Has no data found.</td>
             </tr>
             <tr ng-repeat="poll in pollsPagedItems">
               <td>{{ poll.title }}</td>
               <td>{{ poll.category.name }}</td>
               <td>{{ (poll.isPublic) ? 'Public' : 'Private' }}</td>
+              <td>{{ poll.report.likeCnt }}</td>
+              <td>{{ poll.report.viewCnt }}</td>
+              <td>{{ poll.report.cmtCnt }}</td>
+              <td>{{ poll.report.voteCnt }}</td>
               <td><span ng-bind="user.created | date:'mediumDate'"></span></td>
               <td>
                 <div class="btn-group" role="group">
@@ -381,7 +389,53 @@
     </div>
   </div>
 </div>
-
+<hr>
+<!-- Poll bereports -->
+<div class="row mg12t">
+  <div class="col-xs-12">
+    <div class="admin-card">
+      <div class="admin-card-header">
+        <i class="fa fa-list-alt"></i> List be reported
+        <input class="inline form-control w200 mg12l input-sm" ng-model="bereportSearch" ng-change="figureOutItemsToDisplay_bereports()" placeholder="Search key...">
+        <div class="clearfix"></div>
+      </div>
+      <div class="admin-card-block">
+        <table class="table table-hover table-outline" id="bereports">
+          <thead class="thead-default">
+            <tr>
+              <th>Poll title</th>
+              <th>Reason</th>
+              <th>Created</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-show="bereportsPagedItems.length === 0">
+              <td class="text-center" colspan="4">Has no data found.</td>
+            </tr>
+            <tr ng-repeat="bereport in bereportsPagedItems">
+              <td>{{ bereport.poll.title }}</td>
+              <td><span ng-bind="bereport.reason"></span></td>
+              <td><span ng-bind="bereport.created"></span></td>
+              <td>
+                <div class="btn-group" role="group">
+                  <a class="undecorated-link" ui-sref="admin.polls.view({ pollId: bereport.poll._id })"><i class="icon-eye icons"></i>
+                    <md-tooltip md-direction="bottom">View detail poll</md-tooltip>
+                  </a>
+                  <a class="undecorated-link mg5l" ng-click="delete_bereport(bereport)"><i class="icon-trash icons"></i>
+                    <md-tooltip md-direction="bottom">Delete bereport</md-tooltip>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="bereportFilterLength" ng-model="bereportsCurrentPage"
+          ng-change="bereportPageChanged()"></uib-pagination>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

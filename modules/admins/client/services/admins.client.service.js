@@ -36,6 +36,9 @@ function AdminApi($http) {
   this.get_reports_by_user = userId => {
     return $http.get('/api/admins/users/' + userId + '/reports');
   };
+  this.get_bereports_by_user = userId => {
+    return $http.get('/api/admins/users/' + userId + '/bereports');
+  };
   return this;
 }
 // angular.module('admin').factory('AdminApi', ['$http',

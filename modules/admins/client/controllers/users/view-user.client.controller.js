@@ -21,6 +21,7 @@ function ViewUserController($window, $timeout, $scope, $state, $filter, Authenti
   $scope.cmts = [];
   $scope.votes = [];
   $scope.reports = [];
+  $scope.bereports = [];
   /* User basic info control */
   $scope.filter_min = true;
 
@@ -31,6 +32,7 @@ function ViewUserController($window, $timeout, $scope, $state, $filter, Authenti
       .then(res => {
         $scope.polls = res.data || [];
         $scope.pollCnt = $scope.polls.length;
+        $scope.likeCnt = count_total_like($scope.polls);
         $scope.buildPollPager();
       })
       .catch(err => {
@@ -52,10 +54,16 @@ function ViewUserController($window, $timeout, $scope, $state, $filter, Authenti
     var end = begin + $scope.itemsPerPage;
     $scope.pollsPagedItems = filteredItems.slice(begin, end);
   };
-
   $scope.pollPageChanged = function () {
     $scope.figureOutItemsToDisplay_polls();
   };
+  function count_total_like(polls) {
+    var cnt = 0;
+    polls.forEach(poll => {
+      cnt += poll.report.likeCnt;
+    });
+    return cnt;
+  }
 
   /* Comments */
   get_cmts();
@@ -153,6 +161,37 @@ function ViewUserController($window, $timeout, $scope, $state, $filter, Authenti
     $scope.figureOutItemsToDisplay_reports();
   };
 
+  /* Be reports */
+  get_bereports();
+  function get_bereports() {
+    AdminApi.get_bereports_by_user($scope.user._id)
+      .then(res => {
+        $scope.bereports = res.data || [];
+        $scope.bereportCnt = $scope.bereports.length;
+        $scope.buildBereportPager();
+      })
+      .catch(err => {
+        toast.error('Load bereports error: ' + err.message, 'Error!');
+      });
+  }
+  $scope.buildBereportPager = () => {
+    $scope.bereportsPagedItems = [];
+    $scope.bereportsCurrentPage = 1;
+    $scope.figureOutItemsToDisplay_bereports();
+  };
+  $scope.figureOutItemsToDisplay_bereports = function () {
+    let filteredItems = $filter('filter')($scope.bereports, {
+      $: $scope.bereportSearch
+    }) || [];
+
+    $scope.bereportFilterLength = filteredItems.length;
+    var begin = (($scope.bereportsCurrentPage - 1) * $scope.itemsPerPage);
+    var end = begin + $scope.itemsPerPage;
+    $scope.bereportsPagedItems = filteredItems.slice(begin, end);
+  };
+  $scope.bereportPageChanged = function () {
+    $scope.figureOutItemsToDisplay_bereports();
+  };
   $scope.remove = function (user) {
     if (confirm('Are you sure you want to delete this user?')) {
       if (user) {

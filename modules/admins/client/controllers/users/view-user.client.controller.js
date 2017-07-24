@@ -44,7 +44,7 @@ function ViewUserController($window, $timeout, $scope, $state, $filter, Authenti
       $: $scope.pollSearch
     });
 
-    let filterLength = filteredItems.length;
+    $scope.pollFilterLength = filteredItems.length;
     var begin = (($scope.pollsCurrentPage - 1) * $scope.itemsPerPage);
     var end = begin + $scope.itemsPerPage;
     $scope.pollsPagedItems = filteredItems.slice(begin, end);
@@ -54,7 +54,38 @@ function ViewUserController($window, $timeout, $scope, $state, $filter, Authenti
     $scope.figureOutItemsToDisplay_polls();
   };
 
-  
+  /* Votes */
+  get_votes();
+  function get_votes() {
+    AdminApi.get_votes_by_user($scope.user._id)
+      .then(res => {
+        $scope.votes = res.data || [];
+        $scope.voteCnt = $scope.votes.length;
+        console.log(votes);
+        $scope.buildVotePager();
+      })
+      .catch(err => {
+        toast.error('Load votes error: ' + err.message, 'Error!');
+      });
+  }
+  $scope.buildVotePager = () => {
+    $scope.votesPagedItems = [];
+    $scope.votesCurrentPage = 1;
+    $scope.figureOutItemsToDisplay_votes();
+  };
+  $scope.figureOutItemsToDisplay_votes = function () {
+    let filteredItems = $filter('filter')($scope.votes, {
+      $: $scope.voteSearch
+    });
+
+    $scope.voteFilterLength = filteredItems.length;
+    var begin = (($scope.votesCurrentPage - 1) * $scope.itemsPerPage);
+    var end = begin + $scope.itemsPerPage;
+    $scope.votesPagedItems = filteredItems.slice(begin, end);
+  };
+  $scope.votePageChanged = function () {
+    $scope.figureOutItemsToDisplay_votes();
+  };
 
   $scope.remove = function (user) {
     if (confirm('Are you sure you want to delete this user?')) {

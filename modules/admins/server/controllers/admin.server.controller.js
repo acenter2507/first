@@ -14,6 +14,8 @@ var path = require('path'),
   Bookmark = mongoose.model('Bookmark'),
   View = mongoose.model('View'),
   Poll = mongoose.model('Poll'),
+  Vote = mongoose.model('Vote'),
+  Voteopt = mongoose.model('Voteopt'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
@@ -245,6 +247,40 @@ exports.users_polls = function (req, res) {
         });
       } else {
         res.json(polls);
+      }
+    });
+};
+/**
+ * Lấy polls của user
+ */
+exports.users_votes = function (req, res) {
+  Vote.find({ user: req.model._id })
+    .sort('-created')
+    .populate('poll', 'title')
+    .exec(function (err, votes) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        votes.forEach(vote => {
+          Voteopt.find({ vote: vote._id })
+            .populate('opt', 'title')
+            .exec(function (err, voteopt) {
+              if (err) {
+                return res.status(400).send({
+                  message: errorHandler.getErrorMessage(err)
+                });
+              } else {
+                var opts = [];
+                voteopt.forEach(function(element) {
+                  opts.push(element.opt);
+                });
+                vote['opt'] = opts;
+              }
+            });
+        });
+        res.json(votes);
       }
     });
 };

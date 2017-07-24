@@ -49,7 +49,7 @@
         <div class="text-muted text-uppercase">Votes</div>
       </div>
       <div class="admin-card-footer pd12x pd4y">
-        <a class="font-weight-bold font-sm btn-block text-muted undecorated-link" href="#">View More <i class="fa fa-angle-right pull-right font-lg"></i></a>
+        <a class="font-weight-bold font-sm btn-block text-muted undecorated-link" href="votes">View More <i class="fa fa-angle-right pull-right font-lg"></i></a>
       </div>
     </div>
   </div>
@@ -217,13 +217,67 @@
             </tr>
           </tbody>
         </table>
-        <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="pollsCurrentPage"
+        <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="pollFilterLength" ng-model="pollsCurrentPage"
           ng-change="pollPageChanged()"></uib-pagination>
       </div>
     </div>
   </div>
 </div>
 
+<!-- Votes -->
+<div class="row mg12t">
+  <div class="col-xs-12">
+    <div class="admin-card">
+      <div class="admin-card-header">
+        <i class="fa fa-list-alt"></i> List votes
+        <input class="inline form-control w200 mg12l input-sm" ng-model="voteSearch" ng-change="figureOutItemsToDisplay_votes()" placeholder="Search key...">
+        <a class="undecorated-link pull-right" ui-sref="profile.votes({ userId: user._id })">
+          <i class="icon-user"></i>
+          <md-tooltip md-direction="bottom">View in profile page</md-tooltip>
+        </a>
+        <div class="clearfix"></div>
+      </div>
+      <div class="admin-card-block">
+        <table class="table table-hover table-outline" id="votes">
+          <thead class="thead-default">
+            <tr>
+              <th>Poll title</th>
+              <th>Voted options</th>
+              <th>Updated</th>
+              <th>First voted</th>
+              <th>Last voted</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-show="votesPagedItems.length === 0">
+              <td class="text-center" colspan="8">Has no data found.</td>
+            </tr>
+            <tr ng-repeat="vote in votesPagedItems">
+              <td>{{ vote.poll.title }}</td>
+              <td><span ng-bind="vote.opts"></span></td>
+              <td>{{ vote.updateCnt }}</td>
+              <td><span ng-bind="user.updated | date:'mediumDate'"></span></td>
+              <td><span ng-bind="user.created | date:'mediumDate'"></span></td>
+              <td>
+                <div class="btn-group" role="group">
+                  <a class="undecorated-link" ui-sref="admin.polls.view({ pollId: poll._id })"><i class="icon-eye icons"></i>
+                    <md-tooltip md-direction="bottom">View detail of poll</md-tooltip>
+                  </a>
+                  <a class="undecorated-link mg5l" ng-click="delete_poll(poll)"><i class="icon-trash icons"></i>
+                    <md-tooltip md-direction="bottom">Delete poll</md-tooltip>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="voteFilterLength" ng-model="votesCurrentPage"
+          ng-change="votePageChanged()"></uib-pagination>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

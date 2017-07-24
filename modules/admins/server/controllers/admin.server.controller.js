@@ -264,6 +264,10 @@ exports.users_votes = function (req, res) {
     .exec()
     .then((votes) => {
       console.log(votes);
+      var data = votes.toObject();
+      data.hehe = 'aaa';
+      console.log(data);
+
       // votes.forEach(function (vote) {
       //   Voteopt.find({ vote: vote._id })
       //     .populate('opt', 'title')

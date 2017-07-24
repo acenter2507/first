@@ -19,7 +19,6 @@ var path = require('path'),
   Cmt = mongoose.model('Cmt'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
-mongoose.Promise = require('bluebird');
 /**
  * Show the current user
  */
@@ -256,13 +255,12 @@ exports.users_polls = function (req, res) {
  * Lấy votes của user
  */
 exports.users_votes = function (req, res) {
-  var promise = Vote.find({ user: req.model._id })
+  Vote.find({ user: req.model._id })
     .sort('-created')
     .populate('poll', 'title')
     .lean()
-    .exec();
-  promise
-    .then(votes => {
+    .exec()
+    .then((votes) => {
       votes.forEach(vote => {
         Voteopt.find({ vote: vote._id })
           .populate('opt', 'title')
@@ -280,12 +278,13 @@ exports.users_votes = function (req, res) {
             }
           });
       });
-    })
-    .catch(err => {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
+      res.json(votes);
+    }, handleError);
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
     });
+  }
 };
 /**
  * Lấy cmts của user

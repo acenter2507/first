@@ -272,38 +272,32 @@ exports.findPolls = function (req, res) {
         // Lấy thông tin count
         get_info_by_pollId(array[index]._id)
           .then(result => {
-            console.log(result);
             array[index].report = result || {};
             return get_opts_by_pollId(array[index]._id);
           })
           // Lấy các options
           .then(result => {
-            console.log(result);
             array[index].opts = result || [];
             return get_votes_by_pollId(array[index]._id);
           })
           // Lấy toàn bộ thông tin votes
           .then(result => {
-            console.log(result);
             array[index].votes = result.votes || [];
             array[index].voteopts = result.voteopts || [];
             return get_follow_by_pollId(array[index]._id, userId);
           })
           // Lấy follow của user hiện hành
           .then(result => {
-            console.log(result);
             array[index].follow = result || { poll: array[index]._id };
             return get_report_by_pollId(array[index]._id, userId);
           })
           // Lấy report của user hiện hành
           .then(result => {
-            console.log(result);
             array[index].report = (result) ? true : false;
             return get_bookmark_by_pollId(array[index]._id, userId);
           })
           // Lấy bookmark của user hiện hành
           .then(result => {
-            console.log(result);
             array[index].bookmark = (result) ? true : false;
             if (++counter === length) {
               res.json(polls);

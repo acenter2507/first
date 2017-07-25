@@ -89,24 +89,19 @@
             vm.busy = false;
             return;
           }
-          console.log(res);
           // Load options và tính vote cho các opt trong polls
           vm.new_data = res.data || [];
-
-        //   var promises = [];
-        //   vm.new_data.forEach(poll => {
-        //     poll.isCurrentUserOwner = vm.isLogged && vm.authentication.user._id === poll.user._id;
-        //     promises.push(get_poll_report(poll));
-        //     promises.push(get_opts(poll));
-        //     promises.push(get_owner_follow(poll));
-        //     promises.push(get_reported(poll));
-        //     promises.push(get_bookmarked(poll));
-        //   });
-        //   return Promise.all(promises);
-        // })
-        // .then(res => {
+          // Xử lý poll trước khi hiển thị màn hình
+          var promises = [];
+          vm.new_data.forEach(poll => {
+            poll.isCurrentUserOwner = vm.isLogged && vm.authentication.user._id === poll.user._id;
+            promises.push(process_before_show(poll));
+          });
+          return Promise.all(promises);
+        })
+        .then(results => {
           // Gán data vào list hiện tại
-          vm.polls = _.union(vm.polls, vm.new_data);
+          vm.polls = _.union(vm.polls, results);
           vm.page += 1;
           vm.busy = false;
           $scope.$apply();
@@ -117,6 +112,27 @@
           vm.stopped = true;
           toast.error(err.message, 'Error!');
         });
+    }
+
+    function process_before_show(poll) {
+      return new Promise((resolve, reject) => {
+        poll.isCurrentUserOwner = vm.isLogged && vm.authentication.user._id === poll.user._id;
+        poll.chart = {
+          options: { responsive: true },
+          colors: [],
+          labels: [],
+          data: []
+        };
+        poll.total = poll.voteopts.length;
+        poll.opts.forEach(opt => {
+          opt.voteCnt = _.where(poll.voteopts, { opt: opt._id }).length || 0;
+          opt.progressVal = calPercen(poll.total, opt.voteCnt);
+          poll.chart.data.push(opt.voteCnt);
+          poll.chart.colors.push(opt.color);
+          poll.chart.labels.push(opt.title);
+        });
+        return resolve(poll);
+      });
     }
     // Changed
     function get_poll_report(poll) {

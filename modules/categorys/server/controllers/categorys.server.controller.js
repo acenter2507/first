@@ -82,15 +82,30 @@ exports.delete = function (req, res) {
  * List of Categorys
  */
 exports.list = function (req, res) {
-  Category.find().sort('-created').populate('user', 'displayName').exec(function (err, categorys) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
+  Category.find().sort('-created').exec()
+    .then(categorys => {
+      if (categorys.length === 0) return res.jsonp(categorys);
+      var length = categorys.length;
+      var counter = 0;
+      categorys.forEach(function (instance, index, array) {
+        array[index] = instance.toObject();
+        count_polls_by_categoryId(array[index]._id)
+          .then(result => {
+            array[index].count = (result) || 0;
+            if (++counter === length) {
+              res.jsonp(categorys);
+            }
+          })
+          .catch(err => {
+            handleError(err);
+          });
       });
-    } else {
-      res.jsonp(categorys);
-    }
-  });
+    }, handleError);
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 };
 
 /**
@@ -145,3 +160,18 @@ exports.categoryByID = function (req, res, next, id) {
     next();
   });
 };
+
+/**
+ * Function hỗ trợ
+ */
+function count_polls_by_categoryId(categoryId) {
+  return new Promise((resolve, reject) => {
+    Poll.find({ category: categoryId }).count(function (err, count) {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(count);
+      }
+    });
+  });
+}

@@ -91,7 +91,8 @@ exports.list = function (req, res) {
         array[index] = instance.toObject();
         count_polls_by_categoryId(array[index]._id)
           .then(result => {
-            array[index].count = (result) || 0;
+            console.log(result);
+            array[index].count = result || 0;
             if (++counter === length) {
               res.jsonp(categorys);
             }

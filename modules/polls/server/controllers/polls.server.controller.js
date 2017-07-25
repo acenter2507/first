@@ -300,7 +300,7 @@ exports.findPolls = function (req, res) {
           .then(result => {
             array[index].bookmarked = (result) ? true : false;
             if (++counter === length) {
-              res.json(polls);
+              res.jsonp(polls);
             }
           })
           .catch(err => {

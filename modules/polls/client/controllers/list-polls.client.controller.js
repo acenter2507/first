@@ -94,7 +94,6 @@
           // Xử lý poll trước khi hiển thị màn hình
           var promises = [];
           vm.new_data.forEach(poll => {
-            poll.isCurrentUserOwner = vm.isLogged && vm.authentication.user._id === poll.user._id;
             promises.push(process_before_show(poll));
           });
           return Promise.all(promises);
@@ -102,6 +101,7 @@
         .then(results => {
           // Gán data vào list hiện tại
           vm.polls = _.union(vm.polls, results);
+          console.log(vm.polls);
           vm.page += 1;
           vm.busy = false;
           $scope.$apply();

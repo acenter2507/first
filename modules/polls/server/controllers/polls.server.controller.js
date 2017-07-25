@@ -265,7 +265,7 @@ exports.findPolls = function (req, res) {
     .skip(10 * page).limit(10).exec()
     .then(polls => {
       if (polls.length === 0) return res.jsonp(polls);
-      var length = users.length;
+      var length = polls.length;
       var counter = 0;
       polls.forEach(function (instance, index, array) {
         array[index] = instance.toObject();

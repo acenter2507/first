@@ -293,12 +293,12 @@ exports.findPolls = function (req, res) {
           })
           // Lấy report của user hiện hành
           .then(result => {
-            array[index].report = (result) ? true : false;
+            array[index].reported = (result) ? true : false;
             return get_bookmark_by_pollId(array[index]._id, userId);
           })
           // Lấy bookmark của user hiện hành
           .then(result => {
-            array[index].bookmark = (result) ? true : false;
+            array[index].bookmarked = (result) ? true : false;
             if (++counter === length) {
               res.json(polls);
             }

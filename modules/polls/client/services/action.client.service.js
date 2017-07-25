@@ -587,9 +587,6 @@
     this.get_category_polls = (categoryId, page, sort) => {
       return $http.get('/api/categorys/' + categoryId + '/polls/' + page + '/' + sort);
     };
-    this.count_poll_for_category = categoryId => {
-      return $http.get('/api/count_polls/' + categoryId);
-    };
     this.delete_category = category => {
       category.$remove();
     };

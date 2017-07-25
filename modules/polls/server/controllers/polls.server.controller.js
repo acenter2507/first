@@ -9,7 +9,6 @@ var path = require('path'),
   Opt = mongoose.model('Opt'),
   Vote = mongoose.model('Vote'),
   Voteopt = mongoose.model('Voteopt'),
-  Polltag = mongoose.model('Polltag'),
   Pollreport = mongoose.model('Pollreport'),
   Userreport = mongoose.model('Userreport'),
   Polluser = mongoose.model('Polluser'),
@@ -19,6 +18,8 @@ var path = require('path'),
   Cmt = mongoose.model('Cmt'),
   Cmtlike = mongoose.model('Cmtlike'),
   View = mongoose.model('View'),
+  Tag = mongoose.model('Tag'),
+  Polltag = mongoose.model('Polltag'),
   errorHandler = require(path.resolve(
     './modules/core/server/controllers/errors.server.controller'
   )),
@@ -100,8 +101,33 @@ exports.read = function (req, res) {
     req.user.roles &&
     req.user.roles.length &&
     req.user.roles.indexOf('admin') > -1;
+  get_info_by_pollId(poll._id)
+    .then(result => {
+      poll.report = result || {};
+      return get_opts_by_pollId(poll._id);
+    })
+    .then(result => {
+      poll.opts = result || [];
+      return get_votes_by_pollId(poll._id);
+    })
+    .then(result => {
+      poll.votes = result.votes || [];
+      poll.voteopts = result.voteopts || [];
+      return get_tags_by_pollId(poll._id);
+    })
+    .then(result => {
+      poll.tags = result || [];
+      res.jsonp(poll);
+    })
+    .catch(err => {
+      return handleError(err);
+    });
 
-  res.jsonp(poll);
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 };
 
 /**
@@ -338,7 +364,7 @@ exports.findHotPolls = function (req, res) {
 };
 
 /**
- * List of Opts in poll
+ * List of Opts in poll xxxxx
  */
 exports.findOpts = function (req, res) {
   Poll.findOpts(req.poll._id)
@@ -376,7 +402,7 @@ exports.findCmts = function (req, res) {
 };
 
 /**
- * List of Tags in poll
+ * List of Tags in poll xxxx
  */
 exports.findTags = function (req, res) {
   Poll.findTags(req.poll._id).populate('tag').exec(function (err, polltags) {
@@ -391,7 +417,7 @@ exports.findTags = function (req, res) {
 };
 
 /**
- * List of Votes in poll
+ * List of Votes in poll  xxxx
  */
 exports.findVotes = function (req, res) {
   Poll.findVotes(req.poll._id).exec(function (err, votes) {
@@ -433,7 +459,7 @@ exports.findOwnerVote = function (req, res) {
 };
 
 /**
- * Get all info of vote in poll
+ * Get all info of vote in poll xxxx
  */
 exports.findVoteopts = function (req, res) {
   var rs = {}, ids;
@@ -950,5 +976,22 @@ function get_bookmark_by_pollId(pollId, userId) {
         return resolve(bookmark);
       }
     });
+  });
+}
+// Lấy list tag đã add cho poll
+function get_tags_by_pollId(pollId) {
+  return new Promise((resolve, reject) => {
+    Polltag.find({ poll: pollId })
+      .populate('tag').exec(function (err, polltags) {
+        if (err) {
+          return reject(err);
+        } else {
+          var tags = [];
+          polltags.forEach(function (pt) {
+            tags.push(pt.tag);
+          });
+          return resolve(tags);
+        }
+      });
   });
 }

@@ -86,7 +86,7 @@
 
     vm.close_duration = {};
     vm.remaining = 1;
-    
+
     init();
 
     // Init data
@@ -255,48 +255,26 @@
         // Thiết lập các thông tin cho poll
         vm.poll.close = vm.poll.close ? moment(vm.poll.close) : vm.poll.close;
         vm.isClosed = vm.poll.close ? moment(vm.poll.close).isBefore(new moment()) : false;
-        vm.poll.tags = [];
-        // Lấy thông tin options
-        Action.get_opts(vm.poll._id)
-          .then(res => { // lấy thông tin report
-            vm.opts = _.where(res.data, { status: 1 });
-            return Action.get_poll_report(vm.poll._id);
-          })
-          .then(res => { // lấy thông tin vote
-            vm.poll.report = res.data;
-            return Action.get_voteopts(vm.poll._id);
-          })
-          .then(res => { // Lấy tags
-            vm.chart = {
-              type: 'pie',
-              options: { responsive: true },
-              colors: [],
-              labels: [],
-              data: []
-            };
-            vm.votes = res.data.votes || [];
-            vm.voteopts = res.data.voteopts || [];
-            vm.votedTotal = vm.voteopts.length;
-            vm.opts.forEach(opt => {
-              opt.voteCnt = _.where(vm.voteopts, { opt: opt._id }).length || 0;
-              opt.progressVal = calPercen(vm.votedTotal, opt.voteCnt);
-              vm.chart.colors.push(opt.color);
-              vm.chart.labels.push(opt.title);
-              vm.chart.data.push(opt.voteCnt);
-            });
-            return Action.get_tags(vm.poll._id);
-          })
-          .then(res => { // Update màn hình
-            angular.forEach(res.data, (polltag, index) => {
-              vm.poll.tags.push(polltag.tag);
-            });
-            $scope.$apply();
-            return resolve();
-          })
-          .catch(err => {
-            toast.error(err.message, 'Error!');
-            return reject();
-          });
+        vm.opts = vm.poll.opts;
+        vm.chart = {
+          type: 'pie',
+          options: { responsive: true },
+          colors: [],
+          labels: [],
+          data: []
+        };
+        vm.votes = vm.poll.votes || [];
+        vm.voteopts = vm.poll.voteopts || [];
+        vm.votedTotal = vm.voteopts.length;
+        vm.opts.forEach(opt => {
+          opt.voteCnt = _.where(vm.voteopts, { opt: opt._id }).length || 0;
+          opt.progressVal = calPercen(vm.votedTotal, opt.voteCnt);
+          vm.chart.colors.push(opt.color);
+          vm.chart.labels.push(opt.title);
+          vm.chart.data.push(opt.voteCnt);
+        });
+        $scope.$apply();
+        return resolve();
       });
     }
     function get_owner_info() {

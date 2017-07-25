@@ -89,7 +89,6 @@
             vm.busy = false;
             return;
           }
-          console.log(res);
           // Load options và tính vote cho các opt trong polls
           vm.new_data = res.data || [];
           // Xử lý poll trước khi hiển thị màn hình
@@ -145,7 +144,6 @@
     function loadCategorys() {
       Action.get_categorys()
         .then(res => {
-          console.log(res);
           vm.categorys = res;
         });
     }

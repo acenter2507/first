@@ -40,6 +40,7 @@ app.init(function () {
   - Chức năng search => done
   - Đang code màn hình admin user (Mấy cái button xóa trong màn hình view)
   - Rà soát lại toàn bộ các request lấy db, tổng hợp và dọn sạch
+  - Chuc nang luu thong tin login cua user
 
   - Chức năng quản lý toàn bộ thông tin của user
   - Đếm và quản lý số lần bị report của user
@@ -56,21 +57,62 @@ VERSION 2
 2. Chức năng report comment
  */
 
-// 1. Khi người vote là guest thì không push socket được. => done
-// 2. Sửa các progressbar trong màn hình detail. => done
-// 3. Tạo tooltip => done
-// 3. Lọc notif
-// 4. Infinity scroll => done
-// 5. Chức năng bookmark => done
-// 6. Thêm tùy chọn vote multiple => done
-// 7. Chức năng private và share link
-// 8. Thêm nút bấm đổi kiểu biểu đồ tròn => done
-// 9. Danh sách các poll nổi bật => done
-// 10. Việc lưu và type post
-// 11. Hang doi cac request tu socket
-
-/* Bổ sung
-1. Chức năng nhập lý do khi report
-2. Đếm view poll, poll user đã view
-3. Đếm view profile
-*/
+    // vm.themes = [{
+    //   name: 'Default Theme',
+    //   code: 'default'
+    // }, {
+    //   name: 'Material Design',
+    //   code: 'material'
+    // }, {
+    //   name: 'Bootstrap 3',
+    //   code: 'bootstrap'
+    // }];
+    // vm.toastyTypes = [{
+    //   name: 'Default',
+    //   code: 'default',
+    // }, {
+    //   name: 'Info',
+    //   code: 'info'
+    // }, {
+    //   name: 'Success',
+    //   code: 'success'
+    // }, {
+    //   name: 'Wait',
+    //   code: 'wait'
+    // }, {
+    //   name: 'Error',
+    //   code: 'error'
+    // }, {
+    //   name: 'Warning',
+    //   code: 'warning'
+    // }];
+    // vm.toastyOpts = {
+    //   title: 'Toast It!',
+    //   msg: 'Mmmm, tasties...',
+    //   showClose: false,
+    //   clickToClose: true,
+    //   timeout: 5000,
+    //   sound: true,
+    //   html: false,
+    //   shake: false,
+    //   theme: vm.themes[1].code,
+    //   type: vm.toastyTypes[0].code
+    // };
+    // vm.show_toasty = () => {
+    //   toasty[vm.toastyOpts.type]({
+    //     title: vm.toastyOpts.title,
+    //     msg: vm.toastyOpts.msg,
+    //     showClose: vm.toastyOpts.showClose,
+    //     clickToClose: vm.toastyOpts.clickToClose,
+    //     sound: vm.toastyOpts.sound,
+    //     shake: vm.toastyOpts.shake,
+    //     timeout: vm.toastyOpts.timeout || false,
+    //     html: vm.toastyOpts.html,
+    //     theme: vm.toastyOpts.theme
+    //   });
+    // };
+    // vm.show_toastr = () => {
+    //   toast.success('Hello world! ' + new Date().getSeconds(), 'Toastr fun!');
+    //   toast.error('Hello world! ' + new Date().getSeconds(), 'Toastr fun!');
+    //   toast.info('Hello world! ' + new Date().getSeconds(), 'Toastr fun!');
+    // };

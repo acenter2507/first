@@ -1,10 +1,44 @@
 'use strict';
 angular.module('admin')
   .controller('ViewUserController', ViewUserController);
-ViewUserController.$inject = ['$window', '$timeout', '$scope', '$state', '$filter', 'Authentication', 'userResolve', 'AdminApi', 'Action', 'toastr', 'ngDialog'];
+ViewUserController.$inject = [
+  '$window',
+  '$timeout',
+  '$scope',
+  '$state',
+  '$filter',
+  'Authentication',
+  'userResolve',
+  'AdminApi',
+  'Action',
+  'toastr',
+  'ngDialog',
+  'PollsService',
+  'CmtsService',
+  'VotesService',
+  'ReportsService',
+  'OptsService'
+];
 
 
-function ViewUserController($window, $timeout, $scope, $state, $filter, Authentication, userResolve, AdminApi, Action, toast, dialog) {
+function ViewUserController(
+  $window,
+  $timeout,
+  $scope,
+  $state,
+  $filter,
+  Authentication,
+  userResolve,
+  AdminApi,
+  Action,
+  toast,
+  dialog,
+  Polls,
+  Cmts,
+  Votes,
+  Reports,
+  Opts
+) {
   $scope.authentication = Authentication;
   $scope.loginCnt = 0;
   $scope.pollCnt = 0;
@@ -243,6 +277,121 @@ function ViewUserController($window, $timeout, $scope, $state, $filter, Authenti
       $scope.user.$remove(function () {
         $state.go('admin.users.list');
       });
+    }
+  };
+
+  $scope.delete_poll = poll => {
+    $scope.message_title = 'Delete poll!';
+    $scope.message_content = 'Are you sure you want to delete?';
+    $scope.dialog_type = 3;
+    $scope.buton_label = 'delete';
+    dialog.openConfirm({
+      scope: $scope,
+      templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
+    }).then(() => {
+      handle_confirm();
+    }, reject => {
+    });
+    function handle_confirm() {
+      var rs_poll = new Polls({ _id: poll._id });
+      $scope.polls = _.without($scope.polls, poll);
+      $scope.figureOutItemsToDisplay_polls();
+      rs_poll.$remove();
+    }
+  };
+  $scope.delete_cmt = cmt => {
+    $scope.message_title = 'Delete comment!';
+    $scope.message_content = 'Are you sure you want to delete?';
+    $scope.dialog_type = 3;
+    $scope.buton_label = 'delete';
+    dialog.openConfirm({
+      scope: $scope,
+      templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
+    }).then(() => {
+      handle_confirm();
+    }, reject => {
+    });
+    function handle_confirm() {
+      var rs_cmt = new Cmts({ _id: cmt._id });
+      $scope.cmts = _.without($scope.cmts, cmt);
+      $scope.figureOutItemsToDisplay_cmts();
+      rs_cmt.$remove();
+    }
+  };
+  $scope.delete_vote = vote => {
+    $scope.message_title = 'Delete vote!';
+    $scope.message_content = 'Are you sure you want to delete?';
+    $scope.dialog_type = 3;
+    $scope.buton_label = 'delete';
+    dialog.openConfirm({
+      scope: $scope,
+      templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
+    }).then(() => {
+      handle_confirm();
+    }, reject => {
+    });
+    function handle_confirm() {
+      var rs_vote = new Votes({ _id: vote._id });
+      $scope.votes = _.without($scope.votes, vote);
+      $scope.figureOutItemsToDisplay_votes();
+      rs_vote.$remove();
+    }
+  };
+  $scope.delete_report = rp => {
+    $scope.message_title = 'Delete report!';
+    $scope.message_content = 'Are you sure you want to delete?';
+    $scope.dialog_type = 3;
+    $scope.buton_label = 'delete';
+    dialog.openConfirm({
+      scope: $scope,
+      templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
+    }).then(() => {
+      handle_confirm();
+    }, reject => {
+    });
+    function handle_confirm() {
+      var rs_rp = new Reports({ _id: rp._id });
+      $scope.reports = _.without($scope.reports, rp);
+      $scope.figureOutItemsToDisplay_reports();
+      rs_rp.$remove();
+    }
+  };
+  $scope.delete_bereport = brp => {
+    $scope.message_title = 'Delete report!';
+    $scope.message_content = 'Are you sure you want to delete?';
+    $scope.dialog_type = 3;
+    $scope.buton_label = 'delete';
+    dialog.openConfirm({
+      scope: $scope,
+      templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
+    }).then(() => {
+      handle_confirm();
+    }, reject => {
+    });
+    function handle_confirm() {
+      var rs_brp = new Reports({ _id: brp._id });
+      $scope.bereports = _.without($scope.bereports, brp);
+      $scope.figureOutItemsToDisplay_bereports();
+      rs_brp.$remove();
+    }
+  };
+  $scope.delete_suggest = sg => {
+    $scope.message_title = 'Delete suggest!';
+    $scope.message_content = 'Are you sure you want to delete?';
+    $scope.dialog_type = 3;
+    $scope.buton_label = 'delete';
+    dialog.openConfirm({
+      scope: $scope,
+      templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
+    }).then(() => {
+      handle_confirm();
+    }, reject => {
+    });
+    function handle_confirm() {
+      var rs_sg = new Opts({ _id: sg._id });
+      $scope.suggests = _.without($scope.suggests, sg);
+      $scope.figureOutItemsToDisplay_suggests();
+      rs_sg.$remove();
     }
   };
 }

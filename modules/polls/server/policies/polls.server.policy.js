@@ -20,42 +20,6 @@ exports.invokeRolesPolicies = function() {
     }, {
       resources: '/api/polls/:pollId',
       permissions: '*'
-    }, {
-      resources: '/api/findPolls/:page',
-      permissions: '*'
-    }, {
-      resources: '/api/findHotPolls/:page',
-      permissions: '*'
-    }, {
-      resources: '/api/findOpts/:pollId',
-      permissions: '*'
-    }, {
-      resources: '/api/findCmts/:pollId/:page',
-      permissions: '*'
-    }, {
-      resources: '/api/findTags/:pollId',
-      permissions: '*'
-    }, {
-      resources: '/api/findVotes/:pollId',
-      permissions: '*'
-    }, {
-      resources: '/api/findOwnerVote/:pollId',
-      permissions: '*'
-    }, {
-      resources: '/api/findVoteopts/:pollId',
-      permissions: '*'
-    }, {
-      resources: '/api/findPollLike/:pollId',
-      permissions: '*'
-    }, {
-      resources: '/api/findPolluser/:pollId',
-      permissions: '*'
-    }, {
-      resources: '/api/findReport/:pollId',
-      permissions: '*'
-    }, {
-      resources: '/api/findBookmark/:pollId',
-      permissions: '*'
     }]
   }, {
     roles: ['user'],
@@ -65,42 +29,6 @@ exports.invokeRolesPolicies = function() {
     }, {
       resources: '/api/polls/:pollId',
       permissions: ['get', 'put']
-    }, {
-      resources: '/api/findPolls/:page',
-      permissions: '*'
-    }, {
-      resources: '/api/findHotPolls/:page',
-      permissions: '*'
-    }, {
-      resources: '/api/findOpts/:pollId',
-      permissions: '*'
-    }, {
-      resources: '/api/findCmts/:pollId/:page',
-      permissions: '*'
-    }, {
-      resources: '/api/findTags/:pollId',
-      permissions: '*'
-    }, {
-      resources: '/api/findVotes/:pollId',
-      permissions: '*'
-    }, {
-      resources: '/api/findOwnerVote/:pollId',
-      permissions: '*'
-    }, {
-      resources: '/api/findVoteopts/:pollId',
-      permissions: '*'
-    }, {
-      resources: '/api/findPollLike/:pollId',
-      permissions: '*'
-    }, {
-      resources: '/api/findPolluser/:pollId',
-      permissions: '*'
-    }, {
-      resources: '/api/findReport/:pollId',
-      permissions: '*'
-    }, {
-      resources: '/api/findBookmark/:pollId',
-      permissions: '*'
     }]
   }, {
     roles: ['guest'],
@@ -110,30 +38,6 @@ exports.invokeRolesPolicies = function() {
     }, {
       resources: '/api/polls/:pollId',
       permissions: ['get']
-    }, {
-      resources: '/api/findPolls/:page',
-      permissions: '*'
-    }, {
-      resources: '/api/findHotPolls/:page',
-      permissions: '*'
-    }, {
-      resources: '/api/findOpts/:pollId',
-      permissions: '*'
-    }, {
-      resources: '/api/findCmts/:pollId/:page',
-      permissions: '*'
-    }, {
-      resources: '/api/findTags/:pollId',
-      permissions: '*'
-    }, {
-      resources: '/api/findVotes/:pollId',
-      permissions: '*'
-    }, {
-      resources: '/api/findOwnerVote/:pollId',
-      permissions: '*'
-    }, {
-      resources: '/api/findVoteopts/:pollId',
-      permissions: '*'
     }]
   }]);
 };

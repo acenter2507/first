@@ -17,8 +17,12 @@ module.exports = function(app) {
     .put(polls.update)
     .delete(polls.delete);
 
+  // Lấy danh sách poll cho màn hình polls.list
   app.route('/api/findPolls/:page').get(polls.findPolls);
+  
+  // Lấy danh sách poll nổi bật cho màn hình polls.list
   app.route('/api/findHotPolls/:page').get(polls.findHotPolls);
+  
   app.route('/api/findOpts/:pollId').get(polls.findOpts);
   app.route('/api/findCmts/:pollId/:page').get(polls.findCmts);
   app.route('/api/findTags/:pollId').get(polls.findTags);

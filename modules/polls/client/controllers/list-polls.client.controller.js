@@ -51,9 +51,11 @@
 
     function init() {
       initSocket();
+      // Load danh sách category (Bao gồm số poll)
       loadCategorys();
-      // load Hot poll
+      // Load các polls có lượng like nhiều nhất
       loadHotPolls();
+      // Load danh sách poll đã bookmark
       if (vm.isLogged) {
         loadBookmarks();
       }
@@ -87,20 +89,22 @@
             vm.busy = false;
             return;
           }
+          console.log(res);
           // Load options và tính vote cho các opt trong polls
           vm.new_data = res.data || [];
-          var promises = [];
-          vm.new_data.forEach(poll => {
-            poll.isCurrentUserOwner = vm.isLogged && vm.authentication.user._id === poll.user._id;
-            promises.push(get_poll_report(poll));
-            promises.push(get_opts(poll));
-            promises.push(get_owner_follow(poll));
-            promises.push(get_reported(poll));
-            promises.push(get_bookmarked(poll));
-          });
-          return Promise.all(promises);
-        })
-        .then(res => {
+
+        //   var promises = [];
+        //   vm.new_data.forEach(poll => {
+        //     poll.isCurrentUserOwner = vm.isLogged && vm.authentication.user._id === poll.user._id;
+        //     promises.push(get_poll_report(poll));
+        //     promises.push(get_opts(poll));
+        //     promises.push(get_owner_follow(poll));
+        //     promises.push(get_reported(poll));
+        //     promises.push(get_bookmarked(poll));
+        //   });
+        //   return Promise.all(promises);
+        // })
+        // .then(res => {
           // Gán data vào list hiện tại
           vm.polls = _.union(vm.polls, vm.new_data);
           vm.page += 1;
@@ -114,6 +118,7 @@
           toast.error(err.message, 'Error!');
         });
     }
+    // Changed
     function get_poll_report(poll) {
       return new Promise((resolve, reject) => {
         Action.get_poll_report(poll._id)
@@ -126,6 +131,7 @@
           });
       });
     }
+    // Changed
     function get_opts(poll) {
       return new Promise((resolve, reject) => {
         Action.get_opts(poll._id)
@@ -141,6 +147,7 @@
           });
       });
     }
+    // Changed
     function get_vote_for_poll(poll) {
       return new Promise((resolve, reject) => {
         Action.get_voteopts(poll._id)
@@ -168,6 +175,7 @@
           });
       });
     }
+
     function loadHotPolls() {
       Action.get_hot_polls(0)
         .then(res => {
@@ -201,6 +209,7 @@
           toast.error(err.message, 'Error!');
         });
     }
+    // Changed
     function get_owner_follow(poll) {
       return new Promise((resolve, reject) => {
         if (!vm.isLogged) {
@@ -217,6 +226,7 @@
           });
       });
     }
+    // Changed
     function get_reported(poll) {
       return new Promise((resolve, reject) => {
         if (!vm.isLogged) {
@@ -233,6 +243,7 @@
           });
       });
     }
+    // Changed
     function get_bookmarked(poll) {
       return new Promise((resolve, reject) => {
         if (!vm.isLogged) {
@@ -337,64 +348,5 @@
     vm.load_new = () => {
       $state.reload();
     };
-    // vm.themes = [{
-    //   name: 'Default Theme',
-    //   code: 'default'
-    // }, {
-    //   name: 'Material Design',
-    //   code: 'material'
-    // }, {
-    //   name: 'Bootstrap 3',
-    //   code: 'bootstrap'
-    // }];
-    // vm.toastyTypes = [{
-    //   name: 'Default',
-    //   code: 'default',
-    // }, {
-    //   name: 'Info',
-    //   code: 'info'
-    // }, {
-    //   name: 'Success',
-    //   code: 'success'
-    // }, {
-    //   name: 'Wait',
-    //   code: 'wait'
-    // }, {
-    //   name: 'Error',
-    //   code: 'error'
-    // }, {
-    //   name: 'Warning',
-    //   code: 'warning'
-    // }];
-    // vm.toastyOpts = {
-    //   title: 'Toast It!',
-    //   msg: 'Mmmm, tasties...',
-    //   showClose: false,
-    //   clickToClose: true,
-    //   timeout: 5000,
-    //   sound: true,
-    //   html: false,
-    //   shake: false,
-    //   theme: vm.themes[1].code,
-    //   type: vm.toastyTypes[0].code
-    // };
-    // vm.show_toasty = () => {
-    //   toasty[vm.toastyOpts.type]({
-    //     title: vm.toastyOpts.title,
-    //     msg: vm.toastyOpts.msg,
-    //     showClose: vm.toastyOpts.showClose,
-    //     clickToClose: vm.toastyOpts.clickToClose,
-    //     sound: vm.toastyOpts.sound,
-    //     shake: vm.toastyOpts.shake,
-    //     timeout: vm.toastyOpts.timeout || false,
-    //     html: vm.toastyOpts.html,
-    //     theme: vm.toastyOpts.theme
-    //   });
-    // };
-    // vm.show_toastr = () => {
-    //   toast.success('Hello world! ' + new Date().getSeconds(), 'Toastr fun!');
-    //   toast.error('Hello world! ' + new Date().getSeconds(), 'Toastr fun!');
-    //   toast.info('Hello world! ' + new Date().getSeconds(), 'Toastr fun!');
-    // };
   }
 })();

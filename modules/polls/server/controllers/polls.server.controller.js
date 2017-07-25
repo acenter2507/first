@@ -253,29 +253,70 @@ exports.list = function (req, res) {
 };
 
 /**
- * List of Offset
+ * Lấy danh sách poll cho màn hình polls.list
  */
 exports.findPolls = function (req, res) {
   var page = req.params.page || 0;
+  var userId = req.user ? req.user._id : undefined;
   Poll.find({ isPublic: true })
     .sort('-created')
     .populate('category', 'name icon')
     .populate('user', 'displayName profileImageURL')
-    .skip(10 * page)
-    .limit(10)
-    .exec(function (err, polls) {
-      if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      } else {
-        res.jsonp(polls);
-      }
+    .skip(10 * page).limit(10).exec()
+    .then(polls => {
+      if (polls.length === 0) return res.jsonp(polls);
+      var length = users.length;
+      var counter = 0;
+      polls.forEach(function (instance, index, array) {
+        array[index] = instance.toObject();
+        // Lấy thông tin count
+        get_info_by_pollId(array[index]._id)
+          .then(result => {
+            array[index].report = result || {};
+            return get_opts_by_pollId(array[index]._id);
+          })
+          // Lấy các options
+          .then(result => {
+            array[index].opts = result || [];
+            return get_votes_by_pollId(array[index]._id);
+          })
+          // Lấy toàn bộ thông tin votes
+          .then(result => {
+            array[index].votes = result.votes || [];
+            array[index].voteopts = result.voteopts || [];
+            return get_follow_by_pollId(array[index]._id, userId);
+          })
+          // Lấy follow của user hiện hành
+          .then(result => {
+            array[index].follow = result || { poll: array[index]._id };
+            return get_report_by_pollId(array[index]._id, userId);
+          })
+          // Lấy report của user hiện hành
+          .then(result => {
+            array[index].report = (result) ? true : false;
+            return get_bookmark_by_pollId(array[index]._id, userId);
+          })
+          // Lấy bookmark của user hiện hành
+          .then(result => {
+            array[index].bookmark = (result) ? true : false;
+            if (++counter === length) {
+              res.json(polls);
+            }
+          })
+          .catch(err => {
+            return handleError(err);
+          });
+      });
+    }, handleError);
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
     });
+  }
 };
 
 /**
- * List of Hot
+ * Lấy danh sách poll nổi bật cho màn hình polls.list
  */
 exports.findHotPolls = function (req, res) {
   var page = req.params.page || 0;
@@ -442,7 +483,7 @@ exports.findPollLike = function (req, res) {
 };
 
 /**
- * Find pollusers
+ * Find pollusers xxxx
  */
 exports.findPolluser = function (req, res) {
   Polluser.findOne({
@@ -463,7 +504,7 @@ exports.findPolluser = function (req, res) {
 };
 
 /**
- * Find report
+ * Find report xxxx
  */
 exports.findReport = function (req, res) {
   Report.findOne({
@@ -485,7 +526,7 @@ exports.findReport = function (req, res) {
 };
 
 /**
- * Find Bookmark
+ * Find Bookmark xxxx
  */
 exports.findBookmark = function (req, res) {
   Bookmark.findOne({
@@ -525,7 +566,7 @@ exports.removeBookmark = function (req, res) {
 };
 
 /**
- * Find report
+ * Find report xxxx
  */
 exports.findPollreport = function (req, res) {
   Pollreport.findOne({ poll: req.poll._id }).exec((err, _report) => {
@@ -701,15 +742,15 @@ exports.search = function (req, res) {
   function _polls(con) {
     return new Promise((resolve, reject) => {
       Poll.find(con)
-      .populate('category', 'name icon')
-      .populate('user', 'displayName profileImageURL')
-      .exec((err, polls) => {
-        if (err) {
-          return reject(err);
-        } else {
-          return resolve(polls);
-        }
-      });
+        .populate('category', 'name icon')
+        .populate('user', 'displayName profileImageURL')
+        .exec((err, polls) => {
+          if (err) {
+            return reject(err);
+          } else {
+            return resolve(polls);
+          }
+        });
     });
   }
 
@@ -814,3 +855,100 @@ exports.pollByID = function (req, res, next, id) {
       next();
     });
 };
+
+function temp() {
+  return new Promise((resolve, reject) => { });
+}
+// Lấy các report của poll
+function get_info_by_pollId(pollId) {
+  return new Promise((resolve, reject) => {
+    Pollreport.findOne({ poll: pollId }).exec((err, report) => {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(report);
+      }
+    });
+  });
+}
+// Lấy các option có status = 1 cho poll
+function get_opts_by_pollId(pollId) {
+  return new Promise((resolve, reject) => {
+    Opt.find({ poll: pollId, status: 1 }).exec((err, opts) => {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(opts);
+      }
+    });
+  });
+}
+// Lấy thông tin vote và các option được vote cho poll
+function get_votes_by_pollId(pollId) {
+  return new Promise((resolve, reject) => {
+    var rs = {}, ids;
+    Vote.find({ poll: pollId }).exec()
+      .then(votes => {
+        rs.votes = votes;
+        ids = _.pluck(votes, '_id');
+        Voteopt.find({ vote: { $in: ids } }).exec(function (err, opts) {
+          if (err) {
+            return reject(err);
+          } else {
+            rs.voteopts = opts;
+            return resolve(rs);
+          }
+        });
+      }, err => {
+        return reject(err);
+      });
+  });
+}
+// Lấy thông tin following 1 poll của user hiện hành 
+function get_follow_by_pollId(pollId, userId) {
+  return new Promise((resolve, reject) => {
+    if (!userId) return resolve();
+    Polluser.findOne({
+      poll: pollId,
+      user: userId
+    }).exec((err, follow) => {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(follow);
+      }
+    });
+  });
+}
+// Lấy thông tin user đã report poll hay chưa
+function get_report_by_pollId(pollId, userId) {
+  return new Promise((resolve, reject) => {
+    if (!userId) return resolve();
+    Report.findOne({
+      poll: pollId,
+      user: userId
+    }).exec((err, report) => {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(report);
+      }
+    });
+  });
+}
+// Lấy thông tin user đã bookmark poll hay chưa
+function get_bookmark_by_pollId(pollId, userId) {
+  return new Promise((resolve, reject) => {
+    if (!userId) return resolve();
+    Bookmark.findOne({
+      poll: pollId,
+      user: userId
+    }).exec((err, bookmark) => {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(bookmark);
+      }
+    });
+  });
+}

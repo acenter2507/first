@@ -382,8 +382,6 @@
         toast.error('You must vote at least one option.', 'Error!');
         return;
       }
-      console.log('vm.votedOpts', vm.votedOpts);
-      console.log('vm.selectedOpts', vm.selectedOpts);
       if (angular.equals(vm.votedOpts, vm.selectedOpts)) {
         return;
       }

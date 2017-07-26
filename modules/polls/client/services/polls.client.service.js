@@ -25,9 +25,6 @@
 
   function PollsApi($http) {
     return {
-      findHotPolls: (page) => {
-        return $http.get('/api/findHotPolls/' + page);
-      },
       findOpts: id => {
         return $http.get('/api/findOpts/' + id);
       },
@@ -36,15 +33,6 @@
       },
       findTags: id => {
         return $http.get('/api/findTags/' + id);
-      },
-      findVotes: id => {
-        return $http.get('/api/findVotes/' + id);
-      },
-      findOwnerVote: id => {
-        return $http.get('/api/findOwnerVote/' + id);
-      },
-      findVoteopts: id => {
-        return $http.get('/api/findVoteopts/' + id);
       },
       findPollLike: id => {
         return $http.get('/api/findPollLike/' + id);

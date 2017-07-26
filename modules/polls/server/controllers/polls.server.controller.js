@@ -473,68 +473,54 @@ exports.findTags = function (req, res) {
 /**
  * List of Votes in poll  xxxx
  */
-exports.findVotes = function (req, res) {
-  Poll.findVotes(req.poll._id).exec(function (err, votes) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.jsonp(votes);
-    }
-  });
-};
+// exports.findVotes = function (req, res) {
+//   Vote.find({ poll: req.poll._id }).exec(function (err, votes) {
+//     if (err) {
+//       return res.status(400).send({
+//         message: errorHandler.getErrorMessage(err)
+//       });
+//     } else {
+//       res.jsonp(votes);
+//     }
+//   });
+// };
 
 /**
  * Vote in poll of user
  */
-exports.findOwnerVote = function (req, res) {
-  var condition = {};
-  condition.poll = req.poll._id;
-  if (req.user) {
-    condition.user = req.user._id;
-    condition.guest = false;
-  } else {
-    condition.ip =
-      req.headers['X-Forwarded-For'] ||
-      req.headers['x-forwarded-for'] ||
-      req.client.remoteAddress;
-    condition.guest = true;
-  }
-  Poll.findOwnerVote(condition).exec(function (err, vote) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.jsonp(vote);
-    }
-  });
-};
+// exports.findOwnerVote = function (req, res) {
+//   var condition = {};
+//   condition.poll = req.poll._id;
+//   if (req.user) {
+//     condition.user = req.user._id;
+//     condition.guest = false;
+//   } else {
+//     condition.ip =
+//       req.headers['X-Forwarded-For'] ||
+//       req.headers['x-forwarded-for'] ||
+//       req.client.remoteAddress;
+//     condition.guest = true;
+//   }
+//   Poll.findOwnerVote(condition).exec(function (err, vote) {
+//     if (err) {
+//       return res.status(400).send({
+//         message: errorHandler.getErrorMessage(err)
+//       });
+//     } else {
+//       res.jsonp(vote);
+//     }
+//   });
+// };
 
 /**
- * Get all info of vote in poll xxxx
+ * Lấy toàn bộ thông tin các vote và các opt của vote
  */
 exports.findVoteopts = function (req, res) {
-  var rs = {}, ids;
-  Poll.findVotes(req.poll._id).exec(function (err, _votes) {
-    if (err) {
-      handleError(err);
-    } else {
-      rs.votes = _votes;
-      rs.voteopts = [];
-      ids = _.pluck(_votes, '_id');
-      Voteopt.find({ vote: { $in: ids } }).exec(function (err, opts) {
-        if (err) {
-          handleError(err);
-        } else {
-          rs.voteopts = opts;
-          res.jsonp(rs);
-        }
-      });
-    }
-  });
-
+  get_votes_by_pollId(req.poll._id)
+    .then(result => {
+      res.jsonp(result);
+    })
+    .catch(handleError);
   function handleError(err) {
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)

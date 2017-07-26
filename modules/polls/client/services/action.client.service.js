@@ -75,7 +75,6 @@
           });
       });
     };
-
     /**
      * Lấy danh sách category (Kèm count poll)
      */
@@ -89,7 +88,6 @@
           });
       });
     };
-
     /**
      * Lấy toàn bộ thông tin của user đối với poll màn hình polls.view
      */
@@ -355,25 +353,25 @@
           });
       });
     };
-    this.get_vote = pollId => {
-      return new Promise((resolve, reject) => {
-        PollsApi.findOwnerVote(pollId)
-          .then(res => {
-            return resolve(res);
-          })
-          .catch(err => {
-            return reject(err);
-          });
-      });
-    };
-    // get all vote for option in poll
+    // this.get_vote = pollId => {
+    //   return new Promise((resolve, reject) => {
+    //     $http.get('/api/findOwnerVote/' + pollId)
+    //       .then(res => {
+    //         return resolve(res);
+    //       }, err => {
+    //         return reject(err);
+    //       });
+    //   });
+    // };
+    /**
+     * Lấy toàn bộ thông tin các vote và các opt của vote
+     */
     this.get_voteopts = pollId => {
       return new Promise((resolve, reject) => {
-        PollsApi.findVoteopts(pollId)
+        $http.get('/api/findVoteopts/' + page)
           .then(res => {
             return resolve(res);
-          })
-          .catch(err => {
+          }, err => {
             return reject(err);
           });
       });
@@ -437,7 +435,6 @@
         }
       });
     };
-
     /**
      * Lưu 1 like comment
      */
@@ -491,8 +488,6 @@
         }
       });
     };
-
-
     // get report info for user in poll
     this.get_report = pollId => {
       return new Promise((resolve, reject) => {

@@ -47,7 +47,6 @@
     vm.poll = poll;
     vm.poll.close = vm.poll.close ? moment(vm.poll.close) : vm.poll.close;
     vm.isClosed = moment(vm.poll.close).isAfter(new moment());
-    vm.poll.tags = [];
     vm.categorys = Categorys.query();
     vm.bk_poll = _.clone(poll);
     vm.form = {};
@@ -60,7 +59,7 @@
       if (vm.poll._id) {
         initSocket();
         get_opts();
-        get_tags();
+        // get_tags();
       }
       analysic_nofif();
     }

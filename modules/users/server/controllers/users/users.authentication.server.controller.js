@@ -8,8 +8,8 @@ var path = require('path'),
   mongoose = require('mongoose'),
   passport = require('passport'),
   User = mongoose.model('User'),
-  Userreport = mongoose.model('Userreport');
-Userlogin = mongoose.model('Userlogin');
+  Userreport = mongoose.model('Userreport'),
+  Userlogin = mongoose.model('Userlogin');
 
 // URLs for which user can't be redirected on signin
 var noReturnUrls = [

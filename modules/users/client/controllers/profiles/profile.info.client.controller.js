@@ -26,7 +26,6 @@ angular.module('users').controller('ProfileInfoController', [
           $scope.votes = res.data.votes;
           merge_activity();
           $scope.busy = false;
-          $scope.$apply();
         }, err => {
           toast.error('Can\'t load user info ' + err.message, 'Error!');
         });

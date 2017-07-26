@@ -38,8 +38,8 @@ app.init(function () {
   - Chức năng private và share link => done
   - Chức năng nhập lý do khi report => done
   - Chức năng search => done
-  - Đang code màn hình admin user (Mấy cái button xóa trong màn hình view)
-  - Rà soát lại toàn bộ các request lấy db, tổng hợp và dọn sạch
+  - Đang code màn hình admin user (Mấy cái button xóa trong màn hình view) => done
+  - Rà soát lại toàn bộ các request lấy db, tổng hợp và dọn sạch => done
   - Chuc nang luu thong tin login cua user
 
   - Chức năng quản lý toàn bộ thông tin của user

@@ -9,6 +9,7 @@ var path = require('path'),
   passport = require('passport'),
   User = mongoose.model('User'),
   Userreport = mongoose.model('Userreport');
+Userlogin = mongoose.model('Userlogin');
 
 // URLs for which user can't be redirected on signin
 var noReturnUrls = [
@@ -36,6 +37,13 @@ exports.signup = function (req, res) {
     } else {
       // Remove sensitive data before login
       var report = new Userreport({ user: user._id });
+      var login = new Userlogin({ user: user._id });
+      login.agent = req.headers['user-agent'];
+      login.ip =
+        req.headers['X-Forwarded-For'] ||
+        req.headers['x-forwarded-for'] ||
+        req.client.remoteAddress;
+      login.save();
       report.save();
       user.password = undefined;
       user.salt = undefined;
@@ -48,7 +56,7 @@ exports.signup = function (req, res) {
       });
     }
   });
-      
+
   //   }
   // });
   function handleError(err) {
@@ -62,6 +70,7 @@ exports.signup = function (req, res) {
  * Signin after passport authentication
  */
 exports.signin = function (req, res, next) {
+  console.log('***************************************** login');
   passport.authenticate('local', function (err, user, info) {
     if (err || !user) {
       res.status(400).send(info);

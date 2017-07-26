@@ -12,7 +12,6 @@
     '$window',
     'Authentication',
     'categoryResolve',
-    'Action',
     'toastr',
     'ngDialog'
   ];
@@ -23,7 +22,6 @@
     $window,
     Authentication,
     category,
-    Action,
     toast,
     dialog
   ) {

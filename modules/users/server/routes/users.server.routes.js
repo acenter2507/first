@@ -12,7 +12,11 @@ module.exports = function (app) {
   app.route('/api/users/picture').post(users.changeProfilePicture);
   app.route('/api/users/search').get(users.search_user_by_name);
 
+  // Lấy thông tin của user đang được xem profile page
   app.route('/api/profile/:profileId').get(users.profile);
+  app.route('/api/profile/:profileId/activitys').get(users.activitys);
+
+
   app.route('/api/profile/:profileId/polls').get(users.all_polls);
   app.route('/api/profile/:profileId/polls/:page').get(users.polls);
   app.route('/api/profile/:profileId/cmts').get(users.all_cmts);

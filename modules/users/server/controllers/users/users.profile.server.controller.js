@@ -25,6 +25,7 @@ var _ = require('lodash'),
   Like = mongoose.model('Like'),
   Userreport = mongoose.model('Userreport');
 
+var pollController = require(path.resolve('./modules/polls/server/controllers/polls.server.controller'));
 /**
  * Update user details
  */
@@ -122,59 +123,59 @@ exports.profile = function (req, res) {
   res.json(req.profile || null);
 };
 
-exports.reportByID = function (req, res, next, id) {
+/**
+ * Lấy các thông tin mà user đã tương tác cho màn hình Profile.info
+ */
+exports.activitys = function (req, res) {
+  var result = {};
+  Poll.find({ user: req.profile._id }).sort('-created')
+    .select('title created body isPublic').exec()
+    .then(polls => {
+      result.polls = polls;
+      return Cmt.find({ user: req.profile._id }).sort('-created')
+        .select('created body')
+        .populate('poll', 'title isPublic').exec();
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).send({
-      message: 'Report is invalid'
-    });
-  }
+    }, handleError)
+    .then(cmts => {
+      result.cmts = cmts;
+      return Vote.find({ user: req.profile._id }).sort('-created')
+        .select('created')
+        .populate('poll', 'title isPublic').exec();
+    }, handleError)
+    .then(votes => {
+      if (votes.length === 0) {
+        result.votes = votes;
+        return res.jsonp(result);
+      } else {
+        var length = votes.length;
+        var counter = 0;
+        votes.forEach(function (instance, index, array) {
+          array[index] = instance.toObject();
+          pollController.get_opts_by_voteId(array[index]._id)
+            .then(opts => {
+              array[index].opts = opts;
+              if (++counter === length) {
+                result.votes = votes;
+                res.jsonp(result);
+              }
 
-  Userreport.findById(id).exec(function (err, report) {
-    if (err) {
-      return next(err);
-    } else if (!report) {
-      return res.status(404).send({
-        message: 'No Report with that identifier has been found'
-      });
-    }
-    req.report = report;
-    next();
-  });
-};
+            })
+            .catch(handleError);
+        });
 
-exports.read_report = function (req, res) {
-  res.json(req.report || null);
-};
-exports.create_report = function (req, res) {
-  var report = new Userreport(req.body);
-  report.save(function (err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.jsonp(report);
-    }
-  });
-};
-exports.update_report = function (req, res) {
-  var report = req.report;
-
-  report = _.extend(report, req.body);
-  report.save()
-    .then(_report => {
-      res.jsonp(_report);
+      }
     }, handleError);
+
+
+
+
 
   function handleError(err) {
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
   }
-};
-exports.delete_report = function (req, res) {
-  res.json(req.report || null);
 };
 /**
  * Get polls of user for activity
@@ -446,4 +447,61 @@ exports.search_user_by_name = function (req, res) {
         res.send(JSON.stringify({ users: users }));
       }
     });
+};
+
+/**
+ * USER REPORT
+ */
+exports.reportByID = function (req, res, next, id) {
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).send({
+      message: 'Report is invalid'
+    });
+  }
+
+  Userreport.findById(id).exec(function (err, report) {
+    if (err) {
+      return next(err);
+    } else if (!report) {
+      return res.status(404).send({
+        message: 'No Report with that identifier has been found'
+      });
+    }
+    req.report = report;
+    next();
+  });
+};
+exports.read_report = function (req, res) {
+  res.json(req.report || null);
+};
+exports.create_report = function (req, res) {
+  var report = new Userreport(req.body);
+  report.save(function (err) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(report);
+    }
+  });
+};
+exports.update_report = function (req, res) {
+  var report = req.report;
+
+  report = _.extend(report, req.body);
+  report.save()
+    .then(_report => {
+      res.jsonp(_report);
+    }, handleError);
+
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
+};
+exports.delete_report = function (req, res) {
+  res.json(req.report || null);
 };

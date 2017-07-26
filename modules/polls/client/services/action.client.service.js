@@ -128,7 +128,9 @@
           });
       });
     };
-
+    /**
+     * Lấy thông tin count của user
+     */
     this.get_user_report = userId => {
       return new Promise((resolve, reject) => {
         UserApi.get_user_report(userId)
@@ -597,7 +599,9 @@
     //       });
     //   });
     // };
-    // get categorys
+    /**
+     * Lấy list poll thuộc category
+     */
     this.get_category_polls = (categoryId, page, sort) => {
       return $http.get('/api/categorys/' + categoryId + '/polls/' + page + '/' + sort);
     };

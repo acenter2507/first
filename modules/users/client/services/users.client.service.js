@@ -33,6 +33,9 @@ angular.module('users').factory('Profile', ['$resource',
 
 angular.module('users').factory('UserApi', ['$http',
   function ($http) {
+    this.get_activitys = userId => {
+      return $http.get('/api/profile/' + userId + '/activitys/');
+    };
     this.get_polls = (userId, page) => {
       return $http.get('/api/profile/' + userId + '/polls/' + page);
     };

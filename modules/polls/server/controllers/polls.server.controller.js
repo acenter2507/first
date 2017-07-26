@@ -971,7 +971,7 @@ function get_votes_by_pollId(pollId) {
       });
   });
 }
-// Lấy thông tin following 1 poll của user hiện hành 
+// Lấy thông tin following 1 poll của user hiện hành
 function get_follow_by_pollId(pollId, userId) {
   return new Promise((resolve, reject) => {
     if (!userId) return resolve();
@@ -1108,3 +1108,4 @@ exports.get_follow_by_pollId = get_follow_by_pollId;
 exports.get_report_by_pollId = get_report_by_pollId;
 exports.get_bookmark_by_pollId = get_bookmark_by_pollId;
 exports.get_like_by_cmtId_and_userId = get_like_by_cmtId_and_userId;
+exports.get_opts_by_voteId = get_opts_by_voteId;

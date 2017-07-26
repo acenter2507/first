@@ -332,7 +332,6 @@ exports.bookmarks = function (req, res) {
     .skip(10 * page)
     .exec(function (err, bookmarks) {
       if (err) {
-        console.log(err);
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)
         });

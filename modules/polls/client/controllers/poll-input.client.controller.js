@@ -86,7 +86,7 @@
           .then(_poll => {
             vm.poll = _poll;
             vm.opts = vm.poll.opts;
-            $scope.apply();
+            $scope.$apply();
           }, err => {
             toast.error(err.message, 'Error!');
           });

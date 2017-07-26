@@ -19,7 +19,6 @@ angular.module('users').controller('ProfileInfoController', [
       $scope.busy = true;
       UserApi.get_activitys($scope.profile._id)
         .then(res => {
-          console.log(res);
           $scope.polls = res.data.polls;
           $scope.cmts = res.data.cmts;
           $scope.votes = res.data.votes;

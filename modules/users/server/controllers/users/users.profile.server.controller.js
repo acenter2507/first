@@ -133,14 +133,12 @@ exports.activitys = function (req, res) {
     .then(polls => {
       result.polls = polls;
       return Cmt.find({ user: req.profile._id }).sort('-created')
-        .select('created body')
         .populate('poll', 'title isPublic').exec();
 
     }, handleError)
     .then(cmts => {
       result.cmts = cmts;
       return Vote.find({ user: req.profile._id }).sort('-created')
-        .select('created')
         .populate('poll', 'title isPublic').exec();
     }, handleError)
     .then(votes => {

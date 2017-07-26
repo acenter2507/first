@@ -1088,4 +1088,4 @@ function get_like_by_pollId_and_userId(pollId, userId) {
       }
     });
   });
-};
+}

@@ -1102,7 +1102,7 @@ function get_full_by_pollId(pollId, userId) {
       })
       // Lấy follow của user hiện hành
       .then(result => {
-        info.follow = result || { poll: array[index]._id };
+        info.follow = result || { poll: pollId };
         return get_report_by_pollId(pollId, userId);
       })
       // Lấy report của user hiện hành

@@ -197,7 +197,7 @@ exports.polls = function (req, res) {
 };
 
 /**
- * Get cmts of user
+ * Lấy các cmts mà user đã create cho màn hình Profile.cmts
  */
 exports.cmts = function (req, res) {
   var page = req.params.page || 0;
@@ -362,8 +362,14 @@ exports.likes = function (req, res) {
     });
 };
 
+/**
+ * Lấy các poll user đã dislike
+ */
 exports.dislikes = function (req, res) {
   var page = req.params.page || 0;
+  var userId = req.user ? req.user._id : undefined;
+  var polls = [];
+
   Like.find({ user: req.profile._id, type: 2 })
     .sort('-created')
     .populate({
@@ -374,16 +380,36 @@ exports.dislikes = function (req, res) {
         { path: 'category', select: 'name icon', model: 'Category' }
       ]
     })
-    .skip(10 * page)
-    .exec(function (err, dislikes) {
-      if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      } else {
-        res.jsonp(dislikes);
-      }
+    .skip(10 * page).exec()
+    .then(dislikes => {
+      if (dislikes.length === 0) return res.jsonp([]);
+      polls = _.pluck(dislikes, 'poll');
+      var length = polls.length;
+      var counter = 0;
+      polls.forEach(function (instance, index, array) {
+        array[index] = instance.toObject();
+        pollController.get_full_by_pollId(array[index]._id, userId)
+          .then(result => {
+            array[index].report = result.report;
+            array[index].opts = result.opts;
+            array[index].votes = result.votes;
+            array[index].voteopts = result.voteopts;
+            array[index].follow = result.follow;
+            array[index].reported = result.reported;
+            array[index].bookmarked = result.bookmarked;
+            if (++counter === length) {
+              res.jsonp(polls);
+            }
+          })
+          .catch(handleError);
+      });
+    }, handleError);
+
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
     });
+  }
 };
 
 exports.report = function (req, res) {

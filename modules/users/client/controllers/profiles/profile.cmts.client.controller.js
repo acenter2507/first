@@ -3,7 +3,8 @@
 angular.module('users').controller('ProfileCmtsController', [
   '$scope',
   'UserApi',
-  function ($scope, UserApi) {
+  'toastr',
+  function ($scope, UserApi, toast) {
     $scope.cmts = [];
     $scope.page = 0;
     $scope.busy = false;
@@ -22,10 +23,6 @@ angular.module('users').controller('ProfileCmtsController', [
       }
       $scope.busy = true;
       UserApi.get_cmts($scope.profile._id, $scope.page)
-        .then(res => {
-          console.log('1', res);
-        });
-      UserApi.get_cmts($scope.profile._id, $scope.page)
         .success(res => {
           if (!res || !res.length || res.length === 0) {
             $scope.busy = false;
@@ -38,7 +35,7 @@ angular.module('users').controller('ProfileCmtsController', [
           $scope.busy = false;
         })
         .error(err => {
-          alert(err);
+          toast.error(err.message, 'Error!');
         });
     }
     $scope.cmt_filter = cmt => {

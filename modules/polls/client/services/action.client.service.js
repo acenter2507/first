@@ -213,15 +213,12 @@
     /**
     * Lưu poll vào danh sách đã view của user
     */
-    this.save_view_poll = pollId => {
+    this.save_view_poll = view => {
       return new Promise((resolve, reject) => {
-        $http.get('/api/findView/' + pollId)
-          .then(res => {
-            if (!res.data || !res.data._id) {
-              var rs_view = new Views({ poll: pollId, user: Authentication.user._id });
-              rs_view.$save();
-            }
-          });
+        if (view._id) return resolve();
+        var rs_view = new Views(view);
+        rs_view.user = Authentication.user._id;
+        rs_view.$save();
       });
     };
     // Lưu comment vào db
@@ -431,17 +428,6 @@
         }
       });
     };
-    // get report info for user in poll
-    this.get_report = pollId => {
-      return new Promise((resolve, reject) => {
-        $http.get('/api/findReport/' + pollId)
-          .then(res => {
-            return resolve(res);
-          }, err => {
-            return reject(err);
-          });
-      });
-    };
     this.save_report = (poll, reason) => {
       return new Promise((resolve, reject) => {
         var rs_report = new Reports({
@@ -459,16 +445,6 @@
         );
       });
     };
-    // this.get_follow = pollId => {
-    //   return new Promise((resolve, reject) => {
-    //     $http.get('/api/findPolluser/' + pollId)
-    //       .then(res => {
-    //         return resolve(res);
-    //       }, err => {
-    //         return reject(err);
-    //       });
-    //   });
-    // };
     // Lưu follow vào db
     this.save_follow = follow => {
       return new Promise((resolve, reject) => {
@@ -486,17 +462,6 @@
         function errorCb(err) {
           reject(err);
         }
-      });
-    };
-    // get info bookmark of user
-    this.get_bookmark = pollId => {
-      return new Promise((resolve, reject) => {
-        $http.get('/api/findBookmark/' + pollId)
-          .then(res => {
-            return resolve(res);
-          }, err => {
-            return reject(err);
-          });
       });
     };
     this.save_bookmark = pollId => {

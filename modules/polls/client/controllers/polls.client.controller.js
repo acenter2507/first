@@ -150,7 +150,6 @@
             cmt.likeCnt = res.likeCnt;
           }
         });
-        // $scope.$apply();
       });
       Socket.on('poll_vote', res => {
         Action.get_voteopts(vm.poll._id)
@@ -251,6 +250,7 @@
           vm.reported = res.data.reported;
           vm.bookmarked = res.data.bookmarked;
           vm.like = res.data.like;
+          vm.view = res.data.view;
         })
         .catch(err => {
           toast.error('Không thể load thông tin user' + err.message, 'Error!');
@@ -311,7 +311,7 @@
         var count_up = $timeout(() => {
           Action.count_up_poll_view(vm.poll.report);
           if (vm.isLogged) {
-            Action.save_view_poll(vm.poll._id);
+            Action.save_view_poll(vm.view);
           }
         }, 30000);
         $scope.$on('$destroy', () => {

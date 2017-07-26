@@ -56,15 +56,6 @@ angular.module('polls').controller('PollsSearchController', [
         Action.search($scope.condition)
           .then(res => {
             $scope.polls = res.data;
-          //   var promise = [];
-          //   $scope.polls.forEach(function (item) {
-          //     promise.push(get_owner_follow(item.poll));
-          //     promise.push(get_reported(item.poll));
-          //     promise.push(get_bookmarked(item.poll));
-          //   }, this);
-          //   return Promise.all(promise);
-          // })
-          // .then(res => {
             create_sort();
             $scope.busy = false;
           })
@@ -90,54 +81,6 @@ angular.module('polls').controller('PollsSearchController', [
       }
     }
 
-    function get_owner_follow(poll) {
-      return new Promise((resolve, reject) => {
-        if (!$scope.isLogged) {
-          poll.follow = {};
-          return resolve();
-        }
-        Action.get_follow(poll._id)
-          .then(res => {
-            poll.follow = res.data || { poll: poll._id };
-            return resolve(res.data);
-          })
-          .catch(err => {
-            return reject(err);
-          });
-      });
-    }
-    function get_reported(poll) {
-      return new Promise((resolve, reject) => {
-        if (!$scope.isLogged) {
-          poll.reported = false;
-          return resolve();
-        }
-        Action.get_report(poll._id)
-          .then(res => {
-            poll.reported = (res.data) ? res.data : false;
-            return resolve(res.data);
-          })
-          .catch(err => {
-            return reject(err);
-          });
-      });
-    }
-    function get_bookmarked(poll) {
-      return new Promise((resolve, reject) => {
-        if (!$scope.isLogged) {
-          poll.bookmarked = false;
-          return resolve();
-        }
-        Action.get_bookmark(poll._id)
-          .then(res => {
-            poll.bookmarked = (res.data) ? res.data : false;
-            return resolve(res.data);
-          })
-          .catch(err => {
-            return reject(err);
-          });
-      });
-    }
     $scope.selectedUserFn = function (selected) {
       if (selected) {
         $scope.condition.by = selected.originalObject._id;

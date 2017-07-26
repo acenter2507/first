@@ -22,6 +22,10 @@ angular.module('users').controller('ProfileCmtsController', [
       }
       $scope.busy = true;
       UserApi.get_cmts($scope.profile._id, $scope.page)
+        .then(res => {
+          console.log('1', res);
+        });
+      UserApi.get_cmts($scope.profile._id, $scope.page)
         .success(res => {
           if (!res || !res.length || res.length === 0) {
             $scope.busy = false;

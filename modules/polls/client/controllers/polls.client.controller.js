@@ -240,7 +240,7 @@
       // Thiết lập các thông tin cho poll
       vm.poll.close = vm.poll.close ? moment(vm.poll.close) : vm.poll.close;
       vm.isClosed = vm.poll.close ? moment(vm.poll.close).isBefore(new moment()) : false;
-      vm.opts = vm.poll.opts;
+      vm.opts = _.where(vm.poll.opts, { status: 1 });
       vm.chart = {
         type: 'pie',
         options: { responsive: true },

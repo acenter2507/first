@@ -303,7 +303,7 @@ exports.findPolls = function (req, res) {
           })
           // Lấy các options
           .then(result => {
-            array[index].opts = result || [];
+            array[index].opts = _.filter(result, { status: 1 }) || [];
             return get_votes_by_pollId(array[index]._id);
           })
           // Lấy toàn bộ thông tin votes
@@ -940,7 +940,7 @@ function get_info_by_pollId(pollId) {
 // Lấy các option có status = 1 cho poll
 function get_opts_by_pollId(pollId) {
   return new Promise((resolve, reject) => {
-    Opt.find({ poll: pollId, status: 1 }).exec((err, opts) => {
+    Opt.find({ poll: pollId }).exec((err, opts) => {
       if (err) {
         return reject(err);
       } else {

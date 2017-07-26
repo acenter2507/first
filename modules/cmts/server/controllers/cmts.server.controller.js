@@ -88,14 +88,24 @@ exports.update = function (req, res) {
   var cmt = req.cmt;
 
   cmt = _.extend(cmt, req.body);
-
+  var userId = (req.user) ? req.user._id : undefined;
   cmt.save(function (err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.jsonp(cmt);
+      cmt = cmt.toJSON();
+      pollController.get_like_by_cmtId_and_userId(cmt._id, userId)
+        .then(result => {
+          cmt.like = result || {};
+          res.jsonp(cmt);
+        })
+        .catch(err => {
+          return res.status(400).send({
+            message: errorHandler.getErrorMessage(err)
+          });
+        });
     }
   });
 };
@@ -131,15 +141,30 @@ exports.delete = function (req, res) {
  * List of Cmts
  */
 exports.list = function (req, res) {
-  Cmt.find().sort('-created').populate('user', 'displayName profileImageURL').exec(function (err, cmts) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
+  var userId = (req.user) ? req.user._id : undefined;
+  Cmt.find().sort('-created')
+    .populate('user', 'displayName profileImageURL').exec()
+    .then(cmts => {
+      if (cmts.length === 0) return res.jsonp(cmts);
+      var length = cmts.length;
+      var counter = 0;
+      cmts.forEach(function (instance, index, array) {
+        array[index] = instance.toObject();
+        pollController.get_like_by_cmtId_and_userId(array[index]._id, userId)
+          .then(result => {
+            array[index].like = result || {};
+            if (++counter === length) {
+              res.jsonp(cmts);
+            }
+          })
+          .catch(handleError);
       });
-    } else {
-      res.jsonp(cmts);
-    }
-  });
+    }, handleError);
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 };
 
 /**
@@ -164,24 +189,4 @@ exports.cmtByID = function (req, res, next, id) {
     req.cmt = cmt;
     next();
   });
-};
-
-/**
- * List of Cmts
- */
-exports.findLike = function (req, res) {
-  var condition = { cmt: req.cmt._id, user: req.user._id };
-  Cmtlike.findOne(condition).exec(function (err, cmtlike) {
-    if (err) {
-      handleError(err);
-    } else {
-      res.jsonp(cmtlike);
-    }
-  });
-
-  function handleError(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
-    });
-  }
 };

@@ -20,9 +20,6 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/cmts/:cmtId',
       permissions: '*'
-    }, {
-      resources: '/api/findLike/:cmtId',
-      permissions: '*'
     }]
   }, {
     roles: ['user'],
@@ -32,9 +29,6 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/cmts/:cmtId',
       permissions: ['get']
-    }, {
-      resources: '/api/findLike/:cmtId',
-      permissions: '*'
     }]
   }, {
     roles: ['guest'],
@@ -44,9 +38,6 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/cmts/:cmtId',
       permissions: ['get']
-    }, {
-      resources: '/api/findLike/:cmtId',
-      permissions: '*'
     }]
   }]);
 };

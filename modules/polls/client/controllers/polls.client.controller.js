@@ -288,23 +288,6 @@
         }
       }
     }
-    function get_like_cmt(cmt) {
-      return new Promise((resolve, reject) => {
-        if (!vm.isLogged) {
-          cmt.like = {};
-          return resolve(cmt);
-        } else {
-          Action.get_like_cmt(cmt._id)
-            .then(res => {
-              cmt.like = res.data || {};
-              return resolve(cmt);
-            })
-            .catch(err => {
-              return reject(err);
-            });
-        }
-      });
-    }
 
     vm.get_cmts = get_cmts;
     function get_cmts() {
@@ -398,6 +381,8 @@
         toast.error('You must vote at least one option.', 'Error!');
         return;
       }
+      console.log('vm.votedOpts', vm.votedOpts);
+      console.log('vm.selectedOpts', vm.selectedOpts);
       if (angular.equals(vm.votedOpts, vm.selectedOpts)) {
         return;
       }

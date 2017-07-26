@@ -17,8 +17,6 @@ module.exports = function(app) {
     .put(cmts.update)
     .delete(cmts.delete);
 
-  app.route('/api/findLike/:cmtId').get(cmts.findLike);
-
   // Finish by binding the Cmt middleware
   app.param('cmtId', cmts.cmtByID);
 };

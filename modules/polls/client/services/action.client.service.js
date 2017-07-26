@@ -22,7 +22,6 @@
     'ViewsService',
     'PollsApi',
     'VotesApi',
-    'CmtsApi',
     'UserApi'
   ];
 
@@ -46,7 +45,6 @@
     Views,
     PollsApi,
     VotesApi,
-    CmtsApi,
     UserApi
   ) {
     /**
@@ -132,6 +130,10 @@
           });
       });
     };
+
+
+
+
 
     this.get_user_report = userId => {
       return new Promise((resolve, reject) => {
@@ -376,7 +378,9 @@
           });
       });
     };
-    // Lưu vote vào db
+    /**
+     * Lưu 1 vote của poll
+     */
     this.save_vote = (vote, opts, poll) => {
       return new Promise((resolve, reject) => {
         vote.opts = opts;
@@ -433,18 +437,6 @@
         }
       });
     };
-    // api get comments
-    this.get_like_cmt = cmtId => {
-      return new Promise((resolve, reject) => {
-        CmtsApi.findLike(cmtId)
-          .then(res => {
-            return resolve(res);
-          })
-          .catch(err => {
-            return reject(err);
-          });
-      });
-    };
 
     /**
      * Lưu 1 like comment
@@ -499,6 +491,8 @@
         }
       });
     };
+
+
     // get report info for user in poll
     this.get_report = pollId => {
       return new Promise((resolve, reject) => {

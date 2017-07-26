@@ -246,7 +246,7 @@
         .then(res => {
           vm.ownVote = res.data.ownVote;
           vm.votedOpts = res.data.votedOpts;
-          vm.selectedOpts = res.data.votedOpts;
+          vm.selectedOpts = _.clone(vm.votedOpts);
           vm.follow = res.data.follow;
           vm.reported = res.data.reported;
           vm.bookmarked = res.data.bookmarked;

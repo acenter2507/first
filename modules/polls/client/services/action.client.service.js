@@ -132,6 +132,7 @@
           });
       });
     };
+
     this.get_user_report = userId => {
       return new Promise((resolve, reject) => {
         UserApi.get_user_report(userId)
@@ -444,7 +445,10 @@
           });
       });
     };
-    // Save like of comment
+
+    /**
+     * Lưu 1 like comment
+     */
     this.save_like_cmt = (cmt, type) => {
       // type: 1: like - 2: dislike;
       return new Promise((resolve, reject) => {

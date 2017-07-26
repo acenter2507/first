@@ -73,7 +73,6 @@
 
     // Infinity scroll
     vm.cmts = [];
-    vm.new_cmts = [];
     vm.page = 0;
     vm.busy = false;
     vm.stopped = false;
@@ -321,13 +320,11 @@
             vm.busy = false;
             return;
           }
-          // Lấy data trả về
-          vm.new_cmts = res.data || [];
           // Gán data vào danh sách comment hiện tại
-          vm.cmts = _.union(vm.cmts, vm.new_cmts);
+          vm.cmts = _.union(vm.cmts, res.data);
+          console.log(res.data);
           vm.page += 1;
           vm.busy = false;
-          vm.new_cmts = [];
           $scope.$apply();
         })
         .catch(err => {

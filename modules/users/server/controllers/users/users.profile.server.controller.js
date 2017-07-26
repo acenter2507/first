@@ -263,6 +263,9 @@ exports.follows = function (req, res) {
 
 };
 
+/**
+ * Lấy các poll user đã bookmark tại màn hình profile.bookmark
+ */
 exports.bookmarks = function (req, res) {
   var page = req.params.page || 0;
   var userId = req.user ? req.user._id : undefined;

@@ -13,6 +13,7 @@ var path = require('path'),
   Userreport = mongoose.model('Userreport'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
+var pollController = require('./modules/polls/server/controllers/polls.server.controller');
 
 /**
  * Create a Cmt
@@ -65,8 +66,18 @@ exports.read = function (req, res) {
   // Add a custom field to the Article, for determining if the current User is the "owner".
   // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
   cmt.isCurrentUserOwner = req.user && cmt.user && cmt.user._id.toString() === req.user._id.toString();
+  var userId = (req.user) ? req.user._id : undefined;
 
-  res.jsonp(cmt);
+  pollController.get_like_by_cmtId_and_userId(cmt._id, userId)
+    .then(result => {
+      cmt.like = result || {};
+      res.jsonp(cmt);
+    })
+    .catch(err => {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    });
 };
 
 /**

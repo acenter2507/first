@@ -329,9 +329,7 @@ exports.findPolls = function (req, res) {
               res.jsonp(polls);
             }
           })
-          .catch(err => {
-            return handleError(err);
-          });
+          .catch(handleError);
       });
     }, handleError);
   function handleError(err) {
@@ -404,6 +402,40 @@ exports.findOwners = function (req, res) {
       });
     });
 };
+
+/**
+ * Load comment cho màn hình poll.view theo page
+ */
+exports.findCmts = function (req, res) {
+  var userId = req.user ? req.user._id : undefined;
+  var page = req.params.page || 0;
+  Cmt.find({ poll: req.poll._id })
+    .sort('-created')
+    .populate('user', 'displayName profileImageURL')
+    .skip(10 * page)
+    .limit(10).exec()
+    .then(cmts => {
+      if (cmts.length === 0) return res.jsonp(cmts);
+      var length = cmts.length;
+      var counter = 0;
+      cmts.forEach(function (instance, index, array) {
+        array[index] = instance.toObject();
+        get_like_by_cmtId_and_userId(array[index]._id, userId)
+          .then(result => {
+            array[index].like = result || {};
+            if (++counter === length) {
+              res.jsonp(cmts);
+            }
+          })
+          .catch(handleError);
+      });
+    }, handleError);
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
+};
 /* ------------------------------------------------------------------- */
 /**
  * List of Opts in poll xxxxx
@@ -422,26 +454,6 @@ exports.findOpts = function (req, res) {
     });
 };
 
-/**
- * List of Cmts in poll
- */
-exports.findCmts = function (req, res) {
-  var page = req.params.page || 0;
-  Poll.findCmts(req.poll._id)
-    .sort('-created')
-    .populate('user', 'displayName profileImageURL')
-    .skip(10 * page)
-    .limit(10)
-    .exec(function (err, cmts) {
-      if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      } else {
-        res.jsonp(cmts);
-      }
-    });
-};
 
 /**
  * List of Tags in poll xxxx
@@ -1088,3 +1100,18 @@ function get_like_by_pollId_and_userId(pollId, userId) {
     });
   });
 }
+// Lấy thông tin like của user hiện hành đối với 1 comment
+function get_like_by_cmtId_and_userId(cmtId, userId) {
+  return new Promise((resolve, reject) => {
+    if (!userId) return resolve();
+    Cmtlike.findOne({ cmt: cmtId, user: userId }).exec(function (err, cmtlike) {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(cmtlike);
+      }
+    });
+  });
+}
+
+exports.get_like_by_cmtId_and_userId = get_like_by_cmtId_and_userId;

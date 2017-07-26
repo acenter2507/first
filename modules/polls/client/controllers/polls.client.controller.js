@@ -124,6 +124,7 @@
       Socket.on('cmt_add', cmtId => {
         Action.get_cmt(cmtId)
           .then(res => {
+            console.log(res);
             return get_like_cmt(res.data);
           })
           .then(_cmt => {
@@ -273,66 +274,8 @@
           vm.like = res.data.like;
         })
         .catch(err => {
-          toast.error(err.message, 'Error!');
+          toast.error('Không thể load thông tin user' + err.message, 'Error!');
         });
-
-
-
-      // vm.votedOpts = [];
-      // vm.selectedOpts = [];
-      // vm.follow = { poll: vm.poll._id };
-      // vm.reported = false;
-      // vm.bookmarked = false;
-      // vm.like = {};
-      // return new Promise((resolve, reject) => {
-      //   Action.get_vote(vm.poll._id)
-      //     .then(res => { // Get ownVote
-      //       vm.ownVote = res && res.data ? res.data : { poll: vm.poll._id };
-      //       if (vm.ownVote._id) {
-      //         return Action.get_opts_for_vote(vm.ownVote._id);
-      //       } else {
-      //         return next();
-      //       }
-      //     })
-      //     .then(res => { // Get votedOpts
-      //       if (res && res.data) {
-      //         res.data.forEach(voteopt => {
-      //           vm.votedOpts.push(voteopt.opt._id);
-      //           vm.selectedOpts.push(voteopt.opt._id);
-      //         });
-      //       }
-      //       return (vm.isLogged) ? Action.get_follow(vm.poll._id) : next();
-      //     })
-      //     .then(res => { // Get follow
-      //       if (res && res.data) {
-      //         vm.follow = res.data;
-      //       }
-      //       return (vm.isLogged) ? Action.get_report(vm.poll._id) : next();
-      //     })
-      //     .then(res => { // Get reported
-      //       if (res && res.data) {
-      //         vm.reported = res.data;
-      //       }
-      //       return (vm.isLogged) ? Action.get_bookmark(vm.poll._id) : next();
-      //     })
-      //     .then(res => { // Get bookmarked
-      //       if (res && res.data) {
-      //         vm.bookmarked = res.data;
-      //       }
-      //       return (vm.isLogged) ? Action.get_like(vm.poll._id) : next();
-      //     })
-      //     .then(res => { // Get like
-      //       if (res && res.data) {
-      //         vm.like = res.data;
-      //       }
-      //       $scope.$apply();
-      //       return resolve();
-      //     })
-      //     .catch(err => {
-      //       toast.error(err.message, 'Error!');
-      //       return reject();
-      //     });
-      // });
     }
     function next() {
       return new Promise((resolve, reject) => {
@@ -380,14 +323,6 @@
           }
           // Lấy data trả về
           vm.new_cmts = res.data || [];
-          // Load thông tin like cho các comment mới
-          var promises = [];
-          vm.new_cmts.forEach(cmt => {
-            promises.push(get_like_cmt(cmt));
-          });
-          return Promise.all(promises);
-        })
-        .then(res => {
           // Gán data vào danh sách comment hiện tại
           vm.cmts = _.union(vm.cmts, vm.new_cmts);
           vm.page += 1;

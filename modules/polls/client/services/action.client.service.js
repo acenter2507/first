@@ -93,7 +93,7 @@
     };
 
     /**
-     * Lấy toàn bộ thông tin của user đối với poll
+     * Lấy toàn bộ thông tin của user đối với poll màn hình polls.view
      */
     this.get_owner_by_pollId = pollId => {
       return new Promise((resolve, reject) => {
@@ -105,7 +105,33 @@
           });
       });
     };
-
+    /**
+     * Load comments màn hình polls.view
+     */
+    this.get_cmts = (pollId, _page) => {
+      return new Promise((resolve, reject) => {
+        var page = _page || 0;
+        $http.get('/api/findCmts/' + pollId + '/' + page)
+          .then(res => {
+            return resolve(res);
+          }, err => {
+            return reject(err);
+          });
+      });
+    };
+    /**
+     * Load comments màn hình polls.view
+     */
+    this.get_cmt = cmtId => {
+      return new Promise((resolve, reject) => {
+        $http.get('api/cmts/' + cmtId)
+          .then(res => {
+            return resolve(res);
+          }, err => {
+            return reject(err);
+          });
+      });
+    };
     this.get_user_report = userId => {
       return new Promise((resolve, reject) => {
         UserApi.get_user_report(userId)
@@ -209,23 +235,6 @@
             }
           });
       });
-    };
-    // api get comments
-    this.get_cmts = (pollId, _page) => {
-      return new Promise((resolve, reject) => {
-        var page = _page || 0;
-        PollsApi.findCmts(pollId, page)
-          .then(res => {
-            return resolve(res);
-          })
-          .catch(err => {
-            return reject(err);
-          });
-      });
-    };
-    // api get comment by Id
-    this.get_cmt = cmtId => {
-      return $http.get('api/cmts/' + cmtId);
     };
     // Lưu comment vào db
     this.save_cmt = (poll, cmt) => {

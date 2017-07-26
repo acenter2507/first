@@ -262,6 +262,7 @@
     function get_owner_info() {
       Action.get_owner_by_pollId(vm.poll._id)
         .then(res => {
+          vm.ownVote = res.data.ownVote;
           vm.votedOpts = res.data.votedOpts;
           vm.selectedOpts = res.data.votedOpts;
           vm.follow = res.data.follow;

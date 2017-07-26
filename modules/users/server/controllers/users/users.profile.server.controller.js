@@ -181,6 +181,7 @@ exports.activitys = function (req, res) {
  */
 exports.polls = function (req, res) {
   var page = req.params.page || 0;
+  var userId = req.user ? req.user._id : undefined;
   Poll.find({ user: req.profile._id })
     .sort('-created')
     .populate('category', 'name icon')

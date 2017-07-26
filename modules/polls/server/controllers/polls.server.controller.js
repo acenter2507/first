@@ -417,22 +417,6 @@ exports.findCmts = function (req, res) {
 };
 
 /* ------------------------------------------------------------------- */
-/**
- * List of Opts in poll xxxxx
- */
-exports.findOpts = function (req, res) {
-  Opt.find({ poll: req.poll._id })
-    .populate('user', 'displayName')
-    .exec(function (err, opts) {
-      if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      } else {
-        res.jsonp(opts);
-      }
-    });
-};
 
 /**
  * Lấy toàn bộ thông tin các vote và các opt của vote
@@ -653,6 +637,7 @@ exports.findView = function (req, res) {
 
 exports.search = function (req, res) {
   const condition = req.body.condition;
+  var userId = req.user ? req.user._id : undefined;
   var search = {};
   var and_arr = [];
   and_arr.push({ isPublic: true });
@@ -694,89 +679,8 @@ exports.search = function (req, res) {
   var polls = [];
   _polls(search)
     .then(_polls => {
-      var promise = [];
-      _polls.forEach(poll => {
-        promise.push(_poll_report(poll));
-      });
-      return Promise.all(promise);
-    })
-    .then(_polls => {
-      var result = [];
-      if (condition.cmt && parseInt(condition.cmt)) {
-        var cmtCnt = parseInt(condition.cmt);
-        _polls.forEach(item => {
-          if (condition.compare === 'most') {
-            if (item.report.cmtCnt >= cmtCnt) {
-              result.push(item);
-            }
-          } else {
-            if (item.report.cmtCnt < cmtCnt) {
-              result.push(item);
-            }
-          }
-        });
-      } else {
-        result = _polls;
-      }
-      return new Promise((resolve, reject) => {
-        return resolve(result);
-      });
-    })
-    .then(_polls => {
-      var promise = [];
-      _polls.forEach(poll => {
-        promise.push(_poll_opts(poll));
-      });
-      return Promise.all(promise);
-    })
-    .then(_polls => {
-      var promise = [];
-      _polls.forEach(poll => {
-        promise.push(_poll_cmts(poll));
-      });
-      return Promise.all(promise);
-    })
-    .then(_polls => {
-      var result = [];
-      if (condition.key && condition.in === 'pollcontent') {
-        _polls.forEach(item => {
-          if (item.poll.title.indexOf(condition.key) >= 0) return result.push(item);
-          if (item.poll.body.indexOf(condition.key) >= 0) return result.push(item);
-          var check = false;
-          for (let index = 0; index < item.opts.length; index++) {
-            let element = item.opts[index];
-            if (element.title.indexOf(condition.key) >= 0 || element.body.indexOf(condition.key) >= 0) {
-              check = true;
-              break;
-            }
-          }
-          if (check) return result.push(item);
-        });
-      } else if (condition.key && condition.in === 'pollcmt') {
-        _polls.forEach(item => {
-          if (item.poll.title.indexOf(condition.key) >= 0) return result.push(item);
-          if (item.poll.body.indexOf(condition.key) >= 0) return result.push(item);
-          var check = false;
-          for (let index = 0; index < item.opts.length; index++) {
-            let element = item.opts[index];
-            if (element.title.indexOf(condition.key) >= 0 || element.body.indexOf(condition.key) >= 0) {
-              check = true;
-              break;
-            }
-          }
-          if (check) return result.push(item);
-          for (let index = 0; index < item.cmts.length; index++) {
-            let element = item.cmts[index];
-            if (element.body.indexOf(condition.key) >= 0) {
-              check = true;
-              break;
-            }
-          }
-          if (check) return result.push(item);
-        });
-      } else {
-        result = _polls;
-      }
+      var temp = _filter_report(_polls, condition);
+      var polls = _filter_report(temp, condition);
       res.jsonp(result);
     })
     .catch(err => {
@@ -790,89 +694,102 @@ exports.search = function (req, res) {
       Poll.find(con)
         .populate('category', 'name icon')
         .populate('user', 'displayName profileImageURL')
-        .exec((err, polls) => {
-          if (err) {
-            return reject(err);
-          } else {
-            return resolve(polls);
-          }
+        .exec()
+        .then(polls => {
+          if (polls.length === 0) return resolve([]);
+          var length = polls.length;
+          var counter = 0;
+          polls.forEach(function (instance, index, array) {
+            array[index] = instance.toObject();
+            get_full_by_pollId(array[index]._id, userId)
+              .then(result => {
+                array[index].report = result.report;
+                array[index].opts = result.opts;
+                array[index].votes = result.votes;
+                array[index].voteopts = result.voteopts;
+                array[index].follow = result.follow;
+                array[index].reported = result.reported;
+                array[index].bookmarked = result.bookmarked;
+                return get_cmts_by_pollId(array[index]._id);
+              })
+              .then(result => {
+                array[index].cmts = result || [];
+                if (++counter === length) {
+                  return resolve(polls);
+                }
+              })
+              .catch(err => {
+                return reject(err);
+              });
+          });
+        }, err => {
+          return reject(err);
         });
     });
   }
-
-  function _poll_report(poll) {
-    return new Promise((resolve, reject) => {
-      Pollreport.findOne({ poll: poll._id }).exec((err, _report) => {
-        if (err) {
-          return reject(err);
-        } else {
-          return resolve({ poll: poll, report: _report });
-        }
-      });
-    });
-  }
-  function _poll_opts(poll) {
-    return new Promise((resolve, reject) => {
-      Opt.find({ poll: poll.poll._id, status: 1 }).exec((err, opts) => {
-        if (err) {
-          return reject(err);
-        } else {
-          return resolve({ poll: poll.poll, report: poll.report, opts: opts });
-        }
-      });
-    });
-  }
-  function _poll_cmts(poll) {
-    return new Promise((resolve, reject) => {
-      Cmt.find({ poll: poll.poll._id }).exec((err, cmts) => {
-        if (err) {
-          return reject(err);
-        } else {
-          return resolve({ poll: poll.poll, report: poll.report, opts: poll.opts, cmts: cmts });
-        }
-      });
-    });
-  }
-  function _filter_cmt(polls, condition) {
-    return new Promise((resolve, reject) => {
-      if (!condition.cmt) return resolve(polls);
-      const cmtCnt = parseInt(condition.cmt);
-      if (!cmtCnt) return resolve(polls);
-      var con = {};
-      var ids = _.pluck(polls, '_id');
-      con.poll = { $in: ids };
-      if (condition.compare === 'most') {
-        con.cmtCnt = { $gte: cmtCnt };
-      } else {
-        con.cmtCnt = { $lt: cmtCnt };
-      }
-      Pollreport.find(con).exec((err, _reports) => {
-        if (err) {
-          return reject(err);
-        } else {
-          var pollIds = [];
-          _reports.forEach(report => {
-            pollIds.push(report.poll.toString());
-          });
-          var new_polls = [];
-          polls.forEach(poll => {
-            if (__.contains(pollIds, poll._id.toString())) {
-              new_polls.push(poll);
-            }
-          });
-          return resolve(new_polls);
-        }
-      });
-    });
-  }
-
-  function _filter_key(polls, condition) {
-    return new Promise((resolve, reject) => {
-      if (polls.length === 0) return resolve(polls);
+  function _filter_report(polls, con) {
+    var result = [];
+    if (con.cmt && parseInt(con.cmt)) {
+      var cmtCnt = parseInt(con.cmt);
       polls.forEach(item => {
-
+        if (con.compare === 'most') {
+          if (item.report.cmtCnt >= cmtCnt) {
+            result.push(item);
+          }
+        } else {
+          if (item.report.cmtCnt < cmtCnt) {
+            result.push(item);
+          }
+        }
       });
-    });
+    } else {
+      result = polls;
+    }
+    return result;
+  }
+  function _filter_key(polls, con) {
+
+    var result = [];
+    if (con.key && con.in === 'pollcontent') {
+      polls.forEach(item => {
+        if (item.title.indexOf(con.key) >= 0) return result.push(item);
+        if (item.body.indexOf(con.key) >= 0) return result.push(item);
+        var check = false;
+        for (let index = 0; index < item.opts.length; index++) {
+          let element = item.opts[index];
+          if (element.title.indexOf(con.key) >= 0 || element.body.indexOf(con.key) >= 0) {
+            check = true;
+            break;
+          }
+        }
+        if (check) return result.push(item);
+      });
+    } else if (con.key && con.in === 'pollcmt') {
+      polls.forEach(item => {
+        if (item.title.indexOf(con.key) >= 0) return result.push(item);
+        if (item.body.indexOf(con.key) >= 0) return result.push(item);
+        var check = false;
+        for (let index = 0; index < item.opts.length; index++) {
+          let element = item.opts[index];
+          if (element.title.indexOf(con.key) >= 0 || element.body.indexOf(con.key) >= 0) {
+            check = true;
+            break;
+          }
+        }
+        if (check) return result.push(item);
+        for (let index = 0; index < item.cmts.length; index++) {
+          let element = item.cmts[index];
+          if (element.body.indexOf(con.key) >= 0) {
+            check = true;
+            break;
+          }
+        }
+        if (check) return result.push(item);
+      });
+    } else {
+      result = polls;
+    }
+    return result;
   }
 };
 
@@ -925,6 +842,18 @@ function get_opts_by_pollId(pollId) {
         return reject(err);
       } else {
         return resolve(opts);
+      }
+    });
+  });
+}
+// Lấy các comment có cho poll
+function get_cmts_by_pollId(pollId) {
+  return new Promise((resolve, reject) => {
+    Cmt.find({ poll: pollId }).exec((err, cmts) => {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(cmts);
       }
     });
   });

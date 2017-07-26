@@ -7,7 +7,6 @@
     'Authentication',
     'Socket',
     'PollsService',
-    'TagsService',
     'CmtsService',
     'VotesService',
     'OptsService',
@@ -20,7 +19,6 @@
     'PollreportsService',
     'Userreport',
     'ViewsService',
-    'VotesApi',
     'UserApi'
   ];
 
@@ -29,7 +27,6 @@
     Authentication,
     Socket,
     Polls,
-    Tags,
     Cmts,
     Votes,
     Opts,
@@ -42,7 +39,6 @@
     Pollreports,
     Userreport,
     Views,
-    VotesApi,
     UserApi
   ) {
     /**
@@ -140,6 +136,9 @@
           });
       });
     };
+    /**
+     * Tăng giá trị view profile cho user
+     */
     this.count_up_view_profile = (report, userId) => {
       return new Promise((resolve, reject) => {
         var rs_report;
@@ -162,9 +161,6 @@
           return resolve(_poll);
         });
       });
-    };
-    this.get_poll_http = pollId => {
-      return $http.get('api/polls/' + pollId);
     };
     this.save_poll = poll => {
       return new Promise((resolve, reject) => {
@@ -196,16 +192,6 @@
           Socket.emit('poll_delete', { pollId: poll._id });
           return resolve();
         });
-      });
-    };
-    this.get_poll_report = pollId => {
-      return new Promise((resolve, reject) => {
-        $http.get('/api/findPollreport/' + pollId)
-          .then(res => {
-            return resolve(res);
-          }, err => {
-            return reject(err);
-          });
       });
     };
     /**
@@ -281,16 +267,6 @@
       });
     };
 
-    // this.get_like = pollId => {
-    //   return new Promise((resolve, reject) => {
-    //     $http.get('/api/findPollLike/' + pollId)
-    //       .then(res => {
-    //         return resolve(res);
-    //       }, err => {
-    //         return reject(err);
-    //       });
-    //   });
-    // };
     // Lưu like vào db
     this.save_like = (like, type, poll) => {
       // type: 1: like - 2: dislike;
@@ -342,27 +318,6 @@
       });
     };
 
-    this.get_opts_for_vote = voteId => {
-      return new Promise((resolve, reject) => {
-        VotesApi.findOpts(voteId)
-          .then(res => {
-            return resolve(res);
-          })
-          .catch(err => {
-            return reject(err);
-          });
-      });
-    };
-    // this.get_vote = pollId => {
-    //   return new Promise((resolve, reject) => {
-    //     $http.get('/api/findOwnerVote/' + pollId)
-    //       .then(res => {
-    //         return resolve(res);
-    //       }, err => {
-    //         return reject(err);
-    //       });
-    //   });
-    // };
     /**
      * Lấy toàn bộ thông tin các vote và các opt của vote
      */
@@ -403,17 +358,6 @@
         function errorCb(err) {
           reject(err);
         }
-      });
-    };
-    // api get all options in poll
-    this.get_opts = pollId => {
-      return new Promise((resolve, reject) => {
-        $http.get('/api/findOpts/' + pollId)
-          .then(res => {
-            return resolve(res);
-          }, err => {
-            return reject(err);
-          });
       });
     };
     // Lưu option
@@ -583,19 +527,6 @@
           });
       });
     };
-    /**
-     * Lấy danh sách tag của poll
-     */
-    // this.get_tags = pollId => {
-    //   return new Promise((resolve, reject) => {
-    //     $http.get('/api/findTags/' + pollId)
-    //       .then(res => {
-    //         return resolve(res);
-    //       }, err => {
-    //         return reject(err);
-    //       });
-    //   });
-    // };
     /**
      * Lấy list poll thuộc category
      */

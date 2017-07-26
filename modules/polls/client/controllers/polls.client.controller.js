@@ -618,7 +618,6 @@
         return;
       }
       vm.like_processing = true;
-      console.log(cmt);
       Action.save_like_cmt(cmt, type)
         .then(res => {
           cmt.like = res.like;

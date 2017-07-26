@@ -469,7 +469,7 @@
         }
         function successCb(res) {
           Socket.emit('cmt_like', {
-            pollId: cmt.poll._id,
+            pollId: cmt.poll._id ? cmt.poll._id : cmt.poll,
             cmtId: cmt._id,
             likeCnt: res.likeCnt,
             from: res.like.user._id,

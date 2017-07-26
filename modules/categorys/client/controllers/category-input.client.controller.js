@@ -55,8 +55,7 @@
       }, reject => {
       });
       function handle_delete() {
-        Action.delete_category(vm.category);
-        $state.go('categorys.list');
+        vm.category.$remove($state.go('categorys.list'));
       }
     };
     vm.discard = () => {

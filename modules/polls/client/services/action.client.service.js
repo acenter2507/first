@@ -601,9 +601,6 @@
     this.get_category_polls = (categoryId, page, sort) => {
       return $http.get('/api/categorys/' + categoryId + '/polls/' + page + '/' + sort);
     };
-    this.delete_category = category => {
-      category.$remove();
-    };
     this.search = condition => {
       return $http.post('/api/search', { condition: condition });
     };

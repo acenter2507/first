@@ -12,12 +12,6 @@ angular.module('users').controller('ProfileDislikesController', [
     $scope.stopped = false;
     $scope.new_data = [];
 
-    init();
-
-    function init() {
-      // get_polls();
-    }
-
     $scope.get_polls = get_polls;
     function get_polls() {
       if ($scope.busy || $scope.stopped) {

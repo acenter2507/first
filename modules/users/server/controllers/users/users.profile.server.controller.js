@@ -175,8 +175,9 @@ exports.activitys = function (req, res) {
     });
   }
 };
+
 /**
- * Get polls of user
+ * Lấy các poll mà user đã create cho màn hình Profile.polls
  */
 exports.polls = function (req, res) {
   var page = req.params.page || 0;
@@ -184,16 +185,34 @@ exports.polls = function (req, res) {
     .sort('-created')
     .populate('category', 'name icon')
     .skip(10 * page)
-    .limit(10)
-    .exec(function (err, polls) {
-      if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      } else {
-        res.jsonp(polls);
-      }
+    .limit(10).exec()
+    .then(polls => {
+      if (polls.length === 0) return res.jsonp([]);
+      var length = polls.length;
+      var counter = 0;
+      polls.forEach(function (instance, index, array) {
+        array[index] = instance.toObject();
+        pollController.get_full_by_pollId(array[index]._id, userId)
+          .then(result => {
+            array[index].report = result.report;
+            array[index].opts = result.opts;
+            array[index].votes = result.votes;
+            array[index].voteopts = result.voteopts;
+            array[index].follow = result.follow;
+            array[index].reported = result.reported;
+            array[index].bookmarked = result.bookmarked;
+            if (++counter === length) {
+              res.jsonp(polls);
+            }
+          })
+          .catch(handleError);
+      });
+    }, handleError);
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
     });
+  }
 };
 
 /**
@@ -227,19 +246,37 @@ exports.votes = function (req, res) {
     .populate('poll', 'title isPublic')
     .skip(10 * page)
     .limit(10)
-    .exec(function (err, votes) {
-      if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      } else {
-        res.jsonp(votes);
-      }
+    .then(votes => {
+      if (votes.length === 0) return res.jsonp([]);
+      var length = votes.length;
+      var counter = 0;
+      votes.forEach(function (instance, index, array) {
+        array[index] = instance.toObject();
+        pollController.get_opts_by_voteId(array[index]._id)
+          .then(result => {
+            array[index].opts = result;
+            if (++counter === length) {
+              res.jsonp(votes);
+            }
+          })
+          .catch(handleError);
+      });
+    }, handleError);
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
     });
+  }
 };
 
+/**
+ * Lấy các poll user đã follow tại màn hình profile.bookmark
+ */
 exports.follows = function (req, res) {
   var page = req.params.page || 0;
+  var userId = req.user ? req.user._id : undefined;
+  var polls = [];
+
   Polluser.find({ user: req.profile._id, following: true })
     .sort('-created')
     .populate({
@@ -250,17 +287,36 @@ exports.follows = function (req, res) {
         { path: 'category', select: 'name icon', model: 'Category' }
       ]
     })
-    .skip(10 * page)
-    .exec(function (err, follows) {
-      if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      } else {
-        res.jsonp(follows);
-      }
-    });
+    .skip(10 * page).exec()
+    .then(follows => {
+      if (follows.length === 0) return res.jsonp([]);
+      polls = _.pluck(follows, 'poll');
+      var length = polls.length;
+      var counter = 0;
+      polls.forEach(function (instance, index, array) {
+        array[index] = instance.toObject();
+        pollController.get_full_by_pollId(array[index]._id, userId)
+          .then(result => {
+            array[index].report = result.report;
+            array[index].opts = result.opts;
+            array[index].votes = result.votes;
+            array[index].voteopts = result.voteopts;
+            array[index].follow = result.follow;
+            array[index].reported = result.reported;
+            array[index].bookmarked = result.bookmarked;
+            if (++counter === length) {
+              res.jsonp(polls);
+            }
+          })
+          .catch(handleError);
+      });
+    }, handleError);
 
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 };
 
 /**
@@ -312,8 +368,14 @@ exports.bookmarks = function (req, res) {
   }
 };
 
+/**
+ * Lấy các poll user đã view
+ */
 exports.views = function (req, res) {
   var page = req.params.page || 0;
+  var userId = req.user ? req.user._id : undefined;
+  var polls = [];
+
   View.find({ user: req.profile._id })
     .sort('-created')
     .populate({
@@ -324,22 +386,46 @@ exports.views = function (req, res) {
         { path: 'category', select: 'name icon', model: 'Category' }
       ]
     })
-    .skip(10 * page)
-    .exec(function (err, views) {
-      if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      } else {
-        res.jsonp(views);
-      }
+    .skip(10 * page).exec()
+    .then(views => {
+      if (views.length === 0) return res.jsonp([]);
+      polls = _.pluck(views, 'poll');
+      var length = polls.length;
+      var counter = 0;
+      polls.forEach(function (instance, index, array) {
+        array[index] = instance.toObject();
+        pollController.get_full_by_pollId(array[index]._id, userId)
+          .then(result => {
+            array[index].report = result.report;
+            array[index].opts = result.opts;
+            array[index].votes = result.votes;
+            array[index].voteopts = result.voteopts;
+            array[index].follow = result.follow;
+            array[index].reported = result.reported;
+            array[index].bookmarked = result.bookmarked;
+            if (++counter === length) {
+              res.jsonp(polls);
+            }
+          })
+          .catch(handleError);
+      });
+    }, handleError);
+
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
     });
+  }
 };
+
 /**
- * Get likes of user
+ * Lấy các poll user đã like
  */
 exports.likes = function (req, res) {
   var page = req.params.page || 0;
+  var userId = req.user ? req.user._id : undefined;
+  var polls = [];
+
   Like.find({ user: req.profile._id, type: 1 })
     .sort('-created')
     .populate({
@@ -350,16 +436,36 @@ exports.likes = function (req, res) {
         { path: 'category', select: 'name icon', model: 'Category' }
       ]
     })
-    .skip(10 * page)
-    .exec(function (err, likes) {
-      if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      } else {
-        res.jsonp(likes);
-      }
+    .skip(10 * page).exec()
+    .then(likes => {
+      if (likes.length === 0) return res.jsonp([]);
+      polls = _.pluck(likes, 'poll');
+      var length = polls.length;
+      var counter = 0;
+      polls.forEach(function (instance, index, array) {
+        array[index] = instance.toObject();
+        pollController.get_full_by_pollId(array[index]._id, userId)
+          .then(result => {
+            array[index].report = result.report;
+            array[index].opts = result.opts;
+            array[index].votes = result.votes;
+            array[index].voteopts = result.voteopts;
+            array[index].follow = result.follow;
+            array[index].reported = result.reported;
+            array[index].bookmarked = result.bookmarked;
+            if (++counter === length) {
+              res.jsonp(polls);
+            }
+          })
+          .catch(handleError);
+      });
+    }, handleError);
+
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
     });
+  }
 };
 
 /**

@@ -29,7 +29,6 @@ angular.module('users').controller('ProfileCmtsController', [
             $scope.stopped = true;
             return;
           }
-          console.log(res);
           $scope.cmts = _.union($scope.cmts, res);
           $scope.page += 1;
           $scope.busy = false;

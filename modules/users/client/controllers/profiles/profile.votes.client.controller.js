@@ -4,18 +4,13 @@ angular.module('users').controller('ProfileVotesController', [
   '$scope',
   'UserApi',
   'Action',
+  'toastr',
   function ($scope, UserApi, Action) {
     $scope.votes = [];
     $scope.page = 0;
     $scope.busy = false;
     $scope.stopped = false;
     $scope.new_data = [];
-
-    init();
-
-    function init() {
-      // get_votes();
-    }
 
     $scope.get_votes = get_votes;
     function get_votes() {
@@ -30,26 +25,12 @@ angular.module('users').controller('ProfileVotesController', [
             $scope.stopped = true;
             return;
           }
-          $scope.new_data = res || [];
-          var promises = [];
-          $scope.new_data.forEach(vote => {
-            promises.push(get_opts(vote));
-          });
-          Promise.all(promises)
-            .then(res => {
-              // Gán data vào list hiện tại
-              $scope.votes = _.union($scope.votes, $scope.new_data);
-              $scope.page += 1;
-              $scope.busy = false;
-              $scope.new_data = [];
-              $scope.$apply();
-            })
-            .catch(err => {
-              alert(err);
-            });
+          $scope.votes = _.union($scope.votes, res);
+          $scope.page += 1;
+          $scope.busy = false;
         })
         .error(err => {
-          alert(err);
+          toast.error(err.message, 'Error!');
         });
     }
     function get_opts(vote) {

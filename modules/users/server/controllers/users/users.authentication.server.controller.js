@@ -85,6 +85,8 @@ exports.signin = function (req, res, next) {
         req.headers['x-forwarded-for'] ||
         req.client.remoteAddress;
       login.save();
+      user.lastLogin = new Date();
+      user.save();
       req.login(user, function (err) {
         if (err) {
           res.status(400).send(err);

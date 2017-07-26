@@ -86,10 +86,4 @@ PollSchema.statics.findCmts = function(id, callback) {
   }, callback);
 };
 
-PollSchema.statics.findTags = function(id, callback) {
-  return this.model('Polltag').find({
-    poll: id
-  }, callback);
-};
-
 mongoose.model('Poll', PollSchema);

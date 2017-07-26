@@ -31,9 +31,6 @@
       findCmts: (id, page) => {
         return $http.get('/api/findCmts/' + id + '/' + page);
       },
-      findTags: id => {
-        return $http.get('/api/findTags/' + id);
-      },
       findPollLike: id => {
         return $http.get('/api/findPollLike/' + id);
       },

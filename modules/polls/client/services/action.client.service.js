@@ -585,18 +585,19 @@
           });
       });
     };
-    // get all tags in poll
-    this.get_tags = pollId => {
-      return new Promise((resolve, reject) => {
-        PollsApi.findTags(pollId)
-          .then(res => {
-            return resolve(res);
-          })
-          .catch(err => {
-            return reject(err);
-          });
-      });
-    };
+    /**
+     * Lấy danh sách tag của poll
+     */
+    // this.get_tags = pollId => {
+    //   return new Promise((resolve, reject) => {
+    //     $http.get('/api/findTags/' + pollId)
+    //       .then(res => {
+    //         return resolve(res);
+    //       }, err => {
+    //         return reject(err);
+    //       });
+    //   });
+    // };
     // get categorys
     this.get_category_polls = (categoryId, page, sort) => {
       return $http.get('/api/categorys/' + categoryId + '/polls/' + page + '/' + sort);

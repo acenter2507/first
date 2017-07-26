@@ -436,6 +436,7 @@ exports.findCmts = function (req, res) {
     });
   }
 };
+
 /* ------------------------------------------------------------------- */
 /**
  * List of Opts in poll xxxxx
@@ -458,17 +459,18 @@ exports.findOpts = function (req, res) {
 /**
  * List of Tags in poll xxxx
  */
-exports.findTags = function (req, res) {
-  Poll.findTags(req.poll._id).populate('tag').exec(function (err, polltags) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.jsonp(polltags);
-    }
-  });
-};
+// exports.findTags = function (req, res) {
+//   Polltag.find({ poll: req.poll._id })
+//     .populate('tag').exec(function (err, polltags) {
+//       if (err) {
+//         return res.status(400).send({
+//           message: errorHandler.getErrorMessage(err)
+//         });
+//       } else {
+//         res.jsonp(polltags);
+//       }
+//     });
+// };
 
 /**
  * List of Votes in poll  xxxx

@@ -187,37 +187,48 @@
           .then(_poll => {
             vm.poll = _poll;
             process_before_show();
+          }, err => {
+            toast.error(err.message, 'Error!');
           });
       });
       Socket.on('opts_update', res => {
-        Action.get_opts(vm.poll._id)
-          .then(res => { // lấy thông tin report
-            vm.opts = _.where(res.data, { status: 1 });
-            return Action.get_voteopts(vm.poll._id);
-          })
-          .then(res => { // lấy thông tin vote
-            vm.chart = {
-              type: 'pie',
-              options: { responsive: true },
-              colors: [],
-              labels: [],
-              data: []
-            };
-            vm.votes = res.data.votes || [];
-            vm.voteopts = res.data.voteopts || [];
-            vm.votedTotal = vm.voteopts.length;
-            vm.opts.forEach(opt => {
-              opt.voteCnt = _.where(vm.voteopts, { opt: opt._id }).length || 0;
-              opt.progressVal = calPercen(vm.votedTotal, opt.voteCnt);
-              vm.chart.colors.push(opt.color);
-              vm.chart.labels.push(opt.title);
-              vm.chart.data.push(opt.voteCnt);
-            });
+        Action.get_poll(vm.poll._id)
+          .then(_poll => {
+            vm.poll = _poll;
+            process_before_show();
             $scope.$apply();
-          })
-          .catch(err => {
+          }, err => {
             toast.error(err.message, 'Error!');
           });
+
+        // Action.get_opts(vm.poll._id)
+        //   .then(res => { // lấy thông tin report
+        //     vm.opts = _.where(res.data, { status: 1 });
+        //     return Action.get_voteopts(vm.poll._id);
+        //   })
+        //   .then(res => { // lấy thông tin vote
+        //     vm.chart = {
+        //       type: 'pie',
+        //       options: { responsive: true },
+        //       colors: [],
+        //       labels: [],
+        //       data: []
+        //     };
+        //     vm.votes = res.data.votes || [];
+        //     vm.voteopts = res.data.voteopts || [];
+        //     vm.votedTotal = vm.voteopts.length;
+        //     vm.opts.forEach(opt => {
+        //       opt.voteCnt = _.where(vm.voteopts, { opt: opt._id }).length || 0;
+        //       opt.progressVal = calPercen(vm.votedTotal, opt.voteCnt);
+        //       vm.chart.colors.push(opt.color);
+        //       vm.chart.labels.push(opt.title);
+        //       vm.chart.data.push(opt.voteCnt);
+        //     });
+        //     $scope.$apply();
+        //   })
+        //   .catch(err => {
+        //     toast.error(err.message, 'Error!');
+        //   });
       });
       $scope.$on('$destroy', function () {
         Socket.emit('unsubscribe_poll', {
@@ -303,7 +314,6 @@
           }
           // Gán data vào danh sách comment hiện tại
           vm.cmts = _.union(vm.cmts, res.data);
-          console.log(res.data);
           vm.page += 1;
           vm.busy = false;
           $scope.$apply();

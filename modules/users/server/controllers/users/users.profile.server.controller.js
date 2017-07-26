@@ -176,23 +176,6 @@ exports.activitys = function (req, res) {
   }
 };
 /**
- * Get polls of user for activity
- */
-exports.all_polls = function (req, res) {
-  Poll.find({ user: req.profile._id })
-    .sort('-created')
-    .select('title created body isPublic')
-    .exec(function (err, polls) {
-      if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      } else {
-        res.jsonp(polls);
-      }
-    });
-};
-/**
  * Get polls of user
  */
 exports.polls = function (req, res) {
@@ -214,24 +197,6 @@ exports.polls = function (req, res) {
 };
 
 /**
- * Get cmts of user for activity
- */
-exports.all_cmts = function (req, res) {
-  Cmt.find({ user: req.profile._id })
-    .sort('-created')
-    .select('created body')
-    .populate('poll', 'title isPublic')
-    .exec(function (err, cmts) {
-      if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      } else {
-        res.jsonp(cmts);
-      }
-    });
-};
-/**
  * Get cmts of user
  */
 exports.cmts = function (req, res) {
@@ -252,24 +217,6 @@ exports.cmts = function (req, res) {
     });
 };
 
-/**
- * Get cmts of user for activity
- */
-exports.all_votes = function (req, res) {
-  Vote.find({ user: req.profile._id })
-    .sort('-created')
-    .select('created')
-    .populate('poll', 'title isPublic')
-    .exec(function (err, votes) {
-      if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      } else {
-        res.jsonp(votes);
-      }
-    });
-};
 /**
  * Get likes of user
  */
@@ -318,6 +265,9 @@ exports.follows = function (req, res) {
 
 exports.bookmarks = function (req, res) {
   var page = req.params.page || 0;
+  var userId = req.user ? req.user._id : undefined;
+  var polls = [];
+
   Bookmark.find({ user: req.profile._id })
     .sort('-created')
     .populate({
@@ -328,16 +278,65 @@ exports.bookmarks = function (req, res) {
         { path: 'category', select: 'name icon', model: 'Category' }
       ]
     })
-    .skip(10 * page)
-    .exec(function (err, bookmarks) {
-      if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      } else {
-        res.jsonp(bookmarks);
-      }
+    .skip(10 * page).exec()
+    .then(bms => {
+      if (bms.length === 0) return res.jsonp([]);
+      polls = _.pluck(bms, 'poll');
+      var length = polls.length;
+      var counter = 0;
+      polls.forEach(function (instance, index, array) {
+        array[index] = instance.toObject();
+        pollController.get_info_by_pollId(array[index]._id)
+          // Lấy thông tin count
+          .then(result => {
+            array[index].report = result || {};
+            return pollController.get_opts_by_pollId(array[index]._id);
+          })
+          // Lấy các options
+          .then(result => {
+            array[index].opts = _.filter(result, { status: 1 }) || [];
+            return get_votes_by_pollId(array[index]._id);
+          })
+          // Lấy toàn bộ thông tin votes
+          .then(result => {
+            array[index].votes = result.votes || [];
+            array[index].voteopts = result.voteopts || [];
+            return get_follow_by_pollId(array[index]._id, userId);
+          })
+          // Lấy follow của user hiện hành
+          .then(result => {
+            array[index].follow = result || { poll: array[index]._id };
+            return get_report_by_pollId(array[index]._id, userId);
+          })
+          // Lấy report của user hiện hành
+          .then(result => {
+            array[index].reported = (result) ? true : false;
+            if (++counter === length) {
+              res.jsonp(polls);
+            }
+          })
+          .catch(handleError);
+      });
+    }, handleError);
+
+
+
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
     });
+  }
+
+
+    .exec(function (err, bookmarks) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(bookmarks);
+    }
+  });
 };
 
 exports.views = function (req, res) {

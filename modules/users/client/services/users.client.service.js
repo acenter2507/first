@@ -33,6 +33,7 @@ angular.module('users').factory('Profile', ['$resource',
 
 angular.module('users').factory('UserApi', ['$http',
   function ($http) {
+    // Lấy list activitys của user
     this.get_activitys = userId => {
       return $http.get('/api/profile/' + userId + '/activitys/');
     };

@@ -17,11 +17,8 @@ module.exports = function (app) {
   app.route('/api/profile/:profileId/activitys').get(users.activitys);
 
 
-  app.route('/api/profile/:profileId/polls').get(users.all_polls);
   app.route('/api/profile/:profileId/polls/:page').get(users.polls);
-  app.route('/api/profile/:profileId/cmts').get(users.all_cmts);
   app.route('/api/profile/:profileId/cmts/:page').get(users.cmts);
-  app.route('/api/profile/:profileId/votes').get(users.all_votes);
   app.route('/api/profile/:profileId/votes/:page').get(users.votes);
   app.route('/api/profile/:profileId/likes/:page').get(users.likes);
   app.route('/api/profile/:profileId/dislikes/:page').get(users.dislikes);

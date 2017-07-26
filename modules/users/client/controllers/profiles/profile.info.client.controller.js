@@ -5,8 +5,7 @@ angular.module('users').controller('ProfileInfoController', [
   'UserApi',
   'Action',
   'toastr',
-  'ngDialog',
-  function ($scope, UserApi, Action, toast, dialog) {
+  function ($scope, UserApi, Action, toast) {
     $scope.polls = [];
     $scope.cmts = [];
     $scope.votes = [];
@@ -30,65 +29,6 @@ angular.module('users').controller('ProfileInfoController', [
           toast.error('Can\'t load user info ' + err.message, 'Error!');
         });
     }
-
-    // function get_polls() {
-    //   return new Promise((resolve, reject) => {
-    //     UserApi.get_polls($scope.profile._id, $scope.page)
-    //       .success(res => {
-    //         $scope.polls = res || [];
-    //         return resolve(res);
-    //       })
-    //       .error(err => {
-    //         return reject(err);
-    //       });
-    //   });
-    // }
-    // function get_cmts() {
-    //   return new Promise((resolve, reject) => {
-    //     UserApi.get_cmts($scope.profile._id, $scope.page)
-    //       .success(res => {
-    //         $scope.cmts = res || [];
-    //         return resolve(res);
-    //       })
-    //       .error(err => {
-    //         return reject(err);
-    //       });
-    //   });
-    // }
-    // function get_votes() {
-    //   return new Promise((resolve, reject) => {
-    //     UserApi.get_votes($scope.profile._id, $scope.page)
-    //       .success(res => {
-    //         $scope.votes = res || [];
-    //         var promises = [];
-    //         $scope.votes.forEach(vote => {
-    //           promises.push(get_opts(vote));
-    //         });
-    //         Promise.all(promises)
-    //           .then(res => {
-    //             return resolve(res);
-    //           })
-    //           .catch(err => {
-    //             return reject(err);
-    //           });
-    //       })
-    //       .error(err => {
-    //         return reject(err);
-    //       });
-    //   });
-    // }
-    // function get_opts(vote) {
-    //   return new Promise((resolve, reject) => {
-    //     Action.get_opts_for_vote(vote._id)
-    //       .then(res => {
-    //         vote.opts = _.pluck(res.data, 'opt') || [];
-    //         return resolve(vote);
-    //       })
-    //       .catch(err => {
-    //         return reject(err);
-    //       });
-    //   });
-    // }
 
     function merge_activity() {
       $scope.polls.forEach(function (poll) {

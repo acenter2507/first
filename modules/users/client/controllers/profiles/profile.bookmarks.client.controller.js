@@ -26,25 +26,26 @@ angular.module('users').controller('ProfileBookmarksController', [
             $scope.stopped = true;
             return;
           }
-          res.data.forEach(item => {
-            if (item.poll) {
-              $scope.new_data.push(item.poll);
-            }
-          });
-          var promises = [];
-          $scope.new_data.forEach(poll => {
-            poll.isCurrentUserOwner = $scope.isLogged && $scope.user._id === poll.user._id;
-            promises.push(get_poll_report(poll));
-            promises.push(get_opts(poll));
-            promises.push(get_owner_follow(poll));
-            promises.push(get_reported(poll));
-          });
-          return Promise.all(promises);
-        })
-        .then(res => {
-          // Gán data vào list hiện tại
-          $scope.polls = _.union($scope.polls, $scope.new_data);
-          $scope.page += 1;
+          console.log(res);
+        //   res.data.forEach(item => {
+        //     if (item.poll) {
+        //       $scope.new_data.push(item.poll);
+        //     }
+        //   });
+        //   var promises = [];
+        //   $scope.new_data.forEach(poll => {
+        //     poll.isCurrentUserOwner = $scope.isLogged && $scope.user._id === poll.user._id;
+        //     promises.push(get_poll_report(poll));
+        //     promises.push(get_opts(poll));
+        //     promises.push(get_owner_follow(poll));
+        //     promises.push(get_reported(poll));
+        //   });
+        //   return Promise.all(promises);
+        // })
+        // .then(res => {
+        //   // Gán data vào list hiện tại
+        //   $scope.polls = _.union($scope.polls, $scope.new_data);
+        //   $scope.page += 1;
           $scope.busy = false;
           $scope.new_data = [];
         })

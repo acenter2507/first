@@ -421,7 +421,7 @@ exports.findCmts = function (req, res) {
  * List of Opts in poll xxxxx
  */
 exports.findOpts = function (req, res) {
-  Poll.findOpts(req.poll._id)
+  Opt.find({ poll: req.poll._id })
     .populate('user', 'displayName')
     .exec(function (err, opts) {
       if (err) {

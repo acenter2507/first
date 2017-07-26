@@ -26,7 +26,6 @@ angular.module('users').controller('ProfileBookmarksController', [
             $scope.stopped = true;
             return;
           }
-          console.log(res);
           $scope.new_data = res.data || [];
           var promises = [];
           $scope.new_data.forEach(poll => {
@@ -66,22 +65,6 @@ angular.module('users').controller('ProfileBookmarksController', [
           poll.chart.labels.push(opt.title);
         });
         return resolve(poll);
-      });
-    }
-    function get_reported(poll) {
-      return new Promise((resolve, reject) => {
-        if (!$scope.isLogged) {
-          poll.reported = false;
-          return resolve();
-        }
-        Action.get_report(poll._id)
-          .then(res => {
-            poll.reported = (res.data) ? res.data : false;
-            return resolve(res.data);
-          })
-          .catch(err => {
-            return reject(err);
-          });
       });
     }
     $scope.poll_filter = poll => {

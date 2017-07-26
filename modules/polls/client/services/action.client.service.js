@@ -20,7 +20,6 @@
     'PollreportsService',
     'Userreport',
     'ViewsService',
-    'PollsApi',
     'VotesApi',
     'UserApi'
   ];
@@ -43,7 +42,6 @@
     Pollreports,
     Userreport,
     Views,
-    PollsApi,
     VotesApi,
     UserApi
   ) {
@@ -202,11 +200,10 @@
     };
     this.get_poll_report = pollId => {
       return new Promise((resolve, reject) => {
-        PollsApi.findPollreport(pollId)
+        $http.get('/api/findPollreport/' + pollId)
           .then(res => {
             return resolve(res);
-          })
-          .catch(err => {
+          }, err => {
             return reject(err);
           });
       });
@@ -232,7 +229,7 @@
     */
     this.save_view_poll = pollId => {
       return new Promise((resolve, reject) => {
-        PollsApi.findView(pollId)
+        $http.get('/api/findView/' + pollId)
           .then(res => {
             if (!res.data || !res.data._id) {
               var rs_view = new Views({ poll: pollId, user: Authentication.user._id });
@@ -411,11 +408,10 @@
     // api get all options in poll
     this.get_opts = pollId => {
       return new Promise((resolve, reject) => {
-        PollsApi.findOpts(pollId)
+        $http.get('/api/findOpts/' + pollId)
           .then(res => {
             return resolve(res);
-          })
-          .catch(err => {
+          }, err => {
             return reject(err);
           });
       });
@@ -551,11 +547,10 @@
     // get info bookmark of user
     this.get_bookmark = pollId => {
       return new Promise((resolve, reject) => {
-        PollsApi.findBookmark(pollId)
+        $http.get('/api/findBookmark/' + pollId)
           .then(res => {
             return resolve(res);
-          })
-          .catch(err => {
+          }, err => {
             return reject(err);
           });
       });
@@ -575,13 +570,15 @@
         );
       });
     };
+    /**
+     * Xóa bookmark
+     */
     this.remove_bookmark = pollId => {
       return new Promise((resolve, reject) => {
-        PollsApi.removeBookmark(pollId)
+        $http.get('/api/removeBookmark/' + pollId)
           .then(res => {
             return resolve(res);
-          })
-          .catch(err => {
+          }, err => {
             return reject(err);
           });
       });

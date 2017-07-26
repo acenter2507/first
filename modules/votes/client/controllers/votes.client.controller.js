@@ -6,9 +6,9 @@
     .module('votes')
     .controller('VotesController', VotesController);
 
-  VotesController.$inject = ['$scope', '$state', '$window', 'Authentication', 'voteResolve', 'PollsService', 'PollsApi'];
+  VotesController.$inject = ['$scope', '$state', '$window', 'Authentication', 'voteResolve', 'PollsService'];
 
-  function VotesController($scope, $state, $window, Authentication, vote, Polls, PollsApi) {
+  function VotesController($scope, $state, $window, Authentication, vote, Polls) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -53,14 +53,5 @@
       }
     }
 
-    function selectPoll() {
-      PollsApi.findOpts(vm.vote.poll._id)
-        .then(opts => {
-          vm.opts = opts.data;
-        })
-        .catch(err => {
-          alert('error' + err);
-        });
-    }
   }
 }());

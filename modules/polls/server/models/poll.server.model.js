@@ -74,16 +74,4 @@ PollSchema.pre('save', function(next) {
   next();
 });
 
-PollSchema.statics.findOpts = function(id, callback) {
-  return this.model('Opt').find({
-    poll: id
-  }, callback);
-};
-
-PollSchema.statics.findCmts = function(id, callback) {
-  return this.model('Cmt').find({
-    poll: id
-  }, callback);
-};
-
 mongoose.model('Poll', PollSchema);

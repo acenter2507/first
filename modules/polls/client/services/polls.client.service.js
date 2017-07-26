@@ -18,31 +18,4 @@
       }
     );
   }
-
-  angular.module('polls').factory('PollsApi', PollsApi);
-
-  PollsApi.$inject = ['$http'];
-
-  function PollsApi($http) {
-    return {
-      findOpts: id => {
-        return $http.get('/api/findOpts/' + id);
-      },
-      findCmts: (id, page) => {
-        return $http.get('/api/findCmts/' + id + '/' + page);
-      },
-      findBookmark: id => {
-        return $http.get('/api/findBookmark/' + id);
-      },
-      findPollreport: id => {
-        return $http.get('/api/findPollreport/' + id);
-      },
-      findView: id => {
-        return $http.get('/api/findView/' + id);
-      },
-      removeBookmark: id => {
-        return $http.get('/api/removeBookmark/' + id);
-      }
-    };
-  }
 })();

@@ -58,8 +58,6 @@
     function init() {
       if (vm.poll._id) {
         initSocket();
-        // get_opts();
-        // get_tags();
       }
       analysic_nofif();
     }
@@ -79,7 +77,13 @@
         $state.go('polls.list');
       });
       Socket.on('opts_request', res => {
-        get_opts();
+        Action.get_poll(vm.poll._id)
+          .then(_poll => {
+            vm.poll = _poll;
+            vm.opts = vm.poll.opts;
+          }, err => {
+            toast.error(err.message, 'Error!');
+          });
       });
       $scope.$on('$destroy', function () {
         Socket.emit('unsubscribe', {
@@ -101,28 +105,28 @@
         }
       }
     }
-    function get_opts() {
-      Action.get_opts(vm.poll._id)
-        .then(res => {
-          vm.opts = res.data || [];
-          $scope.$apply();
-        })
-        .catch(err => {
-          toast.error(err.message, 'Error!');
-        });
-    }
+    // function get_opts() {
+    //   Action.get_opts(vm.poll._id)
+    //     .then(res => {
+    //       vm.opts = res.data || [];
+    //       $scope.$apply();
+    //     })
+    //     .catch(err => {
+    //       toast.error(err.message, 'Error!');
+    //     });
+    // }
 
-    function get_tags() {
-      Action.get_tags(vm.poll._id)
-        .then(res => {
-          angular.forEach(res.data, (polltag, index) => {
-            vm.poll.tags.push(polltag.tag);
-          });
-        })
-        .catch(err => {
-          toast.error(err.message, 'Error!');
-        });
-    }
+    // function get_tags() {
+    //   Action.get_tags(vm.poll._id)
+    //     .then(res => {
+    //       angular.forEach(res.data, (polltag, index) => {
+    //         vm.poll.tags.push(polltag.tag);
+    //       });
+    //     })
+    //     .catch(err => {
+    //       toast.error(err.message, 'Error!');
+    //     });
+    // }
 
     function isCanUpdate() {
       return true;
@@ -279,7 +283,6 @@
         var _opt = new Opts(opt);
         _opt.$update(() => {
           Socket.emit('opts_update', { pollId: vm.poll._id });
-          get_opts();
         });
       }
     };
@@ -299,7 +302,6 @@
         opt.status = 3;
         var _opt = new Opts(opt);
         _opt.$update(() => {
-          get_opts();
         });
       }
     };

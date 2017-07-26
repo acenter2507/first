@@ -52,12 +52,12 @@
     function init() {
       initSocket();
       // Load danh sách category (Bao gồm số poll)
-      loadCategorys();
+      get_categorys();
       // Load các polls có lượng like nhiều nhất
-      loadHotPolls();
+      get_hot_polls();
       // Load danh sách poll đã bookmark
       if (vm.isLogged) {
-        loadBookmarks();
+        get_bookmarks();
       }
     }
 
@@ -132,7 +132,7 @@
         return resolve(poll);
       });
     }
-    function loadHotPolls() {
+    function get_hot_polls() {
       Action.get_hot_polls(0)
         .then(res => {
           vm.hot_polls = res.data || [];
@@ -141,18 +141,20 @@
           toast.error(err.message, 'Error!');
         });
     }
-    function loadCategorys() {
+    function get_categorys() {
       Action.get_categorys()
         .then(res => {
           vm.categorys = res;
+        })
+        .catch(err => {
+          toast.error(err.message, 'Error!');
         });
     }
-    function loadBookmarks() {
+    function get_bookmarks() {
       UserApi.get_bookmarks(vm.authentication.user._id, 0)
-        .success(res => {
+        .then(res => {
           vm.bookmarks = _.pluck(res, 'poll');
-        })
-        .error(err => {
+        }, err => {
           toast.error(err.message, 'Error!');
         });
     }

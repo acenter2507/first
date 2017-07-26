@@ -100,20 +100,8 @@
         return;
       }
       vm.isShow = true;
-      get_info_poll()
-        .then(() => {
-          if (!vm.poll.isCurrentUserOwner) {
-            var count_up = $timeout(() => {
-              Action.count_up_poll_view(vm.poll.report);
-              if (vm.isLogged) {
-                Action.save_view_poll(vm.poll._id);
-              }
-            }, 30000);
-            $scope.$on('$destroy', () => {
-              $timeout.cancel(count_up);
-            });
-          }
-        });
+      process_before_show();
+      save_viewed();
       get_owner_info();
 
       if (!vm.isClosed && vm.poll.close) {
@@ -201,7 +189,7 @@
         Action.get_poll(vm.poll._id)
           .then(_poll => {
             vm.poll = _poll;
-            return get_info_poll();
+            process_before_show();
           });
       });
       Socket.on('opts_update', res => {
@@ -250,89 +238,97 @@
       });
     }
 
-    function get_info_poll() {
-      return new Promise((resolve, reject) => {
-        // Thiết lập các thông tin cho poll
-        vm.poll.close = vm.poll.close ? moment(vm.poll.close) : vm.poll.close;
-        vm.isClosed = vm.poll.close ? moment(vm.poll.close).isBefore(new moment()) : false;
-        vm.opts = vm.poll.opts;
-        vm.chart = {
-          type: 'pie',
-          options: { responsive: true },
-          colors: [],
-          labels: [],
-          data: []
-        };
-        vm.votes = vm.poll.votes || [];
-        vm.voteopts = vm.poll.voteopts || [];
-        vm.votedTotal = vm.voteopts.length;
-        vm.opts.forEach(opt => {
-          opt.voteCnt = _.where(vm.voteopts, { opt: opt._id }).length || 0;
-          opt.progressVal = calPercen(vm.votedTotal, opt.voteCnt);
-          vm.chart.colors.push(opt.color);
-          vm.chart.labels.push(opt.title);
-          vm.chart.data.push(opt.voteCnt);
-        });
-        $scope.$apply();
-        return resolve();
+    // Phân tích thông tin poll trước khi hiển thị.
+    function process_before_show() {
+      // Thiết lập các thông tin cho poll
+      vm.poll.close = vm.poll.close ? moment(vm.poll.close) : vm.poll.close;
+      vm.isClosed = vm.poll.close ? moment(vm.poll.close).isBefore(new moment()) : false;
+      vm.opts = vm.poll.opts;
+      vm.chart = {
+        type: 'pie',
+        options: { responsive: true },
+        colors: [],
+        labels: [],
+        data: []
+      };
+      vm.votes = vm.poll.votes || [];
+      vm.voteopts = vm.poll.voteopts || [];
+      vm.votedTotal = vm.voteopts.length;
+      vm.opts.forEach(opt => {
+        opt.voteCnt = _.where(vm.voteopts, { opt: opt._id }).length || 0;
+        opt.progressVal = calPercen(vm.votedTotal, opt.voteCnt);
+        vm.chart.colors.push(opt.color);
+        vm.chart.labels.push(opt.title);
+        vm.chart.data.push(opt.voteCnt);
       });
+      $scope.$apply();
     }
     function get_owner_info() {
-      vm.votedOpts = [];
-      vm.selectedOpts = [];
-      vm.follow = { poll: vm.poll._id };
-      vm.reported = false;
-      vm.bookmarked = false;
-      vm.like = {};
-      return new Promise((resolve, reject) => {
-        Action.get_vote(vm.poll._id)
-          .then(res => { // Get ownVote
-            vm.ownVote = res && res.data ? res.data : { poll: vm.poll._id };
-            if (vm.ownVote._id) {
-              return Action.get_opts_for_vote(vm.ownVote._id);
-            } else {
-              return next();
-            }
-          })
-          .then(res => { // Get votedOpts
-            if (res && res.data) {
-              res.data.forEach(voteopt => {
-                vm.votedOpts.push(voteopt.opt._id);
-                vm.selectedOpts.push(voteopt.opt._id);
-              });
-            }
-            return (vm.isLogged) ? Action.get_follow(vm.poll._id) : next();
-          })
-          .then(res => { // Get follow
-            if (res && res.data) {
-              vm.follow = res.data;
-            }
-            return (vm.isLogged) ? Action.get_report(vm.poll._id) : next();
-          })
-          .then(res => { // Get reported
-            if (res && res.data) {
-              vm.reported = res.data;
-            }
-            return (vm.isLogged) ? Action.get_bookmark(vm.poll._id) : next();
-          })
-          .then(res => { // Get bookmarked
-            if (res && res.data) {
-              vm.bookmarked = res.data;
-            }
-            return (vm.isLogged) ? Action.get_like(vm.poll._id) : next();
-          })
-          .then(res => { // Get like
-            if (res && res.data) {
-              vm.like = res.data;
-            }
-            $scope.$apply();
-            return resolve();
-          })
-          .catch(err => {
-            toast.error(err.message, 'Error!');
-            return reject();
-          });
-      });
+      Action.get_owner_by_pollId(vm.poll._id)
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          toast.error(err.message, 'Error!');
+        });
+
+
+
+      // vm.votedOpts = [];
+      // vm.selectedOpts = [];
+      // vm.follow = { poll: vm.poll._id };
+      // vm.reported = false;
+      // vm.bookmarked = false;
+      // vm.like = {};
+      // return new Promise((resolve, reject) => {
+      //   Action.get_vote(vm.poll._id)
+      //     .then(res => { // Get ownVote
+      //       vm.ownVote = res && res.data ? res.data : { poll: vm.poll._id };
+      //       if (vm.ownVote._id) {
+      //         return Action.get_opts_for_vote(vm.ownVote._id);
+      //       } else {
+      //         return next();
+      //       }
+      //     })
+      //     .then(res => { // Get votedOpts
+      //       if (res && res.data) {
+      //         res.data.forEach(voteopt => {
+      //           vm.votedOpts.push(voteopt.opt._id);
+      //           vm.selectedOpts.push(voteopt.opt._id);
+      //         });
+      //       }
+      //       return (vm.isLogged) ? Action.get_follow(vm.poll._id) : next();
+      //     })
+      //     .then(res => { // Get follow
+      //       if (res && res.data) {
+      //         vm.follow = res.data;
+      //       }
+      //       return (vm.isLogged) ? Action.get_report(vm.poll._id) : next();
+      //     })
+      //     .then(res => { // Get reported
+      //       if (res && res.data) {
+      //         vm.reported = res.data;
+      //       }
+      //       return (vm.isLogged) ? Action.get_bookmark(vm.poll._id) : next();
+      //     })
+      //     .then(res => { // Get bookmarked
+      //       if (res && res.data) {
+      //         vm.bookmarked = res.data;
+      //       }
+      //       return (vm.isLogged) ? Action.get_like(vm.poll._id) : next();
+      //     })
+      //     .then(res => { // Get like
+      //       if (res && res.data) {
+      //         vm.like = res.data;
+      //       }
+      //       $scope.$apply();
+      //       return resolve();
+      //     })
+      //     .catch(err => {
+      //       toast.error(err.message, 'Error!');
+      //       return reject();
+      //     });
+      // });
     }
     function next() {
       return new Promise((resolve, reject) => {
@@ -417,6 +413,19 @@
       }
     }
 
+    function save_viewed() {
+      if (!vm.poll.isCurrentUserOwner) {
+        var count_up = $timeout(() => {
+          Action.count_up_poll_view(vm.poll.report);
+          if (vm.isLogged) {
+            Action.save_view_poll(vm.poll._id);
+          }
+        }, 30000);
+        $scope.$on('$destroy', () => {
+          $timeout.cancel(count_up);
+        });
+      }
+    }
     // Thao tác databse
     function save_cmt() {
       if (

@@ -25,9 +25,6 @@
 
   function PollsApi($http) {
     return {
-      findPolls: (page) => {
-        return $http.get('/api/findPolls/' + page);
-      },
       findHotPolls: (page) => {
         return $http.get('/api/findHotPolls/' + page);
       },

@@ -15,7 +15,7 @@ var path = require('path'),
 /**
  * Create a Vote
  */
-exports.create = function(req, res) {
+exports.create = function (req, res) {
   var vote = new Vote(req.body);
   if (req.user) {
     vote.user = req.user;
@@ -55,7 +55,7 @@ exports.create = function(req, res) {
 /**
  * Show the current Vote
  */
-exports.read = function(req, res) {
+exports.read = function (req, res) {
   // convert mongoose document to JSON
   var vote = req.vote ? req.vote.toJSON() : {};
 
@@ -69,7 +69,7 @@ exports.read = function(req, res) {
 /**
  * Update a Vote
  */
-exports.update = function(req, res) {
+exports.update = function (req, res) {
   var vote = req.vote;
 
   vote = _.extend(vote, req.body);
@@ -103,7 +103,7 @@ exports.update = function(req, res) {
 /**
  * Delete an Vote
  */
-exports.delete = function(req, res) {
+exports.delete = function (req, res) {
   var vote = req.vote;
 
   vote.remove()
@@ -124,8 +124,8 @@ exports.delete = function(req, res) {
 /**
  * List of Votes
  */
-exports.list = function(req, res) {
-  Vote.find().sort('-created').populate('poll').populate('user', 'displayName').exec(function(err, votes) {
+exports.list = function (req, res) {
+  Vote.find().sort('-created').populate('poll').populate('user', 'displayName').exec(function (err, votes) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -139,24 +139,24 @@ exports.list = function(req, res) {
 /**
  * List of Opts voted
  */
-exports.findOpts = function(req, res) {
-  Vote.findOpts(req.vote._id)
-  .populate('opt', 'title')
-  .exec(function(err, opts) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.jsonp(opts);
-    }
-  });
+exports.findOpts = function (req, res) {
+  Voteopt.find({ vote: req.vote._id })
+    .populate('opt', 'title')
+    .exec(function (err, opts) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.jsonp(opts);
+      }
+    });
 };
 
 /**
  * Vote middleware
  */
-exports.voteByID = function(req, res, next, id) {
+exports.voteByID = function (req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
@@ -164,7 +164,7 @@ exports.voteByID = function(req, res, next, id) {
     });
   }
 
-  Vote.findById(id).populate('user', 'displayName').exec(function(err, vote) {
+  Vote.findById(id).populate('user', 'displayName').exec(function (err, vote) {
     if (err) {
       return next(err);
     } else if (!vote) {

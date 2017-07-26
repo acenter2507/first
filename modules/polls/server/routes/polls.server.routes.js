@@ -23,6 +23,9 @@ module.exports = function(app) {
   // Lấy danh sách poll nổi bật cho màn hình polls.list
   app.route('/api/findHotPolls/:page').get(polls.findHotPolls);
   
+  // Lấy thông tin của user hiện hành đối với poll cho màn hình polls.view
+  app.route('/api/findOwners/:pollId').get(polls.findOwners);
+
   app.route('/api/findOpts/:pollId').get(polls.findOpts);
   app.route('/api/findCmts/:pollId/:page').get(polls.findCmts);
   app.route('/api/findTags/:pollId').get(polls.findTags);

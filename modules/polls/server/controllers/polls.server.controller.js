@@ -364,6 +364,49 @@ exports.findHotPolls = function (req, res) {
 };
 
 /**
+ * Lấy thông tin của user hiện hành đối với poll cho màn hình polls.view
+ */
+exports.findOwners = function (req, res) {
+  var userId = req.user ? req.user._id : undefined;
+  var ip =
+    req.headers['X-Forwarded-For'] ||
+    req.headers['x-forwarded-for'] ||
+    req.client.remoteAddress;
+  var result = {};
+  get_vote_by_pollId_and_userId(req.poll._id, userId, ip)
+    .then(_result => {
+      result.ownVote = _result || { poll: req.poll._id };
+      return get_opts_by_voteId(result.ownVote._id);
+    })
+    .then(_result => {
+      result.votedOpts = _.pluck(_result, '_id') || [];
+      result.selectedOpts = _.pluck(_result, '_id') || [];
+      return get_follow_by_pollId(req.poll._id, userId);
+    })
+    .then(_result => {
+      result.follow = _result || { poll: req.poll._id };
+      return get_report_by_pollId(vm.poll._id, userId);
+    })
+    .then(_result => {
+      result.reported = (_result) ? true : false;
+      return get_bookmark_by_pollId(vm.poll._id, userId);
+    })
+    .then(_result => {
+      result.bookmarked = (_result) ? true : false;
+      return get_like_by_pollId_and_userId(vm.poll._id, userId);
+    })
+    .then(_result => {
+      result.like = _result || {};
+      res.jsonp(result);
+    })
+    .catch(err => {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    });
+};
+/* ------------------------------------------------------------------- */
+/**
  * List of Opts in poll xxxxx
  */
 exports.findOpts = function (req, res) {
@@ -489,7 +532,7 @@ exports.findVoteopts = function (req, res) {
 };
 
 /**
- * Get Like of user on this poll
+ * Get Like of user on this poll xxxx
  */
 exports.findPollLike = function (req, res) {
   var condition = { poll: req.poll._id, user: req.user._id };
@@ -995,3 +1038,54 @@ function get_tags_by_pollId(pollId) {
       });
   });
 }
+// Lấy thông tin vote của user hiện hành đối với poll (nếu là guest thì sử dụng ip)
+function get_vote_by_pollId_and_userId(pollId, userId, ip) {
+  return new Promise((resolve, reject) => {
+    var condition = {};
+    condition.poll = pollId;
+    if (userId) {
+      condition.user = userId;
+      condition.guest = false;
+    } else {
+      condition.ip = ip;
+      condition.guest = true;
+    }
+    Vote.findOne(condition).exec()
+      .exec(function (err, vote) {
+        if (err) {
+          return reject(err);
+        } else {
+          return resolve(vote);
+        }
+      });
+  });
+}
+// Lấy danh sách các option của 1 vote
+function get_opts_by_voteId(voteId) {
+  return new Promise((resolve, reject) => {
+    if (!voteId) return resolve();
+    Voteopt.find({ vote: voteId })
+      .populate('opt', 'title')
+      .exec(function (err, voteopts) {
+        if (err) {
+          return reject(err);
+        } else {
+          var opts = _.pluck(voteopts, 'opt') || [];
+          return resolve(opts);
+        }
+      });
+  });
+}
+// Lấy thông tin like của user đối với 1 poll
+function get_like_by_pollId_and_userId(pollId, userId) {
+  return new Promise((resolve, reject) => {
+    if (!userId) return resolve();
+    Like.findOne({ poll: pollId, user: userId }).exec(function (err, like) {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(like);
+      }
+    });
+  });
+};

@@ -49,15 +49,60 @@
     CmtsApi,
     UserApi
   ) {
-    this.template = () => {
+    /**
+     * Lấy danh sách poll cho màn hình polls.list
+     */
+    this.get_polls = (_page) => {
       return new Promise((resolve, reject) => {
-        //(successCb, errorCb);
-        function successCb(res) {
-          resolve(res);
-        }
-        function errorCb(err) {
-          reject(err);
-        }
+        var page = _page || 0;
+        $http.get('/api/findPolls/' + page)
+          .then(res => {
+            return resolve(res);
+          }, err => {
+            return reject(err);
+          });
+      });
+    };
+    /**
+     * Lấy danh sách poll mổi bật cho màn hình polls.list
+     */
+    this.get_hot_polls = (_page) => {
+      return new Promise((resolve, reject) => {
+        var page = _page || 0;
+        $http.get('/api/findHotPolls/' + page)
+          .then(res => {
+            return resolve(res);
+          }, err => {
+            return reject(err);
+          });
+      });
+    };
+
+    /**
+     * Lấy danh sách category (Kèm count poll)
+     */
+    this.get_categorys = () => {
+      return new Promise((resolve, reject) => {
+        Categorys.query().$promise
+          .then(res => {
+            return resolve(res);
+          }, err => {
+            return reject(err);
+          });
+      });
+    };
+
+    /**
+     * Lấy toàn bộ thông tin của user đối với poll
+     */
+    this.get_owner_by_pollId = pollId => {
+      return new Promise((resolve, reject) => {
+        $http.get('/api/findOwners/' + pollId)
+          .then(res => {
+            return resolve(res);
+          }, err => {
+            return reject(err);
+          });
       });
     };
 
@@ -97,31 +142,6 @@
     };
     this.get_poll_http = pollId => {
       return $http.get('api/polls/' + pollId);
-    };
-    // Lấy danh sách poll cho màn hình polls.list
-    this.get_polls = (_page) => {
-      return new Promise((resolve, reject) => {
-        var page = _page || 0;
-        PollsApi.findPolls(page)
-          .then(res => {
-            return resolve(res);
-          })
-          .catch(err => {
-            return reject(err);
-          });
-      });
-    };
-    this.get_hot_polls = (_page) => {
-      return new Promise((resolve, reject) => {
-        var page = _page || 0;
-        PollsApi.findHotPolls(page)
-          .then(res => {
-            return resolve(res);
-          })
-          .catch(err => {
-            return reject(err);
-          });
-      });
     };
     this.save_poll = poll => {
       return new Promise((resolve, reject) => {
@@ -573,14 +593,6 @@
           .catch(err => {
             return reject(err);
           });
-      });
-    };
-    // get categorys
-    this.get_categorys = () => {
-      return new Promise((resolve, reject) => {
-        Categorys.query().$promise.then(res => {
-          return resolve(res);
-        });
       });
     };
     // get categorys

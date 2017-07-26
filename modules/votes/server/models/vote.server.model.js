@@ -40,10 +40,4 @@ var VoteSchema = new Schema({
   }
 });
 
-VoteSchema.statics.findOpts = function(id, callback) {
-  return this.model('Voteopt').find({
-    vote: id
-  }, callback);
-};
-
 mongoose.model('Vote', VoteSchema);

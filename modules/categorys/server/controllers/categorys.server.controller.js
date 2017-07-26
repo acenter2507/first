@@ -131,6 +131,7 @@ exports.count_polls = function (req, res) {
 exports.polls = function (req, res) {
   var page = req.params.page || 0;
   var sort = req.params.sort || '-created';
+  var userId = req.user ? req.user._id : undefined;
   Poll.find({ category: req.category._id, isPublic: true })
     .sort(sort)
     .populate('user', 'displayName profileImageURL').skip(10 * page)

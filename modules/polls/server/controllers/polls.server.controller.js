@@ -1051,7 +1051,7 @@ function get_vote_by_pollId_and_userId(pollId, userId, ip) {
       condition.ip = ip;
       condition.guest = true;
     }
-    Vote.findOne(condition).exec()
+    Vote.findOne(condition)
       .exec(function (err, vote) {
         if (err) {
           return reject(err);

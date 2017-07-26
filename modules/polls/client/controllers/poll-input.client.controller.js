@@ -50,7 +50,7 @@
     vm.categorys = Categorys.query();
     vm.bk_poll = _.clone(poll);
     vm.form = {};
-    vm.opts = [];
+    vm.opts = vm.poll.opts;
 
     vm.optionToggle = -1;
 
@@ -58,7 +58,7 @@
     function init() {
       if (vm.poll._id) {
         initSocket();
-        get_opts();
+        // get_opts();
         // get_tags();
       }
       analysic_nofif();

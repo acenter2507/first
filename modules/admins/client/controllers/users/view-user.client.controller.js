@@ -51,6 +51,7 @@ function ViewUserController(
   $scope.itemsPerPage = 15;
 
   $scope.user = userResolve;
+  $scope.logins = [];
   $scope.polls = [];
   $scope.cmts = [];
   $scope.votes = [];
@@ -59,6 +60,36 @@ function ViewUserController(
   $scope.suggests = [];
   /* User basic info control */
   $scope.filter_min = true;
+
+  /* Login log */
+  get_logins();
+  function get_logins() {
+    AdminApi.get_logins_by_user($scope.user._id)
+      .then(res => {
+        $scope.logins = res.data || [];
+        $scope.loginCnt = $scope.logins.length;
+        $scope.buildloginPager();
+      })
+      .catch(err => {
+        toast.error('Load logins error: ' + err.message, 'Error!');
+      });
+  }
+  $scope.buildloginPager = () => {
+    $scope.loginsPagedItems = [];
+    $scope.loginsCurrentPage = 1;
+    $scope.figureOutItemsToDisplay_logins();
+  };
+  $scope.figureOutItemsToDisplay_logins = function () {
+    let filteredItems = $scope.logins;
+
+    $scope.loginFilterLength = filteredItems.length;
+    var begin = (($scope.loginsCurrentPage - 1) * $scope.itemsPerPage);
+    var end = begin + $scope.itemsPerPage;
+    $scope.loginsPagedItems = filteredItems.slice(begin, end);
+  };
+  $scope.loginPageChanged = function () {
+    $scope.figureOutItemsToDisplay_logins();
+  };
 
   /* Polls */
   get_polls();

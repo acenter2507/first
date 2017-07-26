@@ -13,7 +13,7 @@ var path = require('path'),
   Userreport = mongoose.model('Userreport'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
-var pollController = require('/modules/polls/server/controllers/polls.server.controller.js');
+var pollController = require(path.resolve('./modules/polls/server/controllers/polls.server.controller'));
 
 
 /**

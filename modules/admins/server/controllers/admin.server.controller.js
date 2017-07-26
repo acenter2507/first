@@ -20,6 +20,7 @@ var path = require('path'),
   Cmt = mongoose.model('Cmt'),
   Cmtlike = mongoose.model('Cmtlike'),
   Opt = mongoose.model('Opt'),
+  Userlogin = mongoose.model('Userlogin'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 var _ = require('underscore');
@@ -28,10 +29,10 @@ var _ = require('underscore');
  * Show the current user
  */
 exports.user = function (req, res) {
-  // res.json(req.model);
+  // res.jsonp(req.model);
   var user = req.model.toObject();
   users_report(user).then(_user => {
-    res.json(_user);
+    res.jsonp(_user);
   }).catch(err => {
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
@@ -57,7 +58,7 @@ exports.user_add = function (req, res) {
       report.save();
       user.password = undefined;
       user.salt = undefined;
-      res.json(user);
+      res.jsonp(user);
     }
   });
 };
@@ -121,7 +122,7 @@ exports.user_update = function (req, res) {
       });
     }
 
-    res.json(user);
+    res.jsonp(user);
   });
 };
 
@@ -169,7 +170,7 @@ exports.user_delete = function (req, res) {
       View.remove({ user: user._id });
     }, handleError)
     .then(() => {
-      res.json(user);
+      res.jsonp(user);
     }, handleError);
 
   function handleError(err) {
@@ -190,7 +191,7 @@ exports.users = function (req, res) {
       });
     }
 
-    res.json(users);
+    res.jsonp(users);
   });
 };
 
@@ -223,7 +224,7 @@ exports.users_list = function (req, res) {
   User.find({}, '-salt -password')
     .sort('-created').exec()
     .then((users) => {
-      if (users.length === 0) return res.json(users);
+      if (users.length === 0) return res.jsonp(users);
       var length = users.length;
       var counter = 0;
       users.forEach(function (instance, index, array) {
@@ -234,7 +235,7 @@ exports.users_list = function (req, res) {
           })
           .then(_res => {
             if (++counter === length) {
-              res.json(users);
+              res.jsonp(users);
             }
           })
           .catch(err => {
@@ -289,7 +290,7 @@ function users_report(user) {
 //         });
 //       }
 
-//       res.json(user);
+//       res.jsonp(user);
 //     });
 // };
 /**
@@ -304,7 +305,7 @@ function users_report(user) {
 //         });
 //       }
 
-//       res.json(count);
+//       res.jsonp(count);
 //     });
 // };
 /**
@@ -316,7 +317,7 @@ exports.users_polls = function (req, res) {
     .populate('category', 'name')
     .exec()
     .then((polls) => {
-      if (polls.length === 0) return res.json(polls);
+      if (polls.length === 0) return res.jsonp(polls);
       var length = polls.length;
       var counter = 0;
       polls.forEach(function (instance, index, array) {
@@ -326,7 +327,7 @@ exports.users_polls = function (req, res) {
           .then(report => {
             array[index].report = report;
             if (++counter === length) {
-              res.json(polls);
+              res.jsonp(polls);
             }
           }, handleError);
       });
@@ -347,7 +348,7 @@ exports.users_votes = function (req, res) {
     .populate('poll', 'title')
     .exec()
     .then((votes) => {
-      if (votes.length === 0) return res.json(votes);
+      if (votes.length === 0) return res.jsonp(votes);
       var length = votes.length;
       var counter = 0;
       votes.forEach(function (instance, index, array) {
@@ -362,7 +363,7 @@ exports.users_votes = function (req, res) {
             });
             array[index].opts = opts;
             if (++counter === length) {
-              res.json(votes);
+              res.jsonp(votes);
             }
           }, handleError);
       });
@@ -383,7 +384,7 @@ exports.users_cmts = function (req, res) {
     .populate('poll', 'title')
     .exec()
     .then((cmts) => {
-      res.json(cmts);
+      res.jsonp(cmts);
     }, handleError);
   function handleError(err) {
     return res.status(400).send({
@@ -400,7 +401,7 @@ exports.users_reports = function (req, res) {
     .populate('poll', 'title')
     .exec()
     .then((reports) => {
-      res.json(reports);
+      res.jsonp(reports);
     }, handleError);
   function handleError(err) {
     return res.status(400).send({
@@ -417,7 +418,7 @@ exports.users_bereports = function (req, res) {
     .populate('poll', 'title')
     .exec()
     .then((reports) => {
-      res.json(reports);
+      res.jsonp(reports);
     }, handleError);
   function handleError(err) {
     return res.status(400).send({
@@ -439,7 +440,22 @@ exports.users_suggests = function (req, res) {
         .exec();
     }, handleError)
     .then((opts) => {
-      res.json(opts);
+      res.jsonp(opts);
+    }, handleError);
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
+};
+/**
+ * Lấy history login của user
+ */
+exports.users_logins = function (req, res) {
+  Userlogin.find({ user: req.model._id })
+    .exec()
+    .then(logins => {
+      res.jsonp(logins);
     }, handleError);
   function handleError(err) {
     return res.status(400).send({

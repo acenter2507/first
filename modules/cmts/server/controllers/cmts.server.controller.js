@@ -13,7 +13,8 @@ var path = require('path'),
   Userreport = mongoose.model('Userreport'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
-var pollController = require('./modules/polls/server/controllers/polls.server.controller');
+var pollController = require('/modules/polls/server/controllers/polls.server.controller.js');
+
 
 /**
  * Create a Cmt

@@ -385,15 +385,15 @@ exports.findOwners = function (req, res) {
     })
     .then(_result => {
       result.follow = _result || { poll: req.poll._id };
-      return get_report_by_pollId(vm.poll._id, userId);
+      return get_report_by_pollId(req.poll._id, userId);
     })
     .then(_result => {
       result.reported = (_result) ? true : false;
-      return get_bookmark_by_pollId(vm.poll._id, userId);
+      return get_bookmark_by_pollId(req.poll._id, userId);
     })
     .then(_result => {
       result.bookmarked = (_result) ? true : false;
-      return get_like_by_pollId_and_userId(vm.poll._id, userId);
+      return get_like_by_pollId_and_userId(req.poll._id, userId);
     })
     .then(_result => {
       result.like = _result || {};

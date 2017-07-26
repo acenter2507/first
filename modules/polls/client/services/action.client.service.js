@@ -129,10 +129,6 @@
       });
     };
 
-
-
-
-
     this.get_user_report = userId => {
       return new Promise((resolve, reject) => {
         UserApi.get_user_report(userId)
@@ -280,17 +276,16 @@
       });
     };
 
-    this.get_like = pollId => {
-      return new Promise((resolve, reject) => {
-        PollsApi.findPollLike(pollId)
-          .then(res => {
-            return resolve(res);
-          })
-          .catch(err => {
-            return reject(err);
-          });
-      });
-    };
+    // this.get_like = pollId => {
+    //   return new Promise((resolve, reject) => {
+    //     $http.get('/api/findPollLike/' + pollId)
+    //       .then(res => {
+    //         return resolve(res);
+    //       }, err => {
+    //         return reject(err);
+    //       });
+    //   });
+    // };
     // Lưu like vào db
     this.save_like = (like, type, poll) => {
       // type: 1: like - 2: dislike;
@@ -491,11 +486,10 @@
     // get report info for user in poll
     this.get_report = pollId => {
       return new Promise((resolve, reject) => {
-        PollsApi.findReport(pollId)
+        $http.get('/api/findReport/' + pollId)
           .then(res => {
             return resolve(res);
-          })
-          .catch(err => {
+          }, err => {
             return reject(err);
           });
       });
@@ -517,17 +511,16 @@
         );
       });
     };
-    this.get_follow = pollId => {
-      return new Promise((resolve, reject) => {
-        PollsApi.findPolluser(pollId)
-          .then(res => {
-            return resolve(res);
-          })
-          .catch(err => {
-            return reject(err);
-          });
-      });
-    };
+    // this.get_follow = pollId => {
+    //   return new Promise((resolve, reject) => {
+    //     $http.get('/api/findPolluser/' + pollId)
+    //       .then(res => {
+    //         return resolve(res);
+    //       }, err => {
+    //         return reject(err);
+    //       });
+    //   });
+    // };
     // Lưu follow vào db
     this.save_follow = follow => {
       return new Promise((resolve, reject) => {

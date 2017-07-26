@@ -455,6 +455,21 @@ exports.findOpts = function (req, res) {
     });
 };
 
+/**
+ * Lấy toàn bộ thông tin các vote và các opt của vote
+ */
+exports.findVoteopts = function (req, res) {
+  get_votes_by_pollId(req.poll._id)
+    .then(result => {
+      res.jsonp(result);
+    })
+    .catch(handleError);
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
+};
 
 /**
  * List of Tags in poll xxxx
@@ -515,61 +530,45 @@ exports.findOpts = function (req, res) {
 // };
 
 /**
- * Lấy toàn bộ thông tin các vote và các opt của vote
- */
-exports.findVoteopts = function (req, res) {
-  get_votes_by_pollId(req.poll._id)
-    .then(result => {
-      res.jsonp(result);
-    })
-    .catch(handleError);
-  function handleError(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
-    });
-  }
-};
-
-/**
  * Get Like of user on this poll xxxx
  */
-exports.findPollLike = function (req, res) {
-  var condition = { poll: req.poll._id, user: req.user._id };
-  Like.findOne(condition).exec(function (err, like) {
-    if (err) {
-      handleError(err);
-    } else {
-      res.jsonp(like);
-    }
-  });
+// exports.findPollLike = function (req, res) {
+//   var condition = { poll: req.poll._id, user: req.user._id };
+//   Like.findOne(condition).exec(function (err, like) {
+//     if (err) {
+//       handleError(err);
+//     } else {
+//       res.jsonp(like);
+//     }
+//   });
 
-  function handleError(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
-    });
-  }
-};
+//   function handleError(err) {
+//     return res.status(400).send({
+//       message: errorHandler.getErrorMessage(err)
+//     });
+//   }
+// };
 
 /**
  * Find pollusers xxxx
  */
-exports.findPolluser = function (req, res) {
-  Polluser.findOne({
-    poll: req.poll._id,
-    user: req.user._id
-  }).exec((err, _polluser) => {
-    if (err) {
-      handleError(err);
-    } else {
-      res.jsonp(_polluser);
-    }
-  });
-  function handleError(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
-    });
-  }
-};
+// exports.findPolluser = function (req, res) {
+//   Polluser.findOne({
+//     poll: req.poll._id,
+//     user: req.user._id
+//   }).exec((err, _polluser) => {
+//     if (err) {
+//       handleError(err);
+//     } else {
+//       res.jsonp(_polluser);
+//     }
+//   });
+//   function handleError(err) {
+//     return res.status(400).send({
+//       message: errorHandler.getErrorMessage(err)
+//     });
+//   }
+// };
 
 /**
  * Find report xxxx

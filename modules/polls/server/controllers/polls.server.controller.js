@@ -295,36 +295,15 @@ exports.findPolls = function (req, res) {
       var counter = 0;
       polls.forEach(function (instance, index, array) {
         array[index] = instance.toObject();
-        // Lấy thông tin count
-        get_info_by_pollId(array[index]._id)
+        get_full_by_pollId(array[index]._id, userId)
           .then(result => {
-            array[index].report = result || {};
-            return get_opts_by_pollId(array[index]._id);
-          })
-          // Lấy các options
-          .then(result => {
-            array[index].opts = _.filter(result, { status: 1 }) || [];
-            return get_votes_by_pollId(array[index]._id);
-          })
-          // Lấy toàn bộ thông tin votes
-          .then(result => {
-            array[index].votes = result.votes || [];
-            array[index].voteopts = result.voteopts || [];
-            return get_follow_by_pollId(array[index]._id, userId);
-          })
-          // Lấy follow của user hiện hành
-          .then(result => {
-            array[index].follow = result || { poll: array[index]._id };
-            return get_report_by_pollId(array[index]._id, userId);
-          })
-          // Lấy report của user hiện hành
-          .then(result => {
-            array[index].reported = (result) ? true : false;
-            return get_bookmark_by_pollId(array[index]._id, userId);
-          })
-          // Lấy bookmark của user hiện hành
-          .then(result => {
-            array[index].bookmarked = (result) ? true : false;
+            array[index].report = result.report;
+            array[index].opts = result.opts;
+            array[index].votes = result.votes;
+            array[index].voteopts = result.voteopts;
+            array[index].follow = result.follow;
+            array[index].reported = result.reported;
+            array[index].bookmarked = result.bookmarked;
             if (++counter === length) {
               res.jsonp(polls);
             }
@@ -1101,6 +1080,47 @@ function get_like_by_cmtId_and_userId(cmtId, userId) {
   });
 }
 
+function get_full_by_pollId(pollId, userId) {
+  var info = {};
+  return new Promise((resolve, reject) => {
+    // Lấy thông tin count
+    get_info_by_pollId(pollId)
+      .then(result => {
+        info.report = result || {};
+        return get_opts_by_pollId(pollId);
+      })
+      // Lấy các options
+      .then(result => {
+        info.opts = _.filter(result, { status: 1 }) || [];
+        return get_votes_by_pollId(pollId);
+      })
+      // Lấy toàn bộ thông tin votes
+      .then(result => {
+        info.votes = result.votes || [];
+        info.voteopts = result.voteopts || [];
+        return get_follow_by_pollId(pollId, userId);
+      })
+      // Lấy follow của user hiện hành
+      .then(result => {
+        info.follow = result || { poll: array[index]._id };
+        return get_report_by_pollId(pollId, userId);
+      })
+      // Lấy report của user hiện hành
+      .then(result => {
+        info.reported = (result) ? true : false;
+        return get_bookmark_by_pollId(pollId, userId);
+      })
+      // Lấy bookmark của user hiện hành
+      .then(result => {
+        info.bookmarked = (result) ? true : false;
+        return resolve(info);
+      })
+      .catch(err => {
+        return resolve(err);
+      });
+  });
+}
+exports.get_full_by_pollId = get_full_by_pollId;
 exports.get_info_by_pollId = get_info_by_pollId;
 exports.get_opts_by_pollId = get_opts_by_pollId;
 exports.get_votes_by_pollId = get_votes_by_pollId;

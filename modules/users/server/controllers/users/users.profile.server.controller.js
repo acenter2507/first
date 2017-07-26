@@ -286,31 +286,14 @@ exports.bookmarks = function (req, res) {
       var counter = 0;
       polls.forEach(function (instance, index, array) {
         array[index] = instance.toObject();
-        pollController.get_info_by_pollId(array[index]._id)
-          // Lấy thông tin count
+        pollController.get_full_by_pollId(array[index]._id, userId)
           .then(result => {
-            array[index].report = result || {};
-            return pollController.get_opts_by_pollId(array[index]._id);
-          })
-          // Lấy các options
-          .then(result => {
-            array[index].opts = _.filter(result, { status: 1 }) || [];
-            return get_votes_by_pollId(array[index]._id);
-          })
-          // Lấy toàn bộ thông tin votes
-          .then(result => {
-            array[index].votes = result.votes || [];
-            array[index].voteopts = result.voteopts || [];
-            return get_follow_by_pollId(array[index]._id, userId);
-          })
-          // Lấy follow của user hiện hành
-          .then(result => {
-            array[index].follow = result || { poll: array[index]._id };
-            return get_report_by_pollId(array[index]._id, userId);
-          })
-          // Lấy report của user hiện hành
-          .then(result => {
-            array[index].reported = (result) ? true : false;
+            array[index].report = result.report;
+            array[index].opts = result.opts;
+            array[index].votes = result.votes;
+            array[index].voteopts = result.voteopts;
+            array[index].follow = result.follow;
+            array[index].reported = result.reported;
             if (++counter === length) {
               res.jsonp(polls);
             }
@@ -319,24 +302,11 @@ exports.bookmarks = function (req, res) {
       });
     }, handleError);
 
-
-
   function handleError(err) {
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
   }
-
-
-    .exec(function (err, bookmarks) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.jsonp(bookmarks);
-    }
-  });
 };
 
 exports.views = function (req, res) {
@@ -502,3 +472,4 @@ exports.update_report = function (req, res) {
 exports.delete_report = function (req, res) {
   res.json(req.report || null);
 };
+

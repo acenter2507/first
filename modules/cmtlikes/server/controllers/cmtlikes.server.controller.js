@@ -58,7 +58,7 @@ exports.update = function(req, res) {
   cmtlike.save()
     .then(_cmtlike => {
       cmtlike = _cmtlike;
-      return Cmt.countLike(_cmtlike.cmt._id, cnt);
+      return Cmt.countLike(_cmtlike.cmt, cnt);
     }, handleError)
     .then(cmt => {
       res.jsonp({ like: cmtlike, likeCnt: cmt.likeCnt });

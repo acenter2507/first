@@ -681,7 +681,7 @@ exports.search = function (req, res) {
     .then(_polls => {
       var temp = _filter_report(_polls, condition);
       var polls = _filter_report(temp, condition);
-      res.jsonp(result);
+      res.jsonp(polls);
     })
     .catch(err => {
       return res.status(400).send({

@@ -17,12 +17,14 @@ angular.module('users').controller('ProfileInfoController', [
       if ($scope.busy) return;
       $scope.busy = true;
       UserApi.get_activitys($scope.profile._id)
-      // Promise.all([get_polls(), get_cmts(), get_votes()])
         .then(res => {
           console.log(res);
-          // merge_activity();
-          // $scope.busy = false;
-          // $scope.$apply();
+          $scope.polls = res.polls;
+          $scope.cmts = res.cmts;
+          $scope.votes = res.votes;
+          merge_activity();
+          $scope.busy = false;
+          $scope.$apply();
         }, err => {
           alert(err);
         });

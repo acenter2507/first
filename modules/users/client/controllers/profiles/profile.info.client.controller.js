@@ -19,9 +19,9 @@ angular.module('users').controller('ProfileInfoController', [
       UserApi.get_activitys($scope.profile._id)
         .then(res => {
           console.log(res);
-          $scope.polls = res.polls;
-          $scope.cmts = res.cmts;
-          $scope.votes = res.votes;
+          $scope.polls = res.data.polls;
+          $scope.cmts = res.data.cmts;
+          $scope.votes = res.data.votes;
           merge_activity();
           $scope.busy = false;
           $scope.$apply();

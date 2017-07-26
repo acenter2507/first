@@ -18,7 +18,6 @@
     vm.remove = remove;
     vm.save = save;
     vm.polls = Polls.query();
-    vm.selectPoll = selectPoll;
     vm.opts = [];
     vm.selectedOpts = [];
     // Remove existing Vote

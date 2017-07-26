@@ -123,7 +123,7 @@
       Socket.on('cmt_add', cmtId => {
         Action.get_cmt(cmtId)
           .then(res => {
-            _cmt = res.data || {};
+            var _cmt = res.data || {};
             var item = _.findWhere(vm.cmts, { _id: _cmt._id });
             if (item) {
               _.extend(_.findWhere(vm.cmts, { _id: _cmt._id }), _cmt);

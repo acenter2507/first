@@ -33,18 +33,18 @@ angular.module('users').controller('ProfileVotesController', [
           toast.error(err.message, 'Error!');
         });
     }
-    function get_opts(vote) {
-      return new Promise((resolve, reject) => {
-        Action.get_opts_for_vote(vote._id)
-          .then(res => {
-            vote.opts = _.pluck(res.data, 'opt') || [];
-            return resolve(vote);
-          })
-          .catch(err => {
-            return reject(err);
-          });
-      });
-    }
+    // function get_opts(vote) {
+    //   return new Promise((resolve, reject) => {
+    //     Action.get_opts_for_vote(vote._id)
+    //       .then(res => {
+    //         vote.opts = _.pluck(res.data, 'opt') || [];
+    //         return resolve(vote);
+    //       })
+    //       .catch(err => {
+    //         return reject(err);
+    //       });
+    //   });
+    // }
     $scope.vote_filter = vote => {
       if (vote.poll.isPublic) {
         return true;

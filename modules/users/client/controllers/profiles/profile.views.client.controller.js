@@ -19,7 +19,7 @@ angular.module('users').controller('ProfileViewsController', [
         return;
       }
       $scope.busy = true;
-      UserApi.get_bookmarks($scope.profile._id, $scope.page)
+      UserApi.get_views($scope.profile._id, $scope.page)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
             $scope.busy = false;

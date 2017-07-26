@@ -209,6 +209,9 @@
           });
       });
     };
+    /**
+    * Tăng biến đếm view của poll lên 1
+    */
     this.count_up_poll_view = report => {
       return new Promise((resolve, reject) => {
         var rs_report = new Pollreports(report);
@@ -222,6 +225,9 @@
         }
       });
     };
+    /**
+    * Lưu poll vào danh sách đã view của user
+    */
     this.save_view_poll = pollId => {
       return new Promise((resolve, reject) => {
         PollsApi.findView(pollId)

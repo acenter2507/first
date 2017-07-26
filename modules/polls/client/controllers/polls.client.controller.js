@@ -256,11 +256,6 @@
           toast.error('Không thể load thông tin user' + err.message, 'Error!');
         });
     }
-    function next() {
-      return new Promise((resolve, reject) => {
-        return resolve();
-      });
-    }
     function analysic_nofif() {
       if (notif) {
         if (notif.status === 0) {

@@ -9,6 +9,7 @@ var path = require('path'),
   Poll = mongoose.model('Poll'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
+var pollController = require(path.resolve('./modules/polls/server/controllers/polls.server.controller'));
 
 /**
  * Create a Category
@@ -38,8 +39,16 @@ exports.read = function (req, res) {
   // Add a custom field to the Article, for determining if the current User is the "owner".
   // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
   category.isCurrentUserOwner = req.user && category.user && category.user._id.toString() === req.user._id.toString();
-
-  res.jsonp(category);
+  count_polls_by_categoryId(category._id)
+    .then(result => {
+      category.count = result || 0;
+      res.jsonp(category);
+    })
+    .catch(err => {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    });
 };
 
 /**
@@ -124,18 +133,56 @@ exports.polls = function (req, res) {
   var sort = req.params.sort || '-created';
   Poll.find({ category: req.category._id, isPublic: true })
     .sort(sort)
-    .populate('user', 'displayName profileImageURL')
-    .skip(10 * page)
-    .limit(10)
-    .exec(function (err, polls) {
-      if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      } else {
-        res.jsonp(polls);
-      }
+    .populate('user', 'displayName profileImageURL').skip(10 * page)
+    .limit(10).exec()
+    .then(polls => {
+      if (polls.length === 0) return res.jsonp(polls);
+      var length = polls.length;
+      var counter = 0;
+      polls.forEach(function (instance, index, array) {
+        array[index] = instance.toObject();
+        // Lấy thông tin count
+        pollController.get_info_by_pollId(array[index]._id)
+          .then(result => {
+            array[index].report = result || {};
+            return pollController.get_opts_by_pollId(array[index]._id);
+          })
+          // Lấy các options
+          .then(result => {
+            array[index].opts = _.filter(result, { status: 1 }) || [];
+            return pollController.get_votes_by_pollId(array[index]._id);
+          })
+          // Lấy toàn bộ thông tin votes
+          .then(result => {
+            array[index].votes = result.votes || [];
+            array[index].voteopts = result.voteopts || [];
+            return pollController.get_follow_by_pollId(array[index]._id, userId);
+          })
+          // Lấy follow của user hiện hành
+          .then(result => {
+            array[index].follow = result || { poll: array[index]._id };
+            return pollController.get_report_by_pollId(array[index]._id, userId);
+          })
+          // Lấy report của user hiện hành
+          .then(result => {
+            array[index].reported = (result) ? true : false;
+            return pollController.get_bookmark_by_pollId(array[index]._id, userId);
+          })
+          // Lấy bookmark của user hiện hành
+          .then(result => {
+            array[index].bookmarked = (result) ? true : false;
+            if (++counter === length) {
+              res.jsonp(polls);
+            }
+          })
+          .catch(handleError);
+      });
+    }, handleError);
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
     });
+  }
 };
 /**
  * Category middleware
@@ -162,7 +209,7 @@ exports.categoryByID = function (req, res, next, id) {
 };
 
 /**
- * Function hỗ trợ
+ * Đếm số poll trong category
  */
 function count_polls_by_categoryId(categoryId) {
   return new Promise((resolve, reject) => {

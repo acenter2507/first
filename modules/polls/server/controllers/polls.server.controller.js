@@ -1101,4 +1101,10 @@ function get_like_by_cmtId_and_userId(cmtId, userId) {
   });
 }
 
+exports.get_info_by_pollId = get_info_by_pollId;
+exports.get_opts_by_pollId = get_opts_by_pollId;
+exports.get_votes_by_pollId = get_votes_by_pollId;
+exports.get_follow_by_pollId = get_follow_by_pollId;
+exports.get_report_by_pollId = get_report_by_pollId;
+exports.get_bookmark_by_pollId = get_bookmark_by_pollId;
 exports.get_like_by_cmtId_and_userId = get_like_by_cmtId_and_userId;

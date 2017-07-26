@@ -8,7 +8,8 @@ angular.module('users').controller('ProfileController', [
   'Users',
   'toastr',
   '$timeout',
-  function ($scope, Authentication, profile, Action, Users, toast, $timeout) {
+  'ngDialog',
+  function ($scope, Authentication, profile, Action, Users, toast, $timeout, dialog) {
     $scope.profile = profile;
     $scope.user = Authentication.user;
     $scope.isCurrentOwner = profile._id === $scope.user._id;

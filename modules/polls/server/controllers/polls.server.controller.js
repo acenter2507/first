@@ -399,7 +399,6 @@ exports.findOwners = function (req, res) {
       res.jsonp(result);
     })
     .catch(err => {
-      console.log(err);
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });

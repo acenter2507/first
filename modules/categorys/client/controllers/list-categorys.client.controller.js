@@ -50,7 +50,7 @@
       });
       function handle_delete() {
         vm.categorys = _.without(vm.categorys, category);
-        vm.category.$remove();
+        category.$remove();
       }
     };
   }

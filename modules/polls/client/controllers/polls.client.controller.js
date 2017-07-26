@@ -261,7 +261,6 @@
         vm.chart.labels.push(opt.title);
         vm.chart.data.push(opt.voteCnt);
       });
-      $scope.$apply();
     }
     function get_owner_info() {
       Action.get_owner_by_pollId(vm.poll._id)

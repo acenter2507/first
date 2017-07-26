@@ -70,7 +70,6 @@ exports.signup = function (req, res) {
  * Signin after passport authentication
  */
 exports.signin = function (req, res, next) {
-  console.log('***************************************** login');
   passport.authenticate('local', function (err, user, info) {
     if (err || !user) {
       res.status(400).send(info);
@@ -79,6 +78,13 @@ exports.signin = function (req, res, next) {
       user.password = undefined;
       user.salt = undefined;
 
+      var login = new Userlogin({ user: user._id });
+      login.agent = req.headers['user-agent'];
+      login.ip =
+        req.headers['X-Forwarded-For'] ||
+        req.headers['x-forwarded-for'] ||
+        req.client.remoteAddress;
+      login.save();
       req.login(user, function (err) {
         if (err) {
           res.status(400).send(err);

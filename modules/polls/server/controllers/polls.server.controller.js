@@ -380,7 +380,6 @@ exports.findOwners = function (req, res) {
     })
     .then(_result => {
       result.votedOpts = _.pluck(_result, '_id') || [];
-      result.selectedOpts = _.pluck(_result, '_id') || [];
       return get_follow_by_pollId(req.poll._id, userId);
     })
     .then(_result => {

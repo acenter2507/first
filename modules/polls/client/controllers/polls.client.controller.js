@@ -265,7 +265,12 @@
     function get_owner_info() {
       Action.get_owner_by_pollId(vm.poll._id)
         .then(res => {
-          console.log(res);
+          vm.votedOpts = res.data.votedOpts;
+          vm.selectedOpts = res.data.votedOpts;
+          vm.follow = res.data.follow;
+          vm.reported = res.data.reported;
+          vm.bookmarked = res.data.bookmarked;
+          vm.like = res.data.like;
         })
         .catch(err => {
           toast.error(err.message, 'Error!');

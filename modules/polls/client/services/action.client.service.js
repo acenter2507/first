@@ -368,7 +368,7 @@
      */
     this.get_voteopts = pollId => {
       return new Promise((resolve, reject) => {
-        $http.get('/api/findVoteopts/' + page)
+        $http.get('/api/findVoteopts/' + pollId)
           .then(res => {
             return resolve(res);
           }, err => {

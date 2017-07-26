@@ -107,28 +107,6 @@
         }
       }
     }
-    // function get_opts() {
-    //   Action.get_opts(vm.poll._id)
-    //     .then(res => {
-    //       vm.opts = res.data || [];
-    //       $scope.$apply();
-    //     })
-    //     .catch(err => {
-    //       toast.error(err.message, 'Error!');
-    //     });
-    // }
-
-    // function get_tags() {
-    //   Action.get_tags(vm.poll._id)
-    //     .then(res => {
-    //       angular.forEach(res.data, (polltag, index) => {
-    //         vm.poll.tags.push(polltag.tag);
-    //       });
-    //     })
-    //     .catch(err => {
-    //       toast.error(err.message, 'Error!');
-    //     });
-    // }
 
     function isCanUpdate() {
       return true;

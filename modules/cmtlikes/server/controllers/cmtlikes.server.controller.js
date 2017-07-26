@@ -20,8 +20,7 @@ exports.create = function(req, res) {
   cmtlike.save()
     .then(_cmtlike => {
       cmtlike = _cmtlike;
-      console.log(cmtlike);
-      return Cmt.countLike(cmtlike.cmt._id, cnt);
+      return Cmt.countLike(cmtlike.cmt, cnt);
     }, handleError)
     .then(cmt => {
       res.jsonp({ like: cmtlike, likeCnt: cmt.likeCnt });

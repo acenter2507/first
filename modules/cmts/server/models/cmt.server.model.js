@@ -55,7 +55,9 @@ CmtSchema.pre('save', function(next){
 });
 
 CmtSchema.statics.countLike = function(id, cnt, callback) {
-  return this.findById(id).exec(function(err, cmt) {
+  console.log(id);
+  return this.findOne({ _id: id }).exec(function(err, cmt) {
+    console.log(cmt);
     cmt.likeCnt += cnt;
     return cmt.save();
   });

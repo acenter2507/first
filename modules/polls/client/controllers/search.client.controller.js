@@ -56,15 +56,15 @@ angular.module('polls').controller('PollsSearchController', [
         Action.search($scope.condition)
           .then(res => {
             $scope.polls = res.data;
-            var promise = [];
-            $scope.polls.forEach(function (item) {
-              promise.push(get_owner_follow(item.poll));
-              promise.push(get_reported(item.poll));
-              promise.push(get_bookmarked(item.poll));
-            }, this);
-            return Promise.all(promise);
-          })
-          .then(res => {
+          //   var promise = [];
+          //   $scope.polls.forEach(function (item) {
+          //     promise.push(get_owner_follow(item.poll));
+          //     promise.push(get_reported(item.poll));
+          //     promise.push(get_bookmarked(item.poll));
+          //   }, this);
+          //   return Promise.all(promise);
+          // })
+          // .then(res => {
             create_sort();
             $scope.busy = false;
           })

@@ -60,6 +60,10 @@
         initSocket();
       }
       analysic_nofif();
+
+      $scope.$watch('vm.poll', function() {
+        alert('hey, myVar has changed!');
+    });
     }
 
     init();
@@ -82,6 +86,7 @@
           .then(_poll => {
             vm.poll = _poll;
             vm.opts = vm.poll.opts;
+            $scope.apply();
           }, err => {
             toast.error(err.message, 'Error!');
           });

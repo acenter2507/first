@@ -153,6 +153,7 @@
     function get_bookmarks() {
       UserApi.get_bookmarks(vm.authentication.user._id, 0)
         .then(res => {
+          console.log(res);
           vm.bookmarks = _.pluck(res, 'poll');
         }, err => {
           toast.error(err.message, 'Error!');

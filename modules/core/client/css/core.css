@@ -99,6 +99,8 @@ a:hover .header-profile-image {
     top: 0;
     left: 0;
     height: 40px;
+    width: 100%;
+    padding: 12px;
     margin-bottom: 12px; 
     clear: both; }
     .card .card-header .card-title {

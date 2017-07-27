@@ -109,10 +109,9 @@ a:hover .header-profile-image {
   .card.activitys {
     max-height: 358px;
     overflow: hidden; }
-    .card.activitys .card-body:hover {
-      overflow-y: scroll;}
     .card.activitys .card-body {
-      max-height: 300px; }
+      max-height: 300px; 
+      overflow-y: scroll; }
     .card.activitys .card-body::-webkit-scrollbar {
       display: none; }
 

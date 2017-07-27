@@ -101,14 +101,12 @@ a:hover .header-profile-image {
       color: #90949c; }
     .card .card-header .card-title {
       color: #90949c; }
-  .card .card-body {
-    max-height: calc(100% - 12px);
-    position: relative;}
   .card.activitys {
     max-height: 358px;
     overflow: hidden; }
     .card.activitys .card-body {
-      overflow-y: scroll;}
+      overflow-y: scroll;
+      max-height: 300px; }
     .card.activitys .card-body::-webkit-scrollbar {
       display: none; }
   .card.expand-card {

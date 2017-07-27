@@ -148,15 +148,17 @@
           <strong class="card-title">Ticker</strong>
           <span class="pull-right"><a class="undecorated-link text-muted expand-toggle"><i class="fa fa-caret-down"></i></a></span>
         </div>
-        <div class="side-list-poll" ng-repeat="activity in vm.activitys">
-          <div class="user-avatar pull-left">
-            <img src="{{activity.profileImageURL}}" alt="{{activity.displayName}}">
+        <div class="card-body">
+          <div class="side-list-poll" ng-repeat="activity in vm.activitys">
+            <div class="user-avatar pull-left">
+              <img src="{{activity.profileImageURL}}" alt="{{activity.displayName}}">
+            </div>
+            <small><strong><a class="undecorated-link" ui-sref="profile.info({userId: activity.user})">{{activity.displayName}}</a></strong></small>
+            <small>{{activity.action}}</small>
+            <small><strong><a class="undecorated-link" ui-sref="polls.view({pollId: activity.poll})">{{activity.title}}</a></strong></small>
+            <div class="clearfix"></div>
+            <hr class="mg5t mg5b">
           </div>
-          <small><strong><a class="undecorated-link" ui-sref="profile.info({userId: activity.user})">{{activity.displayName}}</a></strong></small>
-          <small>{{activity.action}}</small>
-          <small><strong><a class="undecorated-link" ui-sref="polls.view({pollId: activity.poll})">{{activity.title}}</a></strong></small>
-          <div class="clearfix"></div>
-          <hr class="mg5t mg5b">
         </div>
       </div>
       <div class="card">

@@ -58,7 +58,7 @@
     function link(scope, element, attrs) {
       if (element.hasClass('expand-toggle')) {
         element.on('click', function () {
-          element.element('.card.expand-card').toggleClass('open').find('.open').removeClass('open');
+          document.element('.card.expand-card').toggleClass('open').find('.open').removeClass('open');
         });
       }
     }

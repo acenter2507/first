@@ -93,7 +93,6 @@ a:hover .header-profile-image {
   margin-left: 6px;
   margin-right: 6px;
   margin-bottom: 12px;
-  transition: height .5s;
   color: #555; }
   .card .card-header {
     margin-bottom: 12px; 

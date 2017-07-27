@@ -40,8 +40,18 @@
 }
 
 .side-list-poll:not(:last-child) {
-  margin-bottom: 5px;
-}
+  margin-bottom: 5px; }
+  .side-list-poll .side-list-body {
+    overflow: hidden;
+    zoom: 1;}
+    .side-list-poll .side-list-body h4.side-list-title {
+      font-size: 1rem;
+      line-height: normal;
+      margin: 0; }
+    .side-list-poll .side-list-body .side-list-entry {
+      font-size: 85%;
+      color: #888;
+    }
 .activitys {
   max-height: 358px;
   overflow: auto;

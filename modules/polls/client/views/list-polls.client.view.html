@@ -192,13 +192,21 @@
       <!-- Bookmark -->
       <div class="card" ng-if="vm.isLogged">
         <strong class="card-title">Bookmarks</strong>
-        <small class="pull-right"><a ui-sref="profile.bookmarks({ userId: vm.authentication.user._id })">View all</a></small>
+        <small class="pull-right" ng-show="vm.bookmarks.length > 0"><a ui-sref="profile.bookmarks({ userId: vm.authentication.user._id })">View all</a></small>
         <div class="side-list-poll" ng-repeat="poll in vm.bookmarks">
           <div class="user-avatar pull-left">
             <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user._id})">
               <img src="{{poll.user.profileImageURL}}" alt="{{poll.user.displayName}}">
             </a>
             <img ng-if="!poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
+          </div>
+          <div class="side-list-body">
+            <h4 class="side-list-title">
+              <a class="undecorated-link" ui-sref="polls.view({pollId: poll._id})" ng-bind="poll.title"></a>
+            </h4>
+            <div class="side-list-entry">
+              <span am-time-ago="poll.created"></span>
+            </div>
           </div>
           <a class="undecorated-link" ui-sref="polls.view({pollId: poll._id})" ng-bind="poll.title"></a>
           <div class="clearfix"></div>

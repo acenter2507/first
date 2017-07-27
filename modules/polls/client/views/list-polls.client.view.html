@@ -143,8 +143,11 @@
     </div>
     <!-- Hot poll -->
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-lg-push-3 pdn">
-      <div class="card activitys">
-        <strong class="card-title">Ticker</strong>
+      <div class="card activitys expand-card">
+        <div class="card-header">
+          <strong class="card-title">Ticker</strong>
+          <span class="pull-right"></span><a class="undecorated-link expand-toggle"><i class="fa fa-caret-down"></i></a>
+        </div>
         <div class="side-list-poll" ng-repeat="activity in vm.activitys">
           <div class="user-avatar pull-left">
             <img src="{{activity.profileImageURL}}" alt="{{activity.displayName}}">
@@ -159,7 +162,7 @@
       <div class="card">
         <div class="card-header">
           <strong class="card-title">Popular polls</strong>
-          <small class="pull-right" ng-show="vm.bookmarks.length > 0"><a ui-sref="profile.bookmarks({ userId: vm.authentication.user._id })">View all</a></small>
+          <small class="pull-right undecorated-link" ng-show="vm.bookmarks.length > 0"><a ui-sref="profile.bookmarks({ userId: vm.authentication.user._id })">View all</a></small>
         </div>
         <div class="side-list-poll" ng-repeat="poll in vm.hot_polls">
           <div class="user-avatar pull-left">
@@ -203,7 +206,7 @@
       <div class="card" ng-if="vm.isLogged">
         <div class="card-header">
           <strong class="card-title">Bookmarks</strong>
-          <small class="pull-right" ng-show="vm.bookmarks.length > 0"><a ui-sref="profile.bookmarks({ userId: vm.authentication.user._id })">View all</a></small>
+          <small class="pull-right undecorated-link" ng-show="vm.bookmarks.length > 0"><a ui-sref="profile.bookmarks({ userId: vm.authentication.user._id })">View all</a></small>
         </div>
         <div class="side-list-poll" ng-repeat="poll in vm.bookmarks">
           <div class="user-avatar pull-left">

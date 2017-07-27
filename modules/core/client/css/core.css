@@ -93,12 +93,22 @@ a:hover .header-profile-image {
   margin-left: 6px;
   margin-right: 6px;
   margin-bottom: 12px;
+  transition: height .5s;
   color: #555; }
   .card .card-header {
     margin-bottom: 12px; 
     clear: both; }
     .card .card-header .card-title {
       color: #90949c; }
+  .card..activitys {
+    max-height: 358px;
+    overflow: auto; }
+    .activitys::-webkit-scrollbar {
+      display: none; }
+  .card.expand-card {
+    max-height: 36px; }
+  .card.card.expand-card.open {
+    max-height: none; }
 
 .custom-toolbar {
   margin-left: 6px;

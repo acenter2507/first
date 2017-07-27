@@ -55,13 +55,7 @@
     .side-list-poll .side-list-body .side-list-entry {
       color: #888;
       line-height: 1.2;}
-.activitys {
-  max-height: 358px;
-  overflow: auto;
-}
-.activitys::-webkit-scrollbar {
-  display: none;
-}
+
 .auto-text {
   font-size: 0.8em;
   overflow: hidden;

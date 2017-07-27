@@ -95,7 +95,7 @@ a:hover .header-profile-image {
   margin-bottom: 12px;
   color: #555; }
 .card.expand-card {
-  max-height: 40px; }
+  max-height: 42px; }
 .card.card.expand-card.open {
   max-height: none; }
 .card.activitys {

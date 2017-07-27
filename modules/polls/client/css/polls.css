@@ -48,8 +48,10 @@
     .side-list-poll .side-list-body h4.side-list-title {
       font-size: 14px;
       line-height: normal;
-      margin: 0; }
+      margin: 0;
+      max-height: 36px; }
     .side-list-poll .side-list-body .side-list-entry {
+      line-height: 1.2;
       position: absolute;
       left: 56px;
       bottom: 0;

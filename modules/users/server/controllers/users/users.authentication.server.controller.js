@@ -72,7 +72,7 @@ exports.signup = function (req, res) {
 exports.signin = function (req, res, next) {
   passport.authenticate('local', function (err, user, info) {
     if (err || !user) {
-      console.log(err);
+      console.log(info);
       res.status(400).send(info);
     } else {
       // Remove sensitive data before login

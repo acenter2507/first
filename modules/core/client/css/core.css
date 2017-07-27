@@ -102,9 +102,10 @@ a:hover .header-profile-image {
     .card .card-header .card-title {
       color: #90949c; }
   .card.activitys {
-    max-height: 358px;
-    overflow: auto; }
-    .activitys::-webkit-scrollbar {
+    max-height: 358px;}
+    .card.activitys .card-body {
+      overflow: auto;}
+    .card.activitys .card-body::-webkit-scrollbar {
       display: none; }
   .card.expand-card {
     max-height: 40px; }

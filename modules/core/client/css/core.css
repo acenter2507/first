@@ -102,7 +102,7 @@ a:hover .header-profile-image {
     .card .card-header .card-title {
       color: #90949c; }
   .card .card-body {
-    max-height: 100%;
+    max-height: calc(100% - 12px);
     position: relative;}
   .card.activitys {
     max-height: 358px;

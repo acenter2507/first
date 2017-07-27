@@ -101,8 +101,11 @@ a:hover .header-profile-image {
       color: #90949c; }
     .card .card-header .card-title {
       color: #90949c; }
+  .card .card-body {
+    max-height: 100%;}
   .card.activitys {
-    max-height: 358px;}
+    max-height: 358px;
+    overflow: auto; }
     .card.activitys .card-body {
       overflow: auto;}
     .card.activitys .card-body::-webkit-scrollbar {

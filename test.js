@@ -38,15 +38,16 @@ app.init(function () {
   - Chức năng private và share link => done
   - Chức năng nhập lý do khi report => done
   - Chức năng search => done
-  - Đang code màn hình admin user (Mấy cái button xóa trong màn hình view)
-  - Rà soát lại toàn bộ các request lấy db, tổng hợp và dọn sạch
-  - Chuc nang luu thong tin login cua user
+  - Đang code màn hình admin user (Mấy cái button xóa trong màn hình view) => done
+  - Rà soát lại toàn bộ các request lấy db, tổng hợp và dọn sạch => done
+  - Chuc nang luu thong tin login cua user => done
+  - Chức năng quản lý toàn bộ thông tin của user => done
+  - Đếm và quản lý số lần bị report của user => done
 
-  - Chức năng quản lý toàn bộ thông tin của user
-  - Đếm và quản lý số lần bị report của user
-
-  - Hoàn thiện màn hình home
+  - Hoàn thiện màn hình home: Chỉnh navbar, hiển thêm màn hình home, màn hình view poll chỉnh cho mobile
   - Share mạng xã hội
+  - Chức năng login mạng xã hội
+
 
 3. Test
   - Test các cài đặt của poll

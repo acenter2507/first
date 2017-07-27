@@ -91,6 +91,10 @@ var UserSchema = new Schema({
   updated: {
     type: Date
   },
+  lastLogin: {
+    type: Date,
+    default: Date.now
+  },
   created: {
     type: Date,
     default: Date.now

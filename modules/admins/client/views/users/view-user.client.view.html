@@ -18,7 +18,7 @@
         <div class="text-muted text-uppercase">Login</div>
       </div>
       <div class="admin-card-footer pd12x pd4y">
-        <a class="font-weight-bold font-sm btn-block text-muted undecorated-link" href="#">View More <i class="fa fa-angle-right pull-right font-lg"></i></a>
+        <a class="font-weight-bold font-sm btn-block text-muted undecorated-link" href="#logins">View More <i class="fa fa-angle-right pull-right font-lg"></i></a>
       </div>
     </div>
   </div>
@@ -168,6 +168,10 @@
                 <td><span ng-bind="user.roles"></span></td>
               </tr>
               <tr>
+                <td>Last login:</td>
+                <td><span am-time-ago="user.lastLogin"></span></td>
+              </tr>
+              <tr>
                 <td>Created:</td>
                 <td><span ng-bind="user.created"></span></td>
               </tr>
@@ -175,6 +179,37 @@
           </div>
           <div class="clearfix"></div>
         </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+</div>
+<!-- logins -->
+<div class="row mg12t" ng-show="loginsPagedItems.length > 0">
+  <div class="col-xs-12">
+    <div class="admin-card">
+      <div class="admin-card-header">
+        <i class="fa fa-list-alt"></i> Login logs
+      </div>
+      <div class="admin-card-block">
+        <table class="table table-hover table-outline" id="logins">
+          <thead class="thead-default">
+            <tr>
+              <th>Ip</th>
+              <th>Agent</th>
+              <th>Login time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="login in loginsPagedItems">
+              <td>{{ login.ip }}</td>
+              <td>{{ login.agent }}</td>
+              <td><span ng-bind="login.created"></span></td>
+            </tr>
+          </tbody>
+        </table>
+        <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="loginFilterLength" ng-model="loginsCurrentPage"
+          ng-change="loginPageChanged()"></uib-pagination>
       </div>
     </div>
   </div>
@@ -218,7 +253,7 @@
               <td>{{ poll.report.viewCnt }}</td>
               <td>{{ poll.report.cmtCnt }}</td>
               <td>{{ poll.report.voteCnt }}</td>
-              <td><span ng-bind="user.created | date:'mediumDate'"></span></td>
+              <td><span ng-bind="poll.created | date:'mediumDate'"></span></td>
               <td>
                 <div class="btn-group" role="group">
                   <a class="undecorated-link" ui-sref="admin.polls.view({ pollId: poll._id })"><i class="icon-eye icons"></i>

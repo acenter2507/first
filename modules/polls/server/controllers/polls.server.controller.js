@@ -373,6 +373,10 @@ exports.findOwners = function (req, res) {
     })
     .then(_result => {
       result.like = _result || {};
+      return get_view_by_pollId(req.poll._id, userId);
+    })
+    .then(_result => {
+      result.view = _result || { poll: req.poll._id };
       res.jsonp(result);
     })
     .catch(err => {
@@ -416,10 +420,8 @@ exports.findCmts = function (req, res) {
   }
 };
 
-/* ------------------------------------------------------------------- */
-
 /**
- * Lấy toàn bộ thông tin các vote và các opt của vote
+ * Lấy toàn bộ thông tin các vote và các opt của vote (polls.view)
  */
 exports.findVoteopts = function (req, res) {
   get_votes_by_pollId(req.poll._id)
@@ -433,149 +435,7 @@ exports.findVoteopts = function (req, res) {
     });
   }
 };
-
-/**
- * List of Tags in poll xxxx
- */
-// exports.findTags = function (req, res) {
-//   Polltag.find({ poll: req.poll._id })
-//     .populate('tag').exec(function (err, polltags) {
-//       if (err) {
-//         return res.status(400).send({
-//           message: errorHandler.getErrorMessage(err)
-//         });
-//       } else {
-//         res.jsonp(polltags);
-//       }
-//     });
-// };
-
-/**
- * List of Votes in poll  xxxx
- */
-// exports.findVotes = function (req, res) {
-//   Vote.find({ poll: req.poll._id }).exec(function (err, votes) {
-//     if (err) {
-//       return res.status(400).send({
-//         message: errorHandler.getErrorMessage(err)
-//       });
-//     } else {
-//       res.jsonp(votes);
-//     }
-//   });
-// };
-
-/**
- * Vote in poll of user
- */
-// exports.findOwnerVote = function (req, res) {
-//   var condition = {};
-//   condition.poll = req.poll._id;
-//   if (req.user) {
-//     condition.user = req.user._id;
-//     condition.guest = false;
-//   } else {
-//     condition.ip =
-//       req.headers['X-Forwarded-For'] ||
-//       req.headers['x-forwarded-for'] ||
-//       req.client.remoteAddress;
-//     condition.guest = true;
-//   }
-//   Poll.findOwnerVote(condition).exec(function (err, vote) {
-//     if (err) {
-//       return res.status(400).send({
-//         message: errorHandler.getErrorMessage(err)
-//       });
-//     } else {
-//       res.jsonp(vote);
-//     }
-//   });
-// };
-
-/**
- * Get Like of user on this poll xxxx
- */
-// exports.findPollLike = function (req, res) {
-//   var condition = { poll: req.poll._id, user: req.user._id };
-//   Like.findOne(condition).exec(function (err, like) {
-//     if (err) {
-//       handleError(err);
-//     } else {
-//       res.jsonp(like);
-//     }
-//   });
-
-//   function handleError(err) {
-//     return res.status(400).send({
-//       message: errorHandler.getErrorMessage(err)
-//     });
-//   }
-// };
-
-/**
- * Find pollusers xxxx
- */
-// exports.findPolluser = function (req, res) {
-//   Polluser.findOne({
-//     poll: req.poll._id,
-//     user: req.user._id
-//   }).exec((err, _polluser) => {
-//     if (err) {
-//       handleError(err);
-//     } else {
-//       res.jsonp(_polluser);
-//     }
-//   });
-//   function handleError(err) {
-//     return res.status(400).send({
-//       message: errorHandler.getErrorMessage(err)
-//     });
-//   }
-// };
-
-/**
- * Find report xxxx
- */
-exports.findReport = function (req, res) {
-  Report.findOne({
-    poll: req.poll._id,
-    user: req.user._id
-  }).exec((err, _report) => {
-    if (err) {
-      handleError(err);
-    } else {
-      var result = _report ? true : false;
-      res.jsonp(result);
-    }
-  });
-  function handleError(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
-    });
-  }
-};
-
-/**
- * Find Bookmark xxxx
- */
-exports.findBookmark = function (req, res) {
-  Bookmark.findOne({
-    poll: req.poll._id,
-    user: req.user._id
-  }).exec((err, _bookmark) => {
-    if (err) {
-      handleError(err);
-    } else {
-      var result = _bookmark ? true : false;
-      res.jsonp(result);
-    }
-  });
-  function handleError(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
-    });
-  }
-};
+/* ------------------------------------------------------------------- */
 
 exports.removeBookmark = function (req, res) {
   Bookmark.findOne({
@@ -594,46 +454,6 @@ exports.removeBookmark = function (req, res) {
     });
   }
 };
-
-/**
- * Find report xxxx
- */
-exports.findPollreport = function (req, res) {
-  Pollreport.findOne({ poll: req.poll._id }).exec((err, _report) => {
-    if (err) {
-      handleError(err);
-    } else {
-      res.jsonp(_report);
-    }
-  });
-  function handleError(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
-    });
-  }
-};
-
-/**
- * Find view
- */
-exports.findView = function (req, res) {
-  View.findOne({
-    poll: req.poll._id,
-    user: req.user._id
-  }).exec((err, _view) => {
-    if (err) {
-      handleError(err);
-    } else {
-      res.jsonp(_view);
-    }
-  });
-  function handleError(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
-    });
-  }
-};
-
 
 exports.search = function (req, res) {
   const condition = req.body.condition;
@@ -819,9 +639,6 @@ exports.pollByID = function (req, res, next, id) {
     });
 };
 
-function temp() {
-  return new Promise((resolve, reject) => { });
-}
 // Lấy các report của poll
 function get_info_by_pollId(pollId) {
   return new Promise((resolve, reject) => {
@@ -923,6 +740,22 @@ function get_bookmark_by_pollId(pollId, userId) {
         return reject(err);
       } else {
         return resolve(bookmark);
+      }
+    });
+  });
+}
+// Lấy thông tin view poll của user
+function get_view_by_pollId(pollId, userId) {
+  return new Promise((resolve, reject) => {
+    if (!userId) return resolve();
+    View.findOne({
+      poll: pollId,
+      user: userId
+    }).exec((err, view) => {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(view);
       }
     });
   });

@@ -45,5 +45,8 @@ function AdminApi($http) {
   this.get_suggests_by_user = userId => {
     return $http.get('/api/admins/users/' + userId + '/suggests');
   };
+  this.get_logins_by_user = userId => {
+    return $http.get('/api/admins/users/' + userId + '/logins');
+  };
   return this;
 }

@@ -97,7 +97,11 @@ a:hover .header-profile-image {
 .card.expand-card {
   max-height: 40px; }
 .card.card.expand-card.open {
-  max-height: 358px; }
+  max-height: none; }
+.card.activitys {
+  overflow: hidden; }
+.card.activitys.card.expand-card.open {
+  max-height: 358px !important; }
 
   .card .card-header {
     margin-bottom: 12px; 
@@ -106,9 +110,6 @@ a:hover .header-profile-image {
       color: #90949c; }
     .card .card-header .card-title {
       color: #90949c; }
-  .card.activitys {
-    max-height: 358px;
-    overflow: hidden; }
     .card.activitys .card-body {
       max-height: 300px; 
       overflow-y: scroll; }

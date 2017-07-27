@@ -38,8 +38,9 @@
 .text-body img {
   max-width: 100%;
 }
-
-.side-list-poll:not(:last-child) {
+.side-list-poll {
+  position: relative; }
+  .side-list-poll:not(:last-child) {
   margin-bottom: 5px; }
   .side-list-poll .side-list-body {
     overflow: hidden;
@@ -49,6 +50,9 @@
       line-height: normal;
       margin: 0; }
     .side-list-poll .side-list-body .side-list-entry {
+      position: absolute;
+      left: 56px;
+      bottom: 0;
       font-size: 85%;
       color: #888;
     }

@@ -95,6 +95,9 @@ a:hover .header-profile-image {
   margin-bottom: 12px;
   color: #555; }
   .card .card-header {
+    position: fixed;
+    top: 0;
+    left: 0;
     margin-bottom: 12px; 
     clear: both; }
     .card .card-header .card-title {

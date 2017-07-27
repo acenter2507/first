@@ -99,7 +99,7 @@ a:hover .header-profile-image {
     clear: both; }
     .card .card-header .card-title {
       color: #90949c; }
-  .card..activitys {
+  .card.activitys {
     max-height: 358px;
     overflow: auto; }
     .activitys::-webkit-scrollbar {

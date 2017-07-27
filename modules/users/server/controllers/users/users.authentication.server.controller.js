@@ -82,7 +82,7 @@ exports.signin = function (req, res, next) {
         req.headers['x-forwarded-for'] ||
         req.client.remoteAddress;
       login.save();
-      user.update({ _id: user._id}, { $set: { lastLogin: new Date() }});
+      user.update({ _id: user._id }, { $set: { lastLogin: new Date() } });
       // Remove sensitive data before login
       user.password = undefined;
       user.salt = undefined;

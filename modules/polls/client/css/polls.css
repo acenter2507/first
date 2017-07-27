@@ -50,10 +50,11 @@
       overflow: hidden;
       line-height: normal;
       margin: 0;
+      width: 100%;
       height: 32px; }
     .side-list-poll .side-list-body .side-list-entry {
       color: #888;
-      line-height: 1.1;}
+      line-height: 1.2;}
 .activitys {
   max-height: 358px;
   overflow: auto;

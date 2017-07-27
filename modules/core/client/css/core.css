@@ -106,7 +106,7 @@ a:hover .header-profile-image {
     .activitys::-webkit-scrollbar {
       display: none; }
   .card.expand-card {
-    max-height: 36px; }
+    max-height: 40px; }
   .card.card.expand-card.open {
     max-height: none; }
 

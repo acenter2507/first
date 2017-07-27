@@ -50,7 +50,7 @@
       overflow: hidden;
       line-height: normal;
       margin: 0;
-      max-height: 32px; }
+      height: 32px; }
     .side-list-poll .side-list-body .side-list-entry {
       color: #888;
     }

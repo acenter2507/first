@@ -55,7 +55,7 @@
         <hr class="mg5t mg10b">
       </div>
       <div clas="poll-body">
-        <h4><a ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a></h4>
+        <h3><a ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a></h3>
         <div class="text-body" ta-bind="text" ng-model="poll.summary" ta-readonly="true"></div>
         <p ng-show="poll.body.length > poll.summary.length" class="poll_item_body">
           <a class="undecorated-link" ui-sref="polls.view({ pollId: poll._id })">see more</a>

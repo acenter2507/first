@@ -70,7 +70,7 @@
         </div>
 
         <div clas="poll-body">
-          <h4><a ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a></h4>
+          <h3><a ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a></h3>
           <!--<p class="text-justify poll_item_body" ng-bind-html="poll.summary | nl2br"></p>-->
           <div class="text-body" ta-bind="text" ng-model="poll.summary" ta-readonly="true"></div>
           <p ng-show="poll.body.length > poll.summary.length" class="poll_item_body">
@@ -176,17 +176,6 @@
           <div class="clearfix"></div>
           <hr class="mg5t mg5b">
         </div>
-        <!-- <div class="side-list-poll" ng-repeat="poll in vm.hot_polls">
-          <div class="user-avatar pull-left">
-            <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user._id})">
-              <img src="{{poll.user.profileImageURL}}" alt="{{poll.user.displayName}}">
-            </a>
-            <img ng-if="!poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
-          </div>
-          <a class="undecorated-link" ui-sref="polls.view({pollId: poll._id})" ng-bind="poll.title"></a>
-          <div class="clearfix"></div>
-          <hr class="mg5t mg5b">
-        </div> -->
       </div>
     </div>
     

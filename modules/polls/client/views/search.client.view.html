@@ -231,7 +231,7 @@
         </div>
 
         <div clas="poll-body">
-          <h4><a ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a></h4>
+          <h3><a ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a></h3>
           <!--<p class="text-justify poll_item_body" ng-bind-html="poll.summary | nl2br"></p>-->
           <div class="text-body" ta-bind="text" ng-model="poll.summary" ta-readonly="true"></div>
           <div class="clearfix"></div>

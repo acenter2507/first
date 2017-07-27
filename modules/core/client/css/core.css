@@ -94,6 +94,11 @@ a:hover .header-profile-image {
   margin-right: 6px;
   margin-bottom: 12px;
   color: #555; }
+.card.expand-card {
+  max-height: 40px; }
+.card.card.expand-card.open {
+  max-height: 358px; }
+
   .card .card-header {
     margin-bottom: 12px; 
     clear: both; }
@@ -104,15 +109,12 @@ a:hover .header-profile-image {
   .card.activitys {
     max-height: 358px;
     overflow: hidden; }
+    .card.activitys .card-body:hover {
+      overflow-y: scroll;}
     .card.activitys .card-body {
-      overflow-y: scroll;
       max-height: 300px; }
     .card.activitys .card-body::-webkit-scrollbar {
       display: none; }
-  .card.expand-card {
-    max-height: 40px; }
-  .card.card.expand-card.open {
-    max-height: 358px; }
 
 .custom-toolbar {
   margin-left: 6px;

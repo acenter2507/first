@@ -157,7 +157,10 @@
         </div>
       </div>
       <div class="card">
-        <strong class="card-title">Hot polls</strong>
+        <div class="card-header">
+          <strong class="card-title">Popular polls</strong>
+          <small class="pull-right" ng-show="vm.bookmarks.length > 0"><a ui-sref="profile.bookmarks({ userId: vm.authentication.user._id })">View all</a></small>
+        </div>
         <div class="side-list-poll" ng-repeat="poll in vm.hot_polls">
           <div class="user-avatar pull-left">
             <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user._id})">

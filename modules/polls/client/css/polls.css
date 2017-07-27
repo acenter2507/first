@@ -53,9 +53,6 @@
     .side-list-poll .side-list-body .side-list-entry {
       margin: 0;
       line-height: 1.2;
-      position: absolute;
-      left: 56px;
-      bottom: 0;
       font-size: 85%;
       color: #888;
     }

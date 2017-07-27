@@ -74,9 +74,6 @@ exports.signin = function (req, res, next) {
     if (err || !user) {
       res.status(400).send(info);
     } else {
-      // Remove sensitive data before login
-      user.password = undefined;
-      user.salt = undefined;
 
       var login = new Userlogin({ user: user._id });
       login.agent = req.headers['user-agent'];
@@ -87,6 +84,9 @@ exports.signin = function (req, res, next) {
       login.save();
       user.lastLogin = new Date();
       user.save();
+      // Remove sensitive data before login
+      user.password = undefined;
+      user.salt = undefined;
       req.login(user, function (err) {
         console.log(err);
         if (err) {

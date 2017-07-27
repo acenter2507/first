@@ -49,8 +49,9 @@
       font-size: 14px;
       line-height: normal;
       margin: 0;
-      max-height: 36px; }
+      max-height: 32px; }
     .side-list-poll .side-list-body .side-list-entry {
+      margin: 0;
       line-height: 1.2;
       position: absolute;
       left: 56px;

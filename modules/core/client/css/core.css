@@ -107,7 +107,7 @@ a:hover .header-profile-image {
   .card.expand-card {
     max-height: 40px; }
   .card.card.expand-card.open {
-    max-height: none; }
+    max-height: 358px; }
 
 .custom-toolbar {
   margin-left: 6px;

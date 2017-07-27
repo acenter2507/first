@@ -198,8 +198,10 @@
       </div>
       <!-- Bookmark -->
       <div class="card" ng-if="vm.isLogged">
-        <strong class="card-title">Bookmarks</strong>
-        <small class="pull-right" ng-show="vm.bookmarks.length > 0"><a ui-sref="profile.bookmarks({ userId: vm.authentication.user._id })">View all</a></small>
+        <div class="card-header">
+          <strong class="card-title">Bookmarks</strong>
+          <small class="pull-right" ng-show="vm.bookmarks.length > 0"><a ui-sref="profile.bookmarks({ userId: vm.authentication.user._id })">View all</a></small>
+        </div>
         <div class="side-list-poll" ng-repeat="poll in vm.bookmarks">
           <div class="user-avatar pull-left">
             <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user._id})">
@@ -213,7 +215,6 @@
             </h4>
             <div class="side-list-entry">
               <small am-time-ago="poll.created"></small>
-              <small class="pull-right">Vote: {{poll.report.voteCnt}}, Like: {{poll.report.likeCnt}}</small>
             </div>
           </div>
           <div class="clearfix"></div>

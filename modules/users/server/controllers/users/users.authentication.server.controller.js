@@ -89,6 +89,7 @@ exports.signin = function (req, res, next) {
       user.lastLogin = new Date();
       user.save();
       req.login(user, function (err) {
+        console.log(err);
         if (err) {
           res.status(400).send(err);
         } else {

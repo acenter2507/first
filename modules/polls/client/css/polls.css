@@ -104,7 +104,6 @@
   margin: auto;
 }
 .progress {
-  height: 24px !important;
   margin-bottom: 10px !important;
 }
 .progress-bar {
@@ -114,6 +113,12 @@
 .progress-bar span {
   margin-left: 12px;
 }
+.progress-xs {
+  height: 4px !important; }
+.progress-sm {
+  height: 8px !important; }
+.progress-lg {
+  height: 24px !important; }
 
 .poll_item_body,
 .poll_item_info {

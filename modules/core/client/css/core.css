@@ -40,12 +40,6 @@ a:hover .header-profile-image {
   padding-top: 11px !important;
   padding-bottom: 11px !important;
 }
-.progress-xs {
-  height: 4px; }
-
-.progress-sm {
-  height: 8px; }
-
 .notif-number {
   position: absolute;
   top: 8px;

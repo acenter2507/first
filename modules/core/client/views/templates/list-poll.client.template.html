@@ -63,7 +63,7 @@
       <div ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">
         <span><strong ng-bind="opt.title"></strong>({{opt.voteCnt + '/' + poll.total}})</span>
         <div class="progress progress-xs">
-          <div nclass="progress-bar" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}"></div>
+          <div class="progress-bar" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}"></div>
         </div>
       </div>
     </div>
@@ -71,7 +71,7 @@
       <div ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">
         <strong><span ng-bind="opt.title"></span></strong>
         <div class="progress progress-xs">
-          <div nclass="progress-bar" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}"></div>
+          <div class="progress-bar" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}"></div>
         </div>
       </div>
     </div>

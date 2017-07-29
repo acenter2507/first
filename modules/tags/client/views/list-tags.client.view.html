@@ -16,8 +16,11 @@
   </div>
   <div class="row">
     <div class="card">
+      <div class="form-group">
+        <input type="text" ng-model="vm.searchKey" placeholder="Search" ng-change="vm.search()" />
+      </div>
       <ul class="tags">
-        <li ng-repeat="tag in vm.tags"><a ui-sref="tags.view({ tagId: tag._id })" class="tag">{{tag.name}}({{tag.count}})</a></li>
+        <li ng-repeat="tag in vm.shows"><a ui-sref="tags.view({ tagId: tag._id })" class="tag">{{tag.name}}({{tag.count}})</a></li>
       </ul>
     </div>
   </div>

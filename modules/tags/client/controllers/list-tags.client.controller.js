@@ -22,7 +22,7 @@
       vm.shows = [];
       search();
     }
-
+    vm.search = search;
     function search() {
       vm.shows = $filter('filter')(vm.tags, {
         $: vm.searchKey

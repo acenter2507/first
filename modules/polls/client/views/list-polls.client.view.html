@@ -164,7 +164,7 @@
       <div class="card">
         <div class="card-header">
           <strong class="card-title">Popular polls</strong>
-          <small class="pull-right undecorated-link" ng-show="vm.bookmarks.length > 0"><a ui-sref="profile.bookmarks({ userId: vm.authentication.user._id })">View all</a></small>
+          <small class="pull-right" ng-show="vm.bookmarks.length > 0"><a class="undecorated-link" ui-sref="profile.bookmarks({ userId: vm.authentication.user._id })">View all</a></small>
         </div>
         <div class="card-body">
           <div class="side-list-poll" ng-repeat="poll in vm.hot_polls">
@@ -190,7 +190,7 @@
       <div class="card">
         <div class="card-header">
           <strong class="card-title">Popular tags</strong>
-          <small class="pull-right undecorated-link"><a ui-sref="tags.list">View all</a></small>
+          <small class="pull-right"><a class="undecorated-link" ui-sref="tags.list">View all</a></small>
         </div>
         <div class="card-body">
           <ul class="tags">
@@ -206,7 +206,7 @@
         <ul class="nav nav-list">
           <li class="nav-header">
             <strong class="card-title">Categorys</strong>
-            <small class="pull-right"><a ui-sref="categorys.list">View all</a></small>
+            <small class="pull-right"><a class="undecorated-link" ui-sref="categorys.list">View all</a></small>
           </li>
           <li ng-repeat="category in vm.categorys">
             <a class="undecorated-link" ui-sref="categorys.polls({ categoryId: category._id })">
@@ -220,7 +220,7 @@
       <div class="card" ng-if="vm.isLogged">
         <div class="card-header">
           <strong class="card-title">Bookmarks</strong>
-          <small class="pull-right undecorated-link" ng-show="vm.bookmarks.length > 0"><a ui-sref="profile.bookmarks({ userId: vm.authentication.user._id })">View all</a></small>
+          <small class="pull-right" ng-show="vm.bookmarks.length > 0"><a class="undecorated-link" ui-sref="profile.bookmarks({ userId: vm.authentication.user._id })">View all</a></small>
         </div>
         <div class="card-body">
           <div class="side-list-poll" ng-repeat="poll in vm.bookmarks">

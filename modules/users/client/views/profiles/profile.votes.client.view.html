@@ -27,7 +27,7 @@
         <hr class="mg5t mg10b">
       </div>
       <div class="post-body">
-        <h3><a ui-sref="polls.view({ pollId: vote.poll._id })">{{vote.poll.title}}</a></h3>
+        <h3><a class="undecorated-link" ui-sref="polls.view({ pollId: vote.poll._id })">{{vote.poll.title}}</a></h3>
         <span>Voted for:</span>
         <span ng-repeat="opt in vote.opts" ng-class="{'mg5l': !$first}">
           <strong>{{ opt.title }}</strong>

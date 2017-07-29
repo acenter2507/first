@@ -31,6 +31,8 @@
 
     vm.authentication = Authentication;
     vm.tag = tag;
+    vm.user = Authentication.user;
+    vm.isLogged = (vm.user);
 
     // Infinity scroll
     vm.busy = false;

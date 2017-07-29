@@ -47,6 +47,7 @@
             vm.busy = false;
             return;
           }
+          var promises = [];
           res.data.forEach(poll => {
             promises.push(process_before_show(poll));
           });

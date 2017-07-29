@@ -10,6 +10,7 @@ var path = require('path'),
   Polltag = mongoose.model('Polltag'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
+var pollController = require(path.resolve('./modules/polls/server/controllers/polls.server.controller'));
 
 /**
  * Create a Tag

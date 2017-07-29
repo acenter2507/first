@@ -32,8 +32,9 @@
     UserApi
   ) {
     var vm = this;
-    vm.authentication = Authentication;
-    vm.isLogged = vm.authentication.user ? true : false;
+    $scope.user = Authentication.user;
+    $scope.isLogged = ($scope.user);
+
     vm.polls = [];
     vm.hot_polls = [];
     vm.activitys = JSON.parse(Storages.get_session(Constants.storages.activitys, JSON.stringify([])));
@@ -57,7 +58,7 @@
       // Load các polls có lượng like nhiều nhất
       get_hot_polls();
       // Load danh sách poll đã bookmark
-      if (vm.isLogged) {
+      if ($scope.isLogged) {
         get_bookmarks();
       }
     }
@@ -115,7 +116,7 @@
     }
     function process_before_show(poll) {
       return new Promise((resolve, reject) => {
-        poll.isCurrentUserOwner = vm.isLogged && vm.authentication.user._id === poll.user._id;
+        poll.isCurrentUserOwner = $scope.isLogged && scope.user._id === poll.user._id;
         poll.chart = {
           options: { responsive: true },
           colors: [],
@@ -161,7 +162,7 @@
         });
     }
     function get_bookmarks() {
-      UserApi.get_bookmarks(vm.authentication.user._id, 0)
+      UserApi.get_bookmarks(scope.user._id, 0)
         .then(res => {
           vm.bookmarks = res.data || [];
         }, err => {
@@ -177,7 +178,7 @@
     }
 
     // Thao tác khác
-    vm.delete_poll = (poll) => {
+    $scope.delete_poll = (poll) => {
       if (!poll.isCurrentUserOwner) {
         toast.error('You are not authorized.', 'Error!');
         return;
@@ -198,7 +199,7 @@
         Action.delete_poll(poll);
       }
     };
-    vm.report_poll = (poll) => {
+    $scope.report_poll = (poll) => {
       if (poll.reported) {
         toast.error('You are already reported ' + poll.title, 'Error!');
         return;
@@ -222,7 +223,7 @@
           });
       }
     };
-    vm.bookmark_poll = (poll) => {
+    $scope.bookmark_poll = (poll) => {
       if (poll.bookmarked) {
         toast.error('You are already bookmark ' + poll.title, 'Error!');
         return;
@@ -237,8 +238,8 @@
           toast.error(err.message, 'Error!');
         });
     };
-    vm.follow_poll = (poll) => {
-      if (!vm.isLogged) {
+    $scope.follow_poll = (poll) => {
+      if (!$scope.isLogged) {
         toast.error('You must login to follow poll.', 'Error!');
         return;
       }
@@ -254,7 +255,7 @@
           toast.error(err.message, 'Error!');
         });
     };
-    vm.load_new = () => {
+    $scope.load_new = () => {
       $state.reload();
     };
   }

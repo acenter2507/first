@@ -19,9 +19,11 @@
       <div class="form-group col-md-4 col-md-offset-4">
         <input class="form-control" type="text" ng-model="vm.searchKey" placeholder="Search" ng-change="vm.search()" />
       </div>
-      <ul class="tags">
-        <li ng-repeat="tag in vm.shows"><a ui-sref="tags.view({ tagId: tag._id })" class="tag">{{tag.name}}({{tag.count}})</a></li>
-      </ul>
+      <div class="col-12 pdn">
+        <ul class="tags">
+          <li ng-repeat="tag in vm.shows"><a ui-sref="tags.view({ tagId: tag._id })" class="tag">{{tag.name}}({{tag.count}})</a></li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>

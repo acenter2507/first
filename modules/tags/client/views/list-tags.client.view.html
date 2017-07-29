@@ -30,32 +30,3 @@
     </div>
   </div>
 </section>
-<!-- 
-
-<section class="container">
-  <div class="page-header">
-    <div class="col col-xs-12 col-sm-8">
-      <h3>Tags</h3>
-    </div>
-    <div class="col col-xs-12 col-sm-4">
-      <a class="btn btn-primary pull-right" ui-sref="tags.create">Create tag</a>
-    </div>
-    <div class="clearfix"></div>
-  </div>
-  <div class="list-group">
-    <a ng-repeat="tag in vm.tags" ui-sref="tags.view({ tagId: tag._id })" class="list-group-item">
-      <small class="list-group-item-text">
-        Posted on
-        <span ng-bind="tag.created | date:'mediumDate'"></span>
-        by
-        <span ng-if="tag.user" ng-bind="tag.user.displayName"></span>
-        <span ng-if="!tag.user">Deleted User</span>
-      </small>
-      <h4 class="list-group-item-heading" ng-bind="tag.name"></h4>
-      <p class="list-group-item-text" ng-bind="tag.des"></p>
-    </a>
-  </div>
-  <div class="alert alert-warning text-center" ng-if="vm.tags.$resolved && !vm.tags.length">
-    No Tags yet, why don't you <a ui-sref="tags.create">create one</a>?
-  </div>
-</section> -->

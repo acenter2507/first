@@ -519,6 +519,12 @@
     this.get_popular_tags = () => {
       return $http.get('/api/tags/popular');
     };
+    /**
+     * Lấy list poll thuộc tag
+     */
+    this.get_tag_polls = (tagId, page, sort) => {
+      return $http.get('/api/tags/' + tagId + '/polls/' + page + '/' + sort);
+    };
     return this;
   }
 })();

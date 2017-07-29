@@ -9,6 +9,7 @@ var tagsPolicy = require('../policies/tags.server.policy'),
 module.exports = function(app) {
   // Tags Routes
   app.route('/api/tags/popular').get(tags.popular);
+  app.route('/api/tags/:tagId/polls').get(tags.polls);
 
   app.route('/api/tags').all(tagsPolicy.isAllowed)
     .get(tags.list)

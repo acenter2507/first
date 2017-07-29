@@ -167,8 +167,41 @@ exports.popular = function (req, res) {
   }
 };
 /**
- * 
+ * List poll su dung tag
  */
+exports.polls = function (req, res) {
+  var userId = req.user ? req.user._id : undefined;
+  get_polls_by_tagId(req.tag._id)
+    .then(polls => {
+      if (polls.length === 0) return res.jsonp(polls);
+      var length = polls.length;
+      var counter = 0;
+      polls.forEach(function (instance, index, array) {
+        array[index] = instance.toObject();
+        pollController.get_full_by_pollId(array[index]._id, userId)
+          .then(result => {
+            array[index].report = result.report;
+            array[index].opts = result.opts;
+            array[index].votes = result.votes;
+            array[index].voteopts = result.voteopts;
+            array[index].follow = result.follow;
+            array[index].reported = result.reported;
+            array[index].bookmarked = result.bookmarked;
+            if (++counter === length) {
+              res.jsonp(polls);
+            }
+          })
+          .catch(handleError);
+      });
+    })
+    .catch(handleError);
+
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
+};
 /**
  * Đếm số poll trong tag
  */
@@ -182,7 +215,8 @@ function get_polls_by_tagId(tagId) {
           { path: 'user', select: 'displayName profileImageURL', model: 'User' },
           { path: 'category', select: 'name icon', model: 'Category' }
         ]
-      }).exec((err, polltags) => {
+      })
+      .exec((err, polltags) => {
         if (err) {
           return reject(err);
         } else {

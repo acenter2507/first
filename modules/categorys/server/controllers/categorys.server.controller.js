@@ -143,35 +143,15 @@ exports.polls = function (req, res) {
       polls.forEach(function (instance, index, array) {
         array[index] = instance.toObject();
         // Lấy thông tin count
-        pollController.get_info_by_pollId(array[index]._id)
+        pollController.get_full_by_pollId(array[index]._id, userId)
           .then(result => {
-            array[index].report = result || {};
-            return pollController.get_opts_by_pollId(array[index]._id);
-          })
-          // Lấy các options
-          .then(result => {
-            array[index].opts = _.filter(result, { status: 1 }) || [];
-            return pollController.get_votes_by_pollId(array[index]._id);
-          })
-          // Lấy toàn bộ thông tin votes
-          .then(result => {
-            array[index].votes = result.votes || [];
-            array[index].voteopts = result.voteopts || [];
-            return pollController.get_follow_by_pollId(array[index]._id, userId);
-          })
-          // Lấy follow của user hiện hành
-          .then(result => {
-            array[index].follow = result || { poll: array[index]._id };
-            return pollController.get_report_by_pollId(array[index]._id, userId);
-          })
-          // Lấy report của user hiện hành
-          .then(result => {
-            array[index].reported = (result) ? true : false;
-            return pollController.get_bookmark_by_pollId(array[index]._id, userId);
-          })
-          // Lấy bookmark của user hiện hành
-          .then(result => {
-            array[index].bookmarked = (result) ? true : false;
+            array[index].report = result.report;
+            array[index].opts = result.opts;
+            array[index].votes = result.votes;
+            array[index].voteopts = result.voteopts;
+            array[index].follow = result.follow;
+            array[index].reported = result.reported;
+            array[index].bookmarked = result.bookmarked;
             if (++counter === length) {
               res.jsonp(polls);
             }

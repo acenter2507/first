@@ -31,8 +31,8 @@
           <span class="pull-left">
             <strong><a class="undecorated-link" ui-sref="profile.info({userId: poll.user._id})" ng-if="poll.user" ng-bind="poll.user.displayName"></a></strong>
             <span ng-if="!poll.user">Deleted User</span>
-            <small class="text-muted">&nbsp;created on</small>
-            <small class="text-muted" am-time-ago="poll.created"></small>
+          <small class="text-muted">&nbsp;created on</small>
+          <small class="text-muted" am-time-ago="poll.created"></small>
           </span>
           <span class="pull-right">
             <md-menu md-offset="-12 20" md-position-mode="target-right target">
@@ -187,8 +187,19 @@
           </div>
         </div>
       </div>
+      <div class="card">
+        <div class="card-header">
+          <strong class="card-title">Popular tags</strong>
+          <small class="pull-right undecorated-link"><a ui-sref="tags.list">View all</a></small>
+        </div>
+        <div class="card-body">
+          <ul class="tags">
+            <li ng-repeat="tag in vm.tags"><a ui-sref="tags.view({ tagId: tag._id })" class="tag">{{tag.name}}</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
-    
+
     <!-- LEFT -->
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-lg-pull-9 pdn">
       <!-- Category -->

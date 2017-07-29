@@ -16,6 +16,7 @@
     'ReportsService',
     'BookmarksService',
     'CategorysService',
+    'TagsService',
     'PollreportsService',
     'Userreport',
     'ViewsService',
@@ -36,6 +37,7 @@
     Reports,
     Bookmarks,
     Categorys,
+    Tags,
     Pollreports,
     Userreport,
     Views,
@@ -504,6 +506,19 @@
     this.search_user_by_name = name => {
       return $http.get('/api/users/search/s=' + name);
     };
+    this.get_tags = () => {
+      return new Promise((resolve, reject) => {
+        Tags.query().$promise
+          .then(res => {
+            return resolve(res);
+          }, err => {
+            return reject(err);
+          });
+      });
+    }
+    this.get_popular_tags = () => {
+      return $http.get('/api/tags/popular');
+    }
     return this;
   }
 })();

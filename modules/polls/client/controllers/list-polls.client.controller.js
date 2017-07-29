@@ -39,6 +39,7 @@
     vm.activitys = JSON.parse(Storages.get_session(Constants.storages.activitys, JSON.stringify([])));
     vm.categorys = [];
     vm.bookmarks = [];
+    vm.tags = [];
     vm.new_data = [];
     vm.page = 0;
     vm.busy = false;
@@ -51,6 +52,8 @@
       initSocket();
       // Load danh sách category (Bao gồm số poll)
       get_categorys();
+      // Load danh sách tags (Bao gồm số poll)
+      get_popular_tags();
       // Load các polls có lượng like nhiều nhất
       get_hot_polls();
       // Load danh sách poll đã bookmark
@@ -143,6 +146,15 @@
       Action.get_categorys()
         .then(res => {
           vm.categorys = res;
+        })
+        .catch(err => {
+          toast.error(err.message, 'Error!');
+        });
+    }
+    function get_popular_tags() {
+      Action.get_popular_tags()
+        .then(res => {
+          vm.tags = res;
         })
         .catch(err => {
           toast.error(err.message, 'Error!');

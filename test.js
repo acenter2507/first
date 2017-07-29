@@ -47,6 +47,7 @@ app.init(function () {
   - Hoàn thiện màn hình home: Chỉnh navbar, hiển thêm màn hình home, màn hình view poll chỉnh cho mobile
   - Share mạng xã hội
   - Chức năng login mạng xã hội
+  - Send message facebook
 
 
 3. Test

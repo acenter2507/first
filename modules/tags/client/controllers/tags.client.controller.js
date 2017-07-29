@@ -98,6 +98,13 @@
     vm.remove = remove;
     vm.save = save;
 
+    vm.poll_filter = poll => {
+      if (poll.isPublic) {
+        return true;
+      } else {
+        return poll.isCurrentUserOwner;
+      }
+    };
     vm.delete_poll = (poll) => {
       if (!poll.isCurrentUserOwner) {
         toast.error('You are not authorized.', 'Error!');

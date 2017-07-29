@@ -17,7 +17,7 @@
 
   <div class="row">
     <div class="col-xs-12 pdn">
-      <div ng-repeat="poll in vm.polls" class="card">
+      <div ng-repeat="poll in vm.polls | filter: vm.poll_filter" class="card">
         <div clas="poll-header">
           <div class="user-avatar pull-left">
             <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user._id})">

@@ -154,7 +154,7 @@
     function get_popular_tags() {
       Action.get_popular_tags()
         .then(res => {
-          vm.tags = res;
+          vm.tags = res.data;
         })
         .catch(err => {
           toast.error(err.message, 'Error!');

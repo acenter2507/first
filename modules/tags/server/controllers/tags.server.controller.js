@@ -134,7 +134,9 @@ exports.popular = function (req, res) {
             array[index].count = result || 0;
             if (++counter === length) {
               tags = _.sortByOrder(tags, ['count'], ['desc']);
+              console.log(tags);
               tags = tags.splice(10, length - 10);
+              console.log(tags);
               res.jsonp(tags);
             }
           })

@@ -515,10 +515,10 @@
             return reject(err);
           });
       });
-    }
+    };
     this.get_popular_tags = () => {
       return $http.get('/api/tags/popular');
-    }
+    };
     return this;
   }
 })();

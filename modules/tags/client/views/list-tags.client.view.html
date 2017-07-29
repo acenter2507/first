@@ -15,9 +15,11 @@
     </div>
   </div>
   <div class="row">
-    <ul class="tags">
-      <li ng-repeat="tag in vm.tags"><a ui-sref="tags.view({ tagId: tag._id })" class="tag">{{tag.name}}({{tag.count}})</a></li>
-    </ul>
+    <div class="card">
+      <ul class="tags">
+        <li ng-repeat="tag in vm.tags"><a ui-sref="tags.view({ tagId: tag._id })" class="tag">{{tag.name}}({{tag.count}})</a></li>
+      </ul>
+    </div>
   </div>
 </section>
 <!-- 

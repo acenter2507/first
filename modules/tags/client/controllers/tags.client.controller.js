@@ -37,7 +37,7 @@
     vm.sort = '-created';
     vm.polls = [];
 
-    vm.get_polls = get_polls;
+    get_polls();
     function get_polls() {
       if (vm.busy) return;
       vm.busy = true;

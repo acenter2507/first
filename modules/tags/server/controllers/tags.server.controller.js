@@ -86,15 +86,31 @@ exports.delete = function (req, res) {
  * List of Tags
  */
 exports.list = function (req, res) {
-  Tag.find().sort('-created').populate('user', 'displayName').exec(function (err, tags) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
+  Tag.find().exec()
+    .then(tags => {
+      if (tags.length === 0) return res.jsonp(tags);
+      var length = tags.length;
+      var counter = 0;
+      tags.forEach(function (instance, index, array) {
+        array[index] = instance.toObject();
+        count_polls_by_tagId(array[index]._id)
+          .then(result => {
+            array[index].count = result || 0;
+            if (++counter === length) {
+              res.jsonp(tags);
+            }
+          })
+          .catch(err => {
+            handleError(err);
+          });
       });
-    } else {
-      res.jsonp(tags);
-    }
-  });
+    }, handleError);
+
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 };
 
 /**

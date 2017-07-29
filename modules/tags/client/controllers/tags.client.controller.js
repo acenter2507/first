@@ -33,42 +33,32 @@
     vm.tag = tag;
 
     // Infinity scroll
-    vm.stopped = false;
     vm.busy = false;
-    vm.page = 0;
     vm.sort = '-created';
-    vm.new_data = [];
     vm.polls = [];
 
     vm.get_polls = get_polls;
     function get_polls() {
-      if (vm.stopped || vm.busy) return;
+      if (vm.busy) return;
       vm.busy = true;
-      Action.get_tag_polls(vm.tag._id, vm.page, vm.sort)
+      Action.get_tag_polls(vm.tag._id)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
-            vm.stopped = true;
             vm.busy = false;
             return;
           }
-          // Load options và tính vote cho các opt trong polls
-          vm.new_data = res.data || [];
-          var promises = [];
-          vm.new_data.forEach(poll => {
+          res.data.forEach(poll => {
             promises.push(process_before_show(poll));
           });
           return Promise.all(promises);
         })
         .then(results => {
           // Gán data vào list hiện tại
-          vm.polls = _.union(vm.polls, results);
-          vm.page += 1;
+          vm.polls = results;
           vm.busy = false;
-          vm.new_data = [];
         })
         .catch(err => {
           vm.busy = false;
-          vm.stopped = true;
           toast.error(err.message, 'Error!');
         });
     }

@@ -194,7 +194,7 @@
         </div>
         <div class="card-body">
           <ul class="tags">
-            <li ng-repeat="tag in vm.tags"><a ui-sref="tags.view({ tagId: tag._id })" class="tag">{{tag.name}}</a></li>
+            <li ng-repeat="tag in vm.tags"><a ui-sref="tags.view({ tagId: tag._id })" class="tag">{{tag.name}}({{tag.count}})</a></li>
           </ul>
         </div>
       </div>

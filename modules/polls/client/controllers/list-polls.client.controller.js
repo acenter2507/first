@@ -116,7 +116,7 @@
     }
     function process_before_show(poll) {
       return new Promise((resolve, reject) => {
-        poll.isCurrentUserOwner = $scope.isLogged && scope.user._id === poll.user._id;
+        poll.isCurrentUserOwner = $scope.isLogged && $scope.user._id === poll.user._id;
         poll.chart = {
           options: { responsive: true },
           colors: [],
@@ -162,7 +162,7 @@
         });
     }
     function get_bookmarks() {
-      UserApi.get_bookmarks(scope.user._id, 0)
+      UserApi.get_bookmarks($scope.user._id, 0)
         .then(res => {
           vm.bookmarks = res.data || [];
         }, err => {

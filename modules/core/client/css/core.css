@@ -20,7 +20,7 @@ body {
     border: 4px solid transparent;
     background-clip: content-box; }
     .content::-webkit-scrollbar-thumb {
-    background: #777; }
+    background: #ddd; }
 
 .undecorated-link:hover {
   text-decoration: none;

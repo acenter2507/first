@@ -11,12 +11,12 @@ module.exports = {
         'public/lib/ng-tags-input/ng-tags-input.css',
         'public/lib/angular-moment-picker/dist/angular-moment-picker.css',
         'public/lib/textAngular/dist/textAngular.css',
-        'public/lib/angular-toasty/dist/angular-toasty.css',
         'public/lib/angular-toastr/dist/angular-toastr.css',
         'public/lib/ng-dialog/css/ngDialog.min.css',
         'public/lib/ng-dialog/css/ngDialog-theme-default.min.css',
         'public/lib/angucomplete-alt/angucomplete-alt.css',
-        'public/lib/simple-line-icons/css/simple-line-icons.css'
+        'public/lib/simple-line-icons/css/simple-line-icons.css',
+        'public/lib/angular-loading-bar/build/loading-bar.css'
       ],
       js: [
         'public/lib/jquery/dist/jquery.min.js',
@@ -45,6 +45,7 @@ module.exports = {
         'public/lib/ng-tags-input/ng-tags-input.js',
         'public/lib/underscore/underscore.js',
         'public/lib/moment/moment.js',
+        'public/lib/moment-timezone/moment-timezone.js',
         'public/lib/angular-moment/angular-moment.js',
         'public/lib/angular-moment-picker/dist/angular-moment-picker.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
@@ -53,10 +54,10 @@ module.exports = {
         'public/lib/textAngular/dist/textAngular-sanitize.min.js',
         'public/lib/textAngular/dist/textAngular.js',
         'public/lib/textAngular/dist/textAngularSetup.js',
-        'public/lib/angular-toasty/dist/angular-toasty.js',
         'public/lib/angular-toastr/dist/angular-toastr.tpls.js',
         'public/lib/ng-dialog/js/ngDialog.min.js',
         'public/lib/angucomplete-alt/angucomplete-alt.js',
+        'public/lib/angular-loading-bar/build/loading-bar.js',
         'public/lib/angular-breadcrumb/dist/angular-breadcrumb.min.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']

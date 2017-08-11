@@ -1,8 +1,8 @@
 'use strict';
 
 // Setting up route
-angular.module('admin.routes').config(['$stateProvider', '$breadcrumbProvider',
-  function ($stateProvider, $breadcrumbProvider) {
+angular.module('admin.routes').config(['$stateProvider',
+  function ($stateProvider) {
     $stateProvider
       .state('admin.dashboard', {
         url: '/dashboard',

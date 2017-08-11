@@ -1,7 +1,16 @@
-'use strict';
+(function () {
+  'use strict';
 
-angular.module('core').config(['toastrConfig',
-  function (toastrConfig) {
+  angular
+    .module(ApplicationConfiguration.applicationModuleName)
+    .config(toastConfig)
+    .config(textAngularConfig)
+    .config(loadingBarConfig)
+    .run(runConfig);
+
+
+  toastConfig.$inject = ['toastrConfig'];
+  function toastConfig(toastrConfig) {
     angular.extend(toastrConfig, {
       allowHtml: false,
       autoDismiss: true,
@@ -15,10 +24,9 @@ angular.module('core').config(['toastrConfig',
       target: 'body'
     });
   }
-]);
 
-angular.module('core').config(['$provide',
-  function ($provide) {
+  textAngularConfig.$inject = ['$provide'];
+  function textAngularConfig($provide) {
     $provide.decorator('taOptions', ['taRegisterTool', 'taToolFunctions', '$delegate',
       function (taRegisterTool, taToolFunctions, taOptions) {
         taRegisterTool('uploadImage', {
@@ -61,4 +69,21 @@ angular.module('core').config(['$provide',
       }
     ]);
   }
-]);
+
+  loadingBarConfig.$inject = ['cfpLoadingBarProvider'];
+  function loadingBarConfig(cfpLoadingBarProvider) {
+    // Loading bar
+    cfpLoadingBarProvider.includeSpinner = false;
+    cfpLoadingBarProvider.latencyThreshold = 1;
+  }
+
+  function runConfig(amMoment) {
+    moment.tz.add([
+      'Asia/Tokyo|JST JDT|-90 -a0|010101010|-QJH0 QL0 1lB0 13X0 1zB0 NX0 1zB0 NX0|38e6',
+      'Asia/Ho_Chi_Minh|LMT PLMT +07 +08 +09|-76.E -76.u -70 -80 -90|0123423232|-2yC76.E bK00.a 1h7b6.u 5lz0 18o0 3Oq0 k5b0 aW00 BAM0|90e5'
+    ]);
+    moment.tz.setDefault('Asia/Tokyo');
+    moment.locale('ja');
+    amMoment.changeLocale('ja');
+  }
+}());

@@ -12,7 +12,6 @@ var ApplicationConfiguration = (function() {
     'ngDialog',
     'ui.router',
     'ui.bootstrap',
-    'angular-toasty',
     'ui.utils',
     'btford.socket-io',
     'angularFileUpload',

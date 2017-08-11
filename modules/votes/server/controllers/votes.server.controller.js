@@ -20,7 +20,7 @@ exports.create = function (req, res) {
     vote.user = req.user;
     vote.guest = false;
   } else {
-    vote.ip = req.headers["X-Forwarded-For"] || req.headers["x-forwarded-for"] || req.client.remoteAddress;
+    vote.ip = req.headers['X-Forwarded-For'] || req.headers['x-forwarded-for'] || req.client.remoteAddress;
     vote.guest = true;
   }
   const opts = req.body.opts;
@@ -59,7 +59,7 @@ exports.read = function (req, res) {
   // convert mongoose document to JSON
   var vote = req.vote ? req.vote.toJSON() : {};
 
-  // Add a custom field to the Article, for determining if the current User is the "owner".
+  // Add a custom field to the Article, for determining if the current User is the 'owner'.
   // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
   vote.isCurrentUserOwner = req.user && vote.user && vote.user._id.toString() === req.user._id.toString();
 

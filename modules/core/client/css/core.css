@@ -129,6 +129,14 @@ a:hover .header-profile-image {
     transition-duration: 0.5s;
     transform: rotate(180deg); }
 
+.card.card-scroll .card-body {
+  overflow-y: scroll; }
+.card.card-scroll .card-body::-webkit-scrollbar {
+    display: none; }
+.card.card-scroll.card-expand.open .card-body {
+  height: 300px;
+  padding: 0.85rem; }
+
 /* .card.expand-card {
   max-height: 42px; }
 .card.card.expand-card.open {

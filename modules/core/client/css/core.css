@@ -5,11 +5,11 @@ body {
   height: 100%;
   margin: 0;
 }
-
-html[style="overflow-y: scroll;"] {
-  overflow: initial !important; }
+body {
+  overflow: hidden; }
 
 .content {
+  overflow: auto;
   position: relative;
   padding-top: 50px; }
 

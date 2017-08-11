@@ -92,13 +92,11 @@ a:hover .header-profile-image {
     padding: 0.85rem 0.85rem 0.5rem 0.85rem;
     margin-bottom: 0; }
   .card .card-body {
-    transition-duration: 0.5s;
     transition: height 0.5s ease-out;
     overflow: hidden;
     flex: 1 1 auto;
     padding: 0.85rem; }
   .card .card-footer {
-    transition-duration: 0.5s;
     transition: height 0.5s ease-out;
     overflow: hidden;
     padding: 0.85rem;
@@ -112,7 +110,6 @@ a:hover .header-profile-image {
 
 .card.card-expand .card-body,
 .card.card-expand .card-footer {
-  transition-duration: 0.5s;
   transition: height 0.5s ease-in;
   height: 0;
   padding: 0; }

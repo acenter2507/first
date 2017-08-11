@@ -142,28 +142,6 @@ a:hover .header-profile-image {
   padding: 0;
   height: 300px; }
 
-/* .card.expand-card {
-  max-height: 42px; }
-.card.card.expand-card.open {
-  max-height: none; }
-.card.activitys {
-  overflow: hidden; }
-.card.activitys.card.expand-card.open {
-  max-height: 358px !important; } */
-
-  /* .card .card-header {
-    margin-bottom: 12px; 
-    clear: both; }
-    .card .card-header .card-title {
-      color: #90949c; }
-    .card .card-header .card-title {
-      color: #90949c; }
-    .card.activitys .card-body {
-      max-height: 300px; 
-      overflow-y: scroll; }
-    .card.activitys .card-body::-webkit-scrollbar {
-      display: none; } */
-
 .loader {
   margin: auto;
   border: 3px solid #f3f3f3; /* Light grey */

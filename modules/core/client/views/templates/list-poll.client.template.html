@@ -8,31 +8,31 @@
     </div>
     <!-- Tên và ngày create  -->
     <span class="pull-left">
-        <a class="undecorated-link" ui-sref="profile.info({userId: poll.user._id})" ng-if="poll.user"><strong>{{poll.user.displayName}}</strong></a>
-        <strong ng-if="!poll.user" class="text-muted">Deleted User</strong>
-        <small class="text-muted">created on</small>
-        <small class="text-muted" am-time-ago="poll.created"></small>
-      </span>
+      <a class="undecorated-link" ui-sref="profile.info({userId: poll.user._id})" ng-if="poll.user"><strong>{{poll.user.displayName}}</strong></a>
+      <strong ng-if="!poll.user" class="text-muted">Deleted User</strong>
+      <small class="text-muted">created on</small>
+      <small class="text-muted" am-time-ago="poll.created"></small>
+    </span>
     <!-- Menu action -->
     <span class="pull-right">
-        <md-menu md-offset="-12 20" md-position-mode="target-right target">
-          <a class="undecorated-link span-link" ng-click="$mdMenu.open($event)" aria-label="Open setting menu"><i class="fa fa-angle-down"></i></a>
-          <md-menu-content>
-            <ul class="menu-list">
-              <li><a ui-sref="polls.view({ pollId: poll._id })"><i class="fa fa-eye"></i> View</a></li>
-              <li ng-if="poll.isCurrentUserOwner"><a class="undecorated-link" ui-sref="polls.edit({ pollId: poll._id })"><i class="fa fa-pencil-square-o"></i> Edit</a></li>
-              <li ng-if="poll.isCurrentUserOwner"><a class="undecorated-link" ng-click="delete_poll(poll)"><i class="fa fa-trash"></i> Delete</a></li>
-              <li ng-if="isLogged">
-                <a ng-click="follow_poll(poll)" class="undecorated-link">
-                  <i class="fa fa-rss"></i> {{(poll.follow.following) ? 'Unfollow' : 'Follow'}}
-                </a>
-              </li>
-              <li ng-if="isLogged && !poll.isCurrentUserOwner && !poll.reported"><a class="undecorated-link" ng-click="report_poll(poll)"><i class="fa fa-exclamation-circle"></i> Report poll</a></li>
-              <li ng-if="isLogged && !poll.isCurrentUserOwner && !poll.bookmarked"><a class="undecorated-link" ng-click="bookmark_poll(poll)"><i class="fa fa-bookmark"></i> Bookmark poll</a></li>
-            </ul>
-          </md-menu-content>
-        </md-menu>
-      </span><br>
+      <md-menu md-offset="-12 20" md-position-mode="target-right target">
+        <a class="undecorated-link span-link" ng-click="$mdMenu.open($event)" aria-label="Open menu"><i class="fa fa-angle-down"></i></a>
+        <md-menu-content>
+          <ul class="menu-list">
+            <li><a ui-sref="polls.view({ pollId: poll._id })"><i class="fa fa-eye"></i> View</a></li>
+            <li ng-if="poll.isCurrentUserOwner"><a class="undecorated-link" ui-sref="polls.edit({ pollId: poll._id })"><i class="fa fa-pencil-square-o"></i> Edit</a></li>
+            <li ng-if="poll.isCurrentUserOwner"><a class="undecorated-link" ng-click="delete_poll(poll)"><i class="fa fa-trash"></i> Delete</a></li>
+            <li ng-if="isLogged">
+              <a ng-click="follow_poll(poll)" class="undecorated-link">
+                <i class="fa fa-rss"></i> {{(poll.follow.following) ? 'Unfollow' : 'Follow'}}
+              </a>
+            </li>
+            <li ng-if="isLogged && !poll.isCurrentUserOwner && !poll.reported"><a class="undecorated-link" ng-click="report_poll(poll)"><i class="fa fa-exclamation-circle"></i> Report poll</a></li>
+            <li ng-if="isLogged && !poll.isCurrentUserOwner && !poll.bookmarked"><a class="undecorated-link" ng-click="bookmark_poll(poll)"><i class="fa fa-bookmark"></i> Bookmark poll</a></li>
+          </ul>
+        </md-menu-content>
+      </md-menu>
+    </span><br>
     <!-- Trạng thái privte hoặc public  -->
     <div class="mg5t">
       <span ng-if="poll.allow_guest" class="fa fa-globe"><md-tooltip md-direction="bottom">This poll is public</md-tooltip></span>
@@ -108,5 +108,5 @@
       <strong> Comments: </strong>{{poll.report.cmtCnt}}
     </p>
   </div>
-
+  <div class="clearfix"></div>
 </div>

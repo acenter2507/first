@@ -1,10 +1,12 @@
 html,
 body {
+  overflow: hidden;
   background-color: #f5f5f5;
   font-size: 14px;
   height: 100%;
   margin: 0;
 }
+
 .content {
   position: relative;
   padding-top: 50px; }

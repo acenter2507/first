@@ -8,36 +8,40 @@
   </div>
   <div class="row mg50t" infinite-scroll="get_votes()" infinite-scroll-distance='2'>
     <div ng-repeat="vote in votes | filter: vote_filter" class="card">
+      <div class="card-body">
 
-      <div clas="post-header">
-        <div class="user-avatar pull-left">
-          <a ui-sref="profile.info({userId: profile._id})">
+        <div clas="post-header">
+          <div class="user-avatar pull-left">
+            <a ui-sref="profile.info({userId: profile._id})">
             <img src="{{profile.profileImageURL}}" alt="{{profile.displayName}}">
           </a>
-        </div>
-        <span class="pull-left">
+          </div>
+          <span class="pull-left">
           <strong><a class="undecorated-link" ui-sref="profile.info({userId: profile._id})" ng-bind="profile.displayName"></a></strong>
           <small class="text-muted">voted on</small>
           <small class="text-muted" am-time-ago="vote.created"></small>
           <small ng-if="vote.updateCnt > 0" class="text-muted">last change </small>
           <small ng-if="vote.updateCnt > 0" class="text-muted" am-time-ago="vote.updated"></small>
         </span>
-        <br>
-        <div class="clearfix"></div>
-        <hr class="mg5t mg10b">
-      </div>
-      <div class="post-body">
-        <h3><a class="undecorated-link" ui-sref="polls.view({ pollId: vote.poll._id })">{{vote.poll.title}}</a></h3>
-        <span>Voted for:</span>
-        <span ng-repeat="opt in vote.opts" ng-class="{'mg5l': !$first}">
+          <br>
+          <div class="clearfix"></div>
+          <hr class="mg5t mg10b">
+        </div>
+        <div class="post-body">
+          <h3><a class="undecorated-link" ui-sref="polls.view({ pollId: vote.poll._id })">{{vote.poll.title}}</a></h3>
+          <span>Voted for:</span>
+          <span ng-repeat="opt in vote.opts" ng-class="{'mg5l': !$first}">
           <strong>{{ opt.title }}</strong>
         </span>
+        </div>
+        <div class="clearfix"></div>
       </div>
-      <div class="clearfix"></div>
     </div>
     <div class="notice notice-warning" ng-show="votes.length === 0 && stopped">
       <strong>Sorry</strong> {{profile.displayName}} has not voted any polls.
     </div>
   </div>
-  <div class="row text-center" ng-show="busy"><div class="loader"></div></div>
+  <div class="row text-center" ng-show="busy">
+    <div class="loader"></div>
+  </div>
 </div>

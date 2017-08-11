@@ -1,27 +1,28 @@
 <div class="card" id="poll_cmt_form_card">
-  <div class="cmt_form" ng-if="vm.isLogged">
-    <div class="form-group">
-      <span ng-if="vm.tmp_cmt.to">@</span>
-      <a class="undecorated-link" ng-if="vm.tmp_cmt.to" ui-sref="profile.info({userId: vm.tmp_cmt.to})" ng-bind="vm.tmp_cmt.toName"></a>
-    </div>
-    <div class="form-group">
-      <div class="user-avatar pull-left" ng-if="vm.authentication.user">
-        <a ui-sref="profile.info({userId: vm.authentication.user._id})">
+  <div class="card-body">
+    <div class="cmt_form" ng-if="vm.isLogged">
+      <div class="form-group">
+        <span ng-if="vm.tmp_cmt.to">@</span>
+        <a class="undecorated-link" ng-if="vm.tmp_cmt.to" ui-sref="profile.info({userId: vm.tmp_cmt.to})" ng-bind="vm.tmp_cmt.toName"></a>
+      </div>
+      <div class="form-group">
+        <div class="user-avatar pull-left" ng-if="vm.authentication.user">
+          <a ui-sref="profile.info({userId: vm.authentication.user._id})">
           <img src="{{vm.authentication.user.profileImageURL}}" alt="{{vm.authentication.user.displayName}}">
         </a>
+        </div>
+        <textarea ng-is-enter="{{vm.enter_send}}" ng-enter="vm.save_cmt()" focus-me="{{vm.cmt_typing}}" class="msd-elastic: \n; reply-input"
+          data-ng-model="vm.tmp_cmt.body" placeholder="Type your comment..."></textarea>
       </div>
-      <textarea ng-is-enter="{{vm.enter_send}}" ng-enter="vm.save_cmt()" focus-me="{{vm.cmt_typing}}" class="msd-elastic: \n; reply-input"
-        data-ng-model="vm.tmp_cmt.body" placeholder="Type your comment..."></textarea>
-    </div>
-    <label class="text-muted"><input type="checkbox" ng-model="vm.enter_send"><small>&nbsp;Enter to send</small></label>
-    <span class="pull-right">
+      <label class="text-muted"><input type="checkbox" ng-model="vm.enter_send"><small>&nbsp;Enter to send</small></label>
+      <span class="pull-right">
       <a class="undecorated-link" ng-hide="vm.enter_send" ng-click="vm.save_cmt()">Send</a>
       <a class="mg20l undecorated-link" ng-click="vm.discard_cmt()" ng-if="vm.tmp_cmt.discard">Discard</a>
     </span>
-    <hr class="mg10t mg10b"/>
-  </div>
-  <div class="cmt_sort" >
-    <small class="pull-right" ng-show="vm.stopped">
+      <hr class="mg10t mg10b" />
+    </div>
+    <div class="cmt_sort">
+      <small class="pull-right" ng-show="vm.stopped">
       Sort:&nbsp;
       <md-menu md-offset="-12 25" md-position-mode="target-right target">
         <a class="undecorated-link" ng-click="$mdMenu.open($event)" aria-label="Open setting menu">
@@ -36,25 +37,25 @@
         </md-menu-content>
       </md-menu>
     </small>
-    <div class="clearfix h30"></div>
-  </div>
-  <div class="cmt_list" ng-repeat="cmt in vm.cmts | orderBy: vm.cmt_sort.val">
-    <div class="user-avatar pull-left">
-      <a ng-if="cmt.user" ui-sref="profile.info({userId: cmt.user._id})">
+      <div class="clearfix h30"></div>
+    </div>
+    <div class="cmt_list" ng-repeat="cmt in vm.cmts | orderBy: vm.cmt_sort.val">
+      <div class="user-avatar pull-left">
+        <a ng-if="cmt.user" ui-sref="profile.info({userId: cmt.user._id})">
         <img src="{{cmt.user.profileImageURL}}" alt="{{cmt.user.displayName}}">
       </a>
-      <img ng-if="!cmt.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
-    </div>
-    <span class="pull-left">
+        <img ng-if="!cmt.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
+      </div>
+      <span class="pull-left">
       <strong><a class="undecorated-link" ui-sref="profile.info({userId: cmt.user._id})" ng-if="cmt.user" ng-bind="cmt.user.displayName"></a></strong>
       <span ng-if="!cmt.user">Deleted User</span>
-    <small class="text-muted" am-time-ago="cmt.created"></small>
-    <a ng-if="cmt.to" class="undecorated-link">@{{cmt.toName}}</a>
-    <span ng-show="cmt.isEdited" class="fa fa-pencil-square-o">
+      <small class="text-muted" am-time-ago="cmt.created"></small>
+      <a ng-if="cmt.to" class="undecorated-link">@{{cmt.toName}}</a>
+      <span ng-show="cmt.isEdited" class="fa fa-pencil-square-o">
       <md-tooltip md-direction="bottom">{{cmt.updated | date:'mediumDate'}}</md-tooltip>
     </span>
-    </span>
-    <span class="pull-right">
+      </span>
+      <span class="pull-right">
         <md-menu md-offset="-20 25" md-position-mode="target-right target">
           <a class="undecorated-link span-link" ng-click="$mdMenu.open($event)" aria-label="Open comment menu">
             <i class="fa fa-angle-down"></i>
@@ -68,16 +69,17 @@
           </md-menu-content>
         </md-menu>
     </span>
-    <br>
-    <p class="text-justify" ng-bind-html="cmt.body | nl2br"></p>
-    <small class="like_tools pull-right">
+      <br>
+      <p class="text-justify" ng-bind-html="cmt.body | nl2br"></p>
+      <small class="like_tools pull-right">
       <a class="undecorated-link" ng-click="vm.like_cmt(cmt, 1)" ng-show="cmt.like.type == 1"><i class="fa fa-thumbs-o-up"></i>&nbsp;Like</a>
       <span class="span_btn" ng-click="vm.like_cmt(cmt, 1)" ng-show="cmt.like.type != 1"><i class="fa fa-thumbs-o-up"></i>&nbsp;Like</span>
       <span class="mg5l mg5r highlight-text" ng-bind="cmt.likeCnt"></span>
       <a class="undecorated-link" ng-click="vm.like_cmt(cmt, 2)" ng-show="cmt.like.type == 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>&nbsp;Dislike</a>
       <span class="span_btn" ng-click="vm.like_cmt(cmt, 2)" ng-show="cmt.like.type != 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>&nbsp;Dislike</span>
     </small>
-    <div class="clearfix"></div>
-    <hr>
+      <div class="clearfix"></div>
+      <hr>
+    </div>
   </div>
 </div>

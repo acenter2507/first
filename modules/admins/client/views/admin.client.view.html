@@ -4,28 +4,30 @@
   <main class="main">
     <!-- Breadcrumb -->
     <div class="card mgnx">
-      <ol class="breadcrumb custom-breadcrumb" breadcrumb>
-        <li class="breadcrumb-item">
-          <a class="nav-link navbar-toggler sidebar-toggler undecorated-link" href="#">
+      <div class="card-body">
+        <ol class="breadcrumb custom-breadcrumb" breadcrumb>
+          <li class="breadcrumb-item">
+            <a class="nav-link navbar-toggler sidebar-toggler undecorated-link" href="#">
             <i class="icon-menu"></i>
           </a>
-        </li>
-        <ncy-breadcrumb></ncy-breadcrumb>
+          </li>
+          <ncy-breadcrumb></ncy-breadcrumb>
 
-        <!-- Breadcrumb Menu-->
-        <li class="breadcrumb-item breadcrumb-menu">
-          <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-            <a class="breadcrumb-btn btn-secondary undecorated-link" ui-sref="admin.users.list"><i class="icon-people icons"></i></a>
-            <a class="breadcrumb-btn btn-secondary undecorated-link" ui-sref="admin.dashboard"><i class="icon-speedometer icons"></i></a>
-            <a class="breadcrumb-btn btn-secondary undecorated-link" ui-sref="admin.setting"><i class="icon-settings icons"></i></a>
-            <a class="breadcrumb-btn btn-secondary undecorated-link" ui-sref="admin.message"><i class="icon-speech icons"></i></a>
-          </div>
-          <a class="nav-link navbar-toggler aside-menu-toggler undecorated-link" href="#">
-            <!--<i class="icon-menu"></i>-->
-          </a>
-        </li>
-        <div class="clearfix"></div>
-      </ol>
+          <!-- Breadcrumb Menu-->
+          <li class="breadcrumb-item breadcrumb-menu">
+            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+              <a class="breadcrumb-btn btn-secondary undecorated-link" ui-sref="admin.users.list"><i class="icon-people icons"></i></a>
+              <a class="breadcrumb-btn btn-secondary undecorated-link" ui-sref="admin.dashboard"><i class="icon-speedometer icons"></i></a>
+              <a class="breadcrumb-btn btn-secondary undecorated-link" ui-sref="admin.setting"><i class="icon-settings icons"></i></a>
+              <a class="breadcrumb-btn btn-secondary undecorated-link" ui-sref="admin.message"><i class="icon-speech icons"></i></a>
+            </div>
+            <a class="nav-link navbar-toggler aside-menu-toggler undecorated-link" href="#">
+              <!--<i class="icon-menu"></i>-->
+            </a>
+          </li>
+          <div class="clearfix"></div>
+        </ol>
+      </div>
     </div>
 
     <div class="container-fluid">
@@ -35,48 +37,3 @@
   <!-- Aside Menu -->
   <div ng-include="'/modules/admins/client/views/commons/admin-aside.client.view.html'"></div>
 </div>
-
-
-
-
-
-<!--<div class="container-fluid">
-  <div class="row">
-    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 pdn">
-      <div class="card admin-sidebar">
-        <ul class="nav">
-          <li class="sidebar-header"></i>MAIN</li>
-          <li ui-sref-active="active">
-            <a ui-sref="admin.dashboard">
-              <i class="fa fa-tachometer"></i>
-							Dashboard
-            </a>
-          </li>
-          <li class="sidebar-header"></i>USERS</li>
-          <li ui-sref-active="active">
-            <a ui-sref="admin.users">
-              <i class="fa fa-users"></i>
-							Lists
-            </a>
-          </li>
-          <li ui-sref-active="active">
-            <a ui-sref="admin.user-new">
-							<i class="fa fa-plus"></i>
-							Add new
-            </a>
-          </li>
-          <li class="sidebar-header">POLLS</li>
-          <li ui-sref-active="active">
-            <a ui-sref="admin.polls">
-              <i class="fa fa-bars"></i>
-							Lists
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 pdn">
-      <div ui-view></div>
-    </div>
-  </div>
-</div>-->

@@ -11,19 +11,20 @@
   <!-- List poll -->
   <div class="row" infinite-scroll="get_polls()" infinite-scroll-distance='2'>
     <div ng-repeat="poll in polls | filter: poll_filter" class="card">
-      <div clas="poll-header">
-        <div class="user-avatar pull-left">
-          <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user._id})">
+      <div class="card-body">
+        <div clas="poll-header">
+          <div class="user-avatar pull-left">
+            <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user._id})">
             <img src="{{poll.user.profileImageURL}}" alt="{{poll.user.displayName}}">
           </a>
-          <img ng-if="!poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
-        </div>
-        <span class="pull-left">
+            <img ng-if="!poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
+          </div>
+          <span class="pull-left">
           <strong><a class="undecorated-link" ui-sref="profile.info({userId: profile._id})" ng-bind="profile.displayName"></a></strong>
           <small class="text-muted">created on</small>
           <small class="text-muted" am-time-ago="poll.created"></small>
         </span>
-        <span class="pull-right">
+          <span class="pull-right">
           <md-menu md-offset="-12 20" md-position-mode="target-right target">
             <a class="undecorated-link span-link" ng-click="$mdMenu.open($event)" aria-label="Open setting menu">
               <i class="fa fa-angle-down"></i>
@@ -52,82 +53,85 @@
             </md-menu-content>
           </md-menu>
         </span>
-        <br>
-        <span ng-if="poll.allow_guest" class="fa fa-globe">
+          <br>
+          <span ng-if="poll.allow_guest" class="fa fa-globe">
           <md-tooltip md-direction="bottom">This poll is public</md-tooltip>
         </span>
-        <span ng-if="!poll.allow_guest" class="fa fa-users">
+          <span ng-if="!poll.allow_guest" class="fa fa-users">
           <md-tooltip md-direction="bottom">Only user can vote</md-tooltip>
         </span>
-        <a class="undecorated-link" ui-sref="categorys.polls({ categoryId: poll.category._id })">{{ poll.category.name }}</a>
-        <div class="clearfix"></div>
-        <hr class="mg5t mg10b">
-      </div>
-      <div clas="poll-body">
-        <h3><a class="undecorated-link" ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a></h3>
-        <div class="text-body" ta-bind="text" ng-model="poll.summary" ta-readonly="true"></div>
-        <p ng-show="poll.body.length > poll.summary.length" class="poll_item_body">
-          <a class="undecorated-link" ui-sref="polls.view({ pollId: poll._id })">see more</a>
-        </p>
-        <!-- options -->
-        <div class="mg10t">
-          <span class="text-muted" ng-if="poll.opts.length === 0"><small>No option yet</small></span>
-          <div class="col-xs-12 pdn" ng-if="poll.total === 0">
-            <div ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">
-              <strong><span ng-bind="opt.title"></span></strong>
-              <div class="progress">
-                <div ng-class="['progress-bar']" ng-class="bar.barClass" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}">
-                  <span ng-if="opt.voteCnt > 0">{{opt.voteCnt + '/' + poll.total}}</span>
-                  <span class="default-text" ng-if="opt.voteCnt === 0">{{opt.voteCnt + '/' + poll.total}}</span>
+          <a class="undecorated-link" ui-sref="categorys.polls({ categoryId: poll.category._id })">{{ poll.category.name }}</a>
+          <div class="clearfix"></div>
+          <hr class="mg5t mg10b">
+        </div>
+        <div clas="poll-body">
+          <h3><a class="undecorated-link" ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a></h3>
+          <div class="text-body" ta-bind="text" ng-model="poll.summary" ta-readonly="true"></div>
+          <p ng-show="poll.body.length > poll.summary.length" class="poll_item_body">
+            <a class="undecorated-link" ui-sref="polls.view({ pollId: poll._id })">see more</a>
+          </p>
+          <!-- options -->
+          <div class="mg10t">
+            <span class="text-muted" ng-if="poll.opts.length === 0"><small>No option yet</small></span>
+            <div class="col-xs-12 pdn" ng-if="poll.total === 0">
+              <div ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">
+                <strong><span ng-bind="opt.title"></span></strong>
+                <div class="progress">
+                  <div ng-class="['progress-bar']" ng-class="bar.barClass" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}">
+                    <span ng-if="opt.voteCnt > 0">{{opt.voteCnt + '/' + poll.total}}</span>
+                    <span class="default-text" ng-if="opt.voteCnt === 0">{{opt.voteCnt + '/' + poll.total}}</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-xs-12 col-md-9 pdn" ng-if="poll.total > 0">
-            <div ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">
-              <strong><span ng-bind="opt.title"></span></strong>
-              <div class="progress">
-                <div ng-class="['progress-bar']" ng-class="bar.barClass" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}">
-                  <span ng-if="opt.voteCnt > 0">{{opt.voteCnt + '/' + poll.total}}</span>
-                  <span class="default-text" ng-if="opt.voteCnt === 0">{{opt.voteCnt + '/' + poll.total}}</span>
+            <div class="col-xs-12 col-md-9 pdn" ng-if="poll.total > 0">
+              <div ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">
+                <strong><span ng-bind="opt.title"></span></strong>
+                <div class="progress">
+                  <div ng-class="['progress-bar']" ng-class="bar.barClass" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}">
+                    <span ng-if="opt.voteCnt > 0">{{opt.voteCnt + '/' + poll.total}}</span>
+                    <span class="default-text" ng-if="opt.voteCnt === 0">{{opt.voteCnt + '/' + poll.total}}</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-xs-12 col-md-3 pdn" ng-if="poll.total > 0">
-            <div class="chart-block">
-              <canvas id="pie" class="chart chart-pie" chart-data="poll.chart.data" chart-labels="poll.chart.labels" chart-options="poll.chart.options"
-                chart-colors="poll.chart.colors">
-              </canvas>
+            <div class="col-xs-12 col-md-3 pdn" ng-if="poll.total > 0">
+              <div class="chart-block">
+                <canvas id="pie" class="chart chart-pie" chart-data="poll.chart.data" chart-labels="poll.chart.labels" chart-options="poll.chart.options"
+                  chart-colors="poll.chart.colors">
+                </canvas>
+              </div>
             </div>
+            <div class="clearfix"></div>
+            <a class="pull-right undecorated-link" ng-if="poll.opts.length > 3" ui-sref="polls.view({ pollId: poll._id })">...and {{poll.opts.length - 3}} others</a>
           </div>
           <div class="clearfix"></div>
-          <a class="pull-right undecorated-link" ng-if="poll.opts.length > 3" ui-sref="polls.view({ pollId: poll._id })">...and {{poll.opts.length - 3}} others</a>
+          <!-- #options -->
+          <hr class="mg10t mg10b">
+        </div>
+        <div clas="poll-footer">
+          <p class="poll_item_info">
+            <i class="fa fa-heart-o" aria-hidden="true"></i>
+            <strong> Votes: </strong>{{poll.report.voteCnt}}
+          </p>
+          <p class="poll_item_info">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+            <strong> Views: </strong>{{poll.report.viewCnt}}
+          </p>
+          <p class="poll_item_info">
+            <i class="fa fa-commenting" aria-hidden="true"></i>
+            <strong> Comments: </strong>{{poll.report.cmtCnt}}
+          </p>
         </div>
         <div class="clearfix"></div>
-        <!-- #options -->
-        <hr class="mg10t mg10b">
       </div>
-      <div clas="poll-footer">
-        <p class="poll_item_info">
-          <i class="fa fa-heart-o" aria-hidden="true"></i>
-          <strong> Votes: </strong>{{poll.report.voteCnt}}
-        </p>
-        <p class="poll_item_info">
-          <i class="fa fa-eye" aria-hidden="true"></i>
-          <strong> Views: </strong>{{poll.report.viewCnt}}
-        </p>
-        <p class="poll_item_info">
-          <i class="fa fa-commenting" aria-hidden="true"></i>
-          <strong> Comments: </strong>{{poll.report.cmtCnt}}
-        </p>
-      </div>
-      <div class="clearfix"></div>
     </div>
 
     <div class="notice notice-warning" ng-show="polls.length === 0 && stopped">
       <strong>Sorry</strong> You has not bookmark any polls.
     </div>
   </div>
-  <div class="row text-center" ng-show="busy"><div class="loader"></div></div>
+  <div class="row text-center" ng-show="busy">
+    <div class="loader"></div>
+  </div>
 </div>

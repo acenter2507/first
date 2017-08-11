@@ -92,12 +92,12 @@ a:hover .header-profile-image {
     padding: 0.85rem 0.85rem 0.5rem 0.85rem;
     margin-bottom: 0; }
   .card .card-body {
-    transition: height 0.5s ease-out;
+    transition: height 0.3s ease-out;
     overflow: hidden;
     flex: 1 1 auto;
     padding: 0.85rem; }
   .card .card-footer {
-    transition: height 0.5s ease-out;
+    transition: height 0.3s ease-out;
     overflow: hidden;
     padding: 0.85rem;
     margin-bottom: 0; }
@@ -110,7 +110,7 @@ a:hover .header-profile-image {
 
 .card.card-expand .card-body,
 .card.card-expand .card-footer {
-  transition: height 0.5s ease-in;
+  transition: height 0.3s ease-in;
   height: 0;
   padding: 0; }
 .card.card-expand.open .card-body {
@@ -120,10 +120,10 @@ a:hover .header-profile-image {
   height: unset;
   padding: 0.85rem;  }
   .card.card-expand .card-header i {
-    transition-duration: 0.5s;
+    transition-duration: 0.3s;
   }
   .card.card-expand .card-header i.r180 {
-    transition-duration: 0.5s;
+    transition-duration: 0.3s;
     transform: rotate(180deg); }
 
 .card.card-scroll .card-body {

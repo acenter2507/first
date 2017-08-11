@@ -142,6 +142,7 @@ a:hover .header-profile-image {
 .card.card-scroll .card-body::-moz-scrollbar {
     display: none; }
 .card.card-scroll.card-expand.open .card-body {
+  padding: 0;
   height: 300px; }
 
 /* .card.expand-card {

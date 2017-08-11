@@ -1,0 +1,12 @@
+.navbar {
+  margin-bottom: 0 !important; }
+
+.navbar .navbar-brand {
+  width: 130px;
+  height: 50px;
+  padding: 0.5rem 1rem;
+  background-image: url("../img/brand/logo.png");
+  background-repeat: no-repeat;
+  background-position: 15px center;
+  background-size: 100px auto;
+}

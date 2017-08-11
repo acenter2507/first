@@ -39,6 +39,11 @@ exports.create = function (req, res) {
   poll.save()
     .then(_poll => {
       poll = _poll;
+      // Tạo report cho poll
+      var report = new Pollreport({ poll: poll._id });
+      return report.save();
+    }, handleError)
+    .then(_report => {
       return Userreport.countUpPoll(req.user._id);
     }, handleError)
     .then(_report => {
@@ -84,6 +89,8 @@ exports.read = function (req, res) {
   // convert mongoose document to JSON
   var poll = req.poll ? req.poll.toJSON() : {};
 
+  // Add a custom field to the Article, for determining if the current User is the "owner".
+  // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
   poll.isCurrentUserOwner =
     req.user &&
     poll.user &&
@@ -93,7 +100,11 @@ exports.read = function (req, res) {
     req.user.roles &&
     req.user.roles.length &&
     req.user.roles.indexOf('admin') > -1;
-  get_opts_by_pollId(poll._id)
+  get_info_by_pollId(poll._id)
+    .then(result => {
+      poll.report = result || {};
+      return get_opts_by_pollId(poll._id);
+    })
     .then(result => {
       poll.opts = result || [];
       return get_votes_by_pollId(poll._id);
@@ -127,7 +138,8 @@ exports.update = function (req, res) {
   var tags = req.body.tags || [];
   var opts = req.body.opts || [];
   var promises = [];
-  poll.save()
+  poll
+    .save()
     .then(_poll => {
       poll = _poll;
       return Polltag.remove({ poll: _poll._id });
@@ -144,13 +156,19 @@ exports.update = function (req, res) {
       opts.forEach(opt => {
         if (opt._id) {
           promises.push(
-            Opt.update({ _id: opt._id }, {
-              $set: {
-                title: opt.title,
-                color: opt.color,
-                body: opt.body
+            Opt.update(
+              {
+                _id: opt._id
+              },
+              {
+                $set: {
+                  title: opt.title,
+                  color: opt.color,
+                  body: opt.body
+                }
               }
-            }).exec());
+            ).exec()
+          );
         } else {
           var _opt = new Opt(opt);
           _opt.user = req.user;
@@ -205,6 +223,9 @@ exports.delete = function (req, res) {
     .then(() => { // Xóa votes
       return Vote.remove({ poll: poll._id });
     }, handleError)
+    .then(() => { // Xóa thông tin report của poll
+      return Pollreport.remove({ poll: poll._id });
+    }, handleError)
     .then(() => { // Xóa thông tin tag của poll
       return Polltag.remove({ poll: poll._id });
     }, handleError)
@@ -238,7 +259,7 @@ exports.delete = function (req, res) {
 };
 
 /**
- * List of Polls x
+ * List of Polls
  */
 exports.list = function (req, res) {
   Poll.find()
@@ -275,6 +296,7 @@ exports.findPolls = function (req, res) {
         array[index] = instance.toObject();
         get_full_by_pollId(array[index]._id, userId)
           .then(result => {
+            array[index].report = result.report;
             array[index].opts = result.opts;
             array[index].votes = result.votes;
             array[index].voteopts = result.voteopts;
@@ -412,6 +434,7 @@ exports.findVoteopts = function (req, res) {
     });
   }
 };
+/* ------------------------------------------------------------------- */
 
 exports.removeBookmark = function (req, res) {
   Bookmark.findOne({
@@ -615,6 +638,18 @@ exports.pollByID = function (req, res, next, id) {
     });
 };
 
+// Lấy các report của poll
+function get_info_by_pollId(pollId) {
+  return new Promise((resolve, reject) => {
+    Pollreport.findOne({ poll: pollId }).exec((err, report) => {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(report);
+      }
+    });
+  });
+}
 // Lấy các option có status = 1 cho poll
 function get_opts_by_pollId(pollId) {
   return new Promise((resolve, reject) => {
@@ -809,8 +844,13 @@ function get_like_by_cmtId_and_userId(cmtId, userId) {
 function get_full_by_pollId(pollId, userId) {
   var info = {};
   return new Promise((resolve, reject) => {
-    // Lấy các options
-    get_opts_by_pollId(pollId)
+    // Lấy thông tin count
+    get_info_by_pollId(pollId)
+      .then(result => {
+        info.report = result || {};
+        return get_opts_by_pollId(pollId);
+      })
+      // Lấy các options
       .then(result => {
         info.opts = _.filter(result, { status: 1 }) || [];
         return get_votes_by_pollId(pollId);
@@ -842,6 +882,7 @@ function get_full_by_pollId(pollId, userId) {
   });
 }
 exports.get_full_by_pollId = get_full_by_pollId;
+exports.get_info_by_pollId = get_info_by_pollId;
 exports.get_opts_by_pollId = get_opts_by_pollId;
 exports.get_votes_by_pollId = get_votes_by_pollId;
 exports.get_follow_by_pollId = get_follow_by_pollId;

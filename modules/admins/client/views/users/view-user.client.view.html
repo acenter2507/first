@@ -249,10 +249,10 @@
               <td>{{ poll.title }}</td>
               <td>{{ poll.category.name }}</td>
               <td>{{ (poll.isPublic) ? 'Public' : 'Private' }}</td>
-              <td>{{ poll.report.likeCnt }}</td>
-              <td>{{ poll.report.viewCnt }}</td>
-              <td>{{ poll.report.cmtCnt }}</td>
-              <td>{{ poll.report.voteCnt }}</td>
+              <td>{{ poll.likeCnt }}</td>
+              <td>{{ poll.viewCnt }}</td>
+              <td>{{ poll.cmtCnt }}</td>
+              <td>{{ poll.voteCnt }}</td>
               <td><span ng-bind="poll.created | date:'mediumDate'"></span></td>
               <td>
                 <div class="btn-group" role="group">

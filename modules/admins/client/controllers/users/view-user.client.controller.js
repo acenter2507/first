@@ -126,7 +126,7 @@ function ViewUserController(
   function count_total_like(polls) {
     var cnt = 0;
     polls.forEach(poll => {
-      cnt += poll.report.likeCnt;
+      cnt += poll.likeCnt;
     });
     return cnt;
   }

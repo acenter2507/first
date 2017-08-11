@@ -129,7 +129,7 @@
               _.extend(_.findWhere(vm.cmts, { _id: _cmt._id }), _cmt);
             } else {
               vm.cmts.push(_cmt);
-              vm.poll.report.cmtCnt += 1;
+              vm.poll.cmtCnt += 1;
             }
           })
           .catch(err => {
@@ -138,11 +138,12 @@
       });
       Socket.on('cmt_del', cmtId => {
         vm.cmts = _.without(vm.cmts, _.findWhere(vm.cmts, { _id: cmtId }));
-        vm.poll.report.cmtCnt -= 1;
+        vm.poll.cmtCnt -= 1;
       });
       Socket.on('poll_like', report => {
         // Update poll like
-        vm.poll.report = report;
+        // TODO
+        //vm.poll.report = report;
       });
       Socket.on('cmt_like', res => {
         vm.cmts.forEach(cmt => {

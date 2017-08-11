@@ -53,7 +53,7 @@
       <div class="card">
         <div class="card-header">
           <strong class="card-title">Popular polls</strong>
-          <small class="pull-right" ng-show="vm.bookmarks.length > 0"><a class="undecorated-link" ui-sref="profile.bookmarks({ userId: user._id })">View all</a></small>
+          <small class="card-link" ng-show="vm.hot_polls.length > 0"><a class="undecorated-link" ui-sref="search({ sort: 'likeCnt' })">View detail</a></small>
         </div>
         <div class="card-body">
           <div class="side-list-poll" ng-repeat="poll in vm.hot_polls">

@@ -101,11 +101,14 @@ a:hover .header-profile-image {
     transition-duration: 0.5s;
     transition: height 0.5s ease-out;
     overflow: hidden;
-    padding: 0.85rem;
+    padding: 0.5rem 0.85rem;
     margin-bottom: 0; }
-  .card .card-header .card-title {
-    color: #777;
-  }
+    .card .card-header .card-title {
+      color: #777;
+      margin-top: auto; }
+    .card .card-header .card-link {
+      float: right;
+      margin-top: auto; }
 
 
 /* .card.expand-card {

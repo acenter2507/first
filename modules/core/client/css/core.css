@@ -13,6 +13,10 @@ body {
   position: relative;
   max-height: 100%;
   padding-top: 50px; }
+  .content::-webkit-scrollbar {
+    width: 0.85rem; }
+  .content::-webkit-scrollbar-track {
+    background-clip: content-box; }
 
 .undecorated-link:hover {
   text-decoration: none;

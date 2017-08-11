@@ -151,9 +151,7 @@
       <!-- List comments -->
       <div ui-view="cmts"></div>
       <!-- Load indicator -->
-      <div class="row text-center" ng-show="vm.busy">
-        <md-progress-circular ng-disabled="!vm.busy" class="md-hue-2 center" md-diameter="20px"></md-progress-circular>
-      </div>
+      <div class="row" ng-show="vm.busy"><div class="loader"></div></div>
     </div>
     <!-- Poll report -->
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 pdn">

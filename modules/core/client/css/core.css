@@ -96,13 +96,16 @@ a:hover .header-profile-image {
     transition: height 0.5s ease-out;
     overflow: hidden;
     flex: 1 1 auto;
-    padding: 0.85rem; }
+    padding: 0.5 0.85rem; }
   .card .card-footer {
     transition-duration: 0.5s;
     transition: height 0.5s ease-out;
     overflow: hidden;
     padding:0.85rem;
     margin-bottom: 0; }
+  .card .card-header .card-title {
+    color: #777;
+  }
 
 
 /* .card.expand-card {

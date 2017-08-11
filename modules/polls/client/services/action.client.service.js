@@ -17,7 +17,6 @@
     'BookmarksService',
     'CategorysService',
     'TagsService',
-    'PollreportsService',
     'Userreport',
     'ViewsService',
     'UserApi'
@@ -38,7 +37,6 @@
     Bookmarks,
     Categorys,
     Tags,
-    Pollreports,
     Userreport,
     Views,
     UserApi
@@ -194,22 +192,6 @@
           Socket.emit('poll_delete', { pollId: poll._id });
           return resolve();
         });
-      });
-    };
-    /**
-    * Tăng biến đếm view của poll lên 1
-    */
-    this.count_up_poll_view = report => {
-      return new Promise((resolve, reject) => {
-        var rs_report = new Pollreports(report);
-        rs_report.viewCnt += 1;
-        rs_report.$update(successCb, errorCb);
-        function successCb(res) {
-          resolve(res);
-        }
-        function errorCb(err) {
-          reject(err);
-        }
       });
     };
     /**

@@ -310,7 +310,8 @@
     function save_viewed() {
       if (!vm.poll.isCurrentUserOwner) {
         var count_up = $timeout(() => {
-          Action.count_up_poll_view(vm.poll.report);
+          vm.poll.viewCnt += 1;
+          vm.poll.$save();
           if (vm.isLogged) {
             Action.save_view_poll(vm.view);
           }

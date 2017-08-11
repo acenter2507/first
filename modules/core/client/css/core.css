@@ -134,7 +134,7 @@ a:hover .header-profile-image {
   .card.card-scroll .card-body .card-scroll-content {
     width: calc(100% + 20px);
     height: 100%;
-    overflow: auto; }
+    overflow-y: scroll; }
 .card.card-scroll .card-body::-webkit-scrollbar {
     display: none; }
 .card.card-scroll .card-body::-moz-scrollbar {

@@ -46,7 +46,6 @@ angular.module('users').controller('ProfileViewsController', [
           toast.error(err.message, 'Error!');
         });
     }
-
     function process_before_show(poll) {
       return new Promise((resolve, reject) => {
         poll.isCurrentUserOwner = $scope.isLogged && $scope.user._id === poll.user._id;

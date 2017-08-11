@@ -25,7 +25,9 @@
         <div class="clearfix"></div>
       </div>
       <!-- Loading indicator -->
-      <div class="row" ng-show="vm.busy"><div class="loader"></div></div>
+      <div class="row" ng-show="vm.busy">
+        <div class="loader"></div>
+      </div>
       <div class="notice notice-warning" ng-show="vm.polls.length === 0 && vm.stopped">
         No polls yet, why don't you <a ui-sref="polls.create">create one</a>?
       </div>
@@ -38,15 +40,17 @@
           <a class="undecorated-link card-expand-toggle pull-right text-muted"><i class="fa fa-caret-down"></i></a>
         </div>
         <div class="card-body">
-          <div class="side-list-poll" ng-repeat="activity in vm.activitys">
-            <div class="user-avatar pull-left">
-              <img src="{{activity.profileImageURL}}" alt="{{activity.displayName}}">
+          <div class="card-scroll-content">
+            <div class="side-list-poll" ng-repeat="activity in vm.activitys">
+              <div class="user-avatar pull-left">
+                <img src="{{activity.profileImageURL}}" alt="{{activity.displayName}}">
+              </div>
+              <small><strong><a class="undecorated-link" ui-sref="profile.info({userId: activity.user})">{{activity.displayName}}</a></strong></small>
+              <small>{{activity.action}}</small>
+              <small><strong><a class="undecorated-link" ui-sref="polls.view({pollId: activity.poll})">{{activity.title}}</a></strong></small>
+              <div class="clearfix"></div>
+              <hr class="mg5t mg5b">
             </div>
-            <small><strong><a class="undecorated-link" ui-sref="profile.info({userId: activity.user})">{{activity.displayName}}</a></strong></small>
-            <small>{{activity.action}}</small>
-            <small><strong><a class="undecorated-link" ui-sref="polls.view({pollId: activity.poll})">{{activity.title}}</a></strong></small>
-            <div class="clearfix"></div>
-            <hr class="mg5t mg5b">
           </div>
         </div>
       </div>

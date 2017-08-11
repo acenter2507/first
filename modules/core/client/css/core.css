@@ -110,6 +110,24 @@ a:hover .header-profile-image {
       float: right;
       margin-top: auto; }
 
+.card.card-expand .card-body,
+.card.card-expand .card-footer {
+  transition-duration: 0.5s;
+  transition: height 0.5s ease-in;
+  height: 0;
+  padding: 0; }
+.card.card-expand.open .card-body {
+  height: unset;
+  padding: 0.85rem; }
+.card.card-expand.open .card-footer {
+  height: unset;
+  padding: 0.85rem;  }
+  .card.card-expand .card-header i {
+    transition-duration: 0.5s;
+  }
+  .card.card-expand .card-header i.r180 {
+    transition-duration: 0.5s;
+    transform: rotate(180deg); }
 
 /* .card.expand-card {
   max-height: 42px; }

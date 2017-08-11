@@ -10,7 +10,6 @@ var path = require('path'),
   User = mongoose.model('User'),
   Report = mongoose.model('Report'),
   Userreport = mongoose.model('Userreport'),
-  Pollreport = mongoose.model('Pollreport'),
   Notif = mongoose.model('Notif'),
   Bookmark = mongoose.model('Bookmark'),
   View = mongoose.model('View'),
@@ -317,20 +316,7 @@ exports.users_polls = function (req, res) {
     .populate('category', 'name')
     .exec()
     .then((polls) => {
-      if (polls.length === 0) return res.jsonp(polls);
-      var length = polls.length;
-      var counter = 0;
-      polls.forEach(function (instance, index, array) {
-        array[index] = instance.toObject();
-        Pollreport.findOne({ poll: array[index]._id })
-          .exec()
-          .then(report => {
-            array[index].report = report;
-            if (++counter === length) {
-              res.jsonp(polls);
-            }
-          }, handleError);
-      });
+      res.jsonp(polls);
     }, handleError);
 
   function handleError(err) {

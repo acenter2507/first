@@ -7,7 +7,6 @@ var path = require('path'),
   mongoose = require('mongoose'),
   Cmt = mongoose.model('Cmt'),
   Poll = mongoose.model('Poll'),
-  Pollreport = mongoose.model('Pollreport'),
   Cmtlike = mongoose.model('Cmtlike'),
   Polluser = mongoose.model('Polluser'),
   Userreport = mongoose.model('Userreport'),
@@ -28,7 +27,8 @@ exports.create = function (req, res) {
     .then(_cmt => {
       cmt = _cmt;
       // Tăng số comemnt trong reprort
-      return Pollreport.countUpCmt(cmt.poll);
+      var pollId = cmt.poll._id || cmt.poll;
+      return Poll.countUpCmt(pollId);
     }, handleError)
     .then(report => {
       return Userreport.countUpCmt(req.user._id);
@@ -115,10 +115,10 @@ exports.update = function (req, res) {
  */
 exports.delete = function (req, res) {
   var cmt = req.cmt;
-  const pollId = cmt.poll._id;
+  const pollId = cmt.poll._id || cmt.poll;
   cmt.remove()
     .then(() => {
-      return Pollreport.countDownCmt(pollId);
+      return Poll.countDownCmt(pollId);
     }, handleError)
     .then(() => {
       return Cmtlike.remove({ cmt: cmt._id });

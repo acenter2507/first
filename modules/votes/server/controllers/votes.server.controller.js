@@ -7,7 +7,6 @@ var path = require('path'),
   mongoose = require('mongoose'),
   Vote = mongoose.model('Vote'),
   Voteopt = mongoose.model('Voteopt'),
-  Pollreport = mongoose.model('Pollreport'),
   Poll = mongoose.model('Poll'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
@@ -38,7 +37,8 @@ exports.create = function (req, res) {
     }, handleError)
     // Resul of save Voteopt
     .then(() => {
-      return Pollreport.countUpVote(vote.poll);
+      var pollId = vote.poll._id || vote.poll;
+      return Poll.countUpVote(pollId);
     }, handleError)
     .then(() => {
       promises = [];

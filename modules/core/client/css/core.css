@@ -14,7 +14,7 @@ body {
   max-height: 100%;
   padding-top: 50px; }
   .content::-webkit-scrollbar {
-    width: 2px; }
+    width: 10px; }
 
 .undecorated-link:hover {
   text-decoration: none;

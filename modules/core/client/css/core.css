@@ -8,6 +8,7 @@ body {
 }
 
 .content {
+  overflow: auto;
   position: relative;
   padding-top: 50px; }
 

@@ -30,10 +30,6 @@ var OptSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'User'
   },
-  voteCnt: {
-    type : Number,
-    default : 0
-  },
   color: {
     type : String,
     default : '#267ED5'

@@ -110,7 +110,7 @@ PollSchema.statics.countUpView = function (id, callback) {
       poll.viewCnt += 1;
       return poll.save();
     } else {
-      console.log("Error!: Not found poll with ID: " + id);
+      console.log('Error!: Not found poll with ID: ' + id);
     }
   });
 };
@@ -121,7 +121,7 @@ PollSchema.statics.countUpVote = function (id, callback) {
       poll.voteCnt += 1;
       return poll.save();
     } else {
-      console.log("Error!: Not found poll with ID: " + id);
+      console.log('Error!: Not found poll with ID: ' + id);
     }
   });
 };
@@ -132,7 +132,7 @@ PollSchema.statics.countUpCmt = function (id, callback) {
       poll.cmtCnt += 1;
       return poll.save();
     } else {
-      console.log("Error!: Not found poll with ID: " + id);
+      console.log('Error!: Not found poll with ID: ' + id);
     }
   });
 };
@@ -143,7 +143,7 @@ PollSchema.statics.countDownCmt = function (id, callback) {
       poll.cmtCnt -= 1;
       return poll.save();
     } else {
-      console.log("Error!: Not found poll with ID: " + id);
+      console.log('Error!: Not found poll with ID: ' + id);
     }
   });
 };
@@ -154,7 +154,7 @@ PollSchema.statics.countLike = function (id, cnt, callback) {
       poll.likeCnt += cnt;
       return poll.save();
     } else {
-      console.log("Error!: Not found poll with ID: " + id);
+      console.log('Error!: Not found poll with ID: ' + id);
     }
   });
 };

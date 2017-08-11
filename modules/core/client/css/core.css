@@ -11,6 +11,7 @@ body {
 .content {
   overflow: auto;
   position: relative;
+  max-height: 100%;
   padding-top: 50px; }
 
 .undecorated-link:hover {

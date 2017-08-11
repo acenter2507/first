@@ -133,6 +133,8 @@ a:hover .header-profile-image {
   overflow-y: scroll; }
 .card.card-scroll .card-body::-webkit-scrollbar {
     display: none; }
+.card.card-scroll .card-body::-moz-scrollbar {
+    display: none; }
 .card.card-scroll.card-expand.open .card-body {
   height: 300px;
   padding: 0.85rem; }

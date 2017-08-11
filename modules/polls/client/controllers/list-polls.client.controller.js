@@ -72,6 +72,7 @@
         vm.is_has_new_polls = true;
       });
       Socket.on('activity', res => {
+        res.time = moment().format();
         vm.activitys.push(res);
         Storages.set_session(Constants.storages.activitys, JSON.stringify(vm.activitys));
       });

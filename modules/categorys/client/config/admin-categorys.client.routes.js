@@ -56,7 +56,7 @@
       .state('admin.categorys.edit', {
         url: '/:categoryId/edit',
         templateUrl: 'modules/categorys/client/views/admin/form-category.client.view.html',
-        controller: 'CategoryInputController',
+        controller: 'CategorysController',
         controllerAs: 'vm',
         resolve: {
           categoryResolve: getCategory

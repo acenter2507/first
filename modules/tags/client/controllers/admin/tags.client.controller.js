@@ -39,7 +39,7 @@
       if ($window.confirm('Are you sure you want to delete?')) {
         vm.tag.$remove($state.go('admin.tags.list'));
       }
-    }
+    };
     $scope.discard = () => {
       function handle_discard() {
         $state.go('admin.tags.list');
@@ -73,6 +73,6 @@
         toast.error(res.data.message, 'Error!');
         console.log(res);
       }
-    }
+    };
   }
 }());

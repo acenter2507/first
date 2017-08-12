@@ -34,6 +34,7 @@
     }
 
     vm.categorys = CategorysService.query();
+    console.log(vm.categorys);
 
     $scope.remove = category => {
       if ($window.confirm('Are you sure you want to delete?')) {

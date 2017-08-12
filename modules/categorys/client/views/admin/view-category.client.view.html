@@ -1,40 +1,20 @@
-<section class="container mg10b">
-  <div class="row mg10t">
-    <div class="col-xs-12 pdn">
-      <div class="card">
-        <div class="card-body">
-          <ol class="breadcrumb custom-breadcrumb">
-            <li class="breadcrumb-item">
-              <a class="undecorated-link" ui-sref="home">
-                <i class="fa fa-home"></i> Home
-              </a>
-            </li>
-            <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="categorys.list">Categorys</a></li>
-            <li class="breadcrumb-item active"><i ng-class="['fa', vm.category.icon]"></i> {{vm.category.name}}</li>
-          </ol>
-        </div>
-      </div>
+<div class="row">
+  <div class="col-xs-12 pdn">
+    <div class="custom-toolbar">
+      <a ui-sref="categorys.list" class="btn btn-primary pull-right">List</a>
+      <a ui-sref="categorys.edit({ categoryId: vm.category._id })" class="btn btn-success pull-right mg10r">Edit</a>
+      <a ng-click="vm.remove()" class="btn btn-danger pull-right mg10r">Delete</a>
     </div>
   </div>
+</div>
 
-  <div class="row">
-    <div class="col-xs-12 pdn">
-      <div class="custom-toolbar">
-        <a ui-sref="categorys.list" class="btn btn-primary pull-right">List</a>
-        <a ui-sref="categorys.edit({ categoryId: vm.category._id })" class="btn btn-success pull-right mg10r">Edit</a>
-        <a ng-click="vm.remove()" class="btn btn-danger pull-right mg10r" >Delete</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-xs-12 pdn">
-      <h3>
-        <i ng-class="['fa', vm.category.icon]"></i>
-        {{vm.category.name}}
-      </h3>
-      <p>
-        <small class="text-muted">
+<div class="row">
+  <div class="col-xs-12 pdn">
+    <div class="card">
+      <div class="card-body">
+        <h3><i ng-class="['fa', vm.category.icon]"></i> {{vm.category.name}}</h3>
+        <p>
+          <small class="text-muted">
           Created on
           <span ng-bind="vm.category.created | date:'mediumDate'"></span>
           by
@@ -42,10 +22,9 @@
                 ng-bind="vm.category.user.displayName"></span>
           <span ng-if="!vm.category.user">Deleted User</span>
         </small>
-      </p>
-      <button class="btn-poll-color" ng-style="{ 'background-color': vm.category.color }">
-        {{vm.category.color}}
-      </button><br>
+        </p>
+        <button class="btn-poll-color" ng-style="{ 'background-color': vm.category.color }">{{vm.category.color}}</button><br>
+      </div>
     </div>
   </div>
-</section>
+</div>

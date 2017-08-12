@@ -26,32 +26,58 @@
     dialog
   ) {
     var vm = this;
-
-    vm.authentication = Authentication;
-    vm.user = Authentication.user;
-    vm.isLogged = vm.user ? true : false;
-    vm.isAdmin = vm.isLogged && _.contains(vm.user.roles, 'admin');
+    $scope.user = Authentication.user;
+    $scope.isAdmin = _.contains($scope.user.roles, 'admin');
+    if (!$scope.isAdmin) {
+      $state.go('home');
+    }
 
     vm.category = category;
+    vm.bk_category = _.clone(category);
+    vm.form = {};
 
     vm.remove = () => {
-      if (!vm.isAdmin) {
-        toast.error('You are not authorized.', 'Error!');
-        return;
+      if ($window.confirm('Are you sure you want to delete?')) {
+        vm.category.$remove($state.go('admin.categorys.list'));
       }
-      $scope.message_title = 'Delete category!';
-      $scope.message_content = 'Are you sure you want to delete this category?';
-      $scope.dialog_type = 3;
-      $scope.buton_label = 'delete';
-      dialog.openConfirm({
-        scope: $scope,
-        templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
-      }).then(confirm => {
-        handle_delete();
-      }, reject => {
-      });
-      function handle_delete() {
-        vm.category.$remove($state.go('categorys.list'));
+    };
+    vm.discard = () => {
+      function handle_discard() {
+        if (vm.category._id) {
+          $state.go('admin.categorys.view', { categoryId: vm.category._id });
+        } else {
+          $state.go('admin.categorys.list');
+        }
+      }
+      if (angular.equals(vm.category, vm.bk_category)) {
+        handle_discard();
+      } else {
+        if ($window.confirm('Are you sure you want to delete?')) {
+          handle_discard();
+        }
+      }
+    };
+    vm.save = isValid => {
+      if (!isValid) {
+        $scope.$broadcast('show-errors-check-validity', 'vm.form.categoryForm');
+        return false;
+      }
+
+      if (vm.category._id) {
+        vm.category.$update(successCallback, errorCallback);
+      } else {
+        vm.category.$save(successCallback, errorCallback);
+      }
+
+      function successCallback(res) {
+        $state.go('admin.categorys.view', {
+          categoryId: res._id
+        });
+      }
+
+      function errorCallback(res) {
+        toast.error(res.data.message, 'Error!');
+        console.log(res);
       }
     };
   }

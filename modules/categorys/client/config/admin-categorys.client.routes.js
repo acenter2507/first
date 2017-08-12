@@ -25,7 +25,7 @@
           label: 'List'
         }
       })
-      .state('admin.categorys.create', {
+      .state('admin.categorys.new', {
         url: '/create',
         templateUrl: 'modules/categorys/client/views/admin/form-category.client.view.html',
         controller: 'CategorysController',

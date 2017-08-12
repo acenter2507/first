@@ -31,7 +31,7 @@
         controller: 'CategorysController',
         controllerAs: 'vm',
         resolve: {
-          userResolve: newCategory
+          categoryResolve: newCategory
         },
         ncyBreadcrumb: {
           label: 'Create'

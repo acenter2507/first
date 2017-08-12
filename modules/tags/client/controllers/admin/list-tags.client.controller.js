@@ -5,12 +5,34 @@
     .module('tags.admin')
     .controller('AdminTagsListController', AdminTagsListController);
 
-  AdminTagsListController.$inject = ['TagsService', 'Authentication', '$filter'];
+  AdminTagsListController.$inject = [
+    '$scope',
+    '$state',
+    '$window',
+    'TagsService',
+    'Authentication',
+    'toastr'
+  ];
 
-  function AdminTagsListController(TagsService, Authentication, $filter) {
+  function AdminTagsListController(
+    $scope,
+    $state,
+    $window,
+    TagsService,
+    Authentication,
+    toast
+  ) {
     var vm = this;
-    vm.user = Authentication.user;
-    vm.isLogged = (vm.user);
+    $scope.user = Authentication.user;
+    $scope.isAdmin = _.contains($scope.user.roles, 'admin');
+    if (!$scope.isAdmin) {
+      $state.go('home');
+    }
+
+    var promise = TagsService.query().$promise;
+    promise.then(_tags => {
+      vm.tags = _tags || [];
+    });
 
     TagsService.query().$promise
       .then(tags => {
@@ -28,5 +50,12 @@
         $: vm.searchKey
       });
     }
+
+    $scope.remove = tag => {
+      if ($window.confirm('Are you sure you want to delete?')) {
+        vm.tags = _.without(vm.tags, tag);
+        tag.$remove();
+      }
+    };
   }
 }());

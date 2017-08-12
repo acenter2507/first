@@ -15,6 +15,7 @@
   <div class="card">
     <div class="card-header">
       <strong class="card-title">List categorys</strong>
+      <input class="form-control mga w200" type="text" ng-model="vm.searchKey" placeholder="Search" ng-change="vm.search()" />
       <a class="card-link undecorated-link" ui-sref="admin.categorys.new"><i class="fa fa-plus"></i></a>
     </div>
     <div class="card-body">
@@ -31,7 +32,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="category in vm.categorys">
+            <tr ng-repeat="category in vm.show">
               <td class="text-center"><i ng-class="['fa', category.icon]"></i></td>
               <td ng-bind="category.name"></td>
               <td ng-bind="category.des"></td>

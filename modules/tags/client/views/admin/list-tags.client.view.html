@@ -1,36 +1,35 @@
-<section class="container">
-  <!-- Breadcrumb -->
-  <div class="row mg10t">
-    <div class="col-xs-12 pdn">
-      <div class="card">
-        <div class="card-body">
-          <ol class="breadcrumb custom-breadcrumb">
-            <li class="breadcrumb-item">
-              <a class="undecorated-link" ui-sref="home">
-                <i class="fa fa-home"></i> Home
-              </a>
-            </li>
-            <li class="breadcrumb-item active">Tags</li>
-          </ol>
-        </div>
+<div class="row">
+  <div class="card">
+    <div class="card-header">
+      <strong class="card-title">List tags</strong>
+      <input class="form-control mga w200" type="text" ng-model="vm.searchKey" placeholder="Search" ng-change="vm.search()" />
+      <a class="card-link undecorated-link" ui-sref="admin.tags.new"><i class="fa fa-plus"></i></a>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead class="bg-primary">
+            <tr>
+              <th>Name</th>
+              <th class="text-center">Polls</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="tag in vm.shows">
+              <td ng-bind="tag.name"></td>
+              <td class="text-center" ng-bind="tag.count"></td>
+              <td>
+                <div class="btn-group" role="group">
+                  <a class="undecorated-link" ui-sref="admin.tags.view({ tagId: tag._id })"><i class="icon-eye icons"></i></a>
+                  <a class="undecorated-link mg5l" ui-sref="admin.tags.edit({ tagId: tag._id })"><i class="icon-note icons"></i></a>
+                  <a class="undecorated-link mg5l" ng-click="remove(tag)"><i class="icon-trash icons"></i></a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="card">
-      <div class="card-body">
-        <div class="col-md-4 col-md-offset-4 pdn">
-          <div class="form-group">
-            <input class="form-control" type="text" ng-model="vm.searchKey" placeholder="Search" ng-change="vm.search()" />
-          </div>
-        </div>
-        <div class="col-xs-12 pdn">
-          <ul class="tags">
-            <li ng-repeat="tag in vm.shows"><a ui-sref="tags.polls({ tagId: tag._id })" class="tag">{{tag.name}}({{tag.count}})</a></li>
-          </ul>
-        </div>
-        <div class="clearfix"></div>
-      </div>
-    </div>
-  </div>
-</section>
+</div>

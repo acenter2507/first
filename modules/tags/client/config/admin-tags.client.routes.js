@@ -39,7 +39,7 @@
         }
       })
       .state('admin.tags.view', {
-        url: '/:categoryId',
+        url: '/:tagId',
         templateUrl: 'modules/tags/client/views/admin/view-tag.client.view.html',
         controller: 'TagsController',
         controllerAs: 'vm',

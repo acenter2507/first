@@ -32,8 +32,20 @@
     var promise = CategorysService.query().$promise;
     promise.then(_categorys => {
       vm.categorys = _categorys || [];
+      buildPage();
       initChart();
     });
+    function buildPage() {
+      vm.searchKey = '';
+      vm.shows = [];
+      search();
+    }
+    vm.search = search;
+    function search() {
+      vm.shows = $filter('filter')(vm.categorys, {
+        $: vm.searchKey
+      });
+    }
 
     // Chart
     function initChart() {

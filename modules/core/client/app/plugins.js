@@ -30,7 +30,7 @@
     $provide.decorator('taOptions', ['taRegisterTool', 'taToolFunctions', '$delegate',
       function (taRegisterTool, taToolFunctions, taOptions) {
         taRegisterTool('uploadImage', {
-          iconclass: "fa fa-upload",
+          iconclass: 'fa fa-upload',
           tooltiptext: 'Upload an image',
           onElementSelect: {
             element: 'img',
@@ -42,7 +42,7 @@
             // Create a virtual input element.
             var input = document.createElement('input');
             input.type = 'file';
-            input.accept = "image/*";
+            input.accept = 'image/*';
 
             input.onchange = function () {
               var reader = new FileReader();

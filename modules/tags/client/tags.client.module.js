@@ -2,4 +2,6 @@
   'use strict';
 
   app.registerModule('tags');
+  app.registerModule('tags.admin', ['admin']);
+  app.registerModule('tags.admin.routes', ['admin.routes']);
 }(ApplicationConfiguration));

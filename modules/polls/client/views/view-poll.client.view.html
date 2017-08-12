@@ -235,7 +235,7 @@
         </div>
         <div class="card-body">
           <ul class="tags" ng-show="vm.poll.tags.length">
-            <li ng-repeat="tag in vm.poll.tags"><a ui-sref="tags.view({ tagId: tag._id })" class="tag">{{tag.name}}</a></li>
+            <li ng-repeat="tag in vm.poll.tags"><a ui-sref="tags.polls({ tagId: tag._id })" class="tag">{{tag.name}}</a></li>
           </ul>
         </div>
       </div>

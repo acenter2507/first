@@ -25,7 +25,7 @@ exports.invokeRolesPolicies = function () {
     roles: ['user'],
     allows: [{
       resources: '/api/tags',
-      permissions: ['get', 'post']
+      permissions: ['get']
     }, {
       resources: '/api/tags/:tagId',
       permissions: ['get']

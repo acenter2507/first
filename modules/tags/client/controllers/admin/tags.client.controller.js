@@ -3,7 +3,7 @@
 
   // Tags controller
   angular
-    .module('tags')
+    .module('tags.admin')
     .controller('TagsController', TagsController);
 
   TagsController.$inject = [
@@ -202,7 +202,7 @@
       }
 
       function successCallback(res) {
-        $state.go('tags.view', {
+        $state.go('admin.tags.view', {
           tagId: res._id
         });
       }

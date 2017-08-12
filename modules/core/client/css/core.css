@@ -108,7 +108,6 @@ a:hover .header-profile-image {
     margin-bottom: 0; }
   .card .card-body {
     transition: height 0.3s ease-out;
-    overflow: hidden;
     flex: 1 1 auto;
     padding: 0.85rem; }
   .card .card-footer {

@@ -21,7 +21,7 @@
     CategorysService,
     Authentication,
     toast
-    ) {
+  ) {
     var vm = this;
     $scope.user = Authentication.user;
     $scope.isAdmin = _.contains($scope.user.roles, 'admin');
@@ -32,7 +32,16 @@
     var promise = CategorysService.query().$promise;
     promise.then(_categorys => {
       vm.categorys = _categorys || [];
+      initChart();
     });
+
+    // Chart
+    function initChart() {
+      $scope.chart = { options: { responsive: true } };
+      $scope.chart.labels = _.pluck(vm.categorys, 'name');
+      $scope.chart.data = _.pluck(vm.categorys, 'count');
+      $scope.chart.color = _.pluck(vm.categorys, 'color');
+    }
 
     $scope.remove = category => {
       if ($window.confirm('Are you sure you want to delete?')) {

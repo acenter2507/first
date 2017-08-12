@@ -11,40 +11,49 @@
 <!-- Form -->
 <div class="row">
   <div class="col-xs-12 pdn">
-    <form name="vm.form.categoryForm" class="form-horizontal" ng-submit="vm.save(vm.form.categoryForm.$valid)" novalidate>
-      <fieldset>
-        <!-- Name -->
-        <div class="form-group mgn mg10b pd6l pd6r" show-errors>
-          <label class="control-label" for="name">Name</label>
-          <input name="name" type="text" ng-model="vm.category.name" id="name" class="form-control" placeholder="Name" required>
-          <div ng-messages="vm.form.categoryForm.name.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Category name is required.</p>
-          </div>
-        </div>
-        <!-- Color -->
-        <div class="form-group mgn mg10b pd6l pd6r" show-errors>
-          <input type="hidden" name="color" ng-model="vm.category.color" required>
-          <md-menu md-offset="102 52">
-            <button class="btn-poll-color" ng-click="$mdMenu.open($event)" ng-style="{'background-color': (vm.category.color) ? vm.category.color : '#ccc'}">
+    <div class="card">
+      <div class="card-body">
+        <form name="vm.form.categoryForm" class="form-horizontal" ng-submit="vm.save(vm.form.categoryForm.$valid)" novalidate>
+          <fieldset>
+            <!-- Name -->
+            <div class="form-group mgn mg10b pd6l pd6r" show-errors>
+              <label class="control-label" for="name">Name</label>
+              <input name="name" type="text" ng-model="vm.category.name" id="name" class="form-control" placeholder="Name" required>
+              <div ng-messages="vm.form.categoryForm.name.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Category name is required.</p>
+              </div>
+            </div>
+            <!-- Description -->
+            <div class="form-group mgn mg10b pd6l pd6r">
+              <label class="control-label" for="des">Description</label>
+              <input name="des" type="text" ng-model="vm.category.des" id="des" class="form-control" placeholder="Description">
+            </div>
+            <!-- Color -->
+            <div class="form-group mgn mg10b pd6l pd6r" show-errors>
+              <input type="hidden" name="color" ng-model="vm.category.color" required>
+              <md-menu md-offset="102 52">
+                <button class="btn-poll-color" ng-click="$mdMenu.open($event)" ng-style="{'background-color': (vm.category.color) ? vm.category.color : '#ccc'}">
                     {{(vm.category.color) ? vm.category.color : 'Select color'}}</button>
-            <md-menu-content>
-              <material-picker format="'hex'" ng-model="vm.category.color" size="15"></material-picker>
-            </md-menu-content>
-          </md-menu>
-          <div ng-messages="vm.form.categoryForm.color.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">You must select color for category</p>
-          </div>
-        </div>
-        <!-- Icon class -->
-        <div class="form-group mgn pd6l pd6r" show-errors>
-          <label class="control-label" for="icon">Icon</label>
-          <input name="icon" type="text" ng-model="vm.category.icon" id="icon" class="form-control" placeholder="Awesome class" required>
-          <div ng-messages="vm.form.categoryForm.icon.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Category icon is required.</p>
-          </div>
-        </div>
-        <fieldset>
-    </form>
+                <md-menu-content>
+                  <material-picker format="'hex'" ng-model="vm.category.color" size="15"></material-picker>
+                </md-menu-content>
+              </md-menu>
+              <div ng-messages="vm.form.categoryForm.color.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">You must select color for category</p>
+              </div>
+            </div>
+            <!-- Icon class -->
+            <div class="form-group mgn pd6l pd6r" show-errors>
+              <label class="control-label" for="icon">Icon</label>
+              <input name="icon" type="text" ng-model="vm.category.icon" id="icon" class="form-control" placeholder="Awesome class" required>
+              <div ng-messages="vm.form.categoryForm.icon.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Category icon is required.</p>
+              </div>
+            </div>
+            <fieldset>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
 <!-- Tool bar -->

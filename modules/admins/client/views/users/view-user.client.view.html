@@ -179,7 +179,40 @@
   </div>
 </div>
 <!-- logins -->
-<div class="row mg12t" ng-show="loginsPagedItems.length > 0">
+<div class="row mg12t">
+  <div class="card card-expand">
+    <div class="card-header">
+      <strong class="card-title"><i class="fa fa-list-alt"></i> Login logs</strong>
+      <a class="undecorated-link card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
+      <div class="clearfix"></div>
+    </div>
+    <hr class="mgn">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover table-outline" id="logins">
+          <thead class="thead-default">
+            <tr>
+              <th>Ip</th>
+              <th>Agent</th>
+              <th>Login time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="login in loginsPagedItems">
+              <td>{{ login.ip }}</td>
+              <td>{{ login.agent }}</td>
+              <td><span ng-bind="login.created"></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="loginFilterLength" ng-model="loginsCurrentPage"
+        ng-change="loginPageChanged()"></uib-pagination>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div>
+<!-- <div class="row mg12t" ng-show="loginsPagedItems.length > 0">
   <div class="col-xs-12">
     <div class="admin-card">
       <div class="admin-card-header">
@@ -208,7 +241,7 @@
     </div>
   </div>
   <hr>
-</div>
+</div> -->
 <!-- Polls -->
 <div class="row mg12t" ng-show="pollsPagedItems.length > 0">
   <div class="col-xs-12">

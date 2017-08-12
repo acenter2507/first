@@ -1,10 +1,94 @@
-
 <div class="row">
+  <div class="card card-expand">
+    <div class="card-header">
+      <strong class="card-title">Filter tools</strong>
+      <a class="undecorated-link card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <label for="search">Search</label>
+          <input name="search" id="search" class="form-control" type="text" ng-model="filter.search" placeholder="Search" ng-change="figureOutItemsToDisplay()"
+          />
+        </div>
+        <div class="form-group col-sm-6">
+          <label for="sort">Sort by</label>
+          <select id="sort" name="sort" class="form-control" ng-model="filter.sort" ng-change="figureOutItemsToDisplay()">
+              <option value>Default</option>
+              <option value="-created">Newest to oldest</option>
+              <option value="created">Oldest to newest</option>
+              <option value="-report.pollCnt">Most polls</option>
+              <option value="report.pollCnt">Least polls</option>
+              <option value="-report.cmtCnt">Most comments</option>
+              <option value="report.cmtCnt">Least comments</option>
+            </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-4">
+          <label for="status">Status</label>
+          <select id="status" name="status" class="form-control input-sm" ng-model="filter.status" ng-change="figureOutItemsToDisplay()"
+            disabled>
+              <option value>All</option>
+              <option value="active">Online</option>
+              <option value="offline">Offline</option>
+            </select>
+        </div>
+        <div class="form-group col-sm-4">
+          <label for="provider">Provider</label>
+          <select id="provider" name="provider" class="form-control input-sm" ng-model="filter.provider" ng-change="figureOutItemsToDisplay()">
+              <option value>All</option>
+              <option value="local">Local</option>
+              <option value="facebook">Facebook</option>
+              <option value="twitter">Twitter</option>
+              <option value="linkedin">Linkedin</option>
+              <option value="google">Google plus</option>
+              <option value="github">Github</option>
+            </select>
+        </div>
+        <div class="form-group col-sm-4">
+          <label for="created">Joined date</label>
+          <input id="created" name="created" class="form-control input-sm" today="true" moment-picker="filter.created" ng-model="filter.created"
+            format="YYYY/MM/DD" start-view="month" placeholder="Select a date..." change="figureOutItemsToDisplay()" additions="{ bottom: 'bottom-template-url' }">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <div class="col-sm-12 pdn"><label>Number of polls</label></div>
+          <div class="col-sm-6 pdn">
+            <select class="form-control input-sm" ng-model="filter.polls_pref" ng-change="figureOutItemsToDisplay()">
+                <option value>None</option>
+                <option value="least">As least</option>
+                <option value="most">As most</option>
+              </select>
+          </div>
+          <div class="col-sm-6 pdn">
+            <input name="polls" id="polls" type="text" class="form-control input-sm" placeholder="Enter number of polls" ng-model="filter.polls"
+              ng-change="figureOutItemsToDisplay()">
+          </div>
+        </div>
+        <div class="form-group col-sm-6">
+          <label for="roles">Role</label>
+          <select id="roles" name="roles" class="form-control input-sm" ng-model="filter.roles" ng-change="figureOutItemsToDisplay()">
+              <option value>All</option>
+              <option value="admin">Admin</option>
+              <option value="user">User</option>
+            </select>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="card-footer">
+      <a class="btn btn-danger btn-sm pull-right" ng-click="clear_filter()">Clear</a>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div>
+<!-- <div class="row">
   <div class="col-xs-12">
     <div class="admin-card">
       <div class="admin-card-header">
-        <i class="fa fa-filter"></i>
-        Filter control
+        <i class="fa fa-filter"></i> Filter control
         <a class="undecorated-link pull-right" ng-click="filter_min = !filter_min">
           <i ng-class="{ 'icon-minus': !filter_min, 'icon-plus': filter_min }"></i>
           <md-tooltip md-direction="bottom">Show filter panel</md-tooltip>
@@ -15,15 +99,16 @@
         </a>
         <div class="clearfix"></div>
       </div>
-      <div class="admin-card-block" ng-class="{ 'minium': filter_min }" >
+      <div class="admin-card-block" ng-class="{ 'minium': filter_min }">
         <div class="row">
           <div class="form-group col-sm-6">
             <label for="search">Search</label>
-            <input name="search" id="search" class="form-control" type="text" ng-model="filter.search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />
+            <input name="search" id="search" class="form-control" type="text" ng-model="filter.search" placeholder="Search" ng-change="figureOutItemsToDisplay()"
+            />
           </div>
           <div class="form-group col-sm-6">
             <label for="sort">Sort by</label>
-            <select id="sort" name="sort" class="form-control" ng-model="filter.sort"  ng-change="figureOutItemsToDisplay()">
+            <select id="sort" name="sort" class="form-control" ng-model="filter.sort" ng-change="figureOutItemsToDisplay()">
               <option value>Default</option>
               <option value="-created">Newest to oldest</option>
               <option value="created">Oldest to newest</option>
@@ -37,7 +122,8 @@
         <div class="row">
           <div class="form-group col-sm-4">
             <label for="status">Status</label>
-            <select id="status" name="status" class="form-control input-sm" ng-model="filter.status" ng-change="figureOutItemsToDisplay()" disabled>
+            <select id="status" name="status" class="form-control input-sm" ng-model="filter.status" ng-change="figureOutItemsToDisplay()"
+              disabled>
               <option value>All</option>
               <option value="active">Online</option>
               <option value="offline">Offline</option>
@@ -57,8 +143,8 @@
           </div>
           <div class="form-group col-sm-4">
             <label for="created">Joined date</label>
-            <input id="created" name="created" class="form-control input-sm" today="true" moment-picker="filter.created" ng-model="filter.created" format="YYYY/MM/DD" start-view="month"
-            placeholder="Select a date..." change="figureOutItemsToDisplay()" additions="{ bottom: 'bottom-template-url' }">
+            <input id="created" name="created" class="form-control input-sm" today="true" moment-picker="filter.created" ng-model="filter.created"
+              format="YYYY/MM/DD" start-view="month" placeholder="Select a date..." change="figureOutItemsToDisplay()" additions="{ bottom: 'bottom-template-url' }">
           </div>
         </div>
         <div class="row">
@@ -72,7 +158,8 @@
               </select>
             </div>
             <div class="col-sm-6 pdn">
-              <input name="polls" id="polls" type="text" class="form-control input-sm" placeholder="Enter number of polls" ng-model="filter.polls" ng-change="figureOutItemsToDisplay()">
+              <input name="polls" id="polls" type="text" class="form-control input-sm" placeholder="Enter number of polls" ng-model="filter.polls"
+                ng-change="figureOutItemsToDisplay()">
             </div>
           </div>
           <div class="form-group col-sm-6">
@@ -88,13 +175,12 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 <div class="row mg12t">
   <div class="col-xs-12">
     <div class="admin-card">
       <div class="admin-card-header">
-        <i class="fa fa-list-alt"></i>
-        List users
+        <i class="fa fa-list-alt"></i> List users
         <a class="undecorated-link pull-right" ui-sref="admin.users.new">
           <i class="icon-user-follow"></i>
           <md-tooltip md-direction="bottom">Add new user</md-tooltip>
@@ -195,8 +281,7 @@
   </div>
 </div>
 <script type="text/ng-template" id="bottom-template-url">
-  <button class="btn btn-info btn-sm btn-block"
-    ng-click="filter.created = undefined">
+  <button class="btn btn-info btn-sm btn-block" ng-click="filter.created = undefined">
     Clear
   </button>
 </script>

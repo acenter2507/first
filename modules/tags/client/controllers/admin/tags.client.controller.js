@@ -66,7 +66,7 @@
       }
 
       function successCallback(res) {
-        toast.success("Tag created", 'Success!');
+        $state.go('admin.tags.list');
       }
 
       function errorCallback(res) {

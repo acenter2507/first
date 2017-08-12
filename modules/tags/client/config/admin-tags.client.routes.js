@@ -38,21 +38,6 @@
           label: 'Create'
         }
       })
-      .state('admin.tags.view', {
-        url: '/:tagId',
-        templateUrl: 'modules/tags/client/views/admin/view-tag.client.view.html',
-        controller: 'TagsController',
-        controllerAs: 'vm',
-        resolve: {
-          tagResolve: getTag
-        },
-        data: {
-          pageTitle: 'View tag'
-        },
-        ncyBreadcrumb: {
-          label: 'View'
-        }
-      })
       .state('admin.tags.edit', {
         url: '/:tagId/edit',
         templateUrl: 'modules/tags/client/views/admin/form-tag.client.view.html',

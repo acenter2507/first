@@ -1,30 +1,42 @@
-<section class="container">
-  <div class="page-header">
-    <h3>{{vm.tag._id ? 'Edit Tag' : 'New Tag'}}</h3>
+<!-- Tool bar -->
+<div class="row">
+  <div class="col-xs-12 pdn">
+    <div class="custom-toolbar">
+      <button class="btn btn-default pull-right" ng-click="discard()">Discard</button>
+      <button class="btn btn-primary pull-right mg10r" ng-click="save(vm.form.tagForm.$valid)">{{vm.tag._id ? ' Update' : ' Create'}}</button>
+      <button class="btn btn-danger pull-right mg10r" ng-if="vm.tag._id" ng-click="remove()">Delete</button>
+    </div>
   </div>
-  <div class="col-md-12">
-    <form name="vm.form.tagForm" class="form-horizontal" ng-submit="vm.save(vm.form.tagForm.$valid)" novalidate>
-      <fieldset>
-        <!-- Name -->
-        <div class="form-group" show-errors>
-          <label class="control-label" for="name">Name</label>
-          <input name="name" type="text" ng-model="vm.tag.name" id="name" class="form-control" placeholder="Name" required>
-          <div ng-messages="vm.form.tagForm.name.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Tag name is required.</p>
-          </div>
-        </div>
-        <!-- Des -->
-        <div class="form-group">
-          <label class="control-label" for="des">Description</label>
-          <textarea name="des" ng-model="vm.opt.des" id="des" class="form-control" placeholder="Description"></textarea>
-        </div>
-        <div class="form-group">
-          <button type="submit" class="btn btn-default">{{vm.tag._id ? 'Update' : 'Create'}}</button>
-        </div>
-        <div ng-show="vm.error" class="text-danger">
-          <strong ng-bind="vm.error"></strong>
-        </div>
-      </fieldset>
-    </form>
+</div>
+<!-- Form -->
+<div class="row">
+  <div class="col-xs-12 pdn">
+    <div class="card">
+      <div class="card-body">
+        <form name="vm.form.categoryForm" class="form-horizontal" ng-submit="save(vm.form.categoryForm.$valid)" novalidate>
+          <fieldset>
+            <!-- Name -->
+            <div class="form-group" show-errors>
+              <label class="control-label" for="name">Name</label>
+              <input name="name" type="text" ng-model="vm.tag.name" id="name" class="form-control" placeholder="Name" required>
+              <div ng-messages="vm.form.tagForm.name.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Tag name is required.</p>
+              </div>
+            </div>
+            <fieldset>
+        </form>
+      </div>
+    </div>
   </div>
-</section>
+</div>
+
+<!-- Tool bar -->
+<div class="row mg10t">
+  <div class="col-xs-12 pdn">
+    <div class="custom-toolbar">
+      <button class="btn btn-default pull-right" ng-click="discard()">Discard</button>
+      <button class="btn btn-primary pull-right mg10r" ng-click="save(vm.form.tagForm.$valid)">{{vm.tag._id ? ' Update' : ' Create'}}</button>
+      <button class="btn btn-danger pull-right mg10r" ng-if="vm.tag._id" ng-click="remove()">Delete</button>
+    </div>
+  </div>
+</div>

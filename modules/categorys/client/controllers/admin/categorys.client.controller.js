@@ -50,7 +50,7 @@
       if (angular.equals(vm.category, vm.bk_category)) {
         handle_discard();
       } else {
-        if ($window.confirm('Are you sure you want to delete?')) {
+        if ($window.confirm('Are you sure you want to discard?')) {
           handle_discard();
         }
       }

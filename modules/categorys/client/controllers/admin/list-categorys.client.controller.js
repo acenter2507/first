@@ -32,8 +32,6 @@
     var promise = CategorysService.query().$promise;
     promise.then(_categorys => {
       vm.categorys = _categorys || [];
-      console.log(vm.categorys);
-      console.log(vm.categorys.length);
     });
 
     $scope.remove = category => {

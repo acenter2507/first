@@ -1,4 +1,5 @@
 <section class="container mg10b">
+  <!-- breadcrumb -->
   <div class="row mg10t">
     <div class="col-xs-12 pdn">
       <div class="card">
@@ -16,28 +17,13 @@
     </div>
   </div>
 
-  <div class="row" ng-if="vm.isAdmin">
-    <div class="col-xs-12 pdn">
-      <div class="custom-toolbar">
-        <a ui-sref="categorys.create" class="btn btn-primary pull-right">Create category</a>
-      </div>
-    </div>
-  </div>
-
   <div class="row">
     <div class="col-xs-12 pdn">
-      <div class="notice notice-warning" ng-show="vm.categorys.length === 0">
-        No categorys yet, why don't you <a ui-sref="categorys.create">create one</a>?
-      </div>
       <div class="card" ng-repeat="category in vm.categorys">
         <div class="card-body">
           <div class="col-xs-9 pdn">
             <div class="avatar pull-left" ng-style="{ 'background-color': category.color }"><i ng-class="['fa', category.icon]"></i></div>
             <a ui-sref="categorys.polls({ categoryId: category._id })" class="undecorated-link h4-text">{{category.name}}</a><br>
-            <span class="mg20t">
-            <a ng-if="vm.isAdmin" ui-sref="categorys.edit({ categoryId: category._id })" class="undecorated-link">Edit</a>
-            <a ng-if="vm.isAdmin" ng-click="vm.remove(category)" class="undecorated-link mg5l">Delete</a>
-          </span>
           </div>
           <div class="col-xs-3 pdn">
             <div class="count pull-right">

@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="card">
+    <div class="card-header">
+      <strong class="card-title">List categorys</strong>
+      <a class="card-link" ui-sref="admin.categorys.new"><i class="fa fa-plus"></i></a>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th class="text-center">Icon</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th class="text-center">Colors</th>
+              <th class="text-center">Polls</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="category in vm.categorys">
+              <td class="text-center"><i ng-class="['fa', category.icon]"></i></td>
+              <td ng-bind="category.name"></td>
+              <td ng-bind="category.des"></td>
+              <td>
+                <div ng-style="{'width': 30px, 'height': 10px, 'background-color': category.color}"></div>
+              </td>
+              <td ng-bind="category.count"></td>
+              <td>
+                <div class="btn-group" role="group">
+                  <a class="undecorated-link" ui-sref="admin.categorys.view({ categoryId: category._id })"><i class="icon-eye icons"></i></a>
+                  <a class="undecorated-link mg5l" ui-sref="admin.categorys.edit({ categoryId: category._id })"><i class="icon-note icons"></i></a>
+                  <a class="undecorated-link mg5l" ng-click="remove(category)"><i class="icon-trash icons"></i></a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

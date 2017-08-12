@@ -28,37 +28,35 @@
     dialog
   ) {
     var vm = this;
-
-    vm.authentication = Authentication;
-    vm.user = Authentication.user;
-    vm.isLogged = vm.user ? true : false;
-    vm.isAdmin = vm.isLogged && _.contains(vm.user.roles, 'admin');
+    $scope.user = Authentication.user;
+    $scope.isLogged = vm.user ? true : false;
+    $scope.isAdmin = vm.isLogged && _.contains(vm.user.roles, 'admin');
 
     vm.category = category;
 
     // Infinity scroll
-    vm.stopped = false;
-    vm.busy = false;
-    vm.page = 0;
-    vm.sort = '-created';
-    vm.new_data = [];
+    $scope.stopped = false;
+    $scope.busy = false;
+    $scope.page = 0;
+    $scope.sort = '-created';
+    $scope.new_data = [];
     vm.polls = [];
 
     vm.get_polls = get_polls;
     function get_polls() {
-      if (vm.stopped || vm.busy) return;
-      vm.busy = true;
-      Action.get_category_polls(vm.category._id, vm.page, vm.sort)
+      if ($scope.stopped || $scope.busy) return;
+      $scope.busy = true;
+      Action.get_category_polls(vm.category._id, $scope.page, $scope.sort)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
-            vm.stopped = true;
-            vm.busy = false;
+            $scope.stopped = true;
+            $scope.busy = false;
             return;
           }
           // Load options và tính vote cho các opt trong polls
-          vm.new_data = res.data || [];
+          $scope.new_data = res.data || [];
           var promises = [];
-          vm.new_data.forEach(poll => {
+          $scope.new_data.forEach(poll => {
             promises.push(process_before_show(poll));
           });
           return Promise.all(promises);
@@ -66,13 +64,13 @@
         .then(results => {
           // Gán data vào list hiện tại
           vm.polls = _.union(vm.polls, results);
-          vm.page += 1;
-          vm.busy = false;
-          vm.new_data = [];
+          $scope.page += 1;
+          $scope.busy = false;
+          $scope.new_data = [];
         })
         .catch(err => {
-          vm.busy = false;
-          vm.stopped = true;
+          $scope.busy = false;
+          $scope.stopped = true;
           toast.error(err.message, 'Error!');
         });
     }
@@ -105,14 +103,14 @@
       return Math.floor(value * 100 / total) || 0;
     }
 
-    vm.poll_filter = poll => {
+    $scope.poll_filter = poll => {
       if (poll.isPublic) {
         return true;
       } else {
         return poll.isCurrentUserOwner;
       }
     };
-    vm.delete_poll = (poll) => {
+    $scope.delete_poll = (poll) => {
       if (!poll.isCurrentUserOwner) {
         toast.error('You are not authorized.', 'Error!');
         return;
@@ -133,7 +131,7 @@
         Action.delete_poll(poll);
       }
     };
-    vm.report_poll = (poll) => {
+    $scope.report_poll = (poll) => {
       if (poll.reported) {
         toast.error('You are already report this poll.', 'Error!');
         return;
@@ -156,7 +154,7 @@
           });
       }
     };
-    vm.bookmark_poll = (poll) => {
+    $scope.bookmark_poll = (poll) => {
       if (poll.bookmarked) {
         toast.error('You are already bookmark this poll.', 'Error!');
         return;
@@ -170,7 +168,7 @@
           toast.error(err.message, 'Error!');
         });
     };
-    vm.follow_poll = (poll) => {
+    $scope.follow_poll = (poll) => {
       if (!vm.isLogged) {
         toast.error('You must login to follow this poll.', 'Error!');
         return;

@@ -31,6 +31,17 @@
           </li>
         </ul>
       </li>
+      <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('admin.categorys')}">
+        <a class="nav-link nav-dropdown-toggle" ng-class="{active: $state.includes('admin.categorys')}" href="#"><i class="fa fa-list"></i> Categorys</a>
+        <ul class="nav-dropdown-items">
+          <li class="nav-item">
+            <a class="nav-link" ui-sref-active="active" ui-sref="admin.categorys.list"><i class="fa fa-list-alt"></i> List categorys</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" ui-sref-active="active" ui-sref="admin.categorys.new"><i class="fa fa-plus"></i> Add new</a>
+          </li>
+        </ul>
+      </li>
       <li class="nav-item">
         <a class="nav-link" ui-sref-active="active" ui-sref="admin.widgets"><i class="icon-calculator"></i> Widgets <span class="badge badge-info">NEW</span></a>
       </li>

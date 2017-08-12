@@ -34,45 +34,6 @@
         data: {
           pageTitle: '{{ categoryResolve.name }}'
         }
-      })
-      .state('categorys.create', {
-        url: '/create',
-        templateUrl: 'modules/categorys/client/views/form-category.client.view.html',
-        controller: 'CategoryInputController',
-        controllerAs: 'vm',
-        resolve: {
-          categoryResolve: newCategory
-        },
-        data: {
-          roles: ['admin'],
-          pageTitle: 'Categorys Create'
-        }
-      })
-      .state('categorys.edit', {
-        url: '/:categoryId/edit',
-        templateUrl: 'modules/categorys/client/views/form-category.client.view.html',
-        controller: 'CategoryInputController',
-        controllerAs: 'vm',
-        resolve: {
-          categoryResolve: getCategory
-        },
-        data: {
-          roles: ['admin'],
-          pageTitle: 'Edit Category {{ categoryResolve.name }}'
-        }
-      })
-      .state('categorys.view', {
-        url: '/:categoryId',
-        templateUrl: 'modules/categorys/client/views/view-category.client.view.html',
-        controller: 'CategorysController',
-        controllerAs: 'vm',
-        resolve: {
-          categoryResolve: getCategory
-        },
-        data: {
-          roles: ['admin'],
-          pageTitle: 'Category {{ categoryResolve.name }}'
-        }
       });
   }
 

@@ -12,6 +12,7 @@
     menuService.addMenuItem('topbar', {
       title: 'Categorys',
       state: 'categorys.list',
+      roles: ['*'],
       position: 1
     });
 

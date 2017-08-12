@@ -12,7 +12,7 @@ var path = require('path'),
 var pollController = require(path.resolve('./modules/polls/server/controllers/polls.server.controller'));
 
 /**
- * Create a Category
+ * Create a Category (Chỉ admin)
  */
 exports.create = function (req, res) {
   var category = new Category(req.body);
@@ -30,14 +30,11 @@ exports.create = function (req, res) {
 };
 
 /**
- * Show the current Category
+ * Show the current Category (Chỉ admin)
  */
 exports.read = function (req, res) {
   // convert mongoose document to JSON
   var category = req.category ? req.category.toJSON() : {};
-
-  // Add a custom field to the Article, for determining if the current User is the "owner".
-  // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
   category.isCurrentUserOwner = req.user && category.user && category.user._id.toString() === req.user._id.toString();
   count_polls_by_categoryId(category._id)
     .then(result => {
@@ -52,7 +49,7 @@ exports.read = function (req, res) {
 };
 
 /**
- * Update a Category
+ * Update a Category (Chỉ admin)
  */
 exports.update = function (req, res) {
   var category = req.category;
@@ -71,7 +68,7 @@ exports.update = function (req, res) {
 };
 
 /**
- * Delete an Category
+ * Delete an Category (Chỉ admin)
  */
 exports.delete = function (req, res) {
   var category = req.category;
@@ -88,7 +85,7 @@ exports.delete = function (req, res) {
 };
 
 /**
- * List of Categorys
+ * List of Categorys (Dùng chung cho cả admin và public)
  */
 exports.list = function (req, res) {
   Category.find().sort('-created').exec()
@@ -118,7 +115,7 @@ exports.list = function (req, res) {
 };
 
 /**
- * List of Categorys
+ * List of Categorys (Dùng chung cho cả admin và public)
  */
 exports.count_polls = function (req, res) {
   Poll.find({ category: req.category._id }).count(function (err, count) {
@@ -126,7 +123,7 @@ exports.count_polls = function (req, res) {
   });
 };
 /**
- * List of Categorys
+ * List of Categorys (Dùng chung cho cả admin và public)
  */
 exports.polls = function (req, res) {
   var page = req.params.page || 0;
@@ -166,7 +163,7 @@ exports.polls = function (req, res) {
   }
 };
 /**
- * Category middleware
+ * Category middleware (Dùng chung cho cả admin và public)
  */
 exports.categoryByID = function (req, res, next, id) {
 

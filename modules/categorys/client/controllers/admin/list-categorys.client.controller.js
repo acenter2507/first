@@ -33,8 +33,12 @@
       $state.go('home');
     }
 
-    vm.categorys = CategorysService.query();
-    console.log(vm.categorys);
+    var promise = CategorysService.query().$promise;
+    promise.then(_categorys => {
+      vm.categorys = _categorys || [];
+      console.log(vm.categorys);
+      console.log(vm.categorys.length);
+    });
 
     $scope.remove = category => {
       if ($window.confirm('Are you sure you want to delete?')) {

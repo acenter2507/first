@@ -175,6 +175,9 @@ a:hover .header-profile-image {
   0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); } }
 
+.auto-complete {
+  z-index: 999;}
+
 .custom-toolbar {
   margin-left: 6px;
   margin-right: 6px;

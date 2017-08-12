@@ -11,9 +11,7 @@
     '$window',
     'CategorysService',
     'Authentication',
-    'Action',
-    'toastr',
-    'ngDialog'
+    'toastr'
   ];
 
   function AdminCategorysListController(
@@ -22,9 +20,7 @@
     $window,
     CategorysService,
     Authentication,
-    Action,
-    toast,
-    dialog
+    toast
     ) {
     var vm = this;
     $scope.user = Authentication.user;

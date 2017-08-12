@@ -12,8 +12,7 @@
     '$window',
     'Authentication',
     'categoryResolve',
-    'toastr',
-    'ngDialog'
+    'toastr'
   ];
 
   function CategorysController(
@@ -22,8 +21,7 @@
     $window,
     Authentication,
     category,
-    toast,
-    dialog
+    toast
   ) {
     var vm = this;
     $scope.user = Authentication.user;

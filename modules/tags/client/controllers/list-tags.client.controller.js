@@ -5,12 +5,10 @@
     .module('tags')
     .controller('TagsListController', TagsListController);
 
-  TagsListController.$inject = ['TagsService', 'Authentication', '$filter'];
+  TagsListController.$inject = ['TagsService', '$filter'];
 
-  function TagsListController(TagsService, Authentication, $filter) {
+  function TagsListController(TagsService, $filter) {
     var vm = this;
-    vm.user = Authentication.user;
-    vm.isLogged = (vm.user);
 
     TagsService.query().$promise
       .then(tags => {

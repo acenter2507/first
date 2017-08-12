@@ -28,25 +28,24 @@
     dialog
   ) {
     var vm = this;
+    $scope.user = Authentication.user;
+    $scope.isLogged = ($scope.user);
+    $scope.isAdmin = $scope.isLogged && _.contains($scope.user.roles, 'admin');
 
-    vm.authentication = Authentication;
     vm.tag = tag;
-    vm.user = Authentication.user;
-    vm.isLogged = (vm.user);
 
-    // Infinity scroll
-    vm.busy = false;
-    vm.sort = '-created';
+    $scope.busy = false;
+    $scope.sort = '-created';
     vm.polls = [];
 
     get_polls();
     function get_polls() {
-      if (vm.busy) return;
-      vm.busy = true;
+      if ($scope.busy) return;
+      $scope.busy = true;
       Action.get_tag_polls(vm.tag._id)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
-            vm.busy = false;
+            $scope.busy = false;
             return;
           }
           var promises = [];
@@ -58,16 +57,16 @@
         .then(results => {
           // Gán data vào list hiện tại
           vm.polls = results;
-          vm.busy = false;
+          $scope.busy = false;
         })
         .catch(err => {
-          vm.busy = false;
+          $scope.busy = false;
           toast.error(err.message, 'Error!');
         });
     }
     function process_before_show(poll) {
       return new Promise((resolve, reject) => {
-        poll.isCurrentUserOwner = vm.isLogged && vm.user._id === poll.user._id;
+        poll.isCurrentUserOwner = $scope.isLogged && $scope.user._id === poll.user._id;
         poll.chart = {
           options: { responsive: true },
           colors: [],
@@ -94,20 +93,14 @@
       return Math.floor(value * 100 / total) || 0;
     }
 
-
-    vm.error = null;
-    vm.form = {};
-    vm.remove = remove;
-    vm.save = save;
-
-    vm.poll_filter = poll => {
+    $scope.poll_filter = poll => {
       if (poll.isPublic) {
         return true;
       } else {
         return poll.isCurrentUserOwner;
       }
     };
-    vm.delete_poll = (poll) => {
+    $scope.delete_poll = (poll) => {
       if (!poll.isCurrentUserOwner) {
         toast.error('You are not authorized.', 'Error!');
         return;
@@ -128,7 +121,7 @@
         Action.delete_poll(poll);
       }
     };
-    vm.report_poll = (poll) => {
+    $scope.report_poll = (poll) => {
       if (poll.reported) {
         toast.error('You are already report this poll.', 'Error!');
         return;
@@ -151,7 +144,7 @@
           });
       }
     };
-    vm.bookmark_poll = (poll) => {
+    $scope.bookmark_poll = (poll) => {
       if (poll.bookmarked) {
         toast.error('You are already bookmark this poll.', 'Error!');
         return;
@@ -165,8 +158,8 @@
           toast.error(err.message, 'Error!');
         });
     };
-    vm.follow_poll = (poll) => {
-      if (!vm.isLogged) {
+    $scope.follow_poll = (poll) => {
+      if (!$scope.isLogged) {
         toast.error('You must login to follow this poll.', 'Error!');
         return;
       }

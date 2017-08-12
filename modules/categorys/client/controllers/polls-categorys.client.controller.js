@@ -29,8 +29,8 @@
   ) {
     var vm = this;
     $scope.user = Authentication.user;
-    $scope.isLogged = vm.user ? true : false;
-    $scope.isAdmin = vm.isLogged && _.contains(vm.user.roles, 'admin');
+    $scope.isLogged = ($scope.user);
+    $scope.isAdmin = $scope.isLogged && _.contains($scope.user.roles, 'admin');
 
     vm.category = category;
 
@@ -77,7 +77,7 @@
 
     function process_before_show(poll) {
       return new Promise((resolve, reject) => {
-        poll.isCurrentUserOwner = vm.isLogged && vm.user._id === poll.user._id;
+        poll.isCurrentUserOwner = $scope.isLogged && $scope.user._id === poll.user._id;
         poll.chart = {
           options: { responsive: true },
           colors: [],
@@ -169,7 +169,7 @@
         });
     };
     $scope.follow_poll = (poll) => {
-      if (!vm.isLogged) {
+      if (!$scope.isLogged) {
         toast.error('You must login to follow this poll.', 'Error!');
         return;
       }

@@ -37,7 +37,7 @@
       <!-- Loader  -->
       <div class="row" ng-show="busy"><div class="loader"></div></div>
       <!-- Message  -->
-      <div class="notice notice-warning" ng-show="vm.polls.length === 0">
+      <div class="notice notice-warning" ng-show="vm.polls.length === 0 && stopped">
         No polls yet, why don't you <a ui-sref="polls.create">create one</a>?
       </div>
     </div>

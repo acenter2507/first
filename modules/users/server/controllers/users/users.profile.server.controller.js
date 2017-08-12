@@ -195,7 +195,6 @@ exports.polls = function (req, res) {
         array[index] = instance.toObject();
         pollController.get_full_by_pollId(array[index]._id, userId)
           .then(result => {
-            array[index].report = result.report;
             array[index].opts = result.opts;
             array[index].votes = result.votes;
             array[index].voteopts = result.voteopts;
@@ -298,7 +297,6 @@ exports.follows = function (req, res) {
         array[index] = instance.toObject();
         pollController.get_full_by_pollId(array[index]._id, userId)
           .then(result => {
-            array[index].report = result.report;
             array[index].opts = result.opts;
             array[index].votes = result.votes;
             array[index].voteopts = result.voteopts;
@@ -348,7 +346,6 @@ exports.bookmarks = function (req, res) {
         array[index] = instance.toObject();
         pollController.get_full_by_pollId(array[index]._id, userId)
           .then(result => {
-            array[index].report = result.report;
             array[index].opts = result.opts;
             array[index].votes = result.votes;
             array[index].voteopts = result.voteopts;
@@ -397,7 +394,6 @@ exports.views = function (req, res) {
         array[index] = instance.toObject();
         pollController.get_full_by_pollId(array[index]._id, userId)
           .then(result => {
-            array[index].report = result.report;
             array[index].opts = result.opts;
             array[index].votes = result.votes;
             array[index].voteopts = result.voteopts;
@@ -447,7 +443,6 @@ exports.likes = function (req, res) {
         array[index] = instance.toObject();
         pollController.get_full_by_pollId(array[index]._id, userId)
           .then(result => {
-            array[index].report = result.report;
             array[index].opts = result.opts;
             array[index].votes = result.votes;
             array[index].voteopts = result.voteopts;
@@ -497,7 +492,6 @@ exports.dislikes = function (req, res) {
         array[index] = instance.toObject();
         pollController.get_full_by_pollId(array[index]._id, userId)
           .then(result => {
-            array[index].report = result.report;
             array[index].opts = result.opts;
             array[index].votes = result.votes;
             array[index].voteopts = result.voteopts;

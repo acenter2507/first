@@ -181,7 +181,6 @@ exports.polls = function (req, res) {
         array[index] = instance.toObject();
         pollController.get_full_by_pollId(array[index]._id, userId)
           .then(result => {
-            array[index].report = result.report;
             array[index].opts = result.opts;
             array[index].votes = result.votes;
             array[index].voteopts = result.voteopts;

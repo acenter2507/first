@@ -50,7 +50,7 @@
     vm.categorys = Categorys.query();
     vm.bk_poll = _.clone(poll);
     vm.form = {};
-    vm.opts = vm.poll.opts;
+    vm.opts = vm.poll.opts || [];
 
     vm.optionToggle = -1;
 

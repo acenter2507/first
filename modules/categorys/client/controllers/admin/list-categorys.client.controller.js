@@ -41,7 +41,6 @@
       $scope.chart.labels = _.pluck(vm.categorys, 'name');
       $scope.chart.data = _.pluck(vm.categorys, 'count');
       $scope.chart.color = _.pluck(vm.categorys, 'color');
-      console.log($scope.chart);
     }
 
     $scope.remove = category => {

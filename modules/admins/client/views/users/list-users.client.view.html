@@ -193,7 +193,7 @@
     <div class="card-body">
       <div class="table-responsive">
         <table class="table table-bordered">
-          <thead class="thead-default">
+          <thead class="bg-primary">
             <tr>
               <th class="text-center"><i class="icon-people"></i></th>
               <th>Display Name</th>
@@ -278,13 +278,9 @@
             </tr>
           </tbody>
         </table>
+        <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage"
+          ng-change="pageChanged()"></uib-pagination>
       </div>
-      <div class="clearfix"></div>
-    </div>
-
-    <div class="card-footer text-center">
-      <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage"
-        ng-change="pageChanged()"></uib-pagination>
       <div class="clearfix"></div>
     </div>
   </div>

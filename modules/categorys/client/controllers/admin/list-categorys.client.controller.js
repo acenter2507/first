@@ -40,7 +40,7 @@
       $scope.chart = { options: { responsive: true } };
       $scope.chart.labels = _.pluck(vm.categorys, 'name');
       $scope.chart.data = _.pluck(vm.categorys, 'count');
-      $scope.chart.color = _.pluck(vm.categorys, 'color');
+      $scope.chart.colors = _.pluck(vm.categorys, 'color');
     }
 
     $scope.remove = category => {

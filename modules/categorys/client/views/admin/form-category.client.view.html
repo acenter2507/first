@@ -4,7 +4,7 @@
     <div class="custom-toolbar">
       <button class="btn btn-default pull-right" ng-click="discard()">Discard</button>
       <button class="btn btn-primary pull-right mg10r" ng-click="save(vm.form.categoryForm.$valid)">{{vm.category._id ? ' Update' : ' Create'}}</button>
-      <button class="btn btn-danger pull-right mg10r" ng-if="category._id" ng-click="remove()">Delete</button>
+      <button class="btn btn-danger pull-right mg10r" ng-if="vm.category._id" ng-click="remove()">Delete</button>
     </div>
   </div>
 </div>

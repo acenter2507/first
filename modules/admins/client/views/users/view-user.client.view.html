@@ -127,61 +127,56 @@
 
 <!-- basic Info-->
 <div class="row mg12t">
-  <div class="col-xs-12">
-    <div class="admin-card">
-      <div class="admin-card-header">
-        <i class="fa fa-filter"></i> User basic info
-        <a class="undecorated-link pull-right" ui-sref="profile.info({ userId: user._id })">
-          <i class="icon-user"></i>
-          <md-tooltip md-direction="bottom">View in profile page</md-tooltip>
-        </a>
-        <div class="clearfix"></div>
-      </div>
-      <div class="admin-card-block">
-        <div class="row">
-          <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
-            <div class="form-group">
-              <img src="{{user.profileImageURL}}" alt="{{user.displayName}}" class="img-thumbnail user-profile-picture">
-            </div>
+  <div class="card card-expand">
+    <div class="card-header">
+      <strong class="card-title"><i class="fa fa-user"></i> Basic info</strong>
+      <a class="undecorated-link card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
+      <div class="clearfix"></div>
+    </div>
+    <hr class="mgn">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+          <div class="form-group">
+            <img src="{{user.profileImageURL}}" alt="{{user.displayName}}" class="img-thumbnail user-profile-picture">
           </div>
-          <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
-            <table class="table">
-              <tr>
-                <td>First name:</td>
-                <td>{{ user.firstName }}</td>
-              </tr>
-              <tr>
-                <td>Last name:</td>
-                <td>{{ user.lastName }}</td>
-              </tr>
-              <tr>
-                <td>Email:</td>
-                <td>{{ user.email }}</td>
-              </tr>
-              <tr>
-                <td>Provider:</td>
-                <td>{{ user.provider }}</td>
-              </tr>
-              <tr>
-                <td>Roles:</td>
-                <td><span ng-bind="user.roles"></span></td>
-              </tr>
-              <tr>
-                <td>Last login:</td>
-                <td><span am-time-ago="user.lastLogin"></span></td>
-              </tr>
-              <tr>
-                <td>Created:</td>
-                <td><span ng-bind="user.created"></span></td>
-              </tr>
-            </table>
-          </div>
-          <div class="clearfix"></div>
         </div>
+        <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
+          <table class="table">
+            <tr>
+              <td>First name:</td>
+              <td>{{ user.firstName }}</td>
+            </tr>
+            <tr>
+              <td>Last name:</td>
+              <td>{{ user.lastName }}</td>
+            </tr>
+            <tr>
+              <td>Email:</td>
+              <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+              <td>Provider:</td>
+              <td>{{ user.provider }}</td>
+            </tr>
+            <tr>
+              <td>Roles:</td>
+              <td><span ng-bind="user.roles"></span></td>
+            </tr>
+            <tr>
+              <td>Last login:</td>
+              <td><span am-time-ago="user.lastLogin"></span></td>
+            </tr>
+            <tr>
+              <td>Created:</td>
+              <td><span ng-bind="user.created"></span></td>
+            </tr>
+          </table>
+        </div>
+        <div class="clearfix"></div>
       </div>
     </div>
   </div>
-  <hr>
 </div>
 <!-- logins -->
 <div class="row mg12t" ng-show="loginsPagedItems.length > 0">

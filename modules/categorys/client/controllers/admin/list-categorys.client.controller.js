@@ -60,6 +60,7 @@
     $scope.remove = category => {
       if ($window.confirm('Are you sure you want to delete?')) {
         vm.categorys = _.without(vm.categorys, category);
+        search();
         category.$remove();
       }
     };

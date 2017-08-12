@@ -56,6 +56,7 @@
     $scope.remove = tag => {
       if ($window.confirm('Are you sure you want to delete?')) {
         vm.tags = _.without(vm.tags, tag);
+        search();
         tag.$remove();
       }
     };

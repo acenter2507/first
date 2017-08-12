@@ -9,6 +9,7 @@
     '$scope',
     '$state',
     '$window',
+    '$filter',
     'CategorysService',
     'Authentication',
     'toastr'
@@ -18,6 +19,7 @@
     $scope,
     $state,
     $window,
+    $filter,
     CategorysService,
     Authentication,
     toast

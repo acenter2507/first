@@ -36,12 +36,12 @@
     vm.bk_category = _.clone(category);
     vm.form = {};
 
-    vm.remove = () => {
+    $scope.remove = () => {
       if ($window.confirm('Are you sure you want to delete?')) {
         vm.category.$remove($state.go('admin.categorys.list'));
       }
     };
-    vm.discard = () => {
+    $scope.discard = () => {
       function handle_discard() {
         if (vm.category._id) {
           $state.go('admin.categorys.view', { categoryId: vm.category._id });
@@ -57,7 +57,7 @@
         }
       }
     };
-    vm.save = isValid => {
+    $scope.save = isValid => {
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.categoryForm');
         return false;

@@ -8,6 +8,7 @@
   AdminCategorysListController.$inject = [
     '$scope',
     '$state',
+    '$window',
     'CategorysService',
     'Authentication',
     'Action',
@@ -18,6 +19,7 @@
   function AdminCategorysListController(
     $scope,
     $state,
+    $window,
     CategorysService,
     Authentication,
     Action,

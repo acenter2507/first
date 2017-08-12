@@ -126,6 +126,7 @@ a:hover .header-profile-image {
 .card.card-expand .card-body,
 .card.card-expand .card-footer {
   transition: height 0.3s ease-in;
+  overflow: hidden;
   height: 0;
   padding: 0; }
 .card.card-expand.open .card-body {

@@ -88,98 +88,6 @@
     </div>
   </div>
 </div>
-<!-- <div class="row">
-  <div class="col-xs-12">
-    <div class="admin-card">
-      <div class="admin-card-header">
-        <i class="fa fa-filter"></i> Filter control
-        <a class="undecorated-link pull-right" ng-click="filter_min = !filter_min">
-          <i ng-class="{ 'icon-minus': !filter_min, 'icon-plus': filter_min }"></i>
-          <md-tooltip md-direction="bottom">Show filter panel</md-tooltip>
-        </a>
-        <a class="undecorated-link pull-right mg5r" ng-click="clear_filter()">
-          Clear
-          <md-tooltip md-direction="bottom">Clear all filter info</md-tooltip>
-        </a>
-        <div class="clearfix"></div>
-      </div>
-      <div class="admin-card-block" ng-class="{ 'minium': filter_min }">
-        <div class="row">
-          <div class="form-group col-sm-6">
-            <label for="search">Search</label>
-            <input name="search" id="search" class="form-control" type="text" ng-model="filter.search" placeholder="Search" ng-change="figureOutItemsToDisplay()"
-            />
-          </div>
-          <div class="form-group col-sm-6">
-            <label for="sort">Sort by</label>
-            <select id="sort" name="sort" class="form-control" ng-model="filter.sort" ng-change="figureOutItemsToDisplay()">
-              <option value>Default</option>
-              <option value="-created">Newest to oldest</option>
-              <option value="created">Oldest to newest</option>
-              <option value="-report.pollCnt">Most polls</option>
-              <option value="report.pollCnt">Least polls</option>
-              <option value="-report.cmtCnt">Most comments</option>
-              <option value="report.cmtCnt">Least comments</option>
-            </select>
-          </div>
-        </div>
-        <div class="row">
-          <div class="form-group col-sm-4">
-            <label for="status">Status</label>
-            <select id="status" name="status" class="form-control input-sm" ng-model="filter.status" ng-change="figureOutItemsToDisplay()"
-              disabled>
-              <option value>All</option>
-              <option value="active">Online</option>
-              <option value="offline">Offline</option>
-            </select>
-          </div>
-          <div class="form-group col-sm-4">
-            <label for="provider">Provider</label>
-            <select id="provider" name="provider" class="form-control input-sm" ng-model="filter.provider" ng-change="figureOutItemsToDisplay()">
-              <option value>All</option>
-              <option value="local">Local</option>
-              <option value="facebook">Facebook</option>
-              <option value="twitter">Twitter</option>
-              <option value="linkedin">Linkedin</option>
-              <option value="google">Google plus</option>
-              <option value="github">Github</option>
-            </select>
-          </div>
-          <div class="form-group col-sm-4">
-            <label for="created">Joined date</label>
-            <input id="created" name="created" class="form-control input-sm" today="true" moment-picker="filter.created" ng-model="filter.created"
-              format="YYYY/MM/DD" start-view="month" placeholder="Select a date..." change="figureOutItemsToDisplay()" additions="{ bottom: 'bottom-template-url' }">
-          </div>
-        </div>
-        <div class="row">
-          <div class="form-group col-sm-6">
-            <div class="col-sm-12 pdn"><label>Number of polls</label></div>
-            <div class="col-sm-6 pdn">
-              <select class="form-control input-sm" ng-model="filter.polls_pref" ng-change="figureOutItemsToDisplay()">
-                <option value>None</option>
-                <option value="least">As least</option>
-                <option value="most">As most</option>
-              </select>
-            </div>
-            <div class="col-sm-6 pdn">
-              <input name="polls" id="polls" type="text" class="form-control input-sm" placeholder="Enter number of polls" ng-model="filter.polls"
-                ng-change="figureOutItemsToDisplay()">
-            </div>
-          </div>
-          <div class="form-group col-sm-6">
-            <label for="roles">Role</label>
-            <select id="roles" name="roles" class="form-control input-sm" ng-model="filter.roles" ng-change="figureOutItemsToDisplay()">
-              <option value>All</option>
-              <option value="admin">Admin</option>
-              <option value="user">User</option>
-            </select>
-          </div>
-        </div>
-        <div class="clearfix"></div>
-      </div>
-    </div>
-  </div>
-</div> -->
 <div class="row">
 
   <div class="card">
@@ -267,7 +175,7 @@
                   <a class="undecorated-link mg5l" ui-sref="admin.users.edit({ userId: user._id })"><i class="icon-note icons"></i>
                     <md-tooltip md-direction="bottom">Edit info of user</md-tooltip>
                   </a>
-                  <a class="undecorated-link mg5l" ng-click="delete_user(user)"><i class="icon-trash icons"></i>
+                  <a class="undecorated-link mg5l" ng-click="remove(user)"><i class="icon-trash icons"></i>
                     <md-tooltip md-direction="bottom">Delete user</md-tooltip>
                   </a>
                   <a ng-if="user.provider === 'local'" class="undecorated-link mg5l" ui-sref="admin.users.resetpass({ userId: user._id })"><i class="icon-refresh icons"></i>
@@ -284,106 +192,6 @@
       <div class="clearfix"></div>
     </div>
   </div>
-  <!-- <div class="col-xs-12">
-    <div class="admin-card">
-      <div class="admin-card-header">
-        <i class="fa fa-list-alt"></i> List users
-        <a class="undecorated-link pull-right" ui-sref="admin.users.new">
-          <i class="icon-user-follow"></i>
-          <md-tooltip md-direction="bottom">Add new user</md-tooltip>
-        </a>
-        <div class="clearfix"></div>
-      </div>
-      <div class="admin-card-block">
-        <table class="table table-hover table-outline">
-          <thead class="thead-default">
-            <tr>
-              <th class="text-center"><i class="icon-people"></i></th>
-              <th>Display Name</th>
-              <th>Joined date</th>
-              <th>Role</th>
-              <th class="text-center">Provider</th>
-              <th class="text-center">Polls count</th>
-              <th class="text-center">Comments count</th>
-              <th class="text-center">Profiles views</th>
-              <th class="text-center">Be reported</th>
-              <th>Activity</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-show="busy">
-              <td class="text-center" colspan="8">
-                <div class="loader"></div>
-              </td>
-            </tr>
-            <tr ng-show="pagedItems.length === 0 && !busy">
-              <td class="text-center" colspan="11">Has no data found.</td>
-            </tr>
-            <tr ng-repeat="user in pagedItems">
-              <td class="text-center">
-                <div class="admin-avatar">
-                  <img src="{{ user.profileImageURL }}" alt="{{ user.displayName }}" class="img-admin-avatar">
-                  <span class="admin-avatar-status" ng-class="{
-                        'badge-success' : user.status === 'active',
-                        'badge-warning' : user.status == 'away',
-                        'badge-danger'  : user.status == 'busy',
-                        'badge-default' : user.status == 'offline' }">
-                    </span>
-                </div>
-              </td>
-
-              <td>
-                <div>{{ user.displayName }}</div>
-                <div class="text-muted">
-                  <small>{{ user.email }}</small>
-                </div>
-              </td>
-              <td>
-                <span ng-bind="user.created | date:'mediumDate'"></span>
-              </td>
-              <td>
-                <span ng-bind="user.roles"></span>
-              </td>
-              <td class="text-center">
-                <i class="fa" ng-class="{ 'fa fa-facebook-square' : user.provider === 'facebook',
-                    'fa fa-twitter-square' : user.provider === 'twitter',
-                    'fa fa-linkedin-square' : user.provider === 'linkedin',
-                    'fa fa-google-plus-square' : user.provider === 'google',
-                    'fa fa-git-square' : user.provider === 'github',
-                    'fa fa-sign-in' : user.provider === 'local'}">
-                </i>
-              </td>
-              <td class="text-center">{{ user.report.pollCnt }}</td>
-              <td class="text-center">{{ user.report.cmtCnt }}</td>
-              <td class="text-center">{{ user.report.viewCnt }}</td>
-              <td class="text-center">{{ user.bereportCnt }}</td>
-              <td>
-                <div class="text-muted"><small>Last login</small></div>
-                <strong ng-bind="user.lastLogin">(<small class="text-muted" am-time-ago="user.lastLogin"></small>)</strong>
-              </td>
-              <td>
-                <div class="btn-group" role="group">
-                  <a class="undecorated-link" ui-sref="admin.users.view({ userId: user._id })"><i class="icon-eye icons"></i>
-                    <md-tooltip md-direction="bottom">View detail of user</md-tooltip>
-                  </a>
-                  <a class="undecorated-link mg5l" ui-sref="admin.users.edit({ userId: user._id })"><i class="icon-note icons"></i>
-                    <md-tooltip md-direction="bottom">Edit info of user</md-tooltip>
-                  </a>
-                  <a class="undecorated-link mg5l" ng-click="delete_user(user)"><i class="icon-trash icons"></i>
-                    <md-tooltip md-direction="bottom">Delete user</md-tooltip>
-                  </a>
-                  <a ng-if="user.provider === 'local'" class="undecorated-link mg5l" ui-sref="admin.users.resetpass({ userId: user._id })"><i class="icon-refresh icons"></i>
-                    <md-tooltip md-direction="bottom">Reset password of user</md-tooltip>
-                  </a>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div> -->
 </div>
 <script type="text/ng-template" id="bottom-template-url">
   <button class="btn btn-info btn-sm btn-block" ng-click="filter.created = undefined">

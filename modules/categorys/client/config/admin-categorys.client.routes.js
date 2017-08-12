@@ -21,6 +21,7 @@
         url: '/list',
         templateUrl: 'modules/categorys/client/views/admin/list-categorys.client.view.html',
         controller: 'AdminCategorysListController',
+        controllerAs: 'vm',
         ncyBreadcrumb: {
           label: 'List'
         }

@@ -18,9 +18,6 @@
             </tr>
           </thead>
           <tbody>
-            <tr >
-              <td colspan="6">{{vm.categorys[0].name}}</td>
-            </tr>
             <tr ng-repeat="category in vm.categorys">
               <td class="text-center"><i ng-class="['fa', category.icon]"></i></td>
               <td ng-bind="category.name"></td>

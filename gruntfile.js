@@ -24,8 +24,13 @@ module.exports = function (grunt) {
       prod: {
         NODE_ENV: 'production'
       },
-      lenh: {
+      init_dev: {
         NODE_ENV: 'development',
+        MONGO_SEED: 'true',
+        MONGO_SEED_LOG_RESULTS: 'true'
+      },
+      init_prod: {
+        NODE_ENV: 'production',
         MONGO_SEED: 'true',
         MONGO_SEED_LOG_RESULTS: 'true'
       }
@@ -317,10 +322,11 @@ module.exports = function (grunt) {
 
   // Run the project in development mode
   grunt.registerTask('default', ['env:dev', 'lint', 'mkdir:upload', 'copy:localConfig', 'concurrent:default']);
-  grunt.registerTask('lenh', ['env:lenh', 'lint', 'mkdir:upload', 'copy:localConfig', 'concurrent:default']);
+  grunt.registerTask('init_dev', ['env:init_dev', 'lint', 'mkdir:upload', 'copy:localConfig', 'concurrent:default']);
   // Run the project in debug mode
   grunt.registerTask('debug', ['env:dev', 'lint', 'mkdir:upload', 'copy:localConfig', 'concurrent:debug']);
 
   // Run the project in production mode
   grunt.registerTask('prod', ['build', 'env:prod', 'mkdir:upload', 'copy:localConfig', 'concurrent:default']);
+  grunt.registerTask('init_prod', ['build', 'env:init_prod', 'mkdir:upload', 'copy:localConfig', 'concurrent:default']);
 };

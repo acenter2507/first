@@ -35,7 +35,7 @@ exports.search = function (req, res) {
   console.log(search);
   var sort = condition.sort || '-created';
   Poll.find(search)
-  .populate('cateogry', 'name')
+  .populate('category', 'name')
   .populate('user', 'displayName profileImageURL')
   .sort(sort).exec()
     .then(polls => {

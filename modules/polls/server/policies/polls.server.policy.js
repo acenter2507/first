@@ -21,7 +21,7 @@ exports.invokeRolesPolicies = function() {
       resources: '/api/polls/:pollId',
       permissions: '*'
     }, {
-      resources: '/api/polls/admin/*',
+      resources: '/api/polls/admin/search',
       permissions: '*'
     }]
   }, {

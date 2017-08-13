@@ -44,7 +44,7 @@
             <a class="undecorated-link" ui-sref="categorys.polls({ categoryId: vm.poll.category._id })">
             {{vm.poll.category.name}}
           </a>
-            <a class="undecorated-link pull-right" ng-click="vm.follow_poll()" ng-show="vm.">
+            <a class="undecorated-link pull-right" ng-click="vm.follow_poll()" ng-show="vm.follow._id">
             <i class="fa fa-rss"></i>&nbsp;Unfollow
             <md-tooltip md-direction="bottom">Following this poll</md-tooltip>
           </a>

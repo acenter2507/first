@@ -14,7 +14,7 @@
     'ngDialog'
   ];
 
-  function PollsListController(
+  function AdminPollsListController(
     $state,
     $scope,
     $window,

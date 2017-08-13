@@ -6,13 +6,14 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Poll = mongoose.model('Poll'),
+  Polluser = mongoose.model('Polluser'),
+  Report = mongoose.model('Report'),
+  Bookmark = mongoose.model('Bookmark'),
+
   Opt = mongoose.model('Opt'),
   Vote = mongoose.model('Vote'),
   Voteopt = mongoose.model('Voteopt'),
   Userreport = mongoose.model('Userreport'),
-  Polluser = mongoose.model('Polluser'),
-  Report = mongoose.model('Report'),
-  Bookmark = mongoose.model('Bookmark'),
   Like = mongoose.model('Like'),
   Cmt = mongoose.model('Cmt'),
   Cmtlike = mongoose.model('Cmtlike'),
@@ -35,11 +36,32 @@ exports.search = function (req, res) {
   console.log(search);
   var sort = condition.sort || '-created';
   Poll.find(search)
-  .populate('category', 'name')
-  .populate('user', 'displayName profileImageURL')
-  .sort(sort).exec()
+    .populate('category', 'name')
+    .populate('user', 'displayName profileImageURL')
+    .sort(sort).exec()
     .then(polls => {
-      res.jsonp(polls);
+      if (polls.length === 0) return res.jsonp(polls);
+      var length = polls.length;
+      var counter = 0;
+      polls.forEach(function (instance, index, array) {
+        array[index] = instance.toObject();
+        count_followed(array[index]._id)
+          .then(result => {
+            array[index].followed = result || 0;
+            return count_bookmarked(array[index]._id);
+          })
+          .then(result => {
+            array[index].bookmarked = result || 0;
+            return count_reported(array[index]._id);
+          })
+          .then(result => {
+            array[index].reported = result || 0;
+            if (++counter === length) {
+              res.jsonp(polls);
+            }
+          })
+          .catch(handleError);
+      });
     }, handleError);
 
   function handleError(err) {
@@ -66,12 +88,10 @@ function condition_analysis(condition) {
     and_arr.push({ isPublic: isPublic });
   }
   if (condition.created_start) {
-    console.log('', condition.created_start);
     let start = new _moment(condition.created_start).utc();
     and_arr.push({ created: { $gte: start } });
   }
   if (condition.created_end) {
-    console.log('', condition.created_end);
     let end = new _moment(condition.created_end).utc();
     and_arr.push({ created: { $lt: end } });
   }
@@ -142,6 +162,39 @@ function condition_analysis(condition) {
   return search;
 }
 
+function count_followed(pollId) {
+  return new Promise((resolve, reject) => {
+    Opt.find({ poll: pollId }).exec().count((cnt, err) => {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(cnt);
+      }
+    });
+  });
+}
+function count_bookmarked(pollId) {
+  return new Promise((resolve, reject) => {
+    Bookmark.find({ poll: pollId }).exec().count((cnt, err) => {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(cnt);
+      }
+    });
+  });
+}
+function count_reported(pollId) {
+  return new Promise((resolve, reject) => {
+    Report.find({ poll: pollId }).exec().count((cnt, err) => {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(cnt);
+      }
+    });
+  });
+}
 // Lấy các option có status = 1 cho poll
 function get_opts_by_pollId(pollId) {
   return new Promise((resolve, reject) => {

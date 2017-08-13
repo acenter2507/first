@@ -59,15 +59,11 @@ exports.search = function (req, res) {
               res.jsonp(polls);
             }
           })
-          .catch(err => {
-            console.log('Error: ', err);
-            handleError(err);
-          });
+          .catch(handleError);
       });
     }, handleError);
 
   function handleError(err) {
-    console.log(err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -166,7 +162,7 @@ function condition_analysis(condition) {
 
 function count_followed(pollId) {
   return new Promise((resolve, reject) => {
-    Polluser.find({ poll: pollId }).count((cnt, err) => {
+    Polluser.find({ poll: pollId }).count((err, cnt) => {
       if (err) {
         return reject(err);
       } else {

@@ -44,7 +44,7 @@
           <label for="ctgr">Category</label>
           <select id="ctgr" name="ctgr" class="form-control input-sm" ng-model="condition.ctgr">
             <option value>All</option>
-            <option ng-repeat="category in categorys" value="{{category._id}}">{{category.name}} ({{category.count}})</option>
+            <option ng-repeat="category in categorys" value="{{category._id}}" ng-selected="category._id === condition.ctgr">{{category.name}} ({{category.count}})</option>
           </select>
         </div>
       </div>

@@ -120,15 +120,15 @@ function condition_analysis(condition) {
   }
   if (condition.status) {
     if (condition.status === 'infinity') {
-      and_arr.push({ close: { $exists: false } });
+      and_arr.push({ close: null });
     }
     if (condition.status === 'limit') {
       let now = new _moment().utc().fomart();
-      and_arr.push({ $and: [{ close: { $exists: true } }, { close: { $gte: now } }] });
+      and_arr.push({ $and: [{ close: { $ne: null } }, { close: { $gte: now } }] });
     }
     if (condition.status === 'closed') {
       let now = new _moment().utc().fomart();
-      and_arr.push({ $and: [{ close: { $exists: true } }, { close: { $lt: now } }] });
+      and_arr.push({ $and: [{ close: { $ne: null } }, { close: { $lt: now } }] });
     }
   }
   if (and_arr.length > 0) {

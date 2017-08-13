@@ -174,7 +174,6 @@
     </div>
     <hr class="mgn">
     <div class="card-body">
-      <div class="row text-center" ng-show="busy"><div class="loader"></div></div>
       <div class="table-responsive">
         <table class="table table-bordered">
           <thead class="bg-primary">
@@ -200,6 +199,9 @@
             </tr>
           </thead>
           <tbody>
+            <tr ng-show="busy">
+              <td class="text-center" colspan="18"><div class="loader"></div></td>
+            </tr>
             <tr ng-show="pagedItems.length === 0 && !busy">
               <td class="text-center" colspan="18">Has no data found.</td>
             </tr>

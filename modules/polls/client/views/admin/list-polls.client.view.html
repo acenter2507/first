@@ -218,7 +218,10 @@
               <td class="text-center">{{ poll.followed }}</td>
               <td class="text-center">{{ poll.bookmarked }}</td>
               <td class="text-center">{{ poll.reported }}</td>
-              <td>{{ (poll.close) ? poll.close | LLL_format : 'Infinity' }}</td>
+              <td>
+                <span ng-if="poll.close" ng-bind="poll.close | LLL_format"></span>
+                <span ng-if="!poll.close">Infinity</span>
+              </td>
               <td>{{ (poll.isPublic) ? 'Public' : 'Private' }}</td>
               <td>{{ (poll.allow_multiple) ? 'Multiple' : 'Single' }}</td>
               <td>{{ (poll.allow_add) ? 'Allow' : 'Deny' }}</td>

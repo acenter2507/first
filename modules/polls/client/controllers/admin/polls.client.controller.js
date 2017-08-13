@@ -41,6 +41,7 @@
         });
     }
 
+    process_before_show();
     function process_before_show() {
       vm.poll.votedTotal = vm.poll.voteopts.length;
       vm.poll.opts.forEach(opt => {

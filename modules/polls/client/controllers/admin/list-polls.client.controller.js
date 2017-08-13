@@ -58,7 +58,7 @@
           $scope.busy = false;
           console.log(err);
         });
-    };
+    }
 
     $scope.buildPager = buildPager;
     function buildPager() {
@@ -67,7 +67,7 @@
       $scope.currentPage = 1;
       figureOutItemsToDisplay();
       $scope.busy = false;
-    };
+    }
 
     $scope.figureOutItemsToDisplay = figureOutItemsToDisplay;
     function figureOutItemsToDisplay() {
@@ -76,7 +76,7 @@
       var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
       var end = begin + $scope.itemsPerPage;
       $scope.pagedItems = $scope.filteredItems.slice(begin, end);
-    };
+    }
 
     $scope.pageChanged = function () {
       figureOutItemsToDisplay();

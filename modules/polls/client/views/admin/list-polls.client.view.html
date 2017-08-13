@@ -10,11 +10,11 @@
       <div class="row">
         <div class="form-group col-sm-6">
           <label for="search">Search</label>
-          <input name="search" id="search" class="form-control" type="text" ng-model="filter.search" placeholder="Search" />
+          <input name="search" id="search" class="form-control input-sm" type="text" ng-model="filter.search" placeholder="Search" />
         </div>
         <div class="form-group col-sm-6">
           <label for="sort">Sort by</label>
-          <select id="sort" name="sort" class="form-control" ng-model="filter.sort">
+          <select id="sort" name="sort" class="form-control input-sm" ng-model="filter.sort">
               <option value>Default</option>
               <option value="-created">Newest to oldest</option>
               <option value="created">Oldest to newest</option>
@@ -154,8 +154,8 @@
     </div>
     <hr class="mgn">
     <div class="card-footer">
-      <button class="btn btn-primary btn-sm" ng-click="search()">Search</button>
-      <button class="btn btn-danger btn-sm" ng-click="clear()">Clear</button>
+      <button class="btn btn-primary btn-sm pull-right" ng-click="search()">Search</button>
+      <button class="btn btn-danger btn-sm pull-right mg5r" ng-click="clear()">Clear</button>
     </div>
   </div>
 </div>

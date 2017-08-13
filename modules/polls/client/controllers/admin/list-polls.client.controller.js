@@ -51,7 +51,6 @@
       $scope.condition = JSON.parse(Storages.get_session(Constants.storages.admin_polls_condition, JSON.stringify({})));
       $scope.filter = JSON.parse(Storages.get_session(Constants.storages.admin_polls_fitler, JSON.stringify({})));
       $scope.currentPage = Storages.get_session(Constants.storages.admin_polls_page, 1);
-      console.log($scope.condition);
       search();
     }
     $scope.search = search;

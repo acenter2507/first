@@ -9,6 +9,8 @@
     '$scope',
     '$window',
     '$filter',
+    'Storages',
+    'Constants',
     'Authentication',
     'AdminPollsService',
     'PollsService',
@@ -22,6 +24,8 @@
     $scope,
     $window,
     $filter,
+    Storages,
+    Constants,
     Authentication,
     AdminPollsService,
     PollsService,
@@ -44,13 +48,18 @@
 
     initFirstShow();
     function initFirstShow() {
-      $scope.condition.created_start = new moment(new Date(), 'YYYY/MM/DD');
+      $scope.condition = JSON.parse(Storages.get_session(Constants.storages.admin_polls_condition, JSON.stringify({
+        created_start: new moment(new Date(), 'YYYY/MM/DD').subtract(1, 'days').format()
+      })));
+      $scope.filter = JSON.parse(Storages.get_session(Constants.storages.admin_polls_fitler, JSON.stringify({})));
+      $scope.currentPage = Storages.get_session(Constants.storages.admin_polls_page, 1);
       search();
     }
     $scope.search = search;
     function search() {
       if ($scope.busy === true) return;
       $scope.busy = true;
+      Storages.set_session(Constants.storages.admin_polls_condition, JSON.stringify($scope.condition));
       AdminPollsService.search($scope.condition)
         .then(res => {
           $scope.polls = res.data;
@@ -67,13 +76,13 @@
     function buildPager() {
       $scope.pagedItems = [];
       $scope.itemsPerPage = 15;
-      $scope.currentPage = 1;
       figureOutItemsToDisplay();
       $scope.busy = false;
     }
 
     $scope.figureOutItemsToDisplay = figureOutItemsToDisplay;
     function figureOutItemsToDisplay() {
+      Storages.set_session(Constants.storages.admin_polls_fitler, JSON.stringify($scope.filter));
       if ($scope.filter.local_sort) {
         $scope.filteredItems = $filter('orderBy')($scope.polls, $scope.filter.local_sort, false);
       } else {
@@ -86,6 +95,7 @@
     }
 
     $scope.pageChanged = function () {
+      Storages.set_session(Constants.storages.admin_polls_page, $scope.currentPage);
       figureOutItemsToDisplay();
     };
     $scope.remove = poll => {

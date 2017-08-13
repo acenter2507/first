@@ -620,13 +620,15 @@ exports.pollByID = function (req, res, next, id) {
 // Lấy các option có status = 1 cho poll
 function get_opts_by_pollId(pollId) {
   return new Promise((resolve, reject) => {
-    Opt.find({ poll: pollId }).exec((err, opts) => {
-      if (err) {
-        return reject(err);
-      } else {
-        return resolve(opts);
-      }
-    });
+    Opt.find({ poll: pollId })
+    populate('user', 'displayName')
+      .exec((err, opts) => {
+        if (err) {
+          return reject(err);
+        } else {
+          return resolve(opts);
+        }
+      });
   });
 }
 // Lấy các comment có cho poll

@@ -82,9 +82,9 @@
               <td>{{ opt.title }}</td>
               <td>{{ opt.user.displayName }}</td>
               <td class="text-center">
-                <div class="mga w30 h10 ng-primary" ng-if="opt.status === 1"></div>
-                <div class="mga w30 h10 ng-warning" ng-if="opt.status === 2"></div>
-                <div class="mga w30 h10 ng-danger" ng-if="opt.status === 3"></div>
+                <div class="mga w30 h10 bg-primary" ng-if="opt.status === 1"></div>
+                <div class="mga w30 h10 bg-warning" ng-if="opt.status === 2"></div>
+                <div class="mga w30 h10 bg-danger" ng-if="opt.status === 3"></div>
               </td>
               <td><span ng-bind="opt.created | LLL_format"></span></td>
             </tr>

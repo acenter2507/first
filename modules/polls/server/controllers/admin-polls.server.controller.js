@@ -173,7 +173,7 @@ function count_followed(pollId) {
 }
 function count_bookmarked(pollId) {
   return new Promise((resolve, reject) => {
-    Bookmark.find({ poll: pollId }).count((cnt, err) => {
+    Bookmark.find({ poll: pollId }).count((err, cnt) => {
       if (err) {
         return reject(err);
       } else {
@@ -184,7 +184,7 @@ function count_bookmarked(pollId) {
 }
 function count_reported(pollId) {
   return new Promise((resolve, reject) => {
-    Report.find({ poll: pollId }).count((cnt, err) => {
+    Report.find({ poll: pollId }).count((err, cnt) => {
       if (err) {
         return reject(err);
       } else {

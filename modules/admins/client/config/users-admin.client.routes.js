@@ -4,6 +4,14 @@
 angular.module('admin.routes').config(['$stateProvider',
   function ($stateProvider) {
     $stateProvider
+      .state('admin.users', {
+        url: '/users',
+        abstract: true,
+        template: '<ui-view></ui-view>',
+        ncyBreadcrumb: {
+          label: 'Users'
+        }
+      })
       .state('admin.users.list', {
         url: '/list',
         templateUrl: 'modules/admins/client/views/users/list-users.client.view.html',

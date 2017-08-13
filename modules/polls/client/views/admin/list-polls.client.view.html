@@ -1,0 +1,258 @@
+<div class="row">
+  <div class="card card-expand">
+    <div class="card-header">
+      <strong class="card-title"><i class="fa fa-filter"></i> Filter database</strong>
+      <a class="undecorated-link card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
+      <div class="clearfix"></div>
+    </div>
+    <hr class="mgn">
+    <div class="card-body">
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <label for="search">Search</label>
+          <input name="search" id="search" class="form-control" type="text" ng-model="filter.search" placeholder="Search" />
+        </div>
+        <div class="form-group col-sm-6">
+          <label for="sort">Sort by</label>
+          <select id="sort" name="sort" class="form-control" ng-model="filter.sort">
+              <option value>Default</option>
+              <option value="-created">Newest to oldest</option>
+              <option value="created">Oldest to newest</option>
+              <option value="-likeCnt">Most likes</option>
+              <option value="likeCnt">Least likes</option>
+              <option value="-cmtCnt">Most comments</option>
+              <option value="cmtCnt">Least comments</option>
+              <option value="-voteCnt">Most votes</option>
+              <option value="voteCnt">Least votes</option>
+              <option value="-viewCnt">Most viewed</option>
+              <option value="viewCnt">Least viewed</option>
+            </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <label for="status">Status</label>
+          <select id="status" name="status" class="form-control input-sm" ng-model="filter.status">
+              <option value>All</option>
+              <option value="infinity">Infinity</option>
+              <option value="limit">Limit</option>
+              <option value="closed">Closed</option>
+            </select>
+        </div>
+        <div class="form-group col-sm-6">
+          <label for="category">Category</label>
+          <select id="category" name="category" class="form-control input-sm" ng-model="filter.category">
+            <option value>All</option>
+            <option ng-repeat="category in categorys" value="category._id">{{category.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <div class="col-sm-12 pdn"><label>Created date</label></div>
+          <div class="col-sm-6 pdn">
+            <input id="created_start" name="created_start" class="form-control input-sm" today="true" moment-picker="filter.created_start"
+              ng-model="filter.created_start" format="YYYY/MM/DD" start-view="month" placeholder="Start date..." additions="{ bottom: 'bottom-template-url' }">
+          </div>
+          <div class="col-sm-6 pdn">
+            <input id="created_end" name="created_end" class="form-control input-sm" today="true" moment-picker="filter.created_end"
+              ng-model="filter.created_end" format="YYYY/MM/DD" start-view="month" placeholder="End date..." additions="{ bottom: 'bottom-template-url' }">
+          </div>
+        </div>
+        <div class="form-group col-sm-6">
+          <label for="security">Security</label>
+          <select id="security" name="security" class="form-control" ng-model="filter.isPublic">
+              <option value>All</option>
+              <option value="true">Public</option>
+              <option value="false">Private</option>
+            </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-4">
+          <label for="allow_multiple">Allow multiple vote</label>
+          <select id="allow_multiple" name="allow_multiple" class="form-control" ng-model="filter.allow_multiple">
+            <option value>All</option>
+            <option value="true">Allow</option>
+            <option value="false">Deny</option>
+          </select>
+        </div>
+        <div class="form-group col-sm-4">
+          <label for="allow_add">Allow member suggest</label>
+          <select id="allow_add" name="allow_add" class="form-control" ng-model="filter.allow_add">
+            <option value>All</option>
+            <option value="true">Allow</option>
+            <option value="false">Deny</option>
+          </select>
+        </div>
+        <div class="form-group col-sm-4">
+          <label for="allow_guest">Allow guest vote</label>
+          <select id="allow_guest" name="allow_guest" class="form-control" ng-model="filter.allow_guest">
+            <option value>All</option>
+            <option value="true">Allow</option>
+            <option value="false">Deny</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <div class="col-sm-12 pdn"><label>Comments</label></div>
+          <div class="col-sm-6 pdn">
+            <select class="form-control input-sm" ng-model="filter.cmts_pref">
+              <option value>Not set</option>
+              <option value="least">As least</option>
+              <option value="most">As most</option>
+            </select>
+          </div>
+          <div class="col-sm-6 pdn">
+            <input name="cmts" id="cmts" type="text" class="form-control input-sm" placeholder="Comments count" ng-model="filter.cmts">
+          </div>
+        </div>
+        <div class="form-group col-sm-6">
+          <div class="col-sm-12 pdn"><label>Likes</label></div>
+          <div class="col-sm-6 pdn">
+            <select class="form-control input-sm" ng-model="filter.likes_pref">
+              <option value>Not set</option>
+              <option value="least">As least</option>
+              <option value="most">As most</option>
+            </select>
+          </div>
+          <div class="col-sm-6 pdn">
+            <input name="likes" id="likes" type="text" class="form-control input-sm" placeholder="Likes count" ng-model="filter.likes">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <div class="col-sm-12 pdn"><label>Votes</label></div>
+          <div class="col-sm-6 pdn">
+            <select class="form-control input-sm" ng-model="filter.votes_pref">
+              <option value>Not set</option>
+              <option value="least">As least</option>
+              <option value="most">As most</option>
+            </select>
+          </div>
+          <div class="col-sm-6 pdn">
+            <input name="votes" id="votes" type="text" class="form-control input-sm" placeholder="Votes count" ng-model="filter.votes">
+          </div>
+        </div>
+        <div class="form-group col-sm-6">
+          <div class="col-sm-12 pdn"><label>Views</label></div>
+          <div class="col-sm-6 pdn">
+            <select class="form-control input-sm" ng-model="filter.views_pref">
+              <option value>Not set</option>
+              <option value="least">As least</option>
+              <option value="most">As most</option>
+            </select>
+          </div>
+          <div class="col-sm-6 pdn">
+            <input name="views" id="views" type="text" class="form-control input-sm" placeholder="Views count" ng-model="filter.views">
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <hr class="mgn">
+    <div class="card-footer">
+      <button class="btn btn-primary btn-sm" ng-click="search()">Search</button>
+      <button class="btn btn-danger btn-sm" ng-click="clear()">Clear</button>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="row">
+  <div class="card card-expand">
+    <div class="card-header">
+      <strong class="card-title"><i class="fa fa-filter"></i> Filter local</strong>
+      <a class="undecorated-link card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
+      <div class="clearfix"></div>
+    </div>
+    <hr class="mgn">
+    <div class="card-body">
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <label for="search">Search</label>
+          <input name="search" id="search" class="form-control" type="text" ng-model="filter.search" placeholder="Search" ng-change="figureOutItemsToDisplay()"
+          />
+        </div>
+        <div class="form-group col-sm-6">
+          <label for="sort">Sort by</label>
+          <select id="sort" name="sort" class="form-control" ng-model="filter.sort" ng-change="figureOutItemsToDisplay()">
+              <option value>Default</option>
+              <option value="-created">Newest to oldest</option>
+              <option value="created">Oldest to newest</option>
+              <option value="-likeCnt">Most likes</option>
+              <option value="likeCnt">Least likes</option>
+              <option value="-cmtCnt">Most comments</option>
+              <option value="cmtCnt">Least comments</option>
+              <option value="-voteCnt">Most votes</option>
+              <option value="voteCnt">Least votes</option>
+              <option value="-viewCnt">Most viewed</option>
+              <option value="viewCnt">Least viewed</option>
+            </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-4">
+          <label for="status">Status</label>
+          <select id="status" name="status" class="form-control input-sm" ng-model="filter.status" ng-change="figureOutItemsToDisplay()"
+            disabled>
+              <option value>All</option>
+              <option value="infinity">Infinity</option>
+              <option value="limit">Limit</option>
+              <option value="closed">Closed</option>
+            </select>
+        </div>
+        <div class="form-group col-sm-4">
+          <label for="provider">Category</label>
+          <select id="provider" name="provider" class="form-control input-sm" ng-model="filter.provider" ng-change="figureOutItemsToDisplay()">
+              <option value>All</option>
+              <option value="local">Local</option>
+              <option value="facebook">Facebook</option>
+              <option value="twitter">Twitter</option>
+              <option value="linkedin">Linkedin</option>
+              <option value="google">Google plus</option>
+              <option value="github">Github</option>
+            </select>
+        </div>
+        <div class="form-group col-sm-4">
+          <label for="created">Joined date</label>
+          <input id="created" name="created" class="form-control input-sm" today="true" moment-picker="filter.created" ng-model="filter.created"
+            format="YYYY/MM/DD" start-view="month" placeholder="Select a date..." change="figureOutItemsToDisplay()" additions="{ bottom: 'bottom-template-url' }">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <div class="col-sm-12 pdn"><label>Number of polls</label></div>
+          <div class="col-sm-6 pdn">
+            <select class="form-control input-sm" ng-model="filter.polls_pref" ng-change="figureOutItemsToDisplay()">
+                <option value>None</option>
+                <option value="least">As least</option>
+                <option value="most">As most</option>
+              </select>
+          </div>
+          <div class="col-sm-6 pdn">
+            <input name="polls" id="polls" type="text" class="form-control input-sm" placeholder="Enter number of polls" ng-model="filter.polls"
+              ng-change="figureOutItemsToDisplay()">
+          </div>
+        </div>
+        <div class="form-group col-sm-6">
+          <label for="roles">Role</label>
+          <select id="roles" name="roles" class="form-control input-sm" ng-model="filter.roles" ng-change="figureOutItemsToDisplay()">
+              <option value>All</option>
+              <option value="admin">Admin</option>
+              <option value="user">User</option>
+            </select>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div> -->
+<div class="row">
+  <div class="card">
+    <div class="card-header"></div>
+    <hr class="mgn">
+    <div class="card-body"></div>
+  </div>
+</div>

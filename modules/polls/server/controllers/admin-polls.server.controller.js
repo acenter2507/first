@@ -60,7 +60,7 @@ exports.search = function (req, res) {
             }
           })
           .catch(err => {
-            console.log(err);
+            console.log('Error: ', err);
             handleError(err);
           });
       });

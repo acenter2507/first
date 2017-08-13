@@ -23,5 +23,6 @@
     dialog
   ) {
     var vm = this;
+    vm.poll = poll;
   }
 })();

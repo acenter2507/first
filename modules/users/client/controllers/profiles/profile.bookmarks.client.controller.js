@@ -110,9 +110,11 @@ angular.module('users').controller('ProfileBookmarksController', [
       }
       Action.save_follow(poll.follow)
         .then(res => {
-          poll.follow = res;
-          if (poll.follow.following) {
+          if (res) {
+            poll.follow = res;
             toast.success('You followed ' + poll.title, 'Success!');
+          } else {
+            poll.follow = { poll: poll._id };
           }
         })
         .catch(err => {
@@ -158,6 +160,12 @@ angular.module('users').controller('ProfileBookmarksController', [
         $scope.polls = _.without($scope.polls, poll);
         Action.remove_bookmark(poll._id);
       }
+    };
+
+    $scope.clear_bookmark = () => {
+      if (!$scope.isCurrentOwner) return;
+      UserApi.clear_bookmark($scope.profile._id);
+      $scope.polls = [];
     };
   }
 ]);

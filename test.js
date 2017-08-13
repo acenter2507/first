@@ -44,6 +44,14 @@ app.init(function () {
   - Chức năng quản lý toàn bộ thông tin của user => done
   - Đếm và quản lý số lần bị report của user => done
 
+  1. Refresh database Chua check het
+  2. Chức năng Admin
+  1. Quản lý category => done
+  2. Quản lý tags => done
+  3. Quản lý user => done
+  4. Quản lý poll => con phan view poll, tao bien dem cho reported, bookmarked, followed
+
+
   - Hoàn thiện màn hình home: Chỉnh navbar, hiển thêm màn hình home, màn hình view poll chỉnh cho mobile
   - Share mạng xã hội
   - Chức năng login mạng xã hội

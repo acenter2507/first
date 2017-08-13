@@ -31,7 +31,7 @@
                 <li><a ui-sref="polls.view({ pollId: poll._id })"><i class="fa fa-eye"></i>&nbsp;View</a></li>
                 <li ng-if="isLogged">
                   <a ng-click="follow_poll(poll)" class="undecorated-link">
-                    <i class="fa fa-rss"></i>&nbsp;{{(poll.follow.following) ? 'Unfollow' : 'Follow'}}
+                    <i class="fa fa-rss"></i>&nbsp;{{(poll.follow._id) ? 'Unfollow' : 'Follow'}}
                   </a>
                 </li>
                 <li ng-if="isLogged && !poll.isCurrentUserOwner && !poll.reported"><a class="undecorated-link" ng-click="report_poll(poll)"><i class="fa fa-exclamation-circle"></i>&nbsp;Report poll</a></li>

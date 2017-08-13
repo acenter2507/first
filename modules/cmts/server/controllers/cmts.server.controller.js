@@ -39,9 +39,6 @@ exports.create = function (req, res) {
         if (!_polluser) {
           _polluser = new Polluser({ poll: cmt.poll, user: cmt.user });
           return _polluser.save();
-        } else {
-          _polluser.following = true;
-          return _polluser.save();
         }
       });
     }, handleError)

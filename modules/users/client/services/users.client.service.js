@@ -64,6 +64,9 @@ angular.module('users').factory('UserApi', ['$http',
     this.get_user_report = userId => {
       return $http.get('/api/profile/' + userId + '/report');
     };
+    this.clear_bookmark = userId => {
+      return $http.get('/api/profile/' + userId + '/clear_bookmark');
+    };
     return this;
   }
 ]);

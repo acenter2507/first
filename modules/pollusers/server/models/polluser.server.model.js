@@ -18,10 +18,6 @@ var PolluserSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'Poll'
   },
-  following: {
-    type: Boolean,
-    default: true
-  },
   created: {
     type: Date,
     default: Date.now

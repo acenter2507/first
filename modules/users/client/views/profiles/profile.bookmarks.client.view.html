@@ -8,6 +8,13 @@
     </ol>
   </div>
   <hr>
+  <div class="row">
+    <div class="col-xs-12 pdn">
+      <div class="custom-toolbar">
+        <a class="btn btn-danger pull-right" ng-click="clear_bookmark()">Clear</a>
+      </div>
+    </div>
+  </div>
   <!-- List poll -->
   <div class="row" infinite-scroll="get_polls()" infinite-scroll-distance='2'>
     <div ng-repeat="poll in polls | filter: poll_filter" class="card">
@@ -44,7 +51,7 @@
                 </li>
                 <li ng-if="isLogged">
                   <a ng-click="follow_poll(poll)" class="undecorated-link">
-                    <i class="fa fa-rss"></i>&nbsp;{{(poll.follow.following) ? 'Unfollow' : 'Follow'}}
+                    <i class="fa fa-rss"></i>&nbsp;{{(poll.follow._id) ? 'Unfollow' : 'Follow'}}
                   </a>
                 </li>
                 <li ng-if="isLogged && !poll.isCurrentUserOwner && !poll.reported"><a class="undecorated-link" ng-click="report_poll(poll)"><i class="fa fa-exclamation-circle"></i>&nbsp;Report poll</a></li>

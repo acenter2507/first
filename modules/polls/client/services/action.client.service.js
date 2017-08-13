@@ -434,10 +434,9 @@
       return new Promise((resolve, reject) => {
         var rs_follow = new Follows(follow);
         if (follow._id) {
-          rs_follow.following = !follow.following;
-          rs_follow.$update(successCb, errorCb);
+          rs_follow.$remove();
+          return resolve();
         } else {
-          rs_follow.following = true;
           rs_follow.$save(successCb, errorCb);
         }
         function successCb(res) {

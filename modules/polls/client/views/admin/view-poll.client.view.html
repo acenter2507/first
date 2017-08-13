@@ -44,11 +44,11 @@
             <a class="undecorated-link" ui-sref="categorys.polls({ categoryId: vm.poll.category._id })">
             {{vm.poll.category.name}}
           </a>
-            <a class="undecorated-link pull-right" ng-click="vm.follow_poll()" ng-show="vm.follow.following">
+            <a class="undecorated-link pull-right" ng-click="vm.follow_poll()" ng-show="vm.follow._id">
             <i class="fa fa-rss"></i>&nbsp;Unfollow
             <md-tooltip md-direction="bottom">Following this poll</md-tooltip>
           </a>
-            <a class="undecorated-link pull-right" ng-click="vm.follow_poll()" ng-hide="vm.follow.following">
+            <a class="undecorated-link pull-right" ng-click="vm.follow_poll()" ng-hide="vm.follow._id">
             <i class="fa fa-rss"></i>&nbsp;Follow
             <md-tooltip md-direction="bottom">You not follow this poll yet</md-tooltip>
           </a>
@@ -83,7 +83,7 @@
                 <ul class="menu-list">
                   <li ng-if="vm.isLogged">
                     <a ng-click="vm.follow_poll()" class="undecorated-link">
-                      <i class="fa fa-rss"></i>&nbsp;{{(vm.follow._id && vm.follow.following) ? 'Unfollow' : 'Follow'}}
+                      <i class="fa fa-rss"></i>&nbsp;{{(vm.follow._id) ? 'Unfollow' : 'Follow'}}
                     </a>
                   </li>
                   <li ng-if="vm.isLogged && !vm.poll.isCurrentUserOwner && !vm.reported"><a class="undecorated-link" ng-click="vm.report_poll()"><i class="fa fa-exclamation-circle"></i>&nbsp;Report poll</a></li>

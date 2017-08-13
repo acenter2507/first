@@ -162,7 +162,7 @@ module.exports = function (io, socket) {
         });
     } else {
       // Tìm toàn bộ các member đang theo dõi poll
-      Polluser.find({ poll: req.pollId, following: true }).then(
+      Polluser.find({ poll: req.pollId }).then(
         pollusers => {
           var notif;
           // Tạo notif cho toàn bộ các member đang theo dõi

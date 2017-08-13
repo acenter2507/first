@@ -277,7 +277,7 @@ exports.follows = function (req, res) {
   var userId = req.user ? req.user._id : undefined;
   var polls = [];
 
-  Polluser.find({ user: req.profile._id, following: true })
+  Polluser.find({ user: req.profile._id })
     .sort('-created')
     .populate({
       path: 'poll',
@@ -364,6 +364,14 @@ exports.bookmarks = function (req, res) {
       message: errorHandler.getErrorMessage(err)
     });
   }
+};
+
+/**
+ * Xoa toan bo bookmark
+ */
+exports.clear_bookmark = function (req, res) {
+  Bookmark.remove({ user: req.profile._id });
+  res.end();
 };
 
 /**

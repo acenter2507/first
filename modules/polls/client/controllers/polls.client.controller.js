@@ -468,10 +468,11 @@
       }
       Action.save_follow(vm.follow)
         .then(res => {
-          vm.follow = res;
-          $scope.$apply();
-          if (res.following) {
-            toast.success('You have following this poll.', 'Thank you!');
+          if (res) {
+            vm.follow = res;
+            toast.success('You followed ' + poll.title, 'Success!');
+          } else {
+            vm.follow = { poll: poll._id };
           }
         })
         .catch(err => {

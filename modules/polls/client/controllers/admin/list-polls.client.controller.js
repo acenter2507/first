@@ -76,7 +76,6 @@
     function figureOutItemsToDisplay() {
       if ($scope.filter.local_sort) {
         $scope.filteredItems = $filter('orderBy')($scope.polls, $scope.filter.local_sort, false);
-        console.log($scope.filteredItems);
       } else {
         $scope.filteredItems = _.clone($scope.polls);
       }

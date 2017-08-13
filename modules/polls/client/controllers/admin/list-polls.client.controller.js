@@ -44,14 +44,14 @@
       $scope.condition.create_start = new moment(new Date(), 'YYYY/MM/DD');
       $scope.search();
     }
-
-    $scope.search = () => {
+    $scope.search = search;
+    function search() {
       if ($scope.busy === true) return;
       $scope.busy = true;
       AdminPollsService.search($scope.condition)
         .then(res => {
           $scope.polls = res.data;
-          $scope.buildPager();
+          buildPager();
         })
         .catch(err => {
           toast.error(err.message, 'Error!');
@@ -60,31 +60,33 @@
         });
     };
 
-    $scope.buildPager = function () {
+    $scope.buildPager = buildPager;
+    function buildPager() {
       $scope.pagedItems = [];
       $scope.itemsPerPage = 15;
       $scope.currentPage = 1;
-      $scope.figureOutItemsToDisplay();
+      figureOutItemsToDisplay();
+      $scope.busy = false;
     };
 
-    $scope.figureOutItemsToDisplay = function () {
+    $scope.figureOutItemsToDisplay = figureOutItemsToDisplay;
+    function figureOutItemsToDisplay() {
       $scope.filteredItems = _.clone($scope.users);
       $scope.filterLength = $scope.filteredItems.length;
       var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
       var end = begin + $scope.itemsPerPage;
       $scope.pagedItems = $scope.filteredItems.slice(begin, end);
-      $scope.busy = false;
     };
 
     $scope.pageChanged = function () {
-      $scope.figureOutItemsToDisplay();
+      figureOutItemsToDisplay();
     };
     $scope.remove = poll => {
       if ($window.confirm('Are you sure you want to delete?')) {
         var rs_poll = new PollsService({ _id: poll._id });
         rs_poll.$remove(() => {
           $scope.polls = _.without($scope.polls, poll);
-          $scope.figureOutItemsToDisplay();
+          figureOutItemsToDisplay();
           toast.success('You have deleted: ' + poll.title, 'Success!');
         });
       }

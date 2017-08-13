@@ -111,7 +111,6 @@ exports.read = function (req, res) {
     });
 
   function handleError(err) {
-    console.log(err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });

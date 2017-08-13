@@ -27,6 +27,8 @@ module.exports = function(app) {
   // Load comment cho màn hình poll.view theo page
   app.route('/api/findCmts/:pollId/:page').get(polls.findCmts);
 
+  app.route('/api/countUpView/:pollId').get(polls.countUpView);
+
   app.route('/api/findVoteopts/:pollId').get(polls.findVoteopts);
   app.route('/api/removeBookmark/:pollId').get(polls.removeBookmark);
   app.route('/api/search').post(polls.search);

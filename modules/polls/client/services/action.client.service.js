@@ -205,6 +205,19 @@
         rs_view.$save();
       });
     };
+    /**
+    * Tăng count view của point
+    */
+    this.count_up_view_poll = pollId => {
+      return new Promise((resolve, reject) => {
+        $http.get('/api/countUpView/' + pollId)
+          .then(res => {
+            return resolve(res);
+          }, err => {
+            return reject(err);
+          });
+      });
+    };
     // Lưu comment vào db
     this.save_cmt = (poll, cmt) => {
       return new Promise((resolve, reject) => {

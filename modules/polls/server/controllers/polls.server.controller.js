@@ -587,6 +587,10 @@ exports.search = function (req, res) {
   }
 };
 
+exports.countUpView = function (req, res) {
+  Poll.countUpView(req.poll._id);
+  res.end();
+};
 /**
  * Poll middleware
  */

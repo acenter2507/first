@@ -311,7 +311,7 @@
       if (!vm.poll.isCurrentUserOwner) {
         var count_up = $timeout(() => {
           vm.poll.viewCnt += 1;
-          vm.poll.$save();
+          Action.count_up_view_poll(vm.poll._id);
           if (vm.isLogged) {
             Action.save_view_poll(vm.view);
           }

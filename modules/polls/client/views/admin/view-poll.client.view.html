@@ -20,6 +20,10 @@
     <div class="card-body">
       <div class="profile-stats mgn">
         <div class="stat">
+          <div class="stat-value">{{vm.poll.opts.length}}</div>
+          <span class="stat-label">Options</span>
+        </div>
+        <div class="stat">
           <div class="stat-value">{{vm.poll.likeCnt}}</div>
           <span class="stat-label">Likes</span>
         </div>
@@ -51,40 +55,46 @@
     </div>
   </div>
 </div>
-<!-- logins -->
-<!-- <div class="row">
+<!-- Options -->
+ <div class="row" ng-show="vm.poll.opts.length > 0">
   <div class="card card-expand">
     <div class="card-header">
-      <strong class="card-title"><i class="fa fa-list-alt"></i> Login logs</strong>
+      <strong class="card-title"><i class="fa fa-list-alt"></i> List options</strong>
       <a class="undecorated-link card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
       <div class="clearfix"></div>
     </div>
     <hr class="mgn">
     <div class="card-body">
       <div class="table-responsive">
-        <table class="table table-hover table-outline" id="logins">
+        <table class="table table-bordered">
           <thead class="bg-primary">
             <tr>
-              <th>Ip</th>
-              <th>Agent</th>
-              <th>Login time</th>
+              <th>Vote count</th>
+              <th>Title</th>
+              <th>Added</th>
+              <th class="text-center">Status</th>
+              <th>Created</th>
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="login in loginsPagedItems">
-              <td>{{ login.ip }}</td>
-              <td>{{ login.agent }}</td>
-              <td><span ng-bind="login.created"></span></td>
+            <tr ng-repeat="opt in vm.poll.opts">
+              <td>{{ opt.voteCnt }}</td>
+              <td>{{ opt.title }}</td>
+              <td>{{ opt.user.displayName }}</td>
+              <td class="text-center">
+                <div class="mga w30 h10 ng-primary" ng-if="opt.status === 1"></div>
+                <div class="mga w30 h10 ng-warning" ng-if="opt.status === 2"></div>
+                <div class="mga w30 h10 ng-danger" ng-if="opt.status === 3"></div>
+              </td>
+              <td><span ng-bind="opt.created | LLL_format"></span></td>
             </tr>
           </tbody>
         </table>
       </div>
-      <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="loginFilterLength" ng-model="loginsCurrentPage"
-        ng-change="loginPageChanged()"></uib-pagination>
       <div class="clearfix"></div>
     </div>
   </div>
-</div> -->
+</div> 
 <!-- Polls -->
 <!-- <div class="row" ng-show="pollsPagedItems.length > 0">
   <div class="card card-expand">

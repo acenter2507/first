@@ -9,6 +9,7 @@
     '$scope',
     '$window',
     'Authentication',
+    'AdminPollsService',
     'Action',
     'toastr',
     'ngDialog'
@@ -19,6 +20,7 @@
     $scope,
     $window,
     Authentication,
+    AdminPollsService,
     Action,
     toast,
     dialog
@@ -31,8 +33,33 @@
       $state.go('home');
     }
 
-    $scope.filter = {};
+    $scope.condition = {};
+    $scope.busy = false;
 
+    $scope.search = () => {
+      console.log($scope.condition);
+      AdminPollsService.search($scope.condition)
+        .then(res => {
+          console.log(res.data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    };
+    $scope.clear = () => {
+      $scope.condition = {};
+      $scope.selectedUser = undefined;
+      $scope.$broadcast('angucomplete-alt:clearInput');
+    };
+    $scope.selectedUserFn = (selected) => {
+      if (selected) {
+        $scope.condition.by = selected.originalObject._id;
+        $scope.selectedUser = selected.originalObject;
+      } else {
+        $scope.condition.by = undefined;
+        $scope.selectedUser = undefined;
+      }
+    };
     get_categorys();
     function get_categorys() {
       Action.get_categorys()
@@ -43,6 +70,5 @@
           toast.error(err.message, 'Error!');
         });
     }
-
   }
 })();

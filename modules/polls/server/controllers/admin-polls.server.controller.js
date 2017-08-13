@@ -6,612 +6,135 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Poll = mongoose.model('Poll'),
-  Opt = mongoose.model('Opt'),
-  Vote = mongoose.model('Vote'),
-  Voteopt = mongoose.model('Voteopt'),
-  Userreport = mongoose.model('Userreport'),
-  Polluser = mongoose.model('Polluser'),
-  Report = mongoose.model('Report'),
-  Bookmark = mongoose.model('Bookmark'),
-  Like = mongoose.model('Like'),
-  Cmt = mongoose.model('Cmt'),
-  Cmtlike = mongoose.model('Cmtlike'),
-  View = mongoose.model('View'),
-  Tag = mongoose.model('Tag'),
-  Polltag = mongoose.model('Polltag'),
+  // Opt = mongoose.model('Opt'),
+  // Vote = mongoose.model('Vote'),
+  // Voteopt = mongoose.model('Voteopt'),
+  // Userreport = mongoose.model('Userreport'),
+  // Polluser = mongoose.model('Polluser'),
+  // Report = mongoose.model('Report'),
+  // Bookmark = mongoose.model('Bookmark'),
+  // Like = mongoose.model('Like'),
+  // Cmt = mongoose.model('Cmt'),
+  // Cmtlike = mongoose.model('Cmtlike'),
+  // View = mongoose.model('View'),
+  // Tag = mongoose.model('Tag'),
+  // Polltag = mongoose.model('Polltag'),
   errorHandler = require(path.resolve(
     './modules/core/server/controllers/errors.server.controller'
   )),
   _ = require('lodash'),
-  __ = require('underscore');
-/**
- * Create a Poll
- */
-exports.create = function (req, res) {
-  var poll = new Poll(req.body);
-  poll.user = req.user;
-
-  var tags = req.body.tags || [];
-  var opts = req.body.opts || [];
-  var promises = [];
-
-  poll.save()
-    .then(_poll => {
-      poll = _poll;
-      return Userreport.countUpPoll(req.user._id);
-    }, handleError)
-    .then(_report => {
-      // Lưu tag vào db
-      tags.forEach(tag => {
-        var polltag = new Polltag({ tag: tag, poll: poll._id });
-        promises.push(polltag.save());
-      });
-      return Promise.all(promises);
-    }, handleError)
-    .then(() => {
-      // Lưu options vào db
-      promises = [];
-      opts.forEach(opt => {
-        var _opt = new Opt(opt);
-        _opt.user = req.user;
-        _opt.poll = poll._id;
-        promises.push(_opt.save());
-      });
-      return Promise.all(promises);
-    }, handleError)
-    .then(() => {
-      // Tạo biến follow mới
-      promises = [];
-      var _polluser = new Polluser({ poll: poll._id, user: req.user._id });
-      return _polluser.save();
-    }, handleError)
-    .then(_polluser => {
-      res.jsonp(poll);
-    }, handleError);
-
-  function handleError(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
-    });
-  }
-};
+  __ = require('underscore'),
+  moment = require('moment');
 
 /**
- * Show the current Poll
+ * Search Polls
  */
-exports.read = function (req, res) {
-  // convert mongoose document to JSON
-  var poll = req.poll ? req.poll.toJSON() : {};
-
-  poll.isCurrentUserOwner =
-    req.user &&
-    poll.user &&
-    poll.user._id.toString() === req.user._id.toString();
-  poll.canEdit =
-    req.user &&
-    req.user.roles &&
-    req.user.roles.length &&
-    req.user.roles.indexOf('admin') > -1;
-  get_opts_by_pollId(poll._id)
-    .then(result => {
-      poll.opts = result || [];
-      return get_votes_by_pollId(poll._id);
-    })
-    .then(result => {
-      poll.votes = result.votes || [];
-      poll.voteopts = result.voteopts || [];
-      return get_tags_by_pollId(poll._id);
-    })
-    .then(result => {
-      poll.tags = result || [];
-      res.jsonp(poll);
-    })
-    .catch(err => {
-      return handleError(err);
-    });
-
-  function handleError(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
-    });
-  }
-};
-
-/**
- * Update a Poll
- */
-exports.update = function (req, res) {
-  var poll = req.poll;
-  poll = _.extend(poll, req.body);
-  var tags = req.body.tags || [];
-  var opts = req.body.opts || [];
-  var promises = [];
-  poll.save()
-    .then(_poll => {
-      poll = _poll;
-      return Polltag.remove({ poll: _poll._id });
-    }, handleError)
-    .then(() => {
-      tags.forEach(tag => {
-        var polltag = new Polltag({ tag: tag, poll: poll._id });
-        promises.push(polltag.save());
-      });
-      return Promise.all(promises);
-    }, handleError)
-    .then(() => {
-      promises = [];
-      opts.forEach(opt => {
-        if (opt._id) {
-          promises.push(
-            Opt.update({ _id: opt._id }, {
-              $set: {
-                title: opt.title,
-                color: opt.color,
-                body: opt.body
-              }
-            }).exec());
-        } else {
-          var _opt = new Opt(opt);
-          _opt.user = req.user;
-          _opt.poll = poll;
-          promises.push(_opt.save());
-        }
-      });
-      return Promise.all(promises);
-    }, handleError)
-    .then(_opts => {
-      promises = [];
-      res.jsonp(poll);
-    }, handleError);
-
-  function handleError(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
-    });
-  }
-};
-
-/**
- * Delete an Poll
- */
-exports.delete = function (req, res) {
-  var poll = req.poll;
-  poll.remove()
-    .then(() => { // Delete option
-      return Opt.remove({ poll: poll._id });
-    }, handleError)
-    .then(() => { // Xóa like của các commetn trong poll
-      var promises = [];
-      Cmt.find({ poll: poll._id }).exec((err, cmts) => {
-        cmts.forEach(cmt => {
-          promises.push(Cmtlike.remove({ cmt: cmt._id }));
-        });
-        return Promise.all(promises);
-      });
-    }, handleError)
-    .then(() => { // Xóa comment
-      return Cmt.remove({ poll: poll._id });
-    }, handleError)
-    .then(() => { // Xóa thông tin của vote
-      var promises = [];
-      Vote.find({ poll: poll._id }).exec((err, votes) => {
-        votes.forEach(vote => {
-          promises.push(Voteopt.remove({ vote: vote._id }));
-        });
-        return Promise.all(promises);
-      });
-    }, handleError)
-    .then(() => { // Xóa votes
-      return Vote.remove({ poll: poll._id });
-    }, handleError)
-    .then(() => { // Xóa thông tin tag của poll
-      return Polltag.remove({ poll: poll._id });
-    }, handleError)
-    .then(() => { // Xóa thông tin report về poll
-      return Report.remove({ poll: poll._id });
-    }, handleError)
-    .then(() => { // Xóa thông tin bookmark về poll
-      return Bookmark.remove({ poll: poll._id });
-    }, handleError)
-    .then(() => { // Xóa thông tin like
-      return Like.remove({ poll: poll._id });
-    }, handleError)
-    .then(() => { // Xóa thông tin follow
-      return Polluser.remove({ poll: poll._id });
-    }, handleError)
-    .then(() => {
-      return Userreport.countDownPoll(poll.user);
-    }, handleError)
-    .then(() => {
-      return View.remove({ poll: poll._id });
-    }, handleError)
-    .then(() => {
-      res.jsonp(poll);
-    }, handleError);
-
-  function handleError(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
-    });
-  }
-};
-
-/**
- * List of Polls x
- */
-exports.list = function (req, res) {
-  Poll.find()
-    .sort('-created')
-    .populate('category', 'name icon')
-    .populate('user', 'displayName profileImageURL')
-    .exec(function (err, polls) {
-      if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      } else {
-        res.jsonp(polls);
-      }
-    });
-};
-
-/**
- * Lấy danh sách poll cho màn hình polls.list
- */
-exports.findPolls = function (req, res) {
-  var page = req.params.page || 0;
-  var userId = req.user ? req.user._id : undefined;
-  Poll.find({ isPublic: true })
-    .sort('-created')
-    .populate('category', 'name icon')
-    .populate('user', 'displayName profileImageURL')
-    .skip(10 * page).limit(10).exec()
-    .then(polls => {
-      if (polls.length === 0) return res.jsonp(polls);
-      var length = polls.length;
-      var counter = 0;
-      polls.forEach(function (instance, index, array) {
-        array[index] = instance.toObject();
-        get_full_by_pollId(array[index]._id, userId)
-          .then(result => {
-            array[index].opts = result.opts;
-            array[index].votes = result.votes;
-            array[index].voteopts = result.voteopts;
-            array[index].follow = result.follow;
-            array[index].reported = result.reported;
-            array[index].bookmarked = result.bookmarked;
-            if (++counter === length) {
-              res.jsonp(polls);
-            }
-          })
-          .catch(handleError);
-      });
-    }, handleError);
-  function handleError(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
-    });
-  }
-};
-
-/**
- * Lấy danh sách poll nổi bật cho màn hình polls.list
- */
-exports.findHotPolls = function (req, res) {
-  var page = req.params.page || 0;
-  Poll.find({ isPublic: true })
-    .sort('-likeCnt')
-    .populate('category', 'name icon')
-    .populate('user', 'displayName profileImageURL')
-    .skip(10 * page)
-    .limit(10)
-    .exec(function (err, polls) {
-      if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      } else {
-        res.jsonp(polls);
-      }
-    });
-};
-
-/**
- * Lấy thông tin của user hiện hành đối với poll cho màn hình polls.view
- */
-exports.findOwners = function (req, res) {
-  var userId = req.user ? req.user._id : undefined;
-  var ip =
-    req.headers['X-Forwarded-For'] ||
-    req.headers['x-forwarded-for'] ||
-    req.client.remoteAddress;
-  var result = {};
-  get_vote_by_pollId_and_userId(req.poll._id, userId, ip)
-    .then(_result => {
-      result.ownVote = _result || { poll: req.poll._id };
-      return get_opts_by_voteId(result.ownVote._id);
-    })
-    .then(_result => {
-      result.votedOpts = _.pluck(_result, '_id') || [];
-      return get_follow_by_pollId(req.poll._id, userId);
-    })
-    .then(_result => {
-      result.follow = _result || { poll: req.poll._id };
-      return get_report_by_pollId(req.poll._id, userId);
-    })
-    .then(_result => {
-      result.reported = (_result) ? true : false;
-      return get_bookmark_by_pollId(req.poll._id, userId);
-    })
-    .then(_result => {
-      result.bookmarked = (_result) ? true : false;
-      return get_like_by_pollId_and_userId(req.poll._id, userId);
-    })
-    .then(_result => {
-      result.like = _result || {};
-      return get_view_by_pollId(req.poll._id, userId);
-    })
-    .then(_result => {
-      result.view = _result || { poll: req.poll._id };
-      res.jsonp(result);
-    })
-    .catch(err => {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    });
-};
-
-/**
- * Load comment cho màn hình poll.view theo page
- */
-exports.findCmts = function (req, res) {
-  var userId = req.user ? req.user._id : undefined;
-  var page = req.params.page || 0;
-  Cmt.find({ poll: req.poll._id })
-    .sort('-created')
-    .populate('user', 'displayName profileImageURL')
-    .skip(10 * page)
-    .limit(10).exec()
-    .then(cmts => {
-      if (cmts.length === 0) return res.jsonp(cmts);
-      var length = cmts.length;
-      var counter = 0;
-      cmts.forEach(function (instance, index, array) {
-        array[index] = instance.toObject();
-        get_like_by_cmtId_and_userId(array[index]._id, userId)
-          .then(result => {
-            array[index].like = result || {};
-            if (++counter === length) {
-              res.jsonp(cmts);
-            }
-          })
-          .catch(handleError);
-      });
-    }, handleError);
-  function handleError(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
-    });
-  }
-};
-
-/**
- * Lấy toàn bộ thông tin các vote và các opt của vote (polls.view)
- */
-exports.findVoteopts = function (req, res) {
-  get_votes_by_pollId(req.poll._id)
-    .then(result => {
-      res.jsonp(result);
-    })
-    .catch(handleError);
-  function handleError(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
-    });
-  }
-};
-
-exports.removeBookmark = function (req, res) {
-  Bookmark.findOne({
-    poll: req.poll._id,
-    user: req.user._id
-  }).remove().exec((err, result) => {
-    if (err) {
-      handleError(err);
-    } else {
-      res.jsonp(result);
-    }
-  });
-  function handleError(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
-    });
-  }
-};
-
 exports.search = function (req, res) {
   const condition = req.body.condition;
-  var userId = req.user ? req.user._id : undefined;
+  var search = condition_analysis(condition);
+  console.log(search);
+  var sort = condition.sort || '-created';
+  Poll.find(search).sort(sort).exec()
+    .then(polls => {
+      res.jsonp(polls);
+    }, handleError);
+
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
+};
+
+// Phan tich dieu kien search
+function condition_analysis(condition) {
   var search = {};
   var and_arr = [];
-  and_arr.push({ isPublic: true });
-  // Search by category
-  if (condition.ctgr) {
-    and_arr.push({ category: condition.ctgr });
-  }
-  // Search by status
-  if (condition.status) {
-    if (condition.status === 'opening') {
-      and_arr.push({ $or: [{ close: { $exists: false } }, { close: { $gte: new Date() } }] });
-    } else {
-      and_arr.push({ $and: [{ close: { $exists: true } }, { close: { $lt: new Date() } }] });
-    }
-  }
   // Search by user
   if (condition.by) {
     and_arr.push({ user: condition.by });
   }
-  // Search by created time
-  if (condition.created) {
-    var today = new Date().getTime();
-    var created = new Date(today - (parseInt(condition.created) * 1000));
-    if (condition.timing === 'old') {
-      and_arr.push({ created: { $lt: created } });
+  if (condition.ctgr) {
+    and_arr.push({ category: condition.ctgr });
+  }
+  if (condition.isPublic) {
+    let isPublic = condition.isPublic === 'true';
+    and_arr.push({ isPublic: isPublic });
+  }
+  if (condition.created_start) {
+    let start = moment(condition.created_start).utc();
+    and_arr.push({ created: { $gte: start } });
+  }
+  if (condition.created_end) {
+    let end = moment(condition.created_end).utc();
+    and_arr.push({ created: { $lt: end } });
+  }
+  if (condition.allow_multiple) {
+    let allow_multiple = condition.allow_multiple === 'true';
+    and_arr.push({ allow_multiple: allow_multiple });
+  }
+  if (condition.allow_add) {
+    let allow_add = condition.allow_add === 'true';
+    and_arr.push({ allow_add: allow_add });
+  }
+  if (condition.allow_guest) {
+    let allow_guest = condition.allow_guest === 'true';
+    and_arr.push({ allow_add: allow_guest });
+  }
+  if (condition.cmts && parseInt(condition.cmts)) {
+    let cmtCnt = parseInt(condition.cmts);
+    if (condition.cmts_pref === 'least') {
+      and_arr.push({ cmtCnt: { $lt: cmtCnt } });
     } else {
-      and_arr.push({ created: { $gte: created } });
+      and_arr.push({ cmtCnt: { $gte: cmtCnt } });
+    }
+  }
+  if (condition.votes && parseInt(condition.votes)) {
+    let voteCnt = parseInt(condition.votes);
+    if (condition.votes_pref === 'least') {
+      and_arr.push({ voteCnt: { $lt: voteCnt } });
+    } else {
+      and_arr.push({ voteCnt: { $gte: voteCnt } });
+    }
+  }
+  if (condition.likes && parseInt(condition.likes)) {
+    let likeCnt = parseInt(condition.likes);
+    if (condition.likes_pref === 'least') {
+      and_arr.push({ likeCnt: { $lt: likeCnt } });
+    } else {
+      and_arr.push({ likeCnt: { $gte: likeCnt } });
+    }
+  }
+  if (condition.views && parseInt(condition.views)) {
+    let viewCnt = parseInt(condition.views);
+    if (condition.views_pref === 'least') {
+      and_arr.push({ viewCnt: { $lt: viewCnt } });
+    } else {
+      and_arr.push({ viewCnt: { $gte: viewCnt } });
     }
   }
   // Search by key in title
-  if (condition.key) {
-    if (!condition.in || condition.in === 'polltitle') {
-      and_arr.push({ title: { $regex: '.*' + condition.key + '.*' } });
+  if (condition.search && condition.search !== '') {
+    and_arr.push({ $or: [{ title: { $regex: '.*' + condition.search + '.*' } }, { body: { $regex: '.*' + condition.search + '.*' } }] });
+  }
+  if (condition.status) {
+    if (condition.status === 'infinity') {
+      and_arr.push({ close: { $exists: false } });
+    }
+    if (condition.status === 'limit') {
+      var now = new moment().utc().fomart();
+      and_arr.push({ $and: [{ close: { $exists: true } }, { close: { $gte: now } }] });
+    }
+    if (condition.status === 'closed') {
+      var now = new moment().utc().fomart();
+      and_arr.push({ $and: [{ close: { $exists: true } }, { close: { $lt: now } }] });
     }
   }
   if (and_arr.length > 0) {
     search = { $and: and_arr };
   }
-  var polls = [];
-  _polls(search)
-    .then(_polls => {
-      var temp = _filter_report(_polls, condition);
-      var polls = _filter_report(temp, condition);
-      res.jsonp(polls);
-    })
-    .catch(err => {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    });
-
-  function _polls(con) {
-    return new Promise((resolve, reject) => {
-      Poll.find(con)
-        .populate('category', 'name icon')
-        .populate('user', 'displayName profileImageURL')
-        .exec()
-        .then(polls => {
-          if (polls.length === 0) return resolve([]);
-          var length = polls.length;
-          var counter = 0;
-          polls.forEach(function (instance, index, array) {
-            array[index] = instance.toObject();
-            get_full_by_pollId(array[index]._id, userId)
-              .then(result => {
-                array[index].opts = result.opts;
-                array[index].votes = result.votes;
-                array[index].voteopts = result.voteopts;
-                array[index].follow = result.follow;
-                array[index].reported = result.reported;
-                array[index].bookmarked = result.bookmarked;
-                return get_cmts_by_pollId(array[index]._id);
-              })
-              .then(result => {
-                array[index].cmts = result || [];
-                if (++counter === length) {
-                  return resolve(polls);
-                }
-              })
-              .catch(err => {
-                return reject(err);
-              });
-          });
-        }, err => {
-          return reject(err);
-        });
-    });
-  }
-  function _filter_report(polls, con) {
-    var result = [];
-    if (con.cmt && parseInt(con.cmt)) {
-      var cmtCnt = parseInt(con.cmt);
-      polls.forEach(item => {
-        if (con.compare === 'most') {
-          if (item.report.cmtCnt >= cmtCnt) {
-            result.push(item);
-          }
-        } else {
-          if (item.report.cmtCnt < cmtCnt) {
-            result.push(item);
-          }
-        }
-      });
-    } else {
-      result = polls;
-    }
-    return result;
-  }
-  function _filter_key(polls, con) {
-
-    var result = [];
-    if (con.key && con.in === 'pollcontent') {
-      polls.forEach(item => {
-        if (item.title.indexOf(con.key) >= 0) return result.push(item);
-        if (item.body.indexOf(con.key) >= 0) return result.push(item);
-        var check = false;
-        for (let index = 0; index < item.opts.length; index++) {
-          let element = item.opts[index];
-          if (element.title.indexOf(con.key) >= 0 || element.body.indexOf(con.key) >= 0) {
-            check = true;
-            break;
-          }
-        }
-        if (check) return result.push(item);
-      });
-    } else if (con.key && con.in === 'pollcmt') {
-      polls.forEach(item => {
-        if (item.title.indexOf(con.key) >= 0) return result.push(item);
-        if (item.body.indexOf(con.key) >= 0) return result.push(item);
-        var check = false;
-        for (let index = 0; index < item.opts.length; index++) {
-          let element = item.opts[index];
-          if (element.title.indexOf(con.key) >= 0 || element.body.indexOf(con.key) >= 0) {
-            check = true;
-            break;
-          }
-        }
-        if (check) return result.push(item);
-        for (let index = 0; index < item.cmts.length; index++) {
-          let element = item.cmts[index];
-          if (element.body.indexOf(con.key) >= 0) {
-            check = true;
-            break;
-          }
-        }
-        if (check) return result.push(item);
-      });
-    } else {
-      result = polls;
-    }
-    return result;
-  }
-};
-
-/**
- * Poll middleware
- */
-exports.pollByID = function (req, res, next, id) {
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).send({
-      message: 'Poll is invalid'
-    });
-  }
-
-  Poll.findById(id)
-    .populate('category', 'name icon')
-    .populate('user', 'displayName profileImageURL')
-    .exec(function (err, poll) {
-      if (err) {
-        return next(err);
-      } else if (!poll) {
-        return res.status(404).send({
-          message: 'No Poll with that identifier has been found'
-        });
-      }
-      req.poll = poll;
-      next();
-    });
-};
+  return search;
+}
 
 // Lấy các option có status = 1 cho poll
 function get_opts_by_pollId(pollId) {

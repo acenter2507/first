@@ -1,21 +1,14 @@
-// Polls service used to communicate Polls REST endpoints
 (function() {
   'use strict';
-  angular.module('polls').factory('PollsService', PollsService);
+  angular.module('polls.admin')
+    .factory('AdminPollsService', AdminPollsService);
 
-  PollsService.$inject = ['$resource'];
+  AdminPollsService.$inject = ['$http'];
 
-  function PollsService($resource) {
-    return $resource(
-      'api/polls/:pollId',
-      {
-        pollId: '@_id'
-      },
-      {
-        update: {
-          method: 'PUT'
-        }
-      }
-    );
+  function AdminPollsService($http) {
+    this.search = condition => {
+      return $http.post('/api/polls/admin/search', { condition: condition });
+    };
+    return this;
   }
 })();

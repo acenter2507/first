@@ -4,7 +4,8 @@
  * Module dependencies
  */
 var pollsPolicy = require('../policies/polls.server.policy'),
-  polls = require('../controllers/polls.server.controller');
+  polls = require('../controllers/polls.server.controller'),
+  admin_polls = require('../controllers/admin-polls.server.controller');
 
 module.exports = function(app) {
   // Polls Routes
@@ -29,6 +30,10 @@ module.exports = function(app) {
   app.route('/api/findVoteopts/:pollId').get(polls.findVoteopts);
   app.route('/api/removeBookmark/:pollId').get(polls.removeBookmark);
   app.route('/api/search').post(polls.search);
+
+  // ADMIN
+  app.route('/api/polls/admin/search').all(pollsPolicy.isAllowed)
+    .post(admin_polls.search);
 
 
   // app.route('/api/findOwnerVote/:pollId').get(polls.findOwnerVote);

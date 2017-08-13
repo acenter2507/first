@@ -33,6 +33,7 @@
 
     $scope.filter = {};
 
+    get_categorys();
     function get_categorys() {
       Action.get_categorys()
         .then(res => {

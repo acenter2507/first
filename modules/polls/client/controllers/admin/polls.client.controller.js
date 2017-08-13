@@ -19,8 +19,8 @@
     $state,
     $window,
     poll,
-    Action,
     AdminPollsService,
+    Action,
     toast,
     dialog
   ) {

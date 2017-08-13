@@ -23,6 +23,9 @@ exports.invokeRolesPolicies = function() {
     }, {
       resources: '/api/polls/admin/search',
       permissions: '*'
+    }, {
+      resources: '/api/polls/admin/report',
+      permissions: '*'
     }]
   }, {
     roles: ['user'],

@@ -36,6 +36,8 @@ module.exports = function(app) {
   // ADMIN
   app.route('/api/polls/admin/search').all(pollsPolicy.isAllowed)
     .post(admin_polls.search);
+  app.route('/api/polls/admin/report').all(pollsPolicy.isAllowed)
+    .post(admin_polls.report);
 
 
   // app.route('/api/findOwnerVote/:pollId').get(polls.findOwnerVote);

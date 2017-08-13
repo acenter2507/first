@@ -37,13 +37,17 @@
     $scope.busy = false;
 
     $scope.search = () => {
+      if ($scope.busy === true) return;
+      $scope.busy = true;
       console.log($scope.condition);
       AdminPollsService.search($scope.condition)
         .then(res => {
           console.log(res.data);
+          $scope.busy = false;
         })
         .catch(err => {
           console.log(err);
+          $scope.busy = false;
         });
     };
     $scope.clear = () => {

@@ -65,13 +65,13 @@
           <input name="by" type="hidden" class="form-control input-sm" ng-model="condition.by">
           <angucomplete-alt placeholder="Search user" pause="300" selected-object="selectedUserFn" initial-value="selectedUser" remote-url="/api/users/search?s="
             remote-url-data-field="users" title-field="displayName" description-field="username" image-field="profileImageURL"
-            minlength="1" input-class="form-control" match-class="highlight" />
+            minlength="1" input-class="form-control input-sm" match-class="highlight" />
         </div>
       </div>
       <div class="row">
         <div class="form-group col-sm-3">
           <label for="security">Security</label>
-          <select id="security" name="security" class="form-control" ng-model="condition.isPublic">
+          <select id="security" name="security" class="form-control input-sm" ng-model="condition.isPublic">
               <option value>All</option>
               <option value="true">Public</option>
               <option value="false">Private</option>
@@ -79,7 +79,7 @@
         </div>
         <div class="form-group col-sm-3">
           <label for="allow_multiple">Allow multiple vote</label>
-          <select id="allow_multiple" name="allow_multiple" class="form-control" ng-model="condition.allow_multiple">
+          <select id="allow_multiple" name="allow_multiple" class="form-control input-sm" ng-model="condition.allow_multiple">
             <option value>All</option>
             <option value="true">Allow</option>
             <option value="false">Deny</option>
@@ -87,7 +87,7 @@
         </div>
         <div class="form-group col-sm-3">
           <label for="allow_add">Allow member suggest</label>
-          <select id="allow_add" name="allow_add" class="form-control" ng-model="condition.allow_add">
+          <select id="allow_add" name="allow_add" class="form-control input-sm" ng-model="condition.allow_add">
             <option value>All</option>
             <option value="true">Allow</option>
             <option value="false">Deny</option>
@@ -95,7 +95,7 @@
         </div>
         <div class="form-group col-sm-3">
           <label for="allow_guest">Allow guest vote</label>
-          <select id="allow_guest" name="allow_guest" class="form-control" ng-model="condition.allow_guest">
+          <select id="allow_guest" name="allow_guest" class="form-control input-sm" ng-model="condition.allow_guest">
             <option value>All</option>
             <option value="true">Allow</option>
             <option value="false">Deny</option>

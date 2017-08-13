@@ -621,7 +621,7 @@ exports.pollByID = function (req, res, next, id) {
 function get_opts_by_pollId(pollId) {
   return new Promise((resolve, reject) => {
     Opt.find({ poll: pollId })
-    populate('user', 'displayName')
+      .populate('user', 'displayName')
       .exec((err, opts) => {
         if (err) {
           return reject(err);

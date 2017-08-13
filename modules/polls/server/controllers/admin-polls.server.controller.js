@@ -24,7 +24,7 @@ var path = require('path'),
   )),
   _ = require('lodash'),
   __ = require('underscore'),
-  moment = require('moment');
+  _moment = require('moment');
 
 /**
  * Search Polls
@@ -62,11 +62,11 @@ function condition_analysis(condition) {
     and_arr.push({ isPublic: isPublic });
   }
   if (condition.created_start) {
-    let start = moment(condition.created_start).utc();
+    let start = new _moment(condition.created_start).utc();
     and_arr.push({ created: { $gte: start } });
   }
   if (condition.created_end) {
-    let end = moment(condition.created_end).utc();
+    let end = new _moment(condition.created_end).utc();
     and_arr.push({ created: { $lt: end } });
   }
   if (condition.allow_multiple) {
@@ -122,11 +122,11 @@ function condition_analysis(condition) {
       and_arr.push({ close: { $exists: false } });
     }
     if (condition.status === 'limit') {
-      let now = moment().utc().fomart();
+      let now = new _moment().utc().fomart();
       and_arr.push({ $and: [{ close: { $exists: true } }, { close: { $gte: now } }] });
     }
     if (condition.status === 'closed') {
-      let now = moment().utc().fomart();
+      let now = new _moment().utc().fomart();
       and_arr.push({ $and: [{ close: { $exists: true } }, { close: { $lt: now } }] });
     }
   }

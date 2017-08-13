@@ -41,7 +41,7 @@
 
     initFirstShow();
     function initFirstShow() {
-      $scope.condition.create_start = new moment(new Date(), 'YYYY/MM/DD');
+      $scope.condition.created_start = new moment(new Date(), 'YYYY/MM/DD');
       search();
     }
     $scope.search = search;

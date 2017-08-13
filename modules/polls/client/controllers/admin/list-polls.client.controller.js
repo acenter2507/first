@@ -49,7 +49,7 @@
     initFirstShow();
     function initFirstShow() {
       $scope.condition = JSON.parse(Storages.get_session(Constants.storages.admin_polls_condition, JSON.stringify({
-        created_start: new moment(new Date(), 'YYYY/MM/DD').utc().subtract(1, 'days').format()
+        created_start: new moment(new Date(), 'YYYY/MM/DD').subtract(1, 'days').format('YYYY/MM/DD')
       })));
       $scope.filter = JSON.parse(Storages.get_session(Constants.storages.admin_polls_fitler, JSON.stringify({})));
       $scope.currentPage = Storages.get_session(Constants.storages.admin_polls_page, 1);

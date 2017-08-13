@@ -122,11 +122,11 @@ function condition_analysis(condition) {
       and_arr.push({ close: { $exists: false } });
     }
     if (condition.status === 'limit') {
-      let now = new moment().utc().fomart();
+      let now = moment().utc().fomart();
       and_arr.push({ $and: [{ close: { $exists: true } }, { close: { $gte: now } }] });
     }
     if (condition.status === 'closed') {
-      let now = new moment().utc().fomart();
+      let now = moment().utc().fomart();
       and_arr.push({ $and: [{ close: { $exists: true } }, { close: { $lt: now } }] });
     }
   }

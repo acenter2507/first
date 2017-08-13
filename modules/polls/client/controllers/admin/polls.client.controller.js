@@ -45,7 +45,8 @@
     function process_before_show() {
       vm.poll.votedTotal = vm.poll.voteopts.length;
       vm.poll.opts.forEach(opt => {
-        opt.voteCnt = _.where(vm.voteopts, { opt: opt._id }).length || 0;
+        console.log(opt);
+        opt.voteCnt = _.where(vm.poll.voteopts, { opt: opt._id }).length || 0;
       });
     }
   }

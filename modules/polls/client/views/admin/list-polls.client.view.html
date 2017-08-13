@@ -163,100 +163,10 @@
     <hr class="mgn">
     <div class="card-footer">
       <button class="btn btn-primary btn-sm pull-right" ng-click="search()">Search</button>
-      <button class="btn btn-danger btn-sm pull-right mg5r" ng-click="clear()">Clear</button>
+      <button class="btn btn-danger btn-sm pull-right mg5r" ng-click="clear_filter()">Clear</button>
     </div>
   </div>
 </div>
-
-<!-- <div class="row">
-  <div class="card card-expand">
-    <div class="card-header">
-      <strong class="card-title"><i class="fa fa-filter"></i> Filter local</strong>
-      <a class="undecorated-link card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
-      <div class="clearfix"></div>
-    </div>
-    <hr class="mgn">
-    <div class="card-body">
-      <div class="row">
-        <div class="form-group col-sm-6">
-          <label for="search">Search</label>
-          <input name="search" id="search" class="form-control" type="text" ng-model="filter.search" placeholder="Search" ng-change="figureOutItemsToDisplay()"
-          />
-        </div>
-        <div class="form-group col-sm-6">
-          <label for="sort">Sort by</label>
-          <select id="sort" name="sort" class="form-control" ng-model="filter.sort" ng-change="figureOutItemsToDisplay()">
-              <option value>Default</option>
-              <option value="-created">Newest to oldest</option>
-              <option value="created">Oldest to newest</option>
-              <option value="-likeCnt">Most likes</option>
-              <option value="likeCnt">Least likes</option>
-              <option value="-cmtCnt">Most comments</option>
-              <option value="cmtCnt">Least comments</option>
-              <option value="-voteCnt">Most votes</option>
-              <option value="voteCnt">Least votes</option>
-              <option value="-viewCnt">Most viewed</option>
-              <option value="viewCnt">Least viewed</option>
-            </select>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-sm-4">
-          <label for="status">Status</label>
-          <select id="status" name="status" class="form-control input-sm" ng-model="filter.status" ng-change="figureOutItemsToDisplay()"
-            disabled>
-              <option value>All</option>
-              <option value="infinity">Infinity</option>
-              <option value="limit">Limit</option>
-              <option value="closed">Closed</option>
-            </select>
-        </div>
-        <div class="form-group col-sm-4">
-          <label for="provider">Category</label>
-          <select id="provider" name="provider" class="form-control input-sm" ng-model="filter.provider" ng-change="figureOutItemsToDisplay()">
-              <option value>All</option>
-              <option value="local">Local</option>
-              <option value="facebook">Facebook</option>
-              <option value="twitter">Twitter</option>
-              <option value="linkedin">Linkedin</option>
-              <option value="google">Google plus</option>
-              <option value="github">Github</option>
-            </select>
-        </div>
-        <div class="form-group col-sm-4">
-          <label for="created">Joined date</label>
-          <input id="created" name="created" class="form-control input-sm" today="true" moment-picker="filter.created" ng-model="filter.created"
-            format="YYYY/MM/DD" start-view="month" placeholder="Select a date..." change="figureOutItemsToDisplay()" additions="{ bottom: 'bottom-template-url' }">
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-sm-6">
-          <div class="col-sm-12 pdn"><label>Number of polls</label></div>
-          <div class="col-sm-6 pdn">
-            <select class="form-control input-sm" ng-model="filter.polls_pref" ng-change="figureOutItemsToDisplay()">
-                <option value>None</option>
-                <option value="least">As least</option>
-                <option value="most">As most</option>
-              </select>
-          </div>
-          <div class="col-sm-6 pdn">
-            <input name="polls" id="polls" type="text" class="form-control input-sm" placeholder="Enter number of polls" ng-model="filter.polls"
-              ng-change="figureOutItemsToDisplay()">
-          </div>
-        </div>
-        <div class="form-group col-sm-6">
-          <label for="roles">Role</label>
-          <select id="roles" name="roles" class="form-control input-sm" ng-model="filter.roles" ng-change="figureOutItemsToDisplay()">
-              <option value>All</option>
-              <option value="admin">Admin</option>
-              <option value="user">User</option>
-            </select>
-        </div>
-      </div>
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</div> -->
 <div class="row">
   <div class="card">
     <div class="card-header">
@@ -265,6 +175,77 @@
     <hr class="mgn">
     <div class="card-body">
       <div class="row text-center" ng-show="busy"><div class="loader"></div></div>
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead class="bg-primary">
+            <tr>
+              <th class="text-center"><i class="icon-people"></i></th>
+              <th>Title</th>
+              <th>Category</th>
+              <th>User</th>
+              <th class="text-center">Likes</th>
+              <th class="text-center">Comments</th>
+              <th class="text-center">Votes</th>
+              <th class="text-center">Viewed</th>
+              <th class="text-center">Followed</th>
+              <th class="text-center">Bookmarked</th>
+              <th class="text-center">Reported</th>
+              <th>Close</th>
+              <th>Public</th>
+              <th>Multiple</th>
+              <th>Allow suggest</th>
+              <th>Allow guest</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-show="pagedItems.length === 0 && !busy">
+              <td class="text-center" colspan="11">Has no data found.</td>
+            </tr>
+            <tr ng-repeat="poll in pagedItems">
+              <td class="text-center">
+                <div class="admin-avatar">
+                  <img src="{{ polluser.profileImageURL }}" alt="{{ poll.user.displayName }}" class="img-admin-avatar">
+                </div>
+              </td>
+              <td ng-bind="poll.title"></td>
+              <td>{{ poll.category.name }}</td>
+              <td>{{ poll.user.displayName }}</td>
+              <td class="text-center">{{ poll.likeCnt }}</td>
+              <td class="text-center">{{ poll.cmtCnt }}</td>
+              <td class="text-center">{{ poll.voteCnt }}</td>
+              <td class="text-center">{{ poll.viewCnt }}</td>
+              <td class="text-center">{{ poll.followed }}</td>
+              <td class="text-center">{{ poll.bookmarked }}</td>
+              <td class="text-center">{{ poll.reported }}</td>
+              <td>{{ (poll.close) ? poll.close | LLL_format : 'Infinity' }}</td>
+              <td>{{ (poll.isPublic) ? 'Public' : 'Private' }}</td>
+              <td>{{ (poll.allow_multiple) ? 'Multiple' : 'Single' }}</td>
+              <td>{{ (poll.allow_add) ? 'Allow' : 'Deny' }}</td>
+              <td>{{ (poll.allow_guest) ? 'Allow' : 'Deny' }}</td>
+              <td>
+                <div class="btn-group" role="group">
+                  <a class="undecorated-link" ui-sref="admin.polls.view({ pollId: poll._id })"><i class="icon-eye icons"></i>
+                    <md-tooltip md-direction="bottom">View detail of poll</md-tooltip>
+                  </a>
+                  <a class="undecorated-link mg5l" ui-sref="polls.edit({ pollId: poll._id })"><i class="icon-note icons"></i>
+                    <md-tooltip md-direction="bottom">Edit info of poll on public</md-tooltip>
+                  </a>
+                  <a class="undecorated-link mg5l" ui-sref="polls.view({ pollId: poll._id })"><i class="icon-login icons"></i>
+                    <md-tooltip md-direction="bottom">View detail of poll on public</md-tooltip>
+                  </a>
+                  <a class="undecorated-link mg5l" ng-click="remove(poll)"><i class="icon-trash icons"></i>
+                    <md-tooltip md-direction="bottom">Delete user</md-tooltip>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage"
+          ng-change="pageChanged()"></uib-pagination>
+      </div>
+      <div class="clearfix"></div>
     </div>
   </div>
 </div>

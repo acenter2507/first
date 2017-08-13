@@ -34,7 +34,10 @@ exports.search = function (req, res) {
   var search = condition_analysis(condition);
   console.log(search);
   var sort = condition.sort || '-created';
-  Poll.find(search).sort(sort).exec()
+  Poll.find(search)
+  .populate('cateogry', 'name')
+  .populate('user', 'displayName profileImageURL')
+  .sort(sort).exec()
     .then(polls => {
       res.jsonp(polls);
     }, handleError);
@@ -63,10 +66,12 @@ function condition_analysis(condition) {
     and_arr.push({ isPublic: isPublic });
   }
   if (condition.created_start) {
+    console.log('', condition.created_start);
     let start = new _moment(condition.created_start).utc();
     and_arr.push({ created: { $gte: start } });
   }
   if (condition.created_end) {
+    console.log('', condition.created_end);
     let end = new _moment(condition.created_end).utc();
     and_arr.push({ created: { $lt: end } });
   }

@@ -10,6 +10,7 @@
     '$window',
     'Authentication',
     'AdminPollsService',
+    'PollsService',
     'Action',
     'toastr',
     'ngDialog'
@@ -21,6 +22,7 @@
     $window,
     Authentication,
     AdminPollsService,
+    PollsService,
     Action,
     toast,
     dialog
@@ -35,22 +37,59 @@
 
     $scope.condition = {};
     $scope.busy = false;
+    $scope.polls = [];
+
+    initFirstShow();
+    function initFirstShow() {
+      $scope.condition.create_start = new moment(new Date, 'YYYY/MM/DD');
+      $scope.search();
+    }
 
     $scope.search = () => {
       if ($scope.busy === true) return;
       $scope.busy = true;
-      console.log($scope.condition);
       AdminPollsService.search($scope.condition)
         .then(res => {
-          console.log(res.data);
-          $scope.busy = false;
+          $scope.polls = res.data;
+          $scope.buildPager();
         })
         .catch(err => {
-          console.log(err);
+          toast.error(err.message, 'Error!');
           $scope.busy = false;
+          console.log(err);
         });
     };
-    $scope.clear = () => {
+
+    $scope.buildPager = function () {
+      $scope.pagedItems = [];
+      $scope.itemsPerPage = 15;
+      $scope.currentPage = 1;
+      $scope.figureOutItemsToDisplay();
+    };
+
+    $scope.figureOutItemsToDisplay = function () {
+      $scope.filteredItems = _.clone($scope.users);
+      $scope.filterLength = $scope.filteredItems.length;
+      var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
+      var end = begin + $scope.itemsPerPage;
+      $scope.pagedItems = $scope.filteredItems.slice(begin, end);
+      $scope.busy = false;
+    };
+
+    $scope.pageChanged = function () {
+      $scope.figureOutItemsToDisplay();
+    };
+    $scope.remove = poll => {
+      if ($window.confirm('Are you sure you want to delete?')) {
+        var rs_poll = new PollsService({ _id: poll._id });
+        rs_poll.$remove(() => {
+          $scope.polls = _.without($scope.polls, poll);
+          $scope.figureOutItemsToDisplay();
+          toast.success('You have deleted: ' + poll.title, 'Success!');
+        });
+      }
+    };
+    $scope.clear_filter = () => {
       $scope.condition = {};
       $scope.selectedUser = undefined;
       $scope.$broadcast('angucomplete-alt:clearInput');

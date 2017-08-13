@@ -33,7 +33,6 @@ var path = require('path'),
 exports.search = function (req, res) {
   const condition = req.body.condition;
   var search = condition_analysis(condition);
-  console.log(search);
   var sort = condition.sort || '-created';
   Poll.find(search)
     .populate('category', 'name')
@@ -164,7 +163,7 @@ function condition_analysis(condition) {
 
 function count_followed(pollId) {
   return new Promise((resolve, reject) => {
-    Opt.find({ poll: pollId }).exec().count((cnt, err) => {
+    Polluser.find({ poll: pollId }).count((cnt, err) => {
       if (err) {
         return reject(err);
       } else {
@@ -175,7 +174,7 @@ function count_followed(pollId) {
 }
 function count_bookmarked(pollId) {
   return new Promise((resolve, reject) => {
-    Bookmark.find({ poll: pollId }).exec().count((cnt, err) => {
+    Bookmark.find({ poll: pollId }).count((cnt, err) => {
       if (err) {
         return reject(err);
       } else {
@@ -186,7 +185,7 @@ function count_bookmarked(pollId) {
 }
 function count_reported(pollId) {
   return new Promise((resolve, reject) => {
-    Report.find({ poll: pollId }).exec().count((cnt, err) => {
+    Report.find({ poll: pollId }).count((cnt, err) => {
       if (err) {
         return reject(err);
       } else {

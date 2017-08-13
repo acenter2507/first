@@ -78,11 +78,11 @@ exports.report = function (req, res) {
   count_followed(pollId)
     .then(result => {
       rs.followed = result || 0;
-      return count_bookmarked(array[index]._id);
+      return count_bookmarked(pollId);
     })
     .then(result => {
       rs.bookmarked = result || 0;
-      return count_reported(array[index]._id);
+      return count_reported(pollId);
     })
     .then(result => {
       rs.reported = result || 0;

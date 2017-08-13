@@ -370,7 +370,7 @@ exports.bookmarks = function (req, res) {
  * Xoa toan bo bookmark
  */
 exports.clear_bookmark = function (req, res) {
-  Bookmark.find({ user: req.profile._id }).remove();
+  Bookmark.remove({ user: req.user._id }).exec();
   res.end();
 };
 

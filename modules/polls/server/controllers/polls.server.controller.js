@@ -111,6 +111,7 @@ exports.read = function (req, res) {
     });
 
   function handleError(err) {
+    console.log(err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -621,7 +622,7 @@ exports.pollByID = function (req, res, next, id) {
 function get_opts_by_pollId(pollId) {
   return new Promise((resolve, reject) => {
     Opt.find({ poll: pollId })
-      .populate('user', 'displayName')
+      .populate('user', 'displayName profileImageURL')
       .exec((err, opts) => {
         if (err) {
           return reject(err);

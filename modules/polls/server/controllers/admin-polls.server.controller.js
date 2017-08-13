@@ -73,40 +73,22 @@ exports.search = function (req, res) {
  * Search Polls
  */
 exports.report = function (req, res) {
-  var pollId = req.params.pollId;
-  console.log(pollId);
-  res.end();
-  // const condition = req.body.condition;
-  // var search = condition_analysis(condition);
-  // var sort = condition.sort || '-created';
-  // Poll.find(search)
-    // .populate('category', 'name')
-    // .populate('user', 'displayName profileImageURL')
-    // .sort(sort).exec()
-    // .then(polls => {
-    //   if (polls.length === 0) return res.jsonp(polls);
-    //   var length = polls.length;
-    //   var counter = 0;
-    //   polls.forEach(function (instance, index, array) {
-    //     array[index] = instance.toObject();
-    //     count_followed(array[index]._id)
-    //       .then(result => {
-    //         array[index].followed = result || 0;
-    //         return count_bookmarked(array[index]._id);
-    //       })
-    //       .then(result => {
-    //         array[index].bookmarked = result || 0;
-    //         return count_reported(array[index]._id);
-    //       })
-    //       .then(result => {
-    //         array[index].reported = result || 0;
-    //         if (++counter === length) {
-    //           res.jsonp(polls);
-    //         }
-    //       })
-    //       .catch(handleError);
-    //   });
-    // }, handleError);
+  var pollId = req.body.pollId;
+  var rs = {};
+  count_followed(pollId)
+    .then(result => {
+      rs.followed = result || 0;
+      return count_bookmarked(array[index]._id);
+    })
+    .then(result => {
+      rs.bookmarked = result || 0;
+      return count_reported(array[index]._id);
+    })
+    .then(result => {
+      rs.reported = result || 0;
+      res.jsonp(rs);
+    })
+    .catch(handleError);
 
   function handleError(err) {
     return res.status(400).send({

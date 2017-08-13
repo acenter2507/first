@@ -31,7 +31,9 @@
     function get_admin_poll_report() {
       AdminPollsService.get_admin_poll_report(vm.poll._id)
         .then(res => {
-          console.log(res);
+          vm.poll.followed = res.data.followed;
+          vm.poll.bookmarked = res.data.bookmarked;
+          vm.poll.reported = res.data.reported;
         })
         .catch(err => {
           toast.error(err.message, 'Error!');

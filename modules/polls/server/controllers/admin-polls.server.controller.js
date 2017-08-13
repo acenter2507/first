@@ -59,7 +59,10 @@ exports.search = function (req, res) {
               res.jsonp(polls);
             }
           })
-          .catch(handleError);
+          .catch(err => {
+            console.log(err);
+            handleError(err);
+          });
       });
     }, handleError);
 

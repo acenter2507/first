@@ -8,6 +8,7 @@
     '$state',
     '$scope',
     '$window',
+    '$filter',
     'Authentication',
     'AdminPollsService',
     'PollsService',
@@ -20,6 +21,7 @@
     $state,
     $scope,
     $window,
+    $filter,
     Authentication,
     AdminPollsService,
     PollsService,
@@ -36,6 +38,7 @@
     }
 
     $scope.condition = {};
+    $scope.filter = {};
     $scope.busy = false;
     $scope.polls = [];
 
@@ -71,7 +74,11 @@
 
     $scope.figureOutItemsToDisplay = figureOutItemsToDisplay;
     function figureOutItemsToDisplay() {
-      $scope.filteredItems = _.clone($scope.polls);
+      if ($scope.filter.local_sort) {
+        $scope.filteredItems = $filter('orderBy')($scope.polls, $scope.filter.local_sort, false);
+      } else {
+        $scope.filteredItems = _.clone($scope.polls);
+      }
       $scope.filterLength = $scope.filteredItems.length;
       var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
       var end = begin + $scope.itemsPerPage;

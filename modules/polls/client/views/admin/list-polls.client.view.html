@@ -168,6 +168,30 @@
   </div>
 </div>
 <div class="row">
+  <div class="card card-expand">
+    <div class="card-header">
+      <strong class="card-title"><i class="fa fa-filter"></i> Filter local result</strong>
+      <a class="undecorated-link card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
+      <div class="clearfix"></div>
+    </div>
+    <hr class="mgn">
+    <div class="card-body">
+      <div class="row">
+        <div class="form-group col-sm-12">
+          <label for="local_sort">Sort by</label>
+          <select id="local_sort" name="local_sort" class="form-control input-sm" ng-model="filter.local_sort" ng-change="figureOutItemsToDisplay()">
+              <option value>Not set</option>
+              <option value="-reported">Most reported</option>
+              <option value="-bookmarked">Most bookmarked</option>
+              <option value="-followed">Most followed</option>
+            </select>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div>
+<div class="row">
   <div class="card">
     <div class="card-header">
       <strong class="card-title"><i class="fa fa-list"></i> List poll</strong>

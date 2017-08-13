@@ -71,7 +71,7 @@
 
     $scope.figureOutItemsToDisplay = figureOutItemsToDisplay;
     function figureOutItemsToDisplay() {
-      $scope.filteredItems = _.clone($scope.users);
+      $scope.filteredItems = _.clone($scope.polls);
       $scope.filterLength = $scope.filteredItems.length;
       var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
       var end = begin + $scope.itemsPerPage;

@@ -1,9 +1,9 @@
 (function () {
   'use strict';
   // Polls controller
-  angular.module('polls').controller('PollsController', PollsController);
+  angular.module('polls').controller('AdminPollController', AdminPollController);
 
-  PollsController.$inject = [
+  AdminPollController.$inject = [
     '$scope',
     '$state',
     '$window',
@@ -13,7 +13,7 @@
     'ngDialog'
   ];
 
-  function PollsController(
+  function AdminPollController(
     $scope,
     $state,
     $window,

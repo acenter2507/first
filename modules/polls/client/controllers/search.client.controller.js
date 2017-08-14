@@ -22,6 +22,7 @@ angular.module('polls').controller('PollsSearchController', [
     $scope.categorys = Categorys.query();
 
     $scope.condition = {};
+    initCondition();
     function initCondition() {
       console.log($location.path);
       if ($stateParams.key) {

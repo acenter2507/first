@@ -114,7 +114,7 @@
       <div class="card" ng-if="isLogged && vm.bookmarks.length > 0">
         <div class="card-header">
           <strong class="card-title">Bookmarks</strong>
-          <small class="card-link" ng-show="vm.bookmarks.length > 0"><a class="undecorated-link" ui-sref="profile.bookmarks({ userId: user._id })">View all</a></small>
+          <small class="card-link"><a class="undecorated-link" ui-sref="profile.bookmarks({ userId: user._id })">View all</a></small>
         </div>
         <div class="card-body">
           <div class="side-list-poll" ng-repeat="poll in vm.bookmarks">

@@ -517,6 +517,35 @@
     this.get_tag_polls = (tagId) => {
       return $http.get('/api/tags/' + tagId + '/polls');
     };
+    /**
+     * Xử lý poll khi show lên màn hình
+     */
+    this.process_before_show = poll => {
+      let isLogged = (Authentication.user);
+      poll.isCurrentUserOwner = isLogged && Authentication.user._id === poll.user._id;
+      poll.chart = {
+        options: { responsive: true },
+        colors: [],
+        labels: [],
+        data: []
+      };
+      poll.total = poll.voteopts.length;
+      poll.opts.forEach(opt => {
+        opt.voteCnt = _.where(poll.voteopts, { opt: opt._id }).length || 0;
+        opt.progressVal = calPercen(poll.total, opt.voteCnt);
+        poll.chart.data.push(opt.voteCnt);
+        poll.chart.colors.push(opt.color);
+        poll.chart.labels.push(opt.title);
+      });
+    };
+    // Tính phần trăm tỉ lệ vote cho opt
+    this.calPercen = calPercen;
+    function calPercen(total, value) {
+      if (total === 0) {
+        return 0;
+      }
+      return Math.floor(value * 100 / total) || 0;
+    }
     return this;
   }
 })();

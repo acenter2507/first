@@ -88,6 +88,7 @@ angular.module('core').service('Menus', [
       this.menus[menuId].items.push({
         title: options.title || '',
         state: options.state || '',
+        icon: options.icon || '',
         type: options.type || 'item',
         class: options.class,
         roles: ((options.roles === null || typeof options.roles === 'undefined') ? this.defaultRoles : options.roles),

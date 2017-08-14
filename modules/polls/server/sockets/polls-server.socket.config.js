@@ -36,7 +36,7 @@ module.exports = function (io, socket) {
 
   // On like poll
   socket.on('poll_like', req => {
-    io.sockets.in(req.pollId).emit('poll_like', req.report);
+    io.sockets.in(req.pollId).emit('poll_like', req.likeCnt);
     if (req.type === 0) {
       Notif.findOne({ poll: req.pollId, type: { $in: [0, 1] }, from: req.from, count: 0 })
         .then(_nof => {

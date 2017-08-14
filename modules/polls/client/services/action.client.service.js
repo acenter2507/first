@@ -299,7 +299,7 @@
         function successCb(res) {
           Socket.emit('poll_like', {
             pollId: poll._id,
-            report: res.report,
+            likeCnt: res.likeCnt,
             from: Authentication.user._id,
             to: poll.user._id,
             type: res.like.type

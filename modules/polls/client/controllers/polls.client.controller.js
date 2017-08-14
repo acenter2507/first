@@ -141,10 +141,8 @@
         vm.cmts = _.without(vm.cmts, _.findWhere(vm.cmts, { _id: cmtId }));
         vm.poll.cmtCnt -= 1;
       });
-      Socket.on('poll_like', report => {
-        // Update poll like
-        // TODO
-        //vm.poll.report = report;
+      Socket.on('poll_like', likeCnt => {
+        vm.poll.likeCnt = likeCnt;
       });
       Socket.on('cmt_like', res => {
         vm.cmts.forEach(cmt => {

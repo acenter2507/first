@@ -24,9 +24,8 @@ exports.create = function(req, res) {
       var pollId = _like.poll._id || _like.poll;
       return Poll.countLike(pollId, cnt);
     }, handleError)
-    .then(report => {
-      console.log('******************', report);
-      res.jsonp({ like: like, report: report });
+    .then(_poll => {
+      res.jsonp({ like: like, likeCnt: _poll.likeCnt });
     }, handleError);
 
   function handleError(err) {
@@ -65,9 +64,8 @@ exports.update = function(req, res) {
       var pollId = _like.poll._id || _like.poll;
       return Poll.countLike(pollId, cnt);
     }, handleError)
-    .then(report => {
-      console.log('******************', report);
-      res.jsonp({ like: like, report: report });
+    .then(_poll => {
+      res.jsonp({ like: like, likeCnt: _poll.likeCnt });
     }, handleError);
 
   function handleError(err) {

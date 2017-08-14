@@ -60,6 +60,24 @@
                   <div class="panel-body">
 
                     <div class="form-group">
+                      <div class="col-sm-12">
+                      <label for="sort">Sort by</label>
+                        <select id="sort" name="sort" class="form-control input-sm" ng-model="condition.sort">
+                          <option value>Default</option>
+                          <option value="-created">Newest to oldest</option>
+                          <option value="created">Oldest to newest</option>
+                          <option value="-likeCnt">Most likes</option>
+                          <option value="likeCnt">Least likes</option>
+                          <option value="-cmtCnt">Most comments</option>
+                          <option value="cmtCnt">Least comments</option>
+                          <option value="-voteCnt">Most votes</option>
+                          <option value="voteCnt">Least votes</option>
+                          <option value="-viewCnt">Most viewed</option>
+                          <option value="viewCnt">Least viewed</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
                       <!-- Status -->
                       <div class="col-sm-6">
                         <label for="status">Status</label>
@@ -186,64 +204,7 @@
                         </div>
                       </div>
                     </div>
-                    <!-- Comment -->
-                    <div class="form-group">
-                      <div class="col-xs-12"><label>Comment count</label></div>
-                      <div class="col-md-6">
-                        <select class="form-control" ng-model="condition.compare">
-							        	<option value></option>
-							        	<option value="least">At least</option>
-							        	<option value="most">As most</option>
-							        </select>
-                      </div>
-                      <div class="col-md-6">
-                        <input name="cmt" class="form-control" ng-model="condition.cmt">
-                      </div>
-                    </div>
-                    <!-- Time -->
-                    <div class="form-group">
-                      <div class="col-xs-12"><label>Created time</label></div>
-                      <div class="col-md-6">
-                        <select class="form-control" ng-model="condition.timing">
-							        	<option value></option>
-							        	<option value="new">Newer than</option>
-							        	<option value="old">Older than</option>
-							        </select>
-                      </div>
-                      <div class="col-md-6">
-                        <select class="form-control" ng-model="condition.created">
-							        	<option value></option>
-							        	<option value="86400">Yesterday</option>
-							        	<option value="604800">One week</option>
-							        	<option value="1209600">Two week</option>
-							        	<option value="2592000">One month</option>
-							        	<option value="7776000">Three months</option>
-							        	<option value="15552000">Six monthst</option>
-							        	<option value="31104000">One year</option>
-							        </select>
-                      </div>
-                    </div>
-                    <!-- Sort -->
-                    <div class="form-group">
-                      <div class="col-xs-12"><label>Sort by</label></div>
-                      <div class="col-md-6">
-                        <select class="form-control" ng-model="condition.sort">
-							        	<option value></option>
-							        	<option value="created">Created time</option>
-							        	<option value="cmtCnt">Number of comments</option>
-							        	<option value="likeCnt">Number of likes</option>
-							        	<option value="voteCnt">Number of votes</option>
-							        	<option value="viewCnt">Number of views</option>
-							        </select>
-                      </div>
-                      <div class="col-md-6">
-                        <select class="form-control" ng-model="condition.sortkind">
-							        	<option value></option>
-							        	<option value="desc">In descending order</option>
-							        	<option value="asc">In ascending order</option>
-							        </select>
-                      </div>
-                    </div>
+
                     <!-- Tools -->
                     <div class="form-group">
                       <div class="col-xs-12">

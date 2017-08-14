@@ -513,9 +513,12 @@ a:hover .header-profile-image {
   padding: 0; }
   .quick-search-submit {
     position: absolute;
-    right: 6px;
-    top: 6px;
-  }
+    right: 8px;
+    top: 6px; }
+  .quick-search-advance {
+    position: absolute;
+    right: 20px;
+    top: 6px; }
 .bg-primary,
 .bg-success,
 .bg-info,

@@ -97,14 +97,11 @@
   width: 90px;
   margin: auto;
   margin-top: 15px;
-  overflow: inherit;
 }
 .chart-base {
   max-height: 200px;
   max-width: 200px;
   margin: auto;
-  overflow: inherit;
-  background: transparent;
 }
 .progress {
   margin-bottom: 10px !important;

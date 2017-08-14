@@ -146,7 +146,7 @@ a:hover .header-profile-image {
   overflow: hidden; }
   .card.card-scroll .card-body .card-scroll-content {
     padding: 0.85rem;
-    width: calc(100% + 20px);
+    width: calc(100% + 10px);
     height: 300px;
     overflow: auto; }
 .card.card-scroll .card-body::-webkit-scrollbar {

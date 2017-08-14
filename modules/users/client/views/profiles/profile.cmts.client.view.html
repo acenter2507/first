@@ -9,6 +9,7 @@
   <div class="row mg50t" infinite-scroll="get_cmts()" infinite-scroll-distance='2'>
     <div ng-repeat="cmt in cmts | filter: cmt_filter" class="card">
       <div class="card-body">
+
         <div clas="post-header">
           <div class="user-avatar pull-left">
             <a ui-sref="profile.info({userId: profile._id})">
@@ -16,21 +17,23 @@
           </a>
           </div>
           <span class="pull-left">
-          <strong><a class="undecorated-link" ui-sref="profile.info({userId: profile._id})" ng-bind="profile.displayName"></a></strong>
-          <small class="text-muted">replied on</small>
-          <small class="text-muted" am-time-ago="cmt.created"></small>
-        </span>
+            <strong><a class="undecorated-link" ui-sref="profile.info({userId: profile._id})" ng-bind="profile.displayName"></a></strong>
+            <small class="text-muted">replied on</small>
+            <small class="text-muted" am-time-ago="cmt.created"></small>
+          </span>
           <br>
           <small ng-if="cmt.to">
-          <span class="text-muted">To:&nbsp;</span>
-          <a class="undecorated-link">{{cmt.toName}}</a>
-        </small>
+            <span class="text-muted">To:</span>
+            <a ui-sref="profile.view({ userId: cmt.to })" class="undecorated-link">{{cmt.toName}}</a>
+          </small>
           <div class="clearfix"></div>
           <hr class="mg5t mg10b">
         </div>
         <div class="post-body">
           <h3><a class="undecorated-link" ui-sref="polls.view({ pollId: cmt.poll._id })">{{cmt.poll.title}}</a></h3>
-          <p class="text-justify" ng-bind-html="cmt.body | nl2br"></p>
+          <blockquote>
+            <p class="text-justify" ng-bind-html="cmt.body | nl2br"></p>
+          </blockquote>
         </div>
         <div class="clearfix"></div>
       </div>

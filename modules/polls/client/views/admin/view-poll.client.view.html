@@ -9,11 +9,11 @@
   </div>
 </div>
 
-<!-- basic Info-->
+<!-- Report-->
 <div class="row mg12t">
   <div class="card">
     <div class="card-header">
-      <strong class="card-title"><i class="fa fa-user"></i> Basic info</strong>
+      <strong class="card-title"><i class="fa fa-user"></i> Report</strong>
       <div class="clearfix"></div>
     </div>
     <hr class="mgn">
@@ -51,6 +51,70 @@
           <div class="stat-value">{{vm.poll.reported}}</div>
           <span class="stat-label">Reported</span>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- basic Info-->
+<div class="row mg12t">
+  <div class="card card-expand">
+    <div class="card-header">
+      <strong class="card-title"><i class="fa fa-user"></i> Report</strong>
+      <a class="undecorated-link card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
+      <div class="clearfix"></div>
+    </div>
+    <hr class="mgn">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+          <div class="form-group">
+            <img src="{{vm.poll.user.profileImageURL}}" alt="{{vm.poll.user.displayName}}" class="img-thumbnail user-profile-picture">
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
+          <table class="table">
+            <tr>
+              <td>Title:</td>
+              <td>{{ vm.poll.title }}</td>
+            </tr>
+            <tr>
+              <td>Created user:</td>
+              <td>{{ vm.poll.user.displayName }}</td>
+            </tr>
+            <tr>
+              <td>Category:</td>
+              <td>{{ vm.poll.category.name }}</td>
+            </tr>
+            <tr>
+              <td>Close:</td>
+              <td>
+                <span ng-if="vm.poll.close">{{vm.poll.close | LLL_format}}</span>
+                <span ng-if="!vm.poll.close">Infinity</span>
+              </td>
+            </tr>
+            <tr>
+              <td>Sercurity:</td>
+              <td>{{(vm.poll.isPublic) ? 'Public' : 'Private'}}</td>
+            </tr>
+            <tr>
+              <td>Allow multiple vote:</td>
+              <td>{{ (vm.poll.allow_multiple) ? 'Multiple' : 'Single' }}</td>
+            </tr>
+            <tr>
+              <td>Allow suggest options:</td>
+              <td>{{ (vm.poll.allow_add) ? 'Allow' : 'Deny' }}</td>
+            </tr>
+            <tr>
+              <td>Allow guest vote:</td>
+              <td>{{ (vm.poll.allow_guest) ? 'Allow' : 'Deny' }}</td>
+            </tr>
+            <tr>
+              <td>Created:</td>
+              <td><span ng-bind="vm.poll.created | LLL_format"></span></td>
+            </tr>
+          </table>
+        </div>
+        <div class="clearfix"></div>
       </div>
     </div>
   </div>

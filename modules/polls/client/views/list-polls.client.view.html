@@ -54,15 +54,13 @@
         </div>
       </div>
       <!-- Popular poll -->
-      <div class="card card-tab" ng-init="popular_active = 1">
+      <div class="card card-tab">
         <div class="card-header">
           <strong class="card-title">Popular polls</strong>
-          <small class="card-link" ng-show="popular_active === 1"><a class="undecorated-link" ui-sref="search({ sort: '-likeCnt' })">View all</a></small>
-          <small class="card-link" ng-show="popular_active === 2"><a class="undecorated-link" ui-sref="search({ sort: '-voteCnt' })">View all</a></small>
-          <small class="card-link" ng-show="popular_active === 3"><a class="undecorated-link" ui-sref="search({ sort: '-cmtCnt' })">View all</a></small>
+          <small class="card-link"><a class="undecorated-link" ui-sref="search({ sort: '-likeCnt' })">Search</a></small>
         </div>
         <div class="card-body pdnt">
-          <uib-tabset active="popular_active" justified="true">
+          <uib-tabset justified="true">
             <uib-tab index="1" heading="Likes">
               <div class="side-list-poll" ng-repeat="poll in vm.populars.likes">
                 <div class="user-avatar pull-left">

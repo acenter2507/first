@@ -21,7 +21,7 @@
       <div class="profile-stats mgn">
         <div class="stat">
           <div class="stat-value">{{vm.poll.opts.length}}</div>
-          <span class="stat-label">Options</span>
+          <span class="stat-label"><a class="undecorated-link" href="#options">Options</a></span>
         </div>
         <div class="stat">
           <div class="stat-value">{{vm.poll.likeCnt}}</div>
@@ -130,7 +130,7 @@
     <hr class="mgn">
     <div class="card-body">
       <div class="table-responsive">
-        <table class="table table-bordered">
+        <table class="table table-bordered" id="#options">
           <thead class="bg-primary">
             <tr>
               <th>Vote count</th>
@@ -158,7 +158,7 @@
       <div class="clearfix"></div>
     </div>
   </div>
-</div> 
+</div>
 <!-- Polls -->
 <!-- <div class="row" ng-show="pollsPagedItems.length > 0">
   <div class="card card-expand">

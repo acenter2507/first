@@ -19,7 +19,12 @@
 
   <div class="row">
     <div class="col-xs-12 pdn">
-      <div class="card">
+      <div class="card card-expand">
+        <div class="card-header">
+          <strong class="card-title"><i class="fa fa-search"></i> Search tool</strong>
+          <a class="undecorated-link card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
+          <div class="clearfix"></div>
+        </div>
         <div class="card-body">
           <form name="form.searchForm" class="form-horizontal" ng-submit="search()" novalidate>
             <div class="form-group">
@@ -52,39 +57,59 @@
                 </div>
                 <div class="panel-collapse" role="tabpanel" bs-collapse-target>
                   <div class="panel-body">
-                    <!-- Status -->
-                    <div class="form-group">
-                      <div class="col-xs-12">
-                        <label>Status</label>
-                        <select class="form-control" ng-model="condition.status">
-							        	<option value></option>
-							        	<option value="opening">Opening</option>
-							        	<option value="closed">Closed</option>
-							        </select>
+                    <div class="row">
+                      <!-- Status -->
+                      <div class="form-group col-sm-6">
+                        <label for="status">Status</label>
+                        <select id="status" name="status" class="form-control input-sm" ng-model="condition.status">
+							          	<option value>All</option>
+							          	<option value="opening">Opening</option>
+							          	<option value="closed">Closed</option>
+							          </select>
                       </div>
-                    </div>
-                    <!-- User -->
-                    <div class="form-group">
-                      <div class="col-xs-12">
+                      <!-- User -->
+                      <div class="form-group col-sm-6">
                         <label>Posted by</label>
-                        <input name="by" type="hidden" class="form-control" ng-model="condition.by">
+                        <input name="by" type="hidden" class="form-control input-sm" ng-model="condition.by">
                         <angucomplete-alt placeholder="Search user" pause="300" selected-object="selectedUserFn" initial-value="selectedUser" remote-url="/api/users/search?s="
                           remote-url-data-field="users" title-field="displayName" description-field="username" image-field="profileImageURL"
                           minlength="1" input-class="form-control" match-class="highlight" />
                       </div>
-
                     </div>
-                    <!-- Category -->
-                    <div class="form-group">
-                      <div class="col-xs-10">
+                    <div class="row">
+                      <!-- Category -->
+                      <div class="form-group col-sm-12">
                         <label>Category</label>
-                        <select class="form-control" ng-model="condition.ctgr" name="ctgr" ng-options="category._id as category.name for category in categorys"></select>
+                        <select id="ctgr" name="ctgr" class="form-control input-sm" ng-model="condition.ctgr">
+                          <option value>All</option>
+                          <option ng-repeat="category in categorys" value="{{category._id}}" ng-selected="category._id === condition.ctgr">{{category.name}} ({{category.count}})</option>
+                        </select>
                       </div>
-                      <div class="col-xs-2 pdnl">
-                        <label>&nbsp;</label>
-                        <button type="button" ng-click="clear_ctgr()" class="btn btn-default form-control">
-                        <i class="fa fa-times" aria-hidden="true"></i>
-                      </button>
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-sm-4">
+                        <label for="allow_multiple">Allow multiple vote</label>
+                        <select id="allow_multiple" name="allow_multiple" class="form-control input-sm" ng-model="condition.allow_multiple">
+                        <option value>All</option>
+                        <option value="true">Allow</option>
+                        <option value="false">Deny</option>
+                      </select>
+                      </div>
+                      <div class="form-group col-sm-4">
+                        <label for="allow_add">Allow member suggest</label>
+                        <select id="allow_add" name="allow_add" class="form-control input-sm" ng-model="condition.allow_add">
+                          <option value>All</option>
+                          <option value="true">Allow</option>
+                          <option value="false">Deny</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-sm-4">
+                        <label for="allow_guest">Allow guest vote</label>
+                        <select id="allow_guest" name="allow_guest" class="form-control input-sm" ng-model="condition.allow_guest">
+                          <option value>All</option>
+                          <option value="true">Allow</option>
+                          <option value="false">Deny</option>
+                        </select>
                       </div>
                     </div>
                     <!-- Comment -->
@@ -177,20 +202,20 @@
     <div class="col-xs-12 pdn">
       <div ng-repeat="poll in polls | orderBy: sort" class="card">
         <div class="card-body">
-        <div clas="poll-header">
-          <div class="user-avatar pull-left">
-            <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user._id})">
+          <div clas="poll-header">
+            <div class="user-avatar pull-left">
+              <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user._id})">
               <img src="{{poll.user.profileImageURL}}" alt="{{poll.user.displayName}}">
             </a>
-            <img ng-if="!poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
-          </div>
-          <span class="pull-left">
+              <img ng-if="!poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
+            </div>
+            <span class="pull-left">
             <strong><a class="undecorated-link" ui-sref="profile.info({userId: poll.user._id})" ng-if="poll.user" ng-bind="poll.user.displayName"></a></strong>
             <span ng-if="!poll.user">Deleted User</span>
-          <small class="text-muted">&nbsp;created on</small>
-          <small class="text-muted" am-time-ago="poll.created"></small>
-          </span>
-          <span class="pull-right">
+            <small class="text-muted">&nbsp;created on</small>
+            <small class="text-muted" am-time-ago="poll.created"></small>
+            </span>
+            <span class="pull-right">
             <md-menu md-offset="-12 20" md-position-mode="target-right target">
               <a class="undecorated-link span-link" ng-click="$mdMenu.open($event)" aria-label="Open setting menu">
                 <i class="fa fa-angle-down"></i>
@@ -211,28 +236,28 @@
               </md-menu-content>
             </md-menu>
           </span>
-          <br>
-          <div class="mg5t">
-            <span ng-if="poll.allow_guest" class="fa fa-globe">
+            <br>
+            <div class="mg5t">
+              <span ng-if="poll.allow_guest" class="fa fa-globe">
               <md-tooltip md-direction="bottom">This poll is public</md-tooltip>
             </span>
-            <span ng-if="!poll.allow_guest" class="fa fa-users">
+              <span ng-if="!poll.allow_guest" class="fa fa-users">
               <md-tooltip md-direction="bottom">Only user can vote</md-tooltip>
             </span>
-            <a class="undecorated-link" ui-sref="categorys.polls({ categoryId: poll.category._id })">{{ poll.category.name }}</a>
+              <a class="undecorated-link" ui-sref="categorys.polls({ categoryId: poll.category._id })">{{ poll.category.name }}</a>
+            </div>
+            <div class="clearfix"></div>
+            <hr class="mg5t mg10b">
+          </div>
+
+          <div clas="poll-body">
+            <h3><a class="undecorated-link" ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a></h3>
+            <!--<p class="text-justify poll_item_body" ng-bind-html="poll.summary | nl2br"></p>-->
+            <div class="text-body" ta-bind="text" ng-model="poll.summary" ta-readonly="true"></div>
+            <div class="clearfix"></div>
+            <!-- #options -->
           </div>
           <div class="clearfix"></div>
-          <hr class="mg5t mg10b">
-        </div>
-
-        <div clas="poll-body">
-          <h3><a class="undecorated-link" ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a></h3>
-          <!--<p class="text-justify poll_item_body" ng-bind-html="poll.summary | nl2br"></p>-->
-          <div class="text-body" ta-bind="text" ng-model="poll.summary" ta-readonly="true"></div>
-          <div class="clearfix"></div>
-          <!-- #options -->
-        </div>
-        <div class="clearfix"></div>
         </div>
       </div>
     </div>

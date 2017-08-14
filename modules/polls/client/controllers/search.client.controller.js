@@ -22,34 +22,51 @@ angular.module('polls').controller('PollsSearchController', [
     $scope.categorys = Categorys.query();
 
     $scope.condition = {};
-    $scope.condition.key = $stateParams.key;
-    $scope.condition.in = $stateParams.in;
-    $scope.condition.status = $stateParams.status;
-    $scope.condition.ctgr = $stateParams.ctgr;
-
-    $scope.condition.cmt = $stateParams.cmt;
-    $scope.condition.compare = $stateParams.compare;
-
-    $scope.condition.created = $stateParams.created;
-    $scope.condition.timing = $stateParams.timing;
-
-    $scope.condition.sort = $stateParams.sort;
-    $scope.condition.sortkind = $stateParams.sortkind;
-
-    $scope.condition.by = $stateParams.by;
-    if ($scope.condition.by) {
-      Profile.get({ userId: $scope.condition.by }, _user => {
-        $scope.selectedUser = _user;
-      });
+    function initCondition() {
+      console.log($location.path);
+      if ($stateParams.key) {
+        $scope.condition.key = $stateParams.key;
+        $scope.condition.in = $stateParams.in;
+        Storages.set_local(Constants.storages.public_search_condition, JSON.stringify($scope.condition));
+      } else {
+        $scope.condition = JSON.parse(Storages.get_local(Constants.storages.public_search_condition, JSON.stringify({})));
+        if ($scope.condition.by) {
+          Profile.get({ userId: $scope.condition.by }, _user => {
+            $scope.selectedUser = _user;
+          });
+        }
+      }
+      search();
     }
-    $scope.search = () => {
-      $state.go('search', $scope.condition);
+    // $scope.condition.key = $stateParams.key;
+    // $scope.condition.in = $stateParams.in;
+    // $scope.condition.status = $stateParams.status;
+    // $scope.condition.ctgr = $stateParams.ctgr;
+
+    // $scope.condition.cmt = $stateParams.cmt;
+    // $scope.condition.compare = $stateParams.compare;
+
+    // $scope.condition.created = $stateParams.created;
+    // $scope.condition.timing = $stateParams.timing;
+
+    // $scope.condition.sort = $stateParams.sort;
+    // $scope.condition.sortkind = $stateParams.sortkind;
+
+    // $scope.condition.by = $stateParams.by;
+    // if ($scope.condition.by) {
+    //   Profile.get({ userId: $scope.condition.by }, _user => {
+    //     $scope.selectedUser = _user;
+    //   });
+    // }
+    $scope.search = search;
+    function search() {
+      //$state.go('search', $scope.condition);
     };
 
     $scope.busy = false;
     $scope.polls = [];
     $scope.sort = '-poll.created';
-    excute();
+    //excute();
     function excute() {
       if (check_params()) {
         $scope.busy = true;
@@ -97,11 +114,11 @@ angular.module('polls').controller('PollsSearchController', [
       Storages.set_local(Constants.storages.preferences, JSON.stringify($scope.condition));
       $location.url($location.path());
     };
-    
+
     $scope.clear_ctgr = () => {
       $scope.condition.ctgr = undefined;
     };
-    
+
     $scope.save_preferences = () => {
       Storages.set_local(Constants.storages.preferences, JSON.stringify($scope.condition));
     };

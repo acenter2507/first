@@ -516,7 +516,7 @@ a:hover .header-profile-image {
   .quick-search-submit {
     width: 0;
     position: relative;
-    left: -30;
+    left: -30px;
   }
 .bg-primary,
 .bg-success,

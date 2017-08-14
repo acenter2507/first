@@ -193,9 +193,9 @@
                   <img src="{{ cmt.user.profileImageURL }}" alt="{{ cmt.user.displayName }}" class="img-admin-avatar">
                 </div>
               </td>
-              <td><a ui-serf="admin.users.view({ userId: cmt.user._id })">{{ cmt.user.displayName }}</a></td>
+              <td><a class="undecorated-link" ui-sref="admin.users.view({ userId: cmt.user._id })">{{ cmt.user.displayName }}</a></td>
               <td>{{ cmt.body }}</td>
-              <td><a ui-serf="admin.users.view({ userId: cmt.to })">{{ cmt.toName }}</a></td>
+              <td><a class="undecorated-link" ui-sref="admin.users.view({ userId: cmt.to })">{{ cmt.toName }}</a></td>
               <td class="text-center">{{ cmt.likeCnt }}</td>
               <td><span ng-bind="cmt.created | LLL_format"></span></td>
               <td>

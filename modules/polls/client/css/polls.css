@@ -32,6 +32,9 @@
   text-justify: inter-word;
   font-size: 1.0em !important;
 }
+.text-body:focus {
+  outline: none;
+}
 .text-body img {
   max-width: 100%;
 }

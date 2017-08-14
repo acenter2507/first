@@ -1,7 +1,10 @@
 <div class="card" id="poll_cmt_form_card">
+  <div class="card-header">
+    <strong class="card-title"> Comments</strong>
+  </div>
   <div class="card-body">
     <div class="cmt_form" ng-if="vm.isLogged">
-      <div class="form-group">
+      <div class="form-group mg5b">
         <span ng-if="vm.tmp_cmt.to">@</span>
         <a class="undecorated-link" ng-if="vm.tmp_cmt.to" ui-sref="profile.info({userId: vm.tmp_cmt.to})" ng-bind="vm.tmp_cmt.toName"></a>
       </div>

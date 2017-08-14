@@ -32,6 +32,7 @@ angular.module('users').controller('ProfileBookmarksController', [
         })
         .then(results => {
           // Gán data vào list hiện tại
+          results = results || [];
           $scope.polls = _.union($scope.polls, results);
           $scope.page += 1;
           $scope.busy = false;

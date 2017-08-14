@@ -103,6 +103,7 @@
         })
         .then(results => {
           // Gán data vào list hiện tại
+          results = results || [];
           vm.polls = _.union(vm.polls, results);
           vm.page += 1;
           vm.busy = false;

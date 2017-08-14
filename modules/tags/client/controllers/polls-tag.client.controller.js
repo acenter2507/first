@@ -56,7 +56,7 @@
         })
         .then(results => {
           // Gán data vào list hiện tại
-          vm.polls = results;
+          vm.polls = results || [];
           $scope.busy = false;
         })
         .catch(err => {

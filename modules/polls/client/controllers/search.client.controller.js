@@ -62,7 +62,7 @@ angular.module('polls').controller('PollsSearchController', [
         })
         .then(results => {
           // Gán data vào list hiện tại
-          $scope.polls = results;
+          $scope.polls = results || [];
           $scope.busy = false;
         })
         .catch(err => {

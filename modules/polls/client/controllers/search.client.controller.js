@@ -16,7 +16,7 @@ angular.module('polls').controller('PollsSearchController', [
   'Profile',
   function ($location, $rootScope, $scope, $state, Authentication, Categorys, Action, $stateParams, Storages, Constants, toast, dialog, Profile) {
     $scope.user = Authentication.user;
-    $scope.isLogged = ($scope.user) ? true : false;
+    $scope.isLogged = ($scope.user);
     $scope.detailToggle = -1;
     $scope.form = {};
     $scope.categorys = Categorys.query();
@@ -58,13 +58,6 @@ angular.module('polls').controller('PollsSearchController', [
         });
       Storages.set_local(Constants.storages.public_search_condition, JSON.stringify($scope.condition));
     }
-    $scope.buildPager = buildPager;
-    function buildPager() {
-      $scope.pagedItems = [];
-      $scope.itemsPerPage = 10;
-      // figureOutItemsToDisplay();
-      $scope.busy = false;
-    }
 
     $scope.clear_filter = () => {
       $scope.condition = {};
@@ -86,10 +79,6 @@ angular.module('polls').controller('PollsSearchController', [
         $scope.selectedUser = undefined;
       }
     };
-
-
-
-
 
     $scope.delete_poll = (poll) => {
       if (poll.user._id !== $scope.user._id) {

@@ -99,8 +99,8 @@
           <form ng-submit="search()">
             <div class="form-group mgnb">
               <!--<span class="input-group-addon"><a class="btn-secondary undecorated-link default-text" type="button" ui-sref="search"><i class="fa fa-cogs"></i></a></span>-->
-              <input ng-model="search_key" type="text" class="form-control w99p" name="search" placeholder="Search...">
-              <span><a class="btn-secondary undecorated-link default-text" ng-click="search()"><i class="fa fa-search"></i></a></span>
+              <input ng-model="search_key" type="text" class="form-control quick-search-input" name="search" placeholder="Search...">
+              <a class="undecorated-link" ng-click="search()"><i class="fa fa-search quick-search-submit"></i></a>
             </div>
           </form>
         </ul>

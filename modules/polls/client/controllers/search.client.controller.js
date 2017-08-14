@@ -49,9 +49,8 @@ angular.module('polls').controller('PollsSearchController', [
       $scope.busy = true;
       Action.search($scope.condition)
         .then(res => {
-          // $scope.polls = res.data;
-          console.log(res.data);
-          // buildPager();
+          $scope.polls = res.data;
+          $scope.busy = false;
         })
         .catch(err => {
           toast.error(err.message, 'Error!');

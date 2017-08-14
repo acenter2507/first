@@ -23,7 +23,8 @@ var path = require('path'),
     './modules/core/server/controllers/errors.server.controller'
   )),
   _ = require('lodash'),
-  __ = require('underscore');
+  __ = require('underscore'),
+  _moment = require('moment');
 /**
  * Create a Poll
  */

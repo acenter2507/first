@@ -58,6 +58,7 @@
                 </div>
                 <div class="panel-collapse" role="tabpanel" bs-collapse-target>
                   <div class="panel-body">
+
                     <div class="form-group">
                       <!-- Status -->
                       <div class="col-sm-6">
@@ -77,9 +78,10 @@
                           minlength="1" input-class="form-control input-sm" match-class="highlight" />
                       </div>
                     </div>
-                    <!-- Category -->
+
                     <div class="form-group">
                       <div class="col-sm-6">
+                        <!-- Category -->
                         <label>Category</label>
                         <select id="ctgr" name="ctgr" class="form-control input-sm" ng-model="condition.ctgr">
                           <option value>All</option>
@@ -101,8 +103,8 @@
                       </div>
                     </div>
 
-                    <div class="row">
-                      <div class="form-group col-sm-4">
+                    <div class="form-group">
+                      <div class="col-sm-4">
                         <label for="allow_multiple">Allow multiple vote</label>
                         <select id="allow_multiple" name="allow_multiple" class="form-control input-sm" ng-model="condition.allow_multiple">
                         <option value>All</option>
@@ -110,7 +112,7 @@
                         <option value="false">Deny</option>
                       </select>
                       </div>
-                      <div class="form-group col-sm-4">
+                      <div class="col-sm-4">
                         <label for="allow_add">Allow member suggest</label>
                         <select id="allow_add" name="allow_add" class="form-control input-sm" ng-model="condition.allow_add">
                           <option value>All</option>
@@ -118,13 +120,70 @@
                           <option value="false">Deny</option>
                         </select>
                       </div>
-                      <div class="form-group col-sm-4">
+                      <div class="col-sm-4">
                         <label for="allow_guest">Allow guest vote</label>
                         <select id="allow_guest" name="allow_guest" class="form-control input-sm" ng-model="condition.allow_guest">
                           <option value>All</option>
                           <option value="true">Allow</option>
                           <option value="false">Deny</option>
                         </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="col-sm-6">
+                        <div class="col-sm-12 pdn"><label>Comments count</label></div>
+                        <div class="col-sm-6 pdn">
+                          <select class="form-control input-sm" ng-model="condition.cmts_pref">
+                            <option value>Not set</option>
+                            <option value="least">As least</option>
+                            <option value="most">As most</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-6 pdn">
+                          <input name="cmts" id="cmts" type="text" class="form-control input-sm" placeholder="Comments count" ng-model="condition.cmts">
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="col-sm-12 pdn"><label>Likes</label></div>
+                        <div class="col-sm-6 pdn">
+                          <select class="form-control input-sm" ng-model="condition.likes_pref">
+                            <option value>Not set</option>
+                            <option value="least">As least</option>
+                            <option value="most">As most</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-6 pdn">
+                          <input name="likes" id="likes" type="text" class="form-control input-sm" placeholder="Likes count" ng-model="condition.likes">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-sm-6">
+                        <div class="col-sm-12 pdn"><label>Votes</label></div>
+                        <div class="col-sm-6 pdn">
+                          <select class="form-control input-sm" ng-model="condition.votes_pref">
+                            <option value>Not set</option>
+                            <option value="least">As least</option>
+                            <option value="most">As most</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-6 pdn">
+                          <input name="votes" id="votes" type="text" class="form-control input-sm" placeholder="Votes count" ng-model="condition.votes">
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="col-sm-12 pdn"><label>Views</label></div>
+                        <div class="col-sm-6 pdn">
+                          <select class="form-control input-sm" ng-model="condition.views_pref">
+                            <option value>Not set</option>
+                            <option value="least">As least</option>
+                            <option value="most">As most</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-6 pdn">
+                          <input name="views" id="views" type="text" class="form-control input-sm" placeholder="Views count" ng-model="condition.views">
+                        </div>
                       </div>
                     </div>
                     <!-- Comment -->

@@ -297,23 +297,33 @@ exports.findPolls = function (req, res) {
 /**
  * Lấy danh sách poll nổi bật cho màn hình polls.list
  */
-exports.findHotPolls = function (req, res) {
-  var page = req.params.page || 0;
-  Poll.find({ isPublic: true })
-    .sort('-likeCnt')
-    .populate('category', 'name icon')
-    .populate('user', 'displayName profileImageURL')
-    .skip(10 * page)
-    .limit(10)
-    .exec(function (err, polls) {
-      if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      } else {
-        res.jsonp(polls);
-      }
+exports.findPopulars = function (req, res) {
+  let rs = {};
+  let sort = '-likeCnt';
+  let limit = 10;
+  get_polls_by_sort_and_limit(sort, limit)
+    .then(result => {
+      rs.likes = result || [];
+      sort = '-voteCnt';
+      return get_polls_by_sort_and_limit(sort, limit);
+    })
+    .then(result => {
+      rs.votes = result || [];
+      sort = '-cmtCnt';
+      return get_polls_by_sort_and_limit(sort, limit);
+    })
+    .then(result => {
+      rs.cmts = result || [];
+      res.jsonp(rs);
+    })
+    .catch(handleError);
+
+
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
     });
+  }
 };
 
 /**
@@ -811,7 +821,7 @@ function get_like_by_cmtId_and_userId(cmtId, userId) {
     });
   });
 }
-
+// Lấy full info của poll và các thông tin của user hiện hành với poll
 function get_full_by_pollId(pollId, userId) {
   var info = {};
   return new Promise((resolve, reject) => {
@@ -847,6 +857,22 @@ function get_full_by_pollId(pollId, userId) {
       });
   });
 }
+
+function get_polls_by_sort_and_limit(sort, limit) {
+  return new Promise((resolve, reject) => {
+    Poll.find({ isPublic: true })
+      .sort(sort)
+      .populate('user', 'displayName profileImageURL')
+      .limit(limit)
+      .exec(function (err, polls) {
+        if (err) {
+          return reject(err);
+        } else {
+          return resolve(polls);
+        }
+      });
+  });
+};
 exports.get_full_by_pollId = get_full_by_pollId;
 exports.get_opts_by_pollId = get_opts_by_pollId;
 exports.get_cmts_by_pollId = get_cmts_by_pollId;

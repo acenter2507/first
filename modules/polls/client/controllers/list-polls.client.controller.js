@@ -56,7 +56,7 @@
       // Load danh sách tags (Bao gồm số poll)
       get_popular_tags();
       // Load các polls có lượng like nhiều nhất
-      get_hot_polls();
+      get_populars();
       // Load danh sách poll đã bookmark
       if ($scope.isLogged) {
         get_bookmarks();
@@ -121,10 +121,10 @@
         return resolve(poll);
       });
     }
-    function get_hot_polls() {
-      Action.get_hot_polls(0)
+    function get_populars() {
+      Action.get_populars(0)
         .then(res => {
-          vm.hot_polls = res.data || [];
+          vm.populars = res.data;
         })
         .catch(err => {
           toast.error(err.message, 'Error!');
@@ -156,14 +156,6 @@
           toast.error(err.message, 'Error!');
         });
     }
-    // Tính phần trăm tỉ lệ vote cho opt
-    function calPercen(total, value) {
-      if (total === 0) {
-        return 0;
-      }
-      return Math.floor(value * 100 / total) || 0;
-    }
-
     // Thao tác khác
     $scope.delete_poll = (poll) => {
       if (!poll.isCurrentUserOwner) {

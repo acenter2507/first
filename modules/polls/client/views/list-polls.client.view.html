@@ -62,7 +62,7 @@
         <div class="card-body pdnt">
           <uib-tabset active="active" justified="true">
             <uib-tab index="1" heading="Likes">
-              <div class="side-list-poll" ng-repeat="poll in vm.hot_polls">
+              <div class="side-list-poll" ng-repeat="poll in vm.populars.likes">
                 <div class="user-avatar pull-left">
                   <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user._id})">
                   <img src="{{poll.user.profileImageURL}}" alt="{{poll.user.displayName}}">
@@ -81,17 +81,8 @@
                 <hr class="mg5t mg5b">
               </div>
             </uib-tab>
-            <uib-tab index="2" heading="Votes">Static content 2</uib-tab>
-            <uib-tab index="3" heading="Comments">Static content 3</uib-tab>
-          </uib-tabset>
-          <!--<ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#popular-likes" aria-controls="home" role="tab" data-toggle="tab">Likes</a></li>
-            <li role="presentation"><a href="#popular-votes" aria-controls="votes" role="tab" data-toggle="tab">Votes</a></li>
-            <li role="presentation"><a href="#popular-comments" aria-controls="comments" role="tab" data-toggle="tab">Comments</a></li>
-          </ul>
-          <div class="tab-content">
-            <div id="popular-likes" class="tab-pane fade in active">
-              <div class="side-list-poll" ng-repeat="poll in vm.hot_polls">
+            <uib-tab index="2" heading="Votes">
+              <div class="side-list-poll" ng-repeat="poll in vm.populars.votes">
                 <div class="user-avatar pull-left">
                   <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user._id})">
                   <img src="{{poll.user.profileImageURL}}" alt="{{poll.user.displayName}}">
@@ -109,14 +100,28 @@
                 <div class="clearfix"></div>
                 <hr class="mg5t mg5b">
               </div>
-            </div>
-            <div id="popular-votes" class="tab-pane fade">
-              <h2>a</h2>
-            </div>
-            <div id="popular-comments" class="tab-pane fade">
-              <h2>b</h2>
-            </div>
-          </div>-->
+            </uib-tab>
+            <uib-tab index="3" heading="Comments">
+              <div class="side-list-poll" ng-repeat="poll in vm.populars.cmts">
+                <div class="user-avatar pull-left">
+                  <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user._id})">
+                  <img src="{{poll.user.profileImageURL}}" alt="{{poll.user.displayName}}">
+                  </a>
+                  <img ng-if="!poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
+                </div>
+                <div class="side-list-body">
+                  <h4 class="side-list-title">
+                    <a class="undecorated-link" ui-sref="polls.view({pollId: poll._id})" ng-bind="poll.title" autoAdjust></a>
+                  </h4>
+                  <div class="side-list-entry">
+                    <small am-time-ago="poll.created"></small>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+                <hr class="mg5t mg5b">
+              </div>
+            </uib-tab>
+          </uib-tabset>
         </div>
       </div>
       <!-- Popular tags -->

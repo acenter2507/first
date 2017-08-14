@@ -58,10 +58,10 @@
     /**
      * Lấy danh sách poll mổi bật cho màn hình polls.list
      */
-    this.get_hot_polls = (_page) => {
+    this.get_populars = (_page) => {
       return new Promise((resolve, reject) => {
         var page = _page || 0;
-        $http.get('/api/findHotPolls/' + page)
+        $http.get('/api/findPopulars/' + page)
           .then(res => {
             return resolve(res);
           }, err => {

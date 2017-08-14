@@ -44,7 +44,8 @@
   ) {
     var vm = this;
     vm.authentication = Authentication;
-    vm.isLogged = vm.authentication.user ? true : false;
+    vm.user = Authentication.user;
+    vm.isLogged = vm.user ? true : false;
     vm.poll = poll;
 
     vm.form = {};
@@ -118,7 +119,7 @@
       }
       Socket.emit('subscribe_poll', {
         pollId: vm.poll._id,
-        userId: vm.authentication.user._id
+        userId: vm.user._id
       });
       Socket.on('cmt_add', cmtId => {
         Action.get_cmt(cmtId)
@@ -204,7 +205,7 @@
       $scope.$on('$destroy', function () {
         Socket.emit('unsubscribe_poll', {
           pollId: vm.poll._id,
-          userId: vm.authentication.user._id
+          userId: vm.user._id
         });
         Socket.removeListener('cmt_add');
         Socket.removeListener('cmt_del');
@@ -353,7 +354,7 @@
     }
 
     function save_vote() {
-      if (!vm.authentication.user && !vm.poll.allow_guest) {
+      if (!vm.user && !vm.poll.allow_guest) {
         return $state.go('authentication.signin');
       }
       if (!vm.selectedOpts.length || vm.selectedOpts.length === 0) {
@@ -607,7 +608,7 @@
         toast.error('You must login to like this comment.', 'Error!');
         return;
       }
-      if (vm.authentication.user._id === cmt.user._id) {
+      if (vm.user._id === cmt.user._id) {
         toast.error('You cannot like your comment.', 'Error!');
         return;
       }

@@ -511,13 +511,9 @@ a:hover .header-profile-image {
 .quick-search {
   position: relative;
   padding: 0; }
-  .quick-search-input {
-    display: inline-block !important;
-    width: 99% !important; }
   .quick-search-submit {
     position: absolute;
-    top: 0;
-    right: 0;
+    right: 10px;
   }
 .bg-primary,
 .bg-success,

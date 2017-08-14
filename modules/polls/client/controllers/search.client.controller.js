@@ -25,7 +25,7 @@ angular.module('polls').controller('PollsSearchController', [
     initCondition();
     function initCondition() {
       var param = $location.search();
-      if (param) {
+      if (!param) {
         console.log('Has no param');
       } else {
         console.log(param);

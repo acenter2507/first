@@ -29,7 +29,11 @@
         </div>
         <div class="post-body">
           <h3><a class="undecorated-link" ui-sref="polls.view({ pollId: vote.poll._id })">{{vote.poll.title}}</a></h3>
-          <span>Voted options:</span><strong ng-bind="vote.opts"></strong></span>
+          <span>Voted options:</span>
+          <span ng-bind="vote.opts" ng-class="{'mg5l': !$first}">
+            <strong>{{ opt.title }}</strong>
+            <span ng-if="!$first">,</span>
+          </span>
         </div>
         <div class="clearfix"></div>
       </div>

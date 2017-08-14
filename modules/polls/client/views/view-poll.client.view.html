@@ -168,7 +168,29 @@
       <!-- Report -->
       <div class="card" id="poll_report_card">
         <div class="card-body">
-          <div class="col-xs-4 pdn">
+          <div class="profile-stats mgn">
+            <div class="stat">
+              <div class="stat-value">{{vm.poll.viewCnt}}</div>
+              <span class="stat-label">views</span>
+            </div>
+          </div>
+            <div class="stat">
+              <div class="stat-value">{{vm.poll.viewCnt}}</div>
+              <span class="stat-label">views</span>
+            </div>
+          </div>
+            <div class="stat">
+              <div class="stat-value">{{vm.poll.viewCnt}}</div>
+              <span class="stat-label">views</span>
+            </div>
+          </div>
+            <div class="stat">
+              <div class="stat-value">{{vm.poll.viewCnt}}</div>
+              <span class="stat-label">views</span>
+            </div>
+          </div>
+
+          <!--<div class="col-xs-4 pdn">
             <div class="poll_info_item pull-left">
               <span class="text-center"><strong>VIEWS</strong></span>
               <span class="text-center" ng-bind="vm.poll.viewCnt"></span>
@@ -188,7 +210,7 @@
               <span class="text-center" ng-bind="vm.poll.cmtCnt"></span>
               <br>
             </div>
-          </div>
+          </div>-->
           <div class="clearfix"></div>
         </div>
       </div>
@@ -243,6 +265,7 @@
     <div class="clearfix"></div>
   </div>
 </section>
+
 <section class="container" ng-hide="vm.isShow">
   <!-- Breadcrumb -->
   <div class="row mg10t">

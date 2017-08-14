@@ -24,7 +24,12 @@ angular.module('polls').controller('PollsSearchController', [
     $scope.condition = {};
     initCondition();
     function initCondition() {
-      console.log($location.search());
+      var param = $location.search();
+      if (param) {
+        console.log('Has no param');
+      } else {
+        console.log(param);
+      }
       if ($stateParams.key) {
         $scope.condition.key = $stateParams.key;
         $scope.condition.in = $stateParams.in;

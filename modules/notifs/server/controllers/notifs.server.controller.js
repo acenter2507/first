@@ -137,7 +137,7 @@ exports.markAllRead = function (req, res) {
   Notif.update(
     { to: req.user._id, status: 0 },
     { $set: { status: 1 } },
-    { "multi": true }
+    { 'multi': true }
   ).exec((err, result) => {
     console.log(result);
     res.end();

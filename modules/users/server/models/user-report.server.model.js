@@ -25,6 +25,10 @@ var UserreportSchema = new Schema({
   cmtCnt: {
     type: 'Number',
     default: 0
+  },
+  rank: {
+    type: 'Number',
+    default: 0
   }
 });
 

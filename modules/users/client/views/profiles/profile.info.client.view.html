@@ -8,6 +8,10 @@
   </div>
   <div class="row profile-stats">
     <div class="stat">
+      <div class="stat-value">{{report.rank}}</div>
+      <span class="stat-label">Rank</span>
+    </div>
+    <div class="stat">
       <div class="stat-value">{{report.pollCnt}}</div>
       <span class="stat-label">Polls</span>
     </div>
@@ -19,16 +23,12 @@
       <div class="stat-value">{{report.cmtCnt}}</div>
       <span class="stat-label">Comments</span>
     </div>
-    <div class="stat">
-      <div class="stat-value">12</div>
-      <span class="stat-label">Polls</span>
-    </div>
   </div>
   <div class="row profile-joined">
     <span>join </span>
     <strong><span am-time-ago="profile.created"></span></strong>
     <span>last online</span>
-    <strong><span>****</span></strong>
+    <strong><span ng-bind="profile.lastLogin | LLL_format"></span></strong>
   </div>
   <div class="row">
     <hr>

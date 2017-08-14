@@ -56,6 +56,16 @@ a:hover .header-profile-image {
   padding-top: 11px !important;
   padding-bottom: 11px !important;
 }
+
+
+.notif-dropdown-toggle {
+  position: relative; }
+  .notif-dropdown-toggle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -16px;
+    margin-left: 0; }
 .notif-number {
   position: absolute;
   top: 8px;
@@ -70,8 +80,6 @@ a:hover .header-profile-image {
   text-align: center;
   padding: auto;
   box-shadow:0 0 1px #333; }
-  .notif-dropdown-toggle {
-    position: relative; }
   .notifis-list {
     border: none;
     box-shadow: 0 1px 2px rgba(0,0,0,.1);

@@ -57,11 +57,11 @@
       <div class="card card-tab">
         <div class="card-header">
           <strong class="card-title">Popular polls</strong>
-          <small class="card-link" ng-show="vm.hot_polls.length > 0"><a class="undecorated-link" ui-sref="search({ sort: 'likeCnt' })">View detail</a></small>
+          <small class="card-link"><a class="undecorated-link" ui-sref="search({ sort: 'likeCnt' })">Search</a></small>
         </div>
         <div class="card-body pdnt">
           <uib-tabset active="active" justified="true">
-            <uib-tab index="1" heading="Likes" classes="aaa">
+            <uib-tab index="1" heading="Likes">
               <div class="side-list-poll" ng-repeat="poll in vm.populars.likes">
                 <div class="user-avatar pull-left">
                   <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user._id})">

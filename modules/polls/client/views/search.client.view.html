@@ -25,6 +25,7 @@
           <a class="undecorated-link card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
           <div class="clearfix"></div>
         </div>
+        <hr class="mgn">
         <div class="card-body">
           <form name="form.searchForm" class="form-horizontal" ng-submit="search()" novalidate>
             <div class="form-group">
@@ -70,10 +71,10 @@
                       <!-- User -->
                       <div class="form-group col-sm-6">
                         <label>Posted by</label>
-                        <input name="by" type="hidden" class="form-control input-sm" ng-model="condition.by">
+                        <input name="by" type="hidden" class="form-control" ng-model="condition.by">
                         <angucomplete-alt placeholder="Search user" pause="300" selected-object="selectedUserFn" initial-value="selectedUser" remote-url="/api/users/search?s="
                           remote-url-data-field="users" title-field="displayName" description-field="username" image-field="profileImageURL"
-                          minlength="1" input-class="form-control" match-class="highlight" />
+                          minlength="1" input-class="form-control input-sm" match-class="highlight" />
                       </div>
                     </div>
                     <div class="row">

@@ -70,8 +70,9 @@
     <ul class="nav navbar-nav navbar-right" ng-show="authentication.user">
       <li class="dropdown" uib-dropdown ui-sref-active="active">
         <a class="dropdown-toggle notif-dropdown-toggle" uib-dropdown-toggle role="button">
-          <span class="fa fa-bell-o fa-lg"></span>
-          <span class="notif-number" ng-bind="uncheckNotifs" ng-show="uncheckNotifs > 0"></span>
+          <i class="icon-bell"></i><span class="badge badge-pill badge-danger" ng-bind="uncheckNotifs" ng-show="uncheckNotifs > 0"></span>
+          <!-- <span class="fa fa-bell-o fa-lg"></span> -->
+          <!-- <span class="notif-number" ng-bind="uncheckNotifs" ng-show="uncheckNotifs > 0"></span> -->
         </a>
         <ul class="dropdown-menu notifis-list mg2t" role="menu">
           <a ng-repeat="notif in notifs" ui-sref="{{notif.state}}({ pollId: notif.poll._id, notif: notif._id })" class="notifis-list-item">

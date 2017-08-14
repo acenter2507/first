@@ -170,7 +170,7 @@ a:hover .header-profile-image {
     .nav-tabs > li.active > a:hover {
       border-width: 0; }
     .nav-tabs > li > a {
-      border: none;
+      border: none !important;
       color: #666; }
         .nav-tabs > li.active > a, .nav-tabs > li > a:hover { border: none; color: #4285F4 !important; background: transparent; }
         .nav-tabs > li > a::after { content: ""; background: #4285F4; height: 2px; position: absolute; width: 100%; left: 0px; bottom: -1px; transition: all 250ms ease 0s; transform: scale(0); }

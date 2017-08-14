@@ -512,14 +512,14 @@ a:hover .header-profile-image {
   position: relative;
   padding: 0; }
   .quick-search-input {
-    padding-right: 60px; }
+    padding-right: 50px; }
   .quick-search-submit {
     position: absolute;
-    right: 10px;
+    right: 30px;
     top: 6px; }
   .quick-search-advance {
     position: absolute;
-    right: 30px;
+    right: 10px;
     top: 6px; }
 .bg-primary,
 .bg-success,

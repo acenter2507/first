@@ -30,7 +30,7 @@
         <div class="post-body">
           <h3><a class="undecorated-link" ui-sref="polls.view({ pollId: vote.poll._id })">{{vote.poll.title}}</a></h3>
           <span>Voted options:</span>
-          <span ng-bind="vote.opts" ng-class="{'mg5l': !$first}">
+          <span ng-repeat="opt in vote.opts" ng-class="{'mg5l': !$first}">
             <strong>{{ opt.title }}</strong>
             <span ng-if="!$last">,</span>
           </span>

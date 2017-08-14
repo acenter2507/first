@@ -60,7 +60,7 @@ a:hover .header-profile-image {
 
 .notif-dropdown-toggle {
   position: relative; }
-  .notif-dropdown-toggle {
+  .notif-dropdown-toggle .badge {
     position: absolute;
     top: 50%;
     left: 50%;

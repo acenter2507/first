@@ -537,6 +537,7 @@
         poll.chart.colors.push(opt.color);
         poll.chart.labels.push(opt.title);
       });
+      return poll;
     };
     // Tính phần trăm tỉ lệ vote cho opt
     this.calPercen = calPercen;

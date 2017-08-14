@@ -131,6 +131,18 @@ exports.findNotifs = function(req, res) {
 };
 
 /**
+ * Count uncheck notifs
+ */
+exports.markAllRead = function(req, res) {
+  Notif.update(
+    { to: req.user._id, status: 0 },
+    {$set: { status: 1 }}
+  ).exec((err, result) => {
+    console.log(result);
+    res.end();
+  });
+};
+/**
  * Notif middleware
  */
 exports.notifByID = function(req, res, next, id) {

@@ -30,6 +30,9 @@
       },
       countUnchecks: () => {
         return $http.get('/api/countUnchecks');
+      },
+      markAllRead: () => {
+        return $http.get('/api/markAllRead');
       }
     };
   }

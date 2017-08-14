@@ -82,7 +82,13 @@ angular.module('core').controller('HeaderController', [
           });
       });
     }
-
+    $scope.mark_all_read = () => {
+      NotifsApi.markAllRead()
+        .then(res => {
+          loadNotifs(10);
+          loadUncheckNotifs();
+        });
+    };
     $scope.search_key = '';
     $scope.search = () => {
       if ($scope.search_key !== '') {

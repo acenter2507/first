@@ -11,7 +11,7 @@ acl = new acl(new acl.memoryBackend());
 /**
  * Invoke Notifs Permissions
  */
-exports.invokeRolesPolicies = function() {
+exports.invokeRolesPolicies = function () {
   acl.allow([
     {
       roles: ['admin'],
@@ -31,6 +31,10 @@ exports.invokeRolesPolicies = function() {
         {
           resources: '/api/findNotifs/:limit',
           permissions: '*'
+        },
+        {
+          resources: '/api/markAllRead',
+          permissions: '*'
         }
       ]
     },
@@ -43,7 +47,7 @@ exports.invokeRolesPolicies = function() {
         },
         {
           resources: '/api/notifs/:notifId',
-          permissions: ['get']
+          permissions: '*'
         },
         {
           resources: '/api/countUnchecks',
@@ -52,19 +56,10 @@ exports.invokeRolesPolicies = function() {
         {
           resources: '/api/findNotifs/:limit',
           permissions: '*'
-        }
-      ]
-    },
-    {
-      roles: ['guest'],
-      allows: [
-        {
-          resources: '/api/notifs',
-          permissions: ['get']
         },
         {
-          resources: '/api/notifs/:notifId',
-          permissions: ['get']
+          resources: '/api/markAllRead',
+          permissions: '*'
         }
       ]
     }
@@ -74,7 +69,7 @@ exports.invokeRolesPolicies = function() {
 /**
  * Check If Notifs Policy Allows
  */
-exports.isAllowed = function(req, res, next) {
+exports.isAllowed = function (req, res, next) {
   var roles = req.user ? req.user.roles : ['guest'];
 
   // If an Notif is being processed and the current user created it then allow any manipulation
@@ -89,7 +84,7 @@ exports.isAllowed = function(req, res, next) {
     roles,
     req.route.path,
     req.method.toLowerCase(),
-    function(err, isAllowed) {
+    function (err, isAllowed) {
       if (err) {
         // An authorization error occurred
         return res.status(500).send('Unexpected authorization error');

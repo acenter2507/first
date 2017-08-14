@@ -24,6 +24,10 @@ body {
     .content::-webkit-scrollbar-thumb {
     background: #ddd; }
 
+*:focus {
+  outline: none !important;
+}
+
 .undecorated-link:hover {
   text-decoration: none;
   cursor: pointer; }
@@ -161,8 +165,6 @@ a:hover .header-profile-image {
 .nav-tabs {
   border: none;
   border-bottom: 2px solid #DDD; }
-    .nav-tabs > li.active > a:focus {
-      outline: 0; }
     .nav-tabs > li.active > a,
     .nav-tabs > li.active > a:focus,
     .nav-tabs > li.active > a:hover {

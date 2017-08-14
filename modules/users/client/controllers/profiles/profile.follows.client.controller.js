@@ -66,12 +66,6 @@ angular.module('users').controller('ProfileFollowsController', [
       }
       Action.save_follow(poll.follow)
         .then(res => {
-          if (res) {
-            poll.follow = res;
-            toast.success('You followed ' + poll.title, 'Success!');
-          } else {
-            poll.follow = { poll: poll._id };
-          }
         })
         .catch(err => {
           toast.error(err.message, 'Error!');

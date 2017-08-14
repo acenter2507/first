@@ -34,6 +34,7 @@
           vm.poll.followed = res.data.followed;
           vm.poll.bookmarked = res.data.bookmarked;
           vm.poll.reported = res.data.reported;
+          vm.poll.cmts = res.data.cmts;
         })
         .catch(err => {
           toast.error(err.message, 'Error!');

@@ -29,7 +29,7 @@
         </div>
         <div class="stat">
           <div class="stat-value">{{vm.poll.cmtCnt}}</div>
-          <span class="stat-label">Comments</span>
+          <span class="stat-label"><a class="undecorated-link" href="#comments">Comments</a></span>
         </div>
         <div class="stat">
           <div class="stat-value">{{vm.poll.voteCnt}}</div>
@@ -120,7 +120,7 @@
   </div>
 </div>
 <!-- Options -->
- <div class="row" ng-show="vm.poll.opts.length > 0">
+<div class="row" ng-show="vm.poll.opts.length > 0">
   <div class="card card-expand">
     <div class="card-header">
       <strong class="card-title"><i class="fa fa-list-alt"></i> List options</strong>
@@ -138,6 +138,7 @@
               <th>Added</th>
               <th class="text-center">Status</th>
               <th>Created</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -151,6 +152,55 @@
                 <div class="mga w30 h10 bg-danger" ng-if="opt.status === 3"></div>
               </td>
               <td><span ng-bind="opt.created | LLL_format"></span></td>
+              <td class="text-center">
+                <a class="undecorated-link mg5l" ng-click="remove_opt(opt)"><i class="icon-trash icons"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div>
+<!-- Comments -->
+<div class="row" ng-show="vm.poll.cmts.length > 0">
+  <div class="card card-expand">
+    <div class="card-header">
+      <strong class="card-title"><i class="fa fa-list-alt"></i> List comments</strong>
+      <a class="undecorated-link card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
+      <div class="clearfix"></div>
+    </div>
+    <hr class="mgn">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="comments">
+          <thead class="bg-primary">
+            <tr>
+              <th class="text-center"><i class="icon-people"></i></th>
+              <th>User</th>
+              <th>Body</th>
+              <th>Reply to</th>
+              <th class="text-center">Likes</th>
+              <th>Created</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="cmt in vm.poll.cmts">
+              <td class="text-center">
+                <div class="admin-avatar">
+                  <img src="{{ cmt.user.profileImageURL }}" alt="{{ cmt.user.displayName }}" class="img-admin-avatar">
+                </div>
+              </td>
+              <td>{{ cmt.user.displayName }}</td>
+              <td>{{ cmt.body }}</td>
+              <td><a ui-serf="admin.users.view({ userId: cmt.to })">{{ cmt.toName }}</a></td>
+              <td class="text-center">{{ cmt.likeCnt }}</td>
+              <td><span ng-bind="cmt.created | LLL_format"></span></td>
+              <td class="text-center">
+                <a class="undecorated-link mg5l" ng-click="remove_cmt(cmt)"><i class="icon-trash icons"></i></a>
+              </td>
             </tr>
           </tbody>
         </table>

@@ -634,7 +634,9 @@ function get_opts_by_pollId(pollId) {
 // Lấy các comment có cho poll
 function get_cmts_by_pollId(pollId) {
   return new Promise((resolve, reject) => {
-    Cmt.find({ poll: pollId }).exec((err, cmts) => {
+    Cmt.find({ poll: pollId })
+      .populate('user', 'displayName profileImageURL')
+      .exec((err, cmts) => {
       if (err) {
         return reject(err);
       } else {

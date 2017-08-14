@@ -50,14 +50,18 @@ var CmtSchema = new Schema({
   }
 });
 
-CmtSchema.pre('save', function(next){
+CmtSchema.pre('save', function (next) {
   next();
 });
 
-CmtSchema.statics.countLike = function(id, cnt, callback) {
-  return this.findOne({ _id: id }).exec(function(err, cmt) {
-    cmt.likeCnt += cnt;
-    return cmt.save();
+CmtSchema.statics.countLike = function (id, cnt, callback) {
+  return this.findOne({ _id: id }).exec(function (err, cmt) {
+    if (cmt) {
+      cmt.likeCnt += cnt;
+      return cmt.save();
+    } else {
+      console.log('Error!: Not found cmt with ID: ' + id);
+    }
   });
 };
 

@@ -17,22 +17,19 @@
           </a>
           </div>
           <span class="pull-left">
-          <strong><a class="undecorated-link" ui-sref="profile.info({userId: profile._id})" ng-bind="profile.displayName"></a></strong>
-          <small class="text-muted">voted on</small>
-          <small class="text-muted" am-time-ago="vote.created"></small>
-          <small ng-if="vote.updateCnt > 0" class="text-muted">last change </small>
-          <small ng-if="vote.updateCnt > 0" class="text-muted" am-time-ago="vote.updated"></small>
-        </span>
+            <strong><a class="undecorated-link" ui-sref="profile.info({userId: profile._id})" ng-bind="profile.displayName"></a></strong>
+            <small class="text-muted">voted on</small>
+            <small class="text-muted" am-time-ago="vote.created"></small>
+            <small ng-if="vote.updateCnt > 0" class="text-muted">last change </small>
+            <small ng-if="vote.updateCnt > 0" class="text-muted" am-time-ago="vote.updated"></small>
+          </span>
           <br>
           <div class="clearfix"></div>
           <hr class="mg5t mg10b">
         </div>
         <div class="post-body">
           <h3><a class="undecorated-link" ui-sref="polls.view({ pollId: vote.poll._id })">{{vote.poll.title}}</a></h3>
-          <span>Voted for:</span>
-          <span ng-repeat="opt in vote.opts" ng-class="{'mg5l': !$first}">
-          <strong>{{ opt.title }}</strong>
-        </span>
+          <span>Voted options:</span><strong ng-bind="vote.opts"></strong></span>
         </div>
         <div class="clearfix"></div>
       </div>

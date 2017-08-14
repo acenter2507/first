@@ -10,13 +10,10 @@ angular.module('users').controller('ProfileVotesController', [
     $scope.page = 0;
     $scope.busy = false;
     $scope.stopped = false;
-    $scope.new_data = [];
 
     $scope.get_votes = get_votes;
     function get_votes() {
-      if ($scope.busy || $scope.stopped) {
-        return;
-      }
+      if ($scope.busy || $scope.stopped) return;
       $scope.busy = true;
       UserApi.get_votes($scope.profile._id, $scope.page)
         .success(res => {

@@ -79,7 +79,7 @@ a:hover .header-profile-image {
     padding: 4px 12px;
     line-height: 1.2em; }
   a.notifis-list-item.unread {
-    background-color: #edf2fa; }
+    background-color: #f2f5fb; }
   a.notifis-list-item:not(:last-child) {
     border-bottom: 1px solid #eee; }
   a.notifis-list-item:hover,

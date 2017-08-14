@@ -164,7 +164,7 @@ a:hover .header-profile-image {
 
 .nav-tabs {
   border: none !important;
-  border-bottom: 3px solid #DDD !important; }
+  border-bottom: 2px solid #DDD !important; }
     .nav-tabs > li.active > a,
     .nav-tabs > li.active > a:focus,
     .nav-tabs > li.active > a:hover {
@@ -180,7 +180,7 @@ a:hover .header-profile-image {
         .nav-tabs > li > a::after {
           content: "";
           background: #4285F4;
-          height: 3px;
+          height: 2px;
           position: absolute;
           width: 100%;
           left: 0px;

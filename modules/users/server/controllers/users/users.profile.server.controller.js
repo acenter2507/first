@@ -184,6 +184,7 @@ exports.polls = function (req, res) {
   var userId = req.user ? req.user._id : undefined;
   Poll.find({ user: req.profile._id })
     .sort('-created')
+    .populate('user', 'displayName profileImageURL')
     .populate('category', 'name icon')
     .skip(10 * page)
     .limit(10).exec()

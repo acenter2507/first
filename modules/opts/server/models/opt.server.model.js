@@ -44,11 +44,4 @@ var OptSchema = new Schema({
   }
 });
 
-/**
- * Hook a pre save method to hash the password
- */
-OptSchema.pre('save', function (next) {
-  next();
-});
-
 mongoose.model('Opt', OptSchema);

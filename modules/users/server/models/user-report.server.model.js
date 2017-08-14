@@ -32,38 +32,48 @@ var UserreportSchema = new Schema({
   }
 });
 
-UserreportSchema.statics.countUpView = function(id, callback) {
-  return this.findOne({ user: id }).exec(function(err, report) {
-    report.viewCnt += 1;
-    return report.save();
+UserreportSchema.statics.countUpView = function (id, callback) {
+  return this.findOne({ user: id }).exec(function (err, report) {
+    if (report) {
+      report.viewCnt += 1;
+      return report.save();
+    }
   });
 };
 
-UserreportSchema.statics.countUpPoll = function(id, callback) {
-  return this.findOne({ user: id }).exec(function(err, report) {
-    report.pollCnt += 1;
-    return report.save();
+UserreportSchema.statics.countUpPoll = function (id, callback) {
+  return this.findOne({ user: id }).exec(function (err, report) {
+    if (report) {
+      report.pollCnt += 1;
+      return report.save();
+    }
   });
 };
 
-UserreportSchema.statics.countDownPoll = function(id, callback) {
-  return this.findOne({ user: id }).exec(function(err, report) {
-    report.pollCnt -= 1;
-    return report.save();
+UserreportSchema.statics.countDownPoll = function (id, callback) {
+  return this.findOne({ user: id }).exec(function (err, report) {
+    if (report) {
+      report.pollCnt -= 1;
+      return report.save();
+    }
   });
 };
 
-UserreportSchema.statics.countUpCmt = function(id, callback) {
-  return this.findOne({ user: id }).exec(function(err, report) {
-    report.cmtCnt += 1;
-    return report.save();
+UserreportSchema.statics.countUpCmt = function (id, callback) {
+  return this.findOne({ user: id }).exec(function (err, report) {
+    if (report) {
+      report.cmtCnt += 1;
+      return report.save();
+    }
   });
 };
 
-UserreportSchema.statics.countDownCmt = function(id, callback) {
-  return this.findOne({ user: id }).exec(function(err, report) {
-    report.cmtCnt -= 1;
-    return report.save();
+UserreportSchema.statics.countDownCmt = function (id, callback) {
+  return this.findOne({ user: id }).exec(function (err, report) {
+    if (report) {
+      report.cmtCnt -= 1;
+      return report.save();
+    }
   });
 };
 

@@ -75,7 +75,7 @@
           <!-- <span class="notif-number" ng-bind="uncheckNotifs" ng-show="uncheckNotifs > 0"></span> -->
         </a>
         <ul class="dropdown-menu notifis-list mg2t" role="menu">
-          <a ng-repeat="notif in notifs" ui-sref="{{notif.state}}({ pollId: notif.poll._id, notif: notif._id })" class="notifis-list-item" ng-class="'unread': notif.status === 0">
+          <a ng-repeat="notif in notifs" ui-sref="{{notif.state}}({ pollId: notif.poll._id, notif: notif._id })" class="notifis-list-item" ng-class="{'unread': notif.status === 0}">
             <div class="user-avatar pull-left">
               <img src="{{notif.from.profileImageURL}}" alt="{{notif.from.displayName}}" ng-id="notif.from._id">
               <img src="modules/users/client/img/profile/default.png" alt="Deleted User" ng-id="!notif.from._id">

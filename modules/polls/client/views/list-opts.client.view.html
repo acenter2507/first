@@ -19,7 +19,7 @@
       </div>
     </div>-->
     <div class="mg10t" ng-repeat="opt in vm.opts | orderBy: '-voteCnt'">
-      <span ng-bind="opt.title"></span><span>({{opt.voteCnt + ' votes'}})</span>
+      <span ng-bind="opt.title"></span><span> ({{opt.voteCnt + ' votes'}})</span>
       <div class="progress progress-xs">
         <div ng-class="['progress-bar']" ng-class="bar.barClass" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}"></div>
       </div>

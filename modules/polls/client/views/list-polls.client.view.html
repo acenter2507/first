@@ -30,6 +30,7 @@
         No polls yet, why don't you <a ui-sref="polls.create">create one</a>?
       </div>
     </div>
+    <!-- RIGHT -->
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-lg-push-3 pdn">
       <!-- Activitys  -->
       <div class="card card-expand card-scroll">
@@ -59,6 +60,12 @@
           <small class="card-link" ng-show="vm.hot_polls.length > 0"><a class="undecorated-link" ui-sref="search({ sort: 'likeCnt' })">View detail</a></small>
         </div>
         <div class="card-body">
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+            <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+            <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+          </ul>
           <div class="side-list-poll" ng-repeat="poll in vm.hot_polls">
             <div class="user-avatar pull-left">
               <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user._id})">

@@ -61,7 +61,7 @@
         </div>
         <div class="card-body pdnt">
           <uib-tabset active="active" justified="true">
-            <uib-tab index="1" heading="Likes">
+            <uib-tab index="1" heading="Likes" classes="aaa">
               <div class="side-list-poll" ng-repeat="poll in vm.populars.likes">
                 <div class="user-avatar pull-left">
                   <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user._id})">

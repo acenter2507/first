@@ -24,11 +24,16 @@ body {
     .content::-webkit-scrollbar-thumb {
     background: #ddd; }
 
+*:focus {
+  outline: none !important;
+}
+
 .undecorated-link:hover {
   text-decoration: none;
   cursor: pointer; }
   .undecorated-link:focus {
-    text-decoration: none; }
+    text-decoration: none;
+    outline: none; }
 
 [ng\:cloak],
 [ng-cloak],
@@ -352,9 +357,11 @@ a:hover .header-profile-image {
     box-shadow: 0 0 12px #000000; }
   .toast-close-button {
     opacity: 0.5; }
-  .toast-close-button:hover,
-  .toast-close-button:focus {
+  .toast-close-button:hover {
     opacity: 0.8; }
+  .toast-close-button:focus {
+    opacity: 0.8;
+    outline: none; }
   .toast {
     border-left: 6px solid #7f7f84; }
   .toast .toast-close-button {
@@ -565,6 +572,8 @@ a:hover .header-profile-image {
   padding: 8px 12px; }
   .btn:hover {
     box-shadow: 0 1px 6px 0 rgba(0,0,0,.12),0 1px 6px 0 rgba(0,0,0,.12); }
+  .btn:focus {
+    outline: none; }
   .btn-default {
     background-color: #d6d6d6; }
     .btn-default:hover {

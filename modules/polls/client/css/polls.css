@@ -281,6 +281,9 @@
   color: #000;
   background: #ccc;
 }
+.select select:focus {
+  outline: none;
+}
 .select select:disabled {
   opacity: 0.5;
   pointer-events: none;
@@ -306,6 +309,10 @@
 .custom-panel {
   border: 1px solid #f6f6f6 !important;
 
+}
+.panel-group:focus,
+.custom-panel:focus {
+  outline: none;
 }
 .custom-panel .panel-heading {
   color: #555 !important;
@@ -427,6 +434,7 @@ div.materialpicker-white.selected {
 }
 
 .menu-list li a:focus {
+  outline: none;
   text-decoration: none;
   cursor: pointer;
 }

@@ -717,6 +717,8 @@
 
 .w100p {
   width: 100% !important; }
+  .w99p {
+    width: 99% !important; }
 .h100p {
   height: 100% !important; }
 

@@ -77,16 +77,30 @@
                           minlength="1" input-class="form-control input-sm" match-class="highlight" />
                       </div>
                     </div>
-                    <div class="row">
-                      <!-- Category -->
-                      <div class="form-group col-sm-12">
+                    <!-- Category -->
+                    <div class="form-group">
+                      <div class="col-sm-6">
                         <label>Category</label>
                         <select id="ctgr" name="ctgr" class="form-control input-sm" ng-model="condition.ctgr">
                           <option value>All</option>
                           <option ng-repeat="category in categorys" value="{{category._id}}" ng-selected="category._id === condition.ctgr">{{category.name}} ({{category.count}})</option>
                         </select>
                       </div>
+                      <div class="col-sm-6">
+                        <div class="col-sm-12 pdn"><label>Created date</label></div>
+                        <div class="col-sm-6 pdn">
+                          <input id="created_start" name="created_start" class="form-control input-sm" today="true" moment-picker="condition.created_start"
+                            ng-model="condition.created_start" format="YYYY/MM/DD" start-view="month" placeholder="Start date..."
+                            additions="{ bottom: 'start_bottom-template-url' }">
+                        </div>
+                        <div class="col-sm-6 pdn">
+                          <input id="created_end" name="created_end" class="form-control input-sm" today="true" moment-picker="condition.created_end"
+                            ng-model="condition.created_end" format="YYYY/MM/DD" start-view="month" placeholder="End date..."
+                            additions="{ bottom: 'end_bottom-template-url' }">
+                        </div>
+                      </div>
                     </div>
+
                     <div class="row">
                       <div class="form-group col-sm-4">
                         <label for="allow_multiple">Allow multiple vote</label>
@@ -268,3 +282,13 @@
     <div class="notice notice-warning" ng-show="polls.length === 0 && !busy">No matches found.</div>
   </div>
 </section>
+<script type="text/ng-template" id="start_bottom-template-url">
+  <button class="btn btn-info btn-sm btn-block" ng-click="condition.created_start = undefined">
+    Clear
+  </button>
+</script>
+<script type="text/ng-template" id="end_bottom-template-url">
+  <button class="btn btn-info btn-sm btn-block" ng-click="condition.created_end = undefined">
+    Clear
+  </button>
+</script>

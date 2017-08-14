@@ -53,11 +53,11 @@
           <div class="col-sm-12 pdn"><label>Created date</label></div>
           <div class="col-sm-6 pdn">
             <input id="created_start" name="created_start" class="form-control input-sm" today="true" moment-picker="condition.created_start"
-              ng-model="condition.created_start" format="YYYY/MM/DD" start-view="month" placeholder="Start date..." additions="{ bottom: 'bottom-template-url' }">
+              ng-model="condition.created_start" format="YYYY/MM/DD" start-view="month" placeholder="Start date..." additions="{ bottom: 'start_bottom-template-url' }">
           </div>
           <div class="col-sm-6 pdn">
             <input id="created_end" name="created_end" class="form-control input-sm" today="true" moment-picker="condition.created_end"
-              ng-model="condition.created_end" format="YYYY/MM/DD" start-view="month" placeholder="End date..." additions="{ bottom: 'bottom-template-url' }">
+              ng-model="condition.created_end" format="YYYY/MM/DD" start-view="month" placeholder="End date..." additions="{ bottom: 'end_bottom-template-url' }">
           </div>
         </div>
         <div class="form-group col-sm-6">
@@ -280,3 +280,13 @@
     </div>
   </div>
 </div>
+<script type="text/ng-template" id="start_bottom-template-url">
+  <button class="btn btn-info btn-sm btn-block" ng-click="condition.created_start = undefined">
+    Clear
+  </button>
+</script>
+<script type="text/ng-template" id="end_bottom-template-url">
+  <button class="btn btn-info btn-sm btn-block" ng-click="condition.created_end = undefined">
+    Clear
+  </button>
+</script>

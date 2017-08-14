@@ -16,7 +16,7 @@ var path = require('path'),
   _ = require('lodash'),
   __ = require('underscore'),
   _moment = require('moment');
-var pollController = require(path.resolve('./polls.server.controller'));
+var pollController = require(path.resolve('./modules/core/server/controllers/polls.server.controller'));
 
 /**
  * Search Polls

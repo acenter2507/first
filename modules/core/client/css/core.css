@@ -512,7 +512,7 @@ a:hover .header-profile-image {
   margin-bottom: 0;
   display: inline-block; }
   .quick-search-input {
-  width: 99%; }
+    width: 99%; }
   .quick-search-submit {
     margin-left: -30px;
   }

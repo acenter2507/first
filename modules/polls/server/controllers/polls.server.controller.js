@@ -637,12 +637,12 @@ function get_cmts_by_pollId(pollId) {
     Cmt.find({ poll: pollId })
       .populate('user', 'displayName profileImageURL')
       .exec((err, cmts) => {
-      if (err) {
-        return reject(err);
-      } else {
-        return resolve(cmts);
-      }
-    });
+        if (err) {
+          return reject(err);
+        } else {
+          return resolve(cmts);
+        }
+      });
   });
 }
 // Lấy thông tin vote và các option được vote cho poll

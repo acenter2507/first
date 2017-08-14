@@ -152,7 +152,7 @@
                 <div class="mga w30 h10 bg-danger" ng-if="opt.status === 3"></div>
               </td>
               <td><span ng-bind="opt.created | LLL_format"></span></td>
-              <td class="text-center">
+              <td>
                 <a class="undecorated-link mg5l" ng-click="remove_opt(opt)"><i class="icon-trash icons"></i></a>
               </td>
             </tr>
@@ -193,12 +193,12 @@
                   <img src="{{ cmt.user.profileImageURL }}" alt="{{ cmt.user.displayName }}" class="img-admin-avatar">
                 </div>
               </td>
-              <td>{{ cmt.user.displayName }}</td>
+              <td><a ui-serf="admin.users.view({ userId: cmt.user._id })">{{ cmt.user.displayName }}</a></td>
               <td>{{ cmt.body }}</td>
               <td><a ui-serf="admin.users.view({ userId: cmt.to })">{{ cmt.toName }}</a></td>
               <td class="text-center">{{ cmt.likeCnt }}</td>
               <td><span ng-bind="cmt.created | LLL_format"></span></td>
-              <td class="text-center">
+              <td>
                 <a class="undecorated-link mg5l" ng-click="remove_cmt(cmt)"><i class="icon-trash icons"></i></a>
               </td>
             </tr>

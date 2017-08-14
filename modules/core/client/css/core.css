@@ -511,9 +511,10 @@ a:hover .header-profile-image {
 .quick-search {
   padding: 0; }
   .quick-search-input {
-    display: inline-block !important;
+    display: inline !important;
     width: 99% !important; }
   .quick-search-submit {
+    display: inline !important;
     margin-left: -30px !important;
   }
 .bg-primary,

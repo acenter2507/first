@@ -163,6 +163,7 @@ a:hover .header-profile-image {
   height: 300px; }
 
 .nav-tabs {
+  border: none !important;
   border-bottom: 3px solid #DDD !important; }
     .nav-tabs > li.active > a,
     .nav-tabs > li.active > a:focus,

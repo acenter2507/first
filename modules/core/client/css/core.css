@@ -508,16 +508,14 @@ a:hover .header-profile-image {
     color: #555; }
 .form-control {
   border-radius: 0 !important; }
-.quick-search-input {
+.quick-search {
+  margin-bottom: 0;
+  display: inline-block; }
+  .quick-search-input {
   width: 99%; }
-.quick-search-input {
-  width: 99%; }
-.quick-search-submit {
-  width: 0;
-  margin: 0;
-  position: relative;
-  left: -30px;
-}
+  .quick-search-submit {
+    margin-left: -30px;
+  }
 .bg-primary,
 .bg-success,
 .bg-info,

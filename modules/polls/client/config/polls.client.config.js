@@ -12,6 +12,7 @@
     Menus.addMenuItem('topbar', {
       title: 'Polls',
       state: 'polls.list',
+      roles: ['*'],
       position: 0
     });
     // Menus.addMenuItem('topbar', {

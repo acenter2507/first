@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('tags')
+    .module('notifs')
     .controller('NotifsListController', NotifsListController);
 
   NotifsListController.$inject = ['NotifsService', '$filter'];

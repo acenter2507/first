@@ -597,8 +597,8 @@ function search_condition_analysis(condition) {
     }
   }
   if (condition.status) {
+    let now = new _moment().utc().fomart();
     if (condition.status === 'opening') {
-      let now = new _moment().utc().fomart();
       and_arr.push({ $or: [{ close: { $exists: false } }, { close: null }, { close: { $gte: now } }] });
     } else {
       and_arr.push({ $and: [{ close: { $exists: true } }, { close: { $ne: null } }, { close: { $lt: now } }] });

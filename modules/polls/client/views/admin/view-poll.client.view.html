@@ -79,7 +79,7 @@
             </tr>
             <tr>
               <td>Created user:</td>
-              <td>{{ vm.poll.user.displayName }}</td>
+              <td><a ui-sref="admin.users.view({ userId: vm.poll.user._id })" class="undecorated-link">{{ vm.poll.user.displayName }}</a></td>
             </tr>
             <tr>
               <td>Category:</td>

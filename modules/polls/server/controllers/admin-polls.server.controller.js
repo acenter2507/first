@@ -23,7 +23,7 @@ var pollController = require(path.resolve('./modules/polls/server/controllers/po
  */
 exports.search = function (req, res) {
   const condition = req.body.condition;
-  var search = condition_analysis(condition);
+  var search = search_condition_analysis(condition);
   var sort = condition.sort || '-created';
   Poll.find(search)
     .populate('category', 'name')
@@ -93,7 +93,7 @@ exports.report = function (req, res) {
   }
 };
 // Phan tich dieu kien search
-function condition_analysis(condition) {
+function search_condition_analysis(condition) {
   var search = {};
   var and_arr = [];
   // Search by user
@@ -108,11 +108,11 @@ function condition_analysis(condition) {
     and_arr.push({ isPublic: isPublic });
   }
   if (condition.created_start) {
-    let start = new _moment(condition.created_start).utc();
+    let start = new _moment(condition.created_start).utc().startOf('day');
     and_arr.push({ created: { $gte: start } });
   }
   if (condition.created_end) {
-    let end = new _moment(condition.created_end).utc();
+    let end = new _moment(condition.created_end).utc().startOf('day');
     and_arr.push({ created: { $lt: end } });
   }
   if (condition.allow_multiple) {

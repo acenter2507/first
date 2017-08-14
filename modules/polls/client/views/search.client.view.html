@@ -37,9 +37,9 @@
                 <label>In</label>
                 <select class="form-control" ng-model="condition.in">
 							  	<option value>Not set</option>
-							  	<option value="polltitle">Poll's title only</option>
-							  	<option value="pollcontent">Poll's content (include options)</option>
-							  	<option value="pollcmt">Poll content and all comments</option>
+							  	<option value="title">Poll's title only</option>
+							  	<option value="content">Poll's title and body</option>
+							  	<option value="options">Poll and options</option>
 							  </select>
               </div>
               <div class="col-md-2">
@@ -204,21 +204,17 @@
                         </div>
                       </div>
                     </div>
-
-                    <!-- Tools -->
-                    <div class="form-group">
-                      <div class="col-xs-12">
-                        <a class="undecorated-link pull-right" ng-click="clear_preferences()">Clear preferences</a>
-                        <a class="undecorated-link pull-right mg10r" ng-click="save_preferences()">Save preferences</a>
-                        <div class="clearfix"></div>
-                      </div>
-                    </div>
                   </div>
                 </div>
                 <div class="clearfix"></div>
               </div>
             </div>
           </form>
+        </div>
+        <hr class="mgn">
+        <div class="card-footer">
+          <button class="btn btn-warning btn-sm pull-left" ng-click="clear_filter()">Clear</button>
+          <div class="clearfix"></div>
         </div>
       </div>
     </div>
@@ -303,12 +299,12 @@
   </div>
 </section>
 <script type="text/ng-template" id="start_bottom-template-url">
-  <button class="btn btn-info btn-sm btn-block" ng-click="condition.created_start = undefined">
+  <button class="btn btn-info btn-sm btn-block" ng-click="clear_created_start()">
     Clear
   </button>
 </script>
 <script type="text/ng-template" id="end_bottom-template-url">
-  <button class="btn btn-info btn-sm btn-block" ng-click="condition.created_end = undefined">
+  <button class="btn btn-info btn-sm btn-block" ng-click="clear_created_end()">
     Clear
   </button>
 </script>

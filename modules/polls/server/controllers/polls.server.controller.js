@@ -442,119 +442,40 @@ exports.removeBookmark = function (req, res) {
 
 exports.search = function (req, res) {
   const condition = req.body.condition;
+  var search = search_condition_analysis(condition);
   var userId = req.user ? req.user._id : undefined;
-  var search = {};
-  var and_arr = [];
-  and_arr.push({ isPublic: true });
-  // Search by category
-  if (condition.ctgr) {
-    and_arr.push({ category: condition.ctgr });
-  }
-  // Search by status
-  if (condition.status) {
-    if (condition.status === 'opening') {
-      and_arr.push({ $or: [{ close: { $exists: false } }, { close: { $gte: new Date() } }] });
-    } else {
-      and_arr.push({ $and: [{ close: { $exists: true } }, { close: { $lt: new Date() } }] });
-    }
-  }
-  // Search by user
-  if (condition.by) {
-    and_arr.push({ user: condition.by });
-  }
-  // Search by created time
-  if (condition.created) {
-    var today = new Date().getTime();
-    var created = new Date(today - (parseInt(condition.created) * 1000));
-    if (condition.timing === 'old') {
-      and_arr.push({ created: { $lt: created } });
-    } else {
-      and_arr.push({ created: { $gte: created } });
-    }
-  }
-  // Search by key in title
-  if (condition.key) {
-    if (!condition.in || condition.in === 'polltitle') {
-      and_arr.push({ title: { $regex: '.*' + condition.key + '.*' } });
-    }
-  }
-  if (and_arr.length > 0) {
-    search = { $and: and_arr };
-  }
-  var polls = [];
-  _polls(search)
-    .then(_polls => {
-      var temp = _filter_report(_polls, condition);
-      var polls = _filter_report(temp, condition);
-      res.jsonp(polls);
-    })
-    .catch(err => {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
+  var sort = condition.sort || '-created';
+  Poll.find(search)
+    .populate('category', 'name')
+    .populate('user', 'displayName profileImageURL')
+    .sort(sort).exec()
+    .then(polls => {
+      if (polls.length === 0) return res.jsonp(polls);
+      var length = polls.length;
+      var counter = 0;
+      polls.forEach(function (instance, index, array) {
+        array[index] = instance.toObject();
+        get_full_by_pollId(array[index]._id, userId)
+          .then(result => {
+            array[index].opts = result.opts;
+            array[index].votes = result.votes;
+            array[index].voteopts = result.voteopts;
+            array[index].follow = result.follow;
+            array[index].reported = result.reported;
+            array[index].bookmarked = result.bookmarked;
+            if (++counter === length) {
+              polls = _filter_key(polls, condition);
+              res.jsonp(polls);
+            }
+          })
+          .catch(handleError);
       });
-    });
+    }, handleError);
 
-  function _polls(con) {
-    return new Promise((resolve, reject) => {
-      Poll.find(con)
-        .populate('category', 'name icon')
-        .populate('user', 'displayName profileImageURL')
-        .exec()
-        .then(polls => {
-          if (polls.length === 0) return resolve([]);
-          var length = polls.length;
-          var counter = 0;
-          polls.forEach(function (instance, index, array) {
-            array[index] = instance.toObject();
-            get_full_by_pollId(array[index]._id, userId)
-              .then(result => {
-                array[index].opts = result.opts;
-                array[index].votes = result.votes;
-                array[index].voteopts = result.voteopts;
-                array[index].follow = result.follow;
-                array[index].reported = result.reported;
-                array[index].bookmarked = result.bookmarked;
-                return get_cmts_by_pollId(array[index]._id);
-              })
-              .then(result => {
-                array[index].cmts = result || [];
-                if (++counter === length) {
-                  return resolve(polls);
-                }
-              })
-              .catch(err => {
-                return reject(err);
-              });
-          });
-        }, err => {
-          return reject(err);
-        });
-    });
-  }
-  function _filter_report(polls, con) {
-    var result = [];
-    if (con.cmt && parseInt(con.cmt)) {
-      var cmtCnt = parseInt(con.cmt);
-      polls.forEach(item => {
-        if (con.compare === 'most') {
-          if (item.report.cmtCnt >= cmtCnt) {
-            result.push(item);
-          }
-        } else {
-          if (item.report.cmtCnt < cmtCnt) {
-            result.push(item);
-          }
-        }
-      });
-    } else {
-      result = polls;
-    }
-    return result;
-  }
   function _filter_key(polls, con) {
 
     var result = [];
-    if (con.key && con.in === 'pollcontent') {
+    if (con.key && con.in === 'options') {
       polls.forEach(item => {
         if (item.title.indexOf(con.key) >= 0) return result.push(item);
         if (item.body.indexOf(con.key) >= 0) return result.push(item);
@@ -562,28 +483,6 @@ exports.search = function (req, res) {
         for (let index = 0; index < item.opts.length; index++) {
           let element = item.opts[index];
           if (element.title.indexOf(con.key) >= 0 || element.body.indexOf(con.key) >= 0) {
-            check = true;
-            break;
-          }
-        }
-        if (check) return result.push(item);
-      });
-    } else if (con.key && con.in === 'pollcmt') {
-      polls.forEach(item => {
-        if (item.title.indexOf(con.key) >= 0) return result.push(item);
-        if (item.body.indexOf(con.key) >= 0) return result.push(item);
-        var check = false;
-        for (let index = 0; index < item.opts.length; index++) {
-          let element = item.opts[index];
-          if (element.title.indexOf(con.key) >= 0 || element.body.indexOf(con.key) >= 0) {
-            check = true;
-            break;
-          }
-        }
-        if (check) return result.push(item);
-        for (let index = 0; index < item.cmts.length; index++) {
-          let element = item.cmts[index];
-          if (element.body.indexOf(con.key) >= 0) {
             check = true;
             break;
           }
@@ -594,6 +493,11 @@ exports.search = function (req, res) {
       result = polls;
     }
     return result;
+  }
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
   }
 };
 
@@ -627,6 +531,89 @@ exports.pollByID = function (req, res, next, id) {
     });
 };
 
+// Phan tich dieu kien search
+function search_condition_analysis(condition) {
+  var search = {};
+  var and_arr = [];
+  and_arr.push({ isPublic: true });
+  // Search by user
+  if (condition.by) {
+    and_arr.push({ user: condition.by });
+  }
+  if (condition.ctgr) {
+    and_arr.push({ category: condition.ctgr });
+  }
+  if (condition.created_start) {
+    let start = new _moment(condition.created_start).utc().startOf('day');
+    and_arr.push({ created: { $gte: start } });
+  }
+  if (condition.created_end) {
+    let end = new _moment(condition.created_end).utc().startOf('day');
+    and_arr.push({ created: { $lt: end } });
+  }
+  if (condition.allow_multiple) {
+    let allow_multiple = condition.allow_multiple === 'true';
+    and_arr.push({ allow_multiple: allow_multiple });
+  }
+  if (condition.allow_add) {
+    let allow_add = condition.allow_add === 'true';
+    and_arr.push({ allow_add: allow_add });
+  }
+  if (condition.allow_guest) {
+    let allow_guest = condition.allow_guest === 'true';
+    and_arr.push({ allow_add: allow_guest });
+  }
+  if (condition.cmts && parseInt(condition.cmts)) {
+    let cmtCnt = parseInt(condition.cmts);
+    if (condition.cmts_pref === 'least') {
+      and_arr.push({ cmtCnt: { $lt: cmtCnt } });
+    } else {
+      and_arr.push({ cmtCnt: { $gte: cmtCnt } });
+    }
+  }
+  if (condition.votes && parseInt(condition.votes)) {
+    let voteCnt = parseInt(condition.votes);
+    if (condition.votes_pref === 'least') {
+      and_arr.push({ voteCnt: { $lt: voteCnt } });
+    } else {
+      and_arr.push({ voteCnt: { $gte: voteCnt } });
+    }
+  }
+  if (condition.likes && parseInt(condition.likes)) {
+    let likeCnt = parseInt(condition.likes);
+    if (condition.likes_pref === 'least') {
+      and_arr.push({ likeCnt: { $lt: likeCnt } });
+    } else {
+      and_arr.push({ likeCnt: { $gte: likeCnt } });
+    }
+  }
+  if (condition.views && parseInt(condition.views)) {
+    let viewCnt = parseInt(condition.views);
+    if (condition.views_pref === 'least') {
+      and_arr.push({ viewCnt: { $lt: viewCnt } });
+    } else {
+      and_arr.push({ viewCnt: { $gte: viewCnt } });
+    }
+  }
+  if (condition.status) {
+    if (condition.status === 'opening') {
+      let now = new _moment().utc().fomart();
+      and_arr.push({ $or: [{ close: { $exists: false } }, { close: null }, { close: { $gte: now } }] });
+    } else {
+      and_arr.push({ $and: [{ close: { $exists: true } }, { close: { $ne: null } }, { close: { $lt: now } }] });
+    }
+  }
+  // Search by key in title
+  if (condition.key && condition.key) {
+    if (!condition.in || condition.in === 'title') {
+      and_arr.push({ title: { $regex: '.*' + condition.key + '.*' } });
+    } else if (condition.in === 'content') {
+      and_arr.push({ $or: [{ title: { $regex: '.*' + condition.key + '.*' } }, { body: { $regex: '.*' + condition.key + '.*' } }] });
+    }
+  }
+  search = { $and: and_arr };
+  return search;
+}
 // Lấy các option có status = 1 cho poll
 function get_opts_by_pollId(pollId) {
   return new Promise((resolve, reject) => {

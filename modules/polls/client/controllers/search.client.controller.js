@@ -22,112 +22,75 @@ angular.module('polls').controller('PollsSearchController', [
     $scope.categorys = Categorys.query();
 
     $scope.condition = {};
+    $scope.busy = false;
+    $scope.polls = [];
+
     initCondition();
     function initCondition() {
       var param = $location.search();
       if (_.isEmpty(param)) {
-        console.log('Has no param');
-      } else {
-        console.log(param);
-      }
-      if ($stateParams.key) {
-        $scope.condition.key = $stateParams.key;
-        $scope.condition.in = $stateParams.in;
-        Storages.set_local(Constants.storages.public_search_condition, JSON.stringify($scope.condition));
-      } else {
         $scope.condition = JSON.parse(Storages.get_local(Constants.storages.public_search_condition, JSON.stringify({})));
         if ($scope.condition.by) {
           Profile.get({ userId: $scope.condition.by }, _user => {
             $scope.selectedUser = _user;
           });
         }
+      } else {
+        _.extend($scope.condition, param);
       }
-      search();
+      if (!_.isEmpty(param)) {
+        search();
+      }
     }
-    // $scope.condition.key = $stateParams.key;
-    // $scope.condition.in = $stateParams.in;
-    // $scope.condition.status = $stateParams.status;
-    // $scope.condition.ctgr = $stateParams.ctgr;
 
-    // $scope.condition.cmt = $stateParams.cmt;
-    // $scope.condition.compare = $stateParams.compare;
-
-    // $scope.condition.created = $stateParams.created;
-    // $scope.condition.timing = $stateParams.timing;
-
-    // $scope.condition.sort = $stateParams.sort;
-    // $scope.condition.sortkind = $stateParams.sortkind;
-
-    // $scope.condition.by = $stateParams.by;
-    // if ($scope.condition.by) {
-    //   Profile.get({ userId: $scope.condition.by }, _user => {
-    //     $scope.selectedUser = _user;
-    //   });
-    // }
     $scope.search = search;
     function search() {
-      //$state.go('search', $scope.condition);
+      if ($scope.busy === true) return;
+      $scope.busy = true;
+      Action.search($scope.condition)
+        .then(res => {
+          // $scope.polls = res.data;
+          console.log(res.data);
+          // buildPager();
+        })
+        .catch(err => {
+          toast.error(err.message, 'Error!');
+          $scope.busy = false;
+        });
+      Storages.set_local(Constants.storages.public_search_condition, JSON.stringify($scope.condition));
     };
-
-    $scope.busy = false;
-    $scope.polls = [];
-    $scope.sort = '-poll.created';
-    //excute();
-    function excute() {
-      if (check_params()) {
-        $scope.busy = true;
-        Action.search($scope.condition)
-          .then(res => {
-            $scope.polls = res.data;
-            create_sort();
-            $scope.busy = false;
-          })
-          .catch(err => {
-            $scope.busy = false;
-            console.log(err);
-          });
-      } else {
-        $scope.condition = JSON.parse(Storages.get_local(Constants.storages.preferences, JSON.stringify({})));
-      }
-    }
-    function check_params() {
-      if ($scope.condition.key || $scope.condition.status || $scope.condition.by || $scope.condition.ctgr || $scope.condition.cmt || $scope.condition.created) {
-        return true;
-      }
-      return false;
-    }
-    function create_sort() {
-      if ($scope.condition.sort) {
-        var prefix = ($scope.condition.sort === 'created') ? 'poll.' : 'report.';
-        var kind = ($scope.condition.sortkind === 'desc') ? '-' : '';
-        $scope.sort = kind + prefix + $scope.condition.sort;
-      }
+    $scope.buildPager = buildPager;
+    function buildPager() {
+      $scope.pagedItems = [];
+      $scope.itemsPerPage = 10;
+      figureOutItemsToDisplay();
+      $scope.busy = false;
     }
 
+    $scope.clear_filter = () => {
+      $scope.condition = {};
+      $scope.selectedUser = undefined;
+      $scope.$broadcast('angucomplete-alt:clearInput');
+    };
+    $scope.clear_created_start = () => {
+      delete $scope.condition.created_start;
+    };
+    $scope.clear_created_end = () => {
+      delete $scope.condition.created_end;
+    };
     $scope.selectedUserFn = function (selected) {
       if (selected) {
         $scope.condition.by = selected.originalObject._id;
         $scope.selectedUser = selected.originalObject;
       } else {
-        $scope.condition.by = undefined;
+        delete $scope.condition.by;
         $scope.selectedUser = undefined;
       }
     };
-    $scope.clear_preferences = () => {
-      $scope.condition = {};
-      $scope.selectedUser = undefined;
-      $scope.$broadcast('angucomplete-alt:clearInput');
-      Storages.set_local(Constants.storages.preferences, JSON.stringify($scope.condition));
-      $location.url($location.path());
-    };
 
-    $scope.clear_ctgr = () => {
-      $scope.condition.ctgr = undefined;
-    };
 
-    $scope.save_preferences = () => {
-      Storages.set_local(Constants.storages.preferences, JSON.stringify($scope.condition));
-    };
+
+
 
     $scope.delete_poll = (poll) => {
       if (poll.user._id !== $scope.user._id) {

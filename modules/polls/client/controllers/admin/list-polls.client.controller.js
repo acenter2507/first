@@ -57,7 +57,6 @@
     function search() {
       if ($scope.busy === true) return;
       $scope.busy = true;
-      Storages.set_session(Constants.storages.admin_polls_condition, JSON.stringify($scope.condition));
       AdminPollsService.search($scope.condition)
         .then(res => {
           $scope.polls = res.data;
@@ -68,6 +67,7 @@
           $scope.busy = false;
           console.log(err);
         });
+      Storages.set_session(Constants.storages.admin_polls_condition, JSON.stringify($scope.condition));
     }
 
     $scope.buildPager = buildPager;
@@ -110,6 +110,12 @@
       $scope.condition = {};
       $scope.selectedUser = undefined;
       $scope.$broadcast('angucomplete-alt:clearInput');
+    };
+    $scope.clear_created_start = () => {
+      delete $scope.condition.created_start;
+    };
+    $scope.clear_created_end = () => {
+      delete $scope.condition.created_end;
     };
     $scope.selectedUserFn = (selected) => {
       if (selected) {

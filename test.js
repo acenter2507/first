@@ -49,7 +49,7 @@ app.init(function () {
   1. Quản lý category => done
   2. Quản lý tags => done
   3. Quản lý user => done
-  4. Quản lý poll => con phan view poll
+  4. Quản lý poll => done 20%
 
 
   - Hoàn thiện màn hình home: Chỉnh navbar, hiển thêm màn hình home, màn hình view poll chỉnh cho mobile

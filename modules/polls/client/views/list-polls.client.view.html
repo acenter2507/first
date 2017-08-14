@@ -111,7 +111,7 @@
         </ul>
       </div>
       <!-- Bookmark -->
-      <div class="card" ng-if="isLogged">
+      <div class="card" ng-if="isLogged && vm.bookmarks.length > 0">
         <div class="card-header">
           <strong class="card-title">Bookmarks</strong>
           <small class="card-link" ng-show="vm.bookmarks.length > 0"><a class="undecorated-link" ui-sref="profile.bookmarks({ userId: user._id })">View all</a></small>

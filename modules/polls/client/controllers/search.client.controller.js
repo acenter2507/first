@@ -47,9 +47,22 @@ angular.module('polls').controller('PollsSearchController', [
     function search() {
       if ($scope.busy === true) return;
       $scope.busy = true;
+      $scope.polls = [];
       Action.search($scope.condition)
         .then(res => {
-          $scope.polls = res.data;
+          if (!res.data.length || res.data.length === 0) {
+            $scope.busy = false;
+            return;
+          }
+          var promises = [];
+          res.data.forEach(poll => {
+            promises.push(process_before_show(poll));
+          });
+          return Promise.all(promises);
+        })
+        .then(results => {
+          // Gán data vào list hiện tại
+          $scope.polls = results;
           $scope.busy = false;
         })
         .catch(err => {
@@ -59,6 +72,12 @@ angular.module('polls').controller('PollsSearchController', [
       Storages.set_local(Constants.storages.public_search_condition, JSON.stringify($scope.condition));
     }
 
+    function process_before_show(poll) {
+      return new Promise((resolve, reject) => {
+        poll = Action.process_before_show(poll);
+        return resolve(poll);
+      });
+    }
     $scope.clear_filter = () => {
       $scope.condition = {};
       $scope.selectedUser = undefined;

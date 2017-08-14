@@ -225,77 +225,20 @@
   </div>
 
   <!-- Message -->
-  <div class="row pd6l pd6r" ng-show="polls.length > 0">
+  <div class="row pd6l pd6r" ng-show="polls.length > 0  && !busy">
     <div class="notice notice-success">{{polls.length}} result(s) matching.</div>
   </div>
   <!-- Result -->
   <div class="row" ng-show="polls.length > 0">
     <div class="col-xs-12 pdn">
-      <div ng-repeat="poll in polls | orderBy: sort" class="card">
-        <div class="card-body">
-          <div clas="poll-header">
-            <div class="user-avatar pull-left">
-              <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user._id})">
-              <img src="{{poll.user.profileImageURL}}" alt="{{poll.user.displayName}}">
-            </a>
-              <img ng-if="!poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
-            </div>
-            <span class="pull-left">
-            <strong><a class="undecorated-link" ui-sref="profile.info({userId: poll.user._id})" ng-if="poll.user" ng-bind="poll.user.displayName"></a></strong>
-            <span ng-if="!poll.user">Deleted User</span>
-            <small class="text-muted">&nbsp;created on</small>
-            <small class="text-muted" am-time-ago="poll.created"></small>
-            </span>
-            <span class="pull-right">
-            <md-menu md-offset="-12 20" md-position-mode="target-right target">
-              <a class="undecorated-link span-link" ng-click="$mdMenu.open($event)" aria-label="Open setting menu">
-                <i class="fa fa-angle-down"></i>
-              </a>
-              <md-menu-content>
-                <ul class="menu-list">
-                  <li><a ui-sref="polls.view({ pollId: poll._id })"><i class="fa fa-eye"></i>&nbsp;View</a></li>
-                  <li ng-if="user._id === poll.user._id"><a class="undecorated-link" ui-sref="polls.edit({ pollId: poll._id })"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
-                  <li ng-if="user._id === poll.user._id"><a class="undecorated-link" ng-click="delete_poll(poll)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
-                  <li ng-if="isLogged">
-                    <a ng-click="follow_poll(poll)" class="undecorated-link">
-                      <i class="fa fa-rss"></i>&nbsp;{{(poll.follow._id) ? 'Unfollow' : 'Follow'}}
-                    </a>
-                  </li>
-                  <li ng-if="isLogged && user._id !== poll._id && !poll.reported"><a class="undecorated-link" ng-click="report_poll(poll)"><i class="fa fa-exclamation-circle"></i>&nbsp;Report poll</a></li>
-                  <li ng-if="isLogged && user._id !== poll._id && !poll.bookmarked"><a class="undecorated-link" ng-click="bookmark_poll(poll)"><i class="fa fa-bookmark"></i>&nbsp;Bookmark poll</a></li>
-                </ul>
-              </md-menu-content>
-            </md-menu>
-          </span>
-            <br>
-            <div class="mg5t">
-              <span ng-if="poll.allow_guest" class="fa fa-globe">
-              <md-tooltip md-direction="bottom">This poll is public</md-tooltip>
-            </span>
-              <span ng-if="!poll.allow_guest" class="fa fa-users">
-              <md-tooltip md-direction="bottom">Only user can vote</md-tooltip>
-            </span>
-              <a class="undecorated-link" ui-sref="categorys.polls({ categoryId: poll.category._id })">{{ poll.category.name }}</a>
-            </div>
-            <div class="clearfix"></div>
-            <hr class="mg5t mg10b">
-          </div>
-
-          <div clas="poll-body">
-            <h3><a class="undecorated-link" ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a></h3>
-            <!--<p class="text-justify poll_item_body" ng-bind-html="poll.summary | nl2br"></p>-->
-            <div class="text-body" ta-bind="text" ng-model="poll.summary" ta-readonly="true"></div>
-            <div class="clearfix"></div>
-            <!-- #options -->
-          </div>
-          <div class="clearfix"></div>
-        </div>
+      <div ng-repeat="poll in polls" class="card">
+        <div ng-include="'/modules/core/client/views/templates/list-poll.client.template.html'"></div>
       </div>
     </div>
   </div>
   <!-- Message -->
-  <div class="row pd6l pd6r">
-    <div class="notice notice-warning" ng-show="polls.length === 0 && !busy">No matches found.</div>
+  <div class="row pd6l pd6r" ng-show="polls.length === 0 && !busy">
+    <div class="notice notice-warning">No matches found.</div>
   </div>
 </section>
 <script type="text/ng-template" id="start_bottom-template-url">

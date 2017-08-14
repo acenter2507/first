@@ -77,21 +77,7 @@
 
     function process_before_show(poll) {
       return new Promise((resolve, reject) => {
-        poll.isCurrentUserOwner = $scope.isLogged && $scope.user._id === poll.user._id;
-        poll.chart = {
-          options: { responsive: true },
-          colors: [],
-          labels: [],
-          data: []
-        };
-        poll.total = poll.voteopts.length;
-        poll.opts.forEach(opt => {
-          opt.voteCnt = _.where(poll.voteopts, { opt: opt._id }).length || 0;
-          opt.progressVal = calPercen(poll.total, opt.voteCnt);
-          poll.chart.data.push(opt.voteCnt);
-          poll.chart.colors.push(opt.color);
-          poll.chart.labels.push(opt.title);
-        });
+        poll = Action.process_before_show(poll);
         return resolve(poll);
       });
     }

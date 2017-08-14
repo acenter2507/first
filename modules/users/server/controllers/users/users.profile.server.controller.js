@@ -351,6 +351,7 @@ exports.bookmarks = function (req, res) {
             array[index].voteopts = result.voteopts;
             array[index].follow = result.follow;
             array[index].reported = result.reported;
+            array[index].bookmarked = result.bookmarked;
             if (++counter === length) {
               res.jsonp(polls);
             }

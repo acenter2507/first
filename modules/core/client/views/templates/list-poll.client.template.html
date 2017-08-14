@@ -31,6 +31,8 @@
             </li>
             <li ng-if="isLogged && !poll.isCurrentUserOwner && !poll.reported"><a class="undecorated-link" ng-click="report_poll(poll)"><i class="fa fa-exclamation-circle"></i> Report poll</a></li>
             <li ng-if="isLogged && !poll.isCurrentUserOwner && !poll.bookmarked"><a class="undecorated-link" ng-click="bookmark_poll(poll)"><i class="fa fa-bookmark"></i> Bookmark poll</a></li>
+            <!-- Chỉ màn hình Profile bookmark -->
+            <li ng-if="isCurrentOwner && screen === 'profile-bookmark'"><a class="undecorated-link" ng-click="remove_bookmark(poll)"><i class="fa fa-bookmark"></i>&nbsp;Remove bookmark</a></li>
           </ul>
         </md-menu-content>
       </md-menu>

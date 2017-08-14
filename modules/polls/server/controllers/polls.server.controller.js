@@ -849,6 +849,7 @@ function get_full_by_pollId(pollId, userId) {
 }
 exports.get_full_by_pollId = get_full_by_pollId;
 exports.get_opts_by_pollId = get_opts_by_pollId;
+exports.get_cmts_by_pollId = get_cmts_by_pollId;
 exports.get_votes_by_pollId = get_votes_by_pollId;
 exports.get_follow_by_pollId = get_follow_by_pollId;
 exports.get_report_by_pollId = get_report_by_pollId;

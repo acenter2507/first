@@ -71,5 +71,10 @@ angular.module('users').controller('ProfileFollowsController', [
           toast.error(err.message, 'Error!');
         });
     };
+    $scope.clear_follow = () => {
+      if (!$scope.isCurrentOwner) return;
+      UserApi.clear_follow($scope.profile._id);
+      $scope.polls = [];
+    };
   }
 ]);

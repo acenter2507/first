@@ -70,6 +70,9 @@ angular.module('users').factory('UserApi', ['$http',
     this.clear_view = userId => {
       return $http.get('/api/profile/' + userId + '/clear_view');
     };
+    this.clear_follow = userId => {
+      return $http.get('/api/profile/' + userId + '/clear_follow');
+    };
     return this;
   }
 ]);

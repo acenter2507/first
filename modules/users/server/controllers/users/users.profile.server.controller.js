@@ -382,6 +382,15 @@ exports.clear_view = function (req, res) {
   View.remove({ user: req.profile._id }).exec();
   res.end();
 };
+
+/**
+ * Xoa toan bo view
+ */
+exports.clear_follow = function (req, res) {
+  Polluser.remove({ user: req.profile._id }).exec();
+  res.end();
+};
+
 /**
  * Lấy các poll user đã view
  */

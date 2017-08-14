@@ -99,8 +99,9 @@ angular.module('polls').controller('PollsSearchController', [
       }
     };
 
+    // Thao tác khác
     $scope.delete_poll = (poll) => {
-      if (poll.user._id !== $scope.user._id) {
+      if (!poll.isCurrentUserOwner) {
         toast.error('You are not authorized.', 'Error!');
         return;
       }
@@ -116,10 +117,8 @@ angular.module('polls').controller('PollsSearchController', [
       }, reject => {
       });
       function handle_delete() {
-        $scope.polls = _.reject($scope.polls, function (item) {
-          return item.poll._id === poll._id;
-        });
-        // Action.delete_poll(poll);
+        $scope.polls = _.without($scope.polls, poll);
+        Action.delete_poll(poll);
       }
     };
     $scope.report_poll = (poll) => {

@@ -194,7 +194,6 @@
         Action.save_report(poll, reason)
           .then(res => {
             poll.reported = (res) ? true : false;
-            $scope.$apply();
             toast.success('You have successfully reported ' + poll.title, 'Thank you!');
           })
           .catch(err => {
@@ -210,7 +209,6 @@
       Action.save_bookmark(poll._id)
         .then(res => {
           poll.bookmarked = (res) ? true : false;
-          $scope.$apply();
           toast.success('Added ' + poll.title + ' to bookmarks.', 'Success!');
         })
         .catch(err => {

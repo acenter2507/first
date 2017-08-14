@@ -7,6 +7,7 @@ angular.module('users').controller('ProfileBookmarksController', [
   'ngDialog',
   'toastr',
   function ($scope, UserApi, Action, dialog, toast) {
+    $scope.screen = 'profile-bookmark';
     $scope.polls = [];
     $scope.page = 0;
     $scope.busy = false;
@@ -44,22 +45,8 @@ angular.module('users').controller('ProfileBookmarksController', [
 
     function process_before_show(poll) {
       return new Promise((resolve, reject) => {
-        // poll.isCurrentUserOwner = $scope.isLogged && $scope.user._id === poll.user._id;
-        // poll.chart = {
-        //   options: { responsive: true },
-        //   colors: [],
-        //   labels: [],
-        //   data: []
-        // };
-        // poll.total = poll.voteopts.length;
-        // poll.opts.forEach(opt => {
-        //   opt.voteCnt = _.where(poll.voteopts, { opt: opt._id }).length || 0;
-        //   opt.progressVal = calPercen(poll.total, opt.voteCnt);
-        //   poll.chart.data.push(opt.voteCnt);
-        //   poll.chart.colors.push(opt.color);
-        //   poll.chart.labels.push(opt.title);
-        // });
         poll = Action.process_before_show(poll);
+        console.log(poll);
         return resolve(poll);
       });
     }

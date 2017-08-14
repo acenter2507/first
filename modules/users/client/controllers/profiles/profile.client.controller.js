@@ -63,24 +63,6 @@ angular.module('users').controller('ProfileController', [
         Action.delete_poll(poll);
       }
     };
-    $scope.follow_poll = poll => {
-      if (!$scope.isLogged) {
-        toast.error('You must login to follow poll.', 'Error!');
-        return;
-      }
-      Action.save_follow(poll.follow)
-        .then(res => {
-          if (res) {
-            poll.follow = res;
-            toast.success('You followed ' + poll.title, 'Success!');
-          } else {
-            poll.follow = { poll: poll._id };
-          }
-        })
-        .catch(err => {
-          toast.error(err.message, 'Error!');
-        });
-    };
     $scope.report_poll = poll => {
       if (poll.reported) {
         toast.error('You are already reported ' + poll.title, 'Error!');
@@ -116,8 +98,25 @@ angular.module('users').controller('ProfileController', [
       Action.save_bookmark(poll._id)
         .then(res => {
           poll.bookmarked = (res) ? true : false;
-          $scope.$apply();
           toast.success('Added ' + poll.title + ' to bookmarks.', 'Success!');
+        })
+        .catch(err => {
+          toast.error(err.message, 'Error!');
+        });
+    };
+    $scope.follow_poll = poll => {
+      if (!$scope.isLogged) {
+        toast.error('You must login to follow poll.', 'Error!');
+        return;
+      }
+      Action.save_follow(poll.follow)
+        .then(res => {
+          if (res) {
+            poll.follow = res;
+            toast.success('You followed ' + poll.title, 'Success!');
+          } else {
+            poll.follow = { poll: poll._id };
+          }
         })
         .catch(err => {
           toast.error(err.message, 'Error!');

@@ -27,6 +27,7 @@ module.exports = function (app) {
   app.route('/api/profile/:profileId/views/:page').get(users.views);
   app.route('/api/profile/:profileId/report').get(users.report);
   app.route('/api/profile/:profileId/clear_bookmark').get(users.clear_bookmark);
+  app.route('/api/profile/:profileId/clear_view').get(users.clear_view);
 
   app.route('/api/userreports')
     .post(users.create_report);

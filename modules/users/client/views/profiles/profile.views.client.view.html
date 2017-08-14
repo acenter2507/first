@@ -1,4 +1,5 @@
 <div class="container" ng-controller="ProfileViewsController">
+  <!-- Breadcrumb -->
   <div class="row profile-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="home">Home</a></li>
@@ -6,6 +7,15 @@
       <li class="breadcrumb-item active">Viewed</li>
     </ol>
   </div>
+  <hr>
+  <div class="row">
+    <div class="col-xs-12 pdn">
+      <div class="custom-toolbar">
+        <a ng-show="polls.length > 0" class="btn btn-danger pull-right" ng-click="clear_view()">Clear</a>
+      </div>
+    </div>
+  </div>
+  <!-- List poll -->
   <div class="row mg50t" infinite-scroll="get_polls()" infinite-scroll-distance='2'>
     <div ng-repeat="poll in polls | filter: poll_filter" class="card">
       <div ng-include="'/modules/core/client/views/templates/list-poll.client.template.html'"></div>

@@ -371,10 +371,17 @@ exports.bookmarks = function (req, res) {
  * Xoa toan bo bookmark
  */
 exports.clear_bookmark = function (req, res) {
-  Bookmark.remove({ user: req.user._id }).exec();
+  Bookmark.remove({ user: req.profile._id }).exec();
   res.end();
 };
 
+/**
+ * Xoa toan bo view
+ */
+exports.clear_view = function (req, res) {
+  View.remove({ user: req.profile._id }).exec();
+  res.end();
+};
 /**
  * Lấy các poll user đã view
  */

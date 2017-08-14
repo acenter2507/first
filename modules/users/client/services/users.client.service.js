@@ -67,6 +67,9 @@ angular.module('users').factory('UserApi', ['$http',
     this.clear_bookmark = userId => {
       return $http.get('/api/profile/' + userId + '/clear_bookmark');
     };
+    this.clear_view = userId => {
+      return $http.get('/api/profile/' + userId + '/clear_view');
+    };
     return this;
   }
 ]);

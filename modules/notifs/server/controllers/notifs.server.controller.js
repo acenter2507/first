@@ -14,11 +14,11 @@ var path = require('path'),
 /**
  * Create a Notif
  */
-exports.create = function(req, res) {
+exports.create = function (req, res) {
   var notif = new Notif(req.body);
   notif.user = req.user;
 
-  notif.save(function(err) {
+  notif.save(function (err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -32,7 +32,7 @@ exports.create = function(req, res) {
 /**
  * Show the current Notif
  */
-exports.read = function(req, res) {
+exports.read = function (req, res) {
   // convert mongoose document to JSON
   var notif = req.notif ? req.notif.toJSON() : {};
 
@@ -49,12 +49,12 @@ exports.read = function(req, res) {
 /**
  * Update a Notif
  */
-exports.update = function(req, res) {
+exports.update = function (req, res) {
   var notif = req.notif;
 
   notif = _.extend(notif, req.body);
 
-  notif.save(function(err) {
+  notif.save(function (err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -68,10 +68,10 @@ exports.update = function(req, res) {
 /**
  * Delete an Notif
  */
-exports.delete = function(req, res) {
+exports.delete = function (req, res) {
   var notif = req.notif;
 
-  notif.remove(function(err) {
+  notif.remove(function (err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -85,13 +85,13 @@ exports.delete = function(req, res) {
 /**
  * List of Notifs
  */
-exports.list = function(req, res) {
+exports.list = function (req, res) {
   Notif.find({ to: req.user._id })
     .sort('-created')
     .populate('poll', 'title')
     .populate('from', 'displayName profileImageURL')
     .populate('to', 'displayName profileImageURL')
-    .exec(function(err, notifs) {
+    .exec(function (err, notifs) {
       if (err) {
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)
@@ -105,13 +105,13 @@ exports.list = function(req, res) {
 /**
  * Count uncheck notifs
  */
-exports.countUnchecks = function(req, res) {
-  Notif.find({ to: req.user._id, status: 0 }).count(function(err, count) {
+exports.countUnchecks = function (req, res) {
+  Notif.find({ to: req.user._id, status: 0 }).count(function (err, count) {
     res.jsonp(count);
   });
 };
 
-exports.findNotifs = function(req, res) {
+exports.findNotifs = function (req, res) {
   var limit = parseInt(req.params.limit);
   Notif.find({ to: req.user._id })
     .sort('-created')
@@ -119,7 +119,7 @@ exports.findNotifs = function(req, res) {
     .populate('from', 'displayName profileImageURL')
     .populate('to', 'displayName profileImageURL')
     .limit(limit)
-    .exec(function(err, notifs) {
+    .exec(function (err, notifs) {
       if (err) {
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)
@@ -133,10 +133,11 @@ exports.findNotifs = function(req, res) {
 /**
  * Count uncheck notifs
  */
-exports.markAllRead = function(req, res) {
+exports.markAllRead = function (req, res) {
   Notif.update(
     { to: req.user._id, status: 0 },
-    {$set: { status: 1 }}
+    { $set: { status: 1 } },
+    { "multi": true }
   ).exec((err, result) => {
     console.log(result);
     res.end();
@@ -145,14 +146,14 @@ exports.markAllRead = function(req, res) {
 /**
  * Notif middleware
  */
-exports.notifByID = function(req, res, next, id) {
+exports.notifByID = function (req, res, next, id) {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
       message: 'Notif is invalid'
     });
   }
 
-  Notif.findById(id).populate('user', 'displayName').exec(function(err, notif) {
+  Notif.findById(id).populate('user', 'displayName').exec(function (err, notif) {
     if (err) {
       return next(err);
     } else if (!notif) {

@@ -216,7 +216,7 @@
           <div class="poll-remaining" ng-if="vm.poll.close">
             <p>{{vm.close_duration.days}}d:{{vm.close_duration.hours}}h:{{vm.close_duration.minutes}}m:{{vm.close_duration.seconds}}s</p>
           </div>
-          <hr class="mgn">
+          <hr class="mgn mg12b">
           <div class="form-group" ng-repeat="opt in vm.opts" ng-if="!vm.poll.allow_multiple">
             <label class="control control--radio w100p">
             {{opt.title}}<span class="mg5l" ng-style="{color: opt.color}"><strong>●</strong></span>

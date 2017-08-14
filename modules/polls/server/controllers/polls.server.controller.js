@@ -872,7 +872,7 @@ function get_polls_by_sort_and_limit(sort, limit) {
         }
       });
   });
-};
+}
 exports.get_full_by_pollId = get_full_by_pollId;
 exports.get_opts_by_pollId = get_opts_by_pollId;
 exports.get_cmts_by_pollId = get_cmts_by_pollId;

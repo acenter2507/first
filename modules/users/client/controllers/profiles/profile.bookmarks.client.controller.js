@@ -46,7 +46,6 @@ angular.module('users').controller('ProfileBookmarksController', [
     function process_before_show(poll) {
       return new Promise((resolve, reject) => {
         poll = Action.process_before_show(poll);
-        console.log(poll);
         return resolve(poll);
       });
     }
@@ -58,68 +57,6 @@ angular.module('users').controller('ProfileBookmarksController', [
       }
     };
 
-    $scope.delete_poll = (poll) => {
-      if (!poll.isCurrentUserOwner) {
-        toast.error('You are not authorized.', 'Error!');
-        return;
-      }
-      $scope.message_title = 'Delete poll!';
-      $scope.message_content = 'Are you sure you want to delete this poll?';
-      $scope.dialog_type = 3;
-      $scope.buton_label = 'delete';
-      dialog.openConfirm({
-        scope: $scope,
-        templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
-      }).then(confirm => {
-        handle_delete();
-      }, reject => {
-      });
-      function handle_delete() {
-        $scope.polls = _.without($scope.polls, poll);
-        Action.delete_poll(poll);
-      }
-    };
-    $scope.follow_poll = poll => {
-      if (!$scope.isLogged) {
-        toast.error('You must login to follow poll.', 'Error!');
-        return;
-      }
-      Action.save_follow(poll.follow)
-        .then(res => {
-          if (res) {
-            poll.follow = res;
-            toast.success('You followed ' + poll.title, 'Success!');
-          } else {
-            poll.follow = { poll: poll._id };
-          }
-        })
-        .catch(err => {
-          toast.error(err.message, 'Error!');
-        });
-    };
-    $scope.report_poll = poll => {
-      if (poll.reported) {
-        toast.error('You are already reported ' + poll.title, 'Error!');
-        return;
-      }
-      dialog.openConfirm({
-        scope: $scope,
-        templateUrl: 'modules/core/client/views/templates/report.dialog.template.html'
-      }).then(reason => {
-        handle_confirm(reason);
-      }, reject => {
-      });
-      function handle_confirm(reason) {
-        Action.save_report(poll, reason)
-          .then(res => {
-            poll.reported = (res) ? true : false;
-            toast.success('You have successfully reported ' + poll.title, 'Thank you!');
-          })
-          .catch(err => {
-            toast.error(err.message, 'Error!');
-          });
-      }
-    };
     $scope.remove_bookmark = poll => {
       $scope.message_title = 'Remove bookmark!';
       $scope.message_content = 'Are you sure you want to remove this poll from bookmark?';

@@ -12,8 +12,8 @@ angular.module('users').controller('ProfileController', [
   function ($scope, Authentication, profile, Action, Users, toast, $timeout, dialog) {
     $scope.profile = profile;
     $scope.user = Authentication.user;
-    $scope.isCurrentOwner = profile._id === $scope.user._id;
-    $scope.isLogged = ($scope.user) ? true : false;
+    $scope.isLogged = ($scope.user);
+    $scope.isCurrentOwner = $scope.isLogged && $scope.profile._id === $scope.user._id;
 
     init();
 
@@ -41,5 +41,87 @@ angular.module('users').controller('ProfileController', [
     function count_up_view_profile() {
       Action.count_up_view_profile($scope.report, $scope.profile._id);
     }
+
+    $scope.delete_poll = (poll) => {
+      if (!poll.isCurrentUserOwner) {
+        toast.error('You are not authorized.', 'Error!');
+        return;
+      }
+      $scope.message_title = 'Delete poll!';
+      $scope.message_content = 'Are you sure you want to delete this poll?';
+      $scope.dialog_type = 3;
+      $scope.buton_label = 'delete';
+      dialog.openConfirm({
+        scope: $scope,
+        templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
+      }).then(confirm => {
+        handle_delete();
+      }, reject => {
+      });
+      function handle_delete() {
+        $scope.polls = _.without($scope.polls, poll);
+        Action.delete_poll(poll);
+      }
+    };
+    $scope.follow_poll = poll => {
+      if (!$scope.isLogged) {
+        toast.error('You must login to follow poll.', 'Error!');
+        return;
+      }
+      Action.save_follow(poll.follow)
+        .then(res => {
+          if (res) {
+            poll.follow = res;
+            toast.success('You followed ' + poll.title, 'Success!');
+          } else {
+            poll.follow = { poll: poll._id };
+          }
+        })
+        .catch(err => {
+          toast.error(err.message, 'Error!');
+        });
+    };
+    $scope.report_poll = poll => {
+      if (poll.reported) {
+        toast.error('You are already reported ' + poll.title, 'Error!');
+        return;
+      }
+      dialog.openConfirm({
+        scope: $scope,
+        templateUrl: 'modules/core/client/views/templates/report.dialog.template.html'
+      }).then(reason => {
+        handle_confirm(reason);
+      }, reject => {
+      });
+      function handle_confirm(reason) {
+        Action.save_report(poll, reason)
+          .then(res => {
+            poll.reported = (res) ? true : false;
+            toast.success('You have successfully reported ' + poll.title, 'Thank you!');
+          })
+          .catch(err => {
+            toast.error(err.message, 'Error!');
+          });
+      }
+    };
+    $scope.bookmark_poll = (poll) => {
+      if (poll.bookmarked) {
+        toast.error('You are already bookmark ' + poll.title, 'Error!');
+        return;
+      }
+      if (!$scope.isLogged) {
+        toast.error('You must login to follow poll.', 'Error!');
+        return;
+      }
+      Action.save_bookmark(poll._id)
+        .then(res => {
+          poll.bookmarked = (res) ? true : false;
+          $scope.$apply();
+          toast.success('Added ' + poll.title + ' to bookmarks.', 'Success!');
+        })
+        .catch(err => {
+          toast.error(err.message, 'Error!');
+        });
+    };
   }
 ]);

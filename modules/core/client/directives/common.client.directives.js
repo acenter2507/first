@@ -1,7 +1,7 @@
 'use strict';
 angular
   .module('core')
-  .directive('a', preventClickDirective)
+  // .directive('a', preventClickDirective)
   .directive('a', cardExpandDirective);
 
 //Prevent click if href="#"

@@ -23,21 +23,22 @@
         <div class="card-body">
           <form name="form.searchForm" class="form-horizontal" ng-submit="search()" novalidate>
             <div class="form-group">
-              <div class="col-md-5 pd6x">
+              <div class="col-md-5">
                 <label>Key</label>
                 <input type="text" class="form-control" placeholder="Search key" ng-model="condition.key">
               </div>
-              <div class="col-md-5 pd6x">
+              <div class="col-md-5">
                 <label>In</label>
                 <select class="form-control" ng-model="condition.in">
-								<option value="polltitle">Poll's title only</option>
-								<option value="pollcontent">Poll's content (include options)</option>
-								<option value="pollcmt">Poll content and all comments</option>
-							</select>
+							  	<option value>Not set</option>
+							  	<option value="polltitle">Poll's title only</option>
+							  	<option value="pollcontent">Poll's content (include options)</option>
+							  	<option value="pollcmt">Poll content and all comments</option>
+							  </select>
               </div>
-              <div class="col-md-2 pd6x">
+              <div class="col-md-2">
                 <label>&nbsp;</label>
-                <button type="submit" class="btn btn-primary form-control">Search</button>
+                <button type="submit" class="btn btn-primary btn-block">Search</button>
               </div>
             </div>
 

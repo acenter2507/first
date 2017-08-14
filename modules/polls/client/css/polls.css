@@ -104,6 +104,7 @@
   max-width: 200px;
   margin: auto;
   overflow: inherit;
+  background: transparent;
 }
 .progress {
   margin-bottom: 10px !important;

@@ -162,7 +162,7 @@ a:hover .header-profile-image {
   border: none;
   border-bottom: 2px solid #DDD; }
     .nav-tabs > li.active > a:focus {
-      outline: none; }
+      outline: 0; }
     .nav-tabs > li.active > a,
     .nav-tabs > li.active > a:focus,
     .nav-tabs > li.active > a:hover {

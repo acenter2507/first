@@ -58,12 +58,12 @@ angular.module('polls').controller('PollsSearchController', [
           $scope.busy = false;
         });
       Storages.set_local(Constants.storages.public_search_condition, JSON.stringify($scope.condition));
-    };
+    }
     $scope.buildPager = buildPager;
     function buildPager() {
       $scope.pagedItems = [];
       $scope.itemsPerPage = 10;
-      figureOutItemsToDisplay();
+      // figureOutItemsToDisplay();
       $scope.busy = false;
     }
 

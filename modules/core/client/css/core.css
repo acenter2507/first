@@ -509,12 +509,12 @@ a:hover .header-profile-image {
 .form-control {
   border-radius: 0 !important; }
 .quick-search {
-  padding: 0;
-  display: inline-block; }
+  padding: 0; }
   .quick-search-input {
+    display: inline-block !important;
     width: 50% !important; }
   .quick-search-submit {
-    margin-left: -30px;
+    margin-left: -30px !important;
   }
 .bg-primary,
 .bg-success,

@@ -57,7 +57,25 @@ angular.module('users').controller('ProfileFollowsController', [
     };
 
     $scope.follow_poll = (poll) => {
-      console.log('kajdkajsdkajsdkajsdkajsd');
+      if (!$scope.isLogged) {
+        toast.error('You must login to follow poll.', 'Error!');
+        return;
+      }
+      if ($scope.isCurrentOwner) {
+        $scope.polls = _.without($scope.polls, poll);
+      }
+      Action.save_follow(poll.follow)
+        .then(res => {
+          if (res) {
+            poll.follow = res;
+            toast.success('You followed ' + poll.title, 'Success!');
+          } else {
+            poll.follow = { poll: poll._id };
+          }
+        })
+        .catch(err => {
+          toast.error(err.message, 'Error!');
+        });
     };
   }
 ]);

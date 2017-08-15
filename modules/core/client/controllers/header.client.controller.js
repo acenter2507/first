@@ -50,6 +50,7 @@ angular.module('core').controller('HeaderController', [
         Socket.connect();
       }
       Socket.on('notifs', res => {
+        console.log('Has new notifs');
         loadNotifs(10);
         loadUncheckNotifs();
       });

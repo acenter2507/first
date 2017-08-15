@@ -1,10 +1,8 @@
 <aside class="aside-menu" ng-controller="HeaderController">
 
   <div class="aside-profile" ng-if="authentication.user">
-    <h4 class="mgnt">Hello {{authentication.user.displayName}}</h4>
-    <div class="aside-avatar">
-      <img ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}"/>
-    </div>
+    <img class="aside-avatar pull-left" ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}"/>
+    <span class="h4-text">{{authentication.user.displayName}}</h4>
   </div>
   <hr>
   <nav class="aside-nav">

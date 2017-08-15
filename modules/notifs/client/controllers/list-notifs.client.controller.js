@@ -32,7 +32,7 @@
       vm.notifs = [];
       // Infinity scroll
       $scope.stopped = false;
-      $scope.busy = false; s
+      $scope.busy = false;
       $scope.page = 0;
     }
 

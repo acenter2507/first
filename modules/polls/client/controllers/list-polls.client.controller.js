@@ -83,7 +83,7 @@
     }
 
     function initRootScope() {
-      $rootScope.$on('activity', () => {
+      $scope.$on('activity', () => {
         console.log('Has new activity');
         vm.activitys = JSON.parse(Storages.get_session(Constants.storages.activitys, JSON.stringify([])));
       });

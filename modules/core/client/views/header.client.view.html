@@ -1,6 +1,12 @@
 <div class="container" ng-controller="HeaderController">
   <a ui-sref="home" class="navbar-brand"></a>
-  <button class="navbar-toggler mobile-sidebar-toggler d-md-none" type="button">&#9776;</button>
+  <!--<a class="sidebar-toggler d-md-none" href="#">&#9776;</a>-->
+  <button class="navbar-toggle d-md-none" type="button" ng-click="toggleCollapsibleMenu()">
+    <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
   <!-- Main menu -->
   <ul class="nav navbar-nav d-sm-down-none" ng-if="menu.shouldRender(authentication.user);">
     <li ng-repeat="item in menu.items | orderBy: 'position'" ng-if="item.shouldRender(authentication.user);" ng-switch="item.type"

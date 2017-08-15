@@ -22,6 +22,12 @@
     padding: 6px 12px; }
 
 @media (max-width: 767px) {
+  .navbar .navbar-toggle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 70px;
+    height: inherit; }
   .navbar .navbar-brand {
     background-position: center;
     width: 100% !important;

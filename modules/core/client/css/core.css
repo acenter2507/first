@@ -74,7 +74,7 @@ body {
       padding: 0.75rem 1rem;
       font-size: 11px;
       font-weight: 600;
-      color: #cfd8dc;
+      color: #fff;
       text-transform: uppercase; }
     .aside-menu .nav .divider {
       height: 10px; }
@@ -99,14 +99,14 @@ body {
         background: transparent; }
         .aside-menu .nav .nav-item .nav-link:hover, .aside-menu .nav .nav-item .navbar .dropdown-toggle:hover, .navbar .aside-menu .nav .nav-item .dropdown-toggle:hover {
           color: #fff !important;
-          background: #20a8d8 !important; }
+          background: #2271bf !important; }
           .aside-menu .nav .nav-item .nav-link:hover i, .aside-menu .nav .nav-item .navbar .dropdown-toggle:hover i, .navbar .aside-menu .nav .nav-item .dropdown-toggle:hover i {
             color: #fff !important; }
         .aside-menu .nav .nav-item .nav-link.active, .aside-menu .nav .nav-item .navbar .active.dropdown-toggle, .navbar .aside-menu .nav .nav-item .active.dropdown-toggle {
           color: #fff;
           background: #304047; }
           .aside-menu .nav .nav-item .nav-link.active i, .aside-menu .nav .nav-item .navbar .active.dropdown-toggle i, .navbar .aside-menu .nav .nav-item .active.dropdown-toggle i {
-            color: #20a8d8; }
+            color: #2271bf; }
         .aside-menu .nav .nav-item .nav-link [class^="icon-"], .aside-menu .nav .nav-item .navbar .dropdown-toggle [class^="icon-"], .navbar .aside-menu .nav .nav-item .dropdown-toggle [class^="icon-"], .aside-menu .nav .nav-item .nav-link [class*=" icon-"], .aside-menu .nav .nav-item .navbar .dropdown-toggle [class*=" icon-"], .navbar .aside-menu .nav .nav-item .dropdown-toggle [class*=" icon-"] {
           display: inline-block;
           margin-top: -4px;
@@ -115,7 +115,7 @@ body {
           width: 20px;
           margin: 0 0.5rem 0 0;
           font-size: 14px;
-          color: #b0bec5;
+          color: #fff;
           text-align: center; }
         .aside-menu .nav .nav-item .nav-link .badge, .aside-menu .nav .nav-item .navbar .dropdown-toggle .badge, .navbar .aside-menu .nav .nav-item .dropdown-toggle .badge {
           float: right;
@@ -153,7 +153,7 @@ body {
       .aside-menu .nav .nav-item .nav-label {
         display: block;
         padding: 0.09375rem 1rem;
-        color: #cfd8dc; }
+        color: #fff; }
         .aside-menu .nav .nav-item .nav-label:hover {
           color: #fff;
           text-decoration: none; }
@@ -161,7 +161,7 @@ body {
           width: 20px;
           margin: -3px 0.5rem 0 0;
           font-size: 10px;
-          color: #b0bec5;
+          color: #fff;
           text-align: center;
           vertical-align: middle; }
       .aside-menu .nav .nav-item .progress {

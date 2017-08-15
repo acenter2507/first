@@ -34,6 +34,9 @@
       },
       markAllRead: () => {
         return $http.get('/api/markAllRead');
+      },
+      clearAll: () => {
+        return $http.get('/api/clearAll');
       }
     };
   }

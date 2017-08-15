@@ -105,6 +105,14 @@ exports.list = function (req, res) {
 /**
  * Count uncheck notifs
  */
+exports.clearAll = function (req, res) {
+  Notif.remove({ to: req.user._id }).exec();
+  res.end();
+};
+
+/**
+ * Count uncheck notifs
+ */
 exports.countUnchecks = function (req, res) {
   Notif.find({ to: req.user._id, status: 0 }).count(function (err, count) {
     res.jsonp(count);

@@ -27,12 +27,15 @@
     dialog
   ) {
     var vm = this;
-    vm.notifs = [];
+    init();
+    function init() {
+      vm.notifs = [];
+      // Infinity scroll
+      $scope.stopped = false;
+      $scope.busy = false; s
+      $scope.page = 0;
+    }
 
-    // Infinity scroll
-    $scope.stopped = false;
-    $scope.busy = false;
-    $scope.page = 0;
     $scope.get_notifs = get_notifs;
     function get_notifs() {
       if ($scope.stopped || $scope.busy) return;
@@ -62,6 +65,21 @@
       notif.status = notif.status === 0 ? 1 : 0;
       let rs_nof = new NotifsService({ _id: notif._id, status: notif.status });
       rs_nof.$update();
+    };
+    $scope.mark_all_read = () => {
+      if ($scope.stopped || $scope.busy || vm.notifs.length === 0) return;
+      $scope.busy = true;
+      NotifsApi.markAllRead()
+        .then(res => {
+          init();
+          get_notifs();
+        });
+    };
+    $scope.clear_all = () => {
+      NotifsApi.clearAll()
+        .then(res => {
+          vm.notifs = [];
+        });
     };
   }
 }());

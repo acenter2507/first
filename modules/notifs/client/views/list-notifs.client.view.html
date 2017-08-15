@@ -16,7 +16,15 @@
       </div>
     </div>
   </div>
-
+  <div class="row">
+    <div class="col-xs-12 pd6x">
+      <span class="h4-text">Your Notifications</span>
+      <a class="undecorated-link pull-right" ng-class="mark_all_read()">Make all as read</a>
+      <a class="undecorated-link pull-right mg5r" ng-class="clear_all()">Clear all</a>
+      <div class="clearfix"></div>
+      <hr class="mgn">
+    </div>
+  </div>
   <div class="row">
     <div class="col-xs-12 pd6x">
       <div class="list-group notifications">
@@ -42,27 +50,6 @@
           <div class="clearfix"></div>
         </a>
       </div>
-      <!--<div class="card" ng-repeat="notif in vm.notifs">
-        <div class="card-body">
-          <div class="col-xs-9 pdn">
-            <div class="user-avatar pull-left">
-              <img src="{{notif.from.profileImageURL}}" alt="{{notif.from.displayName}}" ng-if="notif.from._id">
-              <img src="modules/users/client/img/profile/default.png" alt="Deleted User" ng-if="!notif.from._id">
-            </div>
-            <strong>{{notif.from.displayName}}</strong>
-            <small class="default-text">{{notif.content}}</small>
-            <small>{{notif.poll.title}}</small>
-            <br>
-            <a ui-sref="{{notif.state}}({ pollId: notif.poll._id, notif: notif._id })" class="undecorated-link">View</a><br>
-          </div>
-          <div class="col-xs-3 pdn">
-            <div class="pull-right">
-              <i class="fa fa-home"></i>
-            </div>
-          </div>
-          <div class="clearfix"></div>
-        </div>
-      </div>-->
     </div>
   </div>
   <div class="row text-center" ng-show="busy && !stopped">

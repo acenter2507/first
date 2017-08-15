@@ -35,6 +35,10 @@ exports.invokeRolesPolicies = function () {
         {
           resources: '/api/markAllRead',
           permissions: '*'
+        },
+        {
+          resources: '/api/clearAll',
+          permissions: '*'
         }
       ]
     },
@@ -59,6 +63,10 @@ exports.invokeRolesPolicies = function () {
         },
         {
           resources: '/api/markAllRead',
+          permissions: '*'
+        },
+        {
+          resources: '/api/clearAll',
           permissions: '*'
         }
       ]

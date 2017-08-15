@@ -18,6 +18,7 @@ module.exports = function(app) {
     .get(notifs.read)
     .put(notifs.update)
     .delete(notifs.delete);
+  app.route('/api/clearAll').get(notifs.clearAll);
   app.route('/api/countUnchecks').get(notifs.countUnchecks);
   app.route('/api/markAllRead').get(notifs.markAllRead);
   app.route('/api/findNotifs/:limit/:page').get(notifs.findNotifs);

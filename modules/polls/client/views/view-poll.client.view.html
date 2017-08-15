@@ -1,4 +1,4 @@
-<section class="container animated fadeIn" infinite-scroll="vm.get_cmts()" infinite-scroll-distance='2' ng-show="vm.isShow">
+<section class="container animated fadeIn" ng-show="vm.isShow">
   <!-- Breadcrumb -->
   <div class="row mg10t">
     <div class="col-xs-12 pdn">
@@ -34,7 +34,7 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" infinite-scroll="vm.get_cmts()" infinite-scroll-distance='2'>
     <!-- Title and category -->
     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 pdn">
       <div class="card" id="poll_title_card">

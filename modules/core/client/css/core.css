@@ -28,7 +28,6 @@ body {
   padding-top: 50px;
   z-index: 1019;
   width: 250px;
-  margin-right: -250px;
   color: #fff;
   background: #263238;
   transition-duration: .25s,.25s;

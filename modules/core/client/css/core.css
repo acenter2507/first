@@ -35,13 +35,13 @@ body {
   transition-duration: .25s,.25s;
   transition-property: left, right;
   -webkit-overflow-scrolling: touch;}
-  .content::-webkit-scrollbar {
+  .aside-menu::-webkit-scrollbar {
     width: 1px; }
-  .content::-webkit-scrollbar-track {
+  .aside-menu::-webkit-scrollbar-track {
     background: transparent;
     border: 1px solid transparent;
     background-clip: content-box; }
-    .content::-webkit-scrollbar-thumb {
+    .aside-menu::-webkit-scrollbar-thumb {
     background: transparent; }
 
 .aside-menu-show .app .aside-menu {

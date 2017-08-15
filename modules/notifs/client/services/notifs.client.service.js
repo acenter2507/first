@@ -27,16 +27,24 @@
     return {
       findNotifs: (limit, page) => {
         let _page = page || 0;
-        return $http.get('/api/findNotifs/' + limit + '/' + _page);
+        return $http.get('/api/findNotifs/' + limit + '/' + _page, {
+          ignoreLoadingBar: true
+        });
       },
       countUnchecks: () => {
-        return $http.get('/api/countUnchecks');
+        return $http.get('/api/countUnchecks', {
+          ignoreLoadingBar: true
+        });
       },
       markAllRead: () => {
-        return $http.get('/api/markAllRead');
+        return $http.get('/api/markAllRead', {
+          ignoreLoadingBar: true
+        });
       },
       clearAll: () => {
-        return $http.get('/api/clearAll');
+        return $http.get('/api/clearAll', {
+          ignoreLoadingBar: true
+        });
       }
     };
   }

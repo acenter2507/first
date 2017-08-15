@@ -41,7 +41,6 @@
             return;
           }
           vm.notifs = _.union(vm.notifs, res.data);
-          console.log(vm.notifs);
           $scope.page += 1;
           $scope.busy = false;
         })
@@ -51,5 +50,9 @@
           toast.error('There were problems get your notifications.', 'Error!');
         });
     }
+
+    $scope.mark_read = notif => {
+      console.log(notif);
+    };
   }
 }());

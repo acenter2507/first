@@ -132,7 +132,7 @@ module.exports = function (io, socket) {
     if (!req.isNew) {
       return;
     }
-    io.sockets.in('public').emit('activity', {
+    io.sockets.emit('activity', {
       poll: req.pollId,
       user: req.from,
       displayName: req.displayName,

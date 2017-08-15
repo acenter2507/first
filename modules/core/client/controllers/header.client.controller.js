@@ -58,10 +58,6 @@ angular.module('core').controller('HeaderController', [
         loadNotifs(10);
         loadUncheckNotifs();
       });
-      Socket.on('notifs', res => {
-        loadNotifs(10);
-        loadUncheckNotifs();
-      });
       Socket.on('activity', res => {
         console.log('Has new activity from server');
         res.time = moment().format();
@@ -69,6 +65,9 @@ angular.module('core').controller('HeaderController', [
         activitys.push(res);
         Storages.set_session(Constants.storages.activitys, JSON.stringify(activitys));
         $rootScope.$emit('activity');
+      });
+      $scope.$on('$destroy', function () {
+        Socket.removeListener('activity');
       });
     }
 

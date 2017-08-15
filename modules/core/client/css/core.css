@@ -12,9 +12,7 @@ body {
   overflow-x: hidden; }
   .app .content {
     flex: 1;
-    min-width: 0; 
-    padding-top: 50px;
-    position: relative; }
+    min-width: 0;  }
   .app .aside-menu {
     flex: 0 0 250px; }
 
@@ -31,14 +29,17 @@ body {
   color: #263238;
   background: #fff;
   border-left: 1px solid #cfd8dc; }
-  .aside-menu::-webkit-scrollbar {
-    display: none; }
 
 .aside-menu-show .app .aside-menu {
   margin-right: 0; }
 .aside-menu-show .app .content {
   margin-left: -250px; }
 
+.content {
+  padding-top: 50px;
+  position: relative; }
+  .content::-webkit-scrollbar {
+    display: none; }
 /* Aside menu */
 /*.aside-menu {
   z-index: 9999;

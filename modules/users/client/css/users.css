@@ -102,6 +102,7 @@
     .bgcover .cover {
       height: 200px; }
       .bgcover .cover .container .cover-avatar {
+        left: 6px;
         bottom: -48px;
         height: 96px;
         width: 96px; }
@@ -109,6 +110,7 @@
         font-size: 1.8rem;
         left: 106px; }
       .bgcover .cover .container .cover-menu {
+        right: 6px;
         bottom: -18px;
         height: 36px;
         width: 36px; }
@@ -123,13 +125,15 @@
     .bgcover .cover {
       height: 100px; }
       .bgcover .cover .container .cover-avatar {
+        left: 6px;
         bottom: -32px;
         height: 64px;
         width: 64px; }
       .bgcover .cover .container .cover-name {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
         left: 70px; }
       .bgcover .cover .container .cover-menu {
+        right: 5px;
         bottom: -18px;
         height: 36px;
         width: 36px; }
@@ -137,11 +141,6 @@
           height: 36px;
           width: 36px; }
 }
-
-/*@media (min-width: 992px) {
-}
-@media (min-width: 1200px) {
-}*/
 
 
 .profile-menu-list {

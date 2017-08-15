@@ -84,7 +84,6 @@
 
     function initRootScope() {
       $rootScope.$on('activity', (event, data) => {
-        console.log('Has new activity');
         vm.activitys = JSON.parse(Storages.get_session(Constants.storages.activitys, JSON.stringify([])));
         event.stopPropagation();
       });

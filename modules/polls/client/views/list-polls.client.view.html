@@ -39,7 +39,8 @@
           <a class="undecorated-link card-expand-toggle pull-right text-muted"><i class="fa fa-caret-down"></i></a>
         </div>
         <div class="card-body">
-          <div class="card-scroll-content">
+          <span class="text-muted" ng-if="!isLogged">Login to view tickers.</span>
+          <div class="card-scroll-content" ng-if="isLogged">
             <div class="side-list-poll" ng-repeat="activity in vm.activitys">
               <div class="user-avatar pull-left">
                 <img src="{{activity.profileImageURL}}" alt="{{activity.displayName}}">

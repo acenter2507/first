@@ -68,6 +68,7 @@
   border-radius: 50%;
   border: none;
   outline: none;
+  z-index: 1000;
 }
 
 .cover .container .btn-fab:hover {

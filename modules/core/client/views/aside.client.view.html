@@ -1,10 +1,12 @@
 <aside class="aside-menu" ng-controller="HeaderController">
+
   <div class="aside-profile" ng-if="authentication.user">
+    <h4>Hello {{authentication.user.displayName}}</h4>
     <div class="aside-avatar">
       <img ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}"/>
     </div>
-    <span class="h4-text" ng-bind="authentication.user.displayName"></span>
   </div>
+  <hr>
   <nav class="aside-nav">
     <ul class="nav">
       <li class="nav-item">

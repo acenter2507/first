@@ -45,10 +45,11 @@ body {
     .aside-menu::-webkit-scrollbar-thumb {
     background: transparent; }
   .aside-menu .aside-profile {
-    padding-top: 1rem;
+    padding: 1rem;
     height: 200px;
     width: 100%;}
     .aside-menu .aside-profile .aside-avatar {
+      border: 2px solid #eee;
       height: 46px;
       width: 46px; }
     .aside-menu .aside-profile .aside-avatar img{

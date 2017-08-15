@@ -95,13 +95,27 @@
 /*.profile-breadcrumb .breadcrumb {
   margin-left: 130px;
 }*/
-/*
+
 @media (max-width: 767px) {
-  .cover,
-  .cover .container {
-    height: 200px;
-  }
-  .profile-breadcrumb {
+  .bgcover {
+    height: 250px; }
+    .bgcover .cover {
+      height: 200px; }
+      .bgcover .cover .container .cover-avatar {
+        bottom: 48px;
+        height: 96px;
+        width: 96px; }
+      .bgcover .cover .container .cover-name {
+        font-size: 1.8rem;
+        left: 106px; }
+      .bgcover .cover .container .cover-menu {
+        bottom: -18px;
+        height: 36px;
+        width: 36px; }
+        .bgcover .cover .container .cover-menu .btn-fab {
+          height: 36px;
+          width: 36px; }
+  /*.profile-breadcrumb {
     margin-top: 200px;
     height: 48px;
   }
@@ -130,10 +144,10 @@
     top: 152px;
     height: 96px;
     width: 96px;
-  }
+  }*/
 }
 
-@media (max-width: 479px) {
+/*@media (max-width: 479px) {
   .cover,
   .cover .container {
     height: 100px;

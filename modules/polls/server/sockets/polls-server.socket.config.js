@@ -96,7 +96,7 @@ module.exports = function (io, socket) {
   // On vote poll
   socket.on('poll_vote', req => {
     io.sockets.in(req.pollId).emit('poll_vote');
-    io.sockets.in('public').emit('activity', {
+    io.sockets.emit('activity', {
       poll: req.pollId,
       user: req.from,
       displayName: req.displayName,
@@ -116,7 +116,7 @@ module.exports = function (io, socket) {
   // On delete poll
   socket.on('poll_create', req => {
     io.sockets.in('public').emit('poll_create');
-    io.sockets.in('public').emit('activity', {
+    io.sockets.emit('activity', {
       poll: req._id,
       user: req.user._id,
       displayName: req.user.displayName,

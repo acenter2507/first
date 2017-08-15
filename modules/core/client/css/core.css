@@ -46,8 +46,9 @@ body {
 
 .aside-menu-show .app .aside-menu {
   right: 0; }
-/* .aside-menu-show .app .content {
-  margin-left: -250px; } */
+ .aside-menu-show .app .content {
+  margin-left: -250px;
+  margin-right: 250px; } 
 
 .content {
   padding-top: 50px;

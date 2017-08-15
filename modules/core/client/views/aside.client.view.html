@@ -15,83 +15,44 @@
   <nav class="aside-nav">
     <ul class="nav">
       <li class="nav-item">
-        <a class="nav-link" ui-sref-active="active" ui-sref="admin.dashboard"><i class="fa fa-tachometer"></i> Dashboard</a>
+        <a class="nav-link" ui-sref-active="active" ui-sref="home"><i class="fa fa-newspaper-o"></i> Feeds</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" ui-sref-active="active" ui-sref="categorys.list"><i class="fa fa-list"></i> Categorys</a>
+      </li>
+      <li class="nav-item" ng-show="isAdmin">
+        <a class="nav-link" ui-sref-active="active" ui-sref="admin.dashboard"><i class="fa fa-tachometer"></i> Admin</a>
       </li>
 
       <li class="divider"></li>
-      <li class="nav-title">
-        Manage data
+      <li class="nav-title">Profile</li>
+      <li class="nav-item" ng-show="authentication.user">
+        <a class="nav-link" ui-sref-active="active" ui-sref="profile.info({ userId: authentication.user._id })"><i class="fa fa-user-circle"></i> View Profile</a>
       </li>
-      <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('admin.users')}">
-        <a class="nav-link nav-dropdown-toggle" ng-class="{active: $state.includes('admin.users')}" href="#"><i class="fa fa-users"></i> Users</a>
-        <ul class="nav-dropdown-items">
-          <li class="nav-item">
-            <a class="nav-link" ui-sref-active="active" ui-sref="admin.users.list"><i class="fa fa-list-alt"></i> List</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" ui-sref-active="active" ui-sref="admin.users.new"><i class="fa fa-plus"></i> Add</a>
-          </li>
-        </ul>
+      <li class="nav-item" ng-show="authentication.user">
+        <a class="nav-link" ui-sref-active="active" ui-sref="settings.profile"><i class="fa fa-pencil-square-o"></i> Edit Profile</a>
       </li>
-      <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('admin.polls')}">
-        <a class="nav-link nav-dropdown-toggle" ng-class="{active: $state.includes('admin.polls')}" href="#"><i class="fa fa-list"></i> Polls</a>
-        <ul class="nav-dropdown-items">
-          <li class="nav-item">
-            <a class="nav-link" ui-sref-active="active" ui-sref="admin.polls.list"><i class="fa fa-list-alt"></i> List</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" ui-sref-active="active" ui-sref="admin.polls.new"><i class="fa fa-plus"></i> Add</a>
-          </li>
-        </ul>
+      <li class="nav-item" ng-show="authentication.user">
+        <a class="nav-link" ui-sref-active="active" ui-sref="settings.picture"><i class="fa fa-file-image-o"></i> Change Profile Picture</a>
       </li>
-      <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('admin.categorys')}">
-        <a class="nav-link nav-dropdown-toggle" ng-class="{active: $state.includes('admin.categorys')}" href="#"><i class="fa fa-list"></i> Categorys</a>
-        <ul class="nav-dropdown-items">
-          <li class="nav-item">
-            <a class="nav-link" ui-sref-active="active" ui-sref="admin.categorys.list"><i class="fa fa-list-alt"></i> List categorys</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" ui-sref-active="active" ui-sref="admin.categorys.new"><i class="fa fa-plus"></i> Add new</a>
-          </li>
-        </ul>
+      <li class="nav-item" ng-show="authentication.user && authentication.user.provider === 'local'">
+        <a class="nav-link" ui-sref-active="active" ui-sref="settings.password"><i class="fa fa-lock"></i> Change Password</a>
       </li>
-      <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('admin.tags')}">
-        <a class="nav-link nav-dropdown-toggle" ng-class="{active: $state.includes('admin.tags')}" href="#"><i class="fa fa-list"></i> Tags</a>
-        <ul class="nav-dropdown-items">
-          <li class="nav-item">
-            <a class="nav-link" ui-sref-active="active" ui-sref="admin.tags.list"><i class="fa fa-list-alt"></i> List tags</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" ui-sref-active="active" ui-sref="admin.tags.new"><i class="fa fa-plus"></i> Add new</a>
-          </li>
-        </ul>
+      <li class="nav-item" ng-show="authentication.user">
+        <a class="nav-link" ui-sref-active="active" ui-sref="settings.accounts"><i class="fa fa-facebook"></i> Manage Social Accounts</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" ui-sref-active="active" ui-sref="admin.widgets"><i class="icon-calculator"></i> Widgets <span class="badge badge-info">NEW</span></a>
+      <li class="nav-item" ng-show="authentication.user">
+        <a class="nav-link" href="/api/auth/signout" target="_self"><i class="fa fa-sign-out"></i> Sign Out</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" ui-sref-active="active" ui-sref="admin.charts"><i class="icon-pie-chart"></i> Charts</a>
+      <li class="nav-item" ng-show="!authentication.user">
+        <a class="nav-link" ui-sref="authentication.signin"><i class="fa fa-sign-in"></i> Sign In</a>
+      </li>
+      <li class="nav-item" ng-show="!authentication.user">
+        <a class="nav-link" ui-sref="authentication.signup"><i class="fa fa-download"></i> Sign Up</a>
       </li>
       <li class="divider"></li>
       <li class="nav-title">
-        Extras
-      </li>
-      <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('admin.pages')}">
-        <a class="nav-link nav-dropdown-toggle" ng-class="{active: $state.includes('admin.pages')}" href="#"><i class="icon-star"></i> Pages</a>
-        <ul class="nav-dropdown-items">
-          <li class="nav-item">
-            <a class="nav-link" ui-sref-active="active" ui-sref="appSimple.login"><i class="icon-star"></i> Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" ui-sref-active="active" ui-sref="appSimple.register"><i class="icon-star"></i> Register</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" ui-sref-active="active" ui-sref="appSimple.404"><i class="icon-star"></i> Error 404</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" ui-sref-active="active" ui-sref="appSimple.500"><i class="icon-star"></i> Error 500</a>
-          </li>
-        </ul>
+        Notifications<span class="badge badge-info">NEW</span>
       </li>
     </ul>
   </nav>

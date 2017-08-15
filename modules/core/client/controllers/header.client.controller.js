@@ -15,6 +15,7 @@ angular.module('core').controller('HeaderController', [
     // Expose view variables
     $scope.$state = $state;
     $scope.authentication = Authentication;
+    $scope.isAdmin = _.contains($scope.authentication.user.roles, 'admin');;
 
     // Get the topbar menu
     $scope.menu = Menus.getMenu('topbar');

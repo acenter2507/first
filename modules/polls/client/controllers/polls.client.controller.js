@@ -45,7 +45,7 @@
     var vm = this;
     vm.authentication = Authentication;
     vm.user = Authentication.user;
-    vm.isLogged = vm.user ? true : false;
+    vm.isLogged = (vm.user);
     vm.poll = poll;
 
     vm.form = {};

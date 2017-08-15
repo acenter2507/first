@@ -43,7 +43,7 @@
               </span>
             </span>-->
             <div class="pull-right">
-              <button class="btn-transparent notif-read-toggle" ng-click="mark_read(notif); $event.preventDefault();">
+              <button class="btn-transparent notif-read-toggle" ng-click="mark_read(notif); $event.stopPropagation();">
                 <span class="fa" ng-class="{'fa-circle-o': notif.status === 0, 'fa-dot-circle-o': notif.status === 1}"></span>
               </button>
             </div>

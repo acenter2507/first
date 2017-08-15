@@ -4,8 +4,8 @@
   .notifications a.list-group-item {
     border-radius: 0 !important;
     border: none !important; }
-  .notifications a.list-group-item:not(:last-child) {
-    border-bottom: 1px solid #ddd !important;}
+  .notifications a.list-group-item:not(:first-child) {
+    border-top: 1px solid #ddd !important;}
   .notifications a.list-group-item.unread {
     background-color: #f2f5fb !important; }
   .notifications a.list-group-item:hover,

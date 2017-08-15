@@ -1,21 +1,22 @@
 <div class="container animated fadeIn" ng-controller="ProfilePollsController">
   <!-- Breadcrumb -->
-  <div class="row profile-breadcrumb">
+  <div class="row">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="home">Home</a></li>
       <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="profile.info({ userId: profile._id })">{{profile.displayName}}</a></li>
       <li class="breadcrumb-item active">Polls</li>
     </ol>
   </div>
-  <hr>
   <!-- List poll -->
   <div class="row" infinite-scroll="get_polls()" infinite-scroll-distance='2'>
     <div ng-repeat="poll in polls | filter: poll_filter" class="card">
       <div ng-include="'/modules/core/client/views/templates/list-poll.client.template.html'"></div>
     </div>
 
-    <div class="notice notice-warning" ng-show="polls.length === 0 && stopped">
-      <strong>Sorry</strong> {{profile.displayName}} has not create any polls.
+    <div class="col-xs-12 pd6x">
+      <div class="notice notice-warning" ng-show="polls.length === 0 && stopped">
+        <strong>Sorry</strong> {{profile.displayName}} has not create any polls.
+      </div>
     </div>
   </div>
   <div class="row text-center" ng-show="busy">

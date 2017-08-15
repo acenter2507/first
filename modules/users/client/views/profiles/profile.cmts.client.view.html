@@ -1,12 +1,12 @@
 <div class="container animated fadeIn" ng-controller="ProfileCmtsController">
-  <div class="row profile-breadcrumb">
+  <div class="row">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="home">Home</a></li>
       <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="profile.info({ userId: profile._id })">{{profile.displayName}}</a></li>
       <li class="breadcrumb-item active">Comments</li>
     </ol>
   </div>
-  <div class="row mg50t" infinite-scroll="get_cmts()" infinite-scroll-distance='2'>
+  <div class="row" infinite-scroll="get_cmts()" infinite-scroll-distance='2'>
     <div ng-repeat="cmt in cmts | filter: cmt_filter" class="card">
       <div class="card-body">
 
@@ -38,8 +38,10 @@
         <div class="clearfix"></div>
       </div>
     </div>
-    <div class="notice notice-warning" ng-show="cmts.length === 0 && stopped">
-      <strong>Sorry</strong> {{profile.displayName}} has not commented in any polls.
+    <div class="col-xs-12 pd6x">
+      <div class="notice notice-warning" ng-show="cmts.length === 0 && stopped">
+        <strong>Sorry</strong> {{profile.displayName}} has not commented in any polls.
+      </div>
     </div>
   </div>
   <div class="row text-center" ng-show="busy">

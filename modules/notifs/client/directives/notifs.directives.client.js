@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-  angular.module('notif')
+  angular.module('notifs')
     .directive('span', markReadNotif);
 
   function markReadNotif() {

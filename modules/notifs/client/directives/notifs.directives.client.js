@@ -11,6 +11,12 @@
     return directive;
 
     function link(scope, element, attrs) {
+      element.on('click', function (event) {
+        if (element.hasClass('notif-read-toggle')) {
+          console.log('XXXXX');
+          event.stopPropagation();
+        }
+      });
     }
   }
 

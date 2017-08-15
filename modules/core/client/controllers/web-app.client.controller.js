@@ -11,7 +11,7 @@ angular.module('core').controller('WebAppController', ['$rootScope', '$scope', '
       if (data > 0) {
         $scope.page_notifs = '(' + data + ') ';
       } else {
-        $scope.notifs = '';
+        $scope.page_notifs = '';
       }
       $scope.page_title = $scope.page_notifs + $scope.page_name;
     });

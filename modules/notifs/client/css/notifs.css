@@ -1,20 +1,20 @@
 .notifications {
   box-shadow: 0 1px 2px rgba(0,0,0,.1) !important;
   border-radius: 0 !important;}
-  .notifications > a {
+  .notifications a.list-group-item {
     border-radius: 0 !important;
     border: none !important; }
-  .notifications > a:not(:last-child) {
+  .notifications a.list-group-item:not(:last-child) {
     border-bottom: 1px solid #eee !important;}
-  .notifications > a.unread {
+  .notifications a.list-group-item.unread {
     background-color: #f2f5fb !important; }
-  .notifications > a:hover,
-  .notifications > a.unread:hover {
+  .notifications a.list-group-item:hover,
+  .notifications a.list-group-item.unread:hover {
     background-color: #ddd !important; }
-    .notifications > a a.notif-read-toggle {
+    .notifications a.list-group-item a.notif-read-toggle {
       height: 1rem;
       width: 1rem;
       border-radius: 50%; 
       border: 3px solid #267ED5; }
-    .notifications > a a.notif-read-toggle.read {
+    .notifications > a.list-group-item a.notif-read-toggle.read {
       background-color: #267ED5; }

@@ -22,7 +22,7 @@
       <div class="card" ng-repeat="notif in vm.notifs">
         <div class="card-body">
           <div class="col-xs-9 pdn">
-            <div class="avatar pull-left">
+            <div class="user-avatar pull-left">
               <img src="{{notif.from.profileImageURL}}" alt="{{notif.from.displayName}}" ng-if="notif.from._id">
               <img src="modules/users/client/img/profile/default.png" alt="Deleted User" ng-if="!notif.from._id">
             </div>

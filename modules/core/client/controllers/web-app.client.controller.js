@@ -6,7 +6,7 @@ angular.module('core').controller('WebAppController', ['$rootScope', '$scope', '
     $scope.page_title = $scope.page_notifs + 'Polls';
 
     $rootScope.$on('updateNotif', function (event, data) {
-      if (date > 0) {
+      if (data > 0) {
         $scope.page_notifs = '(' + data + ') ';
       } else {
         $scope.notifs = '';

@@ -45,7 +45,7 @@ body {
     .aside-menu::-webkit-scrollbar-thumb {
     background: transparent; }
   .aside-menu .aside-profile {
-    border-top: 1px solid #5197dd;}
+    border-bottom: 1px solid #5197dd;}
   .aside-menu .aside-profile,
   .aside-menu .aside-search {
     padding: 1rem;

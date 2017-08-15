@@ -25,9 +25,8 @@ body {
   z-index: 1019;
   width: 250px;
   margin-right: -250px;
-  color: #263238;
-  background: #fff;
-  border-left: 1px solid #cfd8dc; }
+  color: #fff;
+  background: #263238;}
 
 .aside-menu-show .app .aside-menu {
   margin-right: 0; }

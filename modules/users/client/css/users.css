@@ -115,66 +115,28 @@
         .bgcover .cover .container .cover-menu .btn-fab {
           height: 36px;
           width: 36px; }
-  /*.profile-breadcrumb {
-    margin-top: 200px;
-    height: 48px;
-  }
-  .profile-poll {
-    margin-top: 300px;
-  }
-  .profile-breadcrumb .breadcrumb {
-    margin-left: 100px;
-  }
-  .cover .container .profile-menu {
-    bottom: -18px;
-    height: 36px;
-    width: 36px;
-  }
-  .cover .container .btn-fab {
-    height: 36px;
-    width: 36px;
-  }
-  .profile-name {
-    left: 106px;
-  }
-  .profile-name span {
-    font-size: 24px;
-  }
-  .profile-avatar {
-    top: 152px;
-    height: 96px;
-    width: 96px;
-  }*/
 }
 
-/*@media (max-width: 479px) {
-  .cover,
-  .cover .container {
-    height: 100px;
-  }
-  .profile-name {
-    left: 70px;
-    bottom: 2px;
-  }
-  .profile-breadcrumb {
-    margin-top: 100px;
-    height: 32px;
-  }
-  .profile-poll {
-    margin-top: 180px;
-  }
-  .profile-breadcrumb .breadcrumb {
-    margin-left: 65px;
-  }
-  .profile-name span {
-    font-size: 18px;
-  }
-  .profile-avatar {
-    top: 68px;
-    height: 64px;
-    width: 64px;
-  }
-}*/
+@media (max-width: 479px) {
+  .bgcover {
+    height: 135px; }
+    .bgcover .cover {
+      height: 100px; }
+      .bgcover .cover .container .cover-avatar {
+        bottom: -32px;
+        height: 64px;
+        width: 64px; }
+      .bgcover .cover .container .cover-name {
+        font-size: 1.4rem;
+        left: 70px; }
+      .bgcover .cover .container .cover-menu {
+        bottom: -18px;
+        height: 36px;
+        width: 36px; }
+        .bgcover .cover .container .cover-menu .btn-fab {
+          height: 36px;
+          width: 36px; }
+}
 
 /*@media (min-width: 992px) {
 }

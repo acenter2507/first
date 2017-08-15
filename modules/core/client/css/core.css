@@ -5,15 +5,43 @@ body {
   height: 100%;
   margin: 0;
 }
+.app {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  overflow-x: hidden; }
+  .app .content {
+    flex: 1;
+    min-width: 0; 
+    padding-top: 50px;
+    position: relative; }
+  .app .aside-menu {
+    flex: 0 0 250px; }
 
-.content {
-  /*overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;*/
+
+/* Aside menu */
+/*.aside-menu {
+  z-index: 9999;
+  width: 250px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: -250px;
+  color: #263238;
+  background: #fff;
+  transition: margin-left 0.25s, margin-right 0.25s, width 0.25s, flex 0.25s; }
+  .aside-menu.aside-menu-show {
+    right: 0; }*/
+
+
+/*.content {
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
   position: relative;
   max-height: 100%;
   width: 100%;
-  padding-top: 50px; }
-  /*.content::-webkit-scrollbar {
+  padding-top: 50px;
+  .content::-webkit-scrollbar {
     width: 4px; }
   .content::-webkit-scrollbar-track {
     background: transparent;

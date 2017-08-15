@@ -28,7 +28,6 @@
         <a class="nav-link" ui-sref-active="active" ui-sref="admin.dashboard"><i class="fa fa-tachometer"></i> Admin</a>
       </li>
 
-      <li class="divider"></li>
       <li class="nav-title">Profile</li>
       <li class="nav-item" ng-show="authentication.user">
         <a class="nav-link" ui-sref-active="active" ui-sref="profile.info({ userId: authentication.user._id })"><i class="fa fa-user-circle"></i> View Profile</a>
@@ -54,9 +53,11 @@
       <li class="nav-item" ng-show="!authentication.user">
         <a class="nav-link" ui-sref="authentication.signup"><i class="fa fa-download"></i> Sign Up</a>
       </li>
-      <li class="divider"></li>
-      <li class="nav-title">
-        Notifications<span class="badge badge-danger">NEW</span>
+      <li class="nav-title" ng-show="authentication.user">Notifications</li>
+      <li class="nav-item" ng-show="authentication.user">
+        <a class="nav-link" ui-sref="authentication.signup"><i class="fa fa-download"></i> See all
+          <span class="badge badge-pill badge-danger" ng-bind="uncheckNotifs" ng-show="uncheckNotifs > 0"></span>
+        </a>
       </li>
     </ul>
   </nav>

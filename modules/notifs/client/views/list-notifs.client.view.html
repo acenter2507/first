@@ -31,9 +31,9 @@
             <strong>{{notif.poll.title}}</strong>
           </div>
           <div class="col-xs-3 pdn">
-            <div class="pull-right">
+            <span class="pull-right" onclick="return false;">
               <span class="fa notif-read-toggle" ng-class="{'fa-circle-o': notif.status === 0, 'fa-dot-circle-o': notif.status === 1}" ng-click="mark_read(notif)"></span>
-            </div>
+            </span>
           </div>
           <div class="clearfix"></div>
         </a>

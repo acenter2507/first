@@ -2,6 +2,7 @@
 angular
   .module('core')
   .directive('a', preventClickDirective)
+  .directive('a', asideMenuToggleDirective)
   .directive('a', cardExpandDirective);
 
 //Prevent click if href="#"
@@ -36,6 +37,25 @@ function cardExpandDirective() {
         element.parent().parent().toggleClass('open');
       }
       // 
+    });
+  }
+}
+
+
+//LayoutToggle
+asideMenuToggleDirective.$inject = ['$interval'];
+function asideMenuToggleDirective($interval) {
+  var directive = {
+    restrict: 'E',
+    link: link
+  };
+  return directive;
+
+  function link(scope, element, attrs) {
+    element.on('click', function () {
+      if (element.hasClass('aside-menu-toggler')) {
+        angular.element('body').toggleClass('aside-menu-show');
+      }
     });
   }
 }

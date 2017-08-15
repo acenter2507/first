@@ -6,6 +6,7 @@
     .controller('NotifsListController', NotifsListController);
 
   NotifsListController.$inject = [
+    '$rootScope',
     '$scope',
     '$state',
     'NotifsService',
@@ -17,6 +18,7 @@
   ];
 
   function NotifsListController(
+    $rootScope,
     $scope,
     $state,
     NotifsService,

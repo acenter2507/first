@@ -3,7 +3,8 @@
 angular.module('core').controller('WebAppController', ['$rootScope', '$scope', 'Authentication',
   function ($rootScope, $scope, Authentication) {
     $scope.page_notifs = '';
-    $scope.page_title = $scope.page_notifs + 'Polls';
+    $scope.page_name = 'Polls';
+    $scope.page_title = $scope.page_notifs + $scope.page_name;
 
     $rootScope.$on('updateNotif', function (event, data) {
       if (data > 0) {
@@ -11,6 +12,7 @@ angular.module('core').controller('WebAppController', ['$rootScope', '$scope', '
       } else {
         $scope.notifs = '';
       }
+      $scope.page_title = $scope.page_notifs + $scope.page_name;
     });
   }
 ]);

@@ -102,7 +102,7 @@
     .bgcover .cover {
       height: 200px; }
       .bgcover .cover .container .cover-avatar {
-        bottom: 48px;
+        bottom: -48px;
         height: 96px;
         width: 96px; }
       .bgcover .cover .container .cover-name {

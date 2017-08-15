@@ -29,7 +29,7 @@
     $scope.stopped = false;
     $scope.busy = false;
     $scope.page = 0;
-    vm.get_notifs = get_notifs;
+    $scope.get_notifs = get_notifs;
     function get_notifs() {
       if ($scope.stopped || $scope.busy) return;
       $scope.busy = true;

@@ -8,3 +8,6 @@
     border-bottom: 1px solid #eee !important;}
   .notifications > a.unread {
     background-color: #f2f5fb !important; }
+  .notifications > a:hover,
+  .notifications > a.unread:hover {
+    background-color: #ddd !important; }

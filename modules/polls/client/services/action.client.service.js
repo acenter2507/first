@@ -61,7 +61,9 @@
     this.get_populars = (_page) => {
       return new Promise((resolve, reject) => {
         var page = _page || 0;
-        $http.get('/api/findPopulars/' + page)
+        $http.get('/api/findPopulars/' + page, {
+          ignoreLoadingBar: true
+        })
           .then(res => {
             return resolve(res);
           }, err => {
@@ -87,7 +89,9 @@
      */
     this.get_owner_by_pollId = pollId => {
       return new Promise((resolve, reject) => {
-        $http.get('/api/findOwners/' + pollId)
+        $http.get('/api/findOwners/' + pollId, {
+          ignoreLoadingBar: true
+        })
           .then(res => {
             return resolve(res);
           }, err => {
@@ -101,7 +105,9 @@
     this.get_cmts = (pollId, _page) => {
       return new Promise((resolve, reject) => {
         var page = _page || 0;
-        $http.get('/api/findCmts/' + pollId + '/' + page)
+        $http.get('/api/findCmts/' + pollId + '/' + page, {
+          ignoreLoadingBar: true
+        })
           .then(res => {
             return resolve(res);
           }, err => {
@@ -114,7 +120,9 @@
      */
     this.get_cmt = cmtId => {
       return new Promise((resolve, reject) => {
-        $http.get('api/cmts/' + cmtId)
+        $http.get('api/cmts/' + cmtId, {
+          ignoreLoadingBar: true
+        })
           .then(res => {
             return resolve(res);
           }, err => {
@@ -210,7 +218,9 @@
     */
     this.count_up_view_poll = pollId => {
       return new Promise((resolve, reject) => {
-        $http.get('/api/countUpView/' + pollId)
+        $http.get('/api/countUpView/' + pollId, {
+          ignoreLoadingBar: true
+        })
           .then(res => {
             return resolve(res);
           }, err => {
@@ -317,7 +327,9 @@
      */
     this.get_voteopts = pollId => {
       return new Promise((resolve, reject) => {
-        $http.get('/api/findVoteopts/' + pollId)
+        $http.get('/api/findVoteopts/' + pollId, {
+          ignoreLoadingBar: true
+        })
           .then(res => {
             return resolve(res);
           }, err => {
@@ -478,7 +490,9 @@
      */
     this.remove_bookmark = pollId => {
       return new Promise((resolve, reject) => {
-        $http.get('/api/removeBookmark/' + pollId)
+        $http.get('/api/removeBookmark/' + pollId, {
+          ignoreLoadingBar: true
+        })
           .then(res => {
             return resolve(res);
           }, err => {
@@ -490,13 +504,19 @@
      * Lấy list poll thuộc category
      */
     this.get_category_polls = (categoryId, page, sort) => {
-      return $http.get('/api/categorys/' + categoryId + '/polls/' + page + '/' + sort);
+      return $http.get('/api/categorys/' + categoryId + '/polls/' + page + '/' + sort, {
+        ignoreLoadingBar: true
+      });
     };
     this.search = condition => {
-      return $http.post('/api/search', { condition: condition });
+      return $http.post('/api/search', { condition: condition }, {
+        ignoreLoadingBar: true
+      });
     };
     this.search_user_by_name = name => {
-      return $http.get('/api/users/search/s=' + name);
+      return $http.get('/api/users/search/s=' + name, {
+        ignoreLoadingBar: true
+      });
     };
     this.get_tags = () => {
       return new Promise((resolve, reject) => {
@@ -509,13 +529,17 @@
       });
     };
     this.get_popular_tags = () => {
-      return $http.get('/api/tags/popular');
+      return $http.get('/api/tags/popular', {
+        ignoreLoadingBar: true
+      });
     };
     /**
      * Lấy list poll thuộc tag
      */
     this.get_tag_polls = (tagId) => {
-      return $http.get('/api/tags/' + tagId + '/polls');
+      return $http.get('/api/tags/' + tagId + '/polls', {
+        ignoreLoadingBar: true
+      });
     };
     /**
      * Xử lý poll khi show lên màn hình

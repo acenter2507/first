@@ -10,7 +10,7 @@ function admin($resource) {
   return $resource('api/users/:aduserId', { aduserId: '@_id' }, {
     update: {
       method: 'PUT'
-    }
+    },
   });
 }
 AdminApi.$inject = ['$http'];
@@ -18,12 +18,6 @@ function AdminApi($http) {
   this.get_users = () => {
     return $http.get('/api/admins/users');
   };
-  // this.user_report = userId => {
-  //   return $http.get('/api/admins/users/' + userId + '/report');
-  // };
-  // this.user_reported = userId => {
-  //   return $http.get('/api/admins/users/' + userId + '/reported');
-  // };
   this.reset_pass = (userId, pass) => {
     return $http.post('/api/admins/users/' + userId + '/resetpass', { password: pass });
   };

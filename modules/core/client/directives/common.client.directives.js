@@ -54,7 +54,7 @@ function asideMenuToggleDirective($interval) {
   function link(scope, element, attrs) {
     element.on('click', function () {
       if (element.hasClass('aside-menu-toggler')) {
-        angular.element('body').toggleClass('aside-menu-hidden');
+        angular.element('body').toggleClass('aside-menu-show');
       }
     });
   }

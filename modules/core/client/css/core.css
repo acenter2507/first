@@ -26,12 +26,15 @@ body {
 .aside-menu {
   z-index: 1019;
   width: 250px;
+  margin-right: -250px;
   color: #263238;
   background: #fff;
   border-left: 1px solid #cfd8dc; }
 
-.aside-menu-hidden .aside-menu {
-  margin-right: -250px; }
+.aside-menu-show .app .aside-menu {
+  margin-right: 0; }
+.aside-menu-show .app .content {
+  margin-left: -250px; }
 /* Aside menu */
 /*.aside-menu {
   z-index: 9999;

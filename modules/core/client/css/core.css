@@ -33,7 +33,10 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   transition-duration: .25s,.25s;
-  transition-property: left, right;}
+  transition-property: left, right;
+  -webkit-overflow-scrolling: touch;}
+  .aside-menu:-webkit-scrollbar {
+    display: none; }
 
 .aside-menu-show .app .aside-menu {
   right: 0; }

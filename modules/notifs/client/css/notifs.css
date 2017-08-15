@@ -17,4 +17,5 @@
       color: #267ED5;
       z-index: 2; }
     .notifications > a.list-group-item .notif-read-toggle:focus {
-      outline: none; }
+      outline: none; 
+      border: none; }

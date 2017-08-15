@@ -9,10 +9,8 @@
         <a class="undecorated-link" ng-if="vm.tmp_cmt.to" ui-sref="profile.info({userId: vm.tmp_cmt.to})" ng-bind="vm.tmp_cmt.toName"></a>
       </div>
       <div class="form-group">
-        <div class="user-avatar pull-left" ng-if="m.user">
-          <a ui-sref="profile.info({userId: m.user._id})">
-          <img src="{{m.user.profileImageURL}}" alt="{{m.user.displayName}}">
-        </a>
+        <div class="user-avatar pull-left" ng-if="vm.user">
+          <a ui-sref="profile.info({userId: vm.user._id})"><img src="{{vm.user.profileImageURL}}" alt="{{vm.user.displayName}}"></a>
         </div>
         <textarea ng-is-enter="{{vm.enter_send}}" ng-enter="vm.save_cmt()" focus-me="{{vm.cmt_typing}}" class="msd-elastic: \n; reply-input"
           data-ng-model="vm.tmp_cmt.body" placeholder="Type your comment..."></textarea>
@@ -65,9 +63,9 @@
           </a>
           <md-menu-content>
             <ul class="menu-list">
-              <li ng-if="vm.isLogged && cmt.user._id !== m.user._id"><a class="undecorated-link" ng-click="vm.reply_cmt(cmt)"><i class="fa fa-reply"></i>&nbsp;Reply</a></li>
-              <li ng-if="cmt.user._id === m.user._id"><a class="undecorated-link" ng-click="vm.edit_cmt(cmt)"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
-              <li ng-if="cmt.user._id === m.user._id"><a class="undecorated-link" ng-click="vm.delete_cmt(cmt)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
+              <li ng-if="vm.isLogged && cmt.user._id !== vm.user._id"><a class="undecorated-link" ng-click="vm.reply_cmt(cmt)"><i class="fa fa-reply"></i>&nbsp;Reply</a></li>
+              <li ng-if="cmt.user._id === vm.user._id"><a class="undecorated-link" ng-click="vm.edit_cmt(cmt)"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
+              <li ng-if="cmt.user._id === vm.user._id"><a class="undecorated-link" ng-click="vm.delete_cmt(cmt)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
             </ul>
           </md-menu-content>
         </md-menu>

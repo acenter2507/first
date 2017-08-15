@@ -17,7 +17,8 @@ angular.module('users').factory('Userreport', ['$resource',
       userreportId: '@_id'
     }, {
       update: {
-        method: 'PUT'
+        method: 'PUT',
+        ignoreLoadingBar: true
       }
     });
   }

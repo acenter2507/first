@@ -13,7 +13,8 @@
       voteoptId: '@_id'
     }, {
       update: {
-        method: 'PUT'
+        method: 'PUT',
+        ignoreLoadingBar: true
       }
     });
   }

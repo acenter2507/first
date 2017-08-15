@@ -1,5 +1,5 @@
 // Polls service used to communicate Polls REST endpoints
-(function() {
+(function () {
   'use strict';
   angular.module('polls').factory('PollsService', PollsService);
 
@@ -13,7 +13,8 @@
       },
       {
         update: {
-          method: 'PUT'
+          method: 'PUT',
+          ignoreLoadingBar: true
         }
       }
     );

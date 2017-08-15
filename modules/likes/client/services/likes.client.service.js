@@ -9,11 +9,10 @@
   LikesService.$inject = ['$resource'];
 
   function LikesService($resource) {
-    return $resource('api/likes/:likeId', {
-      likeId: '@_id'
-    }, {
+    return $resource('api/likes/:likeId', { likeId: '@_id' s}, {
       update: {
-        method: 'PUT'
+        method: 'PUT',
+        ignoreLoadingBar: true
       }
     });
   }

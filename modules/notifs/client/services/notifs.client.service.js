@@ -1,5 +1,5 @@
 // Notifs service used to communicate Notifs REST endpoints
-(function() {
+(function () {
   'use strict';
   angular.module('notifs').factory('NotifsService', NotifsService);
 
@@ -13,7 +13,8 @@
       },
       {
         update: {
-          method: 'PUT'
+          method: 'PUT',
+          ignoreLoadingBar: true
         }
       }
     );

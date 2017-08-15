@@ -9,7 +9,8 @@ admin.$inject = ['$resource'];
 function admin($resource) {
   return $resource('api/users/:aduserId', { aduserId: '@_id' }, {
     update: {
-      method: 'PUT'
+      method: 'PUT',
+      ignoreLoadingBar: true
     },
   });
 }

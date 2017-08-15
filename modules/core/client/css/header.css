@@ -25,8 +25,7 @@
   .navbar .navbar-toggle {
     position: absolute;
     top: 0;
-    left: 0;
-    width: 70px;
+    left: right;
     height: inherit; }
   .navbar .navbar-brand {
     background-position: center;

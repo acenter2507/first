@@ -41,6 +41,7 @@
             return;
           }
           vm.notifs = _.union(vm.notifs, res.data);
+          console.log(vm.notifs);
           $scope.page += 1;
           $scope.busy = false;
         })

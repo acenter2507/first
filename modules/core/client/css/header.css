@@ -21,8 +21,6 @@
   .navbar .navbar-nav .dropdown .dropdown-menu > li > a {
     padding: 6px 12px; }
 
-.aside-menu {}
-
 /* Aside menu */
 .aside-menu {
   z-index: 9999;

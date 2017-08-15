@@ -1,5 +1,5 @@
 <div class="container animated fadeIn" ng-controller="ProfileInfoController">
-  <div class="row profile-breadcrumb">
+  <div class="row">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="home">Home</a></li>
       <!--<li class="breadcrumb-item"><a href="#">Library</a></li>-->
@@ -29,9 +29,6 @@
     <strong><span am-time-ago="profile.created"></span></strong>
     <span>last online</span>
     <strong><span ng-bind="profile.lastLogin | LLL_format"></span></strong>
-  </div>
-  <div class="row">
-    <hr>
   </div>
   <div class="row">
     <ul class="timeline">

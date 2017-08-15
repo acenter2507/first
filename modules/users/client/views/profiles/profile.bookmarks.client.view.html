@@ -21,8 +21,10 @@
       <div ng-include="'/modules/core/client/views/templates/list-poll.client.template.html'"></div>
     </div>
 
-    <div class="notice notice-warning" ng-show="polls.length === 0 && stopped">
-      <strong>Sorry</strong> You has not bookmark any polls.
+    <div class="col-xs-12 pd6x">
+      <div class="notice notice-warning" ng-show="polls.length === 0 && stopped">
+        <strong>Sorry</strong> You has not bookmark any polls.
+      </div>
     </div>
   </div>
   <div class="row text-center" ng-show="busy">

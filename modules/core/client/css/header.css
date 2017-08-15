@@ -12,6 +12,7 @@
 }
 
 .navbar .navbar-nav .dropdown .dropdown-menu {
+  color: #555;
   margin-top: 2px;
   border: none;
   border-radius: 0;

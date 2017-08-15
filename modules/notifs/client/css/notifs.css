@@ -1,0 +1,10 @@
+.notifications {
+  box-shadow: 0 1px 2px rgba(0,0,0,.1);
+  border-radius: 0;}
+  .notifications > a {
+    border-radius: 0;
+    border: none; }
+  .notifications > a:not(:last-child) {
+    border-bottom: 1px solid #eee;}
+  .notifications > a.unread {
+    background-color: #f2f5fb; }

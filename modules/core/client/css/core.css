@@ -32,26 +32,26 @@ body {
   background: #267ED5;
   transition-duration: .25s,.25s;
   transition-property: left, right;
-  overflow: hidden;
-  /* overflow-x: hidden;
+  /* overflow: hidden; */
+   overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: -ms-autohiding-scrollbar;  */}
-  /* .aside-menu::-webkit-scrollbar {
+  -ms-overflow-style: -ms-autohiding-scrollbar;  }
+  .aside-menu::-webkit-scrollbar {
     width: 1px; }
   .aside-menu::-webkit-scrollbar-track {
     background: transparent;
     border: 1px solid transparent;
     background-clip: content-box; }
     .aside-menu::-webkit-scrollbar-thumb {
-    background: transparent; }  */
+    background: transparent; }  
   .aside-menu .aside-nav {
     position: relative;
-    overflow-x: hidden;
+    /* overflow-x: hidden;
     overflow-y: auto;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
+    -ms-overflow-style: -ms-autohiding-scrollbar; */
     width: 250px; }
-    .aside-menu .aside-nav::-webkit-scrollbar {
+    /* .aside-menu .aside-nav::-webkit-scrollbar {
       position: absolute;
       width: 10px;
       margin-left: -10px;
@@ -66,7 +66,7 @@ body {
       background-clip: content-box;
       border-color: transparent;
       border-style: solid;
-      border-width: 1px 2px; }
+      border-width: 1px 2px; } */
   .aside-menu .nav {
     width: 250px;
     flex-direction: column !important; }

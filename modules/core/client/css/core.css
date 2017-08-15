@@ -32,7 +32,6 @@ body {
   background: #267ED5;
   transition-duration: .25s,.25s;
   transition-property: left, right;
-  /* overflow: hidden; */
    overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
@@ -44,29 +43,21 @@ body {
     border: 1px solid transparent;
     background-clip: content-box; }
     .aside-menu::-webkit-scrollbar-thumb {
-    background: transparent; }  
+    background: transparent; }
+  .aside-menu .aside-profile {
+    padding-top: 1rem;
+    height: 200px;
+    width: 100%;}
+    .aside-menu .aside-profile .avatar {
+      float: left;
+      height: 46px;
+      width: 46px; }
+    .aside-menu .aside-profile .avatar img{
+      float: left;
+      height: 46px; }
   .aside-menu .aside-nav {
     position: relative;
-    /* overflow-x: hidden;
-    overflow-y: auto;
-    -ms-overflow-style: -ms-autohiding-scrollbar; */
     width: 250px; }
-    /* .aside-menu .aside-nav::-webkit-scrollbar {
-      position: absolute;
-      width: 10px;
-      margin-left: -10px;
-      -webkit-appearance: none; }
-    .aside-menu .aside-nav::-webkit-scrollbar-track {
-      background-color: #304047;
-      border-right: 1px solid #1c2429;
-      border-left: 1px solid #1c2429; }
-    .aside-menu .aside-nav::-webkit-scrollbar-thumb {
-      height: 50px;
-      background-color: #11171a;
-      background-clip: content-box;
-      border-color: transparent;
-      border-style: solid;
-      border-width: 1px 2px; } */
   .aside-menu .nav {
     width: 250px;
     flex-direction: column !important; }

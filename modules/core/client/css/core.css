@@ -25,8 +25,9 @@ body {
   color: #263238;
   background: #fff;
   border-left: 1px solid #cfd8dc; }
-.aside-menu-show .aside-menu {
-  margin-right: 0px; }
+
+.aside-menu-hidden .aside-menu {
+  margin-right: -250px; }
 /* Aside menu */
 /*.aside-menu {
   z-index: 9999;

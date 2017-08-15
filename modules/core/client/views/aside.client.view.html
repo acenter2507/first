@@ -1,6 +1,6 @@
 <aside class="aside-menu" ng-controller="HeaderController">
   <div class="aside-profile" ng-if="authentication.user">
-    <div class="avatar">
+    <div class="aside-avatar">
       <img ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}"/>
     </div>
     <span class="h4-text" ng-bind="authentication.user.displayName"></span>

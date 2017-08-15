@@ -24,7 +24,6 @@ body {
 .aside-menu {
   z-index: 1019;
   width: 250px;
-  min-height: 100%;
   margin-right: -250px;
   color: #263238;
   background: #fff;
@@ -38,8 +37,10 @@ body {
 .content {
   padding-top: 50px;
   position: relative; }
-  .content::-webkit-scrollbar {
-    display: none; }
+
+
+
+
 /* Aside menu */
 /*.aside-menu {
   z-index: 9999;

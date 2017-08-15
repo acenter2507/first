@@ -104,9 +104,9 @@ body {
             color: #fff !important; }
         .aside-menu .nav .nav-item .nav-link.active, .aside-menu .nav .nav-item .navbar .active.dropdown-toggle, .navbar .aside-menu .nav .nav-item .active.dropdown-toggle {
           color: #fff;
-          background: #1e64aa; }
+          background: #2271bf; }
           .aside-menu .nav .nav-item .nav-link.active i, .aside-menu .nav .nav-item .navbar .active.dropdown-toggle i, .navbar .aside-menu .nav .nav-item .active.dropdown-toggle i {
-            color: #2271bf; }
+            color: #fff; }
         .aside-menu .nav .nav-item .nav-link [class^="icon-"], .aside-menu .nav .nav-item .navbar .dropdown-toggle [class^="icon-"], .navbar .aside-menu .nav .nav-item .dropdown-toggle [class^="icon-"], .aside-menu .nav .nav-item .nav-link [class*=" icon-"], .aside-menu .nav .nav-item .navbar .dropdown-toggle [class*=" icon-"], .navbar .aside-menu .nav .nav-item .dropdown-toggle [class*=" icon-"] {
           display: inline-block;
           margin-top: -4px;

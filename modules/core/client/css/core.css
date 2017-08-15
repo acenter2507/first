@@ -35,8 +35,14 @@ body {
   transition-duration: .25s,.25s;
   transition-property: left, right;
   -webkit-overflow-scrolling: touch;}
-  .aside-menu:-webkit-scrollbar {
-    display: none; }
+  .content::-webkit-scrollbar {
+    width: 1px; }
+  .content::-webkit-scrollbar-track {
+    background: transparent;
+    border: 1px solid transparent;
+    background-clip: content-box; }
+    .content::-webkit-scrollbar-thumb {
+    background: transparent; }
 
 .aside-menu-show .app .aside-menu {
   right: 0; }

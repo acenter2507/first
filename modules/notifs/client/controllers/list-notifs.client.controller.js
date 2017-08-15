@@ -79,6 +79,7 @@
       NotifsApi.clearAll()
         .then(res => {
           vm.notifs = [];
+          $scope.stopped = true;
         });
     };
   }

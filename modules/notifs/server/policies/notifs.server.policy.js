@@ -74,7 +74,7 @@ exports.isAllowed = function (req, res, next) {
 
   // If an Notif is being processed and the current user created it then allow any manipulation
   if (
-    req.notif && req.user && req.notif.user && req.notif.user.id === req.user.id
+    req.notif && req.user && req.notif.to && req.notif.to.id === req.user.id
   ) {
     return next();
   }

@@ -8,6 +8,7 @@
   NotifsListController.$inject = [
     '$scope',
     '$state',
+    'NotifsService',
     'NotifsApi',
     'Authentication',
     '$filter',
@@ -18,6 +19,7 @@
   function NotifsListController(
     $scope,
     $state,
+    NotifsService,
     NotifsApi,
     Authentication,
     $filter,
@@ -57,7 +59,9 @@
       $state.go(notif.state, { pollId: notif.poll._id, notif: notif._id });
     };
     $scope.mark_read = notif => {
-      console.log(notif);
+      notif.status = !notif.status;
+      let rs_nof = new NotifsService({ _id: notif._id, status: notif.status });
+      rs_nof.$update();
     };
   }
 }());

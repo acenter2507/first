@@ -26,7 +26,7 @@
   z-index: 9999;
   width: 250px;
   height: 100%;
-  margin-right: -250px;
+  margin-left: 0;
   color: #263238;
   background: #fff;
   transition: margin-left 0.25s, margin-right 0.25s, width 0.25s, flex 0.25s; }

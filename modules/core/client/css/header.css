@@ -1,5 +1,6 @@
 .navbar {
-  margin-bottom: 0 !important; }
+  margin-bottom: 0 !important;
+  border: none !important; }
 .navbar-default {
   background-color: #267ed5;
   border-color: #2271bf;

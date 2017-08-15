@@ -74,6 +74,8 @@ body {
       position: relative;
       margin: 0;
       transition: background .3s ease-in-out; }
+      .aside-menu .nav .nav-item {
+        border-top: 1px solid #ccc; }
       .aside-menu .nav .nav-item ul {
         max-height: 0;
         padding: 0;

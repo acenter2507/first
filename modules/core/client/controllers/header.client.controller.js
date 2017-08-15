@@ -27,6 +27,7 @@ angular.module('core').controller('HeaderController', [
     });
     $rootScope.$on('changeNotif', () => {
       if ($scope.authentication.user) {
+        loadNotifs(10);
         loadUncheckNotifs();
       }
     });

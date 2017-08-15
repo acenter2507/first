@@ -19,6 +19,14 @@ body {
     flex: 0 0 250px; }
 
 
+.aside-menu {
+  z-index: 1019;
+  width: 250px;
+  color: #263238;
+  background: #fff;
+  border-left: 1px solid #cfd8dc; }
+.aside-menu-show .aside-menu {
+  margin-right: 0px; }
 /* Aside menu */
 /*.aside-menu {
   z-index: 9999;

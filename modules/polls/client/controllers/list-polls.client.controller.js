@@ -37,7 +37,7 @@
 
     vm.polls = [];
     vm.hot_polls = [];
-    vm.activitys = [];//JSON.parse(Storages.get_session(Constants.storages.activitys, JSON.stringify([])));
+    vm.activitys = JSON.parse(Storages.get_session(Constants.storages.activitys, JSON.stringify([])));
     vm.categorys = [];
     vm.bookmarks = [];
     vm.tags = [];
@@ -50,6 +50,9 @@
     init();
 
     function init() {
+      // Lắng nghe sự kiện từ rootScope;
+      initRootScope();
+      // Lắng nghe sự liện từ socket
       initSocket();
       // Load danh sách category (Bao gồm số poll)
       get_categorys();
@@ -71,17 +74,18 @@
       Socket.on('poll_create', () => {
         vm.is_has_new_polls = true;
       });
-      Socket.on('activity', res => {
-        res.time = moment().format();
-        vm.activitys.push(res);
-        Storages.set_session(Constants.storages.activitys, JSON.stringify(vm.activitys));
-      });
       $scope.$on('$destroy', function () {
         Socket.emit('unsubscribe_public');
         Socket.removeListener('poll_create');
       });
     }
 
+    function initRootScope() {
+      $rootScope.$on('activity', () => {
+        console.log('Has new activity');
+        vm.activitys = JSON.parse(Storages.get_session(Constants.storages.activitys, JSON.stringify([])));
+      });
+    }
     function get_polls() {
       if (vm.stopped || vm.busy) return;
       vm.busy = true;

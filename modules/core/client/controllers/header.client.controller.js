@@ -9,7 +9,9 @@ angular.module('core').controller('HeaderController', [
   'Socket',
   'NotifsService',
   'NotifsApi',
-  function ($rootScope, $scope, $state, Authentication, Menus, Socket, Notifs, NotifsApi) {
+  'Storages',
+  'Constants',
+  function ($rootScope, $scope, $state, Authentication, Menus, Socket, Notifs, NotifsApi, Storages, Constants) {
     // Expose view variables
     $scope.$state = $state;
     $scope.authentication = Authentication;
@@ -22,16 +24,18 @@ angular.module('core').controller('HeaderController', [
     $scope.toggleCollapsibleMenu = function () {
       $scope.isCollapsed = !$scope.isCollapsed;
     };
+    // Nghe sự kiện login thành công để load menu
     $rootScope.$on('loginSuccess', () => {
       init();
     });
+    // Nghe sự kiện update Notif để load notifs
     $rootScope.$on('changeNotif', () => {
       if ($scope.authentication.user) {
         loadNotifs(10);
         loadUncheckNotifs();
       }
     });
-    // Collapsing the menu after navigation
+    // Nghe sự kiện chuyển state để đóng menu collapse
     $scope.$on('$stateChangeSuccess', function () {
       $scope.isCollapsed = false;
     });
@@ -53,6 +57,17 @@ angular.module('core').controller('HeaderController', [
       Socket.on('notifs', res => {
         loadNotifs(10);
         loadUncheckNotifs();
+      });
+      Socket.on('notifs', res => {
+        loadNotifs(10);
+        loadUncheckNotifs();
+      });
+      Socket.on('activity', res => {
+        res.time = moment().format();
+        let activitys = JSON.parse(Storages.get_session(Constants.storages.activitys, JSON.stringify([])));
+        activitys.push(res);
+        Storages.set_session(Constants.storages.activitys, JSON.stringify(activitys));
+        $rootScope.$emit('activity');
       });
     }
 

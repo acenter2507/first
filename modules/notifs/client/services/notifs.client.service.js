@@ -25,8 +25,9 @@
 
   function NotifsApi($http) {
     return {
-      findNotifs: limit => {
-        return $http.get('/api/findNotifs/' + limit);
+      findNotifs: (limit, page) => {
+        let _page = page || 0;
+        return $http.get('/api/findNotifs/' + limit + '/' + _page);
       },
       countUnchecks: () => {
         return $http.get('/api/countUnchecks');

@@ -113,12 +113,13 @@ exports.countUnchecks = function (req, res) {
 
 exports.findNotifs = function (req, res) {
   var limit = parseInt(req.params.limit);
+  var page = req.params.page || 0;
   Notif.find({ to: req.user._id })
     .sort('-created')
     .populate('poll', 'title')
     .populate('from', 'displayName profileImageURL')
     .populate('to', 'displayName profileImageURL')
-    .limit(limit)
+    .skip(limit * page).limit(limit)
     .exec(function (err, notifs) {
       if (err) {
         return res.status(400).send({

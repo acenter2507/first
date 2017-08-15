@@ -29,7 +29,7 @@ exports.invokeRolesPolicies = function () {
           permissions: '*'
         },
         {
-          resources: '/api/findNotifs/:limit',
+          resources: '/api/findNotifs/:limit/page',
           permissions: '*'
         },
         {
@@ -54,7 +54,7 @@ exports.invokeRolesPolicies = function () {
           permissions: '*'
         },
         {
-          resources: '/api/findNotifs/:limit',
+          resources: '/api/findNotifs/:limit/page',
           permissions: '*'
         },
         {

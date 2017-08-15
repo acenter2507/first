@@ -22,6 +22,7 @@ body {
   transition: margin-left 0.25s, margin-right 0.25s, width 0.25s, flex 0.25s; }
 
 .aside-menu {
+  padding-top: 50px;
   z-index: 1019;
   width: 250px;
   margin-right: -250px;

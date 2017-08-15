@@ -1,8 +1,15 @@
 <aside class="aside-menu" ng-controller="HeaderController">
-
   <div class="aside-profile" ng-if="authentication.user">
-    <img class="aside-avatar pull-left" ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}"/>
-    <span class="h4-text">{{authentication.user.displayName}}</h4>
+    <img class="aside-avatar pull-left" ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}"
+    />
+    <span class="h4-text">{{authentication.user.displayName}}</span>
+  </div>
+  <div class="aside-search">
+    <div class="quick-search">
+      <input ng-model="search_key" type="text" class="form-control quick-search-input" name="search" placeholder="Search...">
+      <a class="undecorated-link quick-search-submit" type="submit" ng-click="search()"><i class="fa fa-search"></i></a>
+      <a class="undecorated-link quick-search-advance" type="button" ui-sref="search"><i class="fa fa-cogs"></i></a>
+    </div>
   </div>
   <hr>
   <nav class="aside-nav">

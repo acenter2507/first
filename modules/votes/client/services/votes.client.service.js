@@ -13,9 +13,7 @@
       voteId: '@_id'
     }, {
       update: {
-        method: 'PUT'
-      },
-      query: {
+        method: 'PUT',
         ignoreLoadingBar: true
       }
     });

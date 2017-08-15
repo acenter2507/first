@@ -1,4 +1,4 @@
-<section class="container mg10b animated fadeIn"  infinite-scroll="get_notifs()" infinite-scroll-distance='2'>
+<section class="container mg10b animated fadeIn" infinite-scroll="get_notifs()" infinite-scroll-distance='2'>
   <!-- breadcrumb -->
   <div class="row mg10t">
     <div class="col-xs-12 pdn">
@@ -17,9 +17,29 @@
     </div>
   </div>
 
-   <div class="row">
+  <div class="row">
     <div class="col-xs-12 pdn">
-      <div class="card" ng-repeat="notif in vm.notifs">
+      <div class="list-group">
+        <a ng-repeat="notif in vm.notifs" ui-sref="{{notif.state}}({ pollId: notif.poll._id, notif: notif._id })" class="list-group-item">
+          <div class="col-xs-9 pdn">
+            <div class="user-avatar pull-left">
+              <img src="{{notif.from.profileImageURL}}" alt="{{notif.from.displayName}}" ng-if="notif.from._id">
+              <img src="modules/users/client/img/profile/default.png" alt="Deleted User" ng-if="!notif.from._id">
+            </div>
+            <strong>{{notif.from.displayName}}</strong>
+            <small class="default-text">{{notif.content}}</small>
+            <small>{{notif.poll.title}}</small>
+            <br>
+            <a ui-sref="{{notif.state}}({ pollId: notif.poll._id, notif: notif._id })" class="undecorated-link">View</a><br>
+          </div>
+          <div class="col-xs-3 pdn">
+            <div class="pull-right">
+              <i class="fa fa-home"></i>
+            </div>
+          </div>
+        </a>
+      </div>
+      <!--<div class="card" ng-repeat="notif in vm.notifs">
         <div class="card-body">
           <div class="col-xs-9 pdn">
             <div class="user-avatar pull-left">
@@ -39,7 +59,10 @@
           </div>
           <div class="clearfix"></div>
         </div>
-      </div>
+      </div>-->
     </div>
-  </div> 
+  </div>
+  <div class="row text-center" ng-show="busy && !stopped">
+    <div class="loader"></div>
+  </div>
 </section>

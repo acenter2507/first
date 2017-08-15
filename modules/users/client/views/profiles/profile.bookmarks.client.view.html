@@ -7,10 +7,10 @@
       <li class="breadcrumb-item active">Bookmarks</li>
     </ol>
   </div>
-  <div class="row">
+  <div class="row" ng-show="polls.length > 0">
     <div class="col-xs-12 pdn">
       <div class="custom-toolbar">
-        <a ng-show="polls.length > 0" class="btn btn-danger pull-right" ng-click="clear_bookmark()">Clear</a>
+        <a class="btn btn-danger pull-right" ng-click="clear_bookmark()">Clear</a>
       </div>
     </div>
   </div>

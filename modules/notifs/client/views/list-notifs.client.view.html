@@ -26,8 +26,10 @@
     </div>
   </div>
   <div class="row">
-    <div class="notice notice-warning" ng-show="vm.notifs.length === 0 && stopped">
-      You have no notifications.
+    <div class="col-xs-12 pd6x">
+      <div class="notice notice-warning" ng-show="vm.notifs.length === 0 && stopped">
+        You have no notifications.
+      </div>
     </div>
   </div>
   <div class="row" ng-show="vm.notifs.length > 0">

@@ -29,7 +29,7 @@ body {
   z-index: 1019;
   width: 250px;
   color: #fff;
-  background: #263238;
+  background: #222;
   overflow-x: hidden;
   overflow-y: auto;
   transition-duration: .25s,.25s;
@@ -61,8 +61,7 @@ body {
     right: -250px;}
   .aside-menu-show .app .content {
     margin-left: 0;
-    margin-right: 0; }
-}
+    margin-right: 0; } }
 *:focus {
   outline: none !important;
 }

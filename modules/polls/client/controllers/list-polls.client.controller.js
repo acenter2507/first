@@ -52,8 +52,6 @@
     init();
 
     function init() {
-      // Lắng nghe sự kiện từ rootScope;
-      initRootScope();
       // Lắng nghe sự liện từ socket
       initSocket();
       // Load danh sách category (Bao gồm số poll)
@@ -64,6 +62,8 @@
       get_populars();
       // Load danh sách poll đã bookmark
       if ($scope.isLogged) {
+        // Lắng nghe sự kiện từ rootScope;
+        initRootScope();
         get_bookmarks();
       }
     }

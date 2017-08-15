@@ -22,6 +22,7 @@ angular.module('core').controller('HeaderController', [
     // Toggle the menu items
     $scope.isCollapsed = false;
     $scope.toggleCollapsibleMenu = function () {
+      $('.aside-menu').toggleClass('aside-menu-show');
       $scope.isCollapsed = !$scope.isCollapsed;
     };
     // Nghe sự kiện login thành công để load menu

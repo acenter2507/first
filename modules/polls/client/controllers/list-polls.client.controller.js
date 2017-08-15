@@ -5,6 +5,7 @@
     .controller('PollsListController', PollsListController);
 
   PollsListController.$inject = [
+  '$rootScope',
     '$state',
     '$scope',
     '$window',
@@ -19,6 +20,7 @@
   ];
 
   function PollsListController(
+    $rootScope,
     $state,
     $scope,
     $window,

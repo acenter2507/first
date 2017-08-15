@@ -31,6 +31,8 @@ body {
   color: #263238;
   background: #fff;
   border-left: 1px solid #cfd8dc; }
+  .aside-menu::-webkit-scrollbar {
+    display: none; }
 
 .aside-menu-show .app .aside-menu {
   margin-right: 0; }

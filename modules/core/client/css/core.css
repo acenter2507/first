@@ -99,12 +99,12 @@ body {
         background: transparent; }
         .aside-menu .nav .nav-item .nav-link:hover, .aside-menu .nav .nav-item .navbar .dropdown-toggle:hover, .navbar .aside-menu .nav .nav-item .dropdown-toggle:hover {
           color: #fff !important;
-          background: #2271bf !important; }
+          background: #5197dd !important; }
           .aside-menu .nav .nav-item .nav-link:hover i, .aside-menu .nav .nav-item .navbar .dropdown-toggle:hover i, .navbar .aside-menu .nav .nav-item .dropdown-toggle:hover i {
             color: #fff !important; }
         .aside-menu .nav .nav-item .nav-link.active, .aside-menu .nav .nav-item .navbar .active.dropdown-toggle, .navbar .aside-menu .nav .nav-item .active.dropdown-toggle {
           color: #fff;
-          background: #5197dd; }
+          background: #2271bf; }
           .aside-menu .nav .nav-item .nav-link.active i, .aside-menu .nav .nav-item .navbar .active.dropdown-toggle i, .navbar .aside-menu .nav .nav-item .active.dropdown-toggle i {
             color: #fff; }
         .aside-menu .nav .nav-item .nav-link [class^="icon-"], .aside-menu .nav .nav-item .navbar .dropdown-toggle [class^="icon-"], .navbar .aside-menu .nav .nav-item .dropdown-toggle [class^="icon-"], .aside-menu .nav .nav-item .nav-link [class*=" icon-"], .aside-menu .nav .nav-item .navbar .dropdown-toggle [class*=" icon-"], .navbar .aside-menu .nav .nav-item .dropdown-toggle [class*=" icon-"] {

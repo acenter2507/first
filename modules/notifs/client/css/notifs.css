@@ -5,6 +5,7 @@
     border-radius: 0 !important;
     border: none !important; }
   .notifications a.list-group-item:not(:last-child) {
+    background-color: black;
     border-bottom: 1px solid #eee !important;}
   .notifications a.list-group-item.unread {
     background-color: #f2f5fb !important; }

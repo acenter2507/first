@@ -1,7 +1,7 @@
 .bdn {
-  border: none; }
+  border: none !important; }
 .flat {
-  border-radius: 0; }
+  border-radius: 0 !important; }
 .mga {
   margin: auto;}
 .mgn {

@@ -37,14 +37,14 @@ body {
   -webkit-overflow-scrolling: touch;
   overflow-y: auto;
   -ms-overflow-style: -ms-autohiding-scrollbar; }
-  /* .aside-menu::-webkit-scrollbar {
+  .aside-menu::-webkit-scrollbar {
     width: 1px; }
   .aside-menu::-webkit-scrollbar-track {
     background: transparent;
     border: 1px solid transparent;
     background-clip: content-box; }
     .aside-menu::-webkit-scrollbar-thumb {
-    background: transparent; } */
+    background: transparent; } 
 
 .aside-menu-show .app .aside-menu {
   right: 0; }

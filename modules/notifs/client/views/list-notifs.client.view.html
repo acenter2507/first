@@ -18,7 +18,7 @@
   </div>
 
   <div class="row">
-    <div class="col-xs-12 pdn">
+    <div class="col-xs-12 pd6x">
       <div class="list-group">
         <a ng-repeat="notif in vm.notifs" ui-sref="{{notif.state}}({ pollId: notif.poll._id, notif: notif._id })" class="list-group-item">
           <div class="col-xs-9 pdn">
@@ -28,8 +28,7 @@
             </div>
             <strong>{{notif.from.displayName}}</strong>
             <small class="default-text">{{notif.content}}</small>
-            <small>{{notif.poll.title}}</small>
-            <br>
+            <strong>{{notif.poll.title}}</strong>
           </div>
           <div class="col-xs-3 pdn">
             <div class="pull-right">

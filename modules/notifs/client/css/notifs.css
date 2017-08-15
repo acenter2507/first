@@ -14,6 +14,5 @@
     .notifications a.list-group-item > .pull-right{
       cursor: default; }
     .notifications > a.list-group-item .notif-read-toggle {
-      cursor: pointer;
       color: #267ED5;
       z-index: 2; }

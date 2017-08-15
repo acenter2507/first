@@ -1,9 +1,8 @@
 <!-- The chat view -->
-<section class="container" ng-controller="ChatController">
+<!--<section class="container" ng-controller="ChatController">
   <div class="page-header">
     <h1>Chat Example</h1>
   </div>
-  <!-- The message form -->
   <form class="col-xs-12 col-md-offset-4 col-md-4" ng-submit="sendMessage();">
     <fieldset class="row">
       <div class="input-group">
@@ -15,7 +14,6 @@
     </fieldset>
   </form>
   <ul class="list-unstyled">
-    <!-- List all messages -->
     <li class="col-xs-12 col-md-offset-4 col-md-4 chat-message" ng-repeat="message in messages">
       <small class="pull-right text-muted" ng-bind="message.created | date:'mediumTime'"></small>
       <img ng-src="{{message.profileImageURL}}" alt="{{message.username}}" class="pull-left chat-profile-image" />
@@ -26,4 +24,56 @@
       </div>
     </li>
   </ul>
-</section>
+</section>-->
+<div class="container">
+  <div class="row">
+    <div class="card d-sm-none">
+      <div class="card-hearder">
+        <strong class="card-title">d-sm-none</strong>
+      </div>
+      <div class="card-body h20"></div>
+    </div>
+    <div class="card d-md-none">
+      <div class="card-hearder">
+        <strong class="card-title">d-md-none</strong>
+      </div>
+      <div class="card-body h20"></div>
+    </div>
+    <div class="card d-lg-none">
+      <div class="card-hearder">
+        <strong class="card-title">d-lg-none</strong>
+      </div>
+      <div class="card-body h20"></div>
+    </div>
+    <div class="card d-xl-none">
+      <div class="card-hearder">
+        <strong class="card-title">d-xl-none</strong>
+      </div>
+      <div class="card-body h20"></div>
+    </div>
+    <div class="card d-down-none">
+      <div class="card-hearder">
+        <strong class="card-title">d-down-none</strong>
+      </div>
+      <div class="card-body h20"></div>
+    </div>
+    <div class="card d-sm-down-none">
+      <div class="card-hearder">
+        <strong class="card-title">d-sm-down-none</strong>
+      </div>
+      <div class="card-body h20"></div>
+    </div>
+    <div class="card d-md-down-none">
+      <div class="card-hearder">
+        <strong class="card-title">d-md-down-none</strong>
+      </div>
+      <div class="card-body h20"></div>
+    </div>
+    <div class="card d-lg-down-none">
+      <div class="card-hearder">
+        <strong class="card-title">d-lg-down-none</strong>
+      </div>
+      <div class="card-body h20"></div>
+    </div>
+  </div>
+</div>

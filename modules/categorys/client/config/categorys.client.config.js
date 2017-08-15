@@ -10,10 +10,9 @@
   function menuConfig(menuService) {
     // Set top bar menu items
     menuService.addMenuItem('topbar', {
-      title: '',
+      title: 'Categorys',
       state: 'categorys.list',
       roles: ['*'],
-      icon: 'fa-list',
       position: 1
     });
 

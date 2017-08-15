@@ -94,7 +94,6 @@
   .d-xl-inline-flex {
     display: inline-flex !important; } }
 
-
 @media (max-width: 575px) {
   .d-down-none {
     display: none !important; } }

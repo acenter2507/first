@@ -54,7 +54,8 @@ body {
       width: 46px; }
     .aside-menu .aside-profile .avatar img{
       float: left;
-      height: 46px; }
+      height: 46px;
+      width: 46px; }
   .aside-menu .aside-nav {
     position: relative;
     width: 250px; }

@@ -49,7 +49,7 @@
   margin-bottom: 1em;
   background-origin: content-box;
   width: 100%;
-  background-image: url('..img/covers/default.jpg');
+  background-image: url('../img/covers/default.jpg');
   position: absolute;
   left: auto;
   right: 0;

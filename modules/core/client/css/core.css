@@ -36,8 +36,6 @@ body {
   margin-right: 0; }
 .aside-menu-show .app .content {
   margin-left: -250px; }
-.aside-menu-show {
-  overflow-x: hidden; }
 
 /* Aside menu */
 /*.aside-menu {

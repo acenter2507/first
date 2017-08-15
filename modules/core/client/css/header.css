@@ -23,5 +23,6 @@
 
 @media (max-width: 767px) {
   .navbar .navbar-brand {
+    background-position: center;
     width: 100% !important;
     margin: 0 auto !important; } }

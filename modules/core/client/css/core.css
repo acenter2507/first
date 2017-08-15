@@ -18,6 +18,10 @@ body {
   .app .aside-menu {
     flex: 0 0 250px; }
 
+.app,
+.content,
+.aside-menu {
+  transition: margin-left 0.25s, margin-right 0.25s, width 0.25s, flex 0.25s; }
 
 .aside-menu {
   z-index: 1019;

@@ -36,43 +36,43 @@ angular.module('users').factory('UserApi', ['$http',
   function ($http) {
     // Lấy list activitys của user
     this.get_activitys = userId => {
-      return $http.get('/api/profile/' + userId + '/activitys/');
+      return $http.get('/api/profile/' + userId + '/activitys/', { ignoreLoadingBar: true });
     };
     this.get_polls = (userId, page) => {
-      return $http.get('/api/profile/' + userId + '/polls/' + page);
+      return $http.get('/api/profile/' + userId + '/polls/' + page, { ignoreLoadingBar: true });
     };
     this.get_cmts = (userId, page) => {
-      return $http.get('/api/profile/' + userId + '/cmts/' + page);
+      return $http.get('/api/profile/' + userId + '/cmts/' + page, { ignoreLoadingBar: true });
     };
     this.get_likes = (userId, page) => {
-      return $http.get('/api/profile/' + userId + '/likes/' + page);
+      return $http.get('/api/profile/' + userId + '/likes/' + page, { ignoreLoadingBar: true });
     };
     this.get_dislikes = (userId, page) => {
-      return $http.get('/api/profile/' + userId + '/dislikes/' + page);
+      return $http.get('/api/profile/' + userId + '/dislikes/' + page, { ignoreLoadingBar: true });
     };
     this.get_bookmarks = (userId, page) => {
-      return $http.get('/api/profile/' + userId + '/bookmarks/' + page);
+      return $http.get('/api/profile/' + userId + '/bookmarks/' + page, { ignoreLoadingBar: true });
     };
     this.get_follows = (userId, page) => {
-      return $http.get('/api/profile/' + userId + '/follows/' + page);
+      return $http.get('/api/profile/' + userId + '/follows/' + page, { ignoreLoadingBar: true });
     };
     this.get_votes = (userId, page) => {
-      return $http.get('/api/profile/' + userId + '/votes/' + page);
+      return $http.get('/api/profile/' + userId + '/votes/' + page, { ignoreLoadingBar: true });
     };
     this.get_views = (userId, page) => {
-      return $http.get('/api/profile/' + userId + '/views/' + page);
+      return $http.get('/api/profile/' + userId + '/views/' + page, { ignoreLoadingBar: true });
     };
     this.get_user_report = userId => {
-      return $http.get('/api/profile/' + userId + '/report');
+      return $http.get('/api/profile/' + userId + '/report', { ignoreLoadingBar: true });
     };
     this.clear_bookmark = userId => {
-      return $http.get('/api/profile/' + userId + '/clear_bookmark');
+      return $http.get('/api/profile/' + userId + '/clear_bookmark', { ignoreLoadingBar: true });
     };
     this.clear_view = userId => {
-      return $http.get('/api/profile/' + userId + '/clear_view');
+      return $http.get('/api/profile/' + userId + '/clear_view', { ignoreLoadingBar: true });
     };
     this.clear_follow = userId => {
-      return $http.get('/api/profile/' + userId + '/clear_follow');
+      return $http.get('/api/profile/' + userId + '/clear_follow', { ignoreLoadingBar: true });
     };
     return this;
   }

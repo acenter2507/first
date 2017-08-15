@@ -47,7 +47,9 @@
     this.get_polls = (_page) => {
       return new Promise((resolve, reject) => {
         var page = _page || 0;
-        $http.get('/api/findPolls/' + page)
+        $http.get('/api/findPolls/' + page, {
+          ignoreLoadingBar: true
+        })
           .then(res => {
             return resolve(res);
           }, err => {

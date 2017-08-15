@@ -37,7 +37,7 @@
 
     vm.polls = [];
     vm.hot_polls = [];
-    vm.activitys = JSON.parse(Storages.get_session(Constants.storages.activitys, JSON.stringify([])));
+    vm.activitys = [];//JSON.parse(Storages.get_session(Constants.storages.activitys, JSON.stringify([])));
     vm.categorys = [];
     vm.bookmarks = [];
     vm.tags = [];

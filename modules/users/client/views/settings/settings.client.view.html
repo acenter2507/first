@@ -1,74 +1,51 @@
-<section ng-controller="SettingsController" class="container animated fadeIn">
+<section ng-controller="SettingsController" class="container-fluid animated fadeIn">
   <div class="row">
-    <div class="cover">
-      <div class="container">
-        <div class="profile-avatar">
-          <img src="{{user.profileImageURL}}" alt="{{user.displayName}}">
-        </div>
-        <div class="profile-name">
-          <span>{{user.displayName}}</span>
-        </div>
-        <div class="profile-menu">
-          <md-menu md-offset="-10 60" md-position-mode="target-right target">
-            <button class=" btn-fab" ng-click="$mdMenu.open($event)" aria-label="Open profile menu">
+    <div class="bgcover">
+      <div class="cover">
+        <div class="container">
+          <div class="cover-avatar">
+            <img src="{{profile.profileImageURL}}" alt="{{profile.displayName}}">
+          </div>
+          <div class="cover-name"><span>{{profile.displayName}}</span></div>
+          <div class="cover-menu">
+            <md-menu md-offset="-10 60" md-position-mode="target-right target">
+              <button class=" btn-fab" ng-click="$mdMenu.open($event)" aria-label="Open profile menu">
               <i class="fa fa-ellipsis-v fa-lg"></i>
             </button>
-            <md-menu-content>
-              <ul class="profile-menu-list">
-                <li ui-sref-active="active">
-                  <a ui-sref="profile.info({ userId: user._id })">View Profile</a>
-                </li>
-                <li ui-sref-active="active">
-                  <a ui-sref="settings.profile">Edit Profile</a>
-                </li>
-                <li ui-sref-active="active">
-                  <a ui-sref="settings.picture">Change Profile Picture</a>
-                </li>
-                <li ui-sref-active="active" ng-show="user.provider === 'local'">
-                  <a ui-sref="settings.password">Change Password</a>
-                </li>
-                <li ui-sref-active="active">
-                  <a ui-sref="settings.accounts">Manage Social Accounts</a>
-                </li>
-              </ul>
-            </md-menu-content>
-          </md-menu>
+              <md-menu-content>
+                <ul class="profile-menu-list">
+                  <li ui-sref-active="active" ng-if="isCurrentOwner"><a ui-sref="settings.profile">Edit profile</a></li>
+                  <li ui-sref-active="active"><a ui-sref="profile.info">Profile</a></li>
+                  <hr class="mg10t mg10b" />
+                  <li ui-sref-active="active"><a ui-sref="profile.polls">Polls</a></li>
+                  <li ui-sref-active="active"><a ui-sref="profile.cmts">Comments</a></li>
+                  <li ui-sref-active="active"><a ui-sref="profile.votes">Voted</a></li>
+                  <hr class="mg10t mg10b" />
+                  <li ui-sref-active="active"><a ui-sref="profile.follows">Following</a></li>
+                  <li ui-sref-active="active" ng-if="isCurrentOwner"><a ui-sref="profile.bookmarks">Bookmarks</a></li>
+                  <li ui-sref-active="active" ng-if="isCurrentOwner"><a ui-sref="profile.views">Viewed</a></li>
+                  <li ui-sref-active="active" ng-if="isCurrentOwner"><a ui-sref="profile.likes">Liked</a></li>
+                  <li ui-sref-active="active" ng-if="isCurrentOwner"><a ui-sref="profile.dislikes">Disliked</a></li>
+                </ul>
+              </md-menu-content>
+            </md-menu>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="row profile-breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="home">Home</a></li>
-      <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="profile.info({ userId: user._id })">Profile</a></li>
-      <li class="breadcrumb-item active">Edit</li>
-    </ol>
-  </div>
   <div class="row">
-    <div ui-view></div>
-  </div>
-  <!--<div class="page-header">
-    <h1>Settings</h1>
-  </div>
-  <div class="row">
-    <nav class="col-sm-3 col-md-3">
-      <ul class="nav nav-pills nav-stacked">
-        <li ui-sref-active="active">
-          <a ui-sref="settings.profile">Edit Profile</a>
-        </li>
-        <li ui-sref-active="active">
-          <a ui-sref="settings.picture">Change Profile Picture</a>
-        </li>
-        <li ui-sref-active="active" ng-show="user.provider === 'local'">
-          <a ui-sref="settings.password">Change Password</a>
-        </li>
-        <li ui-sref-active="active">
-          <a ui-sref="settings.accounts">Manage Social Accounts</a>
-        </li>
-      </ul>
-    </nav>
-    <div class="col-sm-9 col-md-8 settings-view">
-      <div ui-view></div>
+    <div class="container">
+      <div class="row">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="home">Home</a></li>
+          <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="profile.info({ userId: user._id })">Profile</a></li>
+          <li class="breadcrumb-item active">Edit</li>
+        </ol>
+      </div>
+      <div class="row">
+        <div ui-view></div>
+      </div>
     </div>
-  </div>-->
+  </div>
 </section>

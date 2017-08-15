@@ -53,7 +53,6 @@
 
     $scope.mark_read = notif => {
       console.log(notif);
-      $event.stopPropagation();
     };
   }
 }());

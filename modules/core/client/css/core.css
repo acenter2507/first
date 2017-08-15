@@ -30,11 +30,11 @@ body {
   width: 250px;
   color: #fff;
   background: #267ED5;
+  transition-duration: .25s,.25s;
+  transition-property: left, right;
   overflow: hidden;
   /* overflow-x: hidden;
   overflow-y: auto;
-  transition-duration: .25s,.25s;
-  transition-property: left, right;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;  */}
   /* .aside-menu::-webkit-scrollbar {

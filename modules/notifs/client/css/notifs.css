@@ -5,7 +5,7 @@
     border-radius: 0 !important;
     border: none !important; }
   .notifications a.list-group-item:not(:first-child) {
-    border-top: 1px solid #ddd !important;}
+    border-top: 1px solid #eee !important;}
   .notifications a.list-group-item.unread {
     background-color: #f2f5fb !important; }
   .notifications a.list-group-item:hover,
@@ -16,5 +16,6 @@
       width: 1rem;
       border-radius: 50%; 
       border: 3px solid #267ED5; }
-    .notifications > a.list-group-item a.notif-read-toggle.read {
-      background-color: #267ED5; }
+    .notifications > a.list-group-item .notif-read-toggle {
+      color: #267ED5;
+      z-index: 2; }

@@ -84,18 +84,6 @@
         background-color: #267ED5;
         outline: none; }
 
-/*.profile-breadcrumb {
-  margin-top: 250px;
-  height: 64px;
-}*/
-/*.profile-poll {
-  margin-top: 350px;
-}*/
-
-/*.profile-breadcrumb .breadcrumb {
-  margin-left: 130px;
-}*/
-
 @media (max-width: 767px) {
   .bgcover {
     height: 250px; }

@@ -30,7 +30,7 @@
     <span>last online</span>
     <strong><span ng-bind="profile.lastLogin | LLL_format"></span></strong>
   </div>
-  <div class="row">
+  <div class="row mg12t">
     <ul class="timeline">
       <li class="event" ng-repeat="activity in activitys | filter: activity_filter | orderBy: '-created'">
         <small class="text-muted" am-time-ago="activity.created"></small><br>

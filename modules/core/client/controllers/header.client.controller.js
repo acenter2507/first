@@ -20,12 +20,6 @@ angular.module('core').controller('HeaderController', [
     // Get the topbar menu
     $scope.menu = Menus.getMenu('topbar');
 
-    // Toggle the menu items
-    $scope.isCollapsed = false;
-    $scope.toggleCollapsibleMenu = function () {
-      $('.aside-menu').toggleClass('aside-menu-show');
-      $scope.isCollapsed = !$scope.isCollapsed;
-    };
     // Nghe sự kiện login thành công để load menu
     $rootScope.$on('loginSuccess', () => {
       init();
@@ -39,7 +33,9 @@ angular.module('core').controller('HeaderController', [
     });
     // Nghe sự kiện chuyển state để đóng menu collapse
     $scope.$on('$stateChangeSuccess', function () {
-      $scope.isCollapsed = false;
+      if (angular.element('body').hasClass('aside-menu-show')) {
+        angular.element('body').removeClass('aside-menu-show');
+      }
     });
 
     init();

@@ -85,7 +85,7 @@
             <small>{{notif.poll.title}}</small>
             <div class="clearfix"></div>
           </a>
-          <li class="text-center">
+          <li class="text-center" ng-if="uncheckNotifs > 0">
             <a ng-click="mark_all_read()">Mark all notifications read</a>
           </li>
           <li class="text-center">

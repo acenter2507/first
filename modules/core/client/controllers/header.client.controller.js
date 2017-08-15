@@ -63,6 +63,7 @@ angular.module('core').controller('HeaderController', [
         loadUncheckNotifs();
       });
       Socket.on('activity', res => {
+        console.log('Has new activity from server');
         res.time = moment().format();
         let activitys = JSON.parse(Storages.get_session(Constants.storages.activitys, JSON.stringify([])));
         activitys.push(res);

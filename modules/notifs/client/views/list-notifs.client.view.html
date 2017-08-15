@@ -18,8 +18,8 @@
   </div>
 
   <div class="row">
-    <div class="col-xs-12 pd6x bdn">
-      <div class="list-group">
+    <div class="col-xs-12 pd6x">
+      <div class="list-group flat bdn">
         <a ng-repeat="notif in vm.notifs" ui-sref="{{notif.state}}({ pollId: notif.poll._id, notif: notif._id })" class="list-group-item">
           <div class="col-xs-9 pdn">
             <div class="user-avatar pull-left">

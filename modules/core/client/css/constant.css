@@ -1,5 +1,7 @@
 .bdn {
   border: none; }
+.flat {
+  border-radius: 0; }
 .mga {
   margin: auto;}
 .mgn {

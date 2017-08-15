@@ -14,6 +14,9 @@
     }, {
       update: {
         method: 'PUT'
+      },
+      query: {
+        ignoreLoadingBar: true
       }
     });
   }

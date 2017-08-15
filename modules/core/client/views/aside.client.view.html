@@ -14,6 +14,15 @@
   </div>
   <nav class="aside-nav">
     <ul class="nav">
+      <li class="nav-title" ng-show="authentication.user">Notifications</li>
+      <li class="nav-item" ng-show="authentication.user">
+        <a class="nav-link" ui-sref="notifs.list"><i class="fa fa-bell-o"></i> See all
+          <span class="badge badge-pill badge-danger" ng-bind="uncheckNotifs" ng-show="uncheckNotifs > 0"></span>
+        </a>
+      </li>
+      <li class="nav-item" ng-show="authentication.user && uncheckNotifs > 0">
+        <a class="nav-link" ng-click="mark_all_read()"><i class="fa fa-bell-o"></i> Mark all notifications read</a>
+      </li>
       <li class="nav-title">Navigation</li>
       <li class="nav-item">
         <a class="nav-link" ui-sref-active="active" ui-sref="home"><i class="fa fa-newspaper-o"></i> Feeds</a>
@@ -52,15 +61,6 @@
       </li>
       <li class="nav-item" ng-show="!authentication.user">
         <a class="nav-link" ui-sref="authentication.signup"><i class="fa fa-download"></i> Sign Up</a>
-      </li>
-      <li class="nav-title" ng-show="authentication.user">Notifications</li>
-      <li class="nav-item" ng-show="authentication.user">
-        <a class="nav-link" ui-sref="notifs.list"><i class="fa fa-bell-o"></i> See all
-          <span class="badge badge-pill badge-danger" ng-bind="uncheckNotifs" ng-show="uncheckNotifs > 0"></span>
-        </a>
-      </li>
-      <li class="nav-item" ng-show="authentication.user && uncheckNotifs > 0">
-        <a class="nav-link" ng-click="mark_all_read()"><i class="fa fa-bell-o"></i> Mark all notifications read</a>
       </li>
     </ul>
   </nav>

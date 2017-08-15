@@ -74,6 +74,7 @@ angular.module('core').controller('HeaderController', [
         NotifsApi.countUnchecks()
           .then(res => {
             $scope.uncheckNotifs = res.data || 0;
+            $rootScope.$emit('updateNotif', $scope.uncheckNotifs);
             return resolve(res.data);
           })
           .catch(err => {

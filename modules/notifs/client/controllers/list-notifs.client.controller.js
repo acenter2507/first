@@ -64,7 +64,9 @@
     $scope.mark_read = notif => {
       notif.status = notif.status === 0 ? 1 : 0;
       let rs_nof = new NotifsService({ _id: notif._id, status: notif.status });
-      rs_nof.$update();
+      rs_nof.$update(res => {
+        $rootScope.$emit('changeNotif');
+      });
     };
     $scope.mark_all_read = () => {
       if ($scope.stopped || $scope.busy || vm.notifs.length === 0) return;
@@ -73,6 +75,7 @@
         .then(res => {
           init();
           get_notifs();
+          $rootScope.$emit('changeNotif');
         });
     };
     $scope.clear_all = () => {
@@ -80,6 +83,7 @@
         .then(res => {
           vm.notifs = [];
           $scope.stopped = true;
+          $rootScope.$emit('changeNotif');
         });
     };
   }

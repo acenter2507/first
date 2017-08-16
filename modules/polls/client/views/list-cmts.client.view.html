@@ -85,6 +85,8 @@
     <div class="row text-center" ng-if="!vm.stopped">
       <a class="undecorated-link" ng-click="vm.get_cmts()">Load more</a>
     </div>
+    <!-- Load indicator -->
+    <div class="row" ng-show="vm.busy"><div class="loader"></div></div>
   </div>
 </div>
 <div class="card d-md-none card-expand">

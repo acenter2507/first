@@ -692,7 +692,7 @@
           'provider': 'facebook',
           'attrs': {
             'socialshareUrl': url,
-            'socialshareHashtags': '#hanhatlenh',
+            'socialshareHashtags': 'hanhatlenh',
             'socialshareQuote': text
           }
         });
@@ -708,7 +708,7 @@
           'provider': provider,
           'attrs': {
             'socialshareUrl': url,
-            'socialshareHashtags': '#hanhatlenh',
+            'socialshareHashtags': 'hanhatlenh',
             'socialshareText': text
           }
         });

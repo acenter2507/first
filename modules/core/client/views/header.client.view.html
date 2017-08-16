@@ -19,7 +19,7 @@
       <a ng-switch-default ui-sref="{{item.state}}" ng-bind="item.title"></a>
     </li>
   </ul>-->
-  <ul class="nav navbar-nav navbar-right d-sm-down-none" ng-show="authentication.user">
+  <ul class="nav navbar-nav d-sm-down-none" ng-show="authentication.user">
     <li ui-sref-active="active">
       <a ui-sref="home"><i class="fa fa-newspaper-o"></i></a>
       <md-tooltip md-direction="bottom">New feeds</md-tooltip>

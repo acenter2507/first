@@ -20,7 +20,8 @@
     'Action',
     'toastr',
     'ngDialog',
-    '$stateParams'
+    '$stateParams',
+    'Socialshare'
   ];
 
   function PollsController(
@@ -40,7 +41,8 @@
     Action,
     toast,
     dialog,
-    $stateParams
+    $stateParams,
+    Socialshare
   ) {
     var vm = this;
     $scope.user = Authentication.user;
@@ -678,6 +680,31 @@
     vm.toggle_chart = () => {
       vm.chart.type = vm.chart.type === 'polarArea' ?
         'pie' : 'polarArea';
+    };
+
+    // Share
+    $scope.share = provider => {
+      var url = $location.absUrl();
+      var text = vm.poll.title;
+      if (provider === 'facebook') {
+        Socialshare.share({
+          'provider': 'facebook',
+          'attrs': {
+            'socialshareUrl': url,
+            'socialshareHashtags': '#hanhatlenh',
+            'socialshareQuote': text
+          }
+        });
+      } else {
+        Socialshare.share({
+          'provider': provider,
+          'attrs': {
+            'socialshareUrl': url,
+            'socialshareHashtags': '#hanhatlenh',
+            'socialshareText': text
+          }
+        });
+      }
     };
   }
 })();

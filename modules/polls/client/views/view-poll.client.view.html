@@ -159,35 +159,6 @@
           </div>
         </div>
       </div>
-      <!-- Social -->
-      <div class="card d-md-none">
-        <div class="card-header">
-          <strong class="card-title"> Socials panel</strong>
-        </div>
-        <div class="card-body">
-          <p class="text-justify mgn">
-            <button class="btn btn-facebook btn-sm icon" type="button">
-              <span>Facebook</span>
-            </button>
-            <button class="btn btn-twitter btn-sm icon" type="button">
-              <span>Twitter</span>
-            </button>
-            <button class="btn btn-linkedin btn-sm icon" type="button">
-              <span>LinkedIn</span>
-            </button>
-            <button class="btn btn-google-plus btn-sm icon" type="button">
-              <span>Google+</span>
-            </button>
-            <button class="btn btn-flickr btn-sm icon" type="button">
-              <span>Flickr</span>
-            </button>
-            <button class="btn btn-tumblr btn-sm icon" type="button">
-              <span>Tumblr</span>
-            </button>
-          </p>
-          <div class="clearfix"></div>
-        </div>
-      </div>
       <!-- #Show only MD screen -->
       <!-- Vote card -->
       <div class="card d-md-none" ng-if="vm.isClosed">
@@ -232,6 +203,22 @@
       </div>
       <!-- Chart -->
       <div ui-view="opts" class="d-md-none"></div>
+      <!-- Social -->
+      <div class="card d-md-none">
+        <div class="card-header">
+          <strong class="card-title"> Socials panel</strong>
+        </div>
+        <div class="card-body">
+          <p class="text-justify mgn">
+            <button class="btn btn-facebook btn-sm icon" type="button" ng-click="share('facebook')"></button>
+            <button class="btn btn-twitter btn-sm icon" type="button" ng-click="share('twitter')"></button>
+            <button class="btn btn-linkedin btn-sm icon" type="button" ng-click="share('linkedin')"></button>
+            <button class="btn btn-google-plus btn-sm icon" type="button" ng-click="share('google')"></button>
+            <button class="btn btn-tumblr btn-sm icon" type="button" ng-click="share('tumblr')"></button>
+          </p>
+          <div class="clearfix"></div>
+        </div>
+      </div>
       <!-- Tag -->
       <div class="card d-md-none">
         <div class="card-header">
@@ -282,35 +269,6 @@
           <div class="clearfix"></div>
         </div>
       </div>
-      <!-- Social -->
-      <div class="card">
-        <div class="card-header">
-          <strong class="card-title"> Socials panel</strong>
-        </div>
-        <div class="card-body">
-          <p class="text-justify mgn">
-            <button class="btn btn-facebook icon" type="button">
-              <span>Facebook</span>
-            </button>
-            <button class="btn btn-twitter icon" type="button">
-              <span>Twitter</span>
-            </button>
-            <button class="btn btn-linkedin icon" type="button">
-              <span>LinkedIn</span>
-            </button>
-            <button class="btn btn-google-plus icon" type="button">
-              <span>Google+</span>
-            </button>
-            <button class="btn btn-flickr icon" type="button">
-              <span>Flickr</span>
-            </button>
-            <button class="btn btn-tumblr icon" type="button">
-              <span>Tumblr</span>
-            </button>
-          </p>
-          <div class="clearfix"></div>
-        </div>
-      </div>
       <!-- Vote card -->
       <div class="card" ng-if="vm.isClosed">
         <div class="card-header">
@@ -354,6 +312,22 @@
       </div>
       <!-- Chart -->
       <div ui-view="opts"></div>
+      <!-- Social -->
+      <div class="card">
+        <div class="card-header">
+          <strong class="card-title"> Socials panel</strong>
+        </div>
+        <div class="card-body">
+          <p class="text-justify mgn">
+            <button class="btn btn-facebook btn-sm icon" type="button" ng-click="share('facebook')"></button>
+            <button class="btn btn-twitter btn-sm icon" type="button" ng-click="share('twitter')"></button>
+            <button class="btn btn-linkedin btn-sm icon" type="button" ng-click="share('linkedin')"></button>
+            <button class="btn btn-google-plus btn-sm icon" type="button" ng-click="share('google')"></button>
+            <button class="btn btn-tumblr btn-sm icon" type="button" ng-click="share('tumblr')"></button>
+          </p>
+          <div class="clearfix"></div>
+        </div>
+      </div>
       <!-- Tag -->
       <div class="card" id="poll_tags_card">
         <div class="card-header">

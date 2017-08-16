@@ -635,10 +635,7 @@ a:hover .header-profile-image {
   font-weight: 500;
   line-height: 1.1;
 }
-.large-icons, .large-icons .icons {
-    font-size: 1.3rem;
-    vertical-align: middle;
-}
+
 .custom-breadcrumb {
   padding: 0;
   margin-bottom: 0;

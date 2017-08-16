@@ -366,11 +366,11 @@
       /*display: inline-block;*/
       width: 70%;
       overflow: hidden;
-    text-overflow: ellipsis;
+      text-overflow: ellipsis;
       /* Required for text-overflow to do anything */
       white-space: nowrap;
       /*margin-top: -9px;*/
-      font-size: 1rem;
+      font-size: 0.85rem;
       font-weight: normal;
       line-height: 36px;
       color: #263238; }

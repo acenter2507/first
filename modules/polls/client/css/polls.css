@@ -322,8 +322,8 @@
   list-style: none; }
   .horizontal-bars li {
     position: relative;
-    height: 40px;
-    line-height: 40px;
+    height: 36px;
+    line-height: 36px;
     vertical-align: middle; }
     .horizontal-bars li .title {
       width: 100px;
@@ -346,7 +346,7 @@
         height: 8px;
         padding: 0; }
     .horizontal-bars li.divider {
-      height: 40px; }
+      height: 36px; }
       .horizontal-bars li.divider i {
         margin: 0 !important; }
   /*.horizontal-bars.type-2 li {
@@ -363,7 +363,7 @@
       /*margin-top: -9px;*/
       font-size: 1rem;
       font-weight: normal;
-      line-height: 40px;
+      line-height: 36px;
       color: #263238; }
     .horizontal-bars.type-2 li .value {
       text-align: right;

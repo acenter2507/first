@@ -349,10 +349,10 @@
       height: 36px; }
       .horizontal-bars li.divider i {
         margin: 0 !important; }
-  .horizontal-bars.type-2 li .row {
+  .horizontal-bars.type-2 li .detail {
     width: 100%;
     display: flex; }
-    .horizontal-bars.type-2 li .row .title {
+    .horizontal-bars.type-2 li .detail .title {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -362,7 +362,7 @@
       line-height: 36px;
       flex: 1;
       color: #555; }
-    .horizontal-bars.type-2 li .row .value {
+    .horizontal-bars.type-2 li .detail .value {
       font-weight: 600;}
     .horizontal-bars.type-2 li .bars {
       position: absolute;

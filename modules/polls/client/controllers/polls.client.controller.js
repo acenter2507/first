@@ -312,7 +312,7 @@
         var count_up = $timeout(() => {
           vm.poll.viewCnt += 1;
           Action.count_up_view_poll(vm.poll._id);
-          if (scope.isLogged) {
+          if ($scope.isLogged) {
             Action.save_view_poll(vm.view);
           }
         }, 30000);
@@ -331,7 +331,7 @@
         toast.error('You must type something to reply.', 'Error!');
         return;
       }
-      if (!scope.isLogged) {
+      if (!$scope.isLogged) {
         $state.go('authentication.signin');
         return false;
       }
@@ -435,7 +435,7 @@
       }
     };
     vm.like_poll = type => {
-      if (!scope.isLogged) {
+      if (!$scope.isLogged) {
         toast.error('You must login to like this poll.', 'Error!');
         return;
       }
@@ -462,7 +462,7 @@
     };
 
     vm.follow_poll = () => {
-      if (!scope.isLogged) {
+      if (!$scope.isLogged) {
         toast.error('You must login to follow this poll.', 'Error!');
         return;
       }
@@ -554,7 +554,7 @@
 
     vm.save_cmt = save_cmt;
     vm.reply_cmt = cmt => {
-      if (!scope.isLogged) {
+      if (!$scope.isLogged) {
         toast.error('You must login to reply this comment.', 'Error!');
         return;
       }
@@ -595,7 +595,7 @@
     };
     var cnt = 0;
     vm.focus_cmt = () => {
-      if (!scope.isLogged) {
+      if (!$scope.isLogged) {
         toast.error('You must login to comment.', 'Error!');
         return;
       }
@@ -603,7 +603,7 @@
     };
 
     vm.like_cmt = (cmt, type) => {
-      if (!scope.isLogged) {
+      if (!$scope.isLogged) {
         toast.error('You must login to like this comment.', 'Error!');
         return;
       }
@@ -646,7 +646,7 @@
       if (vm.poll.allow_guest) {
         return true;
       } else {
-        return scope.isLogged;
+        return $scope.isLogged;
       }
     };
     vm.is_voted = function (id) {

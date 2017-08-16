@@ -686,6 +686,8 @@ a:hover .header-profile-image {
     cursor: pointer; }
 @media (max-width: 767px) {
   .back-to-top {
+    font-size: 13px;
+    padding: 8px;
 	  bottom: 6px;
     right: 6px;
     height: 32px;

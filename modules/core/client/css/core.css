@@ -673,18 +673,18 @@ a:hover .header-profile-image {
   position: fixed;
 	bottom: 12px;
   right: 12px;
-  height: 48px;
+  /* height: 48px;
   width: 48px;
-  z-index: 9999;
+  z-index: 9999; */
   background-color: #267ED5;
-  border: none;
+  /* border: none;
   opacity: 0.8;
-  color: #fff;
+  color: #fff; */
 	display: none; }
-  .back-to-top:hover {
+  /* .back-to-top:hover {
 		opacity: 1;
-    cursor: pointer; }
-@media (max-width: 767px) {
+    cursor: pointer; } */
+/* @media (max-width: 767px) {
   .back-to-top {
     font-size: 13px;
     line-height: 16px;
@@ -692,7 +692,7 @@ a:hover .header-profile-image {
 	  bottom: 6px;
     right: 6px;
     height: 32px;
-    width: 32px; } }
+    width: 32px; } } */
 .angucomplete-image {
     border-radius: 0;
     border: none; }

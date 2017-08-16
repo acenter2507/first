@@ -104,14 +104,15 @@
   margin: auto;
 }
 .progress {
-  border-radius: 0 !important;
-}
-.progress-xs {
-  height: 4px !important; }
-.progress-sm {
-  height: 8px !important; }
-.progress-lg {
-  height: 24px !important; }
+  border-radius: 0 !important; }
+  .progress-xs {
+    height: 4px !important; }
+  .progress-sm {
+    height: 8px !important; }
+  .progress-lg {
+    height: 24px !important; }
+  .progress .progress-bar {
+    box-shadow: none; }
 
 .poll_item_body,
 .poll_item_info {

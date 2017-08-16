@@ -4,6 +4,7 @@ angular
   .directive('backToTop', backToTopDirective)
   .directive('a', preventClickDirective)
   .directive('a', asideMenuToggleDirective)
+  .directive('body', asideMenuHideDirective)
   .directive('a', cardExpandDirective);
 
 //Prevent click if href="#"
@@ -60,7 +61,22 @@ function asideMenuToggleDirective($interval) {
     });
   }
 }
+function asideMenuHideDirective() {
+  var directive = {
+    restrict: 'E',
+    link: link
+  };
+  return directive;
 
+  function link(scope, element, attrs) {
+    $(element).on('click', function () {
+      var container = $("#aside-menu");
+      if (!container.is(e.target) && container.has(e.target).length === 0) {
+        angular.element('body').removeClass('aside-menu-show');
+      }
+    });
+  }
+}
 function backToTopDirective() {
   var directive = {
     restrict: 'E',

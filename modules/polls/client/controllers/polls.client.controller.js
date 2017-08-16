@@ -283,7 +283,8 @@
           vm.cmts = _.union(vm.cmts, res.data);
           vm.page += 1;
           vm.busy = false;
-          $scope.$apply();
+          if (res.data.length < 10) { vm.stopped = true; }
+          // $scope.$apply();
         })
         .catch(err => {
           toast.error(err.message, 'Error!');

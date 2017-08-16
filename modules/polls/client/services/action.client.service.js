@@ -104,10 +104,10 @@
     /**
      * Load comments màn hình polls.view
      */
-    this.get_cmts = (pollId, _page) => {
+    this.get_cmts = (pollId, _page, sort) => {
       return new Promise((resolve, reject) => {
         var page = _page || 0;
-        $http.get('/api/findCmts/' + pollId + '/' + page, {
+        $http.get('/api/findCmts/' + pollId + '/' + page + '/' + sort, {
           ignoreLoadingBar: true
         })
           .then(res => {

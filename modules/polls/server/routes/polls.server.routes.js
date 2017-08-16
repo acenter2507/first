@@ -25,7 +25,7 @@ module.exports = function(app) {
   // Lấy thông tin của user hiện hành đối với poll cho màn hình polls.view
   app.route('/api/findOwners/:pollId').get(polls.findOwners);
   // Load comment cho màn hình poll.view theo page
-  app.route('/api/findCmts/:pollId/:page').get(polls.findCmts);
+  app.route('/api/findCmts/:pollId/:page/:sort').get(polls.findCmts);
 
   app.route('/api/countUpView/:pollId').get(polls.countUpView);
 

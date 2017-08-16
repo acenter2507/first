@@ -24,15 +24,15 @@
     </div>
 
     <div class="cmt_sort">
-      <small class="pull-right" ng-show="vm.stopped">Sort:&nbsp;
+      <small class="pull-right">Sort:
       <md-menu md-offset="-12 25" md-position-mode="target-right target">
-        <a class="undecorated-link" ng-click="$mdMenu.open($event)" aria-label="Open setting menu">
-          {{vm.cmt_sort.name}}&nbsp;<i class="fa fa-angle-down"></i>
+        <a class="undecorated-link" ng-click="$mdMenu.open($event)" aria-label="Open sort menu">
+          {{vm.cmt_sort.name}}<i class="fa fa-angle-down"></i>
         </a>
         <md-menu-content>
           <ul class="menu-list">
             <li ng-repeat="cmt_sort in vm.cmt_sorts">
-              <a class="undecorated-link" ng-click="vm.cmt_sort = vm.cmt_sorts[$index]">{{cmt_sort.name}}</a>
+              <a class="undecorated-link" ng-click="vm.sort($index)">{{cmt_sort.name}}</a>
             </li>
           </ul>
         </md-menu-content>
@@ -41,7 +41,7 @@
       <div class="clearfix h30"></div>
     </div>
 
-    <div class="cmt_list" ng-repeat="cmt in vm.cmts | orderBy: vm.cmt_sort.val">
+    <div class="cmt_list" ng-repeat="cmt in vm.cmts">
       <div class="user-avatar pull-left">
         <a ng-if="cmt.user" ui-sref="profile.info({userId: cmt.user._id})">
         <img src="{{cmt.user.profileImageURL}}" alt="{{cmt.user.displayName}}">
@@ -116,10 +116,10 @@
     </div>
 
     <div class="cmt_sort">
-      <small class="pull-right" ng-show="vm.stopped">Sort:&nbsp;
+      <small class="pull-right">Sort
       <md-menu md-offset="-12 25" md-position-mode="target-right target">
-        <a class="undecorated-link" ng-click="$mdMenu.open($event)" aria-label="Open setting menu">
-          {{vm.cmt_sort.name}}&nbsp;<i class="fa fa-angle-down"></i>
+        <a class="undecorated-link" ng-click="$mdMenu.open($event)" aria-label="Open sort menu">
+          {{vm.cmt_sort.name}}<i class="fa fa-angle-down"></i>
         </a>
         <md-menu-content>
           <ul class="menu-list">
@@ -133,7 +133,7 @@
       <div class="clearfix h30"></div>
     </div>
 
-    <div class="cmt_list" ng-repeat="cmt in vm.cmts | orderBy: vm.cmt_sort.val">
+    <div class="cmt_list" ng-repeat="cmt in vm.cmts">
       <div class="user-avatar pull-left">
         <a ng-if="cmt.user" ui-sref="profile.info({userId: cmt.user._id})"><img src="{{cmt.user.profileImageURL}}" alt="{{cmt.user.displayName}}"></a>
         <img ng-if="!cmt.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">

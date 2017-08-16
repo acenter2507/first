@@ -379,8 +379,9 @@ exports.findOwners = function (req, res) {
 exports.findCmts = function (req, res) {
   var userId = req.user ? req.user._id : undefined;
   var page = req.params.page || 0;
+  var sort = req.params.sort || '-created';
   Cmt.find({ poll: req.poll._id })
-    .sort('-created')
+    .sort(sort)
     .populate('user', 'displayName profileImageURL')
     .skip(10 * page)
     .limit(10).exec()

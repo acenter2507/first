@@ -272,7 +272,7 @@
     function get_cmts() {
       if (vm.stopped || vm.busy) return;
       vm.busy = true;
-      Action.get_cmts(vm.poll._id, vm.page)
+      Action.get_cmts(vm.poll._id, vm.page, vm.cmt_sort.val)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
             vm.stopped = true;
@@ -289,6 +289,15 @@
         .catch(err => {
           toast.error(err.message, 'Error!');
         });
+    }
+    vm.sort = sort;
+    function sort(index) {
+      vm.cmt_sort = vm.cmt_sorts[index];
+      vm.cmts = [];
+      vm.page = 0;
+      vm.busy = false;
+      vm.stopped = false;
+      get_cmts();
     }
 
     function loadRemaining() {

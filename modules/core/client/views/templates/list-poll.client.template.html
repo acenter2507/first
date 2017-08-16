@@ -75,7 +75,7 @@
         <ul class="horizontal-bars type-2">
           <li ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">
             <i class="icon-chart"></i>
-            <span class="title" ng-bind="opt.title"></span>
+            <span class="title" ng-bind="opt.title" autoAdjust></span>
             <span class="value">{{ opt.voteCnt + '/' + poll.total }}
               <span class="text-muted small">({{ opt.progressVal }}%)</span>
             </span>
@@ -101,7 +101,7 @@
         <ul class="horizontal-bars type-2">
           <li ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">
             <i class="icon-chart"></i>
-            <span class="title" ng-bind="opt.title"></span>
+            <span class="title" ng-bind="opt.title" autoAdjust></span>
             <span class="value">{{ opt.voteCnt + '/' + poll.total }}
               <span class="text-muted small">({{ opt.progressVal }}%)</span>
             </span>

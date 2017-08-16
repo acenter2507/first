@@ -693,7 +693,8 @@
           'attrs': {
             'socialshareUrl': url,
             'socialshareHashtags': 'hanhatlenh',
-            'socialshareQuote': text
+            'socialshareQuote': text,
+            'socialshareMobileiframe': true
           }
         });
       } else if(provider === 'google') {

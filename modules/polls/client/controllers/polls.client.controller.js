@@ -44,7 +44,7 @@
   ) {
     var vm = this;
     $scope.user = Authentication.user;
-    scope.isLogged = ($scope.user);
+    $scope.isLogged = ($scope.user);
 
     vm.poll = poll;
 

@@ -801,3 +801,13 @@
 
 .font-italic {
   font-style: italic; }
+.center {
+  margin: auto !important; }
+.inline {
+  display: inline !important; }
+.inline-block  {
+  display: inline-block !important; }
+.input-large {
+  height: 44px;
+  font-size: 1.2em !important;
+  padding: 10px 12px !important; }

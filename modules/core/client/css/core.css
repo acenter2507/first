@@ -679,13 +679,12 @@ a:hover .header-profile-image {
   z-index: 9999;
   background-color: #267ED5;
   border: none;
-	opacity: 0.8;
+  opacity: 0.8;
+  color: #fff;
 	display: none; }
   .back-to-top:hover {
 		opacity: 1;
 		cursor: pointer; }
-   .back-to-top i {
-		color: #FFF; } 
 .angucomplete-image {
     border-radius: 0;
     border: none; }

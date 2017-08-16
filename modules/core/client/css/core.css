@@ -683,7 +683,9 @@ a:hover .header-profile-image {
 	display: none; }
   .back-to-top:hover {
 		opacity: 1;
-		cursor: pointer; }
+    cursor: pointer; }
+  .back-to-top i {
+    font-size: 1rem; }
 .angucomplete-image {
     border-radius: 0;
     border: none; }

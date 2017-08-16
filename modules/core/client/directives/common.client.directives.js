@@ -65,7 +65,7 @@ function backToTopDirective() {
   var directive = {
     restrict: 'E',
     replace: true,
-    template: '<button class="back-to-top"><i class="fa fa-chevron-up"></i></button>',
+    template: '<md-button md-colors="{background: \'blue\'}" aria-label="menu" class="md-fab md-mini"><i class="fa fa-chevron-up"></i></md-button>',
     link: link
   };
   return directive;

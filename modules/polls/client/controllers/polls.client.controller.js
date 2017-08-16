@@ -695,7 +695,8 @@
             'socialshareHashtags': 'hanhatlenh',
             'socialshareQuote': text,
             'socialshareMobileiframe': true,
-            'socialshareText': text
+            'socialshareText': text,
+            'socialshareType': 'feed'
           }
         });
       } else if(provider === 'google') {

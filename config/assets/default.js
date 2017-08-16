@@ -16,7 +16,8 @@ module.exports = {
         'public/lib/ng-dialog/css/ngDialog-theme-default.min.css',
         'public/lib/angucomplete-alt/angucomplete-alt.css',
         'public/lib/simple-line-icons/css/simple-line-icons.css',
-        'public/lib/angular-loading-bar/build/loading-bar.css'
+        'public/lib/angular-loading-bar/build/loading-bar.css',
+        'public/lib/angular-socialshare/angular-socialshare.css'
       ],
       js: [
         'public/lib/jquery/dist/jquery.min.js',
@@ -58,7 +59,8 @@ module.exports = {
         'public/lib/ng-dialog/js/ngDialog.min.js',
         'public/lib/angucomplete-alt/angucomplete-alt.js',
         'public/lib/angular-loading-bar/build/loading-bar.js',
-        'public/lib/angular-breadcrumb/dist/angular-breadcrumb.min.js'
+        'public/lib/angular-breadcrumb/dist/angular-breadcrumb.min.js',
+        'public/lib/angular-socialshare/angular-socialshare.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

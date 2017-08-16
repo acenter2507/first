@@ -29,7 +29,8 @@ var ApplicationConfiguration = (function() {
     'toastr',
     'webStorageModule',
     'angucomplete-alt',
-    'angular-loading-bar'
+    'angular-loading-bar',
+    '720kb.socialshare'
   ];
 
   // Add a new vertical module

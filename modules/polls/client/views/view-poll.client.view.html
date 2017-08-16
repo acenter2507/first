@@ -253,6 +253,20 @@
           <div class="clearfix"></div>
         </div>
       </div>
+      <!-- Social -->
+      <div class="card" id="socials_card">
+        <div class="card-header">
+          <strong class="card-title"> Socials panel</strong>
+        </div>
+        <div class="card-body">
+          <a href="#" socialshare
+            socialshare-provider="facebook"
+            socialshare-text="{{vm.poll.title}}"
+            socialshare-hashtags="{{vm.poll.tags}}"
+            socialshare-url="{{ $location.absUrl() }}">Share me</a>
+          <div class="clearfix"></div>
+        </div>
+      </div>
       <!-- Vote card -->
       <div class="card" ng-if="vm.isClosed">
         <div class="card-header">

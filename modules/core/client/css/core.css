@@ -673,10 +673,7 @@ a:hover .header-profile-image {
   position: fixed;
 	bottom: 1rem;
 	right: 1rem;
-	z-index: 1;
-	width: 3rem;
-	height: 3rem;
-	background: #DDD;
+	z-index: 9999;
 	opacity: 0.5;
 	display: none; }
   .back-to-top:hover {

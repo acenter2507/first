@@ -65,7 +65,7 @@ function backToTopDirective() {
   var directive = {
     restrict: 'E',
     replace: true,
-    template: '<div class="back-to-top"><i class="fa fa-chevron-up"></i></div>',
+    template: '<button class="btn btn-primary back-to-top"><i class="fa fa-chevron-up"></i></button>',
     link: link
   };
   return directive;

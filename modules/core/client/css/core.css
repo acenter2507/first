@@ -684,10 +684,10 @@ a:hover .header-profile-image {
   .back-to-top:hover {
 		opacity: 1;
 		cursor: pointer; }
-  .back-to-top i {
+  /* .back-to-top i {
 		font-size: 2rem;
 		padding: 0.85rem;
-		color: #FFF; }
+		color: #FFF; } */
 .angucomplete-image {
     border-radius: 0;
     border: none; }

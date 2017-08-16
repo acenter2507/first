@@ -22,6 +22,9 @@
 
 .d-inline-flex {
   display: inline-flex !important; }
+.margin-control {
+  margin-top: 12px; }
+
 @media (min-width: 576px) {
   .d-sm-none {
     display: none !important; }
@@ -99,6 +102,8 @@
     display: none !important; } }
 
 @media (max-width: 767px) {
+  .margin-control {
+    margin-top: 6px; }
   .d-sm-down-none {
     display: none !important; } }
 

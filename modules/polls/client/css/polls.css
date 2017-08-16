@@ -93,10 +93,9 @@
 }
 
 .chart-block{
-  height: 90px;
-  width: 90px;
+  height: 100px;
+  width: 100px;
   margin: auto;
-  margin-top: 15px;
 }
 .chart-base {
   max-height: 200px;
@@ -112,7 +111,7 @@
   .progress-lg {
     height: 24px !important; }
   .progress .progress-bar {
-    box-shadow: none; }
+    box-shadow: none !important; }
 
 .poll_item_body,
 .poll_item_info {

@@ -66,12 +66,6 @@
       </div>
       <!-- Show 3 option nhiều vote nhất  -->
       <div class="col-xs-12 pdn" ng-if="poll.total === 0">
-        <!--<div ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">
-          <span><strong ng-bind="opt.title"></strong> ({{opt.voteCnt + '/' + poll.total}})</span>
-          <div class="progress progress-sm">
-            <div class="progress-bar" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}"></div>
-          </div>
-        </div>-->
         <ul class="horizontal-bars type-2">
           <li ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">
             <!--<i class="icon-chart"></i>-->

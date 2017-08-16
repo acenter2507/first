@@ -377,7 +377,6 @@
         .then(res => {
           vm.ownVote = res;
           vm.votedOpts = _.clone(vm.selectedOpts);
-          $scope.$apply();
         })
         .catch(err => {
           toast.error(err.message, 'Error!');

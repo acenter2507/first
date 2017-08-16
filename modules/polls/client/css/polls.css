@@ -351,6 +351,9 @@
         margin: 0 !important; }
   /*.horizontal-bars.type-2 li {
     overflow: hidden; }*/
+  .horizontal-bars.type-2 li .row,
+  .horizontal-bars.type-2 li .row div, {
+    line-height: 36px; }
     .horizontal-bars.type-2 li i {
       display: inline-block;
       margin-right: 0.75rem;

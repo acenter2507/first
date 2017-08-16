@@ -83,17 +83,13 @@
           </li>
           <li class="divider text-center" ng-if="poll.opts.length > 3">
             <!--<a class="undecorated-link text-muted" data-toggle="tooltip" data-placement="top" title="show more"><i class="icon-options"></i></a>-->
-            <a class="undecorated-link" ui-sref="polls.view({ pollId: poll._id })"><i class="icon-options"></i></a>
+            <a class="undecorated-link" ui-sref="polls.view({ pollId: poll._id })"><i class="icon-options"></i>
+              <md-tooltip md-direction="bottom">Show more</md-tooltip>
+            </a>
           </li>
         </ul>
       </div>
       <div class="col-xs-12 col-md-9 pdn" ng-if="poll.total > 0">
-        <!--<div ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">
-          <span><strong ng-bind="opt.title"></strong> ({{opt.voteCnt + '/' + poll.total}})</span>
-          <div class="progress progress-sm">
-            <div class="progress-bar" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}"></div>
-          </div>
-        </div>-->
         <ul class="horizontal-bars type-2">
           <li ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">
             <!--<i class="icon-chart"></i>-->
@@ -110,7 +106,9 @@
             </div>
           </li>
           <li class="divider text-center" ng-if="poll.opts.length > 3">
-            <a class="undecorated-link" ui-sref="polls.view({ pollId: poll._id })"><i class="icon-options"></i></a>
+            <a class="undecorated-link" ui-sref="polls.view({ pollId: poll._id })"><i class="icon-options"></i>
+              <md-tooltip md-direction="bottom">Show more</md-tooltip>
+            </a>
           </li>
         </ul>
       </div>
@@ -130,7 +128,7 @@
 
   <div clas="poll-footer">
     <p class="poll_item_info">
-      <i class="fa fa-like" aria-hidden="true"></i>
+      <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
       <strong> Like: </strong>{{poll.likeCnt}}
     </p>
     <p class="poll_item_info">

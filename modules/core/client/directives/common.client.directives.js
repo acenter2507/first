@@ -69,10 +69,12 @@ function asideMenuHideDirective() {
   return directive;
 
   function link(scope, element, attrs) {
-    $(element).on('click', function () {
+    $(document).mouseup(function (e) {
       var container = $("#aside-menu");
       if (!container.is(e.target) && container.has(e.target).length === 0) {
-        angular.element('body').removeClass('aside-menu-show');
+        if ($(element).hasClass('aside-menu-show')) {
+          $(element).removeClass('aside-menu-show');
+        }
       }
     });
   }

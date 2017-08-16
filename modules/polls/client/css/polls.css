@@ -178,7 +178,7 @@
   vertical-align: top;
   text-align: left;
   width: 100%; }
-.control-group .control {
+.control {
   display: block;
   position: relative;
   padding-left: 30px;
@@ -187,11 +187,11 @@
   cursor: pointer;
   max-width: 100%;
   word-wrap: break-word; }
-  .control-group .control input {
+  .control input {
     position: absolute;
     z-index: -1;
     opacity: 0; }
-  .control-group .control__indicator {
+  .control__indicator {
     position: absolute;
     top: 2px;
     left: 0;

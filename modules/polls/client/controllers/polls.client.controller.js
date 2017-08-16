@@ -695,6 +695,13 @@
             'socialshareQuote': text
           }
         });
+      } else if(provider === 'google') {
+        Socialshare.share({
+          'provider': provider,
+          'attrs': {
+            'socialshareUrl': url
+          }
+        });
       } else {
         Socialshare.share({
           'provider': provider,

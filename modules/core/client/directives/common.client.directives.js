@@ -58,7 +58,7 @@ function asideMenuToggleDirective($interval) {
       if (element.hasClass('aside-menu-toggler')) {
         console.log('XXX');
         angular.element('body').toggleClass('aside-menu-show');
-        e.stopPropagation();
+        e.preventDefault();
       }
     });
   }
@@ -72,6 +72,7 @@ function asideMenuHideDirective() {
 
   function link(scope, element, attrs) {
     $(document).mouseup(function (e) {
+      console.log('YYY');
       var container = $("#aside-menu");
       if (!container.is(e.target) && container.has(e.target).length === 0) {
         if ($(element).hasClass('aside-menu-show')) {

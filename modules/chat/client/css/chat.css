@@ -17,5 +17,6 @@
 .quick-menu {
   position: fixed;
   left: 6px;
-  bottom: 6px;
-}
+  bottom: 6px; }
+  .quick-menu .md-fab {
+    margin: 0 !important;}

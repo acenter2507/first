@@ -3,14 +3,14 @@
     <strong class="card-title"> COMMENTS</strong>
   </div>
   <div class="card-body">
-    <div class="cmt_form" ng-if="vm.isLogged">
+    <div class="cmt_form" ng-if="isLogged">
       <div class="form-group mg5b">
         <span ng-if="vm.tmp_cmt.to">@</span>
         <a class="undecorated-link" ng-if="vm.tmp_cmt.to" ui-sref="profile.info({userId: vm.tmp_cmt.to})" ng-bind="vm.tmp_cmt.toName"></a>
       </div>
       <div class="form-group">
-        <div class="user-avatar pull-left" ng-if="vm.user">
-          <a ui-sref="profile.info({userId: vm.user._id})"><img src="{{vm.user.profileImageURL}}" alt="{{vm.user.displayName}}"></a>
+        <div class="user-avatar pull-left" ng-if="isLogged">
+          <a ui-sref="profile.info({userId: user._id})"><img src="{{user.profileImageURL}}" alt="{{user.displayName}}"></a>
         </div>
         <textarea ng-is-enter="{{vm.enter_send}}" ng-enter="vm.save_cmt()" focus-me="{{vm.cmt_typing}}" class="msd-elastic: \n; reply-input"
           data-ng-model="vm.tmp_cmt.body" placeholder="Type your comment..."></textarea>
@@ -63,9 +63,9 @@
           </a>
           <md-menu-content>
             <ul class="menu-list">
-              <li ng-if="vm.isLogged && cmt.user._id !== vm.user._id"><a class="undecorated-link" ng-click="vm.reply_cmt(cmt)"><i class="fa fa-reply"></i>&nbsp;Reply</a></li>
-              <li ng-if="cmt.user._id === vm.user._id"><a class="undecorated-link" ng-click="vm.edit_cmt(cmt)"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
-              <li ng-if="cmt.user._id === vm.user._id"><a class="undecorated-link" ng-click="vm.delete_cmt(cmt)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
+              <li ng-if="isLogged && cmt.user._id !== user._id"><a class="undecorated-link" ng-click="vm.reply_cmt(cmt)"><i class="fa fa-reply"></i>&nbsp;Reply</a></li>
+              <li ng-if="cmt.user._id === user._id"><a class="undecorated-link" ng-click="vm.edit_cmt(cmt)"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
+              <li ng-if="cmt.user._id === user._id"><a class="undecorated-link" ng-click="vm.delete_cmt(cmt)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
             </ul>
           </md-menu-content>
         </md-menu>
@@ -81,6 +81,9 @@
       </small>
       <div class="clearfix"></div>
       <hr class="mg12y">
+    </div>
+    <div class="row text-center" ng-if="!vm.stopped">
+      <a class="undecorated-link" ng-click="vm.get_cmts()">Load more</a>
     </div>
   </div>
 </div>
@@ -90,14 +93,14 @@
     <a class="undecorated-link card-expand-toggle pull-right text-muted"><i class="fa fa-caret-down"></i></a>
   </div>
   <div class="card-body">
-    <div class="cmt_form" ng-if="vm.isLogged">
+    <div class="cmt_form" ng-if="isLogged">
       <div class="form-group mg5b">
         <span ng-if="vm.tmp_cmt.to">@</span>
         <a class="undecorated-link" ng-if="vm.tmp_cmt.to" ui-sref="profile.info({userId: vm.tmp_cmt.to})" ng-bind="vm.tmp_cmt.toName"></a>
       </div>
       <div class="form-group">
-        <div class="user-avatar pull-left" ng-if="vm.user">
-          <a ui-sref="profile.info({userId: vm.user._id})"><img src="{{vm.user.profileImageURL}}" alt="{{vm.user.displayName}}"></a>
+        <div class="user-avatar pull-left" ng-if="isLogged">
+          <a ui-sref="profile.info({userId: user._id})"><img src="{{user.profileImageURL}}" alt="{{user.displayName}}"></a>
         </div>
         <textarea ng-is-enter="{{vm.enter_send}}" ng-enter="vm.save_cmt()" focus-me="{{vm.cmt_typing}}" class="msd-elastic: \n; reply-input"
           data-ng-model="vm.tmp_cmt.body" placeholder="Type your comment..."></textarea>
@@ -130,9 +133,7 @@
 
     <div class="cmt_list" ng-repeat="cmt in vm.cmts | orderBy: vm.cmt_sort.val">
       <div class="user-avatar pull-left">
-        <a ng-if="cmt.user" ui-sref="profile.info({userId: cmt.user._id})">
-        <img src="{{cmt.user.profileImageURL}}" alt="{{cmt.user.displayName}}">
-      </a>
+        <a ng-if="cmt.user" ui-sref="profile.info({userId: cmt.user._id})"><img src="{{cmt.user.profileImageURL}}" alt="{{cmt.user.displayName}}"></a>
         <img ng-if="!cmt.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
       </div>
       <span class="pull-left">
@@ -140,7 +141,8 @@
         <span ng-if="!cmt.user">Deleted User</span>
         <small class="text-muted" am-time-ago="cmt.created"></small>
         <a ng-if="cmt.to" class="undecorated-link">@{{cmt.toName}}</a>
-        <span ng-show="cmt.isEdited" class="fa fa-pencil-square-o"><md-tooltip md-direction="bottom">{{cmt.updated | date:'mediumDate'}}</md-tooltip>
+        <span ng-show="cmt.isEdited" class="fa fa-pencil-square-o">
+          <md-tooltip md-direction="bottom">{{cmt.updated | date:'mediumDate'}}</md-tooltip>
         </span>
       </span>
       <span class="pull-right">
@@ -150,9 +152,9 @@
           </a>
           <md-menu-content>
             <ul class="menu-list">
-              <li ng-if="vm.isLogged && cmt.user._id !== vm.user._id"><a class="undecorated-link" ng-click="vm.reply_cmt(cmt)"><i class="fa fa-reply"></i>&nbsp;Reply</a></li>
-              <li ng-if="cmt.user._id === vm.user._id"><a class="undecorated-link" ng-click="vm.edit_cmt(cmt)"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
-              <li ng-if="cmt.user._id === vm.user._id"><a class="undecorated-link" ng-click="vm.delete_cmt(cmt)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
+              <li ng-if="isLogged && cmt.user._id !== user._id"><a class="undecorated-link" ng-click="vm.reply_cmt(cmt)"><i class="fa fa-reply"></i>&nbsp;Reply</a></li>
+              <li ng-if="cmt.user._id === user._id"><a class="undecorated-link" ng-click="vm.edit_cmt(cmt)"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
+              <li ng-if="cmt.user._id === user._id"><a class="undecorated-link" ng-click="vm.delete_cmt(cmt)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
             </ul>
           </md-menu-content>
         </md-menu>
@@ -169,7 +171,9 @@
       <div class="clearfix"></div>
       <hr class="mg12y">
     </div>
-
+    <div class="row text-center" ng-if="!vm.stopped">
+      <a class="undecorated-link" ng-click="vm.get_cmts()">Load more</a>
+    </div>
     <!-- Load indicator -->
     <div class="row" ng-show="vm.busy"><div class="loader"></div></div>
   </div>

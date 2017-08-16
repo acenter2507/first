@@ -43,9 +43,9 @@
     $stateParams
   ) {
     var vm = this;
-    vm.authentication = Authentication;
-    vm.user = Authentication.user;
-    vm.isLogged = (vm.user);
+    $scope.user = Authentication.user;
+    scope.isLogged = ($scope.user);
+
     vm.poll = poll;
 
     vm.form = {};
@@ -119,7 +119,7 @@
       }
       Socket.emit('subscribe_poll', {
         pollId: vm.poll._id,
-        userId: vm.user._id
+        userId: $scope.user._id
       });
       Socket.on('cmt_add', cmtId => {
         Action.get_cmt(cmtId)
@@ -203,7 +203,7 @@
       $scope.$on('$destroy', function () {
         Socket.emit('unsubscribe_poll', {
           pollId: vm.poll._id,
-          userId: vm.user._id
+          userId: $scope.user._id
         });
         Socket.removeListener('cmt_add');
         Socket.removeListener('cmt_del');
@@ -311,7 +311,7 @@
         var count_up = $timeout(() => {
           vm.poll.viewCnt += 1;
           Action.count_up_view_poll(vm.poll._id);
-          if (vm.isLogged) {
+          if (scope.isLogged) {
             Action.save_view_poll(vm.view);
           }
         }, 30000);
@@ -330,7 +330,7 @@
         toast.error('You must type something to reply.', 'Error!');
         return;
       }
-      if (!vm.isLogged) {
+      if (!scope.isLogged) {
         $state.go('authentication.signin');
         return false;
       }
@@ -352,7 +352,7 @@
     }
 
     function save_vote() {
-      if (!vm.user && !vm.poll.allow_guest) {
+      if (!$scope.user && !vm.poll.allow_guest) {
         return $state.go('authentication.signin');
       }
       if (!vm.selectedOpts.length || vm.selectedOpts.length === 0) {
@@ -434,7 +434,7 @@
       }
     };
     vm.like_poll = type => {
-      if (!vm.isLogged) {
+      if (!scope.isLogged) {
         toast.error('You must login to like this poll.', 'Error!');
         return;
       }
@@ -461,7 +461,7 @@
     };
 
     vm.follow_poll = () => {
-      if (!vm.isLogged) {
+      if (!scope.isLogged) {
         toast.error('You must login to follow this poll.', 'Error!');
         return;
       }
@@ -553,7 +553,7 @@
 
     vm.save_cmt = save_cmt;
     vm.reply_cmt = cmt => {
-      if (!vm.isLogged) {
+      if (!scope.isLogged) {
         toast.error('You must login to reply this comment.', 'Error!');
         return;
       }
@@ -594,7 +594,7 @@
     };
     var cnt = 0;
     vm.focus_cmt = () => {
-      if (!vm.isLogged) {
+      if (!scope.isLogged) {
         toast.error('You must login to comment.', 'Error!');
         return;
       }
@@ -602,11 +602,11 @@
     };
 
     vm.like_cmt = (cmt, type) => {
-      if (!vm.isLogged) {
+      if (!scope.isLogged) {
         toast.error('You must login to like this comment.', 'Error!');
         return;
       }
-      if (vm.user._id === cmt.user._id) {
+      if ($scope.user._id === cmt.user._id) {
         toast.error('You cannot like your comment.', 'Error!');
         return;
       }
@@ -645,7 +645,7 @@
       if (vm.poll.allow_guest) {
         return true;
       } else {
-        return vm.isLogged;
+        return scope.isLogged;
       }
     };
     vm.is_voted = function (id) {

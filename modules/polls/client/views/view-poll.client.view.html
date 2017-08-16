@@ -1,4 +1,4 @@
-<section class="container animated fadeIn" infinite-scroll="vm.get_cmts()" infinite-scroll-distance='2' ng-show="vm.isShow">
+<section class="container animated fadeIn" ng-show="vm.isShow">
   <!-- Breadcrumb -->
   <div class="row mg10t">
     <div class="col-xs-12 pdn">
@@ -81,15 +81,15 @@
               </a>
               <md-menu-content>
                 <ul class="menu-list">
-                  <li ng-if="vm.isLogged">
+                  <li ng-if="isLogged">
                     <a ng-click="vm.follow_poll()" class="undecorated-link">
                       <i class="fa fa-rss"></i>&nbsp;{{(vm.follow._id) ? 'Unfollow' : 'Follow'}}
                     </a>
                   </li>
-                  <li ng-if="vm.isLogged && !vm.poll.isCurrentUserOwner && !vm.reported"><a class="undecorated-link" ng-click="vm.report_poll()"><i class="fa fa-exclamation-circle"></i>&nbsp;Report poll</a></li>
+                  <li ng-if="isLogged && !vm.poll.isCurrentUserOwner && !vm.reported"><a class="undecorated-link" ng-click="vm.report_poll()"><i class="fa fa-exclamation-circle"></i>&nbsp;Report poll</a></li>
                   <li ng-if="vm.poll.isCurrentUserOwner || vm.poll.canEdit"><a class="undecorated-link" ui-sref="polls.edit({ pollId: vm.poll._id })"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
                   <li ng-if="vm.poll.isCurrentUserOwner || vm.poll.canEdit"><a class="undecorated-link" ng-click="vm.remove()"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
-                  <li ng-if="vm.isLogged && !vm.poll.isCurrentUserOwner && !vm.bookmarked"><a class="undecorated-link" ng-click="vm.bookmark_poll()"><i class="fa fa-bookmark"></i>&nbsp;Bookmark poll</a></li>
+                  <li ng-if="isLogged && !vm.poll.isCurrentUserOwner && !vm.bookmarked"><a class="undecorated-link" ng-click="vm.bookmark_poll()"><i class="fa fa-bookmark"></i>&nbsp;Bookmark poll</a></li>
                 </ul>
               </md-menu-content>
             </md-menu>
@@ -192,7 +192,7 @@
           </div>
           <div class="form-group">
             <button ng-show="vm.opts.length > 0 && vm.is_can_vote" class="btn btn-info pull-right" ng-click="vm.save_vote()">{{(vm.ownVote._id) ? 'Change vote' : 'Vote'}}</button>
-            <button ng-show="vm.isLogged && vm.poll.allow_add && !vm.poll.isCurrentUserOwner" class="btn btn-warning pull-right mg10r"
+            <button ng-show="isLogged && vm.poll.allow_add && !vm.poll.isCurrentUserOwner" class="btn btn-warning pull-right mg10r"
               ng-click="vm.input_opt()">Suggest options</button>
           </div>
           <div class="clearfix"></div>
@@ -285,7 +285,7 @@
           </div>
           <div class="form-group">
             <button ng-show="vm.opts.length > 0 && vm.is_can_vote" class="btn btn-info pull-right" ng-click="vm.save_vote()">{{(vm.ownVote._id) ? 'Change vote' : 'Vote'}}</button>
-            <button ng-show="vm.isLogged && vm.poll.allow_add && !vm.poll.isCurrentUserOwner" class="btn btn-warning pull-right mg10r"
+            <button ng-show="isLogged && vm.poll.allow_add && !vm.poll.isCurrentUserOwner" class="btn btn-warning pull-right mg10r"
               ng-click="vm.input_opt()">Suggest options</button>
           </div>
           <div class="clearfix"></div>

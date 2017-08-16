@@ -110,6 +110,7 @@
       // Init socket
       initSocket();
       analysic_nofif();
+      get_cmts();
     }
 
     // Init Socket

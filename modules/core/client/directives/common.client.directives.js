@@ -72,7 +72,7 @@ function asideMenuHideDirective() {
     $(document).mouseup(function (e) {
       var container = $("#aside-menu");
       var btn = $("#aside-menu-toggler");
-      if (!container.is(e.target) && container.has(e.target).length === 0 && !btn.is(e.target) && btn.has(e.target).length) {
+      if (!container.is(e.target) && container.has(e.target).length === 0 && !btn.is(e.target) && btn.has(e.target).length === 0) {
         if ($(element).hasClass('aside-menu-show')) {
           $(element).removeClass('aside-menu-show');
         }

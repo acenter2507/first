@@ -620,29 +620,25 @@ a:hover .header-profile-image {
 .count {
   min-width: 46px;
   min-height: 46px;
-  display: inline-block;
-}
-.count-value {
-  text-align: center;
-  font-size: 1.4em;
-  font-family: inherit;
-  font-weight: 500;
-  line-height: 1.1;
-}
-.count-label {
-  font-size: 1.1em;
-  line-height: 1.0;
-  text-align: center;
-  text-transform: uppercase;
-  color: #777;
-  padding-top: 5px;
-}
+  display: inline-block; }
+  .count .count-value {
+    text-align: center;
+    font-size: 1.4em;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1; }
+  .count .count-label {
+    font-size: 1.1em;
+    line-height: 1.0;
+    text-align: center;
+    text-transform: uppercase;
+    color: #777;
+    padding-top: 5px; }
 .h4-text {
   font-size: 1.3em;
   font-family: inherit;
   font-weight: 500;
-  line-height: 1.1;
-}
+  line-height: 1.1; }
 
 .custom-breadcrumb {
   padding: 0;
@@ -673,7 +669,23 @@ a:hover .header-profile-image {
   border-radius: 0;
   font-size: 14px;
 }
-
+.back-to-top {
+  position: fixed;
+	bottom: 1rem;
+	right: 1rem;
+	z-index: 1;
+	width: 3rem;
+	height: 3rem;
+	background: #DDD;
+	opacity: 0.5;
+	display: none; }
+  .back-to-top:hover {
+		opacity: 1;
+		cursor: pointer; }
+  .back-to-top i {
+		font-size: 2rem;
+		padding: 0.85rem;
+		color: #FFF; }
 .angucomplete-image {
     border-radius: 0;
     border: none; }

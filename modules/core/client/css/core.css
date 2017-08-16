@@ -671,10 +671,10 @@ a:hover .header-profile-image {
 }
 .back-to-top {
   position: fixed;
-	bottom: 0.75rem;
-  right: 0.75rem;
-  height: 2.5rem;
-  width: 2.5rem;
+	bottom: 12px;
+  right: 12px;
+  height: 48px;
+  width: 48px;
   z-index: 9999;
   background-color: #267ED5;
   border: none;
@@ -684,8 +684,12 @@ a:hover .header-profile-image {
   .back-to-top:hover {
 		opacity: 1;
     cursor: pointer; }
-  .back-to-top i {
-    font-size: 1rem; }
+@media (min-width: 768px) {
+  .back-to-top {
+	  bottom: 6px;
+    right: 6px;
+    height: 32px;
+    width: 32px; } }
 .angucomplete-image {
     border-radius: 0;
     border: none; }

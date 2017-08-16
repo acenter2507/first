@@ -684,7 +684,8 @@
 
     // Share
     $scope.share = provider => {
-      var url = $location.absUrl();
+      // var url = $location.absUrl();
+      var url = 'http://notatsujapan.com';
       var text = vm.poll.title;
       if (provider === 'facebook') {
         Socialshare.share({

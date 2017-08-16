@@ -156,15 +156,69 @@
           </div>
         </div>
       </div>
+      <!-- #Show only MD screen -->
+      <!-- Vote card -->
+      <div class="card d-md-none" ng-if="vm.isClosed">
+        <div class="card-header">
+          <strong class="card-title"> Vote panel</strong>
+        </div>
+        <div class="card-body">
+          <h4 ng-if="vm.isClosed">This poll has closed.</h4>
+        </div>
+      </div>
+      <div class="card d-md-none" ng-if="!vm.isClosed">
+        <div class="card-header">
+          <strong class="card-title"> Vote panel</strong>
+        </div>
+        <div class="card-body">
+          <span class="text-muted" ng-if="!vm.opts.length || vm.opts.length === 0"><small>No option to vote.</small></span>
+          <div class="poll-remaining" ng-if="vm.poll.close">
+            <p>{{vm.close_duration.days}}d:{{vm.close_duration.hours}}h:{{vm.close_duration.minutes}}m:{{vm.close_duration.seconds}}s</p>
+          </div>
+          <hr class="mgn mg12b">
+          <div class="form-group" ng-repeat="opt in vm.opts" ng-if="!vm.poll.allow_multiple">
+            <label class="control control--radio w100p">
+            {{opt.title}}<span class="mg5l" ng-style="{color: opt.color}"><strong>●</strong></span>
+            <input type="radio" name="vote_radio" ng-checked="vm.is_voted(opt._id)" ng-click="vm.checked(opt._id)"/>
+            <div class="control__indicator"></div>
+          </label>
+          </div>
+          <div class="form-group" ng-repeat="opt in vm.opts" ng-if="vm.poll.allow_multiple">
+            <label class="control control--checkbox">
+            {{opt.title}}<span class="mg5l" ng-style="{color: opt.color}"><strong>●</strong></span>
+            <input type="checkbox" ng-checked="vm.is_voted(opt._id)" ng-click="vm.checked(opt._id)"/>
+            <div class="control__indicator"></div>
+          </label>
+          </div>
+          <div class="form-group">
+            <button ng-show="vm.opts.length > 0 && vm.is_can_vote" class="btn btn-info pull-right" ng-click="vm.save_vote()">{{(vm.ownVote._id) ? 'Change vote' : 'Vote'}}</button>
+            <button ng-show="vm.isLogged && vm.poll.allow_add && !vm.poll.isCurrentUserOwner" class="btn btn-warning pull-right mg10r"
+              ng-click="vm.input_opt()">Suggest options</button>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+      <!-- Chart -->
+      <div ui-view="opts" class="d-md-none"></div>
+      <!-- Tag -->
+      <div class="card d-md-none">
+        <div class="card-header">
+          <strong class="card-title">Tags: </strong><small>{{(!vm.poll.tags.length || vm.poll.tags.length === 0) ? 'Has no tag added' : ''}}</small>
+        </div>
+        <div class="card-body">
+          <ul class="tags" ng-show="vm.poll.tags.length">
+            <li ng-repeat="tag in vm.poll.tags"><a ui-sref="tags.polls({ tagId: tag._id })" class="tag">{{tag.name}}</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- #Show only MD screen -->
       <!-- List comments -->
       <div ui-view="cmts"></div>
       <!-- Load indicator -->
-      <div class="row" ng-show="vm.busy">
-        <div class="loader"></div>
-      </div>
+      <div class="row" ng-show="vm.busy"><div class="loader"></div></div>
     </div>
     <!-- Poll report -->
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 pdn">
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 pdn d-sm-down-none">
       <!-- Report -->
       <div class="card" id="poll_report_card">
         <div class="card-header">

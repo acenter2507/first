@@ -1,4 +1,4 @@
-.cmts {
+/*.cmts {
   min-width: 100%;
   list-style-type: none;
   padding: 0;
@@ -9,13 +9,13 @@
 .cmts a {
   text-decoration: none;
   cursor: pointer;
-}
+}*/
 
 /*.cmts li{
 	position: relative;
 }*/
 
-.icon {
+/*.icon {
   position: relative;
   border-radius: 50%;
   min-width: 46px;
@@ -30,4 +30,4 @@
   height: 46px;
   line-height: 46px;
   font-size: 2.4rem;
-}
+}*/

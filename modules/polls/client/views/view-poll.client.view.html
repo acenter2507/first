@@ -126,6 +126,9 @@
       </div>
       <!-- Options -->
       <div class="card" id="opts_detail_card">
+        <div class="card-header">
+          <strong class="card-title"> OPTIONS ({{vm.opts.length}})</strong>
+        </div>
         <div class="card-body">
           <span class="text-muted" ng-if="!vm.opts.length || vm.opts.length === 0">Has no option added.</span>
           <div class="panel-group mgnb" ng-model="vm.optionToggle" role="tablist" aria-multiselectable="true" bs-collapse ng-if="vm.opts.length > 0">

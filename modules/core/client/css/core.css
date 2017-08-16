@@ -671,8 +671,11 @@ a:hover .header-profile-image {
 }
 .back-to-top {
   position: fixed;
-	bottom: 12px;
-	right: 12px;
+	bottom: 1rem;
+  right: 1rem;
+  height: 3rem;
+  width: 3rem;
+  padding: 1rem;
 	z-index: 9999;
 	opacity: 0.5;
 	display: none; }

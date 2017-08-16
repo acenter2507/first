@@ -96,6 +96,7 @@
   height: 100px;
   width: 100px;
   margin: auto;
+  margin-top: 1rem;
 }
 .chart-base {
   max-height: 200px;

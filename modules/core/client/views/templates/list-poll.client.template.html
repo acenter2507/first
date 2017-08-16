@@ -101,10 +101,16 @@
         <ul class="horizontal-bars type-2">
           <li ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">
             <!--<i class="icon-chart"></i>-->
-            <span class="title" ng-bind="opt.title"></span>
-            <span class="value">{{ opt.voteCnt + '/' + poll.total }}
-              <span class="text-muted small">({{ opt.progressVal }}%)</span>
-            </span>
+            <div class="row">
+              <div class="col-xs-8">
+                <span class="title" ng-bind="opt.title"></span>
+              </div>
+              <div class="col-xs-4">
+                <span class="value">{{ opt.voteCnt + '/' + poll.total }}
+                  <span class="text-muted small">({{ opt.progressVal }}%)</span>
+                </span>
+              </div>
+            </div>
             <div class="bars">
               <div class="progress progress-xs">
                 <div class="progress-bar" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}" aria-valuenow="{{ opt.progressVal }}" aria-valuemin="0" aria-valuemax="100"></div>

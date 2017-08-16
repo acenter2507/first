@@ -358,15 +358,17 @@
       font-size: 1.2rem;
       line-height: 40px; }
     .horizontal-bars.type-2 li .title {
-      display: inline-block;
-      width: auto;
-      margin-top: -9px;
+      /*display: inline-block;*/
+      width: 70%;
+      /*margin-top: -9px;*/
       font-size: 1rem;
       font-weight: normal;
       line-height: 40px;
       color: #263238; }
     .horizontal-bars.type-2 li .value {
-      float: right;
+      text-align: right;
+      width: 30%;
+      /*float: right;*/
       font-weight: 600; }
     .horizontal-bars.type-2 li .bars {
       position: absolute;

@@ -18,5 +18,5 @@
   position: fixed;
   left: 6px;
   bottom: 6px; }
-  .quick-menu .md-fab {
+  .quick-menu .md-fab:first-child {
     margin: 0 !important;}

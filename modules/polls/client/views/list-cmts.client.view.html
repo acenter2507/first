@@ -124,7 +124,7 @@
         <md-menu-content>
           <ul class="menu-list">
             <li ng-repeat="cmt_sort in vm.cmt_sorts">
-              <a class="undecorated-link" ng-click="vm.cmt_sort = vm.cmt_sorts[$index]">{{cmt_sort.name}}</a>
+              <a class="undecorated-link" ng-click="vm.sort($index)">{{cmt_sort.name}}</a>
             </li>
           </ul>
         </md-menu-content>

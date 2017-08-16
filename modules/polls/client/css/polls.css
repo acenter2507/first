@@ -359,8 +359,7 @@
       line-height: 40px; }
     .horizontal-bars.type-2 li .title {
       display: inline-block;
-      /*width: auto;*/
-      max-width: 80%;
+      width: auto;
       margin-top: -9px;
       font-size: 1rem;
       font-weight: normal;

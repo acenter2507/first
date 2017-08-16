@@ -69,7 +69,7 @@ function asideMenuHideDirective() {
   return directive;
 
   function link(scope, element, attrs) {
-    $(document).mouseup(function (e) {
+    $(document).bind( "mouseup touchend", function(e) {
       var container = $("#aside-menu");
       var btn = $("#aside-menu-toggler");
       if (!container.is(e.target) && container.has(e.target).length === 0 && !btn.is(e.target) && btn.has(e.target).length === 0) {

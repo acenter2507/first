@@ -7,7 +7,7 @@
     <span class="icon-bar"></span>
   </a>
   <!-- Main menu -->
-  <ul class="nav navbar-nav d-sm-down-none" ng-if="menu.shouldRender(authentication.user);">
+  <!--<ul class="nav navbar-nav d-sm-down-none" ng-if="menu.shouldRender(authentication.user);">
     <li ng-repeat="item in menu.items | orderBy: 'position'" ng-if="item.shouldRender(authentication.user);" ng-switch="item.type"
       ng-class="{ active: $state.includes(item.state), dropdown: item.type === 'dropdown' }" class="{{item.class}}" uib-dropdown="item.type === 'dropdown'">
       <a ng-switch-when="dropdown" class="dropdown-toggle" uib-dropdown-toggle role="button">{{::item.title}}&nbsp;<span class="caret"></span></a>
@@ -17,6 +17,24 @@
         </li>
       </ul>
       <a ng-switch-default ui-sref="{{item.state}}" ng-bind="item.title"></a>
+    </li>
+  </ul>-->
+  <ul class="nav navbar-nav navbar-right d-sm-down-none" ng-hide="authentication.user">
+    <li ui-sref-active="active">
+      <a ui-sref="home"><i class="fa fa-newspaper-o"></i></a>
+      <md-tooltip md-direction="bottom">New feeds</md-tooltip>
+    </li>
+    <li ui-sref-active="active">
+      <a ui-sref="categorys.list"><i class="fa fa-list"></i></a>
+      <md-tooltip md-direction="bottom">Categorys</md-tooltip>
+    </li>
+    <li ui-sref-active="active">
+      <a ui-sref="tags.list"><i class="fa fa-tags"></i></a>
+      <md-tooltip md-direction="bottom">Tags</md-tooltip>
+    </li>
+    <li ui-sref-active="active" ng-show="isAdmin">
+      <a ui-sref="admin.dashboard"><i class="fa fa-tachometer"></i></a>
+      <md-tooltip md-direction="bottom">Admin page</md-tooltip>
     </li>
   </ul>
 
@@ -66,7 +84,7 @@
   <ul class="nav navbar-nav navbar-right d-sm-down-none" ng-show="authentication.user">
     <li class="dropdown" uib-dropdown ui-sref-active="active">
       <a class="dropdown-toggle notif-dropdown-toggle" uib-dropdown-toggle role="button">
-          <i class="icon-bell font-xl"></i><span class="badge badge-pill badge-danger" ng-bind="uncheckNotifs" ng-show="uncheckNotifs > 0"></span>
+          <i class="fa fa-bell-o fa-lg"></i><span class="badge badge-pill badge-danger" ng-bind="uncheckNotifs" ng-show="uncheckNotifs > 0"></span>
           <!-- <span class="fa fa-bell-o fa-lg"></span> -->
           <!-- <span class="notif-number" ng-bind="uncheckNotifs" ng-show="uncheckNotifs > 0"></span> -->
         </a>

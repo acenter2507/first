@@ -84,7 +84,7 @@
   <ul class="nav navbar-nav navbar-right d-sm-down-none" ng-show="authentication.user">
     <li class="dropdown" uib-dropdown ui-sref-active="active">
       <a class="dropdown-toggle notif-dropdown-toggle" uib-dropdown-toggle role="button">
-          <i class="fa fa-bell-o fa-lg"></i><span class="badge badge-pill badge-danger" ng-bind="uncheckNotifs" ng-show="uncheckNotifs > 0"></span>
+          <i class="fa fa-bell-o"></i><span class="badge badge-pill badge-danger" ng-bind="uncheckNotifs" ng-show="uncheckNotifs > 0"></span>
           <!-- <span class="fa fa-bell-o fa-lg"></span> -->
           <!-- <span class="notif-number" ng-bind="uncheckNotifs" ng-show="uncheckNotifs > 0"></span> -->
         </a>
@@ -113,7 +113,7 @@
   <ul class="nav navbar-nav navbar-right d-sm-down-none">
     <li class="dropdown" uib-dropdown>
       <a href="#" class="dropdown-toggle" role="button" uib-dropdown-toggle>
-          <i class="fa fa-search fa-lg"></i>
+          <i class="fa fa-search"></i>
         </a>
       <ul class="dropdown-menu notifis-list mg2t pd12x" role="menu" ng-click="$event.stopPropagation()">
         <form ng-submit="search()">

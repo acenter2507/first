@@ -75,15 +75,11 @@
         <ul class="horizontal-bars type-2">
           <li ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">
             <!--<i class="icon-chart"></i>-->
-            <div class="row">
-              <div class="col-xs-8">
-                <p class="title" ng-bind="opt.title"></p>
-              </div>
-              <div class="col-xs-4">
-                <span class="value">{{ opt.voteCnt + '/' + poll.total }}
-                  <span class="text-muted small">({{ opt.progressVal }}%)</span>
-                </span>
-              </div>
+            <div class="detail">
+              <p class="title" ng-bind="opt.title"></p>
+              <span class="value">{{ opt.voteCnt + '/' + poll.total }}
+                <span class="text-muted small">({{ opt.progressVal }}%)</span>
+              </span>
             </div>
             <div class="bars">
               <div class="progress progress-xs">
@@ -107,7 +103,13 @@
         <ul class="horizontal-bars type-2">
           <li ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">
             <!--<i class="icon-chart"></i>-->
-            <div class="row">
+            <div class="detail">
+              <p class="title" ng-bind="opt.title"></p>
+              <span class="value">{{ opt.voteCnt + '/' + poll.total }}
+                <span class="text-muted small">({{ opt.progressVal }}%)</span>
+              </span>
+            </div>
+            <!--<div class="row">
               <div class="col-xs-8">
                 <span class="title" ng-bind="opt.title"></span>
               </div>
@@ -116,7 +118,7 @@
                   <span class="text-muted small">({{ opt.progressVal }}%)</span>
                 </span>
               </div>
-            </div>
+            </div>-->
             <div class="bars">
               <div class="progress progress-xs">
                 <div class="progress-bar" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}" aria-valuenow="{{ opt.progressVal }}" aria-valuemin="0" aria-valuemax="100"></div>
@@ -124,7 +126,6 @@
             </div>
           </li>
           <li class="divider text-center" ng-if="poll.opts.length > 3">
-            <!--<a class="undecorated-link text-muted" data-toggle="tooltip" data-placement="top" title="show more"><i class="icon-options"></i></a>-->
             <a class="undecorated-link" ui-sref="polls.view({ pollId: poll._id })"><i class="icon-options"></i></a>
           </li>
         </ul>

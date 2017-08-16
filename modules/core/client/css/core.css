@@ -671,28 +671,10 @@ a:hover .header-profile-image {
 }
 .back-to-top {
   position: fixed;
-	bottom: 12px;
-  right: 12px;
-  /* height: 48px;
-  width: 48px;
-  z-index: 9999; */
-  background-color: #267ED5;
-  /* border: none;
-  opacity: 0.8;
-  color: #fff; */
+	bottom: 6px;
+  right: 6px;
+  background-color: #267ED5 !important;
 	display: none; }
-  /* .back-to-top:hover {
-		opacity: 1;
-    cursor: pointer; } */
-/* @media (max-width: 767px) {
-  .back-to-top {
-    font-size: 13px;
-    line-height: 16px;
-    padding: 8px;
-	  bottom: 6px;
-    right: 6px;
-    height: 32px;
-    width: 32px; } } */
 .angucomplete-image {
     border-radius: 0;
     border: none; }

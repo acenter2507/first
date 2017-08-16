@@ -676,7 +676,8 @@ a:hover .header-profile-image {
   height: 3rem;
   width: 3rem;
   padding: 1rem;
-	z-index: 9999;
+  z-index: 9999;
+  background-color: #267ED5;
 	opacity: 0.5;
 	display: none; }
   .back-to-top:hover {

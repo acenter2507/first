@@ -16,7 +16,8 @@
     'ngDialog',
     'Storages',
     'Constants',
-    'UserApi'
+    'UserApi',
+    '$timeout'
   ];
 
   function PollsListController(
@@ -31,7 +32,8 @@
     dialog,
     Storages,
     Constants,
-    UserApi
+    UserApi,
+    $timeout
   ) {
     var vm = this;
     $scope.user = Authentication.user;
@@ -245,6 +247,17 @@
     };
 
     // Quick menu
+    $scope.isOpen = false;
+    $scope.isShowQuickToolTip = false;
+    $scope.$watch('isOpen', function (isOpen) {
+      if (isOpen) {
+        $timeout(function () {
+          $scope.isShowQuickToolTip = $scope.isOpen;
+        }, 600);
+      } else {
+        $scope.isShowQuickToolTip = $scope.isOpen;
+      }
+    });
     $scope.q_quick_poll = () => {
       console.log('Quick');
     };

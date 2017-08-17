@@ -132,7 +132,7 @@
         <div class="card-body">
           <span class="text-muted" ng-if="!vm.opts.length || vm.opts.length === 0">Has no option added.</span>
           <uib-accordion close-others="true" ng-if="vm.opts.length > 0">
-            <uib-accordion-group ng-repeat="opt in vm.opts" heading="{{opt.title + ' (' + opt.voteCnt + ' votes)'}}">
+            <uib-accordion-group ng-repeat="opt in vm.opts" heading="{{opt.title + ' (' + opt.voteCnt + ' votes)'}}" panel-class="custom-panel">
               <small class="pull-right text-muted">
                 <span>Added by</span>
                 <a class="undecorated-link" ui-sref="profile.info({userId: opt.user._id})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>

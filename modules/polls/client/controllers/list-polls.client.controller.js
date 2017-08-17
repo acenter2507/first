@@ -243,5 +243,16 @@
     $scope.load_new = () => {
       $state.reload();
     };
+
+    // Quick menu
+    $scope.q_quick_poll = () => {
+      console.log('Quick');
+    };
+    $scope.q_post_poll = () => {
+      $state.go('polls.create');
+    };
+    $scope.q_search = () => {
+      $state.go('search');
+    };
   }
 })();

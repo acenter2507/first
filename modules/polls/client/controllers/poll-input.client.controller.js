@@ -216,6 +216,12 @@
     //   animation: 'am-fade-and-slide-bottom',
     //   show: false
     // });
+    vm.opt_class = opt => {
+      var classStr = 'custom-panel ';
+      classStr += opt.status === 1 ? 'public' : '';
+      classStr += opt.status === 2 ? 'waiting' : '';
+      return classStr;
+    };
     vm.input_opt = opt => {
       vm.tmp_opt = (!opt) ? { poll: vm.poll._id, title: '', body: '', status: 1 } : opt;
       opt_aside.$promise.then(opt_aside.show);

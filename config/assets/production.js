@@ -15,7 +15,7 @@ module.exports = {
         'public/lib/ng-dialog/css/ngDialog.min.css',
         'public/lib/ng-dialog/css/ngDialog-theme-default.min.css',
         'public/lib/angucomplete-alt/angucomplete-alt.min.css',
-        'public/lib/simple-line-icons/css/simple-line-icons.min.css',
+        'public/lib/simple-line-icons/css/simple-line-icons.css',
         'public/lib/angular-loading-bar/build/loading-bar.min.css'
       ],
       js: [

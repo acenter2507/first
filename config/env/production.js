@@ -2,7 +2,7 @@
 
 module.exports = {
   secure: {
-    ssl: false,
+    ssl: true,
     privateKey: '/etc/letsencrypt/live/www.cadobongdafree.com/privkey.pem',
     certificate: '/etc/letsencrypt/live/www.cadobongdafree.com/fullchain.pem'
   },

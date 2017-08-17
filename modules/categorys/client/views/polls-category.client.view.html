@@ -20,14 +20,6 @@
 
   <div class="row">
     <div class="col-xs-12 pdn">
-      <div class="custom-toolbar">
-        <a ui-sref="polls.create" class="btn btn-primary pull-right">Create poll</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-xs-12 pdn">
       <!-- List polls  -->
       <div ng-repeat="poll in vm.polls | filter: poll_filter" class="card">
         <div ng-include="'/modules/core/client/views/templates/list-poll.client.template.html'"></div>

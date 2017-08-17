@@ -1,14 +1,4 @@
 <section class="container mg10b animated fadeIn" infinite-scroll="vm.get_polls()" infinite-scroll-distance='2'>
-  <!-- Toolbar -->
-  <div class="row margin-control">
-    <div class="col-xs-12 pdn">
-      <div class="custom-toolbar">
-        <a ui-sref="polls.create" class="btn btn-primary pull-right">Create poll</a>
-        <!--<a ng-click="vm.show_toastr()" class="btn btn-danger pull-right mg10r">Toastr</a>-->
-      </div>
-    </div>
-  </div>
-
   <div class="row" ng-show="vm.is_has_new_polls">
     <div class="col-xs-12 pdn pd6l pd6r">
       <div class="notice notice-info">

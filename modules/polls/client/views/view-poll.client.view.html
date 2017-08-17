@@ -22,18 +22,6 @@
     </div>
   </div>
 
-  <!-- Toolbar -->
-  <div class="row">
-    <div class="col-xs-12 pdn">
-      <div class="custom-toolbar">
-        <a ui-sref="polls.create" class="btn btn-primary pull-right">Create poll</a>
-        <a ng-if="vm.poll.isCurrentUserOwner || vm.poll.canEdit" ui-sref="polls.edit({ pollId: vm.poll._id })" class="btn btn-success pull-right mg10r">Edit</a>
-        <a ng-if="vm.poll.isCurrentUserOwner || vm.poll.canEdit" ng-click="vm.remove()" class="btn btn-danger pull-right mg10r">Delete</a>
-        <a ng-if="vm.poll.isCurrentUserOwner && !vm.poll.isPublic" ng-click="vm.share()" class="btn btn-info pull-right mg10r">Share</a>
-      </div>
-    </div>
-  </div>
-
   <div class="row">
     <!-- Title and category -->
     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 pdn">
@@ -160,11 +148,11 @@
           <strong class="card-title"> Vote panel</strong>
         </div>
         <div class="card-body">
-          <span class="text-muted" ng-if="!vm.opts.length || vm.opts.length === 0"><small>No option to vote.</small></span>
           <div class="poll-remaining" ng-if="vm.poll.close">
             <p>{{vm.close_duration.days}}d:{{vm.close_duration.hours}}h:{{vm.close_duration.minutes}}m:{{vm.close_duration.seconds}}s</p>
           </div>
           <hr class="mgn mg12b">
+          <span class="text-muted" ng-if="!vm.opts.length || vm.opts.length === 0"><small>No option to vote.</small></span>
           <div class="form-group" ng-repeat="opt in vm.opts" ng-if="!vm.poll.allow_multiple">
             <label class="control control--radio w100p">
             {{opt.title}}<span class="mg5l" ng-style="{color: opt.color}"><strong>●</strong></span>
@@ -269,11 +257,11 @@
           <strong class="card-title"> Vote panel</strong>
         </div>
         <div class="card-body">
-          <span class="text-muted" ng-if="!vm.opts.length || vm.opts.length === 0"><small>No option to vote.</small></span>
           <div class="poll-remaining" ng-if="vm.poll.close">
             <p>{{vm.close_duration.days}}d:{{vm.close_duration.hours}}h:{{vm.close_duration.minutes}}m:{{vm.close_duration.seconds}}s</p>
           </div>
           <hr class="mgn mg12b">
+          <span class="text-muted" ng-if="!vm.opts.length || vm.opts.length === 0"><small>No option to vote.</small></span>
           <div class="form-group" ng-repeat="opt in vm.opts" ng-if="!vm.poll.allow_multiple">
             <label class="control control--radio w100p">
             {{opt.title}}<span class="mg5l" ng-style="{color: opt.color}"><strong>●</strong></span>

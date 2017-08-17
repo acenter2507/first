@@ -1,11 +1,12 @@
 'use strict';
 angular
   .module('core')
-  .directive('backToTop', backToTopDirective)
   .directive('a', preventClickDirective)
+  .directive('a', cardExpandDirective)
   .directive('a', asideMenuToggleDirective)
   .directive('body', asideMenuHideDirective)
-  .directive('a', cardExpandDirective);
+  .directive('backToTop', backToTopDirective)
+  .directive('button', asidePanelToggleDirective);
 
 //Prevent click if href="#"
 function preventClickDirective() {
@@ -42,7 +43,6 @@ function cardExpandDirective() {
     });
   }
 }
-
 
 //LayoutToggle
 asideMenuToggleDirective.$inject = ['$interval'];
@@ -100,6 +100,21 @@ function backToTopDirective() {
     });
     $(element).on('click', function () {
       $('html, body').animate({ scrollTop: 0 }, 'fast');
+    });
+  }
+}
+function backToTopDirective() {
+  var directive = {
+    restrict: 'E',
+    link: link
+  };
+  return directive;
+
+  function link(scope, element, attrs) {
+    element.on('click', function (e) {
+      if (element.hasClass('aside-panel-toggle')) {
+        angular.element('body').toggleClass('aside-menu-open');
+      }
     });
   }
 }

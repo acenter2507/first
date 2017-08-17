@@ -4,18 +4,18 @@ module.exports = {
   client: {
     lib: {
       css: [
-        'public/lib/bootstrap/dist/css/bootstrap.min.css',
-        'public/lib/angular-material/angular-material.min.css',
-        'public/lib/components-font-awesome/css/font-awesome.min.css',
-        'public/lib/ng-tags-input/ng-tags-input.min.css',
-        'public/lib/angular-moment-picker/dist/angular-moment-picker.min.css',
-        'public/lib/textAngular/dist/textAngular.min.css',
-        'public/lib/angular-toastr/dist/angular-toastr.min.css',
+        'public/lib/bootstrap/dist/css/bootstrap.css',
+        'public/lib/angular-material/angular-material.css',
+        'public/lib/components-font-awesome/css/font-awesome.css',
+        'public/lib/ng-tags-input/ng-tags-input.css',
+        'public/lib/angular-moment-picker/dist/angular-moment-picker.css',
+        'public/lib/textAngular/dist/textAngular.css',
+        'public/lib/angular-toastr/dist/angular-toastr.css',
         'public/lib/ng-dialog/css/ngDialog.min.css',
         'public/lib/ng-dialog/css/ngDialog-theme-default.min.css',
-        'public/lib/angucomplete-alt/angucomplete-alt.min.css',
+        'public/lib/angucomplete-alt/angucomplete-alt.css',
         'public/lib/simple-line-icons/css/simple-line-icons.css',
-        'public/lib/angular-loading-bar/build/loading-bar.min.css'
+        'public/lib/angular-loading-bar/build/loading-bar.css'
       ],
       js: [
         'public/lib/jquery/dist/jquery.min.js',

@@ -4,7 +4,7 @@ module.exports = {
   secure: {
     ssl: true,
     privateKey: '/etc/letsencrypt/live/www.cadobongdafree.com/privkey.pem',
-    certificate: '/etc/letsencrypt/live/www.cadobongdafree.com/fullchain.pem'
+    certificate: '/etc/letsencrypt/live/www.cadobongdafree.com/cert.pem'
   },
   port: process.env.PORT || 3000,
   sessionSecret: process.env.SESSION_SECRET || '93182jflajfoaiwudajkdnkUHAD',

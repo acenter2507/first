@@ -107,7 +107,7 @@
           </div>
           <!-- Option -->
           <uib-accordion close-others="true" ng-if="vm.opts.length > 0">
-            <uib-accordion-group ng-repeat="opt in vm.opts | orderBy: 'create'" heading="{{opt.title + ' (' + opt.voteCnt + ' votes)'}}" panel-class="{{ vm.opt_class() }}">
+            <uib-accordion-group ng-repeat="opt in vm.opts | orderBy: 'create'" heading="{{opt.title + ' (' + opt.voteCnt + ' votes)'}}" panel-class="{{ vm.opt_class(opt) }}">
               <small class="pull-right text-muted">
                 <span>Added by</span>
                 <a class="undecorated-link" ui-sref="profile.info({userId: opt.user._id})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>

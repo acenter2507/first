@@ -131,7 +131,20 @@
         </div>
         <div class="card-body">
           <span class="text-muted" ng-if="!vm.opts.length || vm.opts.length === 0">Has no option added.</span>
-          <div class="panel-group mgnb" ng-model="vm.optionToggle" role="tablist" aria-multiselectable="true" bs-collapse ng-if="vm.opts.length > 0">
+          <uib-accordion close-others="true" ng-if="vm.opts.length > 0">
+            <uib-accordion-group ng-repeat="opt in vm.opts" heading="{{opt.title + ' (' + opt.voteCnt + ' votes)'}}">
+              <small class="pull-right text-muted">
+                <span>Added by</span>
+                <a class="undecorated-link" ui-sref="profile.info({userId: opt.user._id})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>
+                <a ui-sref="profile.info({userId: vm.poll.user._id})" ng-if="opt.user"></a>
+                <span ng-if="!opt.user">Deleted User</span><span>on</span>
+                <span ng-bind="opt.created | LLL_format"></span>
+              </small>
+              <div class="clearfix"></div>
+              <div class="text-body" ta-bind="text" ng-model="opt.body" ta-readonly="true"></div>
+            </uib-accordion-group>
+          </uib-accordion>
+          <!--<div class="panel-group mgnb" ng-model="vm.optionToggle" role="tablist" aria-multiselectable="true" bs-collapse ng-if="vm.opts.length > 0">
             <div class="panel panel-default custom-panel" ng-repeat="opt in vm.opts">
               <div class="panel-heading public" role="tab">
                 <h4 class="panel-title">
@@ -156,7 +169,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div>-->
         </div>
       </div>
       <!-- #Show only MD screen -->

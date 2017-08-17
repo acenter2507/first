@@ -177,20 +177,20 @@
   <div class="clearfix"></div>
 
   <div class="quick-menu">
-    <md-fab-speed-dial md-open="isOpen" md-direction="right" class="md-scale">
+    <md-fab-speed-dial md-open="isOpen" md-direction="up" class="md-scale">
       <md-fab-trigger>
         <md-button md-colors="{background: 'blue'}" aria-label="menu" class="md-fab"><i class="fa fa-bars"></i></md-button>
       </md-fab-trigger>
 
       <md-fab-actions>
         <md-button aria-label="Quick Poll" class="md-fab md-raised" ng-click="q_quick_poll()"><i class="fa fa-rocket"></i>
-          <md-tooltip md-direction="top" md-visible="isShowQuickToolTip">Quick poll</md-tooltip>
+          <md-tooltip md-direction="right" md-visible="isShowQuickToolTip">Quick poll</md-tooltip>
         </md-button>
         <md-button aria-label="New Post" class="md-fab md-raised" ng-click="q_post_poll()"><i class="fa fa-pencil-square-o"></i>
-          <md-tooltip md-direction="top" md-visible="isShowQuickToolTip">Type post</md-tooltip>
+          <md-tooltip md-direction="right" md-visible="isShowQuickToolTip">Type post</md-tooltip>
         </md-button>
         <md-button aria-label="Search" class="md-fab md-raised" ng-click="q_search()"><i class="fa fa-search"></i>
-          <md-tooltip md-direction="top" md-visible="isShowQuickToolTip">Search</md-tooltip>
+          <md-tooltip md-direction="right" md-visible="isShowQuickToolTip">Search</md-tooltip>
         </md-button>
       </md-fab-actions>
     </md-fab-speed-dial>

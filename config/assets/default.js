@@ -5,7 +5,6 @@ module.exports = {
     lib: {
       css: [
         'public/lib/bootstrap/dist/css/bootstrap.css',
-        'public/lib/bootstrap-additions/dist/bootstrap-additions.css',
         'public/lib/angular-material/angular-material.css',
         'public/lib/components-font-awesome/css/font-awesome.css',
         'public/lib/ng-tags-input/ng-tags-input.css',
@@ -31,9 +30,6 @@ module.exports = {
         'public/lib/angular-ui-utils/ui-utils.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
         'public/lib/angular-bootstrap/ui.bootstrap.materialPicker.js',
-        'public/lib/angular-strap/dist/angular-strap.js',
-        'public/lib/angular-strap/dist/angular-strap.tpl.js',
-        'public/lib/angular-strap/dist/angular-strap.compat.js',
         'public/lib/angular-file-upload/angular-file-upload.js',
         'public/lib/angular-aria/angular-aria.js',
         'public/lib/angular-material/angular-material.js',

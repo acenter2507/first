@@ -47,168 +47,154 @@
                 <button type="submit" class="btn btn-primary btn-block">Search</button>
               </div>
             </div>
+            <uib-accordion close-others="true">
+              <uib-accordion-group heading="Advanced Search Setting" panel-class="custom-panel public">
 
-            <div class="panel-group" role="tablist" ng-model="detailToggle" aria-multiselectable="true" bs-collapse>
-              <div class="panel panel-default custom-panel">
-                <div ng-class="{ 'panel-heading': true, 'public': true }" role="tab">
-                  <h4 class="panel-title">
-                    <i class="fa fa-caret-down"></i>&nbsp;
-                    <a class="undecorated-link" bs-collapse-toggle>Advanced Search Setting</a>
-                  </h4>
+                <div class="form-group">
+                  <div class="col-sm-12">
+                  <label for="sort">Sort by</label>
+                    <select id="sort" name="sort" class="form-control input-sm" ng-model="condition.sort">
+                      <option value>Default</option>
+                      <option value="-created">Newest to oldest</option>
+                      <option value="created">Oldest to newest</option>
+                      <option value="-likeCnt">Most likes</option>
+                      <option value="likeCnt">Least likes</option>
+                      <option value="-cmtCnt">Most comments</option>
+                      <option value="cmtCnt">Least comments</option>
+                      <option value="-voteCnt">Most votes</option>
+                      <option value="voteCnt">Least votes</option>
+                      <option value="-viewCnt">Most viewed</option>
+                      <option value="viewCnt">Least viewed</option>
+                    </select>
+                  </div>
                 </div>
-                <div class="panel-collapse" role="tabpanel" bs-collapse-target>
-                  <div class="panel-body">
+                <div class="form-group">
+                  <!-- Status -->
+                  <div class="col-sm-6">
+                    <label for="status">Status</label>
+                    <select id="status" name="status" class="form-control input-sm" ng-model="condition.status">
+						        	<option value>All</option>
+						        	<option value="opening">Opening</option>
+						        	<option value="closed">Closed</option>
+						        </select>
+                  </div>
+                  <!-- User -->
+                  <div class="col-sm-6">
+                    <label>Posted by</label>
+                    <input name="by" type="hidden" class="form-control" ng-model="condition.by">
+                    <angucomplete-alt placeholder="Search user" pause="300" selected-object="selectedUserFn" initial-value="selectedUser" remote-url="/api/users/search?s="
+                      remote-url-data-field="users" title-field="displayName" description-field="username" image-field="profileImageURL"
+                      minlength="1" input-class="form-control input-sm" match-class="highlight" />
+                  </div>
+                </div>
 
-                    <div class="form-group">
-                      <div class="col-sm-12">
-                      <label for="sort">Sort by</label>
-                        <select id="sort" name="sort" class="form-control input-sm" ng-model="condition.sort">
-                          <option value>Default</option>
-                          <option value="-created">Newest to oldest</option>
-                          <option value="created">Oldest to newest</option>
-                          <option value="-likeCnt">Most likes</option>
-                          <option value="likeCnt">Least likes</option>
-                          <option value="-cmtCnt">Most comments</option>
-                          <option value="cmtCnt">Least comments</option>
-                          <option value="-voteCnt">Most votes</option>
-                          <option value="voteCnt">Least votes</option>
-                          <option value="-viewCnt">Most viewed</option>
-                          <option value="viewCnt">Least viewed</option>
-                        </select>
-                      </div>
+                <div class="form-group">
+                  <div class="col-sm-6">
+                    <!-- Category -->
+                    <label>Category</label>
+                    <select id="ctgr" name="ctgr" class="form-control input-sm" ng-model="condition.ctgr">
+                      <option value>All</option>
+                      <option ng-repeat="category in categorys" value="{{category._id}}" ng-selected="category._id === condition.ctgr">{{category.name}} ({{category.count}})</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="col-sm-12 pdn"><label>Created date</label></div>
+                    <div class="col-sm-6 pdn">
+                      <input id="created_start" name="created_start" class="form-control input-sm" today="true" moment-picker="condition.created_start"
+                        ng-model="condition.created_start" format="YYYY/MM/DD" start-view="month" placeholder="Start date..."
+                        additions="{ bottom: 'start_bottom-template-url' }">
                     </div>
-                    <div class="form-group">
-                      <!-- Status -->
-                      <div class="col-sm-6">
-                        <label for="status">Status</label>
-                        <select id="status" name="status" class="form-control input-sm" ng-model="condition.status">
-							          	<option value>All</option>
-							          	<option value="opening">Opening</option>
-							          	<option value="closed">Closed</option>
-							          </select>
-                      </div>
-                      <!-- User -->
-                      <div class="col-sm-6">
-                        <label>Posted by</label>
-                        <input name="by" type="hidden" class="form-control" ng-model="condition.by">
-                        <angucomplete-alt placeholder="Search user" pause="300" selected-object="selectedUserFn" initial-value="selectedUser" remote-url="/api/users/search?s="
-                          remote-url-data-field="users" title-field="displayName" description-field="username" image-field="profileImageURL"
-                          minlength="1" input-class="form-control input-sm" match-class="highlight" />
-                      </div>
+                    <div class="col-sm-6 pdn">
+                      <input id="created_end" name="created_end" class="form-control input-sm" today="true" moment-picker="condition.created_end"
+                        ng-model="condition.created_end" format="YYYY/MM/DD" start-view="month" placeholder="End date..."
+                        additions="{ bottom: 'end_bottom-template-url' }">
                     </div>
-
-                    <div class="form-group">
-                      <div class="col-sm-6">
-                        <!-- Category -->
-                        <label>Category</label>
-                        <select id="ctgr" name="ctgr" class="form-control input-sm" ng-model="condition.ctgr">
-                          <option value>All</option>
-                          <option ng-repeat="category in categorys" value="{{category._id}}" ng-selected="category._id === condition.ctgr">{{category.name}} ({{category.count}})</option>
-                        </select>
-                      </div>
-                      <div class="col-sm-6">
-                        <div class="col-sm-12 pdn"><label>Created date</label></div>
-                        <div class="col-sm-6 pdn">
-                          <input id="created_start" name="created_start" class="form-control input-sm" today="true" moment-picker="condition.created_start"
-                            ng-model="condition.created_start" format="YYYY/MM/DD" start-view="month" placeholder="Start date..."
-                            additions="{ bottom: 'start_bottom-template-url' }">
-                        </div>
-                        <div class="col-sm-6 pdn">
-                          <input id="created_end" name="created_end" class="form-control input-sm" today="true" moment-picker="condition.created_end"
-                            ng-model="condition.created_end" format="YYYY/MM/DD" start-view="month" placeholder="End date..."
-                            additions="{ bottom: 'end_bottom-template-url' }">
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <div class="col-sm-4">
-                        <label for="allow_multiple">Allow multiple vote</label>
-                        <select id="allow_multiple" name="allow_multiple" class="form-control input-sm" ng-model="condition.allow_multiple">
-                        <option value>All</option>
-                        <option value="true">Allow</option>
-                        <option value="false">Deny</option>
+                  </div>
+                </div
+                <div class="form-group">
+                  <div class="col-sm-4">
+                    <label for="allow_multiple">Allow multiple vote</label>
+                    <select id="allow_multiple" name="allow_multiple" class="form-control input-sm" ng-model="condition.allow_multiple">
+                    <option value>All</option>
+                    <option value="true">Allow</option>
+                    <option value="false">Deny</option>
+                  </select>
+                  </div>
+                  <div class="col-sm-4">
+                    <label for="allow_add">Allow member suggest</label>
+                    <select id="allow_add" name="allow_add" class="form-control input-sm" ng-model="condition.allow_add">
+                      <option value>All</option>
+                      <option value="true">Allow</option>
+                      <option value="false">Deny</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-4">
+                    <label for="allow_guest">Allow guest vote</label>
+                    <select id="allow_guest" name="allow_guest" class="form-control input-sm" ng-model="condition.allow_guest">
+                      <option value>All</option>
+                      <option value="true">Allow</option>
+                      <option value="false">Deny</option>
+                    </select>
+                  </div>
+                </div
+                <div class="form-group">
+                  <div class="col-sm-6">
+                    <div class="col-sm-12 pdn"><label>Comments count</label></div>
+                    <div class="col-sm-6 pdn">
+                      <select class="form-control input-sm" ng-model="condition.cmts_pref">
+                        <option value>Not set</option>
+                        <option value="least">As least</option>
+                        <option value="most">As most</option>
                       </select>
-                      </div>
-                      <div class="col-sm-4">
-                        <label for="allow_add">Allow member suggest</label>
-                        <select id="allow_add" name="allow_add" class="form-control input-sm" ng-model="condition.allow_add">
-                          <option value>All</option>
-                          <option value="true">Allow</option>
-                          <option value="false">Deny</option>
-                        </select>
-                      </div>
-                      <div class="col-sm-4">
-                        <label for="allow_guest">Allow guest vote</label>
-                        <select id="allow_guest" name="allow_guest" class="form-control input-sm" ng-model="condition.allow_guest">
-                          <option value>All</option>
-                          <option value="true">Allow</option>
-                          <option value="false">Deny</option>
-                        </select>
-                      </div>
                     </div>
-
-                    <div class="form-group">
-                      <div class="col-sm-6">
-                        <div class="col-sm-12 pdn"><label>Comments count</label></div>
-                        <div class="col-sm-6 pdn">
-                          <select class="form-control input-sm" ng-model="condition.cmts_pref">
-                            <option value>Not set</option>
-                            <option value="least">As least</option>
-                            <option value="most">As most</option>
-                          </select>
-                        </div>
-                        <div class="col-sm-6 pdn">
-                          <input name="cmts" id="cmts" type="text" class="form-control input-sm" placeholder="Comments count" ng-model="condition.cmts">
-                        </div>
-                      </div>
-                      <div class="col-sm-6">
-                        <div class="col-sm-12 pdn"><label>Likes</label></div>
-                        <div class="col-sm-6 pdn">
-                          <select class="form-control input-sm" ng-model="condition.likes_pref">
-                            <option value>Not set</option>
-                            <option value="least">As least</option>
-                            <option value="most">As most</option>
-                          </select>
-                        </div>
-                        <div class="col-sm-6 pdn">
-                          <input name="likes" id="likes" type="text" class="form-control input-sm" placeholder="Likes count" ng-model="condition.likes">
-                        </div>
-                      </div>
+                    <div class="col-sm-6 pdn">
+                      <input name="cmts" id="cmts" type="text" class="form-control input-sm" placeholder="Comments count" ng-model="condition.cmts">
                     </div>
-                    <div class="form-group">
-                      <div class="col-sm-6">
-                        <div class="col-sm-12 pdn"><label>Votes</label></div>
-                        <div class="col-sm-6 pdn">
-                          <select class="form-control input-sm" ng-model="condition.votes_pref">
-                            <option value>Not set</option>
-                            <option value="least">As least</option>
-                            <option value="most">As most</option>
-                          </select>
-                        </div>
-                        <div class="col-sm-6 pdn">
-                          <input name="votes" id="votes" type="text" class="form-control input-sm" placeholder="Votes count" ng-model="condition.votes">
-                        </div>
-                      </div>
-                      <div class="col-sm-6">
-                        <div class="col-sm-12 pdn"><label>Views</label></div>
-                        <div class="col-sm-6 pdn">
-                          <select class="form-control input-sm" ng-model="condition.views_pref">
-                            <option value>Not set</option>
-                            <option value="least">As least</option>
-                            <option value="most">As most</option>
-                          </select>
-                        </div>
-                        <div class="col-sm-6 pdn">
-                          <input name="views" id="views" type="text" class="form-control input-sm" placeholder="Views count" ng-model="condition.views">
-                        </div>
-                      </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="col-sm-12 pdn"><label>Likes</label></div>
+                    <div class="col-sm-6 pdn">
+                      <select class="form-control input-sm" ng-model="condition.likes_pref">
+                        <option value>Not set</option>
+                        <option value="least">As least</option>
+                        <option value="most">As most</option>
+                      </select>
+                    </div>
+                    <div class="col-sm-6 pdn">
+                      <input name="likes" id="likes" type="text" class="form-control input-sm" placeholder="Likes count" ng-model="condition.likes">
                     </div>
                   </div>
                 </div>
-                <div class="clearfix"></div>
-              </div>
-            </div>
+                <div class="form-group">
+                  <div class="col-sm-6">
+                    <div class="col-sm-12 pdn"><label>Votes</label></div>
+                    <div class="col-sm-6 pdn">
+                      <select class="form-control input-sm" ng-model="condition.votes_pref">
+                        <option value>Not set</option>
+                        <option value="least">As least</option>
+                        <option value="most">As most</option>
+                      </select>
+                    </div>
+                    <div class="col-sm-6 pdn">
+                      <input name="votes" id="votes" type="text" class="form-control input-sm" placeholder="Votes count" ng-model="condition.votes">
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="col-sm-12 pdn"><label>Views</label></div>
+                    <div class="col-sm-6 pdn">
+                      <select class="form-control input-sm" ng-model="condition.views_pref">
+                        <option value>Not set</option>
+                        <option value="least">As least</option>
+                        <option value="most">As most</option>
+                      </select>
+                    </div>
+                    <div class="col-sm-6 pdn">
+                      <input name="views" id="views" type="text" class="form-control input-sm" placeholder="Views count" ng-model="condition.views">
+                    </div>
+                  </div>
+                </div>
+              </uib-accordion-group>
+            </uib-accordion>
           </form>
         </div>
         <hr class="mgn">

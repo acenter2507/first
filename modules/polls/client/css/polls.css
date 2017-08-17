@@ -300,21 +300,19 @@
       word-wrap: break-word; }
       .custom-panel .panel-heading h4 a {
         text-decoration: none; }
-  .custom-panel .panel-heading.public {
+  .custom-panel.public .panel-heading {
     color: #fff !important;
     background-color: #267ED5 !important;
   }
-  .custom-panel .panel-heading.watting {
+  .custom-panel.watting .panel-heading {
     color: #555 !important;
     background-color: #FEAF20 !important;
   }
   .custom-panel .panel-body {
-    border: none !important;
-  }
+    border: none !important; }
   .custom-panel img {
     max-width: 100%;
-    max-height: 100%;
-  }
+    max-height: 100%; }
 
 .horizontal-bars {
   padding: 0;

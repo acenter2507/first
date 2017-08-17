@@ -136,7 +136,6 @@
               <small class="pull-right text-muted">
                 <span>Added by</span>
                 <a class="undecorated-link" ui-sref="profile.info({userId: opt.user._id})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>
-                <a ui-sref="profile.info({userId: vm.poll.user._id})" ng-if="opt.user"></a>
                 <span ng-if="!opt.user">Deleted User</span><span>on</span>
                 <span ng-bind="opt.created | LLL_format"></span>
               </small>
@@ -144,32 +143,6 @@
               <div class="text-body" ta-bind="text" ng-model="opt.body" ta-readonly="true"></div>
             </uib-accordion-group>
           </uib-accordion>
-          <!--<div class="panel-group mgnb" ng-model="vm.optionToggle" role="tablist" aria-multiselectable="true" bs-collapse ng-if="vm.opts.length > 0">
-            <div class="panel panel-default custom-panel" ng-repeat="opt in vm.opts">
-              <div class="panel-heading public" role="tab">
-                <h4 class="panel-title">
-                  <a class="undecorated-link" bs-collapse-toggle>
-                  {{ opt.title }}
-                </a>
-                  <small class="pull-right">{{opt.voteCnt}}</small>
-                </h4>
-              </div>
-              <div class="panel-collapse" role="tabpanel" bs-collapse-target>
-                <div class="panel-body">
-                  <small class="pull-right text-muted">
-                  <span>Added by&nbsp;</span>
-                  <a class="undecorated-link" ui-sref="profile.info({userId: opt.user._id})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>
-                  <a ui-sref="profile.info({userId: vm.poll.user._id})" ng-if="opt.user"></a>
-                  <span ng-if="!opt.user">Deleted User</span>
-                  <span>&nbsp;on</span>
-                  <span ng-bind="opt.created | date:'mediumDate'"></span>
-                </small><br>
-                  <div class="clearfix"></div>
-                  <div class="text-body" ta-bind="text" ng-model="opt.body" ta-readonly="true"></div>
-                </div>
-              </div>
-            </div>
-          </div>-->
         </div>
       </div>
       <!-- #Show only MD screen -->

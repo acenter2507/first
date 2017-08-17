@@ -207,7 +207,7 @@
     // OPTIONS
     vm.tmp_opt = {};
     vm.show_colorpicker = false;
-     var opt_aside = {};//$bsAside({
+    var opt_aside = {};//$bsAside({
     //   scope: $scope,
     //   controllerAs: vm,
     //   templateUrl: 'modules/polls/client/views/new-opt.client.view.html',

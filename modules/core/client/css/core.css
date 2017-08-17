@@ -319,8 +319,7 @@ a:hover .header-profile-image {
   .card {
     margin-left: 0;
     margin-right: 0;
-    margin-bottom: 6px; }
-}
+    margin-bottom: 6px; } }
 .nav-tabs {
   border: none !important;
   border-bottom: 2px solid #DDD !important; }
@@ -675,6 +674,11 @@ a:hover .header-profile-image {
   right: 6px;
   background-color: #267ED5 !important;
 	display: none; }
+@media (max-width: 767px) {
+  .back-to-top.md-button.md-fab.md-mini {
+    line-height: 40px;
+    width: 40px;
+    height: 40px;} }
 .angucomplete-image {
     border-radius: 0;
     border: none; }

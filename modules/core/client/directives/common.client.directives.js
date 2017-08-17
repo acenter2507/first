@@ -84,7 +84,7 @@ function backToTopDirective() {
   var directive = {
     restrict: 'E',
     replace: true,
-    template: '<button class="md-fab md-mini md-button md-ink-ripple back-to-top"><i class="icon-arrow-up"></i></button>',
+    template: '<button class="md-fab md-button md-ink-ripple back-to-top"><i class="icon-arrow-up"></i></button>',
     link: link
   };
   return directive;

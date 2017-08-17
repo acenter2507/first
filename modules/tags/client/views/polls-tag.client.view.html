@@ -1,22 +1,4 @@
 <section class="container mg10b animated fadeIn">
-  <div class="row mg10t">
-    <div class="col-xs-12 pdn">
-      <div class="card">
-        <div class="card-body">
-          <ol class="breadcrumb custom-breadcrumb">
-            <li class="breadcrumb-item">
-              <a class="undecorated-link" ui-sref="home">
-                <i class="fa fa-home"></i> Home
-              </a>
-            </li>
-            <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="tags.list">Tags</a></li>
-            <li class="breadcrumb-item active">{{vm.tag.name}}</li>
-          </ol>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class="row">
     <div class="col-xs-12 pdn">
       <div ng-repeat="poll in vm.polls | filter: poll_filter" class="card">

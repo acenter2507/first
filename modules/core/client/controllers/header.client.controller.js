@@ -42,6 +42,8 @@ angular.module('core').controller('HeaderController', [
 
     function init() {
       if ($scope.authentication.user) {
+        $scope.authentication = Authentication;
+        $scope.isAdmin = _.contains($scope.authentication.user.roles, 'admin');
         loadNotifs(10);
         loadUncheckNotifs();
         initSocket();

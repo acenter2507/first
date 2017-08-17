@@ -3,10 +3,10 @@
 module.exports = {
   secure: {
     ssl: true,
-    privateKey: './config/sslcerts/key.pem',
-    certificate: './config/sslcerts/cert.pem'
+    privateKey: '/etc/letsencrypt/live/www.cadobongdafree.com/privkey.pem',
+    certificate: '/etc/letsencrypt/live/www.cadobongdafree.com/fullchain.pem'
   },
-  port: process.env.PORT || 80,
+  port: process.env.PORT || 3000,
   sessionSecret: process.env.SESSION_SECRET || '93182jflajfoaiwudajkdnkUHAD',
   db: {
     uri: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/polls',

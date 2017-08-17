@@ -43,7 +43,7 @@
     height: 250px;
     background-size: cover;
     background-repeat: no-repeat;
-    background-image: url('../img/covers/default.jpg');
+    /*background-image: url('../img/covers/default.jpg');*/
     background-origin: content-box;}
   .bgcover .cover .container {
     height: 100%;

@@ -44,7 +44,7 @@ module.exports = {
         'public/lib/angular-chart.js/dist/angular-chart.min.js',
         'public/lib/ng-tags-input/ng-tags-input.min.js',
         'public/lib/underscore/underscore.min.js',
-        'public/lib/moment/moment.min.js',
+        'public/lib/moment/moment.js',
         'public/lib/moment-timezone/moment-timezone.min.js',
         'public/lib/angular-moment/angular-moment.min.js',
         'public/lib/angular-moment-picker/dist/angular-moment-picker.min.js',

@@ -13,8 +13,6 @@
     'Authentication',
     'pollResolve',
     'notifResolve',
-    '$bsModal',
-    '$bsAside',
     'OptsService',
     'Socket',
     'CategorysService',
@@ -31,8 +29,6 @@
     Authentication,
     poll,
     notif,
-    $bsModal,
-    $bsAside,
     Opts,
     Socket,
     Categorys,
@@ -211,15 +207,15 @@
     // OPTIONS
     vm.tmp_opt = {};
     vm.show_colorpicker = false;
-    var opt_aside = $bsAside({
-      scope: $scope,
-      controllerAs: vm,
-      templateUrl: 'modules/polls/client/views/new-opt.client.view.html',
-      title: 'Add new option',
-      placement: 'bottom',
-      animation: 'am-fade-and-slide-bottom',
-      show: false
-    });
+     var opt_aside = {};//$bsAside({
+    //   scope: $scope,
+    //   controllerAs: vm,
+    //   templateUrl: 'modules/polls/client/views/new-opt.client.view.html',
+    //   title: 'Add new option',
+    //   placement: 'bottom',
+    //   animation: 'am-fade-and-slide-bottom',
+    //   show: false
+    // });
     vm.input_opt = opt => {
       vm.tmp_opt = (!opt) ? { poll: vm.poll._id, title: '', body: '', status: 1 } : opt;
       opt_aside.$promise.then(opt_aside.show);

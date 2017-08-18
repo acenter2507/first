@@ -768,6 +768,8 @@ a:hover .header-profile-image {
   display: none; }
   .ta-toolbar.focussed {
     display: block; }
+.my-md-select md-select-menu {
+  margin-top: 3rem; }
 
 .bg-black {
   background-color: black;

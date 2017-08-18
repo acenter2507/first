@@ -59,7 +59,7 @@
         <div class="card-body">
           <md-input-container class="md-block">
             <label>Category</label>
-            <md-select name="category" ng-model="ctrl.poll.category" required>
+            <md-select name="category" ng-model="ctrl.poll.category" md-container-class="my-md-select" required>
               <md-option ng-repeat="category in ctrl.categorys" value="{{category._id}}" ng-selected="category._id === ctrl.poll.category">{{category.name}}</md-option>
             </md-select>
             <div class="errors" ng-messages="myForm.category.$error">

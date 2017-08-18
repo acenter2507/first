@@ -35,7 +35,8 @@
         </md-menu>
         <div class="clearfix"></div>
       </div>
-      <div class="card-body" ng-init="moreCollapse = false;">
+      <div class="card-body" ng-init="moreCollapse = true;">
+        <!-- Category -->
         <div class="form-group">
           <select id="category" name="category" class="form-control" ng-model="ctrl.poll.category" required>
             <option value>Category</option>
@@ -45,8 +46,9 @@
             <div ng-message="required">Category is require.</div>
           </div>
         </div>
+        <!-- More -->
         <div class="form-group">
-          <a class="undecorated-link" ng-click="moreCollapse = !moreCollapse">More setting</i></a>
+          <a class="undecorated-link pull-right" ng-click="moreCollapse = !moreCollapse">More setting</i></a>
         </div>
         <div uib-collapse="moreCollapse">
           <!-- Close time -->
@@ -63,97 +65,16 @@
             </tags-input>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="col-md-9 pdn">
-      <div class="card">
-        <div class="card-body">
-          <!-- Title -->
-          <div class="form-group">
-            <input type="text" class="form-control input-large" name="title" ng-model="ctrl.poll.title" placeholder="Enter your poll tilte here"
-            />
-            <span class="text-danger" ng-hide="ctrl.validateTitle()">You must type somthing for title</span>
-          </div>
-          <!-- Body -->
-          <div class="form-group">
-            <text-angular class="text-body" ng-model="ctrl.poll.body"></text-angular>
-            <span class="text-danger" ng-hide="ctrl.validateBody()">You must type somthing for body</span>
-          </div>
-          <div class="form-group">
-            <button class="btn btn-primary pull-right aside-panel-toggle">Add Option</button>
-            <div class="clearfix"></div>
-          </div>
-          <!-- Option -->
-          <uib-accordion close-others="true" ng-if="ctrl.opts.length > 0">
-            <uib-accordion-group ng-repeat="opt in ctrl.opts | orderBy: 'create'" heading="{{opt.title + ' (' + opt.voteCnt + ' votes)'}}"
-              panel-class="{{ ctrl.opt_class(opt) }}">
-              <small class="pull-right text-muted">
-                <span>Added by</span>
-                <a class="undecorated-link" ui-sref="profile.info({userId: opt.user._id})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>
-                <span ng-if="!opt.user">Deleted User</span><span>on</span>
-                <span ng-bind="opt.created | LLL_format"></span>
-              </small>
-              <div class="clearfix"></div>
-              <div class="pull-right mg10b">
-                <a class="undecorated-link" ng-click="ctrl.remove_opt(opt)">Remove</a>
-                <a class="undecorated-link mg10r" ng-if="opt.status == 1" ng-click="ctrl.input_opt(opt)">Edit</a>
-                <a class="undecorated-link mg10r" ng-if="opt.status == 2" ng-click="ctrl.approve_opt(opt)">Approve</a>
-                <a class="undecorated-link mg10r" ng-if="opt.status == 2" ng-click="ctrl.reject_opt(opt)">Reject</a>
-              </div>
-              <div class="clearfix"></div>
-              <div class="text-body" ta-bind="text" ng-model="opt.body" ta-readonly="true"></div>
-            </uib-accordion-group>
-          </uib-accordion>
+        <!-- Title -->
+        <div class="form-group">
+          <input type="text" class="form-control input-large" name="title" ng-model="ctrl.poll.title" placeholder="Enter your poll tilte here"
+          />
+          <span class="text-danger" ng-hide="ctrl.validateTitle()">You must type somthing for title</span>
         </div>
-      </div>
-    </div>
-    <div class="col-md-3 pdn">
-      <div class="card">
-        <div class="card-body">
-          <div class="form-group">
-            <md-menu md-offset="10 30">
-              <a class="undecorated-link pull-right" ng-click="$mdMenu.open($event)">Poll's options <i class="fa fa-sort-desc"></i></a>
-              <md-menu-content>
-                <ul class="menu-list mg5b">
-                  <li>
-                    <md-checkbox class="md-primary" ng-model="ctrl.poll.isPublic">Public</md-checkbox>
-                  </li>
-                  <li>
-                    <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_guest">Allow guest vote</md-checkbox>
-                  </li>
-                  <li>
-                    <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_multiple">Allow multiple vote</md-checkbox>
-                  </li>
-                  <li>
-                    <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_add">Allow members suggest option</md-checkbox>
-                  </li>
-                </ul>
-              </md-menu-content>
-            </md-menu>
-          </div>
-          <div class="clearfix h20"></div>
-          <div class="form-group">
-            <select id="category" name="category" class="form-control" ng-model="ctrl.poll.category" required>
-              <option value>Category</option>
-              <option ng-repeat="ctgr in ctrl.categorys" value="{{ctgr._id}}" ng-selected="ctgr._id.toString() === ctrl.poll.category.toString()" >{{ctgr.name}}</option>
-            </select>
-            <div class="errors" ng-messages="myForm.category.$error">
-              <div ng-message="required">Required</div>
-            </div>
-          </div>
-          <!-- Close time -->
-          <div class="form-group">
-            <input class="form-control" today="true" moment-picker="ctrl.poll.close" ng-model="ctrl.poll.close" format="YYYY/MM/DD HH:mm"
-              start-view="month" placeholder="Close poll at" onkeydown="return false;" additions="{ bottom: 'bottom-template-url' }">
-            <span class="text-danger" ng-hide="ctrl.validateCloseDate()">Datetime is invalid</span>
-          </div>
-          <!-- Tags -->
-          <div class="form-group" ng-controller="AutocompleteTagController">
-            <tags-input ng-model="ctrl.poll.tags" display-property="name" placeholder="{{placeholder}}" add-from-autocomplete-only="true"
-              replace-spaces-with-dashes="false" min-length="1" enforce-max-tags class="tags-custom">
-              <auto-complete source="loadItems($query)" min-length="1" debounce-delay="0" max-results="10"></auto-complete>
-            </tags-input>
-          </div>
+        <!-- Body -->
+        <div class="form-group">
+          <text-angular class="text-body" ng-model="ctrl.poll.body"></text-angular>
+          <span class="text-danger" ng-hide="ctrl.validateBody()">You must type somthing for body</span>
         </div>
       </div>
     </div>

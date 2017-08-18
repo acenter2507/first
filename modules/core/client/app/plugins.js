@@ -50,7 +50,7 @@
               if (this.files && this.files[0]) {
                 reader.onload = function (e) {
                   console.log(e.target.result);
-                  $editor().wrapSelection('insertHtml', '<img src=' + e.target.result + ' with="100% height="50%""><div><br/></div>', true);
+                  $editor().wrapSelection('insertHtml', '<img src="' + e.target.result + '" with="100% height="50%""><div><br/></div>', true);
                 };
                 reader.readAsDataURL(this.files[0]);
               }

@@ -15,7 +15,6 @@
     <div class="col-md-9 pdn">
       <div class="card">
         <div class="card-body">
-          <md-calendar ng-model="birthday"></md-calendar>
           <!-- Title -->
           <div class="form-group">
             <input type="text" class="form-control input-large" name="title" ng-model="ctrl.poll.title" placeholder="Enter your poll tilte here"
@@ -61,36 +60,13 @@
           <div class="row">
             <div class="col-xs-12">
               <md-menu md-offset="10 30">
-                <a class="undecorated-link span-link pull-right" ng-click="$mdMenu.open($event)" aria-label="Open setting menu">
-                  Setting
-                  <i class="fa fa-cog fa-2x"></i>
-                </a>
+                <a class="undecorated-link span-link pull-right" ng-click="$mdMenu.open($event)">Poll's options</a>
                 <md-menu-content>
                   <ul class="menu-list mg5b">
-                    <li>
-                      <label class="control control--checkbox custom--checkbox">Public
-                        <input type="checkbox" name="isPublic" ng-model="ctrl.poll.isPublic"/>
-                        <div class="control__indicator"></div>
-                      </label>
-                    </li>
-                    <li>
-                      <label class="control control--checkbox custom--checkbox">Allow guest vote
-                        <input type="checkbox" name="allow_guest" ng-model="ctrl.poll.allow_guest"/>
-                        <div class="control__indicator"></div>
-                      </label>
-                    </li>
-                    <li>
-                      <label class="control control--checkbox custom--checkbox">Allow multiple vote
-                        <input type="checkbox" name="allow_multiple" ng-model="ctrl.poll.allow_multiple"/>
-                        <div class="control__indicator"></div>
-                      </label>
-                    </li>
-                    <li>
-                      <label class="control control--checkbox custom--checkbox">Allow members suggest option
-                        <input type="checkbox" name="allow_add" ng-model="ctrl.poll.allow_add"/>
-                        <div class="control__indicator"></div>
-                      </label>
-                    </li>
+                    <li><md-checkbox ng-model="ctrl.poll.isPublic">Public</md-checkbox></li>
+                    <li><md-checkbox ng-model="ctrl.poll.allow_guest">Allow guest vote</md-checkbox></li>
+                    <li><md-checkbox ng-model="ctrl.poll.allow_multiple">Allow multiple vote</md-checkbox></li>
+                    <li><md-checkbox ng-model="ctrl.poll.allow_add">Allow members suggest option</md-checkbox></li>
                   </ul>
                 </md-menu-content>
               </md-menu>

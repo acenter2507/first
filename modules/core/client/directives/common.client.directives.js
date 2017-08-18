@@ -6,7 +6,8 @@ angular
   .directive('a', asideMenuToggleDirective)
   .directive('body', asideMenuHideDirective)
   .directive('backToTop', backToTopDirective)
-  .directive('button', asidePanelToggleDirective);
+  .directive('button', asidePanelToggleDirective)
+  .directive('a', asidePanelToggleDirective);
 
 //Prevent click if href="#"
 function preventClickDirective() {

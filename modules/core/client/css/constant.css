@@ -793,6 +793,9 @@
 .text-capitalize {
   text-transform: capitalize !important; }
 
+.text-white {
+  color: #fff !important; }
+
 .font-weight-normal {
   font-weight: normal; }
 

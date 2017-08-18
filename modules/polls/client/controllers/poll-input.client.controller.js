@@ -288,7 +288,7 @@
     };
     ctrl.save_opt = isValid => {
       if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'ctrl.form.optForm');
+        $scope.$broadcast('show-errors-check-validity', 'optForm');
         return false;
       }
       if (!ctrl.tmp_opt._id && !_.contains(ctrl.opts, ctrl.tmp_opt)) {

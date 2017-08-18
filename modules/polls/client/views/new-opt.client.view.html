@@ -1,6 +1,6 @@
 <div class="card mgn">
   <div class="card-header pd12y">
-    <a class="undecorated-link" ng-click="ctrl.save_opt(ctrl.form.optForm.$valid)">Save</a>
+    <a class="undecorated-link" ng-click="ctrl.save_opt(optForm.$valid)">Save</a>
     <a class="undecorated-link mg10l aside-panel-toggle">Discard</a>
     <md-menu md-offset="0 30">
       <a ng-click="$mdMenu.open($event)" class="undecorated-link card-link" aria-label="Color" href="#">
@@ -15,18 +15,18 @@
   <hr class="mgn">
   <div class="card-body" ng-init="isHideOptBody = true;">
     <div class="col-xs-12">
-      <form name="ctrl.form.optForm" class="form-horizontal" novalidate>
+      <form name="optForm" class="form-horizontal" novalidate>
         <fieldset>
           <div class="form-group" show-errors>
             <input type="hidden" name="color" ng-model="ctrl.tmp_opt.color" required>
-            <div ng-messages="ctrl.form.optForm.color.$error" role="alert">
+            <div ng-messages="optForm.color.$error" role="alert">
               <p class="help-block error-text" ng-message="required">You must select color for option</p>
             </div>
           </div>
           <div class="clearfix"></div>
           <div class="form-group" show-errors>
             <input name="title" type="text" ng-model="ctrl.tmp_opt.title" class="form-control" placeholder="Title" required>
-            <div ng-messages="ctrl.form.optForm.title.$error" role="alert">
+            <div ng-messages="optForm.title.$error" role="alert">
               <p class="help-block error-text" ng-message="required">Opt title is required.</p>
             </div>
           </div>

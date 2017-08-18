@@ -314,7 +314,7 @@
 
   }
   BottomSheetController.$inject = ['$scope', '$mdBottomSheet', 'tmp_opt'];
-  function BottomSheetController($scope, $mdBottomSheet, option) {
+  function BottomSheetController($scope, $mdBottomSheet, tmp_opt) {
     console.log(tmp_opt);
     $scope.dismiss = () => {
       $mdBottomSheet.hide();

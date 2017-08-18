@@ -286,8 +286,8 @@
         });
       }
     };
-    ctrl.save_opt = optForm => {
-      if (!optForm.$valid) {
+    ctrl.save_opt = isValid => {
+      if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'optForm');
         return false;
       }
@@ -295,7 +295,7 @@
         ctrl.opts.push(ctrl.tmp_opt);
       }
       ctrl.tmp_opt = { poll: ctrl.poll._id, title: '', body: '', status: 1 };
-      optForm.$setPristine();
+      ctrl.form.optForm.$setPristine();
 
     };
     ctrl.opt_full = () => {

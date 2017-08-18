@@ -3,7 +3,7 @@
   <div class="row">
     <div class="card">
       <div class="card-header">
-        <a class="undecorated-link" ng-click="ctrl.save(pollForm.$valid)">{{ctrl.poll._id ? ' Save' : ' Post'}}</a>
+        <a class="undecorated-link" ng-click="ctrl.save(ctrl.form.pollForm.$valid)">{{ctrl.poll._id ? ' Save' : ' Post'}}</a>
         <a class="undecorated-link mg10l" ng-click="ctrl.discard()">Discard</a>
         <md-menu md-offset="10 30">
           <a class="undecorated-link card-link" ng-click="$mdMenu.open($event)"><i class="fa fa-lock"></i> Poll's options</a>
@@ -28,14 +28,14 @@
       </div>
       <hr class="mgn">
       <div class="card-body" ng-init="moreCollapse = true;">
-        <form name="pollForm" ng-submit="ctrl.save(pollForm.$valid)" novalidate autocomplete="off">
+        <form name="ctrl.form.pollForm" ng-submit="ctrl.save(ctrl.form.pollForm.$valid)" novalidate autocomplete="off">
           <!-- Category -->
           <div class="form-group mg10b" show-errors>
             <select id="category" name="category" class="form-control" ng-model="ctrl.poll.category" required>
               <option value>Category</option>
               <option ng-repeat="ctgr in ctrl.categorys" value="{{ctgr._id}}" ng-selected="ctgr._id.toString() === ctrl.poll.category.toString()" >{{ctgr.name}}</option>
             </select>
-            <div ng-messages="pollForm.category.$error" role="alert">
+            <div ng-messages="ctrl.form.pollForm.category.$error" role="alert">
               <p class="help-block error-text" ng-message="required">Category is required.</p>
             </div>
           </div>
@@ -65,14 +65,14 @@
           <div class="form-group" show-errors>
             <input type="text" class="form-control" name="title" ng-model="ctrl.poll.title" placeholder="Enter your poll tilte here"
               required/>
-            <div ng-messages="pollForm.title.$error" role="alert">
+            <div ng-messages="ctrl.form.pollForm.title.$error" role="alert">
               <p class="help-block error-text" ng-message="required">You must type somthing for title.</p>
             </div>
           </div>
           <!-- Body -->
           <div class="form-group" show-errors>
             <text-angular name="body" class="text-body" ng-model="ctrl.poll.body" required placeholder="Type you post content here"></text-angular>
-            <div ng-messages="pollForm.body.$error" role="alert">
+            <div ng-messages="ctrl.form.pollForm.body.$error" role="alert">
               <p class="help-block error-text" ng-message="required">You must type somthing for body.</p>
             </div>
           </div>

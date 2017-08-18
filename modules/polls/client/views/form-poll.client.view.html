@@ -58,13 +58,11 @@
       <div class="card">
         <div class="card-body">
           <div class="form-group">
-            <div class="col-sm-12">
-              <label for="category">Sort by</label>
-              <select id="category" name="category" class="form-control" ng-model="ctrl.poll.category">
-                <option value>Select category</option>
-                <option ng-repeat="category in ctrl.categorys" value="{{category._id}}" ng-selected="category._id === ctrl.poll.category">{{category.name}}</option>
-              </select>
-            </div>
+            <label for="category">Sort by</label>
+            <select id="category" name="category" class="form-control" ng-model="ctrl.poll.category">
+              <option value>Select category</option>
+              <option ng-repeat="category in ctrl.categorys" value="{{category._id}}" ng-selected="category._id === ctrl.poll.category">{{category.name}}</option>
+            </select>
           </div>
           <!-- Category -->
           <div class="row">

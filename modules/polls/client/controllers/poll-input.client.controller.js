@@ -309,7 +309,6 @@
     };
     ctrl.opt_full = () => {
       let aside = angular.element('.aside-panel')[0];
-      let toggle = angular.element('#aside-panel-full-toggle');
       angular.element(aside).toggleClass('full');
       angular.element('#aside-panel-full-toggle').find('i').toggleClass('r180');
     };

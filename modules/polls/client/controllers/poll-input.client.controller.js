@@ -295,7 +295,7 @@
         ctrl.opts.push(ctrl.tmp_opt);
       }
       ctrl.tmp_opt = { poll: ctrl.poll._id, title: '', body: '', status: 1 };
-      ctrl.form.optForm.$setPristine();
+      ctrl.form.optForm = {};
 
     };
     ctrl.opt_full = () => {

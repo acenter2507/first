@@ -15,6 +15,7 @@
     <div class="col-md-9 pdn">
       <div class="card">
         <div class="card-body">
+          <md-calendar ng-model="birthday"></md-calendar>
           <!-- Title -->
           <div class="form-group">
             <input type="text" class="form-control input-large" name="title" ng-model="ctrl.poll.title" placeholder="Enter your poll tilte here"
@@ -96,6 +97,15 @@
             </div>
           </div>
           <div class="clearfix"></div>
+          <md-input-container class="md-block">
+            <label>Category</label>
+            <md-select name="category" ng-model="ctrl.poll.category" md-container-class="my-md-select" required>
+              <md-option ng-repeat="category in ctrl.categorys" value="{{category._id}}" ng-selected="category._id === ctrl.poll.category">{{category.name}}</md-option>
+            </md-select>
+            <div class="errors" ng-messages="myForm.category.$error">
+              <div ng-message="required">Required</div>
+            </div>
+          </md-input-container>
           <md-input-container class="md-block">
             <label>Category</label>
             <md-select name="category" ng-model="ctrl.poll.category" md-container-class="my-md-select" required>

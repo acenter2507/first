@@ -77,7 +77,7 @@
             </div>
           </div>
           <!-- Option -->
-          <uib-accordion close-others="true" ng-if="ctrl.opts.length > 0">
+          <uib-accordion close-others="true">
             <uib-accordion-group ng-repeat="opt in ctrl.opts | orderBy: 'create'" heading="{{opt.title}}"
               panel-class="{{ ctrl.opt_class(opt) }}">
               <span>
@@ -87,13 +87,11 @@
                 <a class="undecorated-link mg10l" ng-if="opt.status == 2" ng-click="ctrl.reject_opt(opt)">Reject</a>
               </span>
               <small class="pull-right text-muted">
-                <span>Added by</span>
+                Added by
                 <a class="undecorated-link" ui-sref="profile.info({userId: opt.user._id})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>
-                <span ng-if="!opt.user">Deleted User</span><span>on</span>
+                <span ng-if="!opt.user">Deleted User</span>on
                 <span ng-bind="opt.created | LLL_format"></span>
               </small>
-              <div class="clearfix"></div>
-              </div>
               <div class="clearfix"></div>
               <div class="text-body" ta-bind="text" ng-model="opt.body" ta-readonly="true"></div>
             </uib-accordion-group>

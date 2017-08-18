@@ -225,6 +225,15 @@
     };
     ctrl.input_opt = opt => {
       ctrl.tmp_opt = (!opt) ? { poll: ctrl.poll._id, title: '', body: '', status: 1 } : opt;
+      $mdBottomSheet.show({
+        templateUrl: 'modules/polls/client/views/new-opt.client.view.html',
+        controller: 'BottomSheetController',
+        clickOutsideToClose: true
+      }).then(function (clickedItem) {
+        console.log(clickedItem);
+      }).catch(function (error) {
+        // User clicked outside or hit escape
+      });
     };
     ctrl.remove_opt = opt => {
       $scope.message_title = 'Delete option!';
@@ -298,20 +307,6 @@
     };
 
     ctrl.showOptionSheet = opt => {
-      $mdBottomSheet.show({
-      templateUrl: 'modules/polls/client/views/new-opt.client.view.html',
-      controller: 'BottomSheetController',
-      clickOutsideToClose: true
-    }).then(function(clickedItem) {
-      $mdToast.show(
-            $mdToast.simple()
-              .textContent(clickedItem['name'] + ' clicked!')
-              .position('top right')
-              .hideDelay(1500)
-          );
-    }).catch(function(error) {
-      // User clicked outside or hit escape
-    });
     };
     $scope.clear_close_date = () => {
       delete ctrl.poll.close;
@@ -320,7 +315,14 @@
   }
   BottomSheetController.$inject = ['$scope', '$mdBottomSheet'];
   function BottomSheetController($scope, $mdBottomSheet) {
-    $scope.listItemClick = function($index) {
+    console.log(ctrl.tmp_opt);
+    $scope.dismiss = () => {
+      $mdBottomSheet.hide();
+    };
+    $scope.save = () => {
+      $mdBottomSheet.hide();
+    };
+    $scope.listItemClick = function ($index) {
       var clickedItem = $scope.items[$index];
       $mdBottomSheet.hide(clickedItem);
     };

@@ -1,7 +1,16 @@
-<!--<div class="card mgn">
-  <div class="card-header pd12y" ng-style="{'background-color': ctrl.tmp_opt.color || '#ddd' }">
-    <strong class="card-title text-white" ng-bind="ctrl.tmp_opt.title || 'Add new option'"></strong>
-    <a class="aside-panel-toggle card-link text-muted" aria-label="Close" href="#"><i class="fa fa-times"></i></a>
+<div class="card mgn">
+  <div class="card-header pd12y">
+    <a class="undecorated-link" ng-click="save()">Save</a>
+    <a class="undecorated-link mg10l" ng-click="dismiss()">Discard</a>
+    <md-menu md-offset="102 52">
+      <a ng-click="$mdMenu.open($event)" class="card-link" aria-label="Color" href="#"><i class="fa fa-square" ng-style="{'color': ctrl.tmp_opt.color || '#ccc' }"></i> Option's color</a>
+      <!--<button class="btn-poll-color" ng-click="$mdMenu.open($event)" ng-style="{'background-color': (ctrl.tmp_opt.color) ? ctrl.tmp_opt.color : '#ccc'}">
+                    {{(ctrl.tmp_opt.color) ? ctrl.tmp_opt.color : 'Select color'}}</button>-->
+      <md-menu-content>
+        <material-picker format="'hex'" ng-model="ctrl.tmp_opt.color" size="15"></material-picker>
+      </md-menu-content>
+    </md-menu>
+    
     <div class="clearfix"></div>
   </div>
   <div class="card-body">
@@ -14,13 +23,6 @@
         <fieldset>
           <div class="form-group" show-errors>
             <input type="hidden" name="color" ng-model="ctrl.tmp_opt.color" required>
-            <md-menu md-offset="102 52">
-              <button class="btn-poll-color" ng-click="$mdMenu.open($event)" ng-style="{'background-color': (ctrl.tmp_opt.color) ? ctrl.tmp_opt.color : '#ccc'}">
-                    {{(ctrl.tmp_opt.color) ? ctrl.tmp_opt.color : 'Select color'}}</button>
-              <md-menu-content>
-                <material-picker format="'hex'" ng-model="ctrl.tmp_opt.color" size="15"></material-picker>
-              </md-menu-content>
-            </md-menu>
             <div ng-messages="ctrl.form.optForm.color.$error" role="alert">
               <p class="help-block error-text" ng-message="required">You must select color for option</p>
             </div>
@@ -44,8 +46,8 @@
     <button type="button" class="btn btn-primary" ng-click="ctrl.save_opt(ctrl.form.optForm.$valid)">Save</button>
     <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
   </div>
-</div>-->
-
+</div>
+<!--
 <md-bottom-sheet>
   <div class="card mgn" ng-cloak>
     <div class="card-header">
@@ -91,4 +93,4 @@
       <div class="clearfix"></div>
     </div>
   </div>
-</md-bottom-sheet>
+</md-bottom-sheet>-->

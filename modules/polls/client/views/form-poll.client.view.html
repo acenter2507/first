@@ -47,7 +47,7 @@
           <div uib-collapse="moreCollapse">
             <!-- Close time -->
             <div class="form-group">
-              <div class="input-group" moment-picker="ctrl.poll.close" format="YYYY/MM/DD HH:mm" start-view="month" additions="{ bottom: 'bottom-template-url' }">
+              <div class="input-group" today="true" moment-picker="ctrl.poll.close" format="YYYY/MM/DD HH:mm" start-view="month" additions="{ bottom: 'bottom-template-url' }">
                 <input class="form-control" placeholder="Close poll at" ng-model="ctrl.poll.close" readonly="true">
                 <span class="input-group-addon span-link"><i class="fa fa-calendar"></i></span>
               </div>
@@ -81,9 +81,7 @@
     </div>
   </div>
   <div class="quick-menu">
-    <md-button md-colors="{background: 'blue'}" aria-label="add" class="md-fab" ng-click="ctrl.showOptionSheet()"><i class="fa fa-plus"></i>
-      <md-tooltip class="d-sm-down-none" md-direction="right">Add option</md-tooltip>
-    </md-button>
+    <md-button md-colors="{background: 'blue'}" aria-label="add" class="md-fab" ng-click="ctrl.showOptionSheet()"><i class="fa fa-plus"></i></md-button>
   </div>
   <div class="aside-panel">
     <div ng-include="'/modules/polls/client/views/new-opt.client.view.html'"></div>

@@ -1,21 +1,12 @@
 <section class="container-fluid animated fadeIn mg6t mg50b">
-  <!-- Toolbar -->
-  <!--<div class="row">
-    <div class="col-xs-12 pdn">
-      <div class="custom-toolbar">
-        <button class="btn btn-default pull-right" ng-click="ctrl.discard()">Discard</button>
-        <button class="btn btn-primary pull-right mg10r" ng-click="ctrl.save(true)">{{ctrl.poll._id ? ' Update' : ' Create'}}</button>
-        <button class="btn btn-danger pull-right mg10r" ng-show="ctrl.poll._id" ng-click="ctrl.remove()">Delete</button>
-      </div>
-    </div>
-  </div>-->
-
   <!-- Form -->
   <div class="row">
     <div class="card">
       <div class="card-header">
+        <a class="undecorated-link" ng-click="ctrl.save(pollForm.$valid)">{{ctrl.poll._id ? ' Save' : ' Post'}}</a>
+        <a class="undecorated-link mg10l" ng-click="ctrl.discard()">Discard</a>
         <md-menu md-offset="10 30">
-          <a class="undecorated-link card-link" ng-click="$mdMenu.open($event)">Poll's options</i></a>
+          <a class="undecorated-link card-link" ng-click="$mdMenu.open($event)"><i class="fa fa-lock"></i> Poll's options</a>
           <md-menu-content>
             <ul class="menu-list mg5b">
               <li>
@@ -36,53 +27,59 @@
         <div class="clearfix"></div>
       </div>
       <div class="card-body" ng-init="moreCollapse = true;">
-        <!-- Category -->
-        <div class="form-group">
-          <select id="category" name="category" class="form-control" ng-model="ctrl.poll.category" required>
-            <option value>Category</option>
-            <option ng-repeat="ctgr in ctrl.categorys" value="{{ctgr._id}}" ng-selected="ctgr._id.toString() === ctrl.poll.category.toString()" >{{ctgr.name}}</option>
-          </select>
-          <div class="errors" ng-messages="myForm.category.$error">
-            <div ng-message="required">Category is require.</div>
+        <form name="pollForm" ng-submit="ctrl.save(pollForm.$valid)" novalidate autocomplete="off">
+          <!-- Category -->
+          <div class="form-group" show-errors>
+            <select id="category" name="category" class="form-control" ng-model="ctrl.poll.category" required>
+              <option value>Category</option>
+              <option ng-repeat="ctgr in ctrl.categorys" value="{{ctgr._id}}" ng-selected="ctgr._id.toString() === ctrl.poll.category.toString()" >{{ctgr.name}}</option>
+            </select>
+            <div ng-messages="pollForm.category.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Category is required.</p>
+            </div>
           </div>
-        </div>
-        <!-- More -->
-        <div class="form-group">
-          <a class="undecorated-link pull-right" ng-click="moreCollapse = !moreCollapse">More setting</i></a>
-          <div class="clearfix h10"></div>
-        </div>
-        <div uib-collapse="moreCollapse">
-          <!-- Close time -->
+          <!-- More -->
           <div class="form-group">
-            <input class="form-control" today="true" moment-picker="ctrl.poll.close" ng-model="ctrl.poll.close" format="YYYY/MM/DD HH:mm"
-              start-view="month" placeholder="Close poll at" onkeydown="return false;" additions="{ bottom: 'bottom-template-url' }">
-            <span class="text-danger" ng-hide="ctrl.validateCloseDate()">Datetime is invalid</span>
+            <a class="undecorated-link pull-right" ng-click="moreCollapse = !moreCollapse">More setting</i></a>
+            <div class="clearfix h10"></div>
           </div>
-          <!-- Tags -->
-          <div class="form-group" ng-controller="AutocompleteTagController">
-            <tags-input ng-model="ctrl.poll.tags" display-property="name" placeholder="{{placeholder}}" add-from-autocomplete-only="true"
-              replace-spaces-with-dashes="false" min-length="1" enforce-max-tags class="tags-custom">
-              <auto-complete source="loadItems($query)" min-length="1" debounce-delay="0" max-results="10"></auto-complete>
-            </tags-input>
+          <div uib-collapse="moreCollapse">
+            <!-- Close time -->
+            <div class="form-group">
+              <input class="form-control" today="true" moment-picker="ctrl.poll.close" ng-model="ctrl.poll.close" format="YYYY/MM/DD HH:mm"
+                start-view="month" placeholder="Close poll at" onkeydown="return false;" additions="{ bottom: 'bottom-template-url' }">
+              <span class="text-danger" ng-hide="ctrl.validateCloseDate()">Datetime is invalid</span>
+            </div>
+            <!-- Tags -->
+            <div class="form-group" ng-controller="AutocompleteTagController">
+              <tags-input ng-model="ctrl.poll.tags" display-property="name" placeholder="{{placeholder}}" add-from-autocomplete-only="true"
+                replace-spaces-with-dashes="false" min-length="1" enforce-max-tags class="tags-custom">
+                <auto-complete source="loadItems($query)" min-length="1" debounce-delay="0" max-results="10"></auto-complete>
+              </tags-input>
+            </div>
           </div>
-        </div>
-        <!-- Title -->
-        <div class="form-group">
-          <input type="text" class="form-control input-large" name="title" ng-model="ctrl.poll.title" placeholder="Enter your poll tilte here"
-          />
-          <span class="text-danger" ng-hide="ctrl.validateTitle()">You must type somthing for title</span>
-        </div>
-        <!-- Body -->
-        <div class="form-group">
-          <text-angular class="text-body" ng-model="ctrl.poll.body"></text-angular>
-          <span class="text-danger" ng-hide="ctrl.validateBody()">You must type somthing for body</span>
-        </div>
+          <!-- Title -->
+          <div class="form-group" show-errors>
+            <input type="text" class="form-control" name="title" ng-model="ctrl.poll.title" placeholder="Enter your poll tilte here"
+             required/>
+            <div ng-messages="pollForm.title.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">You must type somthing for title.</p>
+            </div>
+          </div>
+          <!-- Body -->
+          <div class="form-group" show-errors>
+            <text-angular name="body" class="text-body" ng-model="ctrl.poll.body" required></text-angular>
+            <div ng-messages="pollForm.body.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">You must type somthing for body.</p>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 
   <!-- Toolbar -->
-  <div class="row">
+  <!--<div class="row">
     <div class="col-xs-12 pdn">
       <div class="custom-toolbar">
         <button class="btn btn-default pull-right" ng-click="ctrl.discard()">Discard</button>
@@ -90,7 +87,7 @@
         <button class="btn btn-danger pull-right mg10r" ng-show="ctrl.poll._id" ng-click="ctrl.remove()">Delete</button>
       </div>
     </div>
-  </div>
+  </div>-->
   <div class="aside-panel">
     <div ng-include="'/modules/polls/client/views/new-opt.client.view.html'"></div>
   </div>

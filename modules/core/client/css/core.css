@@ -197,7 +197,7 @@ body {
     opacity: 0; }
 
   .aside-panel-open .aside-panel {
-    height: 30%; }
+    height: 20%; }
   .aside-panel-open .aside-panel.full {
     height: 90%; }
     .aside-panel-open .aside-backdrop {

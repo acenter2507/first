@@ -193,19 +193,20 @@ body {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar; }
-  .aside-panel .backdrop {
+  .aside-backdrop {
     opacity: 0; }
 
   .aside-panel-open .aside-panel {
     height: 80%; }
-    .aside-panel-open .backdrop {
+    .aside-panel-open .aside-backdrop {
       transition: opacity 450ms;
       position: fixed;
       top: 0;
       bottom: 0;
       left: 0;
       right: 0;
-      opacity: .48;
+      background: #bbb;
+      opacity: 0.5;
       z-index: 50; }
 *:focus {
   outline: none !important;

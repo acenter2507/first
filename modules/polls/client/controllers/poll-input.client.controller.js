@@ -299,9 +299,9 @@
 
     ctrl.showOptionSheet = opt => {
       $mdBottomSheet.show({
-      template: 'bottom-sheet-grid-template',
+      template: 'bottom-sheet-grid-template.html',
       controller: 'BottomSheetController',
-      clickOutsideToClose: false
+      clickOutsideToClose: true
     }).then(function(clickedItem) {
       $mdToast.show(
             $mdToast.simple()

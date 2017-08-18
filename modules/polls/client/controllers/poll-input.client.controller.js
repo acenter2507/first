@@ -134,7 +134,12 @@
       }
     };
 
-    ctrl.save = () => {
+    ctrl.save = isValid => {
+    if (!isValid) {
+      $scope.$broadcast('show-errors-check-validity', 'pollForm');
+      return false;
+    }
+
       if (!ctrl.validateBody() || !ctrl.validateCategory() || !ctrl.validateTitle() || !ctrl.validateCloseDate()) {
         toast.error('You have not entered enough information.', 'Error!');
         return;

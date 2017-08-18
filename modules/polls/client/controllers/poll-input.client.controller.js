@@ -227,7 +227,7 @@
       $mdBottomSheet.show({
         templateUrl: 'modules/polls/client/views/new-opt.client.view.html',
         controller: 'BottomSheetController',
-        disableParentScroll: false,
+        escapeToClose: false,
         locals: {
           tmp_opt: ctrl.tmp_opt
         }

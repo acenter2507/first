@@ -298,7 +298,7 @@
       ctrl.form.optForm.$setSubmitted();
       ctrl.form.optForm.$setUntouched();
       ctrl.form.optForm.$setPristine();
-      ctrl.form.optForm.name.$setValidity("required", false);
+      ctrl.form.optForm.title.$setValidity("required", false);
       ctrl.form.optForm.color.$setValidity("required", false);
 
     };

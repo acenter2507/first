@@ -311,8 +311,7 @@
       let aside = angular.element('.aside-panel')[0];
       let toggle = angular.element('#aside-panel-full-toggle').find('i');
       angular.element(aside).toggleClass('full');
-      console.log(toggle);
-      // angular.element('#aside-panel-full-toggle').find('i').toggleClass('r180');
+      angular.element(toggle).toggleClass('r180');
     };
     $scope.clear_close_date = () => {
       delete ctrl.poll.close;

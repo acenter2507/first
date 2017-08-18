@@ -63,12 +63,12 @@
         <form name="ctrl.form.optForm" class="form-horizontal" novalidate>
           <fieldset>
             <div class="form-group" show-errors>
-              <input type="hidden" name="color" ng-model="ctrl.tmp_opt.color" required>
+              <input type="hidden" name="color" ng-model="tmp_opt.color" required>
               <md-menu md-offset="102 52">
-                <button class="btn-poll-color" ng-click="$mdMenu.open($event)" ng-style="{'background-color': (ctrl.tmp_opt.color) ? ctrl.tmp_opt.color : '#ccc'}">
-                    {{(ctrl.tmp_opt.color) ? ctrl.tmp_opt.color : 'Select color'}}</button>
+                <button class="btn-poll-color" ng-click="$mdMenu.open($event)" ng-style="{'background-color': (tmp_opt.color) ? tmp_opt.color : '#ccc'}">
+                    {{(tmp_opt.color) ? tmp_opt.color : 'Select color'}}</button>
                 <md-menu-content>
-                  <material-picker format="'hex'" ng-model="ctrl.tmp_opt.color" size="15"></material-picker>
+                  <material-picker format="'hex'" ng-model="tmp_opt.color" size="15"></material-picker>
                 </md-menu-content>
               </md-menu>
               <div ng-messages="ctrl.form.optForm.color.$error" role="alert">
@@ -77,13 +77,13 @@
             </div>
             <div class="clearfix"></div>
             <div class="form-group" show-errors>
-              <input name="title" type="text" ng-model="ctrl.tmp_opt.title" class="form-control" placeholder="Title" required>
+              <input name="title" type="text" ng-model="tmp_opt.title" class="form-control" placeholder="Title" required>
               <div ng-messages="ctrl.form.optForm.title.$error" role="alert">
                 <p class="help-block error-text" ng-message="required">Opt title is required.</p>
               </div>
             </div>
             <div class="form-group">
-              <text-angular ng-model="ctrl.tmp_opt.body"></text-angular>
+              <text-angular ng-model="tmp_opt.body"></text-angular>
             </div>
           </fieldset>
         </form>

@@ -229,7 +229,7 @@
         templateUrl: 'modules/polls/client/views/new-opt.client.view.html',
         controller: 'BottomSheetController',
         locals: {
-          option: ctrl.tmp_opt
+          tmp_opt: ctrl.tmp_opt
         }
       }).then(function (clickedItem) {
         console.log(clickedItem);
@@ -308,16 +308,14 @@
       }
     };
 
-    ctrl.showOptionSheet = opt => {
-    };
     $scope.clear_close_date = () => {
       delete ctrl.poll.close;
     };
 
   }
-  BottomSheetController.$inject = ['$scope', '$mdBottomSheet', 'option'];
+  BottomSheetController.$inject = ['$scope', '$mdBottomSheet', 'tmp_opt'];
   function BottomSheetController($scope, $mdBottomSheet, option) {
-    console.log(option);
+    console.log(tmp_opt);
     $scope.dismiss = () => {
       $mdBottomSheet.hide();
     };

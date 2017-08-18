@@ -1,18 +1,18 @@
-<div class="card mgn">
+<!--<div class="card mgn">
   <div class="card-header pd12y">
     <a class="undecorated-link" ng-click="save()">Save</a>
     <a class="undecorated-link mg10l" ng-click="dismiss()">Discard</a>
     <md-menu md-offset="102 52">
-      <a ng-click="$mdMenu.open($event)" class="card-link" aria-label="Color" href="#"><i class="fa fa-square" ng-style="{'color': ctrl.tmp_opt.color || '#ccc' }"></i> Option's color</a>
-      <!--<button class="btn-poll-color" ng-click="$mdMenu.open($event)" ng-style="{'background-color': (ctrl.tmp_opt.color) ? ctrl.tmp_opt.color : '#ccc'}">
-                    {{(ctrl.tmp_opt.color) ? ctrl.tmp_opt.color : 'Select color'}}</button>-->
+      <a ng-click="$mdMenu.open($event)" class="undecorated-link card-link" aria-label="Color" href="#">
+        <i class="fa fa-square" ng-style="{'color': ctrl.tmp_opt.color || '#ccc' }"></i> Option's color
+      </a>
       <md-menu-content>
         <material-picker format="'hex'" ng-model="ctrl.tmp_opt.color" size="15"></material-picker>
       </md-menu-content>
     </md-menu>
-    
     <div class="clearfix"></div>
   </div>
+  <hr class="mgn">
   <div class="card-body">
     <div class="form-group">
       <button type="button" class="btn btn-default pull-right" ng-click="$hide()">Close</button>
@@ -46,8 +46,8 @@
     <button type="button" class="btn btn-primary" ng-click="ctrl.save_opt(ctrl.form.optForm.$valid)">Save</button>
     <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
   </div>
-</div>
-<!--
+</div>-->
+
 <md-bottom-sheet>
   <div class="card mgn" ng-cloak>
     <div class="card-header">
@@ -93,4 +93,4 @@
       <div class="clearfix"></div>
     </div>
   </div>
-</md-bottom-sheet>-->
+</md-bottom-sheet>

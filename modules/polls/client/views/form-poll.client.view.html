@@ -47,9 +47,24 @@
           <div uib-collapse="moreCollapse">
             <!-- Close time -->
             <div class="form-group">
-              <input class="form-control" today="true" moment-picker="ctrl.poll.close" ng-model="ctrl.poll.close" format="YYYY/MM/DD HH:mm"
-                start-view="month" placeholder="Close poll at" readonly="true" additions="{ bottom: 'bottom-template-url' }">
+              <div class="input-group"
+                moment-picker="ctrl.poll.close"
+                format="YYYY/MM/DD HH:mm"
+                start-view="month"
+                additions="{ bottom: 'bottom-template-url' }">
+                <input class="form-control"
+                  placeholder="Close poll at"
+                  ng-model="ctrl.poll.close"
+                  readonly="true"
+                  ng-model-options="{ updateOn: 'blur' }">
+                <span class="input-group-addon"><i class="octicon octicon-calendar"></i></span>
+              </div>
               <span class="text-danger" ng-hide="ctrl.validateCloseDate()">Datetime is invalid</span>
+              <!--<input class="form-control" today="true" moment-picker="ctrl.poll.close" ng-model="ctrl.poll.close" format="YYYY/MM/DD HH:mm"
+                start-view="month" placeholder="Close poll at" readonly="true" additions="{ bottom: 'bottom-template-url' }">
+              <span class="input-group-addon"><i class="octicon octicon-calendar"></i></span>
+            </div>
+              <span class="text-danger" ng-hide="ctrl.validateCloseDate()">Datetime is invalid</span>-->
             </div>
             <!-- Tags -->
             <div class="form-group" ng-controller="AutocompleteTagController">

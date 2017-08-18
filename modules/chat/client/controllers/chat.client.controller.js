@@ -41,6 +41,7 @@ angular.module('chat').controller('ChatController', ['$scope', '$location', 'Aut
     });
 
     $scope.imageUpload = function (event) {
+      console.log('asdasdasd');
       var files = event.target.files;
       if (files && files.length > 0) {
         var reader = new FileReader();

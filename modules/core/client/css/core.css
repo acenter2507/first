@@ -197,7 +197,7 @@ body {
     opacity: 0; }
 
   .aside-panel-open .aside-panel {
-    height: 80%; }
+    height: 30%; }
     .aside-panel-open .aside-backdrop {
       transition: opacity 450ms;
       position: fixed;

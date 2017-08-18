@@ -13,7 +13,7 @@
     <div class="clearfix"></div>
   </div>
   <hr class="mgn">
-  <div class="card-body">
+  <div class="card-body" ng-init="isHideOptBody = true;">
     <div class="col-xs-12">
       <form name="ctrl.form.optForm" class="form-horizontal" novalidate>
         <fieldset>
@@ -31,6 +31,9 @@
             </div>
           </div>
           <div class="form-group">
+            <a class="undecorated-link" ng-click="isHideOptBody = !isHideOptBody; ctrl.opt_full()" >Type more</a>
+          </div>
+          <div class="form-group" uib-collapse="isHideOptBody">
             <text-angular ng-model="ctrl.tmp_opt.body"></text-angular>
           </div>
         </fieldset>

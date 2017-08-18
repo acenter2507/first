@@ -307,6 +307,10 @@
         ctrl.opts.push(ctrl.tmp_opt);
       }
     };
+    ctrl.opt_full = () => {
+      var aside = angular.element('.aside-panel');
+      console.log(aside);
+    };
     $scope.clear_close_date = () => {
       delete ctrl.poll.close;
     };

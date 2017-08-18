@@ -113,7 +113,7 @@ function asidePanelToggleDirective() {
   function link(scope, element, attrs) {
     element.on('click', function (e) {
       if (element.hasClass('aside-panel-toggle')) {
-        angular.element('body').toggleClass('aside-menu-open');
+        angular.element('body').toggleClass('aside-panel-open');
       }
     });
   }

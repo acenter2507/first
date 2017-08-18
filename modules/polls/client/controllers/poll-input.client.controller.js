@@ -315,7 +315,7 @@
     };
 
   }
-  BottomSheetController.$inject = ['$scope', '$mdBottomSheet'];
+  BottomSheetController.$inject = ['$scope', '$mdBottomSheet', 'option'];
   function BottomSheetController($scope, $mdBottomSheet, option) {
     console.log(option);
     $scope.dismiss = () => {

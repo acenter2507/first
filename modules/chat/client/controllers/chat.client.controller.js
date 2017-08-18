@@ -45,13 +45,13 @@ angular.module('chat').controller('ChatController', ['$scope', '$location', 'Aut
     $scope.upload = () => {
       var input = angular.element('#fileinput');
       console.log(input);
-      if (this.files && this.files[0]) {
+      if (input.files && input.files[0]) {
         var FR = new FileReader();
         FR.onload = function (e) {
           angular.element('#fileimage').src = e.target.result;
           console.log(e.target.result);
         };
-        FR.readAsDataURL(this.files[0]);
+        FR.readAsDataURL(input.files[0]);
       } else {
         console.log('Not file');
       }

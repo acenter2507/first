@@ -57,7 +57,17 @@
     <div class="col-md-3 pdn">
       <div class="card">
         <div class="card-body">
+          <md-input-container>
+            <label>Favorite Color</label>
+            <md-select name="category" ng-model="ctrl.poll.category" required>
+              <md-option ng-repeat="category in ctrl.categorys" value="{{category._id}}" ng-selected="category._id === ctrl.poll.category">{{category.name}}</md-option>
+            </md-select>
+            <div class="errors" ng-messages="myForm.category.$error">
+              <div ng-message="required">Required</div>
+            </div>
+          </md-input-container>
           <div class="form-group">
+
             <label for="category">Sort by</label>
             <select id="category" name="category" class="form-control" ng-model="ctrl.poll.category">
               <option value>Select category</option>
@@ -119,11 +129,6 @@
                 </md-menu>
               </div>
             </div>
-          </div>
-          <div class="clearfix h20"></div>
-          <div class="form-group">
-            <button class="btn btn-primary pull-right aside-panel-toggle">Add Option</button>
-            <div class="clearfix"></div>
           </div>
           <!-- Option -->
           <uib-accordion close-others="true" ng-if="ctrl.opts.length > 0">

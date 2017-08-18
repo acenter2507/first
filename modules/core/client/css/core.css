@@ -199,6 +199,8 @@ body {
   .aside-backdrop {
     opacity: 0; }
 
+  .aside-panel-open {
+    overflow: hidden; }
   .aside-panel-open .aside-panel {
     height: 30%; }
   .aside-panel-open .aside-panel.full {

@@ -3,7 +3,8 @@
   // Polls controller
   angular
     .module('polls')
-    .controller('PollInputController', PollInputController);
+    .controller('PollInputController', PollInputController)
+    .controller('BottomSheetController', BottomSheetController);
 
   PollInputController.$inject = [
     '$rootScope',
@@ -299,7 +300,7 @@
     ctrl.showOptionSheet = opt => {
       $mdBottomSheet.show({
       template: 'bottom-sheet-grid-template',
-      controller: 'GridBottomSheetCtrl',
+      controller: 'BottomSheetController',
       clickOutsideToClose: false
     }).then(function(clickedItem) {
       $mdToast.show(
@@ -316,5 +317,12 @@
       delete ctrl.poll.close;
     };
 
+  }
+  BottomSheetController.$inject = ['$scope', '$mdBottomSheet'];
+  function BottomSheetController($scope, $mdBottomSheet) {
+    $scope.listItemClick = function($index) {
+      var clickedItem = $scope.items[$index];
+      $mdBottomSheet.hide(clickedItem);
+    };
   }
 })();

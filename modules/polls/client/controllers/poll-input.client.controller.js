@@ -223,7 +223,13 @@
       return classStr;
     };
     ctrl.input_opt = opt => {
-      ctrl.tmp_opt = (!opt) ? { poll: ctrl.poll._id, title: '', body: '', status: 1 } : opt;
+      if (opt) {
+        ctrl.tmp_opt = opt;
+      } else {
+        if (!ctrl.tmp_opt) {
+          ctrl.tmp_opt = { poll: ctrl.poll._id, title: '', body: '', status: 1 };
+        }
+      }
       $mdBottomSheet.show({
         templateUrl: 'modules/polls/client/views/new-opt.client.view.html',
         controller: 'BottomSheetController',

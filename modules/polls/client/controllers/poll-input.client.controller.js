@@ -36,23 +36,21 @@
     Action,
     dialog
   ) {
-    var vm = this;
+    var ctrl = this;
 
-    vm.authentication = Authentication;
-    vm.isLogged = vm.authentication.user ? true : false;
-    vm.poll = poll;
-    vm.poll.close = vm.poll.close ? moment(vm.poll.close) : vm.poll.close;
-    vm.isClosed = moment(vm.poll.close).isAfter(new moment());
-    vm.categorys = Categorys.query();
-    vm.bk_poll = _.clone(poll);
-    vm.form = {};
-    vm.opts = vm.poll.opts || [];
+    ctrl.authentication = Authentication;
+    ctrl.user = Authentication.user;
+    ctrl.isLogged = (ctrl.user);
+    ctrl.poll = poll;
+    ctrl.poll.close = ctrl.poll.close ? moment(ctrl.poll.close) : ctrl.poll.close;
+    ctrl.isClosed = moment(ctrl.poll.close).isAfter(new moment());
+    ctrl.categorys = Categorys.query();
+    ctrl.bk_poll = _.clone(poll);
+    ctrl.form = {};
+    ctrl.opts = ctrl.poll.opts || [];
 
-    vm.optionToggle = -1;
-
-    $scope.sharedDate = new Date(new Date().setMinutes(0, 0));
     function init() {
-      if (vm.poll._id) {
+      if (ctrl.poll._id) {
         initSocket();
       }
       analysic_nofif();
@@ -65,8 +63,8 @@
         Socket.connect();
       }
       Socket.emit('subscribe_poll', {
-        pollId: vm.poll._id,
-        userId: vm.authentication.user._id
+        pollId: ctrl.poll._id,
+        userId: ctrl.user._id
       });
       Socket.on('poll_delete', res => {
         toast.error('This poll has been deleted.', 'Error!');
@@ -74,10 +72,10 @@
       });
       Socket.on('opts_request', res => {
         console.log('Has option request');
-        Action.get_poll(vm.poll._id)
+        Action.get_poll(ctrl.poll._id)
           .then(_poll => {
-            vm.poll = _poll;
-            vm.opts = vm.poll.opts;
+            ctrl.poll = _poll;
+            ctrl.opts = ctrl.poll.opts;
             $scope.$apply();
           }, err => {
             toast.error(err.message, 'Error!');
@@ -85,8 +83,8 @@
       });
       $scope.$on('$destroy', function () {
         Socket.emit('unsubscribe', {
-          pollId: vm.poll._id,
-          userId: vm.authentication.user._id
+          pollId: ctrl.poll._id,
+          userId: ctrl.user._id
         });
         Socket.removeListener('poll_delete');
         Socket.removeListener('opts_request');
@@ -106,13 +104,13 @@
 
     function isCanUpdate() {
       return true;
-      // const update = moment(vm.poll.updated);
+      // const update = moment(ctrl.poll.updated);
       // const now = moment(new Date());
       // var duration = moment.duration(now.diff(update)).asHours();
       // return duration >= 1;
     }
     // Function
-    vm.remove = () => {
+    ctrl.remove = () => {
       $scope.message_title = 'Delete poll!';
       $scope.message_content = 'Are you sure you want to delete?';
       $scope.dialog_type = 3;
@@ -125,19 +123,19 @@
       }, reject => {
       });
       function handle_delete() {
-        vm.poll.$remove(() => {
-          Socket.emit('poll_delete', { pollId: vm.poll._id });
+        ctrl.poll.$remove(() => {
+          Socket.emit('poll_delete', { pollId: ctrl.poll._id });
           $state.go('polls.list');
         });
       }
     };
 
-    vm.save = () => {
-      if (!vm.validateBody() || !vm.validateCategory() || !vm.validateTitle() || !vm.validateCloseDate()) {
+    ctrl.save = () => {
+      if (!ctrl.validateBody() || !ctrl.validateCategory() || !ctrl.validateTitle() || !ctrl.validateCloseDate()) {
         toast.error('You have not entered enough information.', 'Error!');
         return;
       }
-      if (!vm.poll.isPublic) {
+      if (!ctrl.poll.isPublic) {
         $scope.message_title = 'Save poll!';
         $scope.message_content = 'You want to save a private poll?';
         $scope.dialog_type = 1;
@@ -153,8 +151,8 @@
         handle_save();
       }
       function handle_save() {
-        vm.poll.opts = vm.opts;
-        Action.save_poll(vm.poll)
+        ctrl.poll.opts = ctrl.opts;
+        Action.save_poll(ctrl.poll)
           .then(res => {
             $state.go('polls.view', { pollId: res._id });
           })
@@ -164,23 +162,23 @@
       }
     };
 
-    vm.validateCategory = () => {
-      return (vm.poll.category) ? true : false;
+    ctrl.validateCategory = () => {
+      return (ctrl.poll.category) ? true : false;
     };
-    vm.validateTitle = () => {
-      return (vm.poll.title) ? true : false;
+    ctrl.validateTitle = () => {
+      return (ctrl.poll.title) ? true : false;
     };
-    vm.validateBody = () => {
-      return (vm.poll.body) ? true : false;
+    ctrl.validateBody = () => {
+      return (ctrl.poll.body) ? true : false;
     };
-    vm.validateCloseDate = () => {
-      if (!vm.poll.close) {
+    ctrl.validateCloseDate = () => {
+      if (!ctrl.poll.close) {
         return true;
       }
-      return moment(vm.poll.close).isAfter(new moment());
+      return moment(ctrl.poll.close).isAfter(new moment());
     };
-    vm.discard = () => {
-      if (angular.equals(vm.poll, vm.bk_poll)) {
+    ctrl.discard = () => {
+      if (angular.equals(ctrl.poll, ctrl.bk_poll)) {
         handle_discard();
       } else {
         $scope.message_title = 'Discard poll!';
@@ -197,36 +195,26 @@
       }
     };
     function handle_discard() {
-      if (vm.poll._id) {
-        $state.go('polls.view', { pollId: vm.poll._id });
+      if (ctrl.poll._id) {
+        $state.go('polls.view', { pollId: ctrl.poll._id });
       } else {
         $state.go('polls.list');
       }
     }
 
     // OPTIONS
-    vm.tmp_opt = {};
-    vm.show_colorpicker = false;
-    var opt_aside = {};//$bsAside({
-    //   scope: $scope,
-    //   controllerAs: vm,
-    //   templateUrl: 'modules/polls/client/views/new-opt.client.view.html',
-    //   title: 'Add new option',
-    //   placement: 'bottom',
-    //   animation: 'am-fade-and-slide-bottom',
-    //   show: false
-    // });
-    vm.opt_class = opt => {
+    ctrl.tmp_opt = {};
+    ctrl.show_colorpicker = false;
+    ctrl.opt_class = opt => {
       var classStr = 'custom-panel ';
       classStr += opt.status === 1 ? 'public' : '';
       classStr += opt.status === 2 ? 'waiting' : '';
       return classStr;
     };
-    vm.input_opt = opt => {
-      vm.tmp_opt = (!opt) ? { poll: vm.poll._id, title: '', body: '', status: 1 } : opt;
-      opt_aside.$promise.then(opt_aside.show);
+    ctrl.input_opt = opt => {
+      ctrl.tmp_opt = (!opt) ? { poll: ctrl.poll._id, title: '', body: '', status: 1 } : opt;
     };
-    vm.remove_opt = opt => {
+    ctrl.remove_opt = opt => {
       $scope.message_title = 'Delete option!';
       $scope.message_content = 'Are you sure you want to delete this option?';
       $scope.dialog_type = 3;
@@ -239,16 +227,16 @@
       }, reject => {
       });
       function handle_delete() {
-        vm.opts = _.without(vm.opts, opt);
+        ctrl.opts = _.without(ctrl.opts, opt);
         if (opt._id) {
           var _opt = new Opts(opt);
           _opt.$remove(() => {
-            Socket.emit('opts_update', { pollId: vm.poll._id });
+            Socket.emit('opts_update', { pollId: ctrl.poll._id });
           });
         }
       }
     };
-    vm.approve_opt = opt => {
+    ctrl.approve_opt = opt => {
       $scope.message_title = 'Approve option!';
       $scope.message_content = 'Are you sure you want to approve this option?';
       $scope.dialog_type = 1;
@@ -264,11 +252,11 @@
         opt.status = 1;
         var _opt = new Opts(opt);
         _opt.$update(() => {
-          Socket.emit('opts_update', { pollId: vm.poll._id });
+          Socket.emit('opts_update', { pollId: ctrl.poll._id });
         });
       }
     };
-    vm.reject_opt = opt => {
+    ctrl.reject_opt = opt => {
       $scope.message_title = 'Reject option!';
       $scope.message_content = 'Are you sure you want to reject this option?';
       $scope.dialog_type = 2;
@@ -287,15 +275,14 @@
         });
       }
     };
-    vm.save_opt = isValid => {
+    ctrl.save_opt = isValid => {
       if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'vm.form.optForm');
+        $scope.$broadcast('show-errors-check-validity', 'ctrl.form.optForm');
         return false;
       }
-      if (!vm.tmp_opt._id && !_.contains(vm.opts, vm.tmp_opt)) {
-        vm.opts.push(vm.tmp_opt);
+      if (!ctrl.tmp_opt._id && !_.contains(ctrl.opts, ctrl.tmp_opt)) {
+        ctrl.opts.push(ctrl.tmp_opt);
       }
-      opt_aside.$promise.then(opt_aside.hide);
     };
   }
 })();

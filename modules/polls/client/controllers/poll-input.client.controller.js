@@ -18,8 +18,7 @@
     'CategorysService',
     'toastr',
     'Action',
-    'ngDialog',
-    '$mdBottomSheet'
+    'ngDialog'
   ];
 
   function PollInputController(
@@ -35,8 +34,7 @@
     Categorys,
     toast,
     Action,
-    dialog,
-    $mdBottomSheet
+    dialog
   ) {
     var ctrl = this;
 
@@ -137,7 +135,7 @@
 
     ctrl.save = isValid => {
       if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'pollForm');
+        $scope.$broadcast('show-errors-check-validity', 'ctrl.form.pollForm');
         return false;
       }
 

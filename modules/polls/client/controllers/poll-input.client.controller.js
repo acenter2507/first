@@ -139,8 +139,8 @@
         return false;
       }
 
-      if (!ctrl.validateBody() || !ctrl.validateCategory() || !ctrl.validateTitle() || !ctrl.validateCloseDate()) {
-        toast.error('You have not entered enough information.', 'Error!');
+      if (!ctrl.validateCloseDate()) {
+        toast.error('Close date is invalid.', 'Error!');
         return;
       }
       if (!ctrl.poll.isPublic) {

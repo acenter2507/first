@@ -43,6 +43,7 @@
             // Create a virtual input element.
             var input = document.createElement('input');
             input.type = 'file';
+            input.capture="camera";
             input.accept = 'image/*';
 
             input.onchange = function () {
@@ -60,10 +61,10 @@
           }
         });
         taOptions.toolbar = [
-          ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'pre', 'quote'],
-          ['bold', 'italics', 'underline', 'strikeThrough', 'ul', 'ol', 'redo', 'undo', 'clear'],
+          ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'quote'],
+          ['bold', 'italics', 'underline', 'strikeThrough', 'ul', 'ol', 'redo', 'undo'],
           ['justifyLeft', 'justifyCenter', 'justifyRight', 'indent', 'outdent'],
-          ['html', 'insertImage', 'insertLink', 'insertVideo', 'uploadImage', 'wordcount', 'charcount']
+          ['html', 'insertImage', 'insertLink', 'insertVideo', 'uploadImage']
         ];
         // taOptions.toolbar[3].push('uploadImage');
         return taOptions;

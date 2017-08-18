@@ -39,7 +39,8 @@ angular.module('chat').controller('ChatController', ['$scope', '$location', 'Aut
     $scope.$on('$destroy', function () {
       Socket.removeListener('chatMessage');
     });
-
+    
+    $scope.text = 'Hello';
     $scope.file = [];
     $scope.upload = () => {
       console.log('Call function');

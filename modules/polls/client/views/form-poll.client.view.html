@@ -30,7 +30,7 @@
       <div class="card-body" ng-init="moreCollapse = true;">
         <form name="pollForm" ng-submit="ctrl.save(pollForm.$valid)" novalidate autocomplete="off">
           <!-- Category -->
-          <div class="form-group" show-errors>
+          <div class="form-group mg10b" show-errors>
             <select id="category" name="category" class="form-control" ng-model="ctrl.poll.category" required>
               <option value>Category</option>
               <option ng-repeat="ctgr in ctrl.categorys" value="{{ctgr._id}}" ng-selected="ctgr._id.toString() === ctrl.poll.category.toString()" >{{ctgr.name}}</option>
@@ -40,30 +40,18 @@
             </div>
           </div>
           <!-- More -->
-          <div class="form-group">
+          <div class="form-group mg20b">
             <a class="undecorated-link pull-right" ng-click="moreCollapse = !moreCollapse">More setting</i></a>
-            <div class="clearfix h10"></div>
+            <div class="clearfix"></div>
           </div>
           <div uib-collapse="moreCollapse">
             <!-- Close time -->
             <div class="form-group">
-              <div class="input-group"
-                moment-picker="ctrl.poll.close"
-                format="YYYY/MM/DD HH:mm"
-                start-view="month"
-                additions="{ bottom: 'bottom-template-url' }">
-                <input class="form-control"
-                  placeholder="Close poll at"
-                  ng-model="ctrl.poll.close"
-                  readonly="true">
+              <div class="input-group" moment-picker="ctrl.poll.close" format="YYYY/MM/DD HH:mm" start-view="month" additions="{ bottom: 'bottom-template-url' }">
+                <input class="form-control" placeholder="Close poll at" ng-model="ctrl.poll.close" readonly="true">
                 <span class="input-group-addon span-link"><i class="fa fa-calendar"></i></span>
               </div>
               <span class="text-danger" ng-hide="ctrl.validateCloseDate()">Datetime is invalid</span>
-              <!--<input class="form-control" today="true" moment-picker="ctrl.poll.close" ng-model="ctrl.poll.close" format="YYYY/MM/DD HH:mm"
-                start-view="month" placeholder="Close poll at" readonly="true" additions="{ bottom: 'bottom-template-url' }">
-              <span class="input-group-addon"><i class="octicon octicon-calendar"></i></span>
-            </div>
-              <span class="text-danger" ng-hide="ctrl.validateCloseDate()">Datetime is invalid</span>-->
             </div>
             <!-- Tags -->
             <div class="form-group" ng-controller="AutocompleteTagController">
@@ -76,7 +64,7 @@
           <!-- Title -->
           <div class="form-group" show-errors>
             <input type="text" class="form-control" name="title" ng-model="ctrl.poll.title" placeholder="Enter your poll tilte here"
-             required/>
+              required/>
             <div ng-messages="pollForm.title.$error" role="alert">
               <p class="help-block error-text" ng-message="required">You must type somthing for title.</p>
             </div>
@@ -92,7 +80,25 @@
       </div>
     </div>
   </div>
-
+  <div class="quick-menu">
+    <md-button md-colors="{background: 'blue'}" aria-label="add" class="md-fab"><i class="fa fa-plus"></i></md-button>
+    <!--<md-fab-speed-dial md-open="isOpen" md-direction="up" class="md-scale md-fab-bottom-left">
+      <md-fab-trigger>
+        <md-button md-colors="{background: 'blue'}" aria-label="menu" class="md-fab"><i class="fa fa-bars"></i></md-button>
+      </md-fab-trigger>
+      <md-fab-actions>
+        <md-button aria-label="Search" class="md-fab md-raised" ng-click="q_search()"><i class="fa fa-search"></i>
+          <md-tooltip md-direction="right" md-visible="isShowQuickToolTip">Search</md-tooltip>
+        </md-button>
+        <md-button aria-label="New Post" class="md-fab md-raised" ng-click="q_post_poll()"><i class="fa fa-pencil-square-o"></i>
+          <md-tooltip md-direction="right" md-visible="isShowQuickToolTip">Type post</md-tooltip>
+        </md-button>
+        <md-button aria-label="Quick Poll" class="md-fab md-raised" ng-click="q_quick_poll()"><i class="fa fa-rocket"></i>
+          <md-tooltip md-direction="right" md-visible="isShowQuickToolTip">Quick poll</md-tooltip>
+        </md-button>
+      </md-fab-actions>
+    </md-fab-speed-dial>-->
+  </div>
   <!-- Toolbar -->
   <!--<div class="row">
     <div class="col-xs-12 pdn">

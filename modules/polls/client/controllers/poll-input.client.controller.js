@@ -307,7 +307,6 @@
         ctrl.opts.push(ctrl.tmp_opt);
       }
     };
-
     $scope.clear_close_date = () => {
       delete ctrl.poll.close;
     };

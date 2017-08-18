@@ -310,6 +310,7 @@
     ctrl.opt_full = () => {
       var aside = angular.element('.aside-panel')[0];
       angular.element(aside).toggleClass('full');
+      angular.element('#aside-panel-full-toggle').find('i').toggleClass('r180');
     };
     $scope.clear_close_date = () => {
       delete ctrl.poll.close;

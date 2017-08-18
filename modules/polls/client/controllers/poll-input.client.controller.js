@@ -48,7 +48,7 @@
       ctrl.categorys = _ctgrs;
       console.log();
     })
-    
+
     ctrl.bk_poll = _.clone(poll);
     ctrl.form = {};
     ctrl.opts = ctrl.poll.opts || [];
@@ -135,10 +135,10 @@
     };
 
     ctrl.save = isValid => {
-    if (!isValid) {
-      $scope.$broadcast('show-errors-check-validity', 'pollForm');
-      return false;
-    }
+      if (!isValid) {
+        $scope.$broadcast('show-errors-check-validity', 'pollForm');
+        return false;
+      }
 
       if (!ctrl.validateBody() || !ctrl.validateCategory() || !ctrl.validateTitle() || !ctrl.validateCloseDate()) {
         toast.error('You have not entered enough information.', 'Error!');

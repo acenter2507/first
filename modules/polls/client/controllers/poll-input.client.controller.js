@@ -311,6 +311,7 @@
       }
       if (!ctrl.tmp_opt._id && !_.contains(ctrl.opts, ctrl.tmp_opt)) {
         ctrl.opts.push(ctrl.tmp_opt);
+        ctrl.tmp_opt = {};
       }
     };
     ctrl.opt_full = () => {

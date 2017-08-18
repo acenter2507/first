@@ -76,6 +76,27 @@
               <p class="help-block error-text" ng-message="required">You must type somthing for body.</p>
             </div>
           </div>
+          <!-- Option -->
+          <uib-accordion close-others="true" ng-if="ctrl.opts.length > 0">
+            <uib-accordion-group ng-repeat="opt in ctrl.opts | orderBy: 'create'" heading="{{opt.title + ' (' + opt.voteCnt + ' votes)'}}"
+              panel-class="{{ ctrl.opt_class(opt) }}">
+              <small class="pull-right text-muted">
+                <span>Added by</span>
+                <a class="undecorated-link" ui-sref="profile.info({userId: opt.user._id})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>
+                <span ng-if="!opt.user">Deleted User</span><span>on</span>
+                <span ng-bind="opt.created | LLL_format"></span>
+              </small>
+              <div class="clearfix"></div>
+              <div class="pull-right mg10b">
+                <a class="undecorated-link" ng-click="ctrl.remove_opt(opt)">Remove</a>
+                <a class="undecorated-link mg10r" ng-if="opt.status == 1" ng-click="ctrl.input_opt(opt)">Edit</a>
+                <a class="undecorated-link mg10r" ng-if="opt.status == 2" ng-click="ctrl.approve_opt(opt)">Approve</a>
+                <a class="undecorated-link mg10r" ng-if="opt.status == 2" ng-click="ctrl.reject_opt(opt)">Reject</a>
+              </div>
+              <div class="clearfix"></div>
+              <div class="text-body" ta-bind="text" ng-model="opt.body" ta-readonly="true"></div>
+            </uib-accordion-group>
+          </uib-accordion>
         </form>
       </div>
     </div>

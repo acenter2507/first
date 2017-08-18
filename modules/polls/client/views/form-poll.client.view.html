@@ -68,7 +68,7 @@
           </div>
           <!-- Category -->
           <div class="row">
-            <div class="col-xs-6">
+            <div class="col-lg-6">
               <!-- Trường hợp edit poll -->
               <div class="select" ng-if="ctrl.poll._id">
                 <select ng-model="ctrl.poll.category._id" id="category" name="category" ng-options="category._id as category.name for category in ctrl.categorys"></select>
@@ -84,7 +84,7 @@
               </div>
               <span class="text-danger" ng-hide="ctrl.validateCategory()">Category is required</span>
             </div>
-            <div class="col-xs-6">
+            <div class="col-lg-6">
               <div class="pull-left mg5t">
                 <md-menu md-offset="10 30">
                   <a class="undecorated-link span-link" ng-click="$mdMenu.open($event)" aria-label="Open setting menu">

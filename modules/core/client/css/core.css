@@ -197,10 +197,14 @@ body {
     height: 100%;
     position: relative; }
     .aside-panel .aside-dialog .aside-content .aside-header {
+      height: 3rem;
       padding: 1rem; }
       .aside-panel .aside-dialog .aside-content .aside-header .aside-title {
+        margin: 0;
+        line-height: 2rem;
         vertical-align: middle; }
       .aside-panel .aside-dialog .aside-content .aside-header .aside-close {
+        line-height: 2rem;
         float: right; }
 
 .aside-panel-open {

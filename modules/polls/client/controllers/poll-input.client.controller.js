@@ -292,14 +292,16 @@
         return false;
       }
       if (!ctrl.tmp_opt._id && !_.contains(ctrl.opts, ctrl.tmp_opt)) {
-        ctrl.opts.push(ctrl.tmp_opt);
+        ctrl.opts.push(_.clone(ctrl.tmp_opt));
+      } else {
+        ctrl.tmp_opt = {
+          poll: ctrl.poll._id,
+          title: ctrl.tmp_opt.title,
+          body: ctrl.tmp_opt.body,
+          color: ctrl.tmp_opt.color,
+          status: 1
+        };
       }
-      ctrl.tmp_opt = { poll: ctrl.poll._id, title: '', body: '', status: 1 };
-      ctrl.form.optForm.$setSubmitted();
-      ctrl.form.optForm.$setUntouched();
-      ctrl.form.optForm.$setPristine();
-      ctrl.form.optForm.title.$setValidity("required", false);
-      ctrl.form.optForm.color.$setValidity("required", false);
 
     };
     ctrl.opt_full = () => {

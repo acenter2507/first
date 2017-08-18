@@ -1,6 +1,6 @@
 <section class="container-fluid animated fadeIn mg6t mg50b">
   <!-- Toolbar -->
-  <div class="row">
+  <!--<div class="row">
     <div class="col-xs-12 pdn">
       <div class="custom-toolbar">
         <button class="btn btn-default pull-right" ng-click="ctrl.discard()">Discard</button>
@@ -8,10 +8,62 @@
         <button class="btn btn-danger pull-right mg10r" ng-show="ctrl.poll._id" ng-click="ctrl.remove()">Delete</button>
       </div>
     </div>
-  </div>
+  </div>-->
 
   <!-- Form -->
   <div class="row">
+    <div class="card">
+      <div class="card-header">
+        <md-menu md-offset="10 30">
+          <a class="undecorated-link card-link" ng-click="$mdMenu.open($event)">Poll's options</i></a>
+          <md-menu-content>
+            <ul class="menu-list mg5b">
+              <li>
+                <md-checkbox class="md-primary" ng-model="ctrl.poll.isPublic">Public</md-checkbox>
+              </li>
+              <li>
+                <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_guest">Allow guest vote</md-checkbox>
+              </li>
+              <li>
+                <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_multiple">Allow multiple vote</md-checkbox>
+              </li>
+              <li>
+                <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_add">Allow members suggest option</md-checkbox>
+              </li>
+            </ul>
+          </md-menu-content>
+        </md-menu>
+      </div>
+      <div class="card-body" ng-init="moreCollapse = false;">
+        <div class="form-group">
+          <select id="category" name="category" class="form-control" ng-model="ctrl.poll.category" required>
+            <option value>Category</option>
+            <option ng-repeat="ctgr in ctrl.categorys" value="{{ctgr._id}}" ng-selected="ctgr._id.toString() === ctrl.poll.category.toString()" >{{ctgr.name}}</option>
+          </select>
+          <div class="errors" ng-messages="myForm.category.$error">
+            <div ng-message="required">Category is require.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <a class="undecorated-link" ng-click="moreCollapse = !moreCollapse">More setting</i></a>
+        </div>
+        <div uib-collapse="moreCollapse">
+          <!-- Close time -->
+          <div class="form-group">
+            <input class="form-control" today="true" moment-picker="ctrl.poll.close" ng-model="ctrl.poll.close" format="YYYY/MM/DD HH:mm"
+              start-view="month" placeholder="Close poll at" onkeydown="return false;" additions="{ bottom: 'bottom-template-url' }">
+            <span class="text-danger" ng-hide="ctrl.validateCloseDate()">Datetime is invalid</span>
+          </div>
+          <!-- Tags -->
+          <div class="form-group" ng-controller="AutocompleteTagController">
+            <tags-input ng-model="ctrl.poll.tags" display-property="name" placeholder="{{placeholder}}" add-from-autocomplete-only="true"
+              replace-spaces-with-dashes="false" min-length="1" enforce-max-tags class="tags-custom">
+              <auto-complete source="loadItems($query)" min-length="1" debounce-delay="0" max-results="10"></auto-complete>
+            </tags-input>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="col-md-9 pdn">
       <div class="card">
         <div class="card-body">
@@ -90,13 +142,12 @@
           </div>
           <!-- Close time -->
           <div class="form-group">
-            <input class="form-control" today="true" moment-picker="ctrl.poll.close" ng-model="ctrl.poll.close" format="YYYY/MM/DD HH:mm" start-view="month"
-              placeholder="Close poll at" onkeydown="return false;" additions="{ bottom: 'bottom-template-url' }">
+            <input class="form-control" today="true" moment-picker="ctrl.poll.close" ng-model="ctrl.poll.close" format="YYYY/MM/DD HH:mm"
+              start-view="month" placeholder="Close poll at" onkeydown="return false;" additions="{ bottom: 'bottom-template-url' }">
             <span class="text-danger" ng-hide="ctrl.validateCloseDate()">Datetime is invalid</span>
           </div>
           <!-- Tags -->
           <div class="form-group" ng-controller="AutocompleteTagController">
-            <label class="form-label" for="#">Tags</label>
             <tags-input ng-model="ctrl.poll.tags" display-property="name" placeholder="{{placeholder}}" add-from-autocomplete-only="true"
               replace-spaces-with-dashes="false" min-length="1" enforce-max-tags class="tags-custom">
               <auto-complete source="loadItems($query)" min-length="1" debounce-delay="0" max-results="10"></auto-complete>
@@ -120,8 +171,8 @@
   <div class="aside-panel">
     <div ng-include="'/modules/polls/client/views/new-opt.client.view.html'"></div>
   </div>
-<script type="text/ng-template" id="bottom-template-url">
-  <button class="btn btn-info btn-sm btn-block" ng-click="clear_close_date()">
+  <script type="text/ng-template" id="bottom-template-url">
+    <button class="btn btn-info btn-sm btn-block" ng-click="clear_close_date()">
     Clear
   </button>
-</script>
+  </script>

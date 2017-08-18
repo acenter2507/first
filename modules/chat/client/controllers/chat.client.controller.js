@@ -48,7 +48,7 @@ angular.module('chat').controller('ChatController', ['$scope', '$location', 'Aut
         var reader = new FileReader();
         reader.onload = function(e) {
           console.log(e.target.result);
-          angular.element('#fileimage').src = e.target.result;
+          angular.element('#fileimage').attr('src', e.target.result);
 
         };
         reader.readAsDataURL(files[0]);

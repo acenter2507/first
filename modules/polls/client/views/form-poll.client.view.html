@@ -12,66 +12,9 @@
 
   <!-- Form -->
   <div class="row">
-    <div class="col-md-8 pdn">
+    <div class="col-md-9 pdn">
       <div class="card">
         <div class="card-body">
-          <!-- Category -->
-          <div class="row">
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-              <!-- Trường hợp edit poll -->
-              <div class="select" ng-if="ctrl.poll._id">
-                <select ng-model="ctrl.poll.category._id" id="category" name="category" ng-options="category._id as category.name for category in ctrl.categorys"></select>
-                <div class="select__arrow"></div>
-              </div>
-              <!-- Trường hợp create poll -->
-              <div class="select" ng-if="!ctrl.poll._id">
-                <select ng-model="ctrl.poll.category" id="category" name="category">
-                  <option value="" selected>Category</option>
-                  <option ng-repeat="category in ctrl.categorys" value="{{category._id}}">{{category.name}}</option>
-                </select>
-                <div class="select__arrow"></div>
-              </div>
-              <span class="text-danger" ng-hide="ctrl.validateCategory()">Category is required</span>
-            </div>
-            <div class="col-xs-6 col-sm-8 col-md-9 col-lg-10">
-              <div class="pull-left mg5t">
-                <md-menu md-offset="10 30">
-                  <a class="undecorated-link span-link" ng-click="$mdMenu.open($event)" aria-label="Open setting menu">
-                  <i class="fa fa-cog fa-2x"></i>
-                </a>
-                  <md-menu-content>
-                    <ul class="menu-list mg5b">
-                      <li>
-                        <label class="control control--checkbox custom--checkbox">Public
-                        <input type="checkbox" name="isPublic" ng-model="ctrl.poll.isPublic"/>
-                        <div class="control__indicator"></div>
-                      </label>
-                      </li>
-                      <li>
-                        <label class="control control--checkbox custom--checkbox">Allow guest vote
-                        <input type="checkbox" name="allow_guest" ng-model="ctrl.poll.allow_guest"/>
-                        <div class="control__indicator"></div>
-                      </label>
-                      </li>
-                      <li>
-                        <label class="control control--checkbox custom--checkbox">Allow multiple vote
-                        <input type="checkbox" name="allow_multiple" ng-model="ctrl.poll.allow_multiple"/>
-                        <div class="control__indicator"></div>
-                      </label>
-                      </li>
-                      <li>
-                        <label class="control control--checkbox custom--checkbox">Allow members suggest option
-                        <input type="checkbox" name="allow_add" ng-model="ctrl.poll.allow_add"/>
-                        <div class="control__indicator"></div>
-                      </label>
-                      </li>
-                    </ul>
-                  </md-menu-content>
-                </md-menu>
-              </div>
-            </div>
-          </div>
-          <div class="clearfix h20"></div>
           <!-- Title -->
           <div class="form-group">
             <input type="text" class="form-control input-large" name="title" ng-model="ctrl.poll.title" placeholder="Enter your poll tilte here"
@@ -89,7 +32,8 @@
           </div>
           <!-- Option -->
           <uib-accordion close-others="true" ng-if="ctrl.opts.length > 0">
-            <uib-accordion-group ng-repeat="opt in ctrl.opts | orderBy: 'create'" heading="{{opt.title + ' (' + opt.voteCnt + ' votes)'}}" panel-class="{{ ctrl.opt_class(opt) }}">
+            <uib-accordion-group ng-repeat="opt in ctrl.opts | orderBy: 'create'" heading="{{opt.title + ' (' + opt.voteCnt + ' votes)'}}"
+              panel-class="{{ ctrl.opt_class(opt) }}">
               <small class="pull-right text-muted">
                 <span>Added by</span>
                 <a class="undecorated-link" ui-sref="profile.info({userId: opt.user._id})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>
@@ -107,30 +51,24 @@
               <div class="text-body" ta-bind="text" ng-model="opt.body" ta-readonly="true"></div>
             </uib-accordion-group>
           </uib-accordion>
-          <!-- Close time -->
-          <div class="form-group">
-            <label class="control-label" for="close">Stop voting at:</label>
-            <input class="form-control" moment-picker="ctrl.poll.close" ng-model="ctrl.poll.close" format="YYYY/MM/DD HH:mm" start-view="month"
-              placeholder="Select a date...">
-            <span class="text-danger" ng-hide="ctrl.validateCloseDate()">Datetime is invalid</span>
-          </div>
-          <!-- Tags -->
-          <div class="form-group" ng-controller="AutocompleteTagController">
-            <label class="form-label" for="#">Tags</label>
-            <tags-input ng-model="ctrl.poll.tags" display-property="name" placeholder="{{placeholder}}" add-from-autocomplete-only="true"
-              replace-spaces-with-dashes="false" min-length="1" enforce-max-tags class="tags-custom">
-              <auto-complete source="loadItems($query)" min-length="1" debounce-delay="0" max-results="10"></auto-complete>
-            </tags-input>
-          </div>
         </div>
       </div>
     </div>
-    <div class="col-md-4 pdn">
+    <div class="col-md-3 pdn">
       <div class="card">
         <div class="card-body">
+          <div class="form-group">
+            <div class="col-sm-12">
+              <label for="category">Sort by</label>
+              <select id="category" name="category" class="form-control" ng-model="ctrl.poll.category">
+                <option value>Select category</option>
+                <option ng-repeat="category in ctrl.categorys" value="{{category._id}}" ng-selected="category._id === ctrl.poll.category">{{category.name}}</option>
+              </select>
+            </div>
+          </div>
           <!-- Category -->
           <div class="row">
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+            <div class="col-xs-6">
               <!-- Trường hợp edit poll -->
               <div class="select" ng-if="ctrl.poll._id">
                 <select ng-model="ctrl.poll.category._id" id="category" name="category" ng-options="category._id as category.name for category in ctrl.categorys"></select>
@@ -146,7 +84,7 @@
               </div>
               <span class="text-danger" ng-hide="ctrl.validateCategory()">Category is required</span>
             </div>
-            <div class="col-xs-6 col-sm-8 col-md-9 col-lg-10">
+            <div class="col-xs-6">
               <div class="pull-left mg5t">
                 <md-menu md-offset="10 30">
                   <a class="undecorated-link span-link" ng-click="$mdMenu.open($event)" aria-label="Open setting menu">
@@ -191,7 +129,8 @@
           </div>
           <!-- Option -->
           <uib-accordion close-others="true" ng-if="ctrl.opts.length > 0">
-            <uib-accordion-group ng-repeat="opt in ctrl.opts | orderBy: 'create'" heading="{{opt.title + ' (' + opt.voteCnt + ' votes)'}}" panel-class="{{ ctrl.opt_class(opt) }}">
+            <uib-accordion-group ng-repeat="opt in ctrl.opts | orderBy: 'create'" heading="{{opt.title + ' (' + opt.voteCnt + ' votes)'}}"
+              panel-class="{{ ctrl.opt_class(opt) }}">
               <small class="pull-right text-muted">
                 <span>Added by</span>
                 <a class="undecorated-link" ui-sref="profile.info({userId: opt.user._id})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>

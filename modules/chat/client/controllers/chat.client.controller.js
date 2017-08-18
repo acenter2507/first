@@ -51,6 +51,6 @@ angular.module('chat').controller('ChatController', ['$scope', '$location', 'Aut
         };
          reader.readAsDataURL(files[0]);
       }
-    }
+    };
   }
 ]);

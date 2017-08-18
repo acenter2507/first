@@ -49,8 +49,7 @@
     ctrl.isClosed = moment(ctrl.poll.close).isAfter(new moment());
     Categorys.query().$promise.then(_ctgrs => {
       ctrl.categorys = _ctgrs;
-      console.log();
-    })
+    });
 
     ctrl.bk_poll = _.clone(poll);
     ctrl.form = {};
@@ -315,7 +314,6 @@
   }
   BottomSheetController.$inject = ['$scope', '$mdBottomSheet', 'tmp_opt'];
   function BottomSheetController($scope, $mdBottomSheet, tmp_opt) {
-    console.log(tmp_opt);
     $scope.dismiss = () => {
       $mdBottomSheet.hide();
     };

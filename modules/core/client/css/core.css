@@ -182,8 +182,20 @@ body {
     margin-right: 0; } }
 
 md-bottom-sheet {
-  top: calc(80%);
+  height: 80%;
   padding: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar; }
+
+.aside-panel {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 0;
+  background-color: #fff;
+  transition: height 0.25s ease-in;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar; }

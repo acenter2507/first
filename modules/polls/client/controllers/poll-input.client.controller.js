@@ -44,8 +44,10 @@
     ctrl.poll = poll;
     ctrl.poll.close = ctrl.poll.close ? moment(ctrl.poll.close) : ctrl.poll.close;
     ctrl.isClosed = moment(ctrl.poll.close).isAfter(new moment());
-    ctrl.categorys = Categorys.query();
-    console.log(ctrl.categorys);
+    Categorys.query().$promise.then(_ctgrs => {
+      ctrl.categorys = _ctgrs;
+    })
+    
     ctrl.bk_poll = _.clone(poll);
     ctrl.form = {};
     ctrl.opts = ctrl.poll.opts || [];

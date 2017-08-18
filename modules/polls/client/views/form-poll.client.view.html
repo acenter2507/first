@@ -84,52 +84,7 @@
     <md-button md-colors="{background: 'blue'}" aria-label="add" class="md-fab" ng-click="ctrl.showOptionSheet()"><i class="fa fa-plus"></i>
       <md-tooltip md-direction="right">Add option</md-tooltip>
     </md-button>
-    <!--<md-fab-speed-dial md-open="isOpen" md-direction="up" class="md-scale md-fab-bottom-left">
-      <md-fab-trigger>
-        <md-button md-colors="{background: 'blue'}" aria-label="menu" class="md-fab"><i class="fa fa-bars"></i></md-button>
-      </md-fab-trigger>
-      <md-fab-actions>
-        <md-button aria-label="Search" class="md-fab md-raised" ng-click="q_search()"><i class="fa fa-search"></i>
-          <md-tooltip md-direction="right" md-visible="isShowQuickToolTip">Search</md-tooltip>
-        </md-button>
-        <md-button aria-label="New Post" class="md-fab md-raised" ng-click="q_post_poll()"><i class="fa fa-pencil-square-o"></i>
-          <md-tooltip md-direction="right" md-visible="isShowQuickToolTip">Type post</md-tooltip>
-        </md-button>
-        <md-button aria-label="Quick Poll" class="md-fab md-raised" ng-click="q_quick_poll()"><i class="fa fa-rocket"></i>
-          <md-tooltip md-direction="right" md-visible="isShowQuickToolTip">Quick poll</md-tooltip>
-        </md-button>
-      </md-fab-actions>
-    </md-fab-speed-dial>-->
   </div>
-  <!-- Toolbar -->
-  <!--<div class="row">
-    <div class="col-xs-12 pdn">
-      <div class="custom-toolbar">
-        <button class="btn btn-default pull-right" ng-click="ctrl.discard()">Discard</button>
-        <button class="btn btn-primary pull-right mg10r" ng-click="ctrl.save(true)">{{ctrl.poll._id ? ' Update' : ' Create'}}</button>
-        <button class="btn btn-danger pull-right mg10r" ng-show="ctrl.poll._id" ng-click="ctrl.remove()">Delete</button>
-      </div>
-    </div>
-  </div>-->
-  <script type="text/ng-template" id="bottom-sheet-grid-template">
-    <md-bottom-sheet class="md-grid" layout="column">
-      <div layout="row" layout-align="center center" ng-cloak>
-        <h4>Since <code>clickOutsideToClose = false</code>, drag down or press ESC to close</h4>
-      </div>
-      <!--<div ng-cloak>
-      <md-list flex layout="row" layout-align="center center">
-        <md-list-item ng-repeat="item in items">
-          <div>
-            <md-button class="md-grid-item-content" ng-click="listItemClick($index)">
-              <md-icon md-svg-src="{{item.icon}}"></md-icon>
-              <div class="md-grid-text"> {{ item.name }} </div>
-            </md-button>
-          </div>
-        </md-list-item>
-      </md-list>
-    </div>-->
-    </md-bottom-sheet>
-  </script>
   <div class="aside-panel">
     <div ng-include="'/modules/polls/client/views/new-opt.client.view.html'"></div>
   </div>

@@ -299,7 +299,7 @@
 
     ctrl.showOptionSheet = opt => {
       $mdBottomSheet.show({
-      templateUrl: 'bottom-sheet-grid-template.html',
+      templateUrl: 'modules/polls/client/views/new-opt.client.view.html',
       controller: 'BottomSheetController',
       clickOutsideToClose: true
     }).then(function(clickedItem) {

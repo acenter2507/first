@@ -298,8 +298,8 @@
       ctrl.form.optForm.$setSubmitted();
       ctrl.form.optForm.$setUntouched();
       ctrl.form.optForm.$setPristine();
-      $scope.form.optForm.name.$setValidity("required", false);
-      $scope.form.optForm.color.$setValidity("required", false);
+      ctrl.form.optForm.name.$setValidity("required", false);
+      ctrl.form.optForm.color.$setValidity("required", false);
 
     };
     ctrl.opt_full = () => {

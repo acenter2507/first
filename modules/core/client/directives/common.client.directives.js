@@ -69,12 +69,12 @@ function asideMenuHideDirective() {
   return directive;
 
   function link(scope, element, attrs) {
-    $(document).bind("mouseup touchend", function (e) {
-      var container = $("#aside-menu");
-      var btn = $("#aside-menu-toggler");
+    angular.element(document).bind("mouseup touchend", function (e) {
+      var container = angular.element("#aside-menu");
+      var btn = angular.element("#aside-menu-toggler");
       if (!container.is(e.target) && container.has(e.target).length === 0 && !btn.is(e.target) && btn.has(e.target).length === 0) {
-        if ($(element).hasClass('aside-menu-show')) {
-          $(element).removeClass('aside-menu-show');
+        if (element.hasClass('aside-menu-show')) {
+          element.removeClass('aside-menu-show');
         }
       }
     });
@@ -90,16 +90,16 @@ function backToTopDirective() {
   return directive;
 
   function link(scope, element, attrs) {
-    $(window).scroll(function () {
-      if ($(window).scrollTop() <= 0) {
-        $(element).fadeOut();
+    angular.element(window).scroll(function () {
+      if (angular.element(window).scrollTop() <= 0) {
+        angular.element(element).fadeOut();
       }
       else {
-        $(element).fadeIn();
+        angular.element(element).fadeIn();
       }
     });
-    $(element).on('click', function () {
-      $('html, body').animate({ scrollTop: 0 }, 'fast');
+    angular.element(element).on('click', function () {
+      angular.element('html, body').animate({ scrollTop: 0 }, 'fast');
     });
   }
 }

@@ -8,7 +8,6 @@ angular
   .directive('button', layoutToggleDirective)
   .directive('a', layoutToggleDirective)
   .directive('button', collapseMenuTogglerDirective)
-  .directive('div', bootstrapCarouselDirective)
   .directive('toggle', bootstrapTooltipsPopoversDirective)
   .directive('tab', bootstrapTabsDirective)
   .directive('button', cardCollapseDirective);
@@ -142,23 +141,6 @@ function collapseMenuTogglerDirective() {
         angular.element('body').toggleClass('sidebar-mobile-show');
       }
     });
-  }
-}
-
-//Bootstrap Carousel
-function bootstrapCarouselDirective() {
-  var directive = {
-    restrict: 'E',
-    link: link
-  };
-  return directive;
-
-  function link(scope, element, attrs) {
-    if (attrs.ride === 'carousel') {
-      element.find('a').each(function () {
-        $(this).attr('data-target', $(this).attr('href').replace('index.html', '')).attr('href', 'javascript;;');
-      });
-    }
   }
 }
 

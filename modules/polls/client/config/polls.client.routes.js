@@ -38,7 +38,7 @@
         url: '/:pollId/edit?notif',
         templateUrl: 'modules/polls/client/views/form-poll.client.view.html',
         controller: 'PollInputController',
-        controllerAs: 'vm',
+        controllerAs: 'ctrl',
         resolve: {
           pollResolve: getPoll,
           notifResolve: getNotif

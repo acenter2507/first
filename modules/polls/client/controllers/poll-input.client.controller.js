@@ -3,8 +3,7 @@
   // Polls controller
   angular
     .module('polls')
-    .controller('PollInputController', PollInputController)
-    .controller('BottomSheetController', BottomSheetController);
+    .controller('PollInputController', PollInputController);
 
   PollInputController.$inject = [
     '$rootScope',
@@ -323,18 +322,5 @@
       delete ctrl.poll.close;
     };
 
-  }
-  BottomSheetController.$inject = ['$scope', '$mdBottomSheet', 'tmp_opt'];
-  function BottomSheetController($scope, $mdBottomSheet, tmp_opt) {
-    $scope.dismiss = () => {
-      $mdBottomSheet.hide();
-    };
-    $scope.save = () => {
-      $mdBottomSheet.hide();
-    };
-    $scope.listItemClick = function ($index) {
-      var clickedItem = $scope.items[$index];
-      $mdBottomSheet.hide(clickedItem);
-    };
   }
 })();

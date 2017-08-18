@@ -197,8 +197,11 @@ body {
     height: 100%;
     position: relative; }
     .aside-panel .aside-dialog .aside-content .aside-header {
-      padding: 1rem;
-      vertical-align: middle; }
+      padding: 1rem; }
+      .aside-panel .aside-dialog .aside-content .aside-header .aside-title {
+        vertical-align: middle; }
+      .aside-panel .aside-dialog .aside-content .aside-header .aside-close {
+        float: right; }
 
 .aside-panel-open {
   position: fixed;

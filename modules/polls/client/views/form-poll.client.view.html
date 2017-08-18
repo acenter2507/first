@@ -78,7 +78,7 @@
           </div>
           <!-- Option -->
           <uib-accordion close-others="true" ng-if="ctrl.opts.length > 0">
-            <uib-accordion-group ng-repeat="opt in ctrl.opts | orderBy: 'create'" heading="{{opt.title + ' (' + opt.voteCnt + ' votes)'}}"
+            <uib-accordion-group ng-repeat="opt in ctrl.opts | orderBy: 'create'" heading="{{opt.title}}"
               panel-class="{{ ctrl.opt_class(opt) }}">
               <span>
                 <a class="undecorated-link" ng-click="ctrl.remove_opt(opt)">Remove</a>

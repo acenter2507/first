@@ -295,6 +295,9 @@
         ctrl.opts.push(ctrl.tmp_opt);
       }
       ctrl.tmp_opt = { poll: ctrl.poll._id, title: '', body: '', status: 1 };
+      $scope.myForm.$setPristine();
+      $scope.myForm.$setUntouched();
+
     };
     ctrl.opt_full = () => {
       let aside = angular.element('.aside-panel')[0];

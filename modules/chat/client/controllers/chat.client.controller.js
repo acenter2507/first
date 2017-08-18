@@ -40,6 +40,7 @@ angular.module('chat').controller('ChatController', ['$scope', '$location', 'Aut
       Socket.removeListener('chatMessage');
     });
 
+    $scope.file = [];
     $scope.upload = () => {
       if (this.files && this.files[0]) {
         var FR = new FileReader();

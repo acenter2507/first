@@ -71,7 +71,7 @@
           </div>
           <!-- Body -->
           <div class="form-group" show-errors>
-            <text-angular name="body" class="text-body" ng-model="ctrl.poll.body" required></text-angular>
+            <text-angular name="body" class="text-body" ng-model="ctrl.poll.body" required aria-placeholder="Type you post content here"></text-angular>
             <div ng-messages="pollForm.body.$error" role="alert">
               <p class="help-block error-text" ng-message="required">You must type somthing for body.</p>
             </div>
@@ -81,7 +81,7 @@
     </div>
   </div>
   <div class="quick-menu">
-    <md-button md-colors="{background: 'blue'}" aria-label="add" class="md-fab"><i class="fa fa-plus"></i>
+    <md-button md-colors="{background: 'blue'}" aria-label="add" class="md-fab" ng-click="ctrl.showOptionSheet()"><i class="fa fa-plus"></i>
       <md-tooltip md-direction="right">Add option</md-tooltip>
     </md-button>
     <!--<md-fab-speed-dial md-open="isOpen" md-direction="up" class="md-scale md-fab-bottom-left">
@@ -111,6 +111,25 @@
       </div>
     </div>
   </div>-->
+  <script type="text/ng-template" id="bottom-sheet-grid-template">
+    <md-bottom-sheet class="md-grid" layout="column">
+      <div layout="row" layout-align="center center" ng-cloak>
+        <h4>Since <code>clickOutsideToClose = false</code>, drag down or press ESC to close</h4>
+      </div>
+      <!--<div ng-cloak>
+      <md-list flex layout="row" layout-align="center center">
+        <md-list-item ng-repeat="item in items">
+          <div>
+            <md-button class="md-grid-item-content" ng-click="listItemClick($index)">
+              <md-icon md-svg-src="{{item.icon}}"></md-icon>
+              <div class="md-grid-text"> {{ item.name }} </div>
+            </md-button>
+          </div>
+        </md-list-item>
+      </md-list>
+    </div>-->
+    </md-bottom-sheet>
+  </script>
   <div class="aside-panel">
     <div ng-include="'/modules/polls/client/views/new-opt.client.view.html'"></div>
   </div>

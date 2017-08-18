@@ -18,7 +18,8 @@
     'CategorysService',
     'toastr',
     'Action',
-    'ngDialog'
+    'ngDialog',
+    '$mdBottomSheet'
   ];
 
   function PollInputController(
@@ -34,7 +35,8 @@
     Categorys,
     toast,
     Action,
-    dialog
+    dialog,
+    $mdBottomSheet
   ) {
     var ctrl = this;
 
@@ -294,8 +296,25 @@
       }
     };
 
+    ctrl.showOptionSheet = opt => {
+      $mdBottomSheet.show({
+      template: 'bottom-sheet-grid-template',
+      controller: 'GridBottomSheetCtrl',
+      clickOutsideToClose: false
+    }).then(function(clickedItem) {
+      $mdToast.show(
+            $mdToast.simple()
+              .textContent(clickedItem['name'] + ' clicked!')
+              .position('top right')
+              .hideDelay(1500)
+          );
+    }).catch(function(error) {
+      // User clicked outside or hit escape
+    });
+    };
     $scope.clear_close_date = () => {
       delete ctrl.poll.close;
     };
+
   }
 })();

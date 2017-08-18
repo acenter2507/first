@@ -228,7 +228,9 @@
       $mdBottomSheet.show({
         templateUrl: 'modules/polls/client/views/new-opt.client.view.html',
         controller: 'BottomSheetController',
-        clickOutsideToClose: true
+        locals: {
+          option: ctrl.tmp_opt
+        }
       }).then(function (clickedItem) {
         console.log(clickedItem);
       }).catch(function (error) {
@@ -314,8 +316,8 @@
 
   }
   BottomSheetController.$inject = ['$scope', '$mdBottomSheet'];
-  function BottomSheetController($scope, $mdBottomSheet) {
-    console.log(ctrl.tmp_opt);
+  function BottomSheetController($scope, $mdBottomSheet, option) {
+    console.log(option);
     $scope.dismiss = () => {
       $mdBottomSheet.hide();
     };

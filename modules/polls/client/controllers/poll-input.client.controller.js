@@ -297,7 +297,6 @@
       ctrl.tmp_opt = { poll: ctrl.poll._id, title: '', body: '', status: 1 };
       console.log(ctrl.form.optForm);
       ctrl.form.optForm.$setSubmitted();
-      ctrl.form.optForm.$removeControl();
       ctrl.form.optForm.$setUntouched();
       ctrl.form.optForm.$setPristine();
 

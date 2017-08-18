@@ -436,7 +436,7 @@ md-menu-content {
   max-height: 400px !important;
   min-width: 160px;
   overflow-y: hidden !important;
-  z-index: 2000 !important;
+  z-index: 9999 !important;
   padding: 8px 10px !important;
 }
 

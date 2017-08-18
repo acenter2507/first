@@ -180,6 +180,26 @@ body {
   .aside-menu-show .app .content {
     margin-left: 0;
     margin-right: 0; } }
+
+.aside-panel {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 0;
+  background-color: #fff;
+  overflow: auto;
+  transition: height 0.25s ease-in; }
+.aside-panel-open {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1040;
+  background-color: #ddd; }
+  .aside-panel-open .aside-panel {
+    height: 80%; }
 *:focus {
   outline: none !important;
 }

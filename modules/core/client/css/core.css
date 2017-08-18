@@ -193,6 +193,9 @@ body {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar; }
+  .aside-panel i.r180 {
+    transition-duration: 0.3s;
+    transform: rotate(180deg); }
   .aside-backdrop {
     opacity: 0; }
 
@@ -200,16 +203,16 @@ body {
     height: 20%; }
   .aside-panel-open .aside-panel.full {
     height: 90%; }
-    .aside-panel-open .aside-backdrop {
-      transition: opacity 450ms;
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background-color: #000;
-      opacity: 0.5;
-      z-index: 50; }
+  .aside-panel-open .aside-backdrop {
+    transition: opacity 450ms;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #000;
+    opacity: 0.5;
+    z-index: 50; }
 *:focus {
   outline: none !important;
 }

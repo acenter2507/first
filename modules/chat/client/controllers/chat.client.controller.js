@@ -49,6 +49,8 @@ angular.module('chat').controller('ChatController', ['$scope', '$location', 'Aut
           console.log(e.target.result);
         };
         FR.readAsDataURL(ip.files[0]);
+      } else {
+        console.log('Not file');
       }
     };
   }

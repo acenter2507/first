@@ -200,7 +200,7 @@ body {
     opacity: 0; }
 
   .aside-panel-open .aside-panel {
-    height: 20%; }
+    height: 30%; }
   .aside-panel-open .aside-panel.full {
     height: 90%; }
   .aside-panel-open .aside-backdrop {
@@ -705,6 +705,7 @@ a:hover .header-profile-image {
   position: fixed;
 	bottom: 6px;
   right: 6px;
+  z-index: 49;
   background-color: #267ED5 !important;
 	display: none; }
 @media (max-width: 767px) {

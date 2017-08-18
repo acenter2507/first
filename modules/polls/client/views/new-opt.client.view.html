@@ -15,7 +15,7 @@
   <hr class="mgn">
   <div class="card-body" ng-init="isHideOptBody = true;">
     <div class="col-xs-12">
-      <form name="ctrl.form.optForm" class="form-horizontal" novalidate>
+      <form name="ctrl.form.optForm" ng-submit="ctrl.save_opt(ctrl.form.optForm.$valid)" class="form-horizontal" novalidate>
         <fieldset>
           <div class="form-group" show-errors>
             <input type="hidden" name="color" ng-model="ctrl.tmp_opt.color" required>

@@ -39,5 +39,15 @@ angular.module('chat').controller('ChatController', ['$scope', '$location', 'Aut
     $scope.$on('$destroy', function () {
       Socket.removeListener('chatMessage');
     });
+
+    $scope.upload = () => {
+      if (this.files && this.files[0]) {
+        var FR = new FileReader();
+        FR.onload = function (e) {
+          angular.element('#fileimage').src = e.target.result;
+        };
+        FR.readAsDataURL(this.files[0]);
+      }
+    };
   }
 ]);

@@ -42,6 +42,7 @@ angular.module('chat').controller('ChatController', ['$scope', '$location', 'Aut
 
     $scope.upload = () => {
       var ip = angular.element('#fileinput');
+      console.log(ip);
       if (ip.files && ip.files[0]) {
         var FR = new FileReader();
         FR.onload = function (e) {

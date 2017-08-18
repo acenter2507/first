@@ -90,8 +90,8 @@
           </div>
           <!-- Close time -->
           <div class="form-group">
-            <input class="form-control" moment-picker="ctrl.poll.close" ng-model="ctrl.poll.close" format="YYYY/MM/DD HH:mm" start-view="month"
-              placeholder="Close poll at" onkeydown="return false;">
+            <input class="form-control" today="true" moment-picker="ctrl.poll.close" ng-model="ctrl.poll.close" format="YYYY/MM/DD HH:mm" start-view="month"
+              placeholder="Close poll at" onkeydown="return false;" additions="{ bottom: 'bottom-template-url' }">
             <span class="text-danger" ng-hide="ctrl.validateCloseDate()">Datetime is invalid</span>
           </div>
           <!-- Tags -->
@@ -120,3 +120,8 @@
   <div class="aside-panel">
     <div ng-include="'/modules/polls/client/views/new-opt.client.view.html'"></div>
   </div>
+<script type="text/ng-template" id="bottom-template-url">
+  <button class="btn btn-info btn-sm btn-block" ng-click="delete ctrl.poll.close;">
+    Clear
+  </button>
+</script>

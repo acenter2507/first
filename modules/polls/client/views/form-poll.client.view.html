@@ -57,7 +57,7 @@
     <div class="col-md-3 pdn">
       <div class="card">
         <div class="card-body">
-          <div class="form-group">
+          <md-input-container class="md-block">
             <label>Favorite Color</label>
             <md-select name="category" ng-model="ctrl.poll.category" required>
               <md-option ng-repeat="category in ctrl.categorys" value="{{category._id}}" ng-selected="category._id === ctrl.poll.category">{{category.name}}</md-option>
@@ -65,7 +65,7 @@
             <div class="errors" ng-messages="myForm.favoriteColor.$error">
               <div ng-message="required">Required</div>
             </div>
-          </div>
+          </md-input-container>
           <div class="form-group">
 
             <label for="category">Sort by</label>

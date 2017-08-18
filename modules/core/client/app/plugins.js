@@ -43,15 +43,14 @@
             // Create a virtual input element.
             var input = document.createElement('input');
             input.type = 'file';
-            input.capture="camera";
-            input.accept = 'image/*';
+            // input.accept = 'image/*';
 
             input.onchange = function () {
               var reader = new FileReader();
-
               if (this.files && this.files[0]) {
                 reader.onload = function (e) {
-                  $editor().wrapSelection('insertHtml', '<img src=' + e.target.result + '><div><br/></div>', true);
+                  console.log(e.target.result);
+                  $editor().wrapSelection('insertHtml', '<img src=' + e.target.result + ' with="100% height="50%""><div><br/></div>', true);
                 };
                 reader.readAsDataURL(this.files[0]);
               }

@@ -61,9 +61,6 @@
             <label>Favorite Color</label>
             <md-select name="category" ng-model="ctrl.poll.category" required>
               <md-option ng-repeat="category in ctrl.categorys" value="{{category._id}}" ng-selected="category._id === ctrl.poll.category">{{category.name}}</md-option>
-              <md-option value="red">Red</md-option>
-              <md-option value="blue">Blue</md-option>
-              <md-option value="green">Green</md-option>
             </md-select>
             <div class="errors" ng-messages="myForm.favoriteColor.$error">
               <div ng-message="required">Required</div>

@@ -228,7 +228,7 @@
         templateUrl: 'modules/polls/client/views/new-opt.client.view.html',
         controller: 'BottomSheetController',
         disableParentScroll: true,
-        resolve: {
+        locals: {
           tmp_opt: ctrl.tmp_opt
         }
       }).then(function (clickedItem) {

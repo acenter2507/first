@@ -48,7 +48,7 @@
             <!-- Close time -->
             <div class="form-group">
               <input class="form-control" today="true" moment-picker="ctrl.poll.close" ng-model="ctrl.poll.close" format="YYYY/MM/DD HH:mm"
-                start-view="month" placeholder="Close poll at" onkeydown="return false;" additions="{ bottom: 'bottom-template-url' }">
+                start-view="month" placeholder="Close poll at" readonly="true" additions="{ bottom: 'bottom-template-url' }">
               <span class="text-danger" ng-hide="ctrl.validateCloseDate()">Datetime is invalid</span>
             </div>
             <!-- Tags -->

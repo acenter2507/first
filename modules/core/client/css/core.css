@@ -183,10 +183,7 @@ body {
 
 md-bottom-sheet {
   height: 80%;
-  padding: 0;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: -ms-autohiding-scrollbar; }
+  padding: 0;}
 
 .aside-panel {
   position: fixed;

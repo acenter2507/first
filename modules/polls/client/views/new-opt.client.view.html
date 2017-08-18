@@ -1,8 +1,8 @@
 <div class="card mgn">
   <div class="card-header pd12y">
-    <a class="undecorated-link" ng-click="save()">Save</a>
-    <a class="undecorated-link mg10l" ng-click="dismiss()">Discard</a>
-    <md-menu md-offset="102 52">
+    <a class="undecorated-link" ng-click="ctrl.save_opt(ctrl.form.optForm.$valid)">Save</a>
+    <a class="undecorated-link mg10l aside-panel-toggle">Discard</a>
+    <md-menu md-offset="0 0">
       <a ng-click="$mdMenu.open($event)" class="undecorated-link card-link" aria-label="Color" href="#">
         <i class="fa fa-square" ng-style="{'color': ctrl.tmp_opt.color || '#ccc' }"></i> Option's color
       </a>
@@ -14,19 +14,9 @@
   </div>
   <hr class="mgn">
   <div class="card-body">
-    <div class="form-group">
-      <button type="button" class="btn btn-default pull-right" ng-click="$hide()">Close</button>
-      <button type="button" class="btn btn-primary pull-right mg10r" ng-click="ctrl.save_opt(ctrl.form.optForm.$valid)">Save</button>
-    </div>
     <div class="col-xs-12">
       <form name="ctrl.form.optForm" class="form-horizontal" novalidate>
         <fieldset>
-          <div class="form-group" show-errors>
-            <input type="hidden" name="color" ng-model="ctrl.tmp_opt.color" required>
-            <div ng-messages="ctrl.form.optForm.color.$error" role="alert">
-              <p class="help-block error-text" ng-message="required">You must select color for option</p>
-            </div>
-          </div>
           <div class="clearfix"></div>
           <div class="form-group" show-errors>
             <input name="title" type="text" ng-model="ctrl.tmp_opt.title" class="form-control" placeholder="Title" required>
@@ -41,10 +31,6 @@
       </form>
     </div>
     <div class="clearfix"></div>
-  </div>
-  <div class="card-footer">
-    <button type="button" class="btn btn-primary" ng-click="ctrl.save_opt(ctrl.form.optForm.$valid)">Save</button>
-    <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
   </div>
 </div>
 

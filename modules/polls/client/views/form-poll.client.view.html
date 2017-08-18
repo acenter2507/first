@@ -79,24 +79,15 @@
             </md-menu>
           </div>
           <div class="clearfix"></div>
-          <md-input-container class="md-block">
-            <label>Category</label>
-            <md-select name="category" ng-model="ctrl.poll.category" md-container-class="my-md-select" required>
-              <md-option ng-repeat="category in ctrl.categorys" value="{{category._id}}" ng-selected="category._id === ctrl.poll.category">{{category.name}}</md-option>
-            </md-select>
+          <div class="form-group">
+            <label for="category">Allow multiple vote</label>
+            <select id="category" name="category" class="form-control" ng-model="ctrl.poll.category">
+              <option ng-repeat="ctgr in ctrl.categorys" value="{{ctgr._id}}" ng-selected="ctgr._id.toString() === ctrl.poll.category.toString()" >{{ctgr.name}}</option>
+            </select>
             <div class="errors" ng-messages="myForm.category.$error">
               <div ng-message="required">Required</div>
             </div>
-          </md-input-container>
-          <md-input-container class="md-block">
-            <label>Category</label>
-            <md-select name="category" ng-model="ctrl.poll.category" md-container-class="my-md-select" required>
-              <md-option ng-repeat="category in ctrl.categorys" value="{{category._id}}" ng-selected="category._id === ctrl.poll.category">{{category.name}}</md-option>
-            </md-select>
-            <div class="errors" ng-messages="myForm.category.$error">
-              <div ng-message="required">Required</div>
-            </div>
-          </md-input-container>
+          </div>
           <!-- Close time -->
           <div class="form-group">
             <label class="control-label" for="close">Stop voting at:</label>

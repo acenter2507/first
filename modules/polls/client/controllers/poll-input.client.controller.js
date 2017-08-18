@@ -295,7 +295,7 @@
         ctrl.opts.push(ctrl.tmp_opt);
       }
       ctrl.tmp_opt = { poll: ctrl.poll._id, title: '', body: '', status: 1 };
-      ctrl.form.optForm = {};
+      ctrl.form.optForm.$setSubmitted();
 
     };
     ctrl.opt_full = () => {

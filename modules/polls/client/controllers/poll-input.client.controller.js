@@ -295,8 +295,8 @@
         ctrl.opts.push(ctrl.tmp_opt);
       }
       ctrl.tmp_opt = { poll: ctrl.poll._id, title: '', body: '', status: 1 };
-      $scope.myForm.$setPristine();
-      $scope.myForm.$setUntouched();
+      $scope.optForm.$setPristine();
+      $scope.optForm.$setUntouched();
 
     };
     ctrl.opt_full = () => {

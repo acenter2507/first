@@ -294,12 +294,8 @@
       if (!ctrl.tmp_opt._id && !_.contains(ctrl.opts, ctrl.tmp_opt)) {
         ctrl.opts.push(ctrl.tmp_opt);
       }
-      ctrl.tmp_opt = { poll: ctrl.poll._id, title: '', body: '', status: 1 };
-      console.log(ctrl.form.optForm);
-      ctrl.form.optForm.$setSubmitted();
-      ctrl.form.optForm.$setUntouched();
-      ctrl.form.optForm.$setPristine();
-
+      angular.element('body').toggleClass('aside-panel-open');
+      delete ctrl.tmp_opt;
     };
     ctrl.opt_full = () => {
       let aside = angular.element('.aside-panel')[0];

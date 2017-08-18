@@ -6,6 +6,7 @@
     .config(toastConfig)
     .config(textAngularConfig)
     .config(loadingBarConfig)
+    .config(momentPickerConfig)
     .run(runConfig);
 
 
@@ -76,7 +77,12 @@
     cfpLoadingBarProvider.includeSpinner = false;
     cfpLoadingBarProvider.latencyThreshold = 1;
   }
-
+  momentPickerConfig.$inject = ['momentPickerProvider'];
+  function momentPickerConfig(momentPickerProvider) {
+    momentPickerProvider.options({
+      minutesFormat: 'HH:mm'
+    });
+  }
   function runConfig(amMoment) {
     moment.tz.add([
       'Asia/Tokyo|JST JDT|-90 -a0|010101010|-QJH0 QL0 1lB0 13X0 1zB0 NX0 1zB0 NX0|38e6',

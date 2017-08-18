@@ -49,6 +49,7 @@
               var reader = new FileReader();
               if (this.files && this.files[0]) {
                 reader.onload = function (e) {
+                  alert(e.target.result);
                   $editor().wrapSelection('insertHtml', '<img src="' + e.target.result + '"><div><br/></div>', true);
                 };
                 reader.readAsDataURL(this.files[0]);

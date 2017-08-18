@@ -57,20 +57,26 @@
     <div class="col-md-3 pdn">
       <div class="card">
         <div class="card-body">
-          <div class="row">
-            <div class="col-xs-12">
-              <md-menu md-offset="10 30">
-                <a class="undecorated-link pull-right" ng-click="$mdMenu.open($event)">Poll's options <i class="fa fa-sort-desc"></i></a>
-                <md-menu-content>
-                  <ul class="menu-list mg5b">
-                    <li><md-checkbox class="md-primary" ng-model="ctrl.poll.isPublic">Public</md-checkbox></li>
-                    <li><md-checkbox class="md-primary" ng-model="ctrl.poll.allow_guest">Allow guest vote</md-checkbox></li>
-                    <li><md-checkbox class="md-primary" ng-model="ctrl.poll.allow_multiple">Allow multiple vote</md-checkbox></li>
-                    <li><md-checkbox class="md-primary" ng-model="ctrl.poll.allow_add">Allow members suggest option</md-checkbox></li>
-                  </ul>
-                </md-menu-content>
-              </md-menu>
-            </div>
+          <div class="form-group">
+            <md-menu md-offset="10 30">
+              <a class="undecorated-link pull-right" ng-click="$mdMenu.open($event)">Poll's options <i class="fa fa-sort-desc"></i></a>
+              <md-menu-content>
+                <ul class="menu-list mg5b">
+                  <li>
+                    <md-checkbox class="md-primary" ng-model="ctrl.poll.isPublic">Public</md-checkbox>
+                  </li>
+                  <li>
+                    <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_guest">Allow guest vote</md-checkbox>
+                  </li>
+                  <li>
+                    <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_multiple">Allow multiple vote</md-checkbox>
+                  </li>
+                  <li>
+                    <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_add">Allow members suggest option</md-checkbox>
+                  </li>
+                </ul>
+              </md-menu-content>
+            </md-menu>
           </div>
           <div class="clearfix"></div>
           <md-input-container class="md-block">

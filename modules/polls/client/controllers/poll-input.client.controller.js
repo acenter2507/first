@@ -46,6 +46,7 @@
     ctrl.isClosed = moment(ctrl.poll.close).isAfter(new moment());
     Categorys.query().$promise.then(_ctgrs => {
       ctrl.categorys = _ctgrs;
+      console.log();
     })
     
     ctrl.bk_poll = _.clone(poll);

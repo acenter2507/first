@@ -14,7 +14,7 @@
   border-radius: 50%;
 }
 
-.quick-menu {
+.test-quick-menu {
   position: fixed;
   left: 3px;
   bottom: 3px; }
@@ -28,4 +28,4 @@
   background-color: #fff;
   transition: height 0.25s ease-in; }
 .aside-panel-open .aside-panel {
-  height: 80%; }
+  height: 500px; }

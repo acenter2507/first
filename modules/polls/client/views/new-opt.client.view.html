@@ -31,7 +31,8 @@
             </div>
           </div>
           <div class="form-group">
-            <a class="undecorated-link" ng-click="isHideOptBody = !isHideOptBody; ctrl.opt_full()" >Type more</a>
+            <a class="undecorated-link pull-right" ng-click="isHideOptBody = !isHideOptBody; ctrl.opt_full()" >Type more</a>
+            <div class="clearfix"></div>
           </div>
           <div class="form-group" uib-collapse="isHideOptBody">
             <text-angular ng-model="ctrl.tmp_opt.body"></text-angular>

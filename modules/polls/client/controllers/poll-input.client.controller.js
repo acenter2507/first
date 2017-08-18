@@ -222,13 +222,7 @@
       return classStr;
     };
     ctrl.input_opt = opt => {
-      if (opt) {
-        ctrl.tmp_opt = opt;
-      } else {
-        if (!ctrl.tmp_opt) {
-          ctrl.tmp_opt = { poll: ctrl.poll._id, title: '', body: '', status: 1 };
-        }
-      }
+      ctrl.tmp_opt = (opt) ? opt : { poll: ctrl.poll._id, title: '', body: '', status: 1 };
       angular.element('body').toggleClass('aside-panel-open');
     };
     ctrl.remove_opt = opt => {

@@ -49,7 +49,7 @@ angular.module('chat').controller('ChatController', ['$scope', '$location', 'Aut
           angular.element('#fileimage').src = e.target.result;
 
         };
-         reader.readAsDataURL(files[0]);
+        reader.readAsDataURL(files[0]);
       }
     };
   }

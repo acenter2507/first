@@ -294,8 +294,13 @@
       if (!ctrl.tmp_opt._id && !_.contains(ctrl.opts, ctrl.tmp_opt)) {
         ctrl.opts.push(ctrl.tmp_opt);
       }
-      angular.element('body').toggleClass('aside-panel-open');
-      delete ctrl.tmp_opt;
+      ctrl.tmp_opt = { poll: ctrl.poll._id, title: '', body: '', status: 1 };
+      ctrl.form.optForm.$setSubmitted();
+      ctrl.form.optForm.$setUntouched();
+      ctrl.form.optForm.$setPristine();
+      $scope.form.optForm.name.$setValidity("required", false);
+      $scope.form.optForm.color.$setValidity("required", false);
+
     };
     ctrl.opt_full = () => {
       let aside = angular.element('.aside-panel')[0];

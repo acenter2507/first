@@ -229,18 +229,7 @@
           ctrl.tmp_opt = { poll: ctrl.poll._id, title: '', body: '', status: 1 };
         }
       }
-      $mdBottomSheet.show({
-        templateUrl: 'modules/polls/client/views/new-opt.client.view.html',
-        controller: 'BottomSheetController',
-        escapeToClose: false,
-        locals: {
-          tmp_opt: ctrl.tmp_opt
-        }
-      }).then(function (clickedItem) {
-        console.log(clickedItem);
-      }).catch(function (error) {
-        // User clicked outside or hit escape
-      });
+      angular.element('body').toggleClass('aside-panel-open');
     };
     ctrl.remove_opt = opt => {
       $scope.message_title = 'Delete option!';

@@ -103,7 +103,7 @@ function backToTopDirective() {
     });
   }
 }
-function backToTopDirective() {
+function asidePanelToggleDirective() {
   var directive = {
     restrict: 'E',
     link: link

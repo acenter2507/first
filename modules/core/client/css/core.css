@@ -188,24 +188,10 @@ body {
   right: 0;
   height: 0;
   background-color: #fff;
-  transition: height 0.25s ease-in; }
-  .aside-panel .aside-dialog {
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
-    width: 100%;
-    height: 100%;
-    position: relative; }
-    .aside-panel .aside-dialog .aside-content .aside-header {
-      height: 3rem;
-      padding: 1rem; }
-      .aside-panel .aside-dialog .aside-content .aside-header .aside-title {
-        margin: 0;
-        line-height: 2rem;
-        vertical-align: middle; }
-      .aside-panel .aside-dialog .aside-content .aside-header .aside-close {
-        line-height: 2rem;
-        float: right; }
+  transition: height 0.25s ease-in;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar; }
 
 .aside-panel-open {
   position: fixed;

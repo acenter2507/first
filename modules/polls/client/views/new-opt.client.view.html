@@ -1,12 +1,10 @@
-<div class="aside-dialog">
-  <div class="aside-content">
-    <div class="aside-header" ng-style="{'background-color': ctrl.tmp_opt.color || '#ddd' }">
-      <span class="aside-title h4" ng-bind="ctrl.tmp_opt.title || 'Add new option'"></span>
-      <!--{{ (ctrl.tmp_opt.title) ?  ctrl.tmp_opt.title : 'Add new option' }}-->
-      <md-button class="md-icon-button aside-panel-toggle aside-close" aria-label="Close"><i class="fa fa-times"></i></md-button>
+<div class="card">
+    <div class="card-header" ng-style="{'background-color': ctrl.tmp_opt.color || '#ddd' }">
+      <strong class="card-title" ng-bind="ctrl.tmp_opt.title || 'Add new option'"></strong>
+      <md-button class="md-icon-button aside-panel-toggle card-link" aria-label="Close"><i class="fa fa-times"></i></md-button>
       <div class="clearfix"></div>
     </div>
-    <div class="aside-body">
+    <div class="card-body">
       <div class="form-group">
         <button type="button" class="btn btn-default pull-right" ng-click="$hide()">Close</button>
         <button type="button" class="btn btn-primary pull-right mg10r" ng-click="ctrl.save_opt(ctrl.form.optForm.$valid)">Save</button>
@@ -45,7 +43,7 @@
       </div>
       <div class="clearfix"></div>
     </div>
-    <div class="aside-footer">
+    <div class="card-footer">
       <button type="button" class="btn btn-primary" ng-click="ctrl.save_opt(ctrl.form.optForm.$valid)">Save</button>
       <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
     </div>

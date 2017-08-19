@@ -12,6 +12,7 @@ angular.module('core').controller('HeaderController', [
   'Storages',
   'Constants',
   function ($rootScope, $scope, $state, Authentication, Menus, Socket, Notifs, NotifsApi, Storages, Constants) {
+    console.log('HeaderController');
     // Expose view variables
     $scope.$state = $state;
     // $scope.authentication = Authentication;

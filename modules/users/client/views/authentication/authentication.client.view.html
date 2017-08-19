@@ -6,6 +6,20 @@
         <a ui-sref="authentication.signup" ui-sref-active="active">Sign Up</a>
       </div>
       <div class="social-login">
+        <p class="text-center">
+            <a class="btn btn-facebook icon" type="button" ng-click="callOauthProvider('/api/auth/facebook')">
+              <span>Facebook</span>
+            </a>
+            <a class="btn btn-twitter icon" type="button" ng-click="callOauthProvider('/api/auth/twitter')">
+              <span>Twitter</span>
+            </a>
+            <a class="btn btn-google-plus icon" type="button" ng-click="callOauthProvider('/api/auth/google')">
+              <span>Google+</span>
+            </a>
+            <a class="btn btn-linkedin icon" type="button" ng-click="callOauthProvider('/api/auth/linkedin')">
+              <span>LinkedIn</span>
+            </a>
+        </p>
         <div class="row">
           <div class="col-md-6 mg5t">
             <a class="btn btn-facebook btn-block" type="button" ng-click="callOauthProvider('/api/auth/facebook')">

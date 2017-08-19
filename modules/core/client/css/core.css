@@ -631,8 +631,7 @@ a:hover .header-profile-image {
       height: 100px;
       text-align: center;
       vertical-align: middle;
-      border: dotted 2px lightgray;
-      }
+      border: dotted 2px lightgray;}
 
 .highlight-text {
   color: #267ED5;

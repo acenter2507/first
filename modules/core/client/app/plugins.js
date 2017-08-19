@@ -40,7 +40,7 @@
           action: function () {
             var dialog = ngDialog.open({
               template: 'module/core/client/views/templates/upload-image.dialog.template.html',
-              controller: 'PollImagesController'
+              controller: 'UploadImagesController'
             });
             dialog.closePromise.then(function (data) {
               console.log(data);

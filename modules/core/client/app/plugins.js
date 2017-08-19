@@ -38,9 +38,12 @@
             action: taToolFunctions.imgOnSelectAction
           },
           action: function () {
-            ngDialog.open({
+            var dialog = ngDialog.open({
               template: 'module/core/client/views/templates/upload-image.dialog.template.html',
               controller: 'PollImagesController'
+            });
+            dialog.closePromise.then(function (data) {
+              console.log(data);
             });
             // var $editor = this.$editor;
 

@@ -525,7 +525,6 @@ exports.images_upload = function (req, res) {
   if (user) {
     upload(req, res, function (uploadError) {
       if (uploadError) {
-        console.log(uploadError);
         return res.status(400).send({
           message: 'Error occurred while uploading images'
         });
@@ -536,9 +535,8 @@ exports.images_upload = function (req, res) {
       }
     });
   } else {
-    console.log(err);
     res.status(400).send({
-      message: 'User is not signed in'
+      message: 'You are not authorized.'
     });
   }
 };

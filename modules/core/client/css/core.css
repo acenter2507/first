@@ -628,6 +628,7 @@ a:hover .header-profile-image {
   .ngdialog.ngdialog-theme-default.images-upload-dialog .card {
     box-shadow: none; }
     .ngdialog.ngdialog-theme-default.images-upload-dialog .drop-image-box {
+      text-align: center;
       border-radius: 0;
       height: 70px;
       border: dotted 2px lightgray; }

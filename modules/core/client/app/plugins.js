@@ -41,7 +41,9 @@
             var dialog = ngDialog.open({
               template: 'modules/core/client/views/templates/upload-image.dialog.template.html',
               controller: 'UploadImagesController',
-              width: '80%'
+              width: '80%',
+              height: '80%',
+              appendClassName: 'pdn'
             });
             dialog.closePromise.then(function (data) {
               console.log(data);

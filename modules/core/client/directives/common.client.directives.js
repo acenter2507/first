@@ -155,15 +155,13 @@ function imagePreviewDirective($window) {
 
     function onLoadFile(event) {
       var img = new Image();
-      img.onload = onLoadImage.call(img);
+      img.onload = function () {
+        var width = params.width || this.width / this.height * params.height;
+        var height = params.height || this.height / this.width * params.width;
+        canvas.attr({ width: width, height: height });
+        canvas[0].getContext('2d').drawImage(this, 0, 0, width, height);
+      };
       img.src = event.target.result;
-    }
-
-    function onLoadImage() {
-      var width = params.width || this.width / this.height * params.height;
-      var height = params.height || this.height / this.width * params.width;
-      canvas.attr({ width: width, height: height });
-      canvas[0].getContext('2d').drawImage(this, 0, 0, width, height);
     }
   }
 }

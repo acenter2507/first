@@ -43,7 +43,7 @@
               controller: 'UploadImagesController',
               width: '80%',
               height: '80%',
-              appendClassName: 'pdn'
+              appendClassName: 'images-upload-dialog'
             });
             dialog.closePromise.then(function (data) {
               console.log(data);

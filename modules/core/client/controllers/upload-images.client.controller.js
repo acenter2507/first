@@ -5,11 +5,13 @@
     .controller('UploadImagesController', UploadImagesController);
 
   UploadImagesController.$inject = [
-    '$scope'
+    '$scope',
+    'FileUploader'
   ];
 
   function UploadImagesController(
-    $scope
+    $scope,
+    FileUploader
   ) {
     console.log('Called controller');
     var uploader = new FileUploader({

@@ -7,45 +7,13 @@
       </div>
       <div class="social-login">
         <p class="text-center">
-            <a class="btn btn-facebook icon" type="button" ng-click="callOauthProvider('/api/auth/facebook')">
-              <span>Facebook</span>
-            </a>
-            <a class="btn btn-twitter icon" type="button" ng-click="callOauthProvider('/api/auth/twitter')">
-              <span>Twitter</span>
-            </a>
-            <a class="btn btn-google-plus icon" type="button" ng-click="callOauthProvider('/api/auth/google')">
-              <span>Google+</span>
-            </a>
-            <a class="btn btn-linkedin icon" type="button" ng-click="callOauthProvider('/api/auth/linkedin')">
-              <span>LinkedIn</span>
-            </a>
+          <a class="btn btn-facebook icon" type="button" ng-click="callOauthProvider('/api/auth/facebook')"><span>Facebook</span></a>
+          <a class="btn btn-twitter icon" type="button" ng-click="callOauthProvider('/api/auth/twitter')"><span>Twitter</span></a>
+          <a class="btn btn-google-plus icon" type="button" ng-click="callOauthProvider('/api/auth/google')"><span>Google+</span></a>
+          <a class="btn btn-linkedin icon" type="button" ng-click="callOauthProvider('/api/auth/linkedin')"><span>LinkedIn</span></a>
         </p>
-        <div class="row">
-          <div class="col-md-6 mg5t">
-            <a class="btn btn-facebook btn-block" type="button" ng-click="callOauthProvider('/api/auth/facebook')">
-              <span>Facebook</span>
-            </a>
-          </div>
-          <div class="col-md-6 mg5t">
-            <a class="btn btn-twitter btn-block" type="button" ng-click="callOauthProvider('/api/auth/twitter')">
-              <span>Twitter</span>
-            </a>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 mg5t">
-            <a class="btn btn-google-plus btn-block" type="button" ng-click="callOauthProvider('/api/auth/google')">
-              <span>Google+</span>
-            </a>
-          </div>
-          <div class="col-md-6 mg5t">
-            <a class="btn btn-linkedin btn-block" type="button" ng-click="callOauthProvider('/api/auth/linkedin')">
-              <span>LinkedIn</span>
-            </a>
-          </div>
-        </div>
+        <div class="clearfix"></div>
       </div>
-      <hr>
       <div ui-view></div>
     </div>
   </section>

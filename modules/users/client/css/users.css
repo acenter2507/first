@@ -1,7 +1,7 @@
 .login-box{
   position:relative;
   margin: 10px auto;
-  min-width: 320px;
+  width: 320px;
   height: 380px;
   background-color: #fff;
   padding: 10px;

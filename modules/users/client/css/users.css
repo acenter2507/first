@@ -12,9 +12,9 @@
     width: 100%;
     border-bottom: 1px solid #eee;
     text-transform: uppercase;
-    padding-bottom: 1rem;
+    padding-bottom: 0.7rem;
     text-align:center;
-    height: 3rem; }
+    height: 2.7rem; }
     .login-box .lb-header a{
       line-height: 2rem;
       font-size: 1.2rem;

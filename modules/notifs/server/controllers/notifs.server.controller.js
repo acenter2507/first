@@ -55,7 +55,7 @@ exports.load = function (req, res) {
     .sort('-created')
     .populate('poll', 'title')
     .populate('from', 'displayName profileImageURL')
-    .limit(limit)
+    .limit(10)
     .exec(function (err, notifs) {
       if (err) {
         return res.status(400).send({

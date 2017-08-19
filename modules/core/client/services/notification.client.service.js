@@ -29,12 +29,12 @@ function Notification($http, NotifsService) {
       });
   };
   this.markReadNotif = function (notifId) {
-    var ntf = _.find(this.notifications, function (item) { return item._id.toString() === notifId.toString() })
+    var ntf = _.find(this.notifications, function (item) { return item._id.toString() === notifId.toString(); })
     if (ntf) {
       ntf.status = 1;
       this.notifCnt -= 1;
     }
-    let rs_notf = NotifsService({ _id: notifId });
+    let rs_notf = new NotifsService({ _id: notifId });
     rs_notf.status = 1;
     rs_notf.$save();
   };

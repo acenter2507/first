@@ -40,6 +40,22 @@
       <a ui-sref="admin.dashboard"><i class="fa fa-tachometer"></i></a>
       <md-tooltip md-direction="bottom">Admin page</md-tooltip>
     </li>
+    <li class="dropdown" uib-dropdown>
+      <a href="#" class="dropdown-toggle" role="button" uib-dropdown-toggle>
+          <i class="fa fa-search"></i>
+        </a>
+      <ul class="dropdown-menu notifis-list mg2t pd12x" role="menu" ng-click="$event.stopPropagation()">
+        <form ng-submit="search()">
+          <div class="form-group mgnb">
+            <div class="col-xs-12 quick-search">
+              <input ng-model="search_key" type="text" class="form-control quick-search-input" name="search" placeholder="Search...">
+              <a class="undecorated-link quick-search-submit" type="submit" ng-click="search()"><i class="fa fa-search"></i></a>
+              <a class="undecorated-link quick-search-advance" type="button" ui-sref="search"><i class="fa fa-cogs"></i></a>
+            </div>
+          </div>
+        </form>
+      </ul>
+    </li>
   </ul>
 
   <!-- User login -->
@@ -114,7 +130,7 @@
     </li>
   </ul>
   <!-- Search -->
-  <ul class="nav navbar-nav navbar-right d-sm-down-none">
+  <!-- <ul class="nav navbar-nav navbar-right d-sm-down-none">
     <li class="dropdown" uib-dropdown>
       <a href="#" class="dropdown-toggle" role="button" uib-dropdown-toggle>
           <i class="fa fa-search"></i>
@@ -131,7 +147,7 @@
         </form>
       </ul>
     </li>
-  </ul>
+  </ul> -->
 
   <div class="clearfix"></div>
 </div>

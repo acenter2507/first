@@ -529,9 +529,7 @@ exports.images_upload = function (req, res) {
           message: 'Error occurred while uploading images'
         });
       } else {
-        console.log('File', req.file);
-        console.log('Files', req.files);
-        res.end();
+        res.jsonp(req.file.path);
       }
     });
   } else {

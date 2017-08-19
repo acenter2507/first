@@ -26,6 +26,9 @@ exports.invokeRolesPolicies = function() {
     }, {
       resources: '/api/polls/admin/report',
       permissions: '*'
+    }, {
+      resources: '/api/polls/images',
+      permissions: ['post']
     }]
   }, {
     roles: ['user'],
@@ -35,6 +38,9 @@ exports.invokeRolesPolicies = function() {
     }, {
       resources: '/api/polls/:pollId',
       permissions: ['get']
+    }, {
+      resources: '/api/polls/images',
+      permissions: ['post']
     }]
   }, {
     roles: ['guest'],

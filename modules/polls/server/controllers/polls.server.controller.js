@@ -507,6 +507,38 @@ exports.countUpView = function (req, res) {
   Poll.countUpView(req.poll._id);
   res.end();
 };
+
+/**
+ * Update profile picture
+ */
+exports.images_upload = function (req, res) {
+  var user = req.user;
+  var message = null;
+  var upload = multer(config.uploads.imagesUpload).single('imagesUpload');
+  var imagesUploadFileFilter = require(path.resolve('./config/lib/multer')).imagesUploadFileFilter;
+
+  // Filtering to upload only images
+  upload.fileFilter = imagesUploadFileFilter;
+
+  if (user) {
+    upload(req, res, function (uploadError) {
+      if (uploadError) {
+        return res.status(400).send({
+          message: 'Error occurred while uploading images'
+        });
+      } else {
+        console.log('File', req.file);
+        console.log('Files', req.files);
+        res.end();
+      }
+    });
+  } else {
+    res.status(400).send({
+      message: 'User is not signed in'
+    });
+  }
+};
+
 /**
  * Poll middleware
  */

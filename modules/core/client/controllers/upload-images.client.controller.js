@@ -15,7 +15,7 @@
   ) {
     $scope.uploader = new FileUploader({
       url: 'api/polls/images',
-      alias: 'ImageUpload'
+      alias: 'imagesUpload'
     });
     $scope.uploader.filters.push({
       name: 'imageFilter',

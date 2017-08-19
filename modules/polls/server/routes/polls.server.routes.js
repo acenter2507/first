@@ -17,7 +17,8 @@ module.exports = function(app) {
     .get(polls.read)
     .put(polls.update)
     .delete(polls.delete);
-
+  // Upload image
+  app.route('/api/polls/images').all(pollsPolicy.isAllowed).post(polls.images_upload);
   // Lấy danh sách poll cho màn hình polls.list
   app.route('/api/findPolls/:page').get(polls.findPolls);
   // Lấy danh sách poll nổi bật cho màn hình polls.list

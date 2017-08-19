@@ -15,10 +15,7 @@
     padding-bottom: 0.5rem;
     text-align:center;
     height: 2.5rem; }
-    .login-box .lb-header p {
-      margin-bottom: 0.85rem;
-      text-align: justify;}
-    .login-box .lb-header p a{
+    .login-box .lb-header a{
       line-height: 2rem;
       font-size: 1.2rem;
       text-decoration: none;
@@ -35,6 +32,9 @@
     padding-top: 0.85rem;
     margin-bottom: 0.85rem;
     border-bottom: 1px solid #eee; }
+    .login-box .social-login p {
+      margin-bottom: 0.85rem;
+      text-align: justify; }
 
 @media (min-width: 992px) {
   .nav-users {

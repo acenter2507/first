@@ -2,8 +2,15 @@
   <section class="row" ng-controller="AuthenticationController">
     <div class="login-box">
       <div class="lb-header">
-        <a ui-sref="authentication.signin" ui-sref-active="active">Login</a>
-        <a ui-sref="authentication.signup" ui-sref-active="active">Sign Up</a>
+        <div class="row">
+          <div class="col-xs-6 pdn text-center">
+            <a ui-sref="authentication.signin" ui-sref-active="active">Login</a>
+          </div>
+          <div class="col-xs-6 pdn text-center">
+            <a ui-sref="authentication.signup" ui-sref-active="active">Sign Up</a>
+          </div>
+        </div>
+        <div class="clearfix"></div>
       </div>
       <div class="social-login">
         <p class="text-center">

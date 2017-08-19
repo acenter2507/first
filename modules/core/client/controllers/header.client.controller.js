@@ -22,6 +22,7 @@ angular.module('core').controller('HeaderController', [
 
     // Nghe sự kiện login thành công để load menu
     $rootScope.$on('loginSuccess', () => {
+      console.log('loginSuccess');
       init();
     });
     // Nghe sự kiện update Notif để load notifs

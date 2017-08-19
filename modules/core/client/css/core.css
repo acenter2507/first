@@ -629,7 +629,7 @@ a:hover .header-profile-image {
     box-shadow: none; }
     .ngdialog.ngdialog-theme-default.images-upload-dialog .drop-image-box {
       border-radius: 0;
-      height: 50px;
+      height: 70px;
       border: dotted 2px lightgray; }
     .ngdialog.ngdialog-theme-default.images-upload-dialog .drop-image-box.nv-file-over {
       border: dotted 2px #267ED5; }

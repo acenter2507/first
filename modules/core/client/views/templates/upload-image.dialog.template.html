@@ -17,14 +17,42 @@
       <div class="col-xs-12">
         <button class="btn btn-primary btn-sm" ng-click="btn_upload_click()">Choose images</button>
         <small class="text-muted">Available formats: JPG/PNG/JPGE/BMP|GIF</small>
-        <input
-          type="file"
-          id="fileInput"
-          accept="image/jpg,image/gif,image/jpeg,image/png,image/bmp"
-          name="file"
-          nv-file-select=""
-          uploader="uploader"
-          multiple>
+        <input type="file" id="fileInput" accept="image/jpg,image/gif,image/jpeg,image/png,image/bmp" name="file" nv-file-select=""
+          uploader="uploader" multiple>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <p>Selected: {{uploader.queue.length}} files</p>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="text-center" ng-if="uploader.isHTML5">Preview</th>
+                <th>Name</th>
+                <th class="text-center">Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in uploader.queue">
+                <td class="text-center" ng-if="uploader.isHTML5">
+                  <div image-preview="{ file: item._file, height: 50 }"></div>
+                </td>
+                <td>{{ ::item.file.name }}</td>
+                <td class="text-center">
+                  <span ng-if="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                  <span ng-if="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                  <span ng-if="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                </td>
+                <td nowrap>
+                  <a class="undecorated-link" ng-click="item.remove()">Remove</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
       </div>
     </div>
     <div class="ngdialog-buttons mg20t">

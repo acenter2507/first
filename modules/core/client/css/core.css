@@ -825,9 +825,6 @@ a:hover .header-profile-image {
   font-weight: normal;
   font-size: 1rem;
   padding: 0.5rem 0.85rem; }
-.btn.btn-sm { 
-  font-size: 0.8rem;
-  padding: 0.3rem 0.7rem; }
   .btn:hover {
     box-shadow: 0 1px 6px 0 rgba(0,0,0,.12),0 1px 6px 0 rgba(0,0,0,.12); }
   .btn:focus {

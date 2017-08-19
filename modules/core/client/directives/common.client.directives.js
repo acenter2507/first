@@ -155,7 +155,7 @@ function imagePreviewDirective($window) {
 
     function onLoadFile(event) {
       var img = new Image();
-      img.onload = onLoadImage;
+      img.onload = onLoadImage.call(img);
       img.src = event.target.result;
     }
 

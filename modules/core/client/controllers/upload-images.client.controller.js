@@ -27,13 +27,13 @@
     $scope.uploader.onAfterAddingAll = function (addedFileItems) {
       console.info('onAfterAddingAll', addedFileItems);
     };
-    uploader.onBeforeUploadItem = function (item) {
+    $scope.uploader.onBeforeUploadItem = function (item) {
       console.info('onBeforeUploadItem', item);
     };
-    uploader.onProgressItem = function (fileItem, progress) {
+    $scope.uploader.onProgressItem = function (fileItem, progress) {
       console.info('onProgressItem', fileItem, progress);
     };
-    uploader.onProgressAll = function (progress) {
+    $scope.uploader.onProgressAll = function (progress) {
       console.info('onProgressAll', progress);
     };
     $scope.uploader.onSuccessItem = function (fileItem, response, status, headers) {

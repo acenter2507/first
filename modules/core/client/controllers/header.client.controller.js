@@ -41,7 +41,7 @@ angular.module('core').controller('HeaderController', [
       }
     });
 
-    init();
+    //init();
 
     function init() {
       console.log($scope.user);

@@ -35,6 +35,7 @@
     UserApi,
     $timeout
   ) {
+    console.log('PollsListController');
     var vm = this;
     $scope.user = Authentication.user;
     $scope.isLogged = ($scope.user);

@@ -19,7 +19,8 @@
     'toastr',
     'ngDialog',
     '$stateParams',
-    'Socialshare'
+    'Socialshare',
+    'Notification'
   ];
 
   function PollsController(
@@ -38,8 +39,10 @@
     toast,
     dialog,
     $stateParams,
-    Socialshare
+    Socialshare,
+    Notification
   ) {
+    console.log('PollsListController');
     var vm = this;
     $scope.user = Authentication.user;
     $scope.isLogged = ($scope.user);
@@ -256,13 +259,8 @@
         });
     }
     function analysic_nofif() {
-      if (notif) {
-        if (notif.status === 0) {
-          notif.status = 1;
-          notif.$update(() => {
-            $rootScope.$emit('changeNotif');
-          });
-        }
+      if (notif && notif.status === 0) {
+        Notification.markReadNotif(notif._id);
       }
     }
 

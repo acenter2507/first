@@ -2,6 +2,7 @@
 
 angular.module('core').controller('WebAppController', ['$rootScope', '$scope', 'Authentication',
   function ($rootScope, $scope, Authentication) {
+    console.log('WebAppController');
     $scope.user = Authentication.user;
     $scope.isLogged = ($scope.user);
     $scope.isAdmin = $scope.isLogged && _.contains($scope.user.roles, 'admin');

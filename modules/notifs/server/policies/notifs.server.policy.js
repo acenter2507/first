@@ -17,6 +17,10 @@ exports.invokeRolesPolicies = function () {
       roles: ['admin'],
       allows: [
         {
+          resources: '/api/notifs/load',
+          permissions: '*'
+        },
+        {
           resources: '/api/notifs',
           permissions: '*'
         },
@@ -45,6 +49,10 @@ exports.invokeRolesPolicies = function () {
     {
       roles: ['user'],
       allows: [
+        {
+          resources: '/api/notifs/load',
+          permissions: '*'
+        },
         {
           resources: '/api/notifs',
           permissions: ['get', 'post']

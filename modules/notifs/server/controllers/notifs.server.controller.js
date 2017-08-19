@@ -47,6 +47,32 @@ exports.read = function (req, res) {
 };
 
 /**
+ * Load Notifs
+ */
+exports.load = function (req, res) {
+  var rs = {};
+  Notif.find({ to: req.user._id })
+    .sort('-created')
+    .populate('poll', 'title')
+    .populate('from', 'displayName profileImageURL')
+    .limit(limit)
+    .exec(function (err, notifs) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        rs.notifs = notifs;
+        count(req.user._id)
+          .then(count => {
+            rs.count = count;
+            res.jsonp(rs);
+          });
+      }
+    });
+};
+
+/**
  * Update a Notif
  */
 exports.update = function (req, res) {
@@ -114,9 +140,15 @@ exports.clearAll = function (req, res) {
  * Count uncheck notifs
  */
 exports.countUnchecks = function (req, res) {
-  Notif.find({ to: req.user._id, status: 0 }).count(function (err, count) {
-    res.jsonp(count);
-  });
+  count(req.user._id)
+    .then(result => {
+      res.jsonp(count);
+    })
+    .catch(err => {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    });
 };
 
 exports.findNotifs = function (req, res) {
@@ -174,3 +206,12 @@ exports.notifByID = function (req, res, next, id) {
     next();
   });
 };
+
+function count(userId) {
+  return new Promise((resolve, reject) => {
+    Notif.find({ to: userId, status: 0 }).count(function (err, count) {
+      if (err) return reject(err);
+      return resolve(count);
+    });
+  });
+}

@@ -4,8 +4,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #267ED5; }
-  
+  background-color: #fff; }
+
 @media (min-width: 992px) {
   .nav-users {
     position: fixed;

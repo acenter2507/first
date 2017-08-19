@@ -10,10 +10,11 @@
     position:relative;
     color: #267ED5;
     width: 100%;
-    border-bottom: 2px solid #eee;
+    border-bottom: 1px solid #eee;
     text-transform: uppercase;
+    padding-bottom: 1rem;
     text-align:center;
-    height: 2rem; }
+    height: 3rem; }
     .login-box .lb-header a{
       line-height: 2rem;
       font-size: 1.2rem;

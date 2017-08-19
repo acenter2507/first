@@ -12,21 +12,19 @@
     width: 100%;
     border-bottom: 1px solid #eee;
     text-transform: uppercase;
-    padding-bottom: 0.7rem;
+    padding-bottom: 0.5rem;
     text-align:center;
-    height: 2.7rem; }
+    height: 2.5rem; }
     .login-box .lb-header a{
       line-height: 2rem;
       font-size: 1.2rem;
-      /* margin: 0 25px;
-      padding: 0 20px; */
       text-decoration: none;
       color: #666;
       font-weight: bold;
       transition: all 0.1s linear;}
     .login-box .lb-header .active{
       color: #267ED5;
-      font-size: 18px; }
+      font-size: 1.4rem; }
   .login-box .social-login{
     position:relative;
     float: left;

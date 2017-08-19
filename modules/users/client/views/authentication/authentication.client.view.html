@@ -2,8 +2,8 @@
   <section class="row" ng-controller="AuthenticationController">
     <div class="login-box">
       <div class="lb-header">
-        <a href="#" class="active" id="login-box-link">Login</a>
-        <a href="#" id="signup-box-link">Sign Up</a>
+        <a ui-sref="authentication.signup" class="active" id="login-box-link">Login</a>
+        <a ui-sref="authentication.signup" id="signup-box-link">Sign Up</a>
       </div>
       <div class="social-login">
         <div class="row">
@@ -31,6 +31,7 @@
           </div>
         </div>
       </div>
+      <div ui-view></div>
     </div>
     <!-- <h3 class="col-md-12 text-center">Sign in using your social accounts</h3>
       <div class="col-md-12 text-center">
@@ -41,6 +42,6 @@
         <img ng-click="callOauthProvider('/api/auth/github')" ng-src="/modules/users/client/img/buttons/github.png">
         <img ng-click="callOauthProvider('/api/auth/paypal')" ng-src="/modules/users/client/img/buttons/paypal.png">
       </div> -->
-    <div ui-view></div>
+    
   </section>
 </section>

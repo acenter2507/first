@@ -13,6 +13,7 @@
     margin: 5px 5px 10px 5px;
     padding-bottom:10px;
     border-bottom: 1px solid #eee;
+    text-transform: uppercase;
     text-align:center;
     height:28px; }
     .login-box .lb-header a{

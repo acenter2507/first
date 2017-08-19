@@ -26,21 +26,10 @@
     });
   }
 
-  textAngularConfig.$inject = ['$provide', 'FileUploader'];
+  textAngularConfig.$inject = ['$provide'];
   function textAngularConfig($provide) {
-    var uploader = new FileUploader({
-      url: 'api/polls/images',
-      alias: 'pollImageUpload'
-    });
-    uploader.filters.push({
-      name: 'imageFilter',
-      fn: function (item, options) {
-        var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-        return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
-      }
-    });
-    $provide.decorator('taOptions', ['taRegisterTool', 'taToolFunctions', '$delegate',
-      function (taRegisterTool, taToolFunctions, taOptions) {
+    $provide.decorator('taOptions', ['taRegisterTool', 'taToolFunctions', '$delegate', 'ngDialog'
+      function (taRegisterTool, taToolFunctions, taOptions, ngDialog) {
         taRegisterTool('uploadImage', {
           iconclass: 'fa fa-upload',
           tooltiptext: 'Upload an image',
@@ -49,25 +38,10 @@
             action: taToolFunctions.imgOnSelectAction
           },
           action: function () {
-            uploader.onAfterAddingAll = function (addedFileItems) {
-              console.info('onAfterAddingAll', addedFileItems);
-            };
-            uploader.onSuccessItem = function (fileItem, response, status, headers) {
-              console.info('onSuccessItem', fileItem, response, status, headers);
-            };
-            uploader.onErrorItem = function (fileItem, response, status, headers) {
-              console.info('onErrorItem', fileItem, response, status, headers);
-            };
-            uploader.onCancelItem = function (fileItem, response, status, headers) {
-              console.info('onCancelItem', fileItem, response, status, headers);
-            };
-            uploader.onCompleteItem = function (fileItem, response, status, headers) {
-              console.info('onCompleteItem', fileItem, response, status, headers);
-            };
-            uploader.onCompleteAll = function () {
-              console.info('onCompleteAll');
-            };
-            console.log('Button upload clicked');
+            ngDialog.open({
+              template: 'module/core/client/views/templates/upload-image.dialog.template.html',
+              controller: 'PollImagesController'
+            });
             // var $editor = this.$editor;
 
             // Create a virtual input element.

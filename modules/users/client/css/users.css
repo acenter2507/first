@@ -21,6 +21,7 @@
       text-decoration: none;
       color: #666;
       font-weight: bold;
+      margin-bottom: 0.85rem;
       transition: all 0.1s linear;}
     .login-box .lb-header .active{
       color: #267ED5;

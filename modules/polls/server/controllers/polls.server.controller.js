@@ -5,6 +5,8 @@
  */
 var path = require('path'),
   mongoose = require('mongoose'),
+  multer = require('multer'),
+  config = require(path.resolve('./config/config')),
   Poll = mongoose.model('Poll'),
   Opt = mongoose.model('Opt'),
   Vote = mongoose.model('Vote'),

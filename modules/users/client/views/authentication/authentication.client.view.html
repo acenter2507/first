@@ -8,24 +8,24 @@
       <div class="social-login">
         <div class="row">
           <div class="col-md-6 mg5t">
-            <a class="btn btn-facebook btn-block" type="button" href="#">
+            <a class="btn btn-facebook btn-block" type="button" ng-click="callOauthProvider('/api/auth/facebook')">
               <span>Facebook</span>
             </a>
           </div>
           <div class="col-md-6 mg5t">
-            <a class="btn btn-twitter btn-block" type="button" href="#">
+            <a class="btn btn-twitter btn-block" type="button" ng-click="callOauthProvider('/api/auth/twitter')">
               <span>Twitter</span>
             </a>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6 mg5t">
-            <a class="btn btn-google-plus btn-block" type="button" href="#">
+            <a class="btn btn-google-plus btn-block" type="button" ng-click="callOauthProvider('/api/auth/google')">
               <span>Google+</span>
             </a>
           </div>
           <div class="col-md-6 mg5t">
-            <a class="btn btn-linkedin btn-block" type="button" href="#">
+            <a class="btn btn-linkedin btn-block" type="button" ng-click="callOauthProvider('/api/auth/linkedin')">
               <span>LinkedIn</span>
             </a>
           </div>
@@ -33,15 +33,5 @@
       </div>
       <div ui-view></div>
     </div>
-    <!-- <h3 class="col-md-12 text-center">Sign in using your social accounts</h3>
-      <div class="col-md-12 text-center">
-        <img ng-click="callOauthProvider('/api/auth/facebook')" ng-src="/modules/users/client/img/buttons/facebook.png">
-        <img ng-click="callOauthProvider('/api/auth/twitter')" ng-src="/modules/users/client/img/buttons/twitter.png">
-        <img ng-click="callOauthProvider('/api/auth/google')" ng-src="/modules/users/client/img/buttons/google.png">
-        <img ng-click="callOauthProvider('/api/auth/linkedin')" ng-src="/modules/users/client/img/buttons/linkedin.png">
-        <img ng-click="callOauthProvider('/api/auth/github')" ng-src="/modules/users/client/img/buttons/github.png">
-        <img ng-click="callOauthProvider('/api/auth/paypal')" ng-src="/modules/users/client/img/buttons/paypal.png">
-      </div> -->
-    
   </section>
 </section>

@@ -51,7 +51,7 @@
       console.info('onCompleteItem', fileItem, response, status, headers);
     };
     $scope.uploader.onCompleteAll = function () {
-      closeThisDialog('This my data');
+      $scope.closeThisDialog('This my data');
     };
     $scope.btn_upload_click = () => {
       angular.element('#fileInput').trigger('click');

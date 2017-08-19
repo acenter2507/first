@@ -15,7 +15,10 @@
     padding-bottom: 0.5rem;
     text-align:center;
     height: 2.5rem; }
-    .login-box .lb-header a{
+    .login-box .lb-header p {
+      margin-bottom: 0.85rem;
+      text-align: justify;}
+    .login-box .lb-header p a{
       line-height: 2rem;
       font-size: 1.2rem;
       text-decoration: none;

@@ -29,8 +29,10 @@
     position:relative;
     width: 100%;
     height:auto;
+    padding-top: 0.85rem;
     margin-bottom: 0.85rem;
     border-bottom: 1px solid #eee; }
+
 @media (min-width: 992px) {
   .nav-users {
     position: fixed;

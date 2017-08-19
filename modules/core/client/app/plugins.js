@@ -38,6 +38,7 @@
             action: taToolFunctions.imgOnSelectAction
           },
           action: function () {
+            var $editor = this.$editor;
             var dialog = ngDialog.open({
               template: 'modules/core/client/views/templates/upload-image.dialog.template.html',
               controller: 'UploadImagesController',
@@ -46,7 +47,11 @@
               appendClassName: 'images-upload-dialog'
             });
             dialog.closePromise.then(function (data) {
-              console.log(data);
+              var paths = data.value || [];
+              for (var index = 0; index < paths.length; index++) {
+                var path = paths[index];
+                $editor().wrapSelection('insertHtml', '<img src="' + path + '"><div><br/></div>', true);
+              }
             });
             // var $editor = this.$editor;
 

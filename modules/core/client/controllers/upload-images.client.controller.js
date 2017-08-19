@@ -50,13 +50,10 @@
     //   console.info('onCancelItem', fileItem, response, status, headers);
     // };
     $scope.uploader.onCompleteItem = function (fileItem, response, status, headers) {
-      console.info('onCompleteItem fileItem', fileItem);
-      console.info('onCompleteItem response', response);
-      console.info('onCompleteItem status', status);
-      console.info('onCompleteItem headers', headers);
+      $scope.results.push(response);
     };
     $scope.uploader.onCompleteAll = function () {
-      $scope.closeThisDialog('This my data');
+      $scope.closeThisDialog($scope.results);
     };
     $scope.btn_upload_click = () => {
       angular.element('#fileInput').trigger('click');

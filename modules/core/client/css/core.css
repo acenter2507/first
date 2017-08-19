@@ -620,9 +620,7 @@ a:hover .header-profile-image {
 .ngdialog-open{
   height: auto !important; }
 .ngdialog.ngdialog-theme-default.images-upload-dialog {
-  font-size: 1rem;
-  width: 90%;
-  min-height: 90%; }
+  font-size: 1rem; }
 .ngdialog.ngdialog-theme-default.images-upload-dialog .ngdialog-content {
   padding: 0; }
   .ngdialog.ngdialog-theme-default.images-upload-dialog .card {

@@ -621,7 +621,7 @@ a:hover .header-profile-image {
   height: auto !important; }
 .ngdialog.ngdialog-theme-default.images-upload-dialog {
   font-size: 1rem;
-  min-width: 90%;
+  width: 90%;
   min-height: 90%; }
 .ngdialog.ngdialog-theme-default.images-upload-dialog .ngdialog-content {
   padding: 0; }

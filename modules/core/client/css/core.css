@@ -628,10 +628,11 @@ a:hover .header-profile-image {
   .ngdialog.ngdialog-theme-default.images-upload-dialog .card {
     box-shadow: none; }
     .ngdialog.ngdialog-theme-default.images-upload-dialog .drop-image-box {
-      height: 100px;
-      text-align: center;
-      vertical-align: middle;
-      border: dotted 2px lightgray;}
+      border-radius: 0;
+      height: 50px;
+      border: dotted 2px lightgray; }
+    .ngdialog.ngdialog-theme-default.images-upload-dialog .drop-image-box.nv-file-over {
+      border: dotted 2px #267ED5; }
 
 .highlight-text {
   color: #267ED5;

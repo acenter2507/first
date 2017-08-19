@@ -634,6 +634,8 @@ a:hover .header-profile-image {
       border: dotted 2px lightgray; }
     .ngdialog.ngdialog-theme-default.images-upload-dialog .drop-image-box.nv-file-over {
       border: dotted 2px #267ED5; }
+    .ngdialog.ngdialog-theme-default.images-upload-dialog input[type="file"] {
+      display: none;}
 
 .highlight-text {
   color: #267ED5;

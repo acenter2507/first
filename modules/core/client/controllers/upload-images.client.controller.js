@@ -13,7 +13,6 @@
     $scope,
     FileUploader
   ) {
-    console.log('Called controller');
     $scope.uploader = new FileUploader({
       url: 'api/polls/images',
       alias: 'ImageUpload'
@@ -43,6 +42,8 @@
     $scope.uploader.onCompleteAll = function () {
       console.info('onCompleteAll');
     };
-    console.log('Button upload clicked');
+    $scope.btn_upload_click = () => {
+      angular.element('#fileInput').trigger('click');
+    };
   }
 })();

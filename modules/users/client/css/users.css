@@ -1,3 +1,11 @@
+.authentication-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #267ED5; }
+  
 @media (min-width: 992px) {
   .nav-users {
     position: fixed;
@@ -14,8 +22,7 @@
 }
 .btn-file {
   position: relative;
-  overflow: hidden;
-}
+  overflow: hidden;}
 .btn-file input[type=file] {
   position: absolute;
   top: 0;

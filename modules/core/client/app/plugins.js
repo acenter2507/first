@@ -53,29 +53,6 @@
                 $editor().wrapSelection('insertHtml', '<img src="' + path + '"><div><br/></div>', true);
               }
             });
-            // var $editor = this.$editor;
-
-            // Create a virtual input element.
-            // var input = document.createElement('input');
-            // input.type = 'file';
-            // // input.accept = 'image/*';
-
-            // input.onchange = function () {
-            //   alert(1);
-            //   var reader = new FileReader();
-            //   if (this.files && this.files[0]) {
-            //     alert(3);
-            //     reader.onload = function (e) {
-            //       alert(e.target.result);
-            //       $editor().wrapSelection('insertHtml', '<img src="' + e.target.result + '"><div><br/></div>', true);
-            //     };
-            //     reader.readAsDataURL(this.files[0]);
-            //   } else {
-            //     alert(2);
-            //   }
-            // };
-            // // Click on a virtual input element.
-            // input.click();
           }
         });
         taOptions.toolbar = [

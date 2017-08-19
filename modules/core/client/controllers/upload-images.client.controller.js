@@ -1,7 +1,8 @@
 (function () {
   'use strict';
   // Polls controller
-  angular.module('core').controller('UploadImagesController', UploadImagesController);
+  angular.module(ApplicationConfiguration.applicationModuleName)
+    .controller('UploadImagesController', UploadImagesController);
 
   UploadImagesController.$inject = [
     '$scope'

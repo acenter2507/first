@@ -1,7 +1,8 @@
 <div class="card mgn" nv-file-drop="" uploader="uploader">
   <div class="card-header">
     <strong class="card-title">IMAGES UPLOAD</strong>
-    <a class="undecorated-link card-link" ng-click="closeThisDialog()"></a>
+    <a class="undecorated-link card-link" ng-click="closeThisDialog()">Cancel</a>
+    <a class="undecorated-link card-link mg20r" ng-click="uploader.uploadAll()">Upload</a>
     <div class="clearfix"></div>
   </div>
   <hr class="mgn">
@@ -23,28 +24,16 @@
     </div>
     <div class="row">
       <div class="col-xs-12">
-        <p>Selected: {{uploader.queue.length}} files</p>
+        <p class="text-right">Selected: {{uploader.queue.length}} files</p>
+        <hr class="mgn">
         <div class="table-responsive">
           <table class="table">
-            <thead>
-              <tr>
-                <th class="text-center" ng-if="uploader.isHTML5">Preview</th>
-                <th>Name</th>
-                <th class="text-center">Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
             <tbody>
               <tr ng-repeat="item in uploader.queue">
                 <td class="text-center" ng-if="uploader.isHTML5">
                   <div image-preview="{ file: item._file, height: 50 }"></div>
                 </td>
                 <td>{{ ::item.file.name }}</td>
-                <td class="text-center">
-                  <span ng-if="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
-                  <span ng-if="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
-                  <span ng-if="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
-                </td>
                 <td nowrap>
                   <a class="undecorated-link" ng-click="item.remove()">Remove</a>
                 </td>
@@ -54,9 +43,6 @@
         </div>
 
       </div>
-    </div>
-    <div class="ngdialog-buttons mg20t">
-      <button class="btn btn-default pull-right mg5r" ng-click="closeThisDialog('This is my data')">Cancel</button>
     </div>
   </div>
 </div>

@@ -14,8 +14,8 @@ angular.module('core').controller('HeaderController', [
   function ($rootScope, $scope, $state, Authentication, Menus, Socket, Notifs, NotifsApi, Storages, Constants) {
     // Expose view variables
     $scope.$state = $state;
-    $scope.authentication = Authentication;
-    $scope.isAdmin = _.contains($scope.authentication.user.roles, 'admin');
+    // $scope.authentication = Authentication;
+    // $scope.isAdmin = _.contains($scope.authentication.user.roles, 'admin');
 
     // Get the topbar menu
     $scope.menu = Menus.getMenu('topbar');
@@ -26,7 +26,8 @@ angular.module('core').controller('HeaderController', [
     });
     // Nghe sự kiện update Notif để load notifs
     $rootScope.$on('changeNotif', () => {
-      if ($scope.authentication.user) {
+      // if ($scope.authentication.user) {
+      if ($scope.user) {
         loadNotifs(10);
         loadUncheckNotifs();
       }
@@ -41,9 +42,10 @@ angular.module('core').controller('HeaderController', [
     init();
 
     function init() {
-      if ($scope.authentication.user) {
-        $scope.authentication = Authentication;
-        $scope.isAdmin = _.contains($scope.authentication.user.roles, 'admin');
+      console.log($scope.user);
+      if ($scope.user) {
+        // $scope.authentication = Authentication;
+        // $scope.isAdmin = _.contains($scope.authentication.user.roles, 'admin');
         loadNotifs(10);
         loadUncheckNotifs();
         initSocket();

@@ -19,7 +19,7 @@
       <a ng-switch-default ui-sref="{{item.state}}" ng-bind="item.title"></a>
     </li>
   </ul>-->
-  <ul class="nav navbar-nav d-sm-down-none" ng-show="authentication.user">
+  <ul class="nav navbar-nav d-sm-down-none">
     <li ui-sref-active="active">
       <a ui-sref="home"><i class="fa fa-newspaper-o"></i></a>
       <md-tooltip md-direction="bottom">New feeds</md-tooltip>
@@ -36,14 +36,14 @@
       <a ui-sref="tags.list"><i class="fa fa-tags"></i></a>
       <md-tooltip md-direction="bottom">Tags</md-tooltip>
     </li>
-    <li ui-sref-active="active" ng-show="isAdmin">
+    <li ui-sref-active="active" ng-if="isAdmin">
       <a ui-sref="admin.dashboard"><i class="fa fa-tachometer"></i></a>
       <md-tooltip md-direction="bottom">Admin page</md-tooltip>
     </li>
   </ul>
 
   <!-- User login -->
-  <ul class="nav navbar-nav navbar-right d-sm-down-none" ng-hide="authentication.user">
+  <ul class="nav navbar-nav navbar-right d-sm-down-none" ng-if="!authentication.user">
     <li ui-sref-active="active">
       <a ui-sref="authentication.signup">Sign Up</a>
     </li>
@@ -54,7 +54,7 @@
   </ul>
 
   <!-- User profile -->
-  <ul class="nav navbar-nav navbar-right d-sm-down-none" ng-show="authentication.user">
+  <ul class="nav navbar-nav navbar-right d-sm-down-none" ng-if="authentication.user">
     <li class="dropdown" uib-dropdown>
       <a class="dropdown-toggle user-header-dropdown-toggle" uib-dropdown-toggle role="button">
           <img ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image" />
@@ -85,7 +85,7 @@
   </ul>
 
   <!-- Notifications -->
-  <ul class="nav navbar-nav navbar-right d-sm-down-none" ng-show="authentication.user">
+  <ul class="nav navbar-nav navbar-right d-sm-down-none" ng-if="authentication.user">
     <li class="dropdown" uib-dropdown ui-sref-active="active">
       <a class="dropdown-toggle notif-dropdown-toggle" uib-dropdown-toggle role="button">
           <i class="fa fa-bell-o"></i><span class="badge badge-pill badge-danger" ng-bind="uncheckNotifs" ng-show="uncheckNotifs > 0"></span>

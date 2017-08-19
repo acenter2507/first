@@ -28,7 +28,7 @@
 
   textAngularConfig.$inject = ['$provide'];
   function textAngularConfig($provide) {
-    $provide.decorator('taOptions', ['taRegisterTool', 'taToolFunctions', '$delegate', 'ngDialog'
+    $provide.decorator('taOptions', ['taRegisterTool', 'taToolFunctions', '$delegate', 'ngDialog',
       function (taRegisterTool, taToolFunctions, taOptions, ngDialog) {
         taRegisterTool('uploadImage', {
           iconclass: 'fa fa-upload',

@@ -14,6 +14,7 @@
     FileUploader
   ) {
     $scope.results = [];
+    $scope.collapse = false;
     $scope.uploader = new FileUploader({
       url: 'api/polls/images',
       alias: 'imagesUpload'
@@ -30,6 +31,7 @@
     // };
     $scope.uploader.onBeforeUploadItem = function (item) {
       // console.info('onBeforeUploadItem', item);
+      $scope.collapse = true;
       $scope.uploadingFileName = item._file.name;
     };
     // $scope.uploader.onProgressItem = function (fileItem, progress) {

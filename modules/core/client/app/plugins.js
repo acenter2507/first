@@ -39,7 +39,7 @@
           },
           action: function () {
             var dialog = ngDialog.open({
-              template: 'module/core/client/views/templates/upload-image.dialog.template.html',
+              template: 'modules/core/client/views/templates/upload-image.dialog.template.html',
               controller: 'UploadImagesController'
             });
             dialog.closePromise.then(function (data) {

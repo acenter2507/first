@@ -8,6 +8,8 @@ var pollsPolicy = require('../policies/polls.server.policy'),
   admin_polls = require('../controllers/admin-polls.server.controller');
 
 module.exports = function(app) {
+  // Upload image
+  app.route('/api/polls/images').all(pollsPolicy.isAllowed).post(polls.images_upload);
   // Polls Routes
   app.route('/api/polls').all(pollsPolicy.isAllowed)
     .get(polls.list)
@@ -17,8 +19,6 @@ module.exports = function(app) {
     .get(polls.read)
     .put(polls.update)
     .delete(polls.delete);
-  // Upload image
-  app.route('/api/polls/images').all(pollsPolicy.isAllowed).post(polls.images_upload);
   // Lấy danh sách poll cho màn hình polls.list
   app.route('/api/findPolls/:page').get(polls.findPolls);
   // Lấy danh sách poll nổi bật cho màn hình polls.list

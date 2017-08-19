@@ -619,6 +619,9 @@ a:hover .header-profile-image {
   background-color: #fff; }
 .ngdialog-open{
   height: auto !important; }
+.ngdialog.ngdialog-theme-default.images-upload-dialog {
+  min-width: 90%;
+  min-height: 90%; }
 .ngdialog.ngdialog-theme-default.images-upload-dialog .ngdialog-content {
   padding: 0; }
   .ngdialog.ngdialog-theme-default.images-upload-dialog .card {

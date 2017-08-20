@@ -1,18 +1,11 @@
 'use strict';
 
 angular.module('core').controller('HeaderController', [
-  '$rootScope',
   '$scope',
   '$state',
-  'Authentication',
   'Menus',
-  'Socket',
-  'NotifsService',
-  'NotifsApi',
-  'Storages',
-  'Constants',
   'Notification',
-  function ($rootScope, $scope, $state, Authentication, Menus, Socket, Notifs, NotifsApi, Storages, Constants, Notification) {
+  function ($scope, $state, Menus, Notification) {
     console.log('HeaderController');
     // Expose view variables
     $scope.$state = $state;
@@ -39,32 +32,31 @@ angular.module('core').controller('HeaderController', [
       }
     });
 
-    init();
-    function init() {
-      console.log($scope.user);
-      if ($scope.isLogged) {
-        initSocket();
-      }
-    }
+    // init();
+    // function init() {
+    //   if ($scope.isLogged) {
+    //     initSocket();
+    //   }
+    // }
 
-    function initSocket() {
-      if (!Socket.socket) {
-        Socket.connect();
-      }
-      Socket.on('notifs', res => {
-        Notification.loadNotifs();
-      });
-      Socket.on('activity', res => {
-        res.time = moment().format();
-        let activitys = JSON.parse(Storages.get_session(Constants.storages.activitys, JSON.stringify([])));
-        activitys.push(res);
-        Storages.set_session(Constants.storages.activitys, JSON.stringify(activitys));
-        $rootScope.$emit('activity');
-      });
-      $scope.$on('$destroy', function () {
-        Socket.removeListener('activity');
-      });
-    }
+    // function initSocket() {
+    //   if (!Socket.socket) {
+    //     Socket.connect();
+    //   }
+    //   Socket.on('notifs', res => {
+    //     Notification.loadNotifs();
+    //   });
+    //   Socket.on('activity', res => {
+    //     res.time = moment().format();
+    //     let activitys = JSON.parse(Storages.get_session(Constants.storages.activitys, JSON.stringify([])));
+    //     activitys.push(res);
+    //     Storages.set_session(Constants.storages.activitys, JSON.stringify(activitys));
+    //     $rootScope.$emit('activity');
+    //   });
+    //   $scope.$on('$destroy', function () {
+    //     Socket.removeListener('activity');
+    //   });
+    // }
 
     // function loadNotifs(limit) {
     //   return new Promise((resolve, reject) => {

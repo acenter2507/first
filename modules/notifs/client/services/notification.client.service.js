@@ -1,26 +1,26 @@
 'use strict';
 
-angular.module('core').service('Notification', Notification);
+angular.module('core').factory('Notification', Notification);
 
 Notification.$inject = ['$http', 'NotifsService'];
 function Notification($http, NotifsService) {
   var notifCnt = 0;
   var notifications = [];
-  this.loadNotifs = function () {
+  function loadNotifs() {
     $http.get('/api/notifs/load', { ignoreLoadingBar: true })
       .then(res => {
         notifCnt = res.data.count || 0;
         notifications = res.data.notifs || 0;
       });
   };
-  this.clearNotifs = function () {
+  function clearNotifs() {
     $http.get('/api/clearAll', { ignoreLoadingBar: true })
       .then(res => {
         notifCnt = 0;
         notifications = [];
       });
   };
-  this.markReadNotifs = function () {
+  function markReadNotifs() {
     $http.get('/api/markAllRead', { ignoreLoadingBar: true })
       .then(res => {
         notifications.forEach(function (notif) {
@@ -28,7 +28,7 @@ function Notification($http, NotifsService) {
         });
       });
   };
-  this.markReadNotif = function (notifId) {
+  function markReadNotif(notifId) {
     var ntf = _.find(notifications, function (item) { return item._id.toString() === notifId.toString(); });
     if (ntf) {
       ntf.status = 1;
@@ -38,8 +38,17 @@ function Notification($http, NotifsService) {
     rs_notf.status = 1;
     rs_notf.$save();
   };
-  this.getData = function () { return { notifCnt: notifCnt, notifications: notifications }; };
-  this.getNotifCnt = function () { return notifCnt; };
-  this.getNotifications = function () { return notifications; };
+  function getData() { return { notifCnt: notifCnt, notifications: notifications }; };
+  function getNotifCnt() { return notifCnt; };
+  function getNotifications() { return notifications; };
+  return {
+    loadNotifs: loadNotifs,
+    clearNotifs: clearNotifs,
+    markReadNotifs: markReadNotifs,
+    markReadNotif: markReadNotif,
+    getData: getData,
+    getNotifCnt: getNotifCnt,
+    getNotifications: getNotifications
+  };
   // return this;
 }

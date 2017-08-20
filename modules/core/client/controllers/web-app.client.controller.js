@@ -7,7 +7,8 @@ angular.module('core').controller('WebAppController', [
   'Notification',
   'Constants',
   'Storages',
-  function ($rootScope, $scope, Authentication, Notification, Constants, Storages) {
+  'Socket',
+  function ($rootScope, $scope, Authentication, Notification, Constants, Storages, Socket) {
     // User info
     $scope.Authentication = Authentication;
     $scope.Notification = Notification;

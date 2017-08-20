@@ -34,43 +34,39 @@ angular.module('users').controller('AuthenticationController', [
     }
 
     $scope.signup = function (isValid) {
-      console.log($scope.credentials);
-      return false;
-      // if (!isValid) {
-      //   $scope.$broadcast('show-errors-check-validity', 'signupForm');
-      //   return false;
-      // }
+      if (!isValid) {
+        $scope.$broadcast('show-errors-check-validity', 'signupForm');
+        return false;
+      }
 
-      // $http.post('/api/auth/signup', $scope.credentials).success(function (response) {
-      //   // If successful we assign the response to the global user model
-      //   $scope.authentication.user = response;
-      //   Notification.loadNotifs();
-      //   $rootScope.$emit('loginSuccess');
-      //   // And redirect to the previous or home page
-      //   $state.go($state.previous.state.name || 'home', $state.previous.params);
-      // }).error(function (response) {
-      //   toastr.error(response.message, 'Error!');
-      // });
+      $http.post('/api/auth/signup', $scope.credentials).success(function (response) {
+        // If successful we assign the response to the global user model
+        $scope.authentication.user = response;
+        Notification.loadNotifs();
+        $rootScope.$emit('loginSuccess');
+        // And redirect to the previous or home page
+        $state.go($state.previous.state.name || 'home', $state.previous.params);
+      }).error(function (response) {
+        toastr.error(response.message, 'Error!');
+      });
     };
 
     $scope.signin = function (isValid) {
-      console.log($scope.credentials);
-      return false;
-      // if (!isValid) {
-      //   $scope.$broadcast('show-errors-check-validity', 'signinForm');
-      //   return false;
-      // }
+      if (!isValid) {
+        $scope.$broadcast('show-errors-check-validity', 'signinForm');
+        return false;
+      }
 
-      // $http.post('/api/auth/signin', $scope.credentials).success(function (response) {
-      //   // If successful we assign the response to the global user model
-      //   $scope.authentication.user = response;
-      //   Notification.loadNotifs();
-      //   $rootScope.$emit('loginSuccess');
-      //   // And redirect to the previous or home page
-      //   $state.go($state.previous.state.name || 'home', $state.previous.params);
-      // }).error(function (response) {
-      //   toastr.error(response.message, 'Error!');
-      // });
+      $http.post('/api/auth/signin', $scope.credentials).success(function (response) {
+        // If successful we assign the response to the global user model
+        $scope.authentication.user = response;
+        Notification.loadNotifs();
+        $rootScope.$emit('loginSuccess');
+        // And redirect to the previous or home page
+        $state.go($state.previous.state.name || 'home', $state.previous.params);
+      }).error(function (response) {
+        toastr.error(response.message, 'Error!');
+      });
     };
 
     // OAuth provider request

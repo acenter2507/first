@@ -25,9 +25,11 @@ angular.module('core').controller('WebAppController', ['$rootScope', '$scope', '
       loadUser();
     });
     $scope.$watch(() => {
-      return Notification.notifCnt;
+      return {
+        notifCnt: Notification.notifCnt,
+        notifications: Notification.notifications
+      };
     }, () => {
-      console.log('getData changed');
       loadNotif();
     });
     function loadUser() {
@@ -37,11 +39,8 @@ angular.module('core').controller('WebAppController', ['$rootScope', '$scope', '
     }
     function loadNotif() {
       if ($scope.isLogged) {
-        $scope.notifCnt = Notification.getNotifCnt();
-        $scope.notifications = Notification.getNotifications();
-        console.log($scope.notifCnt, $scope.notifications);
-      } else {
-        console.log('Not logged');
+        $scope.notifCnt = Notification.notifCnt;
+        $scope.notifications = Notification.notifications;
       }
     }
   }

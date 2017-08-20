@@ -34,8 +34,10 @@ angular.module('users').controller('AuthenticationController', [
     }
 
     $scope.signup = function (isValid) {
+      console.log($scope.credentials);
+      return false;
       if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'userForm');
+        $scope.$broadcast('show-errors-check-validity', 'signupForm');
         return false;
       }
 
@@ -52,8 +54,10 @@ angular.module('users').controller('AuthenticationController', [
     };
 
     $scope.signin = function (isValid) {
+      console.log($scope.credentials);
+      return false;
       if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'userForm');
+        $scope.$broadcast('show-errors-check-validity', 'signinForm');
         return false;
       }
 

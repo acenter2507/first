@@ -1,25 +1,25 @@
 <div class="row animated fadeIn">
   <div class="col-xs-12">
-    <form name="userForm" ng-submit="signup(userForm.$valid)" class="signin" novalidate autocomplete="off">
+    <form name="signupForm" ng-submit="signup(signupForm.$valid)" class="signin" novalidate autocomplete="off">
       <fieldset>
         <div class="form-group" show-errors>
           <input type="text" id="firstName" name="firstName" class="form-control" ng-model="credentials.firstName" placeholder="First Name"
             required>
-          <div ng-messages="userForm.firstName.$error" role="alert">
+          <div ng-messages="signupForm.firstName.$error" role="alert">
             <p class="help-block error-text font-sm" ng-message="required">First name is required.</p>
           </div>
         </div>
         <div class="form-group" show-errors>
           <input type="text" id="lastName" name="lastName" class="form-control" ng-model="credentials.lastName" placeholder="Last Name"
             required>
-          <div ng-messages="userForm.lastName.$error" role="alert">
+          <div ng-messages="signupForm.lastName.$error" role="alert">
             <p class="help-block error-text font-sm" ng-message="required">Last name is required.</p>
           </div>
         </div>
         <div class="form-group" show-errors>
           <input type="email" id="email" name="email" class="form-control" ng-model="credentials.email" placeholder="Email" lowercase
             required>
-          <div ng-messages="userForm.email.$error" role="alert">
+          <div ng-messages="signupForm.email.$error" role="alert">
             <p class="help-block error-text font-sm" ng-message="required">Email address is required.</p>
             <p class="help-block error-text font-sm" ng-message="email">Email address is invalid.</p>
           </div>
@@ -27,21 +27,21 @@
         <div class="form-group" show-errors>
           <input type="text" id="username" name="username" class="form-control" ng-model="credentials.username" placeholder="Username"
             lowercase required>
-          <div ng-messages="userForm.username.$error" role="alert">
+          <div ng-messages="signupForm.username.$error" role="alert">
             <p class="help-block error-text font-xs" ng-message="required">Username is required.</p>
           </div>
         </div>
         <div class="form-group" show-errors>
           <input type="password" id="password" name="password" class="form-control" ng-model="credentials.password" placeholder="Password"
             popover="{{popoverMsg}}" popover-trigger="focus" password-validator required>
-          <div ng-messages="userForm.password.$error" role="alert">
+          <div ng-messages="signupForm.password.$error" role="alert">
             <p class="help-block error-text font-sm" ng-message="required">Password is required.</p>
             <div ng-repeat="passwordError in passwordErrors">
-              <p class="help-block error-text font-sm" ng-show="userForm.password.$error.requirements">{{passwordError}}</p>
+              <p class="help-block error-text font-sm" ng-show="signupForm.password.$error.requirements">{{passwordError}}</p>
             </div>
           </div>
         </div>
-        <div class="form-group" ng-show="!userForm.password.$error.required">
+        <div class="form-group" ng-show="!signupForm.password.$error.required">
           <uib-progressbar class="progress-xs" value="requirementsProgress" type="{{requirementsColor}}"></uib-progressbar>
         </div>
         <div class="text-center form-group">

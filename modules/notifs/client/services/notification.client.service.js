@@ -39,5 +39,7 @@ function Notification($http, NotifsService) {
     rs_notf.$save();
   };
   this.getData = function () { return { notifCnt: notifCnt, notifications: notifications }; };
+  this.getNotifCnt = function () { return notifCnt; };
+  this.getNotifications = function () { return notifications; };
   // return this;
 }

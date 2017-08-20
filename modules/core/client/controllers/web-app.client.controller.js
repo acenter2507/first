@@ -35,8 +35,8 @@ angular.module('core').controller('WebAppController', ['$rootScope', '$scope', '
     }
     function loadNotif() {
       if ($scope.isLogged) {
-        $scope.notifCnt = Notification.notifCnt;
-        $scope.notifications = Notification.notifications;
+        $scope.notifCnt = Notification.getNotifCnt();
+        $scope.notifications = Notification.getNotifications();
       }
     }
   }

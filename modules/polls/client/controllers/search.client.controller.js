@@ -15,8 +15,6 @@ angular.module('polls').controller('PollsSearchController', [
   'ngDialog',
   'Profile',
   function ($location, $rootScope, $scope, $state, Authentication, Categorys, Action, $stateParams, Storages, Constants, toast, dialog, Profile) {
-    $scope.user = Authentication.user;
-    $scope.isLogged = ($scope.user);
     $scope.form = {};
     $scope.categorys = Categorys.query();
 

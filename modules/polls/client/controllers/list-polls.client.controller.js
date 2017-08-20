@@ -85,6 +85,7 @@
         event.stopPropagation();
       });
     }
+
     vm.get_polls = get_polls;
     function get_polls() {
       if (vm.stopped || vm.busy) return;

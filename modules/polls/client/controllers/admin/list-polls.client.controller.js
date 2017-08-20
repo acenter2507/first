@@ -34,9 +34,6 @@
     dialog
   ) {
     var vm = this;
-    $scope.user = Authentication.user;
-    $scope.isLogged = ($scope.user);
-    $scope.isAdmin = _.contains($scope.user.roles, 'admin');
     if (!$scope.isAdmin) {
       $state.go('home');
     }

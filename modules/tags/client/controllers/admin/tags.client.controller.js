@@ -24,8 +24,6 @@
     toast
   ) {
     var vm = this;
-    $scope.user = Authentication.user;
-    $scope.isAdmin = _.contains($scope.user.roles, 'admin');
     if (!$scope.isAdmin) {
       $state.go('home');
     }

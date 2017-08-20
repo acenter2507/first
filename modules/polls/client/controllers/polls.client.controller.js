@@ -44,9 +44,6 @@
   ) {
     console.log('PollsListController');
     var vm = this;
-    $scope.user = Authentication.user;
-    $scope.isLogged = ($scope.user);
-
     vm.poll = poll;
 
     vm.form = {};
@@ -359,7 +356,7 @@
     }
 
     function save_vote() {
-      if (!$scope.user && !vm.poll.allow_guest) {
+      if (!$scope.isLogged && !vm.poll.allow_guest) {
         return $state.go('authentication.signin');
       }
       if (!vm.selectedOpts.length || vm.selectedOpts.length === 0) {

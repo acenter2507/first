@@ -28,10 +28,6 @@
     dialog
   ) {
     var vm = this;
-    $scope.user = Authentication.user;
-    $scope.isLogged = ($scope.user);
-    $scope.isAdmin = $scope.isLogged && _.contains($scope.user.roles, 'admin');
-
     vm.category = category;
 
     // Infinity scroll

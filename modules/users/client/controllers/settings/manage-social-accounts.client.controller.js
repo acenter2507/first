@@ -2,7 +2,6 @@
 
 angular.module('users').controller('SocialAccountsController', ['$scope', '$http', 'Authentication',
   function ($scope, $http, Authentication) {
-    $scope.user = Authentication.user;
 
     // Check if there are additional accounts
     $scope.hasConnectedAdditionalSocialAccounts = function (provider) {

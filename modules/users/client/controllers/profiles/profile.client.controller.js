@@ -11,10 +11,6 @@ angular.module('users').controller('ProfileController', [
   'ngDialog',
   function ($scope, Authentication, profile, Action, Users, toast, $timeout, dialog) {
     $scope.profile = profile;
-    $scope.user = Authentication.user;
-    $scope.isLogged = ($scope.user);
-    $scope.isCurrentOwner = $scope.isLogged && $scope.profile._id === $scope.user._id;
-
     init();
 
     function init() {

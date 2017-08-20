@@ -10,7 +10,6 @@ angular.module('core').controller('WebAppController', ['$rootScope', '$scope', '
     if ($scope.isLogged) {
       Notification.loadNotifs();
     }
-
     $scope.page_name = 'Polls';
     $scope.page_title = ($scope.notifCnt > 0) ? '(' + $scope.notifCnt + ')' : '' + $scope.page_name;
 
@@ -32,6 +31,7 @@ angular.module('core').controller('WebAppController', ['$rootScope', '$scope', '
       return Notification.notifCnt;
     }, () => {
       $scope.notifCnt = Notification.notifCnt;
+      $scope.page_title = ($scope.notifCnt > 0) ? '(' + $scope.notifCnt + ')' : '' + $scope.page_name;
     });
     // Watch notifications
     $scope.$watch(() => {

@@ -6,19 +6,6 @@
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
   </a>
-  <!-- Main menu -->
-  <!--<ul class="nav navbar-nav d-sm-down-none" ng-if="menu.shouldRender(authentication.user);">
-    <li ng-repeat="item in menu.items | orderBy: 'position'" ng-if="item.shouldRender(authentication.user);" ng-switch="item.type"
-      ng-class="{ active: $state.includes(item.state), dropdown: item.type === 'dropdown' }" class="{{item.class}}" uib-dropdown="item.type === 'dropdown'">
-      <a ng-switch-when="dropdown" class="dropdown-toggle" uib-dropdown-toggle role="button">{{::item.title}}&nbsp;<span class="caret"></span></a>
-      <ul ng-switch-when="dropdown" class="dropdown-menu">
-        <li ng-repeat="subitem in item.items | orderBy: 'position'" ng-if="subitem.shouldRender(authentication.user);" ui-sref-active="active">
-          <a ui-sref="{{subitem.state}}" ng-bind="subitem.title"></a>
-        </li>
-      </ul>
-      <a ng-switch-default ui-sref="{{item.state}}" ng-bind="item.title"></a>
-    </li>
-  </ul>-->
   <ul class="nav navbar-nav d-sm-down-none">
     <li ui-sref-active="active">
       <a ui-sref="home"><i class="fa fa-newspaper-o"></i></a>
@@ -60,7 +47,7 @@
   </ul>
 
   <!-- User login -->
-  <ul class="nav navbar-nav navbar-right d-sm-down-none" ng-if="!authentication.user">
+  <ul class="nav navbar-nav navbar-right d-sm-down-none" ng-if="!isLogged">
     <li ui-sref-active="active">
       <a ui-sref="authentication.signup">Sign Up</a>
     </li>
@@ -71,15 +58,15 @@
   </ul>
 
   <!-- User profile -->
-  <ul class="nav navbar-nav navbar-right d-sm-down-none" ng-if="authentication.user">
+  <ul class="nav navbar-nav navbar-right d-sm-down-none" ng-if="isLogged">
     <li class="dropdown" uib-dropdown>
       <a class="dropdown-toggle user-header-dropdown-toggle" uib-dropdown-toggle role="button">
-          <img ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image" />
-          <span ng-bind="authentication.user.displayName"></span> <b class="caret"></b>
+          <img ng-src="{{user.profileImageURL}}" alt="{{user.displayName}}" class="header-profile-image" />
+          <span ng-bind="user.displayName"></span> <b class="caret"></b>
         </a>
       <ul class="dropdown-menu" role="menu">
         <li ui-sref-active="active">
-          <a ui-sref="profile.info({ userId: authentication.user._id })">Profile</a>
+          <a ui-sref="profile.info({ userId: user._id })">Profile</a>
         </li>
         <li ui-sref-active="active">
           <a ui-sref="settings.profile">Edit Profile</a>
@@ -87,7 +74,7 @@
         <li ui-sref-active="active">
           <a ui-sref="settings.picture">Change Profile Picture</a>
         </li>
-        <li ui-sref-active="active" ng-show="authentication.user.provider === 'local'">
+        <li ui-sref-active="active" ng-show="user.provider === 'local'">
           <a ui-sref="settings.password">Change Password</a>
         </li>
         <li ui-sref-active="active">
@@ -102,15 +89,13 @@
   </ul>
 
   <!-- Notifications -->
-  <ul class="nav navbar-nav navbar-right d-sm-down-none" ng-if="authentication.user">
+  <ul class="nav navbar-nav navbar-right d-sm-down-none" ng-if="isLogged">
     <li class="dropdown" uib-dropdown ui-sref-active="active">
       <a class="dropdown-toggle notif-dropdown-toggle" uib-dropdown-toggle role="button">
-          <i class="fa fa-bell-o"></i><span class="badge badge-pill badge-danger" ng-bind="uncheckNotifs" ng-show="uncheckNotifs > 0"></span>
-          <!-- <span class="fa fa-bell-o fa-lg"></span> -->
-          <!-- <span class="notif-number" ng-bind="uncheckNotifs" ng-show="uncheckNotifs > 0"></span> -->
+          <i class="fa fa-bell-o"></i><span class="badge badge-pill badge-danger" ng-bind="notifCnt" ng-show="notifCnt > 0"></span>
         </a>
       <ul class="dropdown-menu notifis-list mg2t" role="menu">
-        <a ng-repeat="notif in notifs" ui-sref="{{notif.state}}({ pollId: notif.poll._id, notif: notif._id })" class="notifis-list-item"
+        <a ng-repeat="notif in notifications" ui-sref="{{notif.state}}({ pollId: notif.poll._id, notif: notif._id })" class="notifis-list-item"
           ng-class="{'unread': notif.status === 0}">
           <div class="user-avatar pull-left">
             <img src="{{notif.from.profileImageURL}}" alt="{{notif.from.displayName}}" ng-if="notif.from._id">
@@ -121,7 +106,7 @@
           <small>{{notif.poll.title}}</small>
           <div class="clearfix"></div>
         </a>
-        <li class="text-center" ng-if="uncheckNotifs > 0">
+        <li class="text-center" ng-if="notifCnt > 0">
           <a ng-click="mark_all_read()">Mark all notifications read</a>
         </li>
         <li class="text-center">
@@ -130,25 +115,5 @@
       </ul>
     </li>
   </ul>
-  <!-- Search -->
-  <!-- <ul class="nav navbar-nav navbar-right d-sm-down-none">
-    <li class="dropdown" uib-dropdown>
-      <a href="#" class="dropdown-toggle" role="button" uib-dropdown-toggle>
-          <i class="fa fa-search"></i>
-        </a>
-      <ul class="dropdown-menu notifis-list mg2t pd12x" role="menu" ng-click="$event.stopPropagation()">
-        <form ng-submit="search()">
-          <div class="form-group mgnb">
-            <div class="col-xs-12 quick-search">
-              <input ng-model="search_key" type="text" class="form-control quick-search-input" name="search" placeholder="Search...">
-              <a class="undecorated-link quick-search-submit" type="submit" ng-click="search()"><i class="fa fa-search"></i></a>
-              <a class="undecorated-link quick-search-advance" type="button" ui-sref="search"><i class="fa fa-cogs"></i></a>
-            </div>
-          </div>
-        </form>
-      </ul>
-    </li>
-  </ul> -->
-
   <div class="clearfix"></div>
 </div>

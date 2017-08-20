@@ -1,8 +1,8 @@
 <aside class="aside-menu" id="aside-menu" ng-controller="HeaderController">
-  <div class="aside-profile" ng-if="authentication.user">
-    <img class="aside-avatar pull-left" ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}"
+  <div class="aside-profile" ng-if="isLogged">
+    <img class="aside-avatar pull-left" ng-src="{{user.profileImageURL}}" alt="{{user.displayName}}"
     />
-    <span class="h4-text">{{authentication.user.displayName}}</span>
+    <span class="h4-text">{{user.displayName}}</span>
     <div class="clearfix"></div>
   </div>
   <div class="aside-search">
@@ -14,13 +14,13 @@
   </div>
   <nav class="aside-nav">
     <ul class="nav">
-      <li class="nav-title" ng-show="authentication.user">Notifications</li>
-      <li class="nav-item" ng-show="authentication.user">
+      <li class="nav-title" ng-show="isLogged">Notifications</li>
+      <li class="nav-item" ng-show="isLogged">
         <a class="nav-link" ui-sref="notifs.list"><i class="fa fa-bell-o"></i> See all
-          <span class="badge badge-pill badge-danger" ng-bind="uncheckNotifs" ng-show="uncheckNotifs > 0"></span>
+          <span class="badge badge-pill badge-danger" ng-bind="notifCnt" ng-show="notifCnt > 0"></span>
         </a>
       </li>
-      <li class="nav-item" ng-show="authentication.user && uncheckNotifs > 0">
+      <li class="nav-item" ng-show="isLogged && notifCnt > 0">
         <a class="nav-link" ng-click="mark_all_read()"><i class="fa fa-check-square-o"></i> Mark all notifications read</a>
       </li>
       <li class="nav-title">Navigation</li>
@@ -44,28 +44,28 @@
       </li>
 
       <li class="nav-title">Profile</li>
-      <li class="nav-item" ng-show="authentication.user">
-        <a class="nav-link" ui-sref-active="active" ui-sref="profile.info({ userId: authentication.user._id })"><i class="fa fa-user-circle"></i> View Profile</a>
+      <li class="nav-item" ng-show="isLogged">
+        <a class="nav-link" ui-sref-active="active" ui-sref="profile.info({ userId: user._id })"><i class="fa fa-user-circle"></i> View Profile</a>
       </li>
-      <li class="nav-item" ng-show="authentication.user">
+      <li class="nav-item" ng-show="isLogged">
         <a class="nav-link" ui-sref-active="active" ui-sref="settings.profile"><i class="fa fa-pencil-square-o"></i> Edit Profile</a>
       </li>
-      <li class="nav-item" ng-show="authentication.user">
+      <li class="nav-item" ng-show="isLogged">
         <a class="nav-link" ui-sref-active="active" ui-sref="settings.picture"><i class="fa fa-file-image-o"></i> Change Profile Picture</a>
       </li>
-      <li class="nav-item" ng-show="authentication.user && authentication.user.provider === 'local'">
+      <li class="nav-item" ng-show="isLogged && user.provider === 'local'">
         <a class="nav-link" ui-sref-active="active" ui-sref="settings.password"><i class="fa fa-lock"></i> Change Password</a>
       </li>
-      <li class="nav-item" ng-show="authentication.user">
+      <li class="nav-item" ng-show="isLogged">
         <a class="nav-link" ui-sref-active="active" ui-sref="settings.accounts"><i class="fa fa-facebook"></i> Manage Social Accounts</a>
       </li>
-      <li class="nav-item" ng-show="authentication.user">
+      <li class="nav-item" ng-show="isLogged">
         <a class="nav-link" href="/api/auth/signout" target="_self"><i class="fa fa-sign-out"></i> Sign Out</a>
       </li>
-      <li class="nav-item" ng-show="!authentication.user">
+      <li class="nav-item" ng-show="!isLogged">
         <a class="nav-link" ui-sref="authentication.signin"><i class="fa fa-sign-in"></i> Sign In</a>
       </li>
-      <li class="nav-item" ng-show="!authentication.user">
+      <li class="nav-item" ng-show="!isLogged">
         <a class="nav-link" ui-sref="authentication.signup"><i class="fa fa-download"></i> Sign Up</a>
       </li>
     </ul>

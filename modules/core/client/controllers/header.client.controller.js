@@ -39,25 +39,20 @@ angular.module('core').controller('HeaderController', [
       }
     });
 
-    //init();
-
-    // function init() {
-    //   if ($scope.user) {
-    //     // $scope.authentication = Authentication;
-    //     // $scope.isAdmin = _.contains($scope.authentication.user.roles, 'admin');
-    //     loadNotifs(10);
-    //     loadUncheckNotifs();
-    //     initSocket();
-    //   }
-    // }
+    init();
+    function init() {
+      console.log($scope.user);
+      if ($scope.isLogged) {
+        initSocket();
+      }
+    }
 
     function initSocket() {
       if (!Socket.socket) {
         Socket.connect();
       }
       Socket.on('notifs', res => {
-        loadNotifs(10);
-        loadUncheckNotifs();
+        Notification.loadNotifs();
       });
       Socket.on('activity', res => {
         res.time = moment().format();

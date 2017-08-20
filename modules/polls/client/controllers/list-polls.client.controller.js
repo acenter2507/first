@@ -37,9 +37,7 @@
   ) {
     console.log('PollsListController');
     var vm = this;
-    $scope.user = Authentication.user;
-    $scope.isLogged = ($scope.user);
-
+    console.log($scope.user);
     vm.polls = [];
     vm.hot_polls = [];
     vm.activitys = JSON.parse(Storages.get_session(Constants.storages.activitys, JSON.stringify([])));

@@ -7,7 +7,7 @@ angular.module('core').controller('WebAppController', ['$rootScope', '$scope', '
     $scope.Authentication = Authentication;
     $scope.Notification = Notification;
     loadUser();
-  
+
     $scope.page_notifs = '';
     $scope.page_name = 'Polls';
     $scope.page_title = ($scope.notifCnt > 0) ? '(' + $scope.notifCnt + ')' : '' + $scope.page_name;
@@ -24,10 +24,15 @@ angular.module('core').controller('WebAppController', ['$rootScope', '$scope', '
     $scope.$watch('Authentication.user', () => {
       loadUser();
     });
+    $scope.$watch('Notification.getData', () => {
+      loadUser();
+    });
     function loadUser() {
       $scope.user = Authentication.user;
       $scope.isLogged = ($scope.user);
       $scope.isAdmin = $scope.isLogged && _.contains($scope.user.roles, 'admin');
+    }
+    function loadNotif() {
       if ($scope.isLogged) {
         $scope.notifCnt = Notification.notifCnt;
         $scope.notifications = Notification.notifications;

@@ -24,6 +24,10 @@ angular.module('core').controller('WebAppController', ['$rootScope', '$scope', '
     $scope.$watch('Authentication.user', () => {
       loadUser();
     });
+    $scope.$watch('Notification.getData', () => {
+      console.log('getData changed');
+      loadNotif();
+    });
     $scope.$watch('Notification.getNotifCnt', () => {
       console.log('getNotifCnt changed');
       loadNotif();
@@ -41,6 +45,7 @@ angular.module('core').controller('WebAppController', ['$rootScope', '$scope', '
       if ($scope.isLogged) {
         $scope.notifCnt = Notification.getNotifCnt();
         $scope.notifications = Notification.getNotifications();
+        console.log(res.data);
       }
     }
   }

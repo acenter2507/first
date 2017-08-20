@@ -35,6 +35,6 @@ angular.module('core').controller('WebAppController', ['$rootScope', '$scope', '
         $scope.notifCnt = Notification.notifCnt;
         $scope.notifications = Notification.notifications;
       }
-    })
+    });
   }
 ]);

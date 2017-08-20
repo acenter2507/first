@@ -13,7 +13,7 @@ angular.module('core').controller('WebAppController', ['$rootScope', '$scope', '
       $scope.notifCnt = Notification.notifCnt;
       $scope.notifications = Notification.notifications;
     }
-  
+
     $scope.page_notifs = '';
     $scope.page_name = 'Polls';
     $scope.page_title = ($scope.notifCnt > 0) ? '(' + $scope.notifCnt + ')' : '' + $scope.page_name;
@@ -26,5 +26,15 @@ angular.module('core').controller('WebAppController', ['$rootScope', '$scope', '
       }
       $scope.page_title = $scope.page_notifs + $scope.page_name;
     });
+
+    $scope.$watch('user', () => {
+      console.log('WebAppController', 'User info updated');
+      $scope.isLogged = ($scope.user);
+      $scope.isAdmin = $scope.isLogged && _.contains($scope.user.roles, 'admin');
+      if ($scope.isLogged) {
+        $scope.notifCnt = Notification.notifCnt;
+        $scope.notifications = Notification.notifications;
+      }
+    })
   }
 ]);

@@ -8,8 +8,7 @@ angular.module('core').controller('WebAppController', ['$rootScope', '$scope', '
     $scope.Notification = Notification;
     loadUser();
     if ($scope.isLogged) {
-      $scope.notifCnt = Notification.notifCnt;
-      $scope.notifications = Notification.notifications;
+      Notification.loadNotifs();
     }
 
     $scope.page_name = 'Polls';
@@ -29,11 +28,15 @@ angular.module('core').controller('WebAppController', ['$rootScope', '$scope', '
       loadUser();
     });
     // Watch notifCnt
-    $scope.$watch('Notification.getNotifCnt', () => {
+    $scope.$watch(() => {
+      return Notification.notifCnt;
+    }, () => {
       $scope.notifCnt = Notification.notifCnt;
     });
     // Watch notifications
-    $scope.$watch('Notification.getNotifications', () => {
+    $scope.$watch(() => {
+      return Notification.notifications;
+    }, () => {
       $scope.notifications = Notification.notifications;
     });
     function loadUser() {

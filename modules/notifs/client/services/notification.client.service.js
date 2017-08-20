@@ -36,12 +36,11 @@ function Notification($http, NotifsService) {
     });
   };
   this.markReadNotif = function (notifId, status) {
-    var _status = status || 1;
+    var _status = status === undefined ? 1 : status;
     var ntf = _.find(this.notifications, function (item) { return item._id.toString() === notifId.toString(); });
     if (ntf) {
       ntf.status = _status;
       this.notifCnt += _status === 1 ? -1 : 1;
-      console.log(ntf);
     }
     let rs_notf = new NotifsService({ _id: notifId });
     rs_notf.status = _status;

@@ -79,7 +79,6 @@ exports.update = function (req, res) {
   var notif = req.notif;
 
   notif = _.extend(notif, req.body);
-  console.log(req.body);
 
   notif.save(function (err) {
     if (err) {

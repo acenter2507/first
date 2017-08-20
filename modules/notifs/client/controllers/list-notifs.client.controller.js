@@ -67,7 +67,6 @@
     };
     $scope.mark_read = notif => {
       var status = notif.status === 0 ? 1 : 0;
-      console.log(status);
       Notification.markReadNotif(notif._id, status);
       notif.status = status;
     };

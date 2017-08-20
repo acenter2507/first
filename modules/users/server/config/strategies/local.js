@@ -18,6 +18,7 @@ module.exports = function () {
       username: username.toLowerCase()
     }, function (err, user) {
       if (err) {
+        console.log(err);
         return done(err);
       }
       if (!user || !user.authenticate(password)) {

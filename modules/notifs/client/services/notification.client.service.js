@@ -26,6 +26,7 @@ function Notification($http, NotifsService) {
         this.notifications.forEach(function (notif) {
           notif.status = 1;
         });
+        this.notifCnt = 0;
       });
   };
   this.markReadNotif = function (notifId) {

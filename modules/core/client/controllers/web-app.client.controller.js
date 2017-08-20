@@ -7,8 +7,8 @@ angular.module('core').controller('WebAppController', ['$rootScope', '$scope', '
     $scope.Authentication = Authentication;
     $scope.Notification = Notification;
     loadUser();
+    loadNotif();
 
-    $scope.page_notifs = '';
     $scope.page_name = 'Polls';
     $scope.page_title = ($scope.notifCnt > 0) ? '(' + $scope.notifCnt + ')' : '' + $scope.page_name;
 
@@ -21,9 +21,11 @@ angular.module('core').controller('WebAppController', ['$rootScope', '$scope', '
       $scope.page_title = $scope.page_notifs + $scope.page_name;
     });
 
+    // Watch user info
     $scope.$watch('Authentication.user', () => {
       loadUser();
     });
+    // Watch notifications
     $scope.$watch(() => {
       return {
         notifCnt: Notification.notifCnt,

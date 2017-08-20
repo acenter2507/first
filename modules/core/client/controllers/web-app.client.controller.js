@@ -45,7 +45,9 @@ angular.module('core').controller('WebAppController', ['$rootScope', '$scope', '
       if ($scope.isLogged) {
         $scope.notifCnt = Notification.getNotifCnt();
         $scope.notifications = Notification.getNotifications();
-        console.log(res.data);
+        console.log(notifCnt, notifications);
+      } else {
+        console.log('Not logged');
       }
     }
   }

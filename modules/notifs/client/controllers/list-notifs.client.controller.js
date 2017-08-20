@@ -14,7 +14,8 @@
     'Authentication',
     '$filter',
     'toastr',
-    'ngDialog'
+    'ngDialog',
+    'Notification'
   ];
 
   function NotifsListController(
@@ -26,36 +27,37 @@
     Authentication,
     $filter,
     toast,
-    dialog
+    dialog,
+    Notification
   ) {
     var vm = this;
     init();
     function init() {
       vm.notifs = [];
       // Infinity scroll
-      $scope.stopped = false;
-      $scope.busy = false;
-      $scope.page = 0;
+      vm.stopped = false;
+      vm.busy = false;
+      vm.page = 0;
     }
 
     $scope.get_notifs = get_notifs;
     function get_notifs() {
-      if ($scope.stopped || $scope.busy) return;
-      $scope.busy = true;
-      NotifsApi.findNotifs(10, $scope.page)
+      if (vm.stopped || vm.busy) return;
+      vm.busy = true;
+      NotifsApi.findNotifs(10, vm.page)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
-            $scope.stopped = true;
-            $scope.busy = false;
+            vm.stopped = true;
+            vm.busy = false;
             return;
           }
           vm.notifs = _.union(vm.notifs, res.data);
-          $scope.page += 1;
-          $scope.busy = false;
+          vm.page += 1;
+          vm.busy = false;
         })
         .catch(err => {
-          $scope.busy = false;
-          $scope.stopped = true;
+          vm.busy = false;
+          vm.stopped = true;
           toast.error('There were problems get your notifications.', 'Error!');
         });
     }
@@ -64,29 +66,27 @@
       $state.go(notif.state, { pollId: notif.poll._id, notif: notif._id });
     };
     $scope.mark_read = notif => {
-      notif.status = notif.status === 0 ? 1 : 0;
-      let rs_nof = new NotifsService({ _id: notif._id, status: notif.status });
-      rs_nof.$update(res => {
-        $rootScope.$emit('changeNotif');
-      });
+      let status = notif.status === 0 ? 1 : 0;
+      Notification.markReadNotif(notif._id, status);
+      notif.status = status;
     };
     $scope.mark_all_read = () => {
-      if ($scope.stopped || $scope.busy || vm.notifs.length === 0) return;
-      $scope.busy = true;
-      NotifsApi.markAllRead()
-        .then(res => {
+      if (vm.stopped || vm.busy || vm.notifs.length === 0) return;
+      vm.busy = true;
+      Notification.markReadNotifs()
+        .then(() => {
           init();
           get_notifs();
-          $rootScope.$emit('changeNotif');
+        })
+        .catch(err => {
+          vm.busy = false;
+          toast.error('There were problems get your notifications.', 'Error!');
         });
     };
     $scope.clear_all = () => {
-      NotifsApi.clearAll()
-        .then(res => {
-          vm.notifs = [];
-          $scope.stopped = true;
-          $rootScope.$emit('changeNotif');
-        });
+      vm.notifs = [];
+      vm.stopped = true;
+      Notification.clearNotifs();
     };
   }
 }());

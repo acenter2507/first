@@ -21,19 +21,36 @@ function Notification($http, NotifsService) {
       });
   };
   this.markReadNotifs = function () {
-    $http.get('/api/markAllRead', { ignoreLoadingBar: true })
-      .then(res => {
-        this.notifications.forEach(function (notif) {
-          notif.status = 1;
+    return new Promise((resolve, reject) => {
+      $http.get('/api/markAllRead', { ignoreLoadingBar: true })
+        .then(res => {
+          this.notifications.forEach(function (notif) {
+            notif.status = 1;
+          });
+          this.notifCnt = 0;
+          return resolve();
+        })
+        .catch(err => {
+          return reject();
         });
-        this.notifCnt = 0;
-      });
+    });
   };
-  this.markReadNotif = function (notifId) {
+  this.markReadNotif = function (notifId, status) {
+    let _status = status || 1;
     var ntf = _.find(this.notifications, function (item) { return item._id.toString() === notifId.toString(); });
     if (ntf) {
-      ntf.status = 1;
-      this.notifCnt -= 1;
+      ntf.status = _status;
+      this.notifCnt += _status === 1 ? -1 : 1;
+    }
+    let rs_notf = new NotifsService({ _id: notifId });
+    rs_notf.status = _status;
+    rs_notf.$update();
+  };
+  this.markUnReadNotif = function (notifId) {
+    var ntf = _.find(this.notifications, function (item) { return item._id.toString() === notifId.toString(); });
+    if (ntf) {
+      ntf.status = 0;
+      this.notifCnt += 1;
     }
     let rs_notf = new NotifsService({ _id: notifId });
     rs_notf.status = 1;

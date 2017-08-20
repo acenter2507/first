@@ -37,7 +37,7 @@ function Notification($http, NotifsService) {
     }
     let rs_notf = new NotifsService({ _id: notifId });
     rs_notf.status = 1;
-    rs_notf.$save();
+    rs_notf.$update();
   };
   this.getData = function () { return { notifCnt: this.notifCnt, notifications: this.notifications } };
   this.getNotifCnt = function () { return this.notifCnt; };

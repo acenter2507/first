@@ -1,9 +1,9 @@
-<section class="container mg50b animated fadeIn mg12t" infinite-scroll="get_notifs()" infinite-scroll-distance='2'>
+<section class="container mg50b animated fadeIn mg12t" infinite-scroll="vm.get_notifs()" infinite-scroll-distance='2'>
   <div class="row">
     <div class="col-xs-12 pd6x">
       <span class="h4-text">Your Notifications</span>
-      <a class="undecorated-link pull-right" ng-click="mark_all_read()">Make all as read</a>
-      <a class="undecorated-link pull-right mg10r" ng-click="clear_all()">Clear all</a>
+      <a class="undecorated-link pull-right" ng-click="vm.mark_all_read()">Make all as read</a>
+      <a class="undecorated-link pull-right mg10r" ng-click="vm.clear_all()">Clear all</a>
       <div class="clearfix"></div>
       <hr class="mgnt">
     </div>
@@ -15,10 +15,10 @@
       </div>
     </div>
   </div>
-  <div class="row" ng-show="vm.notifs.length > 0">
+  <div class="row" ng-if="vm.notifs.length > 0">
     <div class="col-xs-12 pd6x">
       <div class="list-group notifications">
-        <a ng-repeat="notif in vm.notifs" ng-click="view_notif(notif)" class="list-group-item" ng-class="{'unread': notif.status === 0}">
+        <a ng-repeat="notif in vm.notifs" ng-click="vm.view_notif(notif)" class="list-group-item" ng-class="{'unread': notif.status === 0}">
           <div class="col-xs-9 pdn">
             <div class="user-avatar pull-left">
               <img src="{{notif.from.profileImageURL}}" alt="{{notif.from.displayName}}" ng-if="notif.from._id">
@@ -31,7 +31,7 @@
           <div class="col-xs-3 pdn">
             <div class="pull-right">
               <span class="fa notif-read-toggle" ng-class="{'fa-circle-o': notif.status === 0, 'fa-dot-circle-o': notif.status === 1}"
-                ng-click="mark_read(notif); $event.stopPropagation();">
+                ng-click="vm.mark_read(notif); $event.stopPropagation();">
                 <md-tooltip md-direction="bottom">{{ notif.status === 0 ? 'Mark as Read' : 'Mark as Unread' }}</md-tooltip>
               </span>
             </div>

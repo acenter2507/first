@@ -6,28 +6,16 @@
     .controller('NotifsListController', NotifsListController);
 
   NotifsListController.$inject = [
-    '$rootScope',
-    '$scope',
     '$state',
-    'NotifsService',
     'NotifsApi',
-    'Authentication',
-    '$filter',
     'toastr',
-    'ngDialog',
     'Notification'
   ];
 
   function NotifsListController(
-    $rootScope,
-    $scope,
     $state,
-    NotifsService,
     NotifsApi,
-    Authentication,
-    $filter,
     toast,
-    dialog,
     Notification
   ) {
     var vm = this;
@@ -40,7 +28,7 @@
       vm.page = 0;
     }
 
-    $scope.get_notifs = get_notifs;
+    vm.get_notifs = get_notifs;
     function get_notifs() {
       if (vm.stopped || vm.busy) return;
       vm.busy = true;
@@ -62,15 +50,15 @@
         });
     }
 
-    $scope.view_notif = notif => {
+    vm.view_notif = notif => {
       $state.go(notif.state, { pollId: notif.poll._id, notif: notif._id });
     };
-    $scope.mark_read = notif => {
+    vm.mark_read = notif => {
       var status = notif.status === 0 ? 1 : 0;
       Notification.markReadNotif(notif._id, status);
       notif.status = status;
     };
-    $scope.mark_all_read = () => {
+    vm.mark_all_read = () => {
       if (vm.stopped || vm.busy || vm.notifs.length === 0) return;
       vm.busy = true;
       Notification.markReadNotifs()
@@ -83,7 +71,7 @@
           toast.error('There were problems get your notifications.', 'Error!');
         });
     };
-    $scope.clear_all = () => {
+    vm.clear_all = () => {
       vm.notifs = [];
       vm.stopped = true;
       Notification.clearNotifs();

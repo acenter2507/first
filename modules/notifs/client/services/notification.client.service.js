@@ -9,6 +9,7 @@ function Notification($http, NotifsService) {
   this.loadNotifs = function () {
     $http.get('/api/notifs/load', { ignoreLoadingBar: true })
       .then(res => {
+        console.log(res.data);
         notifCnt = res.data.count || 0;
         notifications = res.data.notifs || 0;
       });
@@ -38,6 +39,7 @@ function Notification($http, NotifsService) {
     rs_notf.status = 1;
     rs_notf.$save();
   };
+  this.getData = function () { return { notifCnt: notifCnt, notifications: notifications } };
   this.getNotifCnt = function () { return notifCnt; };
   this.getNotifications = function () { return notifications; };
   // return this;

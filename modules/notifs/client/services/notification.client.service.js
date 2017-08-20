@@ -37,6 +37,7 @@ function Notification($http, NotifsService) {
   };
   this.markReadNotif = function (notifId, status) {
     let _status = status || 1;
+    console.log(_status);
     var ntf = _.find(this.notifications, function (item) { return item._id.toString() === notifId.toString(); });
     if (ntf) {
       ntf.status = _status;

@@ -1,4 +1,4 @@
-<section class="container mg10b animated fadeIn" infinite-scroll="get_notifs()" infinite-scroll-distance='2'>
+<section class="container mg50b animated fadeIn mg12t" infinite-scroll="get_notifs()" infinite-scroll-distance='2'>
   <div class="row">
     <div class="col-xs-12 pd6x">
       <span class="h4-text">Your Notifications</span>
@@ -10,7 +10,7 @@
   </div>
   <div class="row">
     <div class="col-xs-12 pd6x">
-      <div class="notice notice-warning" ng-show="vm.notifs.length === 0 && stopped">
+      <div class="notice notice-warning" ng-show="vm.notifs.length === 0 && vm.stopped">
         You have no notifications.
       </div>
     </div>
@@ -42,7 +42,7 @@
       </div>
     </div>
   </div>
-  <div class="row text-center" ng-show="busy && !stopped">
+  <div class="row text-center" ng-show="vm.busy && !vm.stopped">
     <div class="loader"></div>
   </div>
 </section>

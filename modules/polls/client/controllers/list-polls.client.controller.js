@@ -10,7 +10,6 @@
     '$scope',
     '$window',
     'Socket',
-    'Authentication',
     'Action',
     'toastr',
     'ngDialog',
@@ -26,7 +25,6 @@
     $scope,
     $window,
     Socket,
-    Authentication,
     Action,
     toast,
     dialog,
@@ -35,12 +33,11 @@
     UserApi,
     $timeout
   ) {
-    console.log('PollsListController');
     var vm = this;
-    console.log($scope.user);
+
     vm.polls = [];
-    vm.hot_polls = [];
     vm.activitys = JSON.parse(Storages.get_session(Constants.storages.activitys, JSON.stringify([])));
+    vm.hot_polls = [];
     vm.categorys = [];
     vm.bookmarks = [];
     vm.tags = [];
@@ -48,7 +45,6 @@
     vm.page = 0;
     vm.busy = false;
     vm.stopped = false;
-    vm.get_polls = get_polls;
     vm.is_has_new_polls = false;
     init();
 
@@ -89,6 +85,7 @@
         event.stopPropagation();
       });
     }
+    vm.get_polls = get_polls;
     function get_polls() {
       if (vm.stopped || vm.busy) return;
       vm.busy = true;
@@ -99,11 +96,9 @@
             vm.busy = false;
             return;
           }
-          // Load options và tính vote cho các opt trong polls
-          vm.new_data = res.data || [];
           // Xử lý poll trước khi hiển thị màn hình
           var promises = [];
-          vm.new_data.forEach(poll => {
+          res.data.forEach(poll => {
             promises.push(process_before_show(poll));
           });
           return Promise.all(promises);
@@ -115,7 +110,6 @@
           vm.page += 1;
           vm.busy = false;
           $scope.$apply();
-          vm.new_data = [];
         })
         .catch(err => {
           vm.busy = false;
@@ -164,6 +158,7 @@
           toast.error(err.message, 'Error!');
         });
     }
+
     // Thao tác khác
     $scope.delete_poll = (poll) => {
       if (!poll.isCurrentUserOwner) {

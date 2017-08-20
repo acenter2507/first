@@ -25,7 +25,8 @@ angular.module('core').controller('WebAppController', ['$rootScope', '$scope', '
       loadUser();
     });
     $scope.$watch('Notification.getData', () => {
-      loadUser();
+      console.log('Notification changed');
+      loadNotif();
     });
     function loadUser() {
       $scope.user = Authentication.user;

@@ -29,7 +29,7 @@ angular.module('users').controller('AuthenticationController', [
     // Get an eventual error defined in the URL query string:
     $scope.error = $location.search().err;
     // If user is signed in then redirect back home
-    if ($scope.authentication.user) {
+    if ($scope.isLogged) {
       $location.path('/');
     }
 

@@ -4,6 +4,7 @@ angular.module('core').controller('WebAppController', ['$rootScope', '$scope', '
   function ($rootScope, $scope, Authentication, Notification) {
     console.log('WebAppController');
     // User info
+    $scope.Authentication = Authentication;
     $scope.user = Authentication.user;
     $scope.isLogged = ($scope.user);
     $scope.isAdmin = $scope.isLogged && _.contains($scope.user.roles, 'admin');
@@ -27,8 +28,9 @@ angular.module('core').controller('WebAppController', ['$rootScope', '$scope', '
       $scope.page_title = $scope.page_notifs + $scope.page_name;
     });
 
-    $scope.$watch('user', () => {
+    $scope.$watch('Authentication.user', () => {
       console.log('WebAppController', 'User info updated');
+      $scope.user = Authentication.user;
       $scope.isLogged = ($scope.user);
       $scope.isAdmin = $scope.isLogged && _.contains($scope.user.roles, 'admin');
       if ($scope.isLogged) {

@@ -36,6 +36,7 @@
     Action,
     dialog
   ) {
+    console.log($scope.user);
     var ctrl = this;
 
     ctrl.poll = poll;

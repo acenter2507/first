@@ -137,7 +137,7 @@
         </div>
         <ul class="nav nav-list">
           <li ng-repeat="category in vm.categorys">
-            <a class="undecorated-link" ui-sref="categorys.polls({ categoryId: category._id })">
+            <a class="undecorated-link" ui-sref="categorys.polls({ categoryId: category.slug })">
               <i ng-class="['fa', category.icon]"></i>&nbsp;{{::category.name}}
               <span class="badge-count pull-right" ng-bind="category.count"></span>
             </a>

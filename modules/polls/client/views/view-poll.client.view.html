@@ -6,7 +6,7 @@
         <div class="card-body">
           <p>
             <i ng-class="['fa', ctrl.poll.category.icon]"></i>&nbsp;
-            <a class="undecorated-link" ui-sref="categorys.polls({ categoryId: ctrl.poll.category._id })">
+            <a class="undecorated-link" ui-sref="categorys.polls({ categoryId: ctrl.poll.category.slug })">
             {{ctrl.poll.category.name}}
           </a>
             <a class="undecorated-link pull-right" ng-click="ctrl.follow_poll()" ng-show="ctrl.follow._id">

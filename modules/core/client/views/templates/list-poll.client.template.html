@@ -42,7 +42,7 @@
     <div class="mg5t">
       <span ng-if="poll.allow_guest" class="fa fa-globe"><md-tooltip md-direction="bottom">This poll is public</md-tooltip></span>
       <span ng-if="!poll.allow_guest" class="fa fa-users"><md-tooltip md-direction="bottom">Only user can vote</md-tooltip></span>
-      <a class="undecorated-link" ui-sref="categorys.polls({ categoryId: poll.category._id })">{{:: poll.category.name }}</a>
+      <a class="undecorated-link" ui-sref="categorys.polls({ categoryId: poll.category.slug })">{{:: poll.category.name }}</a>
     </div>
     <div class="clearfix"></div>
     <hr class="mg5t mg10b">

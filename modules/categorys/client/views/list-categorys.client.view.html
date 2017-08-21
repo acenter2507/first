@@ -5,7 +5,7 @@
         <div class="card-body">
           <div class="col-xs-9 pdn">
             <div class="avatar pull-left" ng-style="{ 'background-color': category.color }"><i ng-class="['fa', category.icon]"></i></div>
-            <a ui-sref="categorys.polls({ categoryId: category._id })" class="undecorated-link h4-text">{{category.name}}</a><br>
+            <a ui-sref="categorys.polls({ categoryId: category.slug })" class="undecorated-link h4-text">{{category.name}}</a><br>
           </div>
           <div class="col-xs-3 pdn">
             <div class="count pull-right">

@@ -174,6 +174,10 @@
       }
       return moment(ctrl.poll.close).isAfter(new moment());
     };
+    ctrl.isCategorySelected = ctgrId => {
+      var categoryId = ctrl.poll.category._id || ctrl.poll.category;
+      return (categoryId) ? categoryId.toString() === ctgrId.toString() : false;
+    };
     ctrl.discard = () => {
       if (angular.equals(ctrl.poll, ctrl.bk_poll)) {
         handle_discard();

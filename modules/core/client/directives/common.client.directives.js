@@ -92,7 +92,7 @@ function backToTopDirective() {
   return directive;
 
   function link(scope, element, attrs) {
-    angular.element(window).scroll(function () {
+    angular.element(window).on('scroll', function () {
       if (angular.element(window).scrollTop() <= 0) {
         angular.element(element).fadeOut();
       }

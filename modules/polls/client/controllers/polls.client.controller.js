@@ -39,46 +39,45 @@
     NotifsService
   ) {
     var vm = this;
-    vm.form = {};
+    ctrl.form = {};
     // Options variable
-    vm.opts = [];
-    vm.tmp_opt = {};
-    vm.opt_aside = {};
-    vm.votedOpts = [];
-    vm.selectedOpts = [];
+    ctrl.opts = [];
+    ctrl.tmp_opt = {};
+    ctrl.votedOpts = [];
+    ctrl.selectedOpts = [];
 
     // Sắp xếp comments
-    vm.cmt_sorts = [
+    ctrl.cmt_sorts = [
       { val: '-created', name: 'Newest to oldest' },
       { val: 'created', name: 'Oldest to newest' },
       { val: '-likeCnt', name: 'Most likes' }
     ];
-    vm.cmt_sort = vm.cmt_sorts[0];
+    ctrl.cmt_sort = ctrl.cmt_sorts[0];
     // Biến tự động gửi khi enter
-    vm.enter_send = true;
+    ctrl.enter_send = true;
     // Người dùng đã report poll hiện tại
-    vm.reported = false;
+    ctrl.reported = false;
     // Người dùng đã bookmark poll hiện tại
-    vm.bookmarked = false;
-    vm.votes = [];
-    vm.voteopts = [];
-    vm.votedTotal = 0;
+    ctrl.bookmarked = false;
+    ctrl.votes = [];
+    ctrl.voteopts = [];
+    ctrl.votedTotal = 0;
 
     // Infinity scroll
-    vm.cmts = [];
-    vm.page = 0;
-    vm.busy = false;
-    vm.stopped = false;
+    ctrl.cmts = [];
+    ctrl.page = 0;
+    ctrl.busy = false;
+    ctrl.stopped = false;
 
-    vm.cmt_processing = false;
-    vm.cmt_typing = false;
-    vm.like_processing = false;
-    vm.tmp_cmt = {};
-    vm.optionToggle = -1;
+    ctrl.cmt_processing = false;
+    ctrl.cmt_typing = false;
+    ctrl.like_processing = false;
+    ctrl.tmp_cmt = {};
+    ctrl.optionToggle = -1;
 
-    vm.close_duration = {};
-    vm.remaining = 1;
-    vm.isShow = true;
+    ctrl.close_duration = {};
+    ctrl.remaining = 1;
+    ctrl.isShow = true;
 
     analysic_poll();
 
@@ -89,28 +88,28 @@
       } else {
         Action.get_poll($stateParams.pollId)
           .then(_poll => {
-            vm.poll = _poll;
+            ctrl.poll = _poll;
             init();
           });
       }
     }
     // Init data
     function init() {
-      if (!vm.poll._id) {
+      if (!ctrl.poll._id) {
         $state.go('polls.list');
       }
       // Verify parameters
-      if (!vm.poll.isCurrentUserOwner && !vm.poll.isPublic && $stateParams.share !== vm.poll.share_code) {
-        vm.isShow = false;
+      if (!ctrl.poll.isCurrentUserOwner && !ctrl.poll.isPublic && $stateParams.share !== ctrl.poll.share_code) {
+        ctrl.isShow = false;
         toast.error('You cannot view private poll', 'Error!');
         $state.go('polls.list');
       }
-      vm.isShow = true;
+      ctrl.isShow = true;
       process_before_show();
       save_viewed();
       get_owner_info();
 
-      if (!vm.isClosed && vm.poll.close) {
+      if (!ctrl.isClosed && ctrl.poll.close) {
         loadRemaining();
       }
       // Init socket
@@ -129,7 +128,7 @@
         Socket.connect();
       }
       Socket.emit('subscribe_poll', {
-        pollId: vm.poll._id,
+        pollId: ctrl.poll._id,
         userId: $scope.user._id
       });
       Socket.on('cmt_add', obj => {
@@ -137,13 +136,13 @@
           .then(res => {
             var _cmt = res.data || {};
 
-            var item = _.findWhere(vm.cmts, { _id: _cmt._id });
+            var item = _.findWhere(ctrl.cmts, { _id: _cmt._id });
             if (item) {
-              _.extend(_.findWhere(vm.cmts, { _id: _cmt._id }), _cmt);
+              _.extend(_.findWhere(ctrl.cmts, { _id: _cmt._id }), _cmt);
             } else {
               if (obj.isNew) {
-                vm.cmts.push(_cmt);
-                vm.poll.cmtCnt += 1;
+                ctrl.cmts.push(_cmt);
+                ctrl.poll.cmtCnt += 1;
               }
             }
           })
@@ -152,38 +151,38 @@
           });
       });
       Socket.on('cmt_del', cmtId => {
-        vm.cmts = _.without(vm.cmts, _.findWhere(vm.cmts, { _id: cmtId }));
-        vm.poll.cmtCnt -= 1;
+        ctrl.cmts = _.without(ctrl.cmts, _.findWhere(ctrl.cmts, { _id: cmtId }));
+        ctrl.poll.cmtCnt -= 1;
       });
       Socket.on('poll_like', likeCnt => {
-        vm.poll.likeCnt = likeCnt;
+        ctrl.poll.likeCnt = likeCnt;
       });
       Socket.on('cmt_like', res => {
-        vm.cmts.forEach(cmt => {
+        ctrl.cmts.forEach(cmt => {
           if (cmt._id.toString() === res.cmtId.toString()) {
             cmt.likeCnt = res.likeCnt;
           }
         });
       });
       Socket.on('poll_vote', res => {
-        Action.get_voteopts(vm.poll._id)
+        Action.get_voteopts(ctrl.poll._id)
           .then(res => { // lấy thông tin vote
-            vm.chart = {
+            ctrl.chart = {
               type: 'pie',
               options: { responsive: true },
               colors: [],
               labels: [],
               data: []
             };
-            vm.votes = res.data.votes || [];
-            vm.voteopts = res.data.voteopts || [];
-            vm.votedTotal = vm.voteopts.length;
-            vm.opts.forEach(opt => {
-              opt.voteCnt = _.where(vm.voteopts, { opt: opt._id }).length || 0;
-              opt.progressVal = calPercen(vm.votedTotal, opt.voteCnt);
-              vm.chart.colors.push(opt.color);
-              vm.chart.labels.push(opt.title);
-              vm.chart.data.push(opt.voteCnt);
+            ctrl.votes = res.data.votes || [];
+            ctrl.voteopts = res.data.voteopts || [];
+            ctrl.votedTotal = ctrl.voteopts.length;
+            ctrl.opts.forEach(opt => {
+              opt.voteCnt = _.where(ctrl.voteopts, { opt: opt._id }).length || 0;
+              opt.progressVal = calPercen(ctrl.votedTotal, opt.voteCnt);
+              ctrl.chart.colors.push(opt.color);
+              ctrl.chart.labels.push(opt.title);
+              ctrl.chart.data.push(opt.voteCnt);
             });
             $scope.$apply();
           })
@@ -196,18 +195,18 @@
         $state.go('polls.list');
       });
       Socket.on('poll_update', res => {
-        Action.get_poll(vm.poll._id)
+        Action.get_poll(ctrl.poll._id)
           .then(_poll => {
-            vm.poll = _poll;
+            ctrl.poll = _poll;
             process_before_show();
           }, err => {
             toast.error(err.message, 'Error!');
           });
       });
       Socket.on('opts_update', res => {
-        Action.get_poll(vm.poll._id)
+        Action.get_poll(ctrl.poll._id)
           .then(_poll => {
-            vm.poll = _poll;
+            ctrl.poll = _poll;
             process_before_show();
             $scope.$apply();
           }, err => {
@@ -216,7 +215,7 @@
       });
       $scope.$on('$destroy', function () {
         Socket.emit('unsubscribe_poll', {
-          pollId: vm.poll._id,
+          pollId: ctrl.poll._id,
           userId: $scope.user._id
         });
         Socket.removeListener('cmt_add');
@@ -233,100 +232,100 @@
     // Phân tích thông tin poll trước khi hiển thị.
     function process_before_show() {
       // Thiết lập các thông tin cho poll
-      vm.poll.close = vm.poll.close ? moment(vm.poll.close) : vm.poll.close;
-      vm.isClosed = vm.poll.close ? moment(vm.poll.close).isBefore(new moment()) : false;
-      vm.opts = _.where(vm.poll.opts, { status: 1 });
-      vm.chart = {
+      ctrl.poll.close = ctrl.poll.close ? moment(ctrl.poll.close) : ctrl.poll.close;
+      ctrl.isClosed = ctrl.poll.close ? moment(ctrl.poll.close).isBefore(new moment()) : false;
+      ctrl.opts = _.where(ctrl.poll.opts, { status: 1 });
+      ctrl.chart = {
         type: 'pie',
         options: { responsive: true },
         colors: [],
         labels: [],
         data: []
       };
-      vm.votes = vm.poll.votes || [];
-      vm.voteopts = vm.poll.voteopts || [];
-      vm.votedTotal = vm.voteopts.length;
-      vm.opts.forEach(opt => {
-        opt.voteCnt = _.where(vm.voteopts, { opt: opt._id }).length || 0;
-        opt.progressVal = calPercen(vm.votedTotal, opt.voteCnt);
-        vm.chart.colors.push(opt.color);
-        vm.chart.labels.push(opt.title);
-        vm.chart.data.push(opt.voteCnt);
+      ctrl.votes = ctrl.poll.votes || [];
+      ctrl.voteopts = ctrl.poll.voteopts || [];
+      ctrl.votedTotal = ctrl.voteopts.length;
+      ctrl.opts.forEach(opt => {
+        opt.voteCnt = _.where(ctrl.voteopts, { opt: opt._id }).length || 0;
+        opt.progressVal = calPercen(ctrl.votedTotal, opt.voteCnt);
+        ctrl.chart.colors.push(opt.color);
+        ctrl.chart.labels.push(opt.title);
+        ctrl.chart.data.push(opt.voteCnt);
       });
     }
     function get_owner_info() {
-      Action.get_owner_by_pollId(vm.poll._id)
+      Action.get_owner_by_pollId(ctrl.poll._id)
         .then(res => {
-          vm.ownVote = res.data.ownVote;
-          vm.votedOpts = res.data.votedOpts;
-          vm.selectedOpts = _.clone(vm.votedOpts);
-          vm.follow = res.data.follow;
-          vm.reported = res.data.reported;
-          vm.bookmarked = res.data.bookmarked;
-          vm.like = res.data.like;
-          vm.view = res.data.view;
+          ctrl.ownVote = res.data.ownVote;
+          ctrl.votedOpts = res.data.votedOpts;
+          ctrl.selectedOpts = _.clone(ctrl.votedOpts);
+          ctrl.follow = res.data.follow;
+          ctrl.reported = res.data.reported;
+          ctrl.bookmarked = res.data.bookmarked;
+          ctrl.like = res.data.like;
+          ctrl.view = res.data.view;
         })
         .catch(err => {
           toast.error('Không thể load thông tin user' + err.message, 'Error!');
         });
     }
 
-    vm.get_cmts = get_cmts;
+    ctrl.get_cmts = get_cmts;
     function get_cmts() {
-      if (vm.stopped || vm.busy) return;
-      vm.busy = true;
-      Action.get_cmts(vm.poll._id, vm.page, vm.cmt_sort.val)
+      if (ctrl.stopped || ctrl.busy) return;
+      ctrl.busy = true;
+      Action.get_cmts(ctrl.poll._id, ctrl.page, ctrl.cmt_sort.val)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
-            vm.stopped = true;
-            vm.busy = false;
+            ctrl.stopped = true;
+            ctrl.busy = false;
             return;
           }
           // Gán data vào danh sách comment hiện tại
-          vm.cmts = _.union(vm.cmts, res.data);
-          vm.page += 1;
-          vm.busy = false;
-          if (res.data.length < 10) { vm.stopped = true; }
+          ctrl.cmts = _.union(ctrl.cmts, res.data);
+          ctrl.page += 1;
+          ctrl.busy = false;
+          if (res.data.length < 10) { ctrl.stopped = true; }
           // $scope.$apply();
         })
         .catch(err => {
           toast.error(err.message, 'Error!');
         });
     }
-    vm.sort = sort;
+    ctrl.sort = sort;
     function sort(index) {
-      vm.cmt_sort = vm.cmt_sorts[index];
-      vm.cmts = [];
-      vm.page = 0;
-      vm.busy = false;
-      vm.stopped = false;
+      ctrl.cmt_sort = ctrl.cmt_sorts[index];
+      ctrl.cmts = [];
+      ctrl.page = 0;
+      ctrl.busy = false;
+      ctrl.stopped = false;
       get_cmts();
     }
 
     function loadRemaining() {
-      vm.remaining = $timeout(makeRemaining, 1000);
+      ctrl.remaining = $timeout(makeRemaining, 1000);
       $scope.$on('$destroy', () => {
-        $timeout.cancel(vm.remaining);
+        $timeout.cancel(ctrl.remaining);
       });
     }
 
     function makeRemaining() {
-      vm.close_duration = Remaining.duration(vm.poll.close);
-      vm.isClosed = moment(vm.poll.close).isBefore(new moment());
-      if (!vm.isClosed) {
-        vm.remaining = $timeout(makeRemaining, 1000);
+      ctrl.close_duration = Remaining.duration(ctrl.poll.close);
+      ctrl.isClosed = moment(ctrl.poll.close).isBefore(new moment());
+      if (!ctrl.isClosed) {
+        ctrl.remaining = $timeout(makeRemaining, 1000);
       } else {
-        $timeout.cancel(vm.remaining);
+        $timeout.cancel(ctrl.remaining);
       }
     }
 
     function save_viewed() {
-      if (!vm.poll.isCurrentUserOwner) {
+      if (!ctrl.poll.isCurrentUserOwner) {
         var count_up = $timeout(() => {
-          vm.poll.viewCnt += 1;
-          Action.count_up_view_poll(vm.poll._id);
+          ctrl.poll.viewCnt += 1;
+          Action.count_up_view_poll(ctrl.poll._id);
           if ($scope.isLogged) {
-            Action.save_view_poll(vm.view);
+            Action.save_view_poll(ctrl.view);
           }
         }, 30000);
         $scope.$on('$destroy', () => {
@@ -335,12 +334,12 @@
       }
     }
     // Thao tác databse
-    vm.save_cmt = save_cmt;
+    ctrl.save_cmt = save_cmt;
     function save_cmt() {
       if (
-        !vm.tmp_cmt.body ||
-        !vm.tmp_cmt.body.length ||
-        vm.tmp_cmt.body.length === 0
+        !ctrl.tmp_cmt.body ||
+        !ctrl.tmp_cmt.body.length ||
+        ctrl.tmp_cmt.body.length === 0
       ) {
         toast.error('You must type something to reply.', 'Error!');
         return;
@@ -349,42 +348,42 @@
         $state.go('authentication.signin');
         return false;
       }
-      if (vm.cmt_processing) {
+      if (ctrl.cmt_processing) {
         toast.error('Please wait until all comment be submit.', 'Error!');
         return;
       }
-      vm.cmt_processing = true;
-      Action.save_cmt(vm.poll, vm.tmp_cmt)
+      ctrl.cmt_processing = true;
+      Action.save_cmt(ctrl.poll, ctrl.tmp_cmt)
         .then(res => {
-          vm.tmp_cmt = {};
-          vm.cmt_processing = false;
-          vm.cmt_typing = false;
+          ctrl.tmp_cmt = {};
+          ctrl.cmt_processing = false;
+          ctrl.cmt_typing = false;
         })
         .catch(err => {
           toast.error(err.message, 'Error!');
-          vm.cmt_processing = false;
+          ctrl.cmt_processing = false;
         });
     }
 
     function save_vote() {
-      if (!$scope.isLogged && !vm.poll.allow_guest) {
+      if (!$scope.isLogged && !ctrl.poll.allow_guest) {
         return $state.go('authentication.signin');
       }
-      if (!vm.selectedOpts.length || vm.selectedOpts.length === 0) {
+      if (!ctrl.selectedOpts.length || ctrl.selectedOpts.length === 0) {
         toast.error('You must vote at least one option.', 'Error!');
         return;
       }
-      if (angular.equals(vm.votedOpts, vm.selectedOpts)) {
+      if (angular.equals(ctrl.votedOpts, ctrl.selectedOpts)) {
         return;
       }
-      Action.save_vote(vm.ownVote, vm.selectedOpts, vm.poll)
+      Action.save_vote(ctrl.ownVote, ctrl.selectedOpts, ctrl.poll)
         .then(res => {
-          vm.ownVote = res;
-          vm.votedOpts = _.clone(vm.selectedOpts);
+          ctrl.ownVote = res;
+          ctrl.votedOpts = _.clone(ctrl.selectedOpts);
         })
         .catch(err => {
           toast.error(err.message, 'Error!');
-          vm.selectedOpts = angular.copy(vm.votedOpts) || [];
+          ctrl.selectedOpts = angular.copy(ctrl.votedOpts) || [];
         });
     }
 
@@ -405,7 +404,7 @@
     }
 
     // Remove existing Poll
-    vm.remove = () => {
+    ctrl.remove = () => {
       $scope.message_title = 'Delete poll!';
       $scope.message_content = 'Are you sure you want to delete?';
       $scope.dialog_type = 3;
@@ -418,16 +417,16 @@
       }, reject => {
       });
       function handle_delete() {
-        vm.poll.$remove(() => {
-          Socket.emit('poll_delete', { pollId: vm.poll._id });
+        ctrl.poll.$remove(() => {
+          Socket.emit('poll_delete', { pollId: ctrl.poll._id });
           $state.go('polls.list');
         });
       }
     };
-    vm.share = () => {
-      if (!vm.poll.share_code || vm.poll.share_code === '') {
-        vm.poll.share_code = make_code();
-        vm.poll.$update(() => {
+    ctrl.share = () => {
+      if (!ctrl.poll.share_code || ctrl.poll.share_code === '') {
+        ctrl.poll.share_code = make_code();
+        ctrl.poll.$update(() => {
           show_dialog();
         }, err => {
           toast.error(err.message, 'Error!');
@@ -438,7 +437,7 @@
       function show_dialog() {
         $scope.message_title = 'Share poll!';
         $scope.message_content = 'Send url for anyone you want to share this poll.';
-        $scope.message_url = $location.absUrl().split('?')[0] + '?share=' + vm.poll.share_code;
+        $scope.message_url = $location.absUrl().split('?')[0] + '?share=' + ctrl.poll.share_code;
         dialog.openConfirm({
           scope: $scope,
           templateUrl: 'modules/core/client/views/templates/share.dialog.template.html'
@@ -447,45 +446,45 @@
         });
       }
     };
-    vm.like_poll = type => {
+    ctrl.like_poll = type => {
       if (!$scope.isLogged) {
         toast.error('You must login to like this poll.', 'Error!');
         return;
       }
-      if (vm.poll.isCurrentUserOwner) {
+      if (ctrl.poll.isCurrentUserOwner) {
         toast.error('You cannot like your poll.', 'Error!');
         return;
       }
-      if (vm.like_processing) {
+      if (ctrl.like_processing) {
         toast.error('You cannot interact continuously.', 'Error!');
         return;
       }
-      vm.like_processing = true;
-      Action.save_like(vm.like, type, vm.poll)
+      ctrl.like_processing = true;
+      Action.save_like(ctrl.like, type, ctrl.poll)
         .then(res => {
-          vm.poll.likeCnt = res.likeCnt;
-          vm.like = res.like;
-          vm.like_processing = false;
+          ctrl.poll.likeCnt = res.likeCnt;
+          ctrl.like = res.like;
+          ctrl.like_processing = false;
           $scope.$apply();
         })
         .catch(err => {
           toast.error(err.message, 'Error!');
-          vm.like_processing = false;
+          ctrl.like_processing = false;
         });
     };
 
-    vm.follow_poll = () => {
+    ctrl.follow_poll = () => {
       if (!$scope.isLogged) {
         toast.error('You must login to follow this poll.', 'Error!');
         return;
       }
-      Action.save_follow(vm.follow)
+      Action.save_follow(ctrl.follow)
         .then(res => {
           if (res) {
-            vm.follow = res;
-            toast.success('You followed ' + vm.poll.title, 'Success!');
+            ctrl.follow = res;
+            toast.success('You followed ' + ctrl.poll.title, 'Success!');
           } else {
-            vm.follow = { poll: vm.poll._id };
+            ctrl.follow = { poll: ctrl.poll._id };
           }
         })
         .catch(err => {
@@ -493,8 +492,8 @@
         });
     };
 
-    vm.report_poll = (poll) => {
-      if (vm.reported) {
+    ctrl.report_poll = (poll) => {
+      if (ctrl.reported) {
         toast.error('You are already report this poll.', 'Error!');
         return;
       }
@@ -506,9 +505,9 @@
       }, reject => {
       });
       function handle_confirm(reason) {
-        Action.save_report(vm.poll, reason)
+        Action.save_report(ctrl.poll, reason)
           .then(res => {
-            vm.reported = (res) ? true : false;
+            ctrl.reported = (res) ? true : false;
             $scope.$apply();
             toast.success('You have successfully reported this poll.', 'Thank you!');
           })
@@ -518,14 +517,14 @@
       }
     };
 
-    vm.bookmark_poll = () => {
-      if (vm.bookmarked) {
+    ctrl.bookmark_poll = () => {
+      if (ctrl.bookmarked) {
         toast.error('You are already bookmark this poll.', 'Error!');
         return;
       }
-      Action.save_bookmark(vm.poll._id)
+      Action.save_bookmark(ctrl.poll._id)
         .then(res => {
-          vm.bookmarked = (res) ? true : false;
+          ctrl.bookmarked = (res) ? true : false;
           $scope.$apply();
           toast.success('Added to bookmarks.', 'Success!');
         })
@@ -534,19 +533,19 @@
         });
     };
     // Click button add option
-    vm.input_opt = opt => {
-      vm.tmp_opt = (!opt) ? { poll: vm.poll._id, title: '', body: '', status: 2 } : opt;
-      vm.opt_aside.$promise.then(vm.opt_aside.show);
+    ctrl.input_opt = opt => {
+      ctrl.tmp_opt = (!opt) ? { poll: ctrl.poll._id, title: '', body: '', status: 2 } : opt;
+      angular.element('body').toggleClass('aside-panel-open');
     };
     // Click button save option
-    vm.save_opt = isValid => {
+    ctrl.save_opt = isValid => {
       if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'vm.form.optForm');
+        $scope.$broadcast('show-errors-check-validity', 'ctrl.form.optForm');
         return false;
       }
-      Action.save_opt(vm.tmp_opt, vm.poll)
+      Action.save_opt(ctrl.tmp_opt, ctrl.poll)
         .then(res => {
-          vm.opt_aside.$promise.then(vm.opt_aside.hide);
+          ctrl.opt_aside.$promise.then(ctrl.opt_aside.hide);
           toast.success('Your option is waiting for approve.', 'Thank you!');
         })
         .catch(err => {
@@ -554,30 +553,30 @@
         });
     };
 
-    vm.reply_cmt = cmt => {
+    ctrl.reply_cmt = cmt => {
       if (!$scope.isLogged) {
         toast.error('You must login to reply this comment.', 'Error!');
         return;
       }
-      vm.tmp_cmt = {};
-      vm.tmp_cmt.to = cmt.user._id;
-      vm.tmp_cmt.toName = cmt.user.displayName;
-      vm.tmp_cmt.discard = true;
-      vm.cmt_typing = true;
+      ctrl.tmp_cmt = {};
+      ctrl.tmp_cmt.to = cmt.user._id;
+      ctrl.tmp_cmt.toName = cmt.user.displayName;
+      ctrl.tmp_cmt.discard = true;
+      ctrl.cmt_typing = true;
     };
 
-    vm.edit_cmt = cmt => {
-      vm.tmp_cmt = _.clone(cmt);
-      vm.tmp_cmt.discard = true;
-      vm.cmt_typing = true;
+    ctrl.edit_cmt = cmt => {
+      ctrl.tmp_cmt = _.clone(cmt);
+      ctrl.tmp_cmt.discard = true;
+      ctrl.cmt_typing = true;
     };
 
-    vm.discard_cmt = () => {
-      vm.tmp_cmt = {};
-      vm.cmt_typing = false;
+    ctrl.discard_cmt = () => {
+      ctrl.tmp_cmt = {};
+      ctrl.cmt_typing = false;
     };
 
-    vm.delete_cmt = cmt => {
+    ctrl.delete_cmt = cmt => {
       $scope.message_title = 'Delete comment!';
       $scope.message_content = 'Are you sure you want to delete this comment?';
       $scope.dialog_type = 3;
@@ -590,20 +589,20 @@
       }, reject => {
       });
       function handle_delete_cmt() {
-        vm.cmts = _.without(vm.cmts, cmt);
+        ctrl.cmts = _.without(ctrl.cmts, cmt);
         Action.delete_cmt(cmt);
       }
     };
     var cnt = 0;
-    vm.focus_cmt = () => {
+    ctrl.focus_cmt = () => {
       if (!$scope.isLogged) {
         toast.error('You must login to comment.', 'Error!');
         return;
       }
-      vm.cmt_typing = true;
+      ctrl.cmt_typing = true;
     };
 
-    vm.like_cmt = (cmt, type) => {
+    ctrl.like_cmt = (cmt, type) => {
       if (!$scope.isLogged) {
         toast.error('You must login to like this comment.', 'Error!');
         return;
@@ -612,63 +611,63 @@
         toast.error('You cannot like your comment.', 'Error!');
         return;
       }
-      if (vm.like_processing) {
+      if (ctrl.like_processing) {
         toast.error('You cannot interact continuously.', 'Error!');
         return;
       }
-      vm.like_processing = true;
+      ctrl.like_processing = true;
       Action.save_like_cmt(cmt, type)
         .then(res => {
           cmt.like = res.like;
           cmt.likeCnt = res.likeCnt;
-          vm.like_processing = false;
+          ctrl.like_processing = false;
         })
         .catch(err => {
-          vm.like_processing = false;
+          ctrl.like_processing = false;
           toast.error(err.message, 'Error!');
         });
     };
 
     // VOTE
-    vm.checked = function (id) {
-      if (vm.poll.allow_multiple) {
-        if (_.contains(vm.selectedOpts, id)) {
-          vm.selectedOpts = _.without(vm.selectedOpts, id);
+    ctrl.checked = function (id) {
+      if (ctrl.poll.allow_multiple) {
+        if (_.contains(ctrl.selectedOpts, id)) {
+          ctrl.selectedOpts = _.without(ctrl.selectedOpts, id);
         } else {
-          vm.selectedOpts.push(id);
+          ctrl.selectedOpts.push(id);
         }
       } else {
-        if (!_.contains(vm.selectedOpts, id)) {
-          vm.selectedOpts = [id];
+        if (!_.contains(ctrl.selectedOpts, id)) {
+          ctrl.selectedOpts = [id];
         }
       }
     };
-    vm.is_can_vote = () => {
-      if (vm.poll.allow_guest) {
+    ctrl.is_can_vote = () => {
+      if (ctrl.poll.allow_guest) {
         return true;
       } else {
         return $scope.isLogged;
       }
     };
-    vm.is_voted = function (id) {
-      return _.contains(vm.selectedOpts, id);
+    ctrl.is_voted = function (id) {
+      return _.contains(ctrl.selectedOpts, id);
     };
-    vm.is_voted_all = () => {
-      return vm.selectedOpts.length === vm.opts.length;
+    ctrl.is_voted_all = () => {
+      return ctrl.selectedOpts.length === ctrl.opts.length;
     };
-    vm.toggleAll = () => {
-      if (vm.selectedOpts.length === vm.opts.length) {
-        vm.selectedOpts = [];
-      } else if (vm.selectedOpts.length === 0 || vm.selectedOpts.length > 0) {
-        vm.selectedOpts = _.pluck(vm.opts, '_id');
+    ctrl.toggleAll = () => {
+      if (ctrl.selectedOpts.length === ctrl.opts.length) {
+        ctrl.selectedOpts = [];
+      } else if (ctrl.selectedOpts.length === 0 || ctrl.selectedOpts.length > 0) {
+        ctrl.selectedOpts = _.pluck(ctrl.opts, '_id');
       }
     };
-    vm.isIndeterminate = () => {
-      return (vm.selectedOpts.length !== 0 && vm.selectedOpts.length !== vm.opts.length);
+    ctrl.isIndeterminate = () => {
+      return (ctrl.selectedOpts.length !== 0 && ctrl.selectedOpts.length !== ctrl.opts.length);
     };
-    vm.save_vote = save_vote;
-    vm.toggle_chart = () => {
-      vm.chart.type = vm.chart.type === 'polarArea' ?
+    ctrl.save_vote = save_vote;
+    ctrl.toggle_chart = () => {
+      ctrl.chart.type = ctrl.chart.type === 'polarArea' ?
         'pie' : 'polarArea';
     };
 
@@ -676,7 +675,7 @@
     $scope.share = provider => {
       var url = $location.absUrl();
       // var url = 'http://notatsujapan.com';
-      var text = vm.poll.title;
+      var text = ctrl.poll.title;
       if (provider === 'facebook') {
         Socialshare.share({
           'provider': 'facebook',

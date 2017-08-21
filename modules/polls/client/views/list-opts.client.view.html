@@ -1,14 +1,14 @@
-<div class="card" ng-if="vm.opts.length > 0">
+<div class="card" ng-if="ctrl.opts.length > 0">
   <div class="card-header">
     <strong class="card-title"> Chart panel</strong>
   </div>
   <div class="card-body">
-    <canvas id="pie" class="chart-base" chart-data="vm.chart.data" chart-labels="vm.chart.labels" chart-options="vm.chart.options"
-      chart-colors="vm.chart.colors" chart-type="vm.chart.type" ng-if="vm.votedTotal > 0">
+    <canvas id="pie" class="chart-base" chart-data="ctrl.chart.data" chart-labels="ctrl.chart.labels" chart-options="ctrl.chart.options"
+      chart-colors="ctrl.chart.colors" chart-type="ctrl.chart.type" ng-if="ctrl.votedTotal > 0">
     </canvas>
 
     <ul class="horizontal-bars type-2">
-      <li ng-repeat="opt in vm.opts | orderBy: '-voteCnt'">
+      <li ng-repeat="opt in ctrl.opts | orderBy: '-voteCnt'">
         <!--<i class="icon-chart"></i>-->
         <div class="detail">
           <p class="title" ng-bind="opt.title"></p>
@@ -24,7 +24,7 @@
       </li>
     </ul>
     <div class="form-group mg10t">
-      <button ng-if="vm.votedTotal > 0" class="btn btn-success pull-right" ng-click="vm.toggle_chart()">Change chart</button>
+      <button ng-if="ctrl.votedTotal > 0" class="btn btn-success pull-right" ng-click="ctrl.toggle_chart()">Change chart</button>
     </div>
     <div class="clearfix"></div>
   </div>

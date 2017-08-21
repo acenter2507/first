@@ -1,25 +1,25 @@
-<section class="container animated fadeIn mg6t mg50b" ng-show="vm.isShow">
+<section class="container animated fadeIn mg6t mg50b" ng-show="ctrl.isShow">
   <div class="row">
     <!-- Title and category -->
     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 pdn">
       <div class="card" id="poll_title_card">
         <div class="card-body">
           <p>
-            <i ng-class="['fa', vm.poll.category.icon]"></i>&nbsp;
-            <a class="undecorated-link" ui-sref="categorys.polls({ categoryId: vm.poll.category._id })">
-            {{vm.poll.category.name}}
+            <i ng-class="['fa', ctrl.poll.category.icon]"></i>&nbsp;
+            <a class="undecorated-link" ui-sref="categorys.polls({ categoryId: ctrl.poll.category._id })">
+            {{ctrl.poll.category.name}}
           </a>
-            <a class="undecorated-link pull-right" ng-click="vm.follow_poll()" ng-show="vm.follow._id">
+            <a class="undecorated-link pull-right" ng-click="ctrl.follow_poll()" ng-show="ctrl.follow._id">
             <i class="fa fa-rss"></i> Unfollow
             <md-tooltip md-direction="bottom">Following this poll</md-tooltip>
           </a>
-            <a class="undecorated-link pull-right" ng-click="vm.follow_poll()" ng-hide="vm.follow._id">
+            <a class="undecorated-link pull-right" ng-click="ctrl.follow_poll()" ng-hide="ctrl.follow._id">
             <i class="fa fa-rss"></i> Follow
             <md-tooltip md-direction="bottom">You not follow this poll yet</md-tooltip>
           </a>
           </p>
-          <a class="undecorated-link" ui-sref="polls.view({ pollId: vm.poll._id })">
-            <h3 class="mg5t mg5b" ng-bind="vm.poll.title"></h3>
+          <a class="undecorated-link" ui-sref="polls.view({ pollId: ctrl.poll._id })">
+            <h3 class="mg5t mg5b" ng-bind="ctrl.poll.title"></h3>
           </a>
         </div>
       </div>
@@ -28,16 +28,16 @@
         <div class="card-body">
           <div clas="post-header">
             <div class="user-avatar pull-left">
-              <a ui-sref="profile.info({userId: vm.poll.user._id})" ng-if="vm.poll.user">
-              <img src="{{vm.poll.user.profileImageURL}}" alt="{{vm.poll.user.displayName}}">
+              <a ui-sref="profile.info({userId: ctrl.poll.user._id})" ng-if="ctrl.poll.user">
+              <img src="{{ctrl.poll.user.profileImageURL}}" alt="{{ctrl.poll.user.displayName}}">
             </a>
-              <img ng-if="!vm.poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
+              <img ng-if="!ctrl.poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
             </div>
             <span class="pull-left">
-            <strong><a class="undecorated-link" ui-sref="profile.info({userId: vm.poll.user._id})" ng-if="vm.poll.user" ng-bind="vm.poll.user.displayName"></a></strong>
-            <span ng-if="!vm.poll.user">Deleted User</span>
+            <strong><a class="undecorated-link" ui-sref="profile.info({userId: ctrl.poll.user._id})" ng-if="ctrl.poll.user" ng-bind="ctrl.poll.user.displayName"></a></strong>
+            <span ng-if="!ctrl.poll.user">Deleted User</span>
             <small class="text-muted">created on</small>
-            <small class="text-muted" am-time-ago="vm.poll.created"></small>
+            <small class="text-muted" am-time-ago="ctrl.poll.created"></small>
             </span>
             <span class="pull-right">
             <md-menu md-offset="-20 25" md-position-mode="target-right target">
@@ -47,43 +47,43 @@
               <md-menu-content>
                 <ul class="menu-list">
                   <li ng-if="isLogged">
-                    <a ng-click="vm.follow_poll()" class="undecorated-link">
-                      <i class="fa fa-rss"></i>&nbsp;{{(vm.follow._id) ? 'Unfollow' : 'Follow'}}
+                    <a ng-click="ctrl.follow_poll()" class="undecorated-link">
+                      <i class="fa fa-rss"></i>&nbsp;{{(ctrl.follow._id) ? 'Unfollow' : 'Follow'}}
                     </a>
                   </li>
-                  <li ng-if="isLogged && !vm.poll.isCurrentUserOwner && !vm.reported"><a class="undecorated-link" ng-click="vm.report_poll()"><i class="fa fa-exclamation-circle"></i>&nbsp;Report poll</a></li>
-                  <li ng-if="vm.poll.isCurrentUserOwner || vm.poll.canEdit"><a class="undecorated-link" ui-sref="polls.edit({ pollId: vm.poll._id })"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
-                  <li ng-if="vm.poll.isCurrentUserOwner || vm.poll.canEdit"><a class="undecorated-link" ng-click="vm.remove()"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
-                  <li ng-if="isLogged && !vm.poll.isCurrentUserOwner && !vm.bookmarked"><a class="undecorated-link" ng-click="vm.bookmark_poll()"><i class="fa fa-bookmark"></i>&nbsp;Bookmark poll</a></li>
+                  <li ng-if="isLogged && !ctrl.poll.isCurrentUserOwner && !ctrl.reported"><a class="undecorated-link" ng-click="ctrl.report_poll()"><i class="fa fa-exclamation-circle"></i>&nbsp;Report poll</a></li>
+                  <li ng-if="ctrl.poll.isCurrentUserOwner || ctrl.poll.canEdit"><a class="undecorated-link" ui-sref="polls.edit({ pollId: ctrl.poll._id })"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
+                  <li ng-if="ctrl.poll.isCurrentUserOwner || ctrl.poll.canEdit"><a class="undecorated-link" ng-click="ctrl.remove()"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
+                  <li ng-if="isLogged && !ctrl.poll.isCurrentUserOwner && !ctrl.bookmarked"><a class="undecorated-link" ng-click="ctrl.bookmark_poll()"><i class="fa fa-bookmark"></i>&nbsp;Bookmark poll</a></li>
                 </ul>
               </md-menu-content>
             </md-menu>
           </span>
             <br>
-            <span ng-if="vm.poll.allow_guest" class="fa fa-globe">
+            <span ng-if="ctrl.poll.allow_guest" class="fa fa-globe">
             <md-tooltip md-direction="bottom">This poll is public</md-tooltip>
           </span>
-            <span ng-if="!vm.poll.allow_guest" class="fa fa-users">
+            <span ng-if="!ctrl.poll.allow_guest" class="fa fa-users">
             <md-tooltip md-direction="bottom">Only user can vote</md-tooltip>
           </span>
             <div class="clearfix"></div>
             <hr class="mg5t mg10b">
           </div>
           <div class="post-body">
-            <div class="text-body" ta-bind="text" ng-model="vm.poll.body" ta-readonly="true"></div>
+            <div class="text-body" ta-bind="text" ng-model="ctrl.poll.body" ta-readonly="true"></div>
             <hr class="mg10t mg10b">
           </div>
           <div class="post-footer">
             <small class="like_tools">
-            <a class="undecorated-link" ng-click="vm.like_poll(1)" ng-show="vm.like.type == 1"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;Like</a>
-            <span class="span_btn" ng-click="vm.like_poll(1)" ng-show="vm.like.type != 1"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;Like</span>
-            <span class="mg5l mg5r" ng-bind="vm.poll.likeCnt"></span>
-            <a class="undecorated-link" ng-click="vm.like_poll(2)" ng-show="vm.like.type == 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>&nbsp;Dislike</a>
-            <span class="span_btn" ng-click="vm.like_poll(2)" ng-show="vm.like.type != 2"><i class="fa fa-thumbs-o-down" aria-hidden="true">&nbsp;Dislike</i></span>
+            <a class="undecorated-link" ng-click="ctrl.like_poll(1)" ng-show="ctrl.like.type == 1"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;Like</a>
+            <span class="span_btn" ng-click="ctrl.like_poll(1)" ng-show="ctrl.like.type != 1"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;Like</span>
+            <span class="mg5l mg5r" ng-bind="ctrl.poll.likeCnt"></span>
+            <a class="undecorated-link" ng-click="ctrl.like_poll(2)" ng-show="ctrl.like.type == 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>&nbsp;Dislike</a>
+            <span class="span_btn" ng-click="ctrl.like_poll(2)" ng-show="ctrl.like.type != 2"><i class="fa fa-thumbs-o-down" aria-hidden="true">&nbsp;Dislike</i></span>
           </small>
             <small class="pull-right">
-            <a ng-if="!vm.poll.isCurrentUserOwner" ng-click="vm.reply_cmt(vm.poll)" class="undecorated-link">Reply</a>
-            <a ng-click="vm.focus_cmt()" class="undecorated-link mg10l">Comment</a>
+            <a ng-if="!ctrl.poll.isCurrentUserOwner" ng-click="ctrl.reply_cmt(ctrl.poll)" class="undecorated-link">Reply</a>
+            <a ng-click="ctrl.focus_cmt()" class="undecorated-link mg10l">Comment</a>
           </small>
             <div class="clearfix"></div>
           </div>
@@ -92,12 +92,12 @@
       <!-- Options -->
       <div class="card" id="opts_detail_card">
         <div class="card-header">
-          <strong class="card-title"> OPTIONS ({{vm.opts.length}})</strong>
+          <strong class="card-title"> OPTIONS ({{ctrl.opts.length}})</strong>
         </div>
         <div class="card-body">
-          <span class="text-muted" ng-if="!vm.opts.length || vm.opts.length === 0">Has no option added.</span>
-          <uib-accordion close-others="true" ng-if="vm.opts.length > 0">
-            <uib-accordion-group ng-repeat="opt in vm.opts" heading="{{opt.title + ' (' + opt.voteCnt + ' votes)'}}" panel-class="custom-panel public">
+          <span class="text-muted" ng-if="!ctrl.opts.length || ctrl.opts.length === 0">Has no option added.</span>
+          <uib-accordion close-others="true" ng-if="ctrl.opts.length > 0">
+            <uib-accordion-group ng-repeat="opt in ctrl.opts" heading="{{opt.title + ' (' + opt.voteCnt + ' votes)'}}" panel-class="custom-panel public">
               <small class="pull-right text-muted">
                 <span>Added by</span>
                 <a class="undecorated-link" ui-sref="profile.info({userId: opt.user._id})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>
@@ -112,42 +112,41 @@
       </div>
       <!-- #Show only MD screen -->
       <!-- Vote card -->
-      <div class="card d-md-none" ng-if="vm.isClosed">
+      <div class="card d-md-none" ng-if="ctrl.isClosed">
         <div class="card-header">
           <strong class="card-title"> Vote panel</strong>
         </div>
         <div class="card-body">
-          <h4 ng-if="vm.isClosed">This poll has closed.</h4>
+          <h4 ng-if="ctrl.isClosed">This poll has closed.</h4>
         </div>
       </div>
-      <div class="card d-md-none" ng-if="!vm.isClosed">
+      <div class="card d-md-none" ng-if="!ctrl.isClosed">
         <div class="card-header">
           <strong class="card-title"> Vote panel</strong>
         </div>
         <div class="card-body">
-          <div class="poll-remaining" ng-if="vm.poll.close">
-            <p>{{vm.close_duration.days}}d:{{vm.close_duration.hours}}h:{{vm.close_duration.minutes}}m:{{vm.close_duration.seconds}}s</p>
+          <div class="poll-remaining" ng-if="ctrl.poll.close">
+            <p>{{ctrl.close_duration.days}}d:{{ctrl.close_duration.hours}}h:{{ctrl.close_duration.minutes}}m:{{ctrl.close_duration.seconds}}s</p>
           </div>
           <hr class="mgn mg12b">
-          <span class="text-muted" ng-if="!vm.opts.length || vm.opts.length === 0"><small>No option to vote.</small></span>
-          <div class="form-group" ng-repeat="opt in vm.opts" ng-if="!vm.poll.allow_multiple">
+          <span class="text-muted" ng-if="!ctrl.opts.length || ctrl.opts.length === 0"><small>No option to vote.</small></span>
+          <div class="form-group" ng-repeat="opt in ctrl.opts" ng-if="!ctrl.poll.allow_multiple">
             <label class="control control--radio w100p">
             {{opt.title}}<span class="mg5l" ng-style="{color: opt.color}"><strong>●</strong></span>
-            <input type="radio" name="vote_radio" ng-checked="vm.is_voted(opt._id)" ng-click="vm.checked(opt._id)"/>
+            <input type="radio" name="vote_radio" ng-checked="ctrl.is_voted(opt._id)" ng-click="ctrl.checked(opt._id)"/>
             <div class="control__indicator"></div>
           </label>
           </div>
-          <div class="form-group" ng-repeat="opt in vm.opts" ng-if="vm.poll.allow_multiple">
+          <div class="form-group" ng-repeat="opt in ctrl.opts" ng-if="ctrl.poll.allow_multiple">
             <label class="control control--checkbox">
             {{opt.title}}<span class="mg5l" ng-style="{color: opt.color}"><strong>●</strong></span>
-            <input type="checkbox" ng-checked="vm.is_voted(opt._id)" ng-click="vm.checked(opt._id)"/>
+            <input type="checkbox" ng-checked="ctrl.is_voted(opt._id)" ng-click="ctrl.checked(opt._id)"/>
             <div class="control__indicator"></div>
           </label>
           </div>
           <div class="form-group">
-            <button ng-show="vm.opts.length > 0 && vm.is_can_vote" class="btn btn-info pull-right" ng-click="vm.save_vote()">{{(vm.ownVote._id) ? 'Change vote' : 'Vote'}}</button>
-            <button ng-show="isLogged && vm.poll.allow_add && !vm.poll.isCurrentUserOwner" class="btn btn-warning pull-right mg10r"
-              ng-click="vm.input_opt()">Suggest options</button>
+            <button ng-show="ctrl.opts.length > 0 && ctrl.is_can_vote" class="btn btn-info pull-right" ng-click="ctrl.save_vote()">{{(ctrl.ownVote._id) ? 'Change vote' : 'Vote'}}</button>
+            <button ng-show="isLogged && ctrl.poll.allow_add && !ctrl.poll.isCurrentUserOwner" class="btn btn-warning pull-right mg10r" ng-click="ctrl.input_opt()">Suggest options</button>
           </div>
           <div class="clearfix"></div>
         </div>
@@ -173,11 +172,11 @@
       <!-- Tag -->
       <div class="card d-md-none">
         <div class="card-header">
-          <strong class="card-title">Tags: </strong><small>{{(!vm.poll.tags.length || vm.poll.tags.length === 0) ? 'Has no tag added' : ''}}</small>
+          <strong class="card-title">Tags: </strong><small>{{(!ctrl.poll.tags.length || ctrl.poll.tags.length === 0) ? 'Has no tag added' : ''}}</small>
         </div>
         <div class="card-body">
-          <ul class="tags" ng-show="vm.poll.tags.length">
-            <li ng-repeat="tag in vm.poll.tags"><a ui-sref="tags.polls({ tagId: tag._id })" class="tag">{{tag.name}}</a></li>
+          <ul class="tags" ng-show="ctrl.poll.tags.length">
+            <li ng-repeat="tag in ctrl.poll.tags"><a ui-sref="tags.polls({ tagId: tag._id })" class="tag">{{tag.name}}</a></li>
           </ul>
         </div>
       </div>
@@ -195,25 +194,25 @@
         <div class="card-body">
           <div class="col-xs-3 pdn">
             <div class="poll_info_item pull-left">
-              <div class="value">{{vm.poll.viewCnt}}</div>
+              <div class="value">{{ctrl.poll.viewCnt}}</div>
               <span class="label">views</span>
             </div>
           </div>
           <div class="col-xs-3 pdn text-center">
             <div class="poll_info_item">
-              <div class="value">{{vm.poll.likeCnt}}</div>
+              <div class="value">{{ctrl.poll.likeCnt}}</div>
               <span class="label">likes</span>
             </div>
           </div>
           <div class="col-xs-3 pdn text-center">
             <div class="poll_info_item">
-              <div class="value">{{vm.poll.voteCnt}}</div>
+              <div class="value">{{ctrl.poll.voteCnt}}</div>
               <span class="label">votes</span>
             </div>
           </div>
           <div class="col-xs-3 pdn">
             <div class="poll_info_item pull-right">
-              <div class="value">{{vm.poll.cmtCnt}}</div>
+              <div class="value">{{ctrl.poll.cmtCnt}}</div>
               <span class="label">comments</span>
             </div>
           </div>
@@ -221,42 +220,41 @@
         </div>
       </div>
       <!-- Vote card -->
-      <div class="card" ng-if="vm.isClosed">
+      <div class="card" ng-if="ctrl.isClosed">
         <div class="card-header">
           <strong class="card-title"> Vote panel</strong>
         </div>
         <div class="card-body">
-          <h4 ng-if="vm.isClosed">This poll has closed.</h4>
+          <h4 ng-if="ctrl.isClosed">This poll has closed.</h4>
         </div>
       </div>
-      <div class="card" ng-if="!vm.isClosed">
+      <div class="card" ng-if="!ctrl.isClosed">
         <div class="card-header">
           <strong class="card-title"> Vote panel</strong>
         </div>
         <div class="card-body">
-          <div class="poll-remaining" ng-if="vm.poll.close">
-            <p>{{vm.close_duration.days}}d:{{vm.close_duration.hours}}h:{{vm.close_duration.minutes}}m:{{vm.close_duration.seconds}}s</p>
+          <div class="poll-remaining" ng-if="ctrl.poll.close">
+            <p>{{ctrl.close_duration.days}}d:{{ctrl.close_duration.hours}}h:{{ctrl.close_duration.minutes}}m:{{ctrl.close_duration.seconds}}s</p>
           </div>
           <hr class="mgn mg12b">
-          <span class="text-muted" ng-if="!vm.opts.length || vm.opts.length === 0"><small>No option to vote.</small></span>
-          <div class="form-group" ng-repeat="opt in vm.opts" ng-if="!vm.poll.allow_multiple">
+          <span class="text-muted" ng-if="!ctrl.opts.length || ctrl.opts.length === 0"><small>No option to vote.</small></span>
+          <div class="form-group" ng-repeat="opt in ctrl.opts" ng-if="!ctrl.poll.allow_multiple">
             <label class="control control--radio w100p">
             {{opt.title}}<span class="mg5l" ng-style="{color: opt.color}"><strong>●</strong></span>
-            <input type="radio" name="vote_radio" ng-checked="vm.is_voted(opt._id)" ng-click="vm.checked(opt._id)"/>
+            <input type="radio" name="vote_radio" ng-checked="ctrl.is_voted(opt._id)" ng-click="ctrl.checked(opt._id)"/>
             <div class="control__indicator"></div>
           </label>
           </div>
-          <div class="form-group" ng-repeat="opt in vm.opts" ng-if="vm.poll.allow_multiple">
+          <div class="form-group" ng-repeat="opt in ctrl.opts" ng-if="ctrl.poll.allow_multiple">
             <label class="control control--checkbox">
             {{opt.title}}<span class="mg5l" ng-style="{color: opt.color}"><strong>●</strong></span>
-            <input type="checkbox" ng-checked="vm.is_voted(opt._id)" ng-click="vm.checked(opt._id)"/>
+            <input type="checkbox" ng-checked="ctrl.is_voted(opt._id)" ng-click="ctrl.checked(opt._id)"/>
             <div class="control__indicator"></div>
           </label>
           </div>
           <div class="form-group">
-            <button ng-show="vm.opts.length > 0 && vm.is_can_vote" class="btn btn-info pull-right" ng-click="vm.save_vote()">{{(vm.ownVote._id) ? 'Change vote' : 'Vote'}}</button>
-            <button ng-show="isLogged && vm.poll.allow_add && !vm.poll.isCurrentUserOwner" class="btn btn-warning pull-right mg10r"
-              ng-click="vm.input_opt()">Suggest options</button>
+            <button ng-show="ctrl.opts.length > 0 && ctrl.is_can_vote" class="btn btn-info pull-right" ng-click="ctrl.save_vote()">{{(ctrl.ownVote._id) ? 'Change vote' : 'Vote'}}</button>
+            <button ng-show="isLogged && ctrl.poll.allow_add && !ctrl.poll.isCurrentUserOwner" class="btn btn-warning pull-right mg10r" ng-click="ctrl.input_opt()">Suggest options</button>
           </div>
           <div class="clearfix"></div>
         </div>
@@ -282,11 +280,11 @@
       <!-- Tag -->
       <div class="card" id="poll_tags_card">
         <div class="card-header">
-          <strong class="card-title">Tags: </strong><small>{{(!vm.poll.tags.length || vm.poll.tags.length === 0) ? 'Has no tag added' : ''}}</small>
+          <strong class="card-title">Tags: </strong><small>{{(!ctrl.poll.tags.length || ctrl.poll.tags.length === 0) ? 'Has no tag added' : ''}}</small>
         </div>
         <div class="card-body">
-          <ul class="tags" ng-show="vm.poll.tags.length">
-            <li ng-repeat="tag in vm.poll.tags"><a ui-sref="tags.polls({ tagId: tag._id })" class="tag">{{tag.name}}</a></li>
+          <ul class="tags" ng-if="ctrl.poll.tags.length">
+            <li ng-repeat="tag in ctrl.poll.tags"><a ui-sref="tags.polls({ tagId: tag._id })" class="tag">{{tag.name}}</a></li>
           </ul>
         </div>
       </div>
@@ -295,7 +293,7 @@
   </div>
 </section>
 
-<section class="container animated fadeIn mg6t" ng-hide="vm.isShow">
+<section class="container animated fadeIn mg6t" ng-hide="ctrl.isShow">
   <div class="row">
     <div class="col-xs-12 pdn pd6l pd6r">
       <div class="notice notice-danger">
@@ -304,3 +302,7 @@
     </div>
   </div>
 </section>
+<div class="aside-backdrop"></div>
+<div class="aside-panel">
+  <div ng-include="'/modules/polls/client/views/new-opt.client.view.html'"></div>
+</div>

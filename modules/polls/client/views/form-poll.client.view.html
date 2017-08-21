@@ -30,19 +30,10 @@
       <div class="card-body" ng-init="moreCollapse = true;">
         <form name="ctrl.form.pollForm" ng-submit="ctrl.save(ctrl.form.pollForm.$valid)" novalidate autocomplete="off">
           <!-- Category -->
-          <div class="form-group mg10b" show-errors ng-if="ctrl.poll._id">
+          <div class="form-group mg10b" show-errors>
             <select name="category" class="form-control" ng-model="ctrl.poll.category" required>
               <option value>Category</option>
               <option ng-repeat="ctgr in ctrl.categorys" value="{{ctgr._id}}" ng-selected="ctrl.poll.category._id === ctgr._id" >{{ctgr.name}}</option>
-            </select>
-            <div ng-messages="ctrl.form.pollForm.category.$error" role="alert">
-              <p class="help-block error-text" ng-message="required">Category is required.</p>
-            </div>
-          </div>
-          <div class="form-group mg10b" show-errors ng-if="!ctrl.poll._id">
-            <select name="category" class="form-control" ng-model="ctrl.poll.category" required>
-              <option value>Category</option>
-              <option ng-repeat="ctgr in ctrl.categorys" value="{{ctgr._id}}" ng-selected="ctrl.poll.category === ctgr._id" >{{ctgr.name}}</option>
             </select>
             <div ng-messages="ctrl.form.pollForm.category.$error" role="alert">
               <p class="help-block error-text" ng-message="required">Category is required.</p>

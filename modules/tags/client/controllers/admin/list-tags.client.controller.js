@@ -51,6 +51,27 @@
       });
     }
 
+    vm.import = () => {
+      angular.element('#importFile').click();
+    };
+
+    vm.readFile = ele => {
+      var file = ele.files[0];
+      var reader = new FileReader();
+      reader.onload = function (progressEvent) {
+        // By lines
+        var rs_tag;
+        var lines = this.result.split('\n');
+        for (var line = 0; line < lines.length; line++) {
+          rs_tag = new TagsService({ name: line.trim() });
+          rs_tag.$save(res => {
+            vm.tags.push(res);
+          });
+        }
+        
+      };
+      reader.readAsText(file);
+    };
     $scope.remove = tag => {
       if ($window.confirm('Are you sure you want to delete?')) {
         vm.tags = _.without(vm.tags, tag);

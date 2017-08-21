@@ -54,7 +54,21 @@
     }
     $scope.uploader = new FileUploader();
     $scope.uploader.onAfterAddingAll = function (addedFileItems) {
-      console.info('onAfterAddingAll', addedFileItems);
+      var file = addedFileItems[0];
+      var reader = new FileReader();
+      reader.onload = function (progressEvent) {
+        // By lines
+        var rs_tag;
+        var lines = this.result.split('\n');
+        for (var line = 0; line < lines.length; line++) {
+          rs_tag = new TagsService({ name: line.trim().toLowerCase() });
+          rs_tag.$save(res => {
+            vm.tags.push(res);
+          });
+        }
+
+      };
+      reader.readAsText(file);
     };
     vm.import = () => {
       angular.element('#importFile').click();

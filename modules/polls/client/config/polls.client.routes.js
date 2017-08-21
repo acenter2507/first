@@ -25,10 +25,6 @@
         templateUrl: 'modules/polls/client/views/form-poll.client.view.html',
         controller: 'PollInputController',
         controllerAs: 'ctrl',
-        resolve: {
-          pollResolve: newPoll,
-          notifResolve: getNotif
-        },
         data: {
           roles: ['user', 'admin'],
           pageTitle: 'Polls Create'
@@ -39,10 +35,6 @@
         templateUrl: 'modules/polls/client/views/form-poll.client.view.html',
         controller: 'PollInputController',
         controllerAs: 'ctrl',
-        resolve: {
-          pollResolve: getPoll,
-          notifResolve: getNotif
-        },
         data: {
           roles: ['user', 'admin'],
           pageTitle: 'Edit Poll {{ pollResolve.name }}'

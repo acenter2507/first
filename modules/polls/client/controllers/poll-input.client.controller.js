@@ -10,14 +10,14 @@
     '$scope',
     '$state',
     '$window',
-    'pollResolve',
-    'notifResolve',
+    'PollsService',
     'OptsService',
     'Socket',
     'CategorysService',
     'toastr',
     'Action',
-    'ngDialog'
+    'ngDialog',
+    'Notification'
   ];
 
   function PollInputController(
@@ -25,14 +25,14 @@
     $scope,
     $state,
     $window,
-    poll,
-    notif,
+    PollsService,
     Opts,
     Socket,
     Categorys,
     toast,
     Action,
-    dialog
+    dialog,
+    Notification
   ) {
     var ctrl = this;
 
@@ -47,6 +47,7 @@
     ctrl.form = {};
     ctrl.opts = ctrl.poll.opts || [];
 
+    analysic_poll();
     function init() {
       if (ctrl.poll._id) {
         initSocket();
@@ -54,7 +55,18 @@
       analysic_nofif();
     }
 
-    init();
+    // Get poll from param
+    function analysic_poll() {
+      if (!$stateParams.pollId) {
+        vm.poll = new PollsService();
+      } else {
+        Action.get_poll($stateParams.pollId)
+          .then(_poll => {
+            vm.poll = _poll;
+            init();
+          });
+      }
+    }
     // Init Socket
     function initSocket() {
       if (!Socket.socket) {
@@ -88,13 +100,11 @@
         Socket.removeListener('opts_request');
       });
     }
-
     function analysic_nofif() {
-      if (notif && notif.status === 0) {
-        Notification.markReadNotif(notif._id);
+      if ($stateParams.notif) {
+        Notification.markReadNotif($stateParams.notif);
       }
     }
-
     function isCanUpdate() {
       return true;
       // const update = moment(ctrl.poll.updated);

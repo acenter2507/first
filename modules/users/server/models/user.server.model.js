@@ -5,6 +5,7 @@
  */
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
+  slug = require('mongoose-url-slugs'),
   crypto = require('crypto'),
   validator = require('validator'),
   generatePassword = require('generate-password'),
@@ -103,6 +104,8 @@ var UserSchema = new Schema({
     type: Date
   }
 });
+
+UserSchema.plugin(slug('displayName'));
 
 /**
  * Hook a pre save method to hash the password

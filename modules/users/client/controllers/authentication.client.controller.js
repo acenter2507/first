@@ -25,7 +25,6 @@ angular.module('users').controller('AuthenticationController', [
   ) {
     console.log('AuthenticationController');
     console.log($scope.user);
-    $scope.authentication = Authentication;
     $scope.popoverMsg = PasswordValidator.getPopoverMsg();
 
     // Get an eventual error defined in the URL query string:

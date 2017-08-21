@@ -175,6 +175,7 @@
       return moment(ctrl.poll.close).isAfter(new moment());
     };
     ctrl.isCategorySelected = ctgrId => {
+      if (!ctrl.poll.category) return false;
       var categoryId = ctrl.poll.category._id || ctrl.poll.category;
       return (categoryId) ? categoryId.toString() === ctgrId.toString() : false;
     };

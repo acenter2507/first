@@ -78,6 +78,7 @@
 
     vm.close_duration = {};
     vm.remaining = 1;
+    vm.isShow = true;
 
     analysic_poll();
 

@@ -347,7 +347,7 @@
       return new Promise((resolve, reject) => {
         var rs_vote;
         if (vote._id) {
-          rs_vote = new Votes({ _id: vote._id});
+          rs_vote = new Votes({ _id: vote._id });
           rs_vote.opts = opts;
           rs_vote.updateCnt += 1;
           rs_vote.updated = moment().formart();

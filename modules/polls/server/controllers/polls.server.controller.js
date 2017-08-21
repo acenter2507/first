@@ -482,7 +482,7 @@ exports.search = function (req, res) {
   var userId = req.user ? req.user._id : undefined;
   var sort = condition.sort || '-created';
   Poll.find(search)
-    .populate('category', 'name')
+    .populate('category', 'name icon slug')
     .populate('user', 'displayName profileImageURL slug')
     .sort(sort).exec()
     .then(polls => {

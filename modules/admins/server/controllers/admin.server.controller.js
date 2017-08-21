@@ -313,7 +313,7 @@ function users_report(user) {
 exports.users_polls = function (req, res) {
   Poll.find({ user: req.model._id })
     .sort('-created')
-    .populate('category', 'name')
+    .populate('category', 'name slug')
     .exec()
     .then((polls) => {
       res.jsonp(polls);

@@ -15,7 +15,6 @@
         url: '',
         templateUrl: 'modules/polls/client/views/list-polls.client.view.html',
         controller: 'PollsListController',
-        cache: true,
         controllerAs: 'vm',
         data: {
           pageTitle: 'Polls List'

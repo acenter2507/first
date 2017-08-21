@@ -34,9 +34,9 @@
               <div class="user-avatar pull-left">
                 <img src="{{activity.profileImageURL}}" alt="{{activity.displayName}}">
               </div>
-              <small><strong><a class="undecorated-link" ui-sref="profile.info({userId: activity.user})">{{activity.displayName}}</a></strong></small>
-              <small>{{activity.action}}</small>
-              <small><strong><a class="undecorated-link" ui-sref="polls.view({pollId: activity.poll})">{{activity.title}}</a></strong></small>
+              <small><strong><a class="undecorated-link" ui-sref="profile.info({userId: activity.user})">{{::activity.displayName}}</a></strong></small>
+              <small>{{::activity.action}}</small>
+              <small><strong><a class="undecorated-link" ui-sref="polls.view({pollId: activity.poll})">{{::activity.title}}</a></strong></small>
               <div class="clearfix"></div>
               <hr class="mg5t mg5b">
             </div>
@@ -75,7 +75,7 @@
               <div class="side-list-poll" ng-repeat="poll in vm.populars.votes">
                 <div class="user-avatar pull-left">
                   <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user._id})">
-                  <img src="{{poll.user.profileImageURL}}" alt="{{poll.user.displayName}}">
+                  <img src="{{::poll.user.profileImageURL}}" alt="{{::poll.user.displayName}}">
                   </a>
                   <img ng-if="!poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
                 </div>
@@ -95,7 +95,7 @@
               <div class="side-list-poll" ng-repeat="poll in vm.populars.cmts">
                 <div class="user-avatar pull-left">
                   <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user._id})">
-                  <img src="{{poll.user.profileImageURL}}" alt="{{poll.user.displayName}}">
+                  <img src="{{::poll.user.profileImageURL}}" alt="{{::poll.user.displayName}}">
                   </a>
                   <img ng-if="!poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
                 </div>
@@ -122,7 +122,7 @@
         </div>
         <div class="card-body">
           <ul class="tags">
-            <li ng-repeat="tag in vm.tags"><a ui-sref="tags.polls({ tagId: tag._id })" class="tag">{{tag.name}}({{tag.count}})</a></li>
+            <li ng-repeat="tag in vm.tags"><a ui-sref="tags.polls({ tagId: tag._id })" class="tag">{{::tag.name}}({{::tag.count}})</a></li>
           </ul>
         </div>
       </div>
@@ -138,7 +138,7 @@
         <ul class="nav nav-list">
           <li ng-repeat="category in vm.categorys">
             <a class="undecorated-link" ui-sref="categorys.polls({ categoryId: category._id })">
-              <i ng-class="['fa', category.icon]"></i>&nbsp;{{category.name}}
+              <i ng-class="['fa', category.icon]"></i>&nbsp;{{::category.name}}
               <span class="badge-count pull-right" ng-bind="category.count"></span>
             </a>
           </li>
@@ -154,7 +154,7 @@
           <div class="side-list-poll" ng-repeat="poll in vm.bookmarks">
             <div class="user-avatar pull-left">
               <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user._id})">
-                <img src="{{poll.user.profileImageURL}}" alt="{{poll.user.displayName}}">
+                <img src="{{::poll.user.profileImageURL}}" alt="{{::poll.user.displayName}}">
               </a>
               <img ng-if="!poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
             </div>

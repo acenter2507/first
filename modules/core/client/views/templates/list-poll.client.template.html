@@ -6,12 +6,12 @@
   <div clas="poll-header">
     <!-- Avatar -->
     <div class="user-avatar pull-left">
-      <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user._id})"><img src="{{poll.user.profileImageURL}}" alt="{{poll.user.displayName}}"></a>
+      <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user._id})"><img src="{{::poll.user.profileImageURL}}" alt="{{::poll.user.displayName}}"></a>
       <img ng-if="!poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
     </div>
     <!-- Tên và ngày create  -->
     <span class="pull-left">
-      <a class="undecorated-link" ui-sref="profile.info({userId: poll.user._id})" ng-if="poll.user"><strong>{{poll.user.displayName}}</strong></a>
+      <a class="undecorated-link" ui-sref="profile.info({userId: poll.user._id})" ng-if="poll.user"><strong>{{::poll.user.displayName}}</strong></a>
       <strong ng-if="!poll.user" class="text-muted">Deleted User</strong>
       <small class="text-muted">created on</small>
       <small class="text-muted" am-time-ago="poll.created"></small>
@@ -19,7 +19,7 @@
     <!-- Menu action -->
     <span class="pull-right">
       <md-menu md-offset="-12 20" md-position-mode="target-right target">
-        <a class="undecorated-link span-link" ng-click="$mdMenu.open($event)" aria-label="Open menu"><i class="fa fa-angle-down"></i></a>
+        <a class="undecorated-link span-link" ng-click="open_menu($mdMenu, $event)" aria-label="Open menu"><i class="fa fa-angle-down"></i></a>
         <md-menu-content>
           <ul class="menu-list">
             <li><a ui-sref="polls.view({ pollId: poll._id })"><i class="fa fa-eye"></i> View</a></li>

@@ -237,6 +237,9 @@
           toast.error(err.message, 'Error!');
         });
     };
+    $scope.open_menu = function($mdMenu, ev) {
+      $mdMenu.open(ev);
+    };
     $scope.load_new = () => {
       $state.reload();
     };

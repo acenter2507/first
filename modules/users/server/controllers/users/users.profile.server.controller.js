@@ -573,6 +573,30 @@ exports.search_user_by_name = function (req, res) {
 };
 
 /**
+ * User middleware
+ */
+exports.profileById = function (req, res, next, id) {
+
+  var query = { $or: [{ slug: id }] };
+  if (id.match(/^[0-9a-fA-F]{24}$/)) {
+    query.$or.push({ _id: id });
+  }
+  User.findOne(query)
+    .exec(function (err, user) {
+      if (err) {
+        return res.status(400).send({
+          message: 'Profile is invalid'
+        });
+      } else if (!user) {
+        return next(new Error('Failed to load User ' + id));
+      }
+
+      req.profile = user;
+      next();
+    });
+};
+
+/**
  * USER REPORT
  */
 exports.reportByID = function (req, res, next, id) {

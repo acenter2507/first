@@ -37,6 +37,6 @@ module.exports = function (app) {
     .put(users.update_report);
 
   // Finish by binding the user middleware
-  app.param('profileId', users.userByID);
+  app.param('profileId', users.profileById);
   app.param('userreportId', users.reportByID);
 };

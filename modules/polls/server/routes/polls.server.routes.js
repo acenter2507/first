@@ -19,6 +19,7 @@ module.exports = function(app) {
     .get(polls.read)
     .put(polls.update)
     .delete(polls.delete);
+
   // Lấy danh sách poll cho màn hình polls.list
   app.route('/api/findPolls/:page').get(polls.findPolls);
   // Lấy danh sách poll nổi bật cho màn hình polls.list
@@ -54,4 +55,5 @@ module.exports = function(app) {
 
   // Finish by binding the Poll middleware
   app.param('pollId', polls.pollByID);
+  app.param('slug', polls.slug);
 };

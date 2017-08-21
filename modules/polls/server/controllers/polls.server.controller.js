@@ -259,6 +259,64 @@ exports.list = function (req, res) {
 };
 
 /**
+ * Poll middleware
+ */
+exports.pollByID = function (req, res, next, id) {
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).send({
+      message: 'Poll is invalid'
+    });
+  }
+  var query = { $or: [{ slug: id }] };
+  if (id.match(/^[0-9a-fA-F]{24}$/)) {
+    query.$or.push({ _id: id });
+  }
+
+  Poll.findOne(query)
+    .populate('category', 'name icon')
+    .populate('user', 'displayName profileImageURL')
+    .exec(function (err, poll) {
+      if (err) {
+        return next(err);
+      } else if (!poll) {
+        return res.status(404).send({
+          message: 'No Poll with that identifier has been found'
+        });
+      }
+      req.poll = poll;
+      next();
+    });
+};
+
+/**
+ * Poll middleware slug
+ */
+exports.slug = function (req, res, next, slug) {
+  console.log(slug);
+};
+
+/**
+ * Poll middleware slug
+ */
+exports.slug_read = function (req, res) {
+  res.end();
+};
+
+/**
+ * Poll middleware slug
+ */
+exports.slug_update = function (req, res) {
+  res.end();
+};
+
+/**
+ * Poll middleware slug
+ */
+exports.slug_delete = function (req, res) {
+  res.end();
+};
+
+/**
  * Lấy danh sách poll cho màn hình polls.list
  */
 exports.findPolls = function (req, res) {
@@ -537,32 +595,6 @@ exports.images_upload = function (req, res) {
       message: 'You are not authorized.'
     });
   }
-};
-
-/**
- * Poll middleware
- */
-exports.pollByID = function (req, res, next, id) {
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).send({
-      message: 'Poll is invalid'
-    });
-  }
-
-  Poll.findById(id)
-    .populate('category', 'name icon')
-    .populate('user', 'displayName profileImageURL')
-    .exec(function (err, poll) {
-      if (err) {
-        return next(err);
-      } else if (!poll) {
-        return res.status(404).send({
-          message: 'No Poll with that identifier has been found'
-        });
-      }
-      req.poll = poll;
-      next();
-    });
 };
 
 // Phan tich dieu kien search

@@ -56,11 +56,11 @@
     // Get poll from param
     function analysic_poll() {
       if (!$stateParams.pollId) {
-        vm.poll = new PollsService();
+        ctrl.poll = new PollsService();
       } else {
         Action.get_poll($stateParams.pollId)
           .then(_poll => {
-            vm.poll = _poll;
+            ctrl.poll = _poll;
             init();
           });
       }

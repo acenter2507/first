@@ -31,9 +31,13 @@
         <form name="ctrl.form.pollForm" ng-submit="ctrl.save(ctrl.form.pollForm.$valid)" novalidate autocomplete="off">
           <!-- Category -->
           <div class="form-group mg10b" show-errors>
-            <select id="category" name="category" class="form-control" ng-model="ctrl.poll.category" required>
+            <select ng-if="ctrl.poll._id" name="category" class="form-control" ng-model="ctrl.poll.category" required>
               <option value>Category</option>
-              <option ng-repeat="ctgr in ctrl.categorys" value="{{ctgr._id}}" ng-selected="ctrl.isCategorySelected(ctgr._id)" >{{ctgr.name}}</option>
+              <option ng-repeat="ctgr in ctrl.categorys" value="{{ctgr._id}}" ng-selected="ctrl.poll.category._id === ctgr._id" >{{ctgr.name}}</option>
+            </select>
+            <select ng-if="!ctrl.poll._id" name="category" class="form-control" ng-model="ctrl.poll.category" required>
+              <option value>Category</option>
+              <option ng-repeat="ctgr in ctrl.categorys" value="{{ctgr._id}}" ng-selected="ctrl.poll.category === ctgr._id" >{{ctgr.name}}</option>
             </select>
             <div ng-messages="ctrl.form.pollForm.category.$error" role="alert">
               <p class="help-block error-text" ng-message="required">Category is required.</p>
@@ -77,8 +81,7 @@
           </div>
           <!-- Option -->
           <uib-accordion close-others="true">
-            <uib-accordion-group ng-repeat="opt in ctrl.opts | orderBy: 'create'" heading="{{opt.title}}"
-              panel-class="{{ ctrl.opt_class(opt) }}">
+            <uib-accordion-group ng-repeat="opt in ctrl.opts | orderBy: 'create'" heading="{{opt.title}}" panel-class="{{ ctrl.opt_class(opt) }}">
               <span>
                 <a class="undecorated-link" ng-click="ctrl.remove_opt(opt)">Remove</a>
                 <a class="undecorated-link mg10l" ng-if="opt.status == 1" ng-click="ctrl.input_opt(opt)">Edit</a>

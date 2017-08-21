@@ -56,7 +56,7 @@
     };
 
     vm.readFile = ele => {
-      console.log($cope.file):
+      console.log($cope.file);
       var file = ele.files[0];
       var reader = new FileReader();
       reader.onload = function (progressEvent) {

@@ -481,9 +481,9 @@
         .then(res => {
           if (res) {
             vm.follow = res;
-            toast.success('You followed ' + poll.title, 'Success!');
+            toast.success('You followed ' + vm.poll.title, 'Success!');
           } else {
-            vm.follow = { poll: poll._id };
+            vm.follow = { poll: vm.poll._id };
           }
         })
         .catch(err => {

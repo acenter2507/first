@@ -290,7 +290,7 @@
           status: 1
         };
       }
-      toast.success('Option is saved.', 'Success!')
+      toast.success('Option is saved.', 'Success!');
     };
     ctrl.opt_full = () => {
       let aside = angular.element('.aside-panel')[0];

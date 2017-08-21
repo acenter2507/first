@@ -5,7 +5,7 @@
       <input class="inline form-control w200 mg12l input-sm" ng-model="vm.searchKey" ng-change="vm.search()" placeholder="Search key...">
       <a class="card-link undecorated-link" ui-sref="admin.tags.new"><i class="fa fa-plus"></i></a>
       <a class="card-link undecorated-link mg10r" ng-click="vm.import()"><i class="fa fa-download"></i></a>
-      <input type="file" style="display: none;" id="importFile" onchange="angular.element(this).scope().readFile(this)">
+      <input type="file" style="display: none;" id="importFile" nv-file-select="" uploader="uploader">
     </div>
     <div class="card-body">
       <div class="table-responsive">

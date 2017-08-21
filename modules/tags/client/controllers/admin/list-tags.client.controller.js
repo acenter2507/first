@@ -12,7 +12,8 @@
     '$filter',
     'TagsService',
     'Authentication',
-    'toastr'
+    'toastr',
+    'FileUploader'
   ];
 
   function AdminTagsListController(
@@ -22,7 +23,8 @@
     $filter,
     TagsService,
     Authentication,
-    toast
+    toast,
+    FileUploader
   ) {
     var vm = this;
     if (!$scope.isAdmin) {
@@ -53,6 +55,7 @@
 
     vm.import = () => {
       angular.element('#importFile').click();
+      $scope.uploader = new FileUploader();
     };
 
     $scope.readFile = ele => {
@@ -78,6 +81,10 @@
         search();
         tag.$remove();
       }
+    };
+
+    $scope.uploader.onAfterAddingAll = function (addedFileItems) {
+      console.info('onAfterAddingAll', addedFileItems);
     };
   }
 }());

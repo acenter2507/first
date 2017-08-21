@@ -7,22 +7,15 @@
 
   CategorysListController.$inject = [
     '$scope',
-    'CategorysService',
-    'Authentication',
-    'Action',
-    'toastr',
-    'ngDialog'
+    'CategorysService'
   ];
 
   function CategorysListController(
     $scope,
-    CategorysService,
-    Authentication,
-    Action,
-    toast,
-    dialog
+    CategorysService
     ) {
     var vm = this;
+    console.log($scope);
     var promise = CategorysService.query().$promise;
     promise.then(_categorys => {
       vm.categorys = _categorys || [];

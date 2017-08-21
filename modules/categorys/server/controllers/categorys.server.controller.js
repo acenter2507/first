@@ -166,15 +166,16 @@ exports.polls = function (req, res) {
  */
 exports.categoryByID = function (req, res, next, id) {
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).send({
-      message: 'Category is invalid'
-    });
+  var query = { $or: [{ slug: id }] };
+  if (id.match(/^[0-9a-fA-F]{24}$/)) {
+    query.$or.push({ _id: id });
   }
 
-  Category.findById(id).populate('user', 'displayName slug').exec(function (err, category) {
+  Category.findOne(query).populate('user', 'displayName slug').exec(function (err, category) {
     if (err) {
-      return next(err);
+      return res.status(400).send({
+        message: 'Category is invalid'
+      });
     } else if (!category) {
       return res.status(404).send({
         message: 'No Category with that identifier has been found'

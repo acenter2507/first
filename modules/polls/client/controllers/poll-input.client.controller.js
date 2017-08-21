@@ -161,7 +161,7 @@
         ctrl.poll.opts = ctrl.opts;
         Action.save_poll(ctrl.poll)
           .then(res => {
-            $state.go('polls.view', { pollId: res._id });
+            $state.go('polls.view', { pollId: res.slug });
           })
           .catch(err => {
             toast.error(err.message, 'Error!');
@@ -199,7 +199,7 @@
     };
     function handle_discard() {
       if (ctrl.poll._id) {
-        $state.go('polls.view', { pollId: ctrl.poll._id });
+        $state.go('polls.view', { pollId: ctrl.poll.slug });
       } else {
         $state.go('polls.list');
       }

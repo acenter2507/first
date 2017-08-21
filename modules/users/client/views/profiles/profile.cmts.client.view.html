@@ -30,7 +30,7 @@
           <hr class="mg5t mg10b">
         </div>
         <div class="post-body">
-          <h3><a class="undecorated-link" ui-sref="polls.view({ pollId: cmt.poll._id })">{{cmt.poll.title}}</a></h3>
+          <h3><a class="undecorated-link" ui-sref="polls.view({ pollId: cmt.poll.slug })">{{cmt.poll.title}}</a></h3>
           <blockquote>
             <p class="text-justify" ng-bind-html="cmt.body | nl2br"></p>
           </blockquote>

@@ -241,7 +241,7 @@
         });
     };
     // $scope.open_menu = function($mdMenu, ev, poll) {
-    //   var menuHtml = '<li><a ui-sref="polls.view({ pollId: poll._id })"><i class="fa fa-eye"></i> View</a></li>';
+    //   var menuHtml = '<li><a ui-sref="polls.view({ pollId: poll.slug })"><i class="fa fa-eye"></i> View</a></li>';
     //   if (poll.isCurrentUserOwner) {
     //     menuHtml += '<li><a ui-sref="polls.edit({ pollId: poll._id })"><i class="fa fa-pencil-square-o"></i> Edit</a></li>';
     //     menuHtml += '<li><a ng-click="delete_poll(poll)"><i class="fa fa-trash"></i> Delete</a></li>';

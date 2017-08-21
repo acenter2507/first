@@ -18,9 +18,7 @@
             <md-tooltip md-direction="bottom">You not follow this poll yet</md-tooltip>
           </a>
           </p>
-          <a class="undecorated-link" ui-sref="polls.view({ pollId: ctrl.poll._id })">
-            <h3 class="mg5t mg5b" ng-bind="ctrl.poll.title"></h3>
-          </a>
+          <h3 class="mg5t mg5b">{{::ctrl.poll.title}}</h3>
         </div>
       </div>
       <!-- First post -->

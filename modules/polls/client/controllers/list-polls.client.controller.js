@@ -240,6 +240,10 @@
     $scope.open_menu = function($mdMenu, ev, poll) {
       console.log(poll);
       console.log($mdMenu);
+      var menu = document.querySelector('#' + poll._id + ' .menu-list');
+      console.log(menu);
+      var menuHtml = '<li><a ui-sref="polls.view({ pollId: poll._id })"><i class="fa fa-eye"></i> View</a></li>';
+
       $mdMenu.open(ev);
     };
     $scope.load_new = () => {

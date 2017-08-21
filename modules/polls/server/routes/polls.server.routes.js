@@ -55,5 +55,4 @@ module.exports = function(app) {
 
   // Finish by binding the Poll middleware
   app.param('pollId', polls.pollByID);
-  app.param('slug', polls.slug);
 };

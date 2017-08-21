@@ -10,10 +10,10 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
     $locationProvider.html5Mode(true).hashPrefix('!');
     // Authentication securiry
     $httpProvider.interceptors.push('authInterceptor');
+    // Đồng bộ các http
+    $httpProvider.useApplyAsync(1000);
     // Allow global controller
     $controllerProvider.allowGlobals();
-    // Đồng bộ các http
-    $controllerProvider.useApplyAsync(1000);
     // Disable Debug
     $compileProvider.debugInfoEnabled(false);
   }

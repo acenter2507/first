@@ -153,7 +153,7 @@
       return new Promise((resolve, reject) => {
         var rs_report;
         if (report._id) {
-          rs_report = new Userreport(report);
+          rs_report = new Userreport({ _id: report._id });
           rs_report.viewCnt += 1;
           rs_report.$update();
         } else {
@@ -197,7 +197,7 @@
     };
     this.delete_poll = poll => {
       return new Promise((resolve, reject) => {
-        var rs_poll = new Polls(poll);
+        var rs_poll = new Polls({ _id: poll._id });
         rs_poll.$remove(() => {
           Socket.emit('poll_delete', { pollId: poll._id });
           return resolve();
@@ -236,7 +236,7 @@
         var rs_cmt = new Cmts(cmt);
         var isNew = !cmt._id ? true : false;
         var promise;
-        if (cmt._id) {
+        if (!isNew) {
           rs_cmt.isEdited = true;
           rs_cmt.updated = new Date();
           rs_cmt.$update(successCb, errorCb);

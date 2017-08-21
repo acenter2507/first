@@ -118,16 +118,19 @@
         pollId: vm.poll._id,
         userId: $scope.user._id
       });
-      Socket.on('cmt_add', cmtId => {
-        Action.get_cmt(cmtId)
+      Socket.on('cmt_add', res => {
+        Action.get_cmt(res.cmtId)
           .then(res => {
             var _cmt = res.data || {};
+
             var item = _.findWhere(vm.cmts, { _id: _cmt._id });
             if (item) {
               _.extend(_.findWhere(vm.cmts, { _id: _cmt._id }), _cmt);
             } else {
-              vm.cmts.push(_cmt);
-              vm.poll.cmtCnt += 1;
+              if (res.isNew) {
+                vm.cmts.push(_cmt);
+                vm.poll.cmtCnt += 1;
+              }
             }
           })
           .catch(err => {
@@ -323,6 +326,7 @@
       }
     }
     // Thao tác databse
+    vm.save_cmt = save_cmt;
     function save_cmt() {
       if (
         !vm.tmp_cmt.body ||
@@ -541,7 +545,6 @@
         });
     };
 
-    vm.save_cmt = save_cmt;
     vm.reply_cmt = cmt => {
       if (!$scope.isLogged) {
         toast.error('You must login to reply this comment.', 'Error!');
@@ -676,7 +679,7 @@
             'socialshareText': text
           }
         });
-      } else if(provider === 'google') {
+      } else if (provider === 'google') {
         Socialshare.share({
           'provider': provider,
           'attrs': {

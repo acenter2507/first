@@ -38,9 +38,6 @@
   ) {
     var ctrl = this;
 
-    ctrl.authentication = Authentication;
-    ctrl.user = Authentication.user;
-    ctrl.isLogged = (ctrl.user);
     ctrl.poll = poll;
     ctrl.poll.close = ctrl.poll.close ? moment(ctrl.poll.close) : ctrl.poll.close;
     ctrl.isClosed = moment(ctrl.poll.close).isAfter(new moment());
@@ -67,7 +64,7 @@
       }
       Socket.emit('subscribe_poll', {
         pollId: ctrl.poll._id,
-        userId: ctrl.user._id
+        userId: $scope.user._id
       });
       Socket.on('poll_delete', res => {
         toast.error('This poll has been deleted.', 'Error!');
@@ -87,7 +84,7 @@
       $scope.$on('$destroy', function () {
         Socket.emit('unsubscribe', {
           pollId: ctrl.poll._id,
-          userId: ctrl.user._id
+          userId: $scope.user._id
         });
         Socket.removeListener('poll_delete');
         Socket.removeListener('opts_request');
@@ -95,13 +92,8 @@
     }
 
     function analysic_nofif() {
-      if (notif) {
-        if (notif.status === 0) {
-          notif.status = 1;
-          notif.$update(() => {
-            $rootScope.$emit('changeNotif');
-          });
-        }
+      if (notif && notif.status === 0) {
+        Notification.markReadNotif(notif._id);
       }
     }
 

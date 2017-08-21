@@ -522,17 +522,6 @@
           toast.error(err.message, 'Error!');
         });
     };
-    // OPTIONS
-    // vm.opt_aside = $bsAside({
-    //   scope: $scope,
-    //   controllerAs: vm,
-    //   templateUrl: 'modules/polls/client/views/new-opt.client.view.html',
-    //   title: 'Suggest new option',
-    //   placement: 'bottom',
-    //   animation: 'am-fade-and-slide-bottom',
-    //   show: false
-    // });
-
     // Click button add option
     vm.input_opt = opt => {
       vm.tmp_opt = (!opt) ? { poll: vm.poll._id, title: '', body: '', status: 2 } : opt;

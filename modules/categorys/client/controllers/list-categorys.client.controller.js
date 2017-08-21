@@ -15,7 +15,6 @@
     CategorysService
     ) {
     var vm = this;
-    console.log($scope.user);
     var promise = CategorysService.query().$promise;
     promise.then(_categorys => {
       vm.categorys = _categorys || [];

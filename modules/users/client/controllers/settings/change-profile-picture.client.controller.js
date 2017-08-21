@@ -2,6 +2,7 @@
 
 angular.module('users').controller('ChangeProfilePictureController', ['$scope', '$timeout', '$window', 'Authentication', 'FileUploader',
   function ($scope, $timeout, $window, Authentication, FileUploader) {
+    $scope.imageURL = $scope.user.profileImageURL;
     // Create file uploader instance
     $scope.uploader = new FileUploader({
       url: 'api/users/picture',

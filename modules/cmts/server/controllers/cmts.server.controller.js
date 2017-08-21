@@ -140,7 +140,7 @@ exports.delete = function (req, res) {
 exports.list = function (req, res) {
   var userId = (req.user) ? req.user._id : undefined;
   Cmt.find().sort('-created')
-    .populate('user', 'displayName profileImageURL').exec()
+    .populate('user', 'displayName profileImageURL slug').exec()
     .then(cmts => {
       if (cmts.length === 0) return res.jsonp(cmts);
       var length = cmts.length;
@@ -175,7 +175,7 @@ exports.cmtByID = function (req, res, next, id) {
     });
   }
 
-  Cmt.findById(id).populate('poll').populate('user', 'displayName profileImageURL').exec(function (err, cmt) {
+  Cmt.findById(id).populate('poll').populate('user', 'displayName profileImageURL slug').exec(function (err, cmt) {
     if (err) {
       return next(err);
     } else if (!cmt) {

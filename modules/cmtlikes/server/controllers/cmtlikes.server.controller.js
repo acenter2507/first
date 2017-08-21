@@ -94,7 +94,7 @@ exports.delete = function(req, res) {
  * List of Cmtlikes
  */
 exports.list = function(req, res) {
-  Cmtlike.find().sort('-created').populate('user', 'displayName').exec(function(err, cmtlikes) {
+  Cmtlike.find().sort('-created').populate('user', 'displayName slug').exec(function(err, cmtlikes) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -116,7 +116,7 @@ exports.cmtlikeByID = function(req, res, next, id) {
     });
   }
 
-  Cmtlike.findById(id).populate('user', 'displayName').exec(function(err, cmtlike) {
+  Cmtlike.findById(id).populate('user', 'displayName slug').exec(function(err, cmtlike) {
     if (err) {
       return next(err);
     } else if (!cmtlike) {

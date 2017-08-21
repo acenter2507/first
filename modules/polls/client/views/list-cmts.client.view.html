@@ -6,11 +6,11 @@
     <div class="cmt_form" ng-if="isLogged">
       <div class="form-group mg5b">
         <span ng-if="ctrl.tmp_cmt.to">@</span>
-        <a class="undecorated-link" ng-if="ctrl.tmp_cmt.to" ui-sref="profile.info({userId: ctrl.tmp_cmt.to})" ng-bind="ctrl.tmp_cmt.toName"></a>
+        <a class="undecorated-link" ng-if="ctrl.tmp_cmt.to" ui-sref="profile.info({userId: ctrl.tmp_cmt.toSlug})" ng-bind="ctrl.tmp_cmt.toName"></a>
       </div>
       <div class="form-group">
         <div class="user-avatar pull-left" ng-if="isLogged">
-          <a ui-sref="profile.info({userId: user._id})"><img src="{{user.profileImageURL}}" alt="{{user.displayName}}"></a>
+          <a ui-sref="profile.info({userId: user.slug})"><img src="{{user.profileImageURL}}" alt="{{user.displayName}}"></a>
         </div>
         <textarea ng-is-enter="{{ctrl.enter_send}}" ng-enter="ctrl.save_cmt()" focus-me="{{ctrl.cmt_typing}}" class="msd-elastic: \n; reply-input"
           data-ng-model="ctrl.tmp_cmt.body" placeholder="Type your comment..."></textarea>
@@ -43,13 +43,13 @@
 
     <div class="cmt_list" ng-repeat="cmt in ctrl.cmts">
       <div class="user-avatar pull-left">
-        <a ng-if="cmt.user" ui-sref="profile.info({userId: cmt.user._id})">
+        <a ng-if="cmt.user" ui-sref="profile.info({userId: cmt.user.slug})">
         <img src="{{cmt.user.profileImageURL}}" alt="{{cmt.user.displayName}}">
       </a>
         <img ng-if="!cmt.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
       </div>
       <span class="pull-left">
-        <strong><a class="undecorated-link" ui-sref="profile.info({userId: cmt.user._id})" ng-if="cmt.user" ng-bind="cmt.user.displayName"></a></strong>
+        <strong><a class="undecorated-link" ui-sref="profile.info({userId: cmt.user.slug})" ng-if="cmt.user" ng-bind="cmt.user.displayName"></a></strong>
         <span ng-if="!cmt.user">Deleted User</span>
         <small class="text-muted" am-time-ago="cmt.created"></small>
         <a ng-if="cmt.to" class="undecorated-link">@{{cmt.toName}}</a>
@@ -98,11 +98,11 @@
     <div class="cmt_form" ng-if="isLogged">
       <div class="form-group mg5b">
         <span ng-if="ctrl.tmp_cmt.to">@</span>
-        <a class="undecorated-link" ng-if="ctrl.tmp_cmt.to" ui-sref="profile.info({userId: ctrl.tmp_cmt.to})" ng-bind="ctrl.tmp_cmt.toName"></a>
+        <a class="undecorated-link" ng-if="ctrl.tmp_cmt.to" ui-sref="profile.info({userId: ctrl.tmp_cmt.toSlug})" ng-bind="ctrl.tmp_cmt.toName"></a>
       </div>
       <div class="form-group">
         <div class="user-avatar pull-left" ng-if="isLogged">
-          <a ui-sref="profile.info({userId: user._id})"><img src="{{user.profileImageURL}}" alt="{{user.displayName}}"></a>
+          <a ui-sref="profile.info({userId: user.slug})"><img src="{{user.profileImageURL}}" alt="{{user.displayName}}"></a>
         </div>
         <textarea ng-is-enter="{{ctrl.enter_send}}" ng-enter="ctrl.save_cmt()" focus-me="{{ctrl.cmt_typing}}" class="msd-elastic: \n; reply-input"
           data-ng-model="ctrl.tmp_cmt.body" placeholder="Type your comment..."></textarea>
@@ -135,11 +135,11 @@
 
     <div class="cmt_list" ng-repeat="cmt in ctrl.cmts">
       <div class="user-avatar pull-left">
-        <a ng-if="cmt.user" ui-sref="profile.info({userId: cmt.user._id})"><img src="{{cmt.user.profileImageURL}}" alt="{{cmt.user.displayName}}"></a>
+        <a ng-if="cmt.user" ui-sref="profile.info({userId: cmt.user.slug})"><img src="{{cmt.user.profileImageURL}}" alt="{{cmt.user.displayName}}"></a>
         <img ng-if="!cmt.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
       </div>
       <span class="pull-left">
-        <strong><a class="undecorated-link" ui-sref="profile.info({userId: cmt.user._id})" ng-if="cmt.user" ng-bind="cmt.user.displayName"></a></strong>
+        <strong><a class="undecorated-link" ui-sref="profile.info({userId: cmt.user.slug})" ng-if="cmt.user" ng-bind="cmt.user.displayName"></a></strong>
         <span ng-if="!cmt.user">Deleted User</span>
         <small class="text-muted" am-time-ago="cmt.created"></small>
         <a ng-if="cmt.to" class="undecorated-link">@{{cmt.toName}}</a>

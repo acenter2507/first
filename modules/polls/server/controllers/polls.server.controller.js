@@ -245,8 +245,8 @@ exports.delete = function (req, res) {
 exports.list = function (req, res) {
   Poll.find()
     .sort('-created')
-    .populate('category', 'name icon')
-    .populate('user', 'displayName profileImageURL')
+    .populate('category', 'name icon slug')
+    .populate('user', 'displayName profileImageURL slug')
     .exec(function (err, polls) {
       if (err) {
         return res.status(400).send({
@@ -273,8 +273,8 @@ exports.pollByID = function (req, res, next, id) {
   }
 
   Poll.findOne(query)
-    .populate('category', 'name icon')
-    .populate('user', 'displayName profileImageURL')
+    .populate('category', 'name icon slug')
+    .populate('user', 'displayName profileImageURL slug')
     .exec(function (err, poll) {
       if (err) {
         return res.status(400).send({
@@ -298,8 +298,8 @@ exports.findPolls = function (req, res) {
   var userId = req.user ? req.user._id : undefined;
   Poll.find({ isPublic: true })
     .sort('-created')
-    .populate('category', 'name icon')
-    .populate('user', 'displayName profileImageURL')
+    .populate('category', 'name icon slug')
+    .populate('user', 'displayName profileImageURL slug')
     .skip(10 * page).limit(10).exec()
     .then(polls => {
       if (polls.length === 0) return res.jsonp(polls);
@@ -416,7 +416,7 @@ exports.findCmts = function (req, res) {
   var sort = req.params.sort || '-created';
   Cmt.find({ poll: req.poll._id })
     .sort(sort)
-    .populate('user', 'displayName profileImageURL')
+    .populate('user', 'displayName profileImageURL slug')
     .skip(10 * page)
     .limit(10).exec()
     .then(cmts => {
@@ -658,7 +658,7 @@ function search_condition_analysis(condition) {
 function get_opts_by_pollId(pollId) {
   return new Promise((resolve, reject) => {
     Opt.find({ poll: pollId })
-      .populate('user', 'displayName profileImageURL')
+      .populate('user', 'displayName profileImageURL slug')
       .exec((err, opts) => {
         if (err) {
           return reject(err);
@@ -672,7 +672,7 @@ function get_opts_by_pollId(pollId) {
 function get_cmts_by_pollId(pollId) {
   return new Promise((resolve, reject) => {
     Cmt.find({ poll: pollId })
-      .populate('user', 'displayName profileImageURL')
+      .populate('user', 'displayName profileImageURL slug')
       .exec((err, cmts) => {
         if (err) {
           return reject(err);

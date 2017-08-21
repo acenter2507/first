@@ -81,7 +81,7 @@ exports.delete = function(req, res) {
  * List of Views
  */
 exports.list = function(req, res) {
-  View.find().sort('-created').populate('user', 'displayName').exec(function(err, views) {
+  View.find().sort('-created').populate('user', 'displayName slug').exec(function(err, views) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -103,7 +103,7 @@ exports.viewByID = function(req, res, next, id) {
     });
   }
 
-  View.findById(id).populate('user', 'displayName').exec(function (err, view) {
+  View.findById(id).populate('user', 'displayName slug').exec(function (err, view) {
     if (err) {
       return next(err);
     } else if (!view) {

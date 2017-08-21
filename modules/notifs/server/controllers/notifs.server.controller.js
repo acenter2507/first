@@ -54,7 +54,7 @@ exports.load = function (req, res) {
   Notif.find({ to: req.user._id })
     .sort('-created')
     .populate('poll', 'title slug')
-    .populate('from', 'displayName profileImageURL')
+    .populate('from', 'displayName profileImageURL slug')
     .limit(10)
     .exec(function (err, notifs) {
       if (err) {
@@ -114,9 +114,9 @@ exports.delete = function (req, res) {
 exports.list = function (req, res) {
   Notif.find({ to: req.user._id })
     .sort('-created')
-    .populate('poll', 'title')
-    .populate('from', 'displayName profileImageURL')
-    .populate('to', 'displayName profileImageURL')
+    .populate('poll', 'title slug')
+    .populate('from', 'displayName profileImageURL slug')
+    .populate('to', 'displayName profileImageURL slug')
     .exec(function (err, notifs) {
       if (err) {
         return res.status(400).send({
@@ -194,7 +194,7 @@ exports.notifByID = function (req, res, next, id) {
     });
   }
 
-  Notif.findById(id).populate('user', 'displayName').exec(function (err, notif) {
+  Notif.findById(id).populate('user', 'displayName slug').exec(function (err, notif) {
     if (err) {
       return next(err);
     } else if (!notif) {

@@ -26,13 +26,13 @@
         <div class="card-body">
           <div clas="post-header">
             <div class="user-avatar pull-left">
-              <a ui-sref="profile.info({userId: ctrl.poll.user._id})" ng-if="ctrl.poll.user">
+              <a ui-sref="profile.info({userId: ctrl.poll.user.slug})" ng-if="ctrl.poll.user">
               <img src="{{ctrl.poll.user.profileImageURL}}" alt="{{ctrl.poll.user.displayName}}">
             </a>
               <img ng-if="!ctrl.poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
             </div>
             <span class="pull-left">
-            <strong><a class="undecorated-link" ui-sref="profile.info({userId: ctrl.poll.user._id})" ng-if="ctrl.poll.user" ng-bind="ctrl.poll.user.displayName"></a></strong>
+            <strong><a class="undecorated-link" ui-sref="profile.info({userId: ctrl.poll.user.slug})" ng-if="ctrl.poll.user" ng-bind="ctrl.poll.user.displayName"></a></strong>
             <span ng-if="!ctrl.poll.user">Deleted User</span>
             <small class="text-muted">created on</small>
             <small class="text-muted" am-time-ago="ctrl.poll.created"></small>
@@ -98,7 +98,7 @@
             <uib-accordion-group ng-repeat="opt in ctrl.opts" heading="{{opt.title + ' (' + opt.voteCnt + ' votes)'}}" panel-class="custom-panel public">
               <small class="pull-right text-muted">
                 <span>Added by</span>
-                <a class="undecorated-link" ui-sref="profile.info({userId: opt.user._id})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>
+                <a class="undecorated-link" ui-sref="profile.info({userId: opt.user.slug})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>
                 <span ng-if="!opt.user">Deleted User</span><span>on</span>
                 <span ng-bind="opt.created | LLL_format"></span>
               </small>

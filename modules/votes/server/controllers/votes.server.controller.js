@@ -125,7 +125,7 @@ exports.delete = function (req, res) {
  * List of Votes
  */
 exports.list = function (req, res) {
-  Vote.find().sort('-created').populate('poll').populate('user', 'displayName').exec(function (err, votes) {
+  Vote.find().sort('-created').populate('poll').populate('user', 'displayName slug').exec(function (err, votes) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -147,7 +147,7 @@ exports.voteByID = function (req, res, next, id) {
     });
   }
 
-  Vote.findById(id).populate('user', 'displayName').exec(function (err, vote) {
+  Vote.findById(id).populate('user', 'displayName slug').exec(function (err, vote) {
     if (err) {
       return next(err);
     } else if (!vote) {

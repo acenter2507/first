@@ -566,6 +566,7 @@
       ctrl.tmp_cmt = {};
       ctrl.tmp_cmt.to = cmt.user._id;
       ctrl.tmp_cmt.toName = cmt.user.displayName;
+      ctrl.tmp_cmt.toSlug = cmt.user.slug;
       ctrl.tmp_cmt.discard = true;
       ctrl.cmt_typing = true;
     };

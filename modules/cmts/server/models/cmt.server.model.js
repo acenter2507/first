@@ -36,6 +36,10 @@ var CmtSchema = new Schema({
     type: String,
     default: ''
   },
+  toSlug: {
+    type: String,
+    default: ''
+  },
   updated: {
     type: Date,
     default: Date.now

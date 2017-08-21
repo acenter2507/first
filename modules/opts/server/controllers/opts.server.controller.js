@@ -86,7 +86,7 @@ exports.delete = function(req, res) {
  * List of Opts
  */
 exports.list = function(req, res) {
-  Opt.find().sort('-created').populate('user', 'displayName').exec(function(err, opts) {
+  Opt.find().sort('-created').populate('user', 'displayName slug').exec(function(err, opts) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -108,7 +108,7 @@ exports.optByID = function(req, res, next, id) {
     });
   }
 
-  Opt.findById(id).populate('user', 'displayName').exec(function(err, opt) {
+  Opt.findById(id).populate('user', 'displayName slug').exec(function(err, opt) {
     if (err) {
       return next(err);
     } else if (!opt) {

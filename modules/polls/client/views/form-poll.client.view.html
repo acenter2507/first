@@ -86,7 +86,7 @@
               </span>
               <small class="pull-right text-muted">
                 Added by
-                <a class="undecorated-link" ui-sref="profile.info({userId: opt.user._id})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>
+                <a class="undecorated-link" ui-sref="profile.info({userId: opt.user.slug})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>
                 <span ng-if="!opt.user">Deleted User</span>on
                 <span ng-bind="opt.created | LLL_format"></span>
               </small>

@@ -14,7 +14,7 @@
             </button>
               <md-menu-content>
               <ul class="profile-menu-list">
-                <li ui-sref-active="active"><a ui-sref="profile.info({ userId: user._id })">View Profile</a></li>
+                <li ui-sref-active="active"><a ui-sref="profile.info({ userId: user.slug })">View Profile</a></li>
                 <li ui-sref-active="active"><a ui-sref="settings.profile">Edit Profile</a></li>
                 <li ui-sref-active="active"><a ui-sref="settings.picture">Change Profile Picture</a></li>
                 <li ui-sref-active="active" ng-show="user.provider === 'local'"><a ui-sref="settings.password">Change Password</a></li>
@@ -32,7 +32,7 @@
       <div class="row">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="home">Home</a></li>
-          <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="profile.info({ userId: user._id })">Profile</a></li>
+          <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="profile.info({ userId: user.slug })">Profile</a></li>
           <li class="breadcrumb-item active">Edit</li>
         </ol>
       </div>

@@ -2,7 +2,7 @@
   <div class="row">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="home">Home</a></li>
-      <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="profile.info({ userId: profile._id })">{{profile.displayName}}</a></li>
+      <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="profile.info({ userId: profile.slug })">{{profile.displayName}}</a></li>
       <li class="breadcrumb-item active">Comments</li>
     </ol>
   </div>
@@ -12,19 +12,19 @@
 
         <div clas="post-header">
           <div class="user-avatar pull-left">
-            <a ui-sref="profile.info({userId: profile._id})">
+            <a ui-sref="profile.info({userId: profile.slug})">
             <img src="{{profile.profileImageURL}}" alt="{{profile.displayName}}">
           </a>
           </div>
           <span class="pull-left">
-            <strong><a class="undecorated-link" ui-sref="profile.info({userId: profile._id})" ng-bind="profile.displayName"></a></strong>
+            <strong><a class="undecorated-link" ui-sref="profile.info({userId: profile.slug})" ng-bind="profile.displayName"></a></strong>
             <small class="text-muted">replied on</small>
             <small class="text-muted" am-time-ago="cmt.created"></small>
           </span>
           <br>
           <small ng-if="cmt.to">
             <span class="text-muted">To:</span>
-            <a ui-sref="profile.view({ userId: cmt.to })" class="undecorated-link">{{cmt.toName}}</a>
+            <a ui-sref="profile.info({ userId: cmt.toSlug })" class="undecorated-link">{{cmt.toName}}</a>
           </small>
           <div class="clearfix"></div>
           <hr class="mg5t mg10b">

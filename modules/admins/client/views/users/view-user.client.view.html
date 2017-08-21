@@ -4,7 +4,7 @@
       <a ui-sref="admin.users.list" class="btn btn-default pull-right">List</a>
       <a ui-sref="admin.users.edit({ userId: user._id })" class="btn btn-success pull-right mg10r">Edit</a>
       <a ng-click="remove()" class="btn btn-danger pull-right mg10r">Delete</a>
-      <a ui-sref="profile.info({ userId: user._id })" class="btn btn-info pull-right mg10r">View profile</a>
+      <a ui-sref="profile.info({ userId: user.slug })" class="btn btn-info pull-right mg10r">View profile</a>
     </div>
   </div>
 </div>

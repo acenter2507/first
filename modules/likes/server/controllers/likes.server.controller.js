@@ -96,7 +96,7 @@ exports.delete = function(req, res) {
  * List of Likes
  */
 exports.list = function(req, res) {
-  Like.find().sort('-created').populate('user', 'displayName').exec(function(err, likes) {
+  Like.find().sort('-created').populate('user', 'displayName slug').exec(function(err, likes) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -118,7 +118,7 @@ exports.likeByID = function(req, res, next, id) {
     });
   }
 
-  Like.findById(id).populate('user', 'displayName').exec(function(err, like) {
+  Like.findById(id).populate('user', 'displayName slug').exec(function(err, like) {
     if (err) {
       return next(err);
     } else if (!like) {

@@ -81,7 +81,7 @@ exports.delete = function(req, res) {
  * List of Bookmarks
  */
 exports.list = function(req, res) {
-  Bookmark.find().sort('-created').populate('user', 'displayName').exec(function(err, bookmarks) {
+  Bookmark.find().sort('-created').populate('user', 'displayName slug').exec(function(err, bookmarks) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -103,7 +103,7 @@ exports.bookmarkByID = function(req, res, next, id) {
     });
   }
 
-  Bookmark.findById(id).populate('user', 'displayName').exec(function (err, bookmark) {
+  Bookmark.findById(id).populate('user', 'displayName slug').exec(function (err, bookmark) {
     if (err) {
       return next(err);
     } else if (!bookmark) {

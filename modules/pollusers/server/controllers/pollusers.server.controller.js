@@ -81,7 +81,7 @@ exports.delete = function(req, res) {
  * List of Pollusers
  */
 exports.list = function(req, res) {
-  Polluser.find().sort('-created').populate('user', 'displayName').exec(function(err, pollusers) {
+  Polluser.find().sort('-created').populate('user', 'displayName slug').exec(function(err, pollusers) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -103,7 +103,7 @@ exports.polluserByID = function(req, res, next, id) {
     });
   }
 
-  Polluser.findById(id).populate('user', 'displayName').exec(function (err, polluser) {
+  Polluser.findById(id).populate('user', 'displayName slug').exec(function (err, polluser) {
     if (err) {
       return next(err);
     } else if (!polluser) {

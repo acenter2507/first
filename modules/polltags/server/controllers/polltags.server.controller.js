@@ -81,7 +81,7 @@ exports.delete = function(req, res) {
  * List of Polltags
  */
 exports.list = function(req, res) {
-  Polltag.find().sort('-created').populate('user', 'displayName').exec(function(err, polltags) {
+  Polltag.find().sort('-created').populate('user', 'displayName slug').exec(function(err, polltags) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)

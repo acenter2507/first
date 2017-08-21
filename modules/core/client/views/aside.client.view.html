@@ -45,7 +45,7 @@
 
       <li class="nav-title">Profile</li>
       <li class="nav-item" ng-show="isLogged">
-        <a class="nav-link" ui-sref-active="active" ui-sref="profile.info({ userId: user._id })"><i class="fa fa-user-circle"></i> View Profile</a>
+        <a class="nav-link" ui-sref-active="active" ui-sref="profile.info({ userId: user.slug })"><i class="fa fa-user-circle"></i> View Profile</a>
       </li>
       <li class="nav-item" ng-show="isLogged">
         <a class="nav-link" ui-sref-active="active" ui-sref="settings.profile"><i class="fa fa-pencil-square-o"></i> Edit Profile</a>

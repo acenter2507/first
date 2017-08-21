@@ -168,15 +168,6 @@
       }
     };
 
-    ctrl.validateCategory = () => {
-      return (ctrl.poll.category) ? true : false;
-    };
-    ctrl.validateTitle = () => {
-      return (ctrl.poll.title) ? true : false;
-    };
-    ctrl.validateBody = () => {
-      return (ctrl.poll.body) ? true : false;
-    };
     ctrl.validateCloseDate = () => {
       if (!ctrl.poll.close) {
         return true;

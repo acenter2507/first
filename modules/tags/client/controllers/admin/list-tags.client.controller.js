@@ -52,12 +52,12 @@
         $: vm.searchKey
       });
     }
+    $scope.uploader = new FileUploader();
+    $scope.uploader.onAfterAddingAll = function (addedFileItems) {
+      console.info('onAfterAddingAll', addedFileItems);
+    };
     vm.import = () => {
       angular.element('#importFile').click();
-      $scope.uploader = new FileUploader();
-      $scope.uploader.onAfterAddingAll = function (addedFileItems) {
-        console.info('onAfterAddingAll', addedFileItems);
-      };
     };
 
     // function readFile = ele => {

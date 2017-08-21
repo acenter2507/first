@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
+  slug = require('mongoose-url-slugs'),
   Schema = mongoose.Schema;
 
 /**
@@ -38,5 +39,6 @@ var CategorySchema = new Schema({
     ref: 'User'
   }
 });
+CategorySchema.plugin(slug('name'));
 
 mongoose.model('Category', CategorySchema);

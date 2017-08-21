@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
+  slug = require('mongoose-url-slugs'),
   Schema = mongoose.Schema;
 
 /**
@@ -38,6 +39,7 @@ var TagSchema = new Schema({
     default: Date.now
   }
 });
+TagSchema.plugin(slug('name'));
 
 TagSchema.pre('save', function (next) {
   this.updated = new Date();

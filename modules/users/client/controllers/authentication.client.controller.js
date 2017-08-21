@@ -23,14 +23,12 @@ angular.module('users').controller('AuthenticationController', [
     Notification,
     toastr
   ) {
-    console.log('AuthenticationController');
-    console.log($scope.user);
     $scope.popoverMsg = PasswordValidator.getPopoverMsg();
 
     // Get an eventual error defined in the URL query string:
     $scope.error = $location.search().err;
     // If user is signed in then redirect back home
-    if ($scope.isLogged) {
+    if (Authentication.user) {
       $location.path('/');
     }
 
@@ -44,7 +42,6 @@ angular.module('users').controller('AuthenticationController', [
         // If successful we assign the response to the global user model
         Authentication.user = response;
         Notification.loadNotifs();
-        $rootScope.$emit('loginSuccess');
         // And redirect to the previous or home page
         $state.go($state.previous.state.name || 'home', $state.previous.params);
       }).error(function (response) {
@@ -62,7 +59,6 @@ angular.module('users').controller('AuthenticationController', [
         // If successful we assign the response to the global user model
         Authentication.user = response;
         Notification.loadNotifs();
-        $rootScope.$emit('loginSuccess');
         // And redirect to the previous or home page
         $state.go($state.previous.state.name || 'home', $state.previous.params);
       }).error(function (response) {

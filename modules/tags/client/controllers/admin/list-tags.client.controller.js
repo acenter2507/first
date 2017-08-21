@@ -55,8 +55,7 @@
       angular.element('#importFile').click();
     };
 
-    vm.readFile = ele => {
-      console.log($cope.file);
+    $scope.readFile = ele => {
       var file = ele.files[0];
       var reader = new FileReader();
       reader.onload = function (progressEvent) {

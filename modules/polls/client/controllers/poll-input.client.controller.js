@@ -40,9 +40,9 @@
 
     analysic_poll();
     ctrl.form = {};
+    ctrl.categorys = Categorys.query();
 
     function init() {
-      ctrl.categorys = Categorys.query();
       ctrl.bk_poll = _.clone(ctrl.poll);
       ctrl.opts = ctrl.poll.opts || [];
       if (ctrl.poll._id) {

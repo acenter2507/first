@@ -49,6 +49,7 @@
     "moment": "^2.18.1",
     "moment-timezone": "^0.5.13",
     "mongoose": "~4.2.3",
+    "mongoose-url-slugs": "^1.0.0",
     "morgan": "^1.6.1",
     "multer": "~1.0.5",
     "nodemailer": "^1.4.0",

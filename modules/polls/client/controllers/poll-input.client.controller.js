@@ -36,20 +36,16 @@
   ) {
     var ctrl = this;
 
-    ctrl.poll = poll;
-    ctrl.poll.close = ctrl.poll.close ? moment(ctrl.poll.close) : ctrl.poll.close;
-    ctrl.isClosed = moment(ctrl.poll.close).isAfter(new moment());
-    Categorys.query().$promise.then(_ctgrs => {
-      ctrl.categorys = _ctgrs;
-    });
-
-    ctrl.bk_poll = _.clone(poll);
-    ctrl.form = {};
-    ctrl.opts = ctrl.poll.opts || [];
-
     analysic_poll();
+    ctrl.form = {};
+
     function init() {
+      ctrl.categorys = Categorys.query();
+      ctrl.bk_poll = _.clone(ctrl.poll);
+      ctrl.opts = ctrl.poll.opts || [];
       if (ctrl.poll._id) {
+        ctrl.poll.close = ctrl.poll.close ? moment(ctrl.poll.close) : ctrl.poll.close;
+        ctrl.isClosed = moment(ctrl.poll.close).isAfter(new moment());
         initSocket();
       }
       analysic_nofif();

@@ -253,7 +253,7 @@
           menuHtml += '<li><a ng-click="bookmark_poll(poll)"><i class="fa fa-bookmark"></i> Bookmark poll</a></li>'
         }
       }
-      var menu = angular.element('#' + poll._id).find('ul.menu-list').append(menuHtml);
+      //var menu = angular.element('#' + poll._id).find('ul.menu-list').append(menuHtml);
       $mdMenu.open(ev);
     };
     $scope.load_new = () => {

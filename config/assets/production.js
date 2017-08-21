@@ -18,7 +18,6 @@ module.exports = {
         'public/lib/angular-loading-bar/build/loading-bar.css'
       ],
       js: [
-        'public/lib/jquery/dist/jquery.min.js',
         'public/lib/angular/angular.js',
         'public/lib/angular-resource/angular-resource.js',
         'public/lib/angular-animate/angular-animate.js',

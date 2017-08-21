@@ -23,6 +23,8 @@ angular.module('users').controller('AuthenticationController', [
     Notification,
     toastr
   ) {
+    console.log('AuthenticationController');
+    console.log($scope.user);
     $scope.authentication = Authentication;
     $scope.popoverMsg = PasswordValidator.getPopoverMsg();
 

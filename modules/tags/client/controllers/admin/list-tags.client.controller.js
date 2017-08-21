@@ -63,6 +63,7 @@
         var lines = this.result.split('\n').map(function (item) {
           return item.trim().toLowerCase();
         });
+        console.log(lines);
         for (var line = 0; line < lines.length; line++) {
           rs_tag = new TagsService({ name: line });
           rs_tag.$save(res => {

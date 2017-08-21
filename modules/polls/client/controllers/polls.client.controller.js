@@ -40,7 +40,6 @@
     Socialshare,
     Notification
   ) {
-    console.log('PollsListController');
     var vm = this;
     vm.poll = poll;
 
@@ -118,8 +117,8 @@
         pollId: vm.poll._id,
         userId: $scope.user._id
       });
-      Socket.on('cmt_add', res => {
-        Action.get_cmt(res.cmtId)
+      Socket.on('cmt_add', obj => {
+        Action.get_cmt(obj.cmtId)
           .then(res => {
             var _cmt = res.data || {};
 
@@ -127,7 +126,7 @@
             if (item) {
               _.extend(_.findWhere(vm.cmts, { _id: _cmt._id }), _cmt);
             } else {
-              if (res.isNew) {
+              if (obj.isNew) {
                 vm.cmts.push(_cmt);
                 vm.poll.cmtCnt += 1;
               }

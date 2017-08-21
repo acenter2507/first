@@ -80,7 +80,6 @@
         $state.go('polls.list');
       });
       Socket.on('opts_request', res => {
-        console.log('Has option request');
         Action.get_poll(ctrl.poll._id)
           .then(_poll => {
             ctrl.poll = _poll;

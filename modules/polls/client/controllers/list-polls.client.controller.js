@@ -102,6 +102,7 @@
           }
           // Xử lý poll trước khi hiển thị màn hình
           var promises = [];
+          console.log(res.data);
           res.data.forEach(poll => {
             promises.push(process_before_show(poll));
           });
@@ -240,25 +241,6 @@
           toast.error(err.message, 'Error!');
         });
     };
-    // $scope.open_menu = function($mdMenu, ev, poll) {
-    //   var menuHtml = '<li><a ui-sref="polls.view({ pollId: poll.slug })"><i class="fa fa-eye"></i> View</a></li>';
-    //   if (poll.isCurrentUserOwner) {
-    //     menuHtml += '<li><a ui-sref="polls.edit({ pollId: poll.slug })"><i class="fa fa-pencil-square-o"></i> Edit</a></li>';
-    //     menuHtml += '<li><a ng-click="delete_poll(poll)"><i class="fa fa-trash"></i> Delete</a></li>';
-    //   }
-    //   if ($scope.isLogged) {
-    //     var followStr = (poll.follow._id) ? 'Unfollow' : 'Follow';
-    //     menuHtml += '<li><a ng-click="follow_poll(poll)"><i class="fa fa-rss"></i> ' + followStr + '</a></li>'
-    //     if (!poll.isCurrentUserOwner && !poll.reported) {
-    //       menuHtml += '<li><a ng-click="report_poll(poll)"><i class="fa fa-exclamation-circle"></i> Report poll</a></li>'
-    //     }
-    //     if (!poll.isCurrentUserOwner && !poll.bookmarked) {
-    //       menuHtml += '<li><a ng-click="bookmark_poll(poll)"><i class="fa fa-bookmark"></i> Bookmark poll</a></li>'
-    //     }
-    //   }
-    //   //var menu = angular.element('#' + poll._id).find('ul.menu-list').append(menuHtml);
-    //   $mdMenu.open(ev);
-    // };
     $scope.load_new = () => {
       $state.reload();
     };

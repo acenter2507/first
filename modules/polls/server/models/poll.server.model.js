@@ -4,7 +4,8 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-  Schema = mongoose.Schema;
+  Schema = mongoose.Schema,
+  slug = require('mongoose-url-slugs');
 
 /**
  * Poll Schema
@@ -97,6 +98,7 @@ var PollSchema = new Schema({
     type: Date
   }
 });
+PollSchema.plugin(URLSlugs('title'));
 
 PollSchema.pre('save', function (next) {
   this.summary = (this.body.length > 255) ? this.body.substring(0, 254) : this.body;

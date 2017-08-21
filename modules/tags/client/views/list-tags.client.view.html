@@ -9,7 +9,7 @@
         </div>
         <div class="col-xs-12 pdn">
           <ul class="tags">
-            <li ng-repeat="tag in vm.shows"><a ui-sref="tags.polls({ tagId: tag._id })" class="tag">{{tag.name}}({{tag.count}})</a></li>
+            <li ng-repeat="tag in vm.shows"><a ui-sref="tags.polls({ tagId: tag.slug })" class="tag">{{tag.name}}({{tag.count}})</a></li>
           </ul>
         </div>
         <div class="clearfix"></div>

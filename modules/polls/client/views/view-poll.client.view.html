@@ -174,7 +174,7 @@
         </div>
         <div class="card-body">
           <ul class="tags" ng-show="ctrl.poll.tags.length">
-            <li ng-repeat="tag in ctrl.poll.tags"><a ui-sref="tags.polls({ tagId: tag._id })" class="tag">{{tag.name}}</a></li>
+            <li ng-repeat="tag in ctrl.poll.tags"><a ui-sref="tags.polls({ tagId: tag.slug })" class="tag">{{tag.name}}</a></li>
           </ul>
         </div>
       </div>
@@ -282,7 +282,7 @@
         </div>
         <div class="card-body">
           <ul class="tags" ng-if="ctrl.poll.tags.length">
-            <li ng-repeat="tag in ctrl.poll.tags"><a ui-sref="tags.polls({ tagId: tag._id })" class="tag">{{tag.name}}</a></li>
+            <li ng-repeat="tag in ctrl.poll.tags"><a ui-sref="tags.polls({ tagId: tag.slug })" class="tag">{{tag.name}}</a></li>
           </ul>
         </div>
       </div>

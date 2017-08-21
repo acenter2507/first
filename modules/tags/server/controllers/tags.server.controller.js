@@ -119,15 +119,16 @@ exports.list = function (req, res) {
  */
 exports.tagByID = function (req, res, next, id) {
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).send({
-      message: 'Tag is invalid'
-    });
+  var query = { $or: [{ slug: id }] };
+  if (id.match(/^[0-9a-fA-F]{24}$/)) {
+    query.$or.push({ _id: id });
   }
 
-  Tag.findById(id).populate('user', 'displayName slug').exec(function (err, tag) {
+  Tag.findOne(query).populate('user', 'displayName slug').exec(function (err, tag) {
     if (err) {
-      return next(err);
+      return res.status(400).send({
+        message: 'Tag is invalid'
+      });
     } else if (!tag) {
       return res.status(404).send({
         message: 'No Tag with that identifier has been found'

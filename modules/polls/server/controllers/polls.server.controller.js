@@ -262,11 +262,11 @@ exports.list = function (req, res) {
  * Poll middleware
  */
 exports.pollByID = function (req, res, next, id) {
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).send({
-      message: 'Poll is invalid'
-    });
-  }
+  // if (!mongoose.Types.ObjectId.isValid(id)) {
+  //   return res.status(400).send({
+  //     message: 'Poll is invalid'
+  //   });
+  // }
   var query = { $or: [{ slug: id }] };
   if (id.match(/^[0-9a-fA-F]{24}$/)) {
     query.$or.push({ _id: id });
@@ -277,7 +277,9 @@ exports.pollByID = function (req, res, next, id) {
     .populate('user', 'displayName profileImageURL')
     .exec(function (err, poll) {
       if (err) {
-        return next(err);
+        return res.status(400).send({
+          message: 'Poll is invalid'
+        });
       } else if (!poll) {
         return res.status(404).send({
           message: 'No Poll with that identifier has been found'

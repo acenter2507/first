@@ -90,6 +90,9 @@
     function get_polls() {
       if (vm.stopped || vm.busy) return;
       vm.busy = true;
+      if (Storages.has_session(Constants.storages.polls)) {
+        
+      }
       Action.get_polls(vm.page)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {

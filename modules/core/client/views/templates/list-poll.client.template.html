@@ -42,7 +42,7 @@
     <div class="mg5t">
       <span ng-if="poll.allow_guest" class="fa fa-globe"><md-tooltip md-direction="bottom">This poll is public</md-tooltip></span>
       <span ng-if="!poll.allow_guest" class="fa fa-users"><md-tooltip md-direction="bottom">Only user can vote</md-tooltip></span>
-      <a class="undecorated-link" ui-sref="categorys.polls({ categoryId: poll.category._id })">{{ poll.category.name }}</a>
+      <a class="undecorated-link" ui-sref="categorys.polls({ categoryId: poll.category._id })">{{:: poll.category.name }}</a>
     </div>
     <div class="clearfix"></div>
     <hr class="mg5t mg10b">
@@ -50,7 +50,7 @@
 
   <div clas="poll-body">
     <!-- Tiêu đề  -->
-    <h3><a class="undecorated-link" ui-sref="polls.view({ pollId: poll._id })">{{poll.title}}</a></h3>
+    <h3><a class="undecorated-link" ui-sref="polls.view({ pollId: poll._id })">{{::poll.title}}</a></h3>
     <!--<p class="text-justify poll_item_body" ng-bind-html="poll.summary | nl2br"></p>-->
     <!-- Tóm tắt poll  -->
     <div class="text-body" ta-bind="text" ng-model="poll.summary" ta-readonly="true"></div>
@@ -71,7 +71,7 @@
             <!--<i class="icon-chart"></i>-->
             <div class="detail">
               <p class="title" ng-bind="opt.title"></p>
-              <span class="value">{{ opt.voteCnt + '/' + poll.total }}
+              <span class="value">{{:: opt.voteCnt + '/' + poll.total }}
                 <span class="text-muted small">({{ opt.progressVal }}%)</span>
               </span>
             </div>
@@ -129,19 +129,19 @@
   <div clas="poll-footer">
     <p class="poll_item_info">
       <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-      <strong> Like: </strong>{{poll.likeCnt}}
+      <strong> Like: </strong>{{::poll.likeCnt}}
     </p>
     <p class="poll_item_info">
       <i class="fa fa-heart-o" aria-hidden="true"></i>
-      <strong> Votes: </strong>{{poll.voteCnt}}
+      <strong> Votes: </strong>{{::poll.voteCnt}}
     </p>
     <p class="poll_item_info">
       <i class="fa fa-eye" aria-hidden="true"></i>
-      <strong> Views: </strong>{{poll.viewCnt}}
+      <strong> Views: </strong>{{::poll.viewCnt}}
     </p>
     <p class="poll_item_info">
       <i class="fa fa-commenting" aria-hidden="true"></i>
-      <strong> Comments: </strong>{{poll.cmtCnt}}
+      <strong> Comments: </strong>{{::poll.cmtCnt}}
     </p>
   </div>
   <div class="clearfix"></div>

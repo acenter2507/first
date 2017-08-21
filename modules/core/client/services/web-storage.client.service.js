@@ -4,6 +4,9 @@
 angular.module('core').service('Storages', [
   'webStorage',
   function (webStorage) {
+    this.has_session = (key) => {
+      return webStorage.session.has(key);
+    };
     this.get_session = (key, df) => {
       if (!webStorage.session.isSupported || !webStorage.session.has(key)) {
         return df;
@@ -21,6 +24,9 @@ angular.module('core').service('Storages', [
         return;
       }
       webStorage.session.remove(key);
+    };
+    this.has_local = (key) => {
+      return webStorage.local.has(key);
     };
     this.get_local = (key, df) => {
       if (!webStorage.local.isSupported || !webStorage.local.has(key)) {
@@ -40,5 +46,6 @@ angular.module('core').service('Storages', [
       }
       webStorage.local.remove(key);
     };
+    return this;
   }
 ]);

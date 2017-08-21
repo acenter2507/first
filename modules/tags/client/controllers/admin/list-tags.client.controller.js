@@ -54,7 +54,7 @@
     }
     $scope.uploader = new FileUploader();
     $scope.uploader.onAfterAddingAll = function (addedFileItems) {
-      var file = addedFileItems[0];
+      var file = addedFileItems[0]._file;
       console.log(file);
       var reader = new FileReader();
       reader.onload = function (progressEvent) {

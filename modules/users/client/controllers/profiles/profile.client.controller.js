@@ -2,15 +2,15 @@
 
 angular.module('users').controller('ProfileController', [
   '$scope',
-  'Authentication',
   'profileResolve',
   'Action',
   'Users',
   'toastr',
   '$timeout',
   'ngDialog',
-  function ($scope, Authentication, profile, Action, Users, toast, $timeout, dialog) {
+  function ($scope, profile, Action, Users, toast, $timeout, dialog) {
     $scope.profile = profile;
+    $scope.isCurrentOwner = $scope.profile._id ===  $scope.user._id;
     init();
 
     function init() {
@@ -28,7 +28,6 @@ angular.module('users').controller('ProfileController', [
       Action.get_user_report($scope.profile._id)
         .then(res => {
           $scope.report = res.data || { viewCnt: 0, pollCnt: 0, cmtCnt: 0 };
-          $scope.$apply();
         })
         .catch(err => {
           toast.error(err.message, 'Error!');

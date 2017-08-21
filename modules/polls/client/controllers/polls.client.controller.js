@@ -38,7 +38,7 @@
     Notification,
     NotifsService
   ) {
-    var vm = this;
+    var ctrl = this;
     ctrl.form = {};
     // Options variable
     ctrl.opts = [];

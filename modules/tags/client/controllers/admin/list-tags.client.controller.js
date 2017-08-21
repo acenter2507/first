@@ -65,7 +65,7 @@
         for (var line = 0; line < lines.length; line++) {
           rs_tag = new TagsService({ name: lines[line] });
           rs_tag.$save(res => {
-            console.log(res);
+            vm.tags.push(res);
           });
         }
 

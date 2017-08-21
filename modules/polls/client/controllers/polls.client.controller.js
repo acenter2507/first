@@ -545,12 +545,17 @@
       }
       Action.save_opt(ctrl.tmp_opt, ctrl.poll)
         .then(res => {
-          ctrl.opt_aside.$promise.then(ctrl.opt_aside.hide);
+          angular.element('body').toggleClass('aside-panel-open');
           toast.success('Your option is waiting for approve.', 'Thank you!');
         })
         .catch(err => {
           toast.error(err.message, 'Error!');
         });
+    };
+    ctrl.opt_full = () => {
+      let aside = angular.element('.aside-panel')[0];
+      angular.element(aside).toggleClass('full');
+      angular.element('#aside-panel-full-toggle').find('i').toggleClass('r180');
     };
 
     ctrl.reply_cmt = cmt => {

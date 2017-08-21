@@ -238,11 +238,9 @@
         });
     };
     $scope.open_menu = function($mdMenu, ev, poll) {
-      console.log(poll);
-      console.log($mdMenu);
-      var menu = angular.element('#' + poll._id).find('ul.menu-list');
-      console.log(menu);
       var menuHtml = '<li><a ui-sref="polls.view({ pollId: poll._id })"><i class="fa fa-eye"></i> View</a></li>';
+      var menu = angular.element('#' + poll._id).find('ul.menu-list').append(menuHtml);
+      
 
       $mdMenu.open(ev);
     };

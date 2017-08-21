@@ -115,7 +115,7 @@
       <hr class="mg10t mg10b" />
     </div>
 
-    <div class="cmt_sort">
+    <div class="cmt_sort" ng-if="vm.cmts.length > 0">
       <small class="pull-right">Sort:
       <md-menu md-offset="-12 25" md-position-mode="target-right target">
         <a class="undecorated-link" ng-click="$mdMenu.open($event)" aria-label="Open sort menu">

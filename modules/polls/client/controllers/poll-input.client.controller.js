@@ -10,7 +10,6 @@
     '$scope',
     '$state',
     '$window',
-    'Authentication',
     'pollResolve',
     'notifResolve',
     'OptsService',
@@ -26,7 +25,6 @@
     $scope,
     $state,
     $window,
-    Authentication,
     poll,
     notif,
     Opts,
@@ -36,7 +34,6 @@
     Action,
     dialog
   ) {
-    console.log($scope.user);
     var ctrl = this;
 
     ctrl.poll = poll;

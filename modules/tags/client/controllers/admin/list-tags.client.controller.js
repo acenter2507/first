@@ -62,7 +62,7 @@
         var rs_tag;
         var lines = this.result.split('\n').map(function (item) {
           return item.trim();
-        });;
+        });
         for (var line = 0; line < lines.length; line++) {
           rs_tag = new TagsService({ name: line.toLowerCase() });
           rs_tag.$save(res => {

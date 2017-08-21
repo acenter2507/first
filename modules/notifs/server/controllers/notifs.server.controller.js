@@ -53,7 +53,7 @@ exports.load = function (req, res) {
   var rs = {};
   Notif.find({ to: req.user._id })
     .sort('-created')
-    .populate('poll', 'title')
+    .populate('poll', 'title slug')
     .populate('from', 'displayName profileImageURL')
     .limit(10)
     .exec(function (err, notifs) {
@@ -156,7 +156,7 @@ exports.findNotifs = function (req, res) {
   var page = req.params.page || 0;
   Notif.find({ to: req.user._id })
     .sort('-created')
-    .populate('poll', 'title')
+    .populate('poll', 'title slug')
     .populate('from', 'displayName profileImageURL')
     .populate('to', 'displayName profileImageURL')
     .skip(limit * page).limit(limit)

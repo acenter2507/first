@@ -125,7 +125,7 @@ exports.tagByID = function (req, res, next, id) {
     });
   }
 
-  Tag.findById(id).populate('user', 'displayName').exec(function (err, tag) {
+  Tag.findById(id).populate('user', 'displayName slug').exec(function (err, tag) {
     if (err) {
       return next(err);
     } else if (!tag) {
@@ -212,8 +212,8 @@ function get_polls_by_tagId(tagId) {
         path: 'poll',
         model: 'Poll',
         populate: [
-          { path: 'user', select: 'displayName profileImageURL', model: 'User' },
-          { path: 'category', select: 'name icon', model: 'Category' }
+          { path: 'user', select: 'displayName profileImageURL slug', model: 'User' },
+          { path: 'category', select: 'name icon slug', model: 'Category' }
         ]
       })
       .exec((err, polltags) => {

@@ -51,7 +51,7 @@
     }
 
     vm.view_notif = notif => {
-      $state.go(notif.state, { pollId: notif.poll._id, notif: notif._id });
+      $state.go(notif.state, { pollId: notif.poll.slug, notif: notif._id });
     };
     vm.mark_read = notif => {
       var status = notif.status === 0 ? 1 : 0;

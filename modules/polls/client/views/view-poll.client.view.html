@@ -50,7 +50,7 @@
                     </a>
                   </li>
                   <li ng-if="isLogged && !ctrl.poll.isCurrentUserOwner && !ctrl.reported"><a class="undecorated-link" ng-click="ctrl.report_poll()"><i class="fa fa-exclamation-circle"></i>&nbsp;Report poll</a></li>
-                  <li ng-if="ctrl.poll.isCurrentUserOwner || ctrl.poll.canEdit"><a class="undecorated-link" ui-sref="polls.edit({ pollId: ctrl.poll._id })"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
+                  <li ng-if="ctrl.poll.isCurrentUserOwner || ctrl.poll.canEdit"><a class="undecorated-link" ui-sref="polls.edit({ pollId: ctrl.poll.slug })"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
                   <li ng-if="ctrl.poll.isCurrentUserOwner || ctrl.poll.canEdit"><a class="undecorated-link" ng-click="ctrl.remove()"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
                   <li ng-if="isLogged && !ctrl.poll.isCurrentUserOwner && !ctrl.bookmarked"><a class="undecorated-link" ng-click="ctrl.bookmark_poll()"><i class="fa fa-bookmark"></i>&nbsp;Bookmark poll</a></li>
                 </ul>

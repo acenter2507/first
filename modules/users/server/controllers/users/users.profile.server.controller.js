@@ -129,17 +129,17 @@ exports.profile = function (req, res) {
 exports.activitys = function (req, res) {
   var result = {};
   Poll.find({ user: req.profile._id }).sort('-created')
-    .select('title created body isPublic').exec()
+    .select('title created body isPublic slug').exec()
     .then(polls => {
       result.polls = polls;
       return Cmt.find({ user: req.profile._id }).sort('-created')
-        .populate('poll', 'title isPublic').exec();
+        .populate('poll', 'title isPublic slug').exec();
 
     }, handleError)
     .then(cmts => {
       result.cmts = cmts;
       return Vote.find({ user: req.profile._id }).sort('-created')
-        .populate('poll', 'title isPublic').exec();
+        .populate('poll', 'title isPublic slug').exec();
     }, handleError)
     .then(votes => {
       if (votes.length === 0) {
@@ -184,8 +184,8 @@ exports.polls = function (req, res) {
   var userId = req.user ? req.user._id : undefined;
   Poll.find({ user: req.profile._id })
     .sort('-created')
-    .populate('user', 'displayName profileImageURL')
-    .populate('category', 'name icon')
+    .populate('user', 'displayName profileImageURL slug')
+    .populate('category', 'name icon slug')
     .skip(10 * page)
     .limit(10).exec()
     .then(polls => {
@@ -223,7 +223,7 @@ exports.cmts = function (req, res) {
   var page = req.params.page || 0;
   Cmt.find({ user: req.profile._id })
     .sort('-created')
-    .populate('poll', 'title isPublic')
+    .populate('poll', 'title isPublic slug')
     .skip(10 * page)
     .limit(10)
     .exec(function (err, cmts) {
@@ -244,7 +244,7 @@ exports.votes = function (req, res) {
   var page = req.params.page || 0;
   Vote.find({ user: req.profile._id })
     .sort('-created')
-    .populate('poll', 'title isPublic')
+    .populate('poll', 'title isPublic slug')
     .skip(10 * page)
     .limit(10)
     .then(votes => {
@@ -284,8 +284,8 @@ exports.follows = function (req, res) {
       path: 'poll',
       model: 'Poll',
       populate: [
-        { path: 'user', select: 'displayName profileImageURL', model: 'User' },
-        { path: 'category', select: 'name icon', model: 'Category' }
+        { path: 'user', select: 'displayName profileImageURL slug', model: 'User' },
+        { path: 'category', select: 'name icon slug', model: 'Category' }
       ]
     })
     .skip(10 * page).exec()
@@ -333,8 +333,8 @@ exports.bookmarks = function (req, res) {
       path: 'poll',
       model: 'Poll',
       populate: [
-        { path: 'user', select: 'displayName profileImageURL', model: 'User' },
-        { path: 'category', select: 'name icon', model: 'Category' }
+        { path: 'user', select: 'displayName profileImageURL slug', model: 'User' },
+        { path: 'category', select: 'name icon slug', model: 'Category' }
       ]
     })
     .skip(10 * page).exec()
@@ -406,8 +406,8 @@ exports.views = function (req, res) {
       path: 'poll',
       model: 'Poll',
       populate: [
-        { path: 'user', select: 'displayName profileImageURL', model: 'User' },
-        { path: 'category', select: 'name icon', model: 'Category' }
+        { path: 'user', select: 'displayName profileImageURL slug', model: 'User' },
+        { path: 'category', select: 'name icon slug', model: 'Category' }
       ]
     })
     .skip(10 * page).exec()
@@ -455,8 +455,8 @@ exports.likes = function (req, res) {
       path: 'poll',
       model: 'Poll',
       populate: [
-        { path: 'user', select: 'displayName profileImageURL', model: 'User' },
-        { path: 'category', select: 'name icon', model: 'Category' }
+        { path: 'user', select: 'displayName profileImageURL slug', model: 'User' },
+        { path: 'category', select: 'name icon slug', model: 'Category' }
       ]
     })
     .skip(10 * page).exec()
@@ -504,8 +504,8 @@ exports.dislikes = function (req, res) {
       path: 'poll',
       model: 'Poll',
       populate: [
-        { path: 'user', select: 'displayName profileImageURL', model: 'User' },
-        { path: 'category', select: 'name icon', model: 'Category' }
+        { path: 'user', select: 'displayName profileImageURL slug', model: 'User' },
+        { path: 'category', select: 'name icon slug', model: 'Category' }
       ]
     })
     .skip(10 * page).exec()
@@ -559,7 +559,7 @@ exports.search_user_by_name = function (req, res) {
     return res.jsonp();
   }
   User.find({ displayName: { $regex: '.*' + name + '.*' } })
-    .select('displayName profileImageURL username')
+    .select('displayName profileImageURL username slug')
     .exec(function (err, users) {
       if (err) {
         return res.status(400).send({

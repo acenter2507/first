@@ -95,7 +95,7 @@
           <i class="fa fa-bell-o"></i><span class="badge badge-pill badge-danger" ng-bind="notifCnt" ng-show="notifCnt > 0"></span>
         </a>
       <ul class="dropdown-menu notifis-list mg2t" role="menu">
-        <a ng-repeat="notif in notifications" ui-sref="{{notif.state}}({ pollId: notif.poll._id, notif: notif._id })" class="notifis-list-item"
+        <a ng-repeat="notif in notifications" ui-sref="{{notif.state}}({ pollId: notif.poll.slug, notif: notif._id })" class="notifis-list-item"
           ng-class="{'unread': notif.status === 0}">
           <div class="user-avatar pull-left">
             <img src="{{notif.from.profileImageURL}}" alt="{{notif.from.displayName}}" ng-if="notif.from._id">

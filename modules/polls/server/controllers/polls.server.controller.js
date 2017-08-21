@@ -291,34 +291,6 @@ exports.pollByID = function (req, res, next, id) {
 };
 
 /**
- * Poll middleware slug
- */
-exports.slug = function (req, res, next, slug) {
-  console.log(slug);
-};
-
-/**
- * Poll middleware slug
- */
-exports.slug_read = function (req, res) {
-  res.end();
-};
-
-/**
- * Poll middleware slug
- */
-exports.slug_update = function (req, res) {
-  res.end();
-};
-
-/**
- * Poll middleware slug
- */
-exports.slug_delete = function (req, res) {
-  res.end();
-};
-
-/**
  * Lấy danh sách poll cho màn hình polls.list
  */
 exports.findPolls = function (req, res) {
@@ -511,7 +483,7 @@ exports.search = function (req, res) {
   var sort = condition.sort || '-created';
   Poll.find(search)
     .populate('category', 'name')
-    .populate('user', 'displayName profileImageURL')
+    .populate('user', 'displayName profileImageURL slug')
     .sort(sort).exec()
     .then(polls => {
       if (polls.length === 0) return res.jsonp(polls);
@@ -917,7 +889,7 @@ function get_polls_by_sort_and_limit(sort, limit) {
   return new Promise((resolve, reject) => {
     Poll.find({ isPublic: true })
       .sort(sort)
-      .populate('user', 'displayName profileImageURL')
+      .populate('user', 'displayName profileImageURL slug')
       .limit(limit)
       .exec(function (err, polls) {
         if (err) {

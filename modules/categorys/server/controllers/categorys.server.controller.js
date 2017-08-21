@@ -131,7 +131,7 @@ exports.polls = function (req, res) {
   var userId = req.user ? req.user._id : undefined;
   Poll.find({ category: req.category._id, isPublic: true })
     .sort(sort)
-    .populate('user', 'displayName profileImageURL').skip(10 * page)
+    .populate('user', 'displayName profileImageURL slug').skip(10 * page)
     .limit(10).exec()
     .then(polls => {
       if (polls.length === 0) return res.jsonp(polls);
@@ -172,7 +172,7 @@ exports.categoryByID = function (req, res, next, id) {
     });
   }
 
-  Category.findById(id).populate('user', 'displayName').exec(function (err, category) {
+  Category.findById(id).populate('user', 'displayName slug').exec(function (err, category) {
     if (err) {
       return next(err);
     } else if (!category) {

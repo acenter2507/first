@@ -265,7 +265,7 @@
     // Xóa comment
     this.delete_cmt = cmt => {
       return new Promise((resolve, reject) => {
-        var rs_cmt = new Cmts(cmt);
+        var rs_cmt = new Cmts({ _id: cmt._id });
         rs_cmt.$remove(() => {
           Socket.emit('cmt_del', { pollId: cmt.poll._id, cmtId: cmt._id });
           return resolve();
@@ -296,8 +296,9 @@
               like.type = type === 1 ? 1 : 0;
               break;
           }
-          rs_like = new Likes(like);
+          rs_like = new Likes({ _id: like._id });
           rs_like.cnt = cnt;
+          rs_like.type = like.type;
           rs_like.$update(successCb, successCb);
         } else {
           cnt = type === 1 ? 1 : -1;
@@ -344,18 +345,21 @@
      */
     this.save_vote = (vote, opts, poll) => {
       return new Promise((resolve, reject) => {
-        vote.opts = opts;
-        var rs_vote = new Votes(vote);
+        var rs_vote;
         if (vote._id) {
+          var rs_vote = new Votes({ _id: vote._id});
+          rs_vote.opts = opts;
           rs_vote.updateCnt += 1;
-          rs_vote.updated = new Date();
+          rs_vote.updated = moment().formart();
           rs_vote.$update(successCb, errorCb);
         } else {
+          rs_vote = new Votes(vote);
+          rs_vote.opts = opts;
           rs_vote.$save(successCb, errorCb);
         }
         function successCb(res) {
           Socket.emit('poll_vote', {
-            pollId: res.poll,
+            pollId: res.poll._id || res.poll,
             from: Authentication.user._id,
             displayName: Authentication.user.displayName,
             profileImageURL: Authentication.user.profileImageURL,
@@ -378,7 +382,7 @@
           rs_opt.$save(successCb, errorCb);
         }
         function successCb(res) {
-          Socket.emit('opts_request', { pollId: res.poll, from: res.user._id, to: poll.user._id });
+          Socket.emit('opts_request', { pollId: res.poll._id || res.poll, from: res.user._id, to: poll.user._id });
           resolve(res);
         }
         function errorCb(err) {
@@ -411,8 +415,9 @@
               cmt.like.type = type === 1 ? 1 : 0;
               break;
           }
-          rs_like = new Cmtlikes(cmt.like);
+          rs_like = new Cmtlikes({ _id: cmt.like._id });
           rs_like.cnt = cnt;
+          rs_like.cnt = cmt.like.type;
           rs_like.$update(successCb, successCb);
         } else {
           cnt = type === 1 ? 1 : -1;
@@ -459,11 +464,13 @@
     // Lưu follow vào db
     this.save_follow = follow => {
       return new Promise((resolve, reject) => {
-        var rs_follow = new Follows(follow);
+        var rs_follow;
         if (follow._id) {
+          rs_follow = new Follows({ _id: follow._id });
           rs_follow.$remove();
           return resolve();
         } else {
+          rs_follow = new Follows(follow);
           rs_follow.$save(successCb, errorCb);
         }
         function successCb(res) {

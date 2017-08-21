@@ -249,7 +249,7 @@
       });
       function handle_approve() {
         opt.status = 1;
-        var _opt = new Opts(opt);
+        var _opt = new Opts({ _id: opt._id, status: opt.status });
         _opt.$update(() => {
           Socket.emit('opts_update', { pollId: ctrl.poll._id });
         });
@@ -269,7 +269,7 @@
       });
       function handle_reject() {
         opt.status = 3;
-        var _opt = new Opts(opt);
+        var _opt = new Opts({ _id: opt._id, status: opt.status });
         _opt.$update(() => {
         });
       }

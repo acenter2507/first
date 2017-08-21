@@ -9,8 +9,6 @@
     '$scope',
     '$state',
     '$window',
-    'pollResolve',
-    'notifResolve',
     'Socket',
     '$timeout',
     'Remaining',
@@ -19,7 +17,8 @@
     'ngDialog',
     '$stateParams',
     'Socialshare',
-    'Notification'
+    'Notification',
+    'NotifsService'
   ];
 
   function PollsController(
@@ -28,8 +27,6 @@
     $scope,
     $state,
     $window,
-    poll,
-    notif,
     Socket,
     $timeout,
     Remaining,
@@ -38,11 +35,10 @@
     dialog,
     $stateParams,
     Socialshare,
-    Notification
+    Notification,
+    NotifsService
   ) {
     var vm = this;
-    vm.poll = poll;
-
     vm.form = {};
     // Options variable
     vm.opts = [];
@@ -51,6 +47,7 @@
     vm.votedOpts = [];
     vm.selectedOpts = [];
 
+    // Sắp xếp comments
     vm.cmt_sorts = [
       { val: '-created', name: 'Newest to oldest' },
       { val: 'created', name: 'Oldest to newest' },
@@ -82,8 +79,20 @@
     vm.close_duration = {};
     vm.remaining = 1;
 
-    init();
+    analysic_poll();
 
+    // Get poll from param
+    function analysic_poll() {
+      if (!$stateParams.pollId) {
+        $state.go('polls.list');
+      } else {
+        Action.get_poll($stateParams.pollId)
+          .then(_poll => {
+            vm.poll = _poll;
+            init();
+          });
+      }
+    }
     // Init data
     function init() {
       if (!vm.poll._id) {
@@ -107,7 +116,11 @@
       analysic_nofif();
       get_cmts();
     }
-
+    function analysic_nofif() {
+      if ($stateParams.notif) {
+        Notification.markReadNotif($stateParams.notif);
+      }
+    }
     // Init Socket
     function initSocket() {
       if (!Socket.socket) {
@@ -254,11 +267,6 @@
         .catch(err => {
           toast.error('Không thể load thông tin user' + err.message, 'Error!');
         });
-    }
-    function analysic_nofif() {
-      if (notif && notif.status === 0) {
-        Notification.markReadNotif(notif._id);
-      }
     }
 
     vm.get_cmts = get_cmts;

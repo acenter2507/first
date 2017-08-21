@@ -4,11 +4,18 @@
 angular.module(ApplicationConfiguration.applicationModuleName, ApplicationConfiguration.applicationModuleVendorDependencies);
 
 // Setting HTML5 Location Mode
-angular.module(ApplicationConfiguration.applicationModuleName).config(['$locationProvider', '$httpProvider', '$controllerProvider',
-  function ($locationProvider, $httpProvider, $controllerProvider) {
+angular.module(ApplicationConfiguration.applicationModuleName).config(['$locationProvider', '$httpProvider', '$controllerProvider', '$compileProvider',
+  function ($locationProvider, $httpProvider, $controllerProvider, $compileProvider) {
+    // Good for SEO
     $locationProvider.html5Mode(true).hashPrefix('!');
+    // Authentication securiry
     $httpProvider.interceptors.push('authInterceptor');
+    // Allow global controller
     $controllerProvider.allowGlobals();
+    // Đồng bộ các http
+    $controllerProvider.useApplyAsync(1000);
+    // Disable Debug
+    $compileProvider.debugInfoEnabled(false);
   }
 ]);
 

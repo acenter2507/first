@@ -102,7 +102,8 @@
       // Verify parameters
       if (!vm.poll.isCurrentUserOwner && !vm.poll.isPublic && $stateParams.share !== vm.poll.share_code) {
         vm.isShow = false;
-        return;
+        toast.error('You cannot view private poll', 'Error!');
+        $state.go('polls.list');
       }
       vm.isShow = true;
       process_before_show();

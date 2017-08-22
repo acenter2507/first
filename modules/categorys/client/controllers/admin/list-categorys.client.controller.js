@@ -82,6 +82,7 @@
         Promise.all(promise)
           .then(_ctgrs => {
             vm.categorys = _.union(vm.categorys, _ctgrs);
+            $scope.$digist();
           })
           .catch(err => {
             alert(err.message);

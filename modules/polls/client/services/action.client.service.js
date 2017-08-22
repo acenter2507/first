@@ -367,16 +367,14 @@
           rs_vote.$save(successCb, errorCb);
         }
         function successCb(res) {
-          if (Authentication.user) {
-            Socket.emit('poll_vote', {
-              pollId: res.poll._id || res.poll,
-              poll: res.poll.slug,
-              from: Authentication.user._id,
-              displayName: Authentication.user.displayName,
-              profileImageURL: Authentication.user.profileImageURL,
-              title: poll.title
-            });
-          }
+          Socket.emit('poll_vote', {
+            pollId: res.poll._id || res.poll,
+            poll: res.poll.slug,
+            from: Authentication.user._id,
+            displayName: Authentication.user.displayName,
+            profileImageURL: Authentication.user.profileImageURL,
+            title: poll.title
+          });
           resolve(res);
         }
         function errorCb(err) {

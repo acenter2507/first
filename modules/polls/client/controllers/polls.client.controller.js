@@ -165,7 +165,6 @@
         });
       });
       Socket.on('poll_vote', res => {
-        console.log('PollsController', 'Has poll vote');
         Action.get_voteopts(ctrl.poll._id)
           .then(res => { // lấy thông tin vote
             ctrl.chart = {

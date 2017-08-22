@@ -95,6 +95,7 @@ module.exports = function (io, socket) {
   });
   // On vote poll
   socket.on('poll_vote', req => {
+    console.log(req);
     io.sockets.in(req.pollId).emit('poll_vote');
     io.sockets.emit('activity', {
       poll: req.poll,

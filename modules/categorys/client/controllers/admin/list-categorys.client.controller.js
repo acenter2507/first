@@ -79,9 +79,10 @@
             return item.trim();
           });
           rs_categorys = new CategorysService({ name: ctgrs[0], icon: ctgrs[1], color: ctgrs[0] });
-          rs_categorys.$save(res => {
-            vm.categorys.push(res);
-          });
+          console.log(rs_categorys);
+          // rs_categorys.$save(res => {
+          //   vm.categorys.push(res);
+          // });
         });
       };
       reader.readAsText(file);

@@ -86,5 +86,8 @@
       };
       reader.readAsText(file);
     };
+    vm.import = () => {
+      angular.element('#importFile').click();
+    };
   }
 }());

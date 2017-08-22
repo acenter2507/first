@@ -72,7 +72,7 @@
         Promise.all(promise)
           .then(_tags => {
             vm.tags = _.union(vm.tags, _tags);
-            $scope.$digist();
+            $scope.$digest();
           })
           .catch(err => {
             alert(err.message);

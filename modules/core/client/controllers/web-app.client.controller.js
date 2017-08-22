@@ -12,6 +12,7 @@ angular.module('core').controller('WebAppController', [
   function ($rootScope, $scope, Authentication, Notification, Constants, Storages, Socket, Activitys) {
     // User info
     $scope.Authentication = Authentication;
+    $scope.Activitys = Activitys;
     $scope.page_name = 'Polls';
     $scope.page_title = ($scope.notifCnt > 0) ? '(' + $scope.notifCnt + ')' : '' + $scope.page_name;
 
@@ -38,9 +39,7 @@ angular.module('core').controller('WebAppController', [
         Notification.loadNotifs();
       });
       Socket.on('activity', res => {
-        console.log('Has activity');
-        Activitys.add(res);
-        console.log(Activitys.list);
+        $scope.Activitys.add(res);
       });
       $scope.$on('$destroy', function () {
         Socket.removeListener('activity');
@@ -50,12 +49,10 @@ angular.module('core').controller('WebAppController', [
     function initWatch() {
       console.log('initWatch');
       // Watch notifications
-      $scope.$watch(() => {
-        return Activitys.list;
-      }, () => {
-        $scope.activitys = Activitys.list;
-        console.log($scope.activitys);
-      });
+      // $scope.$watch('Activitys.list', () => {
+      //   $scope.activitys = Activitys.list;
+      //   console.log($scope.activitys);
+      // });
       // Watch notifCnt
       $scope.$watch(() => {
         return Notification.notifCnt;

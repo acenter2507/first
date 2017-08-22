@@ -31,6 +31,7 @@ angular.module('core').controller('WebAppController', [
       }
     }
     function initSocket() {
+      console.log('initSocket');
       if (!Socket.socket) {
         Socket.connect();
       }
@@ -47,6 +48,7 @@ angular.module('core').controller('WebAppController', [
       });
     }
     function initWatch() {
+      console.log('initWatch');
       // Watch notifications
       $scope.$watch(() => {
         return Activitys.list;

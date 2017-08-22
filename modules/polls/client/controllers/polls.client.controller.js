@@ -157,13 +157,13 @@
       Socket.on('poll_like', likeCnt => {
         ctrl.poll.likeCnt = likeCnt;
       });
-      Socket.on('cmt_like', res => {
-        ctrl.cmts.forEach(cmt => {
-          if (cmt._id.toString() === res.cmtId.toString()) {
-            cmt.likeCnt = res.likeCnt;
-          }
-        });
-      });
+      // Socket.on('cmt_like', res => {
+      //   ctrl.cmts.forEach(cmt => {
+      //     if (cmt._id.toString() === res.cmtId.toString()) {
+      //       cmt.likeCnt = res.likeCnt;
+      //     }
+      //   });
+      // });
       Socket.on('poll_vote', res => {
         Action.get_voteopts(ctrl.poll._id)
           .then(res => { // lấy thông tin vote
@@ -192,7 +192,7 @@
       });
       Socket.on('poll_delete', res => {
         toast.error('This poll has been deleted.', 'Error!');
-        $state.go('polls.list');
+        $state.go('home');
       });
       Socket.on('poll_update', res => {
         Action.get_poll(ctrl.poll._id)
@@ -221,7 +221,7 @@
         Socket.removeListener('cmt_add');
         Socket.removeListener('cmt_del');
         Socket.removeListener('poll_like');
-        Socket.removeListener('cmt_like');
+        // Socket.removeListener('cmt_like');
         Socket.removeListener('poll_vote');
         Socket.removeListener('poll_delete');
         Socket.removeListener('poll_update');

@@ -244,7 +244,7 @@
         var promise;
         if (!isNew) {
           rs_cmt.isEdited = true;
-          rs_cmt.updated = new Date();
+          rs_cmt.updated = moment().format();
           rs_cmt.$update(successCb, errorCb);
         } else {
           rs_cmt.poll = poll._id;
@@ -319,13 +319,15 @@
           rs_like.$save(successCb, successCb);
         }
         function successCb(res) {
-          Socket.emit('poll_like', {
-            pollId: poll._id,
-            likeCnt: res.likeCnt,
-            from: Authentication.user._id,
-            to: poll.user._id,
-            type: res.like.type
-          });
+          if (Authentication.user) {
+            Socket.emit('poll_like', {
+              pollId: poll._id,
+              likeCnt: res.likeCnt,
+              from: Authentication.user._id,
+              to: poll.user._id,
+              type: res.like.type
+            });
+          }
           resolve(res);
         }
         function errorCb(err) {
@@ -439,14 +441,14 @@
           rs_like.$save(successCb, successCb);
         }
         function successCb(res) {
-          Socket.emit('cmt_like', {
-            pollId: cmt.poll._id ? cmt.poll._id : cmt.poll,
-            cmtId: cmt._id,
-            likeCnt: res.likeCnt,
-            from: res.like.user._id,
-            to: cmt.user._id,
-            type: res.like.type
-          });
+          // Socket.emit('cmt_like', {
+          //   pollId: cmt.poll._id || cmt.poll,
+          //   cmtId: cmt._id,
+          //   likeCnt: res.likeCnt,
+          //   from: res.like.user._id,
+          //   to: cmt.user._id,
+          //   type: res.like.type
+          // });
           resolve(res);
         }
         function errorCb(err) {

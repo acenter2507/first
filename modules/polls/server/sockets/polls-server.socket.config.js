@@ -95,8 +95,8 @@ module.exports = function (io, socket) {
   });
   // On vote poll
   socket.on('poll_vote', req => {
-    console.log(req);
     io.sockets.in(req.pollId).emit('poll_vote');
+    if (!req.from) return;
     io.sockets.emit('activity', {
       poll: req.poll,
       user: req.from,
@@ -219,11 +219,11 @@ module.exports = function (io, socket) {
     io.sockets.in(req.pollId).emit('cmt_del', req.cmtId);
   });
   // On like poll
-  socket.on('cmt_like', req => {
-    io.sockets
-      .in(req.pollId)
-      .emit('cmt_like', { cmtId: req.cmtId, likeCnt: req.likeCnt });
-  });
+  // socket.on('cmt_like', req => {
+  //   io.sockets
+  //     .in(req.pollId)
+  //     .emit('cmt_like', { cmtId: req.cmtId, likeCnt: req.likeCnt });
+  // });
 
   // On delete poll
   socket.on('opts_update', req => {

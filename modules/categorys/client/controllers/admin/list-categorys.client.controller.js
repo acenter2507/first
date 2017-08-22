@@ -11,8 +11,6 @@
     '$window',
     '$filter',
     'CategorysService',
-    'Authentication',
-    'toastr',
     'FileUploader'
   ];
 
@@ -22,8 +20,6 @@
     $window,
     $filter,
     CategorysService,
-    Authentication,
-    toast,
     FileUploader
   ) {
     var vm = this;
@@ -71,6 +67,7 @@
       reader.onload = function (progressEvent) {
         // By lines
         var rs_categorys;
+        var promise = [];
         var lines = this.result.split('\n').map(function (item) {
           return item.trim();
         });
@@ -80,10 +77,15 @@
             return item.trim();
           });
           rs_categorys = new CategorysService({ name: ctgrs[0], icon: ctgrs[1], color: ctgrs[0] });
-          rs_categorys.$save(res => {
-            vm.categorys.push(res);
-          });
+          promise.push(rs_categorys.$save());
         });
+        Promise.all(promise)
+          .then(_ctgrs => {
+            _.union(vm.categorys, _ctgrs);
+          })
+          .catch(err => {
+            alert(err.message);
+          });
       };
       reader.readAsText(file);
     };

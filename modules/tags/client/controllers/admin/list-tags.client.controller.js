@@ -59,17 +59,23 @@
       reader.onload = function (progressEvent) {
         // By lines
         var rs_tag;
+        var promise = [];
         var lines = this.result.split('\n').map(function (item) {
           return item.trim().toLowerCase();
         });
         for (var line = 0; line < lines.length; line++) {
           if (lines[line] !== '') {
             rs_tag = new TagsService({ name: lines[line] });
-            rs_tag.$save(res => {
-              vm.tags.push(res);
-            });
+            promise.push(rs_tag.$save());
           }
         }
+        Promise.all(promise)
+          .then(_ctgrs => {
+            _.union(vm.categorys, _ctgrs);
+          })
+          .catch(err => {
+            alert(err.message);
+          });
 
       };
       reader.readAsText(file);

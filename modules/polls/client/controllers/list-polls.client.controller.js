@@ -102,7 +102,6 @@
           }
           // Xử lý poll trước khi hiển thị màn hình
           var promises = [];
-          console.log(res.data);
           res.data.forEach(poll => {
             promises.push(process_before_show(poll));
           });

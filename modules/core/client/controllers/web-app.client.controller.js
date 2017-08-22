@@ -8,39 +8,28 @@ angular.module('core').controller('WebAppController', [
   'Constants',
   'Storages',
   'Socket',
-  function ($rootScope, $scope, Authentication, Notification, Constants, Storages, Socket) {
+  'Activitys',
+  function ($rootScope, $scope, Authentication, Notification, Constants, Storages, Socket, Activitys) {
     // User info
     $scope.Authentication = Authentication;
     $scope.Notification = Notification;
-    loadUser();
-    if ($scope.isLogged) {
-      initSocket();
-      Notification.loadNotifs();
-    }
+    init();
     $scope.page_name = 'Polls';
     $scope.page_title = ($scope.notifCnt > 0) ? '(' + $scope.notifCnt + ')' : '' + $scope.page_name;
 
     // Watch user info
     $scope.$watch('Authentication.user', () => {
-      loadUser();
+      init();
     });
-    // Watch notifCnt
-    $scope.$watch(() => {
-      return Notification.notifCnt;
-    }, () => {
-      $scope.notifCnt = Notification.notifCnt;
-      $scope.page_title = ($scope.notifCnt > 0) ? '(' + $scope.notifCnt + ')' + $scope.page_name : '' + $scope.page_name;
-    });
-    // Watch notifications
-    $scope.$watch(() => {
-      return Notification.notifications;
-    }, () => {
-      $scope.notifications = Notification.notifications;
-    });
-    function loadUser() {
+    function init() {
       $scope.user = Authentication.user;
       $scope.isLogged = ($scope.user);
       $scope.isAdmin = $scope.isLogged && _.contains($scope.user.roles, 'admin');
+      if ($scope.isLogged) {
+        initSocket();
+        initWatch();
+        Notification.loadNotifs();
+      }
     }
     function initSocket() {
       if (!Socket.socket) {
@@ -50,15 +39,33 @@ angular.module('core').controller('WebAppController', [
         Notification.loadNotifs();
       });
       Socket.on('activity', res => {
-        res.time = moment().format();
-        let activitys = JSON.parse(Storages.get_session(Constants.storages.activitys, JSON.stringify([])));
-        activitys.push(res);
-        Storages.set_session(Constants.storages.activitys, JSON.stringify(activitys));
-        $rootScope.$emit('activity');
+        Activitys.add(res);
       });
       $scope.$on('$destroy', function () {
         Socket.removeListener('activity');
         Socket.removeListener('notifs');
+      });
+    }
+    function initWatch() {
+      // Watch notifications
+      $scope.$watch(() => {
+        return Activitys.list;
+      }, () => {
+        $scope.activitys = Activitys.list;
+        console.log($scope.activitys);
+      });
+      // Watch notifCnt
+      $scope.$watch(() => {
+        return Notification.notifCnt;
+      }, () => {
+        $scope.notifCnt = Notification.notifCnt;
+        $scope.page_title = ($scope.notifCnt > 0) ? '(' + $scope.notifCnt + ')' + $scope.page_name : '' + $scope.page_name;
+      });
+      // Watch notifications
+      $scope.$watch(() => {
+        return Notification.notifications;
+      }, () => {
+        $scope.notifications = Notification.notifications;
       });
     }
   }

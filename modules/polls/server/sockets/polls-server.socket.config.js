@@ -117,11 +117,11 @@ module.exports = function (io, socket) {
   socket.on('poll_create', req => {
     io.sockets.in('public').emit('poll_create');
     io.sockets.emit('activity', {
-      poll: req._id,
-      user: req.user._id,
-      displayName: req.user.displayName,
+      poll: req.poll,
+      user: req.user,
+      displayName: req.displayName,
       action: 'created poll:',
-      profileImageURL: req.user.profileImageURL,
+      profileImageURL: req.profileImageURL,
       title: req.title
     });
   });

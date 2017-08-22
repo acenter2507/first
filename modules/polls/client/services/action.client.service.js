@@ -183,8 +183,13 @@
         function successCb(res) {
           if (isNew) {
             if (res.isPublic) {
-              Socket.emit('poll_create', res);
-              console.log(res);
+              Socket.emit('poll_create', {
+                poll: res.slug,
+                user: res.user._id,
+                displayName: res.user.displayName,
+                profileImageURL: res.user.profileImageURL,
+                title: res.title
+              });
             }
           } else {
             Socket.emit('poll_update', { pollId: res._id });

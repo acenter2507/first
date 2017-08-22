@@ -359,7 +359,7 @@
           rs_vote = new Votes({ _id: vote._id });
           rs_vote.opts = opts;
           rs_vote.updateCnt += 1;
-          rs_vote.updated = new moment().formart();
+          rs_vote.updated = moment().format();
           rs_vote.$update(successCb, errorCb);
         } else {
           rs_vote = new Votes(vote);

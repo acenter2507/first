@@ -369,6 +369,7 @@
           rs_vote.$save(successCb, errorCb);
         }
         function successCb(res) {
+          console.log(res);
           Socket.emit('poll_vote', {
             pollId: res.poll._id || res.poll,
             poll: res.poll.slug,

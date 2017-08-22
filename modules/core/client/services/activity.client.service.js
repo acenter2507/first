@@ -7,7 +7,6 @@ function Activitys(Socket) {
   this.list = [];
   this.add = function (activity) {
     var time = moment().format();
-    console.log(time);
     activity.time = time;
     this.list.push(activity);
   };

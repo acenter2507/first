@@ -40,6 +40,7 @@ angular.module('core').controller('WebAppController', [
       Socket.on('activity', res => {
         console.log('Has activity');
         Activitys.add(res);
+        console.log(Activitys.list);
       });
       $scope.$on('$destroy', function () {
         Socket.removeListener('activity');

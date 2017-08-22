@@ -16,8 +16,7 @@
     'Storages',
     'Constants',
     'UserApi',
-    '$timeout',
-    'Activitys'
+    '$timeout'
   ];
 
   function PollsListController(
@@ -32,13 +31,11 @@
     Storages,
     Constants,
     UserApi,
-    $timeout,
-    Activitys
+    $timeout
   ) {
     var vm = this;
 
     vm.polls = [];
-    vm.activitys = JSON.parse(Storages.get_session(Constants.storages.activitys, JSON.stringify([])));
     vm.hot_polls = [];
     vm.categorys = [];
     vm.bookmarks = [];
@@ -62,7 +59,6 @@
       // Load danh sách poll đã bookmark
       if ($scope.isLogged) {
         // Lắng nghe sự kiện từ rootScope;
-        initRootScope();
         get_bookmarks();
       }
     }
@@ -78,13 +74,6 @@
       $scope.$on('$destroy', function () {
         Socket.emit('unsubscribe_public');
         Socket.removeListener('poll_create');
-      });
-    }
-
-    function initRootScope() {
-      $rootScope.$on('activity', (event, data) => {
-        vm.activitys = JSON.parse(Storages.get_session(Constants.storages.activitys, JSON.stringify([])));
-        event.stopPropagation();
       });
     }
 

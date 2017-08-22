@@ -28,6 +28,7 @@ angular.module('core').controller('WebAppController', [
       $scope.isAdmin = $scope.isLogged && _.contains($scope.user.roles, 'admin');
       if ($scope.isLogged) {
         initSocket();
+        initActivitys();
         Notifications.loadNotifs();
       }
     }
@@ -40,26 +41,17 @@ angular.module('core').controller('WebAppController', [
       });
       Socket.on('activity', res => {
         $scope.Activitys.add(res);
+        Storages.set_session(Constants.storages.activitys, JSON.stringify($scope.Activitys.list));
       });
       $scope.$on('$destroy', function () {
         Socket.removeListener('activity');
         Socket.removeListener('notifs');
       });
     }
-    // function initWatch() {
-    //   // Watch notifCnt
-    //   $scope.$watch(() => {
-    //     return Notification.notifCnt;
-    //   }, () => {
-    //     $scope.notifCnt = Notification.notifCnt;
-    //     $scope.page_title = ($scope.notifCnt > 0) ? '(' + $scope.notifCnt + ')' + $scope.page_name : '' + $scope.page_name;
-    //   });
-    //   // Watch notifications
-    //   $scope.$watch(() => {
-    //     return Notification.notifications;
-    //   }, () => {
-    //     $scope.notifications = Notification.notifications;
-    //   });
-    // }
+    function initActivitys() {
+      if (Storages.has_session(Constants.storages.activitys)) {
+        $scope.Activitys.add(JSON.parse(Storages.get_session(Constants.storages.activitys, JSON.stringify([]))));
+      }
+    }
   }
 ]);

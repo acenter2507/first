@@ -16,7 +16,8 @@
     'Storages',
     'Constants',
     'UserApi',
-    '$timeout'
+    '$timeout',
+    'Activitys'
   ];
 
   function PollsListController(
@@ -31,7 +32,8 @@
     Storages,
     Constants,
     UserApi,
-    $timeout
+    $timeout,
+    Activitys
   ) {
     var vm = this;
     $scope.Activitys = Activitys;

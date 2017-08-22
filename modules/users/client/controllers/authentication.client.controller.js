@@ -9,7 +9,6 @@ angular.module('users').controller('AuthenticationController', [
   '$window',
   'Authentication',
   'PasswordValidator',
-  'Notification',
   'toastr',
   function (
     $rootScope,
@@ -20,7 +19,6 @@ angular.module('users').controller('AuthenticationController', [
     $window,
     Authentication,
     PasswordValidator,
-    Notification,
     toastr
   ) {
     $scope.popoverMsg = PasswordValidator.getPopoverMsg();

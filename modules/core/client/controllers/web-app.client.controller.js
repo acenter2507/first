@@ -28,7 +28,6 @@ angular.module('core').controller('WebAppController', [
       $scope.isAdmin = $scope.isLogged && _.contains($scope.user.roles, 'admin');
       if ($scope.isLogged) {
         initSocket();
-        initWatch();
         Notifications.loadNotifs();
       }
     }

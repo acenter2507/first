@@ -81,7 +81,7 @@
         });
         Promise.all(promise)
           .then(_ctgrs => {
-            _.union(vm.categorys, _ctgrs);
+            vm.categorys = _.union(vm.categorys, _ctgrs);
           })
           .catch(err => {
             alert(err.message);

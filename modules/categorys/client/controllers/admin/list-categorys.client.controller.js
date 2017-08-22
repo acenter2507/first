@@ -12,7 +12,8 @@
     '$filter',
     'CategorysService',
     'Authentication',
-    'toastr'
+    'toastr',
+    'FileUploader'
   ];
 
   function AdminCategorysListController(
@@ -22,7 +23,8 @@
     $filter,
     CategorysService,
     Authentication,
-    toast
+    toast,
+    FileUploader
   ) {
     var vm = this;
     if (!$scope.isAdmin) {
@@ -61,6 +63,28 @@
         search();
         category.$remove();
       }
+    };
+    $scope.uploader = new FileUploader();
+    $scope.uploader.onAfterAddingAll = function (addedFileItems) {
+      var file = addedFileItems[0]._file;
+      var reader = new FileReader();
+      reader.onload = function (progressEvent) {
+        // By lines
+        var rs_categorys;
+        var lines = this.result.split('\n').map(function (item) {
+          return item.trim();
+        });
+        lines.forEach(function (element) {
+          var ctgrs = element.split('\n').map(function (item) {
+            return item.trim();
+          });
+          rs_categorys = new CategorysService({ name: ctgrs[0], icon: ctgrs[1], color: ctgrs[0] });
+          rs_categorys.$save(res => {
+            vm.categorys.push(res);
+          });
+        });
+      };
+      reader.readAsText(file);
     };
   }
 }());

@@ -92,10 +92,10 @@
   <ul class="nav navbar-nav navbar-right d-sm-down-none" ng-if="isLogged">
     <li class="dropdown" uib-dropdown ui-sref-active="active">
       <a class="dropdown-toggle notif-dropdown-toggle" uib-dropdown-toggle role="button">
-          <i class="fa fa-bell-o"></i><span class="badge badge-pill badge-danger" ng-bind="notifCnt" ng-show="notifCnt > 0"></span>
+          <i class="fa fa-bell-o"></i><span class="badge badge-pill badge-danger" ng-bind="Notifications.notifCnt" ng-show="Notifications.notifCnt > 0"></span>
         </a>
       <ul class="dropdown-menu notifis-list mg2t" role="menu">
-        <a ng-repeat="notif in notifications" ui-sref="{{notif.state}}({ pollId: notif.poll.slug, notif: notif._id })" class="notifis-list-item"
+        <a ng-repeat="notif in Notifications.notifications" ui-sref="{{notif.state}}({ pollId: notif.poll.slug, notif: notif._id })" class="notifis-list-item"
           ng-class="{'unread': notif.status === 0}">
           <div class="user-avatar pull-left">
             <img src="{{notif.from.profileImageURL}}" alt="{{notif.from.displayName}}" ng-if="notif.from._id">
@@ -106,7 +106,7 @@
           <small>{{notif.poll.title}}</small>
           <div class="clearfix"></div>
         </a>
-        <li class="text-center" ng-if="notifCnt > 0">
+        <li class="text-center" ng-if="Notifications.notifCnt > 0">
           <a ng-click="mark_all_read()">Mark all notifications read</a>
         </li>
         <li class="text-center">

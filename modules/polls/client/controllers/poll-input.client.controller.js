@@ -18,7 +18,7 @@
     'toastr',
     'Action',
     'ngDialog',
-    'Notification'
+    'Notifications'
   ];
 
   function PollInputController(
@@ -34,7 +34,7 @@
     toast,
     Action,
     dialog,
-    Notification
+    Notifications
   ) {
     var ctrl = this;
 
@@ -100,7 +100,7 @@
     }
     function analysic_nofif() {
       if ($stateParams.notif) {
-        Notification.markReadNotif($stateParams.notif);
+        Notifications.markReadNotif($stateParams.notif);
       }
     }
     function isCanUpdate() {

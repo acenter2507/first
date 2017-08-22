@@ -36,7 +36,6 @@
     Activitys
   ) {
     var vm = this;
-    $scope.Activitys = Activitys;
 
     vm.polls = [];
     vm.activitys = JSON.parse(Storages.get_session(Constants.storages.activitys, JSON.stringify([])));

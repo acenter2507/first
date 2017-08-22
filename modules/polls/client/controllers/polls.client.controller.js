@@ -119,7 +119,7 @@
     }
     function analysic_nofif() {
       if ($stateParams.notif) {
-        Notification.markReadNotif($stateParams.notif);
+        Notifications.markReadNotif($stateParams.notif);
       }
     }
     // Init Socket

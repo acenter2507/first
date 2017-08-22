@@ -17,10 +17,10 @@
       <li class="nav-title" ng-show="isLogged">Notifications</li>
       <li class="nav-item" ng-show="isLogged">
         <a class="nav-link" ui-sref="notifs.list"><i class="fa fa-bell-o"></i> See all
-          <span class="badge badge-pill badge-danger" ng-bind="notifCnt" ng-show="notifCnt > 0"></span>
+          <span class="badge badge-pill badge-danger" ng-bind="Notifications.notifCnt" ng-show="Notifications.notifCnt > 0"></span>
         </a>
       </li>
-      <li class="nav-item" ng-show="isLogged && notifCnt > 0">
+      <li class="nav-item" ng-show="isLogged && Notifications.notifCnt > 0">
         <a class="nav-link" ng-click="mark_all_read()"><i class="fa fa-check-square-o"></i> Mark all notifications read</a>
       </li>
       <li class="nav-title">Navigation</li>

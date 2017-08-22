@@ -9,14 +9,14 @@
     '$state',
     'NotifsApi',
     'toastr',
-    'Notification'
+    'Notifications'
   ];
 
   function NotifsListController(
     $state,
     NotifsApi,
     toast,
-    Notification
+    Notifications
   ) {
     var vm = this;
     init();
@@ -55,13 +55,13 @@
     };
     vm.mark_read = notif => {
       var status = notif.status === 0 ? 1 : 0;
-      Notification.markReadNotif(notif._id, status);
+      Notifications.markReadNotif(notif._id, status);
       notif.status = status;
     };
     vm.mark_all_read = () => {
       if (vm.stopped || vm.busy || vm.notifs.length === 0) return;
       vm.busy = true;
-      Notification.markReadNotifs()
+      Notifications.markReadNotifs()
         .then(() => {
           init();
           get_notifs();
@@ -74,7 +74,7 @@
     vm.clear_all = () => {
       vm.notifs = [];
       vm.stopped = true;
-      Notification.clearNotifs();
+      Notifications.clearNotifs();
     };
   }
 }());

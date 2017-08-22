@@ -4,17 +4,19 @@ angular.module('core').controller('WebAppController', [
   '$rootScope',
   '$scope',
   'Authentication',
-  'Notification',
+  'Notifications',
   'Constants',
   'Storages',
   'Socket',
   'Activitys',
-  function ($rootScope, $scope, Authentication, Notification, Constants, Storages, Socket, Activitys) {
+  function ($rootScope, $scope, Authentication, Notifications, Constants, Storages, Socket, Activitys) {
     // User info
     $scope.Authentication = Authentication;
     $scope.Activitys = Activitys;
+    $scope.Notifications = Notifications;
+
     $scope.page_name = 'Polls';
-    $scope.page_title = ($scope.notifCnt > 0) ? '(' + $scope.notifCnt + ')' : '' + $scope.page_name;
+    $scope.page_title = ($scope.Notifications.notifCnt > 0) ? '(' + $scope.Notifications.notifCnt + ')' + $scope.page_name : '' + $scope.page_name;
 
     // Watch user info
     $scope.$watch('Authentication.user', () => {
@@ -27,16 +29,15 @@ angular.module('core').controller('WebAppController', [
       if ($scope.isLogged) {
         initSocket();
         initWatch();
-        Notification.loadNotifs();
+        Notifications.loadNotifs();
       }
     }
     function initSocket() {
-      console.log('initSocket');
       if (!Socket.socket) {
         Socket.connect();
       }
       Socket.on('notifs', res => {
-        Notification.loadNotifs();
+        Notifications.loadNotifs();
       });
       Socket.on('activity', res => {
         $scope.Activitys.add(res);
@@ -46,26 +47,20 @@ angular.module('core').controller('WebAppController', [
         Socket.removeListener('notifs');
       });
     }
-    function initWatch() {
-      console.log('initWatch');
-      // Watch notifications
-      // $scope.$watch('Activitys.list', () => {
-      //   $scope.activitys = Activitys.list;
-      //   console.log($scope.activitys);
-      // });
-      // Watch notifCnt
-      $scope.$watch(() => {
-        return Notification.notifCnt;
-      }, () => {
-        $scope.notifCnt = Notification.notifCnt;
-        $scope.page_title = ($scope.notifCnt > 0) ? '(' + $scope.notifCnt + ')' + $scope.page_name : '' + $scope.page_name;
-      });
-      // Watch notifications
-      $scope.$watch(() => {
-        return Notification.notifications;
-      }, () => {
-        $scope.notifications = Notification.notifications;
-      });
-    }
+    // function initWatch() {
+    //   // Watch notifCnt
+    //   $scope.$watch(() => {
+    //     return Notification.notifCnt;
+    //   }, () => {
+    //     $scope.notifCnt = Notification.notifCnt;
+    //     $scope.page_title = ($scope.notifCnt > 0) ? '(' + $scope.notifCnt + ')' + $scope.page_name : '' + $scope.page_name;
+    //   });
+    //   // Watch notifications
+    //   $scope.$watch(() => {
+    //     return Notification.notifications;
+    //   }, () => {
+    //     $scope.notifications = Notification.notifications;
+    //   });
+    // }
   }
 ]);

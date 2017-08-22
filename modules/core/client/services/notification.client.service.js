@@ -1,33 +1,34 @@
 'use strict';
 
-angular.module('core').service('Notification', Notification);
+angular.module('core').service('Notifications', Notifications);
 
-Notification.$inject = ['$http', 'NotifsService'];
-function Notification($http, NotifsService) {
-  this.notifCnt = 0;
-  this.notifications = [];
-  this.loadNotifs = function () {
+Notifications.$inject = ['$http', 'NotifsService'];
+function Notifications($http, NotifsService) {
+  var sv = {};
+  sv.notifCnt = 0;
+  sv.notifications = [];
+  sv.loadNotifs = function () {
     $http.get('/api/notifs/load', { ignoreLoadingBar: true })
       .then(res => {
-        this.notifCnt = res.data.count || 0;
-        this.notifications = res.data.notifs || 0;
+        sv.notifCnt = res.data.count || 0;
+        sv.notifications = res.data.notifs || 0;
       });
   };
-  this.clearNotifs = function () {
+  sv.clearNotifs = function () {
     $http.get('/api/clearAll', { ignoreLoadingBar: true })
       .then(res => {
-        this.notifCnt = 0;
-        this.notifications = [];
+        sv.notifCnt = 0;
+        sv.notifications = [];
       });
   };
-  this.markReadNotifs = function () {
+  sv.markReadNotifs = function () {
     return new Promise((resolve, reject) => {
       $http.get('/api/markAllRead', { ignoreLoadingBar: true })
         .then(res => {
-          this.notifications.forEach(function (notif) {
+          sv.notifications.forEach(function (notif) {
             notif.status = 1;
           });
-          this.notifCnt = 0;
+          sv.notifCnt = 0;
           return resolve();
         })
         .catch(err => {
@@ -35,29 +36,29 @@ function Notification($http, NotifsService) {
         });
     });
   };
-  this.markReadNotif = function (notifId, status) {
+  sv.markReadNotif = function (notifId, status) {
     var _status = status === undefined ? 1 : status;
-    var ntf = _.find(this.notifications, function (item) { return item._id.toString() === notifId.toString(); });
+    var ntf = _.find(sv.notifications, function (item) { return item._id.toString() === notifId.toString(); });
     if (ntf) {
       ntf.status = _status;
-      this.notifCnt += _status === 1 ? -1 : 1;
+      sv.notifCnt += _status === 1 ? -1 : 1;
     }
     let rs_notf = new NotifsService({ _id: notifId });
     rs_notf.status = _status;
     rs_notf.$update();
   };
-  this.markUnReadNotif = function (notifId) {
-    var ntf = _.find(this.notifications, function (item) { return item._id.toString() === notifId.toString(); });
+  sv.markUnReadNotif = function (notifId) {
+    var ntf = _.find(sv.notifications, function (item) { return item._id.toString() === notifId.toString(); });
     if (ntf) {
       ntf.status = 0;
-      this.notifCnt += 1;
+      sv.notifCnt += 1;
     }
     let rs_notf = new NotifsService({ _id: notifId });
     rs_notf.status = 1;
     rs_notf.$update();
   };
-  this.getData = function () { return { notifCnt: this.notifCnt, notifications: this.notifications }; };
-  this.getNotifCnt = function () { return this.notifCnt; };
-  this.getNotifications = function () { return this.notifications; };
-  return this;
+  sv.getData = function () { return { notifCnt: this.notifCnt, notifications: this.notifications }; };
+  sv.getNotifCnt = function () { return this.notifCnt; };
+  sv.getNotifications = function () { return this.notifications; };
+  return sv;
 }

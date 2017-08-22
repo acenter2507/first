@@ -41,7 +41,7 @@ angular.module('users').controller('AuthenticationController', [
       $http.post('/api/auth/signup', $scope.credentials).success(function (response) {
         // If successful we assign the response to the global user model
         Authentication.user = response;
-        Notification.loadNotifs();
+        // Notifications.loadNotifs();
         // And redirect to the previous or home page
         $state.go($state.previous.state.name || 'home', $state.previous.params);
       }).error(function (response) {
@@ -58,7 +58,7 @@ angular.module('users').controller('AuthenticationController', [
       $http.post('/api/auth/signin', $scope.credentials).success(function (response) {
         // If successful we assign the response to the global user model
         Authentication.user = response;
-        Notification.loadNotifs();
+        // Notifications.loadNotifs();
         // And redirect to the previous or home page
         $state.go($state.previous.state.name || 'home', $state.previous.params);
       }).error(function (response) {

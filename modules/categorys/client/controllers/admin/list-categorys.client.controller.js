@@ -75,7 +75,7 @@
           return item.trim();
         });
         lines.forEach(function (element) {
-          if (element === '') continue;
+          if (element === '') return;
           var ctgrs = element.split(',').map(function (item) {
             return item.trim();
           });

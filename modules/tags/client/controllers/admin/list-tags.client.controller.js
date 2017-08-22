@@ -70,8 +70,8 @@
           }
         }
         Promise.all(promise)
-          .then(_ctgrs => {
-            _.union(vm.categorys, _ctgrs);
+          .then(_tags => {
+            vm.tags = _.union(vm.tags, _tags);
           })
           .catch(err => {
             alert(err.message);

@@ -12,7 +12,6 @@ angular.module('core').controller('WebAppController', [
   function ($rootScope, $scope, Authentication, Notification, Constants, Storages, Socket, Activitys) {
     // User info
     $scope.Authentication = Authentication;
-    init();
     $scope.page_name = 'Polls';
     $scope.page_title = ($scope.notifCnt > 0) ? '(' + $scope.notifCnt + ')' : '' + $scope.page_name;
 

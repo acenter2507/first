@@ -97,7 +97,7 @@ module.exports = function (io, socket) {
   socket.on('poll_vote', req => {
     io.sockets.in(req.pollId).emit('poll_vote');
     io.sockets.emit('activity', {
-      poll: req.pollId,
+      poll: req.poll,
       user: req.from,
       displayName: req.displayName,
       action: 'voted in',
@@ -133,7 +133,7 @@ module.exports = function (io, socket) {
       return;
     }
     io.sockets.emit('activity', {
-      poll: req.pollId,
+      poll: req.poll,
       user: req.from,
       displayName: req.displayName,
       action: 'commented in',

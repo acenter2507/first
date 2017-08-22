@@ -8,8 +8,6 @@ function Activitys() {
   svc.list = [];
 
   svc.add = function (activity) {
-    var time = moment().format();
-    activity.time = time;
     svc.list.push(activity);
   };
   return svc;

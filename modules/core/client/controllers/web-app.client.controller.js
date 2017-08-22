@@ -40,6 +40,7 @@ angular.module('core').controller('WebAppController', [
         Notifications.loadNotifs();
       });
       Socket.on('activity', res => {
+        res.time = moment().format();
         $scope.Activitys.add(res);
         Storages.set_session(Constants.storages.activitys, JSON.stringify($scope.Activitys.list));
       });

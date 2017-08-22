@@ -76,13 +76,12 @@
           var ctgrs = element.split(',').map(function (item) {
             return item.trim();
           });
-          rs_categorys = new CategorysService({ name: ctgrs[0], icon: ctgrs[1], color: ctgrs[0] });
+          rs_categorys = new CategorysService({ name: ctgrs[0], icon: ctgrs[1], color: ctgrs[2] });
           promise.push(rs_categorys.$save());
         });
         Promise.all(promise)
           .then(_ctgrs => {
             vm.categorys = _.union(vm.categorys, _ctgrs);
-            $scope.$digest();
           })
           .catch(err => {
             alert(err.message);

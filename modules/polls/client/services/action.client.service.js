@@ -184,6 +184,7 @@
           if (isNew) {
             if (res.isPublic) {
               Socket.emit('poll_create', res);
+              console.log(res);
             }
           } else {
             Socket.emit('poll_update', { pollId: res._id });

@@ -75,7 +75,7 @@
           return item.trim();
         });
         lines.forEach(function (element) {
-          var ctgrs = element.split('\n').map(function (item) {
+          var ctgrs = element.split(',').map(function (item) {
             return item.trim();
           });
           rs_categorys = new CategorysService({ name: ctgrs[0], icon: ctgrs[1], color: ctgrs[0] });

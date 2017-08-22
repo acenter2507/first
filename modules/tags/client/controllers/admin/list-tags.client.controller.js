@@ -63,10 +63,12 @@
           return item.trim().toLowerCase();
         });
         for (var line = 0; line < lines.length; line++) {
-          rs_tag = new TagsService({ name: lines[line] });
-          rs_tag.$save(res => {
-            vm.tags.push(res);
-          });
+          if (lines[line] !== '') {
+            rs_tag = new TagsService({ name: lines[line] });
+            rs_tag.$save(res => {
+              vm.tags.push(res);
+            });
+          }
         }
 
       };
@@ -76,23 +78,6 @@
       angular.element('#importFile').click();
     };
 
-    // function readFile = ele => {
-    //   var file = ele.files[0];
-    //   var reader = new FileReader();
-    //   reader.onload = function (progressEvent) {
-    //     // By lines
-    //     var rs_tag;
-    //     var lines = this.result.split('\n');
-    //     for (var line = 0; line < lines.length; line++) {
-    //       rs_tag = new TagsService({ name: line.trim().toLowerCase() });
-    //       rs_tag.$save(res => {
-    //         vm.tags.push(res);
-    //       });
-    //     }
-
-    //   };
-    //   reader.readAsText(file);
-    // };
     $scope.remove = tag => {
       if ($window.confirm('Are you sure you want to delete?')) {
         vm.tags = _.without(vm.tags, tag);

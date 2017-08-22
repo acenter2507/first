@@ -38,6 +38,7 @@ angular.module('core').controller('WebAppController', [
         Notification.loadNotifs();
       });
       Socket.on('activity', res => {
+        console.log('Has activity');
         Activitys.add(res);
       });
       $scope.$on('$destroy', function () {

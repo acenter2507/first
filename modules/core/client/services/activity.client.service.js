@@ -6,8 +6,7 @@ Activitys.$inject = ['Socket'];
 function Activitys(Socket) {
   this.list = [];
   this.add = function (activity) {
-    var time = moment(new Date()).format();
-    console.log(time);
+    var time = new Date().toString();
     activity.time = time;
     this.list.push(activity);
   };

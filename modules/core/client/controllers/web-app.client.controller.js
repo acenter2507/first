@@ -50,7 +50,9 @@ angular.module('core').controller('WebAppController', [
     }
     function initActivitys() {
       if (Storages.has_session(Constants.storages.activitys)) {
-        $scope.Activitys.add(JSON.parse(Storages.get_session(Constants.storages.activitys, JSON.stringify([]))));
+        var activitys = JSON.parse(Storages.get_session(Constants.storages.activitys, JSON.stringify([])));
+        $scope.Activitys.add(activitys);
+        console.log(activitys);
       }
     }
   }

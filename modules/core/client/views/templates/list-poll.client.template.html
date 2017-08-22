@@ -19,7 +19,7 @@
     <!-- Menu action -->
     <span class="pull-right">
       <md-menu md-offset="-12 20" md-position-mode="target-right target">
-        <a class="undecorated-link span-link" ng-click="$mdMenu.open($mdMenu)" aria-label="Open menu"><i class="fa fa-angle-down"></i></a>
+        <a class="undecorated-link span-link" ng-click="$mdMenu.open($event)" aria-label="Open menu"><i class="fa fa-angle-down"></i></a>
         <md-menu-content>
           <ul class="menu-list">
             <li><a ui-sref="polls.view({ pollId: poll.slug })"><i class="fa fa-eye"></i> View</a></li>

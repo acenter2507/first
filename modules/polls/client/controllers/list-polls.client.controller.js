@@ -252,8 +252,6 @@
         template: 'modules/polls/client/views/quick-poll.client.view.html',
         controller: 'QuickPollController',
         controllerAs: 'ctrl',
-        width: '90%',
-        height: '90%',
         appendClassName: 'images-upload-dialog'
       });
       q_quick_poll.closePromise.then(function (result) {

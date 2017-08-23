@@ -69,10 +69,9 @@
     };
     ctrl.add = () => {
       var color = randomColor();
-      console.log(color);
-      // ctrl.poll.opts.push({
-      //   color: color
-      // });
+      ctrl.poll.opts.push({
+        color: color
+      });
     };
 
     function randomColor() {
@@ -82,9 +81,7 @@
       var color, index;
       do {
         index = getRandomArbitrary(0, length);
-        console.log(index);
         color = Constants.colors[index];
-        console.log(color);
       } while (_.contains(currentColors, color));
       return color;
     }

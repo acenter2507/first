@@ -432,13 +432,14 @@ div.materialpicker-white.selected {
 .span-link {
   color: #999;
 }
+.md-open-menu-container {
+  z-index: 10001 !important; }
 md-menu-content {
   max-height: 400px !important;
   min-width: 160px;
   overflow-y: hidden !important;
   z-index: 10001 !important;
-  padding: 8px 10px !important;
-}
+  padding: 8px 10px !important; }
 
 .btn-poll-color {
   font-size: 1.1em;

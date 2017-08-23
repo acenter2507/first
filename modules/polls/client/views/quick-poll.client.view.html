@@ -2,8 +2,7 @@
   <div class="card-header">
     <a class="undecorated-link" ng-click="ctrl.save(ctrl.form.pollForm.$valid)">Post</a>
     <a class="undecorated-link mg10l" ng-click="ctrl.discard()">Discard</a>
-    <!--<md-menu md-offset="10 30">-->
-    <md-menu>
+    <md-menu md-offset="10 30">
       <a class="undecorated-link card-link" ng-click="$mdMenu.open($event)"><i class="fa fa-lock"></i> Poll's options</a>
       <md-menu-content>
         <ul class="menu-list">
@@ -29,7 +28,7 @@
   <hr class="mgn">
   <div class="card-body mgnb">
     <form name="ctrl.form.pollForm" ng-submit="ctrl.save(ctrl.form.pollForm.$valid)" novalidate autocomplete="off">
-      <div class="form-group" show-errors>
+      <div class="form-group mg6b" show-errors>
         <select name="category" class="form-control input-sm" ng-model="ctrl.poll.category"
           required>
           <option ng-repeat="ctgr in ctrl.categorys" value="{{ctgr._id}}">{{ctgr.name}}</option>
@@ -39,20 +38,20 @@
         </div>
       </div>
       <!-- Title -->
-      <div class="form-group" show-errors>
+      <div class="form-group mg6b" show-errors>
         <input type="text" class="form-control input-sm" name="title" ng-model="ctrl.poll.title" placeholder="Tilte..." required/>
         <div ng-messages="ctrl.form.pollForm.title.$error" role="alert">
           <p class="help-block error-text font-sm" ng-message="required">You must type somthing for title.</p>
         </div>
       </div>
       <!-- Body -->
-      <div class="form-group" show-errors>
+      <div class="form-group mg6b" show-errors>
         <textarea name="body" class="msd-elastic: \n; form-control" data-ng-model="ctrl.poll.body" placeholder="Ask something..." required></textarea>
         <div ng-messages="ctrl.form.pollForm.body.$error" role="alert">
           <p class="help-block error-text" ng-message="required">You must ask somthing.</p>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group mg6b">
         <table class="w100p">
           <tr ng-repeat="opt in ctrl.poll.opts track by $index">
             <td class="text-left w20">
@@ -75,14 +74,18 @@
           </tr>
         </table>
       </div>
-      <div class="form-group">
+      <div class="form-group mg6b">
         <a ng-click="ctrl.add()" class="undecorated-link pull-right font-lg"><i class="icon-plus"></i></a>
         <div class="clearfix"></div>
       </div>
+      <div class="form-group mg6b"><span ng-bind="ctrl.message">asd asdf awk wkejaw aflkawl</span></div>
     </form>
   </div>
   <hr class="mgn">
   <div class="card-footer">
-    <a class="undecorated-link pull-right" ng-click="ctrl.write_as_post()">Write more</a>
+    <a class="undecorated-link pull-right" ng-click="ctrl.write_as_post()">
+      <i class="fa fa-pencil-square-o"></i> Write more
+      <md-tooltip class="d-sm-down-none" md-direction="bottom">Create poll as a post</md-tooltip>
+    </a>
   </div>
 </div>

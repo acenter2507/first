@@ -8,7 +8,7 @@
   <div class="card-body">
     <form name="ctrl.form.pollForm" ng-submit="ctrl.save(ctrl.form.pollForm.$valid)" novalidate autocomplete="off">
       <div class="form-group" show-errors>
-        <select name="category" class="form-control input-sm" ng-model="ctrl.poll.category" ng-init="ctrl.poll.category = Categorys.list[0]._id"
+        <select name="category" class="form-control input-sm" ng-model="ctrl.poll.category"
           required>
           <option ng-repeat="ctgr in Categorys.list" value="{{ctgr._id}}">{{ctgr.name}}</option>
         </select>

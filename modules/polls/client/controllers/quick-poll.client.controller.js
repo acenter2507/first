@@ -26,9 +26,9 @@
     ctrl.form = {};
     ctrl.poll = {
       opts: [{
-        color: randomColor()
+        color: Constants.colors[15]
       }, {
-        color: randomColor()
+        color: Constants.colors[40]
       }],
       category: ctrl.categorys[0]
     };

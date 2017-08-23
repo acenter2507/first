@@ -8,7 +8,7 @@ function Categorys(CategorysService) {
   svc.list = [];
 
   svc.load = function () {
-    CategorysService.query.$promise
+    CategorysService.query().$promise
       .then(_ctgrs => {
         svc.list = _ctgrs;
       });

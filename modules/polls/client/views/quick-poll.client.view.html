@@ -7,6 +7,9 @@
       <a class="undecorated-link card-link" ng-click="$mdMenu.open($event)"><i class="fa fa-cog"></i> Setting</a>
       <md-menu-content>
         <ul class="menu-list">
+          <li class="pdn text-right">
+            <a class="undecorated-link pull-right" ng-click="$mdMenu.close()"><i class="fa fa-times"></i></a>
+          </li>
           <li>
             <md-checkbox class="md-primary" ng-model="ctrl.poll.isPublic">Public</md-checkbox>
           </li>
@@ -18,9 +21,6 @@
           </li>
           <li>
             <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_add">Allow members suggest option</md-checkbox>
-          </li>
-          <li class="pdn">
-            <a class="undecorated-link pull-right" ng-click="$mdMenu.close()"><i class="fa fa-times"></i></a>
           </li>
         </ul>
       </md-menu-content>
@@ -61,6 +61,8 @@
                   <i class="fa fa-square" ng-style="{'color': opt.color }"></i>
                 </a>
                 <md-menu-content>
+                  <a class="undecorated-link pull-right" ng-click="$mdMenu.close()"><i class="fa fa-times"></i></a>
+                  <div class="clearfix"></div>
                   <material-picker format="'hex'" ng-model="opt.color" size="12"></material-picker>
                 </md-menu-content>
               </md-menu>

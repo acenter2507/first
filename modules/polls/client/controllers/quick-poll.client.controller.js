@@ -74,6 +74,7 @@
       });
     };
     ctrl.write_as_post = () => {
+      $scope.closeThisDialog();
       $state.go('polls.create');
     };
     ctrl.discard = () => {

@@ -34,7 +34,8 @@
 
     $scope.remove = () => {
       if ($window.confirm('Are you sure you want to delete?')) {
-        vm.category.$remove($state.go('admin.categorys.list'));
+        $scope.Categorys.remove(vm.category);
+        $state.go('admin.categorys.list');
       }
     };
     $scope.discard = () => {

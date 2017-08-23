@@ -248,7 +248,7 @@
       }
     });
     $scope.q_quick_poll = () => {
-      var q_quick_poll = ngDialog.open({
+      var q_quick_poll = dialog.open({
         template: 'modules/polls/client/views/quick-poll.client.view.html',
         controller: 'QuickPollController',
         controllerAs: 'ctrl',

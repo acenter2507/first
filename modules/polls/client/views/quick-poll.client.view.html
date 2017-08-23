@@ -39,7 +39,7 @@
       </div>
       <!-- Title -->
       <div class="form-group mg6b" show-errors>
-        <input focus-me type="text" class="form-control input-sm" name="title" ng-model="ctrl.poll.title" placeholder="Tilte..." required/>
+        <input focus-me="true" type="text" class="form-control input-sm" name="title" ng-model="ctrl.poll.title" placeholder="Tilte..." required/>
         <div ng-messages="ctrl.form.pollForm.title.$error" role="alert">
           <p class="help-block error-text font-sm" ng-message="required">You must type somthing for title.</p>
         </div>

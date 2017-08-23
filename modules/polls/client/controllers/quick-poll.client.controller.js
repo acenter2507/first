@@ -10,7 +10,6 @@
     '$state',
     'PollsService',
     'Action',
-    'Notifications',
     'Constants'
   ];
 
@@ -19,7 +18,6 @@
     $state,
     PollsService,
     Action,
-    Notifications,
     Constants
   ) {
     var ctrl = this;
@@ -30,7 +28,7 @@
       }, {
         color: Constants.colors[40]
       }],
-      category: ctrl.categorys[0]
+      category: $scope.Categorys.list[0]
     };
 
     ctrl.save = isValid => {

@@ -73,6 +73,12 @@
         color: color
       });
     };
+    ctrl.write_as_post = () => {
+      $state.go('polls.create');
+    };
+    ctrl.discard = () => {
+      $scope.closeThisDialog();
+    };
 
     function randomColor() {
       var length = Constants.colors.length;

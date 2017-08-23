@@ -11,7 +11,7 @@ function Categorys(CategorysService) {
     CategorysService.query.$promise
       .then(_ctgrs => {
         svc.list = _ctgrs;
-      })
+      });
   };
   svc.remove = ctgr => {
     svc.list = _.without(svc.list, ctgr);

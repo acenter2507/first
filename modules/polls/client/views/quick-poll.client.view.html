@@ -61,7 +61,9 @@
                   <i class="fa fa-square" ng-style="{'color': opt.color }"></i>
                 </a>
                 <md-menu-content>
-                  <a class="undecorated-link pull-right" ng-click="$mdMenu.close()"><i class="fa fa-times"></i></a>
+                  <p class="text-right">
+                    <a class="undecorated-link pull-right" ng-click="$mdMenu.close()"><i class="fa fa-times"></i></a>
+                  </p>
                   <div class="clearfix"></div>
                   <material-picker format="'hex'" ng-model="opt.color" size="12"></material-picker>
                 </md-menu-content>

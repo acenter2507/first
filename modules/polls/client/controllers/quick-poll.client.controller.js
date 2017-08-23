@@ -69,9 +69,10 @@
     };
     ctrl.add = () => {
       var color = randomColor();
-      ctrl.poll.opts.push({
-        color: color
-      });
+      console.log(color);
+      // ctrl.poll.opts.push({
+      //   color: color
+      // });
     };
 
     function randomColor() {

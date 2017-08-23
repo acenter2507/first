@@ -32,7 +32,7 @@
       }, {
         color: Constants.colors[40]
       }],
-      category: ctrl.categorys[0]
+      category: ctrl.categorys[0]._id
     };
 
     ctrl.save = isValid => {

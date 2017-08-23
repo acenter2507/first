@@ -43,7 +43,7 @@
                 </md-menu-content>
               </md-menu>
             </td>
-            <td><input type="text" class="form-control input-sm" ng-model="opt.title"></td>
+            <td><input type="text" class="form-control input-sm" ng-model="opt.title" placeholder="Type an option..."></td>
           </tr>
         </table>
       </div>
@@ -54,10 +54,10 @@
     </form>
   </div>
   <div class="card-footer">
-    <md-menu md-offset="10 30">
-      <a class="undecorated-link card-link" ng-click="$mdMenu.open($event)"><i class="fa fa-lock"></i> Poll's options</a>
+    <md-menu>
+      <a class="undecorated-link card-link" ng-mouseenter="$mdMenu.open($event)"><i class="fa fa-lock"></i> Poll's options</a>
       <md-menu-content>
-        <ul class="dropdown-menu">
+        <ul class="menu-list">
           <li>
             <md-checkbox class="md-primary" ng-model="ctrl.poll.isPublic">Public</md-checkbox>
           </li>

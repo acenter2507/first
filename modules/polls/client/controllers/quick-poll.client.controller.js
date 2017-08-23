@@ -68,8 +68,9 @@
       // }
     };
     ctrl.add = () => {
+      var color = randomColor();
       ctrl.poll.opts.push({
-        color: randomColor()
+        color: color
       });
     };
 

@@ -10,7 +10,8 @@
     '$state',
     'PollsService',
     'Action',
-    'Notifications'
+    'Notifications',
+    'Constants'
   ];
 
   function QuickPollController(
@@ -18,12 +19,17 @@
     $state,
     PollsService,
     Action,
-    Notifications
+    Notifications,
+    Constants
   ) {
     var ctrl = this;
     ctrl.form = {};
     ctrl.poll = {
-      opts: [{}, {}],
+      opts: [{
+        color: randomColor()
+      }, {
+        color: randomColor()
+      }],
       category: ctrl.categorys[0]
     };
 
@@ -59,6 +65,25 @@
       //     });
       // }
     };
+    ctrl.add = () => {
+      ctrl.poll.opts.push({
+        color: randomColor()
+      });
+    };
+
+    function randomColor() {
+      var length = Constants.colors.length;
+      var currentColors = _.pluck(ctrl.poll.opts, 'color');
+      var color, index;
+      do {
+        var index = getRandomArbitrary(0, length);
+        color = Constants.colors[index];
+      } while (!_.contains(currentColors, color));
+      return color;
+    }
+    function getRandomArbitrary(min, max) {
+      return Math.random() * (max - min) + min;
+    }
 
   }
 })();

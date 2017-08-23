@@ -8,7 +8,7 @@
   <div class="card-body">
     <form name="ctrl.form.pollForm" ng-submit="ctrl.save(ctrl.form.pollForm.$valid)" novalidate autocomplete="off">
       <div class="form-group" show-errors>
-        <select name="category" class="form-control input-sm" ng-model="ctrl.poll.category" ng-init="ctrl.poll.category = ctrl.categorys[0]._id"
+        <select name="category" class="form-control input-sm" ng-model="ctrl.poll.category" ng-init="ctrl.poll.category = Categorys.list[0]._id"
           required>
           <option ng-repeat="ctgr in Categorys.list" value="{{ctgr._id}}">{{ctgr.name}}</option>
         </select>
@@ -25,15 +25,31 @@
       </div>
       <!-- Body -->
       <div class="form-group" show-errors>
-        <textarea class="msd-elastic: \n; form-control"
-          data-ng-model="ctrl.poll.body" placeholder="Ask something..." required></textarea>
+        <textarea class="msd-elastic: \n; form-control" data-ng-model="ctrl.poll.body" placeholder="Ask something..." required></textarea>
         <div ng-messages="ctrl.form.pollForm.body.$error" role="alert">
           <p class="help-block error-text" ng-message="required">You must ask somthing.</p>
         </div>
       </div>
       <div class="form-group">
         <table class="table table-bordered">
+          <tr ng-repeat="opt in ctrl.poll.opts track by $index">
+            <td class="text-center w50">
+              <md-menu md-offset="0 30">
+                <a ng-click="$mdMenu.open($event)" class="undecorated-link" aria-label="Color" href="#">
+                  <i class="fa fa-square" ng-style="{'color': opt.color }"></i>
+                </a>
+                <md-menu-content>
+                  <material-picker format="'hex'" ng-model="opt.color" size="12"></material-picker>
+                </md-menu-content>
+              </md-menu>
+            </td>
+            <td><input type="text" class="form-control input-sm" ng-model="opt.title"></td>
+          </tr>
         </table>
+      </div>
+      <div class="form-group">
+        <a ng-click="ctrl.add()" class="undecorated-link pull-right">Add option</a>
+        <div class="clearfix"></div>
       </div>
     </form>
   </div>

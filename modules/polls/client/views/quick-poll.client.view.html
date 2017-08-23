@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="form-group">
-        <table>
+        <table class="w100p">
           <tr ng-repeat="opt in ctrl.poll.opts track by $index">
             <td class="text-center w30">
               <md-menu md-offset="0 30">
@@ -44,9 +44,7 @@
               </md-menu>
             </td>
             <td><input type="text" class="form-control input-sm" ng-model="opt.title" placeholder="Type an option..."></td>
-            <td>
-              <a ng-click="ctrl.remove(opt)" class="undecorated-link"><i class="fa fa-minus-square-o"></i></a>
-            </td>
+            <td class="text-center w30"><a ng-click="ctrl.remove(opt)" class="undecorated-link"><i class="fa fa-minus-square-o"></i></a></td>
           </tr>
         </table>
       </div>

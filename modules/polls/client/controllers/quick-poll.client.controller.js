@@ -73,6 +73,9 @@
         color: color
       });
     };
+    ctrl.remove = opt => {
+      ctrl.poll.opts = _.without(ctrl.poll.opts, opt);
+    };
     ctrl.write_as_post = () => {
       $scope.closeThisDialog();
       $state.go('polls.create');

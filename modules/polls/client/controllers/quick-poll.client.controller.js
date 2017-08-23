@@ -92,7 +92,7 @@
     function validOptions() {
       for (var index = 0; index < ctrl.poll.opts.length; index++) {
         var element = ctrl.poll.opts[index];
-        if (element.title === '' || element.color === '') {
+        if (!element.title || element.title === '' || element.color === '') {
           return false;
         }
       }

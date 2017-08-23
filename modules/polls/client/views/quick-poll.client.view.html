@@ -3,10 +3,13 @@
     <a class="undecorated-link" ng-click="ctrl.save(ctrl.form.pollForm.$valid)">Post</a>
     <a class="undecorated-link mg10l" ng-click="ctrl.discard()">Discard</a>
     <a class="undecorated-link mg10l" ng-click="ctrl.write_as_post()">Write more</a>
-    <md-menu>
+    <md-menu md-offset="10 30">
       <a class="undecorated-link card-link" ng-click="$mdMenu.open($event)"><i class="fa fa-cog"></i> Setting</a>
       <md-menu-content>
         <ul class="menu-list">
+          <li class="pdn">
+            <a class="undecorated-link card-link" ng-click="$mdMenu.close()"><i class="fa fa-times"></i></a>
+          </li>
           <li>
             <md-checkbox class="md-primary" ng-model="ctrl.poll.isPublic">Public</md-checkbox>
           </li>
@@ -68,7 +71,7 @@
         </table>
       </div>
       <div class="form-group">
-        <a ng-click="ctrl.add()" class="undecorated-link pull-right font-lg">&#43;</a>
+        <a ng-click="ctrl.add()" class="undecorated-link pull-right font-lg"><i class="icon-plus"></i></a>
         <div class="clearfix"></div>
       </div>
     </form>

@@ -58,7 +58,7 @@
           <tr ng-repeat="opt in ctrl.poll.opts track by $index">
             <td class="text-left w20">
                <!--md-offset="0 30"-->
-              <md-menu md-offset="0 100"> 
+              <md-menu md-position-mode="target-left target" md-offset="0 -100"> 
                 <a ng-click="$mdMenu.open($event)" class="undecorated-link" aria-label="Color" href="#">
                   <i class="fa fa-square" ng-style="{'color': opt.color }"></i>
                 </a>

@@ -14,6 +14,7 @@ function Categorys(CategorysService) {
       });
   };
   svc.add = ctgr => {
+    ctgr.count = 0;
     svc.list.push(ctgr);
   };
   svc.remove = ctgr => {

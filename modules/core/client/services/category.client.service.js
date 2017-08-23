@@ -15,7 +15,8 @@ function Categorys(CategorysService) {
   };
   svc.remove = ctgr => {
     svc.list = _.without(svc.list, ctgr);
-    ctgr.$remove();
+    var rs = new CategorysService({ _id: ctgr._id });
+    rs.$remove();
   };
   return svc;
 }

@@ -83,6 +83,7 @@
       do {
         index = getRandomArbitrary(0, length);
         color = Constants.colors[index];
+        console.log(color);
       } while (_.contains(currentColors, color));
       return color;
     }

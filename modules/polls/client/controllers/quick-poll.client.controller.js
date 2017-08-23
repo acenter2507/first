@@ -24,7 +24,7 @@
   ) {
     var ctrl = this;
     ctrl.categorys = Categorys.list;
-
+    ctrl.message = '';
     ctrl.form = {};
     ctrl.poll = {
       opts: [{
@@ -44,7 +44,7 @@
         ctrl.message = 'Please check your options, has invalid info';
         return false;
       }
-      
+      console.log(ctrl.poll);
 
       // if (!ctrl.poll.isPublic) {
       //   $scope.message_title = 'Save poll!';

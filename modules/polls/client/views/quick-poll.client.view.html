@@ -10,7 +10,7 @@
       <div class="form-group" show-errors>
         <select name="category" class="form-control input-sm" ng-model="ctrl.poll.category"
           required>
-          <option ng-repeat="ctgr in Categorys.list" value="{{ctgr._id}}">{{ctgr.name}}</option>
+          <option ng-repeat="ctgr in ctrl.categorys" value="{{ctgr._id}}">{{ctgr.name}}</option>
         </select>
         <div ng-messages="ctrl.form.pollForm.category.$error" role="alert">
           <p class="help-block error-text font-sm" ng-message="required">Category is required.</p>

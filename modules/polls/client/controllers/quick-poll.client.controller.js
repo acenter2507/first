@@ -9,6 +9,7 @@
     '$scope',
     '$state',
     'PollsService',
+    'Categorys',
     'Action',
     'Constants'
   ];
@@ -17,10 +18,13 @@
     $scope,
     $state,
     PollsService,
+    Categorys,
     Action,
     Constants
   ) {
     var ctrl = this;
+    ctrl.categorys = Categorys.list;
+
     ctrl.form = {};
     ctrl.poll = {
       opts: [{
@@ -28,7 +32,7 @@
       }, {
         color: Constants.colors[40]
       }],
-      category: $scope.Categorys.list[0]
+      category: ctrl.categorys[0]
     };
 
     ctrl.save = isValid => {

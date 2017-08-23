@@ -70,11 +70,11 @@
         $state.go('admin.categorys.view', {
           categoryId: res._id
         });
+        $scope.Categorys.add(res);
       }
 
       function errorCallback(res) {
         toast.error(res.data.message, 'Error!');
-        console.log(res);
       }
     };
   }

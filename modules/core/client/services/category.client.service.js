@@ -13,6 +13,9 @@ function Categorys(CategorysService) {
         svc.list = _ctgrs;
       });
   };
+  svc.add = ctgr => {
+    svc.list.push(ctgr);
+  };
   svc.remove = ctgr => {
     svc.list = _.without(svc.list, ctgr);
     var rs = new CategorysService({ _id: ctgr._id });

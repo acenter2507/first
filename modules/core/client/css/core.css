@@ -741,6 +741,7 @@ a:hover .header-profile-image {
     background-color: #eeeeee;
     color: #555; }
 .form-control {
+  box-shadow: unset;
   border-radius: 0 !important; }
 .quick-search {
   position: relative;

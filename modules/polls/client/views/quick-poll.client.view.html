@@ -33,7 +33,7 @@
       <div class="form-group">
         <table class="w100p">
           <tr ng-repeat="opt in ctrl.poll.opts track by $index">
-            <td class="text-center w30">
+            <td class="text-left w30">
               <md-menu md-offset="0 30">
                 <a ng-click="$mdMenu.open($event)" class="undecorated-link" aria-label="Color" href="#">
                   <i class="fa fa-square" ng-style="{'color': opt.color }"></i>
@@ -44,12 +44,12 @@
               </md-menu>
             </td>
             <td><input type="text" class="form-control input-sm" ng-model="opt.title" placeholder="Type an option..."></td>
-            <td class="text-center w30"><a ng-click="ctrl.remove(opt)" class="undecorated-link"><i class="fa fa-minus-square-o"></i></a></td>
+            <td class="text-right w30"><a ng-click="ctrl.remove(opt)" class="undecorated-link"><i class="fa fa-minus-square-o"></i></a></td>
           </tr>
         </table>
       </div>
       <div class="form-group">
-        <a ng-click="ctrl.add()" class="undecorated-link pull-right">Add option</a>
+        <a ng-click="ctrl.add()" class="undecorated-link pull-right"><i class="fa fa-minus-square-o fa-lg"></a>
         <div class="clearfix"></div>
       </div>
     </form>

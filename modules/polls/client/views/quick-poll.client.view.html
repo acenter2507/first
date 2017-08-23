@@ -3,7 +3,8 @@
     <a class="undecorated-link" ng-click="ctrl.save(ctrl.form.pollForm.$valid)">Post</a>
     <a class="undecorated-link mg10l" ng-click="ctrl.discard()">Discard</a>
     <a class="undecorated-link mg10l" ng-click="ctrl.write_as_post()">Write more</a>
-    <md-menu md-offset="10 30">
+    <!--<md-menu md-offset="10 30">-->
+    <md-menu>
       <a class="undecorated-link card-link" ng-click="$mdMenu.open($event)"><i class="fa fa-cog"></i> Setting</a>
       <md-menu-content>
         <ul class="menu-list">
@@ -56,7 +57,8 @@
         <table class="w100p">
           <tr ng-repeat="opt in ctrl.poll.opts track by $index">
             <td class="text-left w20">
-              <md-menu md-offset="0 30">
+               <!--md-offset="0 30"-->
+              <md-menu> 
                 <a ng-click="$mdMenu.open($event)" class="undecorated-link" aria-label="Color" href="#">
                   <i class="fa fa-square" ng-style="{'color': opt.color }"></i>
                 </a>

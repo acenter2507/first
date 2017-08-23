@@ -82,7 +82,7 @@
       if (vm.stopped || vm.busy) return;
       vm.busy = true;
       if (Storages.has_session(Constants.storages.polls)) {
-        
+
       }
       Action.get_polls(vm.page)
         .then(res => {
@@ -248,7 +248,17 @@
       }
     });
     $scope.q_quick_poll = () => {
-      console.log('Quick');
+      var q_quick_poll = ngDialog.open({
+        template: 'modules/polls/client/views/quick-poll.client.view.html',
+        controller: 'QuickPollController',
+        controllerAs: 'ctrl',
+        width: '90%',
+        height: '90%',
+        appendClassName: 'images-upload-dialog'
+      });
+      q_quick_poll.closePromise.then(function (result) {
+        console.log(result);
+      });
     };
     $scope.q_post_poll = () => {
       $state.go('polls.create');

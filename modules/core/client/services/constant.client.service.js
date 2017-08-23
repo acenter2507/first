@@ -11,6 +11,9 @@ angular.module('core').service('Constants', [
       public_search_condition: '192783hf9283492834',
       preferences: '9218391509124jkd8324',
     };
+    this.colors = [
+      
+    ];
     this.defaultProfileImageURL = 'modules/users/client/img/profile/default.png';
     return this;
   }

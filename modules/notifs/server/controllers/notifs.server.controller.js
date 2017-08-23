@@ -157,8 +157,8 @@ exports.findNotifs = function (req, res) {
   Notif.find({ to: req.user._id })
     .sort('-created')
     .populate('poll', 'title slug')
-    .populate('from', 'displayName profileImageURL')
-    .populate('to', 'displayName profileImageURL')
+    .populate('from', 'displayName profileImageURL slug')
+    .populate('to', 'displayName profileImageURL slug')
     .skip(limit * page).limit(limit)
     .exec(function (err, notifs) {
       if (err) {

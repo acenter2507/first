@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card-header">
+    <a class="undecorated-link" ng-click="ctrl.save(ctrl.form.pollForm.$valid)">Post</a>
+    <a class="undecorated-link mg10l" ng-click="ctrl.discard()">Discard</a>
+    <a class="undecorated-link mg10l" ng-click="ctrl.write_as_post()">Write more</a>
+  </div>
+  <hr class="mgn">
+  <div class="card-body">
+    <form name="ctrl.form.pollForm" ng-submit="ctrl.save(ctrl.form.pollForm.$valid)" novalidate autocomplete="off">
+    </form>
+  </div>
+  <div class="card-footer">
+    <md-menu md-offset="10 30">
+      <a class="undecorated-link card-link" ng-click="$mdMenu.open($event)"><i class="fa fa-lock"></i> Poll's options</a>
+      <md-menu-content>
+        <ul class="dropdown-menu">
+          <li>
+            <md-checkbox class="md-primary" ng-model="ctrl.poll.isPublic">Public</md-checkbox>
+          </li>
+          <li>
+            <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_guest">Allow guest vote</md-checkbox>
+          </li>
+          <li>
+            <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_multiple">Allow multiple vote</md-checkbox>
+          </li>
+          <li>
+            <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_add">Allow members suggest option</md-checkbox>
+          </li>
+        </ul>
+      </md-menu-content>
+    </md-menu>
+  </div>
+</div>

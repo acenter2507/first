@@ -15,7 +15,6 @@
     'PollusersService',
     'ReportsService',
     'BookmarksService',
-    'CategorysService',
     'TagsService',
     'Userreport',
     'ViewsService',
@@ -35,7 +34,6 @@
     Follows,
     Reports,
     Bookmarks,
-    Categorys,
     Tags,
     Userreport,
     Views,
@@ -66,19 +64,6 @@
         $http.get('/api/findPopulars/' + page, {
           ignoreLoadingBar: true
         })
-          .then(res => {
-            return resolve(res);
-          }, err => {
-            return reject(err);
-          });
-      });
-    };
-    /**
-     * Lấy danh sách category (Kèm count poll)
-     */
-    this.get_categorys = () => {
-      return new Promise((resolve, reject) => {
-        Categorys.query().$promise
           .then(res => {
             return resolve(res);
           }, err => {

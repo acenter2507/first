@@ -6,7 +6,6 @@ angular.module('polls').controller('PollsSearchController', [
   '$scope',
   '$state',
   'Authentication',
-  'CategorysService',
   'Action',
   '$stateParams',
   'Storages',
@@ -14,9 +13,8 @@ angular.module('polls').controller('PollsSearchController', [
   'toastr',
   'ngDialog',
   'Profile',
-  function ($location, $rootScope, $scope, $state, Authentication, Categorys, Action, $stateParams, Storages, Constants, toast, dialog, Profile) {
+  function ($location, $rootScope, $scope, $state, Authentication, Action, $stateParams, Storages, Constants, toast, dialog, Profile) {
     $scope.form = {};
-    $scope.categorys = Categorys.query();
 
     $scope.condition = {};
     $scope.busy = false;

@@ -78,10 +78,10 @@
       var currentColors = _.pluck(ctrl.poll.opts, 'color');
       console.log(currentColors);
       var color, index;
-      // do {
-      //   index = getRandomArbitrary(0, length);
-      //   color = Constants.colors[index];
-      // } while (!_.contains(currentColors, color));
+      do {
+        index = getRandomArbitrary(0, length);
+        color = Constants.colors[index];
+      } while (_.contains(currentColors, color));
       return color;
     }
     function getRandomArbitrary(min, max) {

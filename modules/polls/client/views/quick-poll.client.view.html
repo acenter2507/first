@@ -2,10 +2,9 @@
   <div class="card-header">
     <a class="undecorated-link" ng-click="ctrl.save(ctrl.form.pollForm.$valid)">Post</a>
     <a class="undecorated-link mg10l" ng-click="ctrl.discard()">Discard</a>
-    <a class="undecorated-link mg10l" ng-click="ctrl.write_as_post()">Write more</a>
     <!--<md-menu md-offset="10 30">-->
     <md-menu>
-      <a class="undecorated-link card-link" ng-click="$mdMenu.open($event)"><i class="fa fa-cog"></i> Setting</a>
+      <a class="undecorated-link card-link" ng-click="$mdMenu.open($event)"><i class="fa fa-lock"></i> Poll's options</a>
       <md-menu-content>
         <ul class="menu-list">
           <li class="pdn text-right">
@@ -28,7 +27,7 @@
     </md-menu>
   </div>
   <hr class="mgn">
-  <div class="card-body">
+  <div class="card-body mgnb">
     <form name="ctrl.form.pollForm" ng-submit="ctrl.save(ctrl.form.pollForm.$valid)" novalidate autocomplete="off">
       <div class="form-group" show-errors>
         <select name="category" class="form-control input-sm" ng-model="ctrl.poll.category"
@@ -81,5 +80,9 @@
         <div class="clearfix"></div>
       </div>
     </form>
+  </div>
+  <hr class="mgn">
+  <div class="card-footer">
+    <a class="undecorated-link pull-right" ng-click="ctrl.write_as_post()">Write more</a>
   </div>
 </div>

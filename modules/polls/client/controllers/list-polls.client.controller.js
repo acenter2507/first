@@ -248,6 +248,10 @@
       }
     });
     $scope.q_quick_poll = () => {
+      if (!$scope.isLogged) {
+        $state.go('authentication.signin');
+        return;
+      }
       var q_quick_poll = dialog.open({
         template: 'modules/polls/client/views/quick-poll.client.view.html',
         controller: 'QuickPollController',

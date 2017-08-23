@@ -7,6 +7,30 @@
   <hr class="mgn">
   <div class="card-body">
     <form name="ctrl.form.pollForm" ng-submit="ctrl.save(ctrl.form.pollForm.$valid)" novalidate autocomplete="off">
+      <div class="form-group" show-errors>
+        <select name="category" class="form-control input-sm" ng-model="ctrl.poll.category" ng-init="ctrl.poll.category = ctrl.categorys[0]._id"
+          required>
+          <option ng-repeat="ctgr in ctrl.categorys" value="{{ctgr._id}}">{{ctgr.name}}</option>
+        </select>
+        <div ng-messages="ctrl.form.pollForm.category.$error" role="alert">
+          <p class="help-block error-text font-sm" ng-message="required">Category is required.</p>
+        </div>
+      </div>
+      <!-- Title -->
+      <div class="form-group" show-errors>
+        <input type="text" class="form-control input-sm" name="title" ng-model="ctrl.poll.title" placeholder="Tilte..." required/>
+        <div ng-messages="ctrl.form.pollForm.title.$error" role="alert">
+          <p class="help-block error-text font-sm" ng-message="required">You must type somthing for title.</p>
+        </div>
+      </div>
+      <!-- Body -->
+      <div class="form-group" show-errors>
+        <textarea class="msd-elastic: \n; form-control"
+          data-ng-model="ctrl.poll.body" placeholder="Ask something..."></textarea>
+        <div ng-messages="ctrl.form.pollForm.body.$error" role="alert">
+          <p class="help-block error-text" ng-message="required">You must ask somthing.</p>
+        </div>
+      </div>
     </form>
   </div>
   <div class="card-footer">

@@ -74,7 +74,7 @@
       var currentColors = _.pluck(ctrl.poll.opts, 'color');
       var color, index;
       do {
-        var index = getRandomArbitrary(0, length);
+        index = getRandomArbitrary(0, length);
         color = Constants.colors[index];
       } while (!_.contains(currentColors, color));
       return color;

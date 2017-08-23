@@ -9,11 +9,13 @@ angular.module('core').controller('WebAppController', [
   'Storages',
   'Socket',
   'Activitys',
-  function ($rootScope, $scope, Authentication, Notifications, Constants, Storages, Socket, Activitys) {
+  'Categorys',
+  function ($rootScope, $scope, Authentication, Notifications, Constants, Storages, Socket, Activitys, Categorys) {
     // User info
     $scope.Authentication = Authentication;
     $scope.Activitys = Activitys;
     $scope.Notifications = Notifications;
+    $scope.Categorys = Categorys;
 
     $scope.page_name = 'Polls';
     $scope.page_title = ($scope.Notifications.notifCnt > 0) ? '(' + $scope.Notifications.notifCnt + ')' + $scope.page_name : '' + $scope.page_name;
@@ -31,6 +33,7 @@ angular.module('core').controller('WebAppController', [
         initActivitys();
         Notifications.loadNotifs();
       }
+      initCategorys();
     }
     function initSocket() {
       if (!Socket.socket) {
@@ -56,6 +59,9 @@ angular.module('core').controller('WebAppController', [
           $scope.Activitys.add(element);
         });
       }
+    }
+    function initCategorys() {
+      Categorys.load();
     }
   }
 ]);

@@ -14,7 +14,6 @@
     'PollsService',
     'OptsService',
     'Socket',
-    'CategorysService',
     'toastr',
     'Action',
     'ngDialog',
@@ -30,7 +29,6 @@
     PollsService,
     Opts,
     Socket,
-    Categorys,
     toast,
     Action,
     dialog,
@@ -40,7 +38,6 @@
 
     analysic_poll();
     ctrl.form = {};
-    ctrl.categorys = Categorys.query();
 
     function init() {
       ctrl.bk_poll = _.clone(ctrl.poll);
@@ -173,11 +170,6 @@
         return true;
       }
       return moment(ctrl.poll.close).isAfter(new moment());
-    };
-    ctrl.isCategorySelected = ctgrId => {
-      if (!ctrl.poll.category) return false;
-      var categoryId = ctrl.poll.category._id || ctrl.poll.category;
-      return (categoryId) ? categoryId.toString() === ctgrId.toString() : false;
     };
     ctrl.discard = () => {
       if (angular.equals(ctrl.poll, ctrl.bk_poll)) {

@@ -123,15 +123,5 @@
         $scope.selectedUser = undefined;
       }
     };
-    get_categorys();
-    function get_categorys() {
-      Action.get_categorys()
-        .then(res => {
-          $scope.categorys = res;
-        })
-        .catch(err => {
-          toast.error(err.message, 'Error!');
-        });
-    }
   }
 })();

@@ -76,14 +76,6 @@
         return resolve(poll);
       });
     }
-    // Tính phần trăm tỉ lệ vote cho opt
-    function calPercen(total, value) {
-      if (total === 0) {
-        return 0;
-      }
-      return Math.floor(value * 100 / total) || 0;
-    }
-
     $scope.poll_filter = poll => {
       if (poll.isPublic) {
         return true;

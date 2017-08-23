@@ -136,7 +136,7 @@
           <small class="card-link"><a class="undecorated-link" ui-sref="categorys.list">View all</a></small>
         </div>
         <ul class="nav nav-list">
-          <li ng-repeat="category in vm.categorys">
+          <li ng-repeat="category in Categorys.list">
             <a class="undecorated-link" ui-sref="categorys.polls({ categoryId: category.slug })">
               <i ng-class="['fa', category.icon]"></i>&nbsp;{{::category.name}}
               <span class="badge-count pull-right" ng-bind="category.count"></span>

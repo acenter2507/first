@@ -1,0 +1,21 @@
+'use strict';
+
+angular.module('core').factory('Categorys', Categorys);
+
+Categorys.$inject = ['CategorysService'];
+function Categorys(CategorysService) {
+  var svc = {};
+  svc.list = [];
+
+  svc.load = function () {
+    CategorysService.query.$promise
+      .then(_ctgrs => {
+        svc.list = _ctgrs;
+      })
+  };
+  svc.remove = ctgr => {
+    svc.list = _.without(svc.list, ctgr);
+    ctgr.$remove();
+  };
+  return svc;
+}

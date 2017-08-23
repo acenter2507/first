@@ -27,12 +27,9 @@
       $state.go('home');
     }
 
-    var promise = CategorysService.query().$promise;
-    promise.then(_categorys => {
-      vm.categorys = _categorys || [];
-      buildPage();
-      initChart();
-    });
+    buildPage();
+    initChart();
+    
     function buildPage() {
       vm.searchKey = '';
       vm.shows = [];
@@ -40,7 +37,7 @@
     }
     vm.search = search;
     function search() {
-      vm.shows = $filter('filter')(vm.categorys, {
+      vm.shows = $filter('filter')($scope.Categorys.list, {
         $: vm.searchKey
       });
     }
@@ -48,16 +45,15 @@
     // Chart
     function initChart() {
       $scope.chart = { options: { responsive: true } };
-      $scope.chart.labels = _.pluck(vm.categorys, 'name');
-      $scope.chart.data = _.pluck(vm.categorys, 'count');
-      $scope.chart.colors = _.pluck(vm.categorys, 'color');
+      $scope.chart.labels = _.pluck($scope.Categorys.list, 'name');
+      $scope.chart.data = _.pluck($scope.Categorys.list, 'count');
+      $scope.chart.colors = _.pluck($scope.Categorys.list, 'color');
     }
 
     $scope.remove = category => {
       if ($window.confirm('Are you sure you want to delete?')) {
-        vm.categorys = _.without(vm.categorys, category);
+        $scope.Categorys.remove(category);
         search();
-        category.$remove();
       }
     };
     $scope.uploader = new FileUploader();
@@ -81,7 +77,7 @@
         });
         Promise.all(promise)
           .then(_ctgrs => {
-            vm.categorys = _.union(vm.categorys, _ctgrs);
+            $scope.Categorys.load();
           })
           .catch(err => {
             alert(err.message);

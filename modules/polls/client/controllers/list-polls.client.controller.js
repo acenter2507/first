@@ -37,7 +37,6 @@
 
     vm.polls = [];
     vm.hot_polls = [];
-    vm.categorys = [];
     vm.bookmarks = [];
     vm.tags = [];
     vm.new_data = [];
@@ -50,8 +49,6 @@
     function init() {
       // Lắng nghe sự liện từ socket
       initSocket();
-      // Load danh sách category (Bao gồm số poll)
-      get_categorys();
       // Load danh sách tags (Bao gồm số poll)
       get_popular_tags();
       // Load các polls có lượng like nhiều nhất
@@ -122,15 +119,6 @@
       Action.get_populars(0)
         .then(res => {
           vm.populars = res.data;
-        })
-        .catch(err => {
-          toast.error(err.message, 'Error!');
-        });
-    }
-    function get_categorys() {
-      Action.get_categorys()
-        .then(res => {
-          vm.categorys = res;
         })
         .catch(err => {
           toast.error(err.message, 'Error!');

@@ -22,6 +22,10 @@
   ) {
     var ctrl = this;
     ctrl.form = {};
+    ctrl.poll = {
+      opts: [{}, {}],
+      category: ctrl.categorys[0]
+    };
 
     ctrl.save = isValid => {
       if (!isValid) {

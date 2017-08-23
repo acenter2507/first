@@ -40,6 +40,11 @@
         $scope.$broadcast('show-errors-check-validity', 'ctrl.form.pollForm');
         return false;
       }
+      if (!validOptions()) {
+        ctrl.message = 'Please check your options, has invalid info';
+        return false;
+      }
+      
 
       // if (!ctrl.poll.isPublic) {
       //   $scope.message_title = 'Save poll!';
@@ -84,6 +89,15 @@
       $scope.closeThisDialog();
     };
 
+    function validOptions() {
+      for (var index = 0; index < ctrl.poll.opts.length; index++) {
+        var element = ctrl.poll.opts[index];
+        if (element.title === '' || element.color === '') {
+          return false;
+        }
+      }
+      return true;
+    }
     function randomColor() {
       var length = Constants.colors.length;
       var currentColors = _.pluck(ctrl.poll.opts, 'color');

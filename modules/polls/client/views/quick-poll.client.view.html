@@ -3,7 +3,7 @@
     <a class="undecorated-link" ng-click="ctrl.save(ctrl.form.pollForm.$valid)">Post</a>
     <a class="undecorated-link mg10l" ng-click="ctrl.discard()">Discard</a>
     <md-menu md-offset="10 30">
-      <a class="undecorated-link card-link" ng-click="$mdMenu.open($event)"><i class="fa fa-lock"></i> Poll's options</a>
+      <a class="undecorated-link card-link text-flicker" ng-click="$mdMenu.open($event)"><i class="fa fa-lock"></i> Poll's options</a>
       <md-menu-content>
         <ul class="menu-list">
           <li class="pdn text-right">
@@ -46,9 +46,9 @@
       </div>
       <!-- Body -->
       <div class="form-group mg6b" show-errors>
-        <textarea name="body" class="msd-elastic: \n; form-control" data-ng-model="ctrl.poll.body" placeholder="Ask something..." required></textarea>
+        <textarea name="body" class="msd-elastic: \n; form-control input-sm" data-ng-model="ctrl.poll.body" placeholder="Ask something..." required></textarea>
         <div ng-messages="ctrl.form.pollForm.body.$error" role="alert">
-          <p class="help-block error-text" ng-message="required">You must ask somthing.</p>
+          <p class="help-block error-text font-sm" ng-message="required">You must ask somthing.</p>
         </div>
       </div>
       <div class="form-group mg6b">
@@ -78,7 +78,7 @@
         <a ng-click="ctrl.add()" class="undecorated-link pull-right font-lg"><i class="icon-plus"></i></a>
         <div class="clearfix"></div>
       </div>
-      <div class="form-group mg6b"><span ng-bind="ctrl.message">asd asdf awk wkejaw aflkawl</span></div>
+      <div class="form-group mg6b"><span ng-bind="ctrl.message"></span></div>
     </form>
   </div>
   <hr class="mgn">

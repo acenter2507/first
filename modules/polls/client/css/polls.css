@@ -482,3 +482,14 @@ md-menu-content {
     line-height: 40px;
     width: 40px;
     height: 40px;} }
+
+
+.text-flicker {
+  animation:hue 1s linear infinite;
+  color:#f00;text-shadow:0px 0px 1px #FFFF00 !important; }
+
+@-webkit-keyframes hue {
+  100%{-webkit-filter:hue-rotate(360deg); }}
+
+@keyframes hue {
+  100%{filter:hue-rotate(360deg); } }

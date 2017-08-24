@@ -802,7 +802,8 @@ a:hover .header-profile-image {
     margin-bottom: 6px; }
   .ta-bind img {
     max-width: 100%; }
-
+.ta-editor.form-control.quick-body {
+  display: none; }
 .ta-editor.form-control.quick-body,
 .ta-scroll-window.form-control.quick-body {
   min-height: 100px; }

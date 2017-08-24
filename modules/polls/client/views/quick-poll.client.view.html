@@ -29,8 +29,7 @@
   <div class="card-body mgnb">
     <form name="ctrl.form.pollForm" ng-submit="ctrl.save(ctrl.form.pollForm.$valid)" novalidate autocomplete="off">
       <div class="form-group mg6b" show-errors>
-        <select tabindex="1"  name="category" class="form-control" ng-model="ctrl.poll.category"
-          required>
+        <select tabindex="1" name="category" class="form-control" ng-model="ctrl.poll.category" required>
           <option ng-repeat="ctgr in ctrl.categorys" value="{{ctgr._id}}">{{ctgr.name}}</option>
         </select>
         <div ng-messages="ctrl.form.pollForm.category.$error" role="alert">
@@ -39,7 +38,8 @@
       </div>
       <!-- Title -->
       <div class="form-group mg6b" show-errors>
-        <input tabindex="2" focus-me="true" type="text" class="form-control" name="title" ng-model="ctrl.poll.title" placeholder="Tilte..." required/>
+        <input tabindex="2" focus-me="true" type="text" class="form-control" name="title" ng-model="ctrl.poll.title" placeholder="Tilte..."
+          required/>
         <div ng-messages="ctrl.form.pollForm.title.$error" role="alert">
           <p class="help-block error-text font-sm" ng-message="required">You must type somthing for title.</p>
         </div>
@@ -47,13 +47,8 @@
       <!-- Body -->
       <div class="form-group mg6b" show-errors>
         <!--<textarea name="body" class="msd-elastic: \n; form-control input-sm" data-ng-model="ctrl.poll.body" placeholder="Ask something..." required></textarea>-->
-        <text-angular
-          name="body"
-          ng-model="ctrl.poll.body"
-          required
-          tabIndex="3"
-          placeholder="Ask something..."></text-angular>
-          <!--ta-text-editor-class="form-control quick-body"
+        <text-angular ta-toolbar="[]" name="body" ng-model="ctrl.poll.body" required placeholder="Ask something..."></text-angular>
+        <!--ta-text-editor-class="form-control quick-body"
           ta-html-editor-class="form-control quick-body"-->
         <div ng-messages="ctrl.form.pollForm.body.$error" role="alert">
           <p class="help-block error-text" ng-message="required">You must ask somthing.</p>
@@ -63,8 +58,8 @@
         <table class="w100p">
           <tr ng-repeat="opt in ctrl.poll.opts track by $index">
             <td class="text-left w20">
-               <!--md-offset="0 30"-->
-              <md-menu md-position-mode="target-left target" md-offset="15 -160"> 
+              <!--md-offset="0 30"-->
+              <md-menu md-position-mode="target-left target" md-offset="15 -160">
                 <a ng-click="$mdMenu.open($event)" class="undecorated-link" aria-label="Color" href="#">
                   <i class="fa fa-square" ng-style="{'color': opt.color }"></i>
                 </a>
@@ -86,7 +81,9 @@
         <a ng-click="ctrl.add()" class="undecorated-link pull-right font-lg"><i class="icon-plus"></i></a>
         <div class="clearfix"></div>
       </div>
-      <div class="form-group mgnb"><p class="font-sm text-danger mgnb" ng-bind="ctrl.message"></p></div>
+      <div class="form-group mgnb">
+        <p class="font-sm text-danger mgnb" ng-bind="ctrl.message"></p>
+      </div>
     </form>
   </div>
   <hr class="mgn">

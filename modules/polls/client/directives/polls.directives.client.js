@@ -12,7 +12,7 @@
     return {
       restrict: 'E',
       replace: false,
-      template: $templateCache.get('poll_item')
+      template: $templateCache.get('modules/polls/client/views/quick-poll.client.view.html')
     };
   }
   function ngEnter() {

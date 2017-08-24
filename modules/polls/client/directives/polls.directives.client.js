@@ -2,7 +2,7 @@
   'use strict';
   angular.module('polls')
     .directive('pollItem', pollItem)
-    // .directive('quickPoll', quickPoll)
+    .directive('quickPoll', quickPoll)
     .directive('ngEnter', ngEnter)
     .directive('focusMe', focusMe)
     .directive('autoAdjust', autoAdjust)
@@ -20,15 +20,14 @@
   function quickPoll($http, $templateCache, $compile) {
     return {
       restrict: 'E',
-      replace: true,
-      transclude: true,
+      replace: false,
+      // transclude: true,
       link: (scope, element, attrs) => {
         $http.get('modules/polls/client/views/quick-poll.client.view.html', { cache: $templateCache })
           .then(function (res) {
             element.replaceWith($compile(res.data)(scope));
           });
       }
-      // template: $templateCache.get('modules/polls/client/views/quick-poll.client.view.html')
     };
   }
   function ngEnter() {

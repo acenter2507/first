@@ -792,13 +792,10 @@ a:hover .header-profile-image {
 
 .ta-editor.quick-body,
 .ta-scroll-window.quick-body {
-  height: 100px;
-  min-height: 100px;
-  overflow: auto;
   font-family: inherit;
   font-size: 12px;
-  line-height: 12px; }
-  .quick-body > .ta-bind {
+  line-height: 1rem; }
+  .ta-scroll-window.quick-body > .ta-bind {
     min-height: 100px;}
 .ta-bind p{
   margin-bottom: 2px; }

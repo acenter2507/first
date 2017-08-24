@@ -8,6 +8,7 @@
   QuickPollController.$inject = [
     '$scope',
     '$state',
+    'PollsService',
     'Categorys',
     'Action',
     'Constants',
@@ -17,6 +18,7 @@
   function QuickPollController(
     $scope,
     $state,
+    PollsService,
     Categorys,
     Action,
     Constants,
@@ -44,14 +46,14 @@
         ctrl.message = 'Please check your options, has invalid info';
         return false;
       }
-      Action.save_poll(ctrl.poll)
+      var rs = new PollsService(ctrl.poll);
+      Action.save_poll(rs)
         .then(res => {
           $state.go('polls.view', { pollId: res.slug });
           $scope.closeThisDialog();
         })
         .catch(err => {
           $scope.closeThisDialog();
-          console.log(err);
           toast.error('There were problems creating your poll.', 'Error!');
         });
     };

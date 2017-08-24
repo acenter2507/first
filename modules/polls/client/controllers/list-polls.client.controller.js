@@ -225,16 +225,6 @@
 
     // Quick menu
     $scope.isOpen = false;
-    $scope.isShowQuickToolTip = false;
-    $scope.$watch('isOpen', function (isOpen) {
-      if (isOpen) {
-        $timeout(function () {
-          $scope.isShowQuickToolTip = $scope.isOpen;
-        }, 600);
-      } else {
-        $scope.isShowQuickToolTip = $scope.isOpen;
-      }
-    });
     $scope.q_quick_poll = () => {
       if (!$scope.isLogged) {
         $state.go('authentication.signin');

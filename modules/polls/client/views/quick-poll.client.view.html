@@ -39,7 +39,7 @@
       </div>
       <!-- Title -->
       <div class="form-group mg6b" show-errors>
-        <input focus-me="true" type="text" class="form-control" name="title" ng-model="ctrl.poll.title" placeholder="Tilte..." required/>
+        <input tabindex="1" focus-me="true" type="text" class="form-control" name="title" ng-model="ctrl.poll.title" placeholder="Tilte..." required/>
         <div ng-messages="ctrl.form.pollForm.title.$error" role="alert">
           <p class="help-block error-text font-sm" ng-message="required">You must type somthing for title.</p>
         </div>
@@ -54,6 +54,7 @@
           name="body"
           ng-model="ctrl.poll.body"
           required
+          tabIndex="w"
           placeholder="Ask something..."></text-angular>
         <div ng-messages="ctrl.form.pollForm.body.$error" role="alert">
           <p class="help-block error-text" ng-message="required">You must ask somthing.</p>

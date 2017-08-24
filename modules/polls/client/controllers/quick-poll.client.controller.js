@@ -51,6 +51,7 @@
         })
         .catch(err => {
           $scope.closeThisDialog();
+          console.log(err);
           toast.error('There were problems creating your poll.', 'Error!');
         });
     };

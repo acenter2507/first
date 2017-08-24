@@ -790,17 +790,17 @@ a:hover .header-profile-image {
   a.bg-inverse:focus, a.bg-inverse:hover {
     background-color: #11171a !important; }
 
-.ta-editor {
+.ta-bind {
   max-width: 100%;
   text-align: justify;
-  text-justify: inter-word;
-  font-size: 1rem;
-  line-height: 1.2rem; }
-  .ta-editor:focus {
+  text-justify: inter-word; }
+  .ta-bind:focus {
     outline: none; }
-  .ta-editor .ta-bind p{
+  .ta-bind p {
+    font-size: 1rem;
+    line-height: 1.2rem;
     margin-bottom: 2px; }
-  .ta-editor img {
+  .ta-bind img {
     max-width: 100%; }
 
 .ta-editor.quick-body,

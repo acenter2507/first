@@ -793,11 +793,11 @@ a:hover .header-profile-image {
 .ta-editor.form-control,
 .ta-scroll-window.form-control {
   height: 100px;
-  max-height: 200px;
+  min-height: 100px;
   overflow: auto;
   font-family: inherit; }
   .form-control > .ta-bind {
-    max-height: 200px;}
+    min-height: 100px;}
 .ta-bind p{
   margin-bottom: 2px; }
 .ta-toolbar {

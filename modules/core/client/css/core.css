@@ -796,7 +796,8 @@ a:hover .header-profile-image {
     display: block; }
 .my-md-select md-select-menu {
   margin-top: 3rem; }
-
+md-tooltip {
+  z-index: 10002 !important; }
 .bg-black {
   background-color: black;
 }

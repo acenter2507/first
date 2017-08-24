@@ -1,35 +1,35 @@
 (function () {
   'use strict';
   angular.module('polls')
-    .directive('pollItem', pollItem)
-    .directive('quickPoll', quickPoll)
+    // .directive('pollItem', pollItem)
+    // .directive('quickPoll', quickPoll)
     .directive('ngEnter', ngEnter)
     .directive('focusMe', focusMe)
     .directive('autoAdjust', autoAdjust)
     .directive('a', expandCard);
 
-  pollItem.$inject = ['$templateCache'];
-  function pollItem($templateCache) {
-    return {
-      restrict: 'E',
-      replace: false,
-      template: $templateCache.get('modules/core/client/views/templates/list-poll.client.template.html')
-    };
-  }
-  quickPoll.$inject = ['$http', '$templateCache', '$compile'];
-  function quickPoll($http, $templateCache, $compile) {
-    return {
-      restrict: 'E',
-      replace: false,
-      // transclude: true,
-      link: (scope, element, attrs) => {
-        $http.get('modules/polls/client/views/quick-poll.client.view.html', { cache: $templateCache })
-          .then(function (res) {
-            element.replaceWith($compile(res.data)(scope));
-          });
-      }
-    };
-  }
+  // pollItem.$inject = ['$templateCache'];
+  // function pollItem($templateCache) {
+  //   return {
+  //     restrict: 'E',
+  //     replace: false,
+  //     template: $templateCache.get('modules/core/client/views/templates/list-poll.client.template.html')
+  //   };
+  // }
+  // quickPoll.$inject = ['$http', '$templateCache', '$compile'];
+  // function quickPoll($http, $templateCache, $compile) {
+  //   return {
+  //     restrict: 'E',
+  //     replace: false,
+  //     // transclude: true,
+  //     link: (scope, element, attrs) => {
+  //       $http.get('modules/polls/client/views/quick-poll.client.view.html', { cache: $templateCache })
+  //         .then(function (res) {
+  //           element.replaceWith($compile(res.data)(scope));
+  //         });
+  //     }
+  //   };
+  // }
   function ngEnter() {
     return function (scope, element, attrs) {
       element.bind('keydown keypress', function (event) {

@@ -232,17 +232,18 @@
         $state.go('authentication.signin');
         return;
       }
-      var modalInstance = $uibModal.open({
-        animation: true,
-        template:  '<quick-poll></quick-poll>',
-        // controller: 'ModalInstanceCtrl',
-        // size: size,
-        // resolve: {
-        //   items: function () {
-        //     return $scope.items;
-        //   }
-        // }
-      });
+      angular.element('body').toggleClass('aside-panel-open');
+      // var modalInstance = $uibModal.open({
+      //   animation: true,
+      //   template:  '<quick-poll></quick-poll>',
+      //   // controller: 'ModalInstanceCtrl',
+      //   // size: size,
+      //   // resolve: {
+      //   //   items: function () {
+      //   //     return $scope.items;
+      //   //   }
+      //   // }
+      // });
       // var q_quick_poll = dialog.open({
       //   template: 'modules/polls/client/views/quick-poll.client.view.html',
       //   controller: 'QuickPollController',

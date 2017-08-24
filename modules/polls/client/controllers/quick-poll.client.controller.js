@@ -48,8 +48,6 @@
         ctrl.message = 'Please check your options, has invalid info';
         return false;
       }
-      console.log(ctrl.poll.body);
-      ctrl.poll.body = '<p>' + $filter('splice')(ctrl.poll.body) + '</p>';
       var rs = new PollsService(ctrl.poll);
       Action.save_poll(rs)
         .then(res => {

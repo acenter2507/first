@@ -53,7 +53,7 @@
     <h3><a class="undecorated-link" ui-sref="polls.view({ pollId: poll.slug })">{{::poll.title}}</a></h3>
     <!--<p class="text-justify poll_item_body" ng-bind-html="poll.summary | nl2br"></p>-->
     <!-- Tóm tắt poll  -->
-    <div class="text-body" ta-bind-html="text" ng-model="poll.summary" ta-readonly="true"></div>
+    <div class="text-body" ta-bind="text" ng-bind-html="poll.summary" ta-readonly="true"></div>
     <p ng-show="poll.body.length > poll.summary.length" class="poll_item_body">
       <a class="undecorated-link" ui-sref="polls.view({ pollId: poll.slug })">see more</a>
     </p>

@@ -234,7 +234,7 @@
       }
       var modalInstance = $uibModal.open({
         animation: true,
-        templateUrl: 'modules/polls/client/views/quick-poll.client.view.html',
+        template:  $templateCache.get('modules/polls/client/views/quick-poll.client.view.html'),
         // controller: 'ModalInstanceCtrl',
         // size: size,
         // resolve: {

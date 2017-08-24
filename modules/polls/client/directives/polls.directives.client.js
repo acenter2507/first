@@ -8,14 +8,14 @@
     .directive('autoAdjust', autoAdjust)
     .directive('a', expandCard);
 
-  // pollItem.$inject = ['$templateCache'];
-  // function pollItem($templateCache) {
-  //   return {
-  //     restrict: 'E',
-  //     replace: false,
-  //     template: $templateCache.get('modules/core/client/views/templates/list-poll.client.template.html')
-  //   };
-  // }
+  pollItem.$inject = ['$templateCache'];
+  function pollItem($templateCache) {
+    return {
+      restrict: 'E',
+      replace: false,
+      template: $templateCache.get('poll_item')
+    };
+  }
   // quickPoll.$inject = ['$http', '$templateCache', '$compile'];
   // function quickPoll($http, $templateCache, $compile) {
   //   return {

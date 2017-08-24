@@ -811,10 +811,14 @@ a:hover .header-profile-image {
   line-height: 1.2rem; }
   .ta-scroll-window.quick-body > .ta-bind {
     min-height: 100px;}
+    .ta-scroll-window.quick-body > .ta-bind p {
+      margin-bottom: 2px; }
+
 .ta-toolbar {
   display: none; }
   .ta-toolbar.focussed {
     display: block; }
+
 .my-md-select md-select-menu {
   margin-top: 3rem; }
 .bg-black {

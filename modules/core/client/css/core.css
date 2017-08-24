@@ -792,6 +792,7 @@ a:hover .header-profile-image {
 
 .ta-editor.quick-body,
 .ta-scroll-window.quick-body {
+  min-height: 100px;
   font-family: inherit;
   font-size: 12px;
   line-height: 1rem; }

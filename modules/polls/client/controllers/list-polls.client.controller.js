@@ -237,9 +237,6 @@
         appendClassName: 'images-upload-dialog',
         closeByDocument: false
       });
-      q_quick_poll.closePromise.then(function (result) {
-        console.log(result);
-      });
     };
     $scope.q_post_poll = () => {
       $state.go('polls.create');

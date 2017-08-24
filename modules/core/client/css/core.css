@@ -812,7 +812,7 @@ a:hover .header-profile-image {
     .ta-scroll-window.quick-body > .ta-bind span {
       margin-bottom: 2px;
       font-family: inherit;
-      line-height: 1.2rem; }
+      line-height: 1.2; }
 
 .ta-toolbar {
   display: none; }

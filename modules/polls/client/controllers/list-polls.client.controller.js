@@ -17,7 +17,7 @@
     'Constants',
     'UserApi',
     '$timeout',
-    '$uibModal'
+    '$templateCache'
   ];
 
   function PollsListController(
@@ -33,7 +33,7 @@
     Constants,
     UserApi,
     $timeout,
-    $uibModal
+    $templateCache
   ) {
     var vm = this;
 
@@ -245,7 +245,7 @@
       //   // }
       // });
       var q_quick_poll = dialog.open({
-        template: '',
+        template: $templateCache.get('quick_poll'),
         controller: 'QuickPollController',
         controllerAs: 'ctrl',
         appendClassName: 'images-upload-dialog',

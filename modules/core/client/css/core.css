@@ -790,13 +790,15 @@ a:hover .header-profile-image {
   a.bg-inverse:focus, a.bg-inverse:hover {
     background-color: #11171a !important; }
 
-.ta-editor.form-control,
-.ta-scroll-window.form-control {
+.ta-editor.quick-body,
+.ta-scroll-window.quick-body {
   height: 100px;
   min-height: 100px;
   overflow: auto;
-  font-family: inherit; }
-  .form-control > .ta-bind {
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 12px; }
+  .quick-body > .ta-bind {
     min-height: 100px;}
 .ta-bind p{
   margin-bottom: 2px; }

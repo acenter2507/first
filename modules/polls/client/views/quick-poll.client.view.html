@@ -49,11 +49,11 @@
         <!--<textarea name="body" class="msd-elastic: \n; form-control input-sm" data-ng-model="ctrl.poll.body" placeholder="Ask something..." required></textarea>-->
         <text-angular
           ta-toolbar="''"
-          ta-html-editor-class="form-control quick-body"
           name="body"
           ng-model="ctrl.poll.body"
           required
           tabIndex="3"
+          class="form-control quick-body"
           placeholder="Ask something..."></text-angular>
         <div ng-messages="ctrl.form.pollForm.body.$error" role="alert">
           <p class="help-block error-text" ng-message="required">You must ask somthing.</p>

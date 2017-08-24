@@ -16,7 +16,8 @@
     'Storages',
     'Constants',
     'UserApi',
-    '$timeout'
+    '$timeout',
+    '$uibModal'
   ];
 
   function PollsListController(
@@ -31,7 +32,8 @@
     Storages,
     Constants,
     UserApi,
-    $timeout
+    $timeout,
+    $uibModal
   ) {
     var vm = this;
 
@@ -230,13 +232,24 @@
         $state.go('authentication.signin');
         return;
       }
-      var q_quick_poll = dialog.open({
-        template: 'modules/polls/client/views/quick-poll.client.view.html',
-        // controller: 'QuickPollController',
-        // controllerAs: 'ctrl',
-        appendClassName: 'images-upload-dialog',
-        closeByDocument: false
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'modules/polls/client/views/quick-poll.client.view.html',
+        // controller: 'ModalInstanceCtrl',
+        // size: size,
+        // resolve: {
+        //   items: function () {
+        //     return $scope.items;
+        //   }
+        // }
       });
+      // var q_quick_poll = dialog.open({
+      //   template: 'modules/polls/client/views/quick-poll.client.view.html',
+      //   controller: 'QuickPollController',
+      //   controllerAs: 'ctrl',
+      //   appendClassName: 'images-upload-dialog',
+      //   closeByDocument: false
+      // });
     };
     $scope.q_post_poll = () => {
       $state.go('polls.create');

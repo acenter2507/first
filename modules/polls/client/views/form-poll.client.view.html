@@ -6,7 +6,7 @@
         <a class="undecorated-link" ng-click="ctrl.save(ctrl.form.pollForm.$valid)">{{ctrl.poll._id ? ' Save' : ' Post'}}</a>
         <a class="undecorated-link mg10l" ng-click="ctrl.discard()">Discard</a>
         <md-menu md-offset="10 30">
-          <a class="undecorated-link card-link" ng-click="$mdMenu.open($event)"><i class="fa fa-lock"></i> Poll's options</a>
+          <a class="undecorated-link card-link" ng-class="{ 'text-shake': !ctrl.poll.isPublic }" ng-click="$mdMenu.open($event)"><i class="fa fa-lock"></i> Poll's options</a>
           <md-menu-content>
             <ul class="menu-list mg5b">
               <li>

@@ -16,12 +16,19 @@
       template: $templateCache.get('modules/core/client/views/templates/list-poll.client.template.html')
     };
   }
-  quickPoll.$inject = ['$templateCache'];
-  function quickPoll($templateCache) {
+  quickPoll.$inject = ['$http', '$templateCache', '$compile'];
+  function quickPoll($http, $templateCache) {
     return {
       restrict: 'E',
-      replace: false,
-      template: $templateCache.get('modules/polls/client/views/quick-poll.client.view.html')
+      replace: true,
+      transclude: true,
+      link: (scope, element, attrs) => {
+        $http.get('modules/polls/client/views/quick-poll.client.view.html', { cache: $templateCache })
+          .then(function (res) {
+            element.replaceWith($compile(res.data)(scope));
+          });
+      }
+      // template: $templateCache.get('modules/polls/client/views/quick-poll.client.view.html')
     };
   }
   function ngEnter() {

@@ -201,3 +201,99 @@
 <div class="aside-panel full">
   <quick-poll></quick-poll>
 </div>-->
+<script type="text/ng-template" id="/quick_poll.html">
+  <div class="card">
+  <div class="card-header">
+    <a class="undecorated-link" ng-click="ctrl.save(ctrl.form.pollForm.$valid)">Post</a>
+    <a class="undecorated-link mg10l" ng-click="ctrl.discard()">Discard</a>
+    <md-menu md-position-mode="target-right target" md-offset="10 30">
+      <a class="undecorated-link card-link" ng-class="{ 'text-shake': !ctrl.poll.isPublic }" ng-click="$mdMenu.open($event)"><i class="fa fa-lock"></i> Poll's options</a>
+      <md-menu-content>
+        <ul class="menu-list">
+          <li class="pdn text-right">
+            <a class="undecorated-link pull-right" ng-click="$mdMenu.close()"><i class="fa fa-times"></i></a>
+          </li>
+          <li>
+            <md-checkbox class="md-primary" ng-model="ctrl.poll.isPublic">Public</md-checkbox>
+          </li>
+          <li>
+            <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_guest">Allow guest vote</md-checkbox>
+          </li>
+          <li>
+            <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_multiple">Allow multiple vote</md-checkbox>
+          </li>
+          <li>
+            <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_add">Allow members suggest option</md-checkbox>
+          </li>
+        </ul>
+      </md-menu-content>
+    </md-menu>
+  </div>
+  <hr class="mgn">
+  <div class="card-body mgnb">
+    <form name="ctrl.form.pollForm" ng-submit="ctrl.save(ctrl.form.pollForm.$valid)" novalidate autocomplete="off">
+      <div class="form-group mg6b" show-errors>
+        <select tabindex="1" name="category" class="form-control" ng-model="ctrl.poll.category" required>
+          <option ng-repeat="ctgr in ctrl.categorys" value="{{ctgr._id}}">{{ctgr.name}}</option>
+        </select>
+        <div ng-messages="ctrl.form.pollForm.category.$error" role="alert">
+          <p class="help-block error-text font-sm" ng-message="required">Category is required.</p>
+        </div>
+      </div>
+      <!-- Title -->
+      <div class="form-group mg6b" show-errors>
+        <input tabindex="2" focus-me="true" type="text" class="form-control" name="title" ng-model="ctrl.poll.title" placeholder="Tilte..."
+          required/>
+        <div ng-messages="ctrl.form.pollForm.title.$error" role="alert">
+          <p class="help-block error-text font-sm" ng-message="required">You must type somthing for title.</p>
+        </div>
+      </div>
+      <!-- Body -->
+      <div class="form-group mg6b" show-errors>
+        <text-angular name="body" class="text-body" ng-model="ctrl.poll.body" placeholder="Ask something..." required ta-text-editor-class="form-control quick-body"
+          ta-html-editor-class="form-control quick-body"></text-angular>
+          <div ng-messages="ctrl.form.pollForm.body.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">You must ask somthing.</p>
+          </div>
+      </div>
+      <div class="form-group mg6b">
+        <table class="w100p">
+          <tr ng-repeat="opt in ctrl.poll.opts track by $index">
+            <td class="text-left w20">
+              <!--md-offset="0 30"-->
+              <md-menu md-position-mode="target-left target" md-offset="15 -160">
+                <a ng-click="$mdMenu.open($event)" class="undecorated-link" aria-label="Color" href="#">
+                  <i class="fa fa-square" ng-style="{'color': opt.color }"></i>
+                </a>
+                <md-menu-content>
+                  <p class="text-right">
+                    <a class="undecorated-link pull-right" ng-click="$mdMenu.close()"><i class="fa fa-times"></i></a>
+                  </p>
+                  <div class="clearfix"></div>
+                  <material-picker format="'hex'" ng-model="opt.color" size="12"></material-picker>
+                </md-menu-content>
+              </md-menu>
+            </td>
+            <td><input tabindex="{{ 4 + $index }}" type="text" class="form-control input-sm" ng-model="opt.title" placeholder="Type an option..."></td>
+            <td class="text-right w20"><a ng-click="ctrl.remove(opt)" class="undecorated-link">&#8722;</a></td>
+          </tr>
+        </table>
+      </div>
+      <div class="form-group mg6b">
+        <a ng-click="ctrl.add()" class="undecorated-link pull-right font-lg"><i class="icon-plus"></i></a>
+        <div class="clearfix"></div>
+      </div>
+      <div class="form-group mgnb">
+        <p class="font-sm text-danger mgnb" ng-bind="ctrl.message"></p>
+      </div>
+    </form>
+  </div>
+  <hr class="mgn">
+  <div class="card-footer">
+    <a class="undecorated-link pull-right" ng-click="ctrl.write_as_post()">
+      <i class="fa fa-pencil-square-o"></i> Write more
+      <md-tooltip md-z-index="10002" class="d-sm-down-none" md-direction="bottom">Create poll as a post</md-tooltip>
+    </a>
+  </div>
+</div>
+</script>

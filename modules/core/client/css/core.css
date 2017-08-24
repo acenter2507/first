@@ -789,7 +789,8 @@ a:hover .header-profile-image {
     background-color: #263238 !important; }
   a.bg-inverse:focus, a.bg-inverse:hover {
     background-color: #11171a !important; }
-
+.ta-bind p{
+  margin-bottom: 2px; }
 .ta-toolbar {
   display: none; }
   .ta-toolbar.focussed {

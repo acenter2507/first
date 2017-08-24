@@ -2,7 +2,7 @@
   'use strict';
   angular.module('polls')
     .directive('pollItem', pollItem)
-    .directive('quickPoll', quickPoll)
+    // .directive('quickPoll', quickPoll)
     .directive('ngEnter', ngEnter)
     .directive('focusMe', focusMe)
     .directive('autoAdjust', autoAdjust)

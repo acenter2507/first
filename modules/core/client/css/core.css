@@ -790,6 +790,19 @@ a:hover .header-profile-image {
   a.bg-inverse:focus, a.bg-inverse:hover {
     background-color: #11171a !important; }
 
+.ta-editor {
+  max-width: 100%;
+  text-align: justify;
+  text-justify: inter-word;
+  font-size: 1rem;
+  line-height: 1.2rem; }
+  .ta-editor:focus {
+    outline: none; }
+  .ta-editor .ta-bind p{
+    margin-bottom: 2px; }
+  .ta-editor img {
+    max-width: 100%; }
+
 .ta-editor.quick-body,
 .ta-scroll-window.quick-body {
   min-height: 100px;
@@ -798,8 +811,6 @@ a:hover .header-profile-image {
   line-height: 1.2rem; }
   .ta-scroll-window.quick-body > .ta-bind {
     min-height: 100px;}
-.ta-bind p{
-  margin-bottom: 2px; }
 .ta-toolbar {
   display: none; }
   .ta-toolbar.focussed {

@@ -11,20 +11,6 @@
 .post-body p{
   display: inline-block;
 }
-.text-body,
-.text-body p,
-.text-body span {
-  max-width: 100%;
-  text-align: justify;
-  text-justify: inter-word;
-  font-size: 1.0em !important;
-}
-.text-body:focus {
-  outline: none;
-}
-.text-body img {
-  max-width: 100%;
-}
 .side-list-poll {
   position: relative; }
   .side-list-poll:not(:last-child) {

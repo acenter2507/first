@@ -8,19 +8,19 @@
   QuickPollController.$inject = [
     '$scope',
     '$state',
-    'PollsService',
     'Categorys',
     'Action',
-    'Constants'
+    'Constants',
+    'toastr'
   ];
 
   function QuickPollController(
     $scope,
     $state,
-    PollsService,
     Categorys,
     Action,
-    Constants
+    Constants,
+    toast
   ) {
     var ctrl = this;
     ctrl.categorys = Categorys.list;

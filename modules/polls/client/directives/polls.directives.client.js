@@ -2,6 +2,7 @@
   'use strict';
   angular.module('polls')
     .directive('pollItem', pollItem)
+    .directive('quickPoll', quickPoll)
     .directive('ngEnter', ngEnter)
     .directive('focusMe', focusMe)
     .directive('autoAdjust', autoAdjust)
@@ -13,6 +14,14 @@
       restrict: 'E',
       replace: false,
       template: $templateCache.get('modules/core/client/views/templates/list-poll.client.template.html')
+    };
+  }
+  quickPoll.$inject = ['$templateCache'];
+  function quickPoll($templateCache) {
+    return {
+      restrict: 'E',
+      replace: false,
+      template: $templateCache.get('modules/polls/client/views/quick-poll.client.view.html')
     };
   }
   function ngEnter() {

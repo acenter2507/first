@@ -232,8 +232,8 @@
       }
       var q_quick_poll = dialog.open({
         template: 'modules/polls/client/views/quick-poll.client.view.html',
-        controller: 'QuickPollController',
-        controllerAs: 'ctrl',
+        // controller: 'QuickPollController',
+        // controllerAs: 'ctrl',
         appendClassName: 'images-upload-dialog',
         closeByDocument: false
       });

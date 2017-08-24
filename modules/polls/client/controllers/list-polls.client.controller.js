@@ -232,7 +232,7 @@
         $state.go('authentication.signin');
         return;
       }
-      angular.element('body').toggleClass('aside-panel-open');
+      angular.element('body').toggleClass('aside-panel-open full');
       // var modalInstance = $uibModal.open({
       //   animation: true,
       //   template:  '<quick-poll></quick-poll>',

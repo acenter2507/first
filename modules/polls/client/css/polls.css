@@ -485,7 +485,7 @@ md-menu-content {
 
 
 .text-flicker {
-  animation:shake 1s linear infinite;
+  animation:shake 2s linear infinite;
   /*color:#E53935; }*/ }
 
 @-webkit-keyframes hue {

@@ -469,10 +469,12 @@ md-menu-content {
     width: 40px;
     height: 40px;} }
 
+.text-shake {
+  animation:shake 1s linear infinite; }
 
 .text-flicker {
-  animation:shake 1s linear infinite;
-  /*color:#E53935; }*/ }
+  animation:hue 1s linear infinite;
+  color:#E53935; }
 
 @-webkit-keyframes hue {
   100%{-webkit-filter:hue-rotate(360deg); }}

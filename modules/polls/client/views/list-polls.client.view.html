@@ -10,8 +10,7 @@
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 col-lg-push-3 pdn">
       <div ng-repeat="poll in vm.polls" class="card" id="{{::poll._id}}">
-        <!--<div ng-include="'/modules/core/client/views/templates/list-poll.client.template.html'"></div>-->
-        <poll-item></poll-item>
+        <div ng-include="'/modules/core/client/views/templates/list-poll.client.template.html'"></div>
       </div>
       <!-- Loading indicator -->
       <div class="row" ng-show="vm.busy">

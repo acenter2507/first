@@ -29,7 +29,7 @@
   <div class="card-body mgnb">
     <form name="ctrl.form.pollForm" ng-submit="ctrl.save(ctrl.form.pollForm.$valid)" novalidate autocomplete="off">
       <div class="form-group mg6b" show-errors>
-        <select name="category" class="form-control" ng-model="ctrl.poll.category"
+        <select tabindex="1"  name="category" class="form-control" ng-model="ctrl.poll.category"
           required>
           <option ng-repeat="ctgr in ctrl.categorys" value="{{ctgr._id}}">{{ctgr.name}}</option>
         </select>
@@ -39,7 +39,7 @@
       </div>
       <!-- Title -->
       <div class="form-group mg6b" show-errors>
-        <input tabindex="1" focus-me="true" type="text" class="form-control" name="title" ng-model="ctrl.poll.title" placeholder="Tilte..." required/>
+        <input tabindex="2" focus-me="true" type="text" class="form-control" name="title" ng-model="ctrl.poll.title" placeholder="Tilte..." required/>
         <div ng-messages="ctrl.form.pollForm.title.$error" role="alert">
           <p class="help-block error-text font-sm" ng-message="required">You must type somthing for title.</p>
         </div>
@@ -54,7 +54,7 @@
           name="body"
           ng-model="ctrl.poll.body"
           required
-          tabIndex="2"
+          tabIndex="3"
           placeholder="Ask something..."></text-angular>
         <div ng-messages="ctrl.form.pollForm.body.$error" role="alert">
           <p class="help-block error-text" ng-message="required">You must ask somthing.</p>
@@ -78,7 +78,7 @@
                 </md-menu-content>
               </md-menu>
             </td>
-            <td><input type="text" class="form-control input-sm" ng-model="opt.title" placeholder="Type an option..."></td>
+            <td><input tabindex="{{ 4 + $index }}" type="text" class="form-control input-sm" ng-model="opt.title" placeholder="Type an option..."></td>
             <td class="text-right w20"><a ng-click="ctrl.remove(opt)" class="undecorated-link">&#8722;</a></td>
           </tr>
         </table>

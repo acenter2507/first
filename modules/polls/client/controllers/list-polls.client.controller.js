@@ -232,7 +232,7 @@
         $state.go('authentication.signin');
         return;
       }
-      angular.element('body').toggleClass('aside-panel-open full');
+      // angular.element('body').toggleClass('aside-panel-open full');
       // var modalInstance = $uibModal.open({
       //   animation: true,
       //   template:  '<quick-poll></quick-poll>',
@@ -245,7 +245,7 @@
       //   // }
       // });
       var q_quick_poll = dialog.open({
-        templateUrl: '/tpl.html',
+        template: '<quick-poll></quick-poll>',
         controller: 'QuickPollController',
         controllerAs: 'ctrl',
         appendClassName: 'images-upload-dialog',

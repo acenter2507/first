@@ -49,7 +49,7 @@
         return false;
       }
       console.log(ctrl.poll.body);
-      ctrl.poll.body = '<p>' + $filter('splice')(ctrl.poll.body) + '</p>'
+      ctrl.poll.body = '<p>' + $filter('splice')(ctrl.poll.body) + '</p>';
       var rs = new PollsService(ctrl.poll);
       Action.save_poll(rs)
         .then(res => {

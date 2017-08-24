@@ -46,7 +46,7 @@
       </div>
       <!-- Body -->
       <div class="form-group mg6b" show-errors>
-        <textarea name="body" class="msd-elastic: \n; form-control" data-ng-model="ctrl.poll.body" placeholder="Ask something..." required></textarea>
+        <text-angular name="body" class="text-body" ng-model="ctrl.poll.body" placeholder="Ask something..." required></text-angular>
         <div ng-messages="ctrl.form.pollForm.body.$error" role="alert">
           <p class="help-block error-text" ng-message="required">You must ask somthing.</p>
         </div>

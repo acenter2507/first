@@ -789,6 +789,15 @@ a:hover .header-profile-image {
     background-color: #263238 !important; }
   a.bg-inverse:focus, a.bg-inverse:hover {
     background-color: #11171a !important; }
+
+.ta-editor.quick-text,
+.ta-scroll-window.quick-text {
+  height: 100px;
+  max-height: 200px;
+  overflow: auto;
+  font-family: inherit; }
+  .quick-text > .ta-bind {
+    max-height: 200px;}
 .ta-bind p{
   margin-bottom: 2px; }
 .ta-toolbar {

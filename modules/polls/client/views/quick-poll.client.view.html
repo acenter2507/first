@@ -51,7 +51,7 @@
           ta-text-editor-class="form-control quick-body"
           ta-html-editor-class="form-control quick-body">
         </text-angular>-->
-        <text-angular name="body" ng-model="ctrl.poll.body" required placeholder="Ask something..."></text-angular>
+        <text-angular name="body"></text-angular>
         <div ng-messages="ctrl.form.pollForm.body.$error" role="alert">
           <p class="help-block error-text" ng-message="required">You must ask somthing.</p>
         </div>

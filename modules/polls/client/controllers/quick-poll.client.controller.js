@@ -12,7 +12,8 @@
     'Categorys',
     'Action',
     'Constants',
-    'toastr'
+    'toastr',
+    '$filter'
   ];
 
   function QuickPollController(
@@ -22,7 +23,8 @@
     Categorys,
     Action,
     Constants,
-    toast
+    toast,
+    $filter
   ) {
     var ctrl = this;
     ctrl.categorys = Categorys.list;
@@ -30,7 +32,7 @@
     ctrl.form = {};
     ctrl.poll = {
       opts: [{
-        color: Constants.colors[15]
+        color: Constants.colors[5]
       }, {
         color: Constants.colors[40]
       }],
@@ -47,7 +49,7 @@
         return false;
       }
       console.log(ctrl.poll.body);
-      ctrl.poll.body = '<p>' + ctrl.poll.body + '</p>'
+      ctrl.poll.body = '<p>' + $filter('splice')(ctrl.poll.body) + '</p>'
       var rs = new PollsService(ctrl.poll);
       Action.save_poll(rs)
         .then(res => {

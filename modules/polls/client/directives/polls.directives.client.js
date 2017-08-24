@@ -17,7 +17,7 @@
     };
   }
   quickPoll.$inject = ['$http', '$templateCache', '$compile'];
-  function quickPoll($http, $templateCache) {
+  function quickPoll($http, $templateCache, $compile) {
     return {
       restrict: 'E',
       replace: true,

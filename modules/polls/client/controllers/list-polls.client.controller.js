@@ -244,13 +244,13 @@
       //   //   }
       //   // }
       // });
-      // var q_quick_poll = dialog.open({
-      //   template: 'modules/polls/client/views/quick-poll.client.view.html',
-      //   controller: 'QuickPollController',
-      //   controllerAs: 'ctrl',
-      //   appendClassName: 'images-upload-dialog',
-      //   closeByDocument: false
-      // });
+      var q_quick_poll = dialog.open({
+        templateUrl: '/tpl.html',
+        controller: 'QuickPollController',
+        controllerAs: 'ctrl',
+        appendClassName: 'images-upload-dialog',
+        closeByDocument: false
+      });
     };
     $scope.q_post_poll = () => {
       $state.go('polls.create');

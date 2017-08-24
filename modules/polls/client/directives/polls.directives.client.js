@@ -1,11 +1,20 @@
 (function () {
   'use strict';
   angular.module('polls')
+    .directive('pollItem', pollItem)
     .directive('ngEnter', ngEnter)
     .directive('focusMe', focusMe)
     .directive('autoAdjust', autoAdjust)
     .directive('a', expandCard);
 
+  pollItem.$inject = ['$templateCache'];
+  function pollItem($templateCache) {
+    return {
+      restrict: 'E',
+      replace: false,
+      template: $templateCache.get('poll_item')
+    };
+  }
   function ngEnter() {
     return function (scope, element, attrs) {
       element.bind('keydown keypress', function (event) {

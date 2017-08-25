@@ -44,6 +44,10 @@
         float: right;
         color: #777; }
   .poll-body .poll-body-text {
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    display: block;
+    display: -webkit-box;
     width: 100%;
     max-height: 100px;
     white-space: nowrap;

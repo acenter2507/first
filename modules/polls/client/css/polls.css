@@ -38,6 +38,7 @@
         vertical-align: text-top;
         margin: 0;
         height: 1rem;
+        width: 100%;
         line-height: 1rem;}
         .poll-header .poll-info .poll-info-title .poll-info-title-user .poll-info-title-user-name {
           font-weight: bold; }

@@ -31,8 +31,8 @@
       background-color: #FF80AB; }
     .poll-header .poll-info .poll-user-info p{
       vertical-align: text-top;
-      height: 16px;
-      line-height: 16px;}
+      height: 1rem;
+      line-height: 1rem;}
     .poll-header .poll-info .poll-secure-info {
       height: 16px;
       line-height: 16px;

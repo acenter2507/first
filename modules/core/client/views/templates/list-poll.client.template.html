@@ -17,6 +17,25 @@
         <span class="poll-info-title-time">created on
             <span am-time-ago="poll.created"></span>
         </span>
+        <md-menu md-offset="-12 20" md-position-mode="target-right target">
+          <a class="undecorated-link span-link pull-right" ng-click="$mdMenu.open($event)" aria-label="Open menu"><i class="fa fa-angle-down"></i></a>
+          <md-menu-content>
+            <ul class="menu-list">
+              <li><a ui-sref="polls.view({ pollId: poll.slug })"><i class="fa fa-eye"></i> View</a></li>
+              <li ng-if="poll.isCurrentUserOwner"><a ui-sref="polls.edit({ pollId: poll.slug })"><i class="fa fa-pencil-square-o"></i> Edit</a></li>
+              <li ng-if="poll.isCurrentUserOwner"><a ng-click="delete_poll(poll)"><i class="fa fa-trash"></i> Delete</a></li>
+              <li ng-if="isLogged">
+                <a ng-click="follow_poll(poll)" class="undecorated-link">
+                <i class="fa fa-rss"></i> {{(poll.follow._id) ? 'Unfollow' : 'Follow'}}
+              </a>
+              </li>
+              <li ng-if="isLogged && !poll.isCurrentUserOwner && !poll.reported"><a ng-click="report_poll(poll)"><i class="fa fa-exclamation-circle"></i> Report poll</a></li>
+              <li ng-if="isLogged && !poll.isCurrentUserOwner && !poll.bookmarked"><a ng-click="bookmark_poll(poll)"><i class="fa fa-bookmark"></i> Bookmark poll</a></li>
+              <!-- Chỉ màn hình Profile bookmark -->
+              <li ng-if="isCurrentOwner && screen === 'profile-bookmark'"><a ng-click="remove_bookmark(poll)"><i class="fa fa-bookmark"></i>&nbsp;Remove bookmark</a></li>
+            </ul>
+          </md-menu-content>
+        </md-menu>
         <div class="clearfix"></div>
       </div>
       <div class="poll-info-secure">

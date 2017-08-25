@@ -43,6 +43,7 @@
       .poll-header .poll-info .poll-info-title .poll-info-title-menu {
         float: right;
         color: #777; }
+  
   .poll-body .poll-body-options {
     display: flex;
     align-items: stretch;
@@ -56,6 +57,14 @@
     .poll-body .poll-body-options .chart-box .char {
       height: 108px;
       width: 108px; }
+.poll-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start; }
+  .poll-footer .poll_item_info {
+    color: #777;
+    font-size: 0.85rem; }
 
 @media (max-width: 767px) {
   .poll-body .poll-body-options {

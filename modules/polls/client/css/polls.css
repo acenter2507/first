@@ -12,15 +12,15 @@
   display: inline-block;
 }
 
-.post-header {
+.poll-header {
   display: flex;
   flex-direction: row;
   height: 46px; }
-  .post-header .user-avatar, .post-header .user-avatar img {
+  .poll-header .user-avatar, .poll-header .user-avatar img {
     width: 46px;
     height: 46px;
     background-color: #FFF9C4; }
-  .post-header .post-info {
+  .poll-header .poll-info {
     height: 46px;
     background-color: #B3E5FC; }
 

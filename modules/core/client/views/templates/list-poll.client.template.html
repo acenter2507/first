@@ -55,7 +55,7 @@
     <!--<p ng-show="poll.body.length > poll.summary.length" class="poll_item_body">
       <a class="undecorated-link" ui-sref="polls.view({ pollId: poll.slug })">see more</a>
     </p>-->
-    <div class="poll-body-options">
+    <div class="poll-body-options" ng-if="poll.opts.length > 0">
       <div class="progress-box">
         <ul class="horizontal-bars type-2">
           <li ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">

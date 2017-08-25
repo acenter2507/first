@@ -70,8 +70,7 @@
     margin-left: auto; }
     .poll-footer .poll_item_info.share a {
       color: #777; }
-    .poll-footer .poll_item_info.share .quick-share-menu {
-      background-color: #E53935;
+    .poll-footer .poll_item_info.share md-menu-content .quick-share-menu {
       width: 100%;
       display: flex;
       flex-direction: row;

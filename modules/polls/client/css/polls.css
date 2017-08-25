@@ -70,7 +70,7 @@
     margin-left: auto; }
     .poll-footer .poll_item_info.share a {
       color: #777; }
-    .poll-footer .poll_item_info.share .quick-share-menu {
+    .quick-share-menu {
       display: flex;
       flex-direction: row;
       justify-content: space-around; }

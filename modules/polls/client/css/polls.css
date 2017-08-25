@@ -22,7 +22,7 @@
   .poll-header .poll-info {
     display: flex;
     flex-direction: column;
-    flex: 0 0 100%;
+    flex-grow: 1;
     margin-left: 0.85rem;
     height: 46px;
     background-color: #FF80AB; }

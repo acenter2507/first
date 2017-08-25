@@ -67,6 +67,11 @@
     font-size: 0.85rem; }
   .poll-footer .poll_item_info.share {
     margin-left: auto; }
+    .poll-footer .poll_item_info.share .quick-share-menu {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between; }
 
 @media (max-width: 767px) {
   .poll-body .poll-body-options {

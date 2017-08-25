@@ -44,14 +44,12 @@
         .poll-header .poll-info .poll-info-title .poll-info-title-user .poll-info-title-time {
           font-size: 0.85rem;
           color: #777; }
+        .poll-header .poll-info .poll-info-title .poll-info-title-user .poll-info-menu {
+          float: right;
+          color: #555; }
       .poll-header a {
         text-decoration: none;
         cursor: pointer; }
-  .poll-header::after {
-    width: 100%;
-    margin: 0.85rem 0;
-    border: 0;
-    border-top: 1px solid #eee; }
 
 
 

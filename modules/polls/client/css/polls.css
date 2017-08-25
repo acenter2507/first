@@ -55,6 +55,9 @@
     width: 108px;
     background-color: #E53935; }
 
+@media (max-width: 767px) {
+  .poll-body .poll-body-options {
+    flex-direction: column;} }
 
 
 

@@ -3,7 +3,7 @@
 
 <div class="card-body">
 
-  <div clas="poll-header">
+  <div class="poll-header">
     <div class="poll-avatar">
       <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user.slug})">
         <img src="{{::poll.user.profileImageURL}}" alt="{{::poll.user.displayName}}">
@@ -13,7 +13,7 @@
     <div class="poll-info"></div>
   </div>
 
-  <div clas="poll-body">
+  <div class="poll-body">
     <!-- Tiêu đề  -->
     <h3><a class="undecorated-link" ui-sref="polls.view({ pollId: poll.slug })">{{::poll.title}}</a></h3>
     <!--<p class="text-justify poll_item_body" ng-bind-html="poll.summary | nl2br"></p>-->
@@ -91,7 +91,7 @@
     <hr class="mg10t mg10b">
   </div>
 
-  <div clas="poll-footer">
+  <div class="poll-footer">
     <p class="poll_item_info">
       <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
       <strong> Like: </strong>{{::poll.likeCnt}}

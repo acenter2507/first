@@ -47,7 +47,7 @@
   <hr class="mg5y">
   <div class="poll-body">
     <!-- Tiêu đề  -->
-    <h3><a class="undecorated-link" ui-sref="polls.view({ pollId: poll.slug })">{{::poll.title}}</a></h3>
+    <a class="h3" ui-sref="polls.view({ pollId: poll.slug })">{{::poll.title}}</a>
     <!--<p class="text-justify poll_item_body" ng-bind-html="poll.summary | nl2br"></p>-->
     <!-- Tóm tắt poll  -->
     <div class="text-body" ta-bind="text" ng-model="poll.summary" ta-readonly="true"></div>

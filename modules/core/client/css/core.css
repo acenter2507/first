@@ -5,6 +5,16 @@ body {
   height: 100%;
   margin: 0;
   color: #555;}
+
+a {
+  text-decoration: none !important; }
+  a:hover {
+    text-decoration: none !important;
+    cursor: pointer !important; }
+  a:focus {
+    text-decoration: none !important;
+    outline: none !important; }
+
 .app {
   display: flex;
   flex-direction: row;
@@ -218,12 +228,6 @@ body {
 *:focus {
   outline: none !important; }
 
-.undecorated-link:hover {
-  text-decoration: none;
-  cursor: pointer; }
-  .undecorated-link:focus {
-    text-decoration: none;
-    outline: none; }
 
 [ng\:cloak],
 [ng-cloak],

@@ -80,17 +80,16 @@
       </div>
     </div>
     <!-- Các option trong poll -->
-    <div class="mg10t">
+    <!--<div class="mg10t">-->
       <!-- Trường hợp chưa có option nào  -->
-      <div ng-if="poll.opts.length === 0">
+      <!--<div ng-if="poll.opts.length === 0">
         <small class="text-muted">No option yet</small>
         <a ui-sref="polls.view({ pollId: poll.slug })" class="undecorated-link" ng-if="poll.allow_add"><small>, why don't add some option</small></a>
-      </div>
+      </div>-->
       <!-- Show 3 option nhiều vote nhất  -->
-      <div class="col-xs-12 pdn" ng-if="poll.total === 0">
+      <!--<div class="col-xs-12 pdn" ng-if="poll.total === 0">
         <ul class="horizontal-bars type-2">
           <li ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">
-            <!--<i class="icon-chart"></i>-->
             <div class="detail">
               <p class="title" ng-bind="opt.title"></p>
               <span class="value">{{:: opt.voteCnt + '/' + poll.total }}
@@ -105,7 +104,6 @@
             </div>
           </li>
           <li class="divider text-center" ng-if="poll.opts.length > 3">
-            <!--<a class="undecorated-link text-muted" data-toggle="tooltip" data-placement="top" title="show more"><i class="icon-options"></i></a>-->
             <a class="undecorated-link" ui-sref="polls.view({ pollId: poll.slug })"><i class="icon-options"></i>
               <md-tooltip md-direction="bottom">Show more</md-tooltip>
             </a>
@@ -115,7 +113,6 @@
       <div class="col-xs-12 col-md-9 pdn" ng-if="poll.total > 0">
         <ul class="horizontal-bars type-2">
           <li ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">
-            <!--<i class="icon-chart"></i>-->
             <div class="detail">
               <p class="title" ng-bind="opt.title"></p>
               <span class="value">{{ opt.voteCnt + '/' + poll.total }}
@@ -141,10 +138,8 @@
           <canvas id="pie" class="chart chart-pie" chart-data="poll.chart.data" chart-labels="poll.chart.labels" chart-options="poll.chart.options"
             chart-colors="poll.chart.colors"></canvas>
         </div>
-      </div>
-      <div class="clearfix"></div>
-      <!--<a class="pull-right undecorated-link" ng-if="poll.opts.length > 3" ui-sref="polls.view({ pollId: poll.slug })">...and {{poll.opts.length - 3}} others</a>-->
-    </div>
+      </div>-->
+    <!--</div>-->
     <div class="clearfix"></div>
     <!-- #options -->
     <hr class="mg10t mg10b">

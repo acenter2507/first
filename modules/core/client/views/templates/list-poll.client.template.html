@@ -11,8 +11,18 @@
       <img ng-if="!poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
     </div>
     <div class="poll-info">
-      <div class="poll-user-info"></div>
-      <div class="poll-secure-info"></div>
+      <div class="poll-user-info">
+        <a class="poll-user-name" ng-if="poll.user" ui-sref="profile.info({userId: poll.user.slug})">{{::poll.user.displayName}}</a>
+        <span class="poll-user-name" ng-if="!poll.user">Deleted User</span>
+        <span class="poll-time-info">created on
+          <span am-time-ago="poll.created"></span>
+        </span>
+      </div>
+      <div class="poll-secure-info">
+        <span ng-if="poll.allow_guest" class="fa fa-globe"><md-tooltip md-direction="bottom">This poll is public</md-tooltip></span>
+        <span ng-if="!poll.allow_guest" class="fa fa-users"><md-tooltip md-direction="bottom">Only user can vote</md-tooltip></span>
+        <a ui-sref="categorys.polls({ categoryId: poll.category.slug })">{{:: poll.category.name }}</a>
+      </div>
     </div>
   </div>
 
@@ -45,7 +55,8 @@
             </div>
             <div class="bars">
               <div class="progress progress-xs">
-                <div class="progress-bar progress-bar-animated" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}" aria-valuenow="{{ opt.progressVal }}" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar progress-bar-animated" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}"
+                  aria-valuenow="{{ opt.progressVal }}" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
             </div>
           </li>
@@ -69,7 +80,8 @@
             </div>
             <div class="bars">
               <div class="progress progress-xs">
-                <div class="progress-bar progress-bar-animated" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}" aria-valuenow="{{ opt.progressVal }}" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar progress-bar-animated" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}"
+                  aria-valuenow="{{ opt.progressVal }}" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
             </div>
           </li>

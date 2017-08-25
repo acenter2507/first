@@ -33,6 +33,14 @@
       height: 16px;
       line-height: 16px;
       background-color: #FF80AB; }
+      .poll-header .poll-info .poll-secure-info .poll-user-name {
+        font-weight: bold; }
+      .poll-header a {
+        text-decoration: none;
+        cursor: pointer; }
+      .poll-header .poll-info .poll-secure-info .poll-time-info {
+        font-size: 0.85rem;
+        color: #777; }
 
 
 

@@ -6,7 +6,7 @@
   <div class="poll-header">
     <div class="poll-avatar">
       <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user.slug})">
-        <img src="{{::poll.user.profileImageURL}}" alt="{{::poll.user.displayName}}">
+        <img src="{{poll.user.profileImageURL}}" alt="{{poll.user.displayName}}">
       </a>
       <img ng-if="!poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
     </div>
@@ -18,6 +18,9 @@
           <span class="poll-info-title-time">created on
             <span am-time-ago="poll.created"></span>
           </span>
+        </p>
+        <p class="poll-info-title-user">
+          <a ui-sref="profile.info({userId: poll.user.slug})">#{{::poll.user.slug}}</a>
         </p>
       </div>
       <div class="poll-info-secure">

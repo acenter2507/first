@@ -49,8 +49,6 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden; }
-    .poll-body .poll-body-text p,.poll-body .poll-body-text img, .poll-body .poll-body-text span {
-      max-width: 100%; }
 
 
 

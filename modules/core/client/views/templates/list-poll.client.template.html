@@ -19,9 +19,6 @@
             <span am-time-ago="poll.created"></span>
           </span>
         </p>
-        <p class="poll-info-title-slug">
-          <a ui-sref="profile.info({userId: poll.user.slug})">#{{::poll.user.slug}}</a>
-        </p>
       </div>
       <div class="poll-info-secure">
         <span ng-if="poll.allow_guest" class="fa fa-globe"><md-tooltip md-direction="bottom">This poll is public</md-tooltip></span>

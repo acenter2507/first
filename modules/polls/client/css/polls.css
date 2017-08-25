@@ -39,12 +39,6 @@
         margin: 0;
         height: 1rem;
         line-height: 1rem;}
-      .poll-header .poll-info .poll-info-title .poll-info-title-slug {
-        vertical-align: text-top;
-        margin: 2px 0 0 0;
-        font-size: 0.85rem;
-        height: 1rem;
-        line-height: 1rem;}
         .poll-header .poll-info .poll-info-title .poll-info-title-user .poll-info-title-user-name {
           font-weight: bold; }
         .poll-header .poll-info .poll-info-title .poll-info-title-user .poll-info-title-time {

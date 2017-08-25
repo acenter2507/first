@@ -47,7 +47,11 @@
       .poll-header a {
         text-decoration: none;
         cursor: pointer; }
-
+  .poll-header::after {
+    width: 100%;
+    margin: 0.85rem 0;
+    border: 0;
+    border-top: 1px solid #eee; }
 
 
 

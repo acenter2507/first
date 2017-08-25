@@ -54,8 +54,10 @@
       <a class="undecorated-link" ui-sref="polls.view({ pollId: poll.slug })">see more</a>
     </p>-->
     <div class="poll-body-options">
-      <div class="progress-box"></div>
-      <div class="chart-box"></div>
+      <div class="progress-box">
+
+      </div>
+      <div class="chart-box" ng-if="poll.total > 0"></div>
     </div>
     <!-- Các option trong poll -->
     <div class="mg10t">

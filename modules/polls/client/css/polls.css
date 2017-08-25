@@ -27,9 +27,9 @@
     height: 46px; }
     .poll-header .poll-info .poll-info-title{
       vertical-align: top;
+      height: 36px;
       padding:0;
-      margin-top: -4px;
-      line-height: 36px; }
+      margin-top: -4px;}
     .poll-header .poll-info .poll-info-secure {
       vertical-align: text-bottom;
       font-size: 0.85rem;

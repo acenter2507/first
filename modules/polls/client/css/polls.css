@@ -61,6 +61,7 @@
     align-items: center;
     flex-direction: column;}
     .poll-body .poll-body-options .progress-box {
+      margin-top: 0.85rem;
       align-self: stretch;} }
 
 

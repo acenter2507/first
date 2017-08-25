@@ -232,21 +232,9 @@
         $state.go('authentication.signin');
         return;
       }
-      // angular.element('body').toggleClass('aside-panel-open full');
-      // var modalInstance = $uibModal.open({
-      //   animation: true,
-      //   template:  '<quick-poll></quick-poll>',
-      //   // controller: 'ModalInstanceCtrl',
-      //   // size: size,
-      //   // resolve: {
-      //   //   items: function () {
-      //   //     return $scope.items;
-      //   //   }
-      //   // }
-      // });
       var q_quick_poll = dialog.open({
-        template: 'quick-poll-dialog.html',
-        // plain: true,
+        template: '<quick-poll></quick-poll>',
+        plain: true,
         controller: 'QuickPollController',
         controllerAs: 'ctrl',
         appendClassName: 'images-upload-dialog',

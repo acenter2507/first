@@ -8,8 +8,8 @@
     .directive('autoAdjust', autoAdjust)
     .directive('a', expandCard);
 
-  pollItem.$inject = ['$templateCache', '$http'];
-  function pollItem($templateCache, $http) {
+  pollItem.$inject = ['$http', '$templateCache', '$compile'];
+  function pollItem($http, $templateCache, $compile) {
     return {
       restrict: 'E',
       replace: false,

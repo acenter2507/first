@@ -48,6 +48,7 @@
         ctrl.message = 'Please check your options, has invalid info';
         return false;
       }
+      ctrl.poll.summary = ctrl.poll.body;
       var rs = new PollsService(ctrl.poll);
       Action.save_poll(rs)
         .then(res => {

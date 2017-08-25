@@ -34,6 +34,7 @@
       line-height: 16px;
       background-color: #8C9EFF; }
       .poll-header .poll-info .poll-user-info p{
+        margin-bottom: 0;
         vertical-align: text-top;
         height: 1rem;
         line-height: 1rem;}

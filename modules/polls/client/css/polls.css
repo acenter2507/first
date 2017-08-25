@@ -21,21 +21,19 @@
     height: 46px; }
   .poll-header .poll-info {
     display: flex;
+    align-self: stretch;
     flex-direction: column;
+    background-color: #FF80AB;
     margin-left: 0.85rem;
     height: 46px; }
     .poll-header .poll-info .poll-info-title{
       vertical-align: top;
       height: 32px;
-      flex: 0 0 100%;
-      line-height: 32px;
-      background-color: #FF80AB; }
+      line-height: 32px; }
     .poll-header .poll-info .poll-info-secure {
       vertical-align: text-bottom;
       height: 14px;
-      flex: 0 0 100%;
-      line-height: 14px;
-      background-color: #8C9EFF; }
+      line-height: 14px; }
       .poll-header .poll-info .poll-info-title .poll-info-title-user {
         vertical-align: text-top;
         margin: 0;

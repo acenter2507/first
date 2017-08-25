@@ -23,9 +23,8 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    margin-left: 0.85rem;
-    height: 46px;
-    background-color: #FF80AB; }
+    margin-left: 0.75rem;
+    height: 46px; }
     .poll-header .poll-info .poll-info-title{
       vertical-align: top;
       height: 32px;
@@ -41,8 +40,8 @@
         line-height: 1rem;}
       .poll-header .poll-info .poll-info-title .poll-info-title-slug {
         vertical-align: text-top;
-        margin: 4px 0 0 0;
-        font-size: 0.75rem;
+        margin: 2px 0 0 0;
+        font-size: 0.85rem;
         height: 1rem;
         line-height: 1rem;}
         .poll-header .poll-info .poll-info-title .poll-info-title-user .poll-info-title-user-name {

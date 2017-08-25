@@ -16,7 +16,7 @@
   display: flex;
   flex-direction: row;
   height: 46px; }
-  .poll-header .user-avatar, .poll-header .user-avatar img {
+  .poll-header .poll-avatar, .poll-header .poll-avatar img {
     width: 46px;
     height: 46px;
     background-color: #FFF9C4; }

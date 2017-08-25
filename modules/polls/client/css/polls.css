@@ -11,6 +11,27 @@
 .post-body p{
   display: inline-block;
 }
+
+.post-header {
+  display: flex;
+  flex-direction: row;
+  height: 46px; }
+  .post-header .user-avatar, .post-header .user-avatar img {
+    width: 46px;
+    height: 46px;
+    background-color: #FFF9C4; }
+  .post-header .post-info {
+    height: 46px;
+    background-color: #B3E5FC; }
+
+
+
+
+
+
+
+
+
 .side-list-poll {
   position: relative; }
   .side-list-poll:not(:last-child) {

@@ -245,7 +245,8 @@
       //   // }
       // });
       var q_quick_poll = dialog.open({
-        template: $templateCache.get('quick_poll'),
+        template: '<quick_poll></quick_poll>',
+        plain: true,
         controller: 'QuickPollController',
         controllerAs: 'ctrl',
         appendClassName: 'images-upload-dialog',

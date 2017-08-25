@@ -65,6 +65,8 @@
   .poll-footer .poll_item_info {
     color: #777;
     font-size: 0.85rem; }
+  .poll-footer .poll_item_info.share {
+    align-self: flex-end; }
 
 @media (max-width: 767px) {
   .poll-body .poll-body-options {

@@ -66,8 +66,10 @@
     color: #777;
     font-size: 0.85rem; }
   .poll-footer .poll_item_info.share {
-    color: #777 !important;
+    color: #777;
     margin-left: auto; }
+    .poll-footer .poll_item_info.share a {
+      color: #777; }
     .poll-footer .poll_item_info.share .quick-share-menu {
       width: 100%;
       display: flex;

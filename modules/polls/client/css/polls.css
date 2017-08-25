@@ -44,8 +44,9 @@
         float: right;
         color: #777; }
   .poll-body .poll-body-text {
-    max-height: 200px;
-    text-overflow: ellipsis;}
+    max-height: 150px;
+    text-overflow: ellipsis;
+    overflow: hidden; }
 
 
 

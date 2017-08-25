@@ -57,6 +57,7 @@
 
 @media (max-width: 767px) {
   .poll-body .poll-body-options {
+    height: auto;
     flex-direction: column;} }
 
 

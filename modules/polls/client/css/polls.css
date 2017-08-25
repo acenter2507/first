@@ -44,21 +44,24 @@
         float: right;
         color: #777; }
   .poll-body .poll-body-options {
-    height: 108px;
     display: flex;
     align-items: stretch;
     flex-direction: row; }
   .poll-body .poll-body-options .progress-box {
+    height: 108px;
     flex-grow: 1; 
     background-color: #FEAF20;}
   .poll-body .poll-body-options .chart-box {
+    height: 108px;
     width: 108px;
     background-color: #E53935; }
 
 @media (max-width: 767px) {
   .poll-body .poll-body-options {
-    height: auto;
-    flex-direction: column;} }
+    align-items: stretch;
+    flex-direction: column;}
+    .poll-body .poll-body-options .progress-box {
+      align-self: stretch;} }
 
 
 

@@ -43,7 +43,9 @@
       .poll-header .poll-info .poll-info-title .poll-info-title-menu {
         float: right;
         color: #777; }
-
+  .poll-body .poll-body-text {
+    max-height: 200px;
+    text-overflow: ellipsis; }
 
 
 

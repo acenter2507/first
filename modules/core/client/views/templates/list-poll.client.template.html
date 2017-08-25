@@ -49,10 +49,14 @@
     <!-- Tiêu đề  -->
     <a ui-sref="polls.view({ pollId: poll.slug })"><h3 class="mg12y">{{::poll.title}}</h3></a>
     <!-- Tóm tắt poll  -->
-    <div class="poll-body-text" ta-bind="text" ng-model="poll.summary" ta-readonly="true"></div>
+    <!--<div class="poll-body-text" ta-bind="text" ng-model="poll.summary" ta-readonly="true"></div>-->
     <!--<p ng-show="poll.body.length > poll.summary.length" class="poll_item_body">
       <a class="undecorated-link" ui-sref="polls.view({ pollId: poll.slug })">see more</a>
     </p>-->
+    <div class="poll-body-options">
+      <div class="progress-box"></div>
+      <div class="chart-box"></div>
+    </div>
     <!-- Các option trong poll -->
     <div class="mg10t">
       <!-- Trường hợp chưa có option nào  -->

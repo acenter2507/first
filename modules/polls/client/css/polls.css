@@ -34,7 +34,7 @@
       vertical-align: text-bottom;
       font-size: 0.85rem;
       height: 14px;
-      line-height: 14px; }
+      line-height: 0.85rem; }
       .poll-header .poll-info .poll-info-title .poll-info-title-user-name {
         font-weight: bold; }
       .poll-header .poll-info .poll-info-title .poll-info-title-time {

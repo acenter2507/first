@@ -66,7 +66,7 @@
     color: #777;
     font-size: 0.85rem; }
   .poll-footer .poll_item_info.share {
-    align-self: flex-end; }
+    margin-left: auto; }
 
 @media (max-width: 767px) {
   .poll-body .poll-body-options {

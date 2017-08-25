@@ -43,12 +43,6 @@
       .poll-header .poll-info .poll-info-title .poll-info-title-menu {
         float: right;
         color: #777; }
-      .poll-header .poll-info .poll-info-title .poll-menu-list {
-        margin: 0;
-        padding: 0; }
-        .poll-header .poll-info .poll-info-title .poll-menu-list li {
-          list-style:none;
-          cursor: pointer; }
       .poll-header a {
         text-decoration: none;
         cursor: pointer; }

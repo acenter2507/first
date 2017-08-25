@@ -74,7 +74,10 @@
           </li>
         </ul>
       </div>
-      <div class="chart-box" ng-if="poll.total > 0"></div>
+      <div class="chart-box" ng-if="poll.total > 0">
+        <canvas class="chart chart-pie" chart-data="poll.chart.data" chart-labels="poll.chart.labels" chart-options="poll.chart.options"
+            chart-colors="poll.chart.colors"></canvas>
+      </div>
     </div>
     <!-- Các option trong poll -->
     <div class="mg10t">

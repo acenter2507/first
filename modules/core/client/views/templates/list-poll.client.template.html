@@ -76,7 +76,7 @@
       </div>
       <div class="chart-box">
         <canvas class="chart chart-pie" chart-data="poll.chart.data" chart-labels="poll.chart.labels" chart-options="poll.chart.options"
-            chart-colors="poll.chart.colors"></canvas>
+          chart-colors="poll.chart.colors"></canvas>
       </div>
     </div>
   </div>
@@ -84,23 +84,30 @@
 
   <div class="poll-footer">
     <div class="poll_item_info" tooltip-placement="bottom" uib-tooltip="Likes">
-      <i class="fa fa-thumbs-o-up"></i>
-      {{::poll.likeCnt}}
+      <i class="fa fa-thumbs-o-up"></i> {{::poll.likeCnt}}
     </div>
     <div class="poll_item_info" tooltip-placement="bottom" uib-tooltip="Votes">
-      <i class="fa fa-heart-o"></i>
-      {{::poll.voteCnt}}
+      <i class="fa fa-heart-o"></i> {{::poll.voteCnt}}
     </div>
     <div class="poll_item_info" tooltip-placement="bottom" uib-tooltip="Views">
-      <i class="fa fa-eye"></i>
-      {{::poll.viewCnt}}
+      <i class="fa fa-eye"></i> {{::poll.viewCnt}}
     </div>
     <div class="poll_item_info" tooltip-placement="bottom" uib-tooltip="Comments">
-      <i class="fa fa-commenting"></i>
-      {{::poll.cmtCnt}}
+      <i class="fa fa-commenting"></i> {{::poll.cmtCnt}}
     </div>
-    <div class="poll_item_info share" tooltip-placement="bottom" uib-tooltip="Share">
-      <i class="fa fa-share"></i>
+    <div class="poll_item_info share">
+      <md-menu>
+        <md-button aria-label="Share menu" class="md-icon-button" ng-mouseenter="$mdMenu.open()">
+          <i class="fa fa-share-alt"></i>
+        </md-button>
+        <md-menu-content width="4" ng-mouseleave="$mdMenu.close()">
+          <md-menu-item ng-repeat="item in [1, 2, 3]">
+            <md-button>
+              Option {{item}}
+            </md-button>
+          </md-menu-item>
+      </md-menu>
+      
     </div>
   </div>
 

@@ -25,6 +25,7 @@
     margin-left: 0.85rem;
     height: 46px; }
     .poll-header .poll-info .poll-user-info {
+      vertical-align: top;
       height: 30px;
       line-height: 30px;
       background-color: #FF80AB; }
@@ -36,12 +37,14 @@
         vertical-align: top;
         line-height: 30px;
         font-weight: bold; }
+      .poll-header .poll-info .poll-user-info .poll-time-info {
+        vertical-align: top;
+        line-height: 30px;
+        font-size: 0.85rem;
+        color: #777; }
       .poll-header a {
         text-decoration: none;
         cursor: pointer; }
-      .poll-header .poll-info .poll-user-info .poll-time-info {
-        font-size: 0.85rem;
-        color: #777; }
 
 
 

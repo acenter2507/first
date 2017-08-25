@@ -4,7 +4,12 @@
 <div class="card-body">
 
   <div clas="poll-header">
-    <div class="poll-avatar"></div>
+    <div class="poll-avatar">
+      <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user.slug})">
+        <img src="{{::poll.user.profileImageURL}}" alt="{{::poll.user.displayName}}">
+      </a>
+      <img ng-if="!poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
+    </div>
     <div class="poll-info"></div>
   </div>
 

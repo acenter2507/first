@@ -83,17 +83,21 @@
   <hr class="mg5y">
 
   <div class="poll-footer">
-    <div class="poll_item_info" tooltip-placement="bottom" uib-tooltip="Likes">
+    <div class="poll_item_info">
       <i class="fa fa-thumbs-o-up"></i> {{::poll.likeCnt}}
+      <md-tooltip md-direction="bottom">Likes</md-tooltip>
     </div>
-    <div class="poll_item_info" tooltip-placement="bottom" uib-tooltip="Votes">
+    <div class="poll_item_info">
       <i class="fa fa-heart-o"></i> {{::poll.voteCnt}}
+      <md-tooltip md-direction="bottom">Votes</md-tooltip>
     </div>
-    <div class="poll_item_info" tooltip-placement="bottom" uib-tooltip="Views">
+    <div class="poll_item_info">
       <i class="fa fa-eye"></i> {{::poll.viewCnt}}
+      <md-tooltip md-direction="bottom">Views</md-tooltip>
     </div>
-    <div class="poll_item_info" tooltip-placement="bottom" uib-tooltip="Comments">
+    <div class="poll_item_info">
       <i class="fa fa-commenting"></i> {{::poll.cmtCnt}}
+      <md-tooltip md-direction="bottom">Comments</md-tooltip>
     </div>
     <div class="poll_item_info share">
       <md-menu md-offset="-12 20" md-position-mode="target-right target">

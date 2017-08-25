@@ -45,7 +45,7 @@
         color: #777; }
   .poll-body .poll-body-text {
     max-height: 200px;
-    white-space: nowrap;
+    word-wrap: break-word;
     text-overflow: ellipsis;
     overflow: hidden; }
 

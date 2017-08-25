@@ -47,7 +47,9 @@
   <hr class="mg5y">
   <div class="poll-body">
     <!-- Tiêu đề  -->
-    <a ui-sref="polls.view({ pollId: poll.slug })"><h3 class="mg12y">{{::poll.title}}</h3></a>
+    <a ui-sref="polls.view({ pollId: poll.slug })">
+      <h3 class="mg12y">{{::poll.title}}</h3>
+    </a>
     <!-- Tóm tắt poll  -->
     <!--<div class="poll-body-text" ta-bind="text" ng-model="poll.summary" ta-readonly="true"></div>-->
     <!--<p ng-show="poll.body.length > poll.summary.length" class="poll_item_body">
@@ -55,7 +57,22 @@
     </p>-->
     <div class="poll-body-options">
       <div class="progress-box">
-
+        <ul class="horizontal-bars type-2">
+          <li ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">
+            <div class="detail">
+              <p class="title" ng-bind="opt.title"></p>
+              <span class="value">{{:: opt.voteCnt + '/' + poll.total }}
+                <span class="text-muted small">({{ opt.progressVal }}%)</span>
+              </span>
+            </div>
+            <div class="bars">
+              <div class="progress progress-xs">
+                <div class="progress-bar progress-bar-animated" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}"
+                  aria-valuenow="{{ opt.progressVal }}" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
       <div class="chart-box" ng-if="poll.total > 0"></div>
     </div>

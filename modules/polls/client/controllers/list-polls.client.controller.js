@@ -15,9 +15,7 @@
     'ngDialog',
     'Storages',
     'Constants',
-    'UserApi',
-    '$timeout',
-    '$templateCache'
+    'UserApi'
   ];
 
   function PollsListController(
@@ -31,9 +29,7 @@
     dialog,
     Storages,
     Constants,
-    UserApi,
-    $timeout,
-    $templateCache
+    UserApi
   ) {
     var vm = this;
 

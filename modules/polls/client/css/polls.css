@@ -19,11 +19,20 @@
   background-color: #EA80FC; }
   .poll-header .poll-avatar, .poll-header .poll-avatar img {
     width: 46px;
-    height: 46px;
-    background-color: #FFF9C4; }
+    height: 46px; }
   .poll-header .poll-info {
-    height: 46px;
-    background-color: #B3E5FC; }
+    display: flex;
+    flex-direction: column;
+    margin-left: 0.85rem;
+    height: 46px; }
+    .poll-header .poll-info .poll-user-info {
+      height: 30px;
+      line-height: 30px;
+      background-color: #FF80AB; }
+    .poll-header .poll-info .poll-secure-info {
+      height: 16px;
+      line-height: 16px;
+      background-color: #FF80AB; }
 
 
 

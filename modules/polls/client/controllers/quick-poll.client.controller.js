@@ -34,7 +34,7 @@
       opts: [{
         color: Constants.colors[5]
       }, {
-        color: Constants.colors[65]
+        color: Constants.colors[75]
       }],
       category: ctrl.categorys[0]._id
     };

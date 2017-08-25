@@ -247,9 +247,6 @@
     border-radius: 3px;
     background: #e6e6e6;
     color: #7b7b7b;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
   }
   .select select::-ms-expand {
     display: none;
@@ -260,8 +257,7 @@
     background: #ccc;
   }
   .select select:focus {
-    outline: none;
-  }
+    outline: none; }
   .select select:disabled {
     opacity: 0.5;
     pointer-events: none;
@@ -373,7 +369,6 @@
   margin-left: 12px; }
 
 .materialpicker-colors {
-  -webkit-user-select: none;
   user-select: none;
   position: relative;
   border: none;

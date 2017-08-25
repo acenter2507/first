@@ -58,7 +58,7 @@
 
 @media (max-width: 767px) {
   .poll-body .poll-body-options {
-    align-items: stretch;
+    align-items: center;
     flex-direction: column;}
     .poll-body .poll-body-options .progress-box {
       align-self: stretch;} }

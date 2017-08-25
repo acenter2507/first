@@ -21,11 +21,11 @@
     height: 46px; }
   .poll-header .poll-info {
     display: flex;
-    align-self: stretch;
     flex-direction: column;
-    background-color: #FF80AB;
+    flex: 0 0 100%;
     margin-left: 0.85rem;
-    height: 46px; }
+    height: 46px;
+    background-color: #FF80AB; }
     .poll-header .poll-info .poll-info-title{
       vertical-align: top;
       height: 32px;

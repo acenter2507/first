@@ -29,17 +29,17 @@
       height: 30px;
       line-height: 30px;
       background-color: #FF80AB; }
+    .poll-header .poll-info .poll-user-info p{
+      vertical-align: text-top;
+      height: 16px;
+      line-height: 16px;}
     .poll-header .poll-info .poll-secure-info {
       height: 16px;
       line-height: 16px;
-      background-color: #FF80AB; }
+      background-color: #8C9EFF; }
       .poll-header .poll-info .poll-user-info .poll-user-name {
-        vertical-align: top;
-        line-height: 30px;
         font-weight: bold; }
       .poll-header .poll-info .poll-user-info .poll-time-info {
-        vertical-align: top;
-        line-height: 30px;
         font-size: 0.85rem;
         color: #777; }
       .poll-header a {

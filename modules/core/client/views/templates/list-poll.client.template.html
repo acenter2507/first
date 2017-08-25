@@ -12,6 +12,7 @@
     </div>
     <div class="poll-info">
       <div class="poll-user-info">
+        <p>{{::poll.user.displayName}} created on <span am-time-ago="poll.created"></span></p>
         <a class="poll-user-name" ng-if="poll.user" ui-sref="profile.info({userId: poll.user.slug})">{{::poll.user.displayName}}</a>
         <span class="poll-user-name" ng-if="!poll.user">Deleted User</span>
         <span class="poll-time-info">created on

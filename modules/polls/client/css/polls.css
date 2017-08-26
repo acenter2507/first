@@ -150,8 +150,8 @@
     flex-grow: 1;
     margin-left: 6px; }
     .mini-poll .poll-info .poll-title {
-      
-    }
+      font-size: 0.9rem;
+      font-weight: 600; }
     .mini-poll .poll-info .poll-detail {
       font-size: 0.7rem;
       color: #777; }

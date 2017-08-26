@@ -67,7 +67,7 @@
         .poll-body .poll-body-post .poll-body-activity-user .mini-avatar,
         .poll-body .poll-body-post .poll-body-activity-user .mini-avatar img {
           border-radius: 50%;
-          opacity: 0.8;
+          opacity: 0.9;
           width: 24px;
           height: 24px; }
         .poll-body .poll-body-post .poll-body-activity-user .last-comment-time {
@@ -84,6 +84,7 @@
         font-size: 0.85rem;
         line-height: 1rem;
         overflow: hidden;
+        max-height: 76px;
         width: 100%;}
         .poll-body .poll-body-post .poll-body-activity-content p {
           margin: 0; }

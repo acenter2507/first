@@ -55,7 +55,7 @@
     .poll-body .poll-body-post .poll-body-activity {
       width: 40%;
       min-height: 50px;
-      border-left: 3px solid #eee;
+      border-left: 5px solid #eee;
       display: flex;
       align-items: stretch;
       flex-direction: column;}

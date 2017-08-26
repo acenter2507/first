@@ -57,6 +57,7 @@
       min-height: 50px;
       border-left: 3px solid #eee;
       display: flex;
+      align-items: stretch;
       flex-direction: column;}
       .poll-body .poll-body-post .poll-body-activity-content {
         width: 100%;

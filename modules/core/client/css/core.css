@@ -390,7 +390,7 @@ a:hover .header-profile-image {
     background: #21527d none repeat scroll 0% 0%;
     color: #fff; }
   .tab-content {
-    padding-top: 0.85rem; }
+    padding-top: 6px; }
 
 .animated {
   animation-duration: 1s;

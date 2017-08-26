@@ -86,7 +86,7 @@
           <li ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">
             <div class="detail">
               <p class="title" ng-bind="opt.title"></p>
-              <span class="value">{{:: opt.voteCnt + '/' + poll.total }}
+              <span class="value">{{:: (opt.voteCnt | shortNumer) + '/' + (poll.total | shortNumer) }}
                 <span class="text-muted small">({{::opt.progressVal}}%)</span>
               </span>
             </div>
@@ -109,19 +109,19 @@
 
   <div class="poll-footer">
     <div class="poll_item_info">
-      <i class="fa fa-thumbs-o-up"></i> {{::poll.likeCnt}}
+      <i class="fa fa-thumbs-o-up"></i> {{::poll.likeCnt | shortNumer}}
       <md-tooltip md-direction="bottom">Likes</md-tooltip>
     </div>
     <div class="poll_item_info">
-      <i class="fa fa-heart-o"></i> {{::poll.voteCnt}}
+      <i class="fa fa-heart-o"></i> {{::poll.voteCnt | shortNumer}}
       <md-tooltip md-direction="bottom">Votes</md-tooltip>
     </div>
     <div class="poll_item_info">
-      <i class="fa fa-eye"></i> {{::poll.viewCnt}}
+      <i class="fa fa-eye"></i> {{::poll.viewCnt | shortNumer}}
       <md-tooltip md-direction="bottom">Views</md-tooltip>
     </div>
     <div class="poll_item_info">
-      <i class="fa fa-commenting-o"></i> {{::poll.cmtCnt}}
+      <i class="fa fa-commenting-o"></i> {{::poll.cmtCnt | shortNumer}}
       <md-tooltip md-direction="bottom">Comments</md-tooltip>
     </div>
     <div class="poll_item_info share">

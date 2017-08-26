@@ -31,7 +31,25 @@
         </div>
         <div class="card-body">
           <div class="card-scroll-content">
-            <div class="side-list-poll" ng-repeat="activity in Activitys.list | orderBy: '-time' track by $index">
+            <div class="mini-poll" ng-repeat="activity in Activitys.list | orderBy: '-time' track by $index">
+              <div class="poll-avatar">
+                <img src="{{activity.profileImageURL}}" alt="{{activity.displayName}}">
+              </div>
+              <div class="poll-info">
+                <div class="poll-title">
+                  <a ui-sref="profile.info({userId: activity.user})">{{::activity.displayName}}</a>
+                  <span class="text-muted font-sm">{{::activity.action}}</span>
+                  <a ui-sref="polls.view({pollId: activity.poll })">{{::activity.title}}</a>
+                </div>
+                <div class="poll-detail">
+                  <div class="poll-detail-time">
+                    <i class="fa fa-clock-o"></i>
+                    <span am-time-ago="activity.time"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="side-list-poll" ng-repeat="activity in Activitys.list | orderBy: '-time' track by $index">
               <div class="user-avatar pull-left">
                 <img src="{{activity.profileImageURL}}" alt="{{activity.displayName}}">
               </div>
@@ -40,7 +58,7 @@
               <small><strong><a class="undecorated-link" ui-sref="polls.view({pollId: activity.poll })">{{::activity.title}}</a></strong></small>
               <div class="clearfix"></div>
               <hr class="mg5t mg5b">
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -87,7 +105,7 @@
                 </div>
                 <div class="poll-info">
                   <div class="poll-title">
-                    <a ui-sref="polls.view({pollId: poll.slug})">{{::poll.title}}</a>
+                    <a ui-sref="polls.view({pollId: poll.slug})">{{::poll.title | shortNumer}}</a>
                   </div>
                   <div class="poll-detail">
                     <div class="poll-detail-time">
@@ -96,7 +114,7 @@
                     </div>
                     <div class="poll-detail-count">
                       <i class="fa fa-heart-o"></i>
-                      <span>{{:: 3222 | shortNumer}}</span>
+                      <span>{{:: poll.voteCnt | shortNumer}}</span>
                     </div>
                   </div>
                 </div>
@@ -121,7 +139,7 @@
                     </div>
                     <div class="poll-detail-count">
                       <i class="fa fa-commenting-o"></i>
-                      <span>{{:: poll.cmtCnt}}</span>
+                      <span>{{:: poll.cmtCnt | shortNumer}}</span>
                     </div>
                   </div>
                 </div>
@@ -138,7 +156,7 @@
         </div>
         <div class="card-body">
           <ul class="tags">
-            <li ng-repeat="tag in vm.tags"><a ui-sref="tags.polls({ tagId: tag.slug })" class="tag">{{::tag.name}}({{::tag.count}})</a></li>
+            <li ng-repeat="tag in vm.tags"><a ui-sref="tags.polls({ tagId: tag.slug })" class="tag">{{::tag.name}}({{::tag.count | shortNumer}})</a></li>
           </ul>
         </div>
       </div>

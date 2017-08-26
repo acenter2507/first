@@ -49,10 +49,11 @@
     display: flex;
     align-items: stretch;
     flex-direction: row; }
-    .poll-body .poll-body-post .poll-body-title{
+    .poll-body .poll-body-post .poll-body-title {
+      vertical-align: middle;
       background-color: #E53935;
       flex-grow: 1; }
-    .poll-body .poll-body-post .poll-body-activity{
+    .poll-body .poll-body-post .poll-body-activity {
       width: 40%;
       background-color: #FEAF20;
       height: 50px;

@@ -297,8 +297,8 @@ exports.findPolls = function (req, res) {
   var page = req.params.page || 0;
   var userId = req.user ? req.user._id : undefined;
   Poll.find({ isPublic: true })
+    .select('-body -update')
     .sort('-created')
-    .select('-body, -update')
     .populate('category', 'name color slug')
     .populate('user', 'displayName profileImageURL slug')
     .skip(10 * page).limit(10).exec()

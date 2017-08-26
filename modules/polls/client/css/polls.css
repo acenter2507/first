@@ -61,22 +61,20 @@
       flex-direction: column;}
       .poll-body .poll-body-post .poll-body-activity-user {
         width: 100%;
-        background-color: #FEAF20;
         padding: 6px 6px 0 6px;
         display: flex;
-        flex-direction: row;  
-        justify-content: flex-start; }
+        flex-direction: row; }
         .poll-body .poll-body-post .poll-body-activity-user .mini-avatar,
         .poll-body .poll-body-post .poll-body-activity-user .mini-avatar img {
           opacity: 0.8;
           width: 24px;
-          height: 24px;}
+          height: 24px; }
         .poll-body .poll-body-post .poll-body-activity-user .last-comment-time {
+          flex-grow: 1;
           color: #777;
           font-size: 0.75rem;
           align-self: stretch; }
       .poll-body .poll-body-post .poll-body-activity-content {
-        background-color: #E53935;
         width: 100%;}
 
   .poll-body .poll-body-options {

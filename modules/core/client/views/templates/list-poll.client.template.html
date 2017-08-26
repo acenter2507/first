@@ -62,13 +62,13 @@
             <div class="detail">
               <p class="title" ng-bind="opt.title"></p>
               <span class="value">{{:: opt.voteCnt + '/' + poll.total }}
-                <span class="text-muted small">({{ opt.progressVal }}%)</span>
+                <span class="text-muted small">({{::opt.progressVal}}%)</span>
               </span>
             </div>
             <div class="bars">
               <div class="progress progress-xs">
-                <div class="progress-bar progress-bar-animated" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}"
-                  aria-valuenow="{{ opt.progressVal }}" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}"
+                  aria-valuenow="{{::opt.progressVal}}" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
             </div>
           </li>

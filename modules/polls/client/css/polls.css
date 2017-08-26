@@ -66,13 +66,17 @@
         flex-direction: row; }
         .poll-body .poll-body-post .poll-body-activity-user .mini-avatar,
         .poll-body .poll-body-post .poll-body-activity-user .mini-avatar img {
+          border-radius: 50%;
           opacity: 0.8;
           width: 24px;
           height: 24px; }
         .poll-body .poll-body-post .poll-body-activity-user .last-comment-time {
+          margin-left: 0.75rem;
+          line-height: 24px;
+          vertical-align: middle;
           flex-grow: 1;
           color: #777;
-          font-size: 0.75rem;
+          font-size: 0.85rem;
           align-self: stretch; }
       .poll-body .poll-body-post .poll-body-activity-content {
         width: 100%;}

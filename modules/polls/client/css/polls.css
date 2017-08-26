@@ -87,7 +87,7 @@
         font-size: 0.85rem;
         line-height: 1rem;
         overflow: hidden;
-        max-height: 76px;
+        max-height: 74px;
         width: 100%;}
         .poll-body .poll-body-post .poll-body-activity-content p {
           margin: 0; }
@@ -151,7 +151,7 @@
     margin-left: 6px; }
     .mini-poll .poll-info .poll-title {
       font-size: 0.9rem;
-      font-weight: 600; }
+      font-weight: 500; }
     .mini-poll .poll-info .poll-detail {
       display: flex;
       flex-direction: row;

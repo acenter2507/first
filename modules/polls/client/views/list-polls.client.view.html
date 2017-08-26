@@ -76,63 +76,55 @@
                   </div>
                 </div>
               </div>
-              <!-- <div class="side-list-poll" ng-repeat="poll in vm.populars.likes">
-                <div class="user-avatar pull-left">
-                  <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user.slug})">
-                  <img src="{{poll.user.profileImageURL}}" alt="{{poll.user.displayName}}">
-                  </a>
-                  <img ng-if="!poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
-                </div>
-                <div class="side-list-body">
-                  <h4 class="side-list-title">
-                    <a class="undecorated-link" ui-sref="polls.view({pollId: poll.slug})" ng-bind="poll.title" autoAdjust></a>
-                  </h4>
-                  <div class="side-list-entry">
-                    <small am-time-ago="poll.created"></small>
-                  </div>
-                </div>
-                <div class="clearfix"></div>
-                <hr class="mg5t mg5b">
-              </div> -->
             </uib-tab>
             <uib-tab index="2" heading="Votes">
-              <div class="side-list-poll" ng-repeat="poll in vm.populars.votes">
-                <div class="user-avatar pull-left">
+              <div class="mini-poll" ng-repeat="poll in vm.populars.votes">
+                <div class="poll-avatar">
                   <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user.slug})">
-                  <img src="{{::poll.user.profileImageURL}}" alt="{{::poll.user.displayName}}">
+                    <img src="{{poll.user.profileImageURL}}" alt="{{poll.user.displayName}}">
                   </a>
                   <img ng-if="!poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
                 </div>
-                <div class="side-list-body">
-                  <h4 class="side-list-title">
-                    <a class="undecorated-link" ui-sref="polls.view({pollId: poll.slug})" ng-bind="poll.title" autoAdjust></a>
-                  </h4>
-                  <div class="side-list-entry">
-                    <small am-time-ago="poll.created"></small>
+                <div class="poll-info">
+                  <div class="poll-title">
+                    <a ui-sref="polls.view({pollId: poll.slug})">{{::poll.title}}</a>
+                  </div>
+                  <div class="poll-detail">
+                    <div class="poll-detail-time">
+                      <i class="fa fa-clock-o"></i>
+                      <span am-time-ago="poll.created"></span>
+                    </div>
+                    <div class="poll-detail-count">
+                      <i class="fa fa-heart-o"></i>
+                      <span>{{:: poll.voteCnt}}</span>
+                    </div>
                   </div>
                 </div>
-                <div class="clearfix"></div>
-                <hr class="mg5t mg5b">
               </div>
             </uib-tab>
             <uib-tab index="3" heading="Comments">
-              <div class="side-list-poll" ng-repeat="poll in vm.populars.cmts">
-                <div class="user-avatar pull-left">
+              <div class="mini-poll" ng-repeat="poll in vm.populars.cmts">
+                <div class="poll-avatar">
                   <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user.slug})">
-                  <img src="{{::poll.user.profileImageURL}}" alt="{{::poll.user.displayName}}">
+                    <img src="{{poll.user.profileImageURL}}" alt="{{poll.user.displayName}}">
                   </a>
                   <img ng-if="!poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
                 </div>
-                <div class="side-list-body">
-                  <h4 class="side-list-title">
-                    <a class="undecorated-link" ui-sref="polls.view({pollId: poll.slug})" ng-bind="poll.title" autoAdjust></a>
-                  </h4>
-                  <div class="side-list-entry">
-                    <small am-time-ago="poll.created"></small>
+                <div class="poll-info">
+                  <div class="poll-title">
+                    <a ui-sref="polls.view({pollId: poll.slug})">{{::poll.title}}</a>
+                  </div>
+                  <div class="poll-detail">
+                    <div class="poll-detail-time">
+                      <i class="fa fa-clock-o"></i>
+                      <span am-time-ago="poll.created"></span>
+                    </div>
+                    <div class="poll-detail-count">
+                      <i class="fa fa-commenting-o"></i>
+                      <span>{{:: poll.cmtCnt}}</span>
+                    </div>
                   </div>
                 </div>
-                <div class="clearfix"></div>
-                <hr class="mg5t mg5b">
               </div>
             </uib-tab>
           </uib-tabset>

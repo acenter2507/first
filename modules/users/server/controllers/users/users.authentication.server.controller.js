@@ -72,7 +72,6 @@ exports.signup = function (req, res) {
 exports.signin = function (req, res, next) {
   passport.authenticate('local', function (err, user, info) {
     if (err || !user) {
-      console.log(err);
       res.status(400).send(info);
     } else {
 
@@ -88,7 +87,6 @@ exports.signin = function (req, res, next) {
       user.password = undefined;
       user.salt = undefined;
       req.login(user, function (err) {
-        console.log(err);
         if (err) {
           res.status(400).send(err);
         } else {

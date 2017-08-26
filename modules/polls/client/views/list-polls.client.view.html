@@ -60,7 +60,15 @@
                   </a>
                   <img ng-if="!poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
                 </div>
-                <div class="poll-info">a</div>
+                <div class="poll-info">
+                  <div class="poll-title">
+                    <a ui-sref="polls.view({pollId: poll.slug})">{{::poll.title}}</a>
+                  </div>
+                  <div class="poll-report">
+                    <i class="fa fa-clock-o"></i>
+                    <span am-time-ago="poll.created"></span>
+                  </div>
+                </div>
               </div>
               <!-- <div class="side-list-poll" ng-repeat="poll in vm.populars.likes">
                 <div class="user-avatar pull-left">

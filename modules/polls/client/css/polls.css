@@ -146,8 +146,15 @@
   .mini-poll .poll-info {
     display: flex;
     flex-direction: column;
+    align-items: stretch;
     flex-grow: 1;
     margin-left: 6px; }
+    .mini-poll .poll-info .poll-title {
+      
+    }
+    .mini-poll .poll-info .poll-detail {
+      font-size: 0.7rem;
+      color: #777; }
 
 .side-list-poll {
   position: relative; }

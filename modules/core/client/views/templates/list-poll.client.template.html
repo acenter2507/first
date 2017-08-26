@@ -70,8 +70,8 @@
           </div>
         </div>
         <div class="poll-body-activity-content">
-          <p class="text-muted" ng-if="poll.lastCmt._id">{{::poll.lastCmt.body}}</p>
-          <p class="text-muted" ng-if="!poll.lastCmt._id">No one has commented</p>
+          <p class="text-justify" ng-if="poll.lastCmt._id">{{::poll.lastCmt.body}}</p>
+          <p ng-if="!poll.lastCmt._id">No one has commented</p>
         </div>
       </div>
     </div>

@@ -79,7 +79,14 @@
           font-size: 0.85rem;
           align-self: stretch; }
       .poll-body .poll-body-post .poll-body-activity-content {
+        color: #777;
+        padding: 6px;
+        font-size: 0.85rem;
+        line-height: 1rem;
+        overflow: hidden;
         width: 100%;}
+        .poll-body .poll-body-post .poll-body-activity-content p {
+          margin: 0; }
 
   .poll-body .poll-body-options {
     display: flex;

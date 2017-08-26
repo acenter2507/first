@@ -52,7 +52,9 @@
           <h4 class="mg12y">{{::poll.title}}</h4>
         </a>
       </div>
-      <div class="poll-body-activity d-sm-down-none">
+      <div class="poll-body-activity d-sm-down-none" ng-style="{'border-color': poll.category.color}">
+        <div class="poll-body-activity-user"></div>
+        <div class="poll-body-activity-content"></div>
       </div>
     </div>
     <!-- Tóm tắt poll  -->

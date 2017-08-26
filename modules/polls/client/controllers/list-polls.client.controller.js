@@ -86,7 +86,6 @@
             vm.busy = false;
             return;
           }
-          console.log(res.data);
           // Xử lý poll trước khi hiển thị màn hình
           var promises = [];
           res.data.forEach(poll => {
@@ -117,6 +116,7 @@
     function get_populars() {
       Action.get_populars(0)
         .then(res => {
+          console.log(res.data);
           vm.populars = res.data;
         })
         .catch(err => {

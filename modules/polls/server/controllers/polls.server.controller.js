@@ -297,7 +297,7 @@ exports.findPolls = function (req, res) {
   var page = req.params.page || 0;
   var userId = req.user ? req.user._id : undefined;
   Poll.find({ isPublic: true })
-    .select('-body -update')
+    .select('-body -updated -share_code')
     .sort('-created')
     .populate('category', 'name color slug')
     .populate('user', 'displayName profileImageURL slug')
@@ -308,7 +308,11 @@ exports.findPolls = function (req, res) {
       var counter = 0;
       polls.forEach(function (instance, index, array) {
         array[index] = instance.toObject();
-        get_full_by_pollId(array[index]._id, userId)
+        get_last_cmt_by_pollId(array[index]._id)
+          .then(result => {
+            array[index].lastCmt = result;
+            return get_full_by_pollId(array[index]._id, userId);
+          })
           .then(result => {
             var opts = __.map(result.opts, function (obj) {
               return __.pick(obj, '_id', 'color', 'title');
@@ -885,6 +889,24 @@ function get_full_by_pollId(pollId, userId) {
       })
       .catch(err => {
         return resolve(err);
+      });
+  });
+}
+
+// Lấy full info của poll và các thông tin của user hiện hành với poll
+function get_last_cmt_by_pollId(pollId) {
+  return new Promise((resolve, reject) => {
+    Cmt.find({ poll: pollId })
+      .sort('-updated')
+      .select('body updated ')
+      .populate('user', 'displayName profileImageURL slug')
+      .limit(1)
+      .exec((err, cmt) => {
+        if (err) {
+          return reject(err);
+        } else {
+          return resolve(cmt);
+        }
       });
   });
 }

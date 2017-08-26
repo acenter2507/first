@@ -46,10 +46,15 @@
   </div>
   <hr class="mg5y">
   <div class="poll-body">
-    <!-- Tiêu đề  -->
-    <a ui-sref="polls.view({ pollId: poll.slug })">
-      <h3 class="mg12y">{{::poll.title}}</h3>
-    </a>
+    <div class="poll-body-post">
+      <div class="poll-body-title">
+        <a ui-sref="polls.view({ pollId: poll.slug })">
+          <h4 class="mg12y">{{::poll.title}}</h4>
+        </a>
+      </div>
+      <div class="poll-body-activity d-sm-down-none">
+      </div>
+    </div>
     <!-- Tóm tắt poll  -->
     <!--<div class="poll-body-text" ta-bind="text" ng-model="poll.summary" ta-readonly="true"></div>-->
     <!--<p ng-show="poll.body.length > poll.summary.length" class="poll_item_body">
@@ -67,8 +72,8 @@
             </div>
             <div class="bars">
               <div class="progress progress-xs">
-                <div class="progress-bar" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}"
-                  aria-valuenow="{{::opt.progressVal}}" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}" aria-valuenow="{{::opt.progressVal}}"
+                  aria-valuemin="0" aria-valuemax="100"></div>
               </div>
             </div>
           </li>

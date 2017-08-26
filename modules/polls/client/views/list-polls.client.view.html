@@ -65,8 +65,14 @@
                     <a ui-sref="polls.view({pollId: poll.slug})">{{::poll.title}}</a>
                   </div>
                   <div class="poll-detail">
-                    <i class="fa fa-clock-o"></i>
-                    <span am-time-ago="poll.created"></span>
+                    <div class="poll-detail-time">
+                      <i class="fa fa-clock-o"></i>
+                      <span am-time-ago="poll.created"></span>
+                    </div>
+                    <div class="poll-detail-count">
+                      <i class="fa fa-like"></i>
+                      <span>{{:: poll.likeCnt}}</span>
+                    </div>
                   </div>
                 </div>
               </div>

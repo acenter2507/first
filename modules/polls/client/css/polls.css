@@ -153,8 +153,13 @@
       font-size: 0.9rem;
       font-weight: 600; }
     .mini-poll .poll-info .poll-detail {
-      font-size: 0.7rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      font-size: 0.75rem;
       color: #777; }
+    .mini-poll .poll-info .poll-detail .poll-detail-count {
+      margin-left: auto; }
 
 .side-list-poll {
   position: relative; }

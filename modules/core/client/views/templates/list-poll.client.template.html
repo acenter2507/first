@@ -54,10 +54,18 @@
       </div>
       <div class="poll-body-activity d-sm-down-none" ng-style="{'border-color': poll.category.color}">
         <div class="poll-body-activity-user">
-          
+          <div class="mini-avatar">
+            <a ng-if="lastCmt.user._id" ui-sref="profile.info({userId: lastCmt.user.slug})">
+              <img src="{{lastCmt.user.profileImageURL}}" alt="{{lastCmt.user.displayName}}">
+            </a>
+            <img ng-if="!lastCmt.user._id" src="modules/users/client/img/profile/default.png" alt="Deleted User">
+          </div>
+          <div class="last-comment-time">
+            about<span am-time-ago="lastCmt.updated"></span>
+          </div>
         </div>
         <div class="poll-body-activity-content">
-          <p class="text-muted">{{::lastCmt[0].body}}</p>
+          <p class="text-muted">{{::lastCmt.body}}</p>
         </div>
       </div>
     </div>

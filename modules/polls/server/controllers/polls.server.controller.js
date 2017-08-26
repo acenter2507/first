@@ -310,7 +310,7 @@ exports.findPolls = function (req, res) {
         array[index] = instance.toObject();
         get_last_cmt_by_pollId(array[index]._id)
           .then(result => {
-            array[index].lastCmt = result;
+            array[index].lastCmt = result || {};
             return get_full_by_pollId(array[index]._id, userId);
           })
           .then(result => {
@@ -896,11 +896,10 @@ function get_full_by_pollId(pollId, userId) {
 // Lấy full info của poll và các thông tin của user hiện hành với poll
 function get_last_cmt_by_pollId(pollId) {
   return new Promise((resolve, reject) => {
-    Cmt.find({ poll: pollId })
+    Cmt.findOne({ poll: pollId })
       .sort('-updated')
-      .select('body updated ')
+      .select('body updated user')
       .populate('user', 'displayName profileImageURL slug')
-      .limit(1)
       .exec((err, cmt) => {
         if (err) {
           return reject(err);

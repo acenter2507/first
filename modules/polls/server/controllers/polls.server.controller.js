@@ -915,6 +915,7 @@ function get_polls_by_sort_and_limit(sort, limit) {
     Poll.find({ isPublic: true })
       .sort(sort)
       .populate('user', 'displayName profileImageURL slug')
+      .select('title user cmtCnt likeCnt voteCnt created slug')
       .limit(limit)
       .exec(function (err, polls) {
         if (err) {

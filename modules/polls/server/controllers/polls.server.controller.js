@@ -310,7 +310,10 @@ exports.findPolls = function (req, res) {
         array[index] = instance.toObject();
         get_full_by_pollId(array[index]._id, userId)
           .then(result => {
-            array[index].opts = result.opts;
+            var opts = __.map(result.opts, function (obj) {
+              return __.pick(obj, '_id', 'color', 'title');
+            });
+            array[index].opts = opts;
             array[index].votes = result.votes;
             array[index].voteopts = result.voteopts;
             array[index].follow = result.follow;

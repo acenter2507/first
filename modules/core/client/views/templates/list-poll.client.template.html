@@ -36,8 +36,10 @@
             </ul>
           </md-menu-content>
         </md-menu>
-        <p class="poll-info-title-close" ng-id="poll.close">
-          close at <span am-time-ago="poll.close"></span>
+        <p class="poll-info-title-close">
+          <i class="fa fa-calendar"></i>
+          <span ng-if="poll.close">Close at</span><span ng-if="poll.close" am-time-ago="poll.close"></span>
+          <span ng-if="!poll.close">Unlimit</span>
         </p>
       </div>
       <div class="poll-info-secure">

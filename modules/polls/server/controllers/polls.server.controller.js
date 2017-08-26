@@ -898,8 +898,8 @@ function get_last_cmt_by_pollId(pollId) {
   return new Promise((resolve, reject) => {
     Cmt.findOne({ poll: pollId })
       .sort('-updated')
-      .select('body updated user')
       .populate('user', 'displayName profileImageURL slug')
+      .select('body updated user')
       .exec((err, cmt) => {
         if (err) {
           return reject(err);

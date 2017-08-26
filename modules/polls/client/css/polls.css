@@ -37,7 +37,8 @@
       line-height: 12px; }
       .poll-header .poll-info .poll-info-title .poll-info-title-user-name {
         font-weight: bold; }
-      .poll-header .poll-info .poll-info-title .poll-info-title-time {
+      .poll-header .poll-info .poll-info-title .poll-info-title-time,
+      .poll-header .poll-info .poll-info-title .poll-info-title-close {
         font-size: 0.85rem;
         color: #777; }
       .poll-header .poll-info .poll-info-title .poll-info-title-menu {

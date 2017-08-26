@@ -133,11 +133,19 @@
       align-self: stretch;}
     .poll-body .poll-body-options .chart-box {
       margin-top: 0.85rem;} }
-
-
-
-
-
+.mini-poll {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  clear: both; }
+  .mini-poll .poll-avatar, .mini-poll .poll-avatar img {
+    width: 46px;
+    height: 46px; }
+  .mini-poll .poll-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-left: 0.75rem; }
 
 .side-list-poll {
   position: relative; }

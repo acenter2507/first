@@ -53,7 +53,16 @@
         <div class="card-body pdnt">
           <uib-tabset justified="true">
             <uib-tab index="1" heading="Likes">
-              <div class="side-list-poll" ng-repeat="poll in vm.populars.likes">
+              <div class="mini-poll" ng-repeat="poll in vm.populars.likes">
+                <div class="poll-avatar">
+                  <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user.slug})">
+                    <img src="{{poll.user.profileImageURL}}" alt="{{poll.user.displayName}}">
+                  </a>
+                  <img ng-if="!poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
+                </div>
+                <div class="poll-info">a</div>
+              </div>
+              <!-- <div class="side-list-poll" ng-repeat="poll in vm.populars.likes">
                 <div class="user-avatar pull-left">
                   <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user.slug})">
                   <img src="{{poll.user.profileImageURL}}" alt="{{poll.user.displayName}}">
@@ -70,7 +79,7 @@
                 </div>
                 <div class="clearfix"></div>
                 <hr class="mg5t mg5b">
-              </div>
+              </div> -->
             </uib-tab>
             <uib-tab index="2" heading="Votes">
               <div class="side-list-poll" ng-repeat="poll in vm.populars.votes">
@@ -130,8 +139,8 @@
     </div>
     <!-- LEFT -->
     <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-lg-pull-9 pdn d-sm-down-none"> -->
-      <!-- Category -->
-      <!-- <div class="card">
+    <!-- Category -->
+    <!-- <div class="card">
         <div class="card-header">
           <strong class="card-title">Categorys</strong>
           <small class="card-link"><a class="undecorated-link" ui-sref="categorys.list">View all</a></small>
@@ -145,8 +154,8 @@
           </li>
         </ul>
       </div> -->
-      <!-- Bookmark -->
-      <!-- <div class="card" ng-if="isLogged && vm.bookmarks.length > 0">
+    <!-- Bookmark -->
+    <!-- <div class="card" ng-if="isLogged && vm.bookmarks.length > 0">
         <div class="card-header">
           <strong class="card-title">Bookmarks</strong>
           <small class="card-link"><a class="undecorated-link" ui-sref="profile.bookmarks({ userId: user.slug })">View all</a></small>

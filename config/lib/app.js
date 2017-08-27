@@ -15,6 +15,7 @@ function seedDB() {
     console.log(chalk.bold.red('Warning:  Database seeding is turned on'));
     seed.start();
   }
+  job.start();
 }
 
 // Initialize Models
@@ -54,8 +55,6 @@ module.exports.start = function start(callback) {
       if (config.meanjs['meanjs-version'])
         console.log(chalk.green('MEAN.JS version:\t\t\t' + config.meanjs['meanjs-version']));
       console.log('--');
-
-      job.start();
 
       if (callback) callback(app, db, config);
     });

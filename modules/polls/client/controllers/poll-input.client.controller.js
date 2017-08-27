@@ -162,6 +162,7 @@
 
     ctrl.validateCloseDate = () => {
       console.log(ctrl.poll.close);
+      return false;
       if (!ctrl.poll.close) {
         return true;
       }

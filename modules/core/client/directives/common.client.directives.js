@@ -8,8 +8,7 @@ angular
   .directive('backToTop', backToTopDirective)
   .directive('button', asidePanelToggleDirective)
   .directive('a', asidePanelToggleDirective)
-  .directive('imagePreview', imagePreviewDirective)
-  .directive('p', imageFullScreenDirective);
+  .directive('imagePreview', imagePreviewDirective);
 
 //Prevent click if href="#"
 function preventClickDirective() {
@@ -164,30 +163,5 @@ function imagePreviewDirective($window) {
       };
       img.src = event.target.result;
     }
-  }
-}
-
-imageFullScreenDirective.$inject = ['ngDialog'];
-function imageFullScreenDirective(ngDialog) {
-  var directive = {
-    restrict: 'E',
-    link: link
-  };
-  return directive;
-
-  function link(scope, element, attrs) {
-    $(element).click(() => {
-      console.log('aslkjdfalsjdlaksjd');
-    });
-    // element.bind('click', function () {
-    //   if (element.hasClass('full-screen')) {
-    //     var src = element.attr('src');
-    //     var template = '<img src="' + src + '">';
-    //     ngDialog.open({
-    //       template: template,
-    //       plain: true
-    //     });
-    //   }
-    // });
   }
 }

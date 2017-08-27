@@ -9,7 +9,7 @@ angular
   .directive('button', asidePanelToggleDirective)
   .directive('a', asidePanelToggleDirective)
   .directive('imagePreview', imagePreviewDirective)
-  .directive('fullScreen', imageFullScreenDirective);
+  .directive('img', imageFullScreenDirective);
 
 //Prevent click if href="#"
 function preventClickDirective() {
@@ -176,13 +176,16 @@ function imageFullScreenDirective(ngDialog) {
   return directive;
 
   function link(scope, element, attrs) {
+    $(element).hide();
     element.on('click', function (e) {
       console.log(element.src);
-      var template = '<img src="' + element.src + '">';
-      ngDialog.open({
-        template: template,
-        plain: true
-      });
+      if (element.hasClass('full-screen')) {
+        var template = '<img src="' + element.src + '">';
+        ngDialog.open({
+          template: template,
+          plain: true
+        });
+      }
     });
   }
 }

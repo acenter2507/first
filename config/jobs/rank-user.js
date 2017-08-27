@@ -25,7 +25,7 @@ exports.excute = function () {
     .catch(err => {
       console.log(err);
     });
-}
+};
 
 function get_users() {
   return new Promise((resolve, reject) => {

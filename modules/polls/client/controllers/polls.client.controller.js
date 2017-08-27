@@ -723,7 +723,6 @@
             toast.error(err.message, 'Error!');
           });
       } else {
-        console.log('So early to update');
         if (!ctrl.task_queue.is_watting) {
           ctrl.task_queue.is_watting = true;
           ctrl.excute_timer = $timeout(excute_task, 2000);

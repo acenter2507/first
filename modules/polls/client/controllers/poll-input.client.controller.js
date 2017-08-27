@@ -286,5 +286,8 @@
       delete ctrl.poll.close;
     };
 
+    $scope.change = () => {
+      console.log(ctrl.poll.close);
+    }
   }
 })();

@@ -47,7 +47,7 @@
           <div uib-collapse="moreCollapse">
             <!-- Close time -->
             <div class="form-group">
-              <div class="input-group" today="true" moment-picker="ctrl.poll.close" format="YYYY/MM/DD HH:mm" start-view="month" additions="{ bottom: 'bottom-template-url' }">
+              <div class="input-group" today="true" moment-picker="ctrl.poll.close" format="YYYY/MM/DD HH:mm" start-view="month" additions="{ bottom: 'bottom-template-url' }" ng-change="change()">
                 <input class="form-control" placeholder="Close poll at" ng-model="ctrl.poll.close" readonly="true">
                 <span class="input-group-addon span-link"><i class="fa fa-calendar"></i></span>
               </div>

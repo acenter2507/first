@@ -78,7 +78,6 @@
       });
       Socket.on('opts_request', res => {
         Opts.get({ optId: res }, _opt => {
-          console.log(_opt);
           ctrl.opts.push(_opt);
         });
       });

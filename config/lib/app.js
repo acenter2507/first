@@ -7,6 +7,7 @@ var config = require('../config'),
   mongoose = require('./mongoose'),
   express = require('./express'),
   chalk = require('chalk'),
+  job = require('./job'),
   seed = require('./seed');
 
 function seedDB() {
@@ -53,6 +54,8 @@ module.exports.start = function start(callback) {
       if (config.meanjs['meanjs-version'])
         console.log(chalk.green('MEAN.JS version:\t\t\t' + config.meanjs['meanjs-version']));
       console.log('--');
+
+      job.start();
 
       if (callback) callback(app, db, config);
     });

@@ -78,20 +78,9 @@
       });
       Socket.on('opts_request', res => {
         Opts.get({ optId: res }, _opt => {
+          console.log(_opt);
           ctrl.opts.push(_opt);
         });
-        // Opts.get(res).$promise
-        //   .then(res => {
-        //     ctrl.opts.push(res);
-        //   });
-        // Action.get_poll(ctrl.poll._id)
-        //   .then(_poll => {
-        //     ctrl.poll = _poll;
-        //     ctrl.opts = ctrl.poll.opts;
-        //     $scope.$apply();
-        //   }, err => {
-        //     toast.error(err.message, 'Error!');
-        //   });
       });
       $scope.$on('$destroy', function () {
         Socket.emit('unsubscribe', {

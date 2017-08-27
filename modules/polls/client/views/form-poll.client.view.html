@@ -85,7 +85,7 @@
           </div>
           <!-- Option -->
           <uib-accordion close-others="true">
-            <uib-accordion-group ng-repeat="opt in ctrl.opts | orderBy: 'create'" heading="{{opt.title}}" panel-class="{{ ctrl.opt_class(opt) }}">
+            <uib-accordion-group ng-repeat="opt in ctrl.opts | orderBy: 'create'" heading="{{opt.title}}" panel-class="{{'custom-panel ' + opt.status === 1 ? 'public' : '' + opt.status === 2 ? 'waiting' : ''}}">
               <span>
                 <a ng-click="ctrl.remove_opt(opt)">Remove</a>
                 <a class="mg10l" ng-if="opt.status == 1" ng-click="ctrl.input_opt(opt)">Edit</a>

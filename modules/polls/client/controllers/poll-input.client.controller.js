@@ -194,12 +194,6 @@
     // OPTIONS
     ctrl.tmp_opt = {};
     ctrl.show_colorpicker = false;
-    ctrl.opt_class = opt => {
-      var classStr = 'custom-panel ';
-      classStr += opt.status === 1 ? 'public' : '';
-      classStr += opt.status === 2 ? 'waiting' : '';
-      return classStr;
-    };
     ctrl.input_opt = opt => {
       ctrl.tmp_opt = (opt) ? opt : { poll: ctrl.poll._id, title: '', body: '', status: 1 };
       angular.element('body').toggleClass('aside-panel-open');

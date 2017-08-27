@@ -165,7 +165,6 @@
       //   });
       // });
       Socket.on('poll_vote', res => {
-        ctrl.task_queue.is_has_new = true;
         excute_task();
       });
       Socket.on('poll_delete', res => {
@@ -203,6 +202,7 @@
         Socket.removeListener('poll_delete');
         Socket.removeListener('poll_update');
         Socket.removeListener('opts_update');
+        $timeout.cancel(ctrl.excute_timer);
       });
     }
 
@@ -686,13 +686,13 @@
     };
 
     ctrl.task_queue = {
-      is_has_new: false,
+      is_watting: false,
       last_task_time: 0
     };
     ctrl.excute_timer;
     function excute_task() {
       var now = new Date().getTime();
-      if (now - ctrl.task_queue.last_task_time > 2000 && ctrl.task_queue.is_has_new) {
+      if (now - ctrl.task_queue.last_task_time > 2000) {
         Action.get_voteopts(ctrl.poll._id)
           .then(res => { // lấy thông tin vote
             ctrl.chart = {
@@ -713,23 +713,24 @@
               ctrl.chart.data.push(opt.voteCnt);
             });
             ctrl.task_queue.last_task_time = now;
-            ctrl.task_queue.is_has_new = false;
+            ctrl.task_queue.is_watting = false;
             $timeout.cancel(ctrl.excute_timer);
           })
           .catch(err => {
             ctrl.task_queue.last_task_time = now;
-            ctrl.task_queue.is_has_new = false;
+            ctrl.task_queue.is_watting = false;
             $timeout.cancel(ctrl.excute_timer);
             toast.error(err.message, 'Error!');
           });
       } else {
         console.log('So early to update');
-        ctrl.excute_timer = $timeout(excute_task, 2000);
-        $scope.$on('$destroy', () => {
-          $timeout.cancel(ctrl.excute_timer);
-        });
-      }
+        if (!ctrl.task_queue.is_watting) {
+          ctrl.task_queue.is_watting = true;
+          ctrl.excute_timer = $timeout(excute_task, 2000);
+        }
+      });
     }
-
   }
+
+}
 })();

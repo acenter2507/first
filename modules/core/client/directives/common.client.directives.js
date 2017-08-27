@@ -168,7 +168,7 @@ function imagePreviewDirective($window) {
 }
 
 imageFullScreenDirective.$inject = ['ngDialog'];
-function imageFullScreenDirective() {
+function imageFullScreenDirective(ngDialog) {
   var directive = {
     restrict: 'E',
     link: link

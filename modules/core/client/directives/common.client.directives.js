@@ -176,15 +176,18 @@ function imageFullScreenDirective(ngDialog) {
   return directive;
 
   function link(scope, element, attrs) {
-    element.bind('click', function () {
-      if (element.hasClass('full-screen')) {
-        var src = element.attr('src');
-        var template = '<img src="' + src + '">';
-        ngDialog.open({
-          template: template,
-          plain: true
-        });
-      }
+    $(element).click(() => {
+      console.log('aslkjdfalsjdlaksjd');
     });
+    // element.bind('click', function () {
+    //   if (element.hasClass('full-screen')) {
+    //     var src = element.attr('src');
+    //     var template = '<img src="' + src + '">';
+    //     ngDialog.open({
+    //       template: template,
+    //       plain: true
+    //     });
+    //   }
+    // });
   }
 }

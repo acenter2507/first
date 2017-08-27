@@ -116,7 +116,6 @@
     function get_populars() {
       Action.get_populars(0)
         .then(res => {
-          console.log(res.data);
           vm.populars = res.data;
         })
         .catch(err => {

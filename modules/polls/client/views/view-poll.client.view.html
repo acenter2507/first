@@ -5,15 +5,15 @@
       <div class="card" id="poll_title_card">
         <div class="card-body">
           <p>
-            <i ng-class="['fa', ctrl.poll.category.icon]"></i>&nbsp;
-            <a class="undecorated-link" ui-sref="categorys.polls({ categoryId: ctrl.poll.category.slug })">
-            {{ctrl.poll.category.name}}
+            <i ng-class="['fa', ctrl.poll.category.icon]"></i>
+            <a ui-sref="categorys.polls({ categoryId: ctrl.poll.category.slug })">
+            {{::ctrl.poll.category.name}}
           </a>
-            <a class="undecorated-link pull-right" ng-click="ctrl.follow_poll()" ng-show="ctrl.follow._id">
+            <a class="pull-right" ng-click="ctrl.follow_poll()" ng-if="ctrl.follow._id">
             <i class="fa fa-rss"></i> Unfollow
-            <md-tooltip md-direction="bottom">Following this poll</md-tooltip>
+            <md-tooltip md-direction="bottom">You'r following this poll</md-tooltip>
           </a>
-            <a class="undecorated-link pull-right" ng-click="ctrl.follow_poll()" ng-hide="ctrl.follow._id">
+            <a class="pull-right" ng-click="ctrl.follow_poll()" ng-if="!ctrl.follow._id">
             <i class="fa fa-rss"></i> Follow
             <md-tooltip md-direction="bottom">You not follow this poll yet</md-tooltip>
           </a>
@@ -24,7 +24,53 @@
       <!-- First post -->
       <div class="card" id="poll_first_post_card">
         <div class="card-body">
-          <div clas="post-header">
+          <div class="poll-header">
+            <div class="poll-avatar">
+              <a ng-if="ctrl.poll.user" ui-sref="profile.info({userId: ctrl.poll.user.slug})">
+                <img src="{{ctrl.poll.user.profileImageURL}}" alt="{{ctrl.poll.user.displayName}}">
+              </a>
+              <img ng-if="!ctrl.poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
+            </div>
+            <div class="poll-info">
+              <div class="poll-info-title">
+                <a class="poll-info-title-user-name" ng-if="ctrl.poll.user" ui-sref="profile.info({userId: ctrl.poll.user.slug})">{{::ctrl.poll.user.displayName}}</a>
+                <span class="poll-info-title-user-name" ng-if="!ctrl.poll.user">Deleted User</span>
+                <span class="poll-info-title-time">created on
+                    <span am-time-ago="ctrl.poll.created"></span>
+                </span>
+                <md-menu md-offset="-12 20" md-position-mode="target-right target">
+                  <a class="poll-info-title-menu" ng-click="$mdMenu.open($event)" aria-label="Open menu"><i class="icon-options"></i></a>
+                  <md-menu-content>
+                    <ul class="menu-list">
+                      <li ng-if="isLogged">
+                        <a ng-click="ctrl.follow_poll()"><i class="fa fa-rss"></i>&nbsp;{{(ctrl.follow._id) ? 'Unfollow' : 'Follow'}}</a>
+                      </li>
+                      <li ng-if="isLogged && !ctrl.poll.isCurrentUserOwner && !ctrl.reported"><a class="undecorated-link" ng-click="ctrl.report_poll()"><i class="fa fa-exclamation-circle"></i>&nbsp;Report poll</a></li>
+                      <li ng-if="ctrl.poll.isCurrentUserOwner || ctrl.poll.canEdit"><a class="undecorated-link" ui-sref="polls.edit({ pollId: ctrl.poll.slug })"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
+                      <li ng-if="ctrl.poll.isCurrentUserOwner || ctrl.poll.canEdit"><a class="undecorated-link" ng-click="ctrl.remove()"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
+                      <li ng-if="isLogged && !ctrl.poll.isCurrentUserOwner && !ctrl.bookmarked"><a class="undecorated-link" ng-click="ctrl.bookmark_poll()"><i class="fa fa-bookmark"></i>&nbsp;Bookmark poll</a></li>
+                      <li ng-if="ctrl.poll.isCurrentUserOwner"><a class="undecorated-link" ng-click="ctrl.share()"><i class="fa fa-share-alt"></i>&nbsp;Share</a></li>
+                    </ul>
+                  </md-menu-content>
+                </md-menu>
+                <p class="poll-info-title-close">
+                  <i class="fa fa-calendar"></i>
+                  <span ng-if="ctrl.poll.close">Close <span am-time-ago="ctrl.poll.close"></span></span>
+                  <span ng-if="!ctrl.poll.close">Unlimit</span>
+                </p>
+              </div>
+              <div class="poll-info-secure">
+                <span ng-if="ctrl.poll.allow_guest" class="fa fa-globe"><md-tooltip md-direction="bottom">This poll is public</md-tooltip></span>
+                <span ng-if="!ctrl.poll.allow_guest" class="fa fa-users"><md-tooltip md-direction="bottom">Only user can vote</md-tooltip></span>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+          <!-- <div clas="post-header">
             <div class="user-avatar pull-left">
               <a ui-sref="profile.info({userId: ctrl.poll.user.slug})" ng-if="ctrl.poll.user">
               <img src="{{ctrl.poll.user.profileImageURL}}" alt="{{ctrl.poll.user.displayName}}">
@@ -67,7 +113,7 @@
           </span>
             <div class="clearfix"></div>
             <hr class="mg5t mg10b">
-          </div>
+          </div> -->
           <div class="post-body">
             <div class="text-body" ta-bind="text" ng-model="ctrl.poll.body" ta-readonly="true"></div>
             <hr class="mg10t mg10b">
@@ -145,7 +191,8 @@
           </div>
           <div class="form-group">
             <button ng-show="ctrl.opts.length > 0 && ctrl.is_can_vote" class="btn btn-info pull-right" ng-click="ctrl.save_vote()">{{(ctrl.ownVote._id) ? 'Change vote' : 'Vote'}}</button>
-            <button ng-show="isLogged && ctrl.poll.allow_add && !ctrl.poll.isCurrentUserOwner" class="btn btn-warning pull-right mg10r" ng-click="ctrl.input_opt()">Suggest options</button>
+            <button ng-show="isLogged && ctrl.poll.allow_add && !ctrl.poll.isCurrentUserOwner" class="btn btn-warning pull-right mg10r"
+              ng-click="ctrl.input_opt()">Suggest options</button>
           </div>
           <div class="clearfix"></div>
         </div>
@@ -253,7 +300,8 @@
           </div>
           <div class="form-group">
             <button ng-show="ctrl.opts.length > 0 && ctrl.is_can_vote" class="btn btn-info pull-right" ng-click="ctrl.save_vote()">{{(ctrl.ownVote._id) ? 'Change vote' : 'Vote'}}</button>
-            <button ng-show="isLogged && ctrl.poll.allow_add && !ctrl.poll.isCurrentUserOwner" class="btn btn-warning pull-right mg10r" ng-click="ctrl.input_opt()">Suggest options</button>
+            <button ng-show="isLogged && ctrl.poll.allow_add && !ctrl.poll.isCurrentUserOwner" class="btn btn-warning pull-right mg10r"
+              ng-click="ctrl.input_opt()">Suggest options</button>
           </div>
           <div class="clearfix"></div>
         </div>

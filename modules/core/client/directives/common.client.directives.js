@@ -9,7 +9,7 @@ angular
   .directive('button', asidePanelToggleDirective)
   .directive('a', asidePanelToggleDirective)
   .directive('imagePreview', imagePreviewDirective)
-  .directive('img', imageFullScreenDirective);
+  .directive('p', imageFullScreenDirective);
 
 //Prevent click if href="#"
 function preventClickDirective() {

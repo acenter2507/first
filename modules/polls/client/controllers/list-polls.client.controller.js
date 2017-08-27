@@ -99,6 +99,7 @@
           vm.polls = _.union(vm.polls, results);
           vm.page += 1;
           vm.busy = false;
+          $scope.$digest();
         })
         .catch(err => {
           vm.busy = false;

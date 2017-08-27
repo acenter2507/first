@@ -184,7 +184,7 @@
               ctrl.chart.labels.push(opt.title);
               ctrl.chart.data.push(opt.voteCnt);
             });
-            $scope.$apply();
+            // $scope.$apply();
           })
           .catch(err => {
             toast.error(err.message, 'Error!');
@@ -463,7 +463,6 @@
           ctrl.poll.likeCnt = res.likeCnt;
           ctrl.like = res.like;
           ctrl.like_processing = false;
-          // $scope.$apply();
         })
         .catch(err => {
           toast.error(err.message, 'Error!');
@@ -506,7 +505,6 @@
         Action.save_report(ctrl.poll, reason)
           .then(res => {
             ctrl.reported = (res) ? true : false;
-            $scope.$apply();
             toast.success('You have successfully reported this poll.', 'Thank you!');
           })
           .catch(err => {
@@ -523,7 +521,6 @@
       Action.save_bookmark(ctrl.poll._id)
         .then(res => {
           ctrl.bookmarked = (res) ? true : false;
-          $scope.$apply();
           toast.success('Added to bookmarks.', 'Success!');
         })
         .catch(err => {

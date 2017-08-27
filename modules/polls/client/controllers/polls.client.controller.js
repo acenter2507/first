@@ -208,7 +208,6 @@
           .then(_poll => {
             ctrl.poll = _poll;
             process_before_show();
-            // $scope.$apply();
           }, err => {
             toast.error(err.message, 'Error!');
           });

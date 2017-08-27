@@ -77,14 +77,15 @@
         $state.go('polls.list');
       });
       Socket.on('opts_request', res => {
-        Action.get_poll(ctrl.poll._id)
-          .then(_poll => {
-            ctrl.poll = _poll;
-            ctrl.opts = ctrl.poll.opts;
-            $scope.$apply();
-          }, err => {
-            toast.error(err.message, 'Error!');
-          });
+        console.log('Has request new option');
+        // Action.get_poll(ctrl.poll._id)
+        //   .then(_poll => {
+        //     ctrl.poll = _poll;
+        //     ctrl.opts = ctrl.poll.opts;
+        //     $scope.$apply();
+        //   }, err => {
+        //     toast.error(err.message, 'Error!');
+        //   });
       });
       $scope.$on('$destroy', function () {
         Socket.emit('unsubscribe', {

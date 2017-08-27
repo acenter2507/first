@@ -161,6 +161,7 @@
     };
 
     ctrl.validateCloseDate = () => {
+      console.log(ctrl.poll.close);
       if (!ctrl.poll.close) {
         return true;
       }
@@ -285,9 +286,5 @@
     $scope.clear_close_date = () => {
       delete ctrl.poll.close;
     };
-
-    $scope.change = () => {
-      console.log(ctrl.poll.close);
-    }
   }
 })();

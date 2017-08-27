@@ -41,7 +41,7 @@
       <div class="clearfix h30"></div>
     </div>
 
-    <div class="cmt_list" ng-repeat="cmt in ctrl.cmts">
+    <div class="cmt_list" ng-repeat="cmt in ctrl.cmts | orderBy: cmt_sort.val">
       <div class="user-avatar pull-left">
         <a ng-if="cmt.user" ui-sref="profile.info({userId: cmt.user.slug})">
         <img src="{{cmt.user.profileImageURL}}" alt="{{cmt.user.displayName}}">

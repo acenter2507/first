@@ -177,8 +177,8 @@ function imageFullScreenDirective(ngDialog) {
 
   function link(scope, element, attrs) {
     element.on('click', function (e) {
+      console.log(element.src);
       if (element.hasClass('full-screen')) {
-        console.log(element.src);
         var template = '<img src="' + element.src + '">';
         ngDialog.open({
           template: template,

@@ -165,29 +165,8 @@
       //   });
       // });
       Socket.on('poll_vote', res => {
-        Action.get_voteopts(ctrl.poll._id)
-          .then(res => { // lấy thông tin vote
-            ctrl.chart = {
-              type: 'pie',
-              options: { responsive: true },
-              colors: [],
-              labels: [],
-              data: []
-            };
-            ctrl.votes = res.data.votes || [];
-            ctrl.voteopts = res.data.voteopts || [];
-            ctrl.votedTotal = ctrl.voteopts.length;
-            ctrl.opts.forEach(opt => {
-              opt.voteCnt = _.where(ctrl.voteopts, { opt: opt._id }).length || 0;
-              opt.progressVal = calPercen(ctrl.votedTotal, opt.voteCnt);
-              ctrl.chart.colors.push(opt.color);
-              ctrl.chart.labels.push(opt.title);
-              ctrl.chart.data.push(opt.voteCnt);
-            });
-          })
-          .catch(err => {
-            toast.error(err.message, 'Error!');
-          });
+        ctrl.task_queue.is_has_new = true;
+        excute_task();
       });
       Socket.on('poll_delete', res => {
         toast.error('This poll has been deleted.', 'Error!');
@@ -705,5 +684,51 @@
         });
       }
     };
+
+    ctrl.task_queue = {
+      is_has_new: false,
+      last_task_time: 0
+    };
+    ctrl.excute_timer;
+    function excute_task() {
+      var now = new Date().getTime();
+      if (now - ctrl.task_queue.last_task_time > 2000 && ctrl.task_queue.is_has_new) {
+        Action.get_voteopts(ctrl.poll._id)
+          .then(res => { // lấy thông tin vote
+            ctrl.chart = {
+              type: 'pie',
+              options: { responsive: true },
+              colors: [],
+              labels: [],
+              data: []
+            };
+            ctrl.votes = res.data.votes || [];
+            ctrl.voteopts = res.data.voteopts || [];
+            ctrl.votedTotal = ctrl.voteopts.length;
+            ctrl.opts.forEach(opt => {
+              opt.voteCnt = _.where(ctrl.voteopts, { opt: opt._id }).length || 0;
+              opt.progressVal = calPercen(ctrl.votedTotal, opt.voteCnt);
+              ctrl.chart.colors.push(opt.color);
+              ctrl.chart.labels.push(opt.title);
+              ctrl.chart.data.push(opt.voteCnt);
+            });
+            ctrl.task_queue.last_task_time = now;
+            ctrl.task_queue.is_has_new = false;
+            $timeout.cancel(ctrl.excute_timer);
+          })
+          .catch(err => {
+            ctrl.task_queue.last_task_time = now;
+            ctrl.task_queue.is_has_new = false;
+            $timeout.cancel(ctrl.excute_timer);
+            toast.error(err.message, 'Error!');
+          });
+      } else {
+        ctrl.excute_timer = $timeout(excute_task, 2000);
+        $scope.$on('$destroy', () => {
+          $timeout.cancel(ctrl.excute_timer);
+        });
+      }
+    }
+
   }
 })();

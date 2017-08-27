@@ -77,7 +77,9 @@
         $state.go('polls.list');
       });
       Socket.on('opts_request', res => {
-        console.log('Has request new option', res);
+        Opts.get({ optId: res }, _opt => {
+          ctrl.opts.push(_opt);
+        });
         // Opts.get(res).$promise
         //   .then(res => {
         //     ctrl.opts.push(res);

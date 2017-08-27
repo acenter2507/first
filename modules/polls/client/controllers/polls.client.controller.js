@@ -723,6 +723,7 @@
             toast.error(err.message, 'Error!');
           });
       } else {
+        console.log('So early to update');
         ctrl.excute_timer = $timeout(excute_task, 2000);
         $scope.$on('$destroy', () => {
           $timeout.cancel(ctrl.excute_timer);

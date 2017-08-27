@@ -161,12 +161,13 @@
     };
 
     ctrl.validateCloseDate = () => {
-      console.log(ctrl.poll.close);
-      return false;
       if (!ctrl.poll.close) {
         return true;
       }
-      return moment(ctrl.poll.close).isAfter(new moment());
+      var close_d = moment(ctrl.poll.close);
+      console.log(close_d);
+      return false;
+      // return moment(ctrl.poll.close).isAfter(new moment());
     };
     ctrl.discard = () => {
       if (angular.equals(ctrl.poll, ctrl.bk_poll)) {

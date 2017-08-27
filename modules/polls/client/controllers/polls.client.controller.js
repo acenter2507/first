@@ -285,7 +285,6 @@
           ctrl.page += 1;
           ctrl.busy = false;
           if (res.data.length < 10) { ctrl.stopped = true; }
-          // $scope.$apply();
         })
         .catch(err => {
           toast.error(err.message, 'Error!');
@@ -464,7 +463,7 @@
           ctrl.poll.likeCnt = res.likeCnt;
           ctrl.like = res.like;
           ctrl.like_processing = false;
-          $scope.$apply();
+          // $scope.$apply();
         })
         .catch(err => {
           toast.error(err.message, 'Error!');

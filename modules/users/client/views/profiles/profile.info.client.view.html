@@ -1,7 +1,7 @@
 <div class="container animated fadeIn mg50b" ng-controller="ProfileInfoController">
   <div class="row">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="home">Home</a></li>
+      <li class="breadcrumb-item"><a ui-sref="home">Home</a></li>
       <!--<li class="breadcrumb-item"><a href="#">Library</a></li>-->
       <li class="breadcrumb-item active">{{profile.displayName}}</li>
     </ol>
@@ -38,7 +38,7 @@
           <span ng-if="activity.type === 1">Created: </span>
           <span ng-if="activity.type === 2">Re: </span>
           <span ng-if="activity.type === 3">Vote: </span>
-          <a class="undecorated-link" ui-sref="polls.view({ pollId: activity.slug })">{{ activity.title }}</a>
+          <a ui-sref="polls.view({ pollId: activity.slug })">{{ activity.title }}</a>
         </h3>
         <!-- Poll -->
         <div ng-if="activity.type === 1" class="text-body" ta-bind="text" ng-model="activity.body" ta-readonly="true"></div>

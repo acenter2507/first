@@ -1,8 +1,8 @@
 <div class="container animated fadeIn mg50b" ng-controller="ProfileVotesController">
   <div class="row">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="home">Home</a></li>
-      <li class="breadcrumb-item"><a class="undecorated-link" ui-sref="profile.info({ userId: profile.slug })">{{profile.displayName}}</a></li>
+      <li class="breadcrumb-item"><a ui-sref="home">Home</a></li>
+      <li class="breadcrumb-item"><a ui-sref="profile.info({ userId: profile.slug })">{{profile.displayName}}</a></li>
       <li class="breadcrumb-item active">Votes</li>
     </ol>
   </div>
@@ -17,7 +17,7 @@
           </a>
           </div>
           <span class="pull-left">
-            <strong><a class="undecorated-link" ui-sref="profile.info({userId: profile.slug})" ng-bind="profile.displayName"></a></strong>
+            <strong><a ui-sref="profile.info({userId: profile.slug})" ng-bind="profile.displayName"></a></strong>
             <small class="text-muted">voted on</small>
             <small class="text-muted" am-time-ago="vote.created"></small>
             <small ng-if="vote.updateCnt > 0" class="text-muted">last change </small>
@@ -28,7 +28,7 @@
           <hr class="mg5t mg10b">
         </div>
         <div class="post-body">
-          <h3><a class="undecorated-link" ui-sref="polls.view({ pollId: vote.poll.slug })">{{vote.poll.title}}</a></h3>
+          <h3><a ui-sref="polls.view({ pollId: vote.poll.slug })">{{vote.poll.title}}</a></h3>
           <span>Voted options:</span>
           <span ng-repeat="opt in vote.opts">
             <strong>{{ opt.title }}</strong>

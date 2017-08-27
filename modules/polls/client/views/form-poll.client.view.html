@@ -3,7 +3,7 @@
   <div class="row">
     <div class="card">
       <div class="card-header">
-        <a class="undecorated-link" ng-click="ctrl.save(ctrl.form.pollForm.$valid)">{{ctrl.poll._id ? ' Save' : ' Post'}}</a>
+        <a ng-click="ctrl.save(ctrl.form.pollForm.$valid)">{{ctrl.poll._id ? ' Save' : ' Post'}}</a>
         <a class="undecorated-link mg10l" ng-click="ctrl.discard()">Discard</a>
         <md-menu md-offset="10 30">
           <a class="undecorated-link card-link" ng-class="{ 'text-shake': !ctrl.poll.isPublic }" ng-click="$mdMenu.open($event)"><i class="fa fa-lock"></i> Poll's options</a>
@@ -87,14 +87,14 @@
           <uib-accordion close-others="true">
             <uib-accordion-group ng-repeat="opt in ctrl.opts | orderBy: 'create'" heading="{{opt.title}}" panel-class="{{ ctrl.opt_class(opt) }}">
               <span>
-                <a class="undecorated-link" ng-click="ctrl.remove_opt(opt)">Remove</a>
+                <a ng-click="ctrl.remove_opt(opt)">Remove</a>
                 <a class="undecorated-link mg10l" ng-if="opt.status == 1" ng-click="ctrl.input_opt(opt)">Edit</a>
                 <a class="undecorated-link mg10l" ng-if="opt.status == 2" ng-click="ctrl.approve_opt(opt)">Approve</a>
                 <a class="undecorated-link mg10l" ng-if="opt.status == 2" ng-click="ctrl.reject_opt(opt)">Reject</a>
               </span>
               <small class="pull-right text-muted">
                 Added by
-                <a class="undecorated-link" ui-sref="profile.info({userId: opt.user.slug})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>
+                <a ui-sref="profile.info({userId: opt.user.slug})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>
                 <span ng-if="!opt.user">Deleted User</span>on
                 <span ng-bind="opt.created | LLL_format"></span>
               </small>

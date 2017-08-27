@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-header">
-    <a class="undecorated-link" ng-click="ctrl.save(ctrl.form.pollForm.$valid)">Post</a>
+    <a ng-click="ctrl.save(ctrl.form.pollForm.$valid)">Post</a>
     <a class="undecorated-link mg10l" ng-click="ctrl.discard()">Discard</a>
     <md-menu md-position-mode="target-right target" md-offset="10 30">
       <a class="undecorated-link card-link" ng-class="{ 'text-shake': !ctrl.poll.isPublic }" ng-click="$mdMenu.open($event)"><i class="fa fa-lock"></i> Poll's options</a>
@@ -58,7 +58,7 @@
             <td class="text-left w20">
               <!--md-offset="0 30"-->
               <md-menu md-position-mode="target-left target" md-offset="15 -160">
-                <a ng-click="$mdMenu.open($event)" class="undecorated-link" aria-label="Color" href="#">
+                <a ng-click="$mdMenu.open($event)" aria-label="Color" href="#">
                   <i class="fa fa-square" ng-style="{'color': opt.color }"></i>
                 </a>
                 <md-menu-content>

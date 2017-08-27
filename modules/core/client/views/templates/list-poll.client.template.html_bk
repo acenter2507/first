@@ -53,7 +53,7 @@
     <!-- Tóm tắt poll  -->
     <!--<div class="poll-body-text" ta-bind="text" ng-model="poll.summary" ta-readonly="true"></div>-->
     <!--<p ng-show="poll.body.length > poll.summary.length" class="poll_item_body">
-      <a class="undecorated-link" ui-sref="polls.view({ pollId: poll.slug })">see more</a>
+      <a ui-sref="polls.view({ pollId: poll.slug })">see more</a>
     </p>-->
     <div class="poll-body-options" ng-if="poll.total > 0">
       <div class="progress-box">
@@ -84,7 +84,7 @@
       <!-- Trường hợp chưa có option nào  -->
       <!--<div ng-if="poll.opts.length === 0">
         <small class="text-muted">No option yet</small>
-        <a ui-sref="polls.view({ pollId: poll.slug })" class="undecorated-link" ng-if="poll.allow_add"><small>, why don't add some option</small></a>
+        <a ui-sref="polls.view({ pollId: poll.slug })" ng-if="poll.allow_add"><small>, why don't add some option</small></a>
       </div>-->
       <!-- Show 3 option nhiều vote nhất  -->
       <!--<div class="col-xs-12 pdn" ng-if="poll.total === 0">
@@ -104,7 +104,7 @@
             </div>
           </li>
           <li class="divider text-center" ng-if="poll.opts.length > 3">
-            <a class="undecorated-link" ui-sref="polls.view({ pollId: poll.slug })"><i class="icon-options"></i>
+            <a ui-sref="polls.view({ pollId: poll.slug })"><i class="icon-options"></i>
               <md-tooltip md-direction="bottom">Show more</md-tooltip>
             </a>
           </li>
@@ -127,7 +127,7 @@
             </div>
           </li>
           <li class="divider text-center" ng-if="poll.opts.length > 3">
-            <a class="undecorated-link" ui-sref="polls.view({ pollId: poll.slug })"><i class="icon-options"></i>
+            <a ui-sref="polls.view({ pollId: poll.slug })"><i class="icon-options"></i>
               <md-tooltip md-direction="bottom">Show more</md-tooltip>
             </a>
           </li>

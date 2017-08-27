@@ -251,7 +251,7 @@
               <td><span ng-bind="poll.created | date:'mediumDate'"></span></td>
               <td>
                 <div class="btn-group" role="group">
-                  <a class="undecorated-link" ui-sref="admin.polls.view({ pollId: poll._id })"><i class="icon-eye icons"></i>
+                  <a ui-sref="admin.polls.view({ pollId: poll._id })"><i class="icon-eye icons"></i>
                     <md-tooltip md-direction="bottom">View detail of poll</md-tooltip>
                   </a>
                   <a class="undecorated-link mg5l" ui-sref="polls.edit({ pollId: poll._id })"><i class="icon-note icons"></i>
@@ -304,7 +304,7 @@
               <td><span ng-bind="cmt.updated"></span></td>
               <td>
                 <div class="btn-group" role="group">
-                  <a class="undecorated-link" ui-sref="admin.polls.view({ pollId: cmt.poll._id })"><i class="icon-eye icons"></i>
+                  <a ui-sref="admin.polls.view({ pollId: cmt.poll._id })"><i class="icon-eye icons"></i>
                     <md-tooltip md-direction="bottom">View detail in poll</md-tooltip>
                   </a>
                   <a class="undecorated-link mg5l" ng-click="delete_cmt(cmt)"><i class="icon-trash icons"></i>
@@ -355,7 +355,7 @@
               <td><span ng-bind="vote.created"></span></td>
               <td>
                 <div class="btn-group" role="group">
-                  <a class="undecorated-link" ui-sref="admin.polls.view({ pollId: vote.poll._id })"><i class="icon-eye icons"></i>
+                  <a ui-sref="admin.polls.view({ pollId: vote.poll._id })"><i class="icon-eye icons"></i>
                     <md-tooltip md-direction="bottom">View detail poll</md-tooltip>
                   </a>
                   <a class="undecorated-link mg5l" ng-click="delete_vote(vote)"><i class="icon-trash icons"></i>
@@ -402,7 +402,7 @@
               <td><span ng-bind="report.created"></span></td>
               <td>
                 <div class="btn-group" role="group">
-                  <a class="undecorated-link" ui-sref="admin.polls.view({ pollId: report.poll._id })"><i class="icon-eye icons"></i>
+                  <a ui-sref="admin.polls.view({ pollId: report.poll._id })"><i class="icon-eye icons"></i>
                     <md-tooltip md-direction="bottom">View detail poll</md-tooltip>
                   </a>
                   <a class="undecorated-link mg5l" ng-click="delete_report(report)"><i class="icon-trash icons"></i>
@@ -449,7 +449,7 @@
               <td><span ng-bind="bereport.created"></span></td>
               <td>
                 <div class="btn-group" role="group">
-                  <a class="undecorated-link" ui-sref="admin.polls.view({ pollId: bereport.poll._id })"><i class="icon-eye icons"></i>
+                  <a ui-sref="admin.polls.view({ pollId: bereport.poll._id })"><i class="icon-eye icons"></i>
                     <md-tooltip md-direction="bottom">View detail poll</md-tooltip>
                   </a>
                   <a class="undecorated-link mg5l" ng-click="delete_bereport(bereport)"><i class="icon-trash icons"></i>
@@ -498,7 +498,7 @@
               <td><span ng-bind="suggest.created"></span></td>
               <td>
                 <div class="btn-group" role="group">
-                  <a class="undecorated-link" ui-sref="admin.polls.view({ pollId: suggest.poll._id })"><i class="icon-eye icons"></i>
+                  <a ui-sref="admin.polls.view({ pollId: suggest.poll._id })"><i class="icon-eye icons"></i>
                     <md-tooltip md-direction="bottom">View detail poll</md-tooltip>
                   </a>
                   <a class="undecorated-link mg5l" ng-click="delete_suggest(suggest)"><i class="icon-trash icons"></i>

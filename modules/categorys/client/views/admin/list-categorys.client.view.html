@@ -44,7 +44,7 @@
               <td class="text-center" ng-bind="category.count"></td>
               <td>
                 <div class="btn-group" role="group">
-                  <a class="undecorated-link" ui-sref="admin.categorys.view({ categoryId: category.slug })"><i class="icon-eye icons"></i></a>
+                  <a ui-sref="admin.categorys.view({ categoryId: category.slug })"><i class="icon-eye icons"></i></a>
                   <a class="undecorated-link mg5l" ui-sref="admin.categorys.edit({ categoryId: category._id })"><i class="icon-note icons"></i></a>
                   <a class="undecorated-link mg5l" ng-click="remove(category)"><i class="icon-trash icons"></i></a>
                 </div>

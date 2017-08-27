@@ -839,7 +839,8 @@ a:hover .header-profile-image {
 .bg-white {
   background-color: #fff;
 }
-
+img.full-screen {
+  cursor: pointer; }
 
 /* Buttons */
 .btn { 

@@ -177,11 +177,14 @@ function imageFullScreenDirective() {
 
   function link(scope, element, attrs) {
     element.on('click', function (e) {
-      var template = '<img src="' + element.src + '">';
-      ngDialog.open({
-        template: template,
-        plain: true
-      });
+      if (element.hasClass('full-screen')) {
+        console.log(element.src);
+        var template = '<img src="' + element.src + '">';
+        ngDialog.open({
+          template: template,
+          plain: true
+        });
+      }
     });
   }
 }

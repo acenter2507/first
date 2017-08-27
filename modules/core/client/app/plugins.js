@@ -50,7 +50,7 @@
               var paths = data.value || [];
               for (var index = 0; index < paths.length; index++) {
                 var path = paths[index];
-                $editor().wrapSelection('insertHtml', '<img class="full-screen" src="' + path + '"><div><br/></div>', true);
+                $editor().wrapSelection('insertHtml', '<img full-screen class="full-screen" src="' + path + '"><div><br/></div>', true);
               }
             });
           }

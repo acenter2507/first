@@ -3,7 +3,7 @@
 var CronJob = require('cron').CronJob;
 
 var test_job = new CronJob({
-  cronTime: '00 1 * * * *',
+  cronTime: '* * * * *',
   onTick: function() {
     console.log('Job running');
   },
@@ -22,6 +22,7 @@ var test_job = new CronJob({
 //   timeZone: 'America/Los_Angeles'
 // });
 function start() {
+  console.log('run test job', test_job);
   test_job.start();
 }
 exports.start = start;

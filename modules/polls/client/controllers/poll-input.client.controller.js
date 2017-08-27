@@ -78,10 +78,10 @@
       });
       Socket.on('opts_request', res => {
         console.log('Has request new option', res);
-        Opts.get(res).$promise
-          .then(res => {
-            ctrl.opts.push(res);
-          });
+        // Opts.get(res).$promise
+        //   .then(res => {
+        //     ctrl.opts.push(res);
+        //   });
         // Action.get_poll(ctrl.poll._id)
         //   .then(_poll => {
         //     ctrl.poll = _poll;

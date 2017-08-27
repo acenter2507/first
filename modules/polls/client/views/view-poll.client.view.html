@@ -299,10 +299,12 @@
           <i class="fa fa-thumbs-o-up"></i>
           <md-tooltip class="d-md-none" md-direction="right" md-visible="isOpen">Like</md-tooltip>
         </md-button>
-        <md-button aria-label="Dislike" class="md-fab md-raised" ng-click="ctrl.like_poll(2)" ng-class="{'text-primary': ctrl.like.type === 2}"><i class="fa fa-pencil-square-o"></i>
+        <md-button aria-label="Dislike" class="md-fab md-raised" ng-click="ctrl.like_poll(2)" ng-class="{'text-primary': ctrl.like.type === 2}">
+          <i class="fa fa-thumbs-o-down"></i>
           <md-tooltip class="d-md-none" md-direction="right" md-visible="isOpen">Dislike</md-tooltip>
         </md-button>
-        <md-button aria-label="Comment" class="md-fab md-raised" ng-click="ctrl.focus_cmt()"><i class="fa fa-commenting"></i>
+        <md-button aria-label="Comment" class="md-fab md-raised" ng-click="ctrl.focus_cmt()">
+          <i class="fa fa-commenting"></i>
           <md-tooltip class="d-md-none" md-direction="right" md-visible="isOpen">Comment</md-tooltip>
         </md-button>
       </md-fab-actions>

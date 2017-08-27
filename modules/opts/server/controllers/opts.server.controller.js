@@ -32,14 +32,7 @@ exports.create = function(req, res) {
  * Show the current Opt
  */
 exports.read = function(req, res) {
-  // convert mongoose document to JSON
-  var opt = req.opt ? req.opt.toJSON() : {};
-
-  // Add a custom field to the Article, for determining if the current User is the "owner".
-  // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
-  opt.isCurrentUserOwner = req.user && opt.user && opt.user._id.toString() === req.user._id.toString();
-
-  res.jsonp(opt);
+  res.jsonp(req.opt);
 };
 
 /**

@@ -25,7 +25,7 @@
               <li ng-if="poll.isCurrentUserOwner"><a ui-sref="polls.edit({ pollId: poll.slug })"><i class="fa fa-pencil-square-o"></i> Edit</a></li>
               <li ng-if="poll.isCurrentUserOwner"><a ng-click="delete_poll(poll)"><i class="fa fa-trash"></i> Delete</a></li>
               <li ng-if="isLogged">
-                <a ng-click="follow_poll(poll)" class="undecorated-link">
+                <a ng-click="follow_poll(poll)">
                 <i class="fa fa-rss"></i> {{(poll.follow._id) ? 'Unfollow' : 'Follow'}}
               </a>
               </li>

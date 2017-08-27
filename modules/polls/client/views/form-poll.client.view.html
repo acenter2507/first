@@ -4,9 +4,9 @@
     <div class="card">
       <div class="card-header">
         <a ng-click="ctrl.save(ctrl.form.pollForm.$valid)">{{ctrl.poll._id ? ' Save' : ' Post'}}</a>
-        <a class="undecorated-link mg10l" ng-click="ctrl.discard()">Discard</a>
+        <a class="mg10l" ng-click="ctrl.discard()">Discard</a>
         <md-menu md-offset="10 30">
-          <a class="undecorated-link card-link" ng-class="{ 'text-shake': !ctrl.poll.isPublic }" ng-click="$mdMenu.open($event)"><i class="fa fa-lock"></i> Poll's options</a>
+          <a class="card-link" ng-class="{ 'text-shake': !ctrl.poll.isPublic }" ng-click="$mdMenu.open($event)"><i class="fa fa-lock"></i> Poll's options</a>
           <md-menu-content>
             <ul class="menu-list mg5b">
               <li>
@@ -41,7 +41,7 @@
           </div>
           <!-- More -->
           <div class="form-group mg20b">
-            <a class="undecorated-link pull-right" ng-click="moreCollapse = !moreCollapse">More setting</a>
+            <a class="pull-right" ng-click="moreCollapse = !moreCollapse">More setting</a>
             <div class="clearfix"></div>
           </div>
           <div uib-collapse="moreCollapse">
@@ -88,9 +88,9 @@
             <uib-accordion-group ng-repeat="opt in ctrl.opts | orderBy: 'create'" heading="{{opt.title}}" panel-class="{{ ctrl.opt_class(opt) }}">
               <span>
                 <a ng-click="ctrl.remove_opt(opt)">Remove</a>
-                <a class="undecorated-link mg10l" ng-if="opt.status == 1" ng-click="ctrl.input_opt(opt)">Edit</a>
-                <a class="undecorated-link mg10l" ng-if="opt.status == 2" ng-click="ctrl.approve_opt(opt)">Approve</a>
-                <a class="undecorated-link mg10l" ng-if="opt.status == 2" ng-click="ctrl.reject_opt(opt)">Reject</a>
+                <a class="mg10l" ng-if="opt.status == 1" ng-click="ctrl.input_opt(opt)">Edit</a>
+                <a class="mg10l" ng-if="opt.status == 2" ng-click="ctrl.approve_opt(opt)">Approve</a>
+                <a class="mg10l" ng-if="opt.status == 2" ng-click="ctrl.reject_opt(opt)">Reject</a>
               </span>
               <small class="pull-right text-muted">
                 Added by

@@ -18,7 +18,7 @@
       <label class="text-muted"><input type="checkbox" ng-model="ctrl.enter_send"><small>&nbsp;Enter to send</small></label>
       <span class="pull-right">
         <a ng-hide="ctrl.enter_send" ng-click="ctrl.save_cmt()">Send</a>
-        <a class="mg20l undecorated-link" ng-click="ctrl.discard_cmt()" ng-if="ctrl.tmp_cmt.discard">Discard</a>
+        <a class="mg20l" ng-click="ctrl.discard_cmt()" ng-if="ctrl.tmp_cmt.discard">Discard</a>
       </span>
       <hr class="mg10t mg10b" />
     </div>
@@ -52,13 +52,13 @@
         <strong><a ui-sref="profile.info({userId: cmt.user.slug})" ng-if="cmt.user" ng-bind="cmt.user.displayName"></a></strong>
         <span ng-if="!cmt.user">Deleted User</span>
         <small class="text-muted" am-time-ago="cmt.created"></small>
-        <a ng-if="cmt.to" class="undecorated-link">@{{cmt.toName}}</a>
+        <a ng-if="cmt.to">@{{cmt.toName}}</a>
         <span ng-show="cmt.isEdited" class="fa fa-pencil-square-o"><md-tooltip md-direction="bottom">{{cmt.updated | date:'mediumDate'}}</md-tooltip>
         </span>
       </span>
       <span class="pull-right">
         <md-menu md-offset="-20 25" md-position-mode="target-right target">
-          <a class="undecorated-link span-link" ng-click="$mdMenu.open($event)" aria-label="Open comment menu">
+          <a class="span-link" ng-click="$mdMenu.open($event)" aria-label="Open comment menu">
             <i class="fa fa-angle-down"></i>
           </a>
           <md-menu-content>
@@ -92,7 +92,7 @@
 <div class="card d-md-none card-expand">
   <div class="card-header pd12b">
     <strong class="card-title"> COMMENTS ({{ctrl.poll.cmtCnt}})</strong>
-    <a class="undecorated-link card-expand-toggle pull-right text-muted"><i class="fa fa-caret-down"></i></a>
+    <a class="card-expand-toggle pull-right text-muted"><i class="fa fa-caret-down"></i></a>
   </div>
   <div class="card-body">
     <div class="cmt_form" ng-if="isLogged">
@@ -110,7 +110,7 @@
       <label class="text-muted"><input type="checkbox" ng-model="ctrl.enter_send"><small>&nbsp;Enter to send</small></label>
       <span class="pull-right">
         <a ng-hide="ctrl.enter_send" ng-click="ctrl.save_cmt()">Send</a>
-        <a class="mg20l undecorated-link" ng-click="ctrl.discard_cmt()" ng-if="ctrl.tmp_cmt.discard">Discard</a>
+        <a class="mg20l" ng-click="ctrl.discard_cmt()" ng-if="ctrl.tmp_cmt.discard">Discard</a>
       </span>
       <hr class="mg10t mg10b" />
     </div>
@@ -142,14 +142,14 @@
         <strong><a ui-sref="profile.info({userId: cmt.user.slug})" ng-if="cmt.user" ng-bind="cmt.user.displayName"></a></strong>
         <span ng-if="!cmt.user">Deleted User</span>
         <small class="text-muted" am-time-ago="cmt.created"></small>
-        <a ng-if="cmt.to" class="undecorated-link">@{{cmt.toName}}</a>
+        <a ng-if="cmt.to">@{{cmt.toName}}</a>
         <span ng-show="cmt.isEdited" class="fa fa-pencil-square-o">
           <md-tooltip md-direction="bottom">{{cmt.updated | date:'mediumDate'}}</md-tooltip>
         </span>
       </span>
       <span class="pull-right">
         <md-menu md-offset="-20 25" md-position-mode="target-right target">
-          <a class="undecorated-link span-link" ng-click="$mdMenu.open($event)" aria-label="Open comment menu">
+          <a class="span-link" ng-click="$mdMenu.open($event)" aria-label="Open comment menu">
             <i class="fa fa-angle-down"></i>
           </a>
           <md-menu-content>

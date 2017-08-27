@@ -1,9 +1,9 @@
 <div class="card mgn">
   <div class="card-header pd12y">
     <a ng-click="ctrl.save_opt(ctrl.form.optForm.$valid)">Save</a>
-    <a class="undecorated-link mg10l aside-panel-toggle">Discard</a>
+    <a class="mg10l aside-panel-toggle">Discard</a>
     <md-menu md-offset="0 30">
-      <a ng-click="$mdMenu.open($event)" class="undecorated-link card-link" aria-label="Color" href="#">
+      <a ng-click="$mdMenu.open($event)" class="card-link" aria-label="Color" href="#">
         <i class="fa fa-square" ng-style="{'color': ctrl.tmp_opt.color || '#ccc' }"></i> Option's color
       </a>
       <md-menu-content>
@@ -31,7 +31,7 @@
             </div>
           </div>
           <div class="form-group">
-            <a class="undecorated-link pull-right" id="aside-panel-full-toggle" ng-click="isHideOptBody = !isHideOptBody; ctrl.opt_full()" >
+            <a class="pull-right" id="aside-panel-full-toggle" ng-click="isHideOptBody = !isHideOptBody; ctrl.opt_full()" >
               See full
               <i class="fa fa-caret-up"></i>
             </a>

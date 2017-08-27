@@ -3,7 +3,7 @@
 
     <div class="card-header">
       <strong class="card-title"><i class="fa fa-filter"></i> Filter tools</strong>
-      <a class="undecorated-link card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
+      <a class="card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
       <div class="clearfix"></div>
     </div>
     <hr class="mgn">
@@ -94,7 +94,7 @@
 
     <div class="card-header">
       <strong class="card-title"><i class="fa fa-list-alt"></i> List user</strong>
-      <a class="card-link undecorated-link" ui-sref="admin.users.new"><i class="fa fa-plus"></i></a>
+      <a class="card-link" ui-sref="admin.users.new"><i class="fa fa-plus"></i></a>
       <div class="clearfix"></div>
     </div>
     <hr class="mgn">
@@ -172,13 +172,13 @@
                   <a ui-sref="admin.users.view({ userId: user._id })"><i class="icon-eye icons"></i>
                     <md-tooltip md-direction="bottom">View detail of user</md-tooltip>
                   </a>
-                  <a class="undecorated-link mg5l" ui-sref="admin.users.edit({ userId: user._id })"><i class="icon-note icons"></i>
+                  <a class="mg5l" ui-sref="admin.users.edit({ userId: user._id })"><i class="icon-note icons"></i>
                     <md-tooltip md-direction="bottom">Edit info of user</md-tooltip>
                   </a>
-                  <a class="undecorated-link mg5l" ng-click="remove(user)"><i class="icon-trash icons"></i>
+                  <a class="mg5l" ng-click="remove(user)"><i class="icon-trash icons"></i>
                     <md-tooltip md-direction="bottom">Delete user</md-tooltip>
                   </a>
-                  <a ng-if="user.provider === 'local'" class="undecorated-link mg5l" ui-sref="admin.users.resetpass({ userId: user._id })"><i class="icon-refresh icons"></i>
+                  <a ng-if="user.provider === 'local'" class="mg5l" ui-sref="admin.users.resetpass({ userId: user._id })"><i class="icon-refresh icons"></i>
                     <md-tooltip md-direction="bottom">Reset password of user</md-tooltip>
                   </a>
                 </div>

@@ -60,7 +60,7 @@
   <div class="card card-expand">
     <div class="card-header">
       <strong class="card-title"><i class="fa fa-user"></i> Basic info</strong>
-      <a class="undecorated-link card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
+      <a class="card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
       <div class="clearfix"></div>
     </div>
     <hr class="mgn">
@@ -79,7 +79,7 @@
             </tr>
             <tr>
               <td>Created user:</td>
-              <td><a ui-sref="admin.users.view({ userId: vm.poll.user._id })" class="undecorated-link">{{ vm.poll.user.displayName }}</a></td>
+              <td><a ui-sref="admin.users.view({ userId: vm.poll.user._id })">{{ vm.poll.user.displayName }}</a></td>
             </tr>
             <tr>
               <td>Category:</td>
@@ -124,7 +124,7 @@
   <div class="card card-expand">
     <div class="card-header">
       <strong class="card-title"><i class="fa fa-list-alt"></i> List options</strong>
-      <a class="undecorated-link card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
+      <a class="card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
       <div class="clearfix"></div>
     </div>
     <hr class="mgn">
@@ -153,7 +153,7 @@
               </td>
               <td><span ng-bind="opt.created | LLL_format"></span></td>
               <td>
-                <a class="undecorated-link mg5l" ng-click="remove_opt(opt)"><i class="icon-trash icons"></i></a>
+                <a class="mg5l" ng-click="remove_opt(opt)"><i class="icon-trash icons"></i></a>
               </td>
             </tr>
           </tbody>
@@ -168,7 +168,7 @@
   <div class="card card-expand">
     <div class="card-header">
       <strong class="card-title"><i class="fa fa-list-alt"></i> List comments</strong>
-      <a class="undecorated-link card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
+      <a class="card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
       <div class="clearfix"></div>
     </div>
     <hr class="mgn">
@@ -199,7 +199,7 @@
               <td class="text-center">{{ cmt.likeCnt }}</td>
               <td><span ng-bind="cmt.created | LLL_format"></span></td>
               <td>
-                <a class="undecorated-link mg5l" ng-click="remove_cmt(cmt)"><i class="icon-trash icons"></i></a>
+                <a class="mg5l" ng-click="remove_cmt(cmt)"><i class="icon-trash icons"></i></a>
               </td>
             </tr>
           </tbody>
@@ -216,7 +216,7 @@
       <strong class="card-title"><i class="fa fa-list-alt"></i> List polls</strong>
       <input class="inline form-control w200 mg12l input-sm" ng-model="pollSearch" ng-change="figureOutItemsToDisplay_polls()"
         placeholder="Search key...">
-      <a class="undecorated-link card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
+      <a class="card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
       <div class="clearfix"></div>
     </div>
     <hr class="mgn">
@@ -251,10 +251,10 @@
                   <a ui-sref="admin.polls.view({ pollId: poll._id })"><i class="icon-eye icons"></i>
                     <md-tooltip md-direction="bottom">View detail of poll</md-tooltip>
                   </a>
-                  <a class="undecorated-link mg5l" ui-sref="admin.polls.edit({ pollId: poll._id })"><i class="icon-note icons"></i>
+                  <a class="mg5l" ui-sref="admin.polls.edit({ pollId: poll._id })"><i class="icon-note icons"></i>
                     <md-tooltip md-direction="bottom">Edit info of poll</md-tooltip>
                   </a>
-                  <a class="undecorated-link mg5l" ng-click="delete_poll(poll)"><i class="icon-trash icons"></i>
+                  <a class="mg5l" ng-click="delete_poll(poll)"><i class="icon-trash icons"></i>
                     <md-tooltip md-direction="bottom">Delete poll</md-tooltip>
                   </a>
                 </div>
@@ -275,7 +275,7 @@
     <div class="card-header">
       <strong class="card-title"><i class="fa fa-list-alt"></i> List comments</strong>
       <input class="inline form-control w200 mg12l input-sm" ng-model="cmtSearch" ng-change="figureOutItemsToDisplay_cmts()" placeholder="Search key...">
-      <a class="undecorated-link card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
+      <a class="card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
       <div class="clearfix"></div>
     </div>
     <hr class="mgn">
@@ -304,7 +304,7 @@
                   <a ui-sref="admin.polls.view({ pollId: cmt.poll._id })"><i class="icon-eye icons"></i>
                     <md-tooltip md-direction="bottom">View detail in poll</md-tooltip>
                   </a>
-                  <a class="undecorated-link mg5l" ng-click="delete_cmt(cmt)"><i class="icon-trash icons"></i>
+                  <a class="mg5l" ng-click="delete_cmt(cmt)"><i class="icon-trash icons"></i>
                     <md-tooltip md-direction="bottom">Delete comment</md-tooltip>
                   </a>
                 </div>
@@ -326,7 +326,7 @@
       <strong class="card-title"><i class="fa fa-list-alt"></i> List votes</strong>
       <input class="inline form-control w200 mg12l input-sm" ng-model="voteSearch" ng-change="figureOutItemsToDisplay_votes()"
         placeholder="Search key...">
-      <a class="undecorated-link card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
+      <a class="card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
       <div class="clearfix"></div>
     </div>
     <hr class="mgn">
@@ -355,7 +355,7 @@
                   <a ui-sref="admin.polls.view({ pollId: vote.poll._id })"><i class="icon-eye icons"></i>
                     <md-tooltip md-direction="bottom">View detail poll</md-tooltip>
                   </a>
-                  <a class="undecorated-link mg5l" ng-click="delete_vote(vote)"><i class="icon-trash icons"></i>
+                  <a class="mg5l" ng-click="delete_vote(vote)"><i class="icon-trash icons"></i>
                     <md-tooltip md-direction="bottom">Delete vote</md-tooltip>
                   </a>
                 </div>
@@ -377,7 +377,7 @@
       <strong class="card-title"><i class="fa fa-list-alt"></i> List reported</strong>
       <input class="inline form-control w200 mg12l input-sm" ng-model="reportSearch" ng-change="figureOutItemsToDisplay_reports()"
         placeholder="Search key...">
-      <a class="undecorated-link card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
+      <a class="card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
       <div class="clearfix"></div>
     </div>
     <hr class="mgn">
@@ -402,7 +402,7 @@
                   <a ui-sref="admin.polls.view({ pollId: report.poll._id })"><i class="icon-eye icons"></i>
                     <md-tooltip md-direction="bottom">View detail poll</md-tooltip>
                   </a>
-                  <a class="undecorated-link mg5l" ng-click="delete_report(report)"><i class="icon-trash icons"></i>
+                  <a class="mg5l" ng-click="delete_report(report)"><i class="icon-trash icons"></i>
                     <md-tooltip md-direction="bottom">Delete report</md-tooltip>
                   </a>
                 </div>
@@ -424,7 +424,7 @@
       <strong class="card-title"><i class="fa fa-list-alt"></i> List be reported</strong>
       <input class="inline form-control w200 mg12l input-sm" ng-model="bereportSearch" ng-change="figureOutItemsToDisplay_bereports()"
         placeholder="Search key...">
-      <a class="undecorated-link card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
+      <a class="card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
       <div class="clearfix"></div>
     </div>
     <hr class="mgn">
@@ -449,7 +449,7 @@
                   <a ui-sref="admin.polls.view({ pollId: bereport.poll._id })"><i class="icon-eye icons"></i>
                     <md-tooltip md-direction="bottom">View detail poll</md-tooltip>
                   </a>
-                  <a class="undecorated-link mg5l" ng-click="delete_bereport(bereport)"><i class="icon-trash icons"></i>
+                  <a class="mg5l" ng-click="delete_bereport(bereport)"><i class="icon-trash icons"></i>
                     <md-tooltip md-direction="bottom">Delete bereport</md-tooltip>
                   </a>
                 </div>
@@ -471,7 +471,7 @@
       <strong class="card-title"><i class="fa fa-list-alt"></i> List suggested options</strong>
       <input class="inline form-control w200 mg12l input-sm" ng-model="suggestSearch" ng-change="figureOutItemsToDisplay_suggests()"
         placeholder="Search key...">
-      <a class="undecorated-link card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
+      <a class="card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
       <div class="clearfix"></div>
     </div>
     <hr class="mgn">
@@ -498,7 +498,7 @@
                   <a ui-sref="admin.polls.view({ pollId: suggest.poll._id })"><i class="icon-eye icons"></i>
                     <md-tooltip md-direction="bottom">View detail poll</md-tooltip>
                   </a>
-                  <a class="undecorated-link mg5l" ng-click="delete_suggest(suggest)"><i class="icon-trash icons"></i>
+                  <a class="mg5l" ng-click="delete_suggest(suggest)"><i class="icon-trash icons"></i>
                     <md-tooltip md-direction="bottom">Delete suggest</md-tooltip>
                   </a>
                 </div>

@@ -2,7 +2,7 @@
   <div class="card card-expand">
     <div class="card-header">
       <strong class="card-title"><i class="fa fa-filter"></i> Filter database</strong>
-      <a class="undecorated-link card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
+      <a class="card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
       <div class="clearfix"></div>
     </div>
     <hr class="mgn">
@@ -171,7 +171,7 @@
   <div class="card card-expand">
     <div class="card-header">
       <strong class="card-title"><i class="fa fa-filter"></i> Filter local result</strong>
-      <a class="undecorated-link card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
+      <a class="card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
       <div class="clearfix"></div>
     </div>
     <hr class="mgn">
@@ -259,13 +259,13 @@
                   <a ui-sref="admin.polls.view({ pollId: poll._id })"><i class="icon-eye icons"></i>
                     <md-tooltip md-direction="bottom">View detail of poll</md-tooltip>
                   </a>
-                  <a class="undecorated-link mg5l" ui-sref="polls.edit({ pollId: poll._id })"><i class="icon-note icons"></i>
+                  <a class="mg5l" ui-sref="polls.edit({ pollId: poll._id })"><i class="icon-note icons"></i>
                     <md-tooltip md-direction="bottom">Edit info of poll on public</md-tooltip>
                   </a>
-                  <a class="undecorated-link mg5l" ui-sref="polls.view({ pollId: poll.slug })"><i class="icon-login icons"></i>
+                  <a class="mg5l" ui-sref="polls.view({ pollId: poll.slug })"><i class="icon-login icons"></i>
                     <md-tooltip md-direction="bottom">View detail of poll on public</md-tooltip>
                   </a>
-                  <a class="undecorated-link mg5l" ng-click="remove(poll)"><i class="icon-trash icons"></i>
+                  <a class="mg5l" ng-click="remove(poll)"><i class="icon-trash icons"></i>
                     <md-tooltip md-direction="bottom">Delete user</md-tooltip>
                   </a>
                 </div>

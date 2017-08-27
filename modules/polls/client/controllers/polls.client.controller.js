@@ -184,7 +184,6 @@
               ctrl.chart.labels.push(opt.title);
               ctrl.chart.data.push(opt.voteCnt);
             });
-            // $scope.$apply();
           })
           .catch(err => {
             toast.error(err.message, 'Error!');

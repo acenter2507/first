@@ -1,8 +1,8 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-  path = require('path'),
-  User = mongoose.model('User'),
+var mongoose = require('mongoose');
+  // path = require('path'),
+  // User = mongoose.model('User'),
   // Poll = mongoose.model('Poll'),
   // Opt = mongoose.model('Opt'),
   // Cmt = mongoose.model('Cmt'),
@@ -15,7 +15,7 @@ var mongoose = require('mongoose'),
   // Category = mongoose.model('Category'),
   // View = mongoose.model('View'),
   // Like = mongoose.model('Like'),
-  Userreport = mongoose.model('Userreport');
+  //Userreport = mongoose.model('Userreport');
 
 exports.excute = function () {
   get_users()
@@ -29,6 +29,7 @@ exports.excute = function () {
 
 function get_users() {
   return new Promise((resolve, reject) => {
+    var User = mongoose.model('User');
     var users = User.query({ 'roles': { '$not': { '$all': ['user', 'admin'] } } })
       .then(users => {
         return resolve(users);

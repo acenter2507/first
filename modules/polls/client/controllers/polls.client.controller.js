@@ -705,5 +705,8 @@
         });
       }
     };
+    ctrl.fullScreen = el => {
+      console.log(el);
+    }
   }
 })();

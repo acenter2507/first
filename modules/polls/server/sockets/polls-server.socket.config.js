@@ -231,7 +231,7 @@ module.exports = function (io, socket) {
   });
   // On delete poll
   socket.on('opts_request', req => {
-    io.sockets.in(req.pollId).emit('opts_request');
+    io.sockets.in(req.pollId).emit('opts_request', req.optId);
     Notif.findOne({ poll: req.pollId, to: req.to, type: 4, status: 0 })
       .then(_nof => {
         if (_nof) {

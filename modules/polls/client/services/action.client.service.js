@@ -379,7 +379,7 @@
           rs_opt.$save(successCb, errorCb);
         }
         function successCb(res) {
-          Socket.emit('opts_request', { pollId: res.poll._id || res.poll, from: res.user._id, to: poll.user._id });
+          Socket.emit('opts_request', { pollId: res.poll._id || res.poll, from: res.user._id, to: poll.user._id, optId: res._id });
           resolve(res);
         }
         function errorCb(err) {

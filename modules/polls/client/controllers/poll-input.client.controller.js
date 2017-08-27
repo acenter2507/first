@@ -164,10 +164,7 @@
       if (!ctrl.poll.close) {
         return true;
       }
-      var close_d = moment(ctrl.poll.close);
-      console.log(close_d);
-      return false;
-      // return moment(ctrl.poll.close).isAfter(new moment());
+      return moment(ctrl.poll.close).isAfter(new moment());
     };
     ctrl.discard = () => {
       if (angular.equals(ctrl.poll, ctrl.bk_poll)) {

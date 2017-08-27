@@ -164,6 +164,7 @@
       if (!ctrl.poll.close) {
         return true;
       }
+      ctrl.poll.close = ctrl.poll.close + ':00';
       var close_d = moment(ctrl.poll.close);
       console.log(close_d);
       return false;

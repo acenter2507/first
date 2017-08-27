@@ -689,7 +689,7 @@
       is_watting: false,
       last_task_time: 0
     };
-    ctrl.excute_timer;
+    ctrl.excute_timer = {};
     function excute_task() {
       var now = new Date().getTime();
       if (now - ctrl.task_queue.last_task_time > 2000) {

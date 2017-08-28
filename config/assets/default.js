@@ -56,7 +56,8 @@ module.exports = {
         'public/lib/angular-loading-bar/build/loading-bar.js',
         'public/lib/angular-breadcrumb/dist/angular-breadcrumb.min.js',
         'public/lib/angular-socialshare/dist/angular-socialshare.js',
-        'public/lib/angular-translate/angular-translate.js'
+        'public/lib/angular-translate/angular-translate.js',
+        'public/lib/angular-translate-loader-static-files/angular-translate-loader-static-files.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

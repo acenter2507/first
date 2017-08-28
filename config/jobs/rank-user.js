@@ -54,8 +54,8 @@ exports.excute = function () {
             if (++counter === length) {
               // array = _.sortBy(array, function(o) { return o.point; });
               array = _.sortBy(array, 'point').reverse();
+              console.log( '**********************************************************', array);
             }
-            console.log(array);
           })
           .catch(err => {
             console.log(err);

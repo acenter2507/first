@@ -3,7 +3,7 @@
 
   angular
     .module(ApplicationConfiguration.applicationModuleName)
-    .config(translateConfig)
+    // .config(translateConfig)
     .config(toastConfig)
     .config(textAngularConfig)
     .config(loadingBarConfig)

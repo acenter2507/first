@@ -10,7 +10,8 @@ angular.module('core').controller('WebAppController', [
   'Socket',
   'Activitys',
   'Categorys',
-  function ($rootScope, $scope, Authentication, Notifications, Constants, Storages, Socket, Activitys, Categorys) {
+  '$translate',
+  function ($rootScope, $scope, Authentication, Notifications, Constants, Storages, Socket, Activitys, Categorys, $translate) {
     // User info
     $scope.Authentication = Authentication;
     $scope.Activitys = Activitys;
@@ -63,5 +64,9 @@ angular.module('core').controller('WebAppController', [
     function initCategorys() {
       Categorys.load();
     }
+
+    $scope.change_language = lang => {
+      $translate.use(lang);
+    };
   }
 ]);

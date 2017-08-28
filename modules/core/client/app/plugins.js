@@ -23,6 +23,7 @@
         'en_UK': 'en'
       })
       .determinePreferredLanguage();
+    $translateProvider.useLocalStorage();
   }
 
   toastConfig.$inject = ['toastrConfig'];

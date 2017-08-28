@@ -90,6 +90,7 @@
             vm.busy = false;
             return;
           }
+          console.log(res.data);
           // Xử lý poll trước khi hiển thị màn hình
           var promises = [];
           res.data.forEach(poll => {
@@ -108,6 +109,7 @@
         .catch(err => {
           vm.busy = false;
           vm.stopped = true;
+          console.log(err);
           toast.error(err.message, 'Error!');
         });
     }

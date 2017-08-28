@@ -552,7 +552,11 @@
      */
     this.process_before_show = poll => {
       let isLogged = (Authentication.user);
-      poll.isCurrentUserOwner = isLogged && Authentication.user._id === poll.user._id;
+      if (!isLogged || !poll.user) {
+        poll.isCurrentUserOwner = false;
+      } else {
+        poll.isCurrentUserOwner = Authentication.user._id === poll.user._id;
+      }
       poll.chart = {
         options: { responsive: true },
         colors: [],

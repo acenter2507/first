@@ -31,7 +31,29 @@ exports.excute = function () {
             return count_poll_like(array[index]._id);
           })
           .then(rs => {
-            console.log(rs);
+            if (rs.length === 0) {
+              array[index].pollLikeCnt = 0;
+              array[index].pollViewCnt = 0;
+            } else {
+              array[index].pollLikeCnt = rs[0].pollLike;
+              array[index].pollViewCnt = rs[0].pollView;
+            }
+            return count_cmt_like(array[index]._id);
+          })
+          .then(rs => {
+            if (rs.length === 0) {
+              array[index].cmtLikeCnt = 0;
+            } else {
+              array[index].cmtLikeCnt = rs[0].total;
+            }
+            return point_calculate(array[index]);
+          })
+          .then(rs => {
+            array[index].point = rs;
+            if (++counter === length) {
+              _.sortBy(array, function(o) { return -o.point; })
+            }
+            console.log(array);
           })
           .catch(err => {
             console.log(err);
@@ -99,7 +121,8 @@ function count_poll_like(userId) {
       {
         $group: {
           _id: null,
-          total: { $sum: '$viewCnt' }
+          pollLike: { $sum: '$likeCnt' },
+          pollView: { $sum: '$viewCnt' },
         }
       }
     ], function (err, result) {
@@ -114,7 +137,7 @@ function count_cmt_like(userId) {
     Cmt.aggregate([
       {
         $match: {
-          userId: userId
+          user: userId
         }
       },
 
@@ -128,5 +151,16 @@ function count_cmt_like(userId) {
       if (err) return reject(err);
       return resolve(result);
     });
+  });
+}
+function point_calculate(user) {
+  return new Promise((resolve, reject) => {
+    var total = 0;
+    total += user.report.pollCnt * 10;
+    total += user.report.cmtCnt * 4;
+    total += user.pollLikeCnt * 3;
+    total += user.cmtLikeCnt * 2;
+    total += user.pollViewCnt * 1;
+    return resolve(total);
   });
 }

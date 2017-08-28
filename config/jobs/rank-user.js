@@ -92,7 +92,7 @@ function count_poll_like(userId) {
     Poll.aggregate([
       {
         $match: {
-          userId: userId
+          user: userId
         }
       },
 

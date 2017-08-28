@@ -11,20 +11,20 @@
     .run(runConfig);
 
 
-  translateConfig.$inject = ['$translateProvider'];
-  function translateConfig($translateProvider) {
-    $translateProvider.useStaticFilesLoader({
-      prefix: 'i18n/locale-',
-      suffix: '.json'
-    });
-    $translateProvider
-      .registerAvailableLanguageKeys(['en', 'vi', 'ja'], {
-        'en_US': 'en',
-        'en_UK': 'en'
-      })
-      .determinePreferredLanguage();
-    $translateProvider.useLocalStorage();
-  }
+  // translateConfig.$inject = ['$translateProvider'];
+  // function translateConfig($translateProvider) {
+  //   $translateProvider.useStaticFilesLoader({
+  //     prefix: 'i18n/locale-',
+  //     suffix: '.json'
+  //   });
+  //   $translateProvider
+  //     .registerAvailableLanguageKeys(['en', 'vi', 'ja'], {
+  //       'en_US': 'en',
+  //       'en_UK': 'en'
+  //     })
+  //     .determinePreferredLanguage();
+  //   $translateProvider.useLocalStorage();
+  // }
 
   toastConfig.$inject = ['toastrConfig'];
   function toastConfig(toastrConfig) {

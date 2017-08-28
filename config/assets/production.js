@@ -24,7 +24,7 @@ module.exports = {
         'public/lib/angular-animate/angular-animate.js',
         'public/lib/angular-messages/angular-messages.js',
         'public/lib/angular-sanitize/angular-sanitize.js',
-        'public/lib/angular-cookies/angular-cookies.min.js',
+        // 'public/lib/angular-cookies/angular-cookies.min.js',
         'public/lib/angular-socket-io/socket.js',
         'public/lib/angular-touch/angular-touch.js',
         'public/lib/angular-ui-router/release/angular-ui-router.js',
@@ -56,11 +56,11 @@ module.exports = {
         'public/lib/angucomplete-alt/angucomplete-alt.js',
         'public/lib/angular-loading-bar/build/loading-bar.js',
         'public/lib/angular-breadcrumb/dist/angular-breadcrumb.min.js',
-        'public/lib/angular-socialshare/dist/angular-socialshare.js',
-        'public/lib/angular-translate/angular-translate.min.js',
-        'public/lib/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js',
+        'public/lib/angular-socialshare/dist/angular-socialshare.js'
+        // 'public/lib/angular-translate/angular-translate.min.js',
+        // 'public/lib/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js',
         // 'public/lib/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js',
-        'public/lib/angular-translate-storage-local/angular-translate-storage-local.min.js'
+        // 'public/lib/angular-translate-storage-local/angular-translate-storage-local.min.js'
       ]
     },
     css: 'public/dist/application.min.css',

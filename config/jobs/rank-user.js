@@ -97,9 +97,9 @@ function count_poll_like(userId) {
       },
 
       {
-        $project: {
-          user_id: 1,
-          total: { $sum: '$likeCnt' }
+        $group: {
+          _id: null,
+          total: { $sum: '$viewCnt' }
         }
       }
     ], function (err, result) {

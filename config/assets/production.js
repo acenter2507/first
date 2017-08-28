@@ -55,7 +55,8 @@ module.exports = {
         'public/lib/angucomplete-alt/angucomplete-alt.js',
         'public/lib/angular-loading-bar/build/loading-bar.js',
         'public/lib/angular-breadcrumb/dist/angular-breadcrumb.min.js',
-        'public/lib/angular-socialshare/dist/angular-socialshare.js'
+        'public/lib/angular-socialshare/dist/angular-socialshare.js',
+        'public/lib/angular-translate/angular-translate.min.js'
       ]
     },
     css: 'public/dist/application.min.css',

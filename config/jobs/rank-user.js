@@ -52,7 +52,8 @@ exports.excute = function () {
           .then(rs => {
             array[index].point = rs;
             if (++counter === length) {
-              _.sortBy(array, function(o) { return -o.point; });
+              // array = _.sortBy(array, function(o) { return o.point; });
+              array = _.sortBy(array, 'point').reverse();
             }
             console.log(array);
           })

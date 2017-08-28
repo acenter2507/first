@@ -51,7 +51,7 @@ exports.excute = function () {
           .then(rs => {
             array[index].point = rs;
             if (++counter === length) {
-              _.sortBy(array, function(o) { return -o.point; })
+              _.sortBy(array, function(o) { return -o.point; });
             }
             console.log(array);
           })

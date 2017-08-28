@@ -1,6 +1,7 @@
 'use strict';
 
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+  _ = require('underscore');
 // path = require('path'),
 // User = mongoose.model('User'),
 // Poll = mongoose.model('Poll'),

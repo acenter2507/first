@@ -28,14 +28,14 @@ exports.excute = function () {
         get_report(array[index]._id)
           .then(rs => {
             array[index].report = rs;
-            return count_poll_like(userId);
+            return count_poll_like(array[index]._id);
           })
           .then(rs => {
             console.log(rs);
           })
           .catch(err => {
             console.log(err);
-          })
+          });
       });
     })
     .catch(err => {
@@ -73,7 +73,7 @@ function count_poll(userId) {
       .count(function (err, count) {
         if (err) return reject(err);
         return resolve(count);
-      })
+      });
   });
 }
 function count_cmt(userId) {
@@ -83,7 +83,7 @@ function count_cmt(userId) {
       .count(function (err, count) {
         if (err) return reject(err);
         return resolve(count);
-      })
+      });
   });
 }
 function count_poll_like(userId) {

@@ -28,7 +28,10 @@ exports.excute = function () {
         get_report(array[index]._id)
           .then(rs => {
             array[index].report = rs;
-            return 
+            return count_poll_like(userId);
+          })
+          .then(rs => {
+            console.log(rs);
           })
           .catch(err => {
             console.log(err);
@@ -81,6 +84,28 @@ function count_cmt(userId) {
         if (err) return reject(err);
         return resolve(count);
       })
+  });
+}
+function count_poll_like(userId) {
+  return new Promise((resolve, reject) => {
+    var Poll = mongoose.model('Poll');
+    Poll.aggregate([
+      {
+        $match: {
+          userId: userId
+        }
+      },
+
+      {
+        $group: {
+          _id: null,
+          total: { $sum: '$likeCnt' }
+        }
+      }
+    ], function (err, result) {
+      if (err) return reject(err);
+      return resolve(result);
+    });
   });
 }
 function count_cmt_like(userId) {

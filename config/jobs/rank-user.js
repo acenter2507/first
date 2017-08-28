@@ -54,7 +54,7 @@ exports.excute = function () {
             if (++counter === length) {
               // array = _.sortBy(array, function(o) { return o.point; });
               array = _.sortBy(array, 'point').reverse();
-              console.log( '**********************************************************', array);
+              return save_rank(array);
             }
           })
           .catch(err => {
@@ -164,5 +164,15 @@ function point_calculate(user) {
     total += user.cmtLikeCnt * 2;
     total += user.pollViewCnt * 1;
     return resolve(total);
+  });
+}
+function save_rank(users) {
+  var Userreport = mongoose.model('Userreport');
+  users.forEach((item, index) => {
+    Userreport.update({ user: item._id }, {
+      $set: {
+        rank: index + 1
+      }
+    }).exec()
   });
 }

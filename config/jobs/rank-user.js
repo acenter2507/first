@@ -173,6 +173,6 @@ function save_rank(users) {
       $set: {
         rank: index + 1
       }
-    }).exec()
+    }).exec();
   });
 }

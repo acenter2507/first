@@ -193,7 +193,18 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
             });
 
             // And save the user
-            user.save(function (err) {
+            user.save(function (err, _user) {
+              if (!err) {
+                var report = new Userreport({ user: _user._id });
+                var login = new Userlogin({ user: _user._id });
+                login.agent = req.headers['user-agent'];
+                login.ip =
+                  req.headers['X-Forwarded-For'] ||
+                  req.headers['x-forwarded-for'] ||
+                  req.client.remoteAddress;
+                login.save();
+                report.save();
+              }
               return done(err, user);
             });
           });

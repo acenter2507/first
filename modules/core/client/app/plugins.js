@@ -3,12 +3,27 @@
 
   angular
     .module(ApplicationConfiguration.applicationModuleName)
+    .config(translateConfig)
     .config(toastConfig)
     .config(textAngularConfig)
     .config(loadingBarConfig)
     .config(momentPickerConfig)
     .run(runConfig);
 
+
+  translateConfig.$inject = ['$translateProvider'];
+  function translateConfig($translateProvider) {
+    $translateProvider.useStaticFilesLoader({
+      prefix: 'i18n/locale-',
+      suffix: '.json'
+    });
+    $translateProvider
+      .registerAvailableLanguageKeys(['en', 'vi', 'ja'], {
+        'en_US': 'en',
+        'en_UK': 'en'
+      })
+      .determinePreferredLanguage();
+  }
 
   toastConfig.$inject = ['toastrConfig'];
   function toastConfig(toastrConfig) {

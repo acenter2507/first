@@ -3,7 +3,7 @@
 // Init the application configuration module for AngularJS application
 var ApplicationConfiguration = (function() {
   // Init module configuration options
-  var applicationModuleName = 'mean';
+  var applicationModuleName = 'polls';
   var applicationModuleVendorDependencies = [
     'ngResource',
     'ngAnimate',
@@ -29,7 +29,8 @@ var ApplicationConfiguration = (function() {
     'webStorageModule',
     'angucomplete-alt',
     'angular-loading-bar',
-    '720kb.socialshare'
+    '720kb.socialshare',
+    'pascalprecht.translate'
   ];
 
   // Add a new vertical module

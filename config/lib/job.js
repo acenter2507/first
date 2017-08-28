@@ -7,7 +7,7 @@ var CronJob = require('cron').CronJob,
 var test_job = new CronJob({
   cronTime: '* * * * *',
   onTick: function() {
-    rank_user.excute();
+    // rank_user.excute();
   },
   start: false,
   timeZone: 'Asia/Tokyo'
@@ -21,6 +21,6 @@ var rank_user_job = new CronJob({
   timeZone: 'Asia/Tokyo'
 });
 function start() {
-  test_job.start();
+  rank_user_job.start();
 }
 exports.start = start;

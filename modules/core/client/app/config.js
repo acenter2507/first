@@ -29,7 +29,8 @@ var ApplicationConfiguration = (function() {
     'webStorageModule',
     'angucomplete-alt',
     'angular-loading-bar',
-    '720kb.socialshare'
+    '720kb.socialshare',
+    'pascalprecht.translate'
   ];
 
   // Add a new vertical module

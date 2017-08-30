@@ -20,13 +20,12 @@
       prefix: 'locale-',
       suffix: '.json'
     });
-    // $translateProvider
-    //   .registerAvailableLanguageKeys(['en', 'vi', 'ja'], {
-    //     'en_US': 'en',
-    //     'en_UK': 'en'
-    //   })
-    //   .determinePreferredLanguage();
-    $translateProvider.preferredLanguage('en');
+    $translateProvider
+      .registerAvailableLanguageKeys(['en', 'vi', 'ja'], {
+        'en_US': 'en',
+        'en_UK': 'en'
+      })
+      .determinePreferredLanguage();
     $translateProvider.useCookieStorage();
     $translateProvider.fallbackLanguage('en');
   }

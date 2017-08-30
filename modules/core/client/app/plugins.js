@@ -17,7 +17,7 @@
     //   urlTemplate: '/i18n/{lang}.json'
     // });
     $translateProvider.useStaticFilesLoader({
-      prefix: 'i18n/',
+      prefix: 'locale-',
       suffix: '.json'
     });
     // $translateProvider

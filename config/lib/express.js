@@ -89,6 +89,13 @@ module.exports.initMiddleware = function (app) {
 };
 
 /**
+ * Configure Translate
+ */
+module.exports.initI18n = function (app) {
+  app.use(express.static('./i18n'));
+};
+
+/**
  * Configure view engine
  */
 module.exports.initViewEngine = function (app) {
@@ -223,6 +230,9 @@ module.exports.init = function (db) {
 
   // Initialize Express middleware
   this.initMiddleware(app);
+
+  // Initialize I18n folder
+  this.initI18n(app);
 
   // Initialize Express view engine
   this.initViewEngine(app);

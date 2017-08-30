@@ -28,7 +28,7 @@
       .determinePreferredLanguage();
     $translateProvider.useCookieStorage();
     $translateProvider.fallbackLanguage('en');
-    // $translateProvider.useSanitizeValueStrategy('escape');
+    $translateProvider.useSanitizeValueStrategy('escape');
   }
 
   toastConfig.$inject = ['toastrConfig'];

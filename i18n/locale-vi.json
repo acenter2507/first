@@ -1,5 +1,5 @@
 {
-  "LANGUAGUE": "Ngôn ngữ",
+  "LANGUAGE": "Ngôn ngữ",
   "LB_SIGNUP": "Đăng ký",
   "LB_SIGNIN": "Đăng nhập",
   "LB_SIGNOUT": "Đăng xuất",
@@ -29,7 +29,7 @@
   "LB_POLLS_TICKERS": "Hoạt động",
   "LB_POLLS_POPULARS": "Danh sách nổi bật",
   "LB_POLLS_POPULARS_TAGS": "Các thẻ nỗi bật",
-  "LB_POLLS_LIKES": "Thích",
-  "LB_POLLS_VOTES": "Bình chọn",
-  "LB_POLLS_COMMENTS": "Bình luận"
+  "LB_POLLS_LIKES": "Likes",
+  "LB_POLLS_VOTES": "Votes",
+  "LB_POLLS_COMMENTS": "Comments"
 }

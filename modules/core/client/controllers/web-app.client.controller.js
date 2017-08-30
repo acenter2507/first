@@ -25,7 +25,7 @@ angular.module('core').controller('WebAppController', [
     $scope.$watch('Authentication.user', () => {
       init();
     });
-    console.log($translate.use());
+    console.log($translate.preferredLanguage());
     function init() {
       $scope.user = Authentication.user;
       $scope.isLogged = ($scope.user);

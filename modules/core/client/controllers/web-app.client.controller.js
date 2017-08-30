@@ -11,7 +11,9 @@ angular.module('core').controller('WebAppController', [
   'Activitys',
   'Categorys',
   '$translate',
-  function ($rootScope, $scope, Authentication, Notifications, Constants, Storages, Socket, Activitys, Categorys, $translate) {
+  'amMoment',
+  '$window',
+  function ($rootScope, $scope, Authentication, Notifications, Constants, Storages, Socket, Activitys, Categorys, $translate, amMoment, $window) {
     // User info
     $scope.Authentication = Authentication;
     $scope.Activitys = Activitys;
@@ -25,7 +27,6 @@ angular.module('core').controller('WebAppController', [
     $scope.$watch('Authentication.user', () => {
       init();
     });
-    console.log($translate.preferredLanguage());
     function init() {
       $scope.user = Authentication.user;
       $scope.isLogged = ($scope.user);
@@ -68,6 +69,10 @@ angular.module('core').controller('WebAppController', [
 
     $scope.change_language = lang => {
       $translate.use(lang);
+      var tz = $window.locales[lang] || $window.locales.en;
+      moment.tz.setDefault(tz);
+      moment.locale(lang);
+      amMoment.changeLocale(lang);
     };
   }
 ]);

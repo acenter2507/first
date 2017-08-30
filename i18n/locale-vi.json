@@ -45,5 +45,18 @@
   "LB_POLLS_SECURE_ONLYUSER": "Poll này chỉ dành cho user vote",
   "LB_POLLS_NOCOMMENT": "Chưa có bình luận nào.",
   "LB_CM_CLOSE": "Đóng",
-  "LB_CM_UNLIMIT": "Không giới hạn thời gian"
+  "LB_CM_UNLIMIT": "Không giới hạn thời gian",
+  "LB_USER_USERNAME": "Tên đăng nhập",
+  "LB_USER_PASSWORD": "Mật khẩu",
+  "LB_USER_FIRSTNAME": "Họ - tên đệm",
+  "LB_USER_LASTNAME": "Tên",
+  "LB_USER_EMAIL": "Email",
+  "LB_USER_FIRSTNAME_REQUIRED": "Xin hãy nhập họ hoặc tên đệm của bạn.",
+  "LB_USER_LASTNAME_REQUIRED": "Xin hãy nhập tên của bạn.",
+  "LB_USER_EMAIL_REQUIRED": "Xin hãy nhập địa chỉ email.",
+  "LB_USER_EMAIL_INVALID": "Xin hãy nhập đúng định dạng của email.",
+  "LB_USER_USERNAME_REQUIRED": "Xin hãy nhập Tên đăng nhập.",
+  "LB_USER_PASSWORD_REQUIRED": "Xin hãy nhập mật khẩu.",
+  "LB_USER_FORGOT": "Bạn quên mật khẩu à?",
+  "LB_CM_ERROR": "Lỗi!"
 }

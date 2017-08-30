@@ -3,39 +3,39 @@
     <form name="signupForm" ng-submit="signup(signupForm.$valid)" class="signin" novalidate autocomplete="off">
       <fieldset>
         <div class="form-group" show-errors>
-          <input type="text" id="firstName" name="firstName" class="form-control" ng-model="credentials.firstName" placeholder="First Name"
+          <input type="text" id="firstName" name="firstName" class="form-control" ng-model="credentials.firstName" placeholder="{{ 'LB_USER_FIRSTNAME' | translate }}"
             required>
           <div ng-messages="signupForm.firstName.$error" role="alert">
-            <p class="help-block error-text font-sm" ng-message="required">First name is required.</p>
+            <p class="help-block error-text font-sm" ng-message="required">{{ 'LB_USER_FIRSTNAME_REQUIRED' | translate }}</p>
           </div>
         </div>
         <div class="form-group" show-errors>
-          <input type="text" id="lastName" name="lastName" class="form-control" ng-model="credentials.lastName" placeholder="Last Name"
+          <input type="text" id="lastName" name="lastName" class="form-control" ng-model="credentials.lastName" placeholder="{{ 'LB_USER_LASTNAME' | translate }}"
             required>
           <div ng-messages="signupForm.lastName.$error" role="alert">
-            <p class="help-block error-text font-sm" ng-message="required">Last name is required.</p>
+            <p class="help-block error-text font-sm" ng-message="required">{{ 'LB_USER_LASTNAME_REQUIRED' | translate }}</p>
           </div>
         </div>
         <div class="form-group" show-errors>
-          <input type="email" id="email" name="email" class="form-control" ng-model="credentials.email" placeholder="Email" lowercase
+          <input type="email" id="email" name="email" class="form-control" ng-model="credentials.email" placeholder="{{ 'LB_USER_EMAIL' | translate }}" lowercase
             required>
           <div ng-messages="signupForm.email.$error" role="alert">
-            <p class="help-block error-text font-sm" ng-message="required">Email address is required.</p>
-            <p class="help-block error-text font-sm" ng-message="email">Email address is invalid.</p>
+            <p class="help-block error-text font-sm" ng-message="required">{{ 'LB_USER_EMAIL_REQUIRED' | translate }}</p>
+            <p class="help-block error-text font-sm" ng-message="email">{{ 'LB_USER_EMAIL_INVALID' | translate }}</p>
           </div>
         </div>
         <div class="form-group" show-errors>
-          <input type="text" id="username" name="username" class="form-control" ng-model="credentials.username" placeholder="Username"
+          <input type="text" id="username" name="username" class="form-control" ng-model="credentials.username" placeholder="{{ 'LB_USER_USERNAME' | translate }}"
             lowercase required>
           <div ng-messages="signupForm.username.$error" role="alert">
-            <p class="help-block error-text font-xs" ng-message="required">Username is required.</p>
+            <p class="help-block error-text font-xs" ng-message="required">{{ 'LB_USER_USERNAME_REQUIRED' | translate }}</p>
           </div>
         </div>
         <div class="form-group" show-errors>
-          <input type="password" id="password" name="password" class="form-control" ng-model="credentials.password" placeholder="Password"
+          <input type="password" id="password" name="password" class="form-control" ng-model="credentials.password" placeholder="{{ 'LB_USER_PASSWORD' | translate }}"
             uib-popover="{{popoverMsg}}" uib-popover-trigger="focus" password-validator required>
           <div ng-messages="signupForm.password.$error" role="alert">
-            <p class="help-block error-text font-sm" ng-message="required">Password is required.</p>
+            <p class="help-block error-text font-sm" ng-message="required">{{ 'LB_USER_PASSWORD_REQUIRED' | translate }}</p>
             <div ng-repeat="passwordError in passwordErrors">
               <p class="help-block error-text font-sm" ng-show="signupForm.password.$error.requirements">{{passwordError}}</p>
             </div>
@@ -45,7 +45,7 @@
           <uib-progressbar class="progress-xs" value="requirementsProgress" type="{{requirementsColor}}"></uib-progressbar>
         </div>
         <div class="text-center form-group">
-          <button type="submit" class="btn btn-primary btn-block">Sign up</button>
+          <button type="submit" class="btn btn-primary btn-block">{{ 'LB_SIGNUP' | translate }}</button>
         </div>
       </fieldset>
     </form>

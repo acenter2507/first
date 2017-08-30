@@ -11,8 +11,8 @@
     .run(runConfig);
 
 
-  translateConfig.$inject = ['$translateProvider', '$translatePartialLoaderProvider'];
-  function translateConfig($translateProvider, $translatePartialLoaderProvider) {
+  translateConfig.$inject = ['$translateProvider'];
+  function translateConfig($translateProvider) {
     // $translateProvider.useLoader('$translatePartialLoader', {
     //   urlTemplate: '/i18n/{lang}.json'
     // });

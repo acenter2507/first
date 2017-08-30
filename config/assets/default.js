@@ -22,6 +22,7 @@ module.exports = {
         'public/lib/angular/angular.js',
         'public/lib/angular-cookies/angular-cookies.js',
         'public/lib/angular-translate/angular-translate.js',
+        'public/lib/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
         'public/lib/angular-translate-loader-partial/angular-translate-loader-partial.js',
         'public/lib/angular-translate-storage-cookie/angular-translate-storage-cookie.js',
         'public/lib/angular-animate/angular-animate.js',

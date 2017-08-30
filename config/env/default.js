@@ -42,5 +42,10 @@ module.exports = {
         fileSize: 5*1024*1024 // Max file size in bytes (5 MB)
       }
     }
+  },
+  locales: {
+    'vi': 'Asia/Ho_Chi_Minh',
+    'en': 'America/New_York',
+    'ja': 'Asia/Tokyo'
   }
 };

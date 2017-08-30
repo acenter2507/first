@@ -1,3 +1,20 @@
 {
-  "TITLE": "Xin chào"
+  "TITLE": "Xin chào",
+  /* Header */
+  "LB_SIGNUP": "Đăng ký",
+  "LB_SIGNIN": "Đăng nhập",
+  "LB_SIGNOUT": "Đăng xuất",
+  "LB_FEEDS": "Bảng tin",
+  "LB_NEW_POLL": "Tạo poll",
+  "LB_CATEGORYS": "Danh mục",
+  "LB_TAGS": "Danh sách thẻ",
+  "LB_SEARCH": "Tìm kiếm",
+  "LB_ADMIN": "Trang quản trị",
+  "LB_ADVANDCE_SEARCH": "Tìm kiếm nâng cao",
+  "LB_NAVIGATION": "Điều hướng",
+  "LB_PROFILE": "Profile",
+  "LB_PROFILE_EDIT": "Chỉnh sửa profile",
+  "LB_PROFILE_PIC": "Chỉnh sửa avatar",
+  "LB_PROFILE_PASS": "Đổi mật khẩu",
+  "LB_PROFILE_SOCIAL": "Quản lý tài khoản đăng nhập"
 }

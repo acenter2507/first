@@ -9,26 +9,26 @@
   <ul class="nav navbar-nav d-sm-down-none">
     <li ui-sref-active="active">
       <a ui-sref="home"><i class="fa fa-newspaper-o"></i></a>
-      <md-tooltip md-direction="bottom">New feeds</md-tooltip>
+      <md-tooltip md-direction="bottom">{{ 'LB_FEEDS' | translate }}</md-tooltip>
     </li>
     <li ui-sref-active="active">
       <a ui-sref="polls.create"><i class="fa fa-pencil-square-o"></i></a>
-      <md-tooltip md-direction="bottom">New polls</md-tooltip>
+      <md-tooltip md-direction="bottom">{{ 'LB_NEW_POLL' | translate }}</md-tooltip>
     </li>
     <li ui-sref-active="active">
       <a ui-sref="categorys.list"><i class="fa fa-list"></i></a>
-      <md-tooltip md-direction="bottom">Categorys</md-tooltip>
+      <md-tooltip md-direction="bottom">{{ 'LB_CATEGORYS' | translate }}</md-tooltip>
     </li>
     <li ui-sref-active="active">
       <a ui-sref="tags.list"><i class="fa fa-tags"></i></a>
-      <md-tooltip md-direction="bottom">Tags</md-tooltip>
+      <md-tooltip md-direction="bottom">{{ 'LB_TAGS' | translate }}</md-tooltip>
     </li>
     <li ui-sref-active="active" ng-if="isAdmin">
       <a ui-sref="admin.dashboard"><i class="fa fa-tachometer"></i></a>
-      <md-tooltip md-direction="bottom">Admin page</md-tooltip>
+      <md-tooltip md-direction="bottom">{{ 'LB_ADMIN' | translate }}</md-tooltip>
     </li>
     <li class="dropdown" uib-dropdown>
-      <md-tooltip md-direction="bottom">Search</md-tooltip>
+      <md-tooltip md-direction="bottom">{{ 'LB_SEARCH' | translate }}</md-tooltip>
       <a href="#" class="dropdown-toggle" role="button" uib-dropdown-toggle>
           <i class="fa fa-search"></i>
         </a>
@@ -49,11 +49,11 @@
   <!-- User login -->
   <ul class="nav navbar-nav navbar-right d-sm-down-none" ng-if="!isLogged">
     <li ui-sref-active="active">
-      <a ui-sref="authentication.signup">Sign Up</a>
+      <a ui-sref="authentication.signup">{{ 'LB_SIGNUP' | translate }}</a>
     </li>
     <li class="divider-vertical"></li>
     <li ui-sref-active="active">
-      <a ui-sref="authentication.signin">Sign In</a>
+      <a ui-sref="authentication.signin">{{ 'LB_SIGNIN' | translate }}</a>
     </li>
   </ul>
 
@@ -66,23 +66,23 @@
         </a>
       <ul class="dropdown-menu" role="menu">
         <li ui-sref-active="active">
-          <a ui-sref="profile.info({ userId: user.slug })">Profile</a>
+          <a ui-sref="profile.info({ userId: user.slug })">{{ 'LB_PROFILE' | translate }}</a>
         </li>
         <li ui-sref-active="active">
-          <a ui-sref="settings.profile">Edit Profile</a>
+          <a ui-sref="settings.profile">{{ 'LB_PROFILE_EDIT' | translate }}</a>
         </li>
         <li ui-sref-active="active">
-          <a ui-sref="settings.picture">Change Profile Picture</a>
+          <a ui-sref="settings.picture">{{ 'LB_PROFILE_PIC' | translate }}</a>
         </li>
         <li ui-sref-active="active" ng-show="user.provider === 'local'">
-          <a ui-sref="settings.password">Change Password</a>
+          <a ui-sref="settings.password">{{ 'LB_PROFILE_PASS' | translate }}</a>
         </li>
         <li ui-sref-active="active">
-          <a ui-sref="settings.accounts">Manage Social Accounts</a>
+          <a ui-sref="settings.accounts">{{ 'LB_PROFILE_SOCIAL' | translate }}</a>
         </li>
         <li class="divider"></li>
         <li>
-          <a href="/api/auth/signout" target="_self">Signout</a>
+          <a href="/api/auth/signout" target="_self">{{ 'LB_SIGNOUT' | translate }}</a>
         </li>
       </ul>
     </li>

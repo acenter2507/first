@@ -1,3 +1,20 @@
 {
-  "TITLE": "Hello"
+  "TITLE": "Hello",
+  /* Header */
+  "LB_SIGNUP": "Sign Up",
+  "LB_SIGNIN": "Sign In",
+  "LB_SIGNOUT": "Sign Out",
+  "LB_FEEDS": "News feed",
+  "LB_NEW_POLL": "Create poll",
+  "LB_CATEGORYS": "Categorys",
+  "LB_TAGS": "Tags",
+  "LB_SEARCH": "Search",
+  "LB_ADMIN": "Admin page",
+  "LB_ADVANCE_SEARCH": "Advance search",
+  "LB_NAVIGATION": "Navigation",
+  "LB_PROFILE": "Profile",
+  "LB_PROFILE_EDIT": "Edit profile",
+  "LB_PROFILE_PIC": "Change profile picture",
+  "LB_PROFILE_PASS": "Change password",
+  "LB_PROFILE_SOCIAL": "Manage account socials"
 }

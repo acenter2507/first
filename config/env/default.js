@@ -44,8 +44,8 @@ module.exports = {
     }
   },
   locales: {
-    'vi': 'Asia/Ho_Chi_Minh',
-    'en': 'America/New_York',
-    'ja': 'Asia/Tokyo'
+    "vi": "Asia/Ho_Chi_Minh",
+    "en": "America/New_York",
+    "ja": "Asia/Tokyo"
   }
 };

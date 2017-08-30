@@ -101,7 +101,7 @@
     });
   }
   
-  momentPickerConfig.$inject = ['$translate', 'amMoment'];
+  runConfig.$inject = ['$translate', 'amMoment'];
   function runConfig($translate, amMoment) {
     console.log($translate.use());
     moment.tz.add([

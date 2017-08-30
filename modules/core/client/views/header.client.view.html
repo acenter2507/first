@@ -107,10 +107,10 @@
           <div class="clearfix"></div>
         </a>
         <li class="text-center" ng-if="Notifications.notifCnt > 0">
-          <a ng-click="mark_all_read()">Mark all notifications read</a>
+          <a ng-click="mark_all_read()">{{ 'LB_NOFT_MARKALL' | translate }}</a>
         </li>
         <li class="text-center">
-          <a ui-sref="notifs.list">See all notifications</a>
+          <a ui-sref="notifs.list">{{ 'LB_NOFT_VIEWALL' | translate }}</a>
         </li>
       </ul>
     </li>

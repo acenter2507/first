@@ -12,8 +12,14 @@
   "LB_ADVANCE_SEARCH": "Advance search",
   "LB_NAVIGATION": "Navigation",
   "LB_PROFILE": "Profile",
+  "LB_PROFILE_VIEW": "View profile",
   "LB_PROFILE_EDIT": "Edit profile",
   "LB_PROFILE_PIC": "Change profile picture",
   "LB_PROFILE_PASS": "Change password",
-  "LB_PROFILE_SOCIAL": "Manage account socials"
+  "LB_PROFILE_SOCIAL": "Manage account socials",
+  "LB_NOFT": "Notifications",
+  "LB_NOFT_MARKALL": "Mark all notifications read",
+  "LB_NOFT_VIEWALL": "View all notifications",
+  "LB_CM_SEEALL": "See all",
+  "LB_CM_VIEWALL": "View all"
 }

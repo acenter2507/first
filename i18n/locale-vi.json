@@ -9,11 +9,17 @@
   "LB_TAGS": "Danh sách thẻ",
   "LB_SEARCH": "Tìm kiếm",
   "LB_ADMIN": "Trang quản trị",
-  "LB_ADVANDCE_SEARCH": "Tìm kiếm nâng cao",
+  "LB_ADVANCE_SEARCH": "Tìm kiếm nâng cao",
   "LB_NAVIGATION": "Điều hướng",
   "LB_PROFILE": "Profile",
+  "LB_PROFILE_VIEW": "Xem profile",
   "LB_PROFILE_EDIT": "Chỉnh sửa profile",
   "LB_PROFILE_PIC": "Chỉnh sửa avatar",
   "LB_PROFILE_PASS": "Đổi mật khẩu",
-  "LB_PROFILE_SOCIAL": "Quản lý tài khoản đăng nhập"
+  "LB_PROFILE_SOCIAL": "Quản lý tài khoản đăng nhập",
+  "LB_NOFT": "Thông báo",
+  "LB_NOFT_MARKALL": "Đánh dấu đã đọc tất cả",
+  "LB_NOFT_VIEWALL": "Xem tất cả thông báo",
+  "LB_CM_SEEALL": "Xem tất cả",
+  "LB_CM_VIEWALL": "Xem tất cả"
 }

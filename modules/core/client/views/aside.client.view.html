@@ -7,66 +7,66 @@
   </div>
   <div class="aside-search">
     <div class="quick-search">
-      <input ng-model="search_key" type="text" class="form-control quick-search-input" name="search" placeholder="Search...">
+      <input ng-model="search_key" type="text" class="form-control quick-search-input" name="search" placeholder="{{ 'LB_SEARCH' | translate }}">
       <a class="quick-search-submit" type="submit" ng-click="search()"><i class="fa fa-search"></i></a>
       <a class="quick-search-advance" type="button" ui-sref="search"><i class="fa fa-cogs"></i></a>
     </div>
   </div>
   <nav class="aside-nav">
     <ul class="nav">
-      <li class="nav-title" ng-show="isLogged">Notifications</li>
+      <li class="nav-title" ng-show="isLogged">{{ 'LB_NOFT' | translate }}</li>
       <li class="nav-item" ng-show="isLogged">
-        <a class="nav-link" ui-sref="notifs.list"><i class="fa fa-bell-o"></i> See all
+        <a class="nav-link" ui-sref="notifs.list"><i class="fa fa-bell-o"></i> {{ 'LB_NOFT_VIEWALL' | translate }}
           <span class="badge badge-pill badge-danger" ng-bind="Notifications.notifCnt" ng-show="Notifications.notifCnt > 0"></span>
         </a>
       </li>
       <li class="nav-item" ng-show="isLogged && Notifications.notifCnt > 0">
-        <a class="nav-link" ng-click="mark_all_read()"><i class="fa fa-check-square-o"></i> Mark all notifications read</a>
+        <a class="nav-link" ng-click="mark_all_read()"><i class="fa fa-check-square-o"></i> {{ 'LB_NOFT_MARKALL' | translate }}</a>
       </li>
-      <li class="nav-title">Navigation</li>
+      <li class="nav-title">{{ 'LB_NAVIGATION' | translate }}</li>
       <li class="nav-item">
-        <a class="nav-link" ui-sref-active="active" ui-sref="home"><i class="fa fa-newspaper-o"></i> Feeds</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" ui-sref-active="active" ui-sref="polls.create"><i class="fa fa-pencil-square-o"></i> New polls</a>
+        <a class="nav-link" ui-sref-active="active" ui-sref="home"><i class="fa fa-newspaper-o"></i> {{ 'LB_FEEDS' | translate }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" ui-sref-active="active" ui-sref="categorys.list"><i class="fa fa-list"></i> Categorys</a>
+        <a class="nav-link" ui-sref-active="active" ui-sref="polls.create"><i class="fa fa-pencil-square-o"></i> {{ 'LB_NEW_POLL' | translate }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" ui-sref-active="active" ui-sref="tags.list"><i class="fa fa-tags"></i> Tags</a>
+        <a class="nav-link" ui-sref-active="active" ui-sref="categorys.list"><i class="fa fa-list"></i> {{ 'LB_CATEGORYS' | translate }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" ui-sref-active="active" ui-sref="search"><i class="fa fa-search"></i> Advance search</a>
+        <a class="nav-link" ui-sref-active="active" ui-sref="tags.list"><i class="fa fa-tags"></i> {{ 'LB_TAGS' | translate }}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" ui-sref-active="active" ui-sref="search"><i class="fa fa-search"></i> {{ 'LB_ADVANCE_SEARCH' | translate }}</a>
       </li>
       <li class="nav-item" ng-show="isAdmin">
-        <a class="nav-link" ui-sref-active="active" ui-sref="admin.dashboard"><i class="fa fa-tachometer"></i> Admin</a>
+        <a class="nav-link" ui-sref-active="active" ui-sref="admin.dashboard"><i class="fa fa-tachometer"></i> {{ 'LB_ADMIN' | translate }}</a>
       </li>
 
-      <li class="nav-title">Profile</li>
+      <li class="nav-title">{{ 'LB_PROFILE' | translate }}</li>
       <li class="nav-item" ng-show="isLogged">
-        <a class="nav-link" ui-sref-active="active" ui-sref="profile.info({ userId: user.slug })"><i class="fa fa-user-circle"></i> View Profile</a>
+        <a class="nav-link" ui-sref-active="active" ui-sref="profile.info({ userId: user.slug })"><i class="fa fa-user-circle"></i> {{ 'LB_PROFILE_VIEW' | translate }}</a>
       </li>
       <li class="nav-item" ng-show="isLogged">
-        <a class="nav-link" ui-sref-active="active" ui-sref="settings.profile"><i class="fa fa-pencil-square-o"></i> Edit Profile</a>
+        <a class="nav-link" ui-sref-active="active" ui-sref="settings.profile"><i class="fa fa-pencil-square-o"></i> {{ 'LB_PROFILE_EDIT' | translate }}</a>
       </li>
       <li class="nav-item" ng-show="isLogged">
-        <a class="nav-link" ui-sref-active="active" ui-sref="settings.picture"><i class="fa fa-file-image-o"></i> Change Profile Picture</a>
+        <a class="nav-link" ui-sref-active="active" ui-sref="settings.picture"><i class="fa fa-file-image-o"></i> {{ 'LB_PROFILE_PIC' | translate }}</a>
       </li>
       <li class="nav-item" ng-show="isLogged && user.provider === 'local'">
-        <a class="nav-link" ui-sref-active="active" ui-sref="settings.password"><i class="fa fa-lock"></i> Change Password</a>
+        <a class="nav-link" ui-sref-active="active" ui-sref="settings.password"><i class="fa fa-lock"></i> {{ 'LB_PROFILE_PASS' | translate }}</a>
       </li>
       <li class="nav-item" ng-show="isLogged">
-        <a class="nav-link" ui-sref-active="active" ui-sref="settings.accounts"><i class="fa fa-facebook"></i> Manage Social Accounts</a>
+        <a class="nav-link" ui-sref-active="active" ui-sref="settings.accounts"><i class="fa fa-facebook"></i> {{ 'LB_PROFILE_SOCIAL' | translate }}</a>
       </li>
       <li class="nav-item" ng-show="isLogged">
-        <a class="nav-link" href="/api/auth/signout" target="_self"><i class="fa fa-sign-out"></i> Sign Out</a>
+        <a class="nav-link" href="/api/auth/signout" target="_self"><i class="fa fa-sign-out"></i> {{ 'LB_SIGNOUT' | translate }}</a>
       </li>
       <li class="nav-item" ng-show="!isLogged">
-        <a class="nav-link" ui-sref="authentication.signin"><i class="fa fa-sign-in"></i> Sign In</a>
+        <a class="nav-link" ui-sref="authentication.signin"><i class="fa fa-sign-in"></i>  {{ 'LB_SIGNIN' | translate }}</a>
       </li>
       <li class="nav-item" ng-show="!isLogged">
-        <a class="nav-link" ui-sref="authentication.signup"><i class="fa fa-download"></i> Sign Up</a>
+        <a class="nav-link" ui-sref="authentication.signup"><i class="fa fa-download"></i>  {{ 'LB_SIGNUP' | translate }}</a>
       </li>
     </ul>
   </nav>

@@ -21,5 +21,15 @@
   "LB_NOFT_MARKALL": "Đánh dấu đã đọc tất cả",
   "LB_NOFT_VIEWALL": "Xem tất cả thông báo",
   "LB_CM_SEEALL": "Xem tất cả",
-  "LB_CM_VIEWALL": "Xem tất cả"
+  "LB_CM_VIEWALL": "Xem tất cả",
+  "LB_POLLS_HASNEW": "Có poll mới vừa được tạo, ",
+  "LB_POLLS_LOADNOW": "cập nhật ngay.",
+  "LB_POLLS_HASNO": "Chưa có poll nào được tạo, ",
+  "LB_POLLS_CREATE": "tạo poll mới ngay.",
+  "LB_POLLS_TICKERS": "Hoạt động",
+  "LB_POLLS_POPULARS": "Danh sách nổi bật",
+  "LB_POLLS_POPULARS_TAGS": "Các thẻ nỗi bật",
+  "LB_POLLS_LIKES": "Lượt Thích",
+  "LB_POLLS_VOTES": "Bình chọn",
+  "LB_POLLS_COMMENTS": "Bình luận"
 }

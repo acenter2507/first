@@ -15,7 +15,7 @@
         <!--<poll-item></poll-item>-->
       </div>
       <!-- Loading indicator -->
-      <div class="row text-center" ng-show="!vm.busy">
+      <div class="row text-center" ng-show="vm.busy">
         <i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i>
       </div>
       <div class="notice notice-warning" ng-show="vm.polls.length === 0 && vm.stopped">
@@ -28,7 +28,7 @@
       <!-- Activitys  -->
       <div class="card card-expand card-scroll" ng-if="isLogged">
         <div class="card-header">
-          <strong class="card-title">Ticker</strong>
+          <strong class="card-title">{{ 'LB_POLLS_TICKERS' | translate }}</strong>
           <a class="card-expand-toggle pull-right text-muted"><i class="fa fa-caret-down"></i></a>
         </div>
         <div class="card-body">
@@ -58,12 +58,12 @@
       <!-- Popular poll -->
       <div class="card card-tab">
         <div class="card-header">
-          <strong class="card-title">Popular polls</strong>
-          <small class="card-link"><a ui-sref="search({ sort: '-likeCnt' })">Search</a></small>
+          <strong class="card-title">{{ 'LB_POLLS_POPULARS' | translate }}</strong>
+          <small class="card-link"><a ui-sref="search({ sort: '-likeCnt' })">{{ 'LB_SEARCH' | translate }}</a></small>
         </div>
         <div class="card-body pdnt">
           <uib-tabset justified="true">
-            <uib-tab index="1" heading="Likes">
+            <uib-tab index="1" heading="{{ 'LB_POLLS_LIKES' | translate }}">
               <div class="mini-poll" ng-repeat="poll in vm.populars.likes">
                 <div class="poll-avatar">
                   <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user.slug})">
@@ -88,7 +88,7 @@
                 </div>
               </div>
             </uib-tab>
-            <uib-tab index="2" heading="Votes">
+            <uib-tab index="2" heading="{{ 'LB_POLLS_VOTES' | translate }}">
               <div class="mini-poll" ng-repeat="poll in vm.populars.votes">
                 <div class="poll-avatar">
                   <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user.slug})">
@@ -113,7 +113,7 @@
                 </div>
               </div>
             </uib-tab>
-            <uib-tab index="3" heading="Comments">
+            <uib-tab index="3" heading="{{ 'LB_POLLS_COMMENTS' | translate }}">
               <div class="mini-poll" ng-repeat="poll in vm.populars.cmts">
                 <div class="poll-avatar">
                   <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user.slug})">
@@ -144,8 +144,8 @@
       <!-- Popular tags -->
       <div class="card">
         <div class="card-header">
-          <strong class="card-title">Popular tags</strong>
-          <small class="card-link"><a ui-sref="tags.list">View all</a></small>
+          <strong class="card-title">{{ 'LB_POLLS_POPULARS_TAGS' | translate }}</strong>
+          <small class="card-link"><a ui-sref="tags.list">{{ 'LB_CM_VIEWALL' | translate }}</a></small>
         </div>
         <div class="card-body">
           <ul class="tags">
@@ -157,7 +157,6 @@
       <div class="card">
         <div class="card-header">
           <strong class="card-title">{{ 'LANGUAGE' | translate }}</strong>
-          <small class="card-link"><a ui-sref="tags.list">View all</a></small>
         </div>
         <div class="card-body">
           <a ng-click="change_language('en')">English</a>

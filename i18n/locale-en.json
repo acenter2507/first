@@ -25,6 +25,11 @@
   "LB_POLLS_HASNEW": "New poll has just been added, ",
   "LB_POLLS_LOADNOW": "load now.",
   "LB_POLLS_HASNO": "No polls yet, why don't you ",
-  "LB_POLLS_CREATE": "create one?"
-
+  "LB_POLLS_CREATE": "create one?",
+  "LB_POLLS_TICKERS": "Ticker",
+  "LB_POLLS_POPULARS": "Popular polls",
+  "LB_POLLS_POPULARS_TAGS": "Popular tags",
+  "LB_POLLS_LIKES": "Likes",
+  "LB_POLLS_VOTES": "Votes",
+  "LB_POLLS_COMMENTS": "Comments"
 }

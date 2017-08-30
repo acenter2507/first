@@ -31,5 +31,19 @@
   "LB_POLLS_POPULARS_TAGS": "Các thẻ nỗi bật",
   "LB_POLLS_LIKES": "Likes",
   "LB_POLLS_VOTES": "Votes",
-  "LB_POLLS_COMMENTS": "Comments"
+  "LB_POLLS_COMMENTS": "Comments",
+  "LB_POLLS_CREATEON": "đã tạo vào",
+  "LB_POLLS_MENU_VIEW": "Xem chi tiết",
+  "LB_POLLS_MENU_EDIT": "Chỉnh sửa",
+  "LB_POLLS_MENU_DELETE": "Xóa",
+  "LB_POLLS_MENU_FOLLOW": "Theo dõi",
+  "LB_POLLS_MENU_UNFOLLOW": "Bỏ theo dõi",
+  "LB_POLLS_MENU_REPORT": "Báo cáo vi phạm",
+  "LB_POLLS_MENU_BOOKMARK": "Đánh dấu",
+  "LB_POLLS_MENU_RMBOOKMARK": "Bỏ đánh dấu",
+  "LB_POLLS_SECURE_PUBLIC": "Poll này đang ở chế độ công khai",
+  "LB_POLLS_SECURE_ONLYUSER": "Poll này chỉ dành cho user vote",
+  "LB_POLLS_NOCOMMENT": "Chưa có bình luận nào.",
+  "LB_CM_CLOSE": "Đóng",
+  "LB_CM_UNLIMIT": "Không giới hạn thời gian"
 }

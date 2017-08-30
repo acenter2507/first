@@ -31,5 +31,19 @@
   "LB_POLLS_POPULARS_TAGS": "Popular tags",
   "LB_POLLS_LIKES": "Likes",
   "LB_POLLS_VOTES": "Votes",
-  "LB_POLLS_COMMENTS": "Comments"
+  "LB_POLLS_COMMENTS": "Comments",
+  "LB_POLLS_CREATEON": "created on",
+  "LB_POLLS_MENU_VIEW": "View",
+  "LB_POLLS_MENU_EDIT": "Edit",
+  "LB_POLLS_MENU_DELETE": "Delete",
+  "LB_POLLS_MENU_FOLLOW": "Follow",
+  "LB_POLLS_MENU_UNFOLLOW": "Unfollow",
+  "LB_POLLS_MENU_REPORT": "Report",
+  "LB_POLLS_MENU_BOOKMARK": "Bookmark",
+  "LB_POLLS_MENU_RMBOOKMARK": "Remove bookmark",
+  "LB_POLLS_SECURE_PUBLIC": "This poll is public",
+  "LB_POLLS_SECURE_ONLYUSER": "Only user can vote",
+  "LB_POLLS_NOCOMMENT": "No one has commented",
+  "LB_CM_CLOSE": "Close",
+  "LB_CM_UNLIMIT": "Unlimit"
 }

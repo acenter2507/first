@@ -1,5 +1,5 @@
 {
-  "TITLE": "Hello",
+  "LANGUAGUE": "Languages",
   "LB_SIGNUP": "Sign Up",
   "LB_SIGNIN": "Sign In",
   "LB_SIGNOUT": "Sign Out",
@@ -21,5 +21,10 @@
   "LB_NOFT_MARKALL": "Mark all notifications read",
   "LB_NOFT_VIEWALL": "View all notifications",
   "LB_CM_SEEALL": "See all",
-  "LB_CM_VIEWALL": "View all"
+  "LB_CM_VIEWALL": "View all",
+  "LB_POLLS_HASNEW": "New poll has just been added, ",
+  "LB_POLLS_LOADNOW": "load now.",
+  "LB_POLLS_HASNO": "No polls yet, why don't you ",
+  "LB_POLLS_CREATE": "create one?"
+
 }

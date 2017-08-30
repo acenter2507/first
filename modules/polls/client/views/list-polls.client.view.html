@@ -2,7 +2,8 @@
   <div class="row" ng-show="vm.is_has_new_polls">
     <div class="col-xs-12 pdn pd6l pd6r">
       <div class="notice notice-info">
-        New poll has just been added, <a ng-click="load_new()">load now</a>.
+        {{ 'LB_POLLS_HASNEW' | translate }}
+        <a ng-click="load_new()">{{ 'LB_POLLS_LOADNOW' | translate }}</a>
       </div>
     </div>
   </div>
@@ -14,11 +15,12 @@
         <!--<poll-item></poll-item>-->
       </div>
       <!-- Loading indicator -->
-      <div class="row" ng-show="vm.busy">
-        <div class="loader"></div>
+      <div class="row text-center" ng-show="!vm.busy">
+        <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
       </div>
       <div class="notice notice-warning" ng-show="vm.polls.length === 0 && vm.stopped">
-        No polls yet, why don't you <a ui-sref="polls.create">create one</a>?
+        {{ 'LB_POLLS_HASNO' | translate }}
+        <a ui-sref="polls.create">{{ 'LB_POLLS_CREATE' | translate }}</a>
       </div>
     </div>
     <!-- RIGHT -->
@@ -154,7 +156,7 @@
       <!-- Languages -->
       <div class="card">
         <div class="card-header">
-          <strong class="card-title">{{ 'TITLE' | translate }}</strong>
+          <strong class="card-title">{{ 'LANGUAGE' | translate }}</strong>
           <small class="card-link"><a ui-sref="tags.list">View all</a></small>
         </div>
         <div class="card-body">

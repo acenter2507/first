@@ -13,22 +13,13 @@
 
   translateConfig.$inject = ['$translateProvider', '$translatePartialLoaderProvider'];
   function translateConfig($translateProvider, $translatePartialLoaderProvider) {
-    // $translateProvider.translations('vi', {
-    //   TITLE: 'Xin chào!'
+    // $translateProvider.useLoader('$translatePartialLoader', {
+    //   urlTemplate: '/i18n/{lang}.json'
     // });
-    // $translateProvider.translations('en', {
-    //   TITLE: 'Hello world!'
-    // });
-    // $translateProvider.translations('ja', {
-    //   TITLE: 'こんにちは'
-    // });
-    $translateProvider.useLoader('$translatePartialLoader', {
-      urlTemplate: '/i18n/{lang}.json'
+    $translateProvider.useStaticFilesLoader({
+      prefix: 'i18n/',
+      suffix: '.json'
     });
-    // $translateProvider.useStaticFilesLoader({
-    //   prefix: 'i18n/locale-',
-    //   suffix: '.json'
-    // });
     $translateProvider
       .registerAvailableLanguageKeys(['en', 'vi', 'ja'], {
         'en_US': 'en',
@@ -36,6 +27,7 @@
       })
       .determinePreferredLanguage();
     $translateProvider.useCookieStorage();
+    $translateProvider.fallbackLanguage('en');
   }
 
   toastConfig.$inject = ['toastrConfig'];

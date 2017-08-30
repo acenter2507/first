@@ -27,7 +27,7 @@
               <li ng-if="isLogged">
                 <a ng-click="follow_poll(poll)">
                   <i class="fa fa-rss"></i>
-                  {{(poll.follow._id) ? 'LB_POLLS_MENU_UNFOLLOW' | translate : 'LB_POLLS_MENU_FOLLOW' | translate}}
+                  {{(poll.follow._id) ? 'LB_POLLS_MENU_UNFOLLOW' : 'LB_POLLS_MENU_FOLLOW' | translate}}
                 </a>
               </li>
               <li ng-if="isLogged && !poll.isCurrentUserOwner && !poll.reported"><a ng-click="report_poll(poll)"><i class="fa fa-exclamation-circle"></i> {{ 'LB_POLLS_MENU_REPORT' | translate }}</a></li>

@@ -3,7 +3,7 @@
 
   angular
     .module(ApplicationConfiguration.applicationModuleName)
-    // .config(translateConfig)
+    .config(translateConfig)
     .config(toastConfig)
     .config(textAngularConfig)
     .config(loadingBarConfig)
@@ -11,20 +11,32 @@
     .run(runConfig);
 
 
-  // translateConfig.$inject = ['$translateProvider'];
-  // function translateConfig($translateProvider) {
-  //   $translateProvider.useStaticFilesLoader({
-  //     prefix: 'i18n/locale-',
-  //     suffix: '.json'
-  //   });
-  //   $translateProvider
-  //     .registerAvailableLanguageKeys(['en', 'vi', 'ja'], {
-  //       'en_US': 'en',
-  //       'en_UK': 'en'
-  //     })
-  //     .determinePreferredLanguage();
-  //   $translateProvider.useLocalStorage();
-  // }
+  translateConfig.$inject = ['$translateProvider', '$translatePartialLoaderProvider'];
+  function translateConfig($translateProvider, $translatePartialLoaderProvider) {
+    // $translateProvider.translations('vi', {
+    //   TITLE: 'Xin chào!'
+    // });
+    // $translateProvider.translations('en', {
+    //   TITLE: 'Hello world!'
+    // });
+    // $translateProvider.translations('ja', {
+    //   TITLE: 'こんにちは'
+    // });
+    $translateProvider.useLoader('$translatePartialLoader', {
+      urlTemplate: '/i18n/{lang}.json'
+    });
+    // $translateProvider.useStaticFilesLoader({
+    //   prefix: 'i18n/locale-',
+    //   suffix: '.json'
+    // });
+    $translateProvider
+      .registerAvailableLanguageKeys(['en', 'vi', 'ja'], {
+        'en_US': 'en',
+        'en_UK': 'en'
+      })
+      .determinePreferredLanguage();
+    $translateProvider.useCookieStorage();
+  }
 
   toastConfig.$inject = ['toastrConfig'];
   function toastConfig(toastrConfig) {

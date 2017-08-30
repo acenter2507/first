@@ -5,10 +5,12 @@ var ApplicationConfiguration = (function() {
   // Init module configuration options
   var applicationModuleName = 'blablaer';
   var applicationModuleVendorDependencies = [
-    'ngResource',
     'ngAnimate',
+    'ngResource',
     'ngMessages',
     'ngSanitize',
+    'pascalprecht.translate',
+    'ngCookies',
     'ngDialog',
     'ui.router',
     'ui.bootstrap',
@@ -29,8 +31,7 @@ var ApplicationConfiguration = (function() {
     'webStorageModule',
     'angucomplete-alt',
     'angular-loading-bar',
-    '720kb.socialshare',
-    'pascalprecht.translate'
+    '720kb.socialshare'
   ];
 
   // Add a new vertical module

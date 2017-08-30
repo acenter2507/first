@@ -10,6 +10,7 @@ angular.module('core').controller('WebAppController', [
   'Socket',
   'Activitys',
   'Categorys',
+  '$translate',
   function ($rootScope, $scope, Authentication, Notifications, Constants, Storages, Socket, Activitys, Categorys, $translate) {
     // User info
     $scope.Authentication = Authentication;
@@ -65,7 +66,7 @@ angular.module('core').controller('WebAppController', [
     }
 
     $scope.change_language = lang => {
-      // $translate.use(lang);
+      $translate.use(lang);
     };
   }
 ]);

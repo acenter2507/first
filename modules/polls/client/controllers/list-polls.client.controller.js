@@ -126,14 +126,7 @@
           vm.populars = res.data;
         })
         .catch(err => {
-          if (vm.MS_CM_LOAD_ERROR || vm.MS_CM_ERROR) {
-            $translate('MS_CM_LOAD_ERROR').then(tsl => {
-              vm.MS_CM_LOAD_ERROR = tsl;
-              toast.error(vm.MS_CM_LOAD_ERROR, vm.MS_CM_ERROR);
-            });
-          } else {
-            toast.error(vm.MS_CM_LOAD_ERROR, vm.MS_CM_ERROR);
-          }
+          toast.error(vm.ms.MS_CM_LOAD_ERROR, vm.ms.MS_CM_ERROR);
         });
     }
     function get_popular_tags() {
@@ -142,14 +135,7 @@
           vm.tags = res.data;
         })
         .catch(err => {
-          if (vm.MS_CM_LOAD_ERROR || vm.MS_CM_ERROR) {
-            $translate('MS_CM_LOAD_ERROR').then(tsl => {
-              vm.MS_CM_LOAD_ERROR = tsl;
-              toast.error(vm.MS_CM_LOAD_ERROR, vm.MS_CM_ERROR);
-            });
-          } else {
-            toast.error(vm.MS_CM_LOAD_ERROR, vm.MS_CM_ERROR);
-          }
+          toast.error(vm.ms.MS_CM_LOAD_ERROR, vm.ms.MS_CM_ERROR);
         });
     }
     function get_bookmarks() {
@@ -157,14 +143,7 @@
         .then(res => {
           vm.bookmarks = res.data || [];
         }, err => {
-          if (vm.MS_CM_LOAD_ERROR || vm.MS_CM_ERROR) {
-            $translate('MS_CM_LOAD_ERROR').then(tsl => {
-              vm.MS_CM_LOAD_ERROR = tsl;
-              toast.error(vm.MS_CM_LOAD_ERROR, vm.MS_CM_ERROR);
-            });
-          } else {
-            toast.error(vm.MS_CM_LOAD_ERROR, vm.MS_CM_ERROR);
-          }
+          toast.error(vm.ms.MS_CM_LOAD_ERROR, vm.ms.MS_CM_ERROR);
         });
     }
     function get_translate() {
@@ -201,7 +180,9 @@
     };
     $scope.report_poll = (poll) => {
       if (poll.reported) {
-        toast.error(vm.ms.MS_CM_REPORT_EXIST_ERROR, vm.ms.MS_CM_ERROR);
+        $translate('MS_CM_REPORT_EXIST_ERROR', { title: poll.title }).then(tsl => {
+          toast.error(tsl, vm.ms.MS_CM_ERROR);
+        });
         return;
       }
       dialog.openConfirm({
@@ -216,7 +197,7 @@
           .then(res => {
             poll.reported = (res) ? true : false;
             $translate('MS_CM_REPORT_SUCCESS', { title: poll.title }).then(tsl => {
-              toast.error(tsl, vm.ms.MS_CM_ERROR);
+              toast.success(tsl, vm.ms.MS_CM_THANKYOU);
             });
           })
           .catch(err => {
@@ -235,7 +216,7 @@
         .then(res => {
           poll.bookmarked = (res) ? true : false;
           $translate('MS_CM_BOOKMARK_SUCCESS', { title: poll.title }).then(tsl => {
-            toast.error(tsl, vm.ms.MS_CM_SUCCESS);
+            toast.success(tsl, vm.ms.MS_CM_SUCCESS);
           });
         })
         .catch(err => {

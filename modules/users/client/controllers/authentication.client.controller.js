@@ -42,7 +42,7 @@ angular.module('users').controller('AuthenticationController', [
         $scope.$broadcast('show-errors-check-validity', 'signupForm');
         return false;
       }
-      console.log('sending the captcha response to the server', $scope.response);
+      // console.log('sending the captcha response to the server', $scope.response);
 
       $http.post('/api/auth/signup', $scope.credentials).success(function (response) {
         // If successful we assign the response to the global user model
@@ -82,11 +82,11 @@ angular.module('users').controller('AuthenticationController', [
     };
 
     $scope.setResponse = function (response) {
-      console.info('Response available');
+      // console.info('Response available');
       $scope.response = response;
     };
     $scope.setWidgetId = function (widgetId) {
-      console.info('Created widget ID: %s', widgetId);
+      // console.info('Created widget ID: %s', widgetId);
       $scope.widgetId = widgetId;
     };
     $scope.cbExpiration = function () {

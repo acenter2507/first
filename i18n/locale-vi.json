@@ -58,5 +58,14 @@
   "LB_USER_USERNAME_REQUIRED": "Xin hãy nhập Tên đăng nhập.",
   "LB_USER_PASSWORD_REQUIRED": "Xin hãy nhập mật khẩu.",
   "LB_USER_FORGOT": "Bạn quên mật khẩu à?",
-  "LB_CM_ERROR": "Lỗi!"
+  "LB_CM_ERROR": "Lỗi!",
+  "MS_CM_SUCCESS": "Thành công!",
+  "MS_CM_THANKYOU": "Cảm ơn!",
+  "MS_CM_LOAD_ERROR": "Xảy ra lỗi khai tải dữ liệu từ server.",
+  "MS_CM_AUTH_ERROR": "Bạn không có quyền truy cập.",
+  "MS_CM_REPORT_EXIST_ERROR": "Bạn đã báo cáo poll: {{title}}",
+  "MS_CM_REPORT_SUCCESS": "Đã gửi báo cáo poll: {{title}}",
+  "MS_CM_BOOKMARK_EXIST_ERROR": "Bạn đã đánh dấu poll: {{title}}.",
+  "MS_CM_BOOKMARK_SUCCESS": "Đã đánh dấu {{title}}",
+  "MS_CM_FOLLOW_LOGIN_ERROR": "Bạn cần phải đăng nhập để theo dõi poll này."
 }

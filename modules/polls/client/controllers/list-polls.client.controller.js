@@ -50,6 +50,11 @@
     vm.is_has_new_polls = false;
     init();
 
+    console.log($translate('MS_CM_LOAD_ERROR'));
+    $translate('MS_CM_LOAD_ERROR').then(function (translation) {
+      console.log(translation);
+    });
+
     function init() {
       // Lắng nghe sự liện từ socket
       initSocket();

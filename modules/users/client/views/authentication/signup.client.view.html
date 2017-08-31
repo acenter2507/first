@@ -17,8 +17,8 @@
           </div>
         </div>
         <div class="form-group" show-errors>
-          <input type="email" id="email" name="email" class="form-control" ng-model="credentials.email" placeholder="{{ 'LB_USER_EMAIL' | translate }}" lowercase
-            required>
+          <input type="email" id="email" name="email" class="form-control" ng-model="credentials.email" placeholder="{{ 'LB_USER_EMAIL' | translate }}"
+            lowercase required>
           <div ng-messages="signupForm.email.$error" role="alert">
             <p class="help-block error-text font-sm" ng-message="required">{{ 'LB_USER_EMAIL_REQUIRED' | translate }}</p>
             <p class="help-block error-text font-sm" ng-message="email">{{ 'LB_USER_EMAIL_INVALID' | translate }}</p>
@@ -43,6 +43,11 @@
         </div>
         <div class="form-group" ng-show="!signupForm.password.$error.required">
           <uib-progressbar class="progress-xs" value="requirementsProgress" type="{{requirementsColor}}"></uib-progressbar>
+        </div>
+        <div class="text-center form-group">
+          <div vc-recaptcha ng-model="credentials.myRecaptchaResponse" theme="'light'" key="reCaptcha.key" on-create="setWidgetId(widgetId)"
+            on-success="setResponse(response)" on-expire="cbExpiration()">
+          </div>
         </div>
         <div class="text-center form-group">
           <button type="submit" class="btn btn-primary btn-block">{{ 'LB_SIGNUP' | translate }}</button>

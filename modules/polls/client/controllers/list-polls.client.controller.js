@@ -215,7 +215,9 @@
         Action.save_report(poll, reason)
           .then(res => {
             poll.reported = (res) ? true : false;
-            toast.error(vm.ms.MS_CM_REPORT_SUCCESS, vm.ms.MS_CM_THANKYOU);
+            $translate('MS_CM_REPORT_SUCCESS', { title: poll.title }).then(tsl => {
+              toast.error(tsl, vm.ms.MS_CM_ERROR);
+            });
           })
           .catch(err => {
             toast.error(vm.ms.MS_CM_LOAD_ERROR, vm.ms.MS_CM_ERROR);

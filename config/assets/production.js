@@ -19,7 +19,7 @@ module.exports = {
       ],
       js: [
         'public/lib/jquery/dist/jquery.min.js',
-        'public/lib/angular/angular.js',
+        'public/lib/angular/angular.min.js',
         'public/lib/angular-cookies/angular-cookies.min.js',
         'public/lib/angular-translate/angular-translate.min.js',
         'public/lib/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js',
@@ -28,8 +28,8 @@ module.exports = {
         'public/lib/angular-animate/angular-animate.js',
         'public/lib/angular-messages/angular-messages.js',
         'public/lib/angular-sanitize/angular-sanitize.js',
-        'public/lib/angular-socket-io/socket.js',
         'public/lib/angular-touch/angular-touch.js',
+        'public/lib/angular-socket-io/socket.js',
         'public/lib/angular-ui-router/release/angular-ui-router.js',
         'public/lib/angular-ui-utils/ui-utils.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',

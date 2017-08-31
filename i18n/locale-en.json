@@ -66,5 +66,6 @@
   "MS_CM_REPORT_EXIST_ERROR": "You are already reported {{title}}",
   "MS_CM_REPORT_SUCCESS": "You have successfully reported {{title}}",
   "MS_CM_BOOKMARK_EXIST_ERROR": "You are already bookmark {{title}}",
-  "MS_CM_BOOKMARK_SUCCESS": "Added {{title}} to bookmarks."
+  "MS_CM_BOOKMARK_SUCCESS": "Added {{title}} to bookmarks.",
+  "MS_CM_FOLLOW_LOGIN_ERROR": "You must login to follow poll.",
 }

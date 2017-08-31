@@ -208,14 +208,14 @@
     };
     $scope.follow_poll = (poll) => {
       if (!$scope.isLogged) {
-        toast.error('You must login to follow poll.', 'Error!');
+        toast.error($translate('MS_CM_FOLLOW_LOGIN_ERROR'), $translate('MS_CM_ERROR'));
+
         return;
       }
       Action.save_follow(poll.follow)
         .then(res => {
           if (res) {
             poll.follow = res;
-            toast.success('You followed ' + poll.title, 'Success!');
           } else {
             poll.follow = { poll: poll._id };
           }

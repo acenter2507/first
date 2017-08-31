@@ -67,5 +67,5 @@
   "MS_CM_REPORT_SUCCESS": "Đã gửi báo cáo poll: {{title}}",
   "MS_CM_BOOKMARK_EXIST_ERROR": "Bạn đã đánh dấu poll: {{title}}.",
   "MS_CM_BOOKMARK_SUCCESS": "Đã đánh dấu {{title}}",
-  "MS_CM_FOLLOW_LOGIN_ERROR": "Bạn cần phải đăng nhập để theo dõi poll này."
+  "MS_CM_LOGIN_ERROR": "Bạn cần phải đăng nhập để thực hiện thao tác này."
 }

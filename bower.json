@@ -46,7 +46,8 @@
     "angular-translate-loader-static-files": "^2.15.2",
     "angular-material": "^1.1.4",
     "angular-translate-storage-cookie": "^2.15.2",
-    "angular-translate-loader-partial": "^2.15.2"
+    "angular-translate-loader-partial": "^2.15.2",
+    "angular-recaptcha": "^4.1.0"
   },
   "resolutions": {
     "angular": "~1.3",

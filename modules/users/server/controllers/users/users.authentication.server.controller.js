@@ -59,27 +59,6 @@ exports.signup = function (req, res) {
     .catch(err => {
       return res.status(400).send({ message: err.message });
     });
-
-  // user.provider = 'local';
-  // user.save(function (err, user) {
-  //   if (err) return handleError(err);
-  //   // Remove sensitive data before login
-  //   var report = new Userreport({ user: user._id });
-  //   var login = new Userlogin({ user: user._id });
-  //   login.agent = req.headers['user-agent'];
-  //   login.ip = getClientIp(req);
-  //   login.save();
-  //   report.save();
-  //   user.password = undefined;
-  //   user.salt = undefined;
-  //   req.login(user, function (err) {
-  //     if (err) {
-  //       res.status(400).send(err);
-  //     } else {
-  //       res.json(user);
-  //     }
-  //   });
-  // });
   function handleError(err) {
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
@@ -327,7 +306,7 @@ function verifyEmail(email) {
         return resolve();
       }, err => {
         return reject(err);
-      })
+      });
   });
 }
 function getClientIp(req) {

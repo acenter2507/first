@@ -12,7 +12,7 @@ angular.module('users').controller('AuthenticationController', [
   'toastr',
   'Constants',
   'vcRecaptchaService',
-  '$tranlate',
+  '$translate',
   function (
     $rootScope,
     $scope,
@@ -25,7 +25,7 @@ angular.module('users').controller('AuthenticationController', [
     toastr,
     Constants,
     vcRecaptchaService,
-    $tranlate
+    $translate
   ) {
     // Get an eventual error defined in the URL query string:
     get_translate();

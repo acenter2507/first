@@ -123,7 +123,18 @@ UserSchema.pre('save', function (next) {
  * Hook a pre validate method to test the local password
  */
 UserSchema.methods.verifyEmail = function () {
-  console.log(this.email);
+  // if (this.email.length <= 0) return '';
+  // var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  // if (!re.test(this.email)) return false;
+
+  return this.findOne({ email: this.email }).exec(function (err, user) {
+    if (user) {
+      return false;
+    } else {
+
+      return true;
+    }
+  });
 };
 
 /**

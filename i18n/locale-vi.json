@@ -67,5 +67,8 @@
   "MS_CM_REPORT_SUCCESS": "Đã gửi báo cáo poll: {{title}}",
   "MS_CM_BOOKMARK_EXIST_ERROR": "Bạn đã đánh dấu poll: {{title}}.",
   "MS_CM_BOOKMARK_SUCCESS": "Đã đánh dấu {{title}}",
-  "MS_CM_LOGIN_ERROR": "Bạn cần phải đăng nhập để thực hiện thao tác này."
+  "MS_CM_LOGIN_ERROR": "Bạn cần phải đăng nhập để thực hiện thao tác này.",
+  "MS_PASS_MINLENGTH_ERROR": "Bạn cần phải nhập mật khẩu từ 8 ký tự trở lên.",
+  "MS_PASS_MAXLENGTH_ERROR": "Bạn cần phải nhập mật khẩu từ 32 ký tự trở xuống.",
+  "MS_PASS_ILLEGAL_ERROR": "Vui lòng không nhập ký tự đặc biệt trong mật khẩu."
 }

@@ -36,7 +36,7 @@
           <div ng-messages="signupForm.password.$error" role="alert">
             <p class="help-block error-text font-sm" ng-message="required">{{ 'LB_USER_PASSWORD_REQUIRED' | translate }}</p>
             <div ng-repeat="passwordError in passwordErrors">
-              <p class="help-block error-text font-sm" ng-show="signupForm.password.$error.requirements">{{passwordError}}</p>
+              <p class="help-block error-text font-sm" ng-show="signupForm.password.$error.requirements">{{passwordError | translate}}</p>
             </div>
           </div>
         </div>

@@ -131,7 +131,7 @@ UserSchema.methods.verifyEmail = function () {
     if (user) {
       return false;
     } else {
-
+      
       return true;
     }
   });

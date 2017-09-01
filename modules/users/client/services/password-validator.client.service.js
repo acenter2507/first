@@ -8,6 +8,7 @@ angular.module('users').factory('PasswordValidator', ['$window',
     return {
       getResult: function (password) {
         var result = owaspPasswordStrengthTest.test(password);
+        console.log(result);
         return result;
       },
       getPopoverMsg: function () {

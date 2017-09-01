@@ -25,8 +25,6 @@ angular.module('users').controller('AuthenticationController', [
     Constants,
     vcRecaptchaService
   ) {
-    $scope.popoverMsg = PasswordValidator.getPopoverMsg();
-
     // Get an eventual error defined in the URL query string:
     $scope.error = $location.search().err;
     $scope.reCaptcha = Constants.reCaptcha;

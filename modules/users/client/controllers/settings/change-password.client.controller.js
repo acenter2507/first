@@ -2,8 +2,6 @@
 
 angular.module('users').controller('ChangePasswordController', ['$scope', '$http', 'Authentication', 'PasswordValidator',
   function ($scope, $http, Authentication, PasswordValidator) {
-    $scope.popoverMsg = PasswordValidator.getPopoverMsg();
-
     // Change user password
     $scope.changeUserPassword = function (isValid) {
       $scope.success = $scope.error = null;

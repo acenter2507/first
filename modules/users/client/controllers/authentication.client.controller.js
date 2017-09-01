@@ -68,7 +68,7 @@ angular.module('users').controller('AuthenticationController', [
         // And redirect to the previous or home page
         $state.go($state.previous.state.name || 'home', $state.previous.params);
       }).error(function (response) {
-        $tranlate('response.message').then(tsl => {
+        $translate('response.message').then(tsl => {
           if (!tsl || tsl.length === 0) {
             toastr.error(response.message, $scope.MS_CM_ERROR);
           } else {

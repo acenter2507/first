@@ -12,6 +12,7 @@ angular.module('users').controller('AuthenticationController', [
   'toastr',
   'Constants',
   'vcRecaptchaService',
+  '$tranlate',
   function (
     $rootScope,
     $scope,
@@ -23,9 +24,11 @@ angular.module('users').controller('AuthenticationController', [
     PasswordValidator,
     toastr,
     Constants,
-    vcRecaptchaService
+    vcRecaptchaService,
+    $tranlate
   ) {
     // Get an eventual error defined in the URL query string:
+    get_translate();
     $scope.error = $location.search().err;
     // $scope.reCaptcha = Constants.reCaptcha;
     // $scope.response = null;
@@ -65,7 +68,13 @@ angular.module('users').controller('AuthenticationController', [
         // And redirect to the previous or home page
         $state.go($state.previous.state.name || 'home', $state.previous.params);
       }).error(function (response) {
-        toastr.error(response.message, 'Error!');
+        $tranlate('response.message').then(tsl => {
+          if (!tsl || tsl.length === 0) {
+            toastr.error(response.message, $scope.MS_CM_ERROR);
+          } else {
+            toastr.error(tsl, $scope.MS_CM_ERROR);
+          }
+        });
       });
     };
 
@@ -91,5 +100,10 @@ angular.module('users').controller('AuthenticationController', [
     //   vcRecaptchaService.reload($scope.widgetId);
     //   $scope.response = null;
     // };
+
+    function get_translate() {
+      $translate('MS_CM_ERROR').then(tsl => { $scope.MS_CM_ERROR = tsl; });
+      $translate('MS_CM_SUCCESS').then(tsl => { $scope.MS_CM_SUCCESS = tsl; });
+    }
   }
 ]);

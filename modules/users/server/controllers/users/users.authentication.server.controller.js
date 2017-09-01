@@ -75,7 +75,6 @@ exports.signin = function (req, res, next) {
     if (err || !user) {
       res.status(400).send(info);
     } else {
-
       var login = new Userlogin({ user: user._id });
       login.agent = req.headers['user-agent'];
       login.ip = getClientIp(req);

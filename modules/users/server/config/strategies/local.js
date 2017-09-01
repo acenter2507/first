@@ -23,7 +23,7 @@ module.exports = function () {
       }
       if (!user || !user.authenticate(password)) {
         return done(null, false, {
-          message: 'Invalid email or password'
+          message: 'MS_USERS_LOGIN_FAILED'
         });
       }
       return done(null, user);

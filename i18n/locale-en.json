@@ -71,5 +71,6 @@
   "MS_PASS_MINLENGTH_ERROR": "The password must be at least 8 characters long.",
   "MS_PASS_MAXLENGTH_ERROR": "The password must be at least 32 characters long.",
   "MS_PASS_ILLEGAL_ERROR": "Your password contains illegal characters.",
-  "MS_USERS_EMAIL_DUPLICATE": "Email duplicated"
+  "MS_USERS_EMAIL_DUPLICATE": "Email duplicated",
+  "MS_USERS_LOGIN_FAILED": "Invalid email or password"
 }

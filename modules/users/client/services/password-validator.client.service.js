@@ -12,7 +12,7 @@ angular.module('users').factory('PasswordValidator', ['$window', '$translate',
           var check = 0;
           if (password.length < 8) {
             $translate('MS_PASS_MINLENGTH_ERROR').then(tsl => {
-              result.errors.push[tsl];
+              result.errors.push(tsl);
               check += 1;
             });
           } else {
@@ -20,15 +20,15 @@ angular.module('users').factory('PasswordValidator', ['$window', '$translate',
           }
           if (password.length > 32) {
             $translate('MS_PASS_MAXLENGTH_ERROR').then(tsl => {
-              result.errors.push[tsl];
+              result.errors.push(tsl);
               check += 1;
             });
           } else {
             check += 1;
           }
-          if(/^[a-zA-Z0-9- ]*$/.test(str) === false) {
+          if(/^[a-zA-Z0-9- ]*$/.test(password) === false) {
             $translate('MS_PASS_ILLEGAL_ERROR').then(tsl => {
-              result.errors.push[tsl];
+              result.errors.push(tsl);
               check += 1;
             });
           } else {

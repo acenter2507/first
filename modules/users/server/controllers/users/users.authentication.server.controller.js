@@ -28,36 +28,35 @@ exports.signup = function (req, res) {
   var user = new User(req.body);
   var message = null;
 
-  user.verifyEmail();
-  return res.end();
+  if (!user.verifyEmail()) {
+    return res.status(400).send({
+      message: 'MS_USERS_EMAIL_DUPLICATE'
+    });
+  }
+  user.provider = 'local';
+
   // Add missing user fields
   // user.provider = 'local';
   // user.displayName = user.firstName + ' ' + user.lastName;
-  // user.save(function (err, user) {
-  //   if (err) {
-  //     handleError(err);
-  //   } else {
-  //     // Remove sensitive data before login
-  //     var report = new Userreport({ user: user._id });
-  //     var login = new Userlogin({ user: user._id });
-  //     login.agent = req.headers['user-agent'];
-  //     login.ip =
-  //       req.headers['X-Forwarded-For'] ||
-  //       req.headers['x-forwarded-for'] ||
-  //       req.client.remoteAddress;
-  //     login.save();
-  //     report.save();
-  //     user.password = undefined;
-  //     user.salt = undefined;
-  //     req.login(user, function (err) {
-  //       if (err) {
-  //         res.status(400).send(err);
-  //       } else {
-  //         res.json(user);
-  //       }
-  //     });
-  //   }
-  // });
+  user.save(function (err, user) {
+    if (err) return handleError(err);
+    // Remove sensitive data before login
+    var report = new Userreport({ user: user._id });
+    var login = new Userlogin({ user: user._id });
+    login.agent = req.headers['user-agent'];
+    login.ip = getClientIp(req);
+    login.save();
+    report.save();
+    user.password = undefined;
+    user.salt = undefined;
+    req.login(user, function (err) {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.json(user);
+      }
+    });
+  });
 
   //   }
   // });
@@ -79,10 +78,7 @@ exports.signin = function (req, res, next) {
 
       var login = new Userlogin({ user: user._id });
       login.agent = req.headers['user-agent'];
-      login.ip =
-        req.headers['X-Forwarded-For'] ||
-        req.headers['x-forwarded-for'] ||
-        req.client.remoteAddress;
+      login.ip = getClientIp(req);
       login.save();
       user.update({ _id: user._id }, { $set: { lastLogin: new Date() } });
       // Remove sensitive data before login
@@ -196,10 +192,7 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
               var report = new Userreport({ user: _user._id });
               var login = new Userlogin({ user: _user._id });
               login.agent = req.headers['user-agent'];
-              login.ip =
-                req.headers['X-Forwarded-For'] ||
-                req.headers['x-forwarded-for'] ||
-                req.client.remoteAddress;
+              login.ip = getClientIp(req);
               login.save();
               report.save();
             }
@@ -303,4 +296,23 @@ exports.removeOAuthProvider = function (req, res, next) {
       });
     }
   });
+};
+
+function getClientIp(req) {
+  var ipAddress;
+  // Amazon EC2 / Heroku workaround to get real client IP
+  var forwardedIpsStr = req.header('x-forwarded-for'); 
+  if (forwardedIpsStr) {
+    // 'x-forwarded-for' header may return multiple IP addresses in
+    // the format: "client IP, proxy 1 IP, proxy 2 IP" so take the
+    // the first one
+    var forwardedIps = forwardedIpsStr.split(',');
+    ipAddress = forwardedIps[0];
+  }
+  if (!ipAddress) {
+    // Ensure getting client IP address still works in
+    // development environment
+    ipAddress = req.connection.remoteAddress;
+  }
+  return ipAddress;
 };

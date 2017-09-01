@@ -5,7 +5,7 @@
       <fieldset>
         <div class="form-group" show-errors>
           <input type="text" id="username" name="username" class="form-control" ng-model="credentials.username" placeholder="{{ 'LB_USER_USERNAME' | translate }}"
-            lowercase required>
+            required>
           <div ng-messages="signinForm.username.$error" role="alert">
             <p class="help-block error-text" ng-message="required">
               {{ 'LB_USER_USERNAME_REQUIRED' | translate }}

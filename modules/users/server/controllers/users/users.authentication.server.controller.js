@@ -9,7 +9,8 @@ var path = require('path'),
   passport = require('passport'),
   User = mongoose.model('User'),
   Userreport = mongoose.model('Userreport'),
-  Userlogin = mongoose.model('Userlogin');
+  Userlogin = mongoose.model('Userlogin'),
+  validator = require('validator');
 
 // URLs for which user can't be redirected on signin
 var noReturnUrls = [
@@ -28,31 +29,57 @@ exports.signup = function (req, res) {
   var user = new User(req.body);
   var message = null;
 
-  if (!user.verifyEmail()) {
-    return res.status(400).send({
-      message: 'MS_USERS_EMAIL_DUPLICATE'
-    });
-  }
-  user.provider = 'local';
-  user.save(function (err, user) {
-    if (err) return handleError(err);
-    // Remove sensitive data before login
-    var report = new Userreport({ user: user._id });
-    var login = new Userlogin({ user: user._id });
-    login.agent = req.headers['user-agent'];
-    login.ip = getClientIp(req);
-    login.save();
-    report.save();
-    user.password = undefined;
-    user.salt = undefined;
-    req.login(user, function (err) {
-      if (err) {
-        res.status(400).send(err);
+  verifyEmail(user.email)
+    .then(rs => {
+      if (rs) {
+        return res.status(400).send({ message: rs });
       } else {
-        res.json(user);
+        user.provider = 'local';
+        user.save(function (err, user) {
+          if (err) return handleError(err);
+          // Remove sensitive data before login
+          var report = new Userreport({ user: user._id });
+          var login = new Userlogin({ user: user._id });
+          login.agent = req.headers['user-agent'];
+          login.ip = getClientIp(req);
+          login.save();
+          report.save();
+          user.password = undefined;
+          user.salt = undefined;
+          req.login(user, function (err) {
+            if (err) {
+              res.status(400).send(err);
+            } else {
+              res.json(user);
+            }
+          });
+        });
       }
+    })
+    .catch(err => {
+      return res.status(400).send({ message: err.message });
     });
-  });
+
+  // user.provider = 'local';
+  // user.save(function (err, user) {
+  //   if (err) return handleError(err);
+  //   // Remove sensitive data before login
+  //   var report = new Userreport({ user: user._id });
+  //   var login = new Userlogin({ user: user._id });
+  //   login.agent = req.headers['user-agent'];
+  //   login.ip = getClientIp(req);
+  //   login.save();
+  //   report.save();
+  //   user.password = undefined;
+  //   user.salt = undefined;
+  //   req.login(user, function (err) {
+  //     if (err) {
+  //       res.status(400).send(err);
+  //     } else {
+  //       res.json(user);
+  //     }
+  //   });
+  // });
   function handleError(err) {
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
@@ -290,10 +317,23 @@ exports.removeOAuthProvider = function (req, res, next) {
   });
 };
 
+function verifyEmail(email) {
+  return new Promise((resolve, reject) => {
+    if (email.length === 0) return resolve('LB_USER_EMAIL_REQUIRED');
+    if (!validator.isEmail(email)) return resolve('LB_USER_EMAIL_INVALID');
+    User.findOne({ email: email })
+      .then(user => {
+        if (user) return resolve('LB_USERS_EMAIL_DUPLICATE');
+        return resolve();
+      }, err => {
+        return reject(err);
+      })
+  });
+}
 function getClientIp(req) {
   var ipAddress;
   // Amazon EC2 / Heroku workaround to get real client IP
-  var forwardedIpsStr = req.header('x-forwarded-for'); 
+  var forwardedIpsStr = req.header('x-forwarded-for');
   if (forwardedIpsStr) {
     // 'x-forwarded-for' header may return multiple IP addresses in
     // the format: "client IP, proxy 1 IP, proxy 2 IP" so take the

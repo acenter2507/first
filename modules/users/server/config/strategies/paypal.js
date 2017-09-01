@@ -29,7 +29,7 @@ module.exports = function (config) {
       lastName: profile.name.familyName,
       displayName: profile.displayName,
       email: profile._json.email,
-      username: profile.username,
+      // username: profile.username,
       provider: 'paypal',
       providerIdentifierField: 'user_id',
       providerData: providerData

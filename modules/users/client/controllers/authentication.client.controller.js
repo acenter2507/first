@@ -27,9 +27,9 @@ angular.module('users').controller('AuthenticationController', [
   ) {
     // Get an eventual error defined in the URL query string:
     $scope.error = $location.search().err;
-    $scope.reCaptcha = Constants.reCaptcha;
-    $scope.response = null;
-    $scope.widgetId = null;
+    // $scope.reCaptcha = Constants.reCaptcha;
+    // $scope.response = null;
+    // $scope.widgetId = null;
     // If user is signed in then redirect back home
     if (Authentication.user) {
       $location.path('/');
@@ -40,7 +40,6 @@ angular.module('users').controller('AuthenticationController', [
         $scope.$broadcast('show-errors-check-validity', 'signupForm');
         return false;
       }
-      // console.log('sending the captcha response to the server', $scope.response);
 
       $http.post('/api/auth/signup', $scope.credentials).success(function (response) {
         // If successful we assign the response to the global user model
@@ -79,18 +78,18 @@ angular.module('users').controller('AuthenticationController', [
       $window.location.href = url;
     };
 
-    $scope.setResponse = function (response) {
-      // console.info('Response available');
-      $scope.response = response;
-    };
-    $scope.setWidgetId = function (widgetId) {
-      // console.info('Created widget ID: %s', widgetId);
-      $scope.widgetId = widgetId;
-    };
-    $scope.cbExpiration = function () {
-      console.info('Captcha expired. Resetting response object');
-      vcRecaptchaService.reload($scope.widgetId);
-      $scope.response = null;
-    };
+    // $scope.setResponse = function (response) {
+    //   // console.info('Response available');
+    //   $scope.response = response;
+    // };
+    // $scope.setWidgetId = function (widgetId) {
+    //   // console.info('Created widget ID: %s', widgetId);
+    //   $scope.widgetId = widgetId;
+    // };
+    // $scope.cbExpiration = function () {
+    //   console.info('Captcha expired. Resetting response object');
+    //   vcRecaptchaService.reload($scope.widgetId);
+    //   $scope.response = null;
+    // };
   }
 ]);

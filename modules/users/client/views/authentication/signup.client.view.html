@@ -24,13 +24,13 @@
             <p class="help-block error-text font-sm" ng-message="email">{{ 'LB_USER_EMAIL_INVALID' | translate }}</p>
           </div>
         </div>
-        <div class="form-group" show-errors>
+        <!--<div class="form-group" show-errors>
           <input type="text" id="username" name="username" class="form-control" ng-model="credentials.username" placeholder="{{ 'LB_USER_USERNAME' | translate }}"
             required>
           <div ng-messages="signupForm.username.$error" role="alert">
             <p class="help-block error-text font-xs" ng-message="required">{{ 'LB_USER_USERNAME_REQUIRED' | translate }}</p>
           </div>
-        </div>
+        </div>-->
         <div class="form-group" show-errors>
           <input type="password" id="password" name="password" class="form-control" ng-model="credentials.password" placeholder="{{ 'LB_USER_PASSWORD' | translate }}" password-validator required>
           <div ng-messages="signupForm.password.$error" role="alert">
@@ -40,14 +40,11 @@
             </div>
           </div>
         </div>
-        <!--<div class="form-group" ng-show="!signupForm.password.$error.required">
-          <uib-progressbar class="progress-xs" value="requirementsProgress" type="{{requirementsColor}}"></uib-progressbar>
-        </div>-->
-        <div class="text-center form-group">
+        <!--<div class="text-center form-group">
           <div vc-recaptcha ng-model="credentials.myRecaptchaResponse" theme="'light'" key="reCaptcha.key" on-create="setWidgetId(widgetId)"
             on-success="setResponse(response)" on-expire="cbExpiration()" style="max-width: 100%;">
           </div>
-        </div>
+        </div>-->
         <div class="text-center form-group">
           <button type="submit" class="btn btn-primary btn-block">{{ 'LB_SIGNUP' | translate }}</button>
         </div>

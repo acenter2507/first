@@ -28,34 +28,36 @@ exports.signup = function (req, res) {
   var user = new User(req.body);
   var message = null;
 
+  user.verifyEmail();
+  return res.end();
   // Add missing user fields
-  user.provider = 'local';
-  user.displayName = user.firstName + ' ' + user.lastName;
-  user.save(function (err, user) {
-    if (err) {
-      handleError(err);
-    } else {
-      // Remove sensitive data before login
-      var report = new Userreport({ user: user._id });
-      var login = new Userlogin({ user: user._id });
-      login.agent = req.headers['user-agent'];
-      login.ip =
-        req.headers['X-Forwarded-For'] ||
-        req.headers['x-forwarded-for'] ||
-        req.client.remoteAddress;
-      login.save();
-      report.save();
-      user.password = undefined;
-      user.salt = undefined;
-      req.login(user, function (err) {
-        if (err) {
-          res.status(400).send(err);
-        } else {
-          res.json(user);
-        }
-      });
-    }
-  });
+  // user.provider = 'local';
+  // user.displayName = user.firstName + ' ' + user.lastName;
+  // user.save(function (err, user) {
+  //   if (err) {
+  //     handleError(err);
+  //   } else {
+  //     // Remove sensitive data before login
+  //     var report = new Userreport({ user: user._id });
+  //     var login = new Userlogin({ user: user._id });
+  //     login.agent = req.headers['user-agent'];
+  //     login.ip =
+  //       req.headers['X-Forwarded-For'] ||
+  //       req.headers['x-forwarded-for'] ||
+  //       req.client.remoteAddress;
+  //     login.save();
+  //     report.save();
+  //     user.password = undefined;
+  //     user.salt = undefined;
+  //     req.login(user, function (err) {
+  //       if (err) {
+  //         res.status(400).send(err);
+  //       } else {
+  //         res.json(user);
+  //       }
+  //     });
+  //   }
+  // });
 
   //   }
   // });
@@ -178,36 +180,60 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
         return done(err);
       } else {
         if (!user) {
-          var possibleUsername = providerUserProfile.username || ((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
-
-          User.findUniqueUsername(possibleUsername, null, function (availableUsername) {
-            user = new User({
-              firstName: providerUserProfile.firstName,
-              lastName: providerUserProfile.lastName,
-              username: availableUsername,
-              displayName: providerUserProfile.displayName,
-              email: providerUserProfile.email,
-              profileImageURL: providerUserProfile.profileImageURL,
-              provider: providerUserProfile.provider,
-              providerData: providerUserProfile.providerData
-            });
-
-            // And save the user
-            user.save(function (err, _user) {
-              if (!err) {
-                var report = new Userreport({ user: _user._id });
-                var login = new Userlogin({ user: _user._id });
-                login.agent = req.headers['user-agent'];
-                login.ip =
-                  req.headers['X-Forwarded-For'] ||
-                  req.headers['x-forwarded-for'] ||
-                  req.client.remoteAddress;
-                login.save();
-                report.save();
-              }
-              return done(err, user);
-            });
+          // var possibleUsername = providerUserProfile.username || ((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
+          user = new User({
+            firstName: providerUserProfile.firstName,
+            lastName: providerUserProfile.lastName,
+            displayName: providerUserProfile.displayName,
+            email: providerUserProfile.email,
+            profileImageURL: providerUserProfile.profileImageURL,
+            provider: providerUserProfile.provider,
+            providerData: providerUserProfile.providerData
           });
+          // And save the user
+          user.save(function (err, _user) {
+            if (!err) {
+              var report = new Userreport({ user: _user._id });
+              var login = new Userlogin({ user: _user._id });
+              login.agent = req.headers['user-agent'];
+              login.ip =
+                req.headers['X-Forwarded-For'] ||
+                req.headers['x-forwarded-for'] ||
+                req.client.remoteAddress;
+              login.save();
+              report.save();
+            }
+            return done(err, user);
+          });
+
+          // User.findUniqueUsername(possibleUsername, null, function (availableUsername) {
+          //   user = new User({
+          //     firstName: providerUserProfile.firstName,
+          //     lastName: providerUserProfile.lastName,
+          //     username: availableUsername,
+          //     displayName: providerUserProfile.displayName,
+          //     email: providerUserProfile.email,
+          //     profileImageURL: providerUserProfile.profileImageURL,
+          //     provider: providerUserProfile.provider,
+          //     providerData: providerUserProfile.providerData
+          //   });
+
+          //   // And save the user
+          //   user.save(function (err, _user) {
+          //     if (!err) {
+          //       var report = new Userreport({ user: _user._id });
+          //       var login = new Userlogin({ user: _user._id });
+          //       login.agent = req.headers['user-agent'];
+          //       login.ip =
+          //         req.headers['X-Forwarded-For'] ||
+          //         req.headers['x-forwarded-for'] ||
+          //         req.client.remoteAddress;
+          //       login.save();
+          //       report.save();
+          //     }
+          //     return done(err, user);
+          //   });
+          // });
         } else {
           return done(err, user);
         }

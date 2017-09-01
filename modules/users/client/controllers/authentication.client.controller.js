@@ -1,7 +1,6 @@
 'use strict';
 
 angular.module('users').controller('AuthenticationController', [
-  '$rootScope',
   '$scope',
   '$state',
   '$http',
@@ -14,7 +13,6 @@ angular.module('users').controller('AuthenticationController', [
   'vcRecaptchaService',
   '$translate',
   function (
-    $rootScope,
     $scope,
     $state,
     $http,
@@ -47,11 +45,10 @@ angular.module('users').controller('AuthenticationController', [
       $http.post('/api/auth/signup', $scope.credentials).success(function (response) {
         // If successful we assign the response to the global user model
         Authentication.user = response;
-        // Notifications.loadNotifs();
         // And redirect to the previous or home page
         $state.go($state.previous.state.name || 'home', $state.previous.params);
       }).error(function (response) {
-        toastr.error(response.message, 'Error!');
+        show_error(response.message);
       });
     };
 
@@ -64,17 +61,10 @@ angular.module('users').controller('AuthenticationController', [
       $http.post('/api/auth/signin', $scope.credentials).success(function (response) {
         // If successful we assign the response to the global user model
         Authentication.user = response;
-        // Notifications.loadNotifs();
         // And redirect to the previous or home page
         $state.go($state.previous.state.name || 'home', $state.previous.params);
       }).error(function (response) {
-        $translate(response.message).then(tsl => {
-          if (!tsl || tsl.length === 0) {
-            toastr.error(response.message, $scope.MS_CM_ERROR);
-          } else {
-            toastr.error(tsl, $scope.MS_CM_ERROR);
-          }
-        });
+        show_error(response.message);
       });
     };
 
@@ -104,6 +94,16 @@ angular.module('users').controller('AuthenticationController', [
     function get_translate() {
       $translate('MS_CM_ERROR').then(tsl => { $scope.MS_CM_ERROR = tsl; });
       $translate('MS_CM_SUCCESS').then(tsl => { $scope.MS_CM_SUCCESS = tsl; });
+    }
+
+    function show_error(msg) {
+      $translate(msg).then(tsl => {
+        if (!tsl || tsl.length === 0) {
+          toastr.error(msg, $scope.MS_CM_ERROR);
+        } else {
+          toastr.error(tsl, $scope.MS_CM_ERROR);
+        }
+      });
     }
   }
 ]);

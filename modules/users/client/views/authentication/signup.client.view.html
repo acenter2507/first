@@ -2,7 +2,15 @@
   <div class="col-xs-12">
     <form name="signupForm" ng-submit="signup(signupForm.$valid)" class="signin" novalidate autocomplete="off">
       <fieldset>
+        <!-- Display Name  -->
         <div class="form-group" show-errors>
+          <input type="text" id="displayName" name="displayName" class="form-control" ng-model="credentials.displayName" placeholder="{{ 'LB_USER_NAME' | translate }}"
+            required>
+          <div ng-messages="signupForm.displayName.$error" role="alert">
+            <p class="help-block error-text font-sm" ng-message="required">{{ 'LB_USER_NAME_REQUIRED' | translate }}</p>
+          </div>
+        </div>
+        <!-- <div class="form-group" show-errors>
           <input type="text" id="firstName" name="firstName" class="form-control" ng-model="credentials.firstName" placeholder="{{ 'LB_USER_FIRSTNAME' | translate }}"
             required>
           <div ng-messages="signupForm.firstName.$error" role="alert">
@@ -15,7 +23,8 @@
           <div ng-messages="signupForm.lastName.$error" role="alert">
             <p class="help-block error-text font-sm" ng-message="required">{{ 'LB_USER_LASTNAME_REQUIRED' | translate }}</p>
           </div>
-        </div>
+        </div> -->
+        <!-- Email  -->
         <div class="form-group" show-errors>
           <input type="email" id="email" name="email" class="form-control" ng-model="credentials.email" placeholder="{{ 'LB_USER_EMAIL' | translate }}"
             required>
@@ -31,8 +40,10 @@
             <p class="help-block error-text font-xs" ng-message="required">{{ 'LB_USER_USERNAME_REQUIRED' | translate }}</p>
           </div>
         </div>-->
+        <!-- Password  -->
         <div class="form-group" show-errors>
-          <input type="password" id="password" name="password" class="form-control" ng-model="credentials.password" placeholder="{{ 'LB_USER_PASSWORD' | translate }}" password-validator required>
+          <input type="password" id="password" name="password" class="form-control" ng-model="credentials.password" placeholder="{{ 'LB_USER_PASSWORD' | translate }}"
+            password-validator required>
           <div ng-messages="signupForm.password.$error" role="alert">
             <p class="help-block error-text font-sm" ng-message="required">{{ 'LB_USER_PASSWORD_REQUIRED' | translate }}</p>
             <div ng-repeat="passwordError in passwordErrors">

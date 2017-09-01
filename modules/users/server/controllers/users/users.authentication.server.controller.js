@@ -34,10 +34,6 @@ exports.signup = function (req, res) {
     });
   }
   user.provider = 'local';
-
-  // Add missing user fields
-  // user.provider = 'local';
-  // user.displayName = user.firstName + ' ' + user.lastName;
   user.save(function (err, user) {
     if (err) return handleError(err);
     // Remove sensitive data before login
@@ -57,9 +53,6 @@ exports.signup = function (req, res) {
       }
     });
   });
-
-  //   }
-  // });
   function handleError(err) {
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)

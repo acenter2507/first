@@ -52,9 +52,11 @@ exports.signup = function (req, res) {
       return res.redirect('/authentication/send');
     })
     .catch(err => {
+      console.log(err);
       return res.status(400).send({ message: err.message });
     });
   function handleError(err) {
+    console.log(err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });

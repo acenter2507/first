@@ -42,7 +42,7 @@ exports.signup = function (req, res) {
         if (err) return handleError(err);
         user.password = undefined;
         user.salt = undefined;
-        return render_main_content(token, user, req.headers.host);
+        return render_main_content(token, user, req.headers.host, res);
       });
     })
     .then((emailHTML, user) => {
@@ -97,7 +97,7 @@ exports.signout = function (req, res) {
 };
 
 /**
- * Signout
+ * Verify
  */
 exports.verify = function (req, res) {
   User.findOne({
@@ -386,7 +386,7 @@ function gen_token() {
     });
   });
 }
-function render_main_content(token, user, host) {
+function render_main_content(token, user, host, res) {
   return new Promise((resolve, reject) => {
     var httpTransport = 'http://';
     if (config.secure && config.secure.ssl === true) {

@@ -40,6 +40,7 @@ exports.signup = function (req, res) {
       user.activeAccountExpires = Date.now() + 1800000; //86400000; // 24h
       user.save(function (err, _user) {
         if (err) return handleError(err);
+        console.log(_user);
         user = _user;
         user.password = undefined;
         user.salt = undefined;

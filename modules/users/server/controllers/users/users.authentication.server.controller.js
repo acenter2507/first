@@ -91,11 +91,11 @@ exports.signup = function (req, res) {
         appName: config.app.title,
         url: httpTransport + req.headers.host + '/api/auth/verify/' + token
       }, function (err, emailHTML) {
-        console.log(err);
         done(err, emailHTML, user);
       });
     },
     function (emailHTML, user, done) {
+      console.log(emailHTML);
       var mailOptions = {
         to: user.email,
         from: config.mailer.account.from,
@@ -115,7 +115,6 @@ exports.signup = function (req, res) {
     }
   ], function (err) {
     if (err) {
-      console.log(err);
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
@@ -221,7 +220,7 @@ exports.verify = function (req, res) {
       // Kiểm tra nếu user là account social
       if (user.provider !== 'local')
         return res.redirect('/authentication/error?err=4');
-      user.status = 0;
+      user.status = 2;
       user.activeAccountToken = undefined;
       user.resetPasswordExpires = undefined;
       user.save(function (err, user) {

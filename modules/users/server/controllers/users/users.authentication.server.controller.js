@@ -34,11 +34,11 @@ exports.signup = function (req, res) {
         return res.status(400).send({
           message: 'LB_USER_EMAIL_REQUIRED'
         });
-      if (!validator.isEmail(email))
+      if (!validator.isEmail(user.email))
         return res.status(400).send({
           message: 'LB_USER_EMAIL_INVALID'
         });
-      User.findOne({ email: email }, function (err, user) {
+      User.findOne({ email: user.email }, function (err, user) {
         if (user) {
           // Kiểm tra trạng thái user đã active
           if (user.status === 1)
@@ -74,7 +74,7 @@ exports.signup = function (req, res) {
         user = _user;
         user.password = undefined;
         user.salt = undefined;
-        done(err, token, user, done)
+        done(err, token, user, done);
       });
     },
     function (token, user, done) {
@@ -107,8 +107,7 @@ exports.signup = function (req, res) {
         }
         done();
       });
-    },
-    send_verification(emailHTML, user, done)
+    }
   ], function (err) {
     if (err) {
       console.log(err);

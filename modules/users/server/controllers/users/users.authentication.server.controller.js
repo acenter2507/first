@@ -32,9 +32,11 @@ exports.signup = function (req, res) {
   verifyEmail(user.email)
     .then(rs => {
       user.provider = 'local';
+      console.log('Process 1');
       return gen_token();
     })
     .then(token => {
+      console.log('Process 2');
       console.log(token);
       user.status = 1;
       user.activeAccountToken = token;
@@ -49,16 +51,20 @@ exports.signup = function (req, res) {
       });
     })
     .then(rs => {
+      console.log('Process 3');
       return send_verification(rs.html, rs.user);
     })
     .then(msg => {
+      console.log('Process 4');
       return res.redirect('/authentication/send');
     })
     .catch(err => {
+      console.log('Error 1');
       console.log(err);
       return res.status(400).send({ message: err.message });
     });
   function handleError(err) {
+      console.log('Error 2');
     console.log(err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)

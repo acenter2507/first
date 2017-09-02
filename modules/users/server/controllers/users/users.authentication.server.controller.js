@@ -82,14 +82,17 @@ exports.signup = function (req, res) {
       });
     },
     function (token, user, done) {
+      console.log(token);
       var httpTransport = 'http://';
       if (config.secure && config.secure.ssl === true) {
         httpTransport = 'https://';
       }
+      var url = httpTransport + req.headers.host + '/api/auth/verify/' + token;
+      console.log(url);
       res.render(path.resolve('modules/users/server/templates/verify-email'), {
         name: user.displayName,
         appName: config.app.title,
-        url: httpTransport + req.headers.host + '/api/auth/verify/' + token
+        url: url
       }, function (err, emailHTML) {
         done(err, emailHTML, user);
       });

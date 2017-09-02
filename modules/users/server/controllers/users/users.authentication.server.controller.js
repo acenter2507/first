@@ -35,6 +35,7 @@ exports.signup = function (req, res) {
       return gen_token();
     })
     .then(token => {
+      console.log(token);
       user.status = 1;
       user.activeAccountToken = token;
       user.activeAccountExpires = Date.now() + 1800000; //86400000; // 24h

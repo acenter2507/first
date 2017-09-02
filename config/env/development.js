@@ -81,7 +81,7 @@ module.exports = {
       options: {
         service: process.env.INFORM_MAILER_SERVICE_PROVIDER || 'Gmail',
         auth: {
-          user: process.env.INFORM_MAILER_EMAIL_ID || 'acenter2507@gmail.com',
+          user: process.env.INFORM_MAILER_EMAIL_ID || 'acenter2507',
           pass: process.env.INFORM_MAILER_PASSWORD || '1@Aa1@Aa'
         }
       }

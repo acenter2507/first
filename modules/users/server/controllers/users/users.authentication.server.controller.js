@@ -400,6 +400,7 @@ function render_main_content(token, user, host, res) {
       appName: config.app.title,
       url: httpTransport + host + '/api/auth/verify/' + token
     }, function (err, emailHTML) {
+      console.log(err);
       if (err) return reject(new Error('MS_CM_LOAD_ERROR'));
       return resolve({ html: emailHTML, user: user });
     });

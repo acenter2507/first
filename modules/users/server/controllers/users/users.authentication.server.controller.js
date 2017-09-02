@@ -28,6 +28,7 @@ exports.signup = function (req, res) {
 
   // Init Variables
   var user = new User(req.body);
+  user.provider = 'local';
   async.waterfall([
     function (done) {
       if (user.email.length === 0)

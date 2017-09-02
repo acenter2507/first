@@ -66,14 +66,26 @@ module.exports = {
     sandbox: true
   },
   mailer: {
-    from: process.env.MAILER_FROM || 'MAILER_FROM',
-    options: {
-      service: process.env.MAILER_SERVICE_PROVIDER || 'MAILER_SERVICE_PROVIDER',
-      auth: {
-        user: process.env.MAILER_EMAIL_ID || 'MAILER_EMAIL_ID',
-        pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
+    account: {
+      from: process.env.ACCOUNT_MAILER_FROM || 'acenter2507@gmail.com',
+      options: {
+        service: process.env.ACCOUNT_MAILER_SERVICE_PROVIDER || 'Gmail',
+        auth: {
+          user: process.env.ACCOUNT_MAILER_EMAIL_ID || 'acenter2507@gmail.com',
+          pass: process.env.ACCOUNT_MAILER_PASSWORD || '1@Aa1@Aa'
+        }
       }
-    }
+    },
+    inform: {
+      from: process.env.INFORM_MAILER_FROM || 'acenter2507@gmail.com',
+      options: {
+        service: process.env.INFORM_MAILER_SERVICE_PROVIDER || 'Gmail',
+        auth: {
+          user: process.env.INFORM_MAILER_EMAIL_ID || 'acenter2507@gmail.com',
+          pass: process.env.INFORM_MAILER_PASSWORD || '1@Aa1@Aa'
+        }
+      }
+    },
   },
   livereload: true,
   seedDB: {

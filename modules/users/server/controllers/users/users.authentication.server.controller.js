@@ -37,28 +37,12 @@ exports.signup = function (req, res) {
     .then(token => {
       user.status = 1;
       user.activeAccountToken = token;
-      user.activeAccountExpires = Date.now() + 86400000; // 24h
+      user.activeAccountExpires = Date.now() + 1800000; //86400000; // 24h
       user.save(function (err, user) {
         if (err) return handleError(err);
         user.password = undefined;
         user.salt = undefined;
         return render_main_content(token, user, req.headers.host);
-        // Remove sensitive data before login
-        // var report = new Userreport({ user: user._id });
-        // var login = new Userlogin({ user: user._id });
-        // login.agent = req.headers['user-agent'];
-        // login.ip = getClientIp(req);
-        // login.save();
-        // report.save();
-        // user.password = undefined;
-        // user.salt = undefined;
-        // req.login(user, function (err) {
-        //   if (err) {
-        //     res.status(400).send(err);
-        //   } else {
-        //     res.json(user);
-        //   }
-        // });
       });
     })
     .then((emailHTML, user) => {
@@ -110,6 +94,53 @@ exports.signin = function (req, res, next) {
 exports.signout = function (req, res) {
   req.logout();
   res.redirect('/');
+};
+
+/**
+ * Signout
+ */
+exports.verify = function (req, res) {
+  User.findOne({
+    activeAccountToken: req.params.token
+  }, function (err, user) {
+    if (!user) {
+      // Kiểm tra nếu user không tồn tại
+      return res.redirect('/authentication/error?err=1');
+    } else {
+      var now = new Date().getTime();
+      var date = new Date(user.resetPasswordExpires).getTime();
+      // Kiểm tra nếu token đã hết hạn
+      if (date < now)
+        return res.redirect('/authentication/error?err=2');
+      // Kiểm tra nếu user đã bị block
+      if (user.status === 3)
+        return res.redirect('/authentication/error?err=3');
+      // Kiểm tra nếu user là account social
+      if (user.provider !== 'local')
+        return res.redirect('/authentication/error?err=4');
+      user.status = 0;
+      user.activeAccountToken = undefined;
+      user.resetPasswordExpires = undefined;
+      user.save(function (err, user) {
+        var report = new Userreport({ user: user._id });
+        var login = new Userlogin({ user: user._id });
+        login.agent = req.headers['user-agent'];
+        login.ip = getClientIp(req);
+        login.save();
+        report.save();
+        user.password = undefined;
+        user.salt = undefined;
+        req.login(user, function (err) {
+          if (err) {
+            res.status(400).send(err);
+          } else {
+            // res.json(user);
+            return res.redirect('/');
+          }
+        });
+      });
+    }
+  });
 };
 
 /**

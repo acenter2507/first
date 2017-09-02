@@ -93,6 +93,14 @@
         url: '/signin?err',
         templateUrl: 'modules/users/client/views/authentication/signin.client.view.html'
       })
+      .state('authentication.send', {
+        url: '/send',
+        templateUrl: 'modules/users/client/views/authentication/send.client.view.html'
+      })
+      .state('authentication.error', {
+        url: '/error?err',
+        templateUrl: 'modules/users/client/views/authentication/error.client.view.html'
+      })
       .state('password', {
         abstract: true,
         url: '/password',

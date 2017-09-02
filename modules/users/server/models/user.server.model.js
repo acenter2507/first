@@ -98,7 +98,8 @@ var UserSchema = new Schema({
     default: Date.now
   },
   status: {
-    type: Number // 1: Waiting - 2: Actived - 3: Block
+    type: Number, // 0: First time 1: Waiting - 2: Actived - 3: Block
+    default: 0
   },
   activeAccountToken: {
     type: String

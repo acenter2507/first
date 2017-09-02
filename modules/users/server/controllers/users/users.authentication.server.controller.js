@@ -38,7 +38,6 @@ exports.signup = function (req, res) {
     .then(token => {
       console.log('Process 2');
       console.log(token);
-      user.status = 1;
       user.activeAccountToken = token;
       user.activeAccountExpires = Date.now() + 1800000; //86400000; // 24h
       user.save(function (err, _user) {
@@ -64,8 +63,8 @@ exports.signup = function (req, res) {
       return res.status(400).send({ message: err.message });
     });
   function handleError(err) {
-      console.log('Error 2');
-    console.log(err);
+    console.log('@ldlg@pelr@plge@prlg@perg@pler@pgle@prlg@pelrg@pler@pgle@rplge@prg@pelrgp@ergl');
+    console.log('DKM' ,err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });

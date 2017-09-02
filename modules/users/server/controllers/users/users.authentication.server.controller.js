@@ -30,7 +30,7 @@ exports.signup = function (req, res) {
   var message = null;
 
   verifyEmail(user.email)
-    .then(rs => {
+    .then(() => {
       user.provider = 'local';
       console.log('Process 1');
       return gen_token();

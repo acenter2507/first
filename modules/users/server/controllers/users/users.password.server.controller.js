@@ -12,7 +12,7 @@ var path = require('path'),
   async = require('async'),
   crypto = require('crypto');
 
-var smtpTransport = nodemailer.createTransport(config.mailer.options);
+var smtpTransport = nodemailer.createTransport(config.mailer.account.options);
 
 /**
  * Forgot for reset password (forgot POST)
@@ -73,7 +73,7 @@ exports.forgot = function (req, res, next) {
     function (emailHTML, user, done) {
       var mailOptions = {
         to: user.email,
-        from: config.mailer.from,
+        from: config.mailer.account.from,
         subject: 'Password Reset',
         html: emailHTML
       };
@@ -184,7 +184,7 @@ exports.reset = function (req, res, next) {
     function (emailHTML, user, done) {
       var mailOptions = {
         to: user.email,
-        from: config.mailer.from,
+        from: config.mailer.account.from,
         subject: 'Your password has been changed',
         html: emailHTML
       };

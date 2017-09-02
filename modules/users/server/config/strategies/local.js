@@ -26,6 +26,16 @@ module.exports = function () {
           message: 'MS_USERS_LOGIN_FAILED'
         });
       }
+      if (user.status === 1) {
+        return done(null, false, {
+          message: 'MS_USERS_SIGNUP_NOTACTIVE'
+        });
+      }
+      if (user.status === 3) {
+        return done(null, false, {
+          message: 'MS_USERS_BLOCK'
+        });
+      }
       return done(null, user);
     });
   }));

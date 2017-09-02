@@ -68,14 +68,26 @@ module.exports = {
     sandbox: false
   },
   mailer: {
-    from: process.env.MAILER_FROM || 'MAILER_FROM',
-    options: {
-      service: process.env.MAILER_SERVICE_PROVIDER || 'MAILER_SERVICE_PROVIDER',
-      auth: {
-        user: process.env.MAILER_EMAIL_ID || 'MAILER_EMAIL_ID',
-        pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
+    account: {
+      from: process.env.ACCOUNT_MAILER_FROM || 'ACCOUNT_MAILER_FROM',
+      options: {
+        service: process.env.ACCOUNT_MAILER_SERVICE_PROVIDER || 'ACCOUNT_MAILER_SERVICE_PROVIDER',
+        auth: {
+          user: process.env.ACCOUNT_MAILER_EMAIL_ID || 'ACCOUNT_MAILER_EMAIL_ID',
+          pass: process.env.ACCOUNT_MAILER_PASSWORD || 'ACCOUNT_MAILER_PASSWORD'
+        }
       }
-    }
+    },
+    inform: {
+      from: process.env.INFORM_MAILER_FROM || 'INFORM_MAILER_FROM',
+      options: {
+        service: process.env.INFORM_MAILER_SERVICE_PROVIDER || 'INFORM_MAILER_SERVICE_PROVIDER',
+        auth: {
+          user: process.env.INFORM_MAILER_EMAIL_ID || 'INFORM_MAILER_EMAIL_ID',
+          pass: process.env.INFORM_MAILER_PASSWORD || 'INFORM_MAILER_PASSWORD'
+        }
+      }
+    },
   },
   seedDB: {
     seed: process.env.MONGO_SEED === 'true' ? true : false,

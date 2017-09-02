@@ -5,18 +5,18 @@
  */
 var path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
+  config = require(path.resolve('./config/config')),
   mongoose = require('mongoose'),
   passport = require('passport'),
   User = mongoose.model('User'),
   Userreport = mongoose.model('Userreport'),
   Userlogin = mongoose.model('Userlogin'),
+  nev = require('email-verification')(mongoose),
+  crypto = require('crypto'),
+  nodemailer = require('nodemailer'),
   validator = require('validator');
 
-// URLs for which user can't be redirected on signin
-var noReturnUrls = [
-  '/authentication/signin',
-  '/authentication/signup'
-];
+var smtpTransport = nodemailer.createTransport(config.mailer.account.options);
 
 /**
  * Signup
@@ -31,37 +31,46 @@ exports.signup = function (req, res) {
 
   verifyEmail(user.email)
     .then(rs => {
-      if (rs) {
-        return res.status(400).send({ message: rs });
-      } else {
-        user.provider = 'local';
-        user.save(function (err, user) {
-          if (err) return handleError(err);
-          // Remove sensitive data before login
-          var report = new Userreport({ user: user._id });
-          var login = new Userlogin({ user: user._id });
-          login.agent = req.headers['user-agent'];
-          login.ip = getClientIp(req);
-          login.save();
-          report.save();
-          user.password = undefined;
-          user.salt = undefined;
-          req.login(user, function (err) {
-            if (err) {
-              res.status(400).send(err);
-            } else {
-              res.json(user);
-            }
-          });
-        });
-      }
+      user.provider = 'local';
+      return gen_token();
+    })
+    .then(token => {
+      user.status = 1;
+      user.activeAccountToken = token;
+      user.activeAccountExpires = Date.now() + 86400000; // 24h
+      user.save(function (err, user) {
+        if (err) return handleError(err);
+        user.password = undefined;
+        user.salt = undefined;
+        return render_main_content(token, user, req.headers.host);
+        // Remove sensitive data before login
+        // var report = new Userreport({ user: user._id });
+        // var login = new Userlogin({ user: user._id });
+        // login.agent = req.headers['user-agent'];
+        // login.ip = getClientIp(req);
+        // login.save();
+        // report.save();
+        // user.password = undefined;
+        // user.salt = undefined;
+        // req.login(user, function (err) {
+        //   if (err) {
+        //     res.status(400).send(err);
+        //   } else {
+        //     res.json(user);
+        //   }
+        // });
+      });
+    })
+    .then((emailHTML, user) => {
+      return send_verification(emailHTML, user);
+    })
+    .then(msg => {
+      return res.redirect('/authentication/send');
     })
     .catch(err => {
-      console.log(err);
       return res.status(400).send({ message: err.message });
     });
   function handleError(err) {
-    console.log(err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -298,19 +307,6 @@ exports.removeOAuthProvider = function (req, res, next) {
   });
 };
 
-function verifyEmail(email) {
-  return new Promise((resolve, reject) => {
-    if (email.length === 0) return resolve('LB_USER_EMAIL_REQUIRED');
-    if (!validator.isEmail(email)) return resolve('LB_USER_EMAIL_INVALID');
-    User.findOne({ email: email })
-      .then(user => {
-        if (user) return resolve('LB_USERS_EMAIL_DUPLICATE');
-        return resolve();
-      }, err => {
-        return reject(err);
-      });
-  });
-}
 function getClientIp(req) {
   var ipAddress;
   // Amazon EC2 / Heroku workaround to get real client IP
@@ -328,4 +324,67 @@ function getClientIp(req) {
     ipAddress = req.connection.remoteAddress;
   }
   return ipAddress;
+}
+function verifyEmail(email) {
+  return new Promise((resolve, reject) => {
+    if (email.length === 0) return reject(new Error('LB_USER_EMAIL_REQUIRED'));
+    if (!validator.isEmail(email)) return reject(new Error('LB_USER_EMAIL_INVALID'));
+    User.findOne({ email: email })
+      .then(user => {
+        if (user) {
+          // Kiểm tra trạng thái user đã active
+          if (user.status === 1) {
+            return reject(new Error('MS_USERS_SIGNUP_NOTACTIVE'));
+          }
+          if (user.status === 2 || user.status === 3) {
+            return reject(new Error('LB_USERS_EMAIL_DUPLICATE'));
+          }
+        }
+        return resolve();
+      }, err => {
+        return reject(err);
+      });
+  });
+}
+function gen_token() {
+  return new Promise((resolve, reject) => {
+    crypto.randomBytes(20, function (err, buffer) {
+      if (err) return reject(new Error('MS_CM_LOAD_ERROR'));
+      var token = buffer.toString('hex');
+      return resolve(token)
+    });
+  });
+}
+function render_main_content(token, user, host) {
+  return new Promise((resolve, reject) => {
+    var httpTransport = 'http://';
+    if (config.secure && config.secure.ssl === true) {
+      httpTransport = 'https://';
+    }
+    res.render(path.resolve('modules/users/server/templates/verify-email'), {
+      name: user.displayName,
+      appName: config.app.title,
+      url: httpTransport + host + '/api/auth/verify/' + token
+    }, function (err, emailHTML) {
+      if (err) return reject(new Error('MS_CM_LOAD_ERROR'));
+      return resolve(emailHTML, user)
+    });
+  });
+}
+function send_verification(emailHTML, user) {
+  return new Promise((resolve, reject) => {
+    var mailOptions = {
+      to: user.email,
+      from: config.mailer.account.from,
+      subject: 'Verify your account',
+      html: emailHTML
+    };
+    smtpTransport.sendMail(mailOptions, function (err) {
+      if (!err) {
+        return resolve('MS_USERS_SEND_SUCCESS')
+      } else {
+        return reject(new Error('MS_USERS_SEND_FAIL'));
+      }
+    });
+  });
 }

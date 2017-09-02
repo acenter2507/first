@@ -41,6 +41,13 @@ var UserSchema = new Schema({
   //   default: '',
   //   validate: [validateLocalStrategyProperty, 'Please fill in your last name']
   // },
+  // username: {
+  //   type: String,
+  //   unique: 'Username already exists',
+  //   required: 'Please fill in a username',
+  //   lowercase: true,
+  //   trim: true
+  // },
   displayName: {
     type: String,
     trim: true,
@@ -54,13 +61,6 @@ var UserSchema = new Schema({
     default: '',
     validate: [validateLocalStrategyEmail, 'Please fill a valid email address']
   },
-  // username: {
-  //   type: String,
-  //   unique: 'Username already exists',
-  //   required: 'Please fill in a username',
-  //   lowercase: true,
-  //   trim: true
-  // },
   password: {
     type: String,
     default: ''
@@ -96,6 +96,15 @@ var UserSchema = new Schema({
   created: {
     type: Date,
     default: Date.now
+  },
+  status: {
+    type: Number // 1: Waiting - 2: Actived - 3: Block
+  },
+  activeAccountToken: {
+    type: String
+  },
+  activeAccountExpires: {
+    type: Date
   },
   /* For reset password */
   resetPasswordToken: {

@@ -382,7 +382,7 @@ function gen_token() {
     crypto.randomBytes(20, function (err, buffer) {
       if (err) return reject(new Error('MS_CM_LOAD_ERROR'));
       var token = buffer.toString('hex');
-      return resolve(token)
+      return resolve(token);
     });
   });
 }
@@ -398,7 +398,7 @@ function render_main_content(token, user, host, res) {
       url: httpTransport + host + '/api/auth/verify/' + token
     }, function (err, emailHTML) {
       if (err) return reject(new Error('MS_CM_LOAD_ERROR'));
-      return resolve(emailHTML, user)
+      return resolve(emailHTML, user);
     });
   });
 }
@@ -412,7 +412,7 @@ function send_verification(emailHTML, user) {
     };
     smtpTransport.sendMail(mailOptions, function (err) {
       if (!err) {
-        return resolve('MS_USERS_SEND_SUCCESS')
+        return resolve('MS_USERS_SEND_SUCCESS');
       } else {
         return reject(new Error('MS_USERS_SEND_FAIL'));
       }

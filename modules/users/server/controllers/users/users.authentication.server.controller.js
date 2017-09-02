@@ -38,15 +38,16 @@ exports.signup = function (req, res) {
       user.status = 1;
       user.activeAccountToken = token;
       user.activeAccountExpires = Date.now() + 1800000; //86400000; // 24h
-      user.save(function (err, user) {
+      user.save(function (err, _user) {
         if (err) return handleError(err);
+        user = _user;
         user.password = undefined;
         user.salt = undefined;
         return render_main_content(token, user, req.headers.host, res);
       });
     })
-    .then((emailHTML, user) => {
-      return send_verification(emailHTML, user);
+    .then(rs => {
+      return send_verification(rs.html, rs.user);
     })
     .then(msg => {
       return res.redirect('/authentication/send');
@@ -400,7 +401,7 @@ function render_main_content(token, user, host, res) {
       url: httpTransport + host + '/api/auth/verify/' + token
     }, function (err, emailHTML) {
       if (err) return reject(new Error('MS_CM_LOAD_ERROR'));
-      return resolve(emailHTML, user);
+      return resolve({ html: emailHTML, user: user });
     });
   });
 }

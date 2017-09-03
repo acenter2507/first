@@ -98,7 +98,7 @@ exports.signup = function (req, res) {
         if (err)
           return res.status(400).send({ message: 'MS_USERS_SEND_FAIL' });
         var mailOptions = {
-          from: 'Do not reply <' + config.mailer.account.from + '>',
+          from: config.app.title + '<' + config.mailer.account.from + '>',
           to: user.email,
           subject: 'Verify your account',
           // text: result.text,

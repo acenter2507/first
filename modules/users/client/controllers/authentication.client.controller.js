@@ -30,6 +30,8 @@ angular.module('users').controller('AuthenticationController', [
     $scope.error = $location.search().err;
     $scope.isShowForm = true;
     $scope.busy = false;
+    $scope.resend_busy = false;
+    
     // $scope.reCaptcha = Constants.reCaptcha;
     // $scope.response = null;
     // $scope.widgetId = null;
@@ -79,15 +81,15 @@ angular.module('users').controller('AuthenticationController', [
     };
 
     $scope.resend = function (isValid) {
-      if ($scope.busy) return;
-      $scope.busy = true;
+      if ($scope.resend_busy) return;
+      $scope.resend_busy = true;
       $http.post('/api/auth/resend', $scope.credentials.email).success(function (response) {
-        $scope.busy = false;
+        $scope.resend_busy = false;
         if (response.success) {
           $scope.isShowForm = false;
         }
       }).error(function (response) {
-        $scope.busy = false;
+        $scope.resend_busy = false;
         show_error(response.message);
       });
     };

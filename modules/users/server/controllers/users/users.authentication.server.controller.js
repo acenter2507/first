@@ -326,6 +326,7 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
       $or: [mainProviderSearchQuery, additionalProviderSearchQuery]
     };
 
+    console.log(searchQuery);
     User.findOne(searchQuery, function (err, user) {
       console.log(user);
       if (err) {

@@ -9,6 +9,7 @@ var path = require('path'),
   mongoose = require('mongoose'),
   User = mongoose.model('User'),
   nodemailer = require('nodemailer'),
+  EmailTemplate = require('email-templates').EmailTemplate,
   async = require('async'),
   crypto = require('crypto');
 

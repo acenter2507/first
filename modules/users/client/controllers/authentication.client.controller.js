@@ -43,7 +43,9 @@ angular.module('users').controller('AuthenticationController', [
       }
 
       $http.post('/api/auth/signup', $scope.credentials).success(function (response) {
-        console.log(response);
+        if (response.success) {
+          $state.go('authentication.send');
+        }
         // If successful we assign the response to the global user model
         //Authentication.user = response;
         // And redirect to the previous or home page

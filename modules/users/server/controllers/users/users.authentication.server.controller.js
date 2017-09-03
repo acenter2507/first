@@ -41,7 +41,6 @@ exports.signup = function (req, res) {
           message: 'LB_USER_EMAIL_INVALID'
         });
       User.findOne({ email: user.email }, function (err, user) {
-        console.log(err);
         if (user) {
           // Kiểm tra trạng thái user đã active
           if (user.status === 1)
@@ -58,13 +57,12 @@ exports.signup = function (req, res) {
     },
     function (done) {
       crypto.randomBytes(20, function (err, buffer) {
-        console.log(err);
         if (err)
           return res.status(400).send({
             message: 'MS_CM_LOAD_ERROR'
           });
         var token = buffer.toString('hex');
-        done(err, token);
+        done(token);
       });
     },
     function (token, done) {
@@ -78,7 +76,7 @@ exports.signup = function (req, res) {
         user = _user;
         user.password = undefined;
         user.salt = undefined;
-        done(err, token, user);
+        done(token, user);
       });
     },
     function (token, user, done) {
@@ -94,7 +92,6 @@ exports.signup = function (req, res) {
         url: url
       };
       mailTemplate.render(mailContent, function (err, result) {
-        console.log(err);
         if (err)
           return res.status(400).send({ message: 'MS_USERS_SEND_FAIL' });
         var mailOptions = {
@@ -108,7 +105,6 @@ exports.signup = function (req, res) {
           if (!err) {
             return res.json({ success: true });
           } else {
-            console.log(err);
             return res.status(400).send({
               message: 'MS_USERS_SEND_FAIL'
             });
@@ -116,57 +112,7 @@ exports.signup = function (req, res) {
           done();
         });
       });
-
-      // var sendTemplate = smtpTransport.templateSender(
-      //   new EmailTemplate(path.resolve('modules/users/server/templates/verify-email.server.view')), {
-      //     from: config.mailer.account.from,
-      //   });
-
-      // // use template based sender to send a message
-      // sendTemplate(
-      //   { to: user.email, subject: 'Verify your account' },
-      //   {
-      //     username: config.mailer.account.options.auth.user,
-      //     password: config.mailer.account.options.auth.pass
-      //   }, function (err, info) {
-      //     if (err) {
-      //       console.log('Error');
-      //       return res.status(400).send({
-      //         message: 'MS_USERS_SEND_FAIL'
-      //       });
-      //     } else {
-      //       console.log('Password reminder sent');
-      //       return res.redirect('/authentication/send');
-      //     }
-      //   });
-      // done();
-      // res.render(path.resolve('modules/users/server/templates/verify-email'), {
-      //   name: user.displayName,
-      //   appName: config.app.title,
-      //   url: url
-      // }, function (err, emailHTML) {
-      //   done(err, emailHTML, user);
-      // });
     }
-    // function (emailHTML, user, done) {
-    //   console.log(emailHTML);
-    //   var mailOptions = {
-    //     to: user.email,
-    //     from: config.mailer.account.from,
-    //     subject: 'Verify your account',
-    //     html: emailHTML
-    //   };
-    //   smtpTransport.sendMail(mailOptions, function (err) {
-    //     if (!err) {
-    //       return res.redirect('/authentication/send');
-    //     } else {
-    //       return res.status(400).send({
-    //         message: 'MS_USERS_SEND_FAIL'
-    //       });
-    //     }
-    //     done();
-    //   });
-    // }
   ], function (err) {
     if (err) {
       return res.status(400).send({
@@ -174,47 +120,6 @@ exports.signup = function (req, res) {
       });
     }
   });
-
-  // verifyEmail(user.email)
-  //   .then(() => {
-  //     user.provider = 'local';
-  //     console.log('Process 1');
-  //     return gen_token();
-  //   })
-  //   .then(token => {
-  //     console.log('Process 2');
-  //     console.log(token);
-  //     user.activeAccountToken = token;
-  //     user.activeAccountExpires = Date.now() + 1800000; //86400000; // 24h
-  //     user.save(function (err, _user) {
-  //       if (err) return handleError(err);
-  //       console.log(_user);
-  //       user = _user;
-  //       user.password = undefined;
-  //       user.salt = undefined;
-  //       return render_main_content(token, user, req.headers.host, res);
-  //     });
-  //   })
-  //   .then(rs => {
-  //     console.log('Process 3');
-  //     return send_verification(rs.html, rs.user);
-  //   })
-  //   .then(msg => {
-  //     console.log('Process 4');
-  //     return res.redirect('/authentication/send');
-  //   })
-  //   .catch(err => {
-  //     console.log('Error 1');
-  //     console.log(err);
-  //     return res.status(400).send({ message: err.message });
-  //   });
-  // function handleError(err) {
-  //   console.log('@ldlg@pelr@plge@prlg@perg@pler@pgle@prlg@pelrg@pler@pgle@rplge@prg@pelrgp@ergl');
-  //   console.log('DKM', err);
-  //   return res.status(400).send({
-  //     message: errorHandler.getErrorMessage(err)
-  //   });
-  // }
 };
 
 /**
@@ -512,66 +417,3 @@ function getClientIp(req) {
   }
   return ipAddress;
 }
-// function verifyEmail(email) {
-//   if (email.length === 0) return reject(new Error('LB_USER_EMAIL_REQUIRED'));
-//   if (!validator.isEmail(email)) return reject(new Error('LB_USER_EMAIL_INVALID'));
-//   User.findOne({ email: email })
-//     .then(user => {
-//       if (user) {
-//         // Kiểm tra trạng thái user đã active
-//         if (user.status === 1) {
-//           return reject(new Error('MS_USERS_SIGNUP_NOTACTIVE'));
-//         }
-//         if (user.status === 2 || user.status === 3) {
-//           return reject(new Error('LB_USERS_EMAIL_DUPLICATE'));
-//         }
-//       }
-//       return resolve();
-//     }, err => {
-//       return reject(err);
-//     });
-// }
-// function gen_token() {
-//   return new Promise((resolve, reject) => {
-//     crypto.randomBytes(20, function (err, buffer) {
-//       if (err) return reject(new Error('MS_CM_LOAD_ERROR'));
-//       var token = buffer.toString('hex');
-//       return resolve(token);
-//     });
-//   });
-// }
-// function render_main_content(token, user, host, res) {
-//   return new Promise((resolve, reject) => {
-//     var httpTransport = 'http://';
-//     if (config.secure && config.secure.ssl === true) {
-//       httpTransport = 'https://';
-//     }
-//     res.render(path.resolve('modules/users/server/templates/verify-email'), {
-//       name: user.displayName,
-//       appName: config.app.title,
-//       url: httpTransport + host + '/api/auth/verify/' + token
-//     }, function (err, emailHTML) {
-//       console.log(err);
-//       console.log(emailHTML);
-//       if (err) return reject(new Error('MS_CM_LOAD_ERROR'));
-//       return resolve({ html: emailHTML, user: user });
-//     });
-//   });
-// }
-// function send_verification(emailHTML, user) {
-//   return new Promise((resolve, reject) => {
-//     var mailOptions = {
-//       to: user.email,
-//       from: config.mailer.account.from,
-//       subject: 'Verify your account',
-//       html: emailHTML
-//     };
-//     smtpTransport.sendMail(mailOptions, function (err) {
-//       if (!err) {
-//         return resolve('MS_USERS_SEND_SUCCESS');
-//       } else {
-//         return reject(new Error('MS_USERS_SEND_FAIL'));
-//       }
-//     });
-//   });
-// }

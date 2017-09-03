@@ -69,22 +69,25 @@ module.exports = {
   },
   mailer: {
     account: {
-      from: process.env.ACCOUNT_MAILER_FROM || 'ACCOUNT_MAILER_FROM',
+      from: process.env.ACCOUNT_MAILER_FROM || 'account@cadobongdafree.com',
       options: {
-        service: process.env.ACCOUNT_MAILER_SERVICE_PROVIDER || 'ACCOUNT_MAILER_SERVICE_PROVIDER',
+        // service: process.env.ACCOUNT_MAILER_SERVICE_PROVIDER || 'Gmail',
+        host: process.env.ACCOUNT_MAILER_HOST || 'mx1.hostinger.vn',
+        port: process.env.ACCOUNT_MAILER_PORT || '587',
+        secure: process.env.ACCOUNT_MAILER_SECURE === 'true',
         auth: {
-          user: process.env.ACCOUNT_MAILER_EMAIL_ID || 'ACCOUNT_MAILER_EMAIL_ID',
-          pass: process.env.ACCOUNT_MAILER_PASSWORD || 'ACCOUNT_MAILER_PASSWORD'
+          user: process.env.ACCOUNT_MAILER_EMAIL_ID || 'account@cadobongdafree.com',
+          pass: process.env.ACCOUNT_MAILER_PASSWORD || '1aA@1aA@'
         }
       }
     },
     inform: {
-      from: process.env.INFORM_MAILER_FROM || 'INFORM_MAILER_FROM',
+      from: process.env.INFORM_MAILER_FROM || 'acenter2507@gmail.com',
       options: {
-        service: process.env.INFORM_MAILER_SERVICE_PROVIDER || 'INFORM_MAILER_SERVICE_PROVIDER',
+        service: process.env.INFORM_MAILER_SERVICE_PROVIDER || 'Gmail',
         auth: {
-          user: process.env.INFORM_MAILER_EMAIL_ID || 'INFORM_MAILER_EMAIL_ID',
-          pass: process.env.INFORM_MAILER_PASSWORD || 'INFORM_MAILER_PASSWORD'
+          user: process.env.INFORM_MAILER_EMAIL_ID || 'acenter2507',
+          pass: process.env.INFORM_MAILER_PASSWORD || '1@Aa1@Aa'
         }
       }
     },

@@ -50,7 +50,6 @@ module.exports = {
         'public/lib/moment-timezone/moment-timezone.js',
         'public/lib/angular-moment/angular-moment.js',
         'public/lib/angular-moment-picker/dist/angular-moment-picker.js',
-        'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
         'public/lib/ngInfiniteScroll/build/ng-infinite-scroll.js',
         'public/lib/textAngular/dist/textAngular-rangy.min.js',
         'public/lib/textAngular/dist/textAngular-sanitize.min.js',

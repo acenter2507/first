@@ -168,9 +168,6 @@ exports.verify = function (req, res) {
       // Kiểm tra nếu user không tồn tại
       return res.redirect('/');
     } else {
-      // Kiểm tra nếu user đã active
-      if (user.status === 2)
-        return res.redirect('/verification/error?err=2');
       // Kiểm tra nếu user đã bị block
       if (user.status === 3)
         return res.redirect('/verification/error?err=2');

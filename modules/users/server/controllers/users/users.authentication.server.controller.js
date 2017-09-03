@@ -87,7 +87,7 @@ exports.signup = function (req, res) {
         httpTransport = 'https://';
       }
       var url = httpTransport + req.headers.host + '/api/auth/verify/' + token;
-      var mailTemplate = new EmailTemplate(path.resolve('modules/users/server/templates/verify-email.server.view'));
+      var mailTemplate = new EmailTemplate(path.resolve('modules/users/server/templates/verify-email.server.view.html'));
       var mailContent = {
         name: user.displayName,
         appName: config.app.title,

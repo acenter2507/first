@@ -96,7 +96,7 @@
       .state('verification', {
         abstract: true,
         url: '/verification',
-        templateUrl: '<ui-view>'
+        template: '<ui-view>'
       })
       .state('verification.send', {
         url: '/send',

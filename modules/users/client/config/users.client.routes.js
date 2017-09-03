@@ -93,11 +93,16 @@
         url: '/signin?err',
         templateUrl: 'modules/users/client/views/authentication/signin.client.view.html'
       })
-      .state('authentication.send', {
+      .state('verification', {
+        abstract: true,
+        url: '/verification',
+        templateUrl: '<ui-view>'
+      })
+      .state('verification.send', {
         url: '/send',
         templateUrl: 'modules/users/client/views/authentication/send.client.view.html'
       })
-      .state('authentication.error', {
+      .state('verification.error', {
         url: '/error?err',
         templateUrl: 'modules/users/client/views/authentication/error.client.view.html'
       })

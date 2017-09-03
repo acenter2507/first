@@ -108,6 +108,7 @@ exports.signup = function (req, res) {
           if (!err) {
             return res.redirect('/authentication/send');
           } else {
+            console.log(err);
             return res.status(400).send({
               message: 'MS_USERS_SEND_FAIL'
             });

@@ -331,10 +331,10 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
           // And save the user
           __user.save(function (err, user) {
             console.log('Save user');
-            return done(user);
+            return done(err, user);
           });
         } else {
-          return done(__user);
+          return done(err, __user);
         }
       } else {
         console.log('Has no user of email');

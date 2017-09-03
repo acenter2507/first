@@ -80,10 +80,10 @@ angular.module('users').controller('AuthenticationController', [
       });
     };
 
-    $scope.resend = function (isValid) {
+    $scope.resend = function () {
       if ($scope.resend_busy) return;
       $scope.resend_busy = true;
-      $http.post('/api/auth/resend', $scope.credentials.email).success(function (response) {
+      $http.post('/api/auth/resend', { email: $scope.credentials.email }).success(function (response) {
         $scope.resend_busy = false;
         if (response.success) {
           $scope.isShowForm = false;

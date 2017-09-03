@@ -166,7 +166,7 @@ exports.verify = function (req, res) {
   }, function (err, user) {
     if (!user) {
       // Kiểm tra nếu user không tồn tại
-      return res.redirect('/authentication/error?err=1');
+      return res.redirect('/verification/error?err=1');
     } else {
       // Kiểm tra nếu user đã bị block
       if (user.status === 3)

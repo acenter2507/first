@@ -290,6 +290,8 @@ exports.oauthCallback = function (strategy) {
       } else if (!user) {
         return res.redirect('/authentication/signin');
       }
+      user.salt = undefined;
+      user.password = undefined;
       req.login(user, function (err) {
         if (err) {
           return res.redirect('/authentication/signin');

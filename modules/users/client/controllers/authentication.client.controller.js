@@ -51,10 +51,6 @@ angular.module('users').controller('AuthenticationController', [
         if (response.success) {
           $scope.isShowForm = false;
         }
-        // If successful we assign the response to the global user model
-        //Authentication.user = response;
-        // And redirect to the previous or home page
-        //$state.go($state.previous.state.name || 'home', $state.previous.params);
       }).error(function (response) {
         $scope.busy = false;
         show_error(response.message);
@@ -62,17 +58,22 @@ angular.module('users').controller('AuthenticationController', [
     };
 
     $scope.signin = function (isValid) {
+      if ($scope.busy) return;
+      $scope.busy = true;
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'signinForm');
+        $scope.busy = false;
         return false;
       }
 
       $http.post('/api/auth/signin', $scope.credentials).success(function (response) {
         // If successful we assign the response to the global user model
         Authentication.user = response;
+        $scope.busy = false;
         // And redirect to the previous or home page
         $state.go($state.previous.state.name || 'home', $state.previous.params);
       }).error(function (response) {
+        $scope.busy = false;
         show_error(response.message);
       });
     };

@@ -99,7 +99,6 @@ exports.signup = function (req, res) {
           from: config.app.title + '<' + config.mailer.account.from + '>',
           to: user.email,
           subject: 'Verify your account',
-          // text: result.text,
           html: result.html
         };
         transporter.sendMail(mailOptions, function (err) {
@@ -274,7 +273,7 @@ exports.verify = function (req, res) {
         return res.redirect('/authentication/error?err=4');
       user.status = 2;
       user.activeAccountToken = undefined;
-      user.resetPasswordExpires = undefined;
+      user.activeAccountExpires = undefined;
       user.save(function (err, user) {
         var report = new Userreport({ user: user._id });
         var login = new Userlogin({ user: user._id });

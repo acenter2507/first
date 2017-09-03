@@ -28,6 +28,8 @@ angular.module('users').controller('AuthenticationController', [
     // Get an eventual error defined in the URL query string:
     get_translate();
     $scope.error = $location.search().err;
+    $scope.isShowForm = true;
+    $scope.busy = false;
     // $scope.reCaptcha = Constants.reCaptcha;
     // $scope.response = null;
     // $scope.widgetId = null;
@@ -37,20 +39,24 @@ angular.module('users').controller('AuthenticationController', [
     }
 
     $scope.signup = function (isValid) {
+      if ($scope.busy) return;
+      $scope.busy = true;
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'signupForm');
+        $scope.busy = false;
         return false;
       }
-
       $http.post('/api/auth/signup', $scope.credentials).success(function (response) {
+        $scope.busy = false;
         if (response.success) {
-          $state.go('verification.send');
+          $scope.isShowForm = false;
         }
         // If successful we assign the response to the global user model
         //Authentication.user = response;
         // And redirect to the previous or home page
         //$state.go($state.previous.state.name || 'home', $state.previous.params);
       }).error(function (response) {
+        $scope.busy = false;
         show_error(response.message);
       });
     };

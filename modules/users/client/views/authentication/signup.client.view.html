@@ -1,6 +1,6 @@
 <div class="row animated fadeIn" ng-controller="AuthenticationController">
   <div class="col-xs-12">
-    <form name="signupForm" ng-submit="signup(signupForm.$valid)" class="signin" novalidate autocomplete="off">
+    <form name="signupForm" ng-submit="signup(signupForm.$valid)" class="signin" novalidate autocomplete="off" ng-show="isShowForm">
       <fieldset>
         <!-- Display Name  -->
         <div class="form-group" show-errors>
@@ -10,20 +10,6 @@
             <p class="help-block error-text font-sm" ng-message="required">{{ 'LB_USER_NAME_REQUIRED' | translate }}</p>
           </div>
         </div>
-        <!-- <div class="form-group" show-errors>
-          <input type="text" id="firstName" name="firstName" class="form-control" ng-model="credentials.firstName" placeholder="{{ 'LB_USER_FIRSTNAME' | translate }}"
-            required>
-          <div ng-messages="signupForm.firstName.$error" role="alert">
-            <p class="help-block error-text font-sm" ng-message="required">{{ 'LB_USER_FIRSTNAME_REQUIRED' | translate }}</p>
-          </div>
-        </div>
-        <div class="form-group" show-errors>
-          <input type="text" id="lastName" name="lastName" class="form-control" ng-model="credentials.lastName" placeholder="{{ 'LB_USER_LASTNAME' | translate }}"
-            required>
-          <div ng-messages="signupForm.lastName.$error" role="alert">
-            <p class="help-block error-text font-sm" ng-message="required">{{ 'LB_USER_LASTNAME_REQUIRED' | translate }}</p>
-          </div>
-        </div> -->
         <!-- Email  -->
         <div class="form-group" show-errors>
           <input type="email" id="email" name="email" class="form-control" ng-model="credentials.email" placeholder="{{ 'LB_USER_EMAIL' | translate }}"
@@ -33,13 +19,6 @@
             <p class="help-block error-text font-sm" ng-message="email">{{ 'LB_USER_EMAIL_INVALID' | translate }}</p>
           </div>
         </div>
-        <!--<div class="form-group" show-errors>
-          <input type="text" id="username" name="username" class="form-control" ng-model="credentials.username" placeholder="{{ 'LB_USER_USERNAME' | translate }}"
-            required>
-          <div ng-messages="signupForm.username.$error" role="alert">
-            <p class="help-block error-text font-xs" ng-message="required">{{ 'LB_USER_USERNAME_REQUIRED' | translate }}</p>
-          </div>
-        </div>-->
         <!-- Password  -->
         <div class="form-group" show-errors>
           <input type="password" id="password" name="password" class="form-control" ng-model="credentials.password" placeholder="{{ 'LB_USER_PASSWORD' | translate }}"
@@ -57,9 +36,18 @@
           </div>
         </div>-->
         <div class="text-center form-group">
-          <button type="submit" class="btn btn-primary btn-block">{{ 'LB_SIGNUP' | translate }}</button>
+          <button type="submit" class="btn btn-primary btn-block">
+            <i class="fa fa-spinner fa-pulse fa-fw" ng-show="busy"></i>
+            {{ 'LB_SIGNUP' | translate }}
+          </button>
         </div>
       </fieldset>
     </form>
+    <div ng-hide="isShowForm">
+      <p>{{ 'MS_USERS_SEND_SUCCESS' | translate }}</p>
+      <div class="text-center form-group">
+        <button type="button" class="btn btn-primary btn-block">{{ 'MS_USERS_RESEND' | translate }}</button>
+      </div>
+    </div>
   </div>
 </div>

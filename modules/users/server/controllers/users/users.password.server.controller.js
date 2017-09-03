@@ -88,7 +88,7 @@ exports.forgot = function (req, res, next) {
         };
         transporter.sendMail(mailOptions, function (err) {
           if (!err) {
-            return res.json({ success: true });
+            return res.json({ message: 'MS_USERS_SEND_SUCCESS' });
           } else {
             return res.status(400).send({
               message: 'MS_USERS_SEND_FAIL'

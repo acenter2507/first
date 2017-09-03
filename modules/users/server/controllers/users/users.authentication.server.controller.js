@@ -14,6 +14,7 @@ var path = require('path'),
   nev = require('email-verification')(mongoose),
   crypto = require('crypto'),
   nodemailer = require('nodemailer'),
+  EmailTemplate = require('email-templates').EmailTemplate,
   async = require('async'),
   validator = require('validator');
 
@@ -82,40 +83,62 @@ exports.signup = function (req, res) {
       });
     },
     function (token, user, done) {
-      console.log(token);
       var httpTransport = 'http://';
       if (config.secure && config.secure.ssl === true) {
         httpTransport = 'https://';
       }
       var url = httpTransport + req.headers.host + '/api/auth/verify/' + token;
-      console.log(url);
-      res.render(path.resolve('modules/users/server/templates/verify-email'), {
-        name: user.displayName,
-        appName: config.app.title,
-        url: url
-      }, function (err, emailHTML) {
-        done(err, emailHTML, user);
-      });
-    },
-    function (emailHTML, user, done) {
-      console.log(emailHTML);
-      var mailOptions = {
+      var sendTemplate = smtpTransport.templateSender(
+        new EmailTemplate('modules/users/server/templates/verify-email.server.view'), {
+          from: config.mailer.account.from,
+        });
+
+      // use template based sender to send a message
+      sendTemplate({
         to: user.email,
-        from: config.mailer.account.from,
-        subject: 'Verify your account',
-        html: emailHTML
-      };
-      smtpTransport.sendMail(mailOptions, function (err) {
-        if (!err) {
-          return res.redirect('/authentication/send');
-        } else {
-          return res.status(400).send({
-            message: 'MS_USERS_SEND_FAIL'
-          });
-        }
+        subject: 'Verify your account'
+      }, {
+          username: config.mailer.account.options.auth.user,
+          password: config.mailer.account.options.auth.pass
+        }, function (err, info) {
+          if (err) {
+            console.log('Error');
+            return res.status(400).send({
+              message: 'MS_USERS_SEND_FAIL'
+            });
+          } else {
+            console.log('Password reminder sent');
+            return res.redirect('/authentication/send');
+          }
+        });
         done();
-      });
+      // res.render(path.resolve('modules/users/server/templates/verify-email'), {
+      //   name: user.displayName,
+      //   appName: config.app.title,
+      //   url: url
+      // }, function (err, emailHTML) {
+      //   done(err, emailHTML, user);
+      // });
     }
+    // function (emailHTML, user, done) {
+    //   console.log(emailHTML);
+    //   var mailOptions = {
+    //     to: user.email,
+    //     from: config.mailer.account.from,
+    //     subject: 'Verify your account',
+    //     html: emailHTML
+    //   };
+    //   smtpTransport.sendMail(mailOptions, function (err) {
+    //     if (!err) {
+    //       return res.redirect('/authentication/send');
+    //     } else {
+    //       return res.status(400).send({
+    //         message: 'MS_USERS_SEND_FAIL'
+    //       });
+    //     }
+    //     done();
+    //   });
+    // }
   ], function (err) {
     if (err) {
       return res.status(400).send({

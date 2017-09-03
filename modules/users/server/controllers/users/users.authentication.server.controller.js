@@ -127,7 +127,7 @@ exports.signup = function (req, res) {
  */
 exports.resend = function (req, res) {
   // Init Variables
-  var email = req.email;
+  var email = req.body.email;
   console.log(email);
   // user.provider = 'local';
   // async.waterfall([

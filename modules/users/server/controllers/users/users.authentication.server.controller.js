@@ -43,7 +43,7 @@ exports.signup = function (req, res) {
         return res.status(400).send({
           message: 'LB_USER_EMAIL_INVALID'
         });
-      User.findOne({ email: user.email }, function (err, user) {
+      User.findOne({ email: user.email, provider: 'local' }, function (err, user) {
         if (user) {
           // Kiểm tra trạng thái user đã active
           if (user.status === 1)
@@ -127,7 +127,7 @@ exports.signup = function (req, res) {
 exports.resend = function (req, res) {
   // Init Variables
   var email = req.body.email || '';
-  User.findOne({ email: email }, function (err, user) {
+  User.findOne({ email: email, provider: 'local' }, function (err, user) {
     if (err)
       return res.status(400).send({
         message: 'MS_CM_LOAD_ERROR'
@@ -285,7 +285,6 @@ exports.oauthCallback = function (strategy) {
     delete req.session.redirect_to;
 
     passport.authenticate(strategy, function (err, user, info) {
-      console.log(err);
       if (err) {
         return res.redirect('/authentication/signin?err=' + encodeURIComponent(errorHandler.getErrorMessage(err)));
       }
@@ -309,59 +308,53 @@ exports.oauthCallback = function (strategy) {
  */
 exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
   if (!req.user) {
-    User.findOne({ email: providerUserProfile.email, provider: 'local' }, function (err, _user) {
-      if (_user) {
-        return done(new Error('MS_USERS_EXIST'));
+    // Define a search query fields
+    var searchMainProviderIdentifierField = 'providerData.' + providerUserProfile.providerIdentifierField;
+    var searchAdditionalProviderIdentifierField = 'additionalProvidersData.' + providerUserProfile.provider + '.' + providerUserProfile.providerIdentifierField;
+
+    // Define main provider search query
+    var mainProviderSearchQuery = {};
+    mainProviderSearchQuery.provider = providerUserProfile.provider;
+    mainProviderSearchQuery[searchMainProviderIdentifierField] = providerUserProfile.providerData[providerUserProfile.providerIdentifierField];
+
+    // Define additional provider search query
+    var additionalProviderSearchQuery = {};
+    additionalProviderSearchQuery[searchAdditionalProviderIdentifierField] = providerUserProfile.providerData[providerUserProfile.providerIdentifierField];
+
+    // Define a search query to find existing user with current provider profile
+    var searchQuery = {
+      $or: [mainProviderSearchQuery, additionalProviderSearchQuery]
+    };
+
+    User.findOne(searchQuery, function (err, user) {
+      if (err) {
+        return done(err);
       } else {
-        // Define a search query fields
-        var searchMainProviderIdentifierField = 'providerData.' + providerUserProfile.providerIdentifierField;
-        var searchAdditionalProviderIdentifierField = 'additionalProvidersData.' + providerUserProfile.provider + '.' + providerUserProfile.providerIdentifierField;
-
-        // Define main provider search query
-        var mainProviderSearchQuery = {};
-        mainProviderSearchQuery.provider = providerUserProfile.provider;
-        mainProviderSearchQuery[searchMainProviderIdentifierField] = providerUserProfile.providerData[providerUserProfile.providerIdentifierField];
-
-        // Define additional provider search query
-        var additionalProviderSearchQuery = {};
-        additionalProviderSearchQuery[searchAdditionalProviderIdentifierField] = providerUserProfile.providerData[providerUserProfile.providerIdentifierField];
-
-        // Define a search query to find existing user with current provider profile
-        var searchQuery = {
-          $or: [mainProviderSearchQuery, additionalProviderSearchQuery]
-        };
-
-        User.findOne(searchQuery, function (err, user) {
-          if (err) {
-            return done(err);
-          } else {
-            if (!user) {
-              // var possibleUsername = providerUserProfile.username || ((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
-              user = new User({
-                status: 2,
-                displayName: providerUserProfile.displayName,
-                email: providerUserProfile.email,
-                profileImageURL: providerUserProfile.profileImageURL,
-                provider: providerUserProfile.provider,
-                providerData: providerUserProfile.providerData
-              });
-              // And save the user
-              user.save(function (err, _user) {
-                if (!err) {
-                  var report = new Userreport({ user: _user._id });
-                  var login = new Userlogin({ user: _user._id });
-                  login.agent = req.headers['user-agent'];
-                  login.ip = getClientIp(req);
-                  login.save();
-                  report.save();
-                }
-                return done(err, user);
-              });
-            } else {
-              return done(err, user);
+        if (!user) {
+          // var possibleUsername = providerUserProfile.username || ((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
+          user = new User({
+            status: 2,
+            displayName: providerUserProfile.displayName,
+            email: providerUserProfile.email,
+            profileImageURL: providerUserProfile.profileImageURL,
+            provider: providerUserProfile.provider,
+            providerData: providerUserProfile.providerData
+          });
+          // And save the user
+          user.save(function (err, _user) {
+            if (!err) {
+              var report = new Userreport({ user: _user._id });
+              var login = new Userlogin({ user: _user._id });
+              login.agent = req.headers['user-agent'];
+              login.ip = getClientIp(req);
+              login.save();
+              report.save();
             }
-          }
-        });
+            return done(err, user);
+          });
+        } else {
+          return done(err, user);
+        }
       }
     });
   } else {

@@ -36,7 +36,8 @@ exports.forgot = function (req, res, next) {
     function (token, done) {
       if (req.body.email) {
         User.findOne({
-          email: req.body.email
+          email: req.body.email,
+          provider: 'local'
         }, '-salt -password', function (err, user) {
           if (!user) {
             return res.status(400).send({

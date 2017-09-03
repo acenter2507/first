@@ -44,7 +44,6 @@ exports.signup = function (req, res) {
           message: 'LB_USER_EMAIL_INVALID'
         });
       User.findOne({ email: user.email }, function (err, user) {
-        console.log(err);
         if (user) {
           // Kiểm tra trạng thái user đã active
           if (user.status === 1)
@@ -61,7 +60,6 @@ exports.signup = function (req, res) {
     },
     function (done) {
       crypto.randomBytes(20, function (err, buffer) {
-        console.log(err);
         if (err)
           return res.status(400).send({
             message: 'MS_CM_LOAD_ERROR'
@@ -335,8 +333,7 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
         if (!user) {
           // var possibleUsername = providerUserProfile.username || ((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
           user = new User({
-            firstName: providerUserProfile.firstName,
-            lastName: providerUserProfile.lastName,
+            status: 2,
             displayName: providerUserProfile.displayName,
             email: providerUserProfile.email,
             profileImageURL: providerUserProfile.profileImageURL,
@@ -355,35 +352,6 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
             }
             return done(err, user);
           });
-
-          // User.findUniqueUsername(possibleUsername, null, function (availableUsername) {
-          //   user = new User({
-          //     firstName: providerUserProfile.firstName,
-          //     lastName: providerUserProfile.lastName,
-          //     username: availableUsername,
-          //     displayName: providerUserProfile.displayName,
-          //     email: providerUserProfile.email,
-          //     profileImageURL: providerUserProfile.profileImageURL,
-          //     provider: providerUserProfile.provider,
-          //     providerData: providerUserProfile.providerData
-          //   });
-
-          //   // And save the user
-          //   user.save(function (err, _user) {
-          //     if (!err) {
-          //       var report = new Userreport({ user: _user._id });
-          //       var login = new Userlogin({ user: _user._id });
-          //       login.agent = req.headers['user-agent'];
-          //       login.ip =
-          //         req.headers['X-Forwarded-For'] ||
-          //         req.headers['x-forwarded-for'] ||
-          //         req.client.remoteAddress;
-          //       login.save();
-          //       report.save();
-          //     }
-          //     return done(err, user);
-          //   });
-          // });
         } else {
           return done(err, user);
         }

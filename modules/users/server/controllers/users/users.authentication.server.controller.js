@@ -97,16 +97,24 @@ exports.signup = function (req, res) {
         console.log(err);
         if (err)
           return res.status(400).send({ message: 'MS_USERS_SEND_FAIL' });
-        console.log(result.text);
-        console.log(result.html);
+        var mailOptions = {
+          from: 'Do not reply <' + config.mailer.account.from + '>',
+          to: user.email,
+          subject: 'Verify your account',
+          text: result.text,
+          html: result.html
+        };
+        transporter.sendMail(mailOptions, function (err) {
+          if (!err) {
+            return res.redirect('/authentication/send');
+          } else {
+            return res.status(400).send({
+              message: 'MS_USERS_SEND_FAIL'
+            });
+          }
+          done();
+        });
       });
-      // var mailOptions = {
-      //   from: 'Do not reply <' + config.mailer.account.from + '>',
-      //   to: user.email,
-      //   subject: 'Verify your account',
-      //   text: 'Plaintext version of the message',
-      //   html: '<p>HTML version of the message</p>'
-      // };
 
       // var sendTemplate = smtpTransport.templateSender(
       //   new EmailTemplate(path.resolve('modules/users/server/templates/verify-email.server.view')), {
@@ -130,7 +138,7 @@ exports.signup = function (req, res) {
       //       return res.redirect('/authentication/send');
       //     }
       //   });
-      done();
+      // done();
       // res.render(path.resolve('modules/users/server/templates/verify-email'), {
       //   name: user.displayName,
       //   appName: config.app.title,

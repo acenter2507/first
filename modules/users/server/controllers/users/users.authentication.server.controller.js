@@ -325,18 +325,11 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
           user.markModified('additionalProvidersData');
 
           // And save the user
-          user.save(function (err) {
-            req.login(user, function (err) {
-              if (err) {
-                return res.redirect('/authentication/signin');
-              }
-
-              return res.redirect(info.redirect_to || '/');
-              // return res.redirect(redirectURL || sessionRedirectURL || '/');
-            });
+          user.save(function (err, user) {
+            return done(user);
           });
         } else {
-          return done(new Error('MS_USERS_SOCIAL_EXIST'), user);
+          return done(user);
         }
       } else {
 

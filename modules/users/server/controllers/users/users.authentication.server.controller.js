@@ -41,7 +41,6 @@ exports.signup = function (req, res) {
           message: 'LB_USER_EMAIL_INVALID'
         });
       User.findOne({ email: user.email }, function (err, user) {
-        console.log(err);
         if (user) {
           // Kiểm tra trạng thái user đã active
           if (user.status === 1)
@@ -58,7 +57,6 @@ exports.signup = function (req, res) {
     },
     function (done) {
       crypto.randomBytes(20, function (err, buffer) {
-        console.log(err);
         if (err)
           return res.status(400).send({
             message: 'MS_CM_LOAD_ERROR'
@@ -70,6 +68,7 @@ exports.signup = function (req, res) {
     function (token, done) {
       user.activeAccountToken = token;
       user.activeAccountExpires = Date.now() + 1800000; //86400000; // 24h
+      user.status = 1;
       user.save(function (err, _user) {
         if (err)
           return res.status(400).send({
@@ -94,7 +93,6 @@ exports.signup = function (req, res) {
         url: url
       };
       mailTemplate.render(mailContent, function (err, result) {
-        console.log(err);
         if (err)
           return res.status(400).send({ message: 'MS_USERS_SEND_FAIL' });
         var mailOptions = {
@@ -108,7 +106,6 @@ exports.signup = function (req, res) {
           if (!err) {
             return res.json({ success: true });
           } else {
-            console.log(err);
             return res.status(400).send({
               message: 'MS_USERS_SEND_FAIL'
             });

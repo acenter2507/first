@@ -12,7 +12,12 @@ var path = require('path'),
   async = require('async'),
   crypto = require('crypto');
 
-var smtpTransport = nodemailer.createTransport(config.mailer.account.options);
+// var smtpTransport = nodemailer.createTransport(config.mailer.account.options);
+let transporter = nodemailer.createTransport(config.mailer.account.options);
+var httpTransport = 'http://';
+if (config.secure && config.secure.ssl === true) {
+  httpTransport = 'https://';
+}
 
 /**
  * Forgot for reset password (forgot POST)
@@ -28,17 +33,25 @@ exports.forgot = function (req, res, next) {
     },
     // Lookup user by username
     function (token, done) {
-      if (req.body.username) {
+      if (req.body.email) {
         User.findOne({
-          username: req.body.username.toLowerCase()
+          email: req.body.email
         }, '-salt -password', function (err, user) {
           if (!user) {
             return res.status(400).send({
-              message: 'No account with that username has been found'
+              message: 'MS_USERS_NOT_EXIST'
             });
           } else if (user.provider !== 'local') {
             return res.status(400).send({
-              message: 'It seems like you signed up using your ' + user.provider + ' account'
+              message: 'MS_USERS_VERIFI_ERROR_3'
+            });
+          } else if (user.status === 1) {
+            return res.status(400).send({
+              message: 'MS_USERS_SIGNUP_NOTACTIVE'
+            });
+          } else if (user.status === 3) {
+            return res.status(400).send({
+              message: 'MS_USERS_BLOCK'
             });
           } else {
             user.resetPasswordToken = token;
@@ -51,44 +64,37 @@ exports.forgot = function (req, res, next) {
         });
       } else {
         return res.status(400).send({
-          message: 'Username field must not be blank'
+          message: 'LB_USER_EMAIL_INVALID'
         });
       }
     },
     function (token, user, done) {
-
-      var httpTransport = 'http://';
-      if (config.secure && config.secure.ssl === true) {
-        httpTransport = 'https://';
-      }
-      res.render(path.resolve('modules/users/server/templates/reset-password-email'), {
+      var url = httpTransport + req.headers.host + '/api/auth/reset/' + token;
+      var mailTemplate = new EmailTemplate(path.join('modules/users/server/templates', 'resetpass'));
+      var mailContent = {
         name: user.displayName,
         appName: config.app.title,
-        url: httpTransport + req.headers.host + '/api/auth/reset/' + token
-      }, function (err, emailHTML) {
-        done(err, emailHTML, user);
-      });
-    },
-    // If valid email, send reset email using service
-    function (emailHTML, user, done) {
-      var mailOptions = {
-        to: user.email,
-        from: config.mailer.account.from,
-        subject: 'Password Reset',
-        html: emailHTML
+        url: url
       };
-      smtpTransport.sendMail(mailOptions, function (err) {
-        if (!err) {
-          res.send({
-            message: 'An email has been sent to the provided email with further instructions.'
-          });
-        } else {
-          return res.status(400).send({
-            message: 'Failure sending email'
-          });
-        }
-
-        done(err);
+      mailTemplate.render(mailContent, function (err, result) {
+        if (err)
+          return res.status(400).send({ message: 'MS_USERS_SEND_FAIL' });
+        var mailOptions = {
+          from: config.app.title + '<' + config.mailer.account.from + '>',
+          to: user.email,
+          subject: 'Reset your password',
+          html: result.html
+        };
+        transporter.sendMail(mailOptions, function (err) {
+          if (!err) {
+            return res.json({ success: true });
+          } else {
+            return res.status(400).send({
+              message: 'MS_USERS_SEND_FAIL'
+            });
+          }
+          done();
+        });
       });
     }
   ], function (err) {
@@ -108,7 +114,7 @@ exports.validateResetToken = function (req, res) {
       $gt: Date.now()
     }
   }, function (err, user) {
-    if (!user) {
+    if (!user || err) {
       return res.redirect('/password/reset/invalid');
     }
 

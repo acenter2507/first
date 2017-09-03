@@ -98,10 +98,6 @@
         url: '/verification',
         template: '<ui-view>'
       })
-      .state('verification.send', {
-        url: '/send',
-        templateUrl: 'modules/users/client/views/authentication/send.client.view.html'
-      })
       .state('verification.error', {
         url: '/error?err',
         templateUrl: 'modules/users/client/views/authentication/error.client.view.html'

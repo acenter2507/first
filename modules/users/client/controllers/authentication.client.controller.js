@@ -32,9 +32,9 @@ angular.module('users').controller('AuthenticationController', [
     $scope.busy = false;
     $scope.resend_busy = false;
     
-    // $scope.reCaptcha = Constants.reCaptcha;
-    // $scope.response = null;
-    // $scope.widgetId = null;
+    $scope.reCaptcha = Constants.reCaptcha;
+    $scope.response = null;
+    $scope.widgetId = null;
     // If user is signed in then redirect back home
     if (Authentication.user) {
       $location.path('/');
@@ -103,19 +103,18 @@ angular.module('users').controller('AuthenticationController', [
       $window.location.href = url;
     };
 
-    // $scope.setResponse = function (response) {
-    //   // console.info('Response available');
-    //   $scope.response = response;
-    // };
-    // $scope.setWidgetId = function (widgetId) {
-    //   // console.info('Created widget ID: %s', widgetId);
-    //   $scope.widgetId = widgetId;
-    // };
-    // $scope.cbExpiration = function () {
-    //   console.info('Captcha expired. Resetting response object');
-    //   vcRecaptchaService.reload($scope.widgetId);
-    //   $scope.response = null;
-    // };
+    $scope.setResponse = function (response) {
+      // console.info('Response available');
+      $scope.response = response;
+    };
+    $scope.setWidgetId = function (widgetId) {
+      // console.info('Created widget ID: %s', widgetId);
+      $scope.widgetId = widgetId;
+    };
+    $scope.cbExpiration = function () {
+      vcRecaptchaService.reload($scope.widgetId);
+      $scope.response = null;
+    };
 
     function get_translate() {
       $translate('MS_CM_ERROR').then(tsl => { $scope.MS_CM_ERROR = tsl; });

@@ -32,6 +32,7 @@ exports.signup = function (req, res) {
 
   // Init Variables
   var user = new User(req.body);
+  console.log(user);
   user.provider = 'local';
   async.waterfall([
     function (done) {

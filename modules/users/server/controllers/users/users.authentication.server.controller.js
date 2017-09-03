@@ -129,6 +129,7 @@ exports.resend = function (req, res) {
   // Init Variables
   var email = req.body.email;
   console.log(email);
+  res.end();
   // user.provider = 'local';
   // async.waterfall([
   //   function (done) {

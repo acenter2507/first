@@ -86,6 +86,7 @@
   "MS_USERS_SEND_FAIL": "Failure sending verify email.",
   "MS_USERS_RESEND": "Resend",
   "MS_USERS_NOT_EXIST": "We couldn't find your account with that information",
+  "MS_USERS_EXIST": "You signed up, please sign in by this email.",
   "MS_USERS_ACTIVED": "User was actived.",
   "MS_USERS_VERIFI_ERROR_1": "Your verify url has not found. Please create a new account.",
   "MS_USERS_VERIFI_ERROR_3": "It seems like you signed up using your social account",

@@ -308,56 +308,59 @@ exports.oauthCallback = function (strategy) {
  */
 exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
   if (!req.user) {
-    // Define a search query fields
-    var searchMainProviderIdentifierField = 'providerData.' + providerUserProfile.providerIdentifierField;
-    var searchAdditionalProviderIdentifierField = 'additionalProvidersData.' + providerUserProfile.provider + '.' + providerUserProfile.providerIdentifierField;
-
-    // Define main provider search query
-    var mainProviderSearchQuery = {};
-    mainProviderSearchQuery.provider = providerUserProfile.provider;
-    mainProviderSearchQuery[searchMainProviderIdentifierField] = providerUserProfile.providerData[providerUserProfile.providerIdentifierField];
-
-    // Define additional provider search query
-    var additionalProviderSearchQuery = {};
-    additionalProviderSearchQuery[searchAdditionalProviderIdentifierField] = providerUserProfile.providerData[providerUserProfile.providerIdentifierField];
-
-    // Define a search query to find existing user with current provider profile
-    var searchQuery = {
-      $or: [mainProviderSearchQuery, additionalProviderSearchQuery]
-    };
-
-    console.log(searchQuery);
-    User.findOne(searchQuery, function (err, user) {
-      console.log(user);
-      if (err) {
-        console.log(err);
-        return done(err);
+    User.findOne({ email: providerUserProfile.email, provider: 'local' }, function (err, _user) {
+      if (_user) {
+        return done(new Error('MS_USERS_EXIST'));
       } else {
-        if (!user) {
-          // var possibleUsername = providerUserProfile.username || ((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
-          user = new User({
-            status: 2,
-            displayName: providerUserProfile.displayName,
-            email: providerUserProfile.email,
-            profileImageURL: providerUserProfile.profileImageURL,
-            provider: providerUserProfile.provider,
-            providerData: providerUserProfile.providerData
-          });
-          // And save the user
-          user.save(function (err, _user) {
-            if (!err) {
-              var report = new Userreport({ user: _user._id });
-              var login = new Userlogin({ user: _user._id });
-              login.agent = req.headers['user-agent'];
-              login.ip = getClientIp(req);
-              login.save();
-              report.save();
+        // Define a search query fields
+        var searchMainProviderIdentifierField = 'providerData.' + providerUserProfile.providerIdentifierField;
+        var searchAdditionalProviderIdentifierField = 'additionalProvidersData.' + providerUserProfile.provider + '.' + providerUserProfile.providerIdentifierField;
+
+        // Define main provider search query
+        var mainProviderSearchQuery = {};
+        mainProviderSearchQuery.provider = providerUserProfile.provider;
+        mainProviderSearchQuery[searchMainProviderIdentifierField] = providerUserProfile.providerData[providerUserProfile.providerIdentifierField];
+
+        // Define additional provider search query
+        var additionalProviderSearchQuery = {};
+        additionalProviderSearchQuery[searchAdditionalProviderIdentifierField] = providerUserProfile.providerData[providerUserProfile.providerIdentifierField];
+
+        // Define a search query to find existing user with current provider profile
+        var searchQuery = {
+          $or: [mainProviderSearchQuery, additionalProviderSearchQuery]
+        };
+
+        User.findOne(searchQuery, function (err, user) {
+          if (err) {
+            return done(err);
+          } else {
+            if (!user) {
+              // var possibleUsername = providerUserProfile.username || ((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
+              user = new User({
+                status: 2,
+                displayName: providerUserProfile.displayName,
+                email: providerUserProfile.email,
+                profileImageURL: providerUserProfile.profileImageURL,
+                provider: providerUserProfile.provider,
+                providerData: providerUserProfile.providerData
+              });
+              // And save the user
+              user.save(function (err, _user) {
+                if (!err) {
+                  var report = new Userreport({ user: _user._id });
+                  var login = new Userlogin({ user: _user._id });
+                  login.agent = req.headers['user-agent'];
+                  login.ip = getClientIp(req);
+                  login.save();
+                  report.save();
+                }
+                return done(err, user);
+              });
+            } else {
+              return done(err, user);
             }
-            return done(err, user);
-          });
-        } else {
-          return done(err, user);
-        }
+          }
+        });
       }
     });
   } else {

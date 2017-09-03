@@ -330,6 +330,7 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
 
           // And save the user
           __user.save(function (err, user) {
+            console.log(user);
             console.log('Save user');
             return done(err, user);
           });

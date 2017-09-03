@@ -311,30 +311,33 @@ exports.oauthCallback = function (strategy) {
 exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
   if (!req.user) {
 
+    console.log('Has no user in request');
     User.findOne({ email: providerUserProfile.email }, function (err, _user) {
       if (_user) {
-        var user = new User(_user);
+        console.log('Has user of email');
+        var __user = new User(_user);
         // Check if user exists, is not signed in using this provider, and doesn't have that provider data already configured
-        if (user.provider !== providerUserProfile.provider && (!user.additionalProvidersData || !user.additionalProvidersData[providerUserProfile.provider])) {
+        if (__user.provider !== providerUserProfile.provider && (!__user.additionalProvidersData || !__user.additionalProvidersData[providerUserProfile.provider])) {
           // Add the provider data to the additional provider data field
-          if (!user.additionalProvidersData) {
-            user.additionalProvidersData = {};
+          if (!__user.additionalProvidersData) {
+            __user.additionalProvidersData = {};
           }
 
-          user.additionalProvidersData[providerUserProfile.provider] = providerUserProfile.providerData;
+          __user.additionalProvidersData[providerUserProfile.provider] = providerUserProfile.providerData;
 
           // Then tell mongoose that we've updated the additionalProvidersData field
-          user.markModified('additionalProvidersData');
+          __user.markModified('additionalProvidersData');
 
           // And save the user
-          user.save(function (err, user) {
+          __user.save(function (err, user) {
+            console.log('Save user');
             return done(user);
           });
         } else {
-          return done(user);
+          return done(__user);
         }
       } else {
-
+        console.log('Has no user of email');
         // Define a search query fields
         var searchMainProviderIdentifierField = 'providerData.' + providerUserProfile.providerIdentifierField;
         var searchAdditionalProviderIdentifierField = 'additionalProvidersData.' + providerUserProfile.provider + '.' + providerUserProfile.providerIdentifierField;
@@ -387,6 +390,7 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
       }
     });
   } else {
+    console.log('Has user in request');
     // User is already logged in, join the provider data to the existing user
     var user = req.user;
 

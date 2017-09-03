@@ -101,7 +101,7 @@ exports.signup = function (req, res) {
           from: 'Do not reply <' + config.mailer.account.from + '>',
           to: user.email,
           subject: 'Verify your account',
-          text: result.text,
+          // text: result.text,
           html: result.html
         };
         transporter.sendMail(mailOptions, function (err) {

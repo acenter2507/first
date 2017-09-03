@@ -315,7 +315,7 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
     User.findOne({ email: providerUserProfile.email }, function (err, _user) {
       if (_user) {
         console.log('Has user of email');
-        var __user = new User(_user);
+        var __user = _user.toJSON();
         // Check if user exists, is not signed in using this provider, and doesn't have that provider data already configured
         if (__user.provider !== providerUserProfile.provider && (!__user.additionalProvidersData || !__user.additionalProvidersData[providerUserProfile.provider])) {
           // Add the provider data to the additional provider data field
@@ -328,7 +328,6 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
           // Then tell mongoose that we've updated the additionalProvidersData field
           __user.markModified('additionalProvidersData');
 
-          // And save the user
           __user.save(function (err, user) {
             console.log(user);
             console.log('Save user');

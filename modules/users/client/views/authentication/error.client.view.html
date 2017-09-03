@@ -1,9 +1,10 @@
 <section class="container animated fadeIn" ng-controller="VerificationController">
   <section class="row">
+    <div class="clearfix h30"></div>
     <div class="notice notice-error">
       {{ message | translate }}
-      <a ng-if="error === 1" ui-sref="authentication.signup">{{ 'LB_SIGNUP' | translate }}</a>
-      <a ng-if="error === 2" ng-href="mailto: support@cadobongfree.com">{{ 'LB_REQUEST_UNBLOCK' | translate }}</a>
+      <a ng-show="error === 1 || error === '1'" ui-sref="authentication.signup">{{ 'LB_SIGNUP' | translate }}</a>
+      <a ng-show="error === 2 || error === '2'" ng-href="mailto: support@cadobongfree.com">{{ 'LB_REQUEST_UNBLOCK' | translate }}</a>
     </div>
   </section>
 </section>

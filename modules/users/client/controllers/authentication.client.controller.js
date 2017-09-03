@@ -78,6 +78,20 @@ angular.module('users').controller('AuthenticationController', [
       });
     };
 
+    $scope.resend = function (isValid) {
+      if ($scope.busy) return;
+      $scope.busy = true;
+      $http.post('/api/auth/resend', $scope.credentials.email).success(function (response) {
+        $scope.busy = false;
+        if (response.success) {
+          $scope.isShowForm = false;
+        }
+      }).error(function (response) {
+        $scope.busy = false;
+        show_error(response.message);
+      });
+    };
+
     // OAuth provider request
     $scope.callOauthProvider = function (url) {
       if ($state.previous && $state.previous.href) {

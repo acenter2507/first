@@ -46,7 +46,10 @@
     <div ng-hide="isShowForm">
       <p>{{ 'MS_USERS_SEND_SUCCESS' | translate }}</p>
       <div class="text-center form-group">
-        <button type="button" class="btn btn-primary btn-block">{{ 'MS_USERS_RESEND' | translate }}</button>
+        <button type="button" class="btn btn-primary btn-block">
+          <i class="fa fa-spinner fa-pulse fa-fw" ng-show="busy"></i>
+          {{ 'MS_USERS_RESEND' | translate }}
+        </button>
       </div>
     </div>
   </div>

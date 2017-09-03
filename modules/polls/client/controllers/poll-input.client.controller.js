@@ -150,6 +150,7 @@
       }
       function handle_save() {
         ctrl.poll.opts = ctrl.opts;
+        ctrl.poll.summary = 'summary';
         Action.save_poll(ctrl.poll)
           .then(res => {
             $state.go('polls.view', { pollId: res.slug });

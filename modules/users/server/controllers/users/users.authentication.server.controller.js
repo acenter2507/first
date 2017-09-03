@@ -285,12 +285,9 @@ exports.oauthCallback = function (strategy) {
     delete req.session.redirect_to;
 
     passport.authenticate(strategy, function (err, user, info) {
-      console.log(err);
-      console.log(user);
       if (err) {
         return res.redirect('/authentication/signin?err=' + encodeURIComponent(errorHandler.getErrorMessage(err)));
-      }
-      if (!user) {
+      } else if (!user) {
         return res.redirect('/authentication/signin');
       }
       req.login(user, function (err) {
@@ -311,10 +308,8 @@ exports.oauthCallback = function (strategy) {
 exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
   if (!req.user) {
 
-    console.log('Has no user in request');
     User.findOne({ email: providerUserProfile.email }, function (err, _user) {
       if (_user) {
-        console.log('Has user of email');
         // Check if user exists, is not signed in using this provider, and doesn't have that provider data already configured
         if (_user.provider !== providerUserProfile.provider && (!_user.additionalProvidersData || !_user.additionalProvidersData[providerUserProfile.provider])) {
           // Add the provider data to the additional provider data field
@@ -328,15 +323,12 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
           _user.markModified('additionalProvidersData');
 
           _user.save(function (err, user) {
-            console.log(user);
-            console.log('Save user');
             return done(err, user);
           });
         } else {
           return done(err, _user);
         }
       } else {
-        console.log('Has no user of email');
         // Define a search query fields
         var searchMainProviderIdentifierField = 'providerData.' + providerUserProfile.providerIdentifierField;
         var searchAdditionalProviderIdentifierField = 'additionalProvidersData.' + providerUserProfile.provider + '.' + providerUserProfile.providerIdentifierField;
@@ -389,7 +381,6 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
       }
     });
   } else {
-    console.log('Has user in request');
     // User is already logged in, join the provider data to the existing user
     var user = req.user;
 

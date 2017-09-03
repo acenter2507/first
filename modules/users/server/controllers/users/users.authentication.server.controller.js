@@ -67,7 +67,7 @@ exports.signup = function (req, res) {
     },
     function (token, done) {
       user.activeAccountToken = token;
-      user.activeAccountExpires = Date.now() + 1800000; //86400000; // 24h
+      // user.activeAccountExpires = Date.now() + 1800000; //86400000; // 24h
       user.status = 1;
       user.save(function (err, _user) {
         if (err)
@@ -112,57 +112,7 @@ exports.signup = function (req, res) {
           done();
         });
       });
-
-      // var sendTemplate = smtpTransport.templateSender(
-      //   new EmailTemplate(path.resolve('modules/users/server/templates/verify-email.server.view')), {
-      //     from: config.mailer.account.from,
-      //   });
-
-      // // use template based sender to send a message
-      // sendTemplate(
-      //   { to: user.email, subject: 'Verify your account' },
-      //   {
-      //     username: config.mailer.account.options.auth.user,
-      //     password: config.mailer.account.options.auth.pass
-      //   }, function (err, info) {
-      //     if (err) {
-      //       console.log('Error');
-      //       return res.status(400).send({
-      //         message: 'MS_USERS_SEND_FAIL'
-      //       });
-      //     } else {
-      //       console.log('Password reminder sent');
-      //       return res.redirect('/authentication/send');
-      //     }
-      //   });
-      // done();
-      // res.render(path.resolve('modules/users/server/templates/verify-email'), {
-      //   name: user.displayName,
-      //   appName: config.app.title,
-      //   url: url
-      // }, function (err, emailHTML) {
-      //   done(err, emailHTML, user);
-      // });
     }
-    // function (emailHTML, user, done) {
-    //   console.log(emailHTML);
-    //   var mailOptions = {
-    //     to: user.email,
-    //     from: config.mailer.account.from,
-    //     subject: 'Verify your account',
-    //     html: emailHTML
-    //   };
-    //   smtpTransport.sendMail(mailOptions, function (err) {
-    //     if (!err) {
-    //       return res.redirect('/authentication/send');
-    //     } else {
-    //       return res.status(400).send({
-    //         message: 'MS_USERS_SEND_FAIL'
-    //       });
-    //     }
-    //     done();
-    //   });
-    // }
   ], function (err) {
     if (err) {
       console.log(err);
@@ -171,47 +121,6 @@ exports.signup = function (req, res) {
       });
     }
   });
-
-  // verifyEmail(user.email)
-  //   .then(() => {
-  //     user.provider = 'local';
-  //     console.log('Process 1');
-  //     return gen_token();
-  //   })
-  //   .then(token => {
-  //     console.log('Process 2');
-  //     console.log(token);
-  //     user.activeAccountToken = token;
-  //     user.activeAccountExpires = Date.now() + 1800000; //86400000; // 24h
-  //     user.save(function (err, _user) {
-  //       if (err) return handleError(err);
-  //       console.log(_user);
-  //       user = _user;
-  //       user.password = undefined;
-  //       user.salt = undefined;
-  //       return render_main_content(token, user, req.headers.host, res);
-  //     });
-  //   })
-  //   .then(rs => {
-  //     console.log('Process 3');
-  //     return send_verification(rs.html, rs.user);
-  //   })
-  //   .then(msg => {
-  //     console.log('Process 4');
-  //     return res.redirect('/authentication/send');
-  //   })
-  //   .catch(err => {
-  //     console.log('Error 1');
-  //     console.log(err);
-  //     return res.status(400).send({ message: err.message });
-  //   });
-  // function handleError(err) {
-  //   console.log('@ldlg@pelr@plge@prlg@perg@pler@pgle@prlg@pelrg@pler@pgle@rplge@prg@pelrgp@ergl');
-  //   console.log('DKM', err);
-  //   return res.status(400).send({
-  //     message: errorHandler.getErrorMessage(err)
-  //   });
-  // }
 };
 
 /**
@@ -260,20 +169,15 @@ exports.verify = function (req, res) {
       // Kiểm tra nếu user không tồn tại
       return res.redirect('/authentication/error?err=1');
     } else {
-      var now = new Date().getTime();
-      var date = new Date(user.resetPasswordExpires).getTime();
-      // Kiểm tra nếu token đã hết hạn
-      if (date < now)
-        return res.redirect('/authentication/error?err=2');
       // Kiểm tra nếu user đã bị block
       if (user.status === 3)
-        return res.redirect('/authentication/error?err=3');
+        return res.redirect('/verification/error?err=2');
       // Kiểm tra nếu user là account social
       if (user.provider !== 'local')
-        return res.redirect('/authentication/error?err=4');
+        return res.redirect('/verification/error?err=3');
       user.status = 2;
       user.activeAccountToken = undefined;
-      user.activeAccountExpires = undefined;
+      // user.activeAccountExpires = undefined;
       user.save(function (err, user) {
         var report = new Userreport({ user: user._id });
         var login = new Userlogin({ user: user._id });
@@ -287,7 +191,6 @@ exports.verify = function (req, res) {
           if (err) {
             res.status(400).send(err);
           } else {
-            // res.json(user);
             return res.redirect('/');
           }
         });

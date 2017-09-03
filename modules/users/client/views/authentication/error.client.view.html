@@ -1,5 +1,9 @@
 <section class="container animated fadeIn" ng-controller="AuthenticationController">
   <section class="row">
-    <div class="notice notice-error">Error</div>
+    <div class="notice notice-error">
+      {{ message | translate }}
+      <a ng-if="error === 1" ui-sref="authentication.signup">{{ 'LB_SIGNUP' | translate }}</a>
+      <a ng-if="error === 2" ng-href="mailto: support@cadobongfree.com">{{ 'LB_REQUEST_UNBLOCK' | translate }}</a>
+    </div>
   </section>
 </section>

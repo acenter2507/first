@@ -104,9 +104,6 @@ var UserSchema = new Schema({
   activeAccountToken: {
     type: String
   },
-  activeAccountExpires: {
-    type: Date
-  },
   /* For reset password */
   resetPasswordToken: {
     type: String

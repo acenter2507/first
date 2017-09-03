@@ -106,7 +106,7 @@ exports.signup = function (req, res) {
         };
         transporter.sendMail(mailOptions, function (err) {
           if (!err) {
-            return res.redirect('/authentication/send');
+            return res.json({ success: true });
           } else {
             console.log(err);
             return res.status(400).send({

@@ -329,6 +329,7 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
     User.findOne(searchQuery, function (err, user) {
       console.log(user);
       if (err) {
+        console.log(err);
         return done(err);
       } else {
         if (!user) {

@@ -16,8 +16,7 @@ module.exports = function () {
   },
   function (email, password, done) {
     User.findOne({
-      email: email,
-      provider: 'local'
+      email: email
     }, function (err, user) {
       if (err) {
         return done(err);

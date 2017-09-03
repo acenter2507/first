@@ -88,16 +88,16 @@ exports.signup = function (req, res) {
         httpTransport = 'https://';
       }
       var url = httpTransport + req.headers.host + '/api/auth/verify/' + token;
+
       var sendTemplate = smtpTransport.templateSender(
         new EmailTemplate('modules/users/server/templates/verify-email.server.view'), {
           from: config.mailer.account.from,
         });
 
       // use template based sender to send a message
-      sendTemplate({
-        to: user.email,
-        subject: 'Verify your account'
-      }, {
+      sendTemplate(
+        { to: user.email, subject: 'Verify your account' },
+        {
           username: config.mailer.account.options.auth.user,
           password: config.mailer.account.options.auth.pass
         }, function (err, info) {
@@ -111,7 +111,7 @@ exports.signup = function (req, res) {
             return res.redirect('/authentication/send');
           }
         });
-        done();
+      done();
       // res.render(path.resolve('modules/users/server/templates/verify-email'), {
       //   name: user.displayName,
       //   appName: config.app.title,

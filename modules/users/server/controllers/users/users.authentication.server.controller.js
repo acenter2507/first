@@ -18,7 +18,7 @@ var path = require('path'),
   async = require('async'),
   validator = require('validator');
 
-var smtpTransport = nodemailer.createTransport(config.mailer.account.options);
+let transporter = nodemailer.createTransport(config.mailer.account.options)
 
 /**
  * Signup
@@ -71,7 +71,6 @@ exports.signup = function (req, res) {
       user.activeAccountToken = token;
       user.activeAccountExpires = Date.now() + 1800000; //86400000; // 24h
       user.save(function (err, _user) {
-        console.log(err);
         if (err)
           return res.status(400).send({
             message: errorHandler.getErrorMessage(err)
@@ -88,29 +87,48 @@ exports.signup = function (req, res) {
         httpTransport = 'https://';
       }
       var url = httpTransport + req.headers.host + '/api/auth/verify/' + token;
+      var mailTemplate = new EmailTemplate(path.resolve('modules/users/server/templates/verify-email.server.view'));
+      var mailContent = {
+        name: user.displayName,
+        appName: config.app.title,
+        url: url
+      };
+      mailTemplate.render(mailContent, function (err, result) {
+        if (err)
+          return res.status(400).send({ message: 'MS_USERS_SEND_FAIL' });
+        console.log(result.text);
+        console.log(result.html);
+      });
+      // var mailOptions = {
+      //   from: 'Do not reply <' + config.mailer.account.from + '>',
+      //   to: user.email,
+      //   subject: 'Verify your account',
+      //   text: 'Plaintext version of the message',
+      //   html: '<p>HTML version of the message</p>'
+      // };
 
-      var sendTemplate = smtpTransport.templateSender(
-        new EmailTemplate('modules/users/server/templates/verify-email.server.view'), {
-          from: config.mailer.account.from,
-        });
+      // var sendTemplate = smtpTransport.templateSender(
+      //   new EmailTemplate(path.resolve('modules/users/server/templates/verify-email.server.view')), {
+      //     from: config.mailer.account.from,
+      //   });
 
-      // use template based sender to send a message
-      sendTemplate(
-        { to: user.email, subject: 'Verify your account' },
-        {
-          username: config.mailer.account.options.auth.user,
-          password: config.mailer.account.options.auth.pass
-        }, function (err, info) {
-          if (err) {
-            console.log('Error');
-            return res.status(400).send({
-              message: 'MS_USERS_SEND_FAIL'
-            });
-          } else {
-            console.log('Password reminder sent');
-            return res.redirect('/authentication/send');
-          }
-        });
+      // // use template based sender to send a message
+      // sendTemplate(
+      //   { to: user.email, subject: 'Verify your account' },
+      //   {
+      //     username: config.mailer.account.options.auth.user,
+      //     password: config.mailer.account.options.auth.pass
+      //   }, function (err, info) {
+      //     if (err) {
+      //       console.log('Error');
+      //       return res.status(400).send({
+      //         message: 'MS_USERS_SEND_FAIL'
+      //       });
+      //     } else {
+      //       console.log('Password reminder sent');
+      //       return res.redirect('/authentication/send');
+      //     }
+      //   });
       done();
       // res.render(path.resolve('modules/users/server/templates/verify-email'), {
       //   name: user.displayName,

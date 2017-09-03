@@ -204,6 +204,7 @@ exports.reset = function (req, res, next) {
               message: 'MS_USERS_SEND_FAIL'
             });
           }
+          done();
         });
       });
     }

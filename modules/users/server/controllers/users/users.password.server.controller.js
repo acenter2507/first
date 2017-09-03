@@ -159,9 +159,7 @@ exports.reset = function (req, res, next) {
                     // Remove sensitive data before return authenticated user
                     user.password = undefined;
                     user.salt = undefined;
-
                     res.json(user);
-
                     done(err, user);
                   }
                 });
@@ -195,15 +193,6 @@ exports.reset = function (req, res, next) {
           html: result.html
         };
         transporter.sendMail(mailOptions, function (err) {
-          if (!err) {
-            user.salt = undefined;
-            user.password = undefined;
-            return res.json(user);
-          } else {
-            return res.status(400).send({
-              message: 'MS_USERS_SEND_FAIL'
-            });
-          }
           done();
         });
       });

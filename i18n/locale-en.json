@@ -91,6 +91,8 @@
   "MS_USERS_VERIFI_ERROR_3": "It seems like you signed up using your social account",
   "MS_USERS_RESETPASS_TITLE": "Reset your password",
   "MS_USERS_RESETPASS_SUB": "Enter your account email.",
-  "MS_USERS_RESETPASS_INVALID": "Password reset is invalid.",
+  "MS_USERS_RESETPASS_INVALID": "Password reset token is invalid or has expired.",
+  "MS_USERS_RESETPASS_SUCCESS": "Password successfully reset.",
+  "MS_USERS_RESETPASS_HANDBACK": "Continue to home page.",
   "MS_USERS_RESETPASS": "Ask for a new password reset."
 }

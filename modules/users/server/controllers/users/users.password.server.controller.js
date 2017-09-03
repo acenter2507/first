@@ -168,35 +168,43 @@ exports.reset = function (req, res, next) {
             });
           } else {
             return res.status(400).send({
-              message: 'Passwords do not match'
+              message: 'LB_USER_VERIFY_PASSWORD_MATCH'
             });
           }
         } else {
           return res.status(400).send({
-            message: 'Password reset token is invalid or has expired.'
+            message: 'MS_USERS_RESETPASS_INVALID'
           });
         }
       });
     },
     function (user, done) {
-      res.render('modules/users/server/templates/reset-password-confirm-email', {
+      var mailTemplate = new EmailTemplate(path.join('modules/users/server/templates', 'inform_reset_password'));
+      var mailContent = {
         name: user.displayName,
         appName: config.app.title
-      }, function (err, emailHTML) {
-        done(err, emailHTML, user);
-      });
-    },
-    // If valid email, send reset email using service
-    function (emailHTML, user, done) {
-      var mailOptions = {
-        to: user.email,
-        from: config.mailer.account.from,
-        subject: 'Your password has been changed',
-        html: emailHTML
       };
-
-      smtpTransport.sendMail(mailOptions, function (err) {
-        done(err, 'done');
+      mailTemplate.render(mailContent, function (err, result) {
+        if (err)
+          return res.status(400).send({ message: 'MS_USERS_SEND_FAIL' });
+        var mailOptions = {
+          from: config.app.title + '<' + config.mailer.account.from + '>',
+          to: user.email,
+          subject: 'Your password has been changed',
+          html: result.html
+        };
+        transporter.sendMail(mailOptions, function (err) {
+          if (!err) {
+            user.salt = undefined;
+            user.password = undefined;
+            return res.json(user);
+          } else {
+            return res.status(400).send({
+              message: 'MS_USERS_SEND_FAIL'
+            });
+          }
+          done();
+        });
       });
     }
   ], function (err) {

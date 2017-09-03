@@ -78,7 +78,7 @@ exports.signup = function (req, res) {
         user = _user;
         user.password = undefined;
         user.salt = undefined;
-        done(err, token, user, done);
+        done(err, token, user);
       });
     },
     function (token, user, done) {

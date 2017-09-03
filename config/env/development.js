@@ -67,15 +67,15 @@ module.exports = {
   },
   mailer: {
     account: {
-      from: process.env.ACCOUNT_MAILER_FROM || 'acenter2507@gmail.com',
+      from: process.env.ACCOUNT_MAILER_FROM || 'account@cadobongdafree.com',
       options: {
         // service: process.env.ACCOUNT_MAILER_SERVICE_PROVIDER || 'Gmail',
-        host: process.env.ACCOUNT_MAILER_HOST || 'smtp.gmail.com',
-        port: process.env.ACCOUNT_MAILER_PORT || '465',
+        host: process.env.ACCOUNT_MAILER_HOST || 'mx1.hostinger.vn',
+        port: process.env.ACCOUNT_MAILER_PORT || '587',
         secure: process.env.ACCOUNT_MAILER_SECURE === 'true',
         auth: {
-          user: process.env.ACCOUNT_MAILER_EMAIL_ID || 'acenter2507',
-          pass: process.env.ACCOUNT_MAILER_PASSWORD || '1@Aa1@Aa'
+          user: process.env.ACCOUNT_MAILER_EMAIL_ID || 'account@cadobongdafree.com',
+          pass: process.env.ACCOUNT_MAILER_PASSWORD || '1aA@1aA@'
         }
       }
     },

@@ -169,13 +169,12 @@ exports.resend = function (req, res) {
               if (err)
                 return res.status(400).send({ message: 'MS_USERS_SEND_FAIL' });
               return res.json({ success: true });
-            })
+            });
           } else {
             return res.status(400).send({
               message: 'MS_USERS_SEND_FAIL'
             });
           }
-          done();
         });
       });
     });

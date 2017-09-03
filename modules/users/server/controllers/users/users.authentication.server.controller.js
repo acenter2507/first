@@ -309,7 +309,7 @@ exports.oauthCallback = function (strategy) {
 exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
   if (!req.user) {
 
-    User.findOne({ email:  }, function (err, _user) {
+    User.findOne({ email: providerUserProfile.email }, function (err, _user) {
       if (_user) {
         var user = _user;
         // Check if user exists, is not signed in using this provider, and doesn't have that provider data already configured

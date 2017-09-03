@@ -94,6 +94,7 @@ exports.signup = function (req, res) {
         url: url
       };
       mailTemplate.render(mailContent, function (err, result) {
+        console.log(err);
         if (err)
           return res.status(400).send({ message: 'MS_USERS_SEND_FAIL' });
         console.log(result.text);

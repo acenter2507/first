@@ -9,7 +9,7 @@ var _ = require('lodash'),
 // global seed options object
 var seedOptions = {};
 
-function removeUser (user) {
+function removeUser(user) {
   return new Promise(function (resolve, reject) {
     var User = mongoose.model('User');
     User.find({ email: user.email }).remove(function (err) {
@@ -21,14 +21,17 @@ function removeUser (user) {
   });
 }
 
-function saveUser (user) {
-  return function() {
+function saveUser(user) {
+  return function () {
     return new Promise(function (resolve, reject) {
       // Then save the user
       user.save(function (err, theuser) {
         if (err) {
           reject(new Error('Failed to add local ' + user.email));
         } else {
+          var Userreport = mongoose.model('Userreport');
+          var report = new Userreport({ user: theuser._id });
+          report.save();
           resolve(theuser);
         }
       });
@@ -36,7 +39,7 @@ function saveUser (user) {
   };
 }
 
-function checkUserNotExists (user) {
+function checkUserNotExists(user) {
   return new Promise(function (resolve, reject) {
     var User = mongoose.model('User');
     User.find({ email: user.email }, function (err, users) {
@@ -53,7 +56,7 @@ function checkUserNotExists (user) {
   });
 }
 
-function reportSuccess (password) {
+function reportSuccess(password) {
   return function (user) {
     return new Promise(function (resolve, reject) {
       if (seedOptions.logResults) {
@@ -65,7 +68,7 @@ function reportSuccess (password) {
 }
 
 // save the specified user with the password provided from the resolved promise
-function seedTheUser (user) {
+function seedTheUser(user) {
   return function (password) {
     return new Promise(function (resolve, reject) {
 
@@ -99,7 +102,7 @@ function seedTheUser (user) {
 }
 
 // report the error
-function reportError (reject) {
+function reportError(reject) {
   return function (err) {
     if (seedOptions.logResults) {
       console.log();
@@ -120,8 +123,8 @@ module.exports.start = function start(options) {
     seedOptions.logResults = options.logResults;
   }
 
-  if (_.has(options, 'seedUser')) { 
-    seedOptions.seedUser = options.seedUser; 
+  if (_.has(options, 'seedUser')) {
+    seedOptions.seedUser = options.seedUser;
   }
 
   if (_.has(options, 'seedAdmin')) {
@@ -141,6 +144,7 @@ module.exports.start = function start(options) {
       User.generateRandomPassphrase()
         .then(seedTheUser(adminAccount))
         .then(function () {
+
           resolve();
         })
         .catch(reportError(reject));

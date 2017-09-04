@@ -61,6 +61,7 @@ exports.signup = function (req, res) {
     function (done) {
       crypto.randomBytes(20, function (err, buffer) {
         if (err)
+          console.log(err);
           return res.status(400).send({
             message: 'MS_CM_LOAD_ERROR'
           });
@@ -74,6 +75,7 @@ exports.signup = function (req, res) {
       user.status = 1;
       user.save(function (err, _user) {
         if (err)
+          console.log(err);
           return res.status(400).send({
             message: errorHandler.getErrorMessage(err)
           });
@@ -114,6 +116,7 @@ exports.signup = function (req, res) {
     }
   ], function (err) {
     if (err) {
+      console.log(err);
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });

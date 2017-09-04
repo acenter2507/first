@@ -60,8 +60,8 @@ exports.signup = function (req, res) {
     },
     function (done) {
       crypto.randomBytes(20, function (err, buffer) {
+        console.log(err);
         if (err)
-          console.log(err);
           return res.status(400).send({
             message: 'MS_CM_LOAD_ERROR'
           });
@@ -74,8 +74,8 @@ exports.signup = function (req, res) {
       // user.activeAccountExpires = Date.now() + 1800000; //86400000; // 24h
       user.status = 1;
       user.save(function (err, _user) {
+        console.log(err);
         if (err)
-          console.log(err);
           return res.status(400).send({
             message: errorHandler.getErrorMessage(err)
           });

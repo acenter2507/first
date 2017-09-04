@@ -72,7 +72,8 @@ module.exports = {
         // service: process.env.ACCOUNT_MAILER_SERVICE_PROVIDER || 'Gmail',
         host: process.env.ACCOUNT_MAILER_HOST || 'mx1.hostinger.vn',
         port: process.env.ACCOUNT_MAILER_PORT || '587',
-        secure: process.env.ACCOUNT_MAILER_SECURE === 'true',
+        secure: true,
+        tls: {cipher:'SSLv3'},
         auth: {
           user: process.env.ACCOUNT_MAILER_EMAIL_ID || 'account@cadobongdafree.com',
           pass: process.env.ACCOUNT_MAILER_PASSWORD || '1aA@1aA@'

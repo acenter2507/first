@@ -10,7 +10,7 @@ angular
   .directive('a', asidePanelToggleDirective)
   .directive('imagePreview', imagePreviewDirective);
 
-//Prevent click if href="#"
+//Prevent click if href='#'
 function preventClickDirective() {
   var directive = {
     restrict: 'E',
@@ -71,9 +71,9 @@ function asideMenuHideDirective() {
   return directive;
 
   function link(scope, element, attrs) {
-    angular.element(document).bind("mouseup touchend", function (e) {
-      var container = angular.element("#aside-menu");
-      var btn = angular.element("#aside-menu-toggler");
+    angular.element(document).bind('mouseup touchend', function (e) {
+      var container = angular.element('#aside-menu');
+      var btn = angular.element('#aside-menu-toggler');
       if (!container.is(e.target) && container.has(e.target).length === 0 && !btn.is(e.target) && btn.has(e.target).length === 0) {
         if (element.hasClass('aside-menu-show')) {
           element.removeClass('aside-menu-show');

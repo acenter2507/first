@@ -19,13 +19,6 @@ var path = require('path'),
   validator = require('validator');
 
 let transporter = nodemailer.createTransport(config.mailer.account.options);
-transporter.verify(function (error, success) {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log('Server is ready to take our messages');
-  }
-});
 var httpTransport = 'http://';
 if (config.secure && config.secure.ssl === true) {
   httpTransport = 'https://';

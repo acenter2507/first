@@ -14,11 +14,12 @@ var path = require('path'),
   nev = require('email-verification')(mongoose),
   crypto = require('crypto'),
   nodemailer = require('nodemailer'),
+  smtpTransport  = require('nodemailer-smtp-transport'),
   EmailTemplate = require('email-templates').EmailTemplate,
   async = require('async'),
   validator = require('validator');
 
-let transporter = nodemailer.createTransport(config.mailer.account.options);
+let transporter = nodemailer.createTransport(smtpTransport(config.mailer.account.options));
 var httpTransport = 'http://';
 if (config.secure && config.secure.ssl === true) {
   httpTransport = 'https://';

@@ -71,13 +71,17 @@ module.exports = {
       options: {
         // service: process.env.ACCOUNT_MAILER_SERVICE_PROVIDER || 'gmail',
         host: process.env.ACCOUNT_MAILER_HOST || 'mx1.hostinger.vn', //'smtp.gmail.com', //
-        port: process.env.ACCOUNT_MAILER_PORT || '587',// '587',
-        secure: true,
+        port: process.env.ACCOUNT_MAILER_PORT || 587,// '587',
+        secure: false,
+        requireTLS: true,
         // tls: { rejectUnauthorized: false },
         auth: {
           user: process.env.ACCOUNT_MAILER_EMAIL_ID || 'account@cadobongdafree.com',//'blablaerwebapp@gmail.com',
           pass: process.env.ACCOUNT_MAILER_PASSWORD || '1aA@1aA@' //'192837645'
-        }
+        },
+        connectionTimeout: 500, // No effect
+        greetingTimeout: 500, // No effect
+        socketTimeout: 500 // No effect
       }
     },
     inform: {

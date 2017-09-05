@@ -69,7 +69,7 @@ module.exports = {
   },
   mailer: {
     account: {
-      from: process.env.ACCOUNT_MAILER_FROM || 'acenter2507@gmail.com',//'account@cadobongdafree.com',
+      from: process.env.ACCOUNT_MAILER_FROM || 'blablaerwebapp@gmail.com',//'account@cadobongdafree.com',
       options: {
         service: process.env.ACCOUNT_MAILER_SERVICE_PROVIDER || 'gmail',
         // host: process.env.ACCOUNT_MAILER_HOST || 'smtp.gmail.com', //'mx1.hostinger.vn',
@@ -77,8 +77,8 @@ module.exports = {
         // secure: true,
         // tls: { rejectUnauthorized: false },
         auth: {
-          user: process.env.ACCOUNT_MAILER_EMAIL_ID || 'acenter2507@gmail.com',//'account@cadobongdafree.com',
-          pass: process.env.ACCOUNT_MAILER_PASSWORD || '1@Aa1@Aa'//'1aA@1aA@'
+          user: process.env.ACCOUNT_MAILER_EMAIL_ID || 'blablaerwebapp@gmail.com',//'account@cadobongdafree.com',
+          pass: process.env.ACCOUNT_MAILER_PASSWORD || '192837645'//'1aA@1aA@'
         }
       }
     },

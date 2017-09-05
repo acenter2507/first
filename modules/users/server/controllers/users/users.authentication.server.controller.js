@@ -18,7 +18,7 @@ var path = require('path'),
   async = require('async'),
   validator = require('validator');
 
-let transporter = nodemailer.createTransport('SMTP',config.mailer.account.options);
+let transporter = nodemailer.createTransport(config.mailer.account.options);
 var httpTransport = 'http://';
 if (config.secure && config.secure.ssl === true) {
   httpTransport = 'https://';

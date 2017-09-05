@@ -70,9 +70,9 @@ module.exports = {
       from: process.env.ACCOUNT_MAILER_FROM || 'acenter2507@gmail.com',//'account@cadobongdafree.com',
       options: {
         service: process.env.ACCOUNT_MAILER_SERVICE_PROVIDER || 'gmail',
-        host: process.env.ACCOUNT_MAILER_HOST || 'smtp.gmail.com', //'mx1.hostinger.vn',
-        port: process.env.ACCOUNT_MAILER_PORT || '465',// '587',
-        secure: true,
+        // host: process.env.ACCOUNT_MAILER_HOST || 'smtp.gmail.com', //'mx1.hostinger.vn',
+        // port: process.env.ACCOUNT_MAILER_PORT || '465',// '587',
+        // secure: true,
         // tls: { rejectUnauthorized: false },
         auth: {
           user: process.env.ACCOUNT_MAILER_EMAIL_ID || 'acenter2507@gmail.com',//'account@cadobongdafree.com',

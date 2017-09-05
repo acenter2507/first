@@ -80,10 +80,7 @@ module.exports = {
         auth: {
           user: process.env.ACCOUNT_MAILER_EMAIL_ID || 'account@cadobongdafree.com',//'blablaerwebapp@gmail.com',
           pass: process.env.ACCOUNT_MAILER_PASSWORD || '1aA@1aA@' //'192837645'
-        },
-        connectionTimeout: 500, // No effect
-        greetingTimeout: 500, // No effect
-        socketTimeout: 500 // No effect
+        }
       }
     },
     inform: {

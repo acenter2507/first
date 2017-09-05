@@ -74,6 +74,8 @@ module.exports = {
         port: process.env.ACCOUNT_MAILER_PORT || 587,// '587',
         secure: false,
         requireTLS: true,
+        debug: true,
+        logger:true,
         // tls: { rejectUnauthorized: false },
         auth: {
           user: process.env.ACCOUNT_MAILER_EMAIL_ID || 'account@cadobongdafree.com',//'blablaerwebapp@gmail.com',

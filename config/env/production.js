@@ -73,7 +73,7 @@ module.exports = {
       options: {
         // service: process.env.ACCOUNT_MAILER_SERVICE_PROVIDER || 'gmail',
         host: process.env.ACCOUNT_MAILER_HOST || 'mx1.hostinger.vn', //'smtp.gmail.com', //
-        port: process.env.ACCOUNT_MAILER_PORT || '465',// '587',
+        port: process.env.ACCOUNT_MAILER_PORT || '587',// '587',
         secure: true,
         // tls: { rejectUnauthorized: false },
         auth: {

@@ -6,12 +6,12 @@
 var path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   config = require(path.resolve('./config/config')),
+  mail = require(path.resolve('./config/lib/mail')),
   mongoose = require('mongoose'),
   passport = require('passport'),
   User = mongoose.model('User'),
   Userreport = mongoose.model('Userreport'),
   Userlogin = mongoose.model('Userlogin'),
-  nev = require('email-verification')(mongoose),
   crypto = require('crypto'),
   nodemailer = require('nodemailer'),
   smtpTransport = require('nodemailer-smtp-transport'),
@@ -27,103 +27,140 @@ if (config.secure && config.secure.ssl === true) {
 /**
  * Signup
  */
-exports.signup = function (req, res) {
-  // For security measurement we remove the roles from the req.body object
-  delete req.body.roles;
+// exports.signup = function (req, res) {
+//   // For security measurement we remove the roles from the req.body object
+//   delete req.body.roles;
 
-  // Init Variables
+//   // Init Variables
+//   var user = new User(req.body);
+//   user.provider = 'local';
+//   async.waterfall([
+//     function (done) {
+//       if (user.email.length === 0)
+//         return res.status(400).send({
+//           message: 'LB_USER_EMAIL_REQUIRED'
+//         });
+//       if (!validator.isEmail(user.email))
+//         return res.status(400).send({
+//           message: 'LB_USER_EMAIL_INVALID'
+//         });
+//       User.findOne({ email: user.email }, function (err, user) {
+//         if (user) {
+//           // Kiểm tra trạng thái user đã active
+//           if (user.status === 1)
+//             return res.status(400).send({
+//               message: 'MS_USERS_SIGNUP_NOTACTIVE'
+//             });
+//           if (user.status === 2 || user.status === 3)
+//             return res.status(400).send({
+//               message: 'LB_USERS_EMAIL_DUPLICATE'
+//             });
+//         }
+//         done();
+//       });
+//     },
+//     function (done) {
+//       crypto.randomBytes(20, function (err, buffer) {
+//         console.log(err);
+//         if (err)
+//           return res.status(400).send({
+//             message: 'MS_CM_LOAD_ERROR'
+//           });
+//         var token = buffer.toString('hex');
+//         done(err, token);
+//       });
+//     },
+//     function (token, done) {
+//       user.activeAccountToken = token;
+//       // user.activeAccountExpires = Date.now() + 1800000; //86400000; // 24h
+//       user.status = 1;
+//       user.save(function (err, _user) {
+//         console.log(err);
+//         if (err)
+//           return res.status(400).send({
+//             message: errorHandler.getErrorMessage(err)
+//           });
+//         user = _user;
+//         user.password = undefined;
+//         user.salt = undefined;
+//         done(err, token, user);
+//       });
+//     },
+//     function (token, user, done) {
+//       var url = httpTransport + req.headers.host + '/api/auth/verify/' + token;
+//       var mailTemplate = new EmailTemplate(path.join('modules/users/server/templates', 'verification'));
+//       var mailContent = {
+//         name: user.displayName,
+//         appName: config.app.title,
+//         url: url
+//       };
+//       mailTemplate.render(mailContent, function (err, result) {
+//         if (err)
+//           return res.status(400).send({ message: 'MS_USERS_SEND_FAIL' });
+//         var mailOptions = {
+//           from: config.app.title + '<' + config.mailer.account.from + '>',
+//           to: user.email,
+//           subject: 'Verify your account',
+//           html: result.html
+//         };
+//         transporter.sendMail(mailOptions, function (err) {
+//           if (!err) {
+//             return res.json({ success: true });
+//           } else {
+//             console.log(err);
+//             return res.status(400).send({
+//               message: 'MS_USERS_SEND_FAIL'
+//             });
+//           }
+//           done();
+//         });
+//       });
+//     }
+//   ], function (err) {
+//     if (err) {
+//       console.log(err);
+//       return res.status(400).send({
+//         message: errorHandler.getErrorMessage(err)
+//       });
+//     }
+//   });
+// };
+exports.signup = function (req, res) {
+  delete req.body.roles;
   var user = new User(req.body);
   user.provider = 'local';
-  async.waterfall([
-    function (done) {
-      if (user.email.length === 0)
-        return res.status(400).send({
-          message: 'LB_USER_EMAIL_REQUIRED'
-        });
-      if (!validator.isEmail(user.email))
-        return res.status(400).send({
-          message: 'LB_USER_EMAIL_INVALID'
-        });
-      User.findOne({ email: user.email }, function (err, user) {
-        if (user) {
-          // Kiểm tra trạng thái user đã active
-          if (user.status === 1)
-            return res.status(400).send({
-              message: 'MS_USERS_SIGNUP_NOTACTIVE'
-            });
-          if (user.status === 2 || user.status === 3)
-            return res.status(400).send({
-              message: 'LB_USERS_EMAIL_DUPLICATE'
-            });
-        }
-        done();
-      });
-    },
-    function (done) {
-      crypto.randomBytes(20, function (err, buffer) {
-        console.log(err);
-        if (err)
-          return res.status(400).send({
-            message: 'MS_CM_LOAD_ERROR'
-          });
-        var token = buffer.toString('hex');
-        done(err, token);
-      });
-    },
-    function (token, done) {
-      user.activeAccountToken = token;
-      // user.activeAccountExpires = Date.now() + 1800000; //86400000; // 24h
-      user.status = 1;
-      user.save(function (err, _user) {
-        console.log(err);
-        if (err)
-          return res.status(400).send({
-            message: errorHandler.getErrorMessage(err)
-          });
-        user = _user;
-        user.password = undefined;
-        user.salt = undefined;
-        done(err, token, user);
-      });
-    },
-    function (token, user, done) {
-      var url = httpTransport + req.headers.host + '/api/auth/verify/' + token;
-      var mailTemplate = new EmailTemplate(path.join('modules/users/server/templates', 'verification'));
-      var mailContent = {
-        name: user.displayName,
-        appName: config.app.title,
-        url: url
-      };
-      mailTemplate.render(mailContent, function (err, result) {
-        if (err)
-          return res.status(400).send({ message: 'MS_USERS_SEND_FAIL' });
-        var mailOptions = {
-          from: config.app.title + '<' + config.mailer.account.from + '>',
-          to: user.email,
-          subject: 'Verify your account',
-          html: result.html
-        };
-        transporter.sendMail(mailOptions, function (err) {
-          if (!err) {
-            return res.json({ success: true });
-          } else {
-            console.log(err);
-            return res.status(400).send({
-              message: 'MS_USERS_SEND_FAIL'
-            });
-          }
-          done();
-        });
-      });
-    }
-  ], function (err) {
-    if (err) {
-      console.log(err);
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    }
+
+  // Validate EMAIL
+  if (user.email.length === 0)
+    return handleError(new Error('LB_USER_EMAIL_REQUIRED'));
+  if (!validator.isEmail(user.email))
+    return handleError(new Error('LB_USER_EMAIL_INVALID'));
+  User.findOne({ email: user.email }, function (err, user) {
+    if (err)
+      return handleError(new Error('MS_CM_LOAD_ERROR'));
+    // Kiểm tra trạng thái user đã active
+    if (user.status === 1)
+      return handleError(new Error('MS_USERS_SIGNUP_NOTACTIVE'));
+    if (user.status === 2 || user.status === 3)
+      return handleError(new Error('LB_USERS_EMAIL_DUPLICATE'));
+    
+    // Validate OK
+    getToken()
+    .then(token => {
+      console.log(token);
+      return res.end();
+    })
+    .catch(err => {
+      return handleError(err);
+    });
+
   });
+  function handleError(err) {
+    console.log(err);
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 };
 
 /**
@@ -470,4 +507,17 @@ function getClientIp(req) {
     ipAddress = req.connection.remoteAddress;
   }
   return ipAddress;
+}
+
+function getToken() {
+  return new Promise((resolve, reject) => {
+    crypto.randomBytes(20, function (err, buffer) {
+      if (err) {
+        console.log('MS_CM_LOAD_ERROR');
+        return reject(new Error('MS_CM_LOAD_ERROR'));
+      }
+      var token = buffer.toString('hex');
+      return resolve(token);
+    });
+  });
 }

@@ -36,7 +36,6 @@
     "crypto": "0.0.3",
     "ejs": "^2.5.7",
     "email-templates": "^2.7.1",
-    "email-verification": "^0.4.6",
     "express": "^4.13.1",
     "express-session": "^1.11.3",
     "file-stream-rotator": "~0.0.6",

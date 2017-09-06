@@ -47,7 +47,7 @@
   <!--Embedding The User Object-->
   <script type="text/javascript">
   var user ={{ user | json | safe }};
-  var host ={{ host }};
+  var host ={{ host | json | safe }};
   var locales ={{ locales | json | safe }};
   </script>
   <!--Load The Socket.io File-->

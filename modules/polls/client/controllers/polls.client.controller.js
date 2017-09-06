@@ -735,12 +735,14 @@
     function excute_task() {
       var now = new Date().getTime();
       var dif = now - ctrl.task_queue.last_task_time;
+      console.log(dif);
       if (dif > 2000) {
         loadVoteInfo()
           .then(() => {
             ctrl.task_queue.last_task_time = now;
             ctrl.task_queue.is_watting = false;
             $timeout.cancel(ctrl.excute_timer);
+            console.log('run updated');
           })
           .catch(err => {
             ctrl.task_queue.last_task_time = now;

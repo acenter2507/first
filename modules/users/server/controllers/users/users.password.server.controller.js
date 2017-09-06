@@ -30,7 +30,7 @@ exports.forgot = function (req, res, next) {
       return saveUser(user);
     })
     .then(_user => {
-      var url = config.http + '://' + req.headers.host + '/api/auth/reset/' + _user.activeAccountToken;
+      var url = config.http + '://' + req.headers.host + '/api/auth/reset/' + _user.resetPasswordToken;
       var mailTemplate = 'resetpass';
       var mailContent = {
         name: _user.displayName,

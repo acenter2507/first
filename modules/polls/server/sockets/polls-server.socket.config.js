@@ -95,14 +95,6 @@ module.exports = function (io, socket) {
   // On vote poll
   socket.on('poll_vote', req => {
     io.sockets.in(req.pollId).emit('poll_vote', { client: socket.id });
-    // io.sockets.emit('activity', {
-    //   poll: req.poll,
-    //   user: req.from,
-    //   displayName: req.displayName,
-    //   action: 'voted in',
-    //   profileImageURL: req.profileImageURL,
-    //   title: req.title
-    // });
   });
   // On delete poll
   socket.on('poll_delete', req => {
@@ -115,27 +107,11 @@ module.exports = function (io, socket) {
   // On delete poll
   socket.on('poll_create', req => {
     io.sockets.in('public').emit('poll_create');
-    // io.sockets.emit('activity', {
-    //   poll: req.poll,
-    //   user: req.user,
-    //   displayName: req.displayName,
-    //   action: 'created poll:',
-    //   profileImageURL: req.profileImageURL,
-    //   title: req.title
-    // });
   });
   // On comment added
   socket.on('cmt_add', req => {
     io.sockets.in(req.pollId).emit('cmt_add', { cmtId: req.cmtId, isNew: req.isNew, client: socket.id });
     if (!req.isNew) return;
-    // io.sockets.emit('activity', {
-    //   poll: req.poll,
-    //   user: req.from,
-    //   displayName: req.displayName,
-    //   action: 'commented in',
-    //   profileImageURL: req.profileImageURL,
-    //   title: req.title
-    // });
     if (req.to) {
       Notif.findOne({ poll: req.pollId, type: 2, from: req.from, status: 0 })
         .then(_nof => {

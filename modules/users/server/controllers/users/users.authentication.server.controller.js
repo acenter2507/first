@@ -131,30 +131,15 @@ exports.signup = function (req, res) {
   user.provider = 'local';
 
   // Validate EMAIL
-  if (user.email.length === 0)
-    return handleError(new Error('LB_USER_EMAIL_REQUIRED'));
-  if (!validator.isEmail(user.email))
-    return handleError(new Error('LB_USER_EMAIL_INVALID'));
-  User.findOne({ email: user.email }, function (err, user) {
-    if (err)
-      return handleError(new Error('MS_CM_LOAD_ERROR'));
-    // Kiểm tra trạng thái user đã active
-    if (user) {
-      if (user.status === 1)
-        return handleError(new Error('MS_USERS_SIGNUP_NOTACTIVE'));
-      return handleError(new Error('LB_USERS_EMAIL_DUPLICATE'));
-    }
-    // Validate OK
-    getToken()
-      .then(token => {
-        console.log(token);
-        return res.end();
-      })
-      .catch(err => {
-        return handleError(err);
-      });
-
-  });
+  validEmail(user.email)
+    .then(() => {
+      return getToken();
+    })
+    .then(token => {
+      console.log(token);
+      return res.end();
+    })
+    .catch(handleError);
   function handleError(err) {
     console.log(err);
     return res.status(400).send({
@@ -509,6 +494,25 @@ function getClientIp(req) {
   return ipAddress;
 }
 
+function validEmail(email) {
+  return new Promise((resolve, reject) => {
+    if (email.length === 0)
+      return reject(new Error('LB_USER_EMAIL_REQUIRED'));
+    if (!validator.isEmail(email))
+      return reject(new Error('LB_USER_EMAIL_INVALID'));
+    User.findOne({ email: email }, function (err, user) {
+      if (err)
+        return reject(new Error('MS_CM_LOAD_ERROR'));
+      // Kiểm tra trạng thái user đã active
+      if (user) {
+        if (user.status === 1)
+          return reject(new Error('MS_USERS_SIGNUP_NOTACTIVE'));
+        return reject(new Error('LB_USERS_EMAIL_DUPLICATE'));
+      }
+      return resolve();
+    });
+  });
+}
 function getToken() {
   return new Promise((resolve, reject) => {
     crypto.randomBytes(20, function (err, buffer) {

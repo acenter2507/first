@@ -41,25 +41,28 @@ module.exports = {
   },
   mailer: {
     account: {
-      from: process.env.ACCOUNT_MAILER_FROM || 'account@cadobongdafree.com',
+      from: process.env.ACCOUNT_MAILER_FROM || 'blablaerwebapp@gmail.com',
       options: {
-        // service: process.env.ACCOUNT_MAILER_SERVICE_PROVIDER || 'gmail',
-        // host: process.env.ACCOUNT_MAILER_HOST || 'mx1.hostinger.vn',
-        // port: process.env.ACCOUNT_MAILER_PORT || 587,
-        // secure: true,
+        service: process.env.ACCOUNT_MAILER_SERVICE_PROVIDER || 'gmail',
+        host: process.env.ACCOUNT_MAILER_HOST || 'smtp.gmail.com',
+        port: process.env.ACCOUNT_MAILER_PORT || 465,
+        secure: true,
         auth: {
-          user: process.env.ACCOUNT_MAILER_EMAIL_ID || 'account@cadobongdafree.com',
-          pass: process.env.ACCOUNT_MAILER_PASSWORD || '1aA@1aA@'
+          user: process.env.ACCOUNT_MAILER_EMAIL_ID || 'blablaerwebapp@gmail.com',
+          pass: process.env.ACCOUNT_MAILER_PASSWORD || '192837645'
         }
       }
     },
     inform: {
-      from: process.env.INFORM_MAILER_FROM || 'acenter2507@gmail.com',
+      from: process.env.ACCOUNT_MAILER_FROM || 'blablaerwebapp@gmail.com',
       options: {
-        service: process.env.INFORM_MAILER_SERVICE_PROVIDER || 'Gmail',
+        service: process.env.ACCOUNT_MAILER_SERVICE_PROVIDER || 'gmail',
+        host: process.env.ACCOUNT_MAILER_HOST || 'smtp.gmail.com',
+        port: process.env.ACCOUNT_MAILER_PORT || 465,
+        secure: true,
         auth: {
-          user: process.env.INFORM_MAILER_EMAIL_ID || 'acenter2507',
-          pass: process.env.INFORM_MAILER_PASSWORD || '1@Aa1@Aa'
+          user: process.env.ACCOUNT_MAILER_EMAIL_ID || 'blablaerwebapp@gmail.com',
+          pass: process.env.ACCOUNT_MAILER_PASSWORD || '192837645'
         }
       }
     },

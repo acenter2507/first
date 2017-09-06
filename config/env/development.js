@@ -38,19 +38,13 @@ module.exports = {
   http: process.env.HTTP || 'http',
   mailer: {
     account: {
-      from: process.env.ACCOUNT_MAILER_FROM || 'account@cadobongdafree.com',//'blablaerwebapp@gmail.com',
+      from: process.env.ACCOUNT_MAILER_FROM || 'account@cadobongdafree.com',
       options: {
-        // service: process.env.ACCOUNT_MAILER_SERVICE_PROVIDER || 'gmail',
-        host: process.env.ACCOUNT_MAILER_HOST || 'mx1.hostinger.vn', //'smtp.gmail.com', //
-        port: process.env.ACCOUNT_MAILER_PORT || 587,// '587',
-        secure: false,
-        requireTLS: true,
-        debug: true,
-        logger:true,
-        // tls: { rejectUnauthorized: false },
+        host: process.env.ACCOUNT_MAILER_HOST || 'mx1.hostinger.vn',
+        port: process.env.ACCOUNT_MAILER_PORT || 587,
         auth: {
-          user: process.env.ACCOUNT_MAILER_EMAIL_ID || 'account@cadobongdafree.com',//'blablaerwebapp@gmail.com',
-          pass: process.env.ACCOUNT_MAILER_PASSWORD || '1aA@1aA@' //'192837645'
+          user: process.env.ACCOUNT_MAILER_EMAIL_ID || 'account@cadobongdafree.com',
+          pass: process.env.ACCOUNT_MAILER_PASSWORD || '1aA@1aA@'
         }
       }
     },

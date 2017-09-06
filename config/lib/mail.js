@@ -7,7 +7,7 @@ var path = require('path'),
 
 const SYSTEM_EMAIL_TEMPLATE_PATH = 'modules/users/server/templates';
 
-exports.send_mail = function (config, mailContent, mailOptions, template) {
+exports.send = function (config, mailContent, mailOptions, template) {
   return new Promise((resolve, reject) => {
     var transporter = nodemailer.createTransport(smtpTransport(config));
     var mailTemplate = new EmailTemplate(path.join(SYSTEM_EMAIL_TEMPLATE_PATH, template));

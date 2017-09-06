@@ -304,6 +304,7 @@
               ctrl.chart.labels.push(opt.title);
               ctrl.chart.data.push(opt.voteCnt);
             });
+            console.log('run updated');
             return resolve();
           })
           .catch(err => {
@@ -742,7 +743,6 @@
             ctrl.task_queue.last_task_time = now;
             ctrl.task_queue.is_watting = false;
             $timeout.cancel(ctrl.excute_timer);
-            console.log('run updated');
           })
           .catch(err => {
             ctrl.task_queue.last_task_time = now;

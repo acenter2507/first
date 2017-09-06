@@ -10,7 +10,8 @@ var path = require('path'),
   mongoose = require('mongoose'),
   User = mongoose.model('User'),
   async = require('async'),
-  crypto = require('crypto');
+  crypto = require('crypto'),
+  validator = require('validator');
 
 /**
  * Forgot for reset password (forgot POST)

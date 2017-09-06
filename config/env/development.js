@@ -35,7 +35,7 @@ module.exports = {
   app: {
     title: defaultEnvConfig.app.title + ' - Development Environment'
   },
-  prototype: process.env.PROTOTYPE || 'http',
+  http: process.env.HTTP || 'http',
   mailer: {
     account: {
       from: process.env.ACCOUNT_MAILER_FROM || 'account@cadobongdafree.com',//'blablaerwebapp@gmail.com',

@@ -7,7 +7,7 @@ module.exports = {
     privateKey: '/etc/letsencrypt/live/www.cadobongdafree.com/privkey.pem',
     certificate: '/etc/letsencrypt/live/www.cadobongdafree.com/cert.pem'
   },
-  prototype: process.env.PROTOTYPE || 'https',
+  http: process.env.HTTP || 'https',
   port: process.env.PORT || 3000,
   sessionSecret: process.env.SESSION_SECRET || '93182jflajfoaiwudajkdnkUHAD',
   // Mongo database

@@ -136,8 +136,28 @@ exports.signup = function (req, res) {
       return getToken();
     })
     .then(token => {
-      console.log(token);
-      return res.end();
+      user.activeAccountToken = token;
+      user.status = 1;
+      // user.activeAccountExpires = Date.now() + 1800000; //86400000; // 24h
+      return saveUser(user);
+    })
+    .then(_user => {
+      var url = config.http + req.headers.host + '/api/auth/verify/' + _user.activeAccountToken;
+      var mailTemplate = 'verification';
+      var mailContent = {
+        name: _user.displayName,
+        appName: config.app.title,
+        url: url
+      };
+      var mailOptions = {
+        from: config.app.title + '<' + config.mailer.account.from + '>',
+        to: _user.email,
+        subject: 'Verify your account'
+      };
+      return mail.send(config.mailer.account.options, mailContent, mailOptions, mailTemplate);
+    })
+    .then(() => {
+      return res.json({ success: true });
     })
     .catch(handleError);
   function handleError(err) {
@@ -522,6 +542,17 @@ function getToken() {
       }
       var token = buffer.toString('hex');
       return resolve(token);
+    });
+  });
+}
+function saveUser(user) {
+  return new Promise((resolve, reject) => {
+    if (!user) return reject(new Error('MS_CM_LOAD_ERROR'));
+    user.save(function (err, _user) {
+      if (err) return reject(new Error('MS_CM_LOAD_ERROR'));
+      _user.password = undefined;
+      _user.salt = undefined;
+      return resolve(_user);
     });
   });
 }

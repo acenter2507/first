@@ -5,9 +5,11 @@ angular.module('core').service('Socket', [
   'Authentication',
   '$timeout',
   'socketFactory',
-  function(Authentication, $timeout, socketFactory) {
+  '$window',
+  function(Authentication, $timeout, socketFactory, $window) {
     // Connect to Socket.io server
     this.connect = function() {
+      console.log($window.host);
       this.socket = socketFactory();
       if (Authentication.user) {
         this.socket.emit('init', { user: Authentication.user._id });

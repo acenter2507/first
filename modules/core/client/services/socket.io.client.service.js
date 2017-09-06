@@ -12,7 +12,7 @@ angular.module('core').service('Socket', [
       var protocol = $location.protocol();
       var host = $location.host();
       var port = $location.port();
-      var url = protocol + '://' + host + (port !== '') ? ':' + port : '';
+      var url = protocol + '://' + host + ((port !== '') ? ':' + port : '');
       console.log(url);
       this.socket = socketFactory();
       if (Authentication.user) {

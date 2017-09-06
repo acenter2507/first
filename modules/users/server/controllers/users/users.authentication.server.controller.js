@@ -139,20 +139,20 @@ exports.signup = function (req, res) {
     if (err)
       return handleError(new Error('MS_CM_LOAD_ERROR'));
     // Kiểm tra trạng thái user đã active
-    if (user.status === 1)
-      return handleError(new Error('MS_USERS_SIGNUP_NOTACTIVE'));
-    if (user.status === 2 || user.status === 3)
+    if (user) {
+      if (user.status === 1)
+        return handleError(new Error('MS_USERS_SIGNUP_NOTACTIVE'));
       return handleError(new Error('LB_USERS_EMAIL_DUPLICATE'));
-    
+    }
     // Validate OK
     getToken()
-    .then(token => {
-      console.log(token);
-      return res.end();
-    })
-    .catch(err => {
-      return handleError(err);
-    });
+      .then(token => {
+        console.log(token);
+        return res.end();
+      })
+      .catch(err => {
+        return handleError(err);
+      });
 
   });
   function handleError(err) {

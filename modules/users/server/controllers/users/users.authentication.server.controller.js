@@ -75,58 +75,42 @@ exports.resend = function (req, res) {
   // Init Variables
   var email = req.body.email || '';
   User.findOne({ email: email }, function (err, user) {
-    if (err)
-      return res.status(400).send({
-        message: 'MS_CM_LOAD_ERROR'
-      });
-    if (!user)
-      return res.status(400).send({
-        message: 'MS_USERS_NOT_EXIST'
-      });
+    if (err) return handleError(new Error('MS_CM_LOAD_ERROR'));
+    if (!user) return handleError(new Error('MS_USERS_NOT_EXIST'));
     if (user.status === 2 || user.status === 3)
-      return res.status(400).send({
-        message: 'MS_USERS_ACTIVED'
-      });
-    crypto.randomBytes(20, function (err, buffer) {
-      if (err)
-        return res.status(400).send({
-          message: 'MS_CM_LOAD_ERROR'
-        });
-      var token = buffer.toString('hex');
-      user.activeAccountToken = token;
-      var url = httpTransport + req.headers.host + '/api/auth/verify/' + token;
-      var mailTemplate = new EmailTemplate(path.join('modules/users/server/templates', 'verification'));
-      var mailContent = {
-        name: user.displayName,
-        appName: config.app.title,
-        url: url
-      };
-      mailTemplate.render(mailContent, function (err, result) {
-        if (err)
-          return res.status(400).send({ message: 'MS_USERS_SEND_FAIL' });
+      return handleError(new Error('MS_USERS_ACTIVED'));
+    getToken()
+      .then(token => {
+        user.activeAccountToken = token;
+        return saveUser(user);
+      })
+      .then(_user => {
+        var url = config.http + '://' + req.headers.host + '/api/auth/verify/' + _user.activeAccountToken;
+        var mailTemplate = 'verification';
+        var mailContent = {
+          name: _user.displayName,
+          appName: config.app.title,
+          url: url
+        };
         var mailOptions = {
           from: config.app.title + '<' + config.mailer.account.from + '>',
-          to: user.email,
-          subject: 'Verify your account',
-          html: result.html
+          to: _user.email,
+          subject: 'Verify your account'
         };
-        transporter.sendMail(mailOptions, function (err) {
-          if (!err) {
-            user.save((err, user) => {
-              if (err)
-                return res.status(400).send({ message: 'MS_USERS_SEND_FAIL' });
-              return res.json({ success: true });
-            });
-          } else {
-            return res.status(400).send({
-              message: 'MS_USERS_SEND_FAIL'
-            });
-          }
-        });
-      });
-    });
+        return mail.send(config.mailer.account.options, mailContent, mailOptions, mailTemplate);
+      })
+      .then(() => {
+        return res.json({ success: true });
+      })
+      .catch(handleError);
   });
 
+  function handleError(err) {
+    console.log(err);
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 };
 
 /**

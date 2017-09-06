@@ -158,7 +158,7 @@
         ctrl.poll.cmtCnt -= 1;
       });
       Socket.on('poll_vote', obj => {
-        console.log(Socket.socket);
+        console.log(Socket.socket.socket);
         console.log(obj.client);
         if (Socket.socket.id === obj.client) return;
         excute_task();

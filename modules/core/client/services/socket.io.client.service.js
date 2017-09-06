@@ -2,12 +2,10 @@
 
 // Create the Socket.io wrapper service
 angular.module('core').service('Socket', [
-  '$location',
   'Authentication',
-  '$state',
   '$timeout',
   'socketFactory',
-  function($location, Authentication, $state, $timeout, socketFactory) {
+  function(Authentication, $timeout, socketFactory) {
     // Connect to Socket.io server
     this.connect = function() {
       this.socket = socketFactory();

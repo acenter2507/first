@@ -21,7 +21,7 @@ exports.forgot = function (req, res, next) {
   var user;
   validEmail(email)
     .then(_user => {
-      user = _user.toJSON();
+      user = _user;
       return getToken();
     })
     .then(token => {

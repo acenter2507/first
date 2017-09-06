@@ -44,9 +44,9 @@ module.exports = {
       from: process.env.ACCOUNT_MAILER_FROM || 'account@cadobongdafree.com',
       options: {
         // service: process.env.ACCOUNT_MAILER_SERVICE_PROVIDER || 'gmail',
-        host: process.env.ACCOUNT_MAILER_HOST || 'mx1.hostinger.vn',
-        port: process.env.ACCOUNT_MAILER_PORT || 587,
-        secure: true,
+        // host: process.env.ACCOUNT_MAILER_HOST || 'mx1.hostinger.vn',
+        // port: process.env.ACCOUNT_MAILER_PORT || 587,
+        // secure: true,
         auth: {
           user: process.env.ACCOUNT_MAILER_EMAIL_ID || 'account@cadobongdafree.com',
           pass: process.env.ACCOUNT_MAILER_PASSWORD || '1aA@1aA@'

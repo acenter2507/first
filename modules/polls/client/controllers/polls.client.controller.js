@@ -734,7 +734,8 @@
     ctrl.excute_timer = {};
     function excute_task() {
       var now = new Date().getTime();
-      if (now - ctrl.task_queue.last_task_time > 2000) {
+      var dif = now - ctrl.task_queue.last_task_time;
+      if (dif > 2000) {
         loadVoteInfo()
           .then(() => {
             ctrl.task_queue.last_task_time = now;
@@ -749,7 +750,7 @@
       } else {
         if (!ctrl.task_queue.is_watting) {
           ctrl.task_queue.is_watting = true;
-          ctrl.excute_timer = $timeout(excute_task, 2000);
+          ctrl.excute_timer = $timeout(excute_task, (2000 - dif));
         }
       }
     }

@@ -168,13 +168,7 @@
         function successCb(res) {
           if (isNew) {
             if (res.isPublic) {
-              Socket.emit('poll_create', {
-                poll: res.slug,
-                user: res.user._id,
-                displayName: res.user.displayName,
-                profileImageURL: res.user.profileImageURL,
-                title: res.title
-              });
+              Socket.emit('poll_create');
             }
           } else {
             Socket.emit('poll_update', { pollId: res._id });
@@ -238,17 +232,18 @@
         function successCb(res) {
           if (Authentication.user) {
             Socket.emit('cmt_add', {
-              pollId: poll._id,
-              poll: poll.slug,
               cmtId: res._id,
               isNew: isNew,
-              from: Authentication.user._id,
+              pollId: poll._id,
               to: res.to,
-              displayName: Authentication.user.displayName,
-              profileImageURL: Authentication.user.profileImageURL,
-              title: poll.title
+              from: Authentication.user._id
+              // poll: poll.slug,
+              // displayName: Authentication.user.displayName,
+              // profileImageURL: Authentication.user.profileImageURL,
+              // title: poll.title
             });
           }
+          res.isNew = isNew;
           resolve(res);
         }
         function errorCb(err) {
@@ -354,14 +349,7 @@
           rs_vote.$save(successCb, errorCb);
         }
         function successCb(res) {
-          Socket.emit('poll_vote', {
-            pollId: poll._id,
-            poll: poll.slug,
-            from: Authentication.user._id,
-            displayName: Authentication.user.displayName,
-            profileImageURL: Authentication.user.profileImageURL,
-            title: poll.title
-          });
+          Socket.emit('poll_vote', { pollId: poll._id });
           resolve(res);
         }
         function errorCb(err) {

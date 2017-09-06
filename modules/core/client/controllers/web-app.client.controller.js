@@ -42,14 +42,14 @@ angular.module('core').controller('WebAppController', [
       if (!Socket.socket) {
         Socket.connect();
       }
-      Socket.on('notifs', res => {
+      Socket.on('notifs', () => {
         Notifications.loadNotifs();
       });
-      Socket.on('activity', res => {
-        res.time = moment().format();
-        $scope.Activitys.add(res);
-        Storages.set_session(Constants.storages.activitys, JSON.stringify($scope.Activitys.list));
-      });
+      // Socket.on('activity', res => {
+      //   res.time = moment().format();
+      //   $scope.Activitys.add(res);
+      //   Storages.set_session(Constants.storages.activitys, JSON.stringify($scope.Activitys.list));
+      // });
       $scope.$on('$destroy', function () {
         Socket.removeListener('activity');
         Socket.removeListener('notifs');

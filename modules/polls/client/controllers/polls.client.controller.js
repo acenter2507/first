@@ -132,10 +132,11 @@
         userId: $scope.user._id
       });
       Socket.on('cmt_add', obj => {
+        // Nếu tự nhận message của chính mình
+        if (Socket.socket.id === obj.client) return;
         Action.get_cmt(obj.cmtId)
           .then(res => {
             var _cmt = res.data || {};
-
             var item = _.findWhere(ctrl.cmts, { _id: _cmt._id });
             if (item) {
               _.extend(_.findWhere(ctrl.cmts, { _id: _cmt._id }), _cmt);
@@ -150,28 +151,23 @@
             toast.error(err.message, 'Error!');
           });
       });
-      Socket.on('cmt_del', cmtId => {
-        ctrl.cmts = _.without(ctrl.cmts, _.findWhere(ctrl.cmts, { _id: cmtId }));
+      Socket.on('cmt_del', obj => {
+        // Nếu tự nhận message của chính mình
+        if (Socket.socket.id === obj.client) return;
+        ctrl.cmts = _.without(ctrl.cmts, _.findWhere(ctrl.cmts, { _id: obj.cmtId }));
         ctrl.poll.cmtCnt -= 1;
       });
-      Socket.on('poll_like', likeCnt => {
-        ctrl.poll.likeCnt = likeCnt;
-      });
-      // Socket.on('cmt_like', res => {
-      //   ctrl.cmts.forEach(cmt => {
-      //     if (cmt._id.toString() === res.cmtId.toString()) {
-      //       cmt.likeCnt = res.likeCnt;
-      //     }
-      //   });
-      // });
-      Socket.on('poll_vote', res => {
+      Socket.on('poll_vote', obj => {
+        if (Socket.socket.id === obj.client) return;
         excute_task();
       });
-      Socket.on('poll_delete', res => {
+      Socket.on('poll_delete', obj => {
+        if (Socket.socket.id === obj.client) return;
         toast.error('This poll has been deleted.', 'Error!');
         $state.go('home');
       });
-      Socket.on('poll_update', res => {
+      Socket.on('poll_update', obj => {
+        if (Socket.socket.id === obj.client) return;
         Action.get_poll(ctrl.poll._id)
           .then(_poll => {
             ctrl.poll = _poll;
@@ -189,6 +185,16 @@
             toast.error(err.message, 'Error!');
           });
       });
+      // Socket.on('poll_like', likeCnt => {
+      //   ctrl.poll.likeCnt = likeCnt;
+      // });
+      // Socket.on('cmt_like', res => {
+      //   ctrl.cmts.forEach(cmt => {
+      //     if (cmt._id.toString() === res.cmtId.toString()) {
+      //       cmt.likeCnt = res.likeCnt;
+      //     }
+      //   });
+      // });
       $scope.$on('$destroy', function () {
         Socket.emit('unsubscribe_poll', {
           pollId: ctrl.poll._id,
@@ -196,7 +202,7 @@
         });
         Socket.removeListener('cmt_add');
         Socket.removeListener('cmt_del');
-        Socket.removeListener('poll_like');
+        // Socket.removeListener('poll_like');
         // Socket.removeListener('cmt_like');
         Socket.removeListener('poll_vote');
         Socket.removeListener('poll_delete');
@@ -277,7 +283,35 @@
       ctrl.stopped = false;
       get_cmts();
     }
-
+    function loadVoteInfo() {
+      return new Promise((resolve, reject) => {
+        Action.get_voteopts(ctrl.poll._id)
+          .then(res => { // lấy thông tin vote
+            ctrl.chart = {
+              type: 'pie',
+              options: { responsive: true },
+              colors: [],
+              labels: [],
+              data: []
+            };
+            ctrl.votes = res.data.votes || [];
+            ctrl.voteopts = res.data.voteopts || [];
+            ctrl.votedTotal = ctrl.voteopts.length;
+            ctrl.opts.forEach(opt => {
+              opt.voteCnt = _.where(ctrl.voteopts, { opt: opt._id }).length || 0;
+              opt.progressVal = calPercen(ctrl.votedTotal, opt.voteCnt);
+              ctrl.chart.colors.push(opt.color);
+              ctrl.chart.labels.push(opt.title);
+              ctrl.chart.data.push(opt.voteCnt);
+            });
+            return resolve();
+          })
+          .catch(err => {
+            toast.error(err.message, 'Error!');
+            return reject(err);
+          });
+      });
+    }
     function loadRemaining() {
       ctrl.remaining = $timeout(makeRemaining, 1000);
       $scope.$on('$destroy', () => {
@@ -312,11 +346,7 @@
     // Thao tác databse
     ctrl.save_cmt = save_cmt;
     function save_cmt() {
-      if (
-        !ctrl.tmp_cmt.body ||
-        !ctrl.tmp_cmt.body.length ||
-        ctrl.tmp_cmt.body.length === 0
-      ) {
+      if (!ctrl.tmp_cmt.body || !ctrl.tmp_cmt.body.length || ctrl.tmp_cmt.body.length === 0) {
         toast.error('You must type something to reply.', 'Error!');
         return;
       }
@@ -334,6 +364,16 @@
           ctrl.tmp_cmt = {};
           ctrl.cmt_processing = false;
           ctrl.cmt_typing = false;
+
+          var item = _.findWhere(ctrl.cmts, { _id: res._id });
+          if (item) {
+            _.extend(_.findWhere(ctrl.cmts, { _id: res._id }), res);
+          } else {
+            if (res.isNew) {
+              ctrl.cmts.push(res);
+              ctrl.poll.cmtCnt += 1;
+            }
+          }
         })
         .catch(err => {
           toast.error(err.message, 'Error!');
@@ -356,6 +396,7 @@
         .then(res => {
           ctrl.ownVote = res;
           ctrl.votedOpts = _.clone(ctrl.selectedOpts);
+          loadVoteInfo();
         })
         .catch(err => {
           toast.error(err.message, 'Error!');
@@ -569,6 +610,7 @@
       });
       function handle_delete_cmt() {
         ctrl.cmts = _.without(ctrl.cmts, cmt);
+        ctrl.poll.cmtCnt -= 1;
         Action.delete_cmt(cmt);
       }
     };
@@ -693,25 +735,8 @@
     function excute_task() {
       var now = new Date().getTime();
       if (now - ctrl.task_queue.last_task_time > 2000) {
-        Action.get_voteopts(ctrl.poll._id)
-          .then(res => { // lấy thông tin vote
-            ctrl.chart = {
-              type: 'pie',
-              options: { responsive: true },
-              colors: [],
-              labels: [],
-              data: []
-            };
-            ctrl.votes = res.data.votes || [];
-            ctrl.voteopts = res.data.voteopts || [];
-            ctrl.votedTotal = ctrl.voteopts.length;
-            ctrl.opts.forEach(opt => {
-              opt.voteCnt = _.where(ctrl.voteopts, { opt: opt._id }).length || 0;
-              opt.progressVal = calPercen(ctrl.votedTotal, opt.voteCnt);
-              ctrl.chart.colors.push(opt.color);
-              ctrl.chart.labels.push(opt.title);
-              ctrl.chart.data.push(opt.voteCnt);
-            });
+        loadVoteInfo()
+          .then(() => {
             ctrl.task_queue.last_task_time = now;
             ctrl.task_queue.is_watting = false;
             $timeout.cancel(ctrl.excute_timer);
@@ -720,7 +745,6 @@
             ctrl.task_queue.last_task_time = now;
             ctrl.task_queue.is_watting = false;
             $timeout.cancel(ctrl.excute_timer);
-            toast.error(err.message, 'Error!');
           });
       } else {
         if (!ctrl.task_queue.is_watting) {

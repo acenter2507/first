@@ -133,7 +133,7 @@
       });
       Socket.on('cmt_add', obj => {
         // Nếu tự nhận message của chính mình
-        if (Socket.socket.id === obj.client) return;
+        if (Socket.socket.socket.id === obj.client) return;
         Action.get_cmt(obj.cmtId)
           .then(res => {
             var _cmt = res.data || {};
@@ -153,21 +153,21 @@
       });
       Socket.on('cmt_del', obj => {
         // Nếu tự nhận message của chính mình
-        if (Socket.socket.id === obj.client) return;
+        if (Socket.socket.socket.id === obj.client) return;
         ctrl.cmts = _.without(ctrl.cmts, _.findWhere(ctrl.cmts, { _id: obj.cmtId }));
         ctrl.poll.cmtCnt -= 1;
       });
       Socket.on('poll_vote', obj => {
-        if (Socket.socket.id === obj.client) return;
+        if (Socket.socket.socket.id === obj.client) return;
         excute_task();
       });
       Socket.on('poll_delete', obj => {
-        if (Socket.socket.id === obj.client) return;
+        if (Socket.socket.socket.id === obj.client) return;
         toast.error('This poll has been deleted.', 'Error!');
         $state.go('home');
       });
       Socket.on('poll_update', obj => {
-        if (Socket.socket.id === obj.client) return;
+        if (Socket.socket.socket.id === obj.client) return;
         Action.get_poll(ctrl.poll._id)
           .then(_poll => {
             ctrl.poll = _poll;
@@ -185,16 +185,6 @@
             toast.error(err.message, 'Error!');
           });
       });
-      // Socket.on('poll_like', likeCnt => {
-      //   ctrl.poll.likeCnt = likeCnt;
-      // });
-      // Socket.on('cmt_like', res => {
-      //   ctrl.cmts.forEach(cmt => {
-      //     if (cmt._id.toString() === res.cmtId.toString()) {
-      //       cmt.likeCnt = res.likeCnt;
-      //     }
-      //   });
-      // });
       $scope.$on('$destroy', function () {
         Socket.emit('unsubscribe_poll', {
           pollId: ctrl.poll._id,

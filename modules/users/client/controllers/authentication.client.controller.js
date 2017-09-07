@@ -9,6 +9,7 @@ angular.module('users').controller('AuthenticationController', [
   'Authentication',
   'PasswordValidator',
   'toastr',
+  'ngDialog',
   'Constants',
   'vcRecaptchaService',
   '$translate',
@@ -21,6 +22,7 @@ angular.module('users').controller('AuthenticationController', [
     Authentication,
     PasswordValidator,
     toastr,
+    dialog,
     Constants,
     vcRecaptchaService,
     $translate

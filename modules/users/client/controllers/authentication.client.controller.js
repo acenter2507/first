@@ -97,14 +97,13 @@ angular.module('users').controller('AuthenticationController', [
     };
 
     // OAuth provider request
-    $scope.twitterEmail = '';
     $scope.callOauthProvider = function (url) {
       if (url === '/api/auth/twitter') {
         dialog.openConfirm({
           scope: $scope,
           templateUrl: 'modules/core/client/views/templates/twitter-email.dialog.template.html'
-        }).then(twitterEmail => {
-          return handle_confirm(twitterEmail);
+        }).then(email => {
+          return handle_confirm(email);
         }, reject => {
           return;
         });
@@ -115,8 +114,8 @@ angular.module('users').controller('AuthenticationController', [
         $window.location.href = url;
       }
       // Effectively call OAuth authentication route:
-      function handle_confirm(twitterEmail) {
-        console.log(twitterEmail);
+      function handle_confirm(email) {
+        console.log(email.email);
         return;
       }
     };

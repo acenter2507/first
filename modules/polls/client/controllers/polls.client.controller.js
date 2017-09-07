@@ -305,6 +305,7 @@
               ctrl.chart.data.push(opt.voteCnt);
             });
             console.log('run updated');
+            $scope.$digest();
             return resolve();
           })
           .catch(err => {

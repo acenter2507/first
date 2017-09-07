@@ -115,7 +115,7 @@ angular.module('users').controller('AuthenticationController', [
       }
       // Effectively call OAuth authentication route:
       function handle_confirm(email) {
-        console.log(email.email);
+        console.log(email);
         return;
       }
     };

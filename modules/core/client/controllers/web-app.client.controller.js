@@ -37,6 +37,7 @@ angular.module('core').controller('WebAppController', [
       initCategorys();
     }
     function initSocket() {
+      console.log(Socket.socket.socket);
       if (!Socket.socket) {
         Socket.connect();
       }

@@ -36,7 +36,7 @@ var NotifSchema = new Schema({
     type: Number,
     default: 0
   },
-  count: {
+  count: {  // Số người có chung hoạt động
     type: Number,
     default: 0
   },

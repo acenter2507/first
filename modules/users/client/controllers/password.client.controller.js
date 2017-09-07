@@ -4,7 +4,7 @@ angular.module('users').controller('PasswordController', ['$scope', '$stateParam
   function ($scope, $stateParams, $http, $location, Authentication, PasswordValidator) {
     $scope.authentication = Authentication;
     $scope.busy = false;
-
+    get_translate();
     //If user is signed in then redirect back home
     if ($scope.user) {
       $location.path('/');
@@ -31,7 +31,7 @@ angular.module('users').controller('PasswordController', ['$scope', '$stateParam
         // Show user error message and clear form
         $scope.busy = false;
         $scope.credentials = null;
-        $scope.error = response.message;
+        show_error(response.message);
       });
     };
 
@@ -57,8 +57,23 @@ angular.module('users').controller('PasswordController', ['$scope', '$stateParam
         $location.path('/password/reset/success');
       }).error(function (response) {
         $scope.busy = false;
-        $scope.error = response.message;
+        show_error(response.message);
       });
     };
+
+    function get_translate() {
+      $translate('MS_CM_ERROR').then(tsl => { $scope.MS_CM_ERROR = tsl; });
+      $translate('MS_CM_SUCCESS').then(tsl => { $scope.MS_CM_SUCCESS = tsl; });
+    }
+
+    function show_error(msg) {
+      $translate(msg).then(tsl => {
+        if (!tsl || tsl.length === 0) {
+          toastr.error(msg, $scope.MS_CM_ERROR);
+        } else {
+          toastr.error(tsl, $scope.MS_CM_ERROR);
+        }
+      });
+    }
   }
 ]);

@@ -82,7 +82,7 @@
       <div class="clearfix"></div>
       <hr class="mg12y">
     </div>
-    <div class="row text-center" ng-if="!ctrl.stopped">
+    <div class="row text-center" ng-show="!ctrl.stopped && !ctrl.busy">
       <a ng-click="ctrl.get_cmts()">Load more</a>
     </div>
     <!-- Load indicator -->

@@ -259,6 +259,7 @@
           ctrl.page += 1;
           ctrl.busy = false;
           if (res.data.length < 10) { ctrl.stopped = true; }
+          $scope.$digest();
         })
         .catch(err => {
           toast.error(err.message, 'Error!');

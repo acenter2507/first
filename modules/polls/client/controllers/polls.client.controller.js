@@ -140,10 +140,12 @@
             var item = _.findWhere(ctrl.cmts, { _id: _cmt._id });
             if (item) {
               _.extend(_.findWhere(ctrl.cmts, { _id: _cmt._id }), _cmt);
+              if (!$scope.$$phase) $scope.$digest();
             } else {
               if (obj.isNew) {
                 ctrl.cmts.push(_cmt);
                 ctrl.poll.cmtCnt += 1;
+                if (!$scope.$$phase) $scope.$digest();
               }
             }
           })
@@ -259,7 +261,7 @@
           ctrl.page += 1;
           ctrl.busy = false;
           if (res.data.length < 10) { ctrl.stopped = true; }
-          $scope.$digest();
+          if (!$scope.$$phase) $scope.$digest();
         })
         .catch(err => {
           toast.error(err.message, 'Error!');
@@ -295,7 +297,7 @@
               ctrl.chart.labels.push(opt.title);
               ctrl.chart.data.push(opt.voteCnt);
             });
-            $scope.$digest();
+            if (!$scope.$$phase) $scope.$digest();
             return resolve();
           })
           .catch(err => {

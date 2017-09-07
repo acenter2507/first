@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('users').controller('PasswordController', ['$scope', '$stateParams', '$http', '$location', 'Authentication', 'PasswordValidator',
-  function ($scope, $stateParams, $http, $location, Authentication, PasswordValidator) {
+angular.module('users').controller('PasswordController', ['$scope', '$stateParams', '$http', '$location', 'Authentication', 'PasswordValidator', 'toastr', '$translate',
+  function ($scope, $stateParams, $http, $location, Authentication, PasswordValidator, toastr, $translate) {
     $scope.authentication = Authentication;
     $scope.busy = false;
     get_translate();

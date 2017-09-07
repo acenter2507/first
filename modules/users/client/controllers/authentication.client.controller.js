@@ -102,9 +102,7 @@ angular.module('users').controller('AuthenticationController', [
         dialog.openConfirm({
           scope: $scope,
           templateUrl: 'modules/core/client/views/templates/twitter-email.dialog.template.html'
-        }).then(email => {
-          return handle_confirm(email);
-        }, reject => {
+        }).then(handle_confirm, reject => {
           return;
         });
       } else {
@@ -114,8 +112,13 @@ angular.module('users').controller('AuthenticationController', [
         $window.location.href = url;
       }
       // Effectively call OAuth authentication route:
-      function handle_confirm(email) {
-        console.log(email);
+      function handle_confirm(result) {
+        if (result.error) return show_error('LB_USER_EMAIL_INVALID');
+        url += '?email=' + result.email;
+        if ($state.previous && $state.previous.href) {
+          url += '&redirect_to=' + encodeURIComponent($state.previous.href);
+        }
+        $window.location.href = url;
         return;
       }
     };

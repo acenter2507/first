@@ -187,6 +187,8 @@ exports.oauthCall = function (strategy, scope) {
   return function (req, res, next) {
     if (req.query && req.query.redirect_to)
       req.session.redirect_to = req.query.redirect_to;
+    if (req.query && req.query.email)
+      req.twitterEmail = req.query.email;
     // Set redirection path on session.
     // Do not redirect to a signin or signup page
     // if (noReturnUrls.indexOf(req.query.redirect_to) === -1) {

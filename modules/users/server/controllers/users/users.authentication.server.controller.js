@@ -185,6 +185,7 @@ exports.verify = function (req, res) {
  */
 exports.oauthCall = function (strategy, scope) {
   return function (req, res, next) {
+    console.log(req.query);
     if (req.query && req.query.redirect_to)
       req.session.redirect_to = req.query.redirect_to;
     if (req.query && req.query.email)

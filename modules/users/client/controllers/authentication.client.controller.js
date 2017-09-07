@@ -103,21 +103,21 @@ angular.module('users').controller('AuthenticationController', [
           scope: $scope,
           templateUrl: 'modules/core/client/views/templates/twitter-email.dialog.template.html'
         }).then(reason => {
-          handle_confirm(reason);
+          return handle_confirm(reason);
         }, reject => {
           return;
         });
-        function handle_confirm(email) {
-          console.log(email);
-          return;
-        }
       } else {
         if ($state.previous && $state.previous.href) {
           url += '?redirect_to=' + encodeURIComponent($state.previous.href);
+          $window.location.href = url;
         }
       }
       // Effectively call OAuth authentication route:
-      $window.location.href = url;
+      function handle_confirm(email) {
+        console.log(email);
+        return;
+      }
     };
 
     $scope.setResponse = function (response) {

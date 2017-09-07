@@ -97,25 +97,26 @@ angular.module('users').controller('AuthenticationController', [
     };
 
     // OAuth provider request
+    $scope.twitterEmail = '';
     $scope.callOauthProvider = function (url) {
       if (url === '/api/auth/twitter') {
         dialog.openConfirm({
           scope: $scope,
           templateUrl: 'modules/core/client/views/templates/twitter-email.dialog.template.html'
-        }).then(email => {
-          return handle_confirm(email);
+        }).then(twitterEmail => {
+          return handle_confirm(twitterEmail);
         }, reject => {
           return;
         });
       } else {
         if ($state.previous && $state.previous.href) {
           url += '?redirect_to=' + encodeURIComponent($state.previous.href);
-          $window.location.href = url;
         }
+        $window.location.href = url;
       }
       // Effectively call OAuth authentication route:
-      function handle_confirm(email) {
-        console.log(email);
+      function handle_confirm(twitterEmail) {
+        console.log(twitterEmail);
         return;
       }
     };

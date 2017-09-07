@@ -62,4 +62,4 @@ module.exports = function (io, socket) {
   });
 
   // io.sockets.connected[socket.id].emit('comment_result', { success: true });
-}
+};

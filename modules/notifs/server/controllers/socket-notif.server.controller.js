@@ -2,6 +2,7 @@
 
 var path = require('path'),
   mongoose = require('mongoose'),
+  Polluser = mongoose.model('Polluser'),
   Notif = mongoose.model('Notif');
 
 const _ = require('underscore');

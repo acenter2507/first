@@ -21,7 +21,7 @@ function Socket(Authentication, $timeout, mSocketFactory, $location) {
     var host = $location.host();
     var port = $location.port();
     var url = protocol + '://' + host + ((port !== '') ? (':' + port) : '');
-    this.socket = mySocketFactory({
+    this.socket = mSocketFactory({
       ioSocket: io.connect(url)
     });
     // this.socket = socketFactory();

@@ -113,6 +113,7 @@ angular.module('users').controller('AuthenticationController', [
       }
       // Effectively call OAuth authentication route:
       function handle_confirm(result) {
+        console.log(result.error);
         if (result.error) return show_error('LB_USER_EMAIL_INVALID');
         url += '?email=' + result.email;
         if ($state.previous && $state.previous.href) {

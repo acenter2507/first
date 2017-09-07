@@ -102,8 +102,8 @@ angular.module('users').controller('AuthenticationController', [
         dialog.openConfirm({
           scope: $scope,
           templateUrl: 'modules/core/client/views/templates/twitter-email.dialog.template.html'
-        }).then(reason => {
-          return handle_confirm(reason);
+        }).then(email => {
+          return handle_confirm(email);
         }, reject => {
           return;
         });

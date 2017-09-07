@@ -294,7 +294,6 @@
               ctrl.chart.labels.push(opt.title);
               ctrl.chart.data.push(opt.voteCnt);
             });
-            console.log('run updated');
             $scope.$digest();
             return resolve();
           })
@@ -727,7 +726,6 @@
     function excute_task() {
       var now = new Date().getTime();
       var dif = now - ctrl.task_queue.last_task_time;
-      console.log(dif);
       if (dif > 5000) {
         loadVoteInfo()
           .then(() => {

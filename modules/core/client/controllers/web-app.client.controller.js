@@ -17,14 +17,14 @@ angular.module('core').controller('WebAppController', [
     $scope.Categorys = Categorys;
 
     $scope.page_name = 'Polls';
-    $scope.page_title = ($scope.Notifications.notifCnt > 0) ? '(' + $scope.Notifications.notifCnt + ')' + $scope.page_name : '' + $scope.page_name;
+    $scope.page_title = ($scope.Notifications.notifCnt > 0) ? ('(' + $scope.Notifications.notifCnt + ') ' + $scope.page_name) : ('' + $scope.page_name);
 
     // Watch user info
     $scope.$watch('Authentication.user', () => {
       init();
     });
     $scope.$watch('Notifications.notifCnt', () => {
-      $scope.page_title = ($scope.Notifications.notifCnt > 0) ? '(' + $scope.Notifications.notifCnt + ')' + $scope.page_name : '' + $scope.page_name;
+      $scope.page_title = ($scope.Notifications.notifCnt > 0) ? ('(' + $scope.Notifications.notifCnt + ') ' + $scope.page_name) : ('' + $scope.page_name);
     });
     function init() {
       $scope.user = Authentication.user;

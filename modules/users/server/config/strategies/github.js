@@ -27,11 +27,13 @@ module.exports = function (config) {
     // var firstName = iSpace !== -1 ? displayName.substring(0, iSpace) : displayName;
     // var lastName = iSpace !== -1 ? displayName.substring(iSpace + 1) : '';
 
+    var email = profile.emails[0].value || undefined;
+    if (!email) return done(new Error('LB_USER_EMAIL_SOCIAL_INVALID'));
     var providerUserProfile = {
       // firstName: firstName,
       // lastName: lastName,
       displayName: displayName,
-      email: profile.emails[0].value,
+      email: email,
       // username: profile.username,
       // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
       profileImageURL: (providerData.avatar_url) ? providerData.avatar_url : undefined,

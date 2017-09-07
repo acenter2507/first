@@ -31,7 +31,7 @@ angular.module('users').controller('AuthenticationController', [
     $scope.isShowForm = true;
     $scope.busy = false;
     $scope.resend_busy = false;
-    
+
     $scope.reCaptcha = Constants.reCaptcha;
     $scope.response = null;
     $scope.widgetId = null;
@@ -96,8 +96,23 @@ angular.module('users').controller('AuthenticationController', [
 
     // OAuth provider request
     $scope.callOauthProvider = function (url) {
-      if ($state.previous && $state.previous.href) {
-        url += '?redirect_to=' + encodeURIComponent($state.previous.href);
+      if (url === '/api/auth/twitter') {
+        dialog.openConfirm({
+          scope: $scope,
+          templateUrl: 'modules/core/client/views/templates/twitter-email.dialog.template.html'
+        }).then(reason => {
+          handle_confirm(reason);
+        }, reject => {
+          return;
+        });
+        function handle_confirm(email) {
+          console.log(email);
+          return;
+        }
+      } else {
+        if ($state.previous && $state.previous.href) {
+          url += '?redirect_to=' + encodeURIComponent($state.previous.href);
+        }
       }
       // Effectively call OAuth authentication route:
       $window.location.href = url;
@@ -114,6 +129,9 @@ angular.module('users').controller('AuthenticationController', [
     $scope.cbExpiration = function () {
       vcRecaptchaService.reload($scope.widgetId);
       $scope.response = null;
+    };
+    $scope.twitterSignin = function () {
+
     };
 
     function get_translate() {

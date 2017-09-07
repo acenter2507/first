@@ -65,6 +65,7 @@
   "LB_USER_EMAIL": "Email",
   "LB_USER_EMAIL_REQUIRED": "Email address is required.",
   "LB_USER_EMAIL_INVALID": "Email address is invalid.",
+  "LB_USER_EMAIL_SOCIAL_INVALID": "Sorry we can't get your email info.",
   "LB_USER_FIRSTNAME_REQUIRED": "First name is required.",
   "LB_USERS_EMAIL_DUPLICATE": "Email duplicated",
   "LB_USER_LASTNAME_REQUIRED": "Last name is required.",

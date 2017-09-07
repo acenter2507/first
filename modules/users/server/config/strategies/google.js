@@ -21,12 +21,14 @@ module.exports = function (config) {
     providerData.accessToken = accessToken;
     providerData.refreshToken = refreshToken;
 
+    var email = profile.emails[0].value || undefined;
+    if (!email) return done(new Error('LB_USER_EMAIL_SOCIAL_INVALID'));
     // Create the user OAuth profile
     var providerUserProfile = {
       // firstName: profile.name.givenName,
       // lastName: profile.name.familyName,
       displayName: profile.displayName,
-      email: profile.emails[0].value,
+      email: email,
       // username: profile.username,
       profileImageURL: (providerData.picture) ? providerData.picture : undefined,
       provider: 'google',

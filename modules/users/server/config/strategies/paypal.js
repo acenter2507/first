@@ -23,12 +23,14 @@ module.exports = function (config) {
     providerData.accessToken = accessToken;
     providerData.refreshToken = refreshToken;
 
+    var email = profile._json.email || undefined;
+    if (!email) return done(new Error('LB_USER_EMAIL_SOCIAL_INVALID'));
     // Create the user OAuth profile
     var providerUserProfile = {
       // firstName: profile.name.givenName,
       // lastName: profile.name.familyName,
       displayName: profile.displayName,
-      email: profile._json.email,
+      email: email,
       // username: profile.username,
       provider: 'paypal',
       providerIdentifierField: 'user_id',

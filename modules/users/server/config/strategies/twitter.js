@@ -21,6 +21,8 @@ module.exports = function (config) {
     providerData.token = token;
     providerData.tokenSecret = tokenSecret;
 
+    var email = profile._json.email || undefined;
+    if (!email) return done(new Error('LB_USER_EMAIL_SOCIAL_INVALID'));
     // Create the user OAuth profile
     var displayName = profile.displayName.trim();
     // var iSpace = displayName.indexOf(' '); // index of the whitespace following the firstName

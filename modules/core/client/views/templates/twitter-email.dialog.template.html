@@ -1,0 +1,18 @@
+<div class="ngdialog-message">
+  <p>Sorry for the inconvenience but we could not receive the email from your twitter, please provide your email address.</p>
+
+  <form name="emailForm" novalidate>
+    <fieldset>
+      <div class="form-group" show-errors>
+        <input type="email" id="email" name="email" class="form-control" ng-model="email" placeholder="{{ 'LB_USER_EMAIL' | translate }}"
+          required>
+        <div ng-messages="emailForm.email.$error" role="alert">
+          <p class="help-block error-text font-sm" ng-message="required">{{ 'LB_USER_EMAIL_REQUIRED' | translate }}</p>
+          <p class="help-block error-text font-sm" ng-message="email">{{ 'LB_USER_EMAIL_INVALID' | translate }}</p>
+        </div>
+      </div>
+      <div class="ngdialog-buttons mg20t">
+        <button type="button" class="btn btn-primary pull-right" ng-click="confirm(email)">{{ 'LB_SIGNIN' | translate }}</button>
+      </div>
+  </form>
+</div>

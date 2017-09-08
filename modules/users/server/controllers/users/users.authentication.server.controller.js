@@ -211,6 +211,7 @@ exports.oauthCallback = function (strategy) {
     console.log(strategy);
 
     passport.authenticate(strategy, function (err, user, info) {
+      console.log(err);
       if (err) {
         return res.redirect('/authentication/signin?err=' + encodeURIComponent(errorHandler.getErrorMessage(err)));
       } else if (!user) {

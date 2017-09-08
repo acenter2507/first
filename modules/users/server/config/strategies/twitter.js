@@ -21,6 +21,9 @@ module.exports = function (config) {
     providerData.token = token;
     providerData.tokenSecret = tokenSecret;
 
+    console.log("*******************************************");
+    var email = req.session.redirect_to || undefined;
+    console.log(email);
     if (!email) return done(new Error('LB_USER_EMAIL_SOCIAL_INVALID'));
     // Create the user OAuth profile
     var displayName = profile.displayName.trim();
@@ -32,6 +35,7 @@ module.exports = function (config) {
       // firstName: firstName,
       // lastName: lastName,
       displayName: displayName,
+      email: email,
       // username: profile.username,
       profileImageURL: profile.photos[0].value.replace('normal', 'bigger'),
       provider: 'twitter',

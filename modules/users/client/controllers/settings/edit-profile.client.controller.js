@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('users').controller('EditProfileController', ['$scope', '$timeout', '$window', '$http', '$location', 'Users', 'Authentication', 'FileUploader', 'toastr', '$translate',
-  function ($scope, $timeout, $window, $http, $location, Users, Authentication, FileUploader, toast, $translate) {
+  function ($scope, $timeout, $window, $http, $location, Users, Authentication, FileUploader, toastr, $translate) {
     $scope.imageURL = $scope.user.profileImageURL;
     $scope.profile_busy = false;
     $scope.password_busy = false;

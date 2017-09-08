@@ -1788,3 +1788,8 @@ img.full-screen {
     background: #a0cf3c; }
     .btn-vimeo:hover::before {
       background: #93c130; }
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    color: #fff;
+    background-color: #267ED5;
+}

@@ -70,7 +70,7 @@
   "LB_USER_EMAIL_REQUIRED": "Email address is required.",
   "LB_USER_EMAIL_INVALID": "Email address is invalid.",
   "LB_USER_EMAIL_SOCIAL_INVALID": "Sorry we can't get your email info.",
-  "LB_USER_EMAIL_WARNING": "If you change email, we will have to confirm your email address again.",
+  "LB_USER_EMAIL_WARNING": "If you change email, we will have to verify your email address again.",
   "LB_USER_EMAIL_CONFIRM": "Confirm change your email",
   "LB_USER_EMAIL_CONFIRM_CONTENT": "If you change email, your account will log out automatically and an email will be sent to the provided email",
   "LB_USER_FIRSTNAME_REQUIRED": "First name is required.",
@@ -109,7 +109,7 @@
   "MS_USERS_RESETPASS_HANDBACK": "Continue to home page.",
   "MS_USERS_RESETPASS": "Ask for a new password reset.",
   "MS_USERS_SOCIAL_EXIST": "User is already connected using this social.",
-  "LB_PROFILE_SUCCESE": "Profile Saved Successfully",
-  "LB_PROFILE_FAILED": "Profile Saved Failed",
+  "LB_PROFILE_SUCCESE": "Profile saved successfully",
+  "LB_PROFILE_FAILED": "Profile saved failed",
   "LB_SOCIALS": "Social accounts"
 }

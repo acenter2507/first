@@ -52,7 +52,6 @@ exports.signup = function (req, res) {
     })
     .catch(handleError);
   function handleError(err) {
-    console.log(err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -97,7 +96,6 @@ exports.resend = function (req, res) {
   });
 
   function handleError(err) {
-    console.log(err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -185,7 +183,6 @@ exports.verify = function (req, res) {
  */
 exports.oauthCall = function (strategy, scope) {
   return function (req, res, next) {
-    console.log(req.query);
     if (req.query && req.query.redirect_to)
       req.session.redirect_to = req.query.redirect_to;
     if (req.query && req.query.email)
@@ -413,7 +410,6 @@ function getToken() {
   return new Promise((resolve, reject) => {
     crypto.randomBytes(20, function (err, buffer) {
       if (err) {
-        console.log('MS_CM_LOAD_ERROR');
         return reject(new Error('MS_CM_LOAD_ERROR'));
       }
       var token = buffer.toString('hex');

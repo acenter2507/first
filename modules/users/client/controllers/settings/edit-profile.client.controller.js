@@ -46,9 +46,10 @@ angular.module('users')
           $scope.$broadcast('show-errors-reset', 'userForm');
           Authentication.user = res;
           $scope.profile_busy = false;
-          // show_success(res.message);
+          show_success('LB_PROFILE_SUCCESE');
         }, function (err) {
           $scope.profile_busy = false;
+          $scope.userInfo = _.pick($scope.user, '_id', 'displayName', 'email');
           show_error(err.message);
         });
       }

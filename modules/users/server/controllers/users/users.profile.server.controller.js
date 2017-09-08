@@ -10,6 +10,7 @@ var _ = require('lodash'),
   mongoose = require('mongoose'),
   multer = require('multer'),
   config = require(path.resolve('./config/config')),
+  mail = require(path.resolve('./config/lib/mail')),
   User = mongoose.model('User'),
   Poll = mongoose.model('Poll'),
   Opt = mongoose.model('Opt'),
@@ -23,7 +24,9 @@ var _ = require('lodash'),
   Category = mongoose.model('Category'),
   View = mongoose.model('View'),
   Like = mongoose.model('Like'),
-  Userreport = mongoose.model('Userreport');
+  Userreport = mongoose.model('Userreport'),
+  crypto = require('crypto'),
+  validator = require('validator');
 
 var pollController = require(path.resolve('./modules/polls/server/controllers/polls.server.controller'));
 /**
@@ -32,39 +35,118 @@ var pollController = require(path.resolve('./modules/polls/server/controllers/po
 exports.update = function (req, res) {
   // Init Variables
   var user = req.user;
-  console.log(user);
-  console.log(req.body);
-  res.end();
-
+  let isChangeEmail = user.email === req.body.email;
+  if (isChangeEmail) {
+    validEmail(req.body.email)
+      .then(() => {
+        return getToken();
+      })
+      .then(token => {
+        user.activeAccountToken = token;
+        user.status = 1;
+        return saveUser(user);
+      })
+      .then(_user => {
+        var url = config.http + '://' + req.headers.host + '/api/auth/verifyEmail/' + _user.activeAccountToken;
+        var mailTemplate = 'change_email';
+        var mailContent = {
+          name: _user.displayName,
+          appName: config.app.title,
+          url: url
+        };
+        var mailOptions = {
+          from: config.app.title + '<' + config.mailer.account.from + '>',
+          to: _user.email,
+          subject: 'Verify your email'
+        };
+        return mail.send(config.mailer.account.options, mailContent, mailOptions, mailTemplate);
+      })
+    .then(() => {
+      
+    })
+      .catch(handleError);
+  } else {
+    if (!user) return new handleError(new Error('MS_CM_LOGIN_ERROR'));
+    user = _.extend(user, req.body);
+    user.updated = Date.now();
+    saveUser(user).then(_user => {
+      req.login(user, function (err) {
+        if (err) return res.status(400).send(err);
+        return res.json(user);
+      });
+    }).catch(handleError);
+  }
   // For security measurement we remove the roles from the req.body object
-  // delete req.body.roles;
+  delete req.body.roles;
 
-  // if (user) {
-  //   // Merge existing user
-  //   user = _.extend(user, req.body);
-  //   user.updated = Date.now();
-  //   user.save(function (err) {
-  //     if (err) {
-  //       return res.status(400).send({
-  //         message: errorHandler.getErrorMessage(err)
-  //       });
-  //     } else {
-  //       req.login(user, function (err) {
-  //         if (err) {
-  //           res.status(400).send(err);
-  //         } else {
-  //           res.json(user);
-  //         }
-  //       });
-  //     }
-  //   });
-  // } else {
-  //   res.status(400).send({
-  //     message: 'User is not signed in'
-  //   });
-  // }
+  if (user) {
+    // Merge existing user
+    user = _.extend(user, req.body);
+    user.updated = Date.now();
+
+    user.save(function (err) {
+      if (err) {
+        return res.status(400).send({
+          message: 'LB_PROFILE_FAILED'
+        });
+      } else {
+        if (isChangeEmail) {
+
+        } else {
+          req.login(user, function (err) {
+            if (err) return res.status(400).send(err);
+            return res.json(user);
+          });
+        }
+      }
+    });
+  } else {
+    res.status(400).send({
+      message: 'User is not signed in'
+    });
+  }
+
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 };
 
+function validEmail(email) {
+  return new Promise((resolve, reject) => {
+    if (email.length === 0)
+      return reject(new Error('LB_USER_EMAIL_REQUIRED'));
+    if (!validator.isEmail(email))
+      return reject(new Error('LB_USER_EMAIL_INVALID'));
+    User.findOne({ email: email }, function (err, user) {
+      if (err)
+        return reject(new Error('MS_CM_LOAD_ERROR'));
+      // Kiểm tra trạng thái user đã active
+      if (user)
+        return reject(new Error('LB_USERS_EMAIL_DUPLICATE'));
+      return resolve();
+    });
+  });
+}
+function getToken() {
+  return new Promise((resolve, reject) => {
+    crypto.randomBytes(20, function (err, buffer) {
+      if (err) return reject(new Error('MS_CM_LOAD_ERROR'));
+      var token = buffer.toString('hex');
+      return resolve(token);
+    });
+  });
+}
+function saveUser(user) {
+  return new Promise((resolve, reject) => {
+    if (!user) return reject(new Error('MS_CM_LOAD_ERROR'));
+    user.save(function (err, _user) {
+      if (err) return reject(new Error('MS_CM_LOAD_ERROR'));
+      return resolve(_user);
+    });
+  });
+}
 /**
  * Update profile picture
  */

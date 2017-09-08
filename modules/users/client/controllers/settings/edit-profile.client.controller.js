@@ -30,6 +30,7 @@ angular.module('users')
           return handle_save();
         }, reject => {
           $scope.userInfo.email = $scope.user.email;
+          $scope.profile_busy = false;
         });
       } else {
         return handle_save();
@@ -43,6 +44,7 @@ angular.module('users')
           $scope.profile_busy = false;
           // show_success(res.message);
         }, function (err) {
+          $scope.profile_busy = false;
           show_error(err.message);
         });
       }

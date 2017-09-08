@@ -32,6 +32,7 @@ var pollController = require(path.resolve('./modules/polls/server/controllers/po
 exports.update = function (req, res) {
   // Init Variables
   var user = req.user;
+  console.log(user);
   console.log(req.body);
   res.end();
 

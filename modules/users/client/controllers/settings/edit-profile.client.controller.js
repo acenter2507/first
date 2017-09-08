@@ -18,6 +18,7 @@ angular.module('users')
         $scope.profile_busy = false;
         return false;
       }
+      if (_.isEqual($scope.userInfo, _.pick($scope.user, '_id', 'displayName', 'email'))) return;
       if ($scope.userInfo.email !== $scope.user.email) {
         $scope.message_title = 'LB_USER_EMAIL_CONFIRM';
         $scope.message_content = 'LB_USER_EMAIL_CONFIRM_CONTENT';

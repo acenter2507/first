@@ -6,6 +6,7 @@ angular.module('users').controller('EditProfileController', ['$scope', '$timeout
     $scope.profile_busy = false;
     $scope.password_busy = false;
     $scope.picture_busy = false;
+    $scope.userInfo = _.pick($scope.user, '_id', 'displayName', 'email');
     get_translate();
     // Update a user profile
     $scope.updateUserProfile = function (isValid) {
@@ -16,17 +17,34 @@ angular.module('users').controller('EditProfileController', ['$scope', '$timeout
         $scope.profile_busy = false;
         return false;
       }
+      if ($scope.userInfo.email !== $scope.user.email) {
+        $scope.message_title = 'LB_USER_EMAIL_CONFIRM';
+        $scope.message_content = 'LB_USER_EMAIL_CONFIRM_CONTENT';
+        $scope.dialog_type = 1;
+        $scope.buton_label = 'LB_SAVE';
+        dialog.openConfirm({
+          scope: $scope,
+          templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
+        }).then(confirm => {
+          return handle_save();
+        }, reject => {
+          $scope.userInfo.email = $scope.user.email;
+        });
+      } else {
+        return handle_save();
+      }
+      function handle_save() {
+        var user = new Users($scope.userInfo);
 
-      var user = new Users($scope.user);
-
-      user.$update(function (res) {
-        $scope.$broadcast('show-errors-reset', 'userForm');
-        Authentication.user = res;
-        $scope.profile_busy = false;
-        // show_success(res.message);
-      }, function (err) {
-        show_error(err.message);
-      });
+        user.$update(function (res) {
+          $scope.$broadcast('show-errors-reset', 'userForm');
+          Authentication.user = res;
+          $scope.profile_busy = false;
+          // show_success(res.message);
+        }, function (err) {
+          show_error(err.message);
+        });
+      }
     };
 
     $scope.uploader = new FileUploader({

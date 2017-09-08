@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('users').controller('EditProfileController', ['$scope', '$timeout', '$window', '$http', '$location', 'Users', 'Authentication', 'FileUploader', 'toastr', '$translate',
-  function ($scope, $timeout, $window, $http, $location, Users, Authentication, FileUploader, toastr, $translate) {
+angular.module('users')
+.controller('EditProfileController', ['$scope', '$timeout', '$window', '$http', '$location', 'Users', 'Authentication', 'FileUploader', 'toastr', '$translate', 'ngDialog',
+  function ($scope, $timeout, $window, $http, $location, Users, Authentication, FileUploader, toastr, $translate. dialog) {
     $scope.imageURL = $scope.user.profileImageURL;
     $scope.profile_busy = false;
     $scope.password_busy = false;

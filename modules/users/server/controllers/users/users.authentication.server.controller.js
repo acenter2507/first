@@ -206,10 +206,9 @@ exports.oauthCall = function (strategy, scope) {
 exports.oauthCallback = function (strategy) {
   return function (req, res, next) {
     // Pop redirect URL from session
-    var sessionRedirectURL = req.session.redirect_to;
     delete req.session.redirect_to;
+    delete req.session.twitterEmail;
     passport.authenticate(strategy, function (err, user, info) {
-      console.log(err);
       if (err) {
         return res.redirect('/authentication/signin?err=' + encodeURIComponent(errorHandler.getErrorMessage(err)));
       } else if (!user) {
@@ -223,7 +222,6 @@ exports.oauthCallback = function (strategy) {
         }
 
         return res.redirect(info.redirect_to || '/');
-        // return res.redirect(redirectURL || sessionRedirectURL || '/');
       });
     })(req, res, next);
   };

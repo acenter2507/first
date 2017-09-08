@@ -21,9 +21,9 @@ angular.module('users').controller('EditProfileController', ['$scope', '$timeout
 
       user.$update(function (res) {
         $scope.$broadcast('show-errors-reset', 'userForm');
-        Authentication.user = response;
+        Authentication.user = res;
         $scope.profile_busy = false;
-        show_success(res.message);
+        // show_success(res.message);
       }, function (err) {
         show_error(err.message);
       });

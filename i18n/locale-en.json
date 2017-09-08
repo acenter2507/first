@@ -100,5 +100,7 @@
   "MS_USERS_RESETPASS_SUCCESS": "Password successfully reset.",
   "MS_USERS_RESETPASS_HANDBACK": "Continue to home page.",
   "MS_USERS_RESETPASS": "Ask for a new password reset.",
-  "MS_USERS_SOCIAL_EXIST": "User is already connected using this social."
+  "MS_USERS_SOCIAL_EXIST": "User is already connected using this social.",
+  "LB_PROFILE_SETTING": "Personal settings",
+  "LB_SOCIALS": "Social accounts"
 }

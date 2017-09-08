@@ -7,7 +7,7 @@
           <label for="displayName">{{:: 'LB_USER_NAME' | translate }}</label>
           <input type="text" id="displayName" name="displayName" class="form-control" ng-model="user.displayName" placeholder="{{ 'LB_USER_NAME' | translate }}"
             required>
-          <div ng-messages="signupForm.displayName.$error" role="alert">
+          <div ng-messages="userForm.displayName.$error" role="alert">
             <p class="help-block error-text font-sm" ng-message="required">{{:: 'LB_USER_NAME_REQUIRED' | translate }}</p>
           </div>
         </div>
@@ -21,7 +21,7 @@
           </div>
         </div>
         <div class="form-group">
-          <button type="button" class="btn btn-primary" ng-submit="updateUserProfile(userForm.$valid)" ng-disabled="profile_busy">
+          <button type="button" class="btn btn-primary" ng-click="updateUserProfile(userForm.$valid)" ng-disabled="profile_busy">
             <i class="fa fa-spinner fa-pulse fa-fw" ng-show="profile_busy"></i>
             {{:: 'LB_SAVE' | translate }}
             {{:: 'LB_PROFILE' | translate }}

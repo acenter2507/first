@@ -1,33 +1,36 @@
 <div class="row animated fadeIn" ng-controller="EditProfileController">
   <div class="col-xs-12 col-sm-8">
-    <form name="userForm" novalidate autocomplete="off">
-      <fieldset>
-        <!-- Display Name  -->
-        <div class="form-group" show-errors>
-          <label for="displayName">{{:: 'LB_USER_NAME' | translate }}</label>
-          <input type="text" id="displayName" name="displayName" class="form-control" ng-model="user.displayName" placeholder="{{ 'LB_USER_NAME' | translate }}"
-            required>
-          <div ng-messages="userForm.displayName.$error" role="alert">
-            <p class="help-block error-text font-sm" ng-message="required">{{:: 'LB_USER_NAME_REQUIRED' | translate }}</p>
-          </div>
+    <form name="nameForm" novalidate autocomplete="off">
+      <!-- Display Name  -->
+      <div class="form-group" show-errors>
+        <label for="displayName">{{:: 'LB_USER_NAME' | translate }}</label>
+        <input type="text" id="displayName" name="displayName" class="form-control" ng-model="user.displayName" placeholder="{{ 'LB_USER_NAME' | translate }}"
+          required>
+        <div ng-messages="nameForm.displayName.$error" role="alert">
+          <p class="help-block error-text font-sm" ng-message="required">{{:: 'LB_USER_NAME_REQUIRED' | translate }}</p>
         </div>
-        <div class="form-group" show-errors>
-          <label for="email">{{:: 'LB_USER_EMAIL' | translate }}</label>
-          <input type="email" id="email" name="email" class="form-control" ng-model="user.email" placeholder="Email" lowercase required>
-          <span class="font-xs">{{:: 'LB_USER_EMAIL_WARNING' | translate }}</span>
-          <div ng-messages="userForm.email.$error" role="alert">
-            <p class="help-block error-text font-sm" ng-message="required">{{:: 'LB_USER_EMAIL_REQUIRED' | translate }}</p>
-            <p class="help-block error-text font-sm" ng-message="email">{{:: 'LB_USER_EMAIL_INVALID' | translate }}</p>
-          </div>
+      </div>
+      <div class="form-group">
+        <a ng-click="changeName(nameForm.$valid)">{{:: 'LB_SAVE' | translate }}</a>
+      </div>
+    </form>
+    <form name="emailForm" novalidate autocomplete="off">
+      <div class="form-group" show-errors>
+        <label for="email">{{:: 'LB_USER_EMAIL' | translate }}</label>
+        <input type="email" id="email" name="email" class="form-control" ng-model="user.email" placeholder="Email" lowercase required>
+        <span class="font-xs">{{:: 'LB_USER_EMAIL_WARNING' | translate }}</span>
+        <div ng-messages="userForm.email.$error" role="alert">
+          <p class="help-block error-text font-sm" ng-message="required">{{:: 'LB_USER_EMAIL_REQUIRED' | translate }}</p>
+          <p class="help-block error-text font-sm" ng-message="email">{{:: 'LB_USER_EMAIL_INVALID' | translate }}</p>
         </div>
-        <div class="form-group">
-          <button type="button" class="btn btn-primary" ng-click="updateUserProfile(userForm.$valid)" ng-disabled="profile_busy">
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-primary" ng-click="updateUserProfile(userForm.$valid)" ng-disabled="profile_busy">
             <i class="fa fa-spinner fa-pulse fa-fw" ng-show="profile_busy"></i>
             {{:: 'LB_SAVE' | translate }}
             {{:: 'LB_PROFILE' | translate }}
           </button>
-        </div>
-      </fieldset>
+      </div>
     </form>
   </div>
   <div class="col-xs-12 col-sm-4">

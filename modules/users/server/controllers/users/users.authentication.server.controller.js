@@ -189,7 +189,7 @@ exports.oauthCall = function (strategy, scope) {
     if (req.query && req.query.redirect_to)
       req.session.redirect_to = req.query.redirect_to;
     if (req.query && req.query.email)
-      req.twitterEmail = req.query.email;
+      req.session.twitterEmail = req.query.email;
     // Set redirection path on session.
     // Do not redirect to a signin or signup page
     // if (noReturnUrls.indexOf(req.query.redirect_to) === -1) {
@@ -208,6 +208,7 @@ exports.oauthCallback = function (strategy) {
     // Pop redirect URL from session
     var sessionRedirectURL = req.session.redirect_to;
     delete req.session.redirect_to;
+    console.log(strategy);
 
     passport.authenticate(strategy, function (err, user, info) {
       if (err) {

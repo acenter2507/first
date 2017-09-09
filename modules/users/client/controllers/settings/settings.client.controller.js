@@ -22,7 +22,7 @@ angular.module('users').controller('SettingsController', [
           toastr.error(tsl, $scope.MS_CM_ERROR);
         }
       });
-    }
+    };
     $scope.show_success(msg) {
       $translate(msg).then(tsl => {
         if (!tsl || tsl.length === 0) {
@@ -31,6 +31,6 @@ angular.module('users').controller('SettingsController', [
           toastr.success(tsl, $scope.MS_CM_ERROR);
         }
       });
-    }
+    };
   }
 ]);

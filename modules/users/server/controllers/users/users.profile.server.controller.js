@@ -66,7 +66,7 @@ exports.update = function (req, res) {
         return mail.send(config.mailer.account.options, mailContent, mailOptions, mailTemplate);
       })
       .then(() => {
-        return res.end();
+        return res.json();
       })
       .catch(handleError);
   } else {

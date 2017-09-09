@@ -81,7 +81,7 @@ function EditProfileController(
           show_success('LB_PROFILE_SUCCESE');
         } else {
           Storages.set_session(Constants.storages.flash, res.message);
-          $location.path('/api/auth/signout');
+          $window.location.href = res.host + '/api/auth/signout';
         }
       }, function (err) {
         console.log(err);

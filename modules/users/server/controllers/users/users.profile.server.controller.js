@@ -66,7 +66,7 @@ exports.update = function (req, res) {
         return mail.send(config.mailer.account.options, mailContent, mailOptions, mailTemplate);
       })
       .then(() => {
-        return res.json({ message: 'MS_USERS_SEND_SUCCESS' });
+        return res.json({ message: 'MS_USERS_SEND_SUCCESS', host: config.http + '://' + req.headers.host });
       })
       .catch(handleError);
   } else {

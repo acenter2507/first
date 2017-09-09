@@ -61,18 +61,20 @@ exports.update = function (req, res) {
         };
         return mail.send(config.mailer.account.options, mailContent, mailOptions, mailTemplate);
       })
-    .then(() => {
-      
-    })
+      .then(() => {
+        return res.end();
+      })
       .catch(handleError);
   } else {
     if (!user) return new handleError(new Error('MS_CM_LOGIN_ERROR'));
     user = _.extend(user, req.body);
     user.updated = Date.now();
     saveUser(user).then(_user => {
-      req.login(user, function (err) {
+      req.login(_user, function (err) {
         if (err) return res.status(400).send(err);
-        return res.json(user);
+        _user.password = undefined;
+        _user.salt = undefined;
+        return res.json(_user);
       });
     }).catch(handleError);
   }

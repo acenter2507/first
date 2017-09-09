@@ -10,7 +10,10 @@ angular.module('core').controller('WebAppController', [
   '$translate',
   'amMoment',
   '$window',
-  function ($rootScope, $scope, Authentication, Notifications, Socket, Categorys, $translate, amMoment, $window) {
+  'Storages',
+  'Constants',
+  'toastr',
+  function ($rootScope, $scope, Authentication, Notifications, Socket, Categorys, $translate, amMoment, $window, Storages, Constants, toastr) {
     // User info
     $scope.Authentication = Authentication;
     $scope.Notifications = Notifications;
@@ -49,6 +52,14 @@ angular.module('core').controller('WebAppController', [
     }
     function initCategorys() {
       Categorys.load();
+    }
+    getFlash();
+    function getFlash() {
+      var flash = Storages.get_session(Constants.storages.flash);
+      if (flash) {
+        $translate(flash).then(tsl => { toastr.success(tsl, ""); });
+        Storages.set_session(Constants.storages.flash, undefined);
+      }
     }
 
     $scope.change_language = lang => {

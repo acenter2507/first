@@ -84,6 +84,7 @@ function EditProfileController(
           $location.path('/api/auth/signout');
         }
       }, function (err) {
+        console.log(err);
         $scope.profile_busy = false;
         $scope.userInfo = _.pick($scope.user, '_id', 'displayName', 'email');
         show_error(err.message);

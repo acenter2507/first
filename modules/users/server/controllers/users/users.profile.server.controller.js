@@ -50,7 +50,7 @@ exports.update = function (req, res) {
       })
       .then(_user => {
         var url = config.http + '://' + req.headers.host + '/api/auth/verifyEmail/' + _user.activeAccountToken;
-        var mailTemplate = 'change_email';
+        var mailTemplate = 'verify_email';
         var mailContent = {
           name: _user.displayName,
           appName: config.app.title,

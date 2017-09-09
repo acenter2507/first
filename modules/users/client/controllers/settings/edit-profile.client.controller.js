@@ -72,11 +72,11 @@ function EditProfileController(
       var user = new Users($scope.userInfo);
 
       user.$update(function (res) {
+        console.log('***********', res);
         $scope.$broadcast('show-errors-reset', 'userForm');
         $scope.profile_busy = false;
         // Trường hợp trả về user
         if (res._id) {
-          console.log(res);
           Authentication.user = res;
           show_success('LB_PROFILE_SUCCESE');
         } else {

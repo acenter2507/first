@@ -35,6 +35,8 @@ var pollController = require(path.resolve('./modules/polls/server/controllers/po
 exports.update = function (req, res) {
   // Init Variables
   var user = req.user;
+  // For security measurement we remove the roles from the req.body object
+  delete req.body.roles;
   let isChangeEmail = user.email === req.body.email;
   if (isChangeEmail) {
     validEmail(req.body.email)
@@ -78,37 +80,36 @@ exports.update = function (req, res) {
       });
     }).catch(handleError);
   }
-  // For security measurement we remove the roles from the req.body object
-  delete req.body.roles;
 
-  if (user) {
-    // Merge existing user
-    user = _.extend(user, req.body);
-    user.updated = Date.now();
+  // if (user) {
+  //   // Merge existing user
+  //   user = _.extend(user, req.body);
+  //   user.updated = Date.now();
 
-    user.save(function (err) {
-      if (err) {
-        return res.status(400).send({
-          message: 'LB_PROFILE_FAILED'
-        });
-      } else {
-        if (isChangeEmail) {
+  //   user.save(function (err) {
+  //     if (err) {
+  //       return res.status(400).send({
+  //         message: 'LB_PROFILE_FAILED'
+  //       });
+  //     } else {
+  //       if (isChangeEmail) {
 
-        } else {
-          req.login(user, function (err) {
-            if (err) return res.status(400).send(err);
-            return res.json(user);
-          });
-        }
-      }
-    });
-  } else {
-    res.status(400).send({
-      message: 'User is not signed in'
-    });
-  }
+  //       } else {
+  //         req.login(user, function (err) {
+  //           if (err) return res.status(400).send(err);
+  //           return res.json(user);
+  //         });
+  //       }
+  //     }
+  //   });
+  // } else {
+  //   res.status(400).send({
+  //     message: 'User is not signed in'
+  //   });
+  // }
 
   function handleError(err) {
+    console.log(err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });

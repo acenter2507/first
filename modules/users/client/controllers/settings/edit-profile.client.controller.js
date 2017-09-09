@@ -80,7 +80,7 @@ function EditProfileController(
           Authentication.user = res;
           show_success('LB_PROFILE_SUCCESE');
         } else {
-          Storages.set_session(Constants.storages.flash, 'MS_USERS_SEND_SUCCESS');
+          Storages.set_session(Constants.storages.flash, res.message);
           $location.path('/api/auth/signout');
         }
       }, function (err) {

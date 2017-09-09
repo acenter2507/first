@@ -72,7 +72,6 @@ function EditProfileController(
       var user = new Users($scope.userInfo);
 
       user.$update(function (res) {
-        console.log('***********', res);
         $scope.$broadcast('show-errors-reset', 'userForm');
         $scope.profile_busy = false;
         // Trường hợp trả về user
@@ -84,7 +83,6 @@ function EditProfileController(
           $window.location.href = res.host + '/api/auth/signout';
         }
       }, function (err) {
-        console.log(err);
         $scope.profile_busy = false;
         $scope.userInfo = _.pick($scope.user, '_id', 'displayName', 'email');
         show_error(err.message);

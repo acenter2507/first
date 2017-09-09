@@ -57,6 +57,7 @@
   "LB_CM_UNLIMIT": "Unlimit",
   "LB_USER_PASSWORD": "Password",
   "LB_USER_PASSWORD_REQUIRED": "Password is required.",
+  "LB_USER_PASSWORD_CURRENT": "Current Password",
   "LB_USER_NEW_PASSWORD": "New password",
   "LB_USER_NEW_PASSWORD_REQUIRED": "New password is required.",
   "LB_USER_VERIFY_PASSWORD": "Verify password",

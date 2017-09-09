@@ -77,11 +77,10 @@
         url: '/accounts',
         templateUrl: 'modules/users/client/views/settings/manage-social-accounts.client.view.html'
       })
-      // .state('settings.picture', {
-      //   url: '/picture',
-      //   templateUrl: 'modules/users/client/views/settings/change-profile-picture.client.view.html'
-      // })
-
+      .state('settings.password', {
+        url: '/password',
+        templateUrl: 'modules/users/client/views/settings/change-password.client.view.html'
+      })
       .state('authentication', {
         abstract: true,
         url: '/authentication',

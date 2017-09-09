@@ -66,7 +66,7 @@ exports.update = function (req, res) {
       })
       .catch(handleError);
   } else {
-    if (!user) return new handleError(new Error('MS_CM_LOGIN_ERROR'));
+    if (!user) return handleError(new Error('MS_CM_LOGIN_ERROR'));
     user = _.extend(user, req.body);
     user.updated = Date.now();
     saveUser(user).then(_user => {

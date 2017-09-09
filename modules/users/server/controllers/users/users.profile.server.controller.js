@@ -37,13 +37,15 @@ exports.update = function (req, res) {
   var user = req.user;
   // For security measurement we remove the roles from the req.body object
   delete req.body.roles;
-  let isChangeEmail = user.email !== req.body.email;
+
+  var isChangeEmail = user.email !== req.body.email;
   if (isChangeEmail) {
     validEmail(req.body.email)
       .then(() => {
         return getToken();
       })
       .then(token => {
+        user = _.extend(user, req.body);
         user.activeAccountToken = token;
         user.status = 1;
         return saveUser(user);

@@ -154,6 +154,39 @@ function saveUser(user) {
   });
 }
 /**
+ * Verify
+ */
+exports.verifyEmail = function (req, res) {
+  User.findOne({
+    activeAccountToken: req.params.token
+  }, function (err, user) {
+    if (!user) {
+      // Kiểm tra nếu user không tồn tại
+      return res.redirect('/verification/error?err=1');
+    } else {
+      // Kiểm tra nếu user đã bị block
+      if (user.status === 3)
+        return res.redirect('/verification/error?err=2');
+      // Kiểm tra nếu user là account social
+      if (user.provider !== 'local')
+        return res.redirect('/verification/error?err=3');
+      user.status = 2;
+      user.activeAccountToken = undefined;
+      user.save(function (err, user) {
+        user.password = undefined;
+        user.salt = undefined;
+        req.login(user, function (err) {
+          if (err) {
+            res.status(400).send(err);
+          } else {
+            return res.redirect('/');
+          }
+        });
+      });
+    }
+  });
+};
+/**
  * Update profile picture
  */
 exports.changeProfilePicture = function (req, res) {

@@ -63,6 +63,10 @@
   "LB_USER_VERIFY_PASSWORD": "Verify password",
   "LB_USER_VERIFY_PASSWORD_REQUIRED": "Verify your new password.",
   "LB_USER_VERIFY_PASSWORD_MATCH": "Passwords do not match.",
+  "LB_USER_PASSWORD_CHANGE_SUCCESS": "Password changed successfully.",
+  "LB_USER_PASSWORD_CHANGE_INCORRECT": "Current password is incorrect.",
+  "LB_USER_NOT_FOUND": "User is not found.",
+
   "LB_USER_FIRSTNAME": "First name",
   "LB_USER_LASTNAME": "Last name",
   "LB_USER_NAME": "Display name",

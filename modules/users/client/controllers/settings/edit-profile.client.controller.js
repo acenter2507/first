@@ -13,7 +13,6 @@ EditProfileController.$inject = [
   'Authentication',
   'FileUploader',
   'toastr',
-  '$translate',
   'ngDialog',
   'Storages',
   'Constants'];
@@ -27,17 +26,14 @@ function EditProfileController(
   Authentication,
   FileUploader,
   toastr,
-  $translate,
   dialog,
   Storages,
   Constants
 ) {
   $scope.imageURL = $scope.user.profileImageURL;
   $scope.profile_busy = false;
-  $scope.password_busy = false;
   $scope.picture_busy = false;
   $scope.userInfo = _.pick($scope.user, '_id', 'displayName', 'email');
-  get_translate();
   // Update a user profile
   $scope.updateUserProfile = function (isValid) {
     if ($scope.profile_busy) return;
@@ -77,7 +73,7 @@ function EditProfileController(
         // Trường hợp trả về user
         if (res._id) {
           Authentication.user = res;
-          show_success('LB_PROFILE_SUCCESE');
+          $scope.show_success('LB_PROFILE_SUCCESE');
         } else {
           Storages.set_session(Constants.storages.flash, res.message);
           $window.location.href = res.host + '/api/auth/signout';
@@ -85,7 +81,7 @@ function EditProfileController(
       }, function (err) {
         $scope.profile_busy = false;
         $scope.userInfo = _.pick($scope.user, '_id', 'displayName', 'email');
-        show_error(err.message);
+        $scope.show_error(err.message);
       });
     }
   };
@@ -136,27 +132,4 @@ function EditProfileController(
     $scope.uploader.clearQueue();
     $scope.imageURL = $scope.user.profileImageURL;
   };
-  function get_translate() {
-    $translate('MS_CM_ERROR').then(tsl => { $scope.MS_CM_ERROR = tsl; });
-    $translate('MS_CM_SUCCESS').then(tsl => { $scope.MS_CM_SUCCESS = tsl; });
-  }
-
-  function show_error(msg) {
-    $translate(msg).then(tsl => {
-      if (!tsl || tsl.length === 0) {
-        toastr.error(msg, $scope.MS_CM_ERROR);
-      } else {
-        toastr.error(tsl, $scope.MS_CM_ERROR);
-      }
-    });
-  }
-  function show_success(msg) {
-    $translate(msg).then(tsl => {
-      if (!tsl || tsl.length === 0) {
-        toastr.success(msg, $scope.MS_CM_ERROR);
-      } else {
-        toastr.success(tsl, $scope.MS_CM_ERROR);
-      }
-    });
-  }
 }

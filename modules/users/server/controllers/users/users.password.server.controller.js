@@ -49,7 +49,6 @@ exports.forgot = function (req, res, next) {
     })
     .catch(handleError);
   function handleError(err) {
-    console.log(err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -121,83 +120,11 @@ exports.reset = function (req, res, next) {
 
 
   function handleError(err) {
-    console.log(err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
   }
 
-  // async.waterfall([
-
-  //   function (done) {
-  //     User.findOne({
-  //       resetPasswordToken: req.params.token,
-  //       resetPasswordExpires: {
-  //         $gt: Date.now()
-  //       }
-  //     }, function (err, user) {
-  //       if (!err && user) {
-  //         if (passwordDetails.newPassword === passwordDetails.verifyPassword) {
-  //           user.password = passwordDetails.newPassword;
-  //           user.resetPasswordToken = undefined;
-  //           user.resetPasswordExpires = undefined;
-
-  //           user.save(function (err) {
-  //             if (err) {
-  //               return res.status(400).send({
-  //                 message: errorHandler.getErrorMessage(err)
-  //               });
-  //             } else {
-  //               req.login(user, function (err) {
-  //                 if (err) {
-  //                   res.status(400).send(err);
-  //                 } else {
-  //                   // Remove sensitive data before return authenticated user
-  //                   user.password = undefined;
-  //                   user.salt = undefined;
-  //                   res.json(user);
-  //                   done(err, user);
-  //                 }
-  //               });
-  //             }
-  //           });
-  //         } else {
-  //           return res.status(400).send({
-  //             message: 'LB_USER_VERIFY_PASSWORD_MATCH'
-  //           });
-  //         }
-  //       } else {
-  //         return res.status(400).send({
-  //           message: 'MS_USERS_RESETPASS_INVALID'
-  //         });
-  //       }
-  //     });
-  //   },
-  //   function (user, done) {
-  //     var mailTemplate = new EmailTemplate(path.join('modules/users/server/templates', 'inform_reset_password'));
-  //     var mailContent = {
-  //       name: user.displayName,
-  //       appName: config.app.title
-  //     };
-  //     mailTemplate.render(mailContent, function (err, result) {
-  //       if (err)
-  //         return res.status(400).send({ message: 'MS_USERS_SEND_FAIL' });
-  //       var mailOptions = {
-  //         from: config.app.title + '<' + config.mailer.account.from + '>',
-  //         to: user.email,
-  //         subject: 'Your password has been changed',
-  //         html: result.html
-  //       };
-  //       transporter.sendMail(mailOptions, function (err) {
-  //         done();
-  //       });
-  //     });
-  //   }
-  // ], function (err) {
-  //   if (err) {
-  //     return next(err);
-  //   }
-  // });
 };
 
 /**
@@ -206,7 +133,6 @@ exports.reset = function (req, res, next) {
 exports.changePassword = function (req, res, next) {
   // Init Variables
   var passwordDetails = req.body;
-  var message = null;
 
   if (req.user) {
     if (passwordDetails.newPassword) {
@@ -227,7 +153,7 @@ exports.changePassword = function (req, res, next) {
                       res.status(400).send(err);
                     } else {
                       res.send({
-                        message: 'Password changed successfully'
+                        message: 'LB_USER_PASSWORD_CHANGE_SUCCESS'
                       });
                     }
                   });
@@ -235,28 +161,28 @@ exports.changePassword = function (req, res, next) {
               });
             } else {
               res.status(400).send({
-                message: 'Passwords do not match'
+                message: 'LB_USER_VERIFY_PASSWORD_MATCH'
               });
             }
           } else {
             res.status(400).send({
-              message: 'Current password is incorrect'
+              message: 'LB_USER_PASSWORD_CHANGE_INCORRECT'
             });
           }
         } else {
           res.status(400).send({
-            message: 'User is not found'
+            message: 'LB_USER_NOT_FOUND'
           });
         }
       });
     } else {
       res.status(400).send({
-        message: 'Please provide a new password'
+        message: 'LB_USER_NEW_PASSWORD_REQUIRED'
       });
     }
   } else {
     res.status(400).send({
-      message: 'User is not signed in'
+      message: 'MS_CM_AUTH_ERROR'
     });
   }
 };

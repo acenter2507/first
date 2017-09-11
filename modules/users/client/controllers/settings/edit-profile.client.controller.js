@@ -26,7 +26,7 @@ function EditProfileController(
   Authentication,
   FileUploader,
   toastr,
-  dialog,
+  ngDialog,
   Storages,
   Constants
 ) {

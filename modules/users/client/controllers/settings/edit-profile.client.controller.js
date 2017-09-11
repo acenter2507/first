@@ -110,18 +110,6 @@ function EditProfileController(
         }, 0);
       };
     }
-    function showDropImage() {
-      var mDialog = dialog.open({
-        template: 'modules/core/client/views/templates/drop-image.dialog.template.html',
-        scope: $scope,
-        width: '90%',
-        height: '90%',
-        appendClassName: 'images-upload-dialog'
-      });
-      mDialog.closePromise.then(function (data) {
-        console.log(data);
-      });
-    }
   };
   // Called after the user has successfully uploaded a new picture
   $scope.uploader.onSuccessItem = function (fileItem, response, status, headers) {
@@ -138,7 +126,20 @@ function EditProfileController(
   // Change user profile picture
   $scope.uploadProfilePicture = function () {
     // Start upload
-    $scope.uploader.uploadAll();
+    // $scope.uploader.uploadAll();
+    showDropImage();
+    function showDropImage() {
+      var mDialog = dialog.open({
+        template: 'modules/core/client/views/templates/drop-image.dialog.template.html',
+        scope: $scope,
+        width: '90%',
+        height: '90%',
+        appendClassName: 'images-upload-dialog'
+      });
+      mDialog.closePromise.then(function (data) {
+        console.log(data);
+      });
+    }
   };
   // Cancel the upload process
   $scope.cancelUpload = function () {

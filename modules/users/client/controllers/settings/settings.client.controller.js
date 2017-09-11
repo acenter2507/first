@@ -7,7 +7,7 @@ angular.module('users').controller('SettingsController', [
   function (
     $scope,
     toastr,
-    $translate, ) {
+    $translate) {
     get_translate();
     function get_translate() {
       $translate('MS_CM_ERROR').then(tsl => { $scope.MS_CM_ERROR = tsl; });

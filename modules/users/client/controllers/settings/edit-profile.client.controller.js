@@ -26,7 +26,7 @@ function EditProfileController(
   Authentication,
   FileUploader,
   toastr,
-  ngDialog,
+  dialog,
   Storages,
   Constants
 ) {
@@ -111,14 +111,14 @@ function EditProfileController(
       };
     }
     function showDropImage() {
-      var dialog = ngDialog.open({
+      var mDialog = dialog.open({
         template: 'modules/core/client/views/templates/drop-image.dialog.template.html',
         scope: $scope,
         width: '90%',
         height: '90%',
         appendClassName: 'images-upload-dialog'
       });
-      dialog.closePromise.then(function (data) {
+      mDialog.closePromise.then(function (data) {
         console.log(data);
       });
     }

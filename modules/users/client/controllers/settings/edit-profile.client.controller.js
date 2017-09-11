@@ -31,6 +31,7 @@ function EditProfileController(
   Constants
 ) {
   $scope.imageURL = $scope.user.profileImageURL;
+  $scope.imageURLEdited = {};
   $scope.profile_busy = false;
   $scope.picture_busy = false;
   $scope.userInfo = _.pick($scope.user, '_id', 'displayName', 'email');
@@ -108,6 +109,18 @@ function EditProfileController(
           $scope.imageURL = fileReaderEvent.target.result;
         }, 0);
       };
+    }
+    function showDropImage() {
+      var dialog = ngDialog.open({
+        template: 'modules/core/client/views/templates/drop-image.dialog.template.html',
+        scope: $scope,
+        width: '90%',
+        height: '90%',
+        appendClassName: 'images-upload-dialog'
+      });
+      dialog.closePromise.then(function (data) {
+        console.log(data);
+      });
     }
   };
   // Called after the user has successfully uploaded a new picture

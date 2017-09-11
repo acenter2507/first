@@ -1,0 +1,17 @@
+<div class="card mgn">
+  <div class="card-header">
+    <strong class="card-title">Crop your new profile picture</strong>
+    <div class="clearfix"></div>
+  </div>
+  <hr class="mgn">
+  <div class="card-body">
+    <img-crop image="imageURL" result-image="imageURLEdited" area-type="square" area-min-size="320" result-image-size="320"></img-crop>
+  </div>
+  <hr class="mgn">
+  <div class="card-footer">
+    <div class="form-group">
+      <button class="btn btn-primary" ng-click="closeThisDialog()">{{:: 'LB_UPLOAD' | translate }}</button>
+      <button class="btn btn-default" ng-click="closeThisDialog(false)">{{:: 'LB_CANCEL' | translate}}</button>
+    </div>
+  </div>
+</div>

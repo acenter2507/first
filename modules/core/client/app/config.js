@@ -32,7 +32,8 @@ var ApplicationConfiguration = (function() {
     'angucomplete-alt',
     'angular-loading-bar',
     '720kb.socialshare',
-    'vcRecaptcha'
+    'vcRecaptcha',
+    'ngImgCrop'
   ];
 
   // Add a new vertical module

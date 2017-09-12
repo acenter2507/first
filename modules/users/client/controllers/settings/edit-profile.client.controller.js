@@ -135,8 +135,9 @@ function EditProfileController(
         appendClassName: 'images-upload-dialog'
       });
       mDialog.closePromise.then(function (data) {
-        console.log(data);
-        console.log($scope.uploader);
+        if (!data.value) return;
+        $scope.uploader.queue[0]._file = Upload.dataUrltoBlob(data.value, "file");
+        $scope.uploader.uploadAll();
       });
     }
   };

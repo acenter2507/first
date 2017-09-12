@@ -729,7 +729,8 @@ a:hover .header-profile-image {
 .cropArea {
   background: #E4E4E4;
   overflow: hidden;
-  width:100%; }
+  width:100%;
+  height:300px; }
   .cropArea canvas {
     margin: auto !important;
     display: block !important; }

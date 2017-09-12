@@ -730,7 +730,10 @@ a:hover .header-profile-image {
   background: #E4E4E4;
   overflow: hidden;
   width:100%; }
-
+  .cropArea canvas {
+    margin: auto !important;
+    display: block !important;
+  }
 @media (max-width: 767px) {
   .back-to-top.md-button.md-fab {
     line-height: 40px;

@@ -136,7 +136,7 @@ function EditProfileController(
       });
       mDialog.closePromise.then(function (data) {
         if (!data.value) return;
-        $scope.uploader.queue[0]._file = Upload.dataUrltoBlob(data.value, "file");
+        $scope.uploader.queue[0]._file = FileUploader.dataUrltoBlob(data.value, "file");
         $scope.uploader.uploadAll();
       });
     }

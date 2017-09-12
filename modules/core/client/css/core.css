@@ -724,7 +724,14 @@ a:hover .header-profile-image {
   right: 6px;
   z-index: 2;
   background-color: #267ED5 !important;
-	display: none; }
+  display: none; }
+
+.cropArea {
+  background: #E4E4E4;
+  overflow: hidden;
+  width:500px;
+  height:350px; }
+
 @media (max-width: 767px) {
   .back-to-top.md-button.md-fab {
     line-height: 40px;

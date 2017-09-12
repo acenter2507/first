@@ -136,7 +136,7 @@ function EditProfileController(
       });
       mDialog.closePromise.then(function (data) {
         if (!data.value) return;
-        var cover = FileUploader.dataUrltoBlob(category.croppedDataUrl);
+        var cover = FileUploader.dataUrltoBlob(data.value);
         // $scope.uploader.queue[0]._file = FileUploader.dataUrltoBlob(data.value);
         // $scope.uploader.uploadAll();
       });

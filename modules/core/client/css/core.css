@@ -732,8 +732,7 @@ a:hover .header-profile-image {
   width:100%; }
   .cropArea canvas {
     margin: auto !important;
-    display: block !important;
-  }
+    display: block !important; }
 @media (max-width: 767px) {
   .back-to-top.md-button.md-fab {
     line-height: 40px;

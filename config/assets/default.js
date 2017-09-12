@@ -63,7 +63,7 @@ module.exports = {
         'public/lib/angular-breadcrumb/dist/angular-breadcrumb.min.js',
         'public/lib/angular-socialshare/dist/angular-socialshare.js',
         'public/lib/angular-recaptcha/release/angular-recaptcha.js',
-        'public/lib/ng-img-crop/unminified/ng-img-crop.js'
+        'public/lib/ng-img-crop/compile/unminified/ng-img-crop.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

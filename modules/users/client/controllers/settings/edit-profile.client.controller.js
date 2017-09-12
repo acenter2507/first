@@ -136,9 +136,9 @@ function EditProfileController(
       });
       mDialog.closePromise.then(function (data) {
         if (!data.value) return;
-        var cover = FileUploader.dataUrltoBlob(data.value);
-        // $scope.uploader.queue[0]._file = FileUploader.dataUrltoBlob(data.value);
-        // $scope.uploader.uploadAll();
+        var blob = dataURItoBlob(data.value);
+        $scope.uploader.queue[0]._file = blob;
+        $scope.uploader.uploadAll();
       });
     }
   };
@@ -146,5 +146,14 @@ function EditProfileController(
   $scope.cancelUpload = function () {
     $scope.uploader.clearQueue();
     $scope.imageURL = $scope.user.profileImageURL;
+  };
+  var dataURItoBlob = function (dataURI) {
+    var binary = atob(dataURI.split(',')[1]);
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+    var array = [];
+    for (var i = 0; i < binary.length; i++) {
+      array.push(binary.charCodeAt(i));
+    }
+    return new Blob([new Uint8Array(array)], { type: mimeString });
   };
 }

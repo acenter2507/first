@@ -136,6 +136,7 @@ function EditProfileController(
       });
       mDialog.closePromise.then(function (data) {
         console.log(data);
+        console.log($scope.uploader);
       });
     }
   };

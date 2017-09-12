@@ -16,7 +16,7 @@ module.exports = {
         'public/lib/angucomplete-alt/angucomplete-alt.css',
         'public/lib/simple-line-icons/css/simple-line-icons.css',
         'public/lib/angular-loading-bar/build/loading-bar.css',
-        'public/lib/ng-img-crop/unminified/ng-img-crop.css'
+        'public/lib/ng-img-crop/compile/unminified/ng-img-crop.css'
       ],
       js: [
         'public/lib/jquery/dist/jquery.min.js',

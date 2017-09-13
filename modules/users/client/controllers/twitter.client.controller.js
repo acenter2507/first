@@ -4,12 +4,14 @@ angular.module('users').controller('TwitterLoginController', TwitterLoginControl
 TwitterLoginController.$inject = [
   '$scope',
   '$location',
-  '$stateParams'
+  '$stateParams',
+  'toastr'
 ];
 function TwitterLoginController(
   $scope,
   $location,
-  $stateParams
+  $stateParams,
+  toastr
 ) {
   if (!$stateParams.social) $location.path('/');
   $scope.credentials = { user: $stateParams.social };

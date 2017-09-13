@@ -21,8 +21,7 @@ module.exports = function (config) {
     providerData.token = token;
     providerData.tokenSecret = tokenSecret;
 
-    var email = req.session.twitterEmail || undefined;
-    if (!email) return done(new Error('LB_USER_EMAIL_SOCIAL_INVALID'));
+    var email = token + '@xxx.com';
     // Create the user OAuth profile
     var displayName = profile.displayName.trim();
     // var iSpace = displayName.indexOf(' '); // index of the whitespace following the firstName
@@ -30,11 +29,8 @@ module.exports = function (config) {
     // var lastName = iSpace !== -1 ? displayName.substring(iSpace + 1) : '';
 
     var providerUserProfile = {
-      // firstName: firstName,
-      // lastName: lastName,
       displayName: displayName,
       email: email,
-      // username: profile.username,
       profileImageURL: profile.photos[0].value.replace('normal', 'bigger'),
       provider: 'twitter',
       providerIdentifierField: 'id_str',

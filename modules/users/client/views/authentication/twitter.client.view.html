@@ -1,0 +1,27 @@
+<section class="container animated fadeIn">
+  <section class="row" ng-controller="TwitterLoginController">
+    <h3 class="col-md-12 text-center">{{ 'LB_USER_EMAIL_TWITTER' | translate }}</h3>
+    <p class="small text-center">{{ 'MS_USERS_RESETPASS_SUB' | translate }}</p>
+    <div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
+      <form name="mailForm" ng-submit="submit(mailForm.$valid)" class="form-horizontal" novalidate
+        autocomplete="off">
+        <fieldset>
+          <div class="form-group" show-errors>
+            <input type="email" id="email" name="email" class="form-control" ng-model="credentials.email" placeholder="{{ 'LB_USER_EMAIL' | translate }}"
+              required>
+            <div ng-messages="mailForm.email.$error" role="alert">
+              <p class="help-block error-text font-sm" ng-message="required">{{ 'LB_USER_EMAIL_REQUIRED' | translate }}</p>
+              <p class="help-block error-text font-sm" ng-message="email">{{ 'LB_USER_EMAIL_INVALID' | translate }}</p>
+            </div>
+          </div>
+          <div class="text-center form-group">
+            <button type="submit" class="btn btn-primary">
+              <i class="fa fa-spinner fa-pulse fa-fw" ng-show="busy"></i>
+              {{ 'LB_SUBMIT' | translate }}
+            </button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </section>
+</section>

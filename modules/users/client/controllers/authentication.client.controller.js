@@ -60,7 +60,6 @@ angular.module('users').controller('AuthenticationController', [
         show_error(response.message);
       });
     };
-
     $scope.signin = function (isValid) {
       if ($scope.busy) return;
       $scope.busy = true;
@@ -81,7 +80,6 @@ angular.module('users').controller('AuthenticationController', [
         show_error(response.message);
       });
     };
-
     $scope.resend = function () {
       if ($scope.resend_busy) return;
       $scope.resend_busy = true;
@@ -98,29 +96,29 @@ angular.module('users').controller('AuthenticationController', [
 
     // OAuth provider request
     $scope.callOauthProvider = function (url) {
-      if (url === '/api/auth/twitter') {
-        dialog.openConfirm({
-          scope: $scope,
-          templateUrl: 'modules/core/client/views/templates/twitter-email.dialog.template.html'
-        }).then(handle_confirm, reject => {
-          return;
-        });
-      } else {
-        if ($state.previous && $state.previous.href) {
-          url += '?redirect_to=' + encodeURIComponent($state.previous.href);
-        }
-        $window.location.href = url;
+      if ($state.previous && $state.previous.href) {
+        url += '?redirect_to=' + encodeURIComponent($state.previous.href);
       }
-      // Effectively call OAuth authentication route:
-      function handle_confirm(result) {
-        if (result.error.email) return show_error('LB_USER_EMAIL_INVALID');
-        url += '?email=' + result.email;
-        if ($state.previous && $state.previous.href) {
-          url += '&redirect_to=' + encodeURIComponent($state.previous.href);
-        }
-        $window.location.href = url;
-        return;
-      }
+      $window.location.href = url;
+      // if (url === '/api/auth/twitter') {
+      //   dialog.openConfirm({
+      //     scope: $scope,
+      //     templateUrl: 'modules/core/client/views/templates/twitter-email.dialog.template.html'
+      //   }).then(handle_confirm, reject => {
+      //     return;
+      //   });
+      // } else {
+      // }
+      // // Effectively call OAuth authentication route:
+      // function handle_confirm(result) {
+      //   if (result.error.email) return show_error('LB_USER_EMAIL_INVALID');
+      //   url += '?email=' + result.email;
+      //   if ($state.previous && $state.previous.href) {
+      //     url += '&redirect_to=' + encodeURIComponent($state.previous.href);
+      //   }
+      //   $window.location.href = url;
+      //   return;
+      // }
     };
 
     $scope.setResponse = function (response) {
@@ -134,9 +132,6 @@ angular.module('users').controller('AuthenticationController', [
     $scope.cbExpiration = function () {
       vcRecaptchaService.reload($scope.widgetId);
       $scope.response = null;
-    };
-    $scope.twitterSignin = function () {
-
     };
 
     function get_translate() {

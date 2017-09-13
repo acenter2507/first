@@ -91,7 +91,7 @@
         templateUrl: 'modules/users/client/views/authentication/signup.client.view.html'
       })
       .state('authentication.twitter', {
-        url: '/twitter',
+        url: '/twitter?social',
         templateUrl: 'modules/users/client/views/authentication/twitter.client.view.html'
       })
       .state('authentication.signin', {

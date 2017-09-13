@@ -179,19 +179,36 @@ exports.verify = function (req, res) {
 };
 
 /**
+ * Verify
+ */
+exports.twitter = function (req, res) {
+  if (!req.body.user || req.body.email)
+    return res.redirect('/authentication/signin');
+  User.findOne({
+    id: req.body.user
+  }, function (err, user) {
+    if (err || !user)
+      return res.redirect('/authentication/signin');
+    user.email = req.body.email;
+    saveUser(user)
+      .then(user => {
+        req.login(user, function (err) {
+          if (err) return res.status(400).send(err);
+          return res.redirect('/');
+        });
+      })
+      .catch(err => {
+        return res.status(400).send(err);
+      })
+  });
+};
+/**
  * OAuth provider call
  */
 exports.oauthCall = function (strategy, scope) {
   return function (req, res, next) {
     if (req.query && req.query.redirect_to)
       req.session.redirect_to = req.query.redirect_to;
-    if (req.query && req.query.email)
-      req.session.twitterEmail = req.query.email;
-    // Set redirection path on session.
-    // Do not redirect to a signin or signup page
-    // if (noReturnUrls.indexOf(req.query.redirect_to) === -1) {
-    //   req.session.redirect_to = req.query.redirect_to;
-    // }
     // Authenticate
     passport.authenticate(strategy, scope)(req, res, next);
   };
@@ -204,20 +221,19 @@ exports.oauthCallback = function (strategy) {
   return function (req, res, next) {
     // Pop redirect URL from session
     delete req.session.redirect_to;
-    delete req.session.twitterEmail;
     passport.authenticate(strategy, function (err, user, info) {
       if (err) {
         return res.redirect('/authentication/signin?err=' + encodeURIComponent(errorHandler.getErrorMessage(err)));
       } else if (!user) {
         return res.redirect('/authentication/signin');
       }
+      if (strategy === 'twitter' && user.new)
+        return res.redirect('/authentication/twitter?social=' + user._id);
       user.salt = undefined;
       user.password = undefined;
+      user.new = undefined;
       req.login(user, function (err) {
-        if (err) {
-          return res.redirect('/authentication/signin');
-        }
-
+        if (err) return res.redirect('/authentication/signin');
         return res.redirect(info.redirect_to || '/');
       });
     })(req, res, next);
@@ -293,9 +309,11 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
                   login.save();
                   report.save();
                 }
-                return done(err, user);
+                _user.new = true;
+                return done(err, _user);
               });
             } else {
+                user.new = false;
               return done(err, user);
             }
           }

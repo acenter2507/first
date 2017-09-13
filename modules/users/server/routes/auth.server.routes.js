@@ -19,6 +19,7 @@ module.exports = function (app) {
   app.route('/api/auth/signin').post(users.signin);
   app.route('/api/auth/signout').get(users.signout);
   app.route('/api/auth/resend').post(users.resend);
+  app.route('/api/auth/twitter').post(users.twitter);
   app.route('/api/auth/verify/:token').get(users.verify);
   app.route('/api/auth/verifyEmail/:token').get(users.verifyEmail);
 

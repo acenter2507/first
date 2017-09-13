@@ -57,7 +57,7 @@ angular.module('core').controller('WebAppController', [
     function getFlash() {
       var flash = Storages.get_session(Constants.storages.flash);
       if (flash) {
-        $translate(flash).then(tsl => { toastr.success(tsl, ''});
+        $translate(flash).then(tsl => { toastr.success(tsl, '') });
         Storages.set_session(Constants.storages.flash, undefined);
       }
     }

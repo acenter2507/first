@@ -185,7 +185,7 @@ exports.twitter = function (req, res) {
   if (!req.body.user || req.body.email)
     return res.redirect('/authentication/signin');
   User.findOne({
-    id: req.body.user
+    _id: req.body.user
   }, function (err, user) {
     if (err || !user)
       return res.redirect('/authentication/signin');
@@ -199,7 +199,7 @@ exports.twitter = function (req, res) {
       })
       .catch(err => {
         return res.status(400).send(err);
-      })
+      });
   });
 };
 /**

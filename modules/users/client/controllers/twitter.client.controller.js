@@ -14,7 +14,7 @@ function TwitterLoginController(
   if (!$stateParams.social) $location.path('/');
   $scope.credentials = { user: $stateParams.social };
   $scope.busy = false;
-  get_translate():
+  get_translate();
   $scope.submit = function (isValid) {
     if ($scope.busy) return;
     $scope.busy = true;

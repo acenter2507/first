@@ -8,7 +8,8 @@ TwitterLoginController.$inject = [
   'toastr',
   '$translate',
   '$state',
-  '$http'
+  '$http',
+  'Authentication'
 ];
 function TwitterLoginController(
   $scope,
@@ -17,7 +18,8 @@ function TwitterLoginController(
   toastr,
   $translate,
   $state,
-  $http
+  $http,
+  Authentication
 ) {
   if (!$stateParams.social) $location.path('/');
   $scope.credentials = { user: $stateParams.social };

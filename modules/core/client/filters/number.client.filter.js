@@ -9,7 +9,7 @@ function shortNumer() {
     var newValue = value;
     if (value >= 1000) {
       var suffixes = ['', 'k', 'm', 'b', 't'];
-      var suffixNum = Math.floor(("" + value).length / 3);
+      var suffixNum = Math.floor(('' + value).length / 3);
       var shortValue = '';
       for (var precision = 2; precision >= 1; precision--) {
         shortValue = parseFloat((suffixNum !== 0 ? (value / Math.pow(1000, suffixNum)) : value).toPrecision(precision));

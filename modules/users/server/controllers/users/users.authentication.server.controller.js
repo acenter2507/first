@@ -313,7 +313,7 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
                 return done(err, _user);
               });
             } else {
-                user.new = false;
+              user.new = false;
               return done(err, user);
             }
           }

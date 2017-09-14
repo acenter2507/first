@@ -476,6 +476,7 @@
           ctrl.poll.likeCnt = res.likeCnt;
           ctrl.like = res.like;
           ctrl.like_processing = false;
+          if (!$scope.$$phase) $scope.$digest();
         })
         .catch(err => {
           toast.error(err.message, 'Error!');

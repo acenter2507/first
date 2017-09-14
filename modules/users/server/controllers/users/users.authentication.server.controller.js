@@ -183,25 +183,45 @@ exports.verify = function (req, res) {
  * Verify
  */
 exports.twitter = function (req, res) {
-  if (!req.body.user || req.body.email)
-    return res.redirect('/authentication/signin');
-  User.findOne({
-    _id: req.body.user
-  }, function (err, user) {
-    if (err || !user)
-      return res.redirect('/authentication/signin');
-    user.email = req.body.email;
-    saveUser(user)
-      .then(user => {
-        req.login(user, function (err) {
-          if (err) return res.status(400).send(err);
-          return res.redirect('/');
+  if (!req.body.user)
+    return handleError(new Error('MS_USERS_NOT_EXIST'));
+  if (req.body.email.length === 0)
+    return handleError(new Error('LB_USER_EMAIL_REQUIRED'));
+  if (!validator.isEmail(req.body.email))
+    return handleError(new Error('LB_USER_EMAIL_INVALID'));
+  User.findOne({ email: req.body.email }, function (err, user) {
+    if (err)
+      return handleError(new Error('MS_CM_LOAD_ERROR'));
+    if (user)
+      return handleError(new Error('LB_USERS_EMAIL_DUPLICATE'));
+
+    User.findOne({
+      _id: req.body.user
+    }, function (err, user) {
+      if (err || !user)
+        return res.redirect('/authentication/signin');
+      user.email = req.body.email;
+      user.status = 2;
+      saveUser(user)
+        .then(user => {
+          req.login(user, function (err) {
+            if (err) return res.status(400).send(err);
+            return res.redirect('/');
+          });
+        })
+        .catch(err => {
+          return res.status(400).send(err);
         });
-      })
-      .catch(err => {
-        return res.status(400).send(err);
-      });
+    });
+
   });
+
+
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 };
 /**
  * OAuth provider call
@@ -228,7 +248,6 @@ exports.oauthCallback = function (strategy) {
       } else if (!user) {
         return res.redirect('/authentication/signin');
       }
-      console.log("********************************************", user);
       if (strategy === 'twitter' && user.new)
         return res.redirect('/verification/twitter?social=' + user._id);
       user.salt = undefined;

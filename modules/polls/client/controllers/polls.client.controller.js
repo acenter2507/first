@@ -542,6 +542,10 @@
     };
     // Click button add option
     ctrl.input_opt = opt => {
+      if (!poll.user) {
+        toast.error('You can\'t suggest to a deleted user.', 'Error!');
+        return;
+      }
       ctrl.tmp_opt = (!opt) ? { poll: ctrl.poll._id, title: '', body: '', status: 2 } : opt;
       angular.element('body').toggleClass('aside-panel-open');
     };

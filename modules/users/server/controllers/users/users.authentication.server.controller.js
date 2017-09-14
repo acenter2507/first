@@ -228,7 +228,7 @@ exports.oauthCallback = function (strategy) {
       } else if (!user) {
         return res.redirect('/authentication/signin');
       }
-      console.log(user);
+      console.log("********************************************", user);
       if (strategy === 'twitter' && user.new)
         return res.redirect('/verification/twitter?social=' + user._id);
       user.salt = undefined;
@@ -319,7 +319,7 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
                 return done(err, _user);
               });
             } else {
-              if (user.email.indexOf('@fake.com') >= 0) user.new = true;
+              if (user.email.indexOf('@fake.com') !== -1) user.new = true;
               user.new = false;
               return done(err, user);
             }

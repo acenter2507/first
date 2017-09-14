@@ -228,6 +228,7 @@ exports.oauthCallback = function (strategy) {
       } else if (!user) {
         return res.redirect('/authentication/signin');
       }
+      console.log(user);
       if (strategy === 'twitter' && user.new)
         return res.redirect('/verification/twitter?social=' + user._id);
       user.salt = undefined;
@@ -248,6 +249,7 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
   if (!req.user) {
 
     User.findOne({ email: providerUserProfile.email }, function (err, _user) {
+      console.log(_user);
       if (_user) {
         if (_user.email.indexOf('@fake.com') >= 0) {
           _user.new = true;

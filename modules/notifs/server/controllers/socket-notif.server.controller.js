@@ -24,7 +24,7 @@ function pollLikeNotif(req) {
       .catch(saveLogErr);
     return;
   }
-
+  if (!req.to) return;
   var action = (req.type === 1) ? 'liked' : 'disliked';
   var type = req.type - 1;
   Notif.findOne({ poll: req.pollId, type: { $in: [0, 1] }, from: req.from })

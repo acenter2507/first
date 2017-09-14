@@ -304,7 +304,7 @@
               pollId: poll._id,
               likeCnt: res.likeCnt,
               from: Authentication.user._id,
-              to: poll.user._id,
+              to: poll.user ? poll.user._id : undefined,
               type: res.like.type
             });
           }

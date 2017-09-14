@@ -571,8 +571,12 @@
         toast.error('You must login to reply this comment.', 'Error!');
         return;
       }
+      if (!cmt.user) {
+        toast.error('You can\'t reply to a deleted user.', 'Error!');
+        return;
+      }
       ctrl.tmp_cmt = {};
-      ctrl.tmp_cmt.to = cmt.user._id;
+      ctrl.tmp_cmt.to = cmt.user;
       ctrl.tmp_cmt.toName = cmt.user.displayName;
       ctrl.tmp_cmt.toSlug = cmt.user.slug;
       ctrl.tmp_cmt.discard = true;
@@ -622,7 +626,7 @@
         toast.error('You must login to like this comment.', 'Error!');
         return;
       }
-      if ($scope.user._id === cmt.user._id) {
+      if ($scope.user.user._id === cmt.user._id) {
         toast.error('You cannot like your comment.', 'Error!');
         return;
       }

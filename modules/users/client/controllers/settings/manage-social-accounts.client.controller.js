@@ -11,6 +11,14 @@ angular.module('users').controller('SocialAccountsController', ['$scope', '$http
 
       return false;
     };
+    $scope.hasUnConnectedAdditionalSocialAccounts = function (provider) {
+      var cnt = 0;
+      for (var i in $scope.user.additionalProvidersData) {
+        cnt++;
+      }
+      if (cnt < 4) return true;
+      return false;
+    };
     // Check if provider is already in use with current user
     $scope.isConnectedSocialAccount = function (provider) {
       return $scope.user.provider === provider || ($scope.user.additionalProvidersData && $scope.user.additionalProvidersData[provider]);

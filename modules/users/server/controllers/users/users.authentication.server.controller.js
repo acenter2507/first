@@ -319,7 +319,7 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
                 return done(err, _user);
               });
             } else {
-              if (_user.email.indexOf('@fake.com') >= 0) _user.new = true;
+              if (user.email.indexOf('@fake.com') >= 0) user.new = true;
               user.new = false;
               return done(err, user);
             }

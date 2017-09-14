@@ -248,11 +248,11 @@ exports.oauthCallback = function (strategy) {
       } else if (!user) {
         return res.redirect('/authentication/signin');
       }
-      if (strategy === 'twitter' && user.new)
-        return res.redirect('/verification/twitter?social=' + user._id);
+      // if (strategy === 'twitter' && user.new)
+      //   return res.redirect('/verification/twitter?social=' + user._id);
       user.salt = undefined;
       user.password = undefined;
-      user.new = undefined;
+      // user.new = undefined;
       req.login(user, function (err) {
         if (err)
           return res.redirect('/authentication/signin');
@@ -270,10 +270,10 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
 
     User.findOne({ email: providerUserProfile.email }, function (err, _user) {
       if (_user) {
-        if (_user.email.indexOf('@fake.com') >= 0) {
-          _user.new = true;
-          return done(err, _user);
-        }
+        // if (_user.email.indexOf('@fake.com') >= 0) {
+        //   _user.new = true;
+        //   return done(err, _user);
+        // }
         // Check if user exists, is not signed in using this provider, and doesn't have that provider data already configured
         if (_user.provider !== providerUserProfile.provider && (!_user.additionalProvidersData || !_user.additionalProvidersData[providerUserProfile.provider])) {
           // Add the provider data to the additional provider data field
@@ -335,17 +335,17 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
                   login.save();
                   report.save();
                 }
-                user = _user.toJSON();
-                user.new = true;
+                // user = _user.toJSON();
+                // user.new = true;
                 return done(err, user);
               });
             } else {
-              user = user.toJSON();
-              if (user.email.indexOf('@fake.com') !== -1) {
-                user.new = true;
-              } else {
-                user.new = false;
-              }
+              // user = user.toJSON();
+              // if (user.email.indexOf('@fake.com') !== -1) {
+              //   user.new = true;
+              // } else {
+              //   user.new = false;
+              // }
               return done(err, user);
             }
           }

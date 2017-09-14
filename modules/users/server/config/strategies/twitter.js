@@ -24,10 +24,6 @@ module.exports = function (config) {
     var email = token + '@fake.com';
     // Create the user OAuth profile
     var displayName = profile.displayName.trim();
-    // var iSpace = displayName.indexOf(' '); // index of the whitespace following the firstName
-    // var firstName = iSpace !== -1 ? displayName.substring(0, iSpace) : displayName;
-    // var lastName = iSpace !== -1 ? displayName.substring(iSpace + 1) : '';
-
     var providerUserProfile = {
       displayName: displayName,
       email: email,

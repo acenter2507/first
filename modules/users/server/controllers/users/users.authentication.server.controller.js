@@ -14,8 +14,8 @@ var path = require('path'),
   Userlogin = mongoose.model('Userlogin'),
   crypto = require('crypto'),
   async = require('async'),
-  validator = require('validator')
-_ = require('underscore');
+  validator = require('validator'),
+  _ = require('underscore');
 
 exports.signup = function (req, res) {
   delete req.body.roles;
@@ -251,7 +251,7 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
       if (_user) {
         if (_user.email.indexOf('@fake.com') >= 0) {
           _user.new = true;
-          return done(err, _user)
+          return done(err, _user);
         }
         // Check if user exists, is not signed in using this provider, and doesn't have that provider data already configured
         if (_user.provider !== providerUserProfile.provider && (!_user.additionalProvidersData || !_user.additionalProvidersData[providerUserProfile.provider])) {

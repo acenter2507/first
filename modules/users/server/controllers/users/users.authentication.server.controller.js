@@ -255,10 +255,8 @@ exports.oauthCallback = function (strategy) {
       // user.new = undefined;
       req.login(user, function (err) {
         if (err) {
-          console.log(err);
           return res.redirect('/authentication/signin');
         }
-        console.log('Login succes');
         return res.redirect(info.redirect_to || '/');
       });
     })(req, res, next);

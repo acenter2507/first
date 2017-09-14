@@ -542,7 +542,7 @@
     };
     // Click button add option
     ctrl.input_opt = opt => {
-      if (!poll.user) {
+      if (!ctrl.poll.user) {
         toast.error('You can\'t suggest to a deleted user.', 'Error!');
         return;
       }

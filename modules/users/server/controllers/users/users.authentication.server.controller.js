@@ -254,9 +254,8 @@ exports.oauthCallback = function (strategy) {
       user.password = undefined;
       user.new = undefined;
       req.login(user, function (err) {
-        if (err) {
+        if (err)
           return res.redirect('/authentication/signin');
-        }
         return res.redirect(info.redirect_to || '/');
       });
     })(req, res, next);
@@ -386,13 +385,8 @@ exports.removeOAuthProvider = function (req, res, next) {
   var user = req.user;
   var provider = req.query.provider;
 
-  if (!user) {
-    return res.status(401).json({
-      message: 'User is not authenticated'
-    });
-  } else if (!provider) {
-    return res.status(400).send();
-  }
+  if (!user) return res.status(401).send({ message: 'MS_CM_AUTH_ERROR' });
+  if (!provider) return res.status(400).send({ message: 'LB_USER_NOT_FOUND' });
 
   // Delete the additional provider
   if (user.additionalProvidersData[provider]) {
@@ -409,11 +403,9 @@ exports.removeOAuthProvider = function (req, res, next) {
       });
     } else {
       req.login(user, function (err) {
-        if (err) {
-          return res.status(400).send(err);
-        } else {
-          return res.json(user);
-        }
+        if (err)
+          return res.status(400).send(new Error('MS_CM_LOAD_ERROR'));
+        return res.json(user);
       });
     }
   });

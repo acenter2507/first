@@ -3,7 +3,6 @@
 angular.module('users').controller('SocialAccountsController', ['$scope', '$http', 'Authentication',
   function ($scope, $http, Authentication) {
 
-    console.log($scope.user);
     // Check if there are additional accounts
     $scope.hasConnectedAdditionalSocialAccounts = function (provider) {
       for (var i in $scope.user.additionalProvidersData) {
@@ -12,7 +11,6 @@ angular.module('users').controller('SocialAccountsController', ['$scope', '$http
 
       return false;
     };
-
     // Check if provider is already in use with current user
     $scope.isConnectedSocialAccount = function (provider) {
       return $scope.user.provider === provider || ($scope.user.additionalProvidersData && $scope.user.additionalProvidersData[provider]);
@@ -31,7 +29,7 @@ angular.module('users').controller('SocialAccountsController', ['$scope', '$http
         $scope.success = true;
         $scope.user = Authentication.user = response;
       }).error(function (response) {
-        $scope.error = response.message;
+        $scope.show_error(response.message);
       });
     };
   }

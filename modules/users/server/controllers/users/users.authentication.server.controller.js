@@ -206,7 +206,7 @@ exports.twitter = function (req, res) {
         .then(user => {
           req.login(user, function (err) {
             if (err) return handleError(new Error('MS_CM_LOAD_ERROR'));
-            return res.redirect('/');
+            return res.json(user);
           });
         })
         .catch(err => {

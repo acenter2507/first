@@ -90,10 +90,6 @@
         url: '/signup',
         templateUrl: 'modules/users/client/views/authentication/signup.client.view.html'
       })
-      .state('authentication.twitter', {
-        url: '/twitter?social',
-        templateUrl: 'modules/users/client/views/authentication/twitter.client.view.html'
-      })
       .state('authentication.signin', {
         url: '/signin?err',
         templateUrl: 'modules/users/client/views/authentication/signin.client.view.html'
@@ -106,6 +102,10 @@
       .state('verification.error', {
         url: '/error?err',
         templateUrl: 'modules/users/client/views/authentication/error.client.view.html'
+      })
+      .state('verification.twitter', {
+        url: '/twitter?social',
+        templateUrl: 'modules/users/client/views/authentication/twitter.client.view.html'
       })
       .state('password', {
         abstract: true,

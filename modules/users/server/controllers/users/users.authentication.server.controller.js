@@ -14,7 +14,8 @@ var path = require('path'),
   Userlogin = mongoose.model('Userlogin'),
   crypto = require('crypto'),
   async = require('async'),
-  validator = require('validator');
+  validator = require('validator')
+_ = require('underscore');
 
 exports.signup = function (req, res) {
   delete req.body.roles;
@@ -228,7 +229,7 @@ exports.oauthCallback = function (strategy) {
         return res.redirect('/authentication/signin');
       }
       if (strategy === 'twitter' && user.new)
-        return res.redirect('/authentication/twitter?social=' + user._id);
+        return res.redirect('/verification/twitter?social=' + user._id);
       user.salt = undefined;
       user.password = undefined;
       user.new = undefined;
@@ -248,6 +249,10 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
 
     User.findOne({ email: providerUserProfile.email }, function (err, _user) {
       if (_user) {
+        if (_user.email.indexOf('@fake.com') >= 0) {
+          _user.new = true;
+          return done(err, _user)
+        }
         // Check if user exists, is not signed in using this provider, and doesn't have that provider data already configured
         if (_user.provider !== providerUserProfile.provider && (!_user.additionalProvidersData || !_user.additionalProvidersData[providerUserProfile.provider])) {
           // Add the provider data to the additional provider data field

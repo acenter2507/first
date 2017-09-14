@@ -26,11 +26,8 @@ module.exports = function (config) {
     if (!email) return done(new Error('LB_USER_EMAIL_SOCIAL_INVALID'));
     // Create the user OAuth profile
     var providerUserProfile = {
-      // firstName: profile.name.givenName,
-      // lastName: profile.name.familyName,
       displayName: profile.displayName,
       email: email,
-      // username: profile.username || generateUsername(profile),
       profileImageURL: (profile.id) ? '//graph.facebook.com/' + profile.id + '/picture?type=large' : undefined,
       provider: 'facebook',
       providerIdentifierField: 'id',

@@ -254,8 +254,10 @@ exports.oauthCallback = function (strategy) {
       user.password = undefined;
       // user.new = undefined;
       req.login(user, function (err) {
-        if (err)
+        if (err) {
+          console.log(err);
           return res.redirect('/authentication/signin');
+        }
         return res.redirect(info.redirect_to || '/');
       });
     })(req, res, next);
@@ -318,7 +320,7 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
             if (!user) {
               // var possibleUsername = providerUserProfile.username || ((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
               user = new User({
-                status: (providerUserProfile.provider === 'twitter') ? 1 : 2,
+                status: 2,
                 displayName: providerUserProfile.displayName,
                 email: providerUserProfile.email,
                 profileImageURL: providerUserProfile.profileImageURL,

@@ -114,6 +114,7 @@
   "MS_USERS_RESETPASS_HANDBACK": "Continue to home page.",
   "MS_USERS_RESETPASS": "Ask for a new password reset.",
   "MS_USERS_SOCIAL_EXIST": "User is already connected using this social.",
+  "MS_USERS_PROVIDER": "Your account was registried by ",
   "LB_PROFILE_SUCCESE": "Profile saved successfully",
   "LB_PROFILE_FAILED": "Profile saved failed",
   "LB_SOCIALS": "Social accounts"

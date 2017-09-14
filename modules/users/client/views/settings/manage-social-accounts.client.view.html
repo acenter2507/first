@@ -1,12 +1,12 @@
 <section class="row animated fadeIn" ng-controller="SocialAccountsController">
-
-  <h4 class="col-md-12" ng-show="hasConnectedAdditionalSocialAccounts()">Connected social accounts:</h4>
+  <h4 class="col-md-12" ng-if="user.provider !== 'local'">{{::'MS_USERS_PROVIDER' | translate }}<span class="text-uppercase">{{:: user.provider}}</span></h4>
+  <p ng-show="hasConnectedAdditionalSocialAccounts()">Connected social accounts:</p>
   <div class="col-md-12">
     <div ng-repeat="(providerName, providerData) in user.additionalProvidersData" class="social-account-container">
       <a ng-class="'btn-' + providerName" class="btn btn-lg" type="button" ng-click="removeUserSocialAccount(providerName)"><span class="fa fa-times"></span></a>
     </div>
   </div>
-  <h4 class="col-md-12" ng-show="hasUnConnectedAdditionalSocialAccounts()">Unconnected social accounts:</h4>
+  <p ng-show="hasUnConnectedAdditionalSocialAccounts()">Unconnected social accounts:</p>
   <div class="col-md-12">
     <div class="social-account-container" ng-hide="isConnectedSocialAccount('facebook')">
       <a class="btn btn-lg btn-facebook" type="button" href="/api/auth/facebook" target="_self"><span class="fa fa-plus"></span></a>

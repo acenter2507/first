@@ -297,7 +297,7 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
             if (!user) {
               // var possibleUsername = providerUserProfile.username || ((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
               user = new User({
-                status: 2,
+                status: (providerUserProfile.provider === 'twitter') ? 1 : 2,
                 displayName: providerUserProfile.displayName,
                 email: providerUserProfile.email,
                 profileImageURL: providerUserProfile.profileImageURL,

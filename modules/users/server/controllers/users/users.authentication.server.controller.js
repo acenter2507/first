@@ -183,6 +183,8 @@ exports.verify = function (req, res) {
  * Verify
  */
 exports.twitter = function (req, res) {
+  console.log(req.body);
+  return res.end();
   if (!req.body.user)
     return handleError(new Error('MS_USERS_NOT_EXIST'));
   if (req.body.email.length === 0)

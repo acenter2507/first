@@ -185,38 +185,38 @@ exports.verify = function (req, res) {
 exports.twitter = function (req, res) {
   console.log(req.body);
   return res.end();
-  if (!req.body.user)
-    return handleError(new Error('MS_USERS_NOT_EXIST'));
-  if (req.body.email.length === 0)
-    return handleError(new Error('LB_USER_EMAIL_REQUIRED'));
-  if (!validator.isEmail(req.body.email))
-    return handleError(new Error('LB_USER_EMAIL_INVALID'));
-  User.findOne({ email: req.body.email }, function (err, user) {
-    if (err)
-      return handleError(new Error('MS_CM_LOAD_ERROR'));
-    if (user)
-      return handleError(new Error('LB_USERS_EMAIL_DUPLICATE'));
+  // if (!req.body.user)
+  //   return handleError(new Error('MS_USERS_NOT_EXIST'));
+  // if (req.body.email.length === 0)
+  //   return handleError(new Error('LB_USER_EMAIL_REQUIRED'));
+  // if (!validator.isEmail(req.body.email))
+  //   return handleError(new Error('LB_USER_EMAIL_INVALID'));
+  // User.findOne({ email: req.body.email }, function (err, user) {
+  //   if (err)
+  //     return handleError(new Error('MS_CM_LOAD_ERROR'));
+  //   if (user)
+  //     return handleError(new Error('LB_USERS_EMAIL_DUPLICATE'));
 
-    User.findOne({
-      _id: req.body.user
-    }, function (err, user) {
-      if (err || !user)
-        return res.redirect('/authentication/signin');
-      user.email = req.body.email;
-      user.status = 2;
-      saveUser(user)
-        .then(user => {
-          req.login(user, function (err) {
-            if (err) return res.status(400).send(err);
-            return res.redirect('/');
-          });
-        })
-        .catch(err => {
-          return res.status(400).send(err);
-        });
-    });
+  //   User.findOne({
+  //     _id: req.body.user
+  //   }, function (err, user) {
+  //     if (err || !user)
+  //       return res.redirect('/authentication/signin');
+  //     user.email = req.body.email;
+  //     user.status = 2;
+  //     saveUser(user)
+  //       .then(user => {
+  //         req.login(user, function (err) {
+  //           if (err) return res.status(400).send(err);
+  //           return res.redirect('/');
+  //         });
+  //       })
+  //       .catch(err => {
+  //         return res.status(400).send(err);
+  //       });
+  //   });
 
-  });
+  // });
 
 
   function handleError(err) {

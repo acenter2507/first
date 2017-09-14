@@ -2,22 +2,22 @@
   <h3 class="col-md-12 text-center" ng-show="hasConnectedAdditionalSocialAccounts()">Connected social accounts:</h3>
   <div class="col-md-12 text-center">
     <div ng-repeat="(providerName, providerData) in user.additionalProvidersData" class="social-account-container">
-      <a ng-class="'btn-' + providerName" class="btn btn-lg" type="button" ng-click="removeUserSocialAccount(providerName)">Remove</a>
+      <a ng-class="'btn-' + providerName" class="btn btn-lg" type="button" ng-click="removeUserSocialAccount(providerName)"><span class="fa fa-times"></span></a>
     </div>
   </div>
   <h3 class="col-md-12 text-center" ng-show="user.additionalProvidersData.length < 4">Unconnected social accounts:</h3>
   <div class="col-md-12 text-center">
     <div class="social-account-container" ng-hide="isConnectedSocialAccount('facebook')">
-      <a class="btn btn-lg btn-facebook" type="button" href="/api/auth/facebook" target="_self">{{::'LB_SIGNIN' | translate}}</span></a>
+      <a class="btn btn-lg btn-facebook" type="button" href="/api/auth/facebook" target="_self"><span class="fa fa-plus"></span></a>
     </div>
     <div class="social-account-container" ng-hide="isConnectedSocialAccount('twitter')">
-      <a class="btn btn-lg btn-twitter" type="button" href="/api/auth/twitter" target="_self">{{::'LB_SIGNIN' | translate}}</a>
+      <a class="btn btn-lg btn-twitter" type="button" href="/api/auth/twitter" target="_self"><span class="fa fa-plus"></span></a>
     </div>
     <div class="social-account-container" ng-hide="isConnectedSocialAccount('google')">
-      <a class="btn btn-lg btn-google-plus" type="button" href="/api/auth/google" target="_self">{{::'LB_SIGNIN' | translate}}></a>
+      <a class="btn btn-lg btn-google-plus" type="button" href="/api/auth/google" target="_self"><span class="fa fa-plus"></span></a>
     </div>
     <div class="social-account-container" ng-hide="isConnectedSocialAccount('linkedin')">
-      <a class="btn btn-lg btn-linkedin" type="button" href="/api/auth/linkedin" target="_self">{{::'LB_SIGNIN' | translate}}</a>
+      <a class="btn btn-lg btn-linkedin" type="button" href="/api/auth/linkedin" target="_self"><span class="fa fa-plus"></span></a>
     </div>
   </div>
 </section>

@@ -100,25 +100,6 @@ angular.module('users').controller('AuthenticationController', [
         url += '?redirect_to=' + encodeURIComponent($state.previous.href);
       }
       $window.location.href = url;
-      // if (url === '/api/auth/twitter') {
-      //   dialog.openConfirm({
-      //     scope: $scope,
-      //     templateUrl: 'modules/core/client/views/templates/twitter-email.dialog.template.html'
-      //   }).then(handle_confirm, reject => {
-      //     return;
-      //   });
-      // } else {
-      // }
-      // // Effectively call OAuth authentication route:
-      // function handle_confirm(result) {
-      //   if (result.error.email) return show_error('LB_USER_EMAIL_INVALID');
-      //   url += '?email=' + result.email;
-      //   if ($state.previous && $state.previous.href) {
-      //     url += '&redirect_to=' + encodeURIComponent($state.previous.href);
-      //   }
-      //   $window.location.href = url;
-      //   return;
-      // }
     };
 
     $scope.setResponse = function (response) {

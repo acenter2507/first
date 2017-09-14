@@ -299,6 +299,7 @@
           rs_like.$save(successCb, successCb);
         }
         function successCb(res) {
+          console.log(res);
           if (Authentication.user) {
             Socket.emit('poll_like', {
               pollId: poll._id,

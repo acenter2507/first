@@ -315,10 +315,12 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
                   login.save();
                   report.save();
                 }
-                _user.new = true;
-                return done(err, _user);
+                user = _user.toJSON();
+                user.new = true;
+                return done(err, user);
               });
             } else {
+              user = user.toJSON();
               if (user.email.indexOf('@fake.com') !== -1) user.new = true;
               user.new = false;
               return done(err, user);

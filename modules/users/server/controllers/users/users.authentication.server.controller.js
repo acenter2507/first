@@ -249,7 +249,6 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
   if (!req.user) {
 
     User.findOne({ email: providerUserProfile.email }, function (err, _user) {
-      console.log(_user);
       if (_user) {
         if (_user.email.indexOf('@fake.com') >= 0) {
           _user.new = true;
@@ -320,6 +319,7 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
                 return done(err, _user);
               });
             } else {
+              if (_user.email.indexOf('@fake.com') >= 0) _user.new = true;
               user.new = false;
               return done(err, user);
             }

@@ -258,6 +258,7 @@ exports.oauthCallback = function (strategy) {
           console.log(err);
           return res.redirect('/authentication/signin');
         }
+        console.log('Login succes');
         return res.redirect(info.redirect_to || '/');
       });
     })(req, res, next);

@@ -433,7 +433,7 @@
       return new Promise((resolve, reject) => {
         var rs_report = new Reports({
           poll: poll._id,
-          victim: poll.user._id,
+          victim: poll.user ? poll.user._id : null,
           reason: reason
         });
         rs_report.$save(

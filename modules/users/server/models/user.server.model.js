@@ -92,7 +92,7 @@ var UserSchema = new Schema({
   }
 });
 
-UserSchema.plugin(slug('displayName'));
+UserSchema.plugin(slug('displayName', { update: true }));
 
 /**
  * Hook a pre save method to hash the password

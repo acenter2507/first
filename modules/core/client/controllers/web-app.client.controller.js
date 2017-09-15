@@ -41,6 +41,10 @@ angular.module('core').controller('WebAppController', [
       }
       initCategorys();
       // Kiểm tra thông tin user mới có thay đổi ngôn ngữ hay không
+      var lang = $translate.preferredLanguage();
+      var user_lang = $scope.user.language;
+      console.log(lang);
+      console.log(user_lang);
       if ($scope.user.language !== $translate.preferredLanguage()) {
         $translate.use($scope.user.language);
       }

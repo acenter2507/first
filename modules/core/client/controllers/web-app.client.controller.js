@@ -109,6 +109,6 @@ angular.module('core').controller('WebAppController', [
           }
         }
       });
-    }
+    };
   }
 ]);

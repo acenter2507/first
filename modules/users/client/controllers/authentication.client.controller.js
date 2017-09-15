@@ -10,7 +10,7 @@ angular.module('users').controller('AuthenticationController', [
   'PasswordValidator',
   'ngDialog',
   'Constants',
-  'vcRecaptchaService'
+  'vcRecaptchaService',
   function (
     $scope,
     $state,

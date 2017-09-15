@@ -206,6 +206,8 @@ exports.changeProfilePicture = function (req, res) {
  */
 exports.changeLanguage = function (req, res) {
   var user = req.user;
+  console.log(req.body);
+  return res.status(400).send({ message: 'MS_CM_LOAD_ERROR' });
   var language = config.mappingLanguages[req.body.language];
   if (!language) {
     return res.status(400).send({ message: 'MS_USERS_LANG_UNSUPPORT' });

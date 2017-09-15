@@ -83,7 +83,7 @@ angular.module('core').controller('WebAppController', [
       function show_config(content) {
         $scope.message_content = content;
         $scope.dialog_type = 1;
-        $scope.buton_label = 'Discard';
+        $scope.buton_label = 'LB_CHANGE';
         dialog.openConfirm({
           scope: $scope,
           templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'

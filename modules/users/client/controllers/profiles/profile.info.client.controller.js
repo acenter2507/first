@@ -4,8 +4,7 @@ angular.module('users').controller('ProfileInfoController', [
   '$scope',
   'UserApi',
   'Action',
-  'toastr',
-  function ($scope, UserApi, Action, toast) {
+  function ($scope, UserApi, Action) {
     $scope.polls = [];
     $scope.cmts = [];
     $scope.votes = [];
@@ -25,7 +24,7 @@ angular.module('users').controller('ProfileInfoController', [
           merge_activity();
           $scope.busy = false;
         }, err => {
-          toast.error('Can\'t load user info ' + err.message, 'Error!');
+          $scope.show_message(err.message, true);
         });
     }
 

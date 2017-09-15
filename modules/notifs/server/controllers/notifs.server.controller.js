@@ -180,7 +180,6 @@ exports.markAllRead = function (req, res) {
     { $set: { status: 1 } },
     { 'multi': true }
   ).exec((err, result) => {
-    console.log(result);
     res.end();
   });
 };

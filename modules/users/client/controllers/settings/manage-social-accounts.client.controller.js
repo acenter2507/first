@@ -33,11 +33,10 @@ angular.module('users').controller('SocialAccountsController', ['$scope', '$http
           provider: provider
         }
       }).success(function (response) {
-        // If successful show success message and clear form
         $scope.success = true;
         $scope.user = Authentication.user = response;
-      }).error(function (response) {
-        $scope.show_error(response.message);
+      }).error(function (err) {
+        $scope.show_message(err.message, true);
       });
     };
   }

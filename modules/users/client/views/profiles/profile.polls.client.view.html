@@ -2,9 +2,9 @@
   <!-- Breadcrumb -->
   <div class="row">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a ui-sref="home">Home</a></li>
-      <li class="breadcrumb-item"><a ui-sref="profile.info({ userId: profile.slug })">{{profile.displayName}}</a></li>
-      <li class="breadcrumb-item active">Polls</li>
+      <li class="breadcrumb-item"><a ui-sref="home">{{:: 'LB_HOME' | translate }}</a></li>
+      <li class="breadcrumb-item"><a ui-sref="profile.info({ userId: profile.slug })">{{:: profile.displayName}}</a></li>
+      <li class="breadcrumb-item active">{{:: 'LB_POLLS' | translate }}</li>
     </ol>
   </div>
   <!-- List poll -->
@@ -15,7 +15,9 @@
 
     <div class="col-xs-12 pd6x">
       <div class="notice notice-warning" ng-show="polls.length === 0 && stopped">
-        <strong>Sorry</strong> {{profile.displayName}} has not create any polls.
+        <strong>{{:: 'LB_SORRY' | translate }}</strong>
+        <span>{{:: profile.displayName }}</span>
+        <span>{{:: 'LB_PROFILE_POLL_EMPTY' | translate }}</span>
       </div>
     </div>
   </div>

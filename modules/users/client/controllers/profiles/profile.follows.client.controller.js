@@ -5,8 +5,7 @@ angular.module('users').controller('ProfileFollowsController', [
   'UserApi',
   'Action',
   'ngDialog',
-  'toastr',
-  function ($scope, UserApi, Action, dialog, toast) {
+  function ($scope, UserApi, Action, dialog) {
     $scope.screen = 'profile-follow';
     $scope.polls = [];
     $scope.page = 0;
@@ -40,7 +39,7 @@ angular.module('users').controller('ProfileFollowsController', [
         .catch(err => {
           $scope.busy = false;
           $scope.stopped = true;
-          toast.error(err.message, 'Error!');
+          $scope.show_message(err.message, true);
         });
     }
     function process_before_show(poll) {
@@ -59,7 +58,7 @@ angular.module('users').controller('ProfileFollowsController', [
 
     $scope.follow_poll = (poll) => {
       if (!$scope.isLogged) {
-        toast.error('You must login to follow poll.', 'Error!');
+        $scope.show_message('MS_CM_LOGIN_ERROR', true);
         return;
       }
       if ($scope.isCurrentOwner) {
@@ -69,7 +68,7 @@ angular.module('users').controller('ProfileFollowsController', [
         .then(res => {
         })
         .catch(err => {
-          toast.error(err.message, 'Error!');
+          $scope.show_message(err.message, true);
         });
     };
     $scope.clear_follow = () => {

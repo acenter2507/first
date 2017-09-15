@@ -103,10 +103,6 @@
         url: '/error?err',
         templateUrl: 'modules/users/client/views/authentication/error.client.view.html'
       })
-      .state('verification.twitter', {
-        url: '/twitter?social',
-        templateUrl: 'modules/users/client/views/authentication/twitter.client.view.html'
-      })
       .state('password', {
         abstract: true,
         url: '/password',

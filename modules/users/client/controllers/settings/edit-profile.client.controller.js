@@ -12,7 +12,6 @@ EditProfileController.$inject = [
   'Users',
   'Authentication',
   'FileUploader',
-  'toastr',
   'ngDialog',
   'Storages',
   'Constants'];
@@ -25,7 +24,6 @@ function EditProfileController(
   Users,
   Authentication,
   FileUploader,
-  toastr,
   dialog,
   Storages,
   Constants
@@ -74,7 +72,7 @@ function EditProfileController(
         // Trường hợp trả về user
         if (res._id) {
           Authentication.user = res;
-          $scope.show_success('LB_PROFILE_SUCCESE');
+          $scope.show_message('LB_PROFILE_SUCCESE', false);
         } else {
           Storages.set_session(Constants.storages.flash, res.message);
           $window.location.href = res.host + '/api/auth/signout';
@@ -82,7 +80,7 @@ function EditProfileController(
       }, function (err) {
         $scope.profile_busy = false;
         $scope.userInfo = _.pick($scope.user, '_id', 'displayName', 'email');
-        $scope.show_error(err.message);
+        $scope.show_message(err.message, true);
       });
     }
   };

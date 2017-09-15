@@ -62,7 +62,6 @@
         .catch(err => {
           toast.error(err.message, 'Error!');
           $scope.busy = false;
-          console.log(err);
         });
       Storages.set_session(Constants.storages.admin_polls_condition, JSON.stringify($scope.condition));
     }

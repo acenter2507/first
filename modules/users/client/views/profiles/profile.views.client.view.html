@@ -2,15 +2,15 @@
   <!-- Breadcrumb -->
   <div class="row">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a ui-sref="home">Home</a></li>
-      <li class="breadcrumb-item"><a ui-sref="profile.info({ userId: profile.slug })">{{profile.displayName}}</a></li>
-      <li class="breadcrumb-item active">Viewed</li>
+      <li class="breadcrumb-item"><a ui-sref="home">{{:: 'LB_HOME' | translate }}</a></li>
+      <li class="breadcrumb-item"><a ui-sref="profile.info({ userId: profile.slug })">{{:: profile.displayName}}</a></li>
+      <li class="breadcrumb-item active">{{:: 'LB_POLLS_VIEWED' | translate }}</li>
     </ol>
   </div>
   <div class="row">
     <div class="col-xs-12 pdn">
       <div class="custom-toolbar">
-        <a ng-show="polls.length > 0" class="btn btn-danger pull-right" ng-click="clear_view()">Clear</a>
+        <a ng-show="polls.length > 0" class="btn btn-danger pull-right" ng-click="clear_view()">{{:: 'LB_CLEAR' | translate }}</a>
       </div>
     </div>
   </div>
@@ -21,7 +21,8 @@
     </div>
     <div class="col-xs-12 pd6x">
       <div class="notice notice-warning" ng-show="polls.length === 0 && stopped">
-        <strong>Sorry</strong> You has not viewed any polls.
+        <strong>{{:: 'LB_SORRY' | translate }}</strong>
+        <span>{{:: 'LB_PROFILE_VIEW_EMPTY' | translate }}</span>
       </div>
     </div>
   </div>

@@ -4,8 +4,7 @@ angular.module('users').controller('ProfileVotesController', [
   '$scope',
   'UserApi',
   'Action',
-  'toastr',
-  function ($scope, UserApi, Action, toast) {
+  function ($scope, UserApi, Action) {
     $scope.votes = [];
     $scope.page = 0;
     $scope.busy = false;
@@ -27,7 +26,7 @@ angular.module('users').controller('ProfileVotesController', [
           $scope.busy = false;
         })
         .error(err => {
-          toast.error(err.message, 'Error!');
+          $scope.show_message(err.message, true);
         });
     }
     $scope.vote_filter = vote => {

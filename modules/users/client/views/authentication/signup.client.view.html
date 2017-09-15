@@ -4,29 +4,29 @@
       <fieldset>
         <!-- Display Name  -->
         <div class="form-group" show-errors>
-          <input type="text" id="displayName" name="displayName" class="form-control" ng-model="credentials.displayName" placeholder="{{ 'LB_USER_NAME' | translate }}"
+          <input type="text" id="displayName" name="displayName" class="form-control" ng-model="credentials.displayName" placeholder="{{:: 'LB_USER_NAME' | translate }}"
             required>
           <div ng-messages="signupForm.displayName.$error" role="alert">
-            <p class="help-block error-text font-sm" ng-message="required">{{ 'LB_USER_NAME_REQUIRED' | translate }}</p>
+            <p class="help-block error-text font-sm" ng-message="required">{{:: 'LB_USER_NAME_REQUIRED' | translate }}</p>
           </div>
         </div>
         <!-- Email  -->
         <div class="form-group" show-errors>
-          <input type="email" id="email" name="email" class="form-control" ng-model="credentials.email" placeholder="{{ 'LB_USER_EMAIL' | translate }}"
+          <input type="email" id="email" name="email" class="form-control" ng-model="credentials.email" placeholder="{{:: 'LB_USER_EMAIL' | translate }}"
             required>
           <div ng-messages="signupForm.email.$error" role="alert">
-            <p class="help-block error-text font-sm" ng-message="required">{{ 'LB_USER_EMAIL_REQUIRED' | translate }}</p>
-            <p class="help-block error-text font-sm" ng-message="email">{{ 'LB_USER_EMAIL_INVALID' | translate }}</p>
+            <p class="help-block error-text font-sm" ng-message="required">{{:: 'LB_USER_EMAIL_REQUIRED' | translate }}</p>
+            <p class="help-block error-text font-sm" ng-message="email">{{:: 'LB_USER_EMAIL_INVALID' | translate }}</p>
           </div>
         </div>
         <!-- Password  -->
         <div class="form-group" show-errors>
-          <input type="password" id="password" name="password" class="form-control" ng-model="credentials.password" placeholder="{{ 'LB_USER_PASSWORD' | translate }}"
+          <input type="password" id="password" name="password" class="form-control" ng-model="credentials.password" placeholder="{{:: 'LB_USER_PASSWORD' | translate }}"
             password-validator required>
           <div ng-messages="signupForm.password.$error" role="alert">
-            <p class="help-block error-text font-sm" ng-message="required">{{ 'LB_USER_PASSWORD_REQUIRED' | translate }}</p>
+            <p class="help-block error-text font-sm" ng-message="required">{{:: 'LB_USER_PASSWORD_REQUIRED' | translate }}</p>
             <div ng-repeat="passwordError in passwordErrors">
-              <p class="help-block error-text font-sm" ng-show="signupForm.password.$error.requirements">{{passwordError | translate}}</p>
+              <p class="help-block error-text font-sm" ng-show="signupForm.password.$error.requirements">{{:: passwordError | translate}}</p>
             </div>
           </div>
         </div>
@@ -38,17 +38,17 @@
         <div class="text-center form-group">
           <button type="submit" class="btn btn-primary btn-block">
             <i class="fa fa-spinner fa-pulse fa-fw" ng-show="busy"></i>
-            {{ 'LB_SIGNUP' | translate }}
+            {{:: 'LB_SIGNUP' | translate }}
           </button>
         </div>
       </fieldset>
     </form>
     <div ng-hide="isShowForm">
-      <p>{{ 'MS_USERS_SEND_SUCCESS' | translate }}</p>
+      <p>{{:: 'MS_USERS_SEND_SUCCESS' | translate }}</p>
       <div class="text-center form-group">
         <button type="button" class="btn btn-primary btn-block" ng-click="resend()">
           <i class="fa fa-spinner fa-pulse fa-fw" ng-show="resend_busy"></i>
-          {{ 'MS_USERS_RESEND' | translate }}
+          {{:: 'MS_USERS_RESEND' | translate }}
         </button>
       </div>
     </div>

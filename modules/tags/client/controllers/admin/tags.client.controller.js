@@ -69,7 +69,6 @@
 
       function errorCallback(res) {
         toast.error(res.data.message, 'Error!');
-        console.log(res);
       }
     };
   }

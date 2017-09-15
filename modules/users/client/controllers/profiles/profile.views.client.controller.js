@@ -5,8 +5,7 @@ angular.module('users').controller('ProfileViewsController', [
   'UserApi',
   'Action',
   'ngDialog',
-  'toastr',
-  function ($scope, UserApi, Action, dialog, toast) {
+  function ($scope, UserApi, Action, dialog) {
     $scope.screen = 'profile-view';
     $scope.polls = [];
     $scope.page = 0;
@@ -40,7 +39,7 @@ angular.module('users').controller('ProfileViewsController', [
         .catch(err => {
           $scope.busy = false;
           $scope.stopped = true;
-          toast.error(err.message, 'Error!');
+          $scope.show_message(err.message, true);
         });
     }
     function process_before_show(poll) {

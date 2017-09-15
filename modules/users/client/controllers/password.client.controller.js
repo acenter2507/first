@@ -1,8 +1,7 @@
 'use strict';
 
-angular.module('users').controller('PasswordController', ['$scope', '$stateParams', '$http', '$location', 'Authentication', 'PasswordValidator', 'toastr', '$translate',
-  function ($scope, $stateParams, $http, $location, Authentication, PasswordValidator, toastr, $translate) {
-    $scope.authentication = Authentication;
+angular.module('users').controller('PasswordController', ['$scope', '$stateParams', '$http', '$location', 'Authentication', 'PasswordValidator',
+  function ($scope, $stateParams, $http, $location, Authentication, PasswordValidator) {
     $scope.busy = false;
     //If user is signed in then redirect back home
     if ($scope.user) {
@@ -24,13 +23,12 @@ angular.module('users').controller('PasswordController', ['$scope', '$stateParam
         // Show user success message and clear form
         $scope.credentials = null;
         $scope.busy = false;
-        $scope.success = response.message;
-
-      }).error(function (response) {
+        $scope.show_message(response.message, false);
+      }).error(function (err) {
         // Show user error message and clear form
         $scope.busy = false;
         $scope.credentials = null;
-        $scope.show_error(response.message);
+        $scope.show_message(err.message, true);
       });
     };
 
@@ -47,16 +45,13 @@ angular.module('users').controller('PasswordController', ['$scope', '$stateParam
       }
 
       $http.post('/api/auth/reset/' + $stateParams.token, $scope.passwordDetails).success(function (response) {
-        // If successful show success message and clear form
         $scope.passwordDetails = null;
         $scope.busy = false;
-        // Attach user profile
         Authentication.user = response;
-        // And redirect to the index page
         $location.path('/password/reset/success');
-      }).error(function (response) {
+      }).error(function (err) {
         $scope.busy = false;
-        $scope.show_error(response.message);
+        $scope.show_message(err.message, true);
       });
     };
   }

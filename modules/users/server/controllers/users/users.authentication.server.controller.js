@@ -336,17 +336,9 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
                   login.save();
                   report.save();
                 }
-                // user = _user.toJSON();
-                // user.new = true;
                 return done(err, user);
               });
             } else {
-              // user = user.toJSON();
-              // if (user.email.indexOf('@fake.com') !== -1) {
-              //   user.new = true;
-              // } else {
-              //   user.new = false;
-              // }
               return done(err, user);
             }
           }

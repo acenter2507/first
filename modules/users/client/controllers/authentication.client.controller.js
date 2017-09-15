@@ -8,11 +8,9 @@ angular.module('users').controller('AuthenticationController', [
   '$window',
   'Authentication',
   'PasswordValidator',
-  'toastr',
   'ngDialog',
   'Constants',
-  'vcRecaptchaService',
-  '$translate',
+  'vcRecaptchaService'
   function (
     $scope,
     $state,
@@ -21,15 +19,15 @@ angular.module('users').controller('AuthenticationController', [
     $window,
     Authentication,
     PasswordValidator,
-    toastr,
     dialog,
     Constants,
-    vcRecaptchaService,
-    $translate
+    vcRecaptchaService
   ) {
     // Get an eventual error defined in the URL query string:
-    get_translate();
     $scope.error = $location.search().err;
+    if ($scope.error && $scope.error !== '') {
+      $scope.show_message($scope.error, true);
+    }
     $scope.isShowForm = true;
     $scope.busy = false;
     $scope.resend_busy = false;
@@ -55,9 +53,9 @@ angular.module('users').controller('AuthenticationController', [
         if (response.success) {
           $scope.isShowForm = false;
         }
-      }).error(function (response) {
+      }).error(function (err) {
         $scope.busy = false;
-        show_error(response.message);
+        $scope.show_message(err.message, true);
       });
     };
     $scope.signin = function (isValid) {
@@ -75,9 +73,9 @@ angular.module('users').controller('AuthenticationController', [
         $scope.busy = false;
         // And redirect to the previous or home page
         $state.go($state.previous.state.name || 'home', $state.previous.params);
-      }).error(function (response) {
+      }).error(function (err) {
         $scope.busy = false;
-        show_error(response.message);
+        $scope.show_message(err.message, true);
       });
     };
     $scope.resend = function () {
@@ -88,9 +86,9 @@ angular.module('users').controller('AuthenticationController', [
         if (response.success) {
           $scope.isShowForm = false;
         }
-      }).error(function (response) {
+      }).error(function (err) {
         $scope.resend_busy = false;
-        show_error(response.message);
+        $scope.show_message(err.message, true);
       });
     };
 
@@ -114,20 +112,5 @@ angular.module('users').controller('AuthenticationController', [
       vcRecaptchaService.reload($scope.widgetId);
       $scope.response = null;
     };
-
-    function get_translate() {
-      $translate('MS_CM_ERROR').then(tsl => { $scope.MS_CM_ERROR = tsl; });
-      $translate('MS_CM_SUCCESS').then(tsl => { $scope.MS_CM_SUCCESS = tsl; });
-    }
-
-    function show_error(msg) {
-      $translate(msg).then(tsl => {
-        if (!tsl || tsl.length === 0) {
-          toastr.error(msg, $scope.MS_CM_ERROR);
-        } else {
-          toastr.error(tsl, $scope.MS_CM_ERROR);
-        }
-      });
-    }
   }
 ]);

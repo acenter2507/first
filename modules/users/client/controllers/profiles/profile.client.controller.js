@@ -29,7 +29,7 @@ angular.module('users').controller('ProfileController', [
           $scope.report = res.data || { viewCnt: 0, pollCnt: 0, cmtCnt: 0 };
         })
         .catch(err => {
-          $scope.show_error(err.message);
+          $scope.show_message(err.message, true);
         });
     }
     function count_up_view_profile() {
@@ -38,7 +38,7 @@ angular.module('users').controller('ProfileController', [
 
     $scope.delete_poll = (poll) => {
       if (!poll.isCurrentUserOwner) {
-        $scope.show_error('MS_CM_AUTH_ERROR');
+        $scope.show_message('MS_CM_AUTH_ERROR', true);
         return;
       }
       $scope.message_title = 'Delete poll!';
@@ -76,7 +76,7 @@ angular.module('users').controller('ProfileController', [
             $scope.show_message_params('MS_CM_REPORT_SUCCESS', { title: poll.title }, false);
           })
           .catch(err => {
-            $scope.show_error(err.message);
+            $scope.show_message(err.message, true);
           });
       }
     };
@@ -86,7 +86,7 @@ angular.module('users').controller('ProfileController', [
         return;
       }
       if (!$scope.isLogged) {
-        $scope.show_error('MS_CM_LOGIN_ERROR');
+        $scope.show_message('MS_CM_LOGIN_ERROR', true);
         return;
       }
       Action.save_bookmark(poll._id)
@@ -95,12 +95,12 @@ angular.module('users').controller('ProfileController', [
           $scope.show_message_params('MS_CM_BOOKMARK_SUCCESS', { title: poll.title }, false);
         })
         .catch(err => {
-          $scope.show_error(err.message);
+          $scope.show_message(err.message, true);
         });
     };
     $scope.follow_poll = poll => {
       if (!$scope.isLogged) {
-        $scope.show_error('MS_CM_LOGIN_ERROR');
+        $scope.show_message('MS_CM_LOGIN_ERROR', true);
         return;
       }
       Action.save_follow(poll.follow)
@@ -112,7 +112,7 @@ angular.module('users').controller('ProfileController', [
           }
         })
         .catch(err => {
-          $scope.show_error(err.message);
+          $scope.show_message(err.message, true);
         });
     };
   }

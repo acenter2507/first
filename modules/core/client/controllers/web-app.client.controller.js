@@ -29,6 +29,7 @@ angular.module('core').controller('WebAppController', [
     $scope.$watch('Notifications.notifCnt', () => {
       $scope.page_title = ($scope.Notifications.notifCnt > 0) ? ('(' + $scope.Notifications.notifCnt + ') ' + $scope.page_name) : ('' + $scope.page_name);
     });
+    // Init
     function init() {
       $scope.user = Authentication.user;
       $scope.isLogged = ($scope.user);
@@ -39,6 +40,7 @@ angular.module('core').controller('WebAppController', [
       }
       initCategorys();
     }
+    // Init socket
     function initSocket() {
       if (!Socket.socket) {
         Socket.connect();
@@ -50,10 +52,11 @@ angular.module('core').controller('WebAppController', [
         Socket.removeListener('notifs');
       });
     }
+    // Load categorys
     function initCategorys() {
       Categorys.load();
     }
-    get_translate();
+    // Lấy message lưu trong storage
     getFlash();
     function getFlash() {
       var flash = Storages.get_session(Constants.storages.flash);
@@ -63,6 +66,7 @@ angular.module('core').controller('WebAppController', [
       }
     }
 
+    // Thay đổi ngôn ngữ
     $scope.change_language = lang => {
       $translate.use(lang);
       var tz = $window.locales[lang] || $window.locales.en;
@@ -71,11 +75,14 @@ angular.module('core').controller('WebAppController', [
       amMoment.changeLocale(lang);
     };
 
+    // Lấy thông tin translate cơ bản
+    get_translate();
     function get_translate() {
       $translate('MS_CM_ERROR').then(tsl => { $scope.MS_CM_ERROR = tsl; });
       $translate('MS_CM_SUCCESS').then(tsl => { $scope.MS_CM_SUCCESS = tsl; });
     }
 
+    // Hiển thị thông báo với param
     $scope.show_message_params = function (msg, params, error) {
       $translate(msg, params).then(tsl => {
         if (error) {
@@ -84,32 +91,24 @@ angular.module('core').controller('WebAppController', [
           toastr.success(tsl, $scope.MS_CM_SUCCESS);
         }
       });
-
+    };
+    // Hiển thị thông báo bình thường
+    $scope.show_message = function (msg, error) {
       $translate(msg).then(tsl => {
         if (!tsl || tsl.length === 0) {
-          toastr.error(msg, $scope.MS_CM_ERROR);
+          if (error) {
+            toastr.error(msg, $scope.MS_CM_ERROR);
+          } else {
+            toastr.error(msg, $scope.MS_CM_SUCCESS);
+          }
         } else {
-          toastr.error(tsl, $scope.MS_CM_ERROR);
+          if (error) {
+            toastr.error(tsl, $scope.MS_CM_ERROR);
+          } else {
+            toastr.error(tsl, $scope.MS_CM_SUCCESS);
+          }
         }
       });
-    };
-    $scope.show_error = function (msg) {
-      $translate(msg).then(tsl => {
-        if (!tsl || tsl.length === 0) {
-          toastr.error(msg, $scope.MS_CM_ERROR);
-        } else {
-          toastr.error(tsl, $scope.MS_CM_ERROR);
-        }
-      });
-    };
-    $scope.show_success = function (msg) {
-      $translate(msg).then(tsl => {
-        if (!tsl || tsl.length === 0) {
-          toastr.success(msg, $scope.MS_CM_SUCCESS);
-        } else {
-          toastr.success(tsl, $scope.MS_CM_SUCCESS);
-        }
-      });
-    };
+    }
   }
 ]);

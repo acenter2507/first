@@ -14,13 +14,12 @@ angular.module('users').controller('ChangePasswordController', ['$scope', '$http
       }
 
       $http.post('/api/users/password', $scope.passwordDetails).success(function (response) {
-        // If successful show success message and clear form
         $scope.$broadcast('show-errors-reset', 'passwordForm');
         $scope.passwordDetails = null;
         $scope.password_busy = false;
-        $scope.show_success(response.message);
-      }).error(function (response) {
-        $scope.show_error(response.message);
+        $scope.show_message(response.message, false);
+      }).error(function (err) {
+        $scope.show_message(err.message, true);
         $scope.password_busy = false;
       });
     };

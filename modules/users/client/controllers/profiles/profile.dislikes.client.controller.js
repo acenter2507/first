@@ -5,8 +5,7 @@ angular.module('users').controller('ProfileDislikesController', [
   'UserApi',
   'Action',
   'ngDialog',
-  'toastr',
-  function ($scope, UserApi, Action, dialog, toast) {
+  function ($scope, UserApi, Action, dialog) {
     $scope.screen = 'profile-dislike';
     $scope.polls = [];
     $scope.page = 0;
@@ -40,7 +39,7 @@ angular.module('users').controller('ProfileDislikesController', [
         .catch(err => {
           $scope.busy = false;
           $scope.stopped = true;
-          toast.error(err.message, 'Error!');
+          $scope.show_message(err.message, true);
         });
     }
 

@@ -76,10 +76,10 @@ angular.module('core').controller('WebAppController', [
       $translate('MS_CM_SUCCESS').then(tsl => { $scope.MS_CM_SUCCESS = tsl; });
     }
 
-    function show_message_params(msg, params, error) {
+    $scope.show_message_params = function (msg, params, error) {
       $translate(msg, params).then(tsl => {
         if (error) {
-          toast.error(tsl, $scope.MS_CM_ERROR);
+          toastr.error(tsl, $scope.MS_CM_ERROR);
         } else {
           toastr.success(tsl, $scope.MS_CM_SUCCESS);
         }
@@ -92,8 +92,8 @@ angular.module('core').controller('WebAppController', [
           toastr.error(tsl, $scope.MS_CM_ERROR);
         }
       });
-    }
-    function show_error(msg) {
+    };
+    $scope.show_error = function (msg) {
       $translate(msg).then(tsl => {
         if (!tsl || tsl.length === 0) {
           toastr.error(msg, $scope.MS_CM_ERROR);
@@ -101,8 +101,8 @@ angular.module('core').controller('WebAppController', [
           toastr.error(tsl, $scope.MS_CM_ERROR);
         }
       });
-    }
-    function show_success(msg) {
+    };
+    $scope.show_success = function (msg) {
       $translate(msg).then(tsl => {
         if (!tsl || tsl.length === 0) {
           toastr.success(msg, $scope.MS_CM_SUCCESS);
@@ -110,6 +110,6 @@ angular.module('core').controller('WebAppController', [
           toastr.success(tsl, $scope.MS_CM_SUCCESS);
         }
       });
-    }
+    };
   }
 ]);

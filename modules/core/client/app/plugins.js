@@ -22,7 +22,7 @@
     // Kiểm tra user đã đăng nhập hay chưa
     if ($window.user) {
       // Cài đặt ngôn ngữ của user
-      $translate.preferredLanguage($window.user.language);
+      $translateProvider.preferredLanguage($window.user.language);
     } else {
       // Cài đặt ngôn ngữ mặc định của browser
       $translateProvider.determinePreferredLanguage();

@@ -43,6 +43,7 @@ module.exports = {
       }
     }
   },
+  supportLanguages: ['en', 'ja', 'vi'],
   locales: {
     "vi": "Asia/Ho_Chi_Minh",
     "en": "America/New_York",

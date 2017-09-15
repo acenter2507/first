@@ -17,7 +17,8 @@ var config = require('../config'),
   helmet = require('helmet'),
   flash = require('connect-flash'),
   consolidate = require('consolidate'),
-  path = require('path');
+  path = require('path'),
+  locale = require("locale");
 
 /**
  * Initialize local variables
@@ -94,6 +95,7 @@ module.exports.initMiddleware = function (app) {
  */
 module.exports.initI18n = function (app) {
   app.use(express.static('./i18n'));
+  app.use(locale(config.supportLanguages));
 };
 
 /**

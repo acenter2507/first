@@ -4,6 +4,7 @@
  * Render the main application page
  */
 exports.renderIndex = function (req, res) {
+  console.log(req);
   res.render('modules/core/server/views/index', {
     user: req.user || null
   });

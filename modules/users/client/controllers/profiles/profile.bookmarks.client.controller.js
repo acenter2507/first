@@ -39,7 +39,7 @@ angular.module('users').controller('ProfileBookmarksController', [
         .catch(err => {
           $scope.busy = false;
           $scope.stopped = true;
-          $scope.show_error(err.message)
+          $scope.show_error(err.message);
         });
     }
 

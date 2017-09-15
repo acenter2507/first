@@ -208,17 +208,17 @@ exports.changeLanguage = function (req, res) {
   var user = req.user;
   console.log(req.body);
   return res.status(400).send({ message: 'MS_CM_LOAD_ERROR' });
-  var language = config.mappingLanguages[req.body.language];
-  if (!language) {
-    return res.status(400).send({ message: 'MS_USERS_LANG_UNSUPPORT' });
-  }
-  user.language = language;
-  user.save(function (err, _user) {
-    if (err) res.status(400).send({ message: 'MS_CM_LOAD_ERROR' });
-    _user.password = undefined;
-    _user.salt = undefined;
-    return res.jsonp(_user);
-  });
+  // var language = config.mappingLanguages[req.body.language];
+  // if (!language) {
+  //   return res.status(400).send({ message: 'MS_USERS_LANG_UNSUPPORT' });
+  // }
+  // user.language = language;
+  // user.save(function (err, _user) {
+  //   if (err) res.status(400).send({ message: 'MS_CM_LOAD_ERROR' });
+  //   _user.password = undefined;
+  //   _user.salt = undefined;
+  //   return res.jsonp(_user);
+  // });
 };
 /**
  * Send User

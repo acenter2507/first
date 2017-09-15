@@ -1,9 +1,9 @@
 <div class="container animated fadeIn mg50b" ng-controller="ProfileDislikesController">
   <div class="row">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a ui-sref="home">Home</a></li>
-      <li class="breadcrumb-item"><a ui-sref="profile.info({ userId: profile.slug })">{{profile.displayName}}</a></li>
-      <li class="breadcrumb-item active">Disliked</li>
+      <li class="breadcrumb-item"><a ui-sref="home">{{:: 'LB_HOME' | translate }}</a></li>
+      <li class="breadcrumb-item"><a ui-sref="profile.info({ userId: profile.slug })">{{:: profile.displayName}}</a></li>
+      <li class="breadcrumb-item active">{{:: 'LB_POLLS_DISLIKES' | translate }}</li>
     </ol>
   </div>
   <div class="row" infinite-scroll="get_polls()" infinite-scroll-distance='2'>
@@ -12,7 +12,8 @@
     </div>
     <div class="col-xs-12 pd6x">
       <div class="notice notice-warning" ng-show="polls.length === 0 && stopped">
-        <strong>Sorry</strong> You has not disliked any polls.
+        <strong>{{:: 'LB_SORRY' | translate }}</strong>
+        <span>{{:: 'LB_PROFILE_DLIKE_EMPTY' | translate }}</span>
       </div>
     </div>
   </div>

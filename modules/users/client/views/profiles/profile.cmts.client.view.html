@@ -1,9 +1,9 @@
 <div class="container animated fadeIn mg50b" ng-controller="ProfileCmtsController">
   <div class="row">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a ui-sref="home">Home</a></li>
-      <li class="breadcrumb-item"><a ui-sref="profile.info({ userId: profile.slug })">{{profile.displayName}}</a></li>
-      <li class="breadcrumb-item active">Comments</li>
+      <li class="breadcrumb-item"><a ui-sref="home">{{:: 'LB_HOME' | translate }}</a></li>
+      <li class="breadcrumb-item"><a ui-sref="profile.info({ userId: profile.slug })">{{:: profile.displayName}}</a></li>
+      <li class="breadcrumb-item active">{{:: 'LB_POLLS_COMMENTS' | translate }}</li>
     </ol>
   </div>
   <div class="row" infinite-scroll="get_cmts()" infinite-scroll-distance='2'>
@@ -13,24 +13,24 @@
         <div clas="post-header">
           <div class="user-avatar pull-left">
             <a ui-sref="profile.info({userId: profile.slug})">
-            <img src="{{profile.profileImageURL}}" alt="{{profile.displayName}}">
+            <img src="{{:: profile.profileImageURL}}" alt="{{:: profile.displayName}}">
           </a>
           </div>
           <span class="pull-left">
-            <strong><a ui-sref="profile.info({userId: profile.slug})" ng-bind="profile.displayName"></a></strong>
-            <small class="text-muted">replied on</small>
+            <strong><a ui-sref="profile.info({userId: profile.slug})">{{:: profile.displayName}}</a></strong>
+            <small class="text-muted">{{:: 'LB_PROFILE_CMT_REPLIED' | translate }}</small>
             <small class="text-muted" am-time-ago="cmt.created"></small>
           </span>
           <br>
           <small ng-if="cmt.to">
             <span class="text-muted">To:</span>
-            <a ui-sref="profile.info({ userId: cmt.toSlug })">{{cmt.toName}}</a>
+            <a ui-sref="profile.info({ userId: cmt.toSlug })">{{:: cmt.toName}}</a>
           </small>
           <div class="clearfix"></div>
           <hr class="mg5t mg10b">
         </div>
         <div class="post-body">
-          <h3><a ui-sref="polls.view({ pollId: cmt.poll.slug })">{{cmt.poll.title}}</a></h3>
+          <h3><a ui-sref="polls.view({ pollId: cmt.poll.slug })">{{:: cmt.poll.title}}</a></h3>
           <blockquote>
             <p class="text-justify" ng-bind-html="cmt.body | nl2br"></p>
           </blockquote>
@@ -40,7 +40,9 @@
     </div>
     <div class="col-xs-12 pd6x">
       <div class="notice notice-warning" ng-show="cmts.length === 0 && stopped">
-        <strong>Sorry</strong> {{profile.displayName}} has not commented in any polls.
+        <strong>{{:: 'LB_SORRY' | translate }}</strong>
+        <span>{{:: profile.displayName}}</span>
+        <span>{{:: 'LB_PROFILE_CMT_EMPTY' | translate }}</span>
       </div>
     </div>
   </div>

@@ -5,10 +5,9 @@ angular.module('users').controller('ProfileController', [
   'profileResolve',
   'Action',
   'Users',
-  'toastr',
   '$timeout',
   'ngDialog',
-  function ($scope, profile, Action, Users, toast, $timeout, dialog) {
+  function ($scope, profile, Action, Users, $timeout, dialog) {
     $scope.profile = profile;
     $scope.isCurrentOwner = $scope.profile._id === $scope.user._id;
     init();
@@ -30,7 +29,7 @@ angular.module('users').controller('ProfileController', [
           $scope.report = res.data || { viewCnt: 0, pollCnt: 0, cmtCnt: 0 };
         })
         .catch(err => {
-          toast.error(err.message, 'Error!');
+          $scope.show_error(err.message);
         });
     }
     function count_up_view_profile() {
@@ -39,7 +38,7 @@ angular.module('users').controller('ProfileController', [
 
     $scope.delete_poll = (poll) => {
       if (!poll.isCurrentUserOwner) {
-        toast.error('You are not authorized.', 'Error!');
+        $scope.show_error('MS_CM_AUTH_ERROR');
         return;
       }
       $scope.message_title = 'Delete poll!';
@@ -60,7 +59,7 @@ angular.module('users').controller('ProfileController', [
     };
     $scope.report_poll = poll => {
       if (poll.reported) {
-        toast.error('You are already reported ' + poll.title, 'Error!');
+        $scope.show_message_params('MS_CM_REPORT_EXIST_ERROR', { title: poll.title }, true);
         return;
       }
       dialog.openConfirm({
@@ -74,47 +73,46 @@ angular.module('users').controller('ProfileController', [
         Action.save_report(poll, reason)
           .then(res => {
             poll.reported = (res) ? true : false;
-            toast.success('You have successfully reported ' + poll.title, 'Thank you!');
+            $scope.show_message_params('MS_CM_REPORT_SUCCESS', { title: poll.title }, false);
           })
           .catch(err => {
-            toast.error(err.message, 'Error!');
+            $scope.show_error(err.message);
           });
       }
     };
     $scope.bookmark_poll = (poll) => {
       if (poll.bookmarked) {
-        toast.error('You are already bookmark ' + poll.title, 'Error!');
+        $scope.show_message_params('MS_CM_BOOKMARK_EXIST_ERROR', { title: poll.title }, true);
         return;
       }
       if (!$scope.isLogged) {
-        toast.error('You must login to follow poll.', 'Error!');
+        $scope.show_error('MS_CM_LOGIN_ERROR');
         return;
       }
       Action.save_bookmark(poll._id)
         .then(res => {
           poll.bookmarked = (res) ? true : false;
-          toast.success('Added ' + poll.title + ' to bookmarks.', 'Success!');
+          $scope.show_message_params('MS_CM_BOOKMARK_SUCCESS', { title: poll.title }, false);
         })
         .catch(err => {
-          toast.error(err.message, 'Error!');
+          $scope.show_error(err.message);
         });
     };
     $scope.follow_poll = poll => {
       if (!$scope.isLogged) {
-        toast.error('You must login to follow poll.', 'Error!');
+        $scope.show_error('MS_CM_LOGIN_ERROR');
         return;
       }
       Action.save_follow(poll.follow)
         .then(res => {
           if (res) {
             poll.follow = res;
-            toast.success('You followed ' + poll.title, 'Success!');
           } else {
             poll.follow = { poll: poll._id };
           }
         })
         .catch(err => {
-          toast.error(err.message, 'Error!');
+          $scope.show_error(err.message);
         });
     };
   }

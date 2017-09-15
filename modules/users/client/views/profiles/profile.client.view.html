@@ -4,9 +4,9 @@
       <div class="cover" ng-style="{'background-image': 'url(modules/users/client/img/covers/default.jpg)'}">
         <div class="container">
           <div class="cover-avatar">
-            <img src="{{profile.profileImageURL}}" alt="{{profile.displayName}}">
+            <img src="{{:: profile.profileImageURL}}" alt="{{:: profile.displayName}}">
           </div>
-          <div class="cover-name"><span>{{profile.displayName}}</span></div>
+          <div class="cover-name"><span>{{:: profile.displayName }}</span></div>
           <div class="cover-menu">
             <md-menu md-offset="-10 60" md-position-mode="target-right target">
               <button class=" btn-fab" ng-click="$mdMenu.open($event)" aria-label="Open profile menu">
@@ -14,18 +14,18 @@
             </button>
               <md-menu-content>
                 <ul class="profile-menu-list">
-                  <li ui-sref-active="active" ng-if="isCurrentOwner"><a ui-sref="settings.profile">Edit profile</a></li>
-                  <li ui-sref-active="active"><a ui-sref="profile.info">Profile</a></li>
+                  <li ui-sref-active="active" ng-if="isCurrentOwner"><a ui-sref="settings.profile">{{:: 'LB_PROFILE_EDIT' | translate }}</a></li>
+                  <li ui-sref-active="active"><a ui-sref="profile.info">{{:: 'LB_PROFILE' | translate }}</a></li>
                   <hr class="mg10t mg10b" />
-                  <li ui-sref-active="active"><a ui-sref="profile.polls">Polls</a></li>
-                  <li ui-sref-active="active"><a ui-sref="profile.cmts">Comments</a></li>
-                  <li ui-sref-active="active"><a ui-sref="profile.votes">Voted</a></li>
+                  <li ui-sref-active="active"><a ui-sref="profile.polls">{{:: 'LB_POLLS' | translate }}</a></li>
+                  <li ui-sref-active="active"><a ui-sref="profile.cmts">{{:: 'LB_POLLS_COMMENTS' | translate }}</a></li>
+                  <li ui-sref-active="active"><a ui-sref="profile.votes">{{:: 'LB_POLLS_VOTES' | translate }}</a></li>
                   <hr class="mg10t mg10b" />
-                  <li ui-sref-active="active"><a ui-sref="profile.follows">Following</a></li>
-                  <li ui-sref-active="active" ng-if="isCurrentOwner"><a ui-sref="profile.bookmarks">Bookmarks</a></li>
-                  <li ui-sref-active="active" ng-if="isCurrentOwner"><a ui-sref="profile.views">Viewed</a></li>
-                  <li ui-sref-active="active" ng-if="isCurrentOwner"><a ui-sref="profile.likes">Liked</a></li>
-                  <li ui-sref-active="active" ng-if="isCurrentOwner"><a ui-sref="profile.dislikes">Disliked</a></li>
+                  <li ui-sref-active="active"><a ui-sref="profile.follows">{{:: 'LB_POLLS_FOLLOWING' | translate }}</a></li>
+                  <li ui-sref-active="active" ng-if="isCurrentOwner"><a ui-sref="profile.bookmarks">{{:: 'LB_POLLS_BOOKMARKS' | translate }}</a></li>
+                  <li ui-sref-active="active" ng-if="isCurrentOwner"><a ui-sref="profile.views">{{:: 'LB_POLLS_VIEWED' | translate }}</a></li>
+                  <li ui-sref-active="active" ng-if="isCurrentOwner"><a ui-sref="profile.likes">{{:: 'LB_POLLS_LIKES' | translate }}</a></li>
+                  <li ui-sref-active="active" ng-if="isCurrentOwner"><a ui-sref="profile.dislikes">{{:: 'LB_POLLS_DISLIKES' | translate }}</a></li>
                 </ul>
               </md-menu-content>
             </md-menu>

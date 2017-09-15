@@ -1,44 +1,43 @@
 <div class="container animated fadeIn mg50b" ng-controller="ProfileInfoController">
   <div class="row">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a ui-sref="home">Home</a></li>
-      <!--<li class="breadcrumb-item"><a href="#">Library</a></li>-->
-      <li class="breadcrumb-item active">{{profile.displayName}}</li>
+      <li class="breadcrumb-item"><a ui-sref="home">{{:: 'LB_HOME' | translate }}</a></li>
+      <li class="breadcrumb-item active">{{:: profile.displayName}}</li>
     </ol>
   </div>
   <div class="row profile-stats">
     <div class="stat">
-      <div class="stat-value">{{report.rank}}</div>
-      <span class="stat-label">Rank</span>
+      <div class="stat-value">{{:: report.rank}}</div>
+      <span class="stat-label">{{:: 'LB_PROFILE_RANK' | translate }}</span>
     </div>
     <div class="stat">
-      <div class="stat-value">{{report.pollCnt}}</div>
-      <span class="stat-label">Polls</span>
+      <div class="stat-value">{{::report.pollCnt}}</div>
+      <span class="stat-label">{{:: 'LB_POLLS' | translate }}</span>
     </div>
     <div class="stat">
-      <div class="stat-value">{{report.viewCnt}}</div>
-      <span class="stat-label">Profile visits</span>
+      <div class="stat-value">{{::report.viewCnt}}</div>
+      <span class="stat-label">{{:: 'LB_PROFILE_VISIT' | translate }}</span>
     </div>
     <div class="stat">
-      <div class="stat-value">{{report.cmtCnt}}</div>
-      <span class="stat-label">Comments</span>
+      <div class="stat-value">{{::report.cmtCnt}}</div>
+      <span class="stat-label">{{:: 'LB_POLLS_COMMENTS' | translate }}</span>
     </div>
   </div>
   <div class="row profile-joined">
-    <span>join </span>
-    <strong><span am-time-ago="profile.created"></span></strong>
-    <span>last online</span>
-    <strong><span ng-bind="profile.lastLogin | LLL_format"></span></strong>
+    <span>{{:: 'LB_JOIN' | translate }}</span>
+    <strong am-time-ago="profile.created"></strong>
+    <span>{{:: 'LB_LAST_ONLINE' | translate }}</span>
+    <strong>{{::profile.lastLogin | LLL_format}}</strong>
   </div>
   <div class="row mg12t">
     <ul class="timeline">
       <li class="event" ng-repeat="activity in activitys | filter: activity_filter | orderBy: '-created'">
         <small class="text-muted" am-time-ago="activity.created"></small><br>
         <h3 class="mg5t">
-          <span ng-if="activity.type === 1">Created: </span>
-          <span ng-if="activity.type === 2">Re: </span>
-          <span ng-if="activity.type === 3">Vote: </span>
-          <a ui-sref="polls.view({ pollId: activity.slug })">{{ activity.title }}</a>
+          <span ng-if="activity.type === 1">{{::'LB_PROFILE_CREATED' | translate}}</span>
+          <span ng-if="activity.type === 2">{{::'LB_PROFILE_REPLY' | translate}}</span>
+          <span ng-if="activity.type === 3">{{::'LB_PROFILE_VOTE' | translate}}</span>
+          <a ui-sref="polls.view({ pollId: activity.slug })">{{:: activity.title }}</a>
         </h3>
         <!-- Poll -->
         <div ng-if="activity.type === 1" class="text-body" ta-bind="text" ng-model="activity.body" ta-readonly="true"></div>
@@ -47,7 +46,7 @@
         <!-- Vote -->
         <span ng-if="activity.type === 3">Voted for:</span>
         <span ng-if="activity.type === 3" ng-repeat="opt in activity.opts" ng-class="{'mg5l': !$first}">
-          <strong>{{ opt.title }}</strong>
+          <strong>{{:: opt.title }}</strong>
         </span>
       </li>
     </ul>

@@ -47,6 +47,10 @@ angular.module('core').controller('WebAppController', [
       console.log(user_lang);
       if ($scope.user.language !== $translate.preferredLanguage()) {
         $translate.use($scope.user.language);
+        var tz = $window.locales[$scope.user.language];
+        moment.tz.setDefault(tz);
+        moment.locale($scope.user.language);
+        amMoment.changeLocale($scope.user.language);
       }
     }
     // Init socket
@@ -103,10 +107,6 @@ angular.module('core').controller('WebAppController', [
         delete $scope.buton_label;
         $http.post('/api/users/language', { language: lang }).success(function (response) {
           Authentication.user = response;
-          var tz = $window.locales[response.language];
-          moment.tz.setDefault(tz);
-          moment.locale(response.language);
-          amMoment.changeLocale(response.language);
         }).error(function (err) {
           $scope.show_message(err.message, true);
         });

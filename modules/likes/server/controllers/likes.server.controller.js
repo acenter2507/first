@@ -14,6 +14,7 @@ var path = require('path'),
  * Create a Like
  */
 exports.create = function(req, res) {
+  console.log('*************************************************', req.locale);
   var like = new Like(req.body);
   var cnt = req.body.cnt || 0;
   like.user = req.user;
@@ -53,6 +54,7 @@ exports.read = function(req, res) {
  * Update a Like
  */
 exports.update = function(req, res) {
+  console.log('*************************************************', req.locale);
   var like = req.like;
 
   like = _.extend(like, req.body);

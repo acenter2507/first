@@ -97,7 +97,7 @@ angular.module('core').controller('WebAppController', [
         delete $scope.message_content;
         delete $scope.dialog_type;
         delete $scope.buton_label;
-        $http.post('/api/users/language', lang).success(function (response) {
+        $http.post('/api/users/language', { language: lang }).success(function (response) {
           Authentication.user = response;
           var tz = $window.locales[response.language];
           moment.tz.setDefault(tz);

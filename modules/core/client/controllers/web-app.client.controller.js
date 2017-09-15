@@ -58,7 +58,7 @@ angular.module('core').controller('WebAppController', [
     function getFlash() {
       var flash = Storages.get_session(Constants.storages.flash);
       if (flash) {
-        show_success(flash);
+        $scope.show_success(flash);
         Storages.set_session(Constants.storages.flash, undefined);
       }
     }

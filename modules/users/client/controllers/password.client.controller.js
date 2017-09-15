@@ -4,7 +4,6 @@ angular.module('users').controller('PasswordController', ['$scope', '$stateParam
   function ($scope, $stateParams, $http, $location, Authentication, PasswordValidator, toastr, $translate) {
     $scope.authentication = Authentication;
     $scope.busy = false;
-    get_translate();
     //If user is signed in then redirect back home
     if ($scope.user) {
       $location.path('/');

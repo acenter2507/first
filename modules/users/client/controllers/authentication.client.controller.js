@@ -11,6 +11,7 @@ angular.module('users').controller('AuthenticationController', [
   'ngDialog',
   'Constants',
   'vcRecaptchaService',
+  '$translate',
   function (
     $scope,
     $state,
@@ -21,7 +22,8 @@ angular.module('users').controller('AuthenticationController', [
     PasswordValidator,
     dialog,
     Constants,
-    vcRecaptchaService
+    vcRecaptchaService,
+    $translate
   ) {
     // Get an eventual error defined in the URL query string:
     $scope.error = $location.search().err;
@@ -48,6 +50,8 @@ angular.module('users').controller('AuthenticationController', [
         $scope.busy = false;
         return false;
       }
+      // Cài đặt ngôn ngữ cho account
+      $scope.credentials.language = $translate.preferredLanguage();
       $http.post('/api/auth/signup', $scope.credentials).success(function (response) {
         $scope.busy = false;
         if (response.success) {

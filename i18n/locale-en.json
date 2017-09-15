@@ -1,5 +1,8 @@
 {
   "LANGUAGE": "Languages",
+  "en": "English (US)",
+  "ja": "日本語",
+  "vi": "Tiếng Việt",
   "LB_SIGNUP": "Sign Up",
   "LB_SIGNIN": "Sign In",
   "LB_SIGNOUT": "Sign Out",
@@ -122,6 +125,8 @@
   "MS_USERS_PROVIDER": "Your account was registried by ",
   "MS_USERS_CONNECTED": "Connected social accounts:",
   "MS_USERS_UNCONNECTED": "Unconnected social accounts:",
+  "MS_USERS_LANG_UNSUPPORT": "Sorry, we are not support your request language.",
+  "MS_USERS_LANG_CONFIRM": "Change language to ",
   "LB_PROFILE_SUCCESE": "Profile saved successfully",
   "LB_PROFILE_FAILED": "Profile saved failed",
   "LB_PROFILE": "Profile",

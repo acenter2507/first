@@ -10,6 +10,7 @@ module.exports = function (app) {
   app.route('/api/users/accounts').delete(users.removeOAuthProvider);
   app.route('/api/users/password').post(users.changePassword);
   app.route('/api/users/picture').post(users.changeProfilePicture);
+  app.route('/api/users/language').post(users.changeLanguage);
   app.route('/api/users/search').get(users.search_user_by_name);
 
   // Lấy thông tin của user đang được xem profile page

@@ -11,23 +11,27 @@
     .run(runConfig);
 
 
-  translateConfig.$inject = ['$translateProvider'];
-  function translateConfig($translateProvider) {
-    // $translateProvider.useLoader('$translatePartialLoader', {
-    //   urlTemplate: '/i18n/{lang}.json'
-    // });
+  translateConfig.$inject = ['$translateProvider', '$window'];
+  function translateConfig($translateProvider, $window) {
     $translateProvider.useStaticFilesLoader({
       prefix: 'locale-',
       suffix: '.json'
     });
     $translateProvider
-      .registerAvailableLanguageKeys(['en', 'vi', 'ja'], {
-        'en_US': 'en',
-        'en_UK': 'en'
-      })
-      .determinePreferredLanguage();
+      .registerAvailableLanguageKeys($window.supportLanguages, $window.mappingLanguages);
+    // Kiểm tra user đã đăng nhập hay chưa
+    if ($window.user) {
+      // Cài đặt ngôn ngữ của user
+      $translate.preferredLanguage($window.user.language);
+    } else {
+      // Cài đặt ngôn ngữ mặc định của browser
+      $translateProvider.determinePreferredLanguage();
+    }
+    // Sử dụng cookie
     $translateProvider.useCookieStorage();
+    // Nếu không có ngôn ngữ của user thì default là en
     $translateProvider.fallbackLanguage('en');
+    // Mã hóa bảo mật
     $translateProvider.useSanitizeValueStrategy('escape');
   }
 

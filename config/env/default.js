@@ -43,7 +43,15 @@ module.exports = {
       }
     }
   },
+  defaultLanguage: 'en',
   supportLanguages: ['en', 'ja', 'vi'],
+  mappingLanguages: {
+    'en': 'en',
+    'ja': 'ja',
+    'vi': 'vi',
+    'en_US': 'en',
+    'en_UK': 'en'
+  },
   locales: {
     "vi": "Asia/Ho_Chi_Minh",
     "en": "America/New_York",

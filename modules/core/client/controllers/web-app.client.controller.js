@@ -1,7 +1,6 @@
 'use strict';
 
 angular.module('core').controller('WebAppController', [
-  '$rootScope',
   '$scope',
   'Authentication',
   'Notifications',
@@ -13,7 +12,9 @@ angular.module('core').controller('WebAppController', [
   'Storages',
   'Constants',
   'toastr',
-  function ($rootScope, $scope, Authentication, Notifications, Socket, Categorys, $translate, amMoment, $window, Storages, Constants, toastr) {
+  '$http',
+  'ngDialog',
+  function ($scope, Authentication, Notifications, Socket, Categorys, $translate, amMoment, $window, Storages, Constants, toastr, $http, dialog) {
     // User info
     $scope.Authentication = Authentication;
     $scope.Notifications = Notifications;
@@ -39,6 +40,10 @@ angular.module('core').controller('WebAppController', [
         Notifications.loadNotifs();
       }
       initCategorys();
+      // Kiểm tra thông tin user mới có thay đổi ngôn ngữ hay không
+      if ($scope.user.language !== $translate.preferredLanguage()) {
+        $translate.use($scope.user.language);
+      }
     }
     // Init socket
     function initSocket() {
@@ -68,11 +73,40 @@ angular.module('core').controller('WebAppController', [
 
     // Thay đổi ngôn ngữ
     $scope.change_language = lang => {
-      $translate.use(lang);
-      var tz = $window.locales[lang] || $window.locales.en;
-      moment.tz.setDefault(tz);
-      moment.locale(lang);
-      amMoment.changeLocale(lang);
+      $translate('MS_USERS_LANG_CONFIRM').then(tsl => {
+        var content = tsl;
+        $translate(lang).then(_tsl => {
+          content += _tsl;
+          show_config(content);
+        });
+      });
+      function show_config(content) {
+        $scope.message_content = content;
+        $scope.dialog_type = 1;
+        $scope.buton_label = 'Discard';
+        dialog.openConfirm({
+          scope: $scope,
+          templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
+        }).then(confirm => {
+          handle_change_language();
+        }, reject => {
+        });
+      }
+      function handle_change_language() {
+        delete $scope.message_title;
+        delete $scope.message_content;
+        delete $scope.dialog_type;
+        delete $scope.buton_label;
+        $http.post('/api/users/language', lang).success(function (response) {
+          Authentication.user = response;
+          var tz = $window.locales[response.language];
+          moment.tz.setDefault(tz);
+          moment.locale(response.language);
+          amMoment.changeLocale(response.language);
+        }).error(function (err) {
+          $scope.show_message(err.message, true);
+        });
+      }
     };
 
     // Lấy thông tin translate cơ bản

@@ -21,7 +21,7 @@ exports.signup = function (req, res) {
   delete req.body.roles;
   var user = new User(req.body);
   user.provider = 'local';
-
+  user.language = config.mappingLanguages[user.language] || config.defaultLanguage;
   // Validate EMAIL
   validEmail(user.email)
     .then(() => {

@@ -583,8 +583,10 @@ a:hover .header-profile-image {
     outline: none; }
   .toast {
     border-left: 3px solid #7f7f84; }
-  .toast .toast-close-button {
-    color: #7f7f84; }
+    .toast .toast-message {
+      font-size: 0.8rem; }
+    .toast .toast-close-button {
+      color: #7f7f84; }
   .toast-success {
     border-left: 3px solid #267ED5; }
   .toast-error {

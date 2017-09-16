@@ -572,8 +572,9 @@ a:hover .header-profile-image {
   opacity: 1;
   cursor: pointer; }
   #toast-container .toast:hover {
-    box-shadow: 0 0 12px #000000; }
+    box-shadow: 0 0 5px #000000; }
   .toast-close-button {
+    font-size: 0.7rem;
     opacity: 0.5; }
   .toast-close-button:hover {
     opacity: 0.8; }

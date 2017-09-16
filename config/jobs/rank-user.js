@@ -70,7 +70,7 @@ exports.excute = function () {
 function get_users() {
   return new Promise((resolve, reject) => {
     var User = mongoose.model('User');
-    User.find({ 'roles': { '$not': { '$all': ['user', 'admin'] } } })
+    User.find({ 'roles': { '$not': { '$all': ['user', 'admin'] } }, 'status': 2 })
       .select('displayName')
       .then(users => {
         return resolve(users);

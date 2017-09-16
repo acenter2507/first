@@ -49,6 +49,7 @@
     vm.stopped = false;
     vm.is_has_new_polls = false;
     vm.supportLanguage = $window.supportLanguage;
+    console.log(vm.supportLanguage);
     get_translate();
     init();
 

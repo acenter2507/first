@@ -853,10 +853,12 @@ img.full-screen {
 .btn { 
   position: relative;
   overflow:hidden;
+  /* text-transform: uppercase; */
   border-radius: 0;
   border: none;
   font-weight: normal;
-  font-size: 1rem;}
+  font-size: 1rem;
+  /* padding: 0.5rem 0.85rem;  */}
   .btn:hover {
     box-shadow: 0 1px 6px 0 rgba(0,0,0,.12),0 1px 6px 0 rgba(0,0,0,.12); }
   .btn:focus {

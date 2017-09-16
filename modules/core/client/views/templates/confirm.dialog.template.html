@@ -1,10 +1,11 @@
 <div class="ngdialog-message">
-  <h3 class="confirmation-title"><i class="fa fa-exclamation-triangle warning-text"></i> {{::message_title | translate}}</h3>
-  <span>{{::message_content | translate}}</span>
-  <div class="ngdialog-buttons mg20t">
-    <button ng-if="dialog_type === 1" class="btn btn-primary pull-right" ng-click="confirm(confirmValue)">{{::buton_label | translate}}</button>
-    <button ng-if="dialog_type === 2" class="btn btn-warning pull-right" ng-click="confirm(confirmValue)">{{::buton_label | translate}}</button>
-    <button ng-if="dialog_type === 3" class="btn btn-danger pull-right" ng-click="confirm(confirmValue)">{{::buton_label | translate}}</button>
+  <h4 class="confirmation-title" ng-if="message.title">
+    <i class="fa fa-exclamation-triangle warning-text"></i> {{ message.title | translate}}
+  </h4>
+  <p>{{ message.content | translate }}</p>
+  <div class="ngdialog-buttons mg10t">
+    <button class="btn pull-right" ng-class="{'btn-primary': message.type === 1, 'btn-warning': message.type === 2, 'btn-danger': message.type === 3}"
+      ng-click="confirm(confirmValue)">{{ message.button | translate}}</button>
     <button class="btn btn-default pull-right mg5r" ng-click="closeThisDialog()">{{:: 'LB_CANCEL' | translate}}</button>
   </div>
 </div>

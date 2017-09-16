@@ -49,6 +49,11 @@
     vm.stopped = false;
     vm.is_has_new_polls = false;
     vm.supportLanguages = $window.supportLanguages;
+
+    $translate('asjdlkasjdlkasdlka').then(tsl => {
+      console.log(tsl);
+    });
+
     get_translate();
     init();
 

@@ -853,7 +853,6 @@ img.full-screen {
 .btn { 
   position: relative;
   overflow:hidden;
-  text-transform: uppercase;
   border-radius: 0;
   border: none;
   font-weight: normal;

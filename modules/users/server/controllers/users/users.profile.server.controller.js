@@ -52,7 +52,7 @@ exports.update = function (req, res) {
       })
       .then(_user => {
         var url = config.http + '://' + req.headers.host + '/api/auth/verifyEmail/' + _user.activeAccountToken;
-        var mailTemplate = 'verify_email';
+        var mailTemplate = 'verify_email_' + _user.language;
         var mailContent = {
           name: _user.displayName,
           appName: config.app.title,
@@ -173,7 +173,7 @@ exports.changeProfilePicture = function (req, res) {
     upload(req, res, function (uploadError) {
       if (uploadError) {
         return res.status(400).send({
-          message: 'Error occurred while uploading profile picture'
+          message: 'MS_CM_LOAD_ERROR'
         });
       } else {
         user.profileImageURL = config.uploads.profileUpload.dest + req.file.filename;
@@ -197,7 +197,7 @@ exports.changeProfilePicture = function (req, res) {
     });
   } else {
     res.status(400).send({
-      message: 'User is not signed in'
+      message: 'MS_CM_LOGIN_ERROR_SERVER'
     });
   }
 };
@@ -273,11 +273,6 @@ exports.activitys = function (req, res) {
 
       }
     }, handleError);
-
-
-
-
-
   function handleError(err) {
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
@@ -693,10 +688,10 @@ exports.profileById = function (req, res, next, id) {
     .exec(function (err, user) {
       if (err) {
         return res.status(400).send({
-          message: 'Profile is invalid'
+          message: 'MS_CM_DATA_NOT_FOUND'
         });
       } else if (!user) {
-        return next(new Error('Failed to load User ' + id));
+        return next(new Error('MS_CM_DATA_NOT_FOUND'));
       }
 
       req.profile = user;
@@ -711,7 +706,7 @@ exports.reportByID = function (req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
-      message: 'Report is invalid'
+      message: 'MS_CM_DATA_NOT_FOUND'
     });
   }
 
@@ -720,7 +715,7 @@ exports.reportByID = function (req, res, next, id) {
       return next(err);
     } else if (!report) {
       return res.status(404).send({
-        message: 'No Report with that identifier has been found'
+        message: 'MS_CM_DATA_NOT_FOUND'
       });
     }
     req.report = report;

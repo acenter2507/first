@@ -31,7 +31,7 @@ exports.forgot = function (req, res, next) {
     })
     .then(_user => {
       var url = config.http + '://' + req.headers.host + '/api/auth/reset/' + _user.resetPasswordToken;
-      var mailTemplate = 'resetpass';
+      var mailTemplate = 'resetpass_' + _user.language;
       var mailContent = {
         name: _user.displayName,
         appName: config.app.title,
@@ -100,19 +100,19 @@ exports.reset = function (req, res, next) {
           if (err) return res.status(400).send(err);
           _user.password = undefined;
           _user.salt = undefined;
-          res.json(_user);
+          return res.json(_user);
 
-          var mailTemplate = 'inform_reset_password';
-          var mailContent = {
-            name: _user.displayName,
-            appName: config.app.title
-          };
-          var mailOptions = {
-            from: config.app.title + '<' + config.mailer.account.from + '>',
-            to: _user.email,
-            subject: 'Your password has been changed'
-          };
-          return mail.send(config.mailer.account.options, mailContent, mailOptions, mailTemplate);
+          // var mailTemplate = 'inform_reset_password';
+          // var mailContent = {
+          //   name: _user.displayName,
+          //   appName: config.app.title
+          // };
+          // var mailOptions = {
+          //   from: config.app.title + '<' + config.mailer.account.from + '>',
+          //   to: _user.email,
+          //   subject: 'Your password has been changed'
+          // };
+          // return mail.send(config.mailer.account.options, mailContent, mailOptions, mailTemplate);
         });
       })
       .catch(handleError);

@@ -74,7 +74,6 @@ angular.module('core').controller('WebAppController', [
         Storages.set_session(Constants.storages.flash, undefined);
       }
     }
-
     // Thay đổi ngôn ngữ
     $scope.change_language = lang => {
       if (lang === $translate.use()) return;

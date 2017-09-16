@@ -35,7 +35,7 @@ exports.signup = function (req, res) {
     })
     .then(_user => {
       var url = config.http + '://' + req.headers.host + '/api/auth/verify/' + _user.activeAccountToken;
-      var mailTemplate = 'verification';
+      var mailTemplate = 'verification_' + _user.language;
       var mailContent = {
         name: _user.displayName,
         appName: config.app.title,
@@ -77,7 +77,7 @@ exports.resend = function (req, res) {
       })
       .then(_user => {
         var url = config.http + '://' + req.headers.host + '/api/auth/verify/' + _user.activeAccountToken;
-        var mailTemplate = 'verification';
+        var mailTemplate = 'verification_' + _user.language;
         var mailContent = {
           name: _user.displayName,
           appName: config.app.title,

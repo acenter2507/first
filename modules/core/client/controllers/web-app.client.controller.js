@@ -41,7 +41,7 @@ angular.module('core').controller('WebAppController', [
       }
       initCategorys();
       // Kiểm tra thông tin user mới có thay đổi ngôn ngữ hay không
-      if ($scope.user.language !== $translate.preferredLanguage()) {
+      if ($scope.user.language !== $translate.use()) {
         $translate.use($scope.user.language);
         var tz = $window.locales[$scope.user.language];
         moment.tz.setDefault(tz);
@@ -77,8 +77,7 @@ angular.module('core').controller('WebAppController', [
 
     // Thay đổi ngôn ngữ
     $scope.change_language = lang => {
-      console.log($translate.preferredLanguage());
-      if (lang === $translate.preferredLanguage()) return;
+      if (lang === $translate.use()) return;
       $translate('MS_USERS_LANG_CONFIRM').then(tsl => {
         var content = tsl;
         $translate(lang).then(_tsl => {

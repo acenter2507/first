@@ -51,7 +51,7 @@ angular.module('users').controller('AuthenticationController', [
         return false;
       }
       // Cài đặt ngôn ngữ cho account
-      $scope.credentials.language = $translate.preferredLanguage();
+      $scope.credentials.language = $translate.use();
       $http.post('/api/auth/signup', $scope.credentials).success(function (response) {
         $scope.busy = false;
         if (response.success) {

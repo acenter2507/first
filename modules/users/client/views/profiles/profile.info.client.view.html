@@ -44,7 +44,7 @@
         <!-- Comment -->
         <p ng-if="activity.type === 2" class="text-justify" ng-bind-html="activity.body | nl2br"></p>
         <!-- Vote -->
-        <span ng-if="activity.type === 3">Voted for:</span>
+        <span ng-if="activity.type === 3">{{:: 'LB_PROFILE_VOTE_FOR' | translate }}</span>
         <span ng-if="activity.type === 3" ng-repeat="opt in activity.opts" ng-class="{'mg5l': !$first}">
           <strong>{{:: opt.title }}</strong>
         </span>

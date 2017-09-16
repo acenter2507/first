@@ -1,6 +1,6 @@
 <div class="card" ng-if="ctrl.opts.length > 0">
   <div class="card-header">
-    <strong class="card-title"> Chart panel</strong>
+    <strong class="card-title">{{:: 'LB_POLL_CHART_PANEL' | translate }}</strong>
   </div>
   <div class="card-body">
     <canvas id="pie" class="chart-base" chart-data="ctrl.chart.data" chart-labels="ctrl.chart.labels" chart-options="ctrl.chart.options"
@@ -24,7 +24,7 @@
       </li>
     </ul>
     <div class="form-group mg10t">
-      <button ng-if="ctrl.votedTotal > 0" class="btn btn-success pull-right" ng-click="ctrl.toggle_chart()">Change chart</button>
+      <button ng-if="ctrl.votedTotal > 0" class="btn btn-success pull-right" ng-click="ctrl.toggle_chart()">{{:: 'LB_POLL_CHART_CHANGE' | translate }}</button>
     </div>
     <div class="clearfix"></div>
   </div>

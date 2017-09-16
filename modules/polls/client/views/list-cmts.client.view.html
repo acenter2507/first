@@ -1,6 +1,6 @@
 <div class="card d-sm-down-none">
   <div class="card-header">
-    <strong class="card-title"> COMMENTS ({{ctrl.poll.cmtCnt}})</strong>
+    <strong class="card-title">{{:: 'LB_POLLS_COMMENTS' | translate }} ({{ctrl.poll.cmtCnt}})</strong>
   </div>
   <div class="card-body">
     <div class="cmt_form" ng-if="isLogged">
@@ -15,16 +15,16 @@
         <textarea ng-is-enter="{{ctrl.enter_send}}" ng-enter="ctrl.save_cmt()" focus-me="{{ctrl.cmt_typing}}" class="msd-elastic: \n; reply-input"
           data-ng-model="ctrl.tmp_cmt.body" placeholder="Type your comment..."></textarea>
       </div>
-      <label class="text-muted"><input type="checkbox" ng-model="ctrl.enter_send"><small>&nbsp;Enter to send</small></label>
+      <label class="text-muted"><input type="checkbox" ng-model="ctrl.enter_send"><small>{{:: 'LB_POLL_ENTER_TO_SEND' | translate }}</small></label>
       <span class="pull-right">
-        <a ng-hide="ctrl.enter_send" ng-click="ctrl.save_cmt()">Send</a>
-        <a class="mg20l" ng-click="ctrl.discard_cmt()" ng-if="ctrl.tmp_cmt.discard">Discard</a>
+        <a ng-hide="ctrl.enter_send" ng-click="ctrl.save_cmt()">{{:: 'LB_SEND' | translate }}</a>
+        <a class="mg20l" ng-click="ctrl.discard_cmt()" ng-if="ctrl.tmp_cmt.discard">{{:: 'LB_DISCARD' | translate }}</a>
       </span>
       <hr class="mg10t mg10b" />
     </div>
 
     <div class="cmt_sort" ng-if="ctrl.cmts.length > 0">
-      <small class="pull-right">Sort:
+      <small class="pull-right">{{:: 'LB_SORT' | translate }}:
       <md-menu md-offset="-12 25" md-position-mode="target-right target">
         <a ng-click="$mdMenu.open($event)" aria-label="Open sort menu">
           {{ctrl.cmt_sort.name}}<i class="fa fa-angle-down"></i>
@@ -50,10 +50,10 @@
       </div>
       <span class="pull-left">
         <strong><a ui-sref="profile.info({userId: cmt.user.slug})" ng-if="cmt.user" ng-bind="cmt.user.displayName"></a></strong>
-        <span ng-if="!cmt.user">Deleted User</span>
-        <small class="text-muted" am-time-ago="cmt.created"></small>
-        <a ng-if="cmt.to">@{{cmt.toName}}</a>
-        <span ng-show="cmt.isEdited" class="fa fa-pencil-square-o"><md-tooltip md-direction="bottom">{{cmt.updated | date:'mediumDate'}}</md-tooltip>
+        <span ng-if="!cmt.user">{{:: 'LB_DELETED_USER' | translate }}</span>
+      <small class="text-muted" am-time-ago="cmt.created"></small>
+      <a ng-if="cmt.to">@{{cmt.toName}}</a>
+      <span ng-show="cmt.isEdited" class="fa fa-pencil-square-o"><md-tooltip md-direction="bottom">{{cmt.updated | LLL_format }}</md-tooltip>
         </span>
       </span>
       <span class="pull-right">
@@ -63,9 +63,9 @@
           </a>
           <md-menu-content>
             <ul class="menu-list">
-              <li ng-if="isLogged && cmt.user._id !== user._id"><a ng-click="ctrl.reply_cmt(cmt)"><i class="fa fa-reply"></i>&nbsp;Reply</a></li>
-              <li ng-if="cmt.user._id === user._id"><a ng-click="ctrl.edit_cmt(cmt)"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
-              <li ng-if="cmt.user._id === user._id"><a ng-click="ctrl.delete_cmt(cmt)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
+              <li ng-if="isLogged && cmt.user._id !== user._id"><a ng-click="ctrl.reply_cmt(cmt)"><i class="fa fa-reply"></i>{{:: 'LB_REPLY' | translate }}</a></li>
+              <li ng-if="cmt.user._id === user._id"><a ng-click="ctrl.edit_cmt(cmt)"><i class="fa fa-pencil-square-o"></i>{{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
+              <li ng-if="cmt.user._id === user._id"><a ng-click="ctrl.delete_cmt(cmt)"><i class="fa fa-trash"></i>{{:: 'LB_DELETE' | translate }}</a></li>
             </ul>
           </md-menu-content>
         </md-menu>
@@ -73,17 +73,15 @@
       <br>
       <p class="text-justify" ng-bind-html="cmt.body | nl2br"></p>
       <small class="like_tools pull-right">
-        <a ng-click="ctrl.like_cmt(cmt, 1)" ng-show="cmt.like.type == 1"><i class="fa fa-thumbs-o-up"></i>&nbsp;Like</a>
-        <span class="span_btn" ng-click="ctrl.like_cmt(cmt, 1)" ng-show="cmt.like.type != 1"><i class="fa fa-thumbs-o-up"></i>&nbsp;Like</span>
+        <a ng-click="ctrl.like_cmt(cmt, 1)" ng-class="{'text-muted': cmt.like.type !== 1}"><i class="fa fa-thumbs-o-up"></i>{{:: 'LB_LIKE' | translate }}</a>
         <span class="mg5l mg5r highlight-text" ng-bind="cmt.likeCnt"></span>
-        <a ng-click="ctrl.like_cmt(cmt, 2)" ng-show="cmt.like.type == 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>&nbsp;Dislike</a>
-        <span class="span_btn" ng-click="ctrl.like_cmt(cmt, 2)" ng-show="cmt.like.type != 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>&nbsp;Dislike</span>
+        <a ng-click="ctrl.like_cmt(cmt, 2)" ng-class="{'text-muted': cmt.like.type !== 1}"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>{{:: 'LB_DISLIKE' | translate }}</a>
       </small>
       <div class="clearfix"></div>
       <hr class="mg12y">
     </div>
-    <div class="row text-center" ng-show="!ctrl.stopped && !ctrl.busy">
-      <a ng-click="ctrl.get_cmts()">Load more</a>
+    <div class="row text-center" ng-if="!ctrl.stopped">
+      <a ng-click="ctrl.get_cmts()">{{:: 'LB_LOAD_MORE' | translate }}</a>
     </div>
     <!-- Load indicator -->
     <div class="row text-center" ng-show="ctrl.busy"><i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i></div>
@@ -91,7 +89,7 @@
 </div>
 <div class="card d-md-none card-expand">
   <div class="card-header pd12b">
-    <strong class="card-title"> COMMENTS ({{ctrl.poll.cmtCnt}})</strong>
+    <strong class="card-title">{{:: 'LB_POLLS_COMMENTS' | translate }} ({{ctrl.poll.cmtCnt}})</strong>
     <a class="card-expand-toggle pull-right text-muted"><i class="fa fa-caret-down"></i></a>
   </div>
   <div class="card-body">
@@ -107,16 +105,16 @@
         <textarea ng-is-enter="{{ctrl.enter_send}}" ng-enter="ctrl.save_cmt()" focus-me="{{ctrl.cmt_typing}}" class="msd-elastic: \n; reply-input"
           data-ng-model="ctrl.tmp_cmt.body" placeholder="Type your comment..."></textarea>
       </div>
-      <label class="text-muted"><input type="checkbox" ng-model="ctrl.enter_send"><small>&nbsp;Enter to send</small></label>
+      <label class="text-muted"><input type="checkbox" ng-model="ctrl.enter_send"><small>{{:: 'LB_POLL_ENTER_TO_SEND' | translate }}</small></label>
       <span class="pull-right">
-        <a ng-hide="ctrl.enter_send" ng-click="ctrl.save_cmt()">Send</a>
-        <a class="mg20l" ng-click="ctrl.discard_cmt()" ng-if="ctrl.tmp_cmt.discard">Discard</a>
+        <a ng-hide="ctrl.enter_send" ng-click="ctrl.save_cmt()">{{:: 'LB_SEND' | translate }}</a>
+        <a class="mg20l" ng-click="ctrl.discard_cmt()" ng-if="ctrl.tmp_cmt.discard">{{:: 'LB_DISCARD' | translate }}</a>
       </span>
       <hr class="mg10t mg10b" />
     </div>
 
     <div class="cmt_sort" ng-if="ctrl.cmts.length > 0">
-      <small class="pull-right">Sort:
+      <small class="pull-right">{{:: 'LB_SORT' | translate }}:
       <md-menu md-offset="-12 25" md-position-mode="target-right target">
         <a ng-click="$mdMenu.open($event)" aria-label="Open sort menu">
           {{ctrl.cmt_sort.name}}<i class="fa fa-angle-down"></i>
@@ -140,11 +138,11 @@
       </div>
       <span class="pull-left">
         <strong><a ui-sref="profile.info({userId: cmt.user.slug})" ng-if="cmt.user" ng-bind="cmt.user.displayName"></a></strong>
-        <span ng-if="!cmt.user">Deleted User</span>
-        <small class="text-muted" am-time-ago="cmt.created"></small>
-        <a ng-if="cmt.to">@{{cmt.toName}}</a>
-        <span ng-show="cmt.isEdited" class="fa fa-pencil-square-o">
-          <md-tooltip md-direction="bottom">{{cmt.updated | date:'mediumDate'}}</md-tooltip>
+        <span ng-if="!cmt.user">{{:: 'LB_DELETED_USER' | translate }}</span>
+      <small class="text-muted" am-time-ago="cmt.created"></small>
+      <a ng-if="cmt.to">@{{cmt.toName}}</a>
+      <span ng-show="cmt.isEdited" class="fa fa-pencil-square-o">
+          <md-tooltip md-direction="bottom">{{cmt.updated | LLL_format }}</md-tooltip>
         </span>
       </span>
       <span class="pull-right">
@@ -154,9 +152,9 @@
           </a>
           <md-menu-content>
             <ul class="menu-list">
-              <li ng-if="isLogged && cmt.user._id !== user._id"><a ng-click="ctrl.reply_cmt(cmt)"><i class="fa fa-reply"></i>&nbsp;Reply</a></li>
-              <li ng-if="cmt.user._id === user._id"><a ng-click="ctrl.edit_cmt(cmt)"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a></li>
-              <li ng-if="cmt.user._id === user._id"><a ng-click="ctrl.delete_cmt(cmt)"><i class="fa fa-trash"></i>&nbsp;Delete</a></li>
+              <li ng-if="isLogged && cmt.user._id !== user._id"><a ng-click="ctrl.reply_cmt(cmt)"><i class="fa fa-reply"></i>{{:: 'LB_REPLY' | translate }}</a></li>
+              <li ng-if="cmt.user._id === user._id"><a ng-click="ctrl.edit_cmt(cmt)"><i class="fa fa-pencil-square-o"></i>{{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
+              <li ng-if="cmt.user._id === user._id"><a ng-click="ctrl.delete_cmt(cmt)"><i class="fa fa-trash"></i>{{:: 'LB_DELETE' | translate }}</a></li>
             </ul>
           </md-menu-content>
         </md-menu>
@@ -164,17 +162,15 @@
       <br>
       <p class="text-justify" ng-bind-html="cmt.body | nl2br"></p>
       <small class="like_tools pull-right">
-        <a ng-click="ctrl.like_cmt(cmt, 1)" ng-show="cmt.like.type == 1"><i class="fa fa-thumbs-o-up"></i>&nbsp;Like</a>
-        <span class="span_btn" ng-click="ctrl.like_cmt(cmt, 1)" ng-show="cmt.like.type != 1"><i class="fa fa-thumbs-o-up"></i>&nbsp;Like</span>
+        <a ng-click="ctrl.like_cmt(cmt, 1)" ng-class="{'text-muted': cmt.like.type !== 1}"><i class="fa fa-thumbs-o-up"></i> {{:: 'LB_LIKE' | translate }}</a>
         <span class="mg5l mg5r highlight-text" ng-bind="cmt.likeCnt"></span>
-        <a ng-click="ctrl.like_cmt(cmt, 2)" ng-show="cmt.like.type == 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>&nbsp;Dislike</a>
-        <span class="span_btn" ng-click="ctrl.like_cmt(cmt, 2)" ng-show="cmt.like.type != 2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>&nbsp;Dislike</span>
+        <a ng-click="ctrl.like_cmt(cmt, 2)" ng-class="{'text-muted': cmt.like.type !== 1}"><i class="fa fa-thumbs-o-down"></i> {{:: 'LB_DISLIKE' | translate }}</a>
       </small>
       <div class="clearfix"></div>
       <hr class="mg12y">
     </div>
     <div class="row text-center" ng-if="!ctrl.stopped">
-      <a ng-click="ctrl.get_cmts()">Load more</a>
+      <a ng-click="ctrl.get_cmts()">{{:: 'LB_LOAD_MORE' | translate }}</a>
     </div>
     <!-- Load indicator -->
     <div class="row text-center" ng-show="ctrl.busy"><i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i></div>

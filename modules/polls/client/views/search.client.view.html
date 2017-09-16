@@ -3,7 +3,7 @@
     <div class="col-xs-12 pdn">
       <div class="card card-expand">
         <div class="card-header">
-          <strong class="card-title"><i class="fa fa-search"></i> Search tool</strong>
+          <strong class="card-title"><i class="fa fa-search"></i> {{:: 'LB_SEARCH_TOOL' | translate }}</strong>
           <a class="card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
           <div class="clearfix"></div>
         </div>
@@ -12,21 +12,21 @@
           <form name="form.searchForm" class="form-horizontal" ng-submit="search()" novalidate>
             <div class="form-group">
               <div class="col-md-5">
-                <label>Key</label>
+                <label>{{:: 'LB_SEARCH_KEY' | translate }}</label>
                 <input type="text" class="form-control" placeholder="Search key" ng-model="condition.key">
               </div>
               <div class="col-md-5">
                 <label>In</label>
                 <select class="form-control" ng-model="condition.in">
-							  	<option value>Not set</option>
-							  	<option value="title">Poll's title only</option>
-							  	<option value="content">Poll's title and body</option>
-							  	<option value="options">Poll and options</option>
+							  	<option value>{{:: 'LB_SEARCH_NOT_SET' | translate }}</option>
+							  	<option value="title">{{:: 'LB_SEARCH_NOT_SET' | translate }}</option>
+							  	<option value="content">{{:: 'LB_SEARCH_IN_BODY' | translate }}</option>
+							  	<option value="options">{{:: 'LB_SEARCH_IN_OPTION' | translate }}</option>
 							  </select>
               </div>
               <div class="col-md-2">
                 <label>&nbsp;</label>
-                <button type="submit" class="btn btn-primary btn-block">Search</button>
+                <button type="submit" class="btn btn-primary btn-block">{{:: 'LB_SEARCH' | translate }}</button>
               </div>
             </div>
             <uib-accordion close-others="true">
@@ -34,99 +34,100 @@
 
                 <div class="form-group">
                   <div class="col-sm-12">
-                  <label for="sort">Sort by</label>
+                    <label for="sort">{{:: 'LB_SEARCH_SORT_BY' | translate }}</label>
                     <select id="sort" name="sort" class="form-control input-sm" ng-model="condition.sort">
-                      <option value>Default</option>
-                      <option value="-created">Newest to oldest</option>
-                      <option value="created">Oldest to newest</option>
-                      <option value="-likeCnt">Most likes</option>
-                      <option value="likeCnt">Least likes</option>
-                      <option value="-cmtCnt">Most comments</option>
-                      <option value="cmtCnt">Least comments</option>
-                      <option value="-voteCnt">Most votes</option>
-                      <option value="voteCnt">Least votes</option>
-                      <option value="-viewCnt">Most viewed</option>
-                      <option value="viewCnt">Least viewed</option>
+                      <option value>{{:: 'LB_SEARCH_NOT_SET' | translate }}</option>
+                      <option value="-created">{{:: 'LB_SEARCH_SORT_NEWEST' | translate }}</option>
+                      <option value="created">{{:: 'LB_SEARCH_SORT_OLDEST' | translate }}</option>
+                      <option value="-likeCnt">{{:: 'LB_SEARCH_SORT_MOST_LIKE' | translate }}</option>
+                      <option value="likeCnt">{{:: 'LB_SEARCH_SORT_LEAST_LIKE' | translate }}</option>
+                      <option value="-cmtCnt">{{:: 'LB_SEARCH_SORT_MOST_CMT' | translate }}</option>
+                      <option value="cmtCnt">{{:: 'LB_SEARCH_SORT_LEAST_CMT' | translate }}</option>
+                      <option value="-voteCnt">{{:: 'LB_SEARCH_SORT_MOST_VOTE' | translate }}</option>
+                      <option value="voteCnt">{{:: 'LB_SEARCH_SORT_LEAST_VOTE' | translate }}</option>
+                      <option value="-viewCnt">{{:: 'LB_SEARCH_SORT_MOST_VIEW' | translate }}</option>
+                      <option value="viewCnt">{{:: 'LB_SEARCH_SORT_LEAST_VIEW' | translate }}</option>
                     </select>
                   </div>
                 </div>
                 <div class="form-group">
                   <!-- Status -->
                   <div class="col-sm-6">
-                    <label for="status">Status</label>
+                    <label for="status">{{:: 'LB_SEARCH_STATUS' | translate }}</label>
                     <select id="status" name="status" class="form-control input-sm" ng-model="condition.status">
-						        	<option value>All</option>
-						        	<option value="opening">Opening</option>
-						        	<option value="closed">Closed</option>
+						        	<option value>{{:: 'LB_SEARCH_STATUS_ALL' | translate }}</option>
+						        	<option value="opening">{{:: 'LB_SEARCH_STATUS_OPENING' | translate }}</option>
+						        	<option value="closed">{{:: 'LB_SEARCH_STATUS_CLOSED' | translate }}</option>
 						        </select>
                   </div>
                   <!-- User -->
                   <div class="col-sm-6">
-                    <label>Posted by</label>
+                    <label>{{:: 'LB_SEARCH_POST_BY' | translate }}</label>
                     <input name="by" type="hidden" class="form-control" ng-model="condition.by">
-                    <angucomplete-alt placeholder="Search user" pause="300" selected-object="selectedUserFn" initial-value="selectedUser" remote-url="/api/users/search?s="
-                      remote-url-data-field="users" title-field="displayName" description-field="username" image-field="profileImageURL"
-                      minlength="1" input-class="form-control input-sm" match-class="highlight" />
+                    <angucomplete-alt placeholder="{{:: 'LB_SEARCH_POST_BY_USER' | translate }}" pause="300" selected-object="selectedUserFn"
+                      initial-value="selectedUser" remote-url="/api/users/search?s=" remote-url-data-field="users" title-field="displayName"
+                      description-field="username" image-field="profileImageURL" minlength="1" input-class="form-control input-sm"
+                      match-class="highlight" />
                   </div>
                 </div>
 
                 <div class="form-group">
                   <div class="col-sm-6">
                     <!-- Category -->
-                    <label>Category</label>
+                    <label>{{:: 'LB_CATEGORY' | translate }}</label>
                     <select id="ctgr" name="ctgr" class="form-control input-sm" ng-model="condition.ctgr">
-                      <option value>All</option>
-                      <option ng-repeat="category in Categorys.list" value="{{category._id}}" ng-selected="category._id.toString() === condition.ctgr.toString()">{{category.name}} ({{category.count}})</option>
+                      <option value>{{:: 'LB_SEARCH_STATUS_ALL' | translate }}</option>
+                      <option ng-repeat="category in Categorys.list" value="{{category._id}}" ng-selected="category._id.toString() === condition.ctgr.toString()">{{:: category.name}} ({{:: category.count}})</option>
                     </select>
                   </div>
                   <div class="col-sm-6">
-                    <div class="col-sm-12 pdn"><label>Created date</label></div>
+                    <div class="col-sm-12 pdn"><label>{{:: 'LB_SEARCH_CREATED' | translate }}</label></div>
                     <div class="col-sm-6 pdn">
                       <input id="created_start" name="created_start" class="form-control input-sm" today="true" moment-picker="condition.created_start"
-                        ng-model="condition.created_start" format="YYYY/MM/DD" start-view="month" placeholder="Start date..."
+                        ng-model="condition.created_start" format="YYYY/MM/DD" start-view="month" placeholder="{{:: 'LB_SEARCH_CREATED_START' | translate }}"
                         additions="{ bottom: 'start_bottom-template-url' }">
                     </div>
                     <div class="col-sm-6 pdn">
                       <input id="created_end" name="created_end" class="form-control input-sm" today="true" moment-picker="condition.created_end"
-                        ng-model="condition.created_end" format="YYYY/MM/DD" start-view="month" placeholder="End date..."
+                        ng-model="condition.created_end" format="YYYY/MM/DD" start-view="month" placeholder="{{:: 'LB_SEARCH_CREATED_END' | translate }}"
                         additions="{ bottom: 'end_bottom-template-url' }">
                     </div>
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-sm-4">
-                    <label for="allow_multiple">Allow multiple vote</label>
+                    <label for="allow_multiple">{{:: 'LB_POLL_MULTIPLE' | translate }}</label>
                     <select id="allow_multiple" name="allow_multiple" class="form-control input-sm" ng-model="condition.allow_multiple">
-                    <option value>All</option>
-                    <option value="true">Allow</option>
-                    <option value="false">Deny</option>
+                    <option value>{{:: 'LB_SEARCH_STATUS_ALL' | translate }}</option>
+                    <option value="true">{{:: 'LB_SEARCH_ALLOW' | translate }}</option>
+                    <option value="false">{{:: 'LB_SEARCH_DENY' | translate }}</option>
                   </select>
                   </div>
                   <div class="col-sm-4">
-                    <label for="allow_add">Allow member suggest</label>
+                    <label for="allow_add">{{:: 'LB_POLL_SUGGEST' | translate }}</label>
                     <select id="allow_add" name="allow_add" class="form-control input-sm" ng-model="condition.allow_add">
-                      <option value>All</option>
-                      <option value="true">Allow</option>
-                      <option value="false">Deny</option>
+                      <option value>{{:: 'LB_SEARCH_STATUS_ALL' | translate }}</option>
+                      <option value="true">{{:: 'LB_SEARCH_ALLOW' | translate }}</option>
+                      <option value="false">{{:: 'LB_SEARCH_DENY' | translate }}</option>
                     </select>
                   </div>
                   <div class="col-sm-4">
-                    <label for="allow_guest">Allow guest vote</label>
+                    <label for="allow_guest">{{:: 'LB_POLL_ALLOW_GUEST' | translate }}</label>
                     <select id="allow_guest" name="allow_guest" class="form-control input-sm" ng-model="condition.allow_guest">
-                      <option value>All</option>
-                      <option value="true">Allow</option>
-                      <option value="false">Deny</option>
+                      <option value>{{:: 'LB_SEARCH_STATUS_ALL' | translate }}</option>
+                      <option value="true">{{:: 'LB_SEARCH_ALLOW' | translate }}</option>
+                      <option value="false">{{:: 'LB_SEARCH_DENY' | translate }}</option>
                     </select>
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-sm-6">
-                    <div class="col-sm-12 pdn"><label>Comments count</label></div>
+                    <div class="col-sm-12 pdn"><label>{:: 'LB_SEARCH_CMT_CNT' | translate }}</label></div>
                     <div class="col-sm-6 pdn">
                       <select class="form-control input-sm" ng-model="condition.cmts_pref">
-                        <option value>Not set</option>
-                        <option value="least">As least</option>
-                        <option value="most">As most</option>
+                        <option value>{{:: 'LB_SEARCH_NOT_SET' | translate }}</option>
+                        <option value="least">{{:: 'LB_SEARCH_CNT_LEAST' | translate }}</option>
+                        <option value="most">{{:: 'LB_SEARCH_CNT_MOST' | translate }}</option>
                       </select>
                     </div>
                     <div class="col-sm-6 pdn">
@@ -134,12 +135,12 @@
                     </div>
                   </div>
                   <div class="col-sm-6">
-                    <div class="col-sm-12 pdn"><label>Likes</label></div>
+                    <div class="col-sm-12 pdn"><label>{:: 'LB_SEARCH_LIKE_CNT' | translate }}</label></div>
                     <div class="col-sm-6 pdn">
                       <select class="form-control input-sm" ng-model="condition.likes_pref">
-                        <option value>Not set</option>
-                        <option value="least">As least</option>
-                        <option value="most">As most</option>
+                        <option value>{{:: 'LB_SEARCH_NOT_SET' | translate }}</option>
+                        <option value="least">{{:: 'LB_SEARCH_CNT_LEAST' | translate }}</option>
+                        <option value="most">{{:: 'LB_SEARCH_CNT_MOST' | translate }}</option>
                       </select>
                     </div>
                     <div class="col-sm-6 pdn">
@@ -149,12 +150,12 @@
                 </div>
                 <div class="form-group">
                   <div class="col-sm-6">
-                    <div class="col-sm-12 pdn"><label>Votes</label></div>
+                    <div class="col-sm-12 pdn"><label>{:: 'LB_SEARCH_VOTE_CNT' | translate }}</label></div>
                     <div class="col-sm-6 pdn">
                       <select class="form-control input-sm" ng-model="condition.votes_pref">
-                        <option value>Not set</option>
-                        <option value="least">As least</option>
-                        <option value="most">As most</option>
+                        <option value>{{:: 'LB_SEARCH_NOT_SET' | translate }}</option>
+                        <option value="least">{{:: 'LB_SEARCH_CNT_LEAST' | translate }}</option>
+                        <option value="most">{{:: 'LB_SEARCH_CNT_MOST' | translate }}</option>
                       </select>
                     </div>
                     <div class="col-sm-6 pdn">
@@ -162,12 +163,12 @@
                     </div>
                   </div>
                   <div class="col-sm-6">
-                    <div class="col-sm-12 pdn"><label>Views</label></div>
+                    <div class="col-sm-12 pdn"><label>{:: 'LB_SEARCH_VIEW_CNT' | translate }}</label></div>
                     <div class="col-sm-6 pdn">
                       <select class="form-control input-sm" ng-model="condition.views_pref">
-                        <option value>Not set</option>
-                        <option value="least">As least</option>
-                        <option value="most">As most</option>
+                        <option value>{{:: 'LB_SEARCH_NOT_SET' | translate }}</option>
+                        <option value="least">{{:: 'LB_SEARCH_CNT_LEAST' | translate }}</option>
+                        <option value="most">{{:: 'LB_SEARCH_CNT_MOST' | translate }}</option>
                       </select>
                     </div>
                     <div class="col-sm-6 pdn">
@@ -181,7 +182,7 @@
         </div>
         <hr class="mgn">
         <div class="card-footer">
-          <button class="btn btn-warning btn-sm pull-right" ng-click="clear_filter()">Clear</button>
+          <button class="btn btn-warning btn-sm pull-right" ng-click="clear_filter()">{{:: 'LB_CLEAR' | translate }}</button>
           <div class="clearfix"></div>
         </div>
       </div>
@@ -192,28 +193,28 @@
 
   <!-- Message -->
   <div class="row pd6l pd6r" ng-show="polls.length > 0  && !busy">
-    <div class="notice notice-success">{{polls.length}} result(s) matching.</div>
+    <div class="notice notice-success">{{polls.length}} {{:: 'LB_SEARCH_RESULT' | translate }}</div>
   </div>
   <!-- Result -->
   <div class="row" ng-show="polls.length > 0">
     <div class="col-xs-12 pdn">
       <div ng-repeat="poll in polls" class="card">
-        <div ng-include="'/modules/core/client/views/templates/list-poll.client.template.html'"></div>
+        <poll-item></poll-item>
       </div>
     </div>
   </div>
   <!-- Message -->
   <div class="row pd6l pd6r" ng-show="polls.length <= 0 && !busy">
-    <div class="notice notice-warning">No matches found.</div>
+    <div class="notice notice-warning">{{:: 'LB_SEARCH_NOT_FOUND' | translate }}</div>
   </div>
 </section>
 <script type="text/ng-template" id="start_bottom-template-url">
   <button class="btn btn-info btn-sm btn-block" ng-click="clear_created_start()">
-    Clear
+    {{:: 'LB_CLEAR' | translate }}
   </button>
 </script>
 <script type="text/ng-template" id="end_bottom-template-url">
   <button class="btn btn-info btn-sm btn-block" ng-click="clear_created_end()">
-    Clear
+    {{:: 'LB_CLEAR' | translate }}
   </button>
 </script>

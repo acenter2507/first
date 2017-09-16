@@ -1,25 +1,25 @@
 <div class="card">
   <div class="card-header">
-    <a ng-click="ctrl.save(ctrl.form.pollForm.$valid)">Post</a>
-    <a class="mg10l" ng-click="ctrl.discard()">Discard</a>
+    <a ng-click="ctrl.save(ctrl.form.pollForm.$valid)">{{:: 'LB_POST' | translate }}</a>
+    <a class="mg10l" ng-click="ctrl.discard()">{{:: 'LB_DISCARD' | translate}}</a>
     <md-menu md-position-mode="target-right target" md-offset="10 30">
-      <a class="card-link" ng-class="{ 'text-shake': !ctrl.poll.isPublic }" ng-click="$mdMenu.open($event)"><i class="fa fa-lock"></i> Poll's options</a>
+      <a class="card-link" ng-class="{ 'text-shake': !ctrl.poll.isPublic }" ng-click="$mdMenu.open($event)"><i class="fa fa-lock"></i> {{:: 'LB_POLL_OPTION' | translate}}</a>
       <md-menu-content>
         <ul class="menu-list">
           <li class="pdn text-right">
             <a class="pull-right" ng-click="$mdMenu.close()"><i class="fa fa-times"></i></a>
           </li>
           <li>
-            <md-checkbox class="md-primary" ng-model="ctrl.poll.isPublic">Public</md-checkbox>
+            <md-checkbox class="md-primary" ng-model="ctrl.poll.isPublic">{{:: 'LB_PUBLIC' | translate}}</md-checkbox>
           </li>
           <li>
-            <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_guest">Allow guest vote</md-checkbox>
+            <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_guest">{{:: 'LB_POLL_ALLOW_GUEST' | translate}}</md-checkbox>
           </li>
           <li>
-            <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_multiple">Allow multiple vote</md-checkbox>
+            <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_multiple">{{:: 'LB_POLL_MULTIPLE' | translate}}</md-checkbox>
           </li>
           <li>
-            <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_add">Allow members suggest option</md-checkbox>
+            <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_add">{{:: 'LB_POLL_SUGGEST' | translate}}</md-checkbox>
           </li>
         </ul>
       </md-menu-content>
@@ -33,23 +33,23 @@
           <option ng-repeat="ctgr in ctrl.categorys" value="{{ctgr._id}}">{{ctgr.name}}</option>
         </select>
         <div ng-messages="ctrl.form.pollForm.category.$error" role="alert">
-          <p class="help-block error-text font-sm" ng-message="required">Category is required.</p>
+          <p class="help-block error-text font-sm" ng-message="required">{{:: 'LB_CATEGORY_REQUIRE' | translate}}</p>
         </div>
       </div>
       <!-- Title -->
       <div class="form-group mg6b" show-errors>
-        <input tabindex="2" focus-me="true" type="text" class="form-control" name="title" ng-model="ctrl.poll.title" placeholder="Tilte..."
+        <input tabindex="2" focus-me="true" type="text" class="form-control" name="title" ng-model="ctrl.poll.title" placeholder="{{:: 'LB_POLL_TITLE_PLACE' | translate }}"
           required/>
         <div ng-messages="ctrl.form.pollForm.title.$error" role="alert">
-          <p class="help-block error-text font-sm" ng-message="required">You must type somthing for title.</p>
+          <p class="help-block error-text font-sm" ng-message="required">{{:: 'LB_POLL_TITLE_REQUIRE' | translate }}</p>
         </div>
       </div>
       <!-- Body -->
       <div class="form-group mg6b" show-errors>
-        <text-angular ta-toolbar="''" tabIndex="3" name="body" class="text-body" ng-model="ctrl.poll.body" placeholder="Ask something..." required ta-text-editor-class="form-control quick-body"
+        <text-angular ta-toolbar="''" tabIndex="3" name="body" class="text-body" ng-model="ctrl.poll.body" placeholder="{{:: 'LB_QUICK_BODY_PLACE' | translate }}" required ta-text-editor-class="form-control quick-body"
           ta-html-editor-class="form-control quick-body"></text-angular>
           <div ng-messages="ctrl.form.pollForm.body.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">You must ask somthing.</p>
+            <p class="help-block error-text" ng-message="required">{{:: 'LB_QUICK_BODY_REQUIRE' | translate }}</p>
           </div>
       </div>
       <div class="form-group mg6b">
@@ -70,7 +70,7 @@
                 </md-menu-content>
               </md-menu>
             </td>
-            <td><input tabindex="{{ 4 + $index }}" type="text" class="form-control input-sm" ng-model="opt.title" placeholder="Type an option..."></td>
+            <td><input tabindex="{{ 4 + $index }}" type="text" class="form-control input-sm" ng-model="opt.title" placeholder="{{:: 'LB_QUICK_OPT_PLACE' | translate }}"></td>
             <td class="text-right w20"><a ng-click="ctrl.remove(opt)">&#8722;</a></td>
           </tr>
         </table>
@@ -87,8 +87,8 @@
   <hr class="mgn">
   <div class="card-footer">
     <a class="pull-right" ng-click="ctrl.write_as_post()">
-      <i class="fa fa-pencil-square-o"></i> Write more
-      <md-tooltip md-z-index="10002" class="d-sm-down-none" md-direction="bottom">Create poll as a post</md-tooltip>
+      <i class="fa fa-pencil-square-o"></i> {{:: 'LB_WRITE_MORE' | translate }}
+      <md-tooltip md-z-index="10002" class="d-sm-down-none" md-direction="bottom">{{:: 'LB_WRITE_MORE_TOOLTIP' | translate }}</md-tooltip>
     </a>
   </div>
 </div>

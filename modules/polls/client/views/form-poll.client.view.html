@@ -3,23 +3,23 @@
   <div class="row">
     <div class="card">
       <div class="card-header">
-        <a ng-click="ctrl.save(ctrl.form.pollForm.$valid)">{{ctrl.poll._id ? ' Save' : ' Post'}}</a>
-        <a class="mg10l" ng-click="ctrl.discard()">Discard</a>
+        <a ng-click="ctrl.save(ctrl.form.pollForm.$valid)">{{ctrl.poll._id ? 'LB_SAVE' : 'LB_POST' | translate }}</a>
+        <a class="mg10l" ng-click="ctrl.discard()">{{:: 'LB_DISCARD' | translate}}</a>
         <md-menu md-offset="10 30">
-          <a class="card-link" ng-class="{ 'text-shake': !ctrl.poll.isPublic }" ng-click="$mdMenu.open($event)"><i class="fa fa-lock"></i> Poll's options</a>
+          <a class="card-link" ng-class="{ 'text-shake': !ctrl.poll.isPublic }" ng-click="$mdMenu.open($event)"><i class="fa fa-lock"></i> {{:: 'LB_POLL_OPTION' | translate}}</a>
           <md-menu-content>
             <ul class="menu-list mg5b">
               <li>
-                <md-checkbox class="md-primary" ng-model="ctrl.poll.isPublic">Public</md-checkbox>
+                <md-checkbox class="md-primary" ng-model="ctrl.poll.isPublic">{{:: 'LB_PUBLIC' | translate}}</md-checkbox>
               </li>
               <li>
-                <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_guest">Allow guest vote</md-checkbox>
+                <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_guest">{{:: 'LB_POLL_ALLOW_GUEST' | translate}}</md-checkbox>
               </li>
               <li>
-                <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_multiple">Allow multiple vote</md-checkbox>
+                <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_multiple">{{:: 'LB_POLL_MULTIPLE' | translate}}</md-checkbox>
               </li>
               <li>
-                <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_add">Allow members suggest option</md-checkbox>
+                <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_add">{{:: 'LB_POLL_SUGGEST' | translate}}</md-checkbox>
               </li>
             </ul>
           </md-menu-content>
@@ -32,29 +32,29 @@
           <!-- Category -->
           <div class="form-group mg10b" show-errors>
             <select name="category" class="form-control" ng-model="ctrl.poll.category" required>
-              <option value>Category</option>
-              <option ng-repeat="ctgr in Categorys.list" value="{{ctgr._id}}" ng-selected="ctrl.poll.category._id === ctgr._id" >{{ctgr.name}}</option>
+              <option value>{{:: 'LB_CATEGORY' | translate}}</option>
+              <option ng-repeat="ctgr in Categorys.list" value="{{ctgr._id}}" ng-selected="ctrl.poll.category._id === ctgr._id" >{{:: ctgr.name}}</option>
             </select>
             <div ng-messages="ctrl.form.pollForm.category.$error" role="alert">
-              <p class="help-block error-text" ng-message="required">Category is required.</p>
+              <p class="help-block error-text" ng-message="required">{{:: 'LB_CATEGORY_REQUIRE' | translate}}</p>
             </div>
           </div>
           <!-- More -->
           <div class="form-group mg20b">
-            <a class="pull-right" ng-click="moreCollapse = !moreCollapse">More setting</a>
+            <a class="pull-right" ng-click="moreCollapse = !moreCollapse">{{:: 'LB_MORE_SETTING' | translate}}</a>
             <div class="clearfix"></div>
           </div>
           <div uib-collapse="moreCollapse">
             <!-- Close time -->
             <div class="form-group">
               <div class="input-group" today="true" moment-picker="ctrl.poll.close" format="YYYY-MM-DD HH:mm" start-view="month" additions="{ bottom: 'bottom-template-url' }">
-                <input class="form-control" placeholder="Close poll at" ng-model="ctrl.poll.close" readonly="true">
+                <input class="form-control" placeholder="{{:: 'LB_POLL_CLOSE' | translate }}" ng-model="ctrl.poll.close" readonly="true">
                 <span class="input-group-addon span-link"><i class="fa fa-calendar"></i></span>
               </div>
             </div>
             <!-- Tags -->
             <div class="form-group" ng-controller="AutocompleteTagController">
-              <tags-input ng-model="ctrl.poll.tags" display-property="name" placeholder="{{placeholder}}" add-from-autocomplete-only="true"
+              <tags-input ng-model="ctrl.poll.tags" display-property="name" placeholder="{{:: placeholder}}" add-from-autocomplete-only="true"
                 replace-spaces-with-dashes="false" min-length="1" enforce-max-tags class="tags-custom">
                 <auto-complete source="loadItems($query)" min-length="1" debounce-delay="0" max-results="10"></auto-complete>
               </tags-input>
@@ -62,10 +62,10 @@
           </div>
           <!-- Title -->
           <div class="form-group" show-errors>
-            <input type="text" class="form-control" name="title" ng-model="ctrl.poll.title" placeholder="Enter your poll tilte here"
+            <input type="text" class="form-control" name="title" ng-model="ctrl.poll.title" placeholder="{{:: 'LB_POLL_TITLE_PLACE' | translate }}"
               required/>
             <div ng-messages="ctrl.form.pollForm.title.$error" role="alert">
-              <p class="help-block error-text" ng-message="required">You must type somthing for title.</p>
+              <p class="help-block error-text" ng-message="required">{{:: 'LB_POLL_TITLE_REQUIRE' | translate }}</p>
             </div>
           </div>
           <!-- Summary -->
@@ -78,24 +78,25 @@
           </div> -->
           <!-- Body -->
           <div class="form-group" show-errors>
-            <text-angular name="body" class="text-body" ng-model="ctrl.poll.body" required placeholder="Type you post content here"></text-angular>
+            <text-angular name="body" class="text-body" ng-model="ctrl.poll.body" required placeholder="{{:: 'LB_POLL_BODY_PLACE' | translate }}"></text-angular>
             <div ng-messages="ctrl.form.pollForm.body.$error" role="alert">
-              <p class="help-block error-text" ng-message="required">You must type somthing for body.</p>
+              <p class="help-block error-text" ng-message="required">{{:: 'LB_POLL_BODY_REQUIRE' | translate }}</p>
             </div>
           </div>
           <!-- Option -->
           <uib-accordion close-others="true">
             <uib-accordion-group ng-repeat="opt in ctrl.opts | orderBy: 'create'" heading="{{opt.title}}" panel-class="{{'custom-panel ' + (opt.status === 1 ? 'public' : 'waiting')}}">
               <span>
-                <a ng-click="ctrl.remove_opt(opt)">Remove</a>
-                <a class="mg10l" ng-if="opt.status == 1" ng-click="ctrl.input_opt(opt)">Edit</a>
-                <a class="mg10l" ng-if="opt.status == 2" ng-click="ctrl.approve_opt(opt)">Approve</a>
-                <a class="mg10l" ng-if="opt.status == 2" ng-click="ctrl.reject_opt(opt)">Reject</a>
+                <a ng-click="ctrl.remove_opt(opt)">{{:: 'LB_DELETE' | translate }}</a>
+                <a class="mg10l" ng-if="opt.status == 1" ng-click="ctrl.input_opt(opt)">{{:: 'LB_POLLS_MENU_EDIT' | translate }}</a>
+                <a class="mg10l" ng-if="opt.status == 2" ng-click="ctrl.approve_opt(opt)">{{:: 'LB_APPROVE' | translate }}</a>
+                <a class="mg10l" ng-if="opt.status == 2" ng-click="ctrl.reject_opt(opt)">{{:: 'LB_REJECT' | translate }}</a>
               </span>
               <small class="pull-right text-muted">
-                Added by
+                {{:: 'LB_ADD_BY' | translate }}
                 <a ui-sref="profile.info({userId: opt.user.slug})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>
-                <span ng-if="!opt.user">Deleted User</span>on
+                <span ng-if="!opt.user">{{:: 'LB_DELETED_USER' | translate }}</span>
+                <span>{{:: 'LB_ON' | translate }}</span>
                 <span ng-bind="opt.created | LLL_format"></span>
               </small>
               <div class="clearfix"></div>
@@ -115,6 +116,6 @@
   </div>
   <script type="text/ng-template" id="bottom-template-url">
     <button class="btn btn-info btn-sm btn-block" ng-click="clear_close_date()">
-      Clear
+      {{:: 'LB_CLEAR' | translate }}
     </button>
   </script>

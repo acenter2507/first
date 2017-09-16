@@ -11,8 +11,7 @@
     '$state',
     '$window',
     'Authentication',
-    'categoryResolve',
-    'toastr'
+    'categoryResolve'
   ];
 
   function CategorysController(
@@ -20,8 +19,7 @@
     $state,
     $window,
     Authentication,
-    category,
-    toast
+    category
   ) {
     var vm = this;
     if (!$scope.isAdmin) {
@@ -74,7 +72,7 @@
       }
 
       function errorCallback(res) {
-        toast.error(res.data.message, 'Error!');
+        $scope.show_message('MS_CM_LOAD_ERROR', true);
       }
     };
   }

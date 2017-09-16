@@ -12,7 +12,6 @@
     'Categorys',
     'Action',
     'Constants',
-    'toastr',
     '$filter'
   ];
 
@@ -23,7 +22,6 @@
     Categorys,
     Action,
     Constants,
-    toast,
     $filter
   ) {
     var ctrl = this;
@@ -57,7 +55,7 @@
         })
         .catch(err => {
           $scope.closeThisDialog();
-          toast.error('There were problems creating your poll.', 'Error!');
+          $scope.show_message('MS_CM_LOAD_ERROR', true);
         });
     };
     ctrl.add = () => {

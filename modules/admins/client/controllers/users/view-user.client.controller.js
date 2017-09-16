@@ -11,8 +11,6 @@ ViewUserController.$inject = [
   'userResolve',
   'AdminApi',
   'Action',
-  'toastr',
-  'ngDialog',
   'PollsService',
   'CmtsService',
   'VotesService',
@@ -31,8 +29,6 @@ function ViewUserController(
   userResolve,
   AdminApi,
   Action,
-  toast,
-  dialog,
   Polls,
   Cmts,
   Votes,
@@ -71,7 +67,7 @@ function ViewUserController(
         $scope.buildloginPager();
       })
       .catch(err => {
-        toast.error('Load logins error: ' + err.message, 'Error!');
+        alert(err.message);
       });
   }
   $scope.buildloginPager = () => {
@@ -102,7 +98,7 @@ function ViewUserController(
         $scope.buildPollPager();
       })
       .catch(err => {
-        toast.error('Load polls error: ' + err.message, 'Error!');
+        alert(err.message);
       });
   }
   $scope.buildPollPager = () => {
@@ -141,7 +137,7 @@ function ViewUserController(
         $scope.buildCmtPager();
       })
       .catch(err => {
-        toast.error('Load cmts error: ' + err.message, 'Error!');
+        alert(err.message);
       });
   }
   $scope.buildCmtPager = () => {
@@ -173,7 +169,7 @@ function ViewUserController(
         $scope.buildVotePager();
       })
       .catch(err => {
-        toast.error('Load votes error: ' + err.message, 'Error!');
+        alert(err.message);
       });
   }
   $scope.buildVotePager = () => {
@@ -205,7 +201,7 @@ function ViewUserController(
         $scope.buildReportPager();
       })
       .catch(err => {
-        toast.error('Load reports error: ' + err.message, 'Error!');
+        alert(err.message);
       });
   }
   $scope.buildReportPager = () => {
@@ -237,7 +233,7 @@ function ViewUserController(
         $scope.buildBereportPager();
       })
       .catch(err => {
-        toast.error('Load bereports error: ' + err.message, 'Error!');
+        alert(err.message);
       });
   }
   $scope.buildBereportPager = () => {
@@ -270,7 +266,7 @@ function ViewUserController(
         $scope.buildSuggestPager();
       })
       .catch(err => {
-        toast.error('Load suggests error: ' + err.message, 'Error!');
+        alert(err.message);
       });
   }
   $scope.buildSuggestPager = () => {
@@ -293,18 +289,7 @@ function ViewUserController(
   };
 
   $scope.remove = () => {
-    $scope.message_title = 'Delete user!';
-    $scope.message_content = 'Are you sure you want to delete this user?';
-    $scope.dialog_type = 3;
-    $scope.buton_label = 'delete';
-    dialog.openConfirm({
-      scope: $scope,
-      templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
-    }).then(() => {
-      handle_confirm();
-    }, reject => {
-    });
-    function handle_confirm() {
+    if ($window.confirm('Delete this user?')) {
       $scope.user.$remove(function () {
         $state.go('admin.users.list');
       });
@@ -312,18 +297,7 @@ function ViewUserController(
   };
 
   $scope.delete_poll = poll => {
-    $scope.message_title = 'Delete poll!';
-    $scope.message_content = 'Are you sure you want to delete?';
-    $scope.dialog_type = 3;
-    $scope.buton_label = 'delete';
-    dialog.openConfirm({
-      scope: $scope,
-      templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
-    }).then(() => {
-      handle_confirm();
-    }, reject => {
-    });
-    function handle_confirm() {
+    if ($window.confirm('Delete this poll?')) {
       var rs_poll = new Polls({ _id: poll._id });
       $scope.polls = _.without($scope.polls, poll);
       $scope.figureOutItemsToDisplay_polls();
@@ -331,18 +305,7 @@ function ViewUserController(
     }
   };
   $scope.delete_cmt = cmt => {
-    $scope.message_title = 'Delete comment!';
-    $scope.message_content = 'Are you sure you want to delete?';
-    $scope.dialog_type = 3;
-    $scope.buton_label = 'delete';
-    dialog.openConfirm({
-      scope: $scope,
-      templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
-    }).then(() => {
-      handle_confirm();
-    }, reject => {
-    });
-    function handle_confirm() {
+    if ($window.confirm('Delete this comment?')) {
       var rs_cmt = new Cmts({ _id: cmt._id });
       $scope.cmts = _.without($scope.cmts, cmt);
       $scope.figureOutItemsToDisplay_cmts();
@@ -350,18 +313,7 @@ function ViewUserController(
     }
   };
   $scope.delete_vote = vote => {
-    $scope.message_title = 'Delete vote!';
-    $scope.message_content = 'Are you sure you want to delete?';
-    $scope.dialog_type = 3;
-    $scope.buton_label = 'delete';
-    dialog.openConfirm({
-      scope: $scope,
-      templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
-    }).then(() => {
-      handle_confirm();
-    }, reject => {
-    });
-    function handle_confirm() {
+    if ($window.confirm('Delete this vote?')) {
       var rs_vote = new Votes({ _id: vote._id });
       $scope.votes = _.without($scope.votes, vote);
       $scope.figureOutItemsToDisplay_votes();
@@ -369,18 +321,7 @@ function ViewUserController(
     }
   };
   $scope.delete_report = rp => {
-    $scope.message_title = 'Delete report!';
-    $scope.message_content = 'Are you sure you want to delete?';
-    $scope.dialog_type = 3;
-    $scope.buton_label = 'delete';
-    dialog.openConfirm({
-      scope: $scope,
-      templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
-    }).then(() => {
-      handle_confirm();
-    }, reject => {
-    });
-    function handle_confirm() {
+    if ($window.confirm('Delete this report?')) {
       var rs_rp = new Reports({ _id: rp._id });
       $scope.reports = _.without($scope.reports, rp);
       $scope.figureOutItemsToDisplay_reports();
@@ -388,18 +329,7 @@ function ViewUserController(
     }
   };
   $scope.delete_bereport = brp => {
-    $scope.message_title = 'Delete report!';
-    $scope.message_content = 'Are you sure you want to delete?';
-    $scope.dialog_type = 3;
-    $scope.buton_label = 'delete';
-    dialog.openConfirm({
-      scope: $scope,
-      templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
-    }).then(() => {
-      handle_confirm();
-    }, reject => {
-    });
-    function handle_confirm() {
+    if ($window.confirm('Delete this bereport?')) {
       var rs_brp = new Reports({ _id: brp._id });
       $scope.bereports = _.without($scope.bereports, brp);
       $scope.figureOutItemsToDisplay_bereports();
@@ -407,18 +337,7 @@ function ViewUserController(
     }
   };
   $scope.delete_suggest = sg => {
-    $scope.message_title = 'Delete suggest!';
-    $scope.message_content = 'Are you sure you want to delete?';
-    $scope.dialog_type = 3;
-    $scope.buton_label = 'delete';
-    dialog.openConfirm({
-      scope: $scope,
-      templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
-    }).then(() => {
-      handle_confirm();
-    }, reject => {
-    });
-    function handle_confirm() {
+    if ($window.confirm('Delete this bereport?')) {
       var rs_sg = new Opts({ _id: sg._id });
       $scope.suggests = _.without($scope.suggests, sg);
       $scope.figureOutItemsToDisplay_suggests();

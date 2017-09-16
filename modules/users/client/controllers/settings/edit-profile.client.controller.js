@@ -47,16 +47,19 @@ function EditProfileController(
       return false;
     }
     if ($scope.userInfo.email !== $scope.user.email) {
-      $scope.message_title = 'LB_USER_EMAIL_CONFIRM';
-      $scope.message_content = 'LB_USER_EMAIL_CONFIRM_CONTENT';
-      $scope.dialog_type = 1;
-      $scope.buton_label = 'LB_SAVE';
+      $scope.message = {};
+      $scope.message.title = 'LB_USER_EMAIL_CONFIRM';
+      $scope.message.content = 'LB_USER_EMAIL_CONFIRM_CONTENT';
+      $scope.message.type = 1;
+      $scope.message.buton = 'LB_SAVE';
       dialog.openConfirm({
         scope: $scope,
         templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
       }).then(confirm => {
+        delete $scope.message;
         return handle_save();
       }, reject => {
+        delete $scope.message;
         $scope.userInfo.email = $scope.user.email;
         $scope.profile_busy = false;
       });

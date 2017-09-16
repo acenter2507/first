@@ -14,7 +14,6 @@
     'PollsService',
     'OptsService',
     'Socket',
-    'toastr',
     'Action',
     'ngDialog',
     'Notifications'
@@ -29,7 +28,6 @@
     PollsService,
     Opts,
     Socket,
-    toast,
     Action,
     dialog,
     Notifications
@@ -73,7 +71,7 @@
         userId: $scope.user._id
       });
       Socket.on('poll_delete', res => {
-        toast.error('This poll has been deleted.', 'Error!');
+        $scope.show_message('LB_POLLS_DELETED', true);
         $state.go('polls.list');
       });
       Socket.on('opts_request', res => {
@@ -104,18 +102,20 @@
     }
     // Function
     ctrl.remove = () => {
-      $scope.message_title = 'Delete poll!';
-      $scope.message_content = 'Are you sure you want to delete?';
-      $scope.dialog_type = 3;
-      $scope.buton_label = 'Delete';
+      $scope.message = {};
+      $scope.message.content = 'LB_POLLS_CONFIRM_DELETE';
+      $scope.message.type = 3;
+      $scope.message.buton = 'LB_DELETE';
       dialog.openConfirm({
         scope: $scope,
         templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
       }).then(confirm => {
         handle_delete();
       }, reject => {
+        delete $scope.message;
       });
       function handle_delete() {
+        delete $scope.message;
         ctrl.poll.$remove(() => {
           Socket.emit('poll_delete', { pollId: ctrl.poll._id });
           $state.go('polls.list');
@@ -130,25 +130,27 @@
       }
 
       if (!ctrl.validateCloseDate()) {
-        toast.error('Close date is invalid.', 'Error!');
+        $scope.show_message('LB_POLLS_CLOSE_INVALID', true);
         return;
       }
       if (!ctrl.poll.isPublic) {
-        $scope.message_title = 'Save poll!';
-        $scope.message_content = 'You want to save a private poll?';
-        $scope.dialog_type = 1;
-        $scope.buton_label = 'Save';
+        $scope.message = {};
+        $scope.message.content = 'LB_POLLS_PRIVATE_SAVE';
+        $scope.message.type = 1;
+        $scope.message.buton = 'LB_SAVE';
         dialog.openConfirm({
           scope: $scope,
           templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
         }).then(confirm => {
           handle_save();
         }, reject => {
+          delete $scope.message;
         });
       } else {
         handle_save();
       }
       function handle_save() {
+        delete $scope.message;
         ctrl.poll.opts = ctrl.opts;
         ctrl.poll.summary = 'summary';
         Action.save_poll(ctrl.poll)
@@ -156,7 +158,7 @@
             $state.go('polls.view', { pollId: res.slug });
           })
           .catch(err => {
-            toast.error(err.message, 'Error!');
+            $scope.show_message(err.message, true);
           });
       }
     };
@@ -171,20 +173,22 @@
       if (angular.equals(ctrl.poll, ctrl.bk_poll)) {
         handle_discard();
       } else {
-        $scope.message_title = 'Discard poll!';
-        $scope.message_content = 'Are you sure you want to discard?';
-        $scope.dialog_type = 2;
-        $scope.buton_label = 'Discard';
+        $scope.message = {};
+        $scope.message.content = 'LB_POLLS_CONFIRM_DISCARD';
+        $scope.message.type = 2;
+        $scope.message.buton = 'LB_DISCARD';
         dialog.openConfirm({
           scope: $scope,
           templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
         }).then(confirm => {
           handle_discard();
         }, reject => {
+          delete $scope.message;
         });
       }
     };
     function handle_discard() {
+      delete $scope.message;
       if (ctrl.poll._id) {
         $state.go('polls.view', { pollId: ctrl.poll.slug });
       } else {
@@ -200,18 +204,20 @@
       angular.element('body').toggleClass('aside-panel-open');
     };
     ctrl.remove_opt = opt => {
-      $scope.message_title = 'Delete option!';
-      $scope.message_content = 'Are you sure you want to delete this option?';
-      $scope.dialog_type = 3;
-      $scope.buton_label = 'Delete';
+      $scope.message = {};
+      $scope.message.content = 'LB_POLLS_CONFIRM_DELETE_OPT';
+      $scope.message.type = 3;
+      $scope.message.buton = 'LB_DELETE';
       dialog.openConfirm({
         scope: $scope,
         templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
       }).then(confirm => {
         handle_delete();
       }, reject => {
+        delete $scope.message;
       });
       function handle_delete() {
+        delete $scope.message;
         ctrl.opts = _.without(ctrl.opts, opt);
         if (opt._id) {
           var _opt = new Opts(opt);
@@ -222,18 +228,20 @@
       }
     };
     ctrl.approve_opt = opt => {
-      $scope.message_title = 'Approve option!';
-      $scope.message_content = 'Are you sure you want to approve this option?';
-      $scope.dialog_type = 1;
-      $scope.buton_label = 'Approve';
+      $scope.message = {};
+      $scope.message.content = 'LB_POLLS_CONFIRM_APPROVE';
+      $scope.message.type = 1;
+      $scope.message.buton = 'LB_APPROVE';
       dialog.openConfirm({
         scope: $scope,
         templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
       }).then(confirm => {
         handle_approve();
       }, reject => {
+        delete $scope.message;
       });
       function handle_approve() {
+        delete $scope.message;
         opt.status = 1;
         var _opt = new Opts({ _id: opt._id, status: opt.status });
         _opt.$update(() => {
@@ -242,18 +250,20 @@
       }
     };
     ctrl.reject_opt = opt => {
-      $scope.message_title = 'Reject option!';
-      $scope.message_content = 'Are you sure you want to reject this option?';
-      $scope.dialog_type = 2;
-      $scope.buton_label = 'Reject';
+      $scope.message = {};
+      $scope.message.content = 'LB_POLLS_CONFIRM_REJECT';
+      $scope.message.type = 2;
+      $scope.message.buton = 'LB_REJECT';
       dialog.openConfirm({
         scope: $scope,
         templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
       }).then(confirm => {
         handle_reject();
       }, reject => {
+        delete $scope.message;
       });
       function handle_reject() {
+        delete $scope.message;
         opt.status = 3;
         var _opt = new Opts({ _id: opt._id, status: opt.status });
         _opt.$update(() => {
@@ -276,7 +286,6 @@
           status: 1
         };
       }
-      toast.success('Option is saved.', 'Success!');
     };
     ctrl.opt_full = () => {
       let aside = angular.element('.aside-panel')[0];

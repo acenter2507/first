@@ -58,18 +58,20 @@ angular.module('users').controller('ProfileBookmarksController', [
     };
 
     $scope.remove_bookmark = poll => {
-      $scope.message_title = 'Remove bookmark!';
-      $scope.message_content = 'Are you sure you want to remove this poll from bookmark?';
-      $scope.dialog_type = 3;
-      $scope.buton_label = 'remove';
+      $scope.message = {};
+      $scope.message.content = 'LB_POLLS_CONFIRM_BOOKMARK';
+      $scope.message.type = 3;
+      $scope.message.buton = 'LB_DELETE';
       dialog.openConfirm({
         scope: $scope,
         templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
       }).then(confirm => {
         handle_delete();
       }, reject => {
+        delete $scope.message;
       });
       function handle_delete() {
+        delete $scope.message;
         $scope.polls = _.without($scope.polls, poll);
         Action.remove_bookmark(poll._id);
       }

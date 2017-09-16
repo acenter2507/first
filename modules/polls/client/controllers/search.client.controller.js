@@ -10,10 +10,9 @@ angular.module('polls').controller('PollsSearchController', [
   '$stateParams',
   'Storages',
   'Constants',
-  'toastr',
   'ngDialog',
   'Profile',
-  function ($location, $rootScope, $scope, $state, Authentication, Action, $stateParams, Storages, Constants, toast, dialog, Profile) {
+  function ($location, $rootScope, $scope, $state, Authentication, Action, $stateParams, Storages, Constants, dialog, Profile) {
     $scope.form = {};
 
     $scope.condition = {};
@@ -61,7 +60,7 @@ angular.module('polls').controller('PollsSearchController', [
           $scope.busy = false;
         })
         .catch(err => {
-          toast.error(err.message, 'Error!');
+          $scope.show_message('MS_CM_LOAD_ERROR', true);
           $scope.busy = false;
         });
       Storages.set_local(Constants.storages.public_search_condition, JSON.stringify($scope.condition));
@@ -97,28 +96,30 @@ angular.module('polls').controller('PollsSearchController', [
     // Thao tác khác
     $scope.delete_poll = (poll) => {
       if (!poll.isCurrentUserOwner) {
-        toast.error('You are not authorized.', 'Error!');
+        $scope.show_message('MS_CM_AUTH_ERROR', true);
         return;
       }
-      $scope.message_title = 'Delete poll!';
-      $scope.message_content = 'Are you sure you want to delete this poll?';
-      $scope.dialog_type = 3;
-      $scope.buton_label = 'delete';
+      $scope.message = {};
+      $scope.message.content = 'LB_POLLS_CONFIRM_DELETE';
+      $scope.message.type = 3;
+      $scope.message.buton = 'LB_DELETE';
       dialog.openConfirm({
         scope: $scope,
         templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
       }).then(confirm => {
         handle_delete();
       }, reject => {
+        delete $scope.message;
       });
       function handle_delete() {
+        delete $scope.message;
         $scope.polls = _.without($scope.polls, poll);
         Action.delete_poll(poll);
       }
     };
     $scope.report_poll = (poll) => {
       if (poll.reported) {
-        toast.error('You are already reported ' + poll.title, 'Error!');
+        $scope.show_message_params('MS_CM_REPORT_EXIST_ERROR', { title: poll.title }, true);
         return;
       }
       dialog.openConfirm({
@@ -132,43 +133,42 @@ angular.module('polls').controller('PollsSearchController', [
         Action.save_report(poll, reason)
           .then(res => {
             poll.reported = (res) ? true : false;
-            toast.success('You have successfully reported ' + poll.title, 'Thank you!');
+            $scope.show_message_params('MS_CM_REPORT_SUCCESS', { title: poll.title }, false);
           })
           .catch(err => {
-            toast.error(err.message, 'Error!');
+            $scope.show_message('MS_CM_LOAD_ERROR', true);
           });
       }
     };
     $scope.bookmark_poll = (poll) => {
       if (poll.bookmarked) {
-        toast.error('You are already bookmark ' + poll.title, 'Error!');
+        $scope.show_message_params('MS_CM_BOOKMARK_EXIST_ERROR', { title: poll.title }, true);
         return;
       }
       Action.save_bookmark(poll._id)
         .then(res => {
           poll.bookmarked = (res) ? true : false;
-          toast.success('Added ' + poll.title + ' to bookmarks.', 'Success!');
+          $scope.show_message_params('MS_CM_BOOKMARK_SUCCESS', { title: poll.title }, false);
         })
         .catch(err => {
-          toast.error(err.message, 'Error!');
+          $scope.show_message('MS_CM_LOAD_ERROR', true);
         });
     };
     $scope.follow_poll = (poll) => {
       if (!$scope.isLogged) {
-        toast.error('You must login to follow poll.', 'Error!');
+        $scope.show_message('MS_CM_LOGIN_ERROR', true);
         return;
       }
       Action.save_follow(poll.follow)
         .then(res => {
           if (res) {
             poll.follow = res;
-            toast.success('You followed ' + poll.title, 'Success!');
           } else {
             poll.follow = { poll: poll._id };
           }
         })
         .catch(err => {
-          toast.error(err.message, 'Error!');
+          $scope.show_message('MS_CM_LOAD_ERROR', true);
         });
     };
   }

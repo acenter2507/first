@@ -12,7 +12,6 @@
     '$window',
     'Socket',
     'Action',
-    'toastr',
     'ngDialog',
     'Storages',
     'Constants',
@@ -29,7 +28,6 @@
     $window,
     Socket,
     Action,
-    toast,
     dialog,
     Storages,
     Constants,
@@ -50,7 +48,6 @@
     vm.is_has_new_polls = false;
     vm.supportLanguages = $window.supportLanguages;
 
-    get_translate();
     init();
 
     function init() {
@@ -113,7 +110,7 @@
         .catch(err => {
           vm.busy = false;
           vm.stopped = true;
-          toast.error(vm.ms.MS_CM_LOAD_ERROR, vm.ms.MS_CM_ERROR);
+          $scope.show_message('MS_CM_LOAD_ERROR', true);
         });
     }
     function process_before_show(poll) {
@@ -128,7 +125,7 @@
           vm.populars = res.data;
         })
         .catch(err => {
-          toast.error(vm.ms.MS_CM_LOAD_ERROR, vm.ms.MS_CM_ERROR);
+          $scope.show_message('MS_CM_LOAD_ERROR', true);
         });
     }
     function get_popular_tags() {
@@ -137,7 +134,7 @@
           vm.tags = res.data;
         })
         .catch(err => {
-          toast.error(vm.ms.MS_CM_LOAD_ERROR, vm.ms.MS_CM_ERROR);
+          $scope.show_message('MS_CM_LOAD_ERROR', true);
         });
     }
     function get_bookmarks() {
@@ -145,46 +142,36 @@
         .then(res => {
           vm.bookmarks = res.data || [];
         }, err => {
-          toast.error(vm.ms.MS_CM_LOAD_ERROR, vm.ms.MS_CM_ERROR);
+          $scope.show_message('MS_CM_LOAD_ERROR', true);
         });
     }
-    function get_translate() {
-      vm.ms = {};
-      $translate('MS_CM_ERROR').then(tsl => { vm.ms.MS_CM_ERROR = tsl; });
-      $translate('MS_CM_THANKYOU').then(tsl => { vm.ms.MS_CM_THANKYOU = tsl; });
-      $translate('MS_CM_SUCCESS').then(tsl => { vm.ms.MS_CM_SUCCESS = tsl; });
-      $translate('MS_CM_LOAD_ERROR').then(tsl => { vm.ms.MS_CM_LOAD_ERROR = tsl; });
-      $translate('MS_CM_AUTH_ERROR').then(tsl => { vm.ms.MS_CM_AUTH_ERROR = tsl; });
-      $translate('MS_CM_LOGIN_ERROR').then(tsl => { vm.ms.MS_CM_LOGIN_ERROR = tsl; });
-    }
-
     // Thao tác khác
     $scope.delete_poll = (poll) => {
       if (!poll.isCurrentUserOwner) {
-        toast.error(vm.ms.MS_CM_AUTH_ERROR, vm.ms.MS_CM_ERROR);
+        $scope.show_message('MS_CM_AUTH_ERROR', true);
         return;
       }
-      $scope.message_title = 'Delete poll!';
-      $scope.message_content = 'Are you sure you want to delete this poll?';
-      $scope.dialog_type = 3;
-      $scope.buton_label = 'delete';
+      $scope.message = {};
+      $scope.message.content = 'LB_POLLS_CONFIRM_DELETE';
+      $scope.message.type = 3;
+      $scope.message.buton = 'LB_DELETE';
       dialog.openConfirm({
         scope: $scope,
         templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
       }).then(confirm => {
         handle_delete();
       }, reject => {
+        delete $scope.message;
       });
       function handle_delete() {
+        delete $scope.message;
         vm.polls = _.without(vm.polls, poll);
         Action.delete_poll(poll);
       }
     };
     $scope.report_poll = (poll) => {
       if (poll.reported) {
-        $translate('MS_CM_REPORT_EXIST_ERROR', { title: poll.title }).then(tsl => {
-          toast.error(tsl, vm.ms.MS_CM_ERROR);
-        });
+        $scope.show_message_params('MS_CM_REPORT_EXIST_ERROR', { title: poll.title }, true);
         return;
       }
       dialog.openConfirm({
@@ -198,36 +185,30 @@
         Action.save_report(poll, reason)
           .then(res => {
             poll.reported = (res) ? true : false;
-            $translate('MS_CM_REPORT_SUCCESS', { title: poll.title }).then(tsl => {
-              toast.success(tsl, vm.ms.MS_CM_THANKYOU);
-            });
+            $scope.show_message_params('MS_CM_REPORT_SUCCESS', { title: poll.title }, false);
           })
           .catch(err => {
-            toast.error(vm.ms.MS_CM_LOAD_ERROR, vm.ms.MS_CM_ERROR);
+            $scope.show_message('MS_CM_LOAD_ERROR', true);
           });
       }
     };
     $scope.bookmark_poll = (poll) => {
       if (poll.bookmarked) {
-        $translate('MS_CM_BOOKMARK_EXIST_ERROR', { title: poll.title }).then(tsl => {
-          toast.error(tsl, vm.ms.MS_CM_ERROR);
-        });
+        $scope.show_message_params('MS_CM_BOOKMARK_EXIST_ERROR', { title: poll.title }, true);
         return;
       }
       Action.save_bookmark(poll._id)
         .then(res => {
           poll.bookmarked = (res) ? true : false;
-          $translate('MS_CM_BOOKMARK_SUCCESS', { title: poll.title }).then(tsl => {
-            toast.success(tsl, vm.ms.MS_CM_SUCCESS);
-          });
+          $scope.show_message_params('MS_CM_BOOKMARK_SUCCESS', { title: poll.title }, false);
         })
         .catch(err => {
-          toast.error(vm.ms.MS_CM_LOAD_ERROR, vm.ms.MS_CM_ERROR);
+          $scope.show_message('MS_CM_LOAD_ERROR', true);
         });
     };
     $scope.follow_poll = (poll) => {
       if (!$scope.isLogged) {
-        toast.error(vm.ms.MS_CM_LOGIN_ERROR, vm.ms.MS_CM_ERROR);
+        $scope.show_message('MS_CM_LOGIN_ERROR', true);
         return;
       }
       Action.save_follow(poll.follow)
@@ -239,7 +220,7 @@
           }
         })
         .catch(err => {
-          toast.error(vm.ms.MS_CM_LOAD_ERROR, vm.ms.MS_CM_ERROR);
+          $scope.show_message('MS_CM_LOAD_ERROR', true);
         });
     };
     $scope.load_new = () => {

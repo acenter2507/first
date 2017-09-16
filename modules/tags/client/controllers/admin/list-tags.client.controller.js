@@ -12,7 +12,6 @@
     '$filter',
     'TagsService',
     'Authentication',
-    'toastr',
     'FileUploader'
   ];
 
@@ -23,7 +22,6 @@
     $filter,
     TagsService,
     Authentication,
-    toast,
     FileUploader
   ) {
     var vm = this;

@@ -6,16 +6,16 @@
     .controller('NotifsListController', NotifsListController);
 
   NotifsListController.$inject = [
+    '$scope',
     '$state',
     'NotifsApi',
-    'toastr',
     'Notifications'
   ];
 
   function NotifsListController(
+    $scope,
     $state,
     NotifsApi,
-    toast,
     Notifications
   ) {
     var vm = this;
@@ -46,7 +46,7 @@
         .catch(err => {
           vm.busy = false;
           vm.stopped = true;
-          toast.error('There were problems get your notifications.', 'Error!');
+          $scope.show_message('MS_CM_LOAD_ERROR', true);
         });
     }
 
@@ -68,7 +68,7 @@
         })
         .catch(err => {
           vm.busy = false;
-          toast.error('There were problems get your notifications.', 'Error!');
+          $scope.show_message('MS_CM_LOAD_ERROR', true);
         });
     };
     vm.clear_all = () => {

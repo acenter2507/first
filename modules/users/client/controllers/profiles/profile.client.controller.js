@@ -41,18 +41,20 @@ angular.module('users').controller('ProfileController', [
         $scope.show_message('MS_CM_AUTH_ERROR', true);
         return;
       }
-      $scope.message_title = 'Delete poll!';
-      $scope.message_content = 'Are you sure you want to delete this poll?';
-      $scope.dialog_type = 3;
-      $scope.buton_label = 'delete';
+      $scope.message = {};
+      $scope.message.content = 'LB_POLLS_CONFIRM_BOOKMARK';
+      $scope.message.type = 3;
+      $scope.message.buton = 'LB_DELETE';
       dialog.openConfirm({
         scope: $scope,
         templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
       }).then(confirm => {
         handle_delete();
       }, reject => {
+        delete $scope.message;
       });
       function handle_delete() {
+        delete $scope.message;
         $scope.polls = _.without($scope.polls, poll);
         Action.delete_poll(poll);
       }
@@ -76,7 +78,7 @@ angular.module('users').controller('ProfileController', [
             $scope.show_message_params('MS_CM_REPORT_SUCCESS', { title: poll.title }, false);
           })
           .catch(err => {
-            $scope.show_message(err.message, true);
+            $scope.show_message('MS_CM_LOAD_ERROR', true);
           });
       }
     };
@@ -95,7 +97,7 @@ angular.module('users').controller('ProfileController', [
           $scope.show_message_params('MS_CM_BOOKMARK_SUCCESS', { title: poll.title }, false);
         })
         .catch(err => {
-          $scope.show_message(err.message, true);
+          $scope.show_message('MS_CM_LOAD_ERROR', true);
         });
     };
     $scope.follow_poll = poll => {
@@ -112,7 +114,7 @@ angular.module('users').controller('ProfileController', [
           }
         })
         .catch(err => {
-          $scope.show_message(err.message, true);
+          $scope.show_message('MS_CM_LOAD_ERROR', true);
         });
     };
   }

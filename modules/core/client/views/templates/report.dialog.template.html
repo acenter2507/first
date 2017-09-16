@@ -1,8 +1,8 @@
 <div class="ngdialog-message">
-  <h3 class="confirmation-title"><i class="fa fa-exclamation-triangle warning-text"></i> Report poll</h3>
-  <p>Tell us why you want to report this poll.</p>
-  <textarea focus-me="{{true}}" class="msd-elastic: \n; report-reason" data-ng-model="reason" placeholder="Type what's happening..." maxlength="200"></textarea>
+  <!-- <h4 class="confirmation-title"><i class="fa fa-exclamation-triangle warning-text"></i> Report poll</h4> -->
+  <p>{{:: 'LB_POLLS_REPORT_MSG' | translate }}</p>
+  <textarea focus-me="{{true}}" class="msd-elastic: \n; report-reason" data-ng-model="reason" placeholder="{{:: 'LB_POLLS_REPORT_PLACE' | translate }}" maxlength="200"></textarea>
   <div class="ngdialog-buttons mg20t">
-    <button type="button" class="btn btn-primary pull-right" ng-click="confirm(reason)">Send</button>
+    <button type="button" class="btn btn-primary pull-right" ng-click="confirm(reason)">{{:: 'LB_POLLS_MENU_REPORT' | translate }}</button>
   </div>
 </div>

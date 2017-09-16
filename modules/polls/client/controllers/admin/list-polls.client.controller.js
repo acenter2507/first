@@ -1,7 +1,7 @@
 (function () {
   'use strict';
   angular
-    .module('polls')
+    .module('polls.admin')
     .controller('AdminPollsListController', AdminPollsListController);
 
   AdminPollsListController.$inject = [
@@ -14,9 +14,7 @@
     'Authentication',
     'AdminPollsService',
     'PollsService',
-    'Action',
-    'toastr',
-    'ngDialog'
+    'Action'
   ];
 
   function AdminPollsListController(
@@ -29,9 +27,7 @@
     Authentication,
     AdminPollsService,
     PollsService,
-    Action,
-    toast,
-    dialog
+    Action
   ) {
     var vm = this;
     if (!$scope.isAdmin) {
@@ -60,7 +56,7 @@
           buildPager();
         })
         .catch(err => {
-          toast.error(err.message, 'Error!');
+          $scope.show_message('MS_CM_LOAD_ERROR', true);
           $scope.busy = false;
         });
       Storages.set_session(Constants.storages.admin_polls_condition, JSON.stringify($scope.condition));
@@ -98,7 +94,6 @@
         rs_poll.$remove(() => {
           $scope.polls = _.without($scope.polls, poll);
           figureOutItemsToDisplay();
-          toast.success('You have deleted: ' + poll.title, 'Success!');
         });
       }
     };

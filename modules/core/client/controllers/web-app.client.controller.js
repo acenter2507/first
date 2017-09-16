@@ -85,22 +85,21 @@ angular.module('core').controller('WebAppController', [
         });
       });
       function show_config(content) {
-        $scope.message_content = content;
-        $scope.dialog_type = 1;
-        $scope.buton_label = 'LB_CHANGE';
+        $scope.message = {};
+        $scope.message.content = content;
+        $scope.message.type = 1;
+        $scope.message.buton = 'LB_CHANGE';
         dialog.openConfirm({
           scope: $scope,
           templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
         }).then(confirm => {
           handle_change_language();
         }, reject => {
+          delete $scope.message;
         });
       }
       function handle_change_language() {
-        delete $scope.message_title;
-        delete $scope.message_content;
-        delete $scope.dialog_type;
-        delete $scope.buton_label;
+        delete $scope.message;
         $http.post('/api/users/language', { language: lang }).success(function (response) {
           Authentication.user = response;
         }).error(function (err) {

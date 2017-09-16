@@ -1,9 +1,9 @@
 'use strict';
 angular.module('admin')
   .controller('UserListController', UserListController);
-UserListController.$inject = ['$scope', '$filter', '$window', 'Admin', 'AdminApi', 'toastr'];
+UserListController.$inject = ['$scope', '$filter', '$window', 'Admin', 'AdminApi'];
 
-function UserListController($scope, $filter, $window, Admin, AdminApi, toast) {
+function UserListController($scope, $filter, $window, Admin, AdminApi) {
   $scope.busy = true;
   get_users();
   function get_users() {
@@ -14,7 +14,7 @@ function UserListController($scope, $filter, $window, Admin, AdminApi, toast) {
         $scope.buildPager();
       })
       .catch(err => {
-        toast.error('Can\'t load users: ' + err.message, 'Error!');
+        alert(err.message);
       });
   }
 
@@ -51,7 +51,6 @@ function UserListController($scope, $filter, $window, Admin, AdminApi, toast) {
       rs_user.$remove(() => {
         $scope.users = _.without($scope.users, user);
         $scope.figureOutItemsToDisplay();
-        toast.success('You have deleted: ' + user.displayName, 'Thank you!');
       });
     }
   };

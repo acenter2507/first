@@ -13,7 +13,6 @@
     '$timeout',
     'Remaining',
     'Action',
-    'toastr',
     'ngDialog',
     '$stateParams',
     'Socialshare',
@@ -31,7 +30,6 @@
     $timeout,
     Remaining,
     Action,
-    toast,
     dialog,
     $stateParams,
     Socialshare,
@@ -101,7 +99,7 @@
       // Verify parameters
       if (!ctrl.poll.isCurrentUserOwner && !ctrl.poll.isPublic && $stateParams.share !== ctrl.poll.share_code) {
         ctrl.isShow = false;
-        toast.error('You cannot view private poll', 'Error!');
+        $scope.show_message('LB_POLLS_PRIVATE_ERROR', true);
         $state.go('polls.list');
       }
       ctrl.isShow = true;
@@ -150,7 +148,7 @@
             }
           })
           .catch(err => {
-            toast.error(err.message, 'Error!');
+            $scope.show_message(err.message, true);
           });
       });
       Socket.on('cmt_del', obj => {
@@ -165,7 +163,7 @@
       });
       Socket.on('poll_delete', obj => {
         if (Socket.socket.socket.id === obj.client) return;
-        toast.error('This poll has been deleted.', 'Error!');
+        $scope.show_message('LB_POLLS_DELETED', true);
         $state.go('home');
       });
       Socket.on('poll_update', obj => {
@@ -175,7 +173,7 @@
             ctrl.poll = _poll;
             process_before_show();
           }, err => {
-            toast.error(err.message, 'Error!');
+            $scope.show_message(err.message, true);
           });
       });
       Socket.on('opts_update', res => {
@@ -184,7 +182,7 @@
             ctrl.poll = _poll;
             process_before_show();
           }, err => {
-            toast.error(err.message, 'Error!');
+            $scope.show_message(err.message, true);
           });
       });
       $scope.$on('$destroy', function () {
@@ -241,7 +239,7 @@
           ctrl.view = res.data.view;
         })
         .catch(err => {
-          toast.error('Không thể load thông tin user' + err.message, 'Error!');
+          $scope.show_message('MS_CM_LOAD_ERROR', true);
         });
     }
 
@@ -264,7 +262,7 @@
           if (!$scope.$$phase) $scope.$digest();
         })
         .catch(err => {
-          toast.error(err.message, 'Error!');
+          $scope.show_message('MS_CM_LOAD_ERROR', true);
         });
     }
     ctrl.sort = sort;
@@ -301,7 +299,7 @@
             return resolve();
           })
           .catch(err => {
-            toast.error(err.message, 'Error!');
+            $scope.show_message('MS_CM_LOAD_ERROR', true);
             return reject(err);
           });
       });
@@ -341,7 +339,7 @@
     ctrl.save_cmt = save_cmt;
     function save_cmt() {
       if (!ctrl.tmp_cmt.body || !ctrl.tmp_cmt.body.length || ctrl.tmp_cmt.body.length === 0) {
-        toast.error('You must type something to reply.', 'Error!');
+        $scope.show_message('LB_POLLS_CMT_EMPTY', true);
         return;
       }
       if (!$scope.isLogged) {
@@ -349,7 +347,7 @@
         return false;
       }
       if (ctrl.cmt_processing) {
-        toast.error('Please wait until all comment be submit.', 'Error!');
+        $scope.show_message('LB_POLLS_CMT_WAIT', true);
         return;
       }
       ctrl.cmt_processing = true;
@@ -370,7 +368,7 @@
           }
         })
         .catch(err => {
-          toast.error(err.message, 'Error!');
+          $scope.show_message('MS_CM_LOAD_ERROR', true);
           ctrl.cmt_processing = false;
         });
     }
@@ -380,7 +378,7 @@
         return $state.go('authentication.signin');
       }
       if (!ctrl.selectedOpts.length || ctrl.selectedOpts.length === 0) {
-        toast.error('You must vote at least one option.', 'Error!');
+        $scope.show_message('LB_POLLS_VOTE_EMPTY', true);
         return;
       }
       if (angular.equals(ctrl.votedOpts, ctrl.selectedOpts)) {
@@ -393,7 +391,7 @@
           loadVoteInfo();
         })
         .catch(err => {
-          toast.error(err.message, 'Error!');
+          $scope.show_message('MS_CM_LOAD_ERROR', true);
           ctrl.selectedOpts = angular.copy(ctrl.votedOpts) || [];
         });
     }
@@ -416,18 +414,20 @@
 
     // Remove existing Poll
     ctrl.remove = () => {
-      $scope.message_title = 'Delete poll!';
-      $scope.message_content = 'Are you sure you want to delete?';
-      $scope.dialog_type = 3;
-      $scope.buton_label = 'delete';
+      $scope.message = {};
+      $scope.message.content = 'LB_POLLS_CONFIRM_DELETE';
+      $scope.message.type = 3;
+      $scope.message.buton = 'LB_DELETE';
       dialog.openConfirm({
         scope: $scope,
         templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
       }).then(confirm => {
         handle_delete();
       }, reject => {
+        delete $scope.message;
       });
       function handle_delete() {
+        delete $scope.message;
         ctrl.poll.$remove(() => {
           Socket.emit('poll_delete', { pollId: ctrl.poll._id });
           $state.go('polls.list');
@@ -440,34 +440,35 @@
         ctrl.poll.$update(() => {
           show_dialog();
         }, err => {
-          toast.error(err.message, 'Error!');
+          $scope.show_message('MS_CM_LOAD_ERROR', true);
         });
       } else {
         show_dialog();
       }
       function show_dialog() {
-        $scope.message_title = 'Share poll!';
-        $scope.message_content = 'Send url for anyone you want to share this poll.';
-        $scope.message_url = $location.absUrl().split('?')[0] + '?share=' + ctrl.poll.share_code;
+        $scope.message = {};
+        $scope.message.content = 'LB_POLLS_SHARE';
+        $scope.message.url = $location.absUrl().split('?')[0] + '?share=' + ctrl.poll.share_code;
         dialog.openConfirm({
           scope: $scope,
           templateUrl: 'modules/core/client/views/templates/share.dialog.template.html'
         }).then(confirm => {
         }, reject => {
+          delete $scope.message;
         });
       }
     };
     ctrl.like_poll = type => {
       if (!$scope.isLogged) {
-        toast.error('You must login to like this poll.', 'Error!');
+        $scope.show_message('MS_CM_LOGIN_ERROR', true);
         return;
       }
       if (ctrl.poll.isCurrentUserOwner) {
-        toast.error('You cannot like your poll.', 'Error!');
+        $scope.show_message('LB_POLLS_LIKE_OWN', true);
         return;
       }
       if (ctrl.like_processing) {
-        toast.error('You cannot interact continuously.', 'Error!');
+        $scope.show_message('LB_POLLS_LIKE_MANY', true);
         return;
       }
       ctrl.like_processing = true;
@@ -479,33 +480,32 @@
           if (!$scope.$$phase) $scope.$digest();
         })
         .catch(err => {
-          toast.error(err.message, 'Error!');
+          $scope.show_message('MS_CM_LOAD_ERROR', true);
           ctrl.like_processing = false;
         });
     };
 
     ctrl.follow_poll = () => {
       if (!$scope.isLogged) {
-        toast.error('You must login to follow this poll.', 'Error!');
+        $scope.show_message('MS_CM_LOGIN_ERROR', true);
         return;
       }
       Action.save_follow(ctrl.follow)
         .then(res => {
           if (res) {
             ctrl.follow = res;
-            toast.success('You followed ' + ctrl.poll.title, 'Success!');
           } else {
             ctrl.follow = { poll: ctrl.poll._id };
           }
         })
         .catch(err => {
-          toast.error(err.message, 'Error!');
+          $scope.show_message('MS_CM_LOAD_ERROR', true);
         });
     };
 
-    ctrl.report_poll = (poll) => {
+    ctrl.report_poll = () => {
       if (ctrl.reported) {
-        toast.error('You are already report this poll.', 'Error!');
+        $scope.show_message_params('MS_CM_REPORT_EXIST_ERROR', { title: ctrl.poll.title }, true);
         return;
       }
       dialog.openConfirm({
@@ -519,32 +519,32 @@
         Action.save_report(ctrl.poll, reason)
           .then(res => {
             ctrl.reported = (res) ? true : false;
-            toast.success('You have successfully reported this poll.', 'Thank you!');
+            $scope.show_message_params('MS_CM_REPORT_SUCCESS', { title: ctrl.poll.title }, false);
           })
           .catch(err => {
-            toast.error(err.message, 'Error!');
+            $scope.show_message('MS_CM_LOAD_ERROR', true);
           });
       }
     };
 
     ctrl.bookmark_poll = () => {
       if (ctrl.bookmarked) {
-        toast.error('You are already bookmark this poll.', 'Error!');
+        $scope.show_message_params('MS_CM_BOOKMARK_EXIST_ERROR', { title: ctrl.poll.title }, true);
         return;
       }
       Action.save_bookmark(ctrl.poll._id)
         .then(res => {
           ctrl.bookmarked = (res) ? true : false;
-          toast.success('Added to bookmarks.', 'Success!');
+          $scope.show_message_params('MS_CM_BOOKMARK_SUCCESS', { title: ctrl.poll.title }, false);
         })
         .catch(err => {
-          toast.error(err.message, 'Error!');
+          $scope.show_message('MS_CM_LOAD_ERROR', true);
         });
     };
     // Click button add option
     ctrl.input_opt = opt => {
       if (!ctrl.poll.user) {
-        toast.error('You can\'t suggest to a deleted user.', 'Error!');
+        $scope.show_message('LB_POLLS_SUGGEST_DELETED_USER', true);
         return;
       }
       ctrl.tmp_opt = (!opt) ? { poll: ctrl.poll._id, title: '', body: '', status: 2 } : opt;
@@ -559,10 +559,10 @@
       Action.save_opt(ctrl.tmp_opt, ctrl.poll)
         .then(res => {
           angular.element('body').toggleClass('aside-panel-open');
-          toast.success('Your option is waiting for approve.', 'Thank you!');
+          $scope.show_message('LB_POLLS_SUGGEST_SUCCES', false);
         })
         .catch(err => {
-          toast.error(err.message, 'Error!');
+          $scope.show_message('MS_CM_LOAD_ERROR', true);
         });
     };
     ctrl.opt_full = () => {
@@ -573,11 +573,11 @@
 
     ctrl.reply_cmt = cmt => {
       if (!$scope.isLogged) {
-        toast.error('You must login to reply this comment.', 'Error!');
+        $scope.show_message('MS_CM_LOGIN_ERROR', true);
         return;
       }
       if (!cmt.user) {
-        toast.error('You can\'t reply to a deleted user.', 'Error!');
+        $scope.show_message('LB_POLLS_REPLY_DELETED_USER', true);
         return;
       }
       ctrl.tmp_cmt = {};
@@ -600,18 +600,20 @@
     };
 
     ctrl.delete_cmt = cmt => {
-      $scope.message_title = 'Delete comment!';
-      $scope.message_content = 'Are you sure you want to delete this comment?';
-      $scope.dialog_type = 3;
-      $scope.buton_label = 'delete';
+      $scope.message = {};
+      $scope.message.content = 'LB_POLLS_CONFIRM_DELETE_CMT';
+      $scope.message.type = 3;
+      $scope.message.buton = 'LB_DELETE';
       dialog.openConfirm({
         scope: $scope,
         templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
       }).then(confirm => {
         handle_delete_cmt();
       }, reject => {
+        delete $scope.message;
       });
       function handle_delete_cmt() {
+        delete $scope.message;
         ctrl.cmts = _.without(ctrl.cmts, cmt);
         ctrl.poll.cmtCnt -= 1;
         Action.delete_cmt(cmt);
@@ -620,7 +622,7 @@
     var cnt = 0;
     ctrl.focus_cmt = () => {
       if (!$scope.isLogged) {
-        toast.error('You must login to comment.', 'Error!');
+        $scope.show_message('MS_CM_LOGIN_ERROR', true);
         return;
       }
       ctrl.cmt_typing = true;
@@ -628,15 +630,15 @@
 
     ctrl.like_cmt = (cmt, type) => {
       if (!$scope.isLogged) {
-        toast.error('You must login to like this comment.', 'Error!');
+        $scope.show_message('MS_CM_LOGIN_ERROR', true);
         return;
       }
       if ($scope.user.user._id === cmt.user._id) {
-        toast.error('You cannot like your comment.', 'Error!');
+        $scope.show_message('LB_POLLS_LIKE_CMT_OWN', true);
         return;
       }
       if (ctrl.like_processing) {
-        toast.error('You cannot interact continuously.', 'Error!');
+        $scope.show_message('LB_POLLS_LIKE_MANY', true);
         return;
       }
       ctrl.like_processing = true;
@@ -648,7 +650,7 @@
         })
         .catch(err => {
           ctrl.like_processing = false;
-          toast.error(err.message, 'Error!');
+          $scope.show_message('MS_CM_LOAD_ERROR', true);
         });
     };
 

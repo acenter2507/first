@@ -1,7 +1,7 @@
 (function () {
   'use strict';
   // Polls controller
-  angular.module('polls').controller('AdminPollController', AdminPollController);
+  angular.module('polls.admin').controller('AdminPollController', AdminPollController);
 
   AdminPollController.$inject = [
     '$scope',
@@ -9,9 +9,7 @@
     '$window',
     'pollResolve',
     'AdminPollsService',
-    'Action',
-    'toastr',
-    'ngDialog'
+    'Action'
   ];
 
   function AdminPollController(
@@ -20,9 +18,7 @@
     $window,
     poll,
     AdminPollsService,
-    Action,
-    toast,
-    dialog
+    Action
   ) {
     var vm = this;
     vm.poll = poll;
@@ -37,7 +33,7 @@
           vm.poll.cmts = res.data.cmts;
         })
         .catch(err => {
-          toast.error(err.message, 'Error!');
+          alert(err.message);
         });
     }
 

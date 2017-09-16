@@ -11,8 +11,7 @@
     '$state',
     '$window',
     'Authentication',
-    'tagResolve',
-    'toastr'
+    'tagResolve'
   ];
 
   function TagsController(
@@ -20,8 +19,7 @@
     $state,
     $window,
     Authentication,
-    tag,
-    toast
+    tag
   ) {
     var vm = this;
     if (!$scope.isAdmin) {
@@ -68,7 +66,7 @@
       }
 
       function errorCallback(res) {
-        toast.error(res.data.message, 'Error!');
+        alert(res.data.message);
       }
     };
   }

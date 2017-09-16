@@ -1,10 +1,10 @@
 'use strict';
 angular.module('admin')
   .controller('UserController', UserController);
-UserController.$inject = ['$window', '$timeout', '$scope', '$state', 'Authentication', 'userResolve', 'AdminApi', 'Constants', 'FileUploader', 'toastr', 'ngDialog'];
+UserController.$inject = ['$window', '$timeout', '$scope', '$state', 'Authentication', 'userResolve', 'AdminApi', 'Constants', 'FileUploader'];
 
 
-function UserController($window, $timeout, $scope, $state, Authentication, userResolve, AdminApi, Constants, FileUploader, toast, dialog) {
+function UserController($window, $timeout, $scope, $state, Authentication, userResolve, AdminApi, Constants, FileUploader) {
   $scope.authentication = Authentication;
   $scope.user = userResolve;
   $scope.newPassword = '';
@@ -26,7 +26,7 @@ function UserController($window, $timeout, $scope, $state, Authentication, userR
       $state.reload();
     }
     function errorCb(err) {
-      toast.error('Can\'t save user: ' + err.message, 'Error!');
+      alert('Can\'t save user: ' + err.message);
     }
   };
   // Reset password
@@ -37,25 +37,14 @@ function UserController($window, $timeout, $scope, $state, Authentication, userR
     }
     AdminApi.reset_pass($scope.user._id, $scope.newPassword)
       .then(() => {
-        toast.success('Reset password successfully', 'Done!');
+        alert('Reset password successfully');
       })
       .catch(err => {
-        toast.error('Can\'t reset password: ' + err.message, 'Error!');
+        alert('Can\'t reset password: ' + err.message);
       });
   };
   $scope.remove = () => {
-    $scope.message_title = 'Delete user!';
-    $scope.message_content = 'Are you sure you want to delete this user?';
-    $scope.dialog_type = 3;
-    $scope.buton_label = 'delete';
-    dialog.openConfirm({
-      scope: $scope,
-      templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
-    }).then(() => {
-      handle_confirm();
-    }, reject => {
-    });
-    function handle_confirm() {
+    if ($window.confirm('Delete this user?')) {
       $scope.user.$remove(function () {
         $state.go('admin.users.list');
       });
@@ -101,5 +90,4 @@ function UserController($window, $timeout, $scope, $state, Authentication, userR
   // $scope.uploader.onErrorItem = function (fileItem, response, status, headers) {
   //   // Show error message
   //   $scope.error = response.message;
-  //   toast.error('Can\'t save profile image.');
   // };

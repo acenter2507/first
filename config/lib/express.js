@@ -18,7 +18,8 @@ var config = require('../config'),
   flash = require('connect-flash'),
   consolidate = require('consolidate'),
   path = require('path'),
-  locale = require("locale");
+  locale = require("locale"),
+  fs = require('fs');
 
 /**
  * Initialize local variables
@@ -98,6 +99,13 @@ module.exports.initMiddleware = function (app) {
 module.exports.initI18n = function (app) {
   app.use(express.static('./i18n'));
   app.use(locale(config.supportLanguages));
+  global.translate = {};
+  config.supportLanguages.forEach(function (lang) {
+    var langPath = path.resolve('i18n/locale-' + lang + '.json');
+    var trans = JSON.parse(fs.readFileSync(langPath, 'utf8'));
+    global.translate[lang] = trans;
+  });
+  console.log(global.translate);
 };
 
 /**

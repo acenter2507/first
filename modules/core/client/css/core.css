@@ -602,6 +602,7 @@ a:hover .header-profile-image {
 .ngdialog.ngdialog-theme-default .ngdialog-close {
   display: none; }
 .ngdialog.ngdialog-theme-default .ngdialog-content {
+  padding: 0.5rem;
   border-radius: 0px;
   background-color: #fff; }
 .ngdialog-open{

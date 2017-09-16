@@ -48,6 +48,7 @@
     vm.busy = false;
     vm.stopped = false;
     vm.is_has_new_polls = false;
+    vm.supportLanguage = $window.supportLanguage;
     get_translate();
     init();
 

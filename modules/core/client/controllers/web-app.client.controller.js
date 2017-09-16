@@ -77,6 +77,7 @@ angular.module('core').controller('WebAppController', [
 
     // Thay đổi ngôn ngữ
     $scope.change_language = lang => {
+      console.log($translate.preferredLanguage());
       if (lang === $translate.preferredLanguage()) return;
       $translate('MS_USERS_LANG_CONFIRM').then(tsl => {
         var content = tsl;

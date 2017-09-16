@@ -50,6 +50,7 @@
     vm.is_has_new_polls = false;
     vm.supportLanguages = $window.supportLanguages;
 
+    console.log('alksdjlaksdlkasjd');
     $translate('asjdlkasjdlkasdlka').then(tsl => {
       if (tsl) {
         console.log(tsl);

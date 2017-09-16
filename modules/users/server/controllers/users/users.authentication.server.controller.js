@@ -41,10 +41,11 @@ exports.signup = function (req, res) {
         appName: config.app.title,
         url: url
       };
+      var subject = global.translate[_user.language].EMAIL_SJ_VERIFICATION || global.translate[config.defaultLanguage].EMAIL_SJ_VERIFICATION;
       var mailOptions = {
         from: config.app.title + '<' + config.mailer.account.from + '>',
         to: _user.email,
-        subject: 'Verify your account'
+        subject: subject
       };
       return mail.send(config.mailer.account.options, mailContent, mailOptions, mailTemplate);
     })
@@ -83,10 +84,11 @@ exports.resend = function (req, res) {
           appName: config.app.title,
           url: url
         };
+        var subject = global.translate[_user.language].EMAIL_SJ_VERIFICATION || global.translate[config.defaultLanguage].EMAIL_SJ_VERIFICATION;
         var mailOptions = {
           from: config.app.title + '<' + config.mailer.account.from + '>',
           to: _user.email,
-          subject: 'Verify your account'
+          subject: subject
         };
         return mail.send(config.mailer.account.options, mailContent, mailOptions, mailTemplate);
       })
@@ -179,50 +181,6 @@ exports.verify = function (req, res) {
   });
 };
 
-/**
- * Verify
- */
-exports.twitter = function (req, res) {
-  if (!req.body.user)
-    return handleError(new Error('MS_USERS_NOT_EXIST'));
-  if (req.body.email.length === 0)
-    return handleError(new Error('LB_USER_EMAIL_REQUIRED'));
-  if (!validator.isEmail(req.body.email))
-    return handleError(new Error('LB_USER_EMAIL_INVALID'));
-  User.findOne({ email: req.body.email }, function (err, user) {
-    if (err)
-      return handleError(new Error('MS_CM_LOAD_ERROR'));
-    if (user)
-      return handleError(new Error('LB_USERS_EMAIL_DUPLICATE'));
-
-    User.findOne({
-      _id: req.body.user
-    }, function (err, user) {
-      if (err || !user)
-        return res.redirect('/authentication/signin');
-      user.email = req.body.email;
-      user.status = 2;
-      saveUser(user)
-        .then(user => {
-          req.login(user, function (err) {
-            if (err) return handleError(new Error('MS_CM_LOAD_ERROR'));
-            return res.json(user);
-          });
-        })
-        .catch(err => {
-          return handleError(new Error('MS_CM_LOAD_ERROR'));
-        });
-    });
-
-  });
-
-
-  function handleError(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
-    });
-  }
-};
 /**
  * OAuth provider call
  */

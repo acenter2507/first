@@ -58,10 +58,11 @@ exports.update = function (req, res) {
           appName: config.app.title,
           url: url
         };
+        var subject = global.translate[_user.language].EMAIL_SJ_CHANGE_MAIL || global.translate[config.defaultLanguage].EMAIL_SJ_CHANGE_MAIL;
         var mailOptions = {
           from: config.app.title + '<' + config.mailer.account.from + '>',
           to: _user.email,
-          subject: 'Verify your email'
+          subject: subject
         };
         return mail.send(config.mailer.account.options, mailContent, mailOptions, mailTemplate);
       })

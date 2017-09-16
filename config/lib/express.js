@@ -105,7 +105,6 @@ module.exports.initI18n = function (app) {
     var trans = JSON.parse(fs.readFileSync(langPath, 'utf8'));
     global.translate[lang] = trans;
   });
-  console.log(global.translate);
 };
 
 /**

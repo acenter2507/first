@@ -37,6 +37,7 @@ exports.forgot = function (req, res, next) {
         appName: config.app.title,
         url: url
       };
+      var subject = global.translate[_user.language].EMAIL_SJ_FORGET || global.translate[config.defaultLanguage].EMAIL_SJ_FORGET;
       var mailOptions = {
         from: config.app.title + '<' + config.mailer.account.from + '>',
         to: _user.email,

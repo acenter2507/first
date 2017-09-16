@@ -51,7 +51,7 @@ function EditProfileController(
       $scope.message.title = 'LB_USER_EMAIL_CONFIRM';
       $scope.message.content = 'LB_USER_EMAIL_CONFIRM_CONTENT';
       $scope.message.type = 1;
-      $scope.message.buton = 'LB_SAVE';
+      $scope.message.button = 'LB_SAVE';
       dialog.openConfirm({
         scope: $scope,
         templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'

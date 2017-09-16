@@ -105,7 +105,7 @@
       $scope.message = {};
       $scope.message.content = 'LB_POLLS_CONFIRM_DELETE';
       $scope.message.type = 3;
-      $scope.message.buton = 'LB_DELETE';
+      $scope.message.button = 'LB_DELETE';
       dialog.openConfirm({
         scope: $scope,
         templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
@@ -137,7 +137,7 @@
         $scope.message = {};
         $scope.message.content = 'LB_POLLS_PRIVATE_SAVE';
         $scope.message.type = 1;
-        $scope.message.buton = 'LB_SAVE';
+        $scope.message.button = 'LB_SAVE';
         dialog.openConfirm({
           scope: $scope,
           templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
@@ -176,7 +176,7 @@
         $scope.message = {};
         $scope.message.content = 'LB_POLLS_CONFIRM_DISCARD';
         $scope.message.type = 2;
-        $scope.message.buton = 'LB_DISCARD';
+        $scope.message.button = 'LB_DISCARD';
         dialog.openConfirm({
           scope: $scope,
           templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
@@ -207,7 +207,7 @@
       $scope.message = {};
       $scope.message.content = 'LB_POLLS_CONFIRM_DELETE_OPT';
       $scope.message.type = 3;
-      $scope.message.buton = 'LB_DELETE';
+      $scope.message.button = 'LB_DELETE';
       dialog.openConfirm({
         scope: $scope,
         templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
@@ -231,7 +231,7 @@
       $scope.message = {};
       $scope.message.content = 'LB_POLLS_CONFIRM_APPROVE';
       $scope.message.type = 1;
-      $scope.message.buton = 'LB_APPROVE';
+      $scope.message.button = 'LB_APPROVE';
       dialog.openConfirm({
         scope: $scope,
         templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
@@ -253,7 +253,7 @@
       $scope.message = {};
       $scope.message.content = 'LB_POLLS_CONFIRM_REJECT';
       $scope.message.type = 2;
-      $scope.message.buton = 'LB_REJECT';
+      $scope.message.button = 'LB_REJECT';
       dialog.openConfirm({
         scope: $scope,
         templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'

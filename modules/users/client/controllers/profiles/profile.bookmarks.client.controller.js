@@ -61,7 +61,7 @@ angular.module('users').controller('ProfileBookmarksController', [
       $scope.message = {};
       $scope.message.content = 'LB_POLLS_CONFIRM_BOOKMARK';
       $scope.message.type = 3;
-      $scope.message.buton = 'LB_DELETE';
+      $scope.message.button = 'LB_DELETE';
       dialog.openConfirm({
         scope: $scope,
         templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'

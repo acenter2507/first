@@ -574,7 +574,7 @@ a:hover .header-profile-image {
   #toast-container .toast:hover {
     box-shadow: 0 0 5px #000000; }
   .toast-close-button {
-    font-size: 0.7rem;
+    font-size: 1rem;
     opacity: 0.5; }
   .toast-close-button:hover {
     opacity: 0.8; }
@@ -582,39 +582,19 @@ a:hover .header-profile-image {
     opacity: 0.8;
     outline: none; }
   .toast {
-    border-left: 6px solid #7f7f84; }
+    border-left: 3px solid #7f7f84; }
   .toast .toast-close-button {
     color: #7f7f84; }
   .toast-success {
-    border-left: 6px solid #80D651; }
-    .toast-success .toast-close-button,
-    .toast-success .toast-message,
-    .toast-success .toast-title {
-      color: #80D651; }
+    border-left: 3px solid #267ED5; }
   .toast-error {
-    border-left: 6px solid #d73814; }
-    .toast-error .toast-close-button,
-    .toast-error .toast-message,
-    .toast-error .toast-title {
-      color: #d73814; }
+    border-left: 3px solid #d73814; }
   .toast-info {
-    border-left: 6px solid #45ABCD; }
-    .toast-info .toast-close-button,
-    .toast-info .toast-message,
-    .toast-info .toast-title {
-      color: #45ABCD; }
+    border-left: 3px solid #45ABCD; }
   .toast-wait {
-    border-left: 6px solid #267ED5; }
-    .toast-wait .toast-close-button,
-    .toast-wait .toast-message,
-    .toast-wait .toast-title {
-      color: #267ED5; }
+    border-left: 3px solid #267ED5; }
   .toast-warning {
-    border-left: 6px solid #FEAF20; }
-    .toast-warning .toast-close-button,
-    .toast-warning .toast-message,
-    .toast-warning .toast-title {
-      color: #FEAF20; }
+    border-left: 3px solid #FEAF20; }
 
 /*ngDialog*/
 .ngdialog.ngdialog-theme-default .ngdialog-close {

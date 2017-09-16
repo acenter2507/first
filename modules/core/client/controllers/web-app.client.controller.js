@@ -129,18 +129,16 @@ angular.module('core').controller('WebAppController', [
     // Hiển thị thông báo bình thường
     $scope.show_message = function (msg, error) {
       $translate(msg).then(tsl => {
-        if (!tsl || tsl.length === 0) {
-          if (error) {
-            toastr.error(msg, $scope.MS_CM_ERROR);
-          } else {
-            toastr.error(msg, $scope.MS_CM_SUCCESS);
-          }
+        if (error) {
+          toastr.error(tsl, $scope.MS_CM_ERROR);
         } else {
-          if (error) {
-            toastr.error(tsl, $scope.MS_CM_ERROR);
-          } else {
-            toastr.error(tsl, $scope.MS_CM_SUCCESS);
-          }
+          toastr.error(tsl, $scope.MS_CM_SUCCESS);
+        }
+      }, err => {
+        if (error) {
+          toastr.error(msg, $scope.MS_CM_ERROR);
+        } else {
+          toastr.error(msg, $scope.MS_CM_SUCCESS);
         }
       });
     };

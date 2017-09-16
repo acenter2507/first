@@ -51,11 +51,9 @@
     vm.supportLanguages = $window.supportLanguages;
 
     $translate('alksdjlaksdlkasjd').then(tsl => { 
-      if (tsl) {
-        console.log(tls);
-      } else {
-        console.log('oadjoajsdoiasjdoia');
-      }
+      console.log(tls);
+     }, err => {
+       console.log('asdjalksjdasd');
      });
     get_translate();
     init();

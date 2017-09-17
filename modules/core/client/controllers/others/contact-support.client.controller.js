@@ -52,12 +52,12 @@ angular.module('core').controller('ContactSupportController', [
 
     $scope.ticketTest = {};
     $scope.test = {};
-    $scope.test.momentTest = moment();
+    $scope.test.momentTest = moment().local();
     $scope.test.language = $translate.use();
 
     $scope.setLocale = (lang) => {
-      console.log(lang);
       var tz = $window.locales[lang];
+      console.log(tz);
       moment.tz.setDefault(tz);
       moment.locale(lang);
       amMoment.changeLocale(lang);

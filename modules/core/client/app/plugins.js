@@ -106,7 +106,7 @@
   }
 
   runConfig.$inject = ['$rootScope','$translate', 'amMoment', '$window'];
-  function runConfig($translate, amMoment, $window) {
+  function runConfig($rootScope, $translate, amMoment, $window) {
     // Kiểm tra user đã đăng nhập hay chưa
     if ($window.user && $window.user.language !== $translate.use()) {
       // Cài đặt ngôn ngữ của user

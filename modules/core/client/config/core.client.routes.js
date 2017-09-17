@@ -42,6 +42,26 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
       data: {
         ignoreState: true
       }
+    })
+    .state('about-us', {
+      url: '/about-us',
+      templateUrl: 'modules/core/client/views/other/about.client.view.html'
+    })
+    .state('guide', {
+      url: '/guide',
+      templateUrl: 'modules/core/client/views/other/guide.client.view.html'
+    })
+    .state('support', {
+      url: '/support',
+      templateUrl: 'modules/core/client/views/other/support.client.view.html'
+    })
+    .state('policy', {
+      url: '/policy',
+      templateUrl: 'modules/core/client/views/other/policy.client.view.html'
+    })
+    .state('term', {
+      url: '/terms-of-service',
+      templateUrl: 'modules/core/client/views/other/term.client.view.html'
     });
   }
 ]);

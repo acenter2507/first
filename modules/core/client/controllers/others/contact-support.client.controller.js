@@ -38,6 +38,7 @@ angular.module('core').controller('ContactSupportController', [
       $http.post('/api/other/ticket', $scope.ticket).success(function (response) {
         delete $scope.ticket;
         $scope.busy = false;
+        $scope.show_message('LB_SUPPORT_SUCCESS', false);
       }).error(function (err) {
         $scope.busy = false;
         $scope.show_message(err.message, true);

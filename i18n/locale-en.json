@@ -296,5 +296,7 @@
 
   "LB_SUPPORT_TITLE": "Send us a ticket",
   "LB_SUPPORT_BODY_PLACE": "What's happening?",
-  "LB_SUPPORT_BODY_REQUIRE": "Please tell us what is happening?"
+  "LB_SUPPORT_BODY_REQUIRE": "Please tell us what is happening?",
+  "LB_SUPPORT_ERROR": "We cannot receive you ticket now, please try again late.",
+  "LB_SUPPORT_SUCCESS": "Thank you! We have received your request. Your request will be processed and responded via the email you provided."
 }

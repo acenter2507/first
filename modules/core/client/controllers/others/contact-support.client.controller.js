@@ -44,5 +44,8 @@ angular.module('core').controller('ContactSupportController', [
         $scope.show_message(err.message, true);
       });
     };
+
+    $scope.test = {};
+    $scope.test.momentTest = moment();
   }
 ]);

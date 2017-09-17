@@ -62,11 +62,10 @@ angular.module('core').controller('ContactSupportController', [
         var tz = $window.locales[lang];
         moment.tz.setDefault(tz);
         moment.locale(lang);
-        $scope.test.momentX = moment();
-        $scope.test.momentUTC = moment().utc();
-        $scope.test.momentLocal = moment().local();
+        $scope.test.momentX = moment().utc().format('YYYY-MM-DD HH:mm:ss');
+        $scope.test.momentUTC = moment($scope.test.momentX).local();
+        $scope.test.momentLocal = moment($scope.test.momentX).toDate();
         $scope.test.language = $translate.use();
-        if (!$scope.$$phase) $scope.$digest();
       });
     };
   }

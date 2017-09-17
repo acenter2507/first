@@ -5,8 +5,9 @@ angular.module('core').controller('ContactSupportController', [
   'vcRecaptchaService',
   '$http',
   'Constants',
+  'amMoment',
   '$translate',
-  function ($scope, vcRecaptchaService, $http, Constants, $translate) {
+  function ($scope, vcRecaptchaService, $http, Constants, amMoment, $translate) {
     $scope.reCaptcha = Constants.reCaptcha;
     $scope.response = null;
     $scope.widgetId = null;

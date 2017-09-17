@@ -3,7 +3,8 @@
 angular.module('core').controller('ContactSupportController', [
   '$scope',
   'vcRecaptchaService',
-  function ($scope, vcRecaptchaService, ) {
+  '$http',
+  function ($scope, vcRecaptchaService, $http) {
     $scope.reCaptcha = Constants.reCaptcha;
     $scope.response = null;
     $scope.widgetId = null;

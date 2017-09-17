@@ -277,5 +277,7 @@
   "LB_PROFILE_VOTE_LAST_CHANGE": "last change",
   "EMAIL_SJ_VERIFICATION": "Verify your account",
   "EMAIL_SJ_CHANGE_MAIL": "Verify your email",
-  "EMAIL_SJ_FORGET": "Reset your password"
+  "EMAIL_SJ_FORGET": "Reset your password",
+  "LB_USERS_RANK": "Best writer",
+
 }

@@ -141,6 +141,37 @@
           </uib-tabset>
         </div>
       </div>
+      <!-- Top user -->
+      <div class="card">
+        <div class="card-header">
+          <strong class="card-title">{{:: 'LB_USERS_RANK' | translate }}</strong>
+        </div>
+        <div class="card-body">
+          <div class="mini-poll" ng-repeat="u in vm.bestUsers">
+            <div class="poll-avatar">
+              <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user.slug})">
+                    <img src="{{::poll.user.profileImageURL}}" alt="{{::poll.user.displayName}}">
+                  </a>
+              <img ng-if="!poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
+            </div>
+            <div class="poll-info">
+              <div class="poll-title">
+                <a ui-sref="polls.view({pollId: poll.slug})">{{::poll.title}}</a>
+              </div>
+              <div class="poll-detail">
+                <div class="poll-detail-time">
+                  <i class="fa fa-clock-o"></i>
+                  <span am-time-ago="poll.created"></span>
+                </div>
+                <div class="poll-detail-count">
+                  <i class="fa fa-thumbs-o-up"></i>
+                  <span>{{:: poll.likeCnt}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- Popular tags -->
       <div class="card">
         <div class="card-header">

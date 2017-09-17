@@ -527,6 +527,11 @@
         ignoreLoadingBar: true
       });
     };
+    this.get_best_users = (limit) => {
+      return $http.get('/api/users/best/' + limit, {
+        ignoreLoadingBar: true
+      });
+    };
     /**
      * Lấy list poll thuộc tag
      */

@@ -663,7 +663,7 @@ exports.search_user_by_name = function (req, res) {
     return res.jsonp();
   }
   User.find({ displayName: { $regex: '.*' + name + '.*' } })
-    .select('displayName profileImageURL username slug')
+    .select('displayName profileImageURL email slug')
     .exec(function (err, users) {
       if (err) {
         return res.status(400).send({
@@ -676,6 +676,20 @@ exports.search_user_by_name = function (req, res) {
     });
 };
 
+exports.get_best_users = function (req, res) {
+  var limit = req.params.limit || 0;
+  Userreport.find()
+    .sort('-rank')
+    .limit(limit)
+    .populate('user', 'displayName profileImageURL slug')
+    .exec(function (err, users) {
+      if (err) {
+        return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
+      } else {
+        res.jsonp(users);
+      }
+    });
+};
 /**
  * User middleware
  */

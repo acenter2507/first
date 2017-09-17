@@ -66,7 +66,7 @@
                     <input name="by" type="hidden" class="form-control" ng-model="condition.by">
                     <angucomplete-alt placeholder="{{:: 'LB_SEARCH_POST_BY_USER' | translate }}" pause="300" selected-object="selectedUserFn"
                       initial-value="selectedUser" remote-url="/api/users/search?s=" remote-url-data-field="users" title-field="displayName"
-                      description-field="username" image-field="profileImageURL" minlength="1" input-class="form-control input-sm"
+                      description-field="email" image-field="profileImageURL" minlength="1" input-class="form-control input-sm"
                       match-class="highlight" />
                   </div>
                 </div>

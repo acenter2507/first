@@ -40,6 +40,7 @@
     vm.polls = [];
     vm.hot_polls = [];
     vm.bookmarks = [];
+    vm.bestUsers = [];
     vm.tags = [];
     vm.new_data = [];
     vm.page = 0;
@@ -57,10 +58,12 @@
       get_popular_tags();
       // Load các polls có lượng like nhiều nhất
       get_populars();
+      // Load các polls có lượng like nhiều nhất
+      get_best_users();
       // Load danh sách poll đã bookmark
       if ($scope.isLogged) {
         // Lắng nghe sự kiện từ rootScope;
-        get_bookmarks();
+        // get_bookmarks();
       }
     }
 
@@ -142,6 +145,16 @@
         .then(res => {
           vm.bookmarks = res.data || [];
         }, err => {
+          $scope.show_message('MS_CM_LOAD_ERROR', true);
+        });
+    }
+    function get_best_users() {
+      Action.get_best_users(10)
+        .then(res => {
+          console.log(res.data);
+          vm.bestUsers = res.data;
+        })
+        .catch(err => {
           $scope.show_message('MS_CM_LOAD_ERROR', true);
         });
     }

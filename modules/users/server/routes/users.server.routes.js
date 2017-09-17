@@ -12,6 +12,7 @@ module.exports = function (app) {
   app.route('/api/users/picture').post(users.changeProfilePicture);
   app.route('/api/users/language').post(users.changeLanguage);
   app.route('/api/users/search').get(users.search_user_by_name);
+  app.route('/api/users/best/:limit').get(users.get_best_users);
 
   // Lấy thông tin của user đang được xem profile page
   app.route('/api/profile/:profileId').get(users.profile);

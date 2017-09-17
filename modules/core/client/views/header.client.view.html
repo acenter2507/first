@@ -57,12 +57,12 @@
 
   <!-- User login -->
   <ul class="nav navbar-nav navbar-right d-sm-down-none" ng-if="!isLogged">
-    <li ui-sref-active="active">
+    <!-- <li ui-sref-active="active">
       <a ui-sref="authentication.signup">{{:: 'LB_SIGNUP' | translate }}</a>
     </li>
-    <li class="divider-vertical"></li>
+    <li class="divider-vertical"></li> -->
     <li ui-sref-active="active">
-      <a ui-sref="authentication.signin">{{:: 'LB_SIGNIN' | translate }}</a>
+      <a ui-sref="authentication.signin"><i class="fa fa-sign-in"></i></a>
     </li>
   </ul>
 

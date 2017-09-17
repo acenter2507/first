@@ -684,6 +684,7 @@ exports.get_best_users = function (req, res) {
     .populate('user', 'displayName profileImageURL slug')
     .exec(function (err, users) {
       if (err) {
+        console.log(err);
         return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
       } else {
         res.jsonp(users);

@@ -2,8 +2,8 @@
   <div class="row" ng-show="vm.is_has_new_polls">
     <div class="col-xs-12 pdn pd6l pd6r">
       <div class="notice notice-info">
-        {{:: 'LB_POLLS_HASNEW' | translate }}
-        <a ng-click="load_new()">{{:: 'LB_POLLS_LOADNOW' | translate }}</a>
+        {{ 'LB_POLLS_HASNEW' | translate }}
+        <a ng-click="load_new()">{{ 'LB_POLLS_LOADNOW' | translate }}</a>
       </div>
     </div>
   </div>
@@ -19,8 +19,8 @@
         <i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i>
       </div>
       <div class="notice notice-warning" ng-show="vm.polls.length === 0 && vm.stopped">
-        {{:: 'LB_POLLS_HASNO' | translate }}
-        <a ui-sref="polls.create">{{:: 'LB_POLLS_CREATE' | translate }}</a>
+        {{ 'LB_POLLS_HASNO' | translate }}
+        <a ui-sref="polls.create">{{ 'LB_POLLS_CREATE' | translate }}</a>
       </div>
     </div>
     <!-- RIGHT -->
@@ -58,12 +58,12 @@
       <!-- Popular poll -->
       <div class="card card-tab">
         <div class="card-header">
-          <strong class="card-title">{{:: 'LB_POLLS_POPULARS' | translate }}</strong>
-          <small class="card-link"><a ui-sref="search({ sort: '-likeCnt' })">{{:: 'LB_SEARCH' | translate }}</a></small>
+          <strong class="card-title">{{ 'LB_POLLS_POPULARS' | translate }}</strong>
+          <small class="card-link"><a ui-sref="search({ sort: '-likeCnt' })">{{ 'LB_SEARCH' | translate }}</a></small>
         </div>
         <div class="card-body pdnt">
           <uib-tabset justified="true">
-            <uib-tab index="1" heading="{{:: 'LB_POLLS_LIKES' | translate }}">
+            <uib-tab index="1" heading="{{ 'LB_POLLS_LIKES' | translate }}">
               <div class="mini-poll" ng-repeat="poll in vm.populars.likes">
                 <div class="poll-avatar">
                   <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user.slug})">
@@ -88,7 +88,7 @@
                 </div>
               </div>
             </uib-tab>
-            <uib-tab index="2" heading="{{:: 'LB_POLLS_VOTES' | translate }}">
+            <uib-tab index="2" heading="{{ 'LB_POLLS_VOTES' | translate }}">
               <div class="mini-poll" ng-repeat="poll in vm.populars.votes">
                 <div class="poll-avatar">
                   <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user.slug})">
@@ -113,7 +113,7 @@
                 </div>
               </div>
             </uib-tab>
-            <uib-tab index="3" heading="{{:: 'LB_POLLS_COMMENTS' | translate }}">
+            <uib-tab index="3" heading="{{ 'LB_POLLS_COMMENTS' | translate }}">
               <div class="mini-poll" ng-repeat="poll in vm.populars.cmts">
                 <div class="poll-avatar">
                   <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user.slug})">
@@ -144,7 +144,7 @@
       <!-- Top user -->
       <div class="card" ng-if="vm.bestUsers.length > 0">
         <div class="card-header">
-          <strong class="card-title">{{:: 'LB_USERS_RANK' | translate }}</strong>
+          <strong class="card-title">{{ 'LB_USERS_RANK' | translate }}</strong>
         </div>
         <div class="card-body">
           <div class="mini-poll" ng-repeat="u in vm.bestUsers">
@@ -160,7 +160,7 @@
               </div>
               <div class="poll-detail mg16t">
                 <div class="poll-detail-time">
-                  <span>{{:: 'LB_JOIN_DAY' | translate }}:</span>
+                  <span>{{ 'LB_JOIN_DAY' | translate }}:</span>
                   <span am-time-ago="u.user.created"></span>
                 </div>
                 <div class="poll-detail-count">
@@ -179,8 +179,8 @@
       <!-- Popular tags -->
       <div class="card">
         <div class="card-header">
-          <strong class="card-title">{{:: 'LB_POLLS_POPULARS_TAGS' | translate }}</strong>
-          <small class="card-link"><a ui-sref="tags.list">{{:: 'LB_CM_VIEWALL' | translate }}</a></small>
+          <strong class="card-title">{{ 'LB_POLLS_POPULARS_TAGS' | translate }}</strong>
+          <small class="card-link"><a ui-sref="tags.list">{{ 'LB_CM_VIEWALL' | translate }}</a></small>
         </div>
         <div class="card-body">
           <ul class="tags">
@@ -255,13 +255,13 @@
 
       <md-fab-actions>
         <md-button aria-label="Search" class="md-fab md-raised" ng-click="q_search()"><i class="fa fa-search"></i>
-          <md-tooltip class="d-md-none" md-direction="right" md-visible="isOpen">{{:: 'LB_SEARCH' | translate }}</md-tooltip>
+          <md-tooltip class="d-md-none" md-direction="right" md-visible="isOpen">{{ 'LB_SEARCH' | translate }}</md-tooltip>
         </md-button>
         <md-button aria-label="New Post" class="md-fab md-raised" ng-click="q_post_poll()"><i class="fa fa-pencil-square-o"></i>
-          <md-tooltip class="d-md-none" md-direction="right" md-visible="isOpen">{{:: 'LB_WRITE' | translate }}</md-tooltip>
+          <md-tooltip class="d-md-none" md-direction="right" md-visible="isOpen">{{ 'LB_WRITE' | translate }}</md-tooltip>
         </md-button>
         <md-button aria-label="Quick Poll" class="md-fab md-raised" ng-click="q_quick_poll()"><i class="fa fa-rocket"></i>
-          <md-tooltip class="d-md-none" md-direction="right" md-visible="isOpen">{{:: 'LB_QUICK' | translate }}</md-tooltip>
+          <md-tooltip class="d-md-none" md-direction="right" md-visible="isOpen">{{ 'LB_QUICK' | translate }}</md-tooltip>
         </md-button>
       </md-fab-actions>
     </md-fab-speed-dial>

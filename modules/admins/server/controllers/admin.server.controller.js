@@ -53,8 +53,12 @@ exports.user_add = function (req, res) {
       });
     } else {
       // Remove sensitive data before login
-      var report = new Userreport({ user: user._id });
-      report.save();
+      Userreport.findOne({ user: user._id }, (err, rp) => {
+        if (!rp) {
+          var report = new Userreport({ user: user._id });
+          report.save();
+        }
+      });
       user.password = undefined;
       user.salt = undefined;
       res.jsonp(user);

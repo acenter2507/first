@@ -741,14 +741,18 @@ exports.read_report = function (req, res) {
   res.json(req.report || null);
 };
 exports.create_report = function (req, res) {
-  var report = new Userreport(req.body);
-  report.save(function (err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
+  Userreport.findOne({ user: req.body.user }, (err, rp) => {
+    if (!rp) {
+      var report = new Userreport(req.body);
+      report.save(function (err) {
+        if (err) {
+          return res.status(400).send({
+            message: errorHandler.getErrorMessage(err)
+          });
+        } else {
+          res.jsonp(report);
+        }
       });
-    } else {
-      res.jsonp(report);
     }
   });
 };

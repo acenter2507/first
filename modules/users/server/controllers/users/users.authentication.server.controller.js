@@ -161,12 +161,16 @@ exports.verify = function (req, res) {
       user.activeAccountToken = undefined;
       // user.activeAccountExpires = undefined;
       user.save(function (err, user) {
-        var report = new Userreport({ user: user._id });
+        Userreport.findOne({ user: user._id }, (err, rp) => {
+          if (!rp) {
+            var report = new Userreport({ user: user._id });
+            report.save();
+          }
+        });
         var login = new Userlogin({ user: user._id });
         login.agent = req.headers['user-agent'];
         login.ip = getClientIp(req);
         login.save();
-        report.save();
         user.password = undefined;
         user.salt = undefined;
         req.login(user, function (err) {
@@ -287,12 +291,16 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
               // And save the user
               user.save(function (err, _user) {
                 if (!err) {
-                  var report = new Userreport({ user: _user._id });
+                  Userreport.findOne({ user: _user._id }, (err, rp) => {
+                    if (!rp) {
+                      var report = new Userreport({ user: _user._id });
+                      report.save();
+                    }
+                  });
                   var login = new Userlogin({ user: _user._id });
                   login.agent = req.headers['user-agent'];
                   login.ip = getClientIp(req);
                   login.save();
-                  report.save();
                 }
                 return done(err, user);
               });

@@ -131,13 +131,13 @@ angular.module('core').controller('WebAppController', [
         if (error) {
           toastr.error(tsl, $scope.MS_CM_ERROR);
         } else {
-          toastr.error(tsl, $scope.MS_CM_SUCCESS);
+          toastr.success(tsl, $scope.MS_CM_SUCCESS);
         }
       }, err => {
         if (error) {
           toastr.error(msg, $scope.MS_CM_ERROR);
         } else {
-          toastr.error(msg, $scope.MS_CM_SUCCESS);
+          toastr.success(msg, $scope.MS_CM_SUCCESS);
         }
       });
     };

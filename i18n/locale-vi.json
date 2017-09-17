@@ -277,5 +277,6 @@
   "LB_PROFILE_VOTE_LAST_CHANGE": "thay đổi lần cuối vào",
   "EMAIL_SJ_VERIFICATION": "Xác nhận đăng ký",
   "EMAIL_SJ_CHANGE_MAIL": "Xác nhận thay đổi email",
-  "EMAIL_SJ_FORGET": "Thiết lập mật khẩu mới"
+  "EMAIL_SJ_FORGET": "Thiết lập mật khẩu mới",
+  "LB_USERS_RANK": "Thành viên nổi bật"
 }

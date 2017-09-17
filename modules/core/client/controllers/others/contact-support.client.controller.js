@@ -58,7 +58,7 @@ angular.module('core').controller('ContactSupportController', [
       moment.tz.setDefault('Asia/Tokyo');
       moment.locale('vi');
       amMoment.changeLocale('vi');
-      $translate.user('vi');
+      $translate.use('vi');
       $scope.test.momentTest = moment();
       $scope.test.language = $translate.use();
     };

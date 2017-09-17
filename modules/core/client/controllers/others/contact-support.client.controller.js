@@ -7,7 +7,8 @@ angular.module('core').controller('ContactSupportController', [
   'Constants',
   'amMoment',
   '$translate',
-  function ($scope, vcRecaptchaService, $http, Constants, amMoment, $translate) {
+  '$window',
+  function ($scope, vcRecaptchaService, $http, Constants, amMoment, $translate, $window) {
     $scope.reCaptcha = Constants.reCaptcha;
     $scope.response = null;
     $scope.widgetId = null;
@@ -54,11 +55,12 @@ angular.module('core').controller('ContactSupportController', [
     $scope.test.momentTest = moment();
     $scope.test.language = $translate.use();
 
-    $scope.setLocale = () => {
-      moment.tz.setDefault('Asia/Tokyo');
-      moment.locale('vi');
-      amMoment.changeLocale('vi');
-      $translate.use('vi');
+    $scope.setLocale = (lang) => {
+      var tz = $window.locales[lang];
+      moment.tz.setDefault(tz);
+      moment.locale(lang);
+      amMoment.changeLocale(lang);
+      $translate.use(lang);
       $scope.test.momentTest = moment();
       $scope.test.language = $translate.use();
     };

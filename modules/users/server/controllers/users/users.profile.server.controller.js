@@ -680,8 +680,8 @@ exports.get_best_users = function (req, res) {
   var limit = req.params.limit || 0;
   Userreport.find()
     .sort('-rank')
-    .limit(limit)
     .populate('user', 'displayName profileImageURL slug')
+    .limit(limit * 1)
     .exec(function (err, users) {
       if (err) {
         console.log(err);

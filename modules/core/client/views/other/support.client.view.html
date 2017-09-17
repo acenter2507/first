@@ -14,7 +14,7 @@
             <fieldset>
               <div class="form-group" show-errors>
                 <input type="email" id="email" name="email" class="form-control" ng-model="ticket.email" placeholder="{{:: 'LB_USER_EMAIL' | translate }}"
-                  lowercase required>
+                  required>
                 <div ng-messages="ticketForm.email.$error" role="alert">
                   <p class="help-block error-text font-sm" ng-message="required">{{:: 'LB_USER_EMAIL_REQUIRED' | translate }}</p>
                   <p class="help-block error-text font-sm" ng-message="email">{{:: 'LB_USER_EMAIL_INVALID' | translate }}</p>

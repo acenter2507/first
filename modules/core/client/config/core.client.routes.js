@@ -48,8 +48,8 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
       templateUrl: 'modules/core/client/views/other/about.client.view.html'
     })
     .state('guide', {
-      abstract: true,
       url: '/guide',
+      abstract: true,
       templateUrl: 'modules/core/client/views/other/guide/guide.client.view.html'
     })
     .state('guide.signup', {

@@ -27,6 +27,9 @@ var TicketSchema = new Schema({
   status: {
     type: Number,
     default: 1
+  },
+  date: {
+    type: Date
   }
 });
 

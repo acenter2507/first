@@ -35,10 +35,12 @@ angular.module('core').controller('ContactSupportController', [
         $scope.busy = false;
         return false;
       }
+      $scope.ticket.date = moment();
       // Cài đặt ngôn ngữ cho account
       $http.post('/api/other/ticket', $scope.ticket).success(function (response) {
         delete $scope.ticket;
         $scope.busy = false;
+        $scope.ticketTest = response;
         $scope.show_message('LB_SUPPORT_SUCCESS', false);
       }).error(function (err) {
         $scope.busy = false;
@@ -46,6 +48,7 @@ angular.module('core').controller('ContactSupportController', [
       });
     };
 
+    $scope.ticketTest = {};
     $scope.test = {};
     $scope.test.momentTest = moment();
     $scope.test.language = $translate.use();

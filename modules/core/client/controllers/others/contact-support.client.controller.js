@@ -52,7 +52,8 @@ angular.module('core').controller('ContactSupportController', [
 
     $scope.ticketTest = {};
     $scope.test = {};
-    $scope.test.momentTest = moment().local();
+    $scope.test.momentUTC = moment.utc();
+    $scope.test.momentLocal = moment.local();
     $scope.test.language = $translate.use();
 
     $scope.setLocale = (lang) => {
@@ -61,7 +62,8 @@ angular.module('core').controller('ContactSupportController', [
         moment.tz.setDefault(tz);
         moment.locale(lang);
         amMoment.changeLocale(lang);
-        $scope.test.momentTest = moment();
+        $scope.test.momentUTC = moment.utc();
+        $scope.test.momentLocal = moment.local();
         $scope.test.language = $translate.use();
         if (!$scope.$$phase) $scope.$digest();
       });

@@ -48,8 +48,25 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
       templateUrl: 'modules/core/client/views/other/about.client.view.html'
     })
     .state('guide', {
+      abstract: true,
       url: '/guide',
-      templateUrl: 'modules/core/client/views/other/guide.client.view.html'
+      templateUrl: 'modules/core/client/views/other/guide/guide.client.view.html'
+    })
+    .state('guide.signup', {
+      url: '/how-to-signup',
+      templateUrl: 'modules/core/client/views/other/guide/signup.client.view.html'
+    })
+    .state('guide.poll', {
+      url: '/how-to-create-poll',
+      templateUrl: 'modules/core/client/views/other/guide/poll.client.view.html'
+    })
+    .state('guide.quick-poll', {
+      url: '/how-to-create-quick-poll',
+      templateUrl: 'modules/core/client/views/other/guide/quick-poll.client.view.html'
+    })
+    .state('guide.vote', {
+      url: '/how-to-vote',
+      templateUrl: 'modules/core/client/views/other/guide/vote.client.view.html'
     })
     .state('support', {
       url: '/support',

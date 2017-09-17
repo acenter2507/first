@@ -284,5 +284,10 @@
   "EMAIL_SJ_VERIFICATION": "Xác nhận đăng ký",
   "EMAIL_SJ_CHANGE_MAIL": "Xác nhận thay đổi email",
   "EMAIL_SJ_FORGET": "Thiết lập mật khẩu mới",
-  "LB_USERS_RANK": "Thành viên nổi bật"
+  "LB_USERS_RANK": "Thành viên nổi bật",
+
+  "LB_GUIDE_SIGNUP": "Hướng dẫn đăng ký",
+  "LB_GUIDE_POLL": "Hướng dẫn tạo poll",
+  "LB_GUIDE_QUICK_POLL": "Hướng dẫn tạo poll nhanh",
+  "LB_GUIDE_VOTE": "Hướng dẫn bình chọn"
 }

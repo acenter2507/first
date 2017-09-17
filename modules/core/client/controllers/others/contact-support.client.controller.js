@@ -61,10 +61,11 @@ angular.module('core').controller('ContactSupportController', [
       moment.tz.setDefault(tz);
       moment.locale(lang);
       amMoment.changeLocale(lang);
-      $translate.use(lang);
-      $scope.test.momentTest = moment();
-      $scope.test.language = $translate.use();
-      if (!$scope.$$phase) $scope.$digest();
+      $translate.use(lang).then(() => {
+        $scope.test.momentTest = moment();
+        $scope.test.language = $translate.use();
+        if (!$scope.$$phase) $scope.$digest();
+      });
     };
   }
 ]);

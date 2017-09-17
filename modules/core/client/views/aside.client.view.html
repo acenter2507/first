@@ -7,79 +7,79 @@
   </div>
   <div class="aside-search">
     <div class="quick-search">
-      <input ng-model="search_key" type="text" class="form-control quick-search-input" name="search" placeholder="{{:: 'LB_SEARCH' | translate }}">
+      <input ng-model="search_key" type="text" class="form-control quick-search-input" name="search" placeholder="{{ 'LB_SEARCH' | translate }}">
       <a class="quick-search-submit" type="submit" ng-click="search()"><i class="fa fa-search"></i></a>
       <a class="quick-search-advance" type="button" ui-sref="search"><i class="fa fa-cogs"></i></a>
     </div>
   </div>
   <nav class="aside-nav">
     <ul class="nav">
-      <li class="nav-title" ng-show="isLogged">{{:: 'LB_NOFT' | translate }}</li>
+      <li class="nav-title" ng-show="isLogged">{{ 'LB_NOFT' | translate }}</li>
       <li class="nav-item" ng-show="isLogged">
-        <a class="nav-link" ui-sref="notifs.list"><i class="fa fa-bell-o"></i> {{:: 'LB_NOFT_VIEWALL' | translate }}
+        <a class="nav-link" ui-sref="notifs.list"><i class="fa fa-bell-o"></i> {{ 'LB_NOFT_VIEWALL' | translate }}
           <span class="badge badge-pill badge-danger" ng-bind="Notifications.notifCnt" ng-show="Notifications.notifCnt > 0"></span>
         </a>
       </li>
       <li class="nav-item" ng-show="isLogged && Notifications.notifCnt > 0">
-        <a class="nav-link" ng-click="mark_all_read()"><i class="fa fa-check-square-o"></i> {{:: 'LB_NOFT_MARKALL' | translate }}</a>
+        <a class="nav-link" ng-click="mark_all_read()"><i class="fa fa-check-square-o"></i> {{ 'LB_NOFT_MARKALL' | translate }}</a>
       </li>
-      <li class="nav-title">{{:: 'LB_NAVIGATION' | translate }}</li>
+      <li class="nav-title">{{ 'LB_NAVIGATION' | translate }}</li>
       <li class="nav-item">
-        <a class="nav-link" ui-sref-active="active" ui-sref="home"><i class="fa fa-newspaper-o"></i> {{:: 'LB_FEEDS' | translate }}</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" ui-sref-active="active" ui-sref="polls.create"><i class="fa fa-pencil-square-o"></i> {{:: 'LB_NEW_POLL' | translate }}</a>
+        <a class="nav-link" ui-sref-active="active" ui-sref="home"><i class="fa fa-newspaper-o"></i> {{ 'LB_FEEDS' | translate }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" ui-sref-active="active" ui-sref="categorys.list"><i class="fa fa-list"></i> {{:: 'LB_CATEGORYS' | translate }}</a>
+        <a class="nav-link" ui-sref-active="active" ui-sref="polls.create"><i class="fa fa-pencil-square-o"></i> {{ 'LB_NEW_POLL' | translate }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" ui-sref-active="active" ui-sref="tags.list"><i class="fa fa-tags"></i> {{:: 'LB_TAGS' | translate }}</a>
+        <a class="nav-link" ui-sref-active="active" ui-sref="categorys.list"><i class="fa fa-list"></i> {{ 'LB_CATEGORYS' | translate }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" ui-sref-active="active" ui-sref="search"><i class="fa fa-search"></i> {{:: 'LB_ADVANCE_SEARCH' | translate }}</a>
+        <a class="nav-link" ui-sref-active="active" ui-sref="tags.list"><i class="fa fa-tags"></i> {{ 'LB_TAGS' | translate }}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" ui-sref-active="active" ui-sref="search"><i class="fa fa-search"></i> {{ 'LB_ADVANCE_SEARCH' | translate }}</a>
       </li>
       <li class="nav-item" ng-show="isAdmin">
-        <a class="nav-link" ui-sref-active="active" ui-sref="admin.dashboard"><i class="fa fa-tachometer"></i> {{:: 'LB_ADMIN' | translate }}</a>
+        <a class="nav-link" ui-sref-active="active" ui-sref="admin.dashboard"><i class="fa fa-tachometer"></i> {{ 'LB_ADMIN' | translate }}</a>
       </li>
 
-      <li class="nav-title">{{:: 'LB_PROFILE' | translate }}</li>
+      <li class="nav-title">{{ 'LB_PROFILE' | translate }}</li>
       <li class="nav-item" ng-show="isLogged">
-        <a class="nav-link" ui-sref-active="active" ui-sref="profile.info({ userId: user.slug })"><i class="fa fa-user-circle"></i> {{:: 'LB_PROFILE_VIEW' | translate }}</a>
+        <a class="nav-link" ui-sref-active="active" ui-sref="profile.info({ userId: user.slug })"><i class="fa fa-user-circle"></i> {{ 'LB_PROFILE_VIEW' | translate }}</a>
       </li>
       <li class="nav-item" ng-show="isLogged">
-        <a class="nav-link" ui-sref-active="active" ui-sref="settings.profile"><i class="fa fa-pencil-square-o"></i> {{:: 'LB_PROFILE_EDIT' | translate }}</a>
+        <a class="nav-link" ui-sref-active="active" ui-sref="settings.profile"><i class="fa fa-pencil-square-o"></i> {{ 'LB_PROFILE_EDIT' | translate }}</a>
       </li>
       <li class="nav-item" ng-show="isLogged && user.provider === 'local'">
-        <a class="nav-link" ui-sref-active="active" ui-sref="settings.password"><i class="fa fa-lock"></i> {{:: 'LB_PROFILE_PASS' | translate }}</a>
+        <a class="nav-link" ui-sref-active="active" ui-sref="settings.password"><i class="fa fa-lock"></i> {{ 'LB_PROFILE_PASS' | translate }}</a>
       </li>
       <li class="nav-item" ng-show="isLogged">
-        <a class="nav-link" ui-sref-active="active" ui-sref="settings.accounts"><i class="fa fa-facebook"></i> {{:: 'LB_PROFILE_SOCIAL' | translate }}</a>
+        <a class="nav-link" ui-sref-active="active" ui-sref="settings.accounts"><i class="fa fa-facebook"></i> {{ 'LB_PROFILE_SOCIAL' | translate }}</a>
       </li>
       <li class="nav-item" ng-show="isLogged">
-        <a class="nav-link" href="/api/auth/signout" target="_self"><i class="fa fa-sign-out"></i> {{:: 'LB_SIGNOUT' | translate }}</a>
+        <a class="nav-link" href="/api/auth/signout" target="_self"><i class="fa fa-sign-out"></i> {{ 'LB_SIGNOUT' | translate }}</a>
       </li>
       <li class="nav-item" ng-show="!isLogged">
-        <a class="nav-link" ui-sref="authentication.signin"><i class="fa fa-sign-in"></i>  {{:: 'LB_SIGNIN' | translate }}</a>
+        <a class="nav-link" ui-sref="authentication.signin"><i class="fa fa-sign-in"></i>  {{ 'LB_SIGNIN' | translate }}</a>
       </li>
       <li class="nav-item" ng-show="!isLogged">
-        <a class="nav-link" ui-sref="authentication.signup"><i class="fa fa-download"></i>  {{:: 'LB_SIGNUP' | translate }}</a>
+        <a class="nav-link" ui-sref="authentication.signup"><i class="fa fa-download"></i>  {{ 'LB_SIGNUP' | translate }}</a>
       </li>
-      <li class="nav-title">{{:: 'LB_OTHER' | translate }}</li>
+      <li class="nav-title">{{ 'LB_OTHER' | translate }}</li>
       <li class="nav-item">
-        <a class="nav-link" ui-sref-active="active" ui-sref="about-us">{{:: 'LB_ABOUT' | translate }}</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" ui-sref-active="active" ui-sref="guide.poll">{{:: 'LB_GUIDELINE' | translate }}</a>
+        <a class="nav-link" ui-sref-active="active" ui-sref="about-us">{{ 'LB_ABOUT' | translate }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" ui-sref-active="active" ui-sref="support">{{:: 'LB_SUPPORT' | translate }}</a>
+        <a class="nav-link" ui-sref-active="active" ui-sref="guide.poll">{{ 'LB_GUIDELINE' | translate }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" ui-sref-active="active" ui-sref="policy">{{:: 'LB_POLICY' | translate }}</a>
+        <a class="nav-link" ui-sref-active="active" ui-sref="support">{{ 'LB_SUPPORT' | translate }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" ui-sref-active="active" ui-sref="term">{{:: 'LB_TERM' | translate }}</a>
+        <a class="nav-link" ui-sref-active="active" ui-sref="policy">{{ 'LB_POLICY' | translate }}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" ui-sref-active="active" ui-sref="term">{{ 'LB_TERM' | translate }}</a>
       </li>
     </ul>
   </nav>

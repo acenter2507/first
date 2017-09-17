@@ -9,58 +9,58 @@
   <ul class="nav navbar-nav d-sm-down-none">
     <li ui-sref-active="active">
       <a ui-sref="home"><i class="fa fa-newspaper-o"></i></a>
-      <md-tooltip md-direction="bottom">{{:: 'LB_FEEDS' | translate }}</md-tooltip>
+      <md-tooltip md-direction="bottom">{{ 'LB_FEEDS' | translate }}</md-tooltip>
     </li>
     <li ui-sref-active="active">
       <a ui-sref="polls.create"><i class="fa fa-pencil-square-o"></i></a>
-      <md-tooltip md-direction="bottom">{{:: 'LB_NEW_POLL' | translate }}</md-tooltip>
+      <md-tooltip md-direction="bottom">{{ 'LB_NEW_POLL' | translate }}</md-tooltip>
     </li>
     <li ui-sref-active="active">
       <a ui-sref="categorys.list"><i class="fa fa-list"></i></a>
-      <md-tooltip md-direction="bottom">{{:: 'LB_CATEGORYS' | translate }}</md-tooltip>
+      <md-tooltip md-direction="bottom">{{ 'LB_CATEGORYS' | translate }}</md-tooltip>
     </li>
     <li ui-sref-active="active">
       <a ui-sref="tags.list"><i class="fa fa-tags"></i></a>
-      <md-tooltip md-direction="bottom">{{:: 'LB_TAGS' | translate }}</md-tooltip>
+      <md-tooltip md-direction="bottom">{{ 'LB_TAGS' | translate }}</md-tooltip>
     </li>
     <li ui-sref-active="active" ng-if="isAdmin">
       <a ui-sref="admin.dashboard"><i class="fa fa-tachometer"></i></a>
-      <md-tooltip md-direction="bottom">{{:: 'LB_ADMIN' | translate }}</md-tooltip>
+      <md-tooltip md-direction="bottom">{{ 'LB_ADMIN' | translate }}</md-tooltip>
     </li>
     <li class="dropdown" uib-dropdown>
-      <md-tooltip md-direction="bottom">{{:: 'LB_OTHER' | translate }}</md-tooltip>
+      <md-tooltip md-direction="bottom">{{ 'LB_OTHER' | translate }}</md-tooltip>
       <a href="#" class="dropdown-toggle" role="button" uib-dropdown-toggle>
         <i class="fa fa-info"></i>
       </a>
       <ul class="dropdown-menu" role="menu">
         <li ui-sref-active="active">
-          <a ui-sref="about-us">{{:: 'LB_ABOUT' | translate }}</a>
+          <a ui-sref="about-us">{{ 'LB_ABOUT' | translate }}</a>
         </li>
         <li ui-sref-active="active">
-          <a ui-sref="guide.poll">{{:: 'LB_GUIDELINE' | translate }}</a>
+          <a ui-sref="guide.poll">{{ 'LB_GUIDELINE' | translate }}</a>
         </li>
         <li ui-sref-active="active">
-          <a ui-sref="support">{{:: 'LB_SUPPORT' | translate }}</a>
+          <a ui-sref="support">{{ 'LB_SUPPORT' | translate }}</a>
         </li>
         <li ui-sref-active="active">
-          <a ui-sref="policy">{{:: 'LB_POLICY' | translate }}</a>
+          <a ui-sref="policy">{{ 'LB_POLICY' | translate }}</a>
         </li>
         <li ui-sref-active="active">
-          <a ui-sref="term">{{:: 'LB_TERM' | translate }}</a>
+          <a ui-sref="term">{{ 'LB_TERM' | translate }}</a>
         </li>
       </ul>
     </li>
     <li class="mg20l">
       <div class="search-tool">
         <form ng-submit="search()">
-          <input ng-model="search_key" type="text" class="form-control quick-search-input w300" name="search" placeholder="{{:: 'LB_SEARCH_KEY' | translate }}">
+          <input ng-model="search_key" type="text" class="form-control quick-search-input w300" name="search" placeholder="{{ 'LB_SEARCH_KEY' | translate }}">
           <a class="quick-search-submit" type="submit" ng-click="search()"><i class="fa fa-search"></i></a>
           <a class="quick-search-advance" type="button" ui-sref="search"><i class="fa fa-cogs"></i></a>
         </form>
       </div>
     </li>
     <!-- <li class="dropdown" uib-dropdown>
-      <md-tooltip md-direction="bottom">{{:: 'LB_SEARCH' | translate }}</md-tooltip>
+      <md-tooltip md-direction="bottom">{{ 'LB_SEARCH' | translate }}</md-tooltip>
       <a href="#" class="dropdown-toggle" role="button" uib-dropdown-toggle>
           <i class="fa fa-search"></i>
         </a>
@@ -68,7 +68,7 @@
         <form ng-submit="search()">
           <div class="form-group mgnb">
             <div class="col-xs-12 quick-search">
-              <input ng-model="search_key" type="text" class="form-control quick-search-input" name="search" placeholder="{{:: 'LB_SEARCH_KEY' | translate }}">
+              <input ng-model="search_key" type="text" class="form-control quick-search-input" name="search" placeholder="{{ 'LB_SEARCH_KEY' | translate }}">
               <a class="quick-search-submit" type="submit" ng-click="search()"><i class="fa fa-search"></i></a>
               <a class="quick-search-advance" type="button" ui-sref="search"><i class="fa fa-cogs"></i></a>
             </div>
@@ -81,7 +81,7 @@
   <!-- User login -->
   <ul class="nav navbar-nav navbar-right d-sm-down-none" ng-if="!isLogged">
     <!-- <li ui-sref-active="active">
-      <a ui-sref="authentication.signup">{{:: 'LB_SIGNUP' | translate }}</a>
+      <a ui-sref="authentication.signup">{{ 'LB_SIGNUP' | translate }}</a>
     </li>
     <li class="divider-vertical"></li> -->
     <li ui-sref-active="active">
@@ -98,20 +98,20 @@
         </a>
       <ul class="dropdown-menu" role="menu">
         <li ui-sref-active="active">
-          <a ui-sref="profile.info({ userId: user.slug })">{{:: 'LB_PROFILE' | translate }}</a>
+          <a ui-sref="profile.info({ userId: user.slug })">{{ 'LB_PROFILE' | translate }}</a>
         </li>
         <li ui-sref-active="active">
-          <a ui-sref="settings.profile">{{:: 'LB_PROFILE_EDIT' | translate }}</a>
+          <a ui-sref="settings.profile">{{ 'LB_PROFILE_EDIT' | translate }}</a>
         </li>
         <li ui-sref-active="active" ng-show="user.provider === 'local'">
-          <a ui-sref="settings.password">{{:: 'LB_PROFILE_PASS' | translate }}</a>
+          <a ui-sref="settings.password">{{ 'LB_PROFILE_PASS' | translate }}</a>
         </li>
         <li ui-sref-active="active">
-          <a ui-sref="settings.accounts">{{:: 'LB_PROFILE_SOCIAL' | translate }}</a>
+          <a ui-sref="settings.accounts">{{ 'LB_PROFILE_SOCIAL' | translate }}</a>
         </li>
         <li class="divider"></li>
         <li>
-          <a href="/api/auth/signout" target="_self">{{:: 'LB_SIGNOUT' | translate }}</a>
+          <a href="/api/auth/signout" target="_self">{{ 'LB_SIGNOUT' | translate }}</a>
         </li>
       </ul>
     </li>
@@ -136,10 +136,10 @@
           <div class="clearfix"></div>
         </a>
         <li class="text-center" ng-if="Notifications.notifCnt > 0">
-          <a ng-click="mark_all_read()">{{:: 'LB_NOFT_MARKALL' | translate }}</a>
+          <a ng-click="mark_all_read()">{{ 'LB_NOFT_MARKALL' | translate }}</a>
         </li>
         <li class="text-center">
-          <a ui-sref="notifs.list">{{:: 'LB_NOFT_VIEWALL' | translate }}</a>
+          <a ui-sref="notifs.list">{{ 'LB_NOFT_VIEWALL' | translate }}</a>
         </li>
       </ul>
     </li>

@@ -742,6 +742,14 @@ a:hover .header-profile-image {
 .search-tool {
   padding-bottom: 8px;
   padding-top: 8px; }
+  .search-tool .quick-search-submit {
+    position: absolute;
+    right: 30px;
+    top: 14px; }
+  .search-tool .quick-search-advance {
+    position: absolute;
+    right: 10px;
+    top: 14px; }
 .quick-search {
   position: relative;
   padding: 0; }

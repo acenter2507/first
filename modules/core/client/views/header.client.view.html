@@ -27,6 +27,9 @@
       <a ui-sref="admin.dashboard"><i class="fa fa-tachometer"></i></a>
       <md-tooltip md-direction="bottom">{{:: 'LB_ADMIN' | translate }}</md-tooltip>
     </li>
+    <li>
+        <input ng-model="search_key" type="text" class="form-control w300" name="search" placeholder="{{:: 'LB_SEARCH_KEY' | translate }}">
+    </li>
     <li class="dropdown" uib-dropdown>
       <md-tooltip md-direction="bottom">{{:: 'LB_SEARCH' | translate }}</md-tooltip>
       <a href="#" class="dropdown-toggle" role="button" uib-dropdown-toggle>
@@ -36,7 +39,7 @@
         <form ng-submit="search()">
           <div class="form-group mgnb">
             <div class="col-xs-12 quick-search">
-              <input ng-model="search_key" type="text" class="form-control quick-search-input" name="search" placeholder="Search...">
+              <input ng-model="search_key" type="text" class="form-control quick-search-input" name="search" placeholder="{{:: 'LB_SEARCH_KEY' | translate }}">
               <a class="quick-search-submit" type="submit" ng-click="search()"><i class="fa fa-search"></i></a>
               <a class="quick-search-advance" type="button" ui-sref="search"><i class="fa fa-cogs"></i></a>
             </div>

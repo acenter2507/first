@@ -68,6 +68,10 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
       url: '/how-to-vote',
       templateUrl: 'modules/core/client/views/other/guide/vote.client.view.html'
     })
+    .state('guide.contact', {
+      url: '/how-to-contact',
+      templateUrl: 'modules/core/client/views/other/guide/contact.client.view.html'
+    })
     .state('support', {
       url: '/support',
       templateUrl: 'modules/core/client/views/other/support.client.view.html'

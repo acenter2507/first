@@ -5,7 +5,8 @@ angular.module('core').controller('ContactSupportController', [
   'vcRecaptchaService',
   '$http',
   'Constants',
-  function ($scope, vcRecaptchaService, $http, Constants) {
+  '$translate',
+  function ($scope, vcRecaptchaService, $http, Constants, $translate) {
     $scope.reCaptcha = Constants.reCaptcha;
     $scope.response = null;
     $scope.widgetId = null;
@@ -47,5 +48,6 @@ angular.module('core').controller('ContactSupportController', [
 
     $scope.test = {};
     $scope.test.momentTest = moment();
+    $scope.test.language = $translate.use();
   }
 ]);

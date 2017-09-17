@@ -22,7 +22,7 @@
                 </div>
               </div>
               <div class="form-group" show-errors>
-                <textarea focus-me="true" class="msd-elastic: \n; form-control w100p h300 pd12" data-ng-model="ticket.body" placeholder="{{:: 'LB_POLLS_REPORT_PLACE' | translate }}"
+                <textarea name="body" focus-me="true" class="msd-elastic: \n; form-control w100p h300 pd12" data-ng-model="ticket.body" placeholder="{{:: 'LB_POLLS_REPORT_PLACE' | translate }}"
                   required></textarea>
                 <div ng-messages="ticketForm.body.$error" role="alert">
                   <p class="help-block error-text font-sm" ng-message="required">{{:: 'LB_SUPPORT_BODY_REQUIRE' | translate }}</p>

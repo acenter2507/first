@@ -56,12 +56,11 @@ angular.module('core').controller('ContactSupportController', [
     $scope.test.language = $translate.use();
 
     $scope.setLocale = (lang) => {
-      var tz = $window.locales[lang];
-      console.log(tz);
-      moment.tz.setDefault(tz);
-      moment.locale(lang);
-      amMoment.changeLocale(lang);
       $translate.use(lang).then(() => {
+        var tz = $window.locales[lang];
+        moment.tz.setDefault(tz);
+        moment.locale(lang);
+        amMoment.changeLocale(lang);
         $scope.test.momentTest = moment();
         $scope.test.language = $translate.use();
         if (!$scope.$$phase) $scope.$digest();

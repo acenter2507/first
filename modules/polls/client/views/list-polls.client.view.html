@@ -149,23 +149,29 @@
         <div class="card-body">
           <div class="mini-poll" ng-repeat="u in vm.bestUsers">
             <div class="poll-avatar">
-              <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user.slug})">
-                    <img src="{{::poll.user.profileImageURL}}" alt="{{::poll.user.displayName}}">
-                  </a>
-              <img ng-if="!poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
+              <a ng-if="u.user" ui-sref="profile.info({userId: u.user.slug})">
+                <img src="{{::u.user.profileImageURL}}" alt="{{::u.user.displayName}}">
+              </a>
+              <img ng-if="!u.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
             </div>
             <div class="poll-info">
               <div class="poll-title">
-                <a ui-sref="polls.view({pollId: poll.slug})">{{::poll.title}}</a>
+                <a ui-sref="profile.info({userId: u.user.slug})">{{::u.user.displayName}}</a>
               </div>
               <div class="poll-detail">
                 <div class="poll-detail-time">
-                  <i class="fa fa-clock-o"></i>
-                  <span am-time-ago="poll.created"></span>
+                  <small>{{:: 'LB_JOIN_DAY' | translate }}:</small>
+                  <span am-time-ago="u.user.created"></span>
+                </div>
+              </div>
+              <div class="poll-detail">
+                <div class="poll-detail-count">
+                  <i class="fa fa-thumbs-o-up"></i>
+                  <span>{{:: u.pollCnt}}</span>
                 </div>
                 <div class="poll-detail-count">
                   <i class="fa fa-thumbs-o-up"></i>
-                  <span>{{:: poll.likeCnt}}</span>
+                  <span>{{:: u.cmtCnt}}</span>
                 </div>
               </div>
             </div>

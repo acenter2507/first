@@ -13,7 +13,7 @@
           <a ui-sref="profile.info({userId: user.slug})"><img src="{{user.profileImageURL}}" alt="{{user.displayName}}"></a>
         </div>
         <textarea ng-is-enter="{{ctrl.enter_send}}" ng-enter="ctrl.save_cmt()" focus-me="{{ctrl.cmt_typing}}" class="msd-elastic: \n; reply-input"
-          data-ng-model="ctrl.tmp_cmt.body" placeholder="Type your comment..."></textarea>
+          data-ng-model="ctrl.tmp_cmt.body" placeholder="{{:: 'LB_POLL_CMT_PLACE' | translate }}"></textarea>
       </div>
       <label class="text-muted"><input type="checkbox" ng-model="ctrl.enter_send"><small>{{:: 'LB_POLL_ENTER_TO_SEND' | translate }}</small></label>
       <span class="pull-right">

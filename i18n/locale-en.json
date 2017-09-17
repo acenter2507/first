@@ -155,6 +155,7 @@
   "LB_POLL_TAGS_EMPTY": "Has no tag added.",
   "LB_POLL_REPORT_PANEL": "Report panel",
   "LB_POLL_CMT_PLACE": "Type your comment...",
+  "LB_POLL_TAG_PLACE": "Type your tags...",
 
   "LB_QUICK_BODY_PLACE": "Ask something...",
   "LB_QUICK_BODY_REQUIRE": "You must ask somthing.",

@@ -5,7 +5,7 @@
         <!-- Display Name  -->
         <div class="form-group" show-errors>
           <label for="displayName">{{:: 'LB_USER_NAME' | translate }}</label>
-          <input type="text" id="displayName" name="displayName" class="form-control" ng-model="userInfo.displayName" placeholder="{{ 'LB_USER_NAME' | translate }}"
+          <input type="text" id="displayName" name="displayName" class="form-control" ng-model="userInfo.displayName" placeholder="{{:: 'LB_USER_NAME' | translate }}"
             required>
           <div ng-messages="userForm.displayName.$error" role="alert">
             <p class="help-block error-text font-sm" ng-message="required">{{:: 'LB_USER_NAME_REQUIRED' | translate }}</p>

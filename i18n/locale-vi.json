@@ -155,6 +155,7 @@
   "LB_POLL_TAGS_EMPTY": "Không có tag nào được thêm vào",
   "LB_POLL_REPORT_PANEL": "Thông tin poll",
   "LB_POLL_CMT_PLACE": "Nhập nội dung bình luận...",
+  "LB_POLL_TAG_PLACE": "Nhập tên thẻ...",
 
   "LB_QUICK_BODY_PLACE": "Hỏi điều gì đó...",
   "LB_QUICK_BODY_REQUIRE": "Bạn cần phải hỏi gì đó",

@@ -22,6 +22,6 @@
       deferred.resolve(items);
       return deferred.promise;
     };
-    $scope.placeholder = 'Type your tags';
+    $scope.placeholder = 'LB_POLL_TAG_PLACE';
   }
 }());

@@ -131,7 +131,7 @@ function EditProfileController(
     showDropImage();
     function showDropImage() {
       var mDialog = dialog.open({
-        template: 'modules/core/client/views/templates/drop-image.dialog.template.html',
+        template: 'modules/core/client/views/templates/crop-image.dialog.template.html',
         scope: $scope,
         appendClassName: 'images-upload-dialog'
       });

@@ -13,7 +13,7 @@
             <div class="form-group">
               <div class="col-md-5">
                 <label>{{:: 'LB_SEARCH_KEY' | translate }}</label>
-                <input type="text" class="form-control" placeholder="Search key" ng-model="condition.key">
+                <input type="text" class="form-control" placeholder="{{:: 'LB_SEARCH_KEY' | translate }}..." ng-model="condition.key">
               </div>
               <div class="col-md-5">
                 <label>In</label>
@@ -122,7 +122,7 @@
                 </div>
                 <div class="form-group">
                   <div class="col-sm-6">
-                    <div class="col-sm-12 pdn"><label>{:: 'LB_SEARCH_CMT_CNT' | translate }}</label></div>
+                    <div class="col-sm-12 pdn"><label>{{:: 'LB_SEARCH_CMT_CNT' | translate }}</label></div>
                     <div class="col-sm-6 pdn">
                       <select class="form-control input-sm" ng-model="condition.cmts_pref">
                         <option value>{{:: 'LB_SEARCH_NOT_SET' | translate }}</option>
@@ -131,11 +131,11 @@
                       </select>
                     </div>
                     <div class="col-sm-6 pdn">
-                      <input name="cmts" id="cmts" type="text" class="form-control input-sm" placeholder="Comments count" ng-model="condition.cmts">
+                      <input name="cmts" id="cmts" type="text" class="form-control input-sm" placeholder="{:: 'LB_SEARCH_CMT_CNT' | translate }}" ng-model="condition.cmts">
                     </div>
                   </div>
                   <div class="col-sm-6">
-                    <div class="col-sm-12 pdn"><label>{:: 'LB_SEARCH_LIKE_CNT' | translate }}</label></div>
+                    <div class="col-sm-12 pdn"><label>{{:: 'LB_SEARCH_LIKE_CNT' | translate }}</label></div>
                     <div class="col-sm-6 pdn">
                       <select class="form-control input-sm" ng-model="condition.likes_pref">
                         <option value>{{:: 'LB_SEARCH_NOT_SET' | translate }}</option>
@@ -144,13 +144,13 @@
                       </select>
                     </div>
                     <div class="col-sm-6 pdn">
-                      <input name="likes" id="likes" type="text" class="form-control input-sm" placeholder="Likes count" ng-model="condition.likes">
+                      <input name="likes" id="likes" type="text" class="form-control input-sm" placeholder="{:: 'LB_SEARCH_LIKE_CNT' | translate }}" ng-model="condition.likes">
                     </div>
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-sm-6">
-                    <div class="col-sm-12 pdn"><label>{:: 'LB_SEARCH_VOTE_CNT' | translate }}</label></div>
+                    <div class="col-sm-12 pdn"><label>{{:: 'LB_SEARCH_VOTE_CNT' | translate }}</label></div>
                     <div class="col-sm-6 pdn">
                       <select class="form-control input-sm" ng-model="condition.votes_pref">
                         <option value>{{:: 'LB_SEARCH_NOT_SET' | translate }}</option>
@@ -159,11 +159,11 @@
                       </select>
                     </div>
                     <div class="col-sm-6 pdn">
-                      <input name="votes" id="votes" type="text" class="form-control input-sm" placeholder="Votes count" ng-model="condition.votes">
+                      <input name="votes" id="votes" type="text" class="form-control input-sm" placeholder="{{:: 'LB_SEARCH_VOTE_CNT' | translate }}" ng-model="condition.votes">
                     </div>
                   </div>
                   <div class="col-sm-6">
-                    <div class="col-sm-12 pdn"><label>{:: 'LB_SEARCH_VIEW_CNT' | translate }}</label></div>
+                    <div class="col-sm-12 pdn"><label>{{:: 'LB_SEARCH_VIEW_CNT' | translate }}</label></div>
                     <div class="col-sm-6 pdn">
                       <select class="form-control input-sm" ng-model="condition.views_pref">
                         <option value>{{:: 'LB_SEARCH_NOT_SET' | translate }}</option>
@@ -172,7 +172,7 @@
                       </select>
                     </div>
                     <div class="col-sm-6 pdn">
-                      <input name="views" id="views" type="text" class="form-control input-sm" placeholder="Views count" ng-model="condition.views">
+                      <input name="views" id="views" type="text" class="form-control input-sm" placeholder="{{:: 'LB_SEARCH_VIEW_CNT' | translate }}" ng-model="condition.views">
                     </div>
                   </div>
                 </div>

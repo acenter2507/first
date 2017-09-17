@@ -154,6 +154,7 @@
   "LB_POLL_SOCIAL": "Socials panel",
   "LB_POLL_TAGS_EMPTY": "Has no tag added.",
   "LB_POLL_REPORT_PANEL": "Report panel",
+  "LB_POLL_CMT_PLACE": "Type your comment...",
 
   "LB_QUICK_BODY_PLACE": "Ask something...",
   "LB_QUICK_BODY_REQUIRE": "You must ask somthing.",
@@ -291,5 +292,7 @@
   "LB_GUIDE_POLL": "How to create a poll",
   "LB_GUIDE_QUICK_POLL": "How to create quick poll",
   "LB_GUIDE_VOTE": "How to vote",
-  "LB_GUIDE_CONTACT": "How to contact us"
+  "LB_GUIDE_CONTACT": "How to contact us",
+
+  "LB_SUPPORT_TITLE": "Send us a ticket"
 }

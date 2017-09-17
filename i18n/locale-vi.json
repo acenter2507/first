@@ -153,6 +153,7 @@
   "LB_POLL_SOCIAL": "Chia sẽ mạng xã hội",
   "LB_POLL_TAGS_EMPTY": "Không có tag nào được thêm vào",
   "LB_POLL_REPORT_PANEL": "Thông tin poll",
+  "LB_POLL_CMT_PLACE": "Nhập nội dung bình luận...",
 
   "LB_QUICK_BODY_PLACE": "Hỏi điều gì đó...",
   "LB_QUICK_BODY_REQUIRE": "Bạn cần phải hỏi gì đó",
@@ -290,5 +291,9 @@
   "LB_GUIDE_POLL": "Hướng dẫn tạo poll",
   "LB_GUIDE_QUICK_POLL": "Hướng dẫn tạo poll nhanh",
   "LB_GUIDE_VOTE": "Hướng dẫn bình chọn",
-  "LB_GUIDE_CONTACT": "Hướng dẫn liên lạc hỗ trợ"
+  "LB_GUIDE_CONTACT": "Hướng dẫn liên lạc hỗ trợ",
+  
+  "LB_SUPPORT_TITLE": "Gửi ticket hỗ trợ",
+  "LB_SUPPORT_BODY_PLACE": "Bạn cần hỗ trợ vấn đề gì?",
+  "LB_SUPPORT_BODY_REQUIRE": "Xin hãy cho chúng tôi biết bạn gặp vấn đề gì?",
 }

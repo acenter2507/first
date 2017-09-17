@@ -13,7 +13,7 @@
         </div>
         <div class="form-group" show-errors ng-if="user.provider === 'local'">
           <label for="email">{{:: 'LB_USER_EMAIL' | translate }}</label>
-          <input type="email" id="email" name="email" class="form-control" ng-model="userInfo.email" placeholder="Email" lowercase required>
+          <input type="email" id="email" name="email" class="form-control" ng-model="userInfo.email" placeholder="{{:: 'LB_USER_EMAIL' | translate }}" lowercase required>
           <span class="font-xs">{{:: 'LB_USER_EMAIL_WARNING' | translate }}</span>
           <div ng-messages="userForm.email.$error" role="alert">
             <p class="help-block error-text font-sm" ng-message="required">{{:: 'LB_USER_EMAIL_REQUIRED' | translate }}</p>

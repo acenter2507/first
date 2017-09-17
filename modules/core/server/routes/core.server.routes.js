@@ -3,6 +3,7 @@
 module.exports = function (app) {
   // Root routing
   var core = require('../controllers/core.server.controller');
+  var other = require('../controllers/other.server.controller');
 
   // Define error pages
   app.route('/server-error').get(core.renderServerError);
@@ -12,4 +13,7 @@ module.exports = function (app) {
 
   // Define application route
   app.route('/*').get(core.renderIndex);
+
+  // Define other route
+  app.route('/api/other/ticket').post(other.ticket);
 };

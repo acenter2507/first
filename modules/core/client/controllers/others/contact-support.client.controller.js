@@ -63,8 +63,8 @@ angular.module('core').controller('ContactSupportController', [
         moment.tz.setDefault(tz);
         moment.locale(lang);
         $scope.test.momentX = moment().utc().format('YYYY-MM-DD HH:mm:ss');
-        $scope.test.momentUTC = moment($scope.test.momentX).local();
-        $scope.test.momentLocal = moment($scope.test.momentX).toDate();
+        $scope.test.momentUTC = moment($scope.test.momentX).toDate();
+        $scope.test.momentLocal = moment($scope.test.momentUTC).format('YYYY-MM-DD HH:mm:ss');
         $scope.test.language = $translate.use();
       });
     };

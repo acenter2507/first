@@ -294,5 +294,7 @@
   "LB_GUIDE_VOTE": "How to vote",
   "LB_GUIDE_CONTACT": "How to contact us",
 
-  "LB_SUPPORT_TITLE": "Send us a ticket"
+  "LB_SUPPORT_TITLE": "Send us a ticket",
+  "LB_SUPPORT_BODY_PLACE": "What's happening?",
+  "LB_SUPPORT_BODY_REQUIRE": "Please tell us what is happening?"
 }

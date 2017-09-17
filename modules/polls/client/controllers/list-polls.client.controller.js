@@ -151,7 +151,6 @@
     function get_best_users() {
       Action.get_best_users(10)
         .then(res => {
-          console.log(res.data);
           vm.bestUsers = res.data;
         })
         .catch(err => {

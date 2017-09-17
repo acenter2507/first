@@ -78,12 +78,13 @@ angular.module('core').controller('WebAppController', [
     }
     // Thay đổi ngôn ngữ
     $scope.change_language = lang => {
+      $translate.use(lang);
       if (lang === $translate.use()) return;
       $translate('MS_USERS_LANG_CONFIRM').then(tsl => {
         var content = tsl;
         $translate(lang).then(_tsl => {
           content += _tsl;
-          show_config(content);
+          //show_config(content);
         });
       });
       function show_config(content) {

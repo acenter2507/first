@@ -57,5 +57,13 @@
     <p>{{test.momentLocal.format()}}</p>
     <hr>
     <span>Language:</span><span>{{ test.language | translate }}</span>
+    <hr>
+    <div class="form-group">
+      <div class="input-group" today="true" moment-picker="test.pickerDate" format="YYYY-MM-DD HH:mm" start-view="month">
+        <input class="form-control" placeholder="{{:: 'LB_POLL_CLOSE' | translate }}" ng-model="test.pickerDate" readonly="true">
+        <span class="input-group-addon span-link"><i class="fa fa-calendar"></i></span>
+      </div>
+    </div>
+    <p>{{test.pickerDate.format()}}</p>
   </div>
 </section>

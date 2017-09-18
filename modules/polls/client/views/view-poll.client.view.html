@@ -243,14 +243,10 @@
         <div class="card-body">
           <div class="poll-remaining" ng-if="ctrl.poll.close">
             <p>
-              <span>{{ctrl.close_duration.days}}</span>
-              <span>{{:: 'LB_POLL_CLOSE_DAY' | translate }}</span>
-              <span>{{ctrl.close_duration.hours}}</span>
-              <span>{{:: 'LB_POLL_CLOSE_HOUR' | translate }}</span>
-              <span>{{ctrl.close_duration.minutes}}</span>
-              <span>{{:: 'LB_POLL_CLOSE_MIN' | translate }}</span>
-              <span>{{ctrl.close_duration.seconds}}</span>
-              <span>{{:: 'LB_POLL_CLOSE_SEC' | translate }}</span>
+              <span>{{ctrl.close_duration.days}}{{:: 'LB_POLL_CLOSE_DAY' | translate }}</span>
+              <span>{{ctrl.close_duration.hours}}{{:: 'LB_POLL_CLOSE_HOUR' | translate }}</span>
+              <span>{{ctrl.close_duration.minutes}}{{:: 'LB_POLL_CLOSE_MIN' | translate }}</span>
+              <span>{{ctrl.close_duration.seconds}}{{:: 'LB_POLL_CLOSE_SEC' | translate }}</span>
             </p>
           </div>
           <hr class="mgn mg12b">

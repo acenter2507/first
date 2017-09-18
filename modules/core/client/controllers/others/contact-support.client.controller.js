@@ -37,12 +37,11 @@ angular.module('core').controller('ContactSupportController', [
         $scope.busy = false;
         return false;
       }
-      $scope.ticket.date = moment();
+      $scope.ticket.date = moment().utc();
       // Cài đặt ngôn ngữ cho account
       $http.post('/api/other/ticket', $scope.ticket).success(function (response) {
         delete $scope.ticket;
         $scope.busy = false;
-        $scope.ticketTest = response;
         $scope.show_message('LB_SUPPORT_SUCCESS', false);
       }).error(function (err) {
         $scope.busy = false;
@@ -50,26 +49,5 @@ angular.module('core').controller('ContactSupportController', [
       });
     };
 
-    $scope.ticketTest = {};
-    $scope.test = {};
-    $scope.test.momentX = moment();
-    $scope.test.momentUTC = moment().utc();
-    $scope.test.momentLocal = moment().local();
-    $scope.test.date = new Date();
-    console.log($scope.test.date.toString());
-    $scope.test.language = $translate.use();
-
-    $scope.setLocale = (lang) => {
-      $translate.use(lang).then(() => {
-        var tz = $window.locales[lang];
-        moment.tz.setDefault(tz);
-        moment.locale(lang);
-        $scope.test.momentX = moment();
-        $scope.test.momentUTC = moment().utc();
-        $scope.test.momentLocal = moment().local();
-        $scope.test.date = new Date();
-        $scope.test.language = $translate.use();
-      });
-    };
   }
 ]);

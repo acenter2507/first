@@ -43,10 +43,6 @@ angular.module('core').controller('WebAppController', [
       // Kiểm tra thông tin user mới có thay đổi ngôn ngữ hay không
       if ($scope.user.language !== $translate.use()) {
         $translate.use($scope.user.language);
-        // var tz = $window.locales[$scope.user.language];
-        // moment.tz.setDefault(tz);
-        // moment.locale($scope.user.language);
-        // amMoment.changeLocale($scope.user.language);
       }
     }
     // Init socket

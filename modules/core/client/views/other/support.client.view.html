@@ -39,32 +39,5 @@
       </div>
     </div>
   </div>
-  <hr>
-  <div class="row">
-    <button class="btn btn-primary" ng-click="setLocale('vi')">VN</button>
-    <button class="btn btn-warning mg20l" ng-click="setLocale('en')">EN</button>
-    <button class="btn btn-danger mg20l" ng-click="setLocale('ja')">JA</button>
-    <h4>Test object</h4>
-    <pre>{{test}}</pre>
-    <hr>
-    <pre>{{ticketTest}}</pre>
-    <hr>
-    <p am-time-ago="test.momentX"></p>
-    <p am-time-ago="test.momentUTC"></p>
-    <p am-time-ago="test.momentLocal"></p>
-    <p>{{test.momentX.format()}}</p>
-    <p>{{test.momentUTC.format()}}</p>
-    <p>{{test.momentLocal.format()}}</p>
-    <hr>
-    <span>Language:</span><span>{{ test.language | translate }}</span>
-    <hr>
-    <div class="form-group">
-      <div class="input-group" today="true" moment-picker="test.pickerDate" format="YYYY-MM-DD HH:mm" start-view="month">
-        <input class="form-control" placeholder="{{:: 'LB_POLL_CLOSE' | translate }}" ng-model="test.pickerDate" readonly="true">
-        <span class="input-group-addon span-link"><i class="fa fa-calendar"></i></span>
-      </div>
-    </div>
-    <hr>
-    <p>{{test.pickerDate.format()}}</p>
   </div>
 </section>

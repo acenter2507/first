@@ -49,8 +49,12 @@
     <hr>
     <pre>{{ticketTest}}</pre>
     <hr>
+    <span am-time-ago="test.momentX"></span>
     <span am-time-ago="test.momentUTC"></span>
     <span am-time-ago="test.momentLocal"></span>
+    <span>{{test.momentX.format()}}</span>
+    <span>{{test.momentUTC.format()}}</span>
+    <span>{{test.momentLocal.format()}}</span>
     <hr>
     <span>Language:</span><span>{{ test.language | translate }}</span>
   </div>

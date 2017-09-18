@@ -35,7 +35,8 @@
               <div class="poll-info-title">
                 <a class="poll-info-title-user-name" ng-if="ctrl.poll.user" ui-sref="profile.info({userId: ctrl.poll.user.slug})">{{::ctrl.poll.user.displayName}}</a>
                 <span class="poll-info-title-user-name" ng-if="!ctrl.poll.user">{{:: 'LB_DELETED_USER' | translate }}</span>
-                <span class="poll-info-title-time">{{:: 'LB_POLLS_CREATEON' | translate }}
+                <span class="poll-info-title-time">
+                    {{:: 'LB_POLLS_CREATEON' | translate }}
                     <span am-time-ago="ctrl.poll.created"></span>
                 </span>
                 <md-menu md-offset="-12 20" md-position-mode="target-right target">
@@ -55,7 +56,7 @@
                 </md-menu>
                 <p class="poll-info-title-close">
                   <i class="fa fa-calendar"></i>
-                  <span ng-if="ctrl.poll.close">{{:: 'LB_CM_CLOSE' | translate }}<span am-time-ago="ctrl.poll.close"></span></span>
+                  <span ng-if="ctrl.poll.close">{{:: 'LB_CM_CLOSE' | translate }} <span am-time-ago="ctrl.poll.close"></span></span>
                   <span ng-if="!ctrl.poll.close">{{:: 'LB_CM_UNLIMIT' | translate }}</span>
                 </p>
               </div>

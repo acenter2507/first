@@ -113,11 +113,27 @@
       // Init socket
       initSocket();
       analysic_nofif();
+      analysic_vote();
       get_cmts();
     }
     function analysic_nofif() {
       if ($stateParams.notif) {
         Notifications.markReadNotif($stateParams.notif);
+      }
+    }
+    // Kiểm tra url có chưa đối tượng vote
+    function analysic_vote() {
+      if (!$stateParams.vote) return;
+      // Kiểm tra mã vote có tồn tại trong danh sách option không
+      var opt = _.findWhere(ctrl.opts, { _id: $stateParams.vote.trim() });
+      // Nếu không tìm thấy thông tin option đúng với request thì show message
+      if (!opt) return $scope.show_message('LB_POLL_VOTE_ERROR');
+      // Kiểm tra user đã vote trước đây chưa
+      if (ctrl.ownVote._id) {
+        // Nếu đã vote thì show mesage thông báo
+        
+      } else {
+
       }
     }
     // Init Socket

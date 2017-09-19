@@ -156,6 +156,7 @@
   "LB_POLL_REPORT_PANEL": "Thông tin poll",
   "LB_POLL_CMT_PLACE": "Nhập nội dung bình luận...",
   "LB_POLL_TAG_PLACE": "Nhập tên thẻ...",
+  "LB_POLL_VOTE_ERROR": "Không tìm thấy lựa chọn trong đường dẫn mà bạn muốn bình chọn.",
 
   "LB_QUICK_BODY_PLACE": "Hỏi điều gì đó...",
   "LB_QUICK_BODY_REQUIRE": "Bạn cần phải hỏi gì đó",

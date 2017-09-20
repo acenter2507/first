@@ -149,6 +149,7 @@
           ctrl.ownVote = res.data.ownVote;
           ctrl.votedOpts = res.data.votedOpts;
           ctrl.selectedOpts = _.clone(ctrl.votedOpts);
+          ctrl.radioChecked = ctrl.selectedOpts[0];
           ctrl.follow = res.data.follow;
           ctrl.reported = res.data.reported;
           ctrl.bookmarked = res.data.bookmarked;
@@ -675,8 +676,6 @@
     };
 
     // VOTE
-    console.log(ctrl.selectedOpts);
-    ctrl.radioChecked = ctrl.selectedOpts[0];
     ctrl.handleChecked = (id) => {
       if (ctrl.poll.allow_multiple) {
         if (_.contains(ctrl.selectedOpts, id)) {

@@ -684,10 +684,8 @@
           ctrl.selectedOpts.push(id);
         }
       } else {
-        if (!_.contains(ctrl.selectedOpts, ctrl.radioChecked)) {
-          console.log(ctrl.radioChecked);
-          ctrl.selectedOpts = [ctrl.radioChecked];
-        }
+        console.log(ctrl.radioChecked);
+        ctrl.selectedOpts = [ctrl.radioChecked];
       }
     };
     ctrl.isCanVote = () => {

@@ -419,7 +419,6 @@
         return;
       }
       if (angular.equals(ctrl.votedOpts, ctrl.selectedOpts)) {
-        console.log(ctrl.radioChecked);
         return;
       }
       Action.save_vote(ctrl.ownVote, ctrl.selectedOpts, ctrl.poll)
@@ -685,7 +684,6 @@
           ctrl.selectedOpts.push(id);
         }
       } else {
-        console.log(ctrl.radioChecked);
         ctrl.selectedOpts = [ctrl.radioChecked];
       }
     };

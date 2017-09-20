@@ -130,7 +130,7 @@ angular.module('core').controller('WebAppController', [
           handleReject(reject);
         }
       });
-    }
+    };
     /**
      * TOAST MESSAGE
      */

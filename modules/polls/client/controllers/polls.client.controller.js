@@ -675,7 +675,8 @@
     };
 
     // VOTE
-    ctrl.checked = function (id) {
+    ctrl.radioChecked = ctrl.selectedOpts[0];
+    ctrl.handleChecked = (id) => {
       if (ctrl.poll.allow_multiple) {
         if (_.contains(ctrl.selectedOpts, id)) {
           ctrl.selectedOpts = _.without(ctrl.selectedOpts, id);
@@ -683,8 +684,8 @@
           ctrl.selectedOpts.push(id);
         }
       } else {
-        if (!_.contains(ctrl.selectedOpts, id)) {
-          ctrl.selectedOpts = [id];
+        if (!_.contains(ctrl.selectedOpts, ctrl.radioChecked)) {
+          ctrl.selectedOpts = [ctrl.radioChecked];
         }
       }
     };

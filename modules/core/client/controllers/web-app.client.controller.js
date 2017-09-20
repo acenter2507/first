@@ -121,12 +121,12 @@ angular.module('core').controller('WebAppController', [
         templateUrl: Constants.templateUrls.dialogConfirm
       }).then(confirm => {
         delete $scope.confirmDialog;
-        if (!handleConfirm) {
+        if (handleConfirm) {
           handleConfirm(confirm);
         }
       }, reject => {
         delete $scope.confirmDialog;
-        if (!handleReject) {
+        if (handleReject) {
           handleReject(reject);
         }
       });

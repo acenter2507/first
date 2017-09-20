@@ -419,6 +419,7 @@
         return;
       }
       if (angular.equals(ctrl.votedOpts, ctrl.selectedOpts)) {
+        console.log(ctrl.radioChecked);
         return;
       }
       Action.save_vote(ctrl.ownVote, ctrl.selectedOpts, ctrl.poll)

@@ -5,7 +5,7 @@
   <p>{{ confirmDialog.content | translate }}</p>
   <div class="ngdialog-buttons mg10t">
     <button class="btn pull-right" ng-class="{'btn-primary': confirmDialog.type === 1, 'btn-warning': confirmDialog.type === 2, 'btn-danger': confirmDialog.type === 3}"
-      ng-click="confirm(confirmValue)">{{ confirmDialog.button | translate}}</button>
+      ng-click="confirm(confirmValue)" ng-if="confirmDialog.button">{{ confirmDialog.button | translate}}</button>
     <button class="btn btn-default pull-right mg5r" ng-click="closeThisDialog()">{{ 'LB_CANCEL' | translate}}</button>
   </div>
 </div>

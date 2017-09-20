@@ -675,6 +675,7 @@
     };
 
     // VOTE
+    console.log(ctrl.selectedOpts);
     ctrl.radioChecked = ctrl.selectedOpts[0];
     ctrl.handleChecked = (id) => {
       if (ctrl.poll.allow_multiple) {

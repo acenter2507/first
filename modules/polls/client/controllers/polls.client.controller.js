@@ -677,6 +677,7 @@
 
     // VOTE
     ctrl.handleChecked = (id) => {
+      console.log('fadasdas');
       if (ctrl.poll.allow_multiple) {
         if (_.contains(ctrl.selectedOpts, id)) {
           ctrl.selectedOpts = _.without(ctrl.selectedOpts, id);

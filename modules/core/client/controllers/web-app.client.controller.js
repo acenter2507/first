@@ -77,24 +77,16 @@ angular.module('core').controller('WebAppController', [
         var content = tsl;
         $translate(lang).then(_tsl => {
           content += _tsl;
-          show_config(content);
+          $scope.handleShowConfirm({
+            content: content,
+            type: 1,
+            button: 'LB_CHANGE'
+          }, confirm => {
+            handleChangeLanguage();
+          });
         });
       });
-      function show_config(content) {
-        $scope.message = {};
-        $scope.message.content = content;
-        $scope.message.type = 1;
-        $scope.message.button = 'LB_CHANGE';
-        dialog.openConfirm({
-          scope: $scope,
-          templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
-        }).then(confirm => {
-          handle_change_language();
-        }, reject => {
-          delete $scope.message;
-        });
-      }
-      function handle_change_language() {
+      function handleChangeLanguage() {
         delete $scope.message;
         $http.post('/api/users/language', { language: lang }).success(function (response) {
           Authentication.user = response;
@@ -114,7 +106,7 @@ angular.module('core').controller('WebAppController', [
     /**
      * DIALOG CONFIG
      */
-    $scope.handleShowConfirm = function(content, handleConfirm, handleReject) {
+    $scope.handleShowConfirm = function (content, handleConfirm, handleReject) {
       $scope.confirmDialog = content;
       dialog.openConfirm({
         scope: $scope,

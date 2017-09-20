@@ -94,7 +94,7 @@
       }, confirm => {
         vm.polls = _.without(vm.polls, poll);
         Action.delete_poll(poll);
-      });
+      }, false);
       // $scope.message = {};
       // $scope.message.content = 'LB_POLLS_CONFIRM_DELETE';
       // $scope.message.type = 3;

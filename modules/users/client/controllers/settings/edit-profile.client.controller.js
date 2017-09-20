@@ -47,19 +47,14 @@ function EditProfileController(
       return false;
     }
     if ($scope.userInfo.email !== $scope.user.email) {
-      $scope.message = {};
-      $scope.message.title = 'LB_USER_EMAIL_CONFIRM';
-      $scope.message.content = 'LB_USER_EMAIL_CONFIRM_CONTENT';
-      $scope.message.type = 1;
-      $scope.message.button = 'LB_SAVE';
-      dialog.openConfirm({
-        scope: $scope,
-        templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
-      }).then(confirm => {
-        delete $scope.message;
-        return handle_save();
+      // Gọi function show dialog từ scope cha
+      $scope.handleShowConfirm({
+        content: 'LB_USER_EMAIL_CONFIRM_CONTENT',
+        type: 1,
+        button: 'LB_SAVE'
+      }, confirm => {
+        handle_save();
       }, reject => {
-        delete $scope.message;
         $scope.userInfo.email = $scope.user.email;
         $scope.profile_busy = false;
       });

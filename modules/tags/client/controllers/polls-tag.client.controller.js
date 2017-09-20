@@ -77,23 +77,15 @@
         $scope.handleShowMessage('MS_CM_AUTH_ERROR', true);
         return;
       }
-      $scope.message = {};
-      $scope.message.content = 'LB_POLLS_CONFIRM_DELETE';
-      $scope.message.type = 3;
-      $scope.message.button = 'LB_DELETE';
-      dialog.openConfirm({
-        scope: $scope,
-        templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
-      }).then(confirm => {
-        handle_delete();
-      }, reject => {
-        delete $scope.message;
-      });
-      function handle_delete() {
-        delete $scope.message;
+      // Gọi function show dialog từ scope cha
+      $scope.handleShowConfirm({
+        content: 'LB_POLLS_CONFIRM_DELETE',
+        type: 3,
+        button: 'LB_DELETE'
+      }, confirm => {
         vm.polls = _.without(vm.polls, poll);
         Action.delete_poll(poll);
-      }
+      });
     };
     $scope.report_poll = (poll) => {
       if (poll.reported) {

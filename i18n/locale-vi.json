@@ -158,6 +158,8 @@
   "LB_POLL_TAG_PLACE": "Nhập tên thẻ...",
   "LB_POLL_VOTE_ERROR": "Không tìm thấy lựa chọn trong đường dẫn mà bạn muốn bình chọn.",
   "LB_POLL_EXIST_ERROR": "Không tìm thấy poll mà bạn đã yêu cầu.",
+  "LB_POLL_VOTE_CONFIRM": "Bạn thật sự muốn thay đổi lựa chọn mà bạn đã bình chọn trước đây?",
+  "LB_POLL_VOTE_AUTH_ERROR": "Bạn không đủ điều kiện để tham gia bình chọn tại poll này.",
 
   "LB_QUICK_BODY_PLACE": "Hỏi điều gì đó...",
   "LB_QUICK_BODY_REQUIRE": "Bạn cần phải hỏi gì đó",

@@ -112,8 +112,6 @@
       prepareUrlParameters();
       // Kiểm tra và đếm ngược thời gian close của poll
       prepareCloseRemaining();
-      analysic_nofif();
-      analysic_vote();
       // Lắng nghe các request từ server socket
       prepareSocketListener();
       // Đặt timer lưu poll vào Viewed đồng thời tăng lượt View
@@ -163,34 +161,38 @@
     }
     function prepareUrlParameters() {
       // Kiểm tra thông báo
+      prepareParamNotification();
+      // Kiểm tra giá trị vote
+      prepareParamVote();
+    }
+
+    function prepareParamNotification() {
       if ($stateParams.notif) {
         // Đánh dấu thông báo đã đọc
         Notifications.markReadNotif($stateParams.notif);
       }
-      // Kiểm tra giá trị vote
-      if ($stateParams.vote) {
-        // Kiểm tra mã vote có tồn tại trong danh sách option không
-        var opt = _.findWhere(ctrl.opts, { _id: $stateParams.vote.trim() });
-        // Nếu không tìm thấy thông tin option đúng với request thì show message
-        if (opt) {
-          // Kiểm tra hiện tại người dùng đã vote cho poll này chưa
-          if (ctrl.ownVote._id) {
-          } else {
-          }
-
-        } else {
-          $scope.handleShowMessage('LB_POLL_VOTE_ERROR');
-        }
-      }
-    }
-
-    function analysic_nofif() {
-      if ($stateParams.notif) {
-        Notifications.markReadNotif($stateParams.notif);
-      }
     }
     // Kiểm tra url có chưa đối tượng vote
-    function analysic_vote() {
+    function prepareParamVote() {
+      if (!$stateParams.vote) return;
+      // Kiểm tra mã vote có tồn tại trong danh sách option không
+      var opt = _.findWhere(ctrl.opts, { _id: $stateParams.vote.trim() });
+      // Nếu không tìm thấy thông tin option đúng với request thì show message
+      if (!opt || !opt._id) return $scope.handleShowMessage('LB_POLL_VOTE_ERROR');
+      // Kiểm tra điều kiện user có được vote hay không
+      if (!ctrl.isCanVote) return $scope.handleShowMessage('LB_POLL_VOTE_AUTH_ERROR');
+      // Kiểm tra user đã từng vote hay chưa
+      if (ctrl.ownVote._id) {
+        $scope.handleShowConfirm({
+          content: 'LB_POLL_VOTE_CONFIRM',
+          type: 1,
+          button: 'LB_CHANGE'
+        }, () => {
+          ctrl.selectedOpts = [opt._id];
+        });
+      } else {
+        ctrl.selectedOpts = [opt._id];
+      }
     }
     // Init Socket
     function prepareSocketListener() {
@@ -406,6 +408,7 @@
         });
     }
 
+    ctrl.save_vote = save_vote;
     function save_vote() {
       if (!$scope.isLogged && !ctrl.poll.allow_guest) {
         return $state.go('authentication.signin');
@@ -447,25 +450,17 @@
 
     // Remove existing Poll
     ctrl.remove = () => {
-      $scope.message = {};
-      $scope.message.content = 'LB_POLLS_CONFIRM_DELETE';
-      $scope.message.type = 3;
-      $scope.message.button = 'LB_DELETE';
-      dialog.openConfirm({
-        scope: $scope,
-        templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
-      }).then(confirm => {
-        handle_delete();
-      }, reject => {
-        delete $scope.message;
-      });
-      function handle_delete() {
-        delete $scope.message;
+      // Gọi function show dialog từ scope cha
+      $scope.handleShowConfirm({
+        content: 'LB_POLLS_CONFIRM_DELETE',
+        type: 3,
+        button: 'LB_DELETE'
+      }, confirm => {
         ctrl.poll.$remove(() => {
           Socket.emit('poll_delete', { pollId: ctrl.poll._id });
-          $state.go('polls.list');
+          $state.go('home');
         });
-      }
+      });
     };
     ctrl.share = () => {
       if (!ctrl.poll.share_code || ctrl.poll.share_code === '') {
@@ -633,24 +628,16 @@
     };
 
     ctrl.delete_cmt = cmt => {
-      $scope.message = {};
-      $scope.message.content = 'LB_POLLS_CONFIRM_DELETE_CMT';
-      $scope.message.type = 3;
-      $scope.message.button = 'LB_DELETE';
-      dialog.openConfirm({
-        scope: $scope,
-        templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
-      }).then(confirm => {
-        handle_delete_cmt();
-      }, reject => {
-        delete $scope.message;
-      });
-      function handle_delete_cmt() {
-        delete $scope.message;
+      // Gọi function show dialog từ scope cha
+      $scope.handleShowConfirm({
+        content: 'LB_POLLS_CONFIRM_DELETE_CMT',
+        type: 3,
+        button: 'LB_DELETE'
+      }, confirm => {
         ctrl.cmts = _.without(ctrl.cmts, cmt);
         ctrl.poll.cmtCnt -= 1;
         Action.delete_cmt(cmt);
-      }
+      });
     };
     var cnt = 0;
     ctrl.focus_cmt = () => {
@@ -701,7 +688,7 @@
         }
       }
     };
-    ctrl.is_can_vote = () => {
+    ctrl.isCanVote = () => {
       if (ctrl.poll.allow_guest) {
         return true;
       } else {
@@ -724,7 +711,6 @@
     ctrl.isIndeterminate = () => {
       return (ctrl.selectedOpts.length !== 0 && ctrl.selectedOpts.length !== ctrl.opts.length);
     };
-    ctrl.save_vote = save_vote;
     ctrl.toggle_chart = () => {
       ctrl.chart.type = ctrl.chart.type === 'polarArea' ?
         'pie' : 'polarArea';

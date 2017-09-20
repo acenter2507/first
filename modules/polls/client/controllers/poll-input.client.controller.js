@@ -102,25 +102,17 @@
     }
     // Function
     ctrl.remove = () => {
-      $scope.message = {};
-      $scope.message.content = 'LB_POLLS_CONFIRM_DELETE';
-      $scope.message.type = 3;
-      $scope.message.button = 'LB_DELETE';
-      dialog.openConfirm({
-        scope: $scope,
-        templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
-      }).then(confirm => {
-        handle_delete();
-      }, reject => {
-        delete $scope.message;
-      });
-      function handle_delete() {
-        delete $scope.message;
+      // Gọi function show dialog từ scope cha
+      $scope.handleShowConfirm({
+        content: 'LB_POLLS_CONFIRM_DELETE',
+        type: 3,
+        button: 'LB_DELETE'
+      }, confirm => {
         ctrl.poll.$remove(() => {
           Socket.emit('poll_delete', { pollId: ctrl.poll._id });
-          $state.go('polls.list');
+          $state.go('home');
         });
-      }
+      });
     };
 
     ctrl.save = isValid => {
@@ -134,23 +126,18 @@
         return;
       }
       if (!ctrl.poll.isPublic) {
-        $scope.message = {};
-        $scope.message.content = 'LB_POLLS_PRIVATE_SAVE';
-        $scope.message.type = 1;
-        $scope.message.button = 'LB_SAVE';
-        dialog.openConfirm({
-          scope: $scope,
-          templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
-        }).then(confirm => {
+        // Gọi function show dialog từ scope cha
+        $scope.handleShowConfirm({
+          content: 'LB_POLLS_PRIVATE_SAVE',
+          type: 1,
+          button: 'LB_SAVE'
+        }, confirm => {
           handle_save();
-        }, reject => {
-          delete $scope.message;
         });
       } else {
         handle_save();
       }
       function handle_save() {
-        delete $scope.message;
         ctrl.poll.opts = ctrl.opts;
         ctrl.poll.summary = 'summary';
         Action.save_poll(ctrl.poll)
@@ -173,26 +160,21 @@
       if (angular.equals(ctrl.poll, ctrl.bk_poll)) {
         handle_discard();
       } else {
-        $scope.message = {};
-        $scope.message.content = 'LB_POLLS_CONFIRM_DISCARD';
-        $scope.message.type = 2;
-        $scope.message.button = 'LB_DISCARD';
-        dialog.openConfirm({
-          scope: $scope,
-          templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
-        }).then(confirm => {
+        // Gọi function show dialog từ scope cha
+        $scope.handleShowConfirm({
+          content: 'LB_POLLS_CONFIRM_DISCARD',
+          type: 2,
+          button: 'LB_DISCARD'
+        }, confirm => {
           handle_discard();
-        }, reject => {
-          delete $scope.message;
         });
       }
     };
     function handle_discard() {
-      delete $scope.message;
       if (ctrl.poll._id) {
         $state.go('polls.view', { pollId: ctrl.poll.slug });
       } else {
-        $state.go('polls.list');
+        $state.go('home');
       }
     }
 
@@ -204,20 +186,16 @@
       angular.element('body').toggleClass('aside-panel-open');
     };
     ctrl.remove_opt = opt => {
-      $scope.message = {};
-      $scope.message.content = 'LB_POLLS_CONFIRM_DELETE_OPT';
-      $scope.message.type = 3;
-      $scope.message.button = 'LB_DELETE';
-      dialog.openConfirm({
-        scope: $scope,
-        templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
-      }).then(confirm => {
+      // Gọi function show dialog từ scope cha
+      $scope.handleShowConfirm({
+        content: 'LB_POLLS_CONFIRM_DELETE_OPT',
+        type: 3,
+        button: 'LB_DELETE'
+      }, confirm => {
         handle_delete();
-      }, reject => {
-        delete $scope.message;
       });
+
       function handle_delete() {
-        delete $scope.message;
         ctrl.opts = _.without(ctrl.opts, opt);
         if (opt._id) {
           var _opt = new Opts(opt);
@@ -228,20 +206,15 @@
       }
     };
     ctrl.approve_opt = opt => {
-      $scope.message = {};
-      $scope.message.content = 'LB_POLLS_CONFIRM_APPROVE';
-      $scope.message.type = 1;
-      $scope.message.button = 'LB_APPROVE';
-      dialog.openConfirm({
-        scope: $scope,
-        templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
-      }).then(confirm => {
+      // Gọi function show dialog từ scope cha
+      $scope.handleShowConfirm({
+        content: 'LB_POLLS_CONFIRM_APPROVE',
+        type: 1,
+        button: 'LB_APPROVE'
+      }, confirm => {
         handle_approve();
-      }, reject => {
-        delete $scope.message;
       });
       function handle_approve() {
-        delete $scope.message;
         opt.status = 1;
         var _opt = new Opts({ _id: opt._id, status: opt.status });
         _opt.$update(() => {
@@ -250,20 +223,15 @@
       }
     };
     ctrl.reject_opt = opt => {
-      $scope.message = {};
-      $scope.message.content = 'LB_POLLS_CONFIRM_REJECT';
-      $scope.message.type = 2;
-      $scope.message.button = 'LB_REJECT';
-      dialog.openConfirm({
-        scope: $scope,
-        templateUrl: 'modules/core/client/views/templates/confirm.dialog.template.html'
-      }).then(confirm => {
+      // Gọi function show dialog từ scope cha
+      $scope.handleShowConfirm({
+        content: 'LB_POLLS_CONFIRM_REJECT',
+        type: 2,
+        button: 'LB_REJECT'
+      }, confirm => {
         handle_reject();
-      }, reject => {
-        delete $scope.message;
       });
       function handle_reject() {
-        delete $scope.message;
         opt.status = 3;
         var _opt = new Opts({ _id: opt._id, status: opt.status });
         _opt.$update(() => {

@@ -50,7 +50,7 @@
                       <li ng-if="ctrl.poll.isCurrentUserOwner || ctrl.poll.canEdit"><a ui-sref="polls.edit({ pollId: ctrl.poll.slug })"><i class="fa fa-pencil-square-o"></i> {{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
                       <li ng-if="ctrl.poll.isCurrentUserOwner || ctrl.poll.canEdit"><a ng-click="ctrl.remove()"><i class="fa fa-trash"></i> {{:: 'LB_DELETE' | translate }}</a></li>
                       <li ng-if="isLogged && !ctrl.poll.isCurrentUserOwner && !ctrl.bookmarked"><a ng-click="ctrl.bookmark_poll()"><i class="fa fa-bookmark"></i> {{:: 'LB_POLLS_MENU_BOOKMARK' | translate }}</a></li>
-                      <li ng-if="ctrl.poll.isCurrentUserOwner"><a ng-click="ctrl.share()"><i class="fa fa-share-alt"></i> {{:: 'LB_SHARE' | translate }}</a></li>
+                      <li ng-if="ctrl.poll.isCurrentUserOwner"><a ng-click="ctrl.handleSharePoll()"><i class="fa fa-share-alt"></i> {{:: 'LB_SHARE' | translate }}</a></li>
                     </ul>
                   </md-menu-content>
                 </md-menu>
@@ -151,7 +151,7 @@
             </div>
           </div>
           <div class="form-group">
-            <button ng-show="ctrl.opts.length > 0 && ctrl.isCanVote" class="btn btn-primary pull-right" ng-click="ctrl.save_vote()">
+            <button ng-show="ctrl.opts.length > 0 && ctrl.isCanVote" class="btn btn-primary pull-right" ng-click="ctrl.handleSaveVote()">
               {{(ctrl.ownVote._id) ? 'LB_CHANGE_VOTE' : 'LB_VOTE' | translate }}
             </button>
             <button ng-show="isLogged && ctrl.poll.allow_add && !ctrl.poll.isCurrentUserOwner" class="btn btn-warning pull-right mg10r"
@@ -271,7 +271,7 @@
             </div>
           </div>
           <div class="form-group">
-            <button ng-show="ctrl.opts.length > 0 && ctrl.isCanVote" class="btn btn-primary pull-right" ng-click="ctrl.save_vote()">
+            <button ng-show="ctrl.opts.length > 0 && ctrl.isCanVote" class="btn btn-primary pull-right" ng-click="ctrl.handleSaveVote()">
               {{(ctrl.ownVote._id) ? 'LB_CHANGE_VOTE' : 'LB_VOTE' | translate }}
             </button>
             <button ng-show="isLogged && ctrl.poll.allow_add && !ctrl.poll.isCurrentUserOwner" class="btn btn-warning pull-right mg10r"

@@ -256,7 +256,7 @@
           <span class="text-muted" ng-if="!ctrl.opts.length || ctrl.opts.length === 0"><small>{{:: 'LB_POLL_OPTIONS_EMPTY' | translate }}</small></span>
           <div class="form-group" ng-if="!ctrl.poll.allow_multiple">
             <md-radio-group>
-              <md-radio-button ng-repeat="opt in ctrl.opts" ng-checked="ctrl.is_voted(opt._id)" ng-click="ctrl.checked(opt._id)">
+              <md-radio-button ng-repeat="opt in ctrl.opts" ng-selected="ctrl.is_voted(opt._id)" ng-click="ctrl.checked(opt._id)">
                 {{opt.title}}
                 <strong class="mg5l" ng-style="{color: opt.color}">●</strong>
               </md-radio-button>

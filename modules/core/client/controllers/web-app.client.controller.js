@@ -99,7 +99,7 @@ angular.module('core').controller('WebAppController', [
         $http.post('/api/users/language', { language: lang }).success(function (response) {
           Authentication.user = response;
         }).error(function (err) {
-          $scope.show_message(err.message, true);
+          $scope.handleShowMessage(err.message, true);
         });
       }
     };
@@ -111,8 +111,31 @@ angular.module('core').controller('WebAppController', [
       $translate('MS_CM_SUCCESS').then(tsl => { $scope.MS_CM_SUCCESS = tsl; });
     }
 
+    /**
+     * DIALOG CONFIG
+     */
+    $scope.handleShowConfirm = function(content, handleConfirm, handleReject) {
+      $scope.confirmDialog = content;
+      dialog.openConfirm({
+        scope: $scope,
+        templateUrl: Constants.templateUrls.dialogConfirm
+      }).then(confirm => {
+        delete $scope.confirmDialog;
+        if (!handleConfirm) {
+          handleConfirm(confirm);
+        }
+      }, reject => {
+        delete $scope.confirmDialog;
+        if (!handleReject) {
+          handleReject(reject);
+        }
+      });
+    }
+    /**
+     * TOAST MESSAGE
+     */
     // Hiển thị thông báo với param
-    $scope.show_message_params = function (msg, params, error) {
+    $scope.handleShowMessageWithParam = function (msg, params, error) {
       $translate(msg, params).then(tsl => {
         if (error) {
           toastr.error(tsl, $scope.MS_CM_ERROR);
@@ -122,7 +145,7 @@ angular.module('core').controller('WebAppController', [
       });
     };
     // Hiển thị thông báo bình thường
-    $scope.show_message = function (msg, error) {
+    $scope.handleShowMessage = function (msg, error) {
       $translate(msg).then(tsl => {
         if (error) {
           toastr.error(tsl, $scope.MS_CM_ERROR);

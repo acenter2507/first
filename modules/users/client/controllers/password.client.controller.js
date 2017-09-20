@@ -23,12 +23,12 @@ angular.module('users').controller('PasswordController', ['$scope', '$stateParam
         // Show user success message and clear form
         $scope.credentials = null;
         $scope.busy = false;
-        $scope.show_message(response.message, false);
+        $scope.handleShowMessage(response.message, false);
       }).error(function (err) {
         // Show user error message and clear form
         $scope.busy = false;
         $scope.credentials = null;
-        $scope.show_message(err.message, true);
+        $scope.handleShowMessage(err.message, true);
       });
     };
 
@@ -51,7 +51,7 @@ angular.module('users').controller('PasswordController', ['$scope', '$stateParam
         $location.path('/password/reset/success');
       }).error(function (err) {
         $scope.busy = false;
-        $scope.show_message(err.message, true);
+        $scope.handleShowMessage(err.message, true);
       });
     };
   }

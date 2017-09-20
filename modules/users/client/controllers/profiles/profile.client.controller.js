@@ -29,7 +29,7 @@ angular.module('users').controller('ProfileController', [
           $scope.report = res.data || { viewCnt: 0, pollCnt: 0, cmtCnt: 0 };
         })
         .catch(err => {
-          $scope.show_message(err.message, true);
+          $scope.handleShowMessage(err.message, true);
         });
     }
     function count_up_view_profile() {
@@ -38,7 +38,7 @@ angular.module('users').controller('ProfileController', [
 
     $scope.delete_poll = (poll) => {
       if (!poll.isCurrentUserOwner) {
-        $scope.show_message('MS_CM_AUTH_ERROR', true);
+        $scope.handleShowMessage('MS_CM_AUTH_ERROR', true);
         return;
       }
       $scope.message = {};
@@ -61,7 +61,7 @@ angular.module('users').controller('ProfileController', [
     };
     $scope.report_poll = poll => {
       if (poll.reported) {
-        $scope.show_message_params('MS_CM_REPORT_EXIST_ERROR', { title: poll.title }, true);
+        $scope.handleShowMessageWithParam('MS_CM_REPORT_EXIST_ERROR', { title: poll.title }, true);
         return;
       }
       dialog.openConfirm({
@@ -75,34 +75,34 @@ angular.module('users').controller('ProfileController', [
         Action.save_report(poll, reason)
           .then(res => {
             poll.reported = (res) ? true : false;
-            $scope.show_message_params('MS_CM_REPORT_SUCCESS', { title: poll.title }, false);
+            $scope.handleShowMessageWithParam('MS_CM_REPORT_SUCCESS', { title: poll.title }, false);
           })
           .catch(err => {
-            $scope.show_message('MS_CM_LOAD_ERROR', true);
+            $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
           });
       }
     };
     $scope.bookmark_poll = (poll) => {
       if (poll.bookmarked) {
-        $scope.show_message_params('MS_CM_BOOKMARK_EXIST_ERROR', { title: poll.title }, true);
+        $scope.handleShowMessageWithParam('MS_CM_BOOKMARK_EXIST_ERROR', { title: poll.title }, true);
         return;
       }
       if (!$scope.isLogged) {
-        $scope.show_message('MS_CM_LOGIN_ERROR', true);
+        $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;
       }
       Action.save_bookmark(poll._id)
         .then(res => {
           poll.bookmarked = (res) ? true : false;
-          $scope.show_message_params('MS_CM_BOOKMARK_SUCCESS', { title: poll.title }, false);
+          $scope.handleShowMessageWithParam('MS_CM_BOOKMARK_SUCCESS', { title: poll.title }, false);
         })
         .catch(err => {
-          $scope.show_message('MS_CM_LOAD_ERROR', true);
+          $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
     };
     $scope.follow_poll = poll => {
       if (!$scope.isLogged) {
-        $scope.show_message('MS_CM_LOGIN_ERROR', true);
+        $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;
       }
       Action.save_follow(poll.follow)
@@ -114,7 +114,7 @@ angular.module('users').controller('ProfileController', [
           }
         })
         .catch(err => {
-          $scope.show_message('MS_CM_LOAD_ERROR', true);
+          $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
     };
   }

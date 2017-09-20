@@ -25,7 +25,7 @@ angular.module('users').controller('ProfileCmtsController', [
           $scope.busy = false;
         })
         .error(err => {
-          $scope.show_message(err.message, true);
+          $scope.handleShowMessage(err.message, true);
         });
     }
     $scope.cmt_filter = cmt => {

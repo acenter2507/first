@@ -46,7 +46,7 @@
         .catch(err => {
           vm.busy = false;
           vm.stopped = true;
-          $scope.show_message('MS_CM_LOAD_ERROR', true);
+          $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
     }
 
@@ -68,7 +68,7 @@
         })
         .catch(err => {
           vm.busy = false;
-          $scope.show_message('MS_CM_LOAD_ERROR', true);
+          $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
     };
     vm.clear_all = () => {

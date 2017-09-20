@@ -157,6 +157,7 @@
   "LB_POLL_CMT_PLACE": "Type your comment...",
   "LB_POLL_TAG_PLACE": "Type your tags...",
   "LB_POLL_VOTE_ERROR": "",
+  "LB_POLL_EXIST_ERROR": "",
 
   "LB_QUICK_BODY_PLACE": "Ask something...",
   "LB_QUICK_BODY_REQUIRE": "You must ask somthing.",

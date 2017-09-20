@@ -75,47 +75,115 @@
 
     ctrl.close_duration = {};
     ctrl.remaining = 1;
-    ctrl.isShow = true;
 
-    analysic_poll();
+    onPrepare();
 
-    // Get poll from param
-    function analysic_poll() {
+    // Lấy id của poll trong đường dẫn để request API
+    function onPrepare() {
       if (!$stateParams.pollId) {
-        $state.go('polls.list');
+        $state.go('home');
       } else {
         Action.get_poll($stateParams.pollId)
           .then(_poll => {
             ctrl.poll = _poll;
-            init();
+            onCreate();
           });
       }
     }
     // Init data
-    function init() {
+    function onCreate() {
+      // Nếu poll không tồn tại thì về trang chủ
       if (!ctrl.poll._id) {
-        $state.go('polls.list');
+        $state.go('home');
+        $scope.handleShowMessage('LB_POLL_EXIST_ERROR', true);
+        return;
       }
-      // Verify parameters
+      // Kiểm tra nếu poll là private và không có code share thì không show thông tin poll
       if (!ctrl.poll.isCurrentUserOwner && !ctrl.poll.isPublic && $stateParams.share !== ctrl.poll.share_code) {
-        ctrl.isShow = false;
-        $scope.show_message('LB_POLLS_PRIVATE_ERROR', true);
-        $state.go('polls.list');
+        $state.go('home');
+        $scope.handleShowMessage('LB_POLLS_PRIVATE_ERROR', true);
+        return;
       }
-      ctrl.isShow = true;
-      process_before_show();
-      save_viewed();
-      get_owner_info();
-
-      if (!ctrl.isClosed && ctrl.poll.close) {
-        loadRemaining();
-      }
-      // Init socket
-      initSocket();
+      // Collect dữ liệu hiển thị màn hình
+      prepareShowingData();
+      // Lấy thông tin tương tác của người dùng với poll hiện tại
+      prepareOwnerInfo();
+      // Kiểm tra các tham số có trong url
+      prepareUrlParameters();
+      // Kiểm tra và đếm ngược thời gian close của poll
+      prepareCloseRemaining();
       analysic_nofif();
       analysic_vote();
+      // Lắng nghe các request từ server socket
+      prepareSocketListener();
+      // Đặt timer lưu poll vào Viewed đồng thời tăng lượt View
+      handleSaveViewed();
       get_cmts();
     }
+
+    // Phân tích thông tin poll trước khi hiển thị.
+    function prepareShowingData() {
+      // Thiết lập các thông tin cho poll
+      ctrl.poll.close = ctrl.poll.close ? moment(ctrl.poll.close) : ctrl.poll.close;
+      ctrl.isClosed = ctrl.poll.close ? moment(ctrl.poll.close).isBefore(new moment()) : false;
+      ctrl.opts = _.where(ctrl.poll.opts, { status: 1 });
+      ctrl.chart = {
+        type: 'pie',
+        options: { responsive: true },
+        colors: [],
+        labels: [],
+        data: []
+      };
+      ctrl.votes = ctrl.poll.votes || [];
+      ctrl.voteopts = ctrl.poll.voteopts || [];
+      ctrl.votedTotal = ctrl.voteopts.length;
+      ctrl.opts.forEach(opt => {
+        opt.voteCnt = _.where(ctrl.voteopts, { opt: opt._id }).length || 0;
+        opt.progressVal = calPercen(ctrl.votedTotal, opt.voteCnt);
+        ctrl.chart.colors.push(opt.color);
+        ctrl.chart.labels.push(opt.title);
+        ctrl.chart.data.push(opt.voteCnt);
+      });
+    }
+    function prepareOwnerInfo() {
+      Action.get_owner_by_pollId(ctrl.poll._id)
+        .then(res => {
+          ctrl.ownVote = res.data.ownVote;
+          ctrl.votedOpts = res.data.votedOpts;
+          ctrl.selectedOpts = _.clone(ctrl.votedOpts);
+          ctrl.follow = res.data.follow;
+          ctrl.reported = res.data.reported;
+          ctrl.bookmarked = res.data.bookmarked;
+          ctrl.like = res.data.like;
+          ctrl.view = res.data.view;
+        })
+        .catch(err => {
+          $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
+        });
+    }
+    function prepareUrlParameters() {
+      // Kiểm tra thông báo
+      if ($stateParams.notif) {
+        // Đánh dấu thông báo đã đọc
+        Notifications.markReadNotif($stateParams.notif);
+      }
+      // Kiểm tra giá trị vote
+      if ($stateParams.vote) {
+        // Kiểm tra mã vote có tồn tại trong danh sách option không
+        var opt = _.findWhere(ctrl.opts, { _id: $stateParams.vote.trim() });
+        // Nếu không tìm thấy thông tin option đúng với request thì show message
+        if (opt) {
+          // Kiểm tra hiện tại người dùng đã vote cho poll này chưa
+          if (ctrl.ownVote._id) {
+          } else {
+          }
+
+        } else {
+          $scope.handleShowMessage('LB_POLL_VOTE_ERROR');
+        }
+      }
+    }
+
     function analysic_nofif() {
       if ($stateParams.notif) {
         Notifications.markReadNotif($stateParams.notif);
@@ -123,21 +191,9 @@
     }
     // Kiểm tra url có chưa đối tượng vote
     function analysic_vote() {
-      if (!$stateParams.vote) return;
-      // Kiểm tra mã vote có tồn tại trong danh sách option không
-      var opt = _.findWhere(ctrl.opts, { _id: $stateParams.vote.trim() });
-      // Nếu không tìm thấy thông tin option đúng với request thì show message
-      if (!opt) return $scope.show_message('LB_POLL_VOTE_ERROR');
-      // Kiểm tra user đã vote trước đây chưa
-      if (ctrl.ownVote._id) {
-        // Nếu đã vote thì show mesage thông báo
-        
-      } else {
-
-      }
     }
     // Init Socket
-    function initSocket() {
+    function prepareSocketListener() {
       if (!Socket.socket) {
         Socket.connect();
       }
@@ -164,7 +220,7 @@
             }
           })
           .catch(err => {
-            $scope.show_message(err.message, true);
+            $scope.handleShowMessage(err.message, true);
           });
       });
       Socket.on('cmt_del', obj => {
@@ -179,7 +235,7 @@
       });
       Socket.on('poll_delete', obj => {
         if (Socket.socket.socket.id === obj.client) return;
-        $scope.show_message('LB_POLLS_DELETED', true);
+        $scope.handleShowMessage('LB_POLLS_DELETED', true);
         $state.go('home');
       });
       Socket.on('poll_update', obj => {
@@ -187,18 +243,18 @@
         Action.get_poll(ctrl.poll._id)
           .then(_poll => {
             ctrl.poll = _poll;
-            process_before_show();
+            prepareShowingData();
           }, err => {
-            $scope.show_message(err.message, true);
+            $scope.handleShowMessage(err.message, true);
           });
       });
       Socket.on('opts_update', res => {
         Action.get_poll(ctrl.poll._id)
           .then(_poll => {
             ctrl.poll = _poll;
-            process_before_show();
+            prepareShowingData();
           }, err => {
-            $scope.show_message(err.message, true);
+            $scope.handleShowMessage(err.message, true);
           });
       });
       $scope.$on('$destroy', function () {
@@ -216,47 +272,6 @@
         Socket.removeListener('opts_update');
         $timeout.cancel(ctrl.excute_timer);
       });
-    }
-
-    // Phân tích thông tin poll trước khi hiển thị.
-    function process_before_show() {
-      // Thiết lập các thông tin cho poll
-      ctrl.poll.close = ctrl.poll.close ? moment(ctrl.poll.close) : ctrl.poll.close;
-      ctrl.isClosed = ctrl.poll.close ? moment(ctrl.poll.close).isBefore(new moment()) : false;
-      ctrl.opts = _.where(ctrl.poll.opts, { status: 1 });
-      ctrl.chart = {
-        type: 'pie',
-        options: { responsive: true },
-        colors: [],
-        labels: [],
-        data: []
-      };
-      ctrl.votes = ctrl.poll.votes || [];
-      ctrl.voteopts = ctrl.poll.voteopts || [];
-      ctrl.votedTotal = ctrl.voteopts.length;
-      ctrl.opts.forEach(opt => {
-        opt.voteCnt = _.where(ctrl.voteopts, { opt: opt._id }).length || 0;
-        opt.progressVal = calPercen(ctrl.votedTotal, opt.voteCnt);
-        ctrl.chart.colors.push(opt.color);
-        ctrl.chart.labels.push(opt.title);
-        ctrl.chart.data.push(opt.voteCnt);
-      });
-    }
-    function get_owner_info() {
-      Action.get_owner_by_pollId(ctrl.poll._id)
-        .then(res => {
-          ctrl.ownVote = res.data.ownVote;
-          ctrl.votedOpts = res.data.votedOpts;
-          ctrl.selectedOpts = _.clone(ctrl.votedOpts);
-          ctrl.follow = res.data.follow;
-          ctrl.reported = res.data.reported;
-          ctrl.bookmarked = res.data.bookmarked;
-          ctrl.like = res.data.like;
-          ctrl.view = res.data.view;
-        })
-        .catch(err => {
-          $scope.show_message('MS_CM_LOAD_ERROR', true);
-        });
     }
 
     ctrl.get_cmts = get_cmts;
@@ -278,7 +293,7 @@
           if (!$scope.$$phase) $scope.$digest();
         })
         .catch(err => {
-          $scope.show_message('MS_CM_LOAD_ERROR', true);
+          $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
     }
     ctrl.sort = sort;
@@ -315,29 +330,31 @@
             return resolve();
           })
           .catch(err => {
-            $scope.show_message('MS_CM_LOAD_ERROR', true);
+            $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
             return reject(err);
           });
       });
     }
-    function loadRemaining() {
-      ctrl.remaining = $timeout(makeRemaining, 1000);
+    function prepareCloseRemaining() {
+      // Nếu poll không thiết lập giới hạn, hoặc đã hết hạn thì bỏ qua
+      if (ctrl.isClosed || !ctrl.poll.close) return;
+      // Tạo biến timer chạy từng giây update count down
+      ctrl.remaining = $timeout(handleCreateTimer, 1000);
       $scope.$on('$destroy', () => {
         $timeout.cancel(ctrl.remaining);
       });
     }
-
-    function makeRemaining() {
+    function handleCreateTimer() {
       ctrl.close_duration = Remaining.duration(ctrl.poll.close);
       ctrl.isClosed = moment(ctrl.poll.close).isBefore(new moment());
       if (!ctrl.isClosed) {
-        ctrl.remaining = $timeout(makeRemaining, 1000);
+        ctrl.remaining = $timeout(handleCreateTimer, 1000);
       } else {
         $timeout.cancel(ctrl.remaining);
       }
     }
 
-    function save_viewed() {
+    function handleSaveViewed() {
       if (!ctrl.poll.isCurrentUserOwner) {
         var count_up = $timeout(() => {
           ctrl.poll.viewCnt += 1;
@@ -355,7 +372,7 @@
     ctrl.save_cmt = save_cmt;
     function save_cmt() {
       if (!ctrl.tmp_cmt.body || !ctrl.tmp_cmt.body.length || ctrl.tmp_cmt.body.length === 0) {
-        $scope.show_message('LB_POLLS_CMT_EMPTY', true);
+        $scope.handleShowMessage('LB_POLLS_CMT_EMPTY', true);
         return;
       }
       if (!$scope.isLogged) {
@@ -363,7 +380,7 @@
         return false;
       }
       if (ctrl.cmt_processing) {
-        $scope.show_message('LB_POLLS_CMT_WAIT', true);
+        $scope.handleShowMessage('LB_POLLS_CMT_WAIT', true);
         return;
       }
       ctrl.cmt_processing = true;
@@ -384,7 +401,7 @@
           }
         })
         .catch(err => {
-          $scope.show_message('MS_CM_LOAD_ERROR', true);
+          $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
           ctrl.cmt_processing = false;
         });
     }
@@ -394,7 +411,7 @@
         return $state.go('authentication.signin');
       }
       if (!ctrl.selectedOpts.length || ctrl.selectedOpts.length === 0) {
-        $scope.show_message('LB_POLLS_VOTE_EMPTY', true);
+        $scope.handleShowMessage('LB_POLLS_VOTE_EMPTY', true);
         return;
       }
       if (angular.equals(ctrl.votedOpts, ctrl.selectedOpts)) {
@@ -407,7 +424,7 @@
           loadVoteInfo();
         })
         .catch(err => {
-          $scope.show_message('MS_CM_LOAD_ERROR', true);
+          $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
           ctrl.selectedOpts = angular.copy(ctrl.votedOpts) || [];
         });
     }
@@ -456,7 +473,7 @@
         ctrl.poll.$update(() => {
           show_dialog();
         }, err => {
-          $scope.show_message('MS_CM_LOAD_ERROR', true);
+          $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
       } else {
         show_dialog();
@@ -476,15 +493,15 @@
     };
     ctrl.like_poll = type => {
       if (!$scope.isLogged) {
-        $scope.show_message('MS_CM_LOGIN_ERROR', true);
+        $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;
       }
       if (ctrl.poll.isCurrentUserOwner) {
-        $scope.show_message('LB_POLLS_LIKE_OWN', true);
+        $scope.handleShowMessage('LB_POLLS_LIKE_OWN', true);
         return;
       }
       if (ctrl.like_processing) {
-        $scope.show_message('LB_POLLS_LIKE_MANY', true);
+        $scope.handleShowMessage('LB_POLLS_LIKE_MANY', true);
         return;
       }
       ctrl.like_processing = true;
@@ -496,14 +513,14 @@
           if (!$scope.$$phase) $scope.$digest();
         })
         .catch(err => {
-          $scope.show_message('MS_CM_LOAD_ERROR', true);
+          $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
           ctrl.like_processing = false;
         });
     };
 
     ctrl.follow_poll = () => {
       if (!$scope.isLogged) {
-        $scope.show_message('MS_CM_LOGIN_ERROR', true);
+        $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;
       }
       Action.save_follow(ctrl.follow)
@@ -515,13 +532,13 @@
           }
         })
         .catch(err => {
-          $scope.show_message('MS_CM_LOAD_ERROR', true);
+          $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
     };
 
     ctrl.report_poll = () => {
       if (ctrl.reported) {
-        $scope.show_message_params('MS_CM_REPORT_EXIST_ERROR', { title: ctrl.poll.title }, true);
+        $scope.handleShowMessageWithParam('MS_CM_REPORT_EXIST_ERROR', { title: ctrl.poll.title }, true);
         return;
       }
       dialog.openConfirm({
@@ -535,32 +552,32 @@
         Action.save_report(ctrl.poll, reason)
           .then(res => {
             ctrl.reported = (res) ? true : false;
-            $scope.show_message_params('MS_CM_REPORT_SUCCESS', { title: ctrl.poll.title }, false);
+            $scope.handleShowMessageWithParam('MS_CM_REPORT_SUCCESS', { title: ctrl.poll.title }, false);
           })
           .catch(err => {
-            $scope.show_message('MS_CM_LOAD_ERROR', true);
+            $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
           });
       }
     };
 
     ctrl.bookmark_poll = () => {
       if (ctrl.bookmarked) {
-        $scope.show_message_params('MS_CM_BOOKMARK_EXIST_ERROR', { title: ctrl.poll.title }, true);
+        $scope.handleShowMessageWithParam('MS_CM_BOOKMARK_EXIST_ERROR', { title: ctrl.poll.title }, true);
         return;
       }
       Action.save_bookmark(ctrl.poll._id)
         .then(res => {
           ctrl.bookmarked = (res) ? true : false;
-          $scope.show_message_params('MS_CM_BOOKMARK_SUCCESS', { title: ctrl.poll.title }, false);
+          $scope.handleShowMessageWithParam('MS_CM_BOOKMARK_SUCCESS', { title: ctrl.poll.title }, false);
         })
         .catch(err => {
-          $scope.show_message('MS_CM_LOAD_ERROR', true);
+          $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
     };
     // Click button add option
     ctrl.input_opt = opt => {
       if (!ctrl.poll.user) {
-        $scope.show_message('LB_POLLS_SUGGEST_DELETED_USER', true);
+        $scope.handleShowMessage('LB_POLLS_SUGGEST_DELETED_USER', true);
         return;
       }
       ctrl.tmp_opt = (!opt) ? { poll: ctrl.poll._id, title: '', body: '', status: 2 } : opt;
@@ -575,10 +592,10 @@
       Action.save_opt(ctrl.tmp_opt, ctrl.poll)
         .then(res => {
           angular.element('body').toggleClass('aside-panel-open');
-          $scope.show_message('LB_POLLS_SUGGEST_SUCCES', false);
+          $scope.handleShowMessage('LB_POLLS_SUGGEST_SUCCES', false);
         })
         .catch(err => {
-          $scope.show_message('MS_CM_LOAD_ERROR', true);
+          $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
     };
     ctrl.opt_full = () => {
@@ -589,11 +606,11 @@
 
     ctrl.reply_cmt = cmt => {
       if (!$scope.isLogged) {
-        $scope.show_message('MS_CM_LOGIN_ERROR', true);
+        $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;
       }
       if (!cmt.user) {
-        $scope.show_message('LB_POLLS_REPLY_DELETED_USER', true);
+        $scope.handleShowMessage('LB_POLLS_REPLY_DELETED_USER', true);
         return;
       }
       ctrl.tmp_cmt = {};
@@ -638,7 +655,7 @@
     var cnt = 0;
     ctrl.focus_cmt = () => {
       if (!$scope.isLogged) {
-        $scope.show_message('MS_CM_LOGIN_ERROR', true);
+        $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;
       }
       ctrl.cmt_typing = true;
@@ -646,15 +663,15 @@
 
     ctrl.like_cmt = (cmt, type) => {
       if (!$scope.isLogged) {
-        $scope.show_message('MS_CM_LOGIN_ERROR', true);
+        $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;
       }
       if ($scope.user.user._id === cmt.user._id) {
-        $scope.show_message('LB_POLLS_LIKE_CMT_OWN', true);
+        $scope.handleShowMessage('LB_POLLS_LIKE_CMT_OWN', true);
         return;
       }
       if (ctrl.like_processing) {
-        $scope.show_message('LB_POLLS_LIKE_MANY', true);
+        $scope.handleShowMessage('LB_POLLS_LIKE_MANY', true);
         return;
       }
       ctrl.like_processing = true;
@@ -666,7 +683,7 @@
         })
         .catch(err => {
           ctrl.like_processing = false;
-          $scope.show_message('MS_CM_LOAD_ERROR', true);
+          $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
     };
 

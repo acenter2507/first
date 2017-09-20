@@ -75,7 +75,7 @@ function EditProfileController(
         // Trường hợp trả về user
         if (res._id) {
           Authentication.user = res;
-          $scope.show_message('LB_PROFILE_SUCCESE', false);
+          $scope.handleShowMessage('LB_PROFILE_SUCCESE', false);
         } else {
           Storages.set_session(Constants.storages.flash, res.message);
           $window.location.href = res.host + '/api/auth/signout';
@@ -83,7 +83,7 @@ function EditProfileController(
       }, function (err) {
         $scope.profile_busy = false;
         $scope.userInfo = _.pick($scope.user, '_id', 'displayName', 'email');
-        $scope.show_message(err.message, true);
+        $scope.handleShowMessage(err.message, true);
       });
     }
   };

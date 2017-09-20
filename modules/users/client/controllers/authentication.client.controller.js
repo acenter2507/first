@@ -28,7 +28,7 @@ angular.module('users').controller('AuthenticationController', [
     // Get an eventual error defined in the URL query string:
     $scope.error = $location.search().err;
     if ($scope.error && $scope.error !== '') {
-      $scope.show_message($scope.error, true);
+      $scope.handleShowMessage($scope.error, true);
     }
     $scope.isShowForm = true;
     $scope.busy = false;
@@ -59,7 +59,7 @@ angular.module('users').controller('AuthenticationController', [
         }
       }).error(function (err) {
         $scope.busy = false;
-        $scope.show_message(err.message, true);
+        $scope.handleShowMessage(err.message, true);
       });
     };
     $scope.signin = function (isValid) {
@@ -79,7 +79,7 @@ angular.module('users').controller('AuthenticationController', [
         $state.go($state.previous.state.name || 'home', $state.previous.params);
       }).error(function (err) {
         $scope.busy = false;
-        $scope.show_message(err.message, true);
+        $scope.handleShowMessage(err.message, true);
       });
     };
     $scope.resend = function () {
@@ -92,7 +92,7 @@ angular.module('users').controller('AuthenticationController', [
         }
       }).error(function (err) {
         $scope.resend_busy = false;
-        $scope.show_message(err.message, true);
+        $scope.handleShowMessage(err.message, true);
       });
     };
 

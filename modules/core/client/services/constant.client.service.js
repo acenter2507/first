@@ -3,6 +3,9 @@
 // Create the Storages wrapper service
 angular.module('core').service('Constants', [
   function () {
+    this.templateUrls = {
+      dialogConfirm: 'modules/core/client/views/templates/confirm.dialog.template.html'
+    };
     this.storages = {
       polls: '3918250791283P32O273LL',
       admin_polls_condition: '132LFJALSF92843',

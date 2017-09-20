@@ -26,7 +26,7 @@ angular.module('users').controller('ProfileVotesController', [
           $scope.busy = false;
         })
         .error(err => {
-          $scope.show_message(err.message, true);
+          $scope.handleShowMessage(err.message, true);
         });
     }
     $scope.vote_filter = vote => {

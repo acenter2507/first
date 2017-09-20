@@ -56,7 +56,7 @@
           buildPager();
         })
         .catch(err => {
-          $scope.show_message('MS_CM_LOAD_ERROR', true);
+          $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
           $scope.busy = false;
         });
       Storages.set_session(Constants.storages.admin_polls_condition, JSON.stringify($scope.condition));

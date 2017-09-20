@@ -39,7 +39,7 @@ angular.module('users').controller('ProfileFollowsController', [
         .catch(err => {
           $scope.busy = false;
           $scope.stopped = true;
-          $scope.show_message(err.message, true);
+          $scope.handleShowMessage(err.message, true);
         });
     }
     function process_before_show(poll) {
@@ -58,7 +58,7 @@ angular.module('users').controller('ProfileFollowsController', [
 
     $scope.follow_poll = (poll) => {
       if (!$scope.isLogged) {
-        $scope.show_message('MS_CM_LOGIN_ERROR', true);
+        $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;
       }
       if ($scope.isCurrentOwner) {
@@ -68,7 +68,7 @@ angular.module('users').controller('ProfileFollowsController', [
         .then(res => {
         })
         .catch(err => {
-          $scope.show_message(err.message, true);
+          $scope.handleShowMessage(err.message, true);
         });
     };
     $scope.clear_follow = () => {

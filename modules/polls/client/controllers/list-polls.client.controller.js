@@ -113,7 +113,7 @@
         .catch(err => {
           vm.busy = false;
           vm.stopped = true;
-          $scope.show_message('MS_CM_LOAD_ERROR', true);
+          $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
     }
     function process_before_show(poll) {
@@ -128,7 +128,7 @@
           vm.populars = res.data;
         })
         .catch(err => {
-          $scope.show_message('MS_CM_LOAD_ERROR', true);
+          $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
     }
     function get_popular_tags() {
@@ -137,7 +137,7 @@
           vm.tags = res.data;
         })
         .catch(err => {
-          $scope.show_message('MS_CM_LOAD_ERROR', true);
+          $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
     }
     function get_bookmarks() {
@@ -145,7 +145,7 @@
         .then(res => {
           vm.bookmarks = res.data || [];
         }, err => {
-          $scope.show_message('MS_CM_LOAD_ERROR', true);
+          $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
     }
     function get_best_users() {
@@ -154,13 +154,13 @@
           vm.bestUsers = res.data;
         })
         .catch(err => {
-          $scope.show_message('MS_CM_LOAD_ERROR', true);
+          $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
     }
     // Thao tác khác
     $scope.delete_poll = (poll) => {
       if (!poll.isCurrentUserOwner) {
-        $scope.show_message('MS_CM_AUTH_ERROR', true);
+        $scope.handleShowMessage('MS_CM_AUTH_ERROR', true);
         return;
       }
       $scope.message = {};
@@ -183,7 +183,7 @@
     };
     $scope.report_poll = (poll) => {
       if (poll.reported) {
-        $scope.show_message_params('MS_CM_REPORT_EXIST_ERROR', { title: poll.title }, true);
+        $scope.handleShowMessageWithParam('MS_CM_REPORT_EXIST_ERROR', { title: poll.title }, true);
         return;
       }
       dialog.openConfirm({
@@ -197,30 +197,30 @@
         Action.save_report(poll, reason)
           .then(res => {
             poll.reported = (res) ? true : false;
-            $scope.show_message_params('MS_CM_REPORT_SUCCESS', { title: poll.title }, false);
+            $scope.handleShowMessageWithParam('MS_CM_REPORT_SUCCESS', { title: poll.title }, false);
           })
           .catch(err => {
-            $scope.show_message('MS_CM_LOAD_ERROR', true);
+            $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
           });
       }
     };
     $scope.bookmark_poll = (poll) => {
       if (poll.bookmarked) {
-        $scope.show_message_params('MS_CM_BOOKMARK_EXIST_ERROR', { title: poll.title }, true);
+        $scope.handleShowMessageWithParam('MS_CM_BOOKMARK_EXIST_ERROR', { title: poll.title }, true);
         return;
       }
       Action.save_bookmark(poll._id)
         .then(res => {
           poll.bookmarked = (res) ? true : false;
-          $scope.show_message_params('MS_CM_BOOKMARK_SUCCESS', { title: poll.title }, false);
+          $scope.handleShowMessageWithParam('MS_CM_BOOKMARK_SUCCESS', { title: poll.title }, false);
         })
         .catch(err => {
-          $scope.show_message('MS_CM_LOAD_ERROR', true);
+          $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
     };
     $scope.follow_poll = (poll) => {
       if (!$scope.isLogged) {
-        $scope.show_message('MS_CM_LOGIN_ERROR', true);
+        $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;
       }
       Action.save_follow(poll.follow)
@@ -232,7 +232,7 @@
           }
         })
         .catch(err => {
-          $scope.show_message('MS_CM_LOAD_ERROR', true);
+          $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
     };
     $scope.load_new = () => {

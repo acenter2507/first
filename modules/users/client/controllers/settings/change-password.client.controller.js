@@ -17,9 +17,9 @@ angular.module('users').controller('ChangePasswordController', ['$scope', '$http
         $scope.$broadcast('show-errors-reset', 'passwordForm');
         $scope.passwordDetails = null;
         $scope.password_busy = false;
-        $scope.show_message(response.message, false);
+        $scope.handleShowMessage(response.message, false);
       }).error(function (err) {
-        $scope.show_message(err.message, true);
+        $scope.handleShowMessage(err.message, true);
         $scope.password_busy = false;
       });
     };

@@ -71,7 +71,7 @@
         userId: $scope.user._id
       });
       Socket.on('poll_delete', res => {
-        $scope.show_message('LB_POLLS_DELETED', true);
+        $scope.handleShowMessage('LB_POLLS_DELETED', true);
         $state.go('polls.list');
       });
       Socket.on('opts_request', res => {
@@ -130,7 +130,7 @@
       }
 
       if (!ctrl.validateCloseDate()) {
-        $scope.show_message('LB_POLLS_CLOSE_INVALID', true);
+        $scope.handleShowMessage('LB_POLLS_CLOSE_INVALID', true);
         return;
       }
       if (!ctrl.poll.isPublic) {
@@ -158,7 +158,7 @@
             $state.go('polls.view', { pollId: res.slug });
           })
           .catch(err => {
-            $scope.show_message(err.message, true);
+            $scope.handleShowMessage(err.message, true);
           });
       }
     };

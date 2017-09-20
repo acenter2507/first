@@ -72,7 +72,7 @@
       }
 
       function errorCallback(res) {
-        $scope.show_message('MS_CM_LOAD_ERROR', true);
+        $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
       }
     };
   }

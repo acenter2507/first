@@ -39,7 +39,7 @@ angular.module('users').controller('ProfileViewsController', [
         .catch(err => {
           $scope.busy = false;
           $scope.stopped = true;
-          $scope.show_message(err.message, true);
+          $scope.handleShowMessage(err.message, true);
         });
     }
     function process_before_show(poll) {

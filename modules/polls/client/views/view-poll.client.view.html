@@ -136,8 +136,8 @@
               <div class="control__indicator"></div>
             </label>
           </div>
-          <div class="form-group" ng-repeat="opt in ctrl.opts" ng-if="ctrl.poll.allow_multiple">
-            <md-checkbox class="md-primary" ng-checked="ctrl.is_voted(opt._id)" ng-click="ctrl.checked(opt._id)">
+          <div class="form-group" ng-if="ctrl.poll.allow_multiple">
+            <md-checkbox ng-repeat="opt in ctrl.opts" class="md-primary" ng-checked="ctrl.is_voted(opt._id)" ng-click="ctrl.checked(opt._id)">
               {{opt.title}}
               <span class="mg5l" ng-style="{color: opt.color}"><strong>●</strong></span>
             </md-checkbox>
@@ -258,8 +258,8 @@
               <div class="control__indicator"></div>
             </label>
           </div>
-          <div class="form-group" ng-repeat="opt in ctrl.opts" ng-if="ctrl.poll.allow_multiple">
-            <md-checkbox class="md-primary" ng-checked="ctrl.is_voted(opt._id)" ng-click="ctrl.checked(opt._id)">
+          <div class="form-group" ng-if="ctrl.poll.allow_multiple">
+            <md-checkbox ng-repeat="opt in ctrl.opts" class="md-primary" ng-checked="ctrl.is_voted(opt._id)" ng-click="ctrl.checked(opt._id)">
               {{opt.title}}
               <span class="mg5l" ng-style="{color: opt.color}"><strong>●</strong></span>
             </md-checkbox>

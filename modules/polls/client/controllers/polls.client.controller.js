@@ -685,7 +685,7 @@
         }
       } else {
         if (!_.contains(ctrl.selectedOpts, ctrl.radioChecked)) {
-          console.log('fadasdas');
+          console.log(ctrl.radioChecked);
           ctrl.selectedOpts = [ctrl.radioChecked];
         }
       }

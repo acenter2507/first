@@ -412,16 +412,13 @@
     ctrl.handleGetLinkOption = handleGetLinkOption;
     function handleGetLinkOption() {
       var url = $location.absUrl().split('?')[0] + '?vote=';
+      $scope.dialogData = {
+        url: url,
+        opts: ctrl.opts
+      };
       dialog.open({
-        scope: $scope,
         template: 'getLinkOptionTemplate',
-        controller: $controller('GetLinkOptionController', {
-          $scope: $scope,
-          data: {
-            url: url,
-            opts: ctrl.opts
-          }
-        })
+        scope: $scope
       });
       // getLinkDialog.closePromise.then(function (data) {
       //   console.log(data);
@@ -804,19 +801,18 @@
 
   }
 
-  // GetLinkOptionController.$inject = [
-  //   '$scope',
-  //   '$data'
-  // ];
-  function GetLinkOptionController($scope, data) {
-    $scope.opts = data.opts;
-    $scope.baseUrl = data.url;
-    $scope.select = $scope.opts[0]._id;
-    $scope.url = '';
+  GetLinkOptionController.$inject = [
+    '$scope'
+  ];
+  function GetLinkOptionController($scope) {
+    // $scope.opts = data.opts;
+    // $scope.baseUrl = data.url;
+    // $scope.select = $scope.opts[0]._id;
+    // $scope.url = '';
 
-    $scope.handleSeletedOption = (select) => {
-      console.log(this.values);
-      // $scope.url = $scope.baseUrl + $scope.selectedOption;
-    };
+    // $scope.handleSeletedOption = (select) => {
+    //   console.log(select);
+    //   // $scope.url = $scope.baseUrl + $scope.selectedOption;
+    // };
   }
 })();

@@ -9,10 +9,10 @@
 
     <!-- Danh sách options -->
     <ul class="horizontal-bars type-2">
-      <li ng-repeat="opt in ctrl.opts | orderBy: '-voteCnt'" ng-mouseenter="ctrl.handleMouseEnterOption(this)">
+      <li ng-repeat="opt in ctrl.opts | orderBy: '-voteCnt'">
         <!--<i class="icon-chart"></i>-->
         <div class="detail">
-          <p class="title" ng-bind="opt.title"></p>
+          <p class="title" ng-bind="opt.title" ng-mouseenter="ctrl.handleMouseEnterOption(this)"></p>
           <span class="value">{{ opt.voteCnt + '/' + poll.total }}
             <span class="text-muted small">({{ opt.progressVal }}%)</span>
           </span>

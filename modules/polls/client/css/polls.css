@@ -447,6 +447,7 @@
       font-size: 1rem;
       font-weight: 600;
       color: #b0bec5;
+      cursor: pointer;
       vertical-align: middle; }
     .horizontal-bars li .bars {
       position: absolute;

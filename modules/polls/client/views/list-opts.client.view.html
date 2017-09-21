@@ -13,7 +13,8 @@
         <!--<i class="icon-chart"></i>-->
         <div class="detail">
           <p class="title" ng-bind="opt.title" ng-mouseenter="ctrl.handleMouseEnterOption(opt)" ng-click="ctrl.handleMouseClickOption(opt) && $event.stopPropagation();"
-            ng-mouseleave="ctrl.handleMouseLeaveOption(opt)" uib-popover-template="'myPopoverTemplate'" popover-trigger="mouseenter" popover-popup-delay="1000">
+            ng-mouseleave="ctrl.handleMouseLeaveOption(opt)" uib-popover-template="'myPopoverTemplate'" popover-trigger="mouseenter"
+            popover-popup-delay="1000">
           </p>
           <span class="value">{{ opt.voteCnt + '/' + poll.total }}
             <span class="text-muted small">({{ opt.progressVal }}%)</span>
@@ -34,9 +35,10 @@
   </div>
 </div>
 <script type="text/ng-template" id="myPopoverTemplate">
-  <h4>asdsssssssssss asdasd adasda asdasd</h4>
-  <div class="form-group">
-    <label>Popup Title:</label>
-    <input type="text" class="form-control">
+  <div ng-show="opt.loading" class="row text-center">
+    <i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i>
+  </div>
+  <div ng-hide="opt.loading">
+    <span>{{ opt.title }}</span>
   </div>
 </script>

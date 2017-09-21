@@ -477,6 +477,7 @@
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseEnterOption = handleMouseEnterOption;
     function handleMouseEnterOption(opt) {
+      
     }
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseClickOption = handleMouseClickOption;

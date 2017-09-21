@@ -411,9 +411,6 @@
     // Share poll với url
     ctrl.handleGetLinkOption = handleGetLinkOption;
     function handleGetLinkOption() {
-      var new_opts = _.map(ctrl.opts, function (obj) {
-        return _.pick(obj, '_id', 'title');
-      });
       var url = $location.absUrl().split('?')[0] + '?vote=';
       dialog.open({
         scope: $scope,
@@ -422,7 +419,7 @@
           $scope: $scope,
           data: {
             url: url,
-            opts: new_opts
+            opts: ctrl.opts
           }
         })
       });

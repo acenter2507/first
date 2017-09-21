@@ -477,7 +477,7 @@
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseEnterOption = handleMouseEnterOption;
     function handleMouseEnterOption(opt) {
-      opt.loadUserTimer = $timeout(loadAllUsersVotedForThisOption, 1000);
+      opt.loadUserTimer = $timeout(loadAllUsersVotedForThisOption, 500);
       // Lấy tất cả các user đã vote cho lựa chọn này
       function loadAllUsersVotedForThisOption() {
         console.log('loadAllUsersVotedForThisOption');

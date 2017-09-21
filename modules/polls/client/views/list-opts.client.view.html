@@ -11,13 +11,10 @@
     <ul class="horizontal-bars type-2">
       <li ng-repeat="opt in ctrl.opts | orderBy: '-voteCnt'">
         <!--<i class="icon-chart"></i>-->
-        <div class="detail" uib-dropdown is-open="opt.isOpenDropdown">
+        <div class="detail">
           <p class="title" ng-bind="opt.title" ng-mouseenter="ctrl.handleMouseEnterOption(opt)" ng-click="ctrl.handleMouseClickOption(opt) && $event.stopPropagation();"
-            ng-mouseleave="ctrl.handleMouseLeaveOption(opt)" uib-dropdown-toggle ng-disabled="disabled">
+            ng-mouseleave="ctrl.handleMouseLeaveOption(opt)" uib-popover-template="myPopoverTemplate" popover-trigger="mouseenter">
           </p>
-          <ul class="dropdown-menu" uib-dropdown-menu role="menu">
-            <i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i>
-          </ul>
           <span class="value">{{ opt.voteCnt + '/' + poll.total }}
             <span class="text-muted small">({{ opt.progressVal }}%)</span>
           </span>
@@ -36,3 +33,8 @@
     <div class="clearfix"></div>
   </div>
 </div>
+<script type="text/ng-template" id="myPopoverTemplate">
+  <ul class="dropdown-menu">
+    <i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i>
+  </ul>
+</script>

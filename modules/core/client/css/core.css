@@ -828,9 +828,14 @@ a:hover .header-profile-image {
 
 .my-md-select md-select-menu {
   margin-top: 3rem; }
-md-radio-button .md-label {
+md-checkbox,
+md-radio-button {
+  margin-bottom: 10px; }
+  md-radio-button .md-label {
+    margin-left: 30px;
+    margin-right: 0;
     vertical-align: middle;
-    white-space: nowrap; }
+    white-space: normal;}
 
 .bg-black {
   background-color: black;

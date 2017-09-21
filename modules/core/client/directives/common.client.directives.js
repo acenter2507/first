@@ -4,7 +4,7 @@ angular
   .directive('a', preventClickDirective)
   .directive('a', cardExpandDirective)
   .directive('copyToClipboard', copyToClipboardDirective)
-  .directive('usersDropDrown', usersDropDownDirective)
+  .directive('usersDropdrown', usersDropDownDirective)
   .directive('a', asideMenuToggleDirective)
   .directive('body', asideMenuHideDirective)
   .directive('backToTop', backToTopDirective)

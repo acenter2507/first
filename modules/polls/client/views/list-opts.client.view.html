@@ -13,18 +13,7 @@
         <!--<i class="icon-chart"></i>-->
         <div class="detail">
           <p class="title" ng-bind="opt.title" ng-mouseenter="ctrl.handleMouseEnterOption(this)" ng-click="ctrl.handleMouseClickOption(this)"
-            ng-mouseleave="ctrl.handleMouseLeaveOption(this)" uib-dropdown is-open="true">
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="#">Action</a>
-              </li>
-              <li><a href="#">Another action</a>
-              </li>
-              <li><a href="#">Something else here</a>
-              </li>
-              <li class="divider"></li>
-              <li><a href="#">Separated link</a>
-              </li>
-            </ul>
+            ng-mouseleave="ctrl.handleMouseLeaveOption(this)">
           </p>
           <span class="value">{{ opt.voteCnt + '/' + poll.total }}
             <span class="text-muted small">({{ opt.progressVal }}%)</span>

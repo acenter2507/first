@@ -477,22 +477,16 @@
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseEnterOption = handleMouseEnterOption;
     function handleMouseEnterOption(element) {
-      console.log(element);
-      console.log(element.opt);
+      var dropdown = angular.element('users-dropdown');
+      element.appendChild(dropdown);
     }
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseClickOption = handleMouseClickOption;
     function handleMouseClickOption(element) {
-      var dropdown = angular.element('users-drop-down');
-      angular.element(element).append(dropdown);
-      console.log(element);
-      console.log(element.opt);
     }
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseLeaveOption = handleMouseLeaveOption;
     function handleMouseLeaveOption(element) {
-      console.log(element);
-      console.log(element.opt);
     }
     // Tạo Timer đếm ngược
     function handleCreateTimer() {

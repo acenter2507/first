@@ -521,10 +521,10 @@
           $scope.dialogData.loading = false;
           $scope.dialogData.message = 'MS_CM_LOAD_ERROR';
         });
-      
-        dlg.closePromise.then(function (data) {
-          delete $scope.dialogData;
-        });
+
+      dlg.closePromise.then(function (data) {
+        delete $scope.dialogData;
+      });
     }
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseLeaveOption = handleMouseLeaveOption;

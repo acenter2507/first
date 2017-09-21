@@ -419,16 +419,15 @@
       });
       var url = $location.absUrl().split('?')[0] + '?vote=';
       dialog.open({
+        scope: $scope,
         template: 'getLinkOptionTemplate',
-        controller: 'GetLinkOptionController',
-        resolve: {
-          data: function dataFactory() {
-            return {
-              url: url,
-              opts: new_opts
-            };
+        controller: $controller('GetLinkOptionController', {
+          $scope: $scope,
+          data: {
+            url: url,
+            opts: new_opts
           }
-        }
+        })
       });
       // getLinkDialog.closePromise.then(function (data) {
       //   console.log(data);
@@ -811,10 +810,10 @@
 
   }
 
-  GetLinkOptionController.$inject = [
-    '$scope',
-    '$data'
-  ];
+  // GetLinkOptionController.$inject = [
+  //   '$scope',
+  //   '$data'
+  // ];
   function GetLinkOptionController($scope, data) {
     $scope.opts = data.opts;
     $scope.baseUrl = data.url;

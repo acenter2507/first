@@ -356,7 +356,7 @@
       <md-radio-button ng-repeat="opt in message.opts" ng-value="opt._id" class="md-primary">{{:: opt.title }}</md-radio-button>
     </md-radio-group>
     <!-- Vùng hiển thị url các option -->
-    <input class="form-control" value="{{ message.url + selectedOption._id }}">
+    <input class="form-control" value="{{ message.url }} {{ selectedOption._id }}">
 
     <div class="ngdialog-buttons mg10t">
       <button class="btn btn-default pull-right mg5r" ng-click="closeThisDialog()">{{ 'LB_DONE' | translate }}</button>

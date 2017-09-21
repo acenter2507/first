@@ -474,7 +474,12 @@
           ctrl.like_processing = false;
         });
     }
-
+    // Người dùng trỏ chuột đến 
+    ctrl.handleMouseEnterOption = handleMouseEnterOption;
+    function handleMouseEnterOption(opt, element) {
+      console.log(opt);
+      console.log(element);
+    }
     // Tạo Timer đếm ngược
     function handleCreateTimer() {
       ctrl.close_duration = Remaining.duration(ctrl.poll.close);

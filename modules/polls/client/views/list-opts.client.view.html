@@ -3,10 +3,11 @@
     <strong class="card-title">{{:: 'LB_POLL_CHART_PANEL' | translate }}</strong>
   </div>
   <div class="card-body">
-    <canvas id="pie" class="chart-base" chart-data="ctrl.chart.data" chart-labels="ctrl.chart.labels" chart-options="ctrl.chart.options"
+    <canvas style="background: transparent" id="pie" class="chart-base" chart-data="ctrl.chart.data" chart-labels="ctrl.chart.labels" chart-options="ctrl.chart.options"
       chart-colors="ctrl.chart.colors" chart-type="ctrl.chart.type" ng-if="ctrl.votedTotal > 0">
     </canvas>
 
+    <!-- Danh sách options -->
     <ul class="horizontal-bars type-2">
       <li ng-repeat="opt in ctrl.opts | orderBy: '-voteCnt'">
         <!--<i class="icon-chart"></i>-->

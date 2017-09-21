@@ -176,9 +176,9 @@
       // Kiểm tra mã vote có tồn tại trong danh sách option không
       var opt = _.findWhere(ctrl.opts, { _id: $stateParams.vote.trim() });
       // Nếu không tìm thấy thông tin option đúng với request thì show message
-      if (!opt || !opt._id) return $scope.handleShowMessage('LB_POLL_VOTE_ERROR');
+      if (!opt || !opt._id) return $scope.handleShowMessage('LB_POLL_VOTE_ERROR', true);
       // Kiểm tra điều kiện user có được vote hay không
-      if (!ctrl.isCanVote) return $scope.handleShowMessage('LB_POLL_VOTE_AUTH_ERROR');
+      if (!ctrl.isCanVote) return $scope.handleShowMessage('LB_POLL_VOTE_AUTH_ERROR', true);
       // Kiểm tra user đã từng vote hay chưa
       if (ctrl.ownVote._id) {
         $scope.handleShowConfirm({

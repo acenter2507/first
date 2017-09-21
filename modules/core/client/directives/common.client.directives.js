@@ -51,7 +51,7 @@ function cardExpandDirective() {
 function copyToClipboardDirective() {
   var clip;
   function link(scope, element) {
-    function clipboardSimulator() {
+    function ClipboardSimulator() {
       var self = this,
         textarea,
         container;
@@ -70,7 +70,7 @@ function copyToClipboardDirective() {
       }
       createTextarea();
     }
-    clipboardSimulator.prototype.copy = function () {
+    ClipboardSimulator.prototype.copy = function () {
       this.textarea.innerHTML = '';
       this.textarea.appendChild(document.createTextNode(scope.textToCopy));
       this.textarea.focus();
@@ -79,7 +79,7 @@ function copyToClipboardDirective() {
         document.execCommand('copy');
       }, 20);
     };
-    clip = new clipboardSimulator();
+    clip = new ClipboardSimulator();
     element[0].addEventListener('click', function () {
       clip.copy();
     });

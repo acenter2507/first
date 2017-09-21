@@ -170,8 +170,8 @@
   clear: both; }
   .user-list-item .user-item-image,
   .user-list-item .user-item-image img {
-    width: 24px;
-    height: 24px; }
+    width: 32px;
+    height: 32px; }
   .user-list-item .user-item-info {
     display: flex;
     flex-direction: column;

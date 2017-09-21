@@ -7,10 +7,8 @@
 
   PollsController.$inject = [
     '$location',
-    '$rootScope',
     '$scope',
     '$state',
-    '$window',
     'Socket',
     '$timeout',
     'Remaining',
@@ -19,15 +17,14 @@
     '$stateParams',
     'Socialshare',
     'Notifications',
-    'NotifsService'
+    'NotifsService',
+    '$controller'
   ];
 
   function PollsController(
     $location,
-    $rootScope,
     $scope,
     $state,
-    $window,
     Socket,
     $timeout,
     Remaining,
@@ -36,7 +33,8 @@
     $stateParams,
     Socialshare,
     Notifications,
-    NotifsService
+    NotifsService,
+    $controller
   ) {
     var ctrl = this;
     ctrl.form = {};

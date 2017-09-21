@@ -276,37 +276,6 @@
         $timeout.cancel(ctrl.excute_timer);
       });
     }
-
-    function loadVoteInfo() {
-      return new Promise((resolve, reject) => {
-        Action.get_voteopts(ctrl.poll._id)
-          .then(res => { // lấy thông tin vote
-            ctrl.chart = {
-              type: 'pie',
-              options: { responsive: true },
-              colors: [],
-              labels: [],
-              data: []
-            };
-            ctrl.votes = res.data.votes || [];
-            ctrl.voteopts = res.data.voteopts || [];
-            ctrl.votedTotal = ctrl.voteopts.length;
-            ctrl.opts.forEach(opt => {
-              opt.voteCnt = _.where(ctrl.voteopts, { opt: opt._id }).length || 0;
-              opt.progressVal = Action.calPercen(ctrl.votedTotal, opt.voteCnt);
-              ctrl.chart.colors.push(opt.color);
-              ctrl.chart.labels.push(opt.title);
-              ctrl.chart.data.push(opt.voteCnt);
-            });
-            if (!$scope.$$phase) $scope.$digest();
-            return resolve();
-          })
-          .catch(err => {
-            $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
-            return reject(err);
-          });
-      });
-    }
     function prepareCloseRemaining() {
       // Nếu poll không thiết lập giới hạn, hoặc đã hết hạn thì bỏ qua
       if (ctrl.isClosed || !ctrl.poll.close) return;
@@ -342,31 +311,6 @@
         .catch(err => {
           $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
-    }
-    // Tạo Timer đếm ngược
-    function handleCreateTimer() {
-      ctrl.close_duration = Remaining.duration(ctrl.poll.close);
-      ctrl.isClosed = moment(ctrl.poll.close).isBefore(new moment());
-      if (!ctrl.isClosed) {
-        ctrl.remaining = $timeout(handleCreateTimer, 1000);
-      } else {
-        $timeout.cancel(ctrl.remaining);
-      }
-    }
-    // Lưu poll vào viewed và tăng lượt view
-    function handleSaveViewed() {
-      if (!ctrl.poll.isCurrentUserOwner) {
-        var count_up = $timeout(() => {
-          ctrl.poll.viewCnt += 1;
-          Action.count_up_view_poll(ctrl.poll._id);
-          if ($scope.isLogged) {
-            Action.save_view_poll(ctrl.view);
-          }
-        }, 30000);
-        $scope.$on('$destroy', () => {
-          $timeout.cancel(count_up);
-        });
-      }
     }
     // Lưu comment
     ctrl.handleSaveComment = handleSaveComment;
@@ -422,7 +366,7 @@
         .then(res => {
           ctrl.ownVote = res;
           ctrl.votedOpts = _.clone(ctrl.selectedOpts);
-          loadVoteInfo();
+          handleLoadNewVoteInfo();
         })
         .catch(err => {
           $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
@@ -438,14 +382,6 @@
       ctrl.busy = false;
       ctrl.stopped = false;
       handleLoadComments();
-    }
-    // Tạo code share cho poll
-    function handleGenerateShareCode() {
-      var text = '';
-      var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      for (var i = 0; i < 10; i++)
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-      return text;
     }
     // Share poll với url
     ctrl.handleSharePoll = handleSharePoll;
@@ -473,9 +409,13 @@
         });
       }
     }
-    
+    // Share poll với url
+    ctrl.handleGetLinkOption = handleGetLinkOption;
+    function handleGetLinkOption() {
+    }
     // Remove existing Poll
-    ctrl.remove = () => {
+    ctrl.handleRemovePoll = handleRemovePoll;
+    function handleRemovePoll() {
       // Gọi function show dialog từ scope cha
       $scope.handleShowConfirm({
         content: 'LB_POLLS_CONFIRM_DELETE',
@@ -487,8 +427,10 @@
           $state.go('home');
         });
       });
-    };
-    ctrl.like_poll = type => {
+    }
+    // Người dùng click button like poll
+    ctrl.handleLikePoll = handleLikePoll;
+    function handleLikePoll(type) {
       if (!$scope.isLogged) {
         $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;
@@ -513,7 +455,73 @@
           $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
           ctrl.like_processing = false;
         });
-    };
+    }
+
+    // Tạo Timer đếm ngược
+    function handleCreateTimer() {
+      ctrl.close_duration = Remaining.duration(ctrl.poll.close);
+      ctrl.isClosed = moment(ctrl.poll.close).isBefore(new moment());
+      if (!ctrl.isClosed) {
+        ctrl.remaining = $timeout(handleCreateTimer, 1000);
+      } else {
+        $timeout.cancel(ctrl.remaining);
+      }
+    }
+    // Lưu poll vào viewed và tăng lượt view
+    function handleSaveViewed() {
+      if (!ctrl.poll.isCurrentUserOwner) {
+        var count_up = $timeout(() => {
+          ctrl.poll.viewCnt += 1;
+          Action.count_up_view_poll(ctrl.poll._id);
+          if ($scope.isLogged) {
+            Action.save_view_poll(ctrl.view);
+          }
+        }, 30000);
+        $scope.$on('$destroy', () => {
+          $timeout.cancel(count_up);
+        });
+      }
+    }
+    // Tạo code share cho poll
+    function handleGenerateShareCode() {
+      var text = '';
+      var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      for (var i = 0; i < 10; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+      return text;
+    }
+    // Load mới thông tin đã vote của poll (khi có ai đó vote)
+    function handleLoadNewVoteInfo() {
+      return new Promise((resolve, reject) => {
+        Action.get_voteopts(ctrl.poll._id)
+          .then(res => { // lấy thông tin vote
+            ctrl.chart = {
+              type: 'pie',
+              options: { responsive: true },
+              colors: [],
+              labels: [],
+              data: []
+            };
+            ctrl.votes = res.data.votes || [];
+            ctrl.voteopts = res.data.voteopts || [];
+            ctrl.votedTotal = ctrl.voteopts.length;
+            ctrl.opts.forEach(opt => {
+              opt.voteCnt = _.where(ctrl.voteopts, { opt: opt._id }).length || 0;
+              opt.progressVal = Action.calPercen(ctrl.votedTotal, opt.voteCnt);
+              ctrl.chart.colors.push(opt.color);
+              ctrl.chart.labels.push(opt.title);
+              ctrl.chart.data.push(opt.voteCnt);
+            });
+            if (!$scope.$$phase) $scope.$digest();
+            return resolve();
+          })
+          .catch(err => {
+            $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
+            return reject(err);
+          });
+      });
+    }
+
 
     ctrl.follow_poll = () => {
       if (!$scope.isLogged) {
@@ -571,6 +579,7 @@
           $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
     };
+
     // Click button add option
     ctrl.input_opt = opt => {
       if (!ctrl.poll.user) {
@@ -760,7 +769,7 @@
       var now = new Date().getTime();
       var dif = now - ctrl.task_queue.last_task_time;
       if (dif > 5000) {
-        loadVoteInfo()
+        handleLoadNewVoteInfo()
           .then(() => {
             ctrl.task_queue.last_task_time = now;
             ctrl.task_queue.is_watting = false;

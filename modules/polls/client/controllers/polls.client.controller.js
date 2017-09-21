@@ -818,8 +818,8 @@
     $scope.url = $scope.baseUrl + $scope.selectedOption;
 
     $scope.handleSeletedOption = () => {
+      console.log($scope.selectedOption);
       $scope.url = $scope.baseUrl + $scope.selectedOption;
-      console.log($scope.url);
     };
   }
 })();

@@ -12,8 +12,8 @@
       <li ng-repeat="opt in ctrl.opts | orderBy: '-voteCnt'">
         <!--<i class="icon-chart"></i>-->
         <div class="detail" uib-dropdown is-open="opt.isOpenDropdown">
-          <p class="title" ng-bind="opt.title" ng-mouseenter="ctrl.handleMouseEnterOption(this)" ng-click="ctrl.handleMouseClickOption(this) && $event.stopPropagation();"
-            ng-mouseleave="ctrl.handleMouseLeaveOption(this)" uib-dropdown-toggle>
+          <p class="title" ng-bind="opt.title" ng-mouseenter="ctrl.handleMouseEnterOption(opt)" ng-click="ctrl.handleMouseClickOption(opt) && $event.stopPropagation();"
+            ng-mouseleave="ctrl.handleMouseLeaveOption(opt)" uib-dropdown-toggle>
           </p>
           <ul class="dropdown-menu" role="menu">
             <i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i>

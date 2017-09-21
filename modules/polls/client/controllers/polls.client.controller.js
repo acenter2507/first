@@ -477,7 +477,7 @@
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseEnterOption = handleMouseEnterOption;
     function handleMouseEnterOption(element) {
-      console.log(element);
+      opt.isOpenDropdown = true;
     }
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseClickOption = handleMouseClickOption;
@@ -486,6 +486,7 @@
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseLeaveOption = handleMouseLeaveOption;
     function handleMouseLeaveOption(element) {
+      opt.isOpenDropdown = false;
     }
     // Tạo Timer đếm ngược
     function handleCreateTimer() {

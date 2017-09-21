@@ -332,6 +332,22 @@
       });
     };
     /**
+     * Lấy toàn bộ thông tin các vote của 1 option
+     */
+    this.get_votes_by_opt = optId => {
+      return new Promise((resolve, reject) => {
+        $http.get('/api/findVotesByOption/' + optId, {
+          ignoreLoadingBar: true
+        })
+          .then(res => {
+            return resolve(res);
+          }, err => {
+            return reject(err);
+          });
+      });
+    };
+
+    /**
      * Lưu 1 vote của poll
      */
     this.save_vote = (vote, opts, poll) => {

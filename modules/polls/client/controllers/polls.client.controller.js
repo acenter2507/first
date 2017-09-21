@@ -497,6 +497,31 @@
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseClickOption = handleMouseClickOption;
     function handleMouseClickOption(opt) {
+      $scope.dialogData = {
+        loading: true,
+        title: opt.title
+      };
+      var dlg = dialog.open({
+        templateUrl: 'modules/core/client/views/templates/popup-users.dialog.template.html',
+        scope: $scope,
+        appendClassName: 'images-upload-dialog'
+      });
+      Action.get_votes_by_opt(opt._id)
+        .then(res => {
+          if (!res.data || res.data.length === 0) {
+            $scope.dialogData.votes = [];
+            $scope.dialogData.message = 'LB_VOTE_EMPTY';
+          } else {
+            $scope.dialogData.votes = res.data;
+          }
+          $scope.dialogData.loading = false;
+        })
+        .catch(err => {
+          $scope.dialogData.votes = [];
+          $scope.dialogData.loading = false;
+          $scope.dialogData.message = 'MS_CM_LOAD_ERROR';
+        });
+      
     }
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseLeaveOption = handleMouseLeaveOption;

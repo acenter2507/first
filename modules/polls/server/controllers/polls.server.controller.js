@@ -466,6 +466,33 @@ exports.findVoteopts = function (req, res) {
   }
 };
 
+/**
+ * Lấy toàn bộ thông tin các vote của một options
+ */
+exports.findVoteByOption = function (req, res) {
+  var optId = req.params.optId || '';
+  var ids;
+  Voteopt.find({ opt: optId }).exec()
+    .then(voteopts => {
+      var ids = _.pluck(voteopts, 'vote');
+      Vote.find({ _id: { $in: ids } })
+        .populate('user', 'displayName slug profileImageURL')
+        .exec(function (err, votes) {
+          if (err) {
+            return res.status(400).send({
+              message: errorHandler.getErrorMessage(err)
+            });
+          } else {
+            return res.jsonp(votes);
+          }
+        });
+    }, err => {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    });
+};
+
 exports.removeBookmark = function (req, res) {
   Bookmark.findOne({
     poll: req.poll._id,
@@ -894,7 +921,6 @@ function get_full_by_pollId(pollId, userId) {
       });
   });
 }
-
 // Lấy full info của poll và các thông tin của user hiện hành với poll
 function get_last_cmt_by_pollId(pollId) {
   return new Promise((resolve, reject) => {

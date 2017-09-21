@@ -107,7 +107,7 @@
                     </div>
                     <div class="poll-detail-count">
                       <i class="fa fa-heart-o"></i>
-                      <span>{{:: poll.voteCnt | shortNumer}}</span>
+                      <span>{{:: poll.voteCnt | shortNumber}}</span>
                     </div>
                   </div>
                 </div>
@@ -132,7 +132,7 @@
                     </div>
                     <div class="poll-detail-count">
                       <i class="fa fa-commenting-o"></i>
-                      <span>{{:: poll.cmtCnt | shortNumer}}</span>
+                      <span>{{:: poll.cmtCnt | shortNumber}}</span>
                     </div>
                   </div>
                 </div>
@@ -184,7 +184,7 @@
         </div>
         <div class="card-body">
           <ul class="tags">
-            <li ng-repeat="tag in vm.tags"><a ui-sref="tags.polls({ tagId: tag.slug })" class="tag">{{::tag.name}}({{::tag.count | shortNumer}})</a></li>
+            <li ng-repeat="tag in vm.tags"><a ui-sref="tags.polls({ tagId: tag.slug })" class="tag">{{::tag.name}}({{::tag.count | shortNumber}})</a></li>
           </ul>
         </div>
       </div>

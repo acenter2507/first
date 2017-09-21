@@ -16,7 +16,10 @@
             ng-mouseleave="ctrl.handleMouseLeaveOption(opt)" uib-popover-template="'optionUsersTemplate'" popover-trigger="mouseenter"
             popover-popup-delay="500" popover-placement="top-left" popover-class="black-popover">
           </p>
-          <span class="value">{{ opt.voteCnt + '/' + poll.total }}
+          <span class="value">
+            <span>{{ opt.voteCnt | shortNumber }}</span>
+            <span>/</span>
+            <span>{{ poll.total | shortNumber }}</span>
             <span class="text-muted small">({{ opt.progressVal }}%)</span>
           </span>
         </div>
@@ -39,12 +42,12 @@
     <p class="mgn" ng-repeat="user in opt.users | limitTo: 10">{{:: user.displayName }}</p>
     <p class="mgn" ng-if="opt.voteCollect.users && opt.voteCollect.users > 10">
       <span>{{:: 'LB_AND' | translate }}</span>
-      <span>{{:: opt.voteCollect.users - 10 }}</span>
+      <span>{{:: opt.voteCollect.users - 10 | shortNumber }}</span>
       <span>{{:: 'LB_MORE' | translate }}</span>
     </p>
     <p class="mgn" ng-if="opt.voteCollect.guest && opt.voteCollect.guest > 0">
       <span ng-if="opt.voteCollect.users && opt.voteCollect.users > 0">{{:: 'LB_AND' | translate }}</span>
-      <span>{{:: opt.voteCollect.guest }}</span>
+      <span>{{:: opt.voteCollect.guest | shortNumber }}</span>
       <span>{{:: 'LB_GUEST' | translate }}</span>
     </p>
   </div>

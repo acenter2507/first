@@ -161,6 +161,33 @@
     .mini-poll .poll-info .poll-detail .poll-detail-count {
       margin-left: auto; }
 
+.user-list-item {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  padding: 3px 0;
+  border-bottom: 1px solid #eee;
+  clear: both; }
+  .user-list-item .user-avatar, .user-list-item .user-avatar img {
+    width: 24px;
+    height: 24px; }
+  .user-list-item .user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    flex-grow: 1;
+    margin-left: 6px; }
+    .user-list-item .user-info .user-name {
+      font-size: 1rem; }
+    .user-list-item .user-info .user-detail {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      font-size: 0.75rem;
+      color: #777; }
+    .user-list-item .user-info .user-detail .user-detail-count {
+      margin-left: auto; }
+
 .side-list-poll {
   position: relative; }
   .side-list-poll:not(:last-child) {

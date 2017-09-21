@@ -2,9 +2,9 @@
 
 angular
   .module('core')
-  .filter('shortNumer', shortNumer);
+  .filter('shortNumber', shortNumber);
 
-function shortNumer() {
+function shortNumber() {
   return function (value) {
     var newValue = value;
     if (value >= 1000) {

@@ -166,6 +166,7 @@
   "LB_POLL_VOTE_AUTH_ERROR": "Bạn không đủ điều kiện để tham gia bình chọn tại poll này.",
   "LB_VOTE_GET_LINK": "Lấy link bình chọn",
   "LB_VOTE_GET_LINK_MSG": "Hãy chọn lựa chọn rồi gửi đường dẫn bên dưới cho bất kỳ ai có thể tham gia bình chọn. Chú ý có thể người dùng không thể gửi bình chọn vì các thiết lập của poll.",
+  "LB_VOTE_EMPTY": "Lựa chọn này chưa nhận được lượt bình chọn nào.",
 
   "LB_QUICK_BODY_PLACE": "Ask something...",
   "LB_QUICK_BODY_REQUIRE": "You must ask somthing.",

@@ -107,8 +107,7 @@ function usersDropDownDirective() {
   return directive;
 
   function link(scope, element, attrs) {
-    var self = this;
-    console.log(self);
+    console.log(element);
   }
 }
 

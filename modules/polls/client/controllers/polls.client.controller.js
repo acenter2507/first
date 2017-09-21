@@ -482,6 +482,7 @@
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseClickOption = handleMouseClickOption;
     function handleMouseClickOption(opt) {
+      console.log(opt);
     }
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseLeaveOption = handleMouseLeaveOption;

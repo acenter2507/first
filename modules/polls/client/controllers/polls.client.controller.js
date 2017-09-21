@@ -2,8 +2,7 @@
   'use strict';
   // Polls controller
   angular.module('polls')
-    .controller('PollsController', PollsController)
-    .controller('GetLinkOptionController', GetLinkOptionController);
+    .controller('PollsController', PollsController);
 
   PollsController.$inject = [
     '$location',
@@ -16,8 +15,7 @@
     'ngDialog',
     '$stateParams',
     'Socialshare',
-    'Notifications',
-    '$controller'
+    'Notifications'
   ];
 
   function PollsController(
@@ -31,8 +29,7 @@
     dialog,
     $stateParams,
     Socialshare,
-    Notifications,
-    $controller
+    Notifications
   ) {
     var ctrl = this;
     ctrl.form = {};
@@ -480,8 +477,6 @@
       opt.loadUserTimer = $timeout(loadAllUsersVotedForThisOption, 500);
       // Lấy tất cả các user đã vote cho lựa chọn này
       function loadAllUsersVotedForThisOption() {
-        console.log('loadAllUsersVotedForThisOption');
-        console.log(opt);
         // Lấy các vote đã có vote cho option hiện tại
         var _votes = _.pluck(_.where(ctrl.voteopts, { opt: opt._id }), 'vote');
         // Lấy các lần vote có có vote cho option hiện tại
@@ -498,7 +493,6 @@
         });
         $timeout.cancel(opt.loadUserTimer);
       }
-      console.log('handleMouseEnterOption');
     }
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseClickOption = handleMouseClickOption;
@@ -509,7 +503,6 @@
     function handleMouseLeaveOption(opt) {
       $timeout.cancel(opt.loadUserTimer);
       delete opt.loadUserTimer;
-      console.log('handleMouseLeaveOption');
     }
     // Tạo Timer đếm ngược
     function handleCreateTimer() {
@@ -842,21 +835,5 @@
       }
     }
 
-  }
-
-  // GetLinkOptionController.$inject = [
-  //   '$scope',
-  //   '$data'
-  // ];
-  function GetLinkOptionController($scope, data) {
-    $scope.opts = data.opts;
-    $scope.baseUrl = data.url;
-    $scope.select = $scope.opts[0]._id;
-    $scope.url = '';
-
-    $scope.handleSeletedOption = (select) => {
-      console.log(select);
-      // $scope.url = $scope.baseUrl + $scope.selectedOption;
-    };
   }
 })();

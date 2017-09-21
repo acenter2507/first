@@ -418,7 +418,7 @@
         return _.pick(obj, '_id', 'title');
       });
       var url = $location.absUrl().split('?')[0] + '?vote=';
-      var getLinkDialog = dialog.open({
+      dialog.open({
         template: 'getLinkOptionTemplate',
         controller: 'GetLinkOptionController',
         resolve: {

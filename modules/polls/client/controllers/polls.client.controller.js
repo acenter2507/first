@@ -814,11 +814,11 @@
   function GetLinkOptionController($scope, data) {
     $scope.opts = data.opts;
     $scope.baseUrl = data.url;
-    $scope.selectedOpts = $scope.opts[0]._id;
-    $scope.url = $scope.baseUrl + $scope.selectedOpts;
+    $scope.selectedOption = $scope.opts[0]._id;
+    $scope.url = $scope.baseUrl + $scope.selectedOption;
 
     $scope.handleSeletedOption = () => {
-      $scope.url = $scope.baseUrl + $scope.selectedOpts;
+      $scope.url = $scope.baseUrl + $scope.selectedOption;
       console.log($scope.url);
     };
   }

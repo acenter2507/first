@@ -469,7 +469,7 @@ exports.findVoteopts = function (req, res) {
 /**
  * Lấy toàn bộ thông tin các vote của một options
  */
-exports.findVoteByOption = function (req, res) {
+exports.findVotesByOption = function (req, res) {
   var optId = req.params.optId || '';
   var ids;
   Voteopt.find({ opt: optId }).exec()

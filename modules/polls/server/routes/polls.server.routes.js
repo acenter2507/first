@@ -32,7 +32,7 @@ module.exports = function(app) {
   app.route('/api/countUpView/:pollId').get(polls.countUpView);
 
   app.route('/api/findVoteopts/:pollId').get(polls.findVoteopts);
-  app.route('/api/findVoteByOption/:optId').get(polls.findVoteByOption);
+  app.route('/api/findVotesByOption/:optId').get(polls.findVotesByOption);
   app.route('/api/removeBookmark/:pollId').get(polls.removeBookmark);
   app.route('/api/search').post(polls.search);
 

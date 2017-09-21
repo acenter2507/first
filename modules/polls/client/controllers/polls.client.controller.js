@@ -809,7 +809,6 @@
   //   '$data'
   // ];
   function GetLinkOptionController($scope, data) {
-    console.log(data);
     $scope.opts = data.opts;
     $scope.baseUrl = data.url;
     $scope.url = '';

@@ -488,17 +488,14 @@
         opt.votes = _.filter(ctrl.votes, (vote) => {
           return _.contains(_votes, vote._id);
         });
-        console.log(opt.votes);
         // Lấy các user đã vote cho option hiện tại
         opt.users = _.pluck(_.filter(opt.votes, (vote) => {
           return !vote.guest;
         }), 'user');
-        console.log(opt.users);
         // Đếm số guest và số user đã vote
         opt.voteCollect = _.countBy(opt.votes, function (vote) {
-          return vote.guest ? 'users' : 'guest';
+          return vote.guest ? 'guest' : 'users';
         });
-        console.log(opt.voteCollect);
         $timeout.cancel(opt.loadUserTimer);
       }
       console.log('handleMouseEnterOption');

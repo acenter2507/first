@@ -812,11 +812,9 @@
     console.log(data);
     $scope.opts = data.opts;
     $scope.baseUrl = data.url;
-    $scope.selectedOption = $scope.opts[0]._id;
-    $scope.url = $scope.baseUrl + $scope.selectedOption;
+    $scope.url = '';
 
     $scope.handleSeletedOption = () => {
-      console.log($scope.selectedOption);
       $scope.url = $scope.baseUrl + $scope.selectedOption;
     };
   }

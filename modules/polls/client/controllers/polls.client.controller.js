@@ -483,6 +483,7 @@
       function loadAllUsersVotedForThisOption() {
         opt.userLoading = true;
         console.log('loadAllUsersVotedForThisOption');
+        console.log(opt);
         // Lấy các vote đã có vote cho option hiện tại
         var _votes = _.where(ctrl.voteopts, { opt: opt._id });
         // Lấy các lần vote có có vote cho option hiện tại

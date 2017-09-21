@@ -91,13 +91,13 @@
           <!-- Danh sách options -->
           <uib-accordion close-others="true" ng-if="ctrl.opts.length > 0">
             <uib-accordion-group ng-repeat="opt in ctrl.opts" heading="{{opt.title + ' (' + opt.voteCnt + ' votes)'}}" panel-class="custom-panel public">
-              <small class="pull-right text-muted">
+              <span class="pull-right text-muted font-sm">
                 <span>{{:: 'LB_ADD_BY' | translate }}</span>
                 <a ui-sref="profile.info({userId: opt.user.slug})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>
                 <span ng-if="!opt.user">{{:: 'LB_DELETED_USER' | translate }}</span>
                 <span>{{:: 'LB_ON' | translate }}</span>
                 <span>{{:: opt.created | LLL_format}}</span>
-              </small>
+              </span>
               <div class="clearfix"></div>
               <div class="text-body" ta-bind="text" ng-model="opt.body" ta-readonly="true"></div>
             </uib-accordion-group>
@@ -129,7 +129,8 @@
             </p>
           </div>
           <hr class="mgn mg12b">
-          <span class="text-muted" ng-if="!ctrl.opts.length || ctrl.opts.length === 0"><small>{{:: 'LB_POLL_OPTIONS_EMPTY' | translate }}</small></span>
+          <span class="text-muted font-sm" ng-if="!ctrl.opts.length || ctrl.opts.length === 0">{{:: 'LB_POLL_OPTIONS_EMPTY' | translate }}</span>
+
           <div class="form-group" ng-if="!ctrl.poll.allow_multiple">
             <md-radio-group ng-model="ctrl.radioChecked" ng-change="ctrl.handleChecked()">
               <md-radio-button ng-repeat="opt in ctrl.opts" ng-value="opt._id" class="md-primary">
@@ -185,7 +186,7 @@
           <strong class="card-title">{{:: 'LB_TAGS' | translate }}</strong>
         </div>
         <div class="card-body">
-          <span class="text-muted" ng-if="!ctrl.poll.tags.length || ctrl.poll.tags.length === 0"><small>{{:: 'LB_POLL_TAGS_EMPTY' | translate }}</small></span>
+          <span class="text-muted font-sm" ng-if="!ctrl.poll.tags.length || ctrl.poll.tags.length === 0">{{:: 'LB_POLL_TAGS_EMPTY' | translate }}</span>
           <ul class="tags" ng-if="ctrl.poll.tags.length > 0">
             <li ng-repeat="tag in ctrl.poll.tags"><a ui-sref="tags.polls({ tagId: tag.slug })" class="tag">{{:: tag.name}}</a></li>
           </ul>
@@ -254,15 +255,18 @@
             </p>
           </div>
           <hr class="mgn mg12b">
-          <span class="text-muted" ng-if="!ctrl.opts.length || ctrl.opts.length === 0"><small>{{:: 'LB_POLL_OPTIONS_EMPTY' | translate }}</small></span>
+          <span class="text-muted font-sm" ng-if="!ctrl.opts.length || ctrl.opts.length === 0">{{:: 'LB_POLL_OPTIONS_EMPTY' | translate }}</span>
+          <!-- Danh sách lựa chọn đối với trường hợp vote đơn -->
           <div class="form-group" ng-if="!ctrl.poll.allow_multiple">
             <md-radio-group ng-model="ctrl.radioChecked" ng-change="ctrl.handleChecked()">
               <md-radio-button ng-repeat="opt in ctrl.opts" ng-value="opt._id" class="md-primary">
                 {{opt.title}}
                 <strong class="mg5l" ng-style="{color: opt.color}">●</strong>
+                <a class="mg5l" ng-click="ctrl.handleGetLinkOption(opt)">{{:: 'LB_VOTE_GET_LINK' | translate }}</a>
               </md-radio-button>
             </md-radio-group>
           </div>
+          <!-- Danh sách lựa chọn đối với trường hợp vote nhiều -->
           <div class="form-group" ng-if="ctrl.poll.allow_multiple">
             <div ng-repeat="opt in ctrl.opts">
               <md-checkbox class="md-primary" ng-checked="ctrl.is_voted(opt._id)" ng-click="ctrl.handleChecked(opt._id)">
@@ -305,7 +309,7 @@
           <strong class="card-title">{{:: 'LB_TAGS' | translate }}</strong>
         </div>
         <div class="card-body">
-          <span class="text-muted" ng-if="!ctrl.poll.tags.length || ctrl.poll.tags.length === 0"><small>{{:: 'LB_POLL_TAGS_EMPTY' | translate }}</small></span>
+          <span class="text-muted font-sm" ng-if="!ctrl.poll.tags.length || ctrl.poll.tags.length === 0">{{:: 'LB_POLL_TAGS_EMPTY' | translate }}</span>
           <ul class="tags" ng-if="ctrl.poll.tags.length">
             <li ng-repeat="tag in ctrl.poll.tags"><a ui-sref="tags.polls({ tagId: tag.slug })" class="tag">{{:: tag.name}}</a></li>
           </ul>

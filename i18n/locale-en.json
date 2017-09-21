@@ -160,6 +160,7 @@
   "LB_POLL_EXIST_ERROR": "Không tìm thấy poll mà bạn đã yêu cầu.",
   "LB_POLL_VOTE_CONFIRM": "Bạn thật sự muốn thay đổi lựa chọn mà bạn đã bình chọn trước đây?",
   "LB_POLL_VOTE_AUTH_ERROR": "Bạn không đủ điều kiện để tham gia bình chọn tại poll này.",
+  "LB_VOTE_GET_LINK": "Quick link",
 
   "LB_QUICK_BODY_PLACE": "Ask something...",
   "LB_QUICK_BODY_REQUIRE": "You must ask somthing.",

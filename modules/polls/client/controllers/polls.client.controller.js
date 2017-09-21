@@ -411,7 +411,19 @@
     }
     // Share poll với url
     ctrl.handleGetLinkOption = handleGetLinkOption;
-    function handleGetLinkOption() {
+    function handleGetLinkOption(opt) {
+      var url = $location.absUrl().split('?')[0] + '?vote=' + opt._id;
+      $scope.message = {
+        content: 'LB_VOTE_GET_LINK_MSG',
+        url: url
+      };
+      dialog.openConfirm({
+        scope: $scope,
+        templateUrl: 'modules/core/client/views/templates/share.dialog.template.html'
+      }).then(confirm => {
+      }, reject => {
+        delete $scope.message;
+      });
     }
     // Remove existing Poll
     ctrl.handleRemovePoll = handleRemovePoll;

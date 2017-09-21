@@ -168,25 +168,25 @@
   padding: 3px 0;
   border-bottom: 1px solid #eee;
   clear: both; }
-  .user-list-item .user-image,
-  .user-list-item .user-image img {
+  .user-list-item .user-item-image,
+  .user-list-item .user-item-image img {
     width: 24px;
     height: 24px; }
-  .user-list-item .user-info {
+  .user-list-item .user-item-info {
     display: flex;
     flex-direction: column;
     align-items: stretch;
     flex-grow: 1;
     margin-left: 6px; }
-    .user-list-item .user-info .user-name {
+    .user-list-item .user-item-info .user-item-name {
       font-size: 1rem; }
-    .user-list-item .user-info .user-detail {
+    .user-list-item .user-item-info .user-item-detail {
       display: flex;
       flex-direction: row;
       justify-content: space-around;
       font-size: 0.75rem;
       color: #777; }
-    .user-list-item .user-info .user-detail .user-detail-count {
+    .user-list-item .user-item-info .user-detail .user-detail-count {
       margin-left: auto; }
 
 .side-list-poll {

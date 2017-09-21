@@ -483,6 +483,8 @@
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseClickOption = handleMouseClickOption;
     function handleMouseClickOption(element) {
+      var dropdown = angular.element('users-drop-down');
+      element.append(dropdown);
       console.log(element);
       console.log(element.opt);
     }

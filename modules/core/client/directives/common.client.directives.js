@@ -4,6 +4,7 @@ angular
   .directive('a', preventClickDirective)
   .directive('a', cardExpandDirective)
   .directive('copyToClipboard', copyToClipboardDirective)
+  .directive('usersDropDrown', usersDropDownDirective)
   .directive('a', asideMenuToggleDirective)
   .directive('body', asideMenuHideDirective)
   .directive('backToTop', backToTopDirective)
@@ -47,7 +48,7 @@ function cardExpandDirective() {
   }
 }
 
-//Card Collapse
+// Copy to Clipboard Directive
 function copyToClipboardDirective() {
   var clip;
   function link(scope, element) {
@@ -95,6 +96,21 @@ function copyToClipboardDirective() {
   return directive;
 }
 
+// Show drop down list user
+function usersDropDownDirective() {
+  var directive = {
+    restrict: 'E',
+    replace: true,
+    template: '<ul class="dropdown-menu" role="menu"><li><i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i></li></ul>',
+    link: link
+  };
+  return directive;
+
+  function link(scope, element, attrs) {
+    var self = this;
+    console.log(self);
+  }
+}
 
 //LayoutToggle
 asideMenuToggleDirective.$inject = ['$interval'];

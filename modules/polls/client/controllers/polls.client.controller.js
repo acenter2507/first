@@ -477,11 +477,9 @@
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseEnterOption = handleMouseEnterOption;
     function handleMouseEnterOption(opt) {
-      if (opt.userLoading) return;
       opt.loadUserTimer = $timeout(loadAllUsersVotedForThisOption, 1000);
       // Lấy tất cả các user đã vote cho lựa chọn này
       function loadAllUsersVotedForThisOption() {
-        opt.userLoading = true;
         console.log('loadAllUsersVotedForThisOption');
         console.log(opt);
         // Lấy các vote đã có vote cho option hiện tại
@@ -498,7 +496,6 @@
         opt.voteCollect = _.countBy(opt.votes, function (vote) {
           return vote.guest ? 'users' : 'guest';
         });
-        opt.userLoading = false;
         $timeout.cancel(opt.loadUserTimer);
       }
       console.log('handleMouseEnterOption');
@@ -510,7 +507,6 @@
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseLeaveOption = handleMouseLeaveOption;
     function handleMouseLeaveOption(opt) {
-      opt.userLoading = false;
       $timeout.cancel(opt.loadUserTimer);
       delete opt.loadUserTimer;
       console.log('handleMouseLeaveOption');

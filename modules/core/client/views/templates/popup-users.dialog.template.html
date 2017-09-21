@@ -10,14 +10,14 @@
     <p class="mgn" ng-show="!dialogData.loading && dialogData.votes.length == 0">{{:: dialogData.message | translate }}</p>
     <div class="card-scroll-content">
       <div class="user-list-item" ng-repeat="vote in dialogData.votes | orderBy: '-updated'">
-        <div class="user-avatar">
+        <div class="user-image">
           <a ng-if="vote.user" ui-sref="profile.info({userId: vote.user.slug})">
             <img src="{{::vote.user.profileImageURL}}" alt="{{::vote.user.displayName}}">
           </a>
           <img ng-if="!vote.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
         </div>
         <div class="user-info">
-          <div class="user-title">
+          <div class="user-name">
             <a ui-sref="profile.info({userId: vote.user.slug})">{{:: vote.user.displayName}}</a>
           </div>
           <div class="user-detail">

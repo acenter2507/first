@@ -350,17 +350,16 @@
 <script type="text/ng-template" id="getLinkOptionTemplate">
   <div class="ngdialog-message">
     <!-- Message -->
-    <p>{{:: message.content | translate }}</p>
+    <p>{{:: 'LB_VOTE_GET_LINK_MSG' | translate }}</p>
     <!-- Vùng chọn các option -->
-    <md-radio-group ng-model="selectedOption">
-      <md-radio-button ng-repeat="opt in message.opts" ng-value="opt._id" class="md-primary">{{:: opt.title }}</md-radio-button>
+    <md-radio-group ng-model="selectedOption" ng-change="handleSeletedOption()">
+      <md-radio-button ng-repeat="opt in opts" ng-value="opt._id" class="md-primary">{{:: opt.title }}</md-radio-button>
     </md-radio-group>
-    <span>{{selectedOption}}</span>
     <!-- Vùng hiển thị url các option -->
-    <input class="form-control" value="{{ message.url }}">
+    <input class="form-control" value="{{ url }}">
 
     <div class="ngdialog-buttons mg10t">
-      <button class="btn btn-default pull-right mg5r" ng-click="closeThisDialog()">{{ 'LB_DONE' | translate }}</button>
+      <button class="btn btn-default pull-right mg5r" ng-click="closeThisDialog()">{{:: 'LB_DONE' | translate }}</button>
     </div>
   </div>
 </script>

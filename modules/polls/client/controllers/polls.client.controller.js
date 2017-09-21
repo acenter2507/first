@@ -1,7 +1,9 @@
 (function () {
   'use strict';
   // Polls controller
-  angular.module('polls').controller('PollsController', PollsController);
+  angular.module('polls')
+    .controller('PollsController', PollsController)
+    .controller('GetLinkOptionController', GetLinkOptionController);
 
   PollsController.$inject = [
     '$location',
@@ -416,18 +418,18 @@
         return _.pick(obj, '_id', 'title');
       });
       var url = $location.absUrl().split('?')[0] + '?vote=';
-      $scope.message = {
-        content: 'LB_VOTE_GET_LINK_MSG',
-        url: url,
-        opts: new_opts
-      };
-      dialog.openConfirm({
-        scope: $scope,
-        template: 'getLinkOptionTemplate'
-      }).then(confirm => {
-      }, reject => {
-        delete $scope.message;
-        new_opts = undefined;
+      var getLinkDialog = dialog.open({
+        template: 'getLinkOptionTemplate',
+        controller: 'GetLinkOptionController',
+        resolve: {
+          data: {
+            url: url,
+            opts: new_opts
+          }
+        }
+      });
+      getLinkDialog.closePromise.then(function (data) {
+        console.log(data);
       });
     }
     // Remove existing Poll
@@ -805,5 +807,20 @@
       }
     }
 
+  }
+
+  GetLinkOptionController.$inject = [
+    '$scope',
+    '$data'
+  ];
+  function GetLinkOptionController($scope, data) {
+    $scope.opts = data.opts;
+    $scope.baseUrl = data.url;
+    $scope.selectedOpts = $scope.opts[0]._id;
+    $scope.url = $scope.baseUrl + $scope.selectedOpts;
+
+    $scope.handleSeletedOption = () => {
+      $scope.url = $scope.baseUrl + $scope.selectedOpts;
+    };
   }
 })();

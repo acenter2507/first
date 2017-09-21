@@ -496,6 +496,7 @@
         opt.voteCollect = _.countBy(opt.votes, function (vote) {
           return vote.guest ? 'users' : 'guest';
         });
+        console.log(opt.voteCollect);
         $timeout.cancel(opt.loadUserTimer);
       }
       console.log('handleMouseEnterOption');

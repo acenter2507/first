@@ -476,7 +476,7 @@
     }
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseEnterOption = handleMouseEnterOption;
-    function handleMouseEnterOption(opt, element) {
+    function handleMouseEnterOption(element) {
       console.log(opt);
       console.log(element);
     }

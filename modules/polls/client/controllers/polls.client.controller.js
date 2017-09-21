@@ -811,6 +811,7 @@
   function GetLinkOptionController($scope, data) {
     $scope.opts = data.opts;
     $scope.baseUrl = data.url;
+    $scope.select = $scope.opts[0]._id;
     $scope.url = '';
 
     $scope.handleSeletedOption = () => {

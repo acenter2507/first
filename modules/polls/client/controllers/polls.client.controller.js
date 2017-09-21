@@ -484,6 +484,7 @@
         console.log(opt);
         // Lấy các vote đã có vote cho option hiện tại
         var _votes = _.where(ctrl.voteopts, { opt: opt._id });
+        console.log(_votes);
         // Lấy các lần vote có có vote cho option hiện tại
         opt.votes = _.filter(ctrl.votes, (vote) => {
           return _.contains(_votes, vote._id);

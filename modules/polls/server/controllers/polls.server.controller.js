@@ -475,7 +475,7 @@ exports.findVotesByOption = function (req, res) {
   Voteopt.find({ opt: optId }).exec()
     .then(voteopts => {
       var ids = _.pluck(voteopts, 'vote');
-      Vote.find({ _id: { $in: ids } })
+      Vote.find({ _id: { $in: ids }, guest: false })
         .populate('user', 'displayName slug profileImageURL')
         .exec(function (err, votes) {
           if (err) {

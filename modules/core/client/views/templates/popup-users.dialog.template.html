@@ -17,10 +17,10 @@
           <img ng-if="!vote.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
         </div>
         <div class="user-info">
-          <div class="poll-title">
+          <div class="user-title">
             <a ui-sref="profile.info({userId: vote.user.slug})">{{:: vote.user.displayName}}</a>
           </div>
-          <div class="poll-detail">
+          <div class="user-detail">
             <span am-time-ago="vote.updated"></span>
           </div>
         </div>

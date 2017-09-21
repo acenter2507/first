@@ -168,7 +168,8 @@
   padding: 3px 0;
   border-bottom: 1px solid #eee;
   clear: both; }
-  .user-list-item .user-avatar, .user-list-item .user-avatar img {
+  .user-list-item .user-avatar,
+  .user-list-item .user-avatar img {
     width: 24px;
     height: 24px; }
   .user-list-item .user-info {

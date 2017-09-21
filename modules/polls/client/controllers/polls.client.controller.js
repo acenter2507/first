@@ -411,18 +411,23 @@
     }
     // Share poll với url
     ctrl.handleGetLinkOption = handleGetLinkOption;
-    function handleGetLinkOption(opt) {
-      var url = $location.absUrl().split('?')[0] + '?vote=' + opt._id;
+    function handleGetLinkOption() {
+      var new_opts = _.map(ctrl.opts, function (obj) {
+        return _.pick(obj, '_id', 'title');
+      });
+      var url = $location.absUrl().split('?')[0] + '?vote=';
       $scope.message = {
         content: 'LB_VOTE_GET_LINK_MSG',
-        url: url
+        url: url,
+        opts: new_opts
       };
       dialog.openConfirm({
         scope: $scope,
-        templateUrl: 'modules/core/client/views/templates/share.dialog.template.html'
+        template: 'getLinkOptionTemplate'
       }).then(confirm => {
       }, reject => {
         delete $scope.message;
+        new_opts = undefined;
       });
     }
     // Remove existing Poll

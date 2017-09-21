@@ -85,6 +85,7 @@
       <div class="card" id="opts_detail_card">
         <div class="card-header">
           <strong class="card-title">{{:: 'LB_POLL_OPTIONS' | translate }} ({{ctrl.opts.length}})</strong>
+          <a class="card-link" ng-click="ctrl.handleGetLinkOption()">{{:: 'LB_VOTE_GET_LINK' | translate }}</a>
         </div>
         <div class="card-body">
           <span class="text-muted" ng-if="!ctrl.opts.length || ctrl.opts.length === 0">{{:: 'LB_POLL_OPTIONS_EMPTY' | translate }}</span>
@@ -93,10 +94,10 @@
             <uib-accordion-group ng-repeat="opt in ctrl.opts" heading="{{opt.title + ' (' + opt.voteCnt + ' votes)'}}" panel-class="custom-panel public">
               <span class="pull-right text-muted font-sm">
                 <span>{{:: 'LB_ADD_BY' | translate }}</span>
-                <a ui-sref="profile.info({userId: opt.user.slug})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>
-                <span ng-if="!opt.user">{{:: 'LB_DELETED_USER' | translate }}</span>
-                <span>{{:: 'LB_ON' | translate }}</span>
-                <span>{{:: opt.created | LLL_format}}</span>
+              <a ui-sref="profile.info({userId: opt.user.slug})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>
+              <span ng-if="!opt.user">{{:: 'LB_DELETED_USER' | translate }}</span>
+              <span>{{:: 'LB_ON' | translate }}</span>
+              <span>{{:: opt.created | LLL_format}}</span>
               </span>
               <div class="clearfix"></div>
               <div class="text-body" ta-bind="text" ng-model="opt.body" ta-readonly="true"></div>
@@ -262,7 +263,6 @@
               <md-radio-button ng-repeat="opt in ctrl.opts" ng-value="opt._id" class="md-primary">
                 {{opt.title}}
                 <strong class="mg5l" ng-style="{color: opt.color}">●</strong>
-                <a class="mg5l" style="z-index: 99999;" ng-click="ctrl.handleGetLinkOption(opt)">{{:: 'LB_VOTE_GET_LINK' | translate }}</a>
               </md-radio-button>
             </md-radio-group>
           </div>
@@ -341,7 +341,25 @@
     </md-fab-speed-dial>
   </div>
 </section>
+<!-- Form đề xuất lựa chọn cho người dùng -->
 <div class="aside-backdrop"></div>
 <div class="aside-panel">
   <div ng-include="'/modules/polls/client/views/new-opt.client.view.html'"></div>
 </div>
+<!-- Temlate lấy link vote option -->
+<script type="text/ng-template" id="getLinkOptionTemplate">
+  <div class="ngdialog-message" ng-init="selectedOption = opts[0]._id">
+    <!-- Message -->
+    <p>{{:: message.content | translate }}</p>
+    <!-- Vùng chọn các option -->
+    <md-radio-group ng-model="selectedOption">
+      <md-radio-button ng-repeat="opt in opts" ng-value="opt._id" class="md-primary">{{:: opt.title }}</md-radio-button>
+    </md-radio-group>
+    <!-- Vùng hiển thị url các option -->
+    <input class="form-control" value="{{ message.url + selectedOption._id }}">
+
+    <div class="ngdialog-buttons mg10t">
+      <button class="btn btn-default pull-right mg5r" ng-click="closeThisDialog()">{{ 'LB_DONE' | translate }}</button>
+    </div>
+  </div>
+</script>

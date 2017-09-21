@@ -161,7 +161,7 @@
   "LB_POLL_VOTE_CONFIRM": "Bạn thật sự muốn thay đổi lựa chọn mà bạn đã bình chọn trước đây?",
   "LB_POLL_VOTE_AUTH_ERROR": "Bạn không đủ điều kiện để tham gia bình chọn tại poll này.",
   "LB_VOTE_GET_LINK": "Link nhanh",
-  "LB_VOTE_GET_LINK_MSG": "Bạn có thể gửi đường dẫn bên dưới cho bất kỳ ai có thể tham gia bình chọn. Chú ý người dùng không đăng nhập sẽ không thể bình chọn cho một poll bí mật.",
+  "LB_VOTE_GET_LINK_MSG": "Hãy chọn lựa chọn rồi gửi đường dẫn bên dưới cho bất kỳ ai có thể tham gia bình chọn. Chú ý có thể người dùng không thể gửi bình chọn vì các thiết lập của poll.",
 
   "LB_QUICK_BODY_PLACE": "Hỏi điều gì đó...",
   "LB_QUICK_BODY_REQUIRE": "Bạn cần phải hỏi gì đó",

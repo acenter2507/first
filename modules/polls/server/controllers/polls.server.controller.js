@@ -694,7 +694,9 @@ function get_cmts_by_pollId(pollId) {
 function get_votes_by_pollId(pollId) {
   return new Promise((resolve, reject) => {
     var rs = {}, ids;
-    Vote.find({ poll: pollId }).exec()
+    Vote.find({ poll: pollId })
+      .populate('user', 'displayName')
+      .exec()
       .then(votes => {
         rs.votes = votes;
         ids = _.pluck(votes, '_id');

@@ -419,6 +419,7 @@
         baseUrl: url,
         opts: ctrl.opts,
         selected: ctrl.opts[0]._id,
+        url: url + ctrl.opts[0]._id,
         handleSeletedOption: handleSeletedOption
       };
       dialog.openConfirm({

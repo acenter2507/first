@@ -352,7 +352,7 @@
     <!-- Message -->
     <p>{{:: 'LB_VOTE_GET_LINK_MSG' | translate }}</p>
     <!-- Vùng chọn các option -->
-    <md-radio-group ng-model="linkOptionData.select" ng-change="linkOptionData.handleSeletedOption()">
+    <md-radio-group ng-model="linkOptionData.selected" ng-change="linkOptionData.handleSeletedOption()">
       <md-radio-button ng-repeat="opt in linkOptionData.opts" ng-value="opt._id" class="md-primary">
         {{:: opt.title }}
         </md-radio-button>

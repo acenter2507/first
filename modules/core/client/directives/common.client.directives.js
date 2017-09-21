@@ -52,9 +52,8 @@ function copyToClipboardDirective() {
   var clip;
   function link(scope, element) {
     function ClipboardSimulator() {
-      var self = this,
-        textarea,
-        container;
+      var self = this;
+      var textarea, container;
       function createTextarea() {
         if (!self.textarea) {
           container = document.createElement('div');

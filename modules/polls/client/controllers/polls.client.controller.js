@@ -482,6 +482,7 @@
       // Lấy tất cả các user đã vote cho lựa chọn này
       function loadAllUsersVotedForThisOption() {
         opt.userLoading = true;
+        console.log('loadAllUsersVotedForThisOption');
         // Lấy các vote đã có vote cho option hiện tại
         var _votes = _.where(ctrl.voteopts, { opt: opt._id });
         // Lấy các lần vote có có vote cho option hiện tại
@@ -494,11 +495,12 @@
         }), 'user');
         // Đếm số guest và số user đã vote
         opt.voteCollect = _.countBy(opt.votes, function (vote) {
-          return vote.guest ? 'user' : 'guest';
+          return vote.guest ? 'users' : 'guest';
         });
         opt.userLoading = false;
         $timeout.cancel(opt.loadUserTimer);
       }
+      console.log('handleMouseEnterOption');
     }
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseClickOption = handleMouseClickOption;
@@ -510,6 +512,7 @@
       opt.userLoading = false;
       $timeout.cancel(opt.loadUserTimer);
       delete opt.loadUserTimer;
+      console.log('handleMouseLeaveOption');
     }
     // Tạo Timer đếm ngược
     function handleCreateTimer() {

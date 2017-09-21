@@ -819,6 +819,7 @@
 
     $scope.handleSeletedOption = () => {
       $scope.url = $scope.baseUrl + $scope.selectedOpts;
+      console.log($scope.url);
     };
   }
 })();

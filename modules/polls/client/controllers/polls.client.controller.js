@@ -476,16 +476,16 @@
     }
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseEnterOption = handleMouseEnterOption;
-    function handleMouseEnterOption(element) {
+    function handleMouseEnterOption(opt) {
       opt.isOpenDropdown = true;
     }
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseClickOption = handleMouseClickOption;
-    function handleMouseClickOption(element) {
+    function handleMouseClickOption(opt) {
     }
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseLeaveOption = handleMouseLeaveOption;
-    function handleMouseLeaveOption(element) {
+    function handleMouseLeaveOption(opt) {
       opt.isOpenDropdown = false;
     }
     // Tạo Timer đếm ngược

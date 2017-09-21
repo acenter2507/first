@@ -134,9 +134,7 @@
         data: []
       };
       ctrl.votes = ctrl.poll.votes || [];
-      console.log(ctrl.votes);
       ctrl.voteopts = ctrl.poll.voteopts || [];
-      console.log(ctrl.voteopts);
       ctrl.votedTotal = ctrl.voteopts.length;
       ctrl.opts.forEach(opt => {
         opt.voteCnt = _.where(ctrl.voteopts, { opt: opt._id }).length || 0;
@@ -479,7 +477,28 @@
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseEnterOption = handleMouseEnterOption;
     function handleMouseEnterOption(opt) {
-      if (opt.loading) return;
+      if (opt.userLoading) return;
+      opt.loadUserTimer = $timeout(loadAllUsersVotedForThisOption, 1000);
+      // Lấy tất cả các user đã vote cho lựa chọn này
+      function loadAllUsersVotedForThisOption() {
+        opt.userLoading = true;
+        // Lấy các vote đã có vote cho option hiện tại
+        var _votes = _.where(ctrl.voteopts, { opt: opt._id });
+        // Lấy các lần vote có có vote cho option hiện tại
+        opt.votes = _.filter(ctrl.votes, (vote) => {
+          return _.contains(_votes, vote._id);
+        });
+        // Lấy các user đã vote cho option hiện tại
+        opt.users = _.pluck(_.filter(opt.votes, (vote) => {
+          return !vote.guest;
+        }), 'user');
+        // Đếm số guest và số user đã vote
+        opt.voteCollect = _.countBy(opt.votes, function (vote) {
+          return vote.guest ? 'user' : 'guest';
+        });
+        opt.userLoading = false;
+        $timeout.cancel(opt.loadUserTimer);
+      }
     }
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseClickOption = handleMouseClickOption;
@@ -488,6 +507,9 @@
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseLeaveOption = handleMouseLeaveOption;
     function handleMouseLeaveOption(opt) {
+      opt.userLoading = false;
+      $timeout.cancel(opt.loadUserTimer);
+      delete opt.loadUserTimer;
     }
     // Tạo Timer đếm ngược
     function handleCreateTimer() {

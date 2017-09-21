@@ -422,9 +422,11 @@
         template: 'getLinkOptionTemplate',
         controller: 'GetLinkOptionController',
         resolve: {
-          data: {
-            // url: url,
-            // opts: new_opts
+          data: function dataFactory() {
+            return {
+              url: url,
+              opts: new_opts
+            };
           }
         }
       });

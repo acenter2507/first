@@ -814,8 +814,8 @@
     $scope.select = $scope.opts[0]._id;
     $scope.url = '';
 
-    $scope.handleSeletedOption = () => {
-      console.log($scope.select);
+    $scope.handleSeletedOption = (select) => {
+      console.log(select);
       // $scope.url = $scope.baseUrl + $scope.selectedOption;
     };
   }

@@ -14,7 +14,7 @@
         <div class="detail">
           <p class="title" ng-bind="opt.title" ng-mouseenter="ctrl.handleMouseEnterOption(opt)" ng-click="ctrl.handleMouseClickOption(opt) && $event.stopPropagation();"
             ng-mouseleave="ctrl.handleMouseLeaveOption(opt)" uib-popover-template="'optionUsersTemplate'" popover-trigger="mouseenter"
-            popover-popup-delay="500" popover-placement="top-left">
+            popover-popup-delay="500" popover-placement="top-left" popover-class="black-popover">
           </p>
           <span class="value">{{ opt.voteCnt + '/' + poll.total }}
             <span class="text-muted small">({{ opt.progressVal }}%)</span>

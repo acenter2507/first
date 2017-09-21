@@ -428,9 +428,9 @@
           }
         }
       });
-      getLinkDialog.closePromise.then(function (data) {
-        console.log(data);
-      });
+      // getLinkDialog.closePromise.then(function (data) {
+      //   console.log(data);
+      // });
     }
     // Remove existing Poll
     ctrl.handleRemovePoll = handleRemovePoll;

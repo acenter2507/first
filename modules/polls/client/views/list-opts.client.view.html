@@ -36,13 +36,13 @@
 </div>
 <script type="text/ng-template" id="optionUsersTemplate">
   <div class="form-group">
-    <p class="mg0" ng-repeat="user in opt.users | limitTo: 10">{{:: user.displayName }}</p>
-    <p class="mg0" ng-if="opt.voteCollect.users && opt.voteCollect.users > 10">
+    <p class="mgn" ng-repeat="user in opt.users | limitTo: 10">{{:: user.displayName }}</p>
+    <p class="mgn" ng-if="opt.voteCollect.users && opt.voteCollect.users > 10">
       <span>{{:: 'LB_AND' | translate }}</span>
       <span>{{:: opt.voteCollect.users - 10 }}</span>
       <span>{{:: 'LB_MORE' | translate }}</span>
     </p>
-    <p class="mg0" ng-if="opt.voteCollect.guest && opt.voteCollect.guest > 0">
+    <p class="mgn" ng-if="opt.voteCollect.guest && opt.voteCollect.guest > 0">
       <span>{{:: 'LB_AND' | translate }}</span>
       <span>{{:: opt.voteCollect.guest }}</span>
       <span>{{:: 'LB_GUEST' | translate }}</span>

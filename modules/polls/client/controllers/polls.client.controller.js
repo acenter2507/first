@@ -421,9 +421,13 @@
         selected: ctrl.opts[0]._id,
         handleSeletedOption: handleSeletedOption
       };
-      dialog.open({
+      dialog.openConfirm({
         scope: $scope,
         template: 'getLinkOptionTemplate'
+      }, () => {
+        delete $scope.linkOptionData;
+      }, () => {
+        delete $scope.linkOptionData;
       });
       // getLinkDialog.closePromise.then(function (data) {
       //   console.log(data);

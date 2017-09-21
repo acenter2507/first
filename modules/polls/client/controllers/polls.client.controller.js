@@ -17,7 +17,6 @@
     '$stateParams',
     'Socialshare',
     'Notifications',
-    'NotifsService',
     '$controller'
   ];
 
@@ -33,7 +32,6 @@
     $stateParams,
     Socialshare,
     Notifications,
-    NotifsService,
     $controller
   ) {
     var ctrl = this;
@@ -189,6 +187,7 @@
           button: 'LB_CHANGE'
         }, () => {
           ctrl.selectedOpts = [opt._id];
+          ctrl.radioChecked = opt._id;
           handleSaveVote();
         });
       } else {

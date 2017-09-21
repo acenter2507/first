@@ -85,7 +85,7 @@
       <div class="card" id="opts_detail_card">
         <div class="card-header">
           <strong class="card-title">{{:: 'LB_POLL_OPTIONS' | translate }} ({{ctrl.opts.length}})</strong>
-          <a class="card-link" ng-click="ctrl.handleGetLinkOption()">{{:: 'LB_VOTE_GET_LINK' | translate }}</a>
+          <a class="card-link font-sm" ng-if="ctrl.opts.length > 0" ng-click="ctrl.handleGetLinkOption()">{{:: 'LB_VOTE_GET_LINK' | translate }}</a>
         </div>
         <div class="card-body">
           <span class="text-muted" ng-if="!ctrl.opts.length || ctrl.opts.length === 0">{{:: 'LB_POLL_OPTIONS_EMPTY' | translate }}</span>
@@ -119,6 +119,7 @@
       <div class="card d-md-none" ng-if="!ctrl.isClosed">
         <div class="card-header">
           <strong class="card-title">{{:: 'LB_POLL_VOTE_PANEL' | translate }}</strong>
+          <a class="card-link font-sm" ng-if="ctrl.opts.length > 0" ng-click="ctrl.handleGetLinkOption()">{{:: 'LB_VOTE_GET_LINK' | translate }}</a>
         </div>
         <div class="card-body">
           <div class="poll-remaining" ng-if="ctrl.poll.close">
@@ -245,6 +246,7 @@
       <div class="card" ng-if="!ctrl.isClosed">
         <div class="card-header">
           <strong class="card-title">{{:: 'LB_POLL_VOTE_PANEL' | translate }}</strong>
+          <a class="card-link font-sm" ng-if="ctrl.opts.length > 0" ng-click="ctrl.handleGetLinkOption()">{{:: 'LB_VOTE_GET_LINK' | translate }}</a>
         </div>
         <div class="card-body">
           <div class="poll-remaining" ng-if="ctrl.poll.close">

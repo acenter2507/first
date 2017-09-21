@@ -100,7 +100,7 @@ function copyToClipboardDirective() {
 function usersDropDownDirective() {
   var directive = {
     restrict: 'E',
-    replace: true,
+    scope: true,
     template: '<ul class="dropdown-menu" role="menu"><li><i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i></li></ul>',
     link: link
   };

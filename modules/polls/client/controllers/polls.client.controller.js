@@ -479,6 +479,7 @@
     function handleMouseEnterOption(opt) {
       opt.isOpenDropdown = true;
       console.log(opt.isOpenDropdown);
+      opt.title = 'aaaaa aaaa aaaaaaa aa aa aaa aaa';
     }
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseClickOption = handleMouseClickOption;

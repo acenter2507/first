@@ -262,7 +262,7 @@
               <md-radio-button ng-repeat="opt in ctrl.opts" ng-value="opt._id" class="md-primary">
                 {{opt.title}}
                 <strong class="mg5l" ng-style="{color: opt.color}">●</strong>
-                <a class="mg5l" ng-click="ctrl.handleGetLinkOption(opt)">{{:: 'LB_VOTE_GET_LINK' | translate }}</a>
+                <a class="mg5l" style="z-index: 99999;" ng-click="ctrl.handleGetLinkOption(opt)">{{:: 'LB_VOTE_GET_LINK' | translate }}</a>
               </md-radio-button>
             </md-radio-group>
           </div>

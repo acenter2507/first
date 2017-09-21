@@ -423,8 +423,8 @@
         controller: 'GetLinkOptionController',
         resolve: {
           data: {
-            url: url,
-            opts: new_opts
+            // url: url,
+            // opts: new_opts
           }
         }
       });

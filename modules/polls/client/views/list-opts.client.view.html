@@ -3,8 +3,8 @@
     <strong class="card-title">{{:: 'LB_POLL_CHART_PANEL' | translate }}</strong>
   </div>
   <div class="card-body">
-    <canvas style="background: transparent" id="pie" class="chart-base" chart-data="ctrl.chart.data" chart-labels="ctrl.chart.labels" chart-options="ctrl.chart.options"
-      chart-colors="ctrl.chart.colors" chart-type="ctrl.chart.type" ng-if="ctrl.votedTotal > 0">
+    <canvas style="background: transparent" id="pie" class="chart-base" chart-data="ctrl.chart.data" chart-labels="ctrl.chart.labels"
+      chart-options="ctrl.chart.options" chart-colors="ctrl.chart.colors" chart-type="ctrl.chart.type" ng-if="ctrl.votedTotal > 0">
     </canvas>
 
     <!-- Danh sách options -->
@@ -12,14 +12,16 @@
       <li ng-repeat="opt in ctrl.opts | orderBy: '-voteCnt'">
         <!--<i class="icon-chart"></i>-->
         <div class="detail">
-          <p class="title" ng-bind="opt.title" ng-mouseenter="ctrl.handleMouseEnterOption(this)"></p>
+          <p class="title" ng-bind="opt.title" ng-mouseenter="ctrl.handleMouseEnterOption(this)" ng-click="ctrl.handleMouseClickOption(this)"
+            ng-mouseleave="ctrl.handleMouseLeaveOption(this)"></p>
           <span class="value">{{ opt.voteCnt + '/' + poll.total }}
             <span class="text-muted small">({{ opt.progressVal }}%)</span>
           </span>
         </div>
         <div class="bars">
           <div class="progress progress-xs">
-            <div class="progress-bar progress-bar-animated" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}" aria-valuenow="{{ opt.progressVal }}" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress-bar progress-bar-animated" ng-style="{'width': opt.progressVal + '%', 'background-color': opt.color}"
+              aria-valuenow="{{ opt.progressVal }}" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
         </div>
       </li>

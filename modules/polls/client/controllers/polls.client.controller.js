@@ -480,6 +480,18 @@
       console.log(element);
       console.log(element.opt);
     }
+    // Người dùng trỏ chuột đến 
+    ctrl.handleMouseClickOption = handleMouseClickOption;
+    function handleMouseClickOption(element) {
+      console.log(element);
+      console.log(element.opt);
+    }
+    // Người dùng trỏ chuột đến 
+    ctrl.handleMouseLeaveOption = handleMouseLeaveOption;
+    function handleMouseLeaveOption(element) {
+      console.log(element);
+      console.log(element.opt);
+    }
     // Tạo Timer đếm ngược
     function handleCreateTimer() {
       ctrl.close_duration = Remaining.duration(ctrl.poll.close);

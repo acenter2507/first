@@ -13,7 +13,7 @@
         <!--<i class="icon-chart"></i>-->
         <div class="detail">
           <p class="title" ng-bind="opt.title" ng-mouseenter="ctrl.handleMouseEnterOption(opt)" ng-click="ctrl.handleMouseClickOption(opt) && $event.stopPropagation();"
-            ng-mouseleave="ctrl.handleMouseLeaveOption(opt)" uib-popover-template="'myPopoverTemplate'" popover-trigger="mouseenter">
+            ng-mouseleave="ctrl.handleMouseLeaveOption(opt)" uib-popover-template="'myPopoverTemplate'" popover-trigger="mouseenter" popover-popup-delay="2000">
           </p>
           <span class="value">{{ opt.voteCnt + '/' + poll.total }}
             <span class="text-muted small">({{ opt.progressVal }}%)</span>

@@ -15,7 +15,7 @@
           <p class="title" ng-bind="opt.title" ng-mouseenter="ctrl.handleMouseEnterOption(opt)" ng-click="ctrl.handleMouseClickOption(opt) && $event.stopPropagation();"
             ng-mouseleave="ctrl.handleMouseLeaveOption(opt)" uib-dropdown-toggle ng-disabled="disabled">
           </p>
-          <ul class="dropdown-menu" role="menu">
+          <ul class="dropdown-menu" uib-dropdown-menu role="menu">
             <i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i>
           </ul>
           <span class="value">{{ opt.voteCnt + '/' + poll.total }}

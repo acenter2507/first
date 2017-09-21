@@ -134,7 +134,9 @@
         data: []
       };
       ctrl.votes = ctrl.poll.votes || [];
+      console.log(ctrl.votes);
       ctrl.voteopts = ctrl.poll.voteopts || [];
+      console.log(ctrl.voteopts);
       ctrl.votedTotal = ctrl.voteopts.length;
       ctrl.opts.forEach(opt => {
         opt.voteCnt = _.where(ctrl.voteopts, { opt: opt._id }).length || 0;
@@ -477,7 +479,7 @@
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseEnterOption = handleMouseEnterOption;
     function handleMouseEnterOption(opt) {
-      
+      if (opt.loading) return;
     }
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseClickOption = handleMouseClickOption;

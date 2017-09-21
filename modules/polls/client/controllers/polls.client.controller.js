@@ -477,20 +477,14 @@
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseEnterOption = handleMouseEnterOption;
     function handleMouseEnterOption(opt) {
-      opt.isOpenDropdown = true;
-      console.log(opt.isOpenDropdown);
-      opt.title = 'aaaaa aaaa aaaaaaa aa aa aaa aaa';
     }
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseClickOption = handleMouseClickOption;
     function handleMouseClickOption(opt) {
-      console.log(opt);
     }
     // Người dùng trỏ chuột đến 
     ctrl.handleMouseLeaveOption = handleMouseLeaveOption;
     function handleMouseLeaveOption(opt) {
-      opt.isOpenDropdown = false;
-      console.log(opt.isOpenDropdown);
     }
     // Tạo Timer đếm ngược
     function handleCreateTimer() {

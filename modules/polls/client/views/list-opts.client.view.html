@@ -43,7 +43,7 @@
       <span>{{:: 'LB_MORE' | translate }}</span>
     </p>
     <p class="mgn" ng-if="opt.voteCollect.guest && opt.voteCollect.guest > 0">
-      <span>{{:: 'LB_AND' | translate }}</span>
+      <span ng-if="opt.voteCollect.users && opt.voteCollect.users > 0">{{:: 'LB_AND' | translate }}</span>
       <span>{{:: opt.voteCollect.guest }}</span>
       <span>{{:: 'LB_GUEST' | translate }}</span>
     </p>

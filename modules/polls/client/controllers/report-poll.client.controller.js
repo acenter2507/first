@@ -71,6 +71,10 @@
       prepareDays();
       prepareYears();
     }
+
+    /**
+     * PREPARE
+     */
     // Lấy các thông tin vote
     function prepareShowingData() {
       // Thiết lập các thông tin cho poll
@@ -138,6 +142,9 @@
     function handleChangeDate() {
     }
 
+    /**
+     * LOCAL HANDLE
+     */
     function handleGetMonthsOfYear(year) {
       var mmYear = moment().utc().year(year);
       var startMonth = mmYear.clone().startOf('year');
@@ -146,8 +153,9 @@
       var months = [];
       for (var index = 0; index <= durration; index++) {
         // Tháng bắt đầu từ 0 nên phải + 1
-        var item = startMonth.clone().add(index, 'months').month() + 1;
-        months.push(item);
+        var item = startMonth.clone().add(index, 'months');
+        if (item.isAfter(ctrl.endDate)) return;
+        months.push(item.month() + 1);
       }
       mmYear = undefined;
       startMonth = undefined;
@@ -163,8 +171,9 @@
       var duration = endDate.diff(startDate, 'days');
       var dates = [];
       for (var index = 0; index <= duration; index++) {
-        var item = startDate.clone().add(index, 'day').date();
-        dates.push(item);
+        var item = startDate.clone().add(index, 'day');
+        if (item.isAfter(ctrl.endDate)) return;
+        dates.push(item.date());
       }
       mmMonth = undefined;
       startDate = undefined;

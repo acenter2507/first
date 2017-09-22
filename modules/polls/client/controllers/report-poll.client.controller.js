@@ -30,12 +30,11 @@
     ctrl.weekCnt = 0;
 
     // Chart data
-    ctrl.mode = 1; // 1: month - 2: year - 3: weeks
+    ctrl.mode = 1; // 1: year - 2: month - 3: weeks
     ctrl.year = '';
     ctrl.month = '';
     ctrl.date = '';
     ctrl.series = ['Thành viên', 'Khách'];
-
 
     onPrepare();
 
@@ -129,17 +128,29 @@
      */
     ctrl.handleChangeYear = handleChangeYear;
     function handleChangeYear() {
-      ctrl.months = handleGetMonthsOfYear(ctrl.year);
-      ctrl.month = ctrl.months[ctrl.months.length - 1];
-      handleChangeMonth();
+      // Nếu mode đang xem là Năm
+      if (ctrl.mode === 1) {
+
+      } else {
+        ctrl.months = handleGetMonthsOfYear(ctrl.year);
+        ctrl.month = ctrl.months[ctrl.months.length - 1];
+        handleChangeMonth();
+      }
     }
     ctrl.handleChangeMonth = handleChangeMonth;
     function handleChangeMonth() {
-      ctrl.dates = handleGetDatesOfMonth(ctrl.year, ctrl.month);
-      ctrl.date = ctrl.dates[ctrl.dates.length - 1];
+      // Nếu mode đang xem là Tháng
+      if (ctrl.mode === 2) {
+
+      } else {
+        ctrl.dates = handleGetDatesOfMonth(ctrl.year, ctrl.month);
+        ctrl.date = ctrl.dates[ctrl.dates.length - 1];
+        handleChangeDate();
+      }
     }
     ctrl.handleChangeDate = handleChangeDate;
     function handleChangeDate() {
+      
     }
 
     /**
@@ -154,6 +165,7 @@
       for (var index = 0; index <= durration; index++) {
         // Tháng bắt đầu từ 0 nên phải + 1
         var item = startMonth.clone().add(index, 'months');
+        // Nếu ngày đang lấy lớn hơn ngày kết thúc thì stop for
         if (item.isAfter(ctrl.endDate)) break;
         months.push(item.month() + 1);
       }
@@ -162,7 +174,6 @@
       endMonth = undefined;
       return months;
     }
-
     function handleGetDatesOfMonth(year, month) {
       // Khi truyền ngày vào, phải - 1 vì tháng bắt đầu từ 0
       var mmMonth = moment().utc().year(year).month(month - 1);
@@ -172,6 +183,7 @@
       var dates = [];
       for (var index = 0; index <= duration; index++) {
         var item = startDate.clone().add(index, 'day');
+        // Nếu ngày đang lấy lớn hơn ngày kết thúc thì stop for
         if (item.isAfter(ctrl.endDate)) break;
         dates.push(item.date());
       }

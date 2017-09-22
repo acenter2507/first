@@ -18,20 +18,6 @@
           <td>{{ ctrl.endDate.clone().local().format('LLL') }}</td>
           <td>{{ ctrl.endDate.format('LLL') }}</td>
         </tr>
-        <tr>
-          <td>Danh sách năm: </td>
-          <td colspan="1" ng-bind="ctrl.yearCnt"></td>
-          <td colspan="1" ng-bind="ctrl.years"></td>
-        </tr>
-        <tr>
-          <td>Danh sách tháng: </td>
-          <td colspan="1" ng-bind="ctrl.monthCnt"></td>
-          <td colspan="1" ng-bind="ctrl.months"></td>
-        </tr>
-        <tr>
-          <td>Số tuần: </td>
-          <td colspan="2" ng-bind="ctrl.weekCnt"></td>
-        </tr>
       </table>
       <!--<canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" chart-series="series" chart-options="options"
         chart-dataset-override="datasetOverride" chart-click="onClick">
@@ -46,12 +32,12 @@
       </div>
     </div>
     <div class="col-xs-4">
-      <div class="form-group">
+      <div class="form-group" ng-show="ctrl.mode != 1">
         <select ng-options="month as month for month in ctrl.months" ng-model="ctrl.month" class="form-control" ng-change="ctrl.handleChangeMonth()"></select>
       </div>
     </div>
     <div class="col-xs-4">
-      <div class="form-group">
+      <div class="form-group" ng-show="ctrl.mode === 3">
         <select ng-options="date as date for date in ctrl.dates" ng-model="ctrl.date" class="form-control" ng-change="ctrl.handleChangeDate()"></select>
       </div>
     </div>

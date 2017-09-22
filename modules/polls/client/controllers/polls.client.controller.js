@@ -508,12 +508,8 @@
       });
       Action.get_votes_by_opt(opt._id)
         .then(res => {
-          if (!res.data || res.data.length === 0) {
-            $scope.dialogData.votes = [];
-            $scope.dialogData.message = 'LB_VOTE_EMPTY';
-          } else {
-            $scope.dialogData.votes = res.data;
-          }
+          $scope.dialogData.votes = res.data || [];
+          $scope.dialogData.message = 'LB_VOTE_EMPTY';
           $scope.dialogData.loading = false;
         })
         .catch(err => {

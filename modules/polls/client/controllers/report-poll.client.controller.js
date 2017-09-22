@@ -95,14 +95,14 @@
     function prepareYears() {
       ctrl.yearCnt = ctrl.endDate.diff(ctrl.startDate, 'years');
       for (var index = 0; index < ctrl.yearCnt; index++) {
-        var item = vm.startDate.clone().add(index, 'years').year();
+        var item = ctrl.startDate.clone().add(index, 'years').year();
         ctrl.years.push(item);
       }
     }
     function prepareMonths() {
       ctrl.monthCnt = ctrl.endDate.diff(ctrl.startDate, 'months');
       for (var index = 0; index < ctrl.monthCnt; index++) {
-        var item = vm.startDate.clone().add(index, 'months').month();
+        var item = ctrl.startDate.clone().add(index, 'months').month();
         ctrl.months.push(item);
       }
     }

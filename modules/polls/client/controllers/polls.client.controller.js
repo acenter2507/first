@@ -99,8 +99,6 @@
         $scope.handleShowMessage('LB_POLLS_PRIVATE_ERROR', true);
         return;
       }
-      // Collect dữ liệu hiển thị màn hình
-      prepareShowingData();
       // Lấy thông tin tương tác của người dùng với poll hiện tại
       prepareOwnerInfo().then(() => {
         // Kiểm tra giá trị vote
@@ -108,6 +106,8 @@
       });
       // Kiểm tra thông báo
       prepareParamNotification();
+      // Collect dữ liệu hiển thị màn hình
+      prepareShowingData();
       // Lắng nghe các request từ server socket
       prepareSocketListener();
       // Đặt timer lưu poll vào Viewed đồng thời tăng lượt View

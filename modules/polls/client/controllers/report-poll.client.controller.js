@@ -163,7 +163,7 @@
       console.log(endDate);
       var duration = endDate.diff(startDate, 'days');
       var dates = [];
-      for (var index = 0; index <= durration; index++) {
+      for (var index = 0; index <= duration; index++) {
         var item = startDate.clone().add(index, 'day').date();
         dates.push(item);
       }

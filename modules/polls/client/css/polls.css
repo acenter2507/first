@@ -179,12 +179,10 @@
     flex-grow: 1;
     margin-left: 6px; }
     .user-list-item .user-item-info .user-item-name {
+      height: 20px;
       line-height: 1rem;
       font-size: 1rem; }
     .user-list-item .user-item-info .user-item-detail {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
       line-height: 0.75rem;
       font-size: 0.75rem;
       color: #777; }

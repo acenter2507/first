@@ -511,6 +511,7 @@
           $scope.dialogData.votes = res.data || [];
           $scope.dialogData.message = 'LB_VOTE_EMPTY';
           $scope.dialogData.loading = false;
+          if (!$scope.$$phase) $scope.$digest();
         })
         .catch(err => {
           $scope.dialogData.votes = [];

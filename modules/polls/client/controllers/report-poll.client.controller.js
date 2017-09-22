@@ -141,7 +141,7 @@
       var durration = endMonth.diff(startMonth, 'months');
       var months = [];
       for (var index = 0; index <= durration; index++) {
-        var item = startMonth.clone().add(index, 'months').month();
+        var item = startMonth.clone().add(index, 'months').month() + 1;
         months.push(item);
       }
       year = undefined;

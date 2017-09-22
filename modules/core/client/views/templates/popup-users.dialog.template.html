@@ -1,13 +1,13 @@
 <div class="card mgn">
   <div class="card-header">
-    <strong class="card-title">{{:: dialogData.title }}</strong>
+    <strong class="card-title">{{:: dialogData.title }} ({{:: dialogData.votes.length  | shortNumber }})</strong>
   </div>
   <hr class="mgn">
   <div class="card-body">
     <div class="row text-center" ng-show="dialogData.loading">
       <i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i>
     </div>
-    <p class="mgn" ng-show="!dialogData.loading && dialogData.votes.length == 0">{{:: dialogData.message | translate }}</p>
+    <p class="mgn" ng-show="!dialogData.loading && dialogData.votes.length == 0">{{ dialogData.message | translate }}</p>
     <div class="card-scroll-content">
       <div class="user-list-item" ng-repeat="vote in dialogData.votes | orderBy: '-updated'">
         <div class="user-item-image">

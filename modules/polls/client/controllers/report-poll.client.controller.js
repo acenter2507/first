@@ -154,7 +154,7 @@
       for (var index = 0; index <= durration; index++) {
         // Tháng bắt đầu từ 0 nên phải + 1
         var item = startMonth.clone().add(index, 'months');
-        if (item.isAfter(ctrl.endDate)) return;
+        if (item.isAfter(ctrl.endDate)) break;
         months.push(item.month() + 1);
       }
       mmYear = undefined;
@@ -172,7 +172,7 @@
       var dates = [];
       for (var index = 0; index <= duration; index++) {
         var item = startDate.clone().add(index, 'day');
-        if (item.isAfter(ctrl.endDate)) return;
+        if (item.isAfter(ctrl.endDate)) break;
         dates.push(item.date());
       }
       mmMonth = undefined;

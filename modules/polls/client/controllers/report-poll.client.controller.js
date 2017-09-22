@@ -95,7 +95,7 @@
       ctrl.yearCnt = ctrl.endDate.diff(ctrl.startDate, 'years', true);
     }
     function prepareMonths() {
-      ctrl.monthCnt = ctrl.startDate.diff(ctrl.endDate, 'months', true);
+      ctrl.monthCnt = ctrl.endDate.diff(ctrl.startDate, 'months', true);
       var start = ctrl.startDate.clone();
       while (ctrl.endDate > start) {
         ctrl.months.push(start.format('YYYY-MM'));
@@ -103,7 +103,7 @@
       }
     }
     function prepareWeeks() {
-      ctrl.weekCnt = ctrl.startDate.diff(ctrl.endDate, 'weeks', true);
+      ctrl.weekCnt = ctrl.endDate.diff(ctrl.startDate, 'weeks', true);
     }
     function prepareReportTraffic() {
       ctrl.traffic = {};

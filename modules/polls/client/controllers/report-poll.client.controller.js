@@ -92,10 +92,10 @@
       }
     }
     function prepareYears() {
-      ctrl.yearCnt = ctrl.endDate.diff(ctrl.startDate, 'years', true);
+      ctrl.yearCnt = ctrl.endDate.diff(ctrl.startDate, 'years');
     }
     function prepareMonths() {
-      ctrl.monthCnt = ctrl.endDate.diff(ctrl.startDate, 'months', true);
+      ctrl.monthCnt = ctrl.endDate.diff(ctrl.startDate, 'months');
       var start = ctrl.startDate.clone();
       while (ctrl.endDate > start) {
         ctrl.months.push(start.format('YYYY-MM'));
@@ -103,7 +103,7 @@
       }
     }
     function prepareWeeks() {
-      ctrl.weekCnt = ctrl.endDate.diff(ctrl.startDate, 'weeks', true);
+      ctrl.weekCnt = ctrl.endDate.diff(ctrl.startDate, 'weeks');
     }
     function prepareReportTraffic() {
       ctrl.traffic = {};

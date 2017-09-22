@@ -134,24 +134,28 @@
     ctrl.handleChangeMonth = handleChangeMonth;
     function handleChangeMonth() {
     }
+
     function handleGetMonthsOfYear(year) {
-      var year = moment().utc().year(year);
-      var startMonth = year.clone().startOf('year');
-      var endMonth = year.clone().endOf('year').subtract(1, 'days');
+      var mmYear = moment().utc().year(year);
+      var startMonth = mmYear.clone().startOf('year');
+      var endMonth = mmYear.clone().endOf('year').subtract(1, 'days');
       var durration = endMonth.diff(startMonth, 'months');
       var months = [];
       for (var index = 0; index <= durration; index++) {
         var item = startMonth.clone().add(index, 'months').month() + 1;
         months.push(item);
       }
-      year = undefined;
+      mmYear = undefined;
       startMonth = undefined;
       endMonth = undefined;
       return months;
     }
-    function handleGetDatesOfMonth(month) {
+
+    function handleGetDatesOfMonth(year, month) {
+      var mmMonth = moment().utc().year(year).month(month);
       var startDate = month.clone().startOf('month');
-      var endDate = month.clone().startOf('month');
+      var endDate = month.clone().endOf('month').subtract(1, 'hour');
+      var d
     }
   }
 })();

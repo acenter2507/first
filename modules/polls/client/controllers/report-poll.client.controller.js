@@ -20,7 +20,8 @@
     Action
   ) {
     var ctrl = this;
-    ctrl.form = {};
+    ctrl.endDate = {};
+    ctrl.startDate = {};
 
     onPrepare();
 
@@ -54,9 +55,9 @@
       // Collect dữ liệu hiển thị màn hình
       prepareShowingData();
       console.log(ctrl);
-      
-    }
 
+    }
+    // Lấy các thông tin vote
     function prepareShowingData() {
       // Thiết lập các thông tin cho poll
       ctrl.opts = _.where(ctrl.poll.opts, { status: 1 });
@@ -67,6 +68,17 @@
         opt.voteCnt = _.where(ctrl.voteopts, { opt: opt._id }).length || 0;
         opt.progressVal = Action.calPercen(ctrl.votedTotal, opt.voteCnt);
       });
+    }
+    function prepareDates() {
+      
+    }
+    function prepareTimeline() {
+      ctrl.startDate = moment(ctrl.poll.created).utc();
+      console.log(ctrl.startDate);
+    }
+    function prepareReportTraffic() {
+      ctrl.traffic = {};
+      
     }
   }
 })();

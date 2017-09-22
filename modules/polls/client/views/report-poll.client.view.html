@@ -1,4 +1,15 @@
 <section class="container animated fadeIn mg6t mg50b">
   <div class="row">
+    <div class="col-xs-12">
+      <h2>{{:: ctrl.poll.title}}</h2>
+    </div>
+  </div>
+  <!-- Báo cáo thông số -->
+  <div class="row">
+    <div class="col-xs-12">
+      <canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" chart-series="series" chart-options="options"
+        chart-dataset-override="datasetOverride" chart-click="onClick">
+      </canvas>
+    </div>
   </div>
 </section>

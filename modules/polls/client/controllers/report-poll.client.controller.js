@@ -12,12 +12,12 @@
     'Action',
   ];
 
-  function PollsController(
+  function PollReportController(
     $location,
     $scope,
     $stateParams,
     $state,
-    Action,
+    Action
   ) {
     var ctrl = this;
     ctrl.form = {};

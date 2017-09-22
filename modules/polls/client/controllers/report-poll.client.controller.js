@@ -95,7 +95,7 @@
     function prepareYears() {
       ctrl.yearCnt = ctrl.endDate.diff(ctrl.startDate, 'years');
       for (var index = 0; index < ctrl.yearCnt; index++) {
-        var item = ctrl.startDate.clone().add(index, 'years').year();
+        var item = ctrl.startDate.clone().add(index, 'years').format('YYYY');
         ctrl.years.push(item);
       }
       console.log(ctrl.years);
@@ -103,7 +103,7 @@
     function prepareMonths() {
       ctrl.monthCnt = ctrl.endDate.diff(ctrl.startDate, 'months');
       for (var index = 0; index < ctrl.monthCnt; index++) {
-        var item = ctrl.startDate.clone().add(index, 'months').month();
+        var item = ctrl.startDate.clone().add(index, 'months').format('YYYY-MM');
         ctrl.months.push(item);
       }
       console.log(ctrl.months);

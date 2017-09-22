@@ -145,6 +145,7 @@
       var durration = endMonth.diff(startMonth, 'months');
       var months = [];
       for (var index = 0; index <= durration; index++) {
+        // Tháng bắt đầu từ 0 nên phải + 1
         var item = startMonth.clone().add(index, 'months').month() + 1;
         months.push(item);
       }
@@ -155,7 +156,8 @@
     }
 
     function handleGetDatesOfMonth(year, month) {
-      var mmMonth = moment().utc().year(year).month(month);
+      // Khi truyền ngày vào, phải - 1 vì tháng bắt đầu từ 0
+      var mmMonth = moment().utc().year(year).month(month - 1);
       var startDate = mmMonth.clone().startOf('month');
       var endDate = mmMonth.clone().endOf('month').subtract(1, 'hour');
       var duration = endDate.diff(startDate, 'days');

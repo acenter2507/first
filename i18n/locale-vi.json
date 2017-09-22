@@ -168,6 +168,14 @@
   "LB_VOTE_GET_LINK": "Lấy link bình chọn",
   "LB_VOTE_GET_LINK_MSG": "Hãy chọn lựa chọn rồi gửi đường dẫn bên dưới cho bất kỳ ai có thể tham gia bình chọn. Chú ý có thể người dùng không thể gửi bình chọn vì các thiết lập của poll.",
   "LB_VOTE_EMPTY": "Lựa chọn này chưa nhận được lượt bình chọn nào từ các thành viên.",
+  "LB_POLL_CHART_SERIES": "",
+  "LB_POLL_CHART_TRAFFIC_YEAR": "",
+  "LB_POLL_CHART_TRAFFIC_MONTH": "",
+  "LB_POLL_CHART_TRAFFIC_DATE": "",
+  "LB_POLL_CHART_SERIES": "",
+
+
+
 
   "LB_QUICK_BODY_PLACE": "Hỏi điều gì đó...",
   "LB_QUICK_BODY_REQUIRE": "Bạn cần phải hỏi gì đó",

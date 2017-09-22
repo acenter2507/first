@@ -10,6 +10,7 @@
     '$stateParams',
     '$state',
     'Action',
+    '$translate',
   ];
 
   function PollReportController(
@@ -17,7 +18,8 @@
     $scope,
     $stateParams,
     $state,
-    Action
+    Action,
+    $translate
   ) {
     var ctrl = this;
     ctrl.endDate = {};
@@ -34,7 +36,7 @@
     ctrl.year = '';
     ctrl.month = '';
     ctrl.date = '';
-    ctrl.series = ['Thành viên', 'Khách'];
+    ctrl.series = handleGetTranslate('LB_POLL_CHART_SERIES');//['Thành viên', 'Khách'];
 
     onPrepare();
 
@@ -117,20 +119,22 @@
       }
       ctrl.month = ctrl.months[ctrl.months.length - 1];
     }
-    function prepareReportTraffic() {
-      ctrl.traffic = {};
-      ctrl.traffic.labels = 1;
-
-    }
 
     /**
      * HANDLES
      */
+
+    ctrl.handleChangeMode = handleChangeMode;
+    function handleChangeMode(mode) {
+      if (mode === ctrl.mode) return;
+      ctrl.mode = mode;
+      handleCreateTrafficChart();
+    }
     ctrl.handleChangeYear = handleChangeYear;
     function handleChangeYear() {
       // Nếu mode đang xem là Năm
       if (ctrl.mode === 1) {
-
+        handleCreateTrafficChart();
       } else {
         ctrl.months = handleGetMonthsOfYear(ctrl.year);
         ctrl.month = ctrl.months[ctrl.months.length - 1];
@@ -141,7 +145,7 @@
     function handleChangeMonth() {
       // Nếu mode đang xem là Tháng
       if (ctrl.mode === 2) {
-
+        handleCreateTrafficChart();
       } else {
         ctrl.dates = handleGetDatesOfMonth(ctrl.year, ctrl.month);
         ctrl.date = ctrl.dates[ctrl.dates.length - 1];
@@ -150,7 +154,7 @@
     }
     ctrl.handleChangeDate = handleChangeDate;
     function handleChangeDate() {
-      
+      handleCreateTrafficChart();
     }
 
     /**
@@ -191,6 +195,50 @@
       startDate = undefined;
       endDate = undefined;
       return dates;
+    }
+    function handleCreateTrafficChart() {
+      ctrl.traffic = {};
+      ctrl.traffic.data = handleGetDataTraffic();
+      switch (ctrl.mode) {
+        case 1:
+          ctrl.traffic.labels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_YEAR');
+          break;
+        case 2:
+          ctrl.traffic.labels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_MONTH');
+          break;
+        case 3:
+          ctrl.traffic.labels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_DATE');
+          break;
+        default:
+          ctrl.traffic.labels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_YEAR');
+      }
+
+    }
+    function handleGetTranslate(translateId) {
+      $translate(translateId).then(tsl => {
+        var labels = tsl.split('_');
+        _.map(labels, function (str) { return str.replace(/_/g, ''); });
+        return labels;
+      });
+    }
+    function handleGetDataTraffic() {
+      var data = [];
+      var selected
+      switch (ctrl.mode) {
+        case 1:
+          ctrl.months.forEach(month => {
+            console.log(month);
+          });
+          break;
+        case 2:
+          ctrl.traffic.labels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_MONTH');
+          break;
+        case 3:
+          ctrl.traffic.labels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_DATE');
+          break;
+        default:
+          ctrl.traffic.labels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_YEAR');
+      }
     }
   }
 })();

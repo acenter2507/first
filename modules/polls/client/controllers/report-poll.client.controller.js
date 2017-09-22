@@ -53,29 +53,18 @@
       }
       // Collect dữ liệu hiển thị màn hình
       prepareShowingData();
+      console.log(ctrl);
     }
 
     function prepareShowingData() {
       // Thiết lập các thông tin cho poll
-      ctrl.poll.close = ctrl.poll.close ? moment(ctrl.poll.close) : ctrl.poll.close;
-      ctrl.isClosed = ctrl.poll.close ? moment(ctrl.poll.close).isBefore(new moment().utc()) : false;
       ctrl.opts = _.where(ctrl.poll.opts, { status: 1 });
-      ctrl.chart = {
-        type: 'pie',
-        options: { responsive: true },
-        colors: [],
-        labels: [],
-        data: []
-      };
       ctrl.votes = ctrl.poll.votes || [];
       ctrl.voteopts = ctrl.poll.voteopts || [];
       ctrl.votedTotal = ctrl.voteopts.length;
       ctrl.opts.forEach(opt => {
         opt.voteCnt = _.where(ctrl.voteopts, { opt: opt._id }).length || 0;
         opt.progressVal = Action.calPercen(ctrl.votedTotal, opt.voteCnt);
-        ctrl.chart.colors.push(opt.color);
-        ctrl.chart.labels.push(opt.title);
-        ctrl.chart.data.push(opt.voteCnt);
       });
     }
   }

@@ -33,7 +33,7 @@ module.exports = {
     }
   },
   app: {
-    title: defaultEnvConfig.app.title + ' - Development Environment'
+    title: defaultEnvConfig.app.title + ' - Dev Env'
   },
   http: process.env.HTTP || 'http',
   mailer: {

@@ -1,7 +1,7 @@
 <div class="card" ng-if="ctrl.opts.length > 0">
   <div class="card-header">
     <strong class="card-title">{{:: 'LB_POLL_CHART_PANEL' | translate }}</strong>
-    <a class="card-link" ui-sref="polls.report({ pollId: ctrl.poll.slug })" target="_blank">{{:: 'LB_POLL_CHART_REPORT' | translate }}</a>
+    <a class="card-link font-sm" ui-sref="polls.report({ pollId: ctrl.poll.slug })" target="_blank">{{:: 'LB_POLL_CHART_REPORT' | translate }}</a>
   </div>
   <div class="card-body">
     <canvas style="background: transparent" id="pie" class="chart-base" chart-data="ctrl.chart.data" chart-labels="ctrl.chart.labels"

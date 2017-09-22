@@ -54,7 +54,7 @@
       }
       // Collect dữ liệu hiển thị màn hình
       prepareShowingData();
-      console.log(ctrl);
+      prepareTimeline();
 
     }
     // Lấy các thông tin vote

@@ -38,4 +38,26 @@
       </canvas>-->
     </div>
   </div>
+  <!-- Báo cáo thông số -->
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="form-group">
+        <select ng-options="year as year for year in ctrl.years" ng-model="ctrl.year" class="form-control" ng-change="ctrl.handleChangeYear()"></select>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="form-group">
+        <select ng-options="month as month for month in ctrl.months" ng-model="ctrl.month" class="form-control" ng-change="ctrl.handleChangeMonth()"></select>
+      </div>
+    </div>
+    <div class="col-xs-4">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" chart-series="series" chart-options="options"
+        chart-dataset-override="datasetOverride" chart-click="onClick">
+      </canvas>
+    </div>
+  </div>
 </section>

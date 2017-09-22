@@ -70,15 +70,26 @@
       });
     }
     function prepareDates() {
-      
+
     }
     function prepareTimeline() {
-      ctrl.startDate = moment(ctrl.poll.created);
-      console.log(ctrl.startDate.format());
+      ctrl.startDate = moment(ctrl.poll.created).utc();
+      var now = moment().utc();
+      if (!ctrl.poll.close) {
+        ctrl.endDate = moment().utc();
+      } else {
+        var closeDate = moment(ctrl.poll.close).utc();
+        if (closeDate.isBefore(now)) {
+          ctrl.endDate = closeDate;
+        } else {
+          ctrl.endDate = now;
+        }
+      }
+      console.log(ctrl.startDate.format('LLL'));
+      console.log(ctrl.endDate.format('LLL'));
     }
     function prepareReportTraffic() {
       ctrl.traffic = {};
-      
     }
   }
 })();

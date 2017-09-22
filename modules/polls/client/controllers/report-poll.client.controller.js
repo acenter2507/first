@@ -24,6 +24,7 @@
     ctrl.startDate = {};
     ctrl.years = [];
     ctrl.months = [];
+    ctrl.weeks = [];
     ctrl.yearCnt = 0;
     ctrl.monthCnt = 0;
     ctrl.weekCnt = 0;
@@ -93,13 +94,16 @@
     }
     function prepareYears() {
       ctrl.yearCnt = ctrl.endDate.diff(ctrl.startDate, 'years');
+      for (var index = 0; index < ctrl.yearCnt; index++) {
+        var item = vm.startDate.clone().add(index, 'years').year();
+        ctrl.years.push(item);
+      }
     }
     function prepareMonths() {
       ctrl.monthCnt = ctrl.endDate.diff(ctrl.startDate, 'months');
-      var start = ctrl.startDate.clone();
-      while (ctrl.endDate > start) {
-        ctrl.months.push(start.format('YYYY-MM'));
-        start.add(1, 'month');
+      for (var index = 0; index < ctrl.monthCnt; index++) {
+        var item = vm.startDate.clone().add(index, 'months').month();
+        ctrl.months.push(item);
       }
     }
     function prepareWeeks() {

@@ -128,7 +128,7 @@
     function handleChangeMode(mode) {
       if (mode === ctrl.mode) return;
       ctrl.mode = mode;
-      handleCreateTrafficChart();
+      handleChangeYear();
     }
     ctrl.handleChangeYear = handleChangeYear;
     function handleChangeYear() {

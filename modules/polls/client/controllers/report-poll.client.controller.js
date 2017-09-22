@@ -102,7 +102,7 @@
     }
     function prepareMonths() {
       ctrl.monthCnt = ctrl.endDate.diff(ctrl.startDate, 'months');
-      for (var index = 0; index < ctrl.monthCnt; index++) {
+      for (var index = 0; index <= ctrl.monthCnt; index++) {
         var item = ctrl.startDate.clone().add(index, 'months').format('YYYY-MM');
         ctrl.months.push(item);
       }

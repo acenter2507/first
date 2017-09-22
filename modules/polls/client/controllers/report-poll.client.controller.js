@@ -54,6 +54,7 @@
       // Collect dữ liệu hiển thị màn hình
       prepareShowingData();
       console.log(ctrl);
+      
     }
 
     function prepareShowingData() {

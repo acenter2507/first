@@ -95,6 +95,7 @@
       ctrl.yearCnt = ctrl.endDate.diff(ctrl.startDate, 'years', true);
     }
     function prepareMonths() {
+      ctrl.monthCnt = ctrl.startDate.diff(ctrl.endDate, 'months', true);
       var start = ctrl.startDate.clone();
       while (ctrl.endDate > start) {
         ctrl.months.push(start.format('YYYY-MM'));
@@ -102,7 +103,7 @@
       }
     }
     function prepareWeeks() {
-      var weekCnt = ctrl.startDate.diff(ctrl.endDate, 'week');
+      ctrl.weekCnt = ctrl.startDate.diff(ctrl.endDate, 'weeks', true);
     }
     function prepareReportTraffic() {
       ctrl.traffic = {};

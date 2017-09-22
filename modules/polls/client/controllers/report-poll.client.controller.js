@@ -98,6 +98,7 @@
         var item = ctrl.startDate.clone().add(index, 'years').year();
         ctrl.years.push(item);
       }
+      console.log(ctrl.years);
     }
     function prepareMonths() {
       ctrl.monthCnt = ctrl.endDate.diff(ctrl.startDate, 'months');
@@ -105,6 +106,7 @@
         var item = ctrl.startDate.clone().add(index, 'months').month();
         ctrl.months.push(item);
       }
+      console.log(ctrl.months);
     }
     function prepareWeeks() {
       ctrl.weekCnt = ctrl.endDate.diff(ctrl.startDate, 'weeks');

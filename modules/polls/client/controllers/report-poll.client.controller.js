@@ -73,7 +73,7 @@
       
     }
     function prepareTimeline() {
-      ctrl.startDate = moment(ctrl.poll.created).utc();
+      ctrl.startDate = moment(ctrl.poll.created);
       console.log(ctrl.startDate.format());
     }
     function prepareReportTraffic() {

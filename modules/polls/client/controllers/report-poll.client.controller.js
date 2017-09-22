@@ -99,7 +99,7 @@
     }
     function prepareYears() {
       ctrl.yearCnt = ctrl.endDate.diff(ctrl.startDate, 'years');
-      for (var index = 0; index < ctrl.yearCnt; index++) {
+      for (var index = 0; index <= ctrl.yearCnt; index++) {
         var item = ctrl.startDate.clone().add(index, 'years').year();
         ctrl.years.push(item);
       }
@@ -156,11 +156,8 @@
 
     function handleGetDatesOfMonth(year, month) {
       var mmMonth = moment().utc().year(year).month(month);
-      console.log(mmMonth);
       var startDate = mmMonth.clone().startOf('month');
-      console.log(startDate);
       var endDate = mmMonth.clone().endOf('month').subtract(1, 'hour');
-      console.log(endDate);
       var duration = endDate.diff(startDate, 'days');
       var dates = [];
       for (var index = 0; index <= duration; index++) {

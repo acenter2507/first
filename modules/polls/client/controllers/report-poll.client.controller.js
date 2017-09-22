@@ -69,7 +69,6 @@
       prepareShowingData();
       prepareDays();
       prepareYears();
-      prepareMonths();
       prepareWeeks();
     }
     // Lấy các thông tin vote

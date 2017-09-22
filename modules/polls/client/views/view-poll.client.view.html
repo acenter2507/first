@@ -84,7 +84,7 @@
       <!-- Options -->
       <div class="card" id="opts_detail_card">
         <div class="card-header">
-          <strong class="card-title">{{:: 'LB_POLL_OPTIONS' | translate }} ({{ctrl.opts.length}})</strong>
+          <strong class="card-title">{{:: 'LB_POLL_OPTIONS' | translate }} ({{ctrl.opts.length | shortNumber }})</strong>
           <a class="card-link font-sm" ng-if="ctrl.opts.length > 0" ng-click="ctrl.handleGetLinkOption()">{{:: 'LB_VOTE_GET_LINK' | translate }}</a>
         </div>
         <div class="card-body">
@@ -203,27 +203,27 @@
         </div>
         <div class="card-body">
           <div class="col-xs-3 pdn">
+            <div class="poll_info_item">
+              <div class="value">{{ctrl.poll.voteCnt | shortNumber}}</div>
+              <span class="label">{{:: 'LB_POLLS_VOTES' | translate }}</span>
+            </div>
+          </div>
+          <div class="col-xs-3 pdn text-center">
             <div class="poll_info_item pull-left">
               <div class="value">{{ctrl.poll.viewCnt | shortNumber}}</div>
               <span class="label">{{:: 'LB_POLLS_VIEWS' | translate }}</span>
             </div>
           </div>
           <div class="col-xs-3 pdn text-center">
-            <div class="poll_info_item">
-              <div class="value">{{ctrl.poll.likeCnt | shortNumber}}</div>
-              <span class="label">{{:: 'LB_POLLS_LIKES' | translate }}</span>
-            </div>
-          </div>
-          <div class="col-xs-3 pdn text-center">
-            <div class="poll_info_item">
-              <div class="value">{{ctrl.poll.voteCnt | shortNumber}}</div>
-              <span class="label">{{:: 'LB_POLLS_VOTES' | translate }}</span>
-            </div>
-          </div>
-          <div class="col-xs-3 pdn">
             <div class="poll_info_item pull-right">
               <div class="value">{{ctrl.poll.cmtCnt | shortNumber}}</div>
               <span class="label">{{:: 'LB_POLLS_COMMENTS' | translate }}</span>
+            </div>
+          </div>
+          <div class="col-xs-3 pdn">
+            <div class="poll_info_item">
+              <div class="value">{{ctrl.poll.likeCnt | shortNumber}}</div>
+              <span class="label">{{:: 'LB_POLLS_LIKES' | translate }}</span>
             </div>
           </div>
           <div class="clearfix"></div>

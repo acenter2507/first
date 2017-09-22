@@ -99,6 +99,8 @@
         $scope.handleShowMessage('LB_POLLS_PRIVATE_ERROR', true);
         return;
       }
+      // Collect dữ liệu hiển thị màn hình
+      prepareShowingData();
       // Lấy thông tin tương tác của người dùng với poll hiện tại
       prepareOwnerInfo().then(() => {
         // Kiểm tra giá trị vote
@@ -106,22 +108,20 @@
       });
       // Kiểm tra thông báo
       prepareParamNotification();
-      // Collect dữ liệu hiển thị màn hình
-      prepareShowingData();
-      // Kiểm tra và đếm ngược thời gian close của poll
-      prepareCloseRemaining();
       // Lắng nghe các request từ server socket
       prepareSocketListener();
       // Đặt timer lưu poll vào Viewed đồng thời tăng lượt View
       handleSaveViewed();
       // Load comment
       handleLoadComments();
+      // Kiểm tra và đếm ngược thời gian close của poll
+      prepareCloseRemaining();
     }
 
     function prepareShowingData() {
       // Thiết lập các thông tin cho poll
       ctrl.poll.close = ctrl.poll.close ? moment(ctrl.poll.close) : ctrl.poll.close;
-      ctrl.isClosed = ctrl.poll.close ? moment(ctrl.poll.close).isBefore(new moment()) : false;
+      ctrl.isClosed = ctrl.poll.close ? moment(ctrl.poll.close).isBefore(new moment().utc()) : false;
       ctrl.opts = _.where(ctrl.poll.opts, { status: 1 });
       ctrl.chart = {
         type: 'pie',
@@ -348,14 +348,22 @@
     // Lưu thông tin bình chọn
     ctrl.handleSaveVote = handleSaveVote;
     function handleSaveVote() {
+      // Nếu chưa đăng nhập mà gặp phải poll chỉ cho thành viên
       if (!$scope.isLogged && !ctrl.poll.allow_guest) {
         return $state.go('authentication.signin');
       }
+      // Nếu không vote cho cái nào mà bấm
       if (!ctrl.selectedOpts.length || ctrl.selectedOpts.length === 0) {
         $scope.handleShowMessage('LB_POLLS_VOTE_EMPTY', true);
         return;
       }
+      // Nếu thông tin mới và cũ giống nhau
       if (angular.equals(ctrl.votedOpts, ctrl.selectedOpts)) {
+        return;
+      }
+      // Nếu poll đã hết thời hạn
+      if (ctrl.isClosed) {
+        $scope.handleShowMessage('LB_POLL_CLOSED', true);
         return;
       }
       Action.save_vote(ctrl.ownVote, ctrl.selectedOpts, ctrl.poll)

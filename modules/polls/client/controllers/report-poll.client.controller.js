@@ -105,6 +105,7 @@
         ctrl.years.push(item);
       }
       ctrl.year = ctrl.years[ctrl.years.length - 1];
+      handleChangeYear();
     }
     function prepareMonths() {
       ctrl.monthCnt = ctrl.endDate.diff(ctrl.startDate, 'months');

@@ -40,6 +40,12 @@
           pageTitle: 'Edit Poll {{ pollResolve.name }}'
         }
       })
+      .state('polls.report', {
+        url: '/:pollId/report',
+        templateUrl: 'modules/polls/client/views/report-poll.client.view.html',
+        controller: 'PollReportController',
+        controllerAs: 'ctrl'
+      })
       .state('polls.view', {
         url: '/:pollId?notif?share?vote',
         views: {

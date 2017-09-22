@@ -88,7 +88,7 @@
     // Init data
     function onCreate() {
       // Nếu poll không tồn tại thì về trang chủ
-      if (!ctrl.poll._id) {
+      if (!ctrl.poll || !ctrl.poll._id) {
         $state.go('home');
         $scope.handleShowMessage('LB_POLL_EXIST_ERROR', true);
         return;

@@ -156,8 +156,11 @@
 
     function handleGetDatesOfMonth(year, month) {
       var mmMonth = moment().utc().year(year).month(month);
+      console.log(mmMonth);
       var startDate = mmMonth.clone().startOf('month');
+      console.log(startDate);
       var endDate = mmMonth.clone().endOf('month').subtract(1, 'hour');
+      console.log(endDate);
       var duration = endDate.diff(startDate, 'days');
       var dates = [];
       for (var index = 0; index <= durration; index++) {

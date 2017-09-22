@@ -4,7 +4,7 @@
   angular.module('polls')
     .controller('PollReportController', PollReportController);
 
-  PollsController.$inject = [
+  PollReportController.$inject = [
     '$location',
     '$scope',
     '$stateParams',

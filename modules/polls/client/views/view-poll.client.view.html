@@ -140,11 +140,6 @@
                 <strong class="mg5l" ng-style="{color: opt.color}">●</strong>
               </md-radio-button>
             </md-radio-group>
-            <!--<label class="control control--radio w100p">
-              {{opt.title}}<span class="mg5l" ng-style="{color: opt.color}"><strong>●</strong></span>
-              <input type="radio" name="vote_radio" ng-checked="ctrl.is_voted(opt._id)" ng-click="ctrl.handleChecked(opt._id)"/>
-              <div class="control__indicator"></div>
-            </label>-->
           </div>
           <div class="form-group" ng-if="ctrl.poll.allow_multiple">
             <div ng-repeat="opt in ctrl.opts">

@@ -145,6 +145,7 @@
   "LB_POLL_ENTER_TO_SEND": "Enter to send",
   "LB_POLL_CHART_PANEL": "Chart panel",
   "LB_POLL_CHART_CHANGE": "Change chart",
+  "LB_POLL_CHART_REPORT": "Detail report",
   "LB_POLL_FOLLOW_TOOLTIP": "You have not follow this poll yet.",
   "LB_POLL_UNFOLLOW_TOOLTIP": "You'r following this poll.",
   "LB_POLL_OPTIONS": "Options",

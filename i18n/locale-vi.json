@@ -145,6 +145,7 @@
   "LB_POLL_ENTER_TO_SEND": "Bấm enter để gửi",
   "LB_POLL_CHART_PANEL": "Biểu đồ bình chọn",
   "LB_POLL_CHART_CHANGE": "Đổi biểu đồ",
+  "LB_POLL_CHART_REPORT": "Báo cáo chi tiết",
   "LB_POLL_FOLLOW_TOOLTIP": "Bạn chưa theo dõi poll này.",
   "LB_POLL_UNFOLLOW_TOOLTIP": "Bạn đang theo dõi poll này.",
   "LB_POLL_OPTIONS": "Lựa chọn",

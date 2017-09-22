@@ -51,6 +51,9 @@
       </div>
     </div>
     <div class="col-xs-4">
+      <div class="form-group">
+        <select ng-options="date as date for date in ctrl.dates" ng-model="ctrl.date" class="form-control" ng-change="ctrl.handleChangeDate()"></select>
+      </div>
     </div>
   </div>
   <div class="row">

@@ -24,7 +24,7 @@
     ctrl.startDate = {};
     ctrl.years = [];
     ctrl.months = [];
-    ctrl.weeks = [];
+    ctrl.dates = [];
     ctrl.yearCnt = 0;
     ctrl.monthCnt = 0;
     ctrl.weekCnt = 0;
@@ -33,6 +33,7 @@
     ctrl.mode = 1; // 1: month - 2: year - 3: weeks
     ctrl.year = '';
     ctrl.month = '';
+    ctrl.date = '';
     ctrl.series = ['Thành viên', 'Khách'];
 
 
@@ -69,7 +70,6 @@
       prepareShowingData();
       prepareDays();
       prepareYears();
-      prepareWeeks();
     }
     // Lấy các thông tin vote
     function prepareShowingData() {
@@ -114,9 +114,6 @@
       }
       ctrl.month = ctrl.months[ctrl.months.length - 1];
     }
-    function prepareWeeks() {
-      ctrl.weekCnt = ctrl.endDate.diff(ctrl.startDate, 'weeks');
-    }
     function prepareReportTraffic() {
       ctrl.traffic = {};
       ctrl.traffic.labels = 1;
@@ -130,9 +127,15 @@
     function handleChangeYear() {
       ctrl.months = handleGetMonthsOfYear(ctrl.year);
       ctrl.month = ctrl.months[ctrl.months.length - 1];
+      handleChangeMonth();
     }
     ctrl.handleChangeMonth = handleChangeMonth;
     function handleChangeMonth() {
+      ctrl.dates = handleGetDatesOfMonth(ctrl.year, ctrl.month);
+      ctrl.date = ctrl.dates[ctrl.dates.length - 1];
+    }
+    ctrl.handleChangeDate = handleChangeDate;
+    function handleChangeDate() {
     }
 
     function handleGetMonthsOfYear(year) {
@@ -155,7 +158,16 @@
       var mmMonth = moment().utc().year(year).month(month);
       var startDate = month.clone().startOf('month');
       var endDate = month.clone().endOf('month').subtract(1, 'hour');
-      var d
+      var duration = endDate.diff(startDate, 'days');
+      var dates = [];
+      for (var index = 0; index <= durration; index++) {
+        var item = startDate.clone().add(index, 'day').date();
+        dates.push(item);
+      }
+      mmMonth = undefined;
+      startDate = undefined;
+      endDate = undefined;
+      return dates;
     }
   }
 })();

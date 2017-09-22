@@ -24,6 +24,8 @@
     ctrl.startDate = {};
     ctrl.years = [];
     ctrl.months = [];
+    ctrl.yearCnt = 0;
+    ctrl.monthCnt = 0;
     ctrl.weekCnt = 0;
 
 
@@ -90,11 +92,7 @@
       }
     }
     function prepareYears() {
-      var start = ctrl.startDate.clone();
-      while (ctrl.endDate > start) {
-        ctrl.years.push(start.format('YYYY'));
-        start.add(1, 'year');
-      }
+      ctrl.yearCnt = ctrl.endDate.diff(ctrl.startDate, 'years', true);
     }
     function prepareMonths() {
       var start = ctrl.startDate.clone();

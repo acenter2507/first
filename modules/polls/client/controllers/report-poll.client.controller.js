@@ -22,6 +22,10 @@
     var ctrl = this;
     ctrl.endDate = {};
     ctrl.startDate = {};
+    ctrl.years = [];
+    ctrl.months = [];
+    ctrl.weekCnt = 0;
+
 
     onPrepare();
 
@@ -54,8 +58,10 @@
       }
       // Collect dữ liệu hiển thị màn hình
       prepareShowingData();
-      prepareTimeline();
-
+      prepareDays();
+      prepareYears();
+      prepareMonths();
+      prepareWeeks();
     }
     // Lấy các thông tin vote
     function prepareShowingData() {
@@ -69,10 +75,7 @@
         opt.progressVal = Action.calPercen(ctrl.votedTotal, opt.voteCnt);
       });
     }
-    function prepareDates() {
-
-    }
-    function prepareTimeline() {
+    function prepareDays() {
       ctrl.startDate = moment(ctrl.poll.created).utc();
       var now = moment().utc();
       if (!ctrl.poll.close) {
@@ -85,8 +88,23 @@
           ctrl.endDate = now;
         }
       }
-      console.log(ctrl.startDate.format('LLL'));
-      console.log(ctrl.endDate.format('LLL'));
+    }
+    function prepareYears() {
+      var start = ctrl.startDate.clone();
+      while (ctrl.endDate > start) {
+        ctrl.years.push(start.format('YYYY'));
+        start.add(1, 'year');
+      }
+    }
+    function prepareMonths() {
+      var start = ctrl.startDate.clone();
+      while (ctrl.endDate > start) {
+        ctrl.months.push(start.format('YYYY-MM'));
+        start.add(1, 'month');
+      }
+    }
+    function prepareWeeks() {
+      var weekCnt = ctrl.startDate.diff(ctrl.endDate, 'week');
     }
     function prepareReportTraffic() {
       ctrl.traffic = {};

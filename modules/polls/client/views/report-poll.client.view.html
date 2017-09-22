@@ -7,9 +7,33 @@
   <!-- Báo cáo thông số -->
   <div class="row">
     <div class="col-xs-12">
-      <canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" chart-series="series" chart-options="options"
+      <table class="table">
+        <tr>
+          <td>Ngày bắt đầu: </td>
+          <td>{{ ctrl.startDate.local().format('LLL') }}</td>
+          <td>{{ ctrl.startDate.format('LLL') }}</td>
+        </tr>
+        <tr>
+          <td>Ngày kết thúc: </td>
+          <td>{{ ctrl.endDate.local().format('LLL') }}</td>
+          <td>{{ ctrl.endDate.format('LLL') }}</td>
+        </tr>
+        <tr>
+          <td>Danh sách năm: </td>
+          <td colspan="2" ng-bind="ctrl.years"></td>
+        </tr>
+        <tr>
+          <td>Danh sách tháng: </td>
+          <td colspan="2" ng-bind="ctrl.months"></td>
+        </tr>
+        <tr>
+          <td>Số tuần: </td>
+          <td colspan="2" ng-bind="ctrl.weekCnt"></td>
+        </tr>
+      </table>
+      <!--<canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" chart-series="series" chart-options="options"
         chart-dataset-override="datasetOverride" chart-click="onClick">
-      </canvas>
+      </canvas>-->
     </div>
   </div>
 </section>

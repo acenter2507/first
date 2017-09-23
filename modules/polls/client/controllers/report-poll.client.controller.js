@@ -225,7 +225,7 @@
     function handleGetTranslate(translateId) {
       $translate(translateId).then(tsl => {
         var labels = tsl.split('_');
-        _.map(labels, function (str) { return str.replace(/_/g, ''); });
+        labels = _.map(labels, function (str) { return str.replace(/_/g, ''); });
         return labels;
       });
     }

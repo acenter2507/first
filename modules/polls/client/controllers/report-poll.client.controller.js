@@ -41,6 +41,7 @@
 
     // Chart data
     ctrl.chartSeries = [];
+    ctrl.chartColors = ['#267ed5', '#ffa500'];
     ctrl.chartOption = {
       legend: { display: true },
       scales: {
@@ -192,7 +193,8 @@
     ctrl.handleCreateLineChart = handleCreateLineChart;
     function handleCreateLineChart() {
       ctrl.lineChart = {
-        series: ctrl.chartSeries
+        series: ctrl.chartSeries,
+        colors: ctrl.chartColors
       };
       ctrl.lineChart.data = handleGetDataLineChart();
 
@@ -211,6 +213,7 @@
       ctrl.barChart = {
         series: ctrl.chartSeries,
         labels: ctrl.barChartLabels,
+        colors: ctrl.chartColors,
         option: ctrl.chartOption
       };
       ctrl.barChart.data = handleGetDataBarChart();

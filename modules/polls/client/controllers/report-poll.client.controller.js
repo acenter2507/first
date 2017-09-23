@@ -383,6 +383,7 @@
         });
         member.push(memberCnt);
         guest.push(guestCnt);
+        console.log('Member: ' + memberCnt + '----' + 'Guest: ' + guestCnt);
       });
       data.push(member);
       data.push(guest);

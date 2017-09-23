@@ -36,11 +36,8 @@
     ctrl.year = '';
     ctrl.month = '';
     ctrl.date = '';
-    handleGetTranslate([
-      'LB_POLL_CHART_SERIES',
-      'LB_POLL_CHART_TRAFFIC_YEAR',
-      'LB_POLL_CHART_TRAFFIC_MONTH',
-      'LB_POLL_CHART_TRAFFIC_DATE']);
+
+    handleGetTranslate(;
     // ctrl.series = handleGetTranslate('LB_POLL_CHART_SERIES');
     // var labels = [
     //   handleGetTranslate('LB_POLL_CHART_TRAFFIC_YEAR'),
@@ -90,6 +87,26 @@
      * PREPARE
      */
     // Lấy các thông tin vote
+    function preapreTranslateData() {
+      return new Promise((resolve, reject) => {
+        var translateIds = [
+          'LB_POLL_CHART_SERIES',
+          'LB_POLL_CHART_TRAFFIC_YEAR',
+          'LB_POLL_CHART_TRAFFIC_MONTH',
+          'LB_POLL_CHART_TRAFFIC_DATE'];
+        $translate(translateIds).then(tsl => {
+          angular.forEach(tsl, function (val, key) {
+            var array = val.split('_');
+            array = _.map(array, function (str) { return str.replace(/_/g, ''); });
+            tsl[key] = array;
+          });
+          console.log(tsl);
+          // var labels = tsl.split('_');
+          // labels = _.map(labels, function (str) { return str.replace(/_/g, ''); });
+          // return labels;
+        });
+      });
+    }
     function prepareShowingData() {
       // Thiết lập các thông tin cho poll
       ctrl.opts = _.where(ctrl.poll.opts, { status: 1 });
@@ -228,12 +245,6 @@
       }
     }
     function handleGetTranslate(translateId) {
-      $translate(translateId).then(tsl => {
-        console.log(tsl);
-        // var labels = tsl.split('_');
-        // labels = _.map(labels, function (str) { return str.replace(/_/g, ''); });
-        // return labels;
-      });
     }
     function handleGetDataTraffic() {
       var data = [];

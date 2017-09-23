@@ -176,10 +176,9 @@
   "LB_YEAR": "Năm",
   "LB_MONTH": "Tháng",
   "LB_DATE": "Ngày",
-  "LB_POLL_CHART_ZONE": "Múi giờ:",
-  "LB_POLL_CHART_UTC": "Chuẩn UTC",
-  "LB_POLL_CHART_LANG": "Dựa theo ngôn ngữ đã chọn",
-  "LB_POLL_CHART_LOCAL": "Giờ địa phương",
+  "LB_POLL_CHART_UTC": "Múi giờ chuẩn UTC",
+  "LB_POLL_CHART_LANG": "Múi giờ theo ngôn ngữ",
+  "LB_POLL_CHART_LOCAL": "Múi giờ địa phương",
   
   "LB_QUICK_BODY_PLACE": "Hỏi điều gì đó...",
   "LB_QUICK_BODY_REQUIRE": "Bạn cần phải hỏi gì đó",

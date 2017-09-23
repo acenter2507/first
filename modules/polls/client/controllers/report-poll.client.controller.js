@@ -382,6 +382,7 @@
       });
       data.push(member);
       data.push(guest);
+      console.log(data);
       return data;
     }
   }

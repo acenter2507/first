@@ -27,15 +27,12 @@
     ctrl.years = [];
     ctrl.months = [];
     ctrl.dates = [];
-    ctrl.yearCnt = 0;
-    ctrl.monthCnt = 0;
-    ctrl.weekCnt = 0;
 
     // Timezone
     ctrl.timezone = 'utc';
 
-    // Traffic chart data
-    ctrl.mode = 1; // 1: year - 2: month - 3: date
+    // Line chart data
+    ctrl.lineChartMode = 1; // 1: year - 2: month - 3: date
     ctrl.year = '';
     ctrl.month = '';
     ctrl.date = '';
@@ -90,7 +87,7 @@
       return new Promise((resolve, reject) => {
         var translateIds = [
           'LB_POLL_CHART_SERIES',
-          'LB_POLL_CHART_TRAFFIC_YEAR'];
+          'LB_POLL_CHART_LINE_YEAR'];
         $translate(translateIds).then(tsl => {
           angular.forEach(tsl, function (val, key) {
             var array = val.split('_');
@@ -99,7 +96,7 @@
           });
           // Gán các giá trị translate đã lấy vào biến controller
           ctrl.series = tsl.LB_POLL_CHART_SERIES;
-          ctrl.yearLabels = tsl.LB_POLL_CHART_TRAFFIC_YEAR;
+          ctrl.yearLabels = tsl.LB_POLL_CHART_LINE_YEAR;
           return resolve();
         });
       });
@@ -130,8 +127,8 @@
       }
     }
     function prepareYears() {
-      ctrl.yearCnt = ctrl.endDate.diff(ctrl.startDate, 'years');
-      for (var index = 0; index <= ctrl.yearCnt; index++) {
+      var durration = ctrl.endDate.diff(ctrl.startDate, 'years');
+      for (var index = 0; index <= durration; index++) {
         var item = ctrl.startDate.clone().add(index, 'years').year();
         ctrl.years.push(item);
       }
@@ -139,8 +136,8 @@
       handleChangeYear();
     }
     function prepareMonths() {
-      ctrl.monthCnt = ctrl.endDate.diff(ctrl.startDate, 'months');
-      for (var index = 0; index <= ctrl.monthCnt; index++) {
+      var durration = ctrl.endDate.diff(ctrl.startDate, 'months');
+      for (var index = 0; index <= durration; index++) {
         var item = ctrl.startDate.clone().add(index, 'months').month();
         ctrl.months.push(item);
       }
@@ -150,54 +147,58 @@
     /**
      * HANDLES
      */
-
-    ctrl.handleChangeMode = handleChangeMode;
-    function handleChangeMode(mode) {
-      if (mode === ctrl.mode) return;
-      ctrl.mode = mode;
+    // Sự kiện thay đổi mode của line chart
+    ctrl.handleChangeLineChartMode = handleChangeLineChartMode;
+    function handleChangeLineChartMode(mode) {
+      if (mode === ctrl.lineChartMode) return;
+      ctrl.lineChartMode = mode;
       handleChangeYear();
     }
+    // Sự kiện thay đổi năm của line chart
     ctrl.handleChangeYear = handleChangeYear;
     function handleChangeYear() {
       // Nếu mode đang xem là Năm
-      if (ctrl.mode === 1) {
-        handleCreateTrafficChart();
+      if (ctrl.lineChartMode === 1) {
+        handleCreateLineChart();
       } else {
         ctrl.months = handleGetMonthsOfYear(ctrl.year);
         ctrl.month = ctrl.months[ctrl.months.length - 1];
         handleChangeMonth();
       }
     }
+    // Sự kiện thay đổi tháng của line chart
     ctrl.handleChangeMonth = handleChangeMonth;
     function handleChangeMonth() {
       // Nếu mode đang xem là Tháng
-      if (ctrl.mode === 2) {
+      if (ctrl.lineChartMode === 2) {
         ctrl.dates = handleGetDatesOfMonth(ctrl.year, ctrl.month);
         ctrl.date = ctrl.dates[ctrl.dates.length - 1];
-        handleCreateTrafficChart();
+        handleCreateLineChart();
       } else {
         ctrl.dates = handleGetDatesOfMonth(ctrl.year, ctrl.month);
         ctrl.date = ctrl.dates[ctrl.dates.length - 1];
         handleChangeDate();
       }
     }
+    // Sự kiện thay đổi ngày của line chart
     ctrl.handleChangeDate = handleChangeDate;
     function handleChangeDate() {
-      handleCreateTrafficChart();
+      handleCreateLineChart();
     }
-    ctrl.handleCreateTrafficChart = handleCreateTrafficChart;
-    function handleCreateTrafficChart() {
-      ctrl.traffic = {};
-      ctrl.traffic.data = handleGetDataTraffic();
+    // Tạo lại object line chart
+    ctrl.handleCreateLineChart = handleCreateLineChart;
+    function handleCreateLineChart() {
+      ctrl.lineChart = {};
+      ctrl.lineChart.data = handleGetDataLineChart();
 
-      if (ctrl.mode === 1) {
-        ctrl.traffic.labels = ctrl.yearLabels;
-      } else if (ctrl.mode === 2) {
-        ctrl.traffic.labels = ctrl.dates;
+      if (ctrl.lineChartMode === 1) {
+        ctrl.lineChart.labels = ctrl.yearLabels;
+      } else if (ctrl.lineChartMode === 2) {
+        ctrl.lineChart.labels = ctrl.dates;
       } else {
-        ctrl.traffic.labels = ctrl.dateLabels;
+        ctrl.lineChart.labels = ctrl.dateLabels;
       }
-      ctrl.traffic.option = {
+      ctrl.lineChart.option = {
         scales: {
           yAxes: [{
             ticks: {
@@ -247,13 +248,13 @@
       endDate = undefined;
       return dates;
     }
-    function handleGetDataTraffic() {
+    function handleGetDataLineChart() {
       var rs = [];
       var member = [];
       var guest = [];
       var votes = [];
       var created, downedMonth;
-      switch (ctrl.mode) {
+      switch (ctrl.lineChartMode) {
         case 1:
           for (let index = 0; index < 12; index++) {
             votes = [];

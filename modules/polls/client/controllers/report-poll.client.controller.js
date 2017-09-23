@@ -360,7 +360,7 @@
           } else {
             created = moment(vote.updated).local();
           }
-          console.log(ctrl.year + '-' + (ctrl.month-1) + '-' + ctrl.date + '----' + created.format('YYYY-MM-DD'));
+          console.log(ctrl.year + '-' + (ctrl.month-1) + '-' + ctrl.date + '----' + created.year() + '-' + created.month() + '-' + created.date());
           isMatch = false;
           switch (ctrl.chartMode) {
             case 1:

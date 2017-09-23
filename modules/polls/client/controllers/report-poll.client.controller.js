@@ -101,7 +101,13 @@
             array = _.map(array, function (str) { return str.replace(/_/g, ''); });
             tsl[key] = array;
           });
-          console.log(tsl);
+          // Gán các giá trị translate đã lấy vào biến controller
+          ctrl.series = tsl['LB_POLL_CHART_SERIES'];
+          ctrl.lables = [
+            tsl['LB_POLL_CHART_TRAFFIC_YEAR'],
+            tsl['LB_POLL_CHART_TRAFFIC_MONTH'],
+            tsl['LB_POLL_CHART_TRAFFIC_DATE'],
+          ];
           return resolve();
           // var labels = tsl.split('_');
           // labels = _.map(labels, function (str) { return str.replace(/_/g, ''); });
@@ -229,22 +235,9 @@
       return dates;
     }
     function handleCreateTrafficChart() {
-      console.log(ctrl.yearLabels);
       ctrl.traffic = {};
       ctrl.traffic.data = handleGetDataTraffic();
-      switch (ctrl.mode) {
-        case 1:
-          ctrl.traffic.labels = ctrl.yearLabels;
-          break;
-        case 2:
-          ctrl.traffic.labels = ctrl.monthLabels;
-          break;
-        case 3:
-          ctrl.traffic.labels = ctrl.dateLabels;
-          break;
-        default:
-          ctrl.traffic.labels = ctrl.yearLabels;
-      }
+      ctrl.traffic.labels = ctrl.lables[ctrl.mode - 1];
     }
     function handleGetTranslate(translateId) {
     }

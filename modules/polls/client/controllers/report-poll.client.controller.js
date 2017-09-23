@@ -252,6 +252,7 @@
         default:
           ctrl.traffic.labels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_YEAR');
       }
+      return data;
     }
   }
 })();

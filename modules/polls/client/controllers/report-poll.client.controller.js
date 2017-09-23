@@ -220,7 +220,7 @@
         default:
           ctrl.traffic.labels = yearLabels;
       }
-      console.log();
+      console.log(ctrl.traffic);
     }
     function handleGetTranslate(translateId) {
       $translate(translateId).then(tsl => {

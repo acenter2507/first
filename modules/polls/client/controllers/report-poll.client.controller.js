@@ -36,7 +36,15 @@
     ctrl.year = '';
     ctrl.month = '';
     ctrl.date = '';
-    ctrl.series = handleGetTranslate('LB_POLL_CHART_SERIES');//['Thành viên', 'Khách'];
+    ctrl.series = handleGetTranslate('LB_POLL_CHART_SERIES');
+    var labels = [
+      handleGetTranslate('LB_POLL_CHART_TRAFFIC_YEAR'),
+      handleGetTranslate('LB_POLL_CHART_TRAFFIC_MONTH'),
+      handleGetTranslate('LB_POLL_CHART_TRAFFIC_DATE')
+    ];
+    // var yearLabels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_YEAR');
+    // var monthLabels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_MONTH');
+    // var dateLabels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_DATE');
 
     onPrepare();
 
@@ -199,20 +207,21 @@
     function handleCreateTrafficChart() {
       ctrl.traffic = {};
       ctrl.traffic.data = handleGetDataTraffic();
-      switch (ctrl.mode) {
-        case 1:
-          ctrl.traffic.labels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_YEAR');
-          break;
-        case 2:
-          ctrl.traffic.labels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_MONTH');
-          break;
-        case 3:
-          ctrl.traffic.labels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_DATE');
-          break;
-        default:
-          ctrl.traffic.labels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_YEAR');
-      }
-
+      ctrl.traffic.labels = labels[ctrl.mode];
+      // switch (ctrl.mode) {
+      //   case 1:
+      //     ctrl.traffic.labels = yearLabels;
+      //     break;
+      //   case 2:
+      //     ctrl.traffic.labels = monthLabels;
+      //     break;
+      //   case 3:
+      //     ctrl.traffic.labels = dateLabels;
+      //     break;
+      //   default:
+      //     ctrl.traffic.labels = yearLabels;
+      // }
+      console.log(ctrl.traffic);
     }
     function handleGetTranslate(translateId) {
       $translate(translateId).then(tsl => {

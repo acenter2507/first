@@ -32,10 +32,15 @@
     ctrl.weekCnt = 0;
 
     // Chart data
-    ctrl.mode = 1; // 1: year - 2: month - 3: weeks
+    ctrl.mode = 1; // 1: year - 2: month - 3: date
     ctrl.year = '';
     ctrl.month = '';
     ctrl.date = '';
+
+    // Chart data
+    ctrl.series = [];
+    ctrl.yearLabels = [];
+    ctrl.dateLabels = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'];
 
     onPrepare();
 
@@ -82,9 +87,7 @@
       return new Promise((resolve, reject) => {
         var translateIds = [
           'LB_POLL_CHART_SERIES',
-          'LB_POLL_CHART_TRAFFIC_YEAR',
-          'LB_POLL_CHART_TRAFFIC_MONTH',
-          'LB_POLL_CHART_TRAFFIC_DATE'];
+          'LB_POLL_CHART_TRAFFIC_YEAR'];
         $translate(translateIds).then(tsl => {
           angular.forEach(tsl, function (val, key) {
             var array = val.split('_');
@@ -93,11 +96,7 @@
           });
           // Gán các giá trị translate đã lấy vào biến controller
           ctrl.series = tsl.LB_POLL_CHART_SERIES;
-          ctrl.lables = [
-            tsl.LB_POLL_CHART_TRAFFIC_YEAR,
-            tsl.LB_POLL_CHART_TRAFFIC_MONTH,
-            tsl.LB_POLL_CHART_TRAFFIC_DATE
-          ];
+          ctrl.yearLabels = tsl.LB_POLL_CHART_TRAFFIC_YEAR;
           return resolve();
         });
       });
@@ -226,10 +225,13 @@
     function handleCreateTrafficChart() {
       ctrl.traffic = {};
       ctrl.traffic.data = handleGetDataTraffic();
-      if (ctrl.mode === 2) {
+
+      if (ctrl.mode === 1) {
+        ctrl.traffic.labels = ctrl.yearLabels;
+      } else if (ctrl.mode === 2) {
         ctrl.traffic.labels = ctrl.dates;
       } else {
-        ctrl.traffic.labels = ctrl.lables[ctrl.mode - 1];
+        ctrl.traffic.labels = ctrl.dateLabels;
       }
       ctrl.traffic.option = {
         scales: {
@@ -240,9 +242,6 @@
           }]
         }
       };
-      console.log(ctrl.traffic);
-    }
-    function handleGetTranslate(translateId) {
     }
     function handleGetDataTraffic() {
       var rs = [];
@@ -287,10 +286,26 @@
           rs.push(member, guest);
           break;
         case 3:
-          ctrl.traffic.labels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_DATE');
+          // Hạ tháng xuống 1 đơn vị vì tháng bắt đầu từ 0
+          var downedMonth = ctrl.month - 1;
+          for (let index = 0; index < 24; index++) {
+            votes = [];
+            ctrl.votes.forEach(vote => {
+              let created = moment(vote.updated).utc();
+              if (created.year() === ctrl.year && created.month() === downedMonth && created.date() === ctrl.date && created.hour() === index) {
+                votes.push(vote);
+              }
+            });
+            let collect = _.countBy(votes, function (vote) {
+              return vote.guest ? 'guest' : 'user';
+            });
+            member.push(collect.user || 0);
+            guest.push(collect.guest || 0);
+          }
+          rs.push(member, guest);
           break;
         default:
-          ctrl.traffic.labels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_YEAR');
+          break;
       }
       return rs;
     }

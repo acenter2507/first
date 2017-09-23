@@ -205,6 +205,7 @@
       return dates;
     }
     function handleCreateTrafficChart() {
+      console.log(yearLabels);
       ctrl.traffic = {};
       ctrl.traffic.data = handleGetDataTraffic();
       switch (ctrl.mode) {
@@ -220,12 +221,12 @@
         default:
           ctrl.traffic.labels = yearLabels;
       }
-      console.log(ctrl.traffic);
     }
     function handleGetTranslate(translateId) {
       $translate(translateId).then(tsl => {
         var labels = tsl.split('_');
         labels = _.map(labels, function (str) { return str.replace(/_/g, ''); });
+        console.log(labels);
         return labels;
       });
     }

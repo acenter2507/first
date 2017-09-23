@@ -1,7 +1,7 @@
 'use strict';
 angular.module('users.admin')
   .controller('AdminViewUserController', AdminViewUserController);
-  AdminViewUserController.$inject = [
+AdminViewUserController.$inject = [
   '$window',
   '$timeout',
   '$scope',

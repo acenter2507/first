@@ -267,8 +267,8 @@
     }
 
     function resolveProperties(obj) {
-      forEach(obj, function (val, key) {
-        if (isFunction(val.then)) {
+      angular.forEach(obj, function (val, key) {
+        if (angular.isFunction(val.then)) {
           val.then(function (data) {
             obj[key] = data;
           });

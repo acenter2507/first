@@ -31,6 +31,9 @@
     ctrl.monthCnt = 0;
     ctrl.weekCnt = 0;
 
+    // Timezone
+    ctrl.timezone = 'utc';
+
     // Chart data
     ctrl.mode = 1; // 1: year - 2: month - 3: date
     ctrl.year = '';
@@ -248,12 +251,19 @@
       var member = [];
       var guest = [];
       var votes = [];
+      var created;
       switch (ctrl.mode) {
         case 1:
           for (let index = 0; index < 12; index++) {
             votes = [];
             ctrl.votes.forEach(vote => {
-              let created = moment(vote.updated).utc();
+              if (ctrl.timezone === 'utc') {
+                created = moment(vote.updated).utc();
+              } else if (ctrl.timezone === 'language') {
+                created = moment(vote.updated);
+              } else {
+                created = moment(vote.updated).local();
+              }
               if (created.year() === ctrl.year && created.month() === index) {
                 votes.push(vote);
               }
@@ -272,7 +282,13 @@
           for (let index = 0; index < ctrl.dates.length; index++) {
             votes = [];
             ctrl.votes.forEach(vote => {
-              let created = moment(vote.updated).utc();
+              if (ctrl.timezone === 'utc') {
+                created = moment(vote.updated).utc();
+              } else if (ctrl.timezone === 'language') {
+                created = moment(vote.updated);
+              } else {
+                created = moment(vote.updated).local();
+              }
               if (created.year() === ctrl.year && created.month() === downedMonth && created.date() === ctrl.dates[index]) {
                 votes.push(vote);
               }
@@ -291,7 +307,13 @@
           for (let index = 0; index < 24; index++) {
             votes = [];
             ctrl.votes.forEach(vote => {
-              let created = moment(vote.updated);
+              if (ctrl.timezone === 'utc') {
+                created = moment(vote.updated).utc();
+              } else if (ctrl.timezone === 'language') {
+                created = moment(vote.updated);
+              } else {
+                created = moment(vote.updated).local();
+              }
               if (created.year() === ctrl.year && created.month() === downedMonth && created.date() === ctrl.date && created.hour() === index) {
                 votes.push(vote);
               }

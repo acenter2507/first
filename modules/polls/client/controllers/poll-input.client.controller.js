@@ -6,63 +6,64 @@
     .controller('PollInputController', PollInputController);
 
   PollInputController.$inject = [
-    '$rootScope',
     '$scope',
     '$state',
-    '$window',
     '$stateParams',
     'PollsService',
     'OptsService',
     'Socket',
     'Action',
-    'ngDialog',
     'Notifications'
   ];
 
   function PollInputController(
-    $rootScope,
     $scope,
     $state,
-    $window,
     $stateParams,
     PollsService,
     Opts,
     Socket,
     Action,
-    dialog,
     Notifications
   ) {
     var ctrl = this;
-
-    analysic_poll();
     ctrl.form = {};
+    // Biến tạm lưu option
+    ctrl.tmp_opt = {};
 
-    function init() {
-      ctrl.bk_poll = _.clone(ctrl.poll);
-      ctrl.opts = ctrl.poll.opts || [];
-      if (ctrl.poll._id) {
-        ctrl.poll.close = ctrl.poll.close ? moment(ctrl.poll.close) : ctrl.poll.close;
-        ctrl.isClosed = moment(ctrl.poll.close).isAfter(new moment());
-        initSocket();
-      }
-      analysic_nofif();
-    }
+    onPrepare();
 
-    // Get poll from param
-    function analysic_poll() {
+    // Lấy id của poll trong đường dẫn để request API
+    function onPrepare() {
       if (!$stateParams.pollId) {
         ctrl.poll = new PollsService();
-        init();
+        onCreate();
       } else {
         Action.get_poll($stateParams.pollId)
           .then(_poll => {
             ctrl.poll = _poll;
-            init();
+            onCreate();
           });
       }
     }
-    // Init Socket
-    function initSocket() {
+
+    function onCreate() {
+      ctrl.bk_poll = _.clone(ctrl.poll);
+      ctrl.opts = ctrl.poll.opts || [];
+      if (ctrl.poll._id) {
+        ctrl.poll.close = ctrl.poll.close ? moment(ctrl.poll.close).utc() : ctrl.poll.close;
+        ctrl.isClosed = moment(ctrl.poll.close).utc().isAfter(new moment().utc());
+        // Lắng nghe các request từ server socket
+        prepareSocketListener();
+      }
+      // Kiểm tra thông báo
+      prepareParamNotification();
+    }
+
+    /**
+     * PREPARE
+     */
+    function prepareSocketListener() {
       if (!Socket.socket) {
         Socket.connect();
       }
@@ -88,40 +89,24 @@
         Socket.removeListener('opts_request');
       });
     }
-    function analysic_nofif() {
+    function prepareParamNotification() {
       if ($stateParams.notif) {
         Notifications.markReadNotif($stateParams.notif);
       }
     }
-    function isCanUpdate() {
-      return true;
-      // const update = moment(ctrl.poll.updated);
-      // const now = moment(new Date());
-      // var duration = moment.duration(now.diff(update)).asHours();
-      // return duration >= 1;
-    }
-    // Function
-    ctrl.remove = () => {
-      // Gọi function show dialog từ scope cha
-      $scope.handleShowConfirm({
-        content: 'LB_POLLS_CONFIRM_DELETE',
-        type: 3,
-        button: 'LB_DELETE'
-      }, confirm => {
-        ctrl.poll.$remove(() => {
-          Socket.emit('poll_delete', { pollId: ctrl.poll._id });
-          $state.go('home');
-        });
-      });
-    };
 
-    ctrl.save = isValid => {
+    /**
+     * HANDLES
+     */
+    // Lưu poll
+    ctrl.handleSavePoll = handleSavePoll;
+    function handleSavePoll(isValid) {
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'ctrl.form.pollForm');
         return false;
       }
 
-      if (!ctrl.validateCloseDate()) {
+      if (!handleValidateCloseDate()) {
         $scope.handleShowMessage('LB_POLLS_CLOSE_INVALID', true);
         return;
       }
@@ -132,14 +117,13 @@
           type: 1,
           button: 'LB_SAVE'
         }, confirm => {
-          handle_save();
+          handleSave();
         });
       } else {
-        handle_save();
+        handleSave();
       }
-      function handle_save() {
+      function handleSave() {
         ctrl.poll.opts = ctrl.opts;
-        ctrl.poll.summary = 'summary';
         Action.save_poll(ctrl.poll)
           .then(res => {
             $state.go('polls.view', { pollId: res.slug });
@@ -148,15 +132,10 @@
             $scope.handleShowMessage(err.message, true);
           });
       }
-    };
-
-    ctrl.validateCloseDate = () => {
-      if (!ctrl.poll.close) {
-        return true;
-      }
-      return moment(ctrl.poll.close).isAfter(new moment());
-    };
-    ctrl.discard = () => {
+    }
+    // Hủy nhập poll
+    ctrl.handleDiscard = handleDiscard;
+    function handleDiscard() {
       if (angular.equals(ctrl.poll, ctrl.bk_poll)) {
         handle_discard();
       } else {
@@ -169,23 +148,23 @@
           handle_discard();
         });
       }
-    };
-    function handle_discard() {
-      if (ctrl.poll._id) {
-        $state.go('polls.view', { pollId: ctrl.poll.slug });
-      } else {
-        $state.go('home');
+      function handle_discard() {
+        if (ctrl.poll._id) {
+          $state.go('polls.view', { pollId: ctrl.poll.slug });
+        } else {
+          $state.go('home');
+        }
       }
     }
-
-    // OPTIONS
-    ctrl.tmp_opt = {};
-    ctrl.show_colorpicker = false;
-    ctrl.input_opt = opt => {
+    // Gọi màn hình nhập thông tin options
+    ctrl.handleStartInputOption = handleStartInputOption;
+    function handleStartInputOption(opt) {
       ctrl.tmp_opt = (opt) ? opt : { poll: ctrl.poll._id, title: '', body: '', status: 1 };
       angular.element('body').toggleClass('aside-panel-open');
-    };
-    ctrl.remove_opt = opt => {
+    }
+    // Xóa option
+    ctrl.handleRemoveOption = handleRemoveOption;
+    function handleRemoveOption(opt) {
       // Gọi function show dialog từ scope cha
       $scope.handleShowConfirm({
         content: 'LB_POLLS_CONFIRM_DELETE_OPT',
@@ -204,8 +183,10 @@
           });
         }
       }
-    };
-    ctrl.approve_opt = opt => {
+    }
+    // Đồng ý đề xuất của thành viên
+    ctrl.handleApproveOption = handleApproveOption;
+    function handleApproveOption(opt) {
       // Gọi function show dialog từ scope cha
       $scope.handleShowConfirm({
         content: 'LB_POLLS_CONFIRM_APPROVE',
@@ -221,8 +202,10 @@
           Socket.emit('opts_update', { pollId: ctrl.poll._id });
         });
       }
-    };
-    ctrl.reject_opt = opt => {
+    }
+    // Từ chối đề xuất
+    ctrl.handleRejectOption = handleRejectOption;
+    function handleRejectOption(opt) {
       // Gọi function show dialog từ scope cha
       $scope.handleShowConfirm({
         content: 'LB_POLLS_CONFIRM_REJECT',
@@ -237,31 +220,55 @@
         _opt.$update(() => {
         });
       }
-    };
-    ctrl.save_opt = isValid => {
+    }
+    // Lưu option
+    ctrl.handleSaveOption = handleSaveOption;
+    function handleSaveOption(isValid) {
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'ctrl.form.optForm');
         return false;
       }
       if (!ctrl.tmp_opt._id && !_.contains(ctrl.opts, ctrl.tmp_opt)) {
         ctrl.opts.push(_.clone(ctrl.tmp_opt));
-      } else {
-        ctrl.tmp_opt = {
-          poll: ctrl.poll._id,
-          title: ctrl.tmp_opt.title,
-          body: ctrl.tmp_opt.body,
-          color: ctrl.tmp_opt.color,
-          status: 1
-        };
       }
-    };
-    ctrl.opt_full = () => {
+      ctrl.tmp_opt = {};
+      $scope.$broadcast('show-errors-reset', 'ctrl.form.optForm');
+      angular.element('body').removeClass('aside-panel-open');
+            // } else {
+      //   ctrl.tmp_opt = {
+      //     poll: ctrl.poll._id,
+      //     title: ctrl.tmp_opt.title,
+      //     body: ctrl.tmp_opt.body,
+      //     color: ctrl.tmp_opt.color,
+      //     status: 1
+      //   };
+      // }
+    }
+    // Hiển thị full màn hình
+    ctrl.handleShowFullOption = handleShowFullOption;
+    function handleShowFullOption() {
       let aside = angular.element('.aside-panel')[0];
       angular.element(aside).toggleClass('full');
       angular.element('#aside-panel-full-toggle').find('i').toggleClass('r180');
-    };
-    $scope.clear_close_date = () => {
+    }
+    // Xóa thông tin cài đặt ngày close
+    ctrl.handleClearCloseDate = handleClearCloseDate;
+    function handleClearCloseDate() {
       delete ctrl.poll.close;
+    }
+    // Xác định user có thể update được nữa hay không
+    function handleCheckCanUpdate() {
+      return true;
+      // const update = moment(ctrl.poll.updated);
+      // const now = moment(new Date());
+      // var duration = moment.duration(now.diff(update)).asHours();
+      // return duration >= 1;
+    }
+    // Kiểm tra ngày đóng poll hợp lệ hay không
+    function handleValidateCloseDate() {
+      if (!ctrl.poll.close) return true;
+      if (ctrl.poll._id && ctrl.isClosed) return true;
+      return moment(ctrl.poll.close).utc().isAfter(new moment().utc());
     };
   }
 })();

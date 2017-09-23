@@ -273,12 +273,10 @@
             votes = [];
             ctrl.votes.forEach(vote => {
               let created = moment(vote.updated).utc();
-              console.log(date + '-' + created.date());
-              if (created.year() === ctrl.year && created.month() === index && created.date() === ctrl.dates[index]) {
+              if (created.year() === ctrl.year && created.month() === ctrl.month && created.date() === ctrl.dates[index]) {
                 votes.push(vote);
               }
             });
-            console.log(votes);
             let collect = _.countBy(votes, function (vote) {
               return vote.guest ? 'guest' : 'user';
             });

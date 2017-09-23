@@ -170,6 +170,8 @@
     function handleChangeMonth() {
       // Nếu mode đang xem là Tháng
       if (ctrl.mode === 2) {
+        ctrl.dates = handleGetDatesOfMonth(ctrl.year, ctrl.month);
+        ctrl.date = ctrl.dates[ctrl.dates.length - 1];
         handleCreateTrafficChart();
       } else {
         ctrl.dates = handleGetDatesOfMonth(ctrl.year, ctrl.month);

@@ -37,15 +37,24 @@
     ctrl.month = '';
     ctrl.date = '';
 
-    // ctrl.series = handleGetTranslate('LB_POLL_CHART_SERIES');
-    // var labels = [
-    //   handleGetTranslate('LB_POLL_CHART_TRAFFIC_YEAR'),
-    //   handleGetTranslate('LB_POLL_CHART_TRAFFIC_MONTH'),
-    //   handleGetTranslate('LB_POLL_CHART_TRAFFIC_DATE')
-    // ];
-    // ctrl.yearLabels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_YEAR');
-    // ctrl.monthLabels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_MONTH');
-    // ctrl.dateLabels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_DATE');
+    ctrl.options = {
+      scales: {
+        yAxes: [
+          {
+            id: 'y-axis-1',
+            type: 'linear',
+            display: true,
+            position: 'left'
+          },
+          {
+            id: 'y-axis-2',
+            type: 'linear',
+            display: true,
+            position: 'right'
+          }
+        ]
+      }
+    };
 
     onPrepare();
 

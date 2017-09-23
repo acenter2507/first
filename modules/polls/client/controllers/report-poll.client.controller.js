@@ -210,8 +210,8 @@
     function handleCreateBarChart() {
       ctrl.barChart = {
         series: ctrl.chartSeries,
-        labels = ctrl.barChartLabels,
-        option = ctrl.chartOption
+        labels: ctrl.barChartLabels,
+        option: ctrl.chartOption
       };
       ctrl.barChart.data = handleGetDataBarChart();
     }

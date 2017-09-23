@@ -339,7 +339,6 @@
       var guest = [];
       var voteopts, vote, memberCnt, guestCnt, created, isMatch;
       ctrl.opts.forEach(opt => {
-        console.log('Check for option: ' + opt.title);
         memberCnt = 0;
         guestCnt = 0;
         var voteopts = _.where(ctrl.voteopts, { opt: opt._id });
@@ -348,10 +347,8 @@
           guest.push(guestCnt);
           return;
         }
-        console.log('Total votes: ', voteopts);
         voteopts.forEach(voteopt => {
-          vote = _.where(ctrl.votes, { _id: voteopt.vote });
-          console.log('Check for vote: ', vote);
+          vote = _.findWhere(ctrl.votes, { _id: voteopt.vote });
           if (!vote) return;
           if (ctrl.timezone === 'utc') {
             created = moment(vote.updated).utc();
@@ -360,8 +357,6 @@
           } else {
             created = moment(vote.updated).local();
           }
-          console.log(ctrl.year + '-' + (ctrl.month-1) + '-' + ctrl.date + '----' + created.year() + '-' + created.month() + '-' + created.date());
-          isMatch = false;
           switch (ctrl.chartMode) {
             case 1:
               isMatch = created.year() === ctrl.year;
@@ -374,7 +369,6 @@
               break;
           }
           if (isMatch) {
-            console.log('Matched: ' + vote.guest);
             if (vote.guest) {
               guestCnt++;
             } else {
@@ -384,11 +378,9 @@
         });
         member.push(memberCnt);
         guest.push(guestCnt);
-        console.log('Member: ' + memberCnt + '----' + 'Guest: ' + guestCnt);
       });
       data.push(member);
       data.push(guest);
-      console.log(data);
       return data;
     }
   }

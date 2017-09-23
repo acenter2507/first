@@ -36,15 +36,20 @@
     ctrl.year = '';
     ctrl.month = '';
     ctrl.date = '';
-    ctrl.series = handleGetTranslate('LB_POLL_CHART_SERIES');
-    var labels = [
-      handleGetTranslate('LB_POLL_CHART_TRAFFIC_YEAR'),
-      handleGetTranslate('LB_POLL_CHART_TRAFFIC_MONTH'),
-      handleGetTranslate('LB_POLL_CHART_TRAFFIC_DATE')
-    ];
-    ctrl.yearLabels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_YEAR');
-    ctrl.monthLabels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_MONTH');
-    ctrl.dateLabels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_DATE');
+    handleGetTranslate([
+      'LB_POLL_CHART_SERIES',
+      'LB_POLL_CHART_TRAFFIC_YEAR',
+      'LB_POLL_CHART_TRAFFIC_MONTH',
+      'LB_POLL_CHART_TRAFFIC_DATE']);
+    // ctrl.series = handleGetTranslate('LB_POLL_CHART_SERIES');
+    // var labels = [
+    //   handleGetTranslate('LB_POLL_CHART_TRAFFIC_YEAR'),
+    //   handleGetTranslate('LB_POLL_CHART_TRAFFIC_MONTH'),
+    //   handleGetTranslate('LB_POLL_CHART_TRAFFIC_DATE')
+    // ];
+    // ctrl.yearLabels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_YEAR');
+    // ctrl.monthLabels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_MONTH');
+    // ctrl.dateLabels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_DATE');
 
     onPrepare();
 
@@ -131,6 +136,7 @@
     /**
      * HANDLES
      */
+
     ctrl.handleChangeMode = handleChangeMode;
     function handleChangeMode(mode) {
       if (mode === ctrl.mode) return;
@@ -204,77 +210,63 @@
       return dates;
     }
     function handleCreateTrafficChart() {
-      var labelId = '';
+      console.log(ctrl.yearLabels);
+      ctrl.traffic = {};
+      ctrl.traffic.data = handleGetDataTraffic();
       switch (ctrl.mode) {
         case 1:
-          labelId = 'LB_POLL_CHART_TRAFFIC_YEAR';
+          ctrl.traffic.labels = ctrl.yearLabels;
           break;
         case 2:
-          labelId = 'LB_POLL_CHART_TRAFFIC_MONTH';
+          ctrl.traffic.labels = ctrl.monthLabels;
           break;
         case 3:
-          labelId = 'LB_POLL_CHART_TRAFFIC_DATE';
+          ctrl.traffic.labels = ctrl.dateLabels;
           break;
         default:
-          labelId = 'LB_POLL_CHART_TRAFFIC_YEAR';
+          ctrl.traffic.labels = ctrl.yearLabels;
       }
-      ctrl.traffic = {
-        data: handleGetDataTraffic(),
-        labels: handleGetTranslate(labelId)
-      }
-      ctrl.traffic = resolveProperties(ctrl.traffic);
     }
     function handleGetTranslate(translateId) {
-      return new Promise((resolve, reject) => {
-        $translate(translateId).then(tsl => {
-          var labels = tsl.split('_');
-          labels = _.map(labels, function (str) { return str.replace(/_/g, ''); });
-          return resolve(labels);
-        });
+      $translate(translateId).then(tsl => {
+        console.log(tsl);
+        // var labels = tsl.split('_');
+        // labels = _.map(labels, function (str) { return str.replace(/_/g, ''); });
+        // return labels;
       });
     }
     function handleGetDataTraffic() {
-      return new Promise((resolve, reject) => {
-        var data = [];
-        var member = [];
-        var guest = [];
-        switch (ctrl.mode) {
-          case 1:
-            for (var index = 0; index < 12; index++) {
-              var votes = [];
-              ctrl.votes.forEach(vote => {
-                let created = moment(vote.updated).utc();
-                if (created.year() === ctrl.year && created.month() === index) {
-                  votes.push(vote);
-                }
-              });
-              var collect = _.countBy(votes, function (vote) {
-                return vote.guest ? 'guest' : 'user';
-              });
-              member.push(collect.user || 0);
-              guest.push(collect.guest || 0);
-            }
-            data.push(member, guest);
-            break;
-          case 2:
-            break;
-          case 3:
-            break;
-          default:
-            break;
-        }
-        return resolve(data);
-      });
-    }
-
-    function resolveProperties(obj) {
-      angular.forEach(obj, function (val, key) {
-        if (angular.isFunction(val.then)) {
-          val.then(function (data) {
-            obj[key] = data;
-          });
-        }
-      });
+      var data = [];
+      var member = [];
+      var guest = [];
+      switch (ctrl.mode) {
+        case 1:
+          for (var index = 0; index < 12; index++) {
+            var votes = [];
+            ctrl.votes.forEach(vote => {
+              let created = moment(vote.updated).utc();
+              if (created.year() === ctrl.year && created.month() === index) {
+                votes.push(vote);
+              }
+            });
+            var collect = _.countBy(votes, function (vote) {
+              return vote.guest ? 'guest' : 'user';
+            });
+            member.push(collect.user || 0);
+            guest.push(collect.guest || 0);
+          }
+          data.push(member, guest);
+          break;
+        case 2:
+          ctrl.traffic.labels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_MONTH');
+          break;
+        case 3:
+          ctrl.traffic.labels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_DATE');
+          break;
+        default:
+          ctrl.traffic.labels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_YEAR');
+      }
+      return data;
     }
   }
 })();

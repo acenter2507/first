@@ -4,59 +4,7 @@
       <h2>{{:: ctrl.poll.title}}</h2>
     </div>
   </div>
-  <!-- Báo cáo thông số -->
-  <!-- <div class="row">
-    <div class="col-xs-12">
-      <table class="table">
-        <tr>
-          <td>Ngày bắt đầu: </td>
-          <td>{{ ctrl.startDate.clone().local().format('LLL') }}</td>
-          <td>{{ ctrl.startDate.format('LLL') }}</td>
-        </tr>
-        <tr>
-          <td>Ngày kết thúc: </td>
-          <td>{{ ctrl.endDate.clone().local().format('LLL') }}</td>
-          <td>{{ ctrl.endDate.format('LLL') }}</td>
-        </tr>
-      </table>
-    </div>
-  </div> -->
-  <!-- Báo cáo thông số -->
-  <!-- <div class="row">
-    <div class="col-xs-3">
-      <div class="form-group">
-        <div class="btn-group">
-          <button type="button" class="btn btn-primary" ng-click="ctrl.handleChangeMode(1)">Year</button>
-          <button type="button" class="btn btn-warning" ng-click="ctrl.handleChangeMode(2)">Month</button>
-          <button type="button" class="btn btn-danger" ng-click="ctrl.handleChangeMode(3)">Date</button>
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-2">
-      <div class="form-group">
-        <select ng-model="ctrl.timezone" class="form-control" ng-change="ctrl.handleCreateTrafficChart()">
-          <option value="utc">ISO Time</option>
-          <option value="language">Mapping with you language locale</option>
-          <option value="local">Your local time</option>
-        </select>
-      </div>
-    </div>
-    <div class="col-xs-2">
-      <div class="form-group">
-        <select ng-options="year as year for year in ctrl.years" ng-model="ctrl.year" class="form-control" ng-change="ctrl.handleChangeYear()"></select>
-      </div>
-    </div>
-    <div class="col-xs-2">
-      <div class="form-group" ng-show="ctrl.lineChartMode != 1">
-        <select ng-options="month as month for month in ctrl.months" ng-model="ctrl.month" class="form-control" ng-change="ctrl.handleChangeMonth()"></select>
-      </div>
-    </div>
-    <div class="col-xs-2">
-      <div class="form-group" ng-show="ctrl.lineChartMode === 3">
-        <select ng-options="date as date for date in ctrl.dates" ng-model="ctrl.date" class="form-control" ng-change="ctrl.handleChangeDate()"></select>
-      </div>
-    </div>
-  </div> -->
+
   <div class="row">
     <div class="col-xs-12">
       <div class="card mgn">
@@ -70,24 +18,26 @@
               </div>
             </div>
             <div class="col-sm-12 col-md-3">
-              <select ng-model="ctrl.timezone" class="form-control control-sm" ng-change="ctrl.handleCreateTrafficChart()">
-                    <option value="utc">{{:: 'LB_POLL_CHART_UTC' | translate }}</option>
-                    <option value="language">{{:: 'LB_POLL_CHART_LANG' | translate }}</option>
-                    <option value="local">{{:: 'LB_POLL_CHART_LOCAL' | translate }}</option>
-                  </select>
+              <div class="form-group mgnb">
+                <select ng-model="ctrl.timezone" class="form-control control-sm" ng-change="ctrl.handleCreateTrafficChart()">
+                  <option value="utc">{{:: 'LB_POLL_CHART_UTC' | translate }}</option>
+                  <option value="language">{{:: 'LB_POLL_CHART_LANG' | translate }}</option>
+                  <option value="local">{{:: 'LB_POLL_CHART_LOCAL' | translate }}</option>
+                </select>
+              </div>
             </div>
             <div class="col-sm-12 col-md-2">
-              <div class="form-group">
+              <div class="form-group mgnb">
                 <select ng-options="year as year for year in ctrl.years" ng-model="ctrl.year" class="form-control control-sm" ng-change="ctrl.handleChangeYear()"></select>
               </div>
             </div>
             <div class="col-sm-12 col-md-2">
-              <div class="form-group" ng-show="ctrl.lineChartMode != 1">
+              <div class="form-group mgnb" ng-show="ctrl.lineChartMode != 1">
                 <select ng-options="month as month for month in ctrl.months" ng-model="ctrl.month" class="form-control control-sm" ng-change="ctrl.handleChangeMonth()"></select>
               </div>
             </div>
             <div class="col-sm-12 col-md-2">
-              <div class="form-group" ng-show="ctrl.lineChartMode === 3">
+              <div class="form-group mgnb" ng-show="ctrl.lineChartMode === 3">
                 <select ng-options="date as date for date in ctrl.dates" ng-model="ctrl.date" class="form-control control-sm" ng-change="ctrl.handleChangeDate()"></select>
               </div>
             </div>

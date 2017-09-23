@@ -22,20 +22,22 @@
     $translate
   ) {
     var ctrl = this;
+
     ctrl.endDate = {};
     ctrl.startDate = {};
-    ctrl.years = [];
-    ctrl.months = [];
-    ctrl.dates = [];
 
     // Timezone
     ctrl.timezone = 'utc';
-
-    // Line chart data
-    ctrl.lineChartMode = 1; // 1: year - 2: month - 3: date
+    ctrl.years = [];
+    ctrl.months = [];
+    ctrl.dates = [];
     ctrl.year = '';
     ctrl.month = '';
     ctrl.date = '';
+
+
+    // Line chart data
+    ctrl.chartMode = 1; // 1: year - 2: month - 3: date
 
     // Chart data
     ctrl.series = [];
@@ -106,11 +108,7 @@
       ctrl.opts = _.where(ctrl.poll.opts, { status: 1 });
       ctrl.votes = ctrl.poll.votes || [];
       ctrl.voteopts = ctrl.poll.voteopts || [];
-      ctrl.votedTotal = ctrl.voteopts.length;
-      ctrl.opts.forEach(opt => {
-        opt.voteCnt = _.where(ctrl.voteopts, { opt: opt._id }).length || 0;
-        opt.progressVal = Action.calPercen(ctrl.votedTotal, opt.voteCnt);
-      });
+      ctrl.barChartLabels = _.pluck(ctrl.opts, 'title');
     }
     function prepareDays() {
       ctrl.startDate = moment(ctrl.poll.created).utc();
@@ -135,31 +133,24 @@
       ctrl.year = ctrl.years[ctrl.years.length - 1];
       handleChangeYear();
     }
-    function prepareMonths() {
-      var durration = ctrl.endDate.diff(ctrl.startDate, 'months');
-      for (var index = 0; index <= durration; index++) {
-        var item = ctrl.startDate.clone().add(index, 'months').month();
-        ctrl.months.push(item);
-      }
-      ctrl.month = ctrl.months[ctrl.months.length - 1];
-    }
 
     /**
      * HANDLES
      */
     // Sự kiện thay đổi mode của line chart
-    ctrl.handleChangeLineChartMode = handleChangeLineChartMode;
-    function handleChangeLineChartMode(mode) {
-      if (mode === ctrl.lineChartMode) return;
-      ctrl.lineChartMode = mode;
+    ctrl.handleChangeChartMode = handleChangeChartMode;
+    function handleChangeChartMode(mode) {
+      if (mode === ctrl.chartMode) return;
+      ctrl.chartMode = mode;
       handleChangeYear();
     }
     // Sự kiện thay đổi năm của line chart
     ctrl.handleChangeYear = handleChangeYear;
     function handleChangeYear() {
       // Nếu mode đang xem là Năm
-      if (ctrl.lineChartMode === 1) {
+      if (ctrl.chartMode === 1) {
         handleCreateLineChart();
+        handleCreateBarChart();
       } else {
         ctrl.months = handleGetMonthsOfYear(ctrl.year);
         ctrl.month = ctrl.months[ctrl.months.length - 1];
@@ -170,10 +161,11 @@
     ctrl.handleChangeMonth = handleChangeMonth;
     function handleChangeMonth() {
       // Nếu mode đang xem là Tháng
-      if (ctrl.lineChartMode === 2) {
+      if (ctrl.chartMode === 2) {
         ctrl.dates = handleGetDatesOfMonth(ctrl.year, ctrl.month);
         ctrl.date = ctrl.dates[ctrl.dates.length - 1];
         handleCreateLineChart();
+        handleCreateBarChart();
       } else {
         ctrl.dates = handleGetDatesOfMonth(ctrl.year, ctrl.month);
         ctrl.date = ctrl.dates[ctrl.dates.length - 1];
@@ -184,6 +176,7 @@
     ctrl.handleChangeDate = handleChangeDate;
     function handleChangeDate() {
       handleCreateLineChart();
+      handleCreateBarChart();
     }
     // Tạo lại object line chart
     ctrl.handleCreateLineChart = handleCreateLineChart;
@@ -191,9 +184,9 @@
       ctrl.lineChart = {};
       ctrl.lineChart.data = handleGetDataLineChart();
 
-      if (ctrl.lineChartMode === 1) {
+      if (ctrl.chartMode === 1) {
         ctrl.lineChart.labels = ctrl.yearLabels;
-      } else if (ctrl.lineChartMode === 2) {
+      } else if (ctrl.chartMode === 2) {
         ctrl.lineChart.labels = ctrl.dates;
       } else {
         ctrl.lineChart.labels = ctrl.dateLabels;
@@ -207,6 +200,13 @@
           }]
         }
       };
+    }
+    // Tạo lại object line chart
+    ctrl.handleCreateBarChart = handleCreateBarChart;
+    function handleCreateBarChart() {
+      ctrl.barChart = {};
+      ctrl.barChart.data = handleGetDataBarChart();
+      ctrl.barChart.labels = ctrl.barChartLabels;
     }
 
     /**
@@ -254,7 +254,7 @@
       var guest = [];
       var votes = [];
       var created, downedMonth;
-      switch (ctrl.lineChartMode) {
+      switch (ctrl.chartMode) {
         case 1:
           for (let index = 0; index < 12; index++) {
             votes = [];
@@ -334,7 +334,54 @@
       return rs;
     }
     function handleGetDataBarChart() {
-
+      var data = [];
+      var member = [];
+      var guest = [];
+      var voteopts, vote, memberCnt, guestCnt, created, isMatch;
+      ctrl.opts.forEach(opt => {
+        memberCnt = 0;
+        guestCnt = 0;
+        var voteopts = _.where(ctrl.voteopts, { opt: opt._id });
+        if (voteopts.length === 0) {
+          member.push(memberCnt);
+          guest.push(guestCnt);
+          return;
+        }
+        voteopts.forEach(voteopt => {
+          vote = _.where(ctrl.votes, { _id: voteopt.vote });
+          if (!vote) return;
+          if (ctrl.timezone === 'utc') {
+            created = moment(vote.updated).utc();
+          } else if (ctrl.timezone === 'language') {
+            created = moment(vote.updated);
+          } else {
+            created = moment(vote.updated).local();
+          }
+          isMatch = false;
+          switch (ctrl.chartMode) {
+            case 1:
+              isMatch = created.year() === ctrl.year;
+              break;
+            case 2:
+              isMatch = created.year() === ctrl.year && created.month() === (ctrl.month - 1);
+              break;
+            case 3:
+              isMatch = created.year() === ctrl.year && created.month() === (ctrl.month - 1) && created.date() === ctrl.date;
+              break;
+          }
+          if (isMatch) {
+            if (vote.guest) {
+              guestCnt++;
+            } else {
+              memberCnt++;
+            }
+          }
+        });
+        member.push(memberCnt);
+        guest.push(guestCnt);
+      });
+      data.push(member);
+      data.push(guest);
     }
   }
 })();

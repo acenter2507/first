@@ -12,14 +12,14 @@
           <div class="row">
             <div class="col-sm-12 col-md-3">
               <div class="btn-group btn-group-justified">
-                <a class="btn btn-primary btn-sm" ng-click="ctrl.handleChangeMode(1)" ng-disable="ctrl.lineChartMode=1">{{:: 'LB_YEAR' | translate }}</a>
-                <a class="btn btn-primary btn-sm" ng-click="ctrl.handleChangeMode(2)" ng-disable="ctrl.lineChartMode=2">{{:: 'LB_MONTH' | translate }}</a>
-                <a class="btn btn-primary btn-sm" ng-click="ctrl.handleChangeMode(3)" ng-disable="ctrl.lineChartMode=3">{{:: 'LB_DATE' | translate }}</a>
+                <a class="btn btn-primary btn-sm" ng-click="ctrl.handleChangeChartMode(1)" ng-disable="ctrl.chartMode === 1">{{:: 'LB_YEAR' | translate }}</a>
+                <a class="btn btn-primary btn-sm" ng-click="ctrl.handleChangeChartMode(2)" ng-disable="ctrl.chartMode === 2">{{:: 'LB_MONTH' | translate }}</a>
+                <a class="btn btn-primary btn-sm" ng-click="ctrl.handleChangeChartMode(3)" ng-disable="ctrl.chartMode === 3">{{:: 'LB_DATE' | translate }}</a>
               </div>
             </div>
             <div class="col-sm-12 col-md-3">
               <div class="form-group mgnb">
-                <select ng-model="ctrl.timezone" class="form-control control-sm" ng-change="ctrl.handleCreateTrafficChart()">
+                <select ng-model="ctrl.timezone" class="form-control input-sm" ng-change="ctrl.handleChangeDate()">
                   <option value="utc">{{:: 'LB_POLL_CHART_UTC' | translate }}</option>
                   <option value="language">{{:: 'LB_POLL_CHART_LANG' | translate }}</option>
                   <option value="local">{{:: 'LB_POLL_CHART_LOCAL' | translate }}</option>
@@ -28,17 +28,17 @@
             </div>
             <div class="col-sm-12 col-md-2">
               <div class="form-group mgnb">
-                <select ng-options="year as year for year in ctrl.years" ng-model="ctrl.year" class="form-control control-sm" ng-change="ctrl.handleChangeYear()"></select>
+                <select ng-options="year as year for year in ctrl.years" ng-model="ctrl.year" class="form-control input-sm" ng-change="ctrl.handleChangeYear()"></select>
               </div>
             </div>
             <div class="col-sm-12 col-md-2">
-              <div class="form-group mgnb" ng-show="ctrl.lineChartMode != 1">
-                <select ng-options="month as month for month in ctrl.months" ng-model="ctrl.month" class="form-control control-sm" ng-change="ctrl.handleChangeMonth()"></select>
+              <div class="form-group mgnb" ng-show="ctrl.chartMode != 1">
+                <select ng-options="month as month for month in ctrl.months" ng-model="ctrl.month" class="form-control input-sm" ng-change="ctrl.handleChangeMonth()"></select>
               </div>
             </div>
             <div class="col-sm-12 col-md-2">
-              <div class="form-group mgnb" ng-show="ctrl.lineChartMode === 3">
-                <select ng-options="date as date for date in ctrl.dates" ng-model="ctrl.date" class="form-control control-sm" ng-change="ctrl.handleChangeDate()"></select>
+              <div class="form-group mgnb" ng-show="ctrl.chartMode === 3">
+                <select ng-options="date as date for date in ctrl.dates" ng-model="ctrl.date" class="form-control input-sm" ng-change="ctrl.handleChangeDate()"></select>
               </div>
             </div>
           </div>
@@ -57,9 +57,8 @@
         <div class="card-body">
           <div class="row">
             <div class="col-xs-12">
-              <canvas id="line" class="chart chart-line" chart-data="ctrl.traffic.data" chart-labels="ctrl.traffic.labels" chart-series="ctrl.series"
-                chart-options="ctrl.traffic.option">
-              </canvas>
+              <canvas id="line" class="chart chart-line" chart-data="ctrl.lineChart.data" chart-labels="ctrl.lineChart.labels" chart-series="ctrl.series"
+                chart-options="ctrl.lineChart.option"></canvas>
             </div>
           </div>
         </div>
@@ -74,6 +73,11 @@
           <strong class="card-title">{{:: 'LB_POLL_CHART_BAR_TITLE' | translate }}</strong>
         </div>
         <div class="card-body">
+          <div class="row">
+            <div class="col-xs-12">
+              <canvas id="bar" class="chart chart-bar" chart-data="ctrl.barChart.data" chart-labels="ctrl.barChart.labels" chart-series="ctrl.series"></canvas>
+            </div>
+          </div>
         </div>
       </div>
     </div>

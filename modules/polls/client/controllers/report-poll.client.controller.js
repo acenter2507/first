@@ -268,12 +268,12 @@
           rs.push(member, guest);
           break;
         case 2:
+          // Hạ tháng xuống 1 đơn vị vì tháng bắt đầu từ 0
+          var downedMonth = ctrl.month - 1;
           for (let index = 0; index < ctrl.dates.length; index++) {
             votes = [];
             ctrl.votes.forEach(vote => {
               let created = moment(vote.updated).utc();
-              console.log(created.year() + '-' + created.month() + '-' + created.date());
-              console.log(ctrl.year + '-' + ctrl.month + '-' + ctrl.dates[index]);
               if (created.year() === ctrl.year && created.month() === ctrl.month && created.date() === ctrl.dates[index]) {
                 votes.push(vote);
               }

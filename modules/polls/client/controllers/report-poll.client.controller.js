@@ -238,6 +238,7 @@
           }]
         }
       }
+      console.log(ctrl.traffic);
     }
     function handleGetTranslate(translateId) {
     }

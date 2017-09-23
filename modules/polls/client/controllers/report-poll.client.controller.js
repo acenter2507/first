@@ -222,6 +222,7 @@
         data: handleGetDataTraffic(),
         labels: handleGetTranslate(labelId)
       });
+      console.log(ctrl.traffic);
     }
     function handleGetTranslate(translateId) {
       return new Promise((resolve, reject) => {

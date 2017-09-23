@@ -282,6 +282,7 @@
             guest.push(collect.guest || 0);
           }
           data.push(member, guest);
+          console.log(data);
           break;
         case 3:
           ctrl.traffic.labels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_DATE');

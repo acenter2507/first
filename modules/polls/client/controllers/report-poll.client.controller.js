@@ -278,7 +278,7 @@
           break;
         case 2:
           // Hạ tháng xuống 1 đơn vị vì tháng bắt đầu từ 0
-          var downedMonth = ctrl.month - 1;
+          let downedMonth = ctrl.month - 1;
           for (let index = 0; index < ctrl.dates.length; index++) {
             votes = [];
             ctrl.votes.forEach(vote => {
@@ -303,7 +303,7 @@
           break;
         case 3:
           // Hạ tháng xuống 1 đơn vị vì tháng bắt đầu từ 0
-          var downedMonth = ctrl.month - 1;
+          let downedMonth = ctrl.month - 1;
           for (let index = 0; index < 24; index++) {
             votes = [];
             ctrl.votes.forEach(vote => {

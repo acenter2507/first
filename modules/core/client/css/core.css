@@ -882,6 +882,8 @@ img.full-screen {
     box-shadow: 0 1px 6px 0 rgba(0,0,0,.12),0 1px 6px 0 rgba(0,0,0,.12); }
   .btn:focus {
     outline: none; }
+  .btn:disabled {
+    color: #eee; }
   .btn-default {
     background-color: #d6d6d6; }
     .btn-default:hover {

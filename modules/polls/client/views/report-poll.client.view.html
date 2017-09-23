@@ -64,13 +64,14 @@
         <div class="card-header">
           <strong class="card-title">{{:: 'LB_POLL_CHART_TRAFFIC_TITLE' | translate }}</strong>
         </div>
+        <hr class="mgn">
         <div class="card-body">
           <div class="row">
             <div class="col-sm-12 col-md-3">
               <div class="btn-group btn-group-justified">
-                <a class="btn btn-primary btn-sm" ng-click="ctrl.handleChangeMode(2)" ng-disable="ctrl.trafficMode=2">Month</a>
-                <a class="btn btn-primary btn-sm" ng-click="ctrl.handleChangeMode(3)" ng-disable="ctrl.trafficMode=3">Date</a>
-                <a class="btn btn-primary btn-sm" ng-click="ctrl.handleChangeMode(1)" ng-disable="ctrl.trafficMode=1">Year</a>
+                <a class="btn btn-primary btn-sm" ng-click="ctrl.handleChangeMode(1)" ng-disable="ctrl.trafficMode=1">{{:: 'LB_YEAR' | translate }}</a>
+                <a class="btn btn-primary btn-sm" ng-click="ctrl.handleChangeMode(2)" ng-disable="ctrl.trafficMode=2">{{:: 'LB_MONTH' | translate }}</a>
+                <a class="btn btn-primary btn-sm" ng-click="ctrl.handleChangeMode(3)" ng-disable="ctrl.trafficMode=3">{{:: 'LB_DATE' | translate }}</a>
               </div>
             </div>
             <div class="col-sm-12 col-md-3"></div>

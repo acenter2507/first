@@ -382,6 +382,7 @@
       });
       data.push(member);
       data.push(guest);
+      return data;
     }
   }
 })();

@@ -291,7 +291,7 @@
           for (let index = 0; index < 24; index++) {
             votes = [];
             ctrl.votes.forEach(vote => {
-              let created = moment(vote.updated).utc();
+              let created = moment(vote.updated);
               if (created.year() === ctrl.year && created.month() === downedMonth && created.date() === ctrl.date && created.hour() === index) {
                 votes.push(vote);
               }

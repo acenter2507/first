@@ -271,7 +271,7 @@
             var votes = [];
             ctrl.votes.forEach(vote => {
               let created = moment(vote.updated).utc();
-              if (created.year() === ctrl.year && created.month() === index && created.month() === ctrl.dates[index]) {
+              if (created.year() === ctrl.year && created.month() === index && created.date() === ctrl.dates[index]) {
                 votes.push(vote);
               }
             });

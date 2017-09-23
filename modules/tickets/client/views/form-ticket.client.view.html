@@ -1,24 +1,42 @@
-<section>
-  <div class="page-header">
-    <h1>{{vm.ticket._id ? 'Edit Ticket' : 'New Ticket'}}</h1>
-  </div>
-  <div class="col-md-12">
-    <form name="vm.form.ticketForm" class="form-horizontal" ng-submit="vm.save(vm.form.ticketForm.$valid)" novalidate>
-      <fieldset>
-        <div class="form-group" show-errors>
-          <label class="control-label" for="name">Name</label>
-          <input name="name" type="text" ng-model="vm.ticket.name" id="name" class="form-control" placeholder="Name" required>
-          <div ng-messages="vm.form.ticketForm.name.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Ticket name is required.</p>
-          </div>
+<section class="container animated fadeIn mg6t">
+  <div class="row">
+    <div class="col-xs-12 pdn">
+      <div class="card">
+        <div class="card-header">
+          <strong class="card-title">{{:: 'LB_SUPPORT_TITLE' | translate }}</strong>
+          <a ng-click="send(vm.form.ticketForm.$valid)" class="card-link">
+              <i class="fa fa-spinner fa-pulse fa-fw" ng-show="vm.busy"></i>
+              {{:: 'LB_SEND' | translate}}
+            </a>
         </div>
-        <div class="form-group">
-          <button type="submit" class="btn btn-default">{{vm.ticket._id ? 'Update' : 'Create'}}</button>
+        <hr class="mgn">
+        <div class="card-body">
+          <form name="vm.form.ticketForm" class="form-horizontal" novalidate autocomplete="off">
+            <fieldset>
+              <div class="form-group" show-errors>
+                <input type="email" id="email" name="email" focus-me="true" class="form-control" ng-model="vm.ticket.email" placeholder="{{:: 'LB_USER_EMAIL' | translate }}"
+                  required>
+                <div ng-messages="vm.form.ticketForm.email.$error" role="alert">
+                  <p class="help-block error-text font-sm" ng-message="required">{{:: 'LB_USER_EMAIL_REQUIRED' | translate }}</p>
+                  <p class="help-block error-text font-sm" ng-message="email">{{:: 'LB_USER_EMAIL_INVALID' | translate }}</p>
+                </div>
+              </div>
+              <div class="form-group" show-errors>
+                <textarea name="body" class="msd-elastic: \n; form-control w100p h300 pd12" data-ng-model="vm.ticket.body" placeholder="{{:: 'LB_POLLS_REPORT_PLACE' | translate }}"
+                  required></textarea>
+                <div ng-messages="vm.form.ticketForm.body.$error" role="alert">
+                  <p class="help-block error-text font-sm" ng-message="required">{{:: 'LB_SUPPORT_BODY_REQUIRE' | translate }}</p>
+                </div>
+              </div>
+              <div class="text-center form-group">
+                <div vc-recaptcha ng-model="credentials.myRecaptchaResponse" theme="'light'" key="reCaptcha.key" on-create="setWidgetId(widgetId)"
+                  on-success="setResponse(response)" on-expire="cbExpiration()">
+                </div>
+              </div>
+            </fieldset>
+          </form>
         </div>
-        <div ng-show="vm.error" class="text-danger">
-          <strong ng-bind="vm.error"></strong>
-        </div>
-      </fieldset>
-    </form>
+      </div>
+    </div>
   </div>
 </section>

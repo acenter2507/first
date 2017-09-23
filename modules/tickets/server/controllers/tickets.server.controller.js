@@ -12,14 +12,12 @@ var path = require('path'),
 /**
  * Create a Ticket
  */
-exports.create = function(req, res) {
+exports.create = function (req, res) {
   var ticket = new Ticket(req.body);
-  ticket.user = req.user;
-
-  ticket.save(function(err) {
+  ticket.save(function (err) {
     if (err) {
       return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
+        message: 'LB_SUPPORT_ERROR'
       });
     } else {
       res.jsonp(ticket);
@@ -30,26 +28,19 @@ exports.create = function(req, res) {
 /**
  * Show the current Ticket
  */
-exports.read = function(req, res) {
-  // convert mongoose document to JSON
-  var ticket = req.ticket ? req.ticket.toJSON() : {};
-
-  // Add a custom field to the Article, for determining if the current User is the "owner".
-  // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
-  ticket.isCurrentUserOwner = req.user && ticket.user && ticket.user._id.toString() === req.user._id.toString();
-
+exports.read = function (req, res) {
   res.jsonp(ticket);
 };
 
 /**
  * Update a Ticket
  */
-exports.update = function(req, res) {
+exports.update = function (req, res) {
   var ticket = req.ticket;
 
   ticket = _.extend(ticket, req.body);
 
-  ticket.save(function(err) {
+  ticket.save(function (err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -63,10 +54,10 @@ exports.update = function(req, res) {
 /**
  * Delete an Ticket
  */
-exports.delete = function(req, res) {
+exports.delete = function (req, res) {
   var ticket = req.ticket;
 
-  ticket.remove(function(err) {
+  ticket.remove(function (err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -80,8 +71,8 @@ exports.delete = function(req, res) {
 /**
  * List of Tickets
  */
-exports.list = function(req, res) {
-  Ticket.find().sort('-created').populate('user', 'displayName').exec(function(err, tickets) {
+exports.list = function (req, res) {
+  Ticket.find().sort('-created').exec(function (err, tickets) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -95,7 +86,7 @@ exports.list = function(req, res) {
 /**
  * Ticket middleware
  */
-exports.ticketByID = function(req, res, next, id) {
+exports.ticketByID = function (req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({

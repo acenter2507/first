@@ -10,19 +10,26 @@ var mongoose = require('mongoose'),
  * Ticket Schema
  */
 var TicketSchema = new Schema({
-  name: {
-    type: String,
-    default: '',
-    required: 'Please fill Ticket name',
-    trim: true
-  },
   created: {
     type: Date,
     default: Date.now
   },
-  user: {
-    type: Schema.ObjectId,
-    ref: 'User'
+  email: {
+    type: 'String',
+    default: '',
+    required: 'Please fill Ticket email',
+  },
+  body: {
+    type: 'String',
+    default: '',
+    required: 'Please fill Ticket body',
+  },
+  status: {
+    type: Number,
+    default: 1
+  },
+  date: {
+    type: Date
   }
 });
 

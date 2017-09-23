@@ -37,26 +37,6 @@
     ctrl.month = '';
     ctrl.date = '';
 
-    ctrl.options = {
-      scales: {
-        yAxes: [
-          {
-            id: 'y-axis-1',
-            type: 'linear',
-            display: true,
-            position: 'left'
-          },
-          {
-            id: 'y-axis-2',
-            type: 'linear',
-            display: true,
-            position: 'right'
-          }
-        ]
-      }
-    };
-    ctrl.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
-
     onPrepare();
 
     // Lấy id của poll trong đường dẫn để request API

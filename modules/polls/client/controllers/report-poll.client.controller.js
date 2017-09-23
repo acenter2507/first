@@ -251,7 +251,7 @@
       var member = [];
       var guest = [];
       var votes = [];
-      var created;
+      var created, downedMonth;
       switch (ctrl.mode) {
         case 1:
           for (let index = 0; index < 12; index++) {
@@ -278,7 +278,7 @@
           break;
         case 2:
           // Hạ tháng xuống 1 đơn vị vì tháng bắt đầu từ 0
-          let downedMonth = ctrl.month - 1;
+          downedMonth = ctrl.month - 1;
           for (let index = 0; index < ctrl.dates.length; index++) {
             votes = [];
             ctrl.votes.forEach(vote => {
@@ -303,7 +303,7 @@
           break;
         case 3:
           // Hạ tháng xuống 1 đơn vị vì tháng bắt đầu từ 0
-          let downedMonth = ctrl.month - 1;
+          downedMonth = ctrl.month - 1;
           for (let index = 0; index < 24; index++) {
             votes = [];
             ctrl.votes.forEach(vote => {

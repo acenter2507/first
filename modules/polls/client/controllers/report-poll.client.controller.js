@@ -268,6 +268,8 @@
           break;
         case 2:
           for (var index = 0; index < ctrl.dates.length; index++) {
+            var date = ctrl.dates[index];
+            console.log(typeof date);
             var votes = [];
             ctrl.votes.forEach(vote => {
               let created = moment(vote.updated).utc();

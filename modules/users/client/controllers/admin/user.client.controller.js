@@ -1,7 +1,7 @@
 'use strict';
 angular.module('users.admin')
   .controller('AdminUserController', AdminUserController);
-  AdminUserController.$inject = ['$window', '$timeout', '$scope', '$state', 'Authentication', 'userResolve', 'AdminApi', 'Constants', 'FileUploader'];
+AdminUserController.$inject = ['$window', '$timeout', '$scope', '$state', 'Authentication', 'userResolve', 'AdminApi', 'Constants', 'FileUploader'];
 
 
 function AdminUserController($window, $timeout, $scope, $state, Authentication, userResolve, AdminApi, Constants, FileUploader) {

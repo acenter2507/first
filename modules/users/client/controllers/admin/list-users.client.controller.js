@@ -1,7 +1,7 @@
 'use strict';
 angular.module('users.admin')
   .controller('AdminUserListController', AdminUserListController);
-  AdminUserListController.$inject = ['$scope', '$filter', '$window', 'Admin', 'AdminApi'];
+AdminUserListController.$inject = ['$scope', '$filter', '$window', 'Admin', 'AdminApi'];
 
 function AdminUserListController($scope, $filter, $window, Admin, AdminApi) {
   $scope.busy = true;

@@ -248,7 +248,7 @@
       var rs = [];
       var member = [];
       var guest = [];
-      var vote = [];
+      var votes = [];
       switch (ctrl.mode) {
         case 1:
           for (let index = 0; index < 12; index++) {

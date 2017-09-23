@@ -251,14 +251,14 @@
       switch (ctrl.mode) {
         case 1:
           for (var index = 0; index < 12; index++) {
-            var votes = [];
+            let votes = [];
             ctrl.votes.forEach(vote => {
               let created = moment(vote.updated).utc();
               if (created.year() === ctrl.year && created.month() === index) {
                 votes.push(vote);
               }
             });
-            var collect = _.countBy(votes, function (vote) {
+            let collect = _.countBy(votes, function (vote) {
               return vote.guest ? 'guest' : 'user';
             });
             member.push(collect.user || 0);
@@ -269,22 +269,21 @@
         case 2:
           for (var index = 0; index < ctrl.dates.length; index++) {
             var date = ctrl.dates[index];
-            console.log(typeof date);
-            var votes = [];
+            let votes = [];
             ctrl.votes.forEach(vote => {
               let created = moment(vote.updated).utc();
+              console.log(created.date());
               if (created.year() === ctrl.year && created.month() === index && created.date() === ctrl.dates[index]) {
                 votes.push(vote);
               }
             });
-            var collect = _.countBy(votes, function (vote) {
+            let collect = _.countBy(votes, function (vote) {
               return vote.guest ? 'guest' : 'user';
             });
             member.push(collect.user || 0);
             guest.push(collect.guest || 0);
           }
           rs.push(member, guest);
-          console.log(rs);
           break;
         case 3:
           ctrl.traffic.labels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_DATE');

@@ -218,11 +218,11 @@
         default:
           labelId = 'LB_POLL_CHART_TRAFFIC_YEAR';
       }
-      ctrl.traffic = resolveProperties({
+      ctrl.traffic = {
         data: handleGetDataTraffic(),
         labels: handleGetTranslate(labelId)
-      });
-      console.log(ctrl.traffic);
+      }
+      ctrl.traffic = resolveProperties(ctrl.traffic);
     }
     function handleGetTranslate(translateId) {
       return new Promise((resolve, reject) => {

@@ -224,7 +224,11 @@
     function handleCreateTrafficChart() {
       ctrl.traffic = {};
       ctrl.traffic.data = handleGetDataTraffic();
-      ctrl.traffic.labels = ctrl.lables[ctrl.mode - 1];
+      if (ctrl.mode === 2) {
+        ctrl.traffic.labels = ctrl.dates;
+      } else {
+        ctrl.traffic.labels = ctrl.lables[ctrl.mode - 1];
+      }
       ctrl.traffic.option = {
         scales: {
           yAxes: [{
@@ -260,7 +264,21 @@
           data.push(member, guest);
           break;
         case 2:
-          ctrl.traffic.labels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_MONTH');
+          for (var index = 0; index < ctrl.dates; index++) {
+            var votes = [];
+            ctrl.votes.forEach(vote => {
+              let created = moment(vote.updated).utc();
+              if (created.year() === ctrl.year && created.month() === index && created.month(date) === ctrl.date) {
+                votes.push(vote);
+              }
+            });
+            var collect = _.countBy(votes, function (vote) {
+              return vote.guest ? 'guest' : 'user';
+            });
+            member.push(collect.user || 0);
+            guest.push(collect.guest || 0);
+          }
+          data.push(member, guest);
           break;
         case 3:
           ctrl.traffic.labels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_DATE');

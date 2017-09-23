@@ -374,6 +374,7 @@
               break;
           }
           if (isMatch) {
+            console.log('Matched: ' + vote.guest);
             if (vote.guest) {
               guestCnt++;
             } else {

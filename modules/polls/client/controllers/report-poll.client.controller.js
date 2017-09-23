@@ -225,6 +225,16 @@
       ctrl.traffic = {};
       ctrl.traffic.data = handleGetDataTraffic();
       ctrl.traffic.labels = ctrl.lables[ctrl.mode - 1];
+      ctrl.traffic.option = {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              stepSize: 1
+            }
+          }]
+        }
+      }
     }
     function handleGetTranslate(translateId) {
     }

@@ -40,7 +40,16 @@
     ctrl.chartMode = 1; // 1: year - 2: month - 3: date
 
     // Chart data
-    ctrl.series = [];
+    ctrl.chartSeries = [];
+    ctrl.chartOption = {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    };
     ctrl.yearLabels = [];
     ctrl.dateLabels = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'];
 
@@ -191,15 +200,6 @@
       } else {
         ctrl.lineChart.labels = ctrl.dateLabels;
       }
-      ctrl.lineChart.option = {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
-          }]
-        }
-      };
     }
     // Tạo lại object line chart
     ctrl.handleCreateBarChart = handleCreateBarChart;

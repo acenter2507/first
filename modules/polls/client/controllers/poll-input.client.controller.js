@@ -269,6 +269,6 @@
       if (!ctrl.poll.close) return true;
       if (ctrl.poll._id && ctrl.isClosed) return true;
       return moment(ctrl.poll.close).utc().isAfter(new moment().utc());
-    };
+    }
   }
 })();

@@ -185,6 +185,28 @@
     function handleChangeDate() {
       handleCreateTrafficChart();
     }
+    ctrl.handleCreateTrafficChart = handleCreateTrafficChart;
+    function handleCreateTrafficChart() {
+      ctrl.traffic = {};
+      ctrl.traffic.data = handleGetDataTraffic();
+
+      if (ctrl.mode === 1) {
+        ctrl.traffic.labels = ctrl.yearLabels;
+      } else if (ctrl.mode === 2) {
+        ctrl.traffic.labels = ctrl.dates;
+      } else {
+        ctrl.traffic.labels = ctrl.dateLabels;
+      }
+      ctrl.traffic.option = {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      };
+    }
 
     /**
      * LOCAL HANDLE
@@ -224,27 +246,6 @@
       startDate = undefined;
       endDate = undefined;
       return dates;
-    }
-    function handleCreateTrafficChart() {
-      ctrl.traffic = {};
-      ctrl.traffic.data = handleGetDataTraffic();
-
-      if (ctrl.mode === 1) {
-        ctrl.traffic.labels = ctrl.yearLabels;
-      } else if (ctrl.mode === 2) {
-        ctrl.traffic.labels = ctrl.dates;
-      } else {
-        ctrl.traffic.labels = ctrl.dateLabels;
-      }
-      ctrl.traffic.option = {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
-          }]
-        }
-      };
     }
     function handleGetDataTraffic() {
       var rs = [];

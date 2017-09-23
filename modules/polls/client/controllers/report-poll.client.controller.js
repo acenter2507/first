@@ -250,7 +250,7 @@
       var guest = [];
       switch (ctrl.mode) {
         case 1:
-          for (var index = 0; index < 12; index++) {
+          for (let index = 0; index < 12; index++) {
             let votes = [];
             ctrl.votes.forEach(vote => {
               let created = moment(vote.updated).utc();
@@ -267,7 +267,7 @@
           rs.push(member, guest);
           break;
         case 2:
-          for (var index = 0; index < ctrl.dates.length; index++) {
+          for (let index = 0; index < ctrl.dates.length; index++) {
             var date = ctrl.dates[index];
             let votes = [];
             ctrl.votes.forEach(vote => {

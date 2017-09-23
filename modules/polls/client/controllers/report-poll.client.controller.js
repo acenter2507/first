@@ -348,10 +348,10 @@
           guest.push(guestCnt);
           return;
         }
-        console.log('Total votes: ' + voteopts);
+        console.log('Total votes: ', voteopts);
         voteopts.forEach(voteopt => {
           vote = _.where(ctrl.votes, { _id: voteopt.vote });
-          console.log('Check for vote: ' + vote);
+          console.log('Check for vote: ', vote);
           if (!vote) return;
           if (ctrl.timezone === 'utc') {
             created = moment(vote.updated).utc();

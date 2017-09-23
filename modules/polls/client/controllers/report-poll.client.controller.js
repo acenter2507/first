@@ -36,16 +36,6 @@
     ctrl.year = '';
     ctrl.month = '';
     ctrl.date = '';
-    ctrl.series = handleGetTranslate('LB_POLL_CHART_SERIES');
-    var labels = [
-      handleGetTranslate('LB_POLL_CHART_TRAFFIC_YEAR'),
-      handleGetTranslate('LB_POLL_CHART_TRAFFIC_MONTH'),
-      handleGetTranslate('LB_POLL_CHART_TRAFFIC_DATE')
-    ];
-    ctrl.yearLabels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_YEAR');
-    ctrl.monthLabels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_MONTH');
-    ctrl.dateLabels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_DATE');
-
     onPrepare();
 
     // Lấy id của poll trong đường dẫn để request API
@@ -76,15 +66,26 @@
         return;
       }
       // Collect dữ liệu hiển thị màn hình
-      prepareShowingData();
-      prepareDays();
-      prepareYears();
+      prepareTranslate().then(() => {
+        prepareShowingData();
+        prepareDays();
+        prepareYears();
+      });
     }
 
     /**
      * PREPARE
      */
     // Lấy các thông tin vote
+    function prepareTranslate() {
+      return new Promise((resolve, reject) => {
+        ctrl.series = handleGetTranslate('LB_POLL_CHART_SERIES');
+        ctrl.yearLabels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_YEAR');
+        ctrl.monthLabels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_MONTH');
+        ctrl.dateLabels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_DATE');
+        return resolve();
+      });
+    }
     function prepareShowingData() {
       // Thiết lập các thông tin cho poll
       ctrl.opts = _.where(ctrl.poll.opts, { status: 1 });

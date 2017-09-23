@@ -42,6 +42,7 @@
     // Chart data
     ctrl.chartSeries = [];
     ctrl.chartOption = {
+      legend: { display: true },
       scales: {
         yAxes: [{
           ticks: {

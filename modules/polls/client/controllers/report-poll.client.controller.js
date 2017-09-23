@@ -37,7 +37,6 @@
     ctrl.month = '';
     ctrl.date = '';
 
-    handleGetTranslate(;
     // ctrl.series = handleGetTranslate('LB_POLL_CHART_SERIES');
     // var labels = [
     //   handleGetTranslate('LB_POLL_CHART_TRAFFIC_YEAR'),

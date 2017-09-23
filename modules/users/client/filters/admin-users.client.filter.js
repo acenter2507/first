@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-  .module('admin')
+  .module('users.admin')
   .filter('users_filter', users_filter);
 
 users_filter.$inject = ['$filter'];

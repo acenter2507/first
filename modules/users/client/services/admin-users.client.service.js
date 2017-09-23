@@ -1,7 +1,7 @@
 'use strict';
 
 //TODO this should be Users service
-angular.module('admin')
+angular.module('users.admin')
   .factory('Admin', admin)
   .factory('AdminApi', AdminApi);
 

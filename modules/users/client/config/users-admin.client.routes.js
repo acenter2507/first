@@ -14,16 +14,16 @@ angular.module('users.admin.routes').config(['$stateProvider',
       })
       .state('admin.users.list', {
         url: '/list',
-        templateUrl: 'modules/admins/client/views/users/list-users.client.view.html',
-        controller: 'UserListController',
+        templateUrl: 'modules/users/client/views/admin/list-users.client.view.html',
+        controller: 'AdminUserListController',
         ncyBreadcrumb: {
           label: 'List'
         }
       })
       .state('admin.users.new', {
         url: '/new',
-        templateUrl: 'modules/admins/client/views/users/form-user.client.view.html',
-        controller: 'UserController',
+        templateUrl: 'modules/users/client/views/admin/form-user.client.view.html',
+        controller: 'AdminUserController',
         ncyBreadcrumb: {
           label: 'Add new'
         },
@@ -35,8 +35,8 @@ angular.module('users.admin.routes').config(['$stateProvider',
       })
       .state('admin.users.view', {
         url: '/:userId',
-        templateUrl: 'modules/admins/client/views/users/view-user.client.view.html',
-        controller: 'ViewUserController',
+        templateUrl: 'modules/users/client/views/admin/view-user.client.view.html',
+        controller: 'AdminViewUserController',
         ncyBreadcrumb: {
           label: 'View user info'
         },
@@ -50,8 +50,8 @@ angular.module('users.admin.routes').config(['$stateProvider',
       })
       .state('admin.users.edit', {
         url: '/:userId/edit',
-        templateUrl: 'modules/admins/client/views/users/form-user.client.view.html',
-        controller: 'UserController',
+        templateUrl: 'modules/users/client/views/admin/form-user.client.view.html',
+        controller: 'AdminUserController',
         ncyBreadcrumb: {
           label: 'Edit {{ userResolve.displayName }}'
         },
@@ -65,8 +65,8 @@ angular.module('users.admin.routes').config(['$stateProvider',
       })
       .state('admin.users.resetpass', {
         url: '/:userId/resetpass',
-        templateUrl: 'modules/admins/client/views/users/resetpass-user.client.view.html',
-        controller: 'UserController',
+        templateUrl: 'modules/users/client/views/admin/resetpass-user.client.view.html',
+        controller: 'AdminUserController',
         ncyBreadcrumb: {
           label: 'Reset password'
         },

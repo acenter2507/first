@@ -1,7 +1,7 @@
 'use strict';
-angular.module('admin')
-  .controller('ViewUserController', ViewUserController);
-ViewUserController.$inject = [
+angular.module('users.admin')
+  .controller('AdminViewUserController', AdminViewUserController);
+  AdminViewUserController.$inject = [
   '$window',
   '$timeout',
   '$scope',
@@ -19,7 +19,7 @@ ViewUserController.$inject = [
 ];
 
 
-function ViewUserController(
+function AdminViewUserController(
   $window,
   $timeout,
   $scope,

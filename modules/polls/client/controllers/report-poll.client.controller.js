@@ -245,7 +245,7 @@
     function handleGetTranslate(translateId) {
     }
     function handleGetDataTraffic() {
-      var data = [];
+      var rs = [];
       var member = [];
       var guest = [];
       switch (ctrl.mode) {
@@ -264,10 +264,10 @@
             member.push(collect.user || 0);
             guest.push(collect.guest || 0);
           }
-          data.push(member, guest);
+          rs.push(member, guest);
           break;
         case 2:
-          for (var index = 0; index < ctrl.dates; index++) {
+          for (var index = 0; index < ctrl.dates.length; index++) {
             var votes = [];
             ctrl.votes.forEach(vote => {
               let created = moment(vote.updated).utc();
@@ -281,7 +281,7 @@
             member.push(collect.user || 0);
             guest.push(collect.guest || 0);
           }
-          data.push(member, guest);
+          rs.push(member, guest);
           console.log(data);
           break;
         case 3:
@@ -290,7 +290,7 @@
         default:
           ctrl.traffic.labels = handleGetTranslate('LB_POLL_CHART_TRAFFIC_YEAR');
       }
-      return data;
+      return rs;
     }
   }
 })();

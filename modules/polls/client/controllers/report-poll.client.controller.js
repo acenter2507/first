@@ -77,9 +77,11 @@
         return;
       }
       // Collect dữ liệu hiển thị màn hình
-      prepareShowingData();
-      prepareDays();
-      prepareYears();
+      preapreTranslateData().then(() => {
+        prepareShowingData();
+        prepareDays();
+        prepareYears();
+      });
     }
 
     /**
@@ -100,6 +102,7 @@
             tsl[key] = array;
           });
           console.log(tsl);
+          return resolve();
           // var labels = tsl.split('_');
           // labels = _.map(labels, function (str) { return str.replace(/_/g, ''); });
           // return labels;

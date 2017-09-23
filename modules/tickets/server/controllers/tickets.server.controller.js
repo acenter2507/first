@@ -29,7 +29,7 @@ exports.create = function (req, res) {
  * Show the current Ticket
  */
 exports.read = function (req, res) {
-  res.jsonp(ticket);
+  res.jsonp(req.ticket);
 };
 
 /**

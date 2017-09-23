@@ -269,11 +269,11 @@
           break;
         case 2:
           for (let index = 0; index < ctrl.dates.length; index++) {
-            var date = ctrl.dates[index];
             votes = [];
             ctrl.votes.forEach(vote => {
-              let created = moment(vote.updated).utc();
-              if (created.year() === ctrl.year && created.month() === ctrl.month && created.date() === ctrl.dates[index]) {
+              let created = moment(vote.updated).utc().startOf('date');
+              let compareDate = moment().utc().year(ctrl.year).month(ctrl.month).date(ctrl.dates[index]).startOf('date');
+              if (created.isSame(compareDate)) {
                 votes.push(vote);
               }
             });

@@ -34,7 +34,7 @@
     // Timezone
     ctrl.timezone = 'utc';
 
-    // Chart data
+    // Traffic chart data
     ctrl.mode = 1; // 1: year - 2: month - 3: date
     ctrl.year = '';
     ctrl.month = '';
@@ -331,6 +331,9 @@
           break;
       }
       return rs;
+    }
+    function handleGetDataBarChart() {
+
     }
   }
 })();

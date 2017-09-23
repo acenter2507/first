@@ -1,5 +1,5 @@
 'use strict';
-angular.module('admin')
+angular.module('users.admin')
   .controller('UserListController', UserListController);
 UserListController.$inject = ['$scope', '$filter', '$window', 'Admin', 'AdminApi'];
 

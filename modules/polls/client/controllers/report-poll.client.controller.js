@@ -55,6 +55,7 @@
         ]
       }
     };
+    ctrl.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
 
     onPrepare();
 

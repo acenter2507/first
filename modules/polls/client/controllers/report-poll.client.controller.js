@@ -102,16 +102,13 @@
             tsl[key] = array;
           });
           // Gán các giá trị translate đã lấy vào biến controller
-          ctrl.series = tsl['LB_POLL_CHART_SERIES'];
+          ctrl.series = tsl.LB_POLL_CHART_SERIES;
           ctrl.lables = [
-            tsl['LB_POLL_CHART_TRAFFIC_YEAR'],
-            tsl['LB_POLL_CHART_TRAFFIC_MONTH'],
-            tsl['LB_POLL_CHART_TRAFFIC_DATE'],
+            tsl.LB_POLL_CHART_TRAFFIC_YEAR,
+            tsl.LB_POLL_CHART_TRAFFIC_MONTH,
+            tsl.LB_POLL_CHART_TRAFFIC_DATE
           ];
           return resolve();
-          // var labels = tsl.split('_');
-          // labels = _.map(labels, function (str) { return str.replace(/_/g, ''); });
-          // return labels;
         });
       });
     }

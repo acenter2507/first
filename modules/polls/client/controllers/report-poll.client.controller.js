@@ -271,9 +271,10 @@
           for (let index = 0; index < ctrl.dates.length; index++) {
             votes = [];
             ctrl.votes.forEach(vote => {
-              let created = moment(vote.updated).utc().startOf('date');
-              let compareDate = moment().utc().year(ctrl.year).month(ctrl.month).date(ctrl.dates[index]).startOf('date');
-              if (created.isSame(compareDate)) {
+              let created = moment(vote.updated).utc();
+              console.log(created.year() + '-' + created.month() + '-' + created.date());
+              console.log(ctrl.year + '-' + ctrl.month + '-' + ctrl.dates[index]);
+              if (created.year() === ctrl.year && created.month() === ctrl.month && created.date() === ctrl.dates[index]) {
                 votes.push(vote);
               }
             });

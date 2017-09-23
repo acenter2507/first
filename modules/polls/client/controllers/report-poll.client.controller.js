@@ -191,7 +191,9 @@
     // Tạo lại object line chart
     ctrl.handleCreateLineChart = handleCreateLineChart;
     function handleCreateLineChart() {
-      ctrl.lineChart = {};
+      ctrl.lineChart = {
+        series: ctrl.chartSeries
+      };
       ctrl.lineChart.data = handleGetDataLineChart();
 
       if (ctrl.chartMode === 1) {
@@ -201,13 +203,17 @@
       } else {
         ctrl.lineChart.labels = ctrl.dateLabels;
       }
+      ctrl.lineChart.option = ctrl.chartOption;
     }
     // Tạo lại object line chart
     ctrl.handleCreateBarChart = handleCreateBarChart;
     function handleCreateBarChart() {
-      ctrl.barChart = {};
+      ctrl.barChart = {
+        series: ctrl.chartSeries,
+        labels = ctrl.barChartLabels,
+        option = ctrl.chartOption
+      };
       ctrl.barChart.data = handleGetDataBarChart();
-      ctrl.barChart.labels = ctrl.barChartLabels;
     }
 
     /**

@@ -107,7 +107,7 @@
             tsl[key] = array;
           });
           // Gán các giá trị translate đã lấy vào biến controller
-          ctrl.series = tsl.LB_POLL_CHART_SERIES;
+          ctrl.chartSeries = tsl.LB_POLL_CHART_SERIES;
           ctrl.yearLabels = tsl.LB_POLL_CHART_LINE_YEAR;
           return resolve();
         });

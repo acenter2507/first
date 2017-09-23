@@ -5,7 +5,7 @@
     </div>
   </div>
   <!-- Báo cáo thông số -->
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-xs-12">
       <table class="table">
         <tr>
@@ -19,11 +19,8 @@
           <td>{{ ctrl.endDate.format('LLL') }}</td>
         </tr>
       </table>
-      <!--<canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" chart-series="series" chart-options="options"
-        chart-dataset-override="datasetOverride" chart-click="onClick">
-      </canvas>-->
     </div>
-  </div>
+  </div> -->
   <!-- Báo cáo thông số -->
   <div class="row">
     <div class="col-xs-3">
@@ -60,13 +57,41 @@
       </div>
     </div>
   </div>
+  <!-- Traffic chart -->
   <div class="row">
     <div class="col-xs-12">
       <div class="card mgn">
+        <div class="card-header">
+          <strong class="card-title">{{:: 'LB_POLL_CHART_TRAFFIC_TITLE' | translate }}</strong>
+        </div>
         <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12 col-md-3">
+              <div class="btn-group btn-group-justified">
+                <a class="btn btn-primary btn-sm" ng-click="ctrl.handleChangeMode(2)" ng-disable="ctrl.trafficMode=2">Month</a>
+                <a class="btn btn-primary btn-sm" ng-click="ctrl.handleChangeMode(3)" ng-disable="ctrl.trafficMode=3">Date</a>
+                <a class="btn btn-primary btn-sm" ng-click="ctrl.handleChangeMode(1)" ng-disable="ctrl.trafficMode=1">Year</a>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-3"></div>
+            <div class="col-sm-12 col-md-2"></div>
+            <div class="col-sm-12 col-md-2"></div>
+            <div class="col-sm-12 col-md-2"></div>
+          </div>
           <canvas id="line" class="chart chart-line" chart-data="ctrl.traffic.data" chart-labels="ctrl.traffic.labels" chart-series="ctrl.series"
             chart-options="ctrl.traffic.option">
           </canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="card mgn">
+        <div class="card-header">
+          <strong class="card-title">{{:: 'LB_POLL_CHART_BAR_TITLE' | translate }}</strong>
+        </div>
+        <div class="card-body">
         </div>
       </div>
     </div>

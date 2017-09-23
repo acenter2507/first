@@ -170,7 +170,17 @@
   "LB_VOTE_EMPTY": "Lựa chọn này chưa nhận được lượt bình chọn nào từ các thành viên.",
   "LB_POLL_CHART_SERIES": "Thành viên_Khách",
   "LB_POLL_CHART_TRAFFIC_YEAR": "Tháng 1_Tháng 2_Tháng 3_Tháng 4_Tháng 5_Tháng 6_Tháng 7_Tháng 8_Tháng 9_Tháng 10_Tháng 11_Tháng 12",
-
+  "LB_POLL_CHART_TRAFFIC_TITLE": "Biểu đồ lượt bình chọn theo thời gian",
+  "LB_POLL_CHART_BAR_TITLE": "Biểu đồ lượt bình chọn theo lựa chọn",
+  "LB_POLL_CHART_BAR": "Chế độ xem theo:",
+  "LB_YEAR": "Năm",
+  "LB_MONTH": "Tháng",
+  "LB_DATE": "Ngày",
+  "LB_POLL_CHART_ZONE": "Múi giờ:",
+  "LB_POLL_CHART_UTC": "Chuẩn UTC",
+  "LB_POLL_CHART_LANG": "Dựa theo ngôn ngữ đã chọn",
+  "LB_POLL_CHART_LOCAL": "Giờ địa phương",
+  
   "LB_QUICK_BODY_PLACE": "Hỏi điều gì đó...",
   "LB_QUICK_BODY_REQUIRE": "Bạn cần phải hỏi gì đó",
   "LB_QUICK_OPT_PLACE": "Thêm lựa chọn...",

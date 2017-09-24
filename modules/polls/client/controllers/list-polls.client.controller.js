@@ -46,8 +46,6 @@
     vm.busy = false;
     vm.stopped = false;
     vm.is_has_new_polls = false;
-    vm.supportLanguages = $window.supportLanguages;
-    vm.language = $translate.use();
 
     onPrepare();
 
@@ -87,7 +85,7 @@
     function handleLoadPolls() {
       if (vm.stopped || vm.busy) return;
       vm.busy = true;
-      Action.get_polls(vm.page, vm.language)
+      Action.get_polls(vm.page, $scope.language)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
             vm.stopped = true;

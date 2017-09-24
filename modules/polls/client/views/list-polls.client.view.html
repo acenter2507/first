@@ -25,14 +25,14 @@
     <!-- RIGHT -->
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 pdn d-sm-down-none">
       <!-- Languages -->
-      <!-- <div class="card">
+      <div class="card">
         <div class="card-header">
           <strong class="card-title">{{ 'LANGUAGE' | translate }}</strong>
         </div>
         <div class="card-body">
-          <a ng-repeat="lang in vm.supportLanguages" ng-click="handleChangeLanguage(lang)" ng-class="{ 'mg5l': !$first, 'text-default': lang === vm.language }">{{ lang | translate }}</a>
+          <a ng-repeat="lang in vm.supportLanguages" ng-click="handleChangeLanguage(lang)" ng-class="{ 'mg5l': !$first, 'text-muted': lang === vm.language }">{{ lang | translate }}</a>
         </div>
-      </div> -->
+      </div>
       <!-- Activitys  -->
       <!-- <div class="card card-expand card-scroll" ng-if="isLogged">
         <div class="card-header">

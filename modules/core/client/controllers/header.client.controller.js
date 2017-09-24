@@ -12,7 +12,8 @@ angular.module('core').controller('HeaderController', [
     // Get the topbar menu
     $scope.menu = Menus.getMenu('topbar');
     // Support language
-    $scope.supportLanguages = $window.supportLanguages;
+    // $scope.supportLanguages = $window.supportLanguages;
+    
     // Nghe sự kiện chuyển state để đóng menu collapse
     $scope.$on('$stateChangeSuccess', function () {
       if (angular.element('body').hasClass('aside-menu-show')) {

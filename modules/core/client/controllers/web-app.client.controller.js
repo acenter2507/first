@@ -23,8 +23,6 @@ angular.module('core').controller('WebAppController', [
     $scope.page_name = 'Blablaer';
     $scope.page_title = ($scope.Notifications.notifCnt > 0) ? ('(' + $scope.Notifications.notifCnt + ') ' + $scope.page_name) : ('' + $scope.page_name);
 
-    $scope.language = $translate.use();
-
     // Watch user info
     $scope.$watch('Authentication.user', () => {
       onCreate();
@@ -45,10 +43,8 @@ angular.module('core').controller('WebAppController', [
       // Kiểm tra thông tin user mới có thay đổi ngôn ngữ hay không
       if ($scope.user.language !== $translate.use()) {
         $translate.use($scope.user.language);
-        $scope.language = $translate.use();
         $scope.$broadcast('changeLanguage');
       }
-      if (!$scope.$$phase) $scope.$digest();
     }
     // Init socket
     function prepareSocketListener() {
@@ -108,9 +104,7 @@ angular.module('core').controller('WebAppController', [
         } else {
           $translate.use(lang);
           Storages.set_local(Constants.storages.language, lang);
-          $scope.language = $translate.use();
           $scope.$broadcast('changeLanguage');
-          if (!$scope.$$phase) $scope.$digest();
         }
       }
     };

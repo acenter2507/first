@@ -13,10 +13,8 @@
     'Socket',
     'Action',
     'ngDialog',
-    'Storages',
     'Constants',
     'Socialshare',
-    'UserApi',
     '$translate'
   ];
 
@@ -29,10 +27,8 @@
     Socket,
     Action,
     dialog,
-    Storages,
     Constants,
     Socialshare,
-    UserApi,
     $translate
   ) {
     var vm = this;

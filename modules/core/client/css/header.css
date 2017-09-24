@@ -77,8 +77,8 @@
   padding: 0.5rem 1rem;
   /*background-image: url("../img/brand/logo.png");*/
   background-repeat: no-repeat;
-  background-position: 15px center;
-  background-size: 100px auto;
+  background-position: 5px center;
+  background-size: 120px auto;
 }
 
 .navbar .navbar-nav .dropdown .dropdown-menu {

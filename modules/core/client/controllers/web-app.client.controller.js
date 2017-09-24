@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('core').controller('WebAppController', [
+  '$location',
   '$scope',
   'Authentication',
   'Notifications',
@@ -14,7 +15,7 @@ angular.module('core').controller('WebAppController', [
   'toastr',
   '$http',
   'ngDialog',
-  function ($scope, Authentication, Notifications, Socket, Categorys, $translate, amMoment, $window, Storages, Constants, toastr, $http, dialog) {
+  function ($location, $scope, Authentication, Notifications, Socket, Categorys, $translate, amMoment, $window, Storages, Constants, toastr, $http, dialog) {
     // User info
     $scope.Authentication = Authentication;
     $scope.Notifications = Notifications;

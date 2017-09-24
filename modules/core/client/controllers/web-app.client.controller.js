@@ -15,7 +15,8 @@ angular.module('core').controller('WebAppController', [
   'toastr',
   '$http',
   'ngDialog',
-  function ($state, $scope, Authentication, Notifications, Socket, Categorys, $translate, amMoment, $window, Storages, Constants, toastr, $http, dialog) {
+  '$route',
+  function ($state, $scope, Authentication, Notifications, Socket, Categorys, $translate, amMoment, $window, Storages, Constants, toastr, $http, dialog, $route) {
     // User info
     $scope.Authentication = Authentication;
     $scope.Notifications = Notifications;
@@ -99,14 +100,14 @@ angular.module('core').controller('WebAppController', [
           $http.post('/api/users/language', { language: lang }).success(function (response) {
             // Authentication.user = response;
             // reload page
-            $state.reload();
+            $route.reload();
           }).error(function (err) {
             $scope.handleShowMessage(err.message, true);
           });
         } else {
           // $translate.use(lang);
           Storages.set_local(Constants.storages.language, lang);
-          $state.reload();
+          $route.reload();
         }
       }
     };

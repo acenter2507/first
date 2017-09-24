@@ -48,6 +48,7 @@ angular.module('core').controller('WebAppController', [
         $scope.language = $translate.use();
         $scope.$broadcast('changeLanguage');
       }
+      if (!$scope.$$phase) $scope.$digest();
     }
     // Init socket
     function prepareSocketListener() {
@@ -109,6 +110,7 @@ angular.module('core').controller('WebAppController', [
           Storages.set_local(Constants.storages.language, lang);
           $scope.language = $translate.use();
           $scope.$broadcast('changeLanguage');
+          if (!$scope.$$phase) $scope.$digest();
         }
       }
     };

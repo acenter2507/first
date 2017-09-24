@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('core').controller('WebAppController', [
-  '$route',
+  '$state',
   '$scope',
   'Authentication',
   'Notifications',
@@ -99,14 +99,14 @@ angular.module('core').controller('WebAppController', [
           $http.post('/api/users/language', { language: lang }).success(function (response) {
             // Authentication.user = response;
             // reload page
-            $route.reload();
+            $state.reload();
           }).error(function (err) {
             $scope.handleShowMessage(err.message, true);
           });
         } else {
           // $translate.use(lang);
           Storages.set_local(Constants.storages.language, lang);
-          $route.reload();
+          $state.reload();
         }
       }
     };

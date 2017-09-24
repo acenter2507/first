@@ -76,6 +76,11 @@
         Socket.removeListener('poll_create');
       });
     }
+    function prepareScopeListener() {
+      $scope.$on('changeLanguage', () => {
+        $state.reload();
+      });
+    }
     vm.handleLoadPolls = handleLoadPolls;
     function handleLoadPolls() {
       if (vm.stopped || vm.busy) return;

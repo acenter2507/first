@@ -45,6 +45,7 @@ angular.module('core').controller('WebAppController', [
       // Kiểm tra thông tin user mới có thay đổi ngôn ngữ hay không
       if ($scope.user.language !== $translate.use()) {
         $translate.use($scope.user.language);
+        $scope.$broadcast('changeLanguage');
       }
     }
     // Init socket
@@ -98,16 +99,14 @@ angular.module('core').controller('WebAppController', [
       function handleSaveLanguage() {
         if ($scope.isLogged) {
           $http.post('/api/users/language', { language: lang }).success(function (response) {
-            // Authentication.user = response;
-            // reload page
-            $route.reload();
+            Authentication.user = response;
           }).error(function (err) {
             $scope.handleShowMessage(err.message, true);
           });
         } else {
-          // $translate.use(lang);
+          $translate.use(lang);
           Storages.set_local(Constants.storages.language, lang);
-          $route.reload();
+          $scope.$broadcast('changeLanguage');
         }
       }
     };

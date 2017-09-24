@@ -28,8 +28,11 @@ var PollSchema = new Schema({
   // Tóm tắt
   summary: {
     type: String,
-    default: '',
-    required: 'Please fill Poll summary',
+    default: ''
+  },
+  language: {
+    type: String,
+    default: ''
   },
   // Mã loại poll
   category: {

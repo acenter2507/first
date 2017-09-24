@@ -39,7 +39,6 @@
 
     vm.polls = [];
     vm.hot_polls = [];
-    vm.bookmarks = [];
     vm.bestUsers = [];
     vm.tags = [];
     vm.new_data = [];
@@ -48,26 +47,23 @@
     vm.stopped = false;
     vm.is_has_new_polls = false;
     vm.supportLanguages = $window.supportLanguages;
+    vm.language = $translate.use();
 
-    init();
+    onPrepare();
 
-    function init() {
+    function onPrepare() {
       // Lắng nghe sự liện từ socket
-      initSocket();
+      prepareSocketListener();
       // Load danh sách tags (Bao gồm số poll)
-      get_popular_tags();
+      preparePopularTags();
       // Load các polls có lượng like nhiều nhất
-      get_populars();
+      preparePopularPolls();
       // Load các polls có lượng like nhiều nhất
-      get_best_users();
+      prepareTopUsers();
       // Load danh sách poll đã bookmark
-      if ($scope.isLogged) {
-        // Lắng nghe sự kiện từ rootScope;
-        // get_bookmarks();
-      }
     }
 
-    function initSocket() {
+    function prepareSocketListener() {
       if (!Socket.socket) {
         Socket.connect();
       }
@@ -80,15 +76,11 @@
         Socket.removeListener('poll_create');
       });
     }
-
-    vm.get_polls = get_polls;
-    function get_polls() {
+    vm.handleLoadPolls = handleLoadPolls;
+    function handleLoadPolls() {
       if (vm.stopped || vm.busy) return;
       vm.busy = true;
-      if (Storages.has_session(Constants.storages.polls)) {
-
-      }
-      Action.get_polls(vm.page)
+      Action.get_polls(vm.page, vm.language)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
             vm.stopped = true;
@@ -98,7 +90,7 @@
           // Xử lý poll trước khi hiển thị màn hình
           var promises = [];
           res.data.forEach(poll => {
-            promises.push(process_before_show(poll));
+            promises.push(prepareShowingData(poll));
           });
           return Promise.all(promises);
         })
@@ -108,7 +100,7 @@
           vm.polls = _.union(vm.polls, results);
           vm.page += 1;
           vm.busy = false;
-          $scope.$digest();
+          if (!$scope.$$phase) $scope.$digest();
         })
         .catch(err => {
           vm.busy = false;
@@ -116,13 +108,13 @@
           $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
     }
-    function process_before_show(poll) {
+    function prepareShowingData(poll) {
       return new Promise((resolve, reject) => {
         poll = Action.process_before_show(poll);
         return resolve(poll);
       });
     }
-    function get_populars() {
+    function preparePopularPolls() {
       Action.get_populars(0)
         .then(res => {
           vm.populars = res.data;
@@ -131,7 +123,7 @@
           $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
     }
-    function get_popular_tags() {
+    function preparePopularTags() {
       Action.get_popular_tags()
         .then(res => {
           vm.tags = res.data;
@@ -140,15 +132,7 @@
           $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
     }
-    function get_bookmarks() {
-      UserApi.get_bookmarks($scope.user._id, 0)
-        .then(res => {
-          vm.bookmarks = res.data || [];
-        }, err => {
-          $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
-        });
-    }
-    function get_best_users() {
+    function prepareTopUsers() {
       Action.get_best_users(10)
         .then(res => {
           vm.bestUsers = res.data;
@@ -157,6 +141,7 @@
           $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
     }
+
     // Thao tác khác
     $scope.delete_poll = (poll) => {
       if (!poll.isCurrentUserOwner) {

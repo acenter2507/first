@@ -25,28 +25,28 @@ angular.module('core').controller('WebAppController', [
 
     // Watch user info
     $scope.$watch('Authentication.user', () => {
-      init();
+      onCreate();
     });
     $scope.$watch('Notifications.notifCnt', () => {
       $scope.page_title = ($scope.Notifications.notifCnt > 0) ? ('(' + $scope.Notifications.notifCnt + ') ' + $scope.page_name) : ('' + $scope.page_name);
     });
     // Init
-    function init() {
+    function onCreate() {
       $scope.user = Authentication.user;
       $scope.isLogged = ($scope.user);
       $scope.isAdmin = $scope.isLogged && _.contains($scope.user.roles, 'admin');
       if ($scope.isLogged) {
-        initSocket();
+        prepareSocketListener();
         Notifications.loadNotifs();
       }
-      initCategorys();
+      prepareCategorys();
       // Kiểm tra thông tin user mới có thay đổi ngôn ngữ hay không
       if ($scope.user.language !== $translate.use()) {
         $translate.use($scope.user.language);
       }
     }
     // Init socket
-    function initSocket() {
+    function prepareSocketListener() {
       if (!Socket.socket) {
         Socket.connect();
       }
@@ -58,50 +58,57 @@ angular.module('core').controller('WebAppController', [
       });
     }
     // Load categorys
-    function initCategorys() {
+    function prepareCategorys() {
       Categorys.load();
     }
     // Lấy message lưu trong storage
-    getFlash();
-    function getFlash() {
-      var flash = Storages.get_session(Constants.storages.flash);
-      if (flash) {
-        $scope.show_success(flash);
+    prepareFlashMessage();
+    function prepareFlashMessage() {
+      var message = Storages.get_session(Constants.storages.flash);
+      if (message) {
+        $scope.handleShowMessage(message, true);
         Storages.set_session(Constants.storages.flash, undefined);
       }
     }
+    // Lấy thông tin translate cơ bản
+    prepareCommonMessage();
+    function prepareCommonMessage() {
+      $translate(['MS_CM_ERROR', 'MS_CM_SUCCESS']).then(tsl => {
+        $scope.MS_CM_ERROR = tsl.MS_CM_ERROR;
+        $scope.MS_CM_SUCCESS = tsl.MS_CM_SUCCESS;
+
+      });
+    }
+
     // Thay đổi ngôn ngữ
-    $scope.change_language = lang => {
+    $scope.handleChangeLanguage = lang => {
       if (lang === $translate.use()) return;
-      $translate('MS_USERS_LANG_CONFIRM').then(tsl => {
-        var content = tsl;
-        $translate(lang).then(_tsl => {
-          content += _tsl;
-          $scope.handleShowConfirm({
-            content: content,
-            type: 1,
-            button: 'LB_CHANGE'
-          }, confirm => {
-            handleChangeLanguage();
-          });
+      $translate(['MS_USERS_LANG_CONFIRM', lang]).then(tsl => {
+        var content = tsl.MS_USERS_LANG_CONFIRM + tsl[lang];
+        $scope.handleShowConfirm({
+          content: content,
+          type: 1,
+          button: 'LB_CHANGE'
+        }, confirm => {
+          handleSaveLanguage();
         });
       });
-      function handleChangeLanguage() {
-        delete $scope.message;
-        $http.post('/api/users/language', { language: lang }).success(function (response) {
-          Authentication.user = response;
-        }).error(function (err) {
-          $scope.handleShowMessage(err.message, true);
-        });
+      function handleSaveLanguage() {
+        if ($scope.isLogged) {
+          $http.post('/api/users/language', { language: lang }).success(function (response) {
+            // Authentication.user = response;
+            // reload page
+            $location.path('/');
+          }).error(function (err) {
+            $scope.handleShowMessage(err.message, true);
+          });
+        } else {
+          // $translate.use(lang);
+          Storages.set_local(Constants.storages.language, lang);
+          $location.path('/');
+        }
       }
     };
-
-    // Lấy thông tin translate cơ bản
-    get_translate();
-    function get_translate() {
-      $translate('MS_CM_ERROR').then(tsl => { $scope.MS_CM_ERROR = tsl; });
-      $translate('MS_CM_SUCCESS').then(tsl => { $scope.MS_CM_SUCCESS = tsl; });
-    }
 
     /**
      * DIALOG CONFIG

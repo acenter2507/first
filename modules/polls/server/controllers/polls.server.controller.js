@@ -33,6 +33,7 @@ var path = require('path'),
 exports.create = function (req, res) {
   var poll = new Poll(req.body);
   poll.user = req.user;
+  poll.language = req.user.language;
 
   var tags = req.body.tags || [];
   var opts = req.body.opts || [];
@@ -296,7 +297,9 @@ exports.pollByID = function (req, res, next, id) {
 exports.findPolls = function (req, res) {
   var page = req.params.page || 0;
   var userId = req.user ? req.user._id : undefined;
-  Poll.find({ isPublic: true })
+  // Lấy ngôn ngữ hiển thị poll
+  var language = req.params.language || config.mappingLanguages[req.locale];
+  Poll.find({ isPublic: true, language: language })
     .select('-body -updated -share_code')
     .sort('-created')
     .populate('category', 'name color slug')

@@ -21,7 +21,7 @@ module.exports = function(app) {
     .delete(polls.delete);
 
   // Lấy danh sách poll cho màn hình polls.list
-  app.route('/api/findPolls/:page').get(polls.findPolls);
+  app.route('/api/findPolls/:page/:language').get(polls.findPolls);
   // Lấy danh sách poll nổi bật cho màn hình polls.list
   app.route('/api/findPopulars/:page').get(polls.findPopulars);
   // Lấy thông tin của user hiện hành đối với poll cho màn hình polls.view

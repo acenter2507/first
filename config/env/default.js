@@ -50,11 +50,12 @@ module.exports = {
     'ja': 'ja',
     'vi': 'vi',
     'en_US': 'en',
-    'en_UK': 'en'
+    'en_UK': 'en',
+    '': 'en' // Default
   },
   locales: {
-    "vi": "Asia/Ho_Chi_Minh",
-    "en": "America/New_York",
-    "ja": "Asia/Tokyo"
+    'vi': 'Asia/Ho_Chi_Minh',
+    'en': 'America/New_York',
+    'ja': 'Asia/Tokyo'
   }
 };

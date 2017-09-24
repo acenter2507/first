@@ -7,12 +7,15 @@ angular.module('core').service('Constants', [
       dialogConfirm: 'modules/core/client/views/templates/confirm.dialog.template.html'
     };
     this.storages = {
-      polls: '3918250791283P32O273LL',
+      // Điều kiện search poll tại màn hình admin
       admin_polls_condition: '132LFJALSF92843',
+      // Điều kiện filter poll tại màn hình admin
       admin_polls_fitler: '9183kfksjdf38392',
+      // Màn hình search
       public_search_condition: '192783hf9283492834',
+      // Message flash
       flash: '409234lMLDOIFA98fa',
-      preferences: '9218391509124jkd8324',
+      language: '851kf00aAF093402395'
     };
     this.reCaptcha = {
       key: '6LeV2y4UAAAAAIysrsCFTAKqbgwVkp5MQbd019mX',

@@ -42,10 +42,10 @@
     /**
      * Lấy danh sách poll cho màn hình polls.list
      */
-    this.get_polls = (_page) => {
+    this.get_polls = (_page, language) => {
       return new Promise((resolve, reject) => {
         var page = _page || 0;
-        $http.get('/api/findPolls/' + page, {
+        $http.get('/api/findPolls/' + page + '/' + language, {
           ignoreLoadingBar: true
         })
           .then(res => {

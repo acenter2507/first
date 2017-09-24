@@ -87,7 +87,7 @@
     function handleLoadPolls() {
       if (vm.stopped || vm.busy) return;
       vm.busy = true;
-      Action.get_polls(vm.page, $scope.language)
+      Action.get_polls(vm.page, vm.language)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
             vm.stopped = true;

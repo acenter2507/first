@@ -80,10 +80,6 @@
 
   <!-- User login -->
   <ul class="nav navbar-nav navbar-right d-sm-down-none" ng-if="!isLogged">
-    <!-- <li ui-sref-active="active">
-      <a ui-sref="authentication.signup">{{ 'LB_SIGNUP' | translate }}</a>
-    </li>
-    <li class="divider-vertical"></li> -->
     <li ui-sref-active="active">
       <a ui-sref="authentication.signin"><i class="fa fa-sign-in"></i></a>
     </li>
@@ -142,6 +138,14 @@
           <a ui-sref="notifs.list">{{ 'LB_NOFT_VIEWALL' | translate }}</a>
         </li>
       </ul>
+    </li>
+  </ul>
+
+  <!-- Languages -->
+  <ul class="nav navbar-nav navbar-right d-sm-down-none">
+    <li>
+      <a href="#">VI</a>
+      <md-tooltip md-direction="bottom">{{ 'LANGUAGE' | translate }}</md-tooltip>
     </li>
   </ul>
 

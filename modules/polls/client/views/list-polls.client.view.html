@@ -11,7 +11,6 @@
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9 pdn">
       <div ng-repeat="poll in vm.polls" class="card" id="{{::poll._id}}">
-        <!-- <div ng-include="'/modules/core/client/views/templates/list-poll.client.template.html'"></div> -->
         <poll-item></poll-item>
       </div>
       <!-- Loading indicator -->
@@ -31,10 +30,9 @@
           <strong class="card-title">{{ 'LANGUAGE' | translate }}</strong>
         </div>
         <div class="card-body">
-          <a ng-repeat="lang in vm.supportLanguages" ng-click="handleChangeLanguage(lang)" ng-class="{ 'mg5l': !$first, 'text-default': lang === $translate.use() }">{{ lang | translate }}</a>
+          <a ng-repeat="lang in vm.supportLanguages" ng-click="handleChangeLanguage(lang)" ng-class="{ 'mg5l': !$first, 'text-default': lang === vm.language }">{{ lang | translate }}</a>
         </div>
       </div>
-    </div>
     <!-- Activitys  -->
     <!-- <div class="card card-expand card-scroll" ng-if="isLogged">
         <div class="card-header">
@@ -198,6 +196,52 @@
         </ul>
       </div>
     </div>
+    <!-- LEFT -->
+    <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-lg-pull-9 pdn d-sm-down-none"> -->
+    <!-- Category -->
+    <!-- <div class="card">
+        <div class="card-header">
+          <strong class="card-title">Categorys</strong>
+          <small class="card-link"><a ui-sref="categorys.list">View all</a></small>
+        </div>
+        <ul class="nav nav-list">
+          <li ng-repeat="category in Categorys.list">
+            <a ui-sref="categorys.polls({ categoryId: category.slug })">
+              <i ng-class="['fa', category.icon]"></i>&nbsp;{{::category.name}}
+              <span class="badge-count pull-right" ng-bind="category.count"></span>
+            </a>
+          </li>
+        </ul>
+      </div> -->
+    <!-- Bookmark -->
+    <!-- <div class="card" ng-if="isLogged && vm.bookmarks.length > 0">
+        <div class="card-header">
+          <strong class="card-title">Bookmarks</strong>
+          <small class="card-link"><a ui-sref="profile.bookmarks({ userId: user.slug })">View all</a></small>
+        </div>
+        <div class="card-body">
+          <div class="side-list-poll" ng-repeat="poll in vm.bookmarks">
+            <div class="user-avatar pull-left">
+              <a ng-if="poll.user" ui-sref="profile.info({userId: poll.user.slug})">
+                <img src="{{::poll.user.profileImageURL}}" alt="{{::poll.user.displayName}}">
+              </a>
+              <img ng-if="!poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
+            </div>
+            <div class="side-list-body">
+              <h4 class="side-list-title">
+                <a ui-sref="polls.view({pollId: poll.slug})" ng-bind="poll.title" autoAdjust></a>
+              </h4>
+              <div class="side-list-entry">
+                <small am-time-ago="poll.created"></small>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <hr class="mg5t mg5b">
+          </div>
+        </div>
+      </div> -->
+    <!-- </div> -->
+    <div class="clearfix"></div>
   </div>
   <div class="clearfix"></div>
 

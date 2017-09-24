@@ -52,6 +52,8 @@
     onPrepare();
 
     function onPrepare() {
+      // Lắng nghe sự liện từ scope
+      prepareScopeListener();
       // Lắng nghe sự liện từ socket
       prepareSocketListener();
       // Load danh sách tags (Bao gồm số poll)

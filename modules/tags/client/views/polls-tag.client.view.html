@@ -8,9 +8,12 @@
       <div class="row text-center" ng-show="busy"><i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i></div>
       <!-- Message  -->
       <div class="notice notice-warning" ng-show="vm.polls.length === 0 && !busy">
-          {{ 'LB_POLLS_HASNO' | translate }}
-          <a ui-sref="polls.create">{{ 'LB_POLLS_CREATE' | translate }}</a>
+        {{ 'LB_POLLS_HASNO' | translate }}
+        <a ui-sref="polls.create">{{ 'LB_POLLS_CREATE' | translate }}</a>
       </div>
     </div>
+  </div>
+  <div class="row text-center" ng-show="!stopped">
+    <a ng-click="ctrl.handleLoadPolls()">{{:: 'LB_LOAD_MORE' | translate }}</a>
   </div>
 </section>

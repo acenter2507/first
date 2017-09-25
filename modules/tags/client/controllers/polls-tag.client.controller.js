@@ -49,8 +49,10 @@
         .then(results => {
           // Gán data vào list hiện tại
           vm.polls = results || [];
-          vm.page ++;
+          vm.page++;
           $scope.busy = false;
+          if (results.length < 10) { $scope.stopped = true; }
+          if (!$scope.$$phase) $scope.$digest();
         })
         .catch(err => {
           $scope.busy = false;

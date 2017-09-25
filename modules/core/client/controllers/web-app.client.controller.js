@@ -43,7 +43,7 @@ angular.module('core').controller('WebAppController', [
       // Kiểm tra thông tin user mới có thay đổi ngôn ngữ hay không
       if ($scope.isLogged && $scope.user.language !== $translate.use()) {
         $translate.use($scope.user.language);
-        $scope.$broadcast('changeLanguage');
+        // $scope.$broadcast('changeLanguage');
       }
     }
     // Init socket
@@ -104,7 +104,7 @@ angular.module('core').controller('WebAppController', [
         } else {
           $translate.use(lang);
           Storages.set_local(Constants.storages.language, lang);
-          $scope.$broadcast('changeLanguage');
+          // $scope.$broadcast('changeLanguage');
         }
       }
     };

@@ -6,7 +6,6 @@
 
   PollsListController.$inject = [
     '$location',
-    '$rootScope',
     '$state',
     '$scope',
     '$window',
@@ -20,7 +19,6 @@
 
   function PollsListController(
     $location,
-    $rootScope,
     $state,
     $scope,
     $window,

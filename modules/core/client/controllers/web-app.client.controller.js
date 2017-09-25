@@ -49,7 +49,7 @@ angular.module('core').controller('WebAppController', [
         var tz = $window.locales[$scope.user.language];
         moment.tz.setDefault(tz);
         moment.locale($scope.user.language);
-        // $scope.$broadcast('changeLanguage');
+        $scope.$broadcast('changeLanguage', { language: $scope.user.language });
       }
     }
     // Init socket

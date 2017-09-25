@@ -119,9 +119,6 @@
       $translate.use($window.user.language).then(() => {
         console.log($translate.use());
       });
-      var activeLanguage = $translate.use() ||
-        $translate.storage().get($translate.storageKey()) ||
-        $translate.preferredLanguage();
     } else {
       // Kiểm tra ngôn ngữ đã lưu trong local storage
       if (webStorage.local.has('851kf00aAF093402395')) {

@@ -132,7 +132,7 @@
           <div class="clearfix"></div>
         </a>
         <li class="text-center" ng-if="Notifications.notifCnt > 0">
-          <a ng-click="mark_all_read()">{{ 'LB_NOFT_MARKALL' | translate }}</a>
+          <a ng-click="handleMarkAllNotifRead()">{{ 'LB_NOFT_MARKALL' | translate }}</a>
         </li>
         <li class="text-center">
           <a ui-sref="notifs.list">{{ 'LB_NOFT_VIEWALL' | translate }}</a>
@@ -142,19 +142,17 @@
   </ul>
 
   <!-- Languages -->
-  <!-- <ul class="nav navbar-nav navbar-right d-sm-down-none">
+   <ul class="nav navbar-nav navbar-right d-sm-down-none">
     <li class="dropdown" uib-dropdown>
       <md-tooltip md-direction="bottom">{{ 'LANGUAGE' | translate }}</md-tooltip>
-      <a href="#" class="dropdown-toggle" role="button" uib-dropdown-toggle>
-        <i class="fa fa-language"></i> {{language}}
-      </a>
+      <a href="#" class="dropdown-toggle text-uppercase" role="button" uib-dropdown-toggle>{{language}}</a>
       <ul class="dropdown-menu" role="menu">
         <li ng-repeat="lang in supportLanguages">
           <a ng-disabled="lang === language" ng-click="handleChangeLanguage(lang)">{{ lang | translate }}</a>
         </li>
       </ul>
     </li>
-  </ul> -->
+  </ul> 
 
   <div class="clearfix"></div>
 </div>

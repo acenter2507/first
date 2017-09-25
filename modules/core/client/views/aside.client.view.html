@@ -21,7 +21,7 @@
         </a>
       </li>
       <li class="nav-item" ng-show="isLogged && Notifications.notifCnt > 0">
-        <a class="nav-link" ng-click="mark_all_read()"><i class="fa fa-check-square-o"></i> {{ 'LB_NOFT_MARKALL' | translate }}</a>
+        <a class="nav-link" ng-click="handleMarkAllNotifRead()"><i class="fa fa-check-square-o"></i> {{ 'LB_NOFT_MARKALL' | translate }}</a>
       </li>
       <li class="nav-title">{{ 'LB_NAVIGATION' | translate }}</li>
       <li class="nav-item">

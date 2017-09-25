@@ -58,7 +58,7 @@
       Notifications.markReadNotif(notif._id, status);
       notif.status = status;
     };
-    vm.mark_all_read = () => {
+    vm.handleMarkAllNotifRead = () => {
       if (vm.stopped || vm.busy || vm.notifs.length === 0) return;
       vm.busy = true;
       Notifications.markReadNotifs()

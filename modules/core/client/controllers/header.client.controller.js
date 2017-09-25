@@ -6,8 +6,9 @@ angular.module('core').controller('HeaderController', [
   'Menus',
   'Notifications',
   '$window',
-  '$translate',
-  function ($scope, $state, Menus, Notifications, $window, $translate) {
+  'Storages',
+  'Constants',
+  function ($scope, $state, Menus, Notifications, $window, Storages, Constants) {
     // Expose view variables
     $scope.$state = $state;
     // Get the topbar menu

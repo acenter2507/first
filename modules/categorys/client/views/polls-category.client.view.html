@@ -1,17 +1,19 @@
 <section class="container animated fadeIn mg6t mg50b">
   <div class="row">
-    <select class="form-control pull-right w200 input-sm" ng-model="vm.sort" ng-change="vm.handleChangeSortType()">
-      <option value="-created">{{:: 'LB_SEARCH_SORT_NEWEST' | translate }}</option>
-      <option value="created">{{:: 'LB_SEARCH_SORT_OLDEST' | translate }}</option>
-      <option value="-likeCnt">{{:: 'LB_SEARCH_SORT_MOST_LIKE' | translate }}</option>
-      <option value="likeCnt">{{:: 'LB_SEARCH_SORT_LEAST_LIKE' | translate }}</option>
-      <option value="-cmtCnt">{{:: 'LB_SEARCH_SORT_MOST_CMT' | translate }}</option>
-      <option value="cmtCnt">{{:: 'LB_SEARCH_SORT_LEAST_CMT' | translate }}</option>
-      <option value="-voteCnt">{{:: 'LB_SEARCH_SORT_MOST_VOTE' | translate }}</option>
-      <option value="voteCnt">{{:: 'LB_SEARCH_SORT_LEAST_VOTE' | translate }}</option>
-      <option value="-viewCnt">{{:: 'LB_SEARCH_SORT_MOST_VIEW' | translate }}</option>
-      <option value="viewCnt">{{:: 'LB_SEARCH_SORT_LEAST_VIEW' | translate }}</option>
+    <div class="col-xs-12 pdn">
+      <select class="form-control pull-right w200 input-sm" ng-model="vm.sort" ng-change="vm.handleChangeSortType()">
+        <option value="-created">{{:: 'LB_SEARCH_SORT_NEWEST' | translate }}</option>
+        <option value="created">{{:: 'LB_SEARCH_SORT_OLDEST' | translate }}</option>
+        <option value="-likeCnt">{{:: 'LB_SEARCH_SORT_MOST_LIKE' | translate }}</option>
+        <option value="likeCnt">{{:: 'LB_SEARCH_SORT_LEAST_LIKE' | translate }}</option>
+        <option value="-cmtCnt">{{:: 'LB_SEARCH_SORT_MOST_CMT' | translate }}</option>
+        <option value="cmtCnt">{{:: 'LB_SEARCH_SORT_LEAST_CMT' | translate }}</option>
+        <option value="-voteCnt">{{:: 'LB_SEARCH_SORT_MOST_VOTE' | translate }}</option>
+        <option value="voteCnt">{{:: 'LB_SEARCH_SORT_LEAST_VOTE' | translate }}</option>
+        <option value="-viewCnt">{{:: 'LB_SEARCH_SORT_MOST_VIEW' | translate }}</option>
+        <option value="viewCnt">{{:: 'LB_SEARCH_SORT_LEAST_VIEW' | translate }}</option>
     </select>
+    </div>
   </div>
   <div class="row">
     <div class="col-xs-12 pdn">

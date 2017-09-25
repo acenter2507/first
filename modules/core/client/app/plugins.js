@@ -128,13 +128,17 @@
     ]);
     // Kiểm tra user đã đăng nhập hay chưa
     if ($window.user) {
-      // Cài đặt ngôn ngữ của user
-      $translate.use($window.user.language);
+      // Cài đặt ngôn ngữ của user nếu đang khác nhau
+      if ($window.user.language !== $translate.use()) {
+        $translate.use($window.user.language);
+      }
     } else {
       // Kiểm tra ngôn ngữ đã lưu trong local storage
       if (webStorage.local.has('851kf00aAF093402395')) {
         var lang = webStorage.local.get('851kf00aAF093402395');
-        $translate.use($window.user.language);
+        if (lang !== $translate.use()) {
+          $translate.use($window.user.language);
+        }
       }
     }
   }

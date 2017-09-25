@@ -228,6 +228,7 @@ function get_polls_by_tagId(tagId, page, language) {
         if (err) {
           return reject(err);
         } else {
+          console.log(polltags);
           var polls = _.pluck(polltags, 'poll');
           return resolve(polls);
         }

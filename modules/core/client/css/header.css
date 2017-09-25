@@ -35,13 +35,13 @@
   background-color: #2271bf;
 }
 .header-profile-image {
-  height: 28px;
-  width: 28px;
+  height: 34px;
+  width: 34px;
   margin-right: 5px;
 }
 .user-header-dropdown-toggle {
-  padding-top: 11px !important;
-  padding-bottom: 11px !important;
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
 }
 .navbar-default .navbar-toggle {
   border-color: none;

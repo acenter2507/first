@@ -109,7 +109,6 @@
   function runConfig($rootScope, $translate, amMoment, $window, webStorage) {
     $rootScope.$on('$translateChangeSuccess', () => {
       var lang = $translate.use();
-      console.log('translateChangeSuccess', lang);
       // Thay đổi ngôn ngữ angular moment
       amMoment.changeLocale(lang);
       // Thay đổi local 

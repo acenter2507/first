@@ -33,6 +33,8 @@ angular.module('core').controller('HeaderController', [
       // Nghe sự kiện chuyển thay đổi ngôn ngữ
       $scope.$on('changeLanguage', (event, args) => {
         console.log('HeaderController: ' + args.language);
+        $scope.language = args.language;
+        $state.reload();
         // $state.reload();
         // $scope.language = $translate.use();
         // console.log('HeaderController changeLanguage: ' + $scope.language);

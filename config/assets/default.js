@@ -38,7 +38,6 @@ module.exports = {
         'public/lib/angular-file-upload/angular-file-upload.js',
         'public/lib/angular-aria/angular-aria.js',
         'public/lib/angular-material/angular-material.js',
-        'public/lib/angular-ui-switch/angular-ui-switch.js',
         'public/lib/angular-elastic/elastic.js',
         'public/lib/angular-webstorage/angular-webstorage.js',
         'public/lib/chart.js/dist/Chart.js',

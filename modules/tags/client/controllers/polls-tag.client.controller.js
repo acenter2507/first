@@ -32,11 +32,12 @@
 
     handleLoadPolls();
     function handleLoadPolls() {
-      if ($scope.busy) return;
+      if ($scope.stopped || $scope.busy) return;
       $scope.busy = true;
       Action.get_tag_polls(vm.tag._id, vm.page, vm.language, vm.sort)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
+            $scope.stopped = true;
             $scope.busy = false;
             return;
           }

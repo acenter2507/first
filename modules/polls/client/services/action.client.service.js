@@ -58,10 +58,10 @@
     /**
      * Lấy danh sách poll mổi bật cho màn hình polls.list
      */
-    this.get_populars = (_page) => {
+    this.get_populars = (_page, language) => {
       return new Promise((resolve, reject) => {
         var page = _page || 0;
-        $http.get('/api/findPopulars/' + page, {
+        $http.get('/api/findPopulars/' + page + '/' + language, {
           ignoreLoadingBar: true
         })
           .then(res => {

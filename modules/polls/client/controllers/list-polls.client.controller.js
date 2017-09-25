@@ -73,8 +73,8 @@
     }
     function prepareScopeListener() {
       $scope.$on('changeLanguage', (event, args) => {
-        console.log('PollsListController changeLanguage')
-        $state.reload();
+        $location.reload();
+        // $state.reload();
       });
     }
     vm.handleLoadPolls = handleLoadPolls;
@@ -116,7 +116,7 @@
       });
     }
     function preparePopularPolls() {
-      Action.get_populars(0)
+      Action.get_populars(0, vm.language)
         .then(res => {
           vm.populars = res.data;
         })

@@ -298,7 +298,7 @@ exports.findPolls = function (req, res) {
   var page = req.params.page || 0;
   var userId = req.user ? req.user._id : undefined;
   // Lấy ngôn ngữ hiển thị poll
-  var language = req.params.language || config.mappingLanguages[req.locale];
+  var language = req.user ? req.user.language : req.params.language || config.mappingLanguages[req.locale];
   Poll.find({ isPublic: true, language: language })
     .select('-body -updated -share_code')
     .sort('-created')
@@ -347,16 +347,18 @@ exports.findPopulars = function (req, res) {
   let rs = {};
   let sort = '-likeCnt';
   let limit = 10;
-  get_polls_by_sort_and_limit(sort, limit)
+  // Lấy ngôn ngữ hiển thị poll
+  var language = req.user ? req.user.language : req.params.language || config.mappingLanguages[req.locale];
+  get_polls_by_sort_and_limit(sort, limit, language)
     .then(result => {
       rs.likes = result || [];
       sort = '-voteCnt';
-      return get_polls_by_sort_and_limit(sort, limit);
+      return get_polls_by_sort_and_limit(sort, limit, language);
     })
     .then(result => {
       rs.votes = result || [];
       sort = '-cmtCnt';
-      return get_polls_by_sort_and_limit(sort, limit);
+      return get_polls_by_sort_and_limit(sort, limit, language);
     })
     .then(result => {
       rs.cmts = result || [];
@@ -941,9 +943,9 @@ function get_last_cmt_by_pollId(pollId) {
   });
 }
 
-function get_polls_by_sort_and_limit(sort, limit) {
+function get_polls_by_sort_and_limit(sort, limit, language) {
   return new Promise((resolve, reject) => {
-    Poll.find({ isPublic: true })
+    Poll.find({ isPublic: true, language: language })
       .sort(sort)
       .populate('user', 'displayName profileImageURL slug')
       .select('title user cmtCnt likeCnt voteCnt created slug')

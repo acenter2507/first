@@ -33,8 +33,8 @@ angular.module('core').controller('HeaderController', [
       });
       // Nghe sự kiện chuyển thay đổi ngôn ngữ
       $scope.$on('changeLanguage', function () {
-        console.log('HeaderController changeLanguage');
         $scope.language = $translate.use();
+        console.log('HeaderController changeLanguage: ' + $scope.language);
         if (!$scope.$$phase) $scope.$digest();
       });
     }

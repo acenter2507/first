@@ -32,7 +32,6 @@
     var vm = this;
 
     vm.polls = [];
-    vm.hot_polls = [];
     vm.bestUsers = [];
     vm.tags = [];
     vm.new_data = [];

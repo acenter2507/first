@@ -146,6 +146,7 @@ exports.list = function (req, res) {
       var length = cmts.length;
       var counter = 0;
       cmts.forEach(function (instance, index, array) {
+        if (!instance) continue;
         array[index] = instance.toObject();
         pollController.get_like_by_cmtId_and_userId(array[index]._id, userId)
           .then(result => {

@@ -310,6 +310,7 @@ exports.findPolls = function (req, res) {
       var length = polls.length;
       var counter = 0;
       polls.forEach(function (instance, index, array) {
+        if (!instance) continue;
         array[index] = instance.toObject();
         get_last_cmt_by_pollId(array[index]._id)
           .then(result => {
@@ -437,6 +438,7 @@ exports.findCmts = function (req, res) {
       var length = cmts.length;
       var counter = 0;
       cmts.forEach(function (instance, index, array) {
+        if (!instance) continue;
         array[index] = instance.toObject();
         get_like_by_cmtId_and_userId(array[index]._id, userId)
           .then(result => {
@@ -530,6 +532,7 @@ exports.search = function (req, res) {
       var length = polls.length;
       var counter = 0;
       polls.forEach(function (instance, index, array) {
+        if (!instance) continue;
         array[index] = instance.toObject();
         get_full_by_pollId(array[index]._id, userId)
           .then(result => {

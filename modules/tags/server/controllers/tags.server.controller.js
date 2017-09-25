@@ -94,6 +94,7 @@ exports.list = function (req, res) {
       var length = tags.length;
       var counter = 0;
       tags.forEach(function (instance, index, array) {
+        if (!instance) continue;
         array[index] = instance.toObject();
         count_polls_by_tagId(array[index]._id)
           .then(result => {
@@ -147,6 +148,7 @@ exports.popular = function (req, res) {
       var length = tags.length;
       var counter = 0;
       tags.forEach(function (instance, index, array) {
+        if (!instance) continue;
         array[index] = instance.toObject();
         count_polls_by_tagId(array[index]._id)
           .then(result => {
@@ -183,6 +185,7 @@ exports.polls = function (req, res) {
       var length = polls.length;
       var counter = 0;
       polls.forEach(function (instance, index, array) {
+        if (!instance) continue;
         array[index] = instance.toObject();
         pollController.get_full_by_pollId(array[index]._id, userId)
           .then(result => {

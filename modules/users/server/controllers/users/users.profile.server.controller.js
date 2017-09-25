@@ -259,6 +259,7 @@ exports.activitys = function (req, res) {
         var length = votes.length;
         var counter = 0;
         votes.forEach(function (instance, index, array) {
+        if (!instance) continue;
           array[index] = instance.toObject();
           pollController.get_opts_by_voteId(array[index]._id)
             .then(opts => {
@@ -298,6 +299,7 @@ exports.polls = function (req, res) {
       var length = polls.length;
       var counter = 0;
       polls.forEach(function (instance, index, array) {
+        if (!instance) continue;
         array[index] = instance.toObject();
         pollController.get_full_by_pollId(array[index]._id, userId)
           .then(result => {
@@ -357,6 +359,7 @@ exports.votes = function (req, res) {
       var length = votes.length;
       var counter = 0;
       votes.forEach(function (instance, index, array) {
+        if (!instance) continue;
         array[index] = instance.toObject();
         pollController.get_opts_by_voteId(array[index]._id)
           .then(result => {
@@ -400,6 +403,7 @@ exports.follows = function (req, res) {
       var length = polls.length;
       var counter = 0;
       polls.forEach(function (instance, index, array) {
+        if (!instance) continue;
         array[index] = instance.toObject();
         pollController.get_full_by_pollId(array[index]._id, userId)
           .then(result => {
@@ -449,6 +453,7 @@ exports.bookmarks = function (req, res) {
       var length = polls.length;
       var counter = 0;
       polls.forEach(function (instance, index, array) {
+        if (!instance) continue;
         array[index] = instance.toObject();
         pollController.get_full_by_pollId(array[index]._id, userId)
           .then(result => {
@@ -522,6 +527,7 @@ exports.views = function (req, res) {
       var length = polls.length;
       var counter = 0;
       polls.forEach(function (instance, index, array) {
+        if (!instance) continue;
         array[index] = instance.toObject();
         pollController.get_full_by_pollId(array[index]._id, userId)
           .then(result => {
@@ -571,6 +577,7 @@ exports.likes = function (req, res) {
       var length = polls.length;
       var counter = 0;
       polls.forEach(function (instance, index, array) {
+        if (!instance) continue;
         array[index] = instance.toObject();
         pollController.get_full_by_pollId(array[index]._id, userId)
           .then(result => {
@@ -620,6 +627,7 @@ exports.dislikes = function (req, res) {
       var length = polls.length;
       var counter = 0;
       polls.forEach(function (instance, index, array) {
+        if (!instance) continue;
         array[index] = instance.toObject();
         pollController.get_full_by_pollId(array[index]._id, userId)
           .then(result => {

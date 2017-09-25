@@ -75,9 +75,9 @@
       $scope.$on('$translateChangeSuccess', () => {
         console.log('PollsListController changeLanguage: ' + $translate.use());
       });
-      $scope.$on('changeLanguage', (lang) => {
+      $scope.$on('changeLanguage', (data) => {
         //$state.reload();
-        console.log('PollsListController changeLanguage: ' + lang);
+        console.log('PollsListController changeLanguage: ' + data.language);
       });
     }
     vm.handleLoadPolls = handleLoadPolls;

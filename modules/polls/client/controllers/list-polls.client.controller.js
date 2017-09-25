@@ -42,6 +42,7 @@
     vm.is_has_new_polls = false;
     vm.supportLanguages = $window.supportLanguages;
     vm.language = $translate.use();
+    console.log('PollsListController');
 
     onPrepare();
 

@@ -661,16 +661,18 @@
     };
 
     // Click button add option
-    ctrl.handleStartInputOption = () => {
+    ctrl.handleStartInputOption = handleStartInputOption;
+    function handleStartInputOption() {
       if (!ctrl.poll.user) {
         $scope.handleShowMessage('LB_POLLS_SUGGEST_DELETED_USER', true);
         return;
       }
       ctrl.tmp_opt = { poll: ctrl.poll._id, title: '', body: '', status: 2 };
       angular.element('body').toggleClass('aside-panel-open');
-    };
+    }
     // Click button save option
-    ctrl.handleSaveOption = isValid => {
+    ctrl.handleSaveOption = handleSaveOption;
+    function handleSaveOption(isValid) {
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'ctrl.form.optForm');
         return false;
@@ -683,13 +685,16 @@
         })
         .catch(err => {
           $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
+          $scope.$broadcast('show-errors-reset', 'ctrl.form.optForm');
+          angular.element('body').removeClass('aside-panel-open');
         });
-    };
-    ctrl.handleShowFullOption = () => {
+    }
+    ctrl.handleShowFullOption = handleShowFullOption;
+    function handleShowFullOption() {
       let aside = angular.element('.aside-panel')[0];
       angular.element(aside).toggleClass('full');
       angular.element('#aside-panel-full-toggle').find('i').toggleClass('r180');
-    };
+    }
 
     ctrl.reply_cmt = cmt => {
       if (!$scope.isLogged) {

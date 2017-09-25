@@ -66,7 +66,13 @@
           $scope.handleShowMessage(err.message, true);
         });
     }
-
+    vm.handleChangeSortType = handleChangeSortType;
+    function handleChangeSortType() {
+      vm.page = 0;
+      $scope.busy = $scope.stopped = false;
+      vm.polls = [];
+      handleLoadPolls();
+    }
     function prepareShowingData(poll) {
       return new Promise((resolve, reject) => {
         poll = Action.process_before_show(poll);

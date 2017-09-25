@@ -72,12 +72,9 @@
       });
     }
     function prepareScopeListener() {
-      $scope.$on('$translateChangeSuccess', () => {
-        console.log('PollsListController changeLanguage: ' + $translate.use());
-      });
-      $scope.$on('changeLanguage', (data) => {
+      $scope.$on('changeLanguage', (event, args) => {
         //$state.reload();
-        console.log('PollsListController changeLanguage: ' + data.language);
+        console.log('PollsListController changeLanguage: ' + args.language);
       });
     }
     vm.handleLoadPolls = handleLoadPolls;

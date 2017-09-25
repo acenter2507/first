@@ -30,12 +30,9 @@ angular.module('core').controller('HeaderController', [
           angular.element('body').removeClass('aside-menu-show');
         }
       });
-      $scope.$on('$translateChangeSuccess', () => {
-        console.log('HeaderController changeLanguage: ' + $translate.use());
-      });
       // Nghe sự kiện chuyển thay đổi ngôn ngữ
-      $scope.$on('changeLanguage', (data) => {
-        console.log('PollsListController changeLanguage: ' + data.language);
+      $scope.$on('changeLanguage', (event, args) => {
+        console.log('PollsListController changeLanguage: ' + args.language);
         // $state.reload();
         // $scope.language = $translate.use();
         // console.log('HeaderController changeLanguage: ' + $scope.language);

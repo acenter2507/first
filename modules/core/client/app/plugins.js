@@ -115,7 +115,7 @@
       var tz = $window.locales[lang];
       moment.tz.setDefault(tz);
       moment.locale(lang);
-      $rootScope.$broadcast('changeLanguage', { language: lang });
+      // $rootScope.$broadcast('changeLanguage', { language: lang });
       // moment(); -> Thời điểm của locale đã set
       // moment().utc() -> Thời điểm của UTC
       // moment().local(); -> Thời điểm của locale browser

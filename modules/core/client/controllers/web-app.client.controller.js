@@ -97,13 +97,15 @@ angular.module('core').controller('WebAppController', [
       function handleSaveLanguage() {
         if ($scope.isLogged) {
           $http.post('/api/users/language', { language: lang }).success(function (response) {
-            Authentication.user = response;
+            // Authentication.user = response;
+            window.location.reload();
           }).error(function (err) {
             $scope.handleShowMessage(err.message, true);
           });
         } else {
-          $translate.use(lang);
+          // $translate.use(lang);
           Storages.set_local(Constants.storages.language, lang);
+          window.location.reload();
           // $scope.$broadcast('changeLanguage');
         }
       }

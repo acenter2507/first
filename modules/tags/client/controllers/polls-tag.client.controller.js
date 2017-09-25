@@ -8,9 +8,7 @@
 
   PollsTagController.$inject = [
     '$scope',
-    '$state',
-    '$window',
-    'Authentication',
+    '$translate',
     'tagResolve',
     'Action',
     'ngDialog'
@@ -18,9 +16,7 @@
 
   function PollsTagController(
     $scope,
-    $state,
-    $window,
-    Authentication,
+    $translate,
     tag,
     Action,
     dialog

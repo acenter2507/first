@@ -31,7 +31,7 @@
     vm.sort = '-created';
 
     handleLoadPolls();
-    ctrl.handleLoadComments = handleLoadComments;
+    vm.handleLoadPolls = handleLoadPolls;
     function handleLoadPolls() {
       if ($scope.stopped || $scope.busy) return;
       $scope.busy = true;

@@ -113,26 +113,24 @@
       'Asia/Tokyo|JST JDT|-90 -a0|010101010|-QJH0 QL0 1lB0 13X0 1zB0 NX0 1zB0 NX0|38e6',
       'Asia/Ho_Chi_Minh|LMT PLMT +07 +08 +09|-76.E -76.u -70 -80 -90|0123423232|-2yC76.E bK00.a 1h7b6.u 5lz0 18o0 3Oq0 k5b0 aW00 BAM0|90e5'
     ]);
+    var lang;
     // Kiểm tra user đã đăng nhập hay chưa
     if ($window.user) {
-      // Cài đặt ngôn ngữ
-      $translate.use($window.user.language).then(() => {
-        console.log($translate.use());
-      });
+      lang = $window.user.language;
+    } else if (webStorage.local.has('851kf00aAF093402395')) { // Kiểm tra ngôn ngữ đã lưu trong local storage
+      lang = webStorage.local.get('851kf00aAF093402395');
     } else {
-      // Kiểm tra ngôn ngữ đã lưu trong local storage
-      if (webStorage.local.has('851kf00aAF093402395')) {
-        var lang = webStorage.local.get('851kf00aAF093402395');
-        $translate.use(lang);
-        console.log('Plugin: webStorage language: ', lang);
-      }
+      lang = $translate.preferredLanguage() || 'en';
     }
-    // Thay đổi ngôn ngữ angular moment
-    amMoment.changeLocale($translate.use());
-    // Thay đổi local 
-    var tz = $window.locales[$translate.use()];
-    moment.tz.setDefault(tz);
-    moment.locale($translate.use());
+    $translate.use(lang).then(() => {
+      console.log($translate.use());
+      // Thay đổi ngôn ngữ angular moment
+      amMoment.changeLocale($translate.use());
+      // Thay đổi local 
+      var tz = $window.locales[$translate.use()];
+      moment.tz.setDefault(tz);
+      moment.locale($translate.use());
+    });
 
     // $rootScope.$on('$translateChangeSuccess', () => {
     //   var lang = $translate.use();

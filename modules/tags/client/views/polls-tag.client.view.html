@@ -1,6 +1,6 @@
 <section class="container mg10b animated fadeIn mg6t mg50b">
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-12 pdn">
       <div ng-repeat="poll in vm.polls | filter: poll_filter" class="card">
         <poll-item></poll-item>
       </div>
@@ -13,7 +13,7 @@
       </div>
     </div>
   </div>
-  <div class="row text-center mg6t" ng-show="!stopped">
+  <div class="row text-center" ng-show="!stopped">
     <a ng-click="vm.handleLoadPolls()">{{:: 'LB_LOAD_MORE' | translate }}</a>
   </div>
 </section>

@@ -1,6 +1,6 @@
 <section class="container animated fadeIn mg6t mg50b">
   <div class="row">
-    <div class="col-xs-12 pdn">
+    <div class="col-xs-12">
       <select class="form-control pull-right w200 input-sm" ng-model="vm.sort" ng-change="vm.handleChangeSortType()">
         <option value="-created">{{:: 'LB_SEARCH_SORT_NEWEST' | translate }}</option>
         <option value="created">{{:: 'LB_SEARCH_SORT_OLDEST' | translate }}</option>
@@ -15,7 +15,7 @@
     </select>
     </div>
   </div>
-  <div class="row">
+  <div class="row mg6t">
     <div class="col-xs-12 pdn">
       <!-- List polls  -->
       <div ng-repeat="poll in vm.polls | filter: poll_filter" class="card">

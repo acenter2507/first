@@ -117,11 +117,13 @@
     if ($window.user) {
       // Cài đặt ngôn ngữ
       $translate.use($window.user.language);
+      console.log('Plugin: user language: ', $window.user.language);
     } else {
       // Kiểm tra ngôn ngữ đã lưu trong local storage
       if (webStorage.local.has('851kf00aAF093402395')) {
         var lang = webStorage.local.get('851kf00aAF093402395');
         $translate.use(lang);
+        console.log('Plugin: webStorage language: ', lang);
       }
     }
     // Thay đổi ngôn ngữ angular moment

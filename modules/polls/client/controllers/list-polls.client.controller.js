@@ -73,7 +73,7 @@
     }
     function prepareScopeListener() {
       $scope.$on('changeLanguage', (event, args) => {
-        $location.reload();
+        window.location.reload();
         // $state.reload();
       });
     }

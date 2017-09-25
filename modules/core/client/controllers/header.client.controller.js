@@ -15,7 +15,7 @@ angular.module('core').controller('HeaderController', [
     // Support language
     $scope.supportLanguages = $window.supportLanguages;
     // Ngôn ngữ đang sử dụng
-    $scope.language = $translate.use();
+    $scope.language = Storages.get_local(Constants.storages.language);
     // Từ khóa tìm kiếm
     $scope.search_key = '';
     onCreate();

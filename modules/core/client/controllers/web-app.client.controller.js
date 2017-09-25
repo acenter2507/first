@@ -41,17 +41,21 @@ angular.module('core').controller('WebAppController', [
       }
       prepareCategorys();
       // Kiểm tra thông tin user mới có thay đổi ngôn ngữ hay không
-      if ($scope.isLogged && $scope.user.language !== $translate.use()) {
-        $translate.use($scope.user.language);
-        // Thay đổi ngôn ngữ angular moment
-        amMoment.changeLocale($scope.user.language);
-        // Thay đổi local 
-        var tz = $window.locales[$scope.user.language];
-        moment.tz.setDefault(tz);
-        moment.locale($scope.user.language);
-        // Thông báo cho navbar biết đã thay đổi ngôn ngữ
-        $scope.$broadcast('changeLanguage', { language: $scope.user.language });
-        console.log('WebappController: changeLanguage: ', $translate.use());
+      var lang = Storages.get_local(Constants.storages.language);
+      if ($scope.isLogged && $scope.user.language !== lang) {
+        // Lưu ngôn ngữ vào web storage
+        Storages.set_local(Constants.storages.language, $scope.user.language);
+        // Tiến hành đổi ngôn ngữ
+        $translate.use($scope.user.language).then(() => {
+          // Thay đổi ngôn ngữ angular moment
+          amMoment.changeLocale($scope.user.language);
+          // Thay đổi local 
+          var tz = $window.locales[$scope.user.language];
+          moment.tz.setDefault(tz);
+          moment.locale($scope.user.language);
+          // Thông báo cho navbar biết đã thay đổi ngôn ngữ
+          $scope.$broadcast('changeLanguage', { language: $scope.user.language });
+        });
       }
     }
     // Init socket

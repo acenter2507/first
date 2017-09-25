@@ -122,6 +122,9 @@
     } else {
       lang = $translate.preferredLanguage() || 'en';
     }
+    // Lưu ngôn ngữ vào web storage
+    webStorage.local.set('851kf00aAF093402395', lang);
+    // Tiến hành đổi ngôn ngữ
     $translate.use(lang).then(() => {
       console.log($translate.use());
       // Thay đổi ngôn ngữ angular moment

@@ -16,7 +16,6 @@ angular.module('core').controller('HeaderController', [
     $scope.supportLanguages = $window.supportLanguages;
     // Ngôn ngữ đang sử dụng
     $scope.language = $translate.use();
-    console.log('HeaderController');
     // Từ khóa tìm kiếm
     $scope.search_key = '';
     onCreate();
@@ -31,9 +30,12 @@ angular.module('core').controller('HeaderController', [
           angular.element('body').removeClass('aside-menu-show');
         }
       });
+      $scope.$on('$translateChangeSuccess', () => {
+        console.log('HeaderController changeLanguage: ' + $translate.use());
+      });
       // Nghe sự kiện chuyển thay đổi ngôn ngữ
       $scope.$on('changeLanguage', function () {
-        $state.reload();
+        // $state.reload();
         // $scope.language = $translate.use();
         // console.log('HeaderController changeLanguage: ' + $scope.language);
         // if (!$scope.$$phase) $scope.$digest();

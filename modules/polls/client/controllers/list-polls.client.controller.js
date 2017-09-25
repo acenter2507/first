@@ -41,7 +41,6 @@
     vm.is_has_new_polls = false;
     vm.supportLanguages = $window.supportLanguages;
     vm.language = $translate.use();
-    console.log('PollsListController');
 
     onPrepare();
 
@@ -73,6 +72,9 @@
       });
     }
     function prepareScopeListener() {
+      $scope.$on('$translateChangeSuccess', () => {
+        console.log('PollsListController changeLanguage: ' + $translate.use());
+      });
       $scope.$on('changeLanguage', () => {
         //$state.reload();
       });

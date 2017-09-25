@@ -50,7 +50,8 @@
         })
         .then(results => {
           // Gán data vào list hiện tại
-          vm.polls = results || [];
+          results = results || [];
+          vm.polls = _.union(vm.polls, results);
           vm.page++;
           $scope.busy = false;
           if (results.length < 10) { $scope.stopped = true; }

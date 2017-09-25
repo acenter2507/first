@@ -34,7 +34,7 @@
   color: #dddddd;
   background-color: #2271bf;
 }
-.navbar-default .navbar-nav > .open > a .header-profile-image {
+.header-profile-image {
   height: 32px;
   width: 32px;
   margin-right: 5px;

@@ -116,7 +116,9 @@
     // Kiểm tra user đã đăng nhập hay chưa
     if ($window.user) {
       // Cài đặt ngôn ngữ
-      $translate.use($window.user.language);
+      $translate.use($window.user.language).then(() => {
+        console.log($translate.use());
+      });
       var activeLanguage = $translate.use() ||
         $translate.storage().get($translate.storageKey()) ||
         $translate.preferredLanguage();

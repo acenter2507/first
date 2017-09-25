@@ -10,7 +10,7 @@ var path = require('path'),
   Polltag = mongoose.model('Polltag'),
   Polltag = mongoose.model('Polltag'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
-  _ = require('lodash');
+  _ = require('underscore');
 var pollController = require(path.resolve('./modules/polls/server/controllers/polls.server.controller'));
 
 /**
@@ -154,7 +154,7 @@ exports.popular = function (req, res) {
           .then(result => {
             array[index].count = result || 0;
             if (++counter === length) {
-              tags = _.sortByOrder(tags, ['count'], ['desc']);
+              tags = _.sortBy(tags, ['count'], ['desc']);
               tags = tags.splice(0, 10);
               res.jsonp(tags);
             }
@@ -231,8 +231,9 @@ function get_polls_by_tagId(tagId, page, language) {
         if (err) {
           return reject(err);
         } else {
-          console.log(polltags);
-          var polls = _.pluck(polltags, 'poll');
+          var polls = _.filter(_.pluck(polltags, 'poll'), poll => {
+            return (poll);
+          });
           return resolve(polls);
         }
       });

@@ -74,7 +74,7 @@
     }
     function prepareScopeListener() {
       $scope.$on('changeLanguage', () => {
-        $state.reload();
+        //$state.reload();
       });
     }
     vm.handleLoadPolls = handleLoadPolls;

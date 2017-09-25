@@ -119,7 +119,7 @@
       $translate.use($window.user.language);
       var activeLanguage = $translate.use() ||
         $translate.storage().get($translate.storageKey()) ||
-        $translate.preferredLanguage()
+        $translate.preferredLanguage();
       console.log('Plugin: user language: ', activeLanguage);
     } else {
       // Kiểm tra ngôn ngữ đã lưu trong local storage

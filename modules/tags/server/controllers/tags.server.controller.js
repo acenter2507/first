@@ -8,7 +8,6 @@ var path = require('path'),
   config = require(path.resolve('./config/config')),
   Tag = mongoose.model('Tag'),
   Polltag = mongoose.model('Polltag'),
-  Polltag = mongoose.model('Polltag'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('underscore');
 var pollController = require(path.resolve('./modules/polls/server/controllers/polls.server.controller'));
@@ -223,7 +222,7 @@ function get_polls_by_tagId(tagId, page, language) {
         match: { language: language },
         populate: [
           { path: 'user', select: 'displayName profileImageURL slug', model: 'User' },
-          { path: 'category', select: 'name icon slug', model: 'Category' }
+          { path: 'category', select: 'name color slug', model: 'Category' }
         ]
       })
       .skip(10 * page).limit(10)

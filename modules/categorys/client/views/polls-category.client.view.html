@@ -1,6 +1,6 @@
 <section class="container animated fadeIn mg6t mg50b">
-  <div class="row" ng-show="!stopped">
-    <select ng-model="vm.sort" ng-change="vm.handleChangeSortType()">
+  <div class="row">
+    <select class="form-control pull-right w200 input-sm" ng-model="vm.sort" ng-change="vm.handleChangeSortType()">
       <option value="-created">{{:: 'LB_SEARCH_SORT_NEWEST' | translate }}</option>
       <option value="created">{{:: 'LB_SEARCH_SORT_OLDEST' | translate }}</option>
       <option value="-likeCnt">{{:: 'LB_SEARCH_SORT_MOST_LIKE' | translate }}</option>

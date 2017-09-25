@@ -234,15 +234,6 @@
       ctrl.tmp_opt = {};
       $scope.$broadcast('show-errors-reset', 'ctrl.form.optForm');
       angular.element('body').removeClass('aside-panel-open');
-            // } else {
-      //   ctrl.tmp_opt = {
-      //     poll: ctrl.poll._id,
-      //     title: ctrl.tmp_opt.title,
-      //     body: ctrl.tmp_opt.body,
-      //     color: ctrl.tmp_opt.color,
-      //     status: 1
-      //   };
-      // }
     }
     // Hiển thị full màn hình
     ctrl.handleShowFullOption = handleShowFullOption;

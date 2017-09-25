@@ -661,30 +661,31 @@
     };
 
     // Click button add option
-    ctrl.input_opt = opt => {
+    ctrl.handleStartInputOption = () => {
       if (!ctrl.poll.user) {
         $scope.handleShowMessage('LB_POLLS_SUGGEST_DELETED_USER', true);
         return;
       }
-      ctrl.tmp_opt = (!opt) ? { poll: ctrl.poll._id, title: '', body: '', status: 2 } : opt;
+      ctrl.tmp_opt = { poll: ctrl.poll._id, title: '', body: '', status: 2 };
       angular.element('body').toggleClass('aside-panel-open');
     };
     // Click button save option
-    ctrl.save_opt = isValid => {
+    ctrl.handleSaveOption = isValid => {
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'ctrl.form.optForm');
         return false;
       }
       Action.save_opt(ctrl.tmp_opt, ctrl.poll)
         .then(res => {
-          angular.element('body').toggleClass('aside-panel-open');
+          $scope.$broadcast('show-errors-reset', 'ctrl.form.optForm');
+          angular.element('body').removeClass('aside-panel-open');
           $scope.handleShowMessage('LB_POLLS_SUGGEST_SUCCES', false);
         })
         .catch(err => {
           $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
     };
-    ctrl.opt_full = () => {
+    ctrl.handleShowFullOption = () => {
       let aside = angular.element('.aside-panel')[0];
       angular.element(aside).toggleClass('full');
       angular.element('#aside-panel-full-toggle').find('i').toggleClass('r180');

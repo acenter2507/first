@@ -52,7 +52,7 @@ angular.module('core').controller('WebAppController', [
         moment.locale($scope.user.language);
         // Thông báo cho navbar biết đã thay đổi ngôn ngữ
         $scope.$broadcast('changeLanguage', { language: $scope.user.language });
-        console.log('WebappController: changeLanguage: ', $scope.user.language);
+        console.log('WebappController: changeLanguage: ', $translate.use());
       }
     }
     // Init socket

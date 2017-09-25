@@ -259,7 +259,7 @@ exports.activitys = function (req, res) {
         var length = votes.length;
         var counter = 0;
         votes.forEach(function (instance, index, array) {
-        if (!instance) return;
+          if (!instance) return;
           array[index] = instance.toObject();
           pollController.get_opts_by_voteId(array[index]._id)
             .then(opts => {

@@ -73,6 +73,8 @@
         return resolve(poll);
       });
     }
+
+    
     $scope.poll_filter = poll => {
       if (poll.isPublic) {
         return true;

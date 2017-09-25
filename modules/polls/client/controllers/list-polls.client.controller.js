@@ -45,8 +45,6 @@
     onPrepare();
 
     function onPrepare() {
-      // Lắng nghe sự liện từ scope
-      prepareScopeListener();
       // Lắng nghe sự liện từ socket
       prepareSocketListener();
       // Load danh sách tags (Bao gồm số poll)
@@ -69,12 +67,6 @@
       $scope.$on('$destroy', function () {
         Socket.emit('unsubscribe_public');
         Socket.removeListener('poll_create');
-      });
-    }
-    function prepareScopeListener() {
-      $scope.$on('changeLanguage', (event, args) => {
-        
-        // $state.reload();
       });
     }
     vm.handleLoadPolls = handleLoadPolls;

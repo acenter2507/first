@@ -103,6 +103,7 @@
   "LB_POLLS_MENU_REPORT": "Báo cáo sai phạm",
   "LB_POLLS_MENU_BOOKMARK": "Đánh dấu",
   "LB_POLLS_MENU_RMBOOKMARK": "Xóa đánh dấu",
+  "LB_POLLS_SECURE_PRIVATE": "Poll này được đăng ở chế độ riêng tư",
   "LB_POLLS_SECURE_PUBLIC": "Poll này được đăng ở chế độ công khai",
   "LB_POLLS_SECURE_ONLYUSER": "Chỉ có thành viên mới được tham gia bình chọn",
   "LB_POLLS_NOCOMMENT": "Chưa ai bình luận cả.",

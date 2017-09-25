@@ -25,14 +25,16 @@
     vm.tag = tag;
 
     $scope.busy = false;
-    $scope.sort = '-created';
     vm.polls = [];
+    vm.language = $translate.use();
+    vm.page = 0;
+    vm.sort = '-created';
 
-    get_polls();
-    function get_polls() {
+    handleLoadPolls();
+    function handleLoadPolls() {
       if ($scope.busy) return;
       $scope.busy = true;
-      Action.get_tag_polls(vm.tag._id)
+      Action.get_tag_polls(vm.tag._id, vm.page, vm.language, vm.sort)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
             $scope.busy = false;
@@ -40,13 +42,14 @@
           }
           var promises = [];
           res.data.forEach(poll => {
-            promises.push(process_before_show(poll));
+            promises.push(handlePrepareShowingData(poll));
           });
           return Promise.all(promises);
         })
         .then(results => {
           // Gán data vào list hiện tại
           vm.polls = results || [];
+          vm.page ++;
           $scope.busy = false;
         })
         .catch(err => {
@@ -54,7 +57,7 @@
           $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
     }
-    function process_before_show(poll) {
+    function handlePrepareShowingData(poll) {
       return new Promise((resolve, reject) => {
         poll = Action.process_before_show(poll);
         return resolve(poll);

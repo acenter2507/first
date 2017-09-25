@@ -551,8 +551,8 @@
     /**
      * Lấy list poll thuộc tag
      */
-    this.get_tag_polls = (tagId) => {
-      return $http.get('/api/tags/' + tagId + '/polls', {
+    this.get_tag_polls = (tagId, page, language, sort) => {
+      return $http.get('/api/tags/' + tagId + '/polls/' + page + '/' + language + '/' + sort, {
         ignoreLoadingBar: true
       });
     };

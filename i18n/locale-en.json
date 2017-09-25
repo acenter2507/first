@@ -103,6 +103,7 @@
   "LB_POLLS_MENU_REPORT": "Report",
   "LB_POLLS_MENU_BOOKMARK": "Bookmark",
   "LB_POLLS_MENU_RMBOOKMARK": "Delete bookmark",
+  "LB_POLLS_SECURE_PRIVATE": "This poll is private",
   "LB_POLLS_SECURE_PUBLIC": "This poll is public",
   "LB_POLLS_SECURE_ONLYUSER": "Only user can vote",
   "LB_POLLS_NOCOMMENT": "No one has commented",

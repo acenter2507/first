@@ -5,6 +5,7 @@
  */
 var path = require('path'),
   mongoose = require('mongoose'),
+  config = require(path.resolve('./config/config')),
   Tag = mongoose.model('Tag'),
   Polltag = mongoose.model('Polltag'),
   Polltag = mongoose.model('Polltag'),
@@ -173,7 +174,10 @@ exports.popular = function (req, res) {
  */
 exports.polls = function (req, res) {
   var userId = req.user ? req.user._id : undefined;
-  get_polls_by_tagId(req.tag._id)
+  var page = req.params.page || 0;
+  var language = req.params.language || config.mappingLanguages[req.locale];
+  var sort = req.params.page || '-created';
+  get_polls_by_tagId(req.tag._id, page, language)
     .then(polls => {
       if (polls.length === 0) return res.jsonp(polls);
       var length = polls.length;
@@ -206,17 +210,19 @@ exports.polls = function (req, res) {
 /**
  * Đếm số poll trong tag
  */
-function get_polls_by_tagId(tagId) {
+function get_polls_by_tagId(tagId, page, language) {
   return new Promise((resolve, reject) => {
     Polltag.find({ tag: tagId })
       .populate({
         path: 'poll',
         model: 'Poll',
+        match: { language: language },
         populate: [
           { path: 'user', select: 'displayName profileImageURL slug', model: 'User' },
           { path: 'category', select: 'name icon slug', model: 'Category' }
         ]
       })
+      .skip(10 * page).limit(10)
       .exec((err, polltags) => {
         if (err) {
           return reject(err);

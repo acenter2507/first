@@ -13,39 +13,40 @@
     <div class="poll-info">
       <div class="poll-info-title">
         <a class="poll-info-title-user-name" ng-if="poll.user" ui-sref="profile.info({userId: poll.user.slug})">{{::poll.user.displayName}}</a>
-        <span class="poll-info-title-user-name" ng-if="!poll.user">{{ 'LB_DELETED_USER' | translate }}</span>
-        <span class="poll-info-title-time">{{ 'LB_POLLS_CREATEON' | translate }}
+        <span class="poll-info-title-user-name" ng-if="!poll.user">{{:: 'LB_DELETED_USER' | translate }}</span>
+        <span class="poll-info-title-time">{{:: 'LB_POLLS_CREATEON' | translate }}
             <span am-time-ago="poll.created"></span>
         </span>
         <md-menu md-offset="-12 20" md-position-mode="target-right target">
           <a class="poll-info-title-menu" ng-click="$mdMenu.open($event)" aria-label="Open menu"><i class="icon-options"></i></a>
           <md-menu-content>
             <ul class="menu-list">
-              <li><a ui-sref="polls.view({ pollId: poll.slug })"><i class="fa fa-eye"></i> {{ 'LB_POLLS_MENU_VIEW' | translate }}</a></li>
-              <li ng-if="poll.isCurrentUserOwner"><a ui-sref="polls.edit({ pollId: poll.slug })"><i class="fa fa-pencil-square-o"></i> {{ 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
-              <li ng-if="poll.isCurrentUserOwner"><a ng-click="delete_poll(poll)"><i class="fa fa-trash"></i> {{ 'LB_DELETE' | translate }}</a></li>
+              <li><a ui-sref="polls.view({ pollId: poll.slug })"><i class="fa fa-eye"></i> {{:: 'LB_POLLS_MENU_VIEW' | translate }}</a></li>
+              <li ng-if="poll.isCurrentUserOwner"><a ui-sref="polls.edit({ pollId: poll.slug })"><i class="fa fa-pencil-square-o"></i> {{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
+              <li ng-if="poll.isCurrentUserOwner"><a ng-click="delete_poll(poll)"><i class="fa fa-trash"></i> {{:: 'LB_DELETE' | translate }}</a></li>
               <li ng-if="isLogged">
                 <a ng-click="follow_poll(poll)">
                   <i class="fa fa-rss"></i>
                   {{(poll.follow._id) ? 'LB_POLLS_MENU_UNFOLLOW' : 'LB_POLLS_MENU_FOLLOW' | translate}}
                 </a>
               </li>
-              <li ng-if="isLogged && !poll.isCurrentUserOwner && !poll.reported"><a ng-click="report_poll(poll)"><i class="fa fa-exclamation-circle"></i> {{ 'LB_POLLS_MENU_REPORT' | translate }}</a></li>
-              <li ng-if="isLogged && !poll.isCurrentUserOwner && !poll.bookmarked"><a ng-click="bookmark_poll(poll)"><i class="fa fa-bookmark"></i> {{ 'LB_POLLS_MENU_BOOKMARK' | translate }}</a></li>
+              <li ng-if="isLogged && !poll.isCurrentUserOwner && !poll.reported"><a ng-click="report_poll(poll)"><i class="fa fa-exclamation-circle"></i> {{:: 'LB_POLLS_MENU_REPORT' | translate }}</a></li>
+              <li ng-if="isLogged && !poll.isCurrentUserOwner && !poll.bookmarked"><a ng-click="bookmark_poll(poll)"><i class="fa fa-bookmark"></i> {{:: 'LB_POLLS_MENU_BOOKMARK' | translate }}</a></li>
               <!-- Chỉ màn hình Profile bookmark -->
-              <li ng-if="isCurrentOwner && screen === 'profile-bookmark'"><a ng-click="remove_bookmark(poll)"><i class="fa fa-bookmark"></i> {{ 'LB_POLLS_MENU_RMBOOKMARK' | translate }}</a></li>
+              <li ng-if="isCurrentOwner && screen === 'profile-bookmark'"><a ng-click="remove_bookmark(poll)"><i class="fa fa-bookmark"></i> {{:: 'LB_POLLS_MENU_RMBOOKMARK' | translate }}</a></li>
             </ul>
           </md-menu-content>
         </md-menu>
         <p class="poll-info-title-close">
           <i class="fa fa-calendar"></i>
-          <span ng-if="poll.close">{{ 'LB_CM_CLOSE' | translate }} <span am-time-ago="poll.close"></span></span>
-          <span ng-if="!poll.close">{{ 'LB_CM_UNLIMIT' | translate }}</span>
+          <span ng-if="poll.close">{{:: 'LB_CM_CLOSE' | translate }} <span am-time-ago="poll.close"></span></span>
+          <span ng-if="!poll.close">{{:: 'LB_CM_UNLIMIT' | translate }}</span>
         </p>
       </div>
       <div class="poll-info-secure">
-        <span ng-if="poll.allow_guest" class="fa fa-globe"><md-tooltip md-direction="bottom">{{ 'LB_POLLS_SECURE_PUBLIC' | translate }}</md-tooltip></span>
-        <span ng-if="!poll.allow_guest" class="fa fa-users"><md-tooltip md-direction="bottom">{{ 'LB_POLLS_SECURE_ONLYUSER' | translate }}</md-tooltip></span>
+        <span ng-if="!poll.isPublic" class="fa fa-lock"><md-tooltip md-direction="bottom">{{:: 'LB_POLLS_SECURE_PRIVATE' | translate }}</md-tooltip></span>
+        <span ng-if="poll.isPublic && poll.allow_guest" class="fa fa-globe"><md-tooltip md-direction="bottom">{{:: 'LB_POLLS_SECURE_PUBLIC' | translate }}</md-tooltip></span>
+        <span ng-if="poll.isPublic && !poll.allow_guest" class="fa fa-users"><md-tooltip md-direction="bottom">{{:: 'LB_POLLS_SECURE_ONLYUSER' | translate }}</md-tooltip></span>
         <a ui-sref="categorys.polls({ categoryId: poll.category.slug })">{{ poll.category.name }}</a>
       </div>
     </div>
@@ -73,7 +74,7 @@
         </div>
         <div class="poll-body-activity-content">
           <p class="text-justify" ng-if="poll.lastCmt._id">{{::poll.lastCmt.body}}</p>
-          <p ng-if="!poll.lastCmt._id">{{ 'LB_POLLS_NOCOMMENT' | translate }}</p>
+          <p ng-if="!poll.lastCmt._id">{{:: 'LB_POLLS_NOCOMMENT' | translate }}</p>
         </div>
       </div>
     </div>
@@ -112,19 +113,19 @@
   <div class="poll-footer">
     <div class="poll_item_info">
       <i class="fa fa-thumbs-o-up"></i> {{ poll.likeCnt | shortNumber}}
-      <md-tooltip md-direction="bottom">{{ 'LB_POLLS_LIKES' | translate }}</md-tooltip>
+      <md-tooltip md-direction="bottom">{{:: 'LB_POLLS_LIKES' | translate }}</md-tooltip>
     </div>
     <div class="poll_item_info">
       <i class="fa fa-heart-o"></i> {{ poll.voteCnt | shortNumber}}
-      <md-tooltip md-direction="bottom">{{ 'LB_POLLS_VOTES' | translate }}</md-tooltip>
+      <md-tooltip md-direction="bottom">{{:: 'LB_POLLS_VOTES' | translate }}</md-tooltip>
     </div>
     <div class="poll_item_info">
       <i class="fa fa-eye"></i> {{ poll.viewCnt | shortNumber}}
-      <md-tooltip md-direction="bottom">{{ 'LB_POLLS_VIEWS' | translate }}</md-tooltip>
+      <md-tooltip md-direction="bottom">{{:: 'LB_POLLS_VIEWS' | translate }}</md-tooltip>
     </div>
     <div class="poll_item_info">
       <i class="fa fa-commenting-o"></i> {{ poll.cmtCnt | shortNumber}}
-      <md-tooltip md-direction="bottom">{{ 'LB_POLLS_COMMENTS' | translate }}</md-tooltip>
+      <md-tooltip md-direction="bottom">{{:: 'LB_POLLS_COMMENTS' | translate }}</md-tooltip>
     </div>
     <div class="poll_item_info share">
       <md-menu md-position-mode="target-right target">

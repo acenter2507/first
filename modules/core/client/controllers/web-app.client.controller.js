@@ -49,6 +49,7 @@ angular.module('core').controller('WebAppController', [
         var tz = $window.locales[$scope.user.language];
         moment.tz.setDefault(tz);
         moment.locale($scope.user.language);
+        // Thông báo cho navbar biết đã thay đổi ngôn ngữ
         $scope.$broadcast('changeLanguage', { language: $scope.user.language });
       }
     }

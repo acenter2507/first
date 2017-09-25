@@ -298,7 +298,7 @@ exports.findPolls = function (req, res) {
   var page = req.params.page || 0;
   var userId = req.user ? req.user._id : undefined;
   // Lấy ngôn ngữ hiển thị poll
-  var language = req.user ? req.user.language : req.params.language || config.mappingLanguages[req.locale];
+  var language = req.params.language || config.mappingLanguages[req.locale];
   Poll.find({ isPublic: true, language: language })
     .select('-body -updated -share_code')
     .sort('-created')

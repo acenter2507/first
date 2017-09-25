@@ -73,6 +73,7 @@
     }
     function prepareScopeListener() {
       $scope.$on('changeLanguage', (event, args) => {
+        console.log('PollsListController changeLanguage')
         $state.reload();
       });
     }

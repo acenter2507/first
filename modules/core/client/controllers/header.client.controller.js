@@ -32,12 +32,7 @@ angular.module('core').controller('HeaderController', [
       });
       // Nghe sự kiện chuyển thay đổi ngôn ngữ
       $scope.$on('changeLanguage', (event, args) => {
-        console.log('HeaderController: ' + args.language);
         $scope.language = args.language;
-        // $state.reload();
-        // $scope.language = $translate.use();
-        // console.log('HeaderController changeLanguage: ' + $scope.language);
-        // if (!$scope.$$phase) $scope.$digest();
       });
     }
     // Đánh dấu tất cả notifs thành đã xem

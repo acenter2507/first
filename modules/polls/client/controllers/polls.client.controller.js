@@ -295,7 +295,6 @@
           if (!res.data.length || res.data.length === 0) {
             ctrl.stopped = true;
             ctrl.busy = false;
-            return;
           } else {
             // Gán data vào danh sách comment hiện tại
             ctrl.cmts = _.union(ctrl.cmts, res.data);

@@ -34,7 +34,7 @@ exports.search = function (req, res) {
       var length = polls.length;
       var counter = 0;
       polls.forEach(function (instance, index, array) {
-        if (!instance) continue;
+        if (!instance) return;
         array[index] = instance.toObject();
         count_followed(array[index]._id)
           .then(result => {

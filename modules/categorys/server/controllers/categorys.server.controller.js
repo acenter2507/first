@@ -94,7 +94,7 @@ exports.list = function (req, res) {
       var length = categorys.length;
       var counter = 0;
       categorys.forEach(function (instance, index, array) {
-        if (!instance) continue;
+        if (!instance) return;
         array[index] = instance.toObject();
         count_polls_by_categoryId(array[index]._id)
           .then(result => {
@@ -139,7 +139,7 @@ exports.polls = function (req, res) {
       var length = polls.length;
       var counter = 0;
       polls.forEach(function (instance, index, array) {
-        if (!instance) continue;
+        if (!instance) return;
         array[index] = instance.toObject();
         // Lấy thông tin count
         pollController.get_full_by_pollId(array[index]._id, userId)

@@ -231,7 +231,7 @@ exports.users_list = function (req, res) {
       var length = users.length;
       var counter = 0;
       users.forEach(function (instance, index, array) {
-        if (!instance) continue;
+        if (!instance) return;
         array[index] = instance.toObject();
         users_be_report(array[index])
           .then(_res => {
@@ -343,7 +343,7 @@ exports.users_votes = function (req, res) {
       var length = votes.length;
       var counter = 0;
       votes.forEach(function (instance, index, array) {
-        if (!instance) continue;
+        if (!instance) return;
         array[index] = instance.toObject();
         Voteopt.find({ vote: array[index]._id })
           .populate('opt', 'title')

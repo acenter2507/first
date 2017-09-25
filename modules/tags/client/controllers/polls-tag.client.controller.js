@@ -52,7 +52,7 @@
           // Gán data vào list hiện tại
           results = results || [];
           vm.polls = _.union(vm.polls, results);
-          vm.page++;
+          vm.page += 1;
           $scope.busy = false;
           if (results.length < 10) { $scope.stopped = true; }
           if (!$scope.$$phase) $scope.$digest();

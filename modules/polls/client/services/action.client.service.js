@@ -559,7 +559,7 @@
     /**
      * Xử lý poll khi show lên màn hình
      */
-    this.process_before_show = poll => {
+    this.prepareShowingData = poll => {
       let isLogged = (Authentication.user);
       if (!isLogged || !poll.user) {
         poll.isCurrentUserOwner = false;

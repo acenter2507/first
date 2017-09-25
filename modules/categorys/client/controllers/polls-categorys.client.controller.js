@@ -75,7 +75,7 @@
     }
     function prepareShowingData(poll) {
       return new Promise((resolve, reject) => {
-        poll = Action.process_before_show(poll);
+        poll = Action.prepareShowingData(poll);
         return resolve(poll);
       });
     }

@@ -25,7 +25,7 @@ angular.module('users').controller('ProfileViewsController', [
           }
           var promises = [];
           res.data.forEach(poll => {
-            promises.push(process_before_show(poll));
+            promises.push(prepareShowingData(poll));
           });
           return Promise.all(promises);
         })
@@ -42,9 +42,9 @@ angular.module('users').controller('ProfileViewsController', [
           $scope.handleShowMessage(err.message, true);
         });
     }
-    function process_before_show(poll) {
+    function prepareShowingData(poll) {
       return new Promise((resolve, reject) => {
-        poll = Action.process_before_show(poll);
+        poll = Action.prepareShowingData(poll);
         return resolve(poll);
       });
     }

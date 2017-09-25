@@ -25,7 +25,7 @@ angular.module('users').controller('ProfileDislikesController', [
           }
           var promises = [];
           res.data.forEach(poll => {
-            promises.push(process_before_show(poll));
+            promises.push(prepareShowingData(poll));
           });
           return Promise.all(promises);
         })
@@ -43,9 +43,9 @@ angular.module('users').controller('ProfileDislikesController', [
         });
     }
 
-    function process_before_show(poll) {
+    function prepareShowingData(poll) {
       return new Promise((resolve, reject) => {
-        poll = Action.process_before_show(poll);
+        poll = Action.prepareShowingData(poll);
         return resolve(poll);
       });
     }

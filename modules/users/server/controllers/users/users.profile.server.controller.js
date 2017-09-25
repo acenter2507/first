@@ -291,7 +291,7 @@ exports.polls = function (req, res) {
   Poll.find({ user: req.profile._id })
     .sort('-created')
     .populate('user', 'displayName profileImageURL slug')
-    .populate('category', 'name icon slug')
+    .populate('category', 'name color slug')
     .skip(10 * page)
     .limit(10).exec()
     .then(polls => {
@@ -393,7 +393,7 @@ exports.follows = function (req, res) {
       model: 'Poll',
       populate: [
         { path: 'user', select: 'displayName profileImageURL slug', model: 'User' },
-        { path: 'category', select: 'name icon slug', model: 'Category' }
+        { path: 'category', select: 'name color slug', model: 'Category' }
       ]
     })
     .skip(10 * page).exec()
@@ -443,7 +443,7 @@ exports.bookmarks = function (req, res) {
       model: 'Poll',
       populate: [
         { path: 'user', select: 'displayName profileImageURL slug', model: 'User' },
-        { path: 'category', select: 'name icon slug', model: 'Category' }
+        { path: 'category', select: 'name color slug', model: 'Category' }
       ]
     })
     .skip(10 * page).exec()
@@ -517,7 +517,7 @@ exports.views = function (req, res) {
       model: 'Poll',
       populate: [
         { path: 'user', select: 'displayName profileImageURL slug', model: 'User' },
-        { path: 'category', select: 'name icon slug', model: 'Category' }
+        { path: 'category', select: 'name color slug', model: 'Category' }
       ]
     })
     .skip(10 * page).exec()
@@ -567,7 +567,7 @@ exports.likes = function (req, res) {
       model: 'Poll',
       populate: [
         { path: 'user', select: 'displayName profileImageURL slug', model: 'User' },
-        { path: 'category', select: 'name icon slug', model: 'Category' }
+        { path: 'category', select: 'name color slug', model: 'Category' }
       ]
     })
     .skip(10 * page).exec()
@@ -617,7 +617,7 @@ exports.dislikes = function (req, res) {
       model: 'Poll',
       populate: [
         { path: 'user', select: 'displayName profileImageURL slug', model: 'User' },
-        { path: 'category', select: 'name icon slug', model: 'Category' }
+        { path: 'category', select: 'name color slug', model: 'Category' }
       ]
     })
     .skip(10 * page).exec()

@@ -2,20 +2,19 @@
 
 angular.module('polls').controller('PollsSearchController', [
   '$location',
-  '$rootScope',
   '$scope',
   '$state',
-  'Authentication',
   'Action',
-  '$stateParams',
   'Storages',
   'Constants',
   'ngDialog',
   'Profile',
-  function ($location, $rootScope, $scope, $state, Authentication, Action, $stateParams, Storages, Constants, dialog, Profile) {
+  '$translate',
+  function ($location, $scope, $state, Action, Storages, Constants, dialog, Profile, $translate) {
     $scope.form = {};
 
-    $scope.condition = {};
+    $scope.language = $translate.use();
+    $scope.condition = { language: $scope.language };
     $scope.busy = false;
     $scope.polls = [];
 
@@ -50,7 +49,7 @@ angular.module('polls').controller('PollsSearchController', [
           }
           var promises = [];
           res.data.forEach(poll => {
-            promises.push(process_before_show(poll));
+            promises.push(prepareShowingData(poll));
           });
           return Promise.all(promises);
         })
@@ -66,14 +65,14 @@ angular.module('polls').controller('PollsSearchController', [
       Storages.set_local(Constants.storages.public_search_condition, JSON.stringify($scope.condition));
     }
 
-    function process_before_show(poll) {
+    function prepareShowingData(poll) {
       return new Promise((resolve, reject) => {
-        poll = Action.process_before_show(poll);
+        poll = Action.prepareShowingData(poll);
         return resolve(poll);
       });
     }
     $scope.clear_filter = () => {
-      $scope.condition = {};
+      $scope.condition = { language: $scope.language };
       $scope.selectedUser = undefined;
       $scope.$broadcast('angucomplete-alt:clearInput');
     };

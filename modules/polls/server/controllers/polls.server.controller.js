@@ -246,7 +246,7 @@ exports.delete = function (req, res) {
 exports.list = function (req, res) {
   Poll.find()
     .sort('-created')
-    .populate('category', 'name icon slug')
+    .populate('category', 'name color slug')
     .populate('user', 'displayName profileImageURL slug')
     .exec(function (err, polls) {
       if (err) {
@@ -274,7 +274,7 @@ exports.pollByID = function (req, res, next, id) {
   }
 
   Poll.findOne(query)
-    .populate('category', 'name icon slug')
+    .populate('category', 'name color slug')
     .populate('user', 'displayName profileImageURL slug')
     .exec(function (err, poll) {
       if (err) {
@@ -520,11 +520,12 @@ exports.removeBookmark = function (req, res) {
 
 exports.search = function (req, res) {
   const condition = req.body.condition;
+  condition.language = condition.language || config.mappingLanguages[req.locale];
   var search = search_condition_analysis(condition);
   var userId = req.user ? req.user._id : undefined;
   var sort = condition.sort || '-created';
   Poll.find(search)
-    .populate('category', 'name icon slug')
+    .populate('category', 'name color slug')
     .populate('user', 'displayName profileImageURL slug')
     .sort(sort).exec()
     .then(polls => {
@@ -619,6 +620,7 @@ function search_condition_analysis(condition) {
   var search = {};
   var and_arr = [];
   and_arr.push({ isPublic: true });
+  and_arr.push({ language: condition.language });
   // Search by user
   if (condition.by) {
     and_arr.push({ user: condition.by });

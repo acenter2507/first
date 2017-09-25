@@ -120,7 +120,6 @@
       var activeLanguage = $translate.use() ||
         $translate.storage().get($translate.storageKey()) ||
         $translate.preferredLanguage();
-      console.log('Plugin: user language: ', activeLanguage);
     } else {
       // Kiểm tra ngôn ngữ đã lưu trong local storage
       if (webStorage.local.has('851kf00aAF093402395')) {

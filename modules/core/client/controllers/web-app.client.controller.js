@@ -41,7 +41,10 @@ angular.module('core').controller('WebAppController', [
       }
       prepareCategorys();
       // Kiểm tra thông tin user mới có thay đổi ngôn ngữ hay không
-      console.log($translate.use());
+      var activeLanguage = $translate.use() ||
+        $translate.storage().get($translate.storageKey()) ||
+        $translate.preferredLanguage();
+      console.log('WebappController: changeLanguage: ', activeLanguage);
       if ($scope.isLogged && $scope.user.language !== $translate.use()) {
         $translate.use($scope.user.language);
         // Thay đổi ngôn ngữ angular moment

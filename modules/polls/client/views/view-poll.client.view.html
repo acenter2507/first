@@ -278,7 +278,7 @@
               {{(ctrl.ownVote._id) ? 'LB_CHANGE_VOTE' : 'LB_VOTE' | translate }}
             </button>
             <button ng-show="isLogged && ctrl.poll.allow_add && !ctrl.poll.isCurrentUserOwner" class="btn btn-warning pull-right mg10r"
-              ng-click="ctrl.input_opt()">{{:: 'LB_SUGGEST' | translate }}</button>
+              ng-click="ctrl.handleStartInputOption()">{{:: 'LB_SUGGEST' | translate }}</button>
           </div>
           <div class="clearfix"></div>
         </div>

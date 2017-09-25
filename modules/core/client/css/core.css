@@ -236,21 +236,6 @@ a {
 .x-ng-cloak {
   display: none !important;
 }
-.header-profile-image {
-  height: 28px;
-  width: 28px;
-  margin-right: 5px;
-}
-.open .header-profile-image,
-a:hover .header-profile-image {
-  opacity: 1;
-}
-.user-header-dropdown-toggle {
-  padding-top: 11px !important;
-  padding-bottom: 11px !important;
-}
-
-
 .notif-dropdown-toggle {
   position: relative; }
   .notif-dropdown-toggle .badge {

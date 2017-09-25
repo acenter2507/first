@@ -34,6 +34,15 @@
   color: #dddddd;
   background-color: #2271bf;
 }
+.navbar-default .navbar-nav > .open > a .header-profile-image {
+  height: 32px;
+  width: 32px;
+  margin-right: 5px;
+}
+.user-header-dropdown-toggle {
+  padding-top: 11px !important;
+  padding-bottom: 11px !important;
+}
 .navbar-default .navbar-toggle {
   border-color: none;
 }

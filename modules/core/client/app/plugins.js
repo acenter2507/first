@@ -117,7 +117,7 @@
     if ($window.user) {
       // Cài đặt ngôn ngữ
       $translate.use($window.user.language);
-      console.log('Plugin: user language: ', $window.user.language);
+      console.log('Plugin: user language: ', $translate.use());
     } else {
       // Kiểm tra ngôn ngữ đã lưu trong local storage
       if (webStorage.local.has('851kf00aAF093402395')) {

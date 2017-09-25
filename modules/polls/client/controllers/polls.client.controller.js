@@ -296,12 +296,13 @@
             ctrl.stopped = true;
             ctrl.busy = false;
             return;
+          } else {
+            // Gán data vào danh sách comment hiện tại
+            ctrl.cmts = _.union(ctrl.cmts, res.data);
+            ctrl.page += 1;
+            ctrl.busy = false;
+            if (res.data.length < 10) { ctrl.stopped = true; }
           }
-          // Gán data vào danh sách comment hiện tại
-          ctrl.cmts = _.union(ctrl.cmts, res.data);
-          ctrl.page += 1;
-          ctrl.busy = false;
-          if (res.data.length < 10) { ctrl.stopped = true; }
           if (!$scope.$$phase) $scope.$digest();
         })
         .catch(err => {

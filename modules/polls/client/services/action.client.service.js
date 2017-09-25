@@ -513,8 +513,8 @@
     /**
      * Lấy list poll thuộc category
      */
-    this.get_category_polls = (categoryId, page, sort) => {
-      return $http.get('/api/categorys/' + categoryId + '/polls/' + page + '/' + sort, {
+    this.get_category_polls = (categoryId, page, language, sort) => {
+      return $http.get('/api/categorys/' + categoryId + '/polls/' + page + '/' + language + '/' + sort, {
         ignoreLoadingBar: true
       });
     };

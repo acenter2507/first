@@ -128,11 +128,14 @@ exports.count_polls = function (req, res) {
  */
 exports.polls = function (req, res) {
   var page = req.params.page || 0;
+  var language = req.params.language || config.mappingLanguages[req.locale];
   var sort = req.params.sort || '-created';
   var userId = req.user ? req.user._id : undefined;
-  Poll.find({ category: req.category._id, isPublic: true })
+  Poll.find({ category: req.category._id, isPublic: true, language: language })
     .sort(sort)
-    .populate('user', 'displayName profileImageURL slug').skip(10 * page)
+    .populate('user', 'displayName profileImageURL slug')
+    .populate('category', 'name color slug')
+    .skip(10 * page)
     .limit(10).exec()
     .then(polls => {
       if (polls.length === 0) return res.jsonp(polls);

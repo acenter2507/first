@@ -44,7 +44,7 @@
           }
           var promises = [];
           res.data.forEach(poll => {
-            promises.push(handlePrepareShowingData(poll));
+            promises.push(prepareShowingData(poll));
           });
           return Promise.all(promises);
         })
@@ -62,7 +62,7 @@
           $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
     }
-    function handlePrepareShowingData(poll) {
+    function prepareShowingData(poll) {
       return new Promise((resolve, reject) => {
         poll = Action.process_before_show(poll);
         return resolve(poll);

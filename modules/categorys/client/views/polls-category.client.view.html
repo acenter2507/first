@@ -1,4 +1,4 @@
-<section class="container animated fadeIn mg6t mg50b" infinite-scroll="vm.get_polls()" infinite-scroll-distance='2'>
+<section class="container animated fadeIn mg6t mg50b">
   <div class="row">
     <div class="col-xs-12 pdn">
       <!-- List polls  -->
@@ -14,5 +14,8 @@
         <a ui-sref="polls.create">{{ 'LB_POLLS_CREATE' | translate }}</a>
       </div>
     </div>
+  </div>
+  <div class="row text-center" ng-show="!stopped">
+    <a ng-click="vm.handleLoadPolls()">{{:: 'LB_LOAD_MORE' | translate }}</a>
   </div>
 </section>

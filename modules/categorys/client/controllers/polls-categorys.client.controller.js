@@ -8,8 +8,7 @@
 
   CategoryPollsController.$inject = [
     '$scope',
-    '$state',
-    '$window',
+    '$translate',
     'categoryResolve',
     'Action',
     'ngDialog'
@@ -17,8 +16,7 @@
 
   function CategoryPollsController(
     $scope,
-    $state,
-    $window,
+    $translate,
     category,
     Action,
     dialog
@@ -29,16 +27,17 @@
     // Infinity scroll
     $scope.stopped = false;
     $scope.busy = false;
-    $scope.page = 0;
-    $scope.sort = '-created';
-    $scope.new_data = [];
+    vm.page = 0;
+    vm.sort = '-created';
+    vm.language = $translate.use();
     vm.polls = [];
 
-    vm.get_polls = get_polls;
-    function get_polls() {
+    handleLoadPolls();
+    vm.handleLoadPolls = handleLoadPolls;
+    function handleLoadPolls() {
       if ($scope.stopped || $scope.busy) return;
       $scope.busy = true;
-      Action.get_category_polls(vm.category._id, $scope.page, $scope.sort)
+      Action.get_category_polls(vm.category._id, vm.page, vm.language, vm.sort)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
             $scope.stopped = true;
@@ -46,10 +45,9 @@
             return;
           }
           // Load options và tính vote cho các opt trong polls
-          $scope.new_data = res.data || [];
           var promises = [];
-          $scope.new_data.forEach(poll => {
-            promises.push(process_before_show(poll));
+          res.data.forEach(poll => {
+            promises.push(prepareShowingData(poll));
           });
           return Promise.all(promises);
         })
@@ -57,9 +55,10 @@
           // Gán data vào list hiện tại
           results = results || [];
           vm.polls = _.union(vm.polls, results);
-          $scope.page += 1;
+          $scope.page++;
           $scope.busy = false;
-          $scope.new_data = [];
+          if (results.length < 10) { $scope.stopped = true; }
+          if (!$scope.$$phase) $scope.$digest();
         })
         .catch(err => {
           $scope.busy = false;
@@ -68,7 +67,7 @@
         });
     }
 
-    function process_before_show(poll) {
+    function prepareShowingData(poll) {
       return new Promise((resolve, reject) => {
         poll = Action.process_before_show(poll);
         return resolve(poll);

@@ -109,7 +109,7 @@ angular.module('textAngularSetup', [])
         focussed: "focussed",
         toolbar: "btn-toolbar",
         toolbarGroup: "btn-group",
-        toolbarButton: "btn btn-default",
+        toolbarButton: "btn btn-default btn-sm",
         toolbarButtonActive: "active",
         disabled: "disabled",
         textEditor: 'form-control',
@@ -177,7 +177,7 @@ angular.module('textAngularSetup', [])
     //insertLink: "Please enter a URL to insert",
     //insertVideo: "Please enter a youtube URL to embed",
     html: {
-        tooltip: 'Toggle html / Rich Text'
+        tooltip: "{{:: 'LANGUAGE' | translate }}" //Toggle html / Rich Text
     },
     // tooltip for heading - might be worth splitting
     heading: {

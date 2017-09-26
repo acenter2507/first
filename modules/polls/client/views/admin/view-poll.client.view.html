@@ -24,31 +24,31 @@
           <span class="stat-label"><a href="#options">Options</a></span>
         </div>
         <div class="stat">
-          <div class="stat-value">{{vm.poll.likeCnt}}</div>
+          <div class="stat-value">{{vm.poll.likeCnt | shortNumber}}</div>
           <span class="stat-label">Likes</span>
         </div>
         <div class="stat">
-          <div class="stat-value">{{vm.poll.cmtCnt}}</div>
+          <div class="stat-value">{{vm.poll.cmtCnt | shortNumber}}</div>
           <span class="stat-label"><a href="#comments">Comments</a></span>
         </div>
         <div class="stat">
-          <div class="stat-value">{{vm.poll.voteCnt}}</div>
+          <div class="stat-value">{{vm.poll.voteCnt | shortNumber}}</div>
           <span class="stat-label">Votes</span>
         </div>
         <div class="stat">
-          <div class="stat-value">{{vm.poll.viewCnt}}</div>
+          <div class="stat-value">{{vm.poll.viewCnt | shortNumber}}</div>
           <span class="stat-label">Viewed</span>
         </div>
         <div class="stat">
-          <div class="stat-value">{{vm.poll.followed}}</div>
+          <div class="stat-value">{{vm.poll.followed | shortNumber}}</div>
           <span class="stat-label">Followed</span>
         </div>
         <div class="stat">
-          <div class="stat-value">{{vm.poll.bookmarked}}</div>
+          <div class="stat-value">{{vm.poll.bookmarked | shortNumber}}</div>
           <span class="stat-label">Bookmarked</span>
         </div>
         <div class="stat">
-          <div class="stat-value">{{vm.poll.reported}}</div>
+          <div class="stat-value">{{vm.poll.reported | shortNumber}}</div>
           <span class="stat-label">Reported</span>
         </div>
       </div>
@@ -143,7 +143,7 @@
           </thead>
           <tbody>
             <tr ng-repeat="opt in vm.poll.opts">
-              <td>{{ opt.voteCnt }}</td>
+              <td>{{ opt.voteCnt  | shortNumber}}</td>
               <td>{{ opt.title }}</td>
               <td>{{ opt.user.displayName }}</td>
               <td class="text-center">
@@ -196,7 +196,7 @@
               <td><a ui-sref="admin.users.view({ userId: cmt.user._id })">{{ cmt.user.displayName }}</a></td>
               <td>{{ cmt.body }}</td>
               <td><a ui-sref="admin.users.view({ userId: cmt.to })">{{ cmt.toName }}</a></td>
-              <td class="text-center">{{ cmt.likeCnt }}</td>
+              <td class="text-center">{{ cmt.likeCnt  | shortNumber}}</td>
               <td><span ng-bind="cmt.created | LLL_format"></span></td>
               <td>
                 <a class="mg5l" ng-click="remove_cmt(cmt)"><i class="icon-trash icons"></i></a>

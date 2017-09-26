@@ -9,16 +9,16 @@
           <a class="card-link" ng-class="{ 'text-shake': !ctrl.poll.isPublic }" ng-click="$mdMenu.open($event)"><i class="fa fa-lock"></i> {{:: 'LB_POLL_OPTION' | translate}}</a>
           <md-menu-content>
             <ul class="menu-list mg5b">
-              <li>
+              <li class="mgn">
                 <md-checkbox class="md-primary" ng-model="ctrl.poll.isPublic">{{:: 'LB_PUBLIC' | translate}}</md-checkbox>
               </li>
-              <li>
+              <li class="mgn">
                 <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_guest">{{:: 'LB_POLL_ALLOW_GUEST' | translate}}</md-checkbox>
               </li>
-              <li>
+              <li class="mgn">
                 <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_multiple">{{:: 'LB_POLL_MULTIPLE' | translate}}</md-checkbox>
               </li>
-              <li>
+              <li class="mgn">
                 <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_add">{{:: 'LB_POLL_SUGGEST' | translate}}</md-checkbox>
               </li>
             </ul>
@@ -97,17 +97,46 @@
           </uib-accordion>
         </form>
       </div>
+      <hr class="mgn">
+      <div class="card-footer">
+        <a ng-click="ctrl.handleSavePoll(ctrl.form.pollForm.$valid)">{{ctrl.poll._id ? 'LB_SAVE' : 'LB_POST' | translate }}</a>
+        <a class="mg10l" ng-click="ctrl.handleDiscard()">{{:: 'LB_DISCARD' | translate}}</a>
+        <md-menu md-offset="10 30">
+          <a class="card-link" ng-class="{ 'text-shake': !ctrl.poll.isPublic }" ng-click="$mdMenu.open($event)"><i class="fa fa-lock"></i> {{:: 'LB_POLL_OPTION' | translate}}</a>
+          <md-menu-content>
+            <ul class="menu-list mg5b">
+              <li>
+                <md-checkbox class="md-primary" ng-model="ctrl.poll.isPublic">{{:: 'LB_PUBLIC' | translate}}</md-checkbox>
+              </li>
+              <li>
+                <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_guest">{{:: 'LB_POLL_ALLOW_GUEST' | translate}}</md-checkbox>
+              </li>
+              <li>
+                <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_multiple">{{:: 'LB_POLL_MULTIPLE' | translate}}</md-checkbox>
+              </li>
+              <li>
+                <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_add">{{:: 'LB_POLL_SUGGEST' | translate}}</md-checkbox>
+              </li>
+            </ul>
+          </md-menu-content>
+        </md-menu>
+        <div class="clearfix"></div>
+      </div>
     </div>
   </div>
+
+  <!-- Menu nhanh -->
   <div class="quick-menu">
     <md-button md-colors="{background: 'blue'}" aria-label="add" class="md-fab" ng-click="ctrl.handleStartInputOption()"><i class="fa fa-plus"></i></md-button>
   </div>
+
+  <!-- Thêm option mới -->
   <div class="aside-backdrop"></div>
   <div class="aside-panel">
     <div ng-include="'/modules/polls/client/views/new-opt.client.view.html'"></div>
   </div>
+
+  <!-- Template xóa datepicker -->
   <script type="text/ng-template" id="bottom-template-url">
-    <button class="btn btn-info btn-sm btn-block" ng-click="ctrl.handleClearCloseDate()">
-      {{:: 'LB_CLEAR' | translate }}
-    </button>
+    <button class="btn btn-default btn-sm btn-block" ng-click="ctrl.handleClearCloseDate()">{{:: 'LB_CLEAR' | translate }}</button>
   </script>

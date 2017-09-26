@@ -1,6 +1,6 @@
 <div class="card d-sm-down-none">
   <div class="card-header">
-    <strong class="card-title">{{:: 'LB_POLLS_COMMENTS' | translate }} ({{ctrl.poll.cmtCnt}})</strong>
+    <strong class="card-title">{{:: 'LB_POLLS_COMMENTS' | translate }} ({{ctrl.poll.cmtCnt | shortNumber}})</strong>
   </div>
   <div class="card-body">
     <div class="cmt_form" ng-if="isLogged">
@@ -74,7 +74,7 @@
       <p class="text-justify" ng-bind-html="cmt.body | nl2br"></p>
       <small class="like_tools pull-right">
         <a ng-click="ctrl.like_cmt(cmt, 1)" ng-class="{'text-muted': cmt.like.type !== 1}"><i class="fa fa-thumbs-o-up"></i>{{:: 'LB_LIKE' | translate }}</a>
-        <span class="mg5l mg5r highlight-text" ng-bind="cmt.likeCnt"></span>
+        <span class="mg5l mg5r highlight-text" ng-bind="cmt.likeCnt | shortNumber"></span>
         <a ng-click="ctrl.like_cmt(cmt, 2)" ng-class="{'text-muted': cmt.like.type !== 1}"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>{{:: 'LB_DISLIKE' | translate }}</a>
       </small>
       <div class="clearfix"></div>
@@ -89,7 +89,7 @@
 </div>
 <div class="card d-md-none card-expand">
   <div class="card-header pd12b">
-    <strong class="card-title">{{:: 'LB_POLLS_COMMENTS' | translate }} ({{ctrl.poll.cmtCnt}})</strong>
+    <strong class="card-title">{{:: 'LB_POLLS_COMMENTS' | translate }} ({{ctrl.poll.cmtCnt | shortNumber}})</strong>
     <a class="card-expand-toggle pull-right text-muted"><i class="fa fa-caret-down"></i></a>
   </div>
   <div class="card-body">
@@ -163,7 +163,7 @@
       <p class="text-justify" ng-bind-html="cmt.body | nl2br"></p>
       <small class="like_tools pull-right">
         <a ng-click="ctrl.like_cmt(cmt, 1)" ng-class="{'text-muted': cmt.like.type !== 1}"><i class="fa fa-thumbs-o-up"></i> {{:: 'LB_LIKE' | translate }}</a>
-        <span class="mg5l mg5r highlight-text" ng-bind="cmt.likeCnt"></span>
+        <span class="mg5l mg5r highlight-text" ng-bind="cmt.likeCnt | shortNumber"></span>
         <a ng-click="ctrl.like_cmt(cmt, 2)" ng-class="{'text-muted': cmt.like.type !== 1}"><i class="fa fa-thumbs-o-down"></i> {{:: 'LB_DISLIKE' | translate }}</a>
       </small>
       <div class="clearfix"></div>

@@ -39,11 +39,10 @@
         ctrl.poll = new PollsService();
         onCreate();
       } else {
-        Action.get_poll($stateParams.pollId)
-          .then(_poll => {
-            ctrl.poll = _poll;
-            onCreate();
-          });
+        Action.get_poll($stateParams.pollId).then(_poll => {
+          ctrl.poll = _poll;
+          onCreate();
+        });
       }
     }
 
@@ -246,14 +245,6 @@
     ctrl.handleClearCloseDate = handleClearCloseDate;
     function handleClearCloseDate() {
       delete ctrl.poll.close;
-    }
-    // Xác định user có thể update được nữa hay không
-    function handleCheckCanUpdate() {
-      return true;
-      // const update = moment(ctrl.poll.updated);
-      // const now = moment(new Date());
-      // var duration = moment.duration(now.diff(update)).asHours();
-      // return duration >= 1;
     }
     // Kiểm tra ngày đóng poll hợp lệ hay không
     function handleValidateCloseDate() {

@@ -17,7 +17,7 @@
       <li class="nav-title" ng-show="isLogged">{{ 'LB_NOFT' | translate }}</li>
       <li class="nav-item" ng-show="isLogged">
         <a class="nav-link" ui-sref="notifs.list"><i class="fa fa-bell-o"></i> {{ 'LB_NOFT_VIEWALL' | translate }}
-          <span class="badge badge-pill badge-danger" ng-bind="Notifications.notifCnt" ng-show="Notifications.notifCnt > 0"></span>
+          <span class="badge badge-pill badge-danger" ng-bind="Notifications.notifCnt | shortNumber" ng-show="Notifications.notifCnt > 0"></span>
         </a>
       </li>
       <li class="nav-item" ng-show="isLogged && Notifications.notifCnt > 0">

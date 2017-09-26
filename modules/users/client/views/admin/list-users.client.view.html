@@ -159,10 +159,10 @@
                     'fa fa-sign-in' : user.provider === 'local'}">
                 </i>
               </td>
-              <td class="text-center">{{ user.report.pollCnt }}</td>
-              <td class="text-center">{{ user.report.cmtCnt }}</td>
-              <td class="text-center">{{ user.report.viewCnt }}</td>
-              <td class="text-center">{{ user.bereportCnt }}</td>
+              <td class="text-center">{{ user.report.pollCnt | shortNumber }}</td>
+              <td class="text-center">{{ user.report.cmtCnt | shortNumber }}</td>
+              <td class="text-center">{{ user.report.viewCnt | shortNumber }}</td>
+              <td class="text-center">{{ user.bereportCnt | shortNumber }}</td>
               <td>
                 <div class="text-muted"><small>Last login</small></div>
                 <strong ng-bind="user.lastLogin | LLL_format"></strong>

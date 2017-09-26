@@ -239,10 +239,10 @@
               <td>{{ poll.category.name }}</td>
               <td>{{ poll.user.displayName }}</td>
               <td ng-bind="poll.created | LLL_format"></td>
-              <td class="text-center">{{ poll.likeCnt }}</td>
-              <td class="text-center">{{ poll.cmtCnt }}</td>
-              <td class="text-center">{{ poll.voteCnt }}</td>
-              <td class="text-center">{{ poll.viewCnt }}</td>
+              <td class="text-center">{{ poll.likeCnt | shortNumber }}</td>
+              <td class="text-center">{{ poll.cmtCnt | shortNumber }}</td>
+              <td class="text-center">{{ poll.voteCnt | shortNumber }}</td>
+              <td class="text-center">{{ poll.viewCnt | shortNumber }}</td>
               <td class="text-center">{{ poll.followed }}</td>
               <td class="text-center">{{ poll.bookmarked }}</td>
               <td class="text-center">{{ poll.reported }}</td>

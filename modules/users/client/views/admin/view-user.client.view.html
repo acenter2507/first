@@ -13,7 +13,7 @@
     <div class="admin-card">
       <div class="admin-card-block pd12 clearfix">
         <i class="fa fa-cogs bg-primary pd12 font-2xl mg12r pull-left"></i>
-        <h4 class="text-primary mgnb mg4t" ng-bind="loginCnt"></h4>
+        <h4 class="text-primary mgnb mg4t" ng-bind="loginCnt | shortNumber"></h4>
         <div class="text-muted text-uppercase">Login</div>
       </div>
       <div class="admin-card-footer pd12x pd4y">
@@ -27,7 +27,7 @@
     <div class="admin-card">
       <div class="admin-card-block pd12 clearfix">
         <i class="fa fa-laptop bg-info pd12 font-2xl mg12r pull-left"></i>
-        <h4 class="text-info mgnb mg4t" ng-bind="pollCnt"></h4>
+        <h4 class="text-info mgnb mg4t" ng-bind="pollCnt | shortNumber"></h4>
         <div class="text-muted text-uppercase">Polls</div>
       </div>
       <div class="admin-card-footer pd12x pd4y">
@@ -41,7 +41,7 @@
     <div class="admin-card">
       <div class="admin-card-block pd12 clearfix">
         <i class="fa fa-moon-o bg-warning pd12 font-2xl mg12r pull-left"></i>
-        <h4 class="text-warning mgnb mg4t" ng-bind="cmtCnt"></h4>
+        <h4 class="text-warning mgnb mg4t" ng-bind="cmtCnt | shortNumber"></h4>
         <div class="text-muted text-uppercase">Comments</div>
       </div>
       <div class="admin-card-footer pd12x pd4y">
@@ -55,7 +55,7 @@
     <div class="admin-card">
       <div class="admin-card-block pd12 clearfix">
         <i class="fa fa-bell bg-danger pd12 font-2xl mg12r pull-left"></i>
-        <h4 class="text-danger mgnb mg4t" ng-bind="voteCnt"></h4>
+        <h4 class="text-danger mgnb mg4t" ng-bind="voteCnt | shortNumber"></h4>
         <div class="text-muted text-uppercase">Votes</div>
       </div>
       <div class="admin-card-footer pd12x pd4y">
@@ -71,7 +71,7 @@
     <div class="admin-card">
       <div class="admin-card-block pd12 clearfix">
         <i class="fa fa-cogs bg-primary pd12 font-2xl mg12r pull-left"></i>
-        <h4 class="text-primary mgnb mg4t" ng-bind="reportCnt"></h4>
+        <h4 class="text-primary mgnb mg4t" ng-bind="reportCnt | shortNumber"></h4>
         <div class="text-muted text-uppercase">Reported</div>
       </div>
       <div class="admin-card-footer pd12x pd4y">
@@ -85,7 +85,7 @@
     <div class="admin-card">
       <div class="admin-card-block pd12 clearfix">
         <i class="fa fa-laptop bg-info pd12 font-2xl mg12r pull-left"></i>
-        <h4 class="text-info mgnb mg4t" ng-bind="bereportCnt"></h4>
+        <h4 class="text-info mgnb mg4t" ng-bind="bereportCnt | shortNumber"></h4>
         <div class="text-muted text-uppercase">Be reported</div>
       </div>
       <div class="admin-card-footer pd12x pd4y">
@@ -99,7 +99,7 @@
     <div class="admin-card">
       <div class="admin-card-block pd12 clearfix">
         <i class="fa fa-moon-o bg-warning pd12 font-2xl mg12r pull-left"></i>
-        <h4 class="text-warning mgnb mg4t" ng-bind="likeCnt"></h4>
+        <h4 class="text-warning mgnb mg4t" ng-bind="likeCnt | shortNumber"></h4>
         <div class="text-muted text-uppercase">Total like</div>
       </div>
       <div class="admin-card-footer pd12x pd4y">
@@ -113,7 +113,7 @@
     <div class="admin-card">
       <div class="admin-card-block pd12 clearfix">
         <i class="fa fa-bell bg-danger pd12 font-2xl mg12r pull-left"></i>
-        <h4 class="text-danger mgnb mg4t" ng-bind="suggestCnt"></h4>
+        <h4 class="text-danger mgnb mg4t" ng-bind="suggestCnt | shortNumber"></h4>
         <div class="text-muted text-uppercase">Suggested</div>
       </div>
       <div class="admin-card-footer pd12x pd4y">
@@ -244,10 +244,10 @@
               <td>{{ poll.title }}</td>
               <td>{{ poll.category.name }}</td>
               <td>{{ (poll.isPublic) ? 'Public' : 'Private' }}</td>
-              <td>{{ poll.likeCnt }}</td>
-              <td>{{ poll.viewCnt }}</td>
-              <td>{{ poll.cmtCnt }}</td>
-              <td>{{ poll.voteCnt }}</td>
+              <td>{{ poll.likeCnt | shortNumber }}</td>
+              <td>{{ poll.viewCnt | shortNumber }}</td>
+              <td>{{ poll.cmtCnt | shortNumber }}</td>
+              <td>{{ poll.voteCnt | shortNumber }}</td>
               <td><span ng-bind="poll.created | date:'mediumDate'"></span></td>
               <td>
                 <div class="btn-group" role="group">
@@ -299,7 +299,7 @@
             <tr ng-repeat="cmt in cmtsPagedItems">
               <td>{{ cmt.poll.title }}</td>
               <td><span ng-bind="cmt.body"></span></td>
-              <td>{{ cmt.likeCnt }}</td>
+              <td>{{ cmt.likeCnt | shortNumber }}</td>
               <td><span ng-bind="cmt.created"></span></td>
               <td><span ng-bind="cmt.updated"></span></td>
               <td>
@@ -350,7 +350,7 @@
             <tr ng-repeat="vote in votesPagedItems">
               <td>{{ vote.poll.title }}</td>
               <td><span ng-bind="vote.opts"></span></td>
-              <td>{{ vote.updateCnt }}</td>
+              <td>{{ vote.updateCnt | shortNumber }}</td>
               <td><span ng-bind="vote.updated"></span></td>
               <td><span ng-bind="vote.created"></span></td>
               <td>

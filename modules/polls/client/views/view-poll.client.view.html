@@ -75,7 +75,7 @@
           <div class="post-footer">
             <div class="like_tools">
               <a ng-click="ctrl.handleLikePoll(1)" ng-class="{'text-muted': ctrl.like.type !== 1}"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {{:: 'LB_LIKE' | translate }}</a>
-              <span class="mg5l mg5r" ng-bind="ctrl.poll.likeCnt"></span>
+              <span class="mg5l mg5r" ng-bind="ctrl.poll.likeCnt | shortNumber"></span>
               <a ng-click="ctrl.handleLikePoll(2)" ng-class="{'text-muted': ctrl.like.type !== 2}"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> {{:: 'LB_DISLIKE' | translate }}</a>
             </div>
             <div class="clearfix"></div>
@@ -92,7 +92,7 @@
           <span class="text-muted" ng-if="!ctrl.opts.length || ctrl.opts.length === 0">{{:: 'LB_POLL_OPTIONS_EMPTY' | translate }}</span>
           <!-- Danh sách options -->
           <uib-accordion close-others="true" ng-if="ctrl.opts.length > 0">
-            <uib-accordion-group ng-repeat="opt in ctrl.opts" heading="{{opt.title + ' (' + opt.voteCnt + ' votes)'}}" panel-class="custom-panel public">
+            <uib-accordion-group ng-repeat="opt in ctrl.opts" heading="{{opt.title}} ( {{ opt.voteCnt | shortNumber }} votes)" panel-class="custom-panel public">
               <span class="pull-right text-muted font-sm">
                 <span>{{:: 'LB_ADD_BY' | translate }}</span>
               <a ui-sref="profile.info({userId: opt.user.slug})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>

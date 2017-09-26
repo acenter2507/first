@@ -7,19 +7,19 @@
   </div>
   <div class="row profile-stats">
     <div class="stat">
-      <div class="stat-value">{{:: report.rank}}</div>
+      <div class="stat-value">{{:: report.rank | shortNumber}}</div>
       <span class="stat-label">{{:: 'LB_PROFILE_RANK' | translate }}</span>
     </div>
     <div class="stat">
-      <div class="stat-value">{{::report.pollCnt}}</div>
+      <div class="stat-value">{{::report.pollCnt | shortNumber}}</div>
       <span class="stat-label">{{:: 'LB_POLLS' | translate }}</span>
     </div>
     <div class="stat">
-      <div class="stat-value">{{::report.viewCnt}}</div>
+      <div class="stat-value">{{::report.viewCnt | shortNumber}}</div>
       <span class="stat-label">{{:: 'LB_PROFILE_VISIT' | translate }}</span>
     </div>
     <div class="stat">
-      <div class="stat-value">{{::report.cmtCnt}}</div>
+      <div class="stat-value">{{::report.cmtCnt | shortNumber}}</div>
       <span class="stat-label">{{:: 'LB_POLLS_COMMENTS' | translate }}</span>
     </div>
   </div>

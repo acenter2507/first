@@ -104,16 +104,16 @@ module.exports = {
     clientID: process.env.LINKEDIN_ID || '81vweff38wvefi',
     clientSecret: process.env.LINKEDIN_SECRET || 'efY69dZN1Sz2kNrY',
     callbackURL: '/api/auth/linkedin/callback'
+  },
+  github: {
+    clientID: process.env.GITHUB_ID || 'APP_ID',
+    clientSecret: process.env.GITHUB_SECRET || 'APP_SECRET',
+    callbackURL: '/api/auth/github/callback'
+  },
+  paypal: {
+    clientID: process.env.PAYPAL_ID || 'CLIENT_ID',
+    clientSecret: process.env.PAYPAL_SECRET || 'CLIENT_SECRET',
+    callbackURL: '/api/auth/paypal/callback',
+    sandbox: false
   }
-  // github: {
-  //   clientID: process.env.GITHUB_ID || 'APP_ID',
-  //   clientSecret: process.env.GITHUB_SECRET || 'APP_SECRET',
-  //   callbackURL: '/api/auth/github/callback'
-  // },
-  // paypal: {
-  //   clientID: process.env.PAYPAL_ID || 'CLIENT_ID',
-  //   clientSecret: process.env.PAYPAL_SECRET || 'CLIENT_SECRET',
-  //   callbackURL: '/api/auth/paypal/callback',
-  //   sandbox: false
-  // }
 };

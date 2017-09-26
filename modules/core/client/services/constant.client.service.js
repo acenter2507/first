@@ -18,7 +18,7 @@ angular.module('core').service('Constants', [
       language: '851kf00aAF093402395'
     };
     this.reCaptcha = {
-      key: '6LdOGTIUAAAAAAoVPR4UmY1PJP6pYS0wiVUE3LEI', //'6LeV2y4UAAAAAIysrsCFTAKqbgwVkp5MQbd019mX',
+      key: '6LdOGTIUAAAAAAoVPR4UmY1PJP6pYS0wiVUE3LEI',
       secret: '6LdOGTIUAAAAAHNWC1m90TtiNQICz3nqhVZl01VU'
     };
     this.colors = [

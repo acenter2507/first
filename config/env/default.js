@@ -3,7 +3,7 @@
 module.exports = {
   app: {
     title: 'Blablaer',
-    description: '',
+    description: 'The application helps to evaluate, rank and search for the best choice of life',
     keywords: '',
     googleAnalyticsTrackingID: process.env.GOOGLE_ANALYTICS_TRACKING_ID || 'UA-106998889-1'
   },

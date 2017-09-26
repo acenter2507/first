@@ -222,7 +222,7 @@ function get_polls_by_tagId(tagId, page, language) {
         match: { language: language },
         populate: [
           { path: 'user', select: 'displayName profileImageURL slug', model: 'User' },
-          { path: 'category', select: 'name color slug', model: 'Category' }
+          { path: 'category', select: 'name color icon slug', model: 'Category' }
         ]
       })
       .skip(10 * page).limit(10)

@@ -246,7 +246,7 @@ exports.delete = function (req, res) {
 exports.list = function (req, res) {
   Poll.find()
     .sort('-created')
-    .populate('category', 'name color slug')
+    .populate('category', 'name color icon slug')
     .populate('user', 'displayName profileImageURL slug')
     .exec(function (err, polls) {
       if (err) {
@@ -274,7 +274,7 @@ exports.pollByID = function (req, res, next, id) {
   }
 
   Poll.findOne(query)
-    .populate('category', 'name color slug')
+    .populate('category', 'name color icon slug')
     .populate('user', 'displayName profileImageURL slug')
     .exec(function (err, poll) {
       if (err) {
@@ -302,7 +302,7 @@ exports.findPolls = function (req, res) {
   Poll.find({ isPublic: true, language: language })
     .select('-body -updated -share_code')
     .sort('-created')
-    .populate('category', 'name color slug')
+    .populate('category', 'name color icon slug')
     .populate('user', 'displayName profileImageURL slug')
     .skip(10 * page).limit(10).exec()
     .then(polls => {
@@ -525,7 +525,7 @@ exports.search = function (req, res) {
   var userId = req.user ? req.user._id : undefined;
   var sort = condition.sort || '-created';
   Poll.find(search)
-    .populate('category', 'name color slug')
+    .populate('category', 'name color icon slug')
     .populate('user', 'displayName profileImageURL slug')
     .sort(sort).exec()
     .then(polls => {

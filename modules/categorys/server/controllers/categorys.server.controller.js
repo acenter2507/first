@@ -135,7 +135,7 @@ exports.polls = function (req, res) {
   Poll.find({ category: req.category._id, isPublic: true, language: language })
     .sort(sort)
     .populate('user', 'displayName profileImageURL slug')
-    .populate('category', 'name color slug')
+    .populate('category', 'name color icon slug')
     .skip(10 * page)
     .limit(10).exec()
     .then(polls => {

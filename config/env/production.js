@@ -86,34 +86,34 @@ module.exports = {
     }
   },
   facebook: {
-    clientID: process.env.FACEBOOK_ID || '124158324898699',
-    clientSecret: process.env.FACEBOOK_SECRET || 'bb680f1dfcdac77308343ac3f08d5423',
+    clientID: process.env.FACEBOOK_ID || '1687290154629169',
+    clientSecret: process.env.FACEBOOK_SECRET || 'dbe4cc32b74448cce1b0f87f5d21986c',
     callbackURL: '/api/auth/facebook/callback'
   },
   twitter: {
-    clientID: process.env.TWITTER_KEY || 'LrxRLtYr17TE9M0SCuL2RWu4n',
-    clientSecret: process.env.TWITTER_SECRET || 'z1xsq4viqJfRoy4pAONCsDbe1x89ApeSEJ7mbhHHxyqpZKTnal',
+    clientID: process.env.TWITTER_KEY || 'a36McXPyiEj5VuriKsZvzxozc',
+    clientSecret: process.env.TWITTER_SECRET || 'DFlechKegQzjuBJhHCSr0THVFIpuiiphP5gTm2R8loZTEfbHKf',
     callbackURL: '/api/auth/twitter/callback'
   },
   google: {
-    clientID: process.env.GOOGLE_ID || '733507362322-pu3hf7a3eh9c1o6c8rdjosm1q8v9b91u.apps.googleusercontent.com',
-    clientSecret: process.env.GOOGLE_SECRET || 'DkfxoyYGnhau2IRmb1_rRqyK',
+    clientID: process.env.GOOGLE_ID || '733507362322-8h3opimem8vbkrpqlk514qmgp2k0d1ds.apps.googleusercontent.com',
+    clientSecret: process.env.GOOGLE_SECRET || '2rwQ73Cbn6gneD285a4ljzmo',
     callbackURL: '/api/auth/google/callback'
   },
   linkedin: {
-    clientID: process.env.LINKEDIN_ID || 'APP_ID',
-    clientSecret: process.env.LINKEDIN_SECRET || 'APP_SECRET',
+    clientID: process.env.LINKEDIN_ID || '81vweff38wvefi',
+    clientSecret: process.env.LINKEDIN_SECRET || 'efY69dZN1Sz2kNrY',
     callbackURL: '/api/auth/linkedin/callback'
-  },
-  github: {
-    clientID: process.env.GITHUB_ID || 'APP_ID',
-    clientSecret: process.env.GITHUB_SECRET || 'APP_SECRET',
-    callbackURL: '/api/auth/github/callback'
-  },
-  paypal: {
-    clientID: process.env.PAYPAL_ID || 'CLIENT_ID',
-    clientSecret: process.env.PAYPAL_SECRET || 'CLIENT_SECRET',
-    callbackURL: '/api/auth/paypal/callback',
-    sandbox: false
   }
+  // github: {
+  //   clientID: process.env.GITHUB_ID || 'APP_ID',
+  //   clientSecret: process.env.GITHUB_SECRET || 'APP_SECRET',
+  //   callbackURL: '/api/auth/github/callback'
+  // },
+  // paypal: {
+  //   clientID: process.env.PAYPAL_ID || 'CLIENT_ID',
+  //   clientSecret: process.env.PAYPAL_SECRET || 'CLIENT_SECRET',
+  //   callbackURL: '/api/auth/paypal/callback',
+  //   sandbox: false
+  // }
 };

@@ -12,10 +12,10 @@ module.exports = {
   sessionSecret: process.env.SESSION_SECRET || '93182jflajfoaiwudajkdnkUHAD',
   // Mongo database
   db: {
-    uri: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/polls',
+    uri: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/blablaer',
     options: {
-      user: '',
-      pass: ''
+      user: 'BlablaerAdmin',
+      pass: 'a9123kjfiwd32lk3jhhd434'
     },
     // Enable mongoose debug mode
     debug: process.env.MONGODB_DEBUG || false

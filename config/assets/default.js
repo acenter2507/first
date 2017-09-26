@@ -51,7 +51,6 @@ module.exports = {
         'public/lib/angular-moment-picker/dist/angular-moment-picker.js',
         'public/lib/ngInfiniteScroll/build/ng-infinite-scroll.js',
         'public/lib/textAngular/dist/textAngular-rangy.min.js',
-        'public/lib/textAngular/dist/textAngular-sanitize.min.js',
         'public/lib/textAngular/dist/textAngular.js',
         'public/lib/textAngular/dist/textAngularSetup.js',
         'public/lib/angular-toastr/dist/angular-toastr.tpls.js',

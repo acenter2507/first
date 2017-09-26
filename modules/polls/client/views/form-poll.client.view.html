@@ -102,7 +102,7 @@
         <a ng-click="ctrl.handleSavePoll(ctrl.form.pollForm.$valid)">{{ctrl.poll._id ? 'LB_SAVE' : 'LB_POST' | translate }}</a>
         <a class="mg10l" ng-click="ctrl.handleDiscard()">{{:: 'LB_DISCARD' | translate}}</a>
         <md-menu md-offset="10 30">
-          <a class="card-link" ng-class="{ 'text-shake': !ctrl.poll.isPublic }" ng-click="$mdMenu.open($event)"><i class="fa fa-lock"></i> {{:: 'LB_POLL_OPTION' | translate}}</a>
+          <a class="pull-right" ng-class="{ 'text-shake': !ctrl.poll.isPublic }" ng-click="$mdMenu.open($event)"><i class="fa fa-lock"></i> {{:: 'LB_POLL_OPTION' | translate}}</a>
           <md-menu-content>
             <ul class="menu-list mg5b">
               <li>

@@ -181,91 +181,91 @@ angular.module('textAngularSetup', [])
     },
     // tooltip for heading - might be worth splitting
     heading: {
-        tooltip: 'Heading '
+        tooltip: "{{:: 'LANGUAGE' | translate }}" //'Heading '
     },
     p: {
-        tooltip: 'Paragraph'
+        tooltip: "{{:: 'LANGUAGE' | translate }}" //'Paragraph'
     },
     pre: {
-        tooltip: 'Preformatted text'
+        tooltip: "{{:: 'LANGUAGE' | translate }}" //'Preformatted text'
     },
     ul: {
-        tooltip: 'Unordered List'
+        tooltip: "{{:: 'LANGUAGE' | translate }}" //'Unordered List'
     },
     ol: {
-        tooltip: 'Ordered List'
+        tooltip: "{{:: 'LANGUAGE' | translate }}" //'Ordered List'
     },
     quote: {
-        tooltip: 'Quote/unquote selection or paragraph'
+        tooltip: "{{:: 'LANGUAGE' | translate }}" //'Quote/unquote selection or paragraph'
     },
     undo: {
-        tooltip: 'Undo'
+        tooltip: "{{:: 'LANGUAGE' | translate }}" //'Undo'
     },
     redo: {
-        tooltip: 'Redo'
+        tooltip: "{{:: 'LANGUAGE' | translate }}" //'Redo'
     },
     bold: {
-        tooltip: 'Bold'
+        tooltip: "{{:: 'LANGUAGE' | translate }}" //'Bold'
     },
     italic: {
-        tooltip: 'Italic'
+        tooltip: "{{:: 'LANGUAGE' | translate }}" //'Italic'
     },
     underline: {
-        tooltip: 'Underline'
+        tooltip: "{{:: 'LANGUAGE' | translate }}" //'Underline'
     },
     strikeThrough:{
-        tooltip: 'Strikethrough'
+        tooltip: "{{:: 'LANGUAGE' | translate }}" //'Strikethrough'
     },
     justifyLeft: {
-        tooltip: 'Align text left'
+        tooltip: "{{:: 'LANGUAGE' | translate }}" //'Align text left'
     },
     justifyRight: {
-        tooltip: 'Align text right'
+        tooltip: "{{:: 'LANGUAGE' | translate }}" //'Align text right'
     },
     justifyFull: {
-        tooltip: 'Justify text'
+        tooltip: "{{:: 'LANGUAGE' | translate }}" //'Justify text'
     },
     justifyCenter: {
-        tooltip: 'Center'
+        tooltip: "{{:: 'LANGUAGE' | translate }}" //'Center'
     },
     indent: {
-        tooltip: 'Increase indent'
+        tooltip: "{{:: 'LANGUAGE' | translate }}" //'Increase indent'
     },
     outdent: {
-        tooltip: 'Decrease indent'
+        tooltip: "{{:: 'LANGUAGE' | translate }}" //'Decrease indent'
     },
     clear: {
-        tooltip: 'Clear formatting'
+        tooltip: "{{:: 'LANGUAGE' | translate }}" //'Clear formatting'
     },
     insertImage: {
-        dialogPrompt: 'Please enter an image URL to insert',
-        tooltip: 'Insert image',
+        dialogPrompt: "{{:: 'LANGUAGE' | translate }}", //'Please enter an image URL to insert',
+        tooltip: "{{:: 'LANGUAGE' | translate }}", //'Insert image',
         hotkey: 'the - possibly language dependent hotkey ... for some future implementation'
     },
     insertVideo: {
-        tooltip: 'Insert video',
-        dialogPrompt: 'Please enter a youtube URL to embed'
+        tooltip: "{{:: 'LANGUAGE' | translate }}", //'Insert video',
+        dialogPrompt: "{{:: 'LANGUAGE' | translate }}" //'Please enter a youtube URL to embed'
     },
     insertLink: {
-        tooltip: 'Insert / edit link',
-        dialogPrompt: "Please enter a URL to insert"
+        tooltip: "{{:: 'LANGUAGE' | translate }}", //'Insert / edit link',
+        dialogPrompt: "{{:: 'LANGUAGE' | translate }}" //"Please enter a URL to insert"
     },
     editLink: {
         reLinkButton: {
-            tooltip: "Relink"
+            tooltip: "{{:: 'LANGUAGE' | translate }}" //"Relink"
         },
         unLinkButton: {
-            tooltip: "Unlink"
+            tooltip: "{{:: 'LANGUAGE' | translate }}" //"Unlink"
         },
         targetToggle: {
-            buttontext: "Open in New Window"
+            buttontext: "{{:: 'LANGUAGE' | translate }}" //"Open in New Window"
         }
     },
     wordcount: {
-        tooltip: 'Display words Count'
+        tooltip: "{{:: 'LANGUAGE' | translate }}" //'Display words Count'
     },
         charcount: {
-        tooltip: 'Display characters Count'
+        tooltip: "{{:: 'LANGUAGE' | translate }}" //'Display characters Count'
     }
 })
 .factory('taToolFunctions', ['$window','taTranslations', function($window, taTranslations) {

@@ -295,10 +295,7 @@ exports.pollByID = function (req, res, next, id) {
  * Lấy danh sách poll cho màn hình polls.list
  */
 exports.findPolls = function (req, res) {
-  console.log(getClientIp(req));
-  console.log(req.headers['X-Forwarded-For'] || req.headers['x-forwarded-for']);
-  console.log(req.client.remoteAddress);
-  console.log(req.connection.remoteAddress);
+  getClientIp(findPolls);
   var page = req.params.page || 0;
   var userId = req.user ? req.user._id : undefined;
   // Lấy ngôn ngữ hiển thị poll
@@ -384,10 +381,7 @@ exports.findPopulars = function (req, res) {
  */
 exports.findOwners = function (req, res) {
   var userId = req.user ? req.user._id : undefined;
-  var ip =
-    req.headers['X-Forwarded-For'] ||
-    req.headers['x-forwarded-for'] ||
-    req.client.remoteAddress;
+  var ip = getClientIp(req);
   var result = {};
   get_vote_by_pollId_and_userId(req.poll._id, userId, ip)
     .then(_result => {
@@ -968,21 +962,11 @@ function get_polls_by_sort_and_limit(sort, limit, language) {
       });
   });
 }
-exports.get_full_by_pollId = get_full_by_pollId;
-exports.get_opts_by_pollId = get_opts_by_pollId;
-exports.get_cmts_by_pollId = get_cmts_by_pollId;
-exports.get_votes_by_pollId = get_votes_by_pollId;
-exports.get_follow_by_pollId = get_follow_by_pollId;
-exports.get_report_by_pollId = get_report_by_pollId;
-exports.get_bookmark_by_pollId = get_bookmark_by_pollId;
-exports.get_like_by_cmtId_and_userId = get_like_by_cmtId_and_userId;
-exports.get_opts_by_voteId = get_opts_by_voteId;
-
 
 function getClientIp(req) {
   var ipAddress;
   // Amazon EC2 / Heroku workaround to get real client IP
-  var forwardedIpsStr = req.header('x-forwarded-for');
+  var forwardedIpsStr = req.header('x-forwarded-for') || req.headers['X-Forwarded-For'] || req.headers['x-forwarded-for'] || req.client.remoteAddress;
   if (forwardedIpsStr) {
     // 'x-forwarded-for' header may return multiple IP addresses in
     // the format: "client IP, proxy 1 IP, proxy 2 IP" so take the
@@ -997,3 +981,12 @@ function getClientIp(req) {
   }
   return ipAddress;
 }
+exports.get_full_by_pollId = get_full_by_pollId;
+exports.get_opts_by_pollId = get_opts_by_pollId;
+exports.get_cmts_by_pollId = get_cmts_by_pollId;
+exports.get_votes_by_pollId = get_votes_by_pollId;
+exports.get_follow_by_pollId = get_follow_by_pollId;
+exports.get_report_by_pollId = get_report_by_pollId;
+exports.get_bookmark_by_pollId = get_bookmark_by_pollId;
+exports.get_like_by_cmtId_and_userId = get_like_by_cmtId_and_userId;
+exports.get_opts_by_voteId = get_opts_by_voteId;

@@ -94,14 +94,14 @@ angular.module('core').controller('WebAppController', [
     }
 
     // Thay đổi ngôn ngữ
-    $scope.handleChangeLanguage = lang => {
+    $scope.handleChangeLanguage = () => {
       $scope.languages = $window.supportLanguages;
       dialog.openConfirm({
         scope: $scope,
         templateUrl: Constants.templateUrls.languageChange
-      }).then(confirm => {
+      }).then(lang => {
         delete $scope.languages;
-        console.log(confirm);
+        handleSaveLanguage(lang);
       }, reject => {
         delete $scope.languages;
       });
@@ -116,18 +116,18 @@ angular.module('core').controller('WebAppController', [
       //     handleSaveLanguage();
       //   });
       // });
-      // function handleSaveLanguage() {
-      //   if ($scope.isLogged) {
-      //     $http.post('/api/users/language', { language: lang }).success(function (response) {
-      //       window.location.reload();
-      //     }).error(function (err) {
-      //       $scope.handleShowMessage(err.message, true);
-      //     });
-      //   } else {
-      //     Storages.set_local(Constants.storages.language, lang);
-      //     window.location.reload();
-      //   }
-      // }
+      function handleSaveLanguage(lang) {
+        if ($scope.isLogged) {
+          $http.post('/api/users/language', { language: lang }).success(function (response) {
+            window.location.reload();
+          }).error(function (err) {
+            $scope.handleShowMessage(err.message, true);
+          });
+        } else {
+          Storages.set_local(Constants.storages.language, lang);
+          window.location.reload();
+        }
+      }
     };
 
     /**

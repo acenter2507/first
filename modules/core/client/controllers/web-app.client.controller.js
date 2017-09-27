@@ -108,17 +108,6 @@ angular.module('core').controller('WebAppController', [
       }, reject => {
         delete $scope.langDialog;
       });
-      // if (lang === $translate.use()) return;
-      // $translate(['MS_USERS_LANG_CONFIRM', lang]).then(tsl => {
-      //   var content = tsl.MS_USERS_LANG_CONFIRM + tsl[lang];
-      //   $scope.handleShowConfirm({
-      //     content: content,
-      //     type: 1,
-      //     button: 'LB_CHANGE'
-      //   }, confirm => {
-      //     handleSaveLanguage();
-      //   });
-      // });
       function handleSaveLanguage(lang) {
         if (lang === $translate.use()) return;
         if ($scope.isLogged) {

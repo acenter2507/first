@@ -41,7 +41,7 @@
 
     // Chart data
     ctrl.chartSeries = [];
-    ctrl.chartColors = ['#0084ff', '#ffa500'];
+    ctrl.chartColors = ['#267ed5', '#ffa500'];
     ctrl.chartOption = {
       legend: { display: true },
       scales: {

@@ -8,7 +8,7 @@
   box-shadow: 0 1px 2px rgba(0,0,0,.1);}
   .login-box .lb-header{
     position:relative;
-    color: #0084ff;
+    color: #267ed5;
     width: 100%;
     border-bottom: 1px solid #eee;
     text-transform: uppercase;
@@ -23,7 +23,7 @@
       font-weight: bold;
       transition: all 0.1s linear;}
     .login-box .lb-header .active{
-      color: #0084ff;
+      color: #267ed5;
       font-size: 1.3rem; }
   .login-box .social-login{
     position:relative;
@@ -110,14 +110,14 @@
       .bgcover .cover .container .cover-menu .btn-fab {
         width: 48px;
         height: 48px;
-        background-color: #0084ff;
+        background-color: #267ed5;
         color: #fff;
         border-radius: 50%;
         border: none; }
       .bgcover .cover .container .cover-menu .btn-fab:hover {
         background-color: #1a5895; }
       .bgcover .cover .container .cover-menu .btn-fab:focus {
-        background-color: #0084ff;
+        background-color: #267ed5;
         outline: none; }
 
 @media (max-width: 767px) {
@@ -270,7 +270,7 @@
     font-size: 16px;
     min-width: 120px; }
   .timeline .event:after {
-    box-shadow: 0 0 0 8px #0084ff;
+    box-shadow: 0 0 0 8px #267ed5;
     left: -30px;
     background: #212121;
     border-radius: 50%;

@@ -32,7 +32,7 @@ var OptSchema = new Schema({
   },
   color: {
     type : String,
-    default : '#0084ff'
+    default : '#267ed5'
   },
   status: {
     type : Number,

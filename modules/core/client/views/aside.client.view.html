@@ -14,6 +14,14 @@
   </div>
   <nav class="aside-nav">
     <ul class="nav">
+      <li class="nav-title" ng-show="isLogged">{{ 'LANGUAGE' | translate }}</li>
+      <li class="nav-item">
+        <a class="nav-link" ui-sref="notifs.list">
+          <img style="width: 18px; height: 18px;" ng-src="{{'modules/core/client/img/flags/' + language + '.png'}}">
+          {{ language | translate }}
+        </a>
+      </li>
+
       <li class="nav-title" ng-show="isLogged">{{ 'LB_NOFT' | translate }}</li>
       <li class="nav-item" ng-show="isLogged">
         <a class="nav-link" ui-sref="notifs.list"><i class="fa fa-bell-o"></i> {{ 'LB_NOFT_VIEWALL' | translate }}

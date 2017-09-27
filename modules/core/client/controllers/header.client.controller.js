@@ -5,16 +5,13 @@ angular.module('core').controller('HeaderController', [
   '$state',
   'Menus',
   'Notifications',
-  '$window',
   'Storages',
   'Constants',
-  function ($scope, $state, Menus, Notifications, $window, Storages, Constants) {
+  function ($scope, $state, Menus, Notifications, Storages, Constants) {
     // Expose view variables
     $scope.$state = $state;
     // Get the topbar menu
     $scope.menu = Menus.getMenu('topbar');
-    // Support language
-    $scope.supportLanguages = $window.supportLanguages;
     // Ngôn ngữ đang sử dụng
     $scope.language = Storages.get_local(Constants.storages.language);
     // Từ khóa tìm kiếm

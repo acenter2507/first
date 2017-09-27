@@ -444,8 +444,8 @@ angular.module('textAngularSetup', [])
             }
         };
     }])
-    .run(['taRegisterTool', '$window', 'taTranslations', 'taSelection', 'taToolFunctions', '$sanitize', 'taOptions', '$log',
-        function (taRegisterTool, $window, taTranslations, taSelection, taToolFunctions, $sanitize, taOptions, $log) {
+    .run(['taRegisterTool', '$window', 'taTranslations', 'taSelection', 'taToolFunctions', '$sanitize', 'taOptions', '$log', '$translate', 'ngDialog',
+        function (taRegisterTool, $window, taTranslations, taSelection, taToolFunctions, $sanitize, taOptions, $log, $translate, dialog) {
             // test for the version of $sanitize that is in use
             // You can disable this check by setting taOptions.textAngularSanitize == false
             var gv = {}; $sanitize('', gv);
@@ -770,96 +770,6 @@ angular.module('textAngularSetup', [])
                 }
             });
 
-            /* jshint -W099 */
-            /****************************
-             //  we don't use this code - since the previous way CLEAR is expected to work does not clear partially selected <li>
-        
-             var removeListElement = function(listE){
-                        console.log(listE);
-                        var _list = listE.parentNode.childNodes;
-                        console.log('_list', _list);
-                        var _preLis = [], _postLis = [], _found = false;
-                        for (i = 0; i < _list.length; i++) {
-                            if (_list[i] === listE) {
-                                _found = true;
-                            } else if (!_found) _preLis.push(_list[i]);
-                            else _postLis.push(_list[i]);
-                        }
-                        var _parent = angular.element(listE.parentNode);
-                        var newElem = angular.element('<p></p>');
-                        newElem.html(angular.element(listE).html());
-                        if (_preLis.length === 0 || _postLis.length === 0) {
-                            if (_postLis.length === 0) _parent.after(newElem);
-                            else _parent[0].parentNode.insertBefore(newElem[0], _parent[0]);
-        
-                            if (_preLis.length === 0 && _postLis.length === 0) _parent.remove();
-                            else angular.element(listE).remove();
-                        } else {
-                            var _firstList = angular.element('<' + _parent[0].tagName + '></' + _parent[0].tagName + '>');
-                            var _secondList = angular.element('<' + _parent[0].tagName + '></' + _parent[0].tagName + '>');
-                            for (i = 0; i < _preLis.length; i++) _firstList.append(angular.element(_preLis[i]));
-                            for (i = 0; i < _postLis.length; i++) _secondList.append(angular.element(_postLis[i]));
-                            _parent.after(_secondList);
-                            _parent.after(newElem);
-                            _parent.after(_firstList);
-                            _parent.remove();
-                        }
-                        taSelection.setSelectionToElementEnd(newElem[0]);
-                    };
-        
-             elementsSeen = [];
-             if (selectedElements.length !==0) console.log(selectedElements);
-             angular.forEach(selectedElements, function (element) {
-                        if (elementsSeen.indexOf(element) !== -1 || elementsSeen.indexOf(element.parentElement) !== -1) {
-                            return;
-                        }
-                        elementsSeen.push(element);
-                        if (element.nodeName.toLowerCase() === 'li') {
-                            console.log('removeListElement', element);
-                            removeListElement(element);
-                        }
-                        else if (element.parentElement && element.parentElement.nodeName.toLowerCase() === 'li') {
-                            console.log('removeListElement', element.parentElement);
-                            elementsSeen.push(element.parentElement);
-                            removeListElement(element.parentElement);
-                        }
-                    });
-             **********************/
-
-            /**********************
-             if(possibleNodes[0].tagName.toLowerCase() === 'li'){
-                        var _list = possibleNodes[0].parentNode.childNodes;
-                        var _preLis = [], _postLis = [], _found = false;
-                        for(i = 0; i < _list.length; i++){
-                            if(_list[i] === possibleNodes[0]){
-                                _found = true;
-                            }else if(!_found) _preLis.push(_list[i]);
-                            else _postLis.push(_list[i]);
-                        }
-                        var _parent = angular.element(possibleNodes[0].parentNode);
-                        var newElem = angular.element('<p></p>');
-                        newElem.html(angular.element(possibleNodes[0]).html());
-                        if(_preLis.length === 0 || _postLis.length === 0){
-                            if(_postLis.length === 0) _parent.after(newElem);
-                            else _parent[0].parentNode.insertBefore(newElem[0], _parent[0]);
-        
-                            if(_preLis.length === 0 && _postLis.length === 0) _parent.remove();
-                            else angular.element(possibleNodes[0]).remove();
-                        }else{
-                            var _firstList = angular.element('<'+_parent[0].tagName+'></'+_parent[0].tagName+'>');
-                            var _secondList = angular.element('<'+_parent[0].tagName+'></'+_parent[0].tagName+'>');
-                            for(i = 0; i < _preLis.length; i++) _firstList.append(angular.element(_preLis[i]));
-                            for(i = 0; i < _postLis.length; i++) _secondList.append(angular.element(_postLis[i]));
-                            _parent.after(_secondList);
-                            _parent.after(newElem);
-                            _parent.after(_firstList);
-                            _parent.remove();
-                        }
-                        taSelection.setSelectionToElementEnd(newElem[0]);
-                    }
-             *******************/
-
-
             /* istanbul ignore next: if it's javascript don't worry - though probably should show some kind of error message */
             var blockJavascript = function (link) {
                 if (link.toLowerCase().indexOf('javascript') !== -1) {
@@ -873,7 +783,17 @@ angular.module('textAngularSetup', [])
                 tooltiptext: taTranslations.insertImage.tooltip,
                 action: function () {
                     var imageLink;
-                    imageLink = $window.prompt(taTranslations.insertImage.dialogPrompt, 'http://');
+                    //imageLink = $window.prompt(taTranslations.insertImage.dialogPrompt, 'http://');
+                    
+                    dialog.openConfirm({
+                        templateUrl: "<p>{{:: 'LANGUAGE' | translate }}<p><input ng-model=\"url\" class=\"form-control\" value=" + href + "><br /><button class=\"btn btn-primary\" ng-click=\"confirm(url)\"></button>",
+                        plain: true
+                    }).then(confirm => {
+                        console.log(confirm);
+                        imageLink = confirm;
+                    }, reject => {
+                    });
+
                     if (imageLink && imageLink !== '' && imageLink !== 'http://') {
                         /* istanbul ignore next: don't know how to test this... since it needs a dialogPrompt */
                         // block javascript here

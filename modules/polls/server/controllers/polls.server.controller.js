@@ -295,7 +295,7 @@ exports.pollByID = function (req, res, next, id) {
  * Lấy danh sách poll cho màn hình polls.list
  */
 exports.findPolls = function (req, res) {
-  getClientIp(req);
+  console.log(getClientIp(req));
   var page = req.params.page || 0;
   var userId = req.user ? req.user._id : undefined;
   // Lấy ngôn ngữ hiển thị poll

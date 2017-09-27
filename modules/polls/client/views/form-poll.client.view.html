@@ -70,7 +70,7 @@
           </div>
           <!-- Body -->
           <div class="form-group" show-errors>
-            <text-angular name="body" class="text-body" ng-model="ctrl.poll.body" required placeholder-text="{{:: 'LB_POLL_BODY_PLACE' | translate }}"></text-angular>
+            <text-angular name="body" class="text-body" ng-model="ctrl.poll.body" required placeholder="{{:: 'LB_POLL_BODY_PLACE' | translate }}"></text-angular>
             <div ng-messages="ctrl.form.pollForm.body.$error" role="alert">
               <p class="help-block error-text" ng-message="required">{{:: 'LB_POLL_BODY_REQUIRE' | translate }}</p>
             </div>

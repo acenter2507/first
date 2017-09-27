@@ -102,7 +102,7 @@ angular.module('core').controller('WebAppController', [
       dialog.openConfirm({
         scope: $scope,
         templateUrl: Constants.templateUrls.languageChange,
-        appendClassName: 'pdn'
+        appendClassName: 'images-upload-dialog'
       }).then(lang => {
         delete $scope.langDialog;
         handleSaveLanguage(lang);

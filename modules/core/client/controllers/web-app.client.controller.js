@@ -95,15 +95,18 @@ angular.module('core').controller('WebAppController', [
 
     // Thay đổi ngôn ngữ
     $scope.handleChangeLanguage = () => {
-      $scope.languages = $window.supportLanguages;
+      $scope.langDialog = {
+        languages = $window.supportLanguages,
+        language: $translate.use()
+      };
       dialog.openConfirm({
         scope: $scope,
         templateUrl: Constants.templateUrls.languageChange
       }).then(lang => {
-        delete $scope.languages;
+        delete $scope.langDialog;
         handleSaveLanguage(lang);
       }, reject => {
-        delete $scope.languages;
+        delete $scope.langDialog;
       });
       // if (lang === $translate.use()) return;
       // $translate(['MS_USERS_LANG_CONFIRM', lang]).then(tsl => {
@@ -117,6 +120,7 @@ angular.module('core').controller('WebAppController', [
       //   });
       // });
       function handleSaveLanguage(lang) {
+        if (lang === $translate.use()) return;
         if ($scope.isLogged) {
           $http.post('/api/users/language', { language: lang }).success(function (response) {
             window.location.reload();

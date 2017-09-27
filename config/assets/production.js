@@ -59,7 +59,8 @@ module.exports = {
         'public/lib/angular-breadcrumb/dist/angular-breadcrumb.min.js',
         'public/lib/angular-socialshare/dist/angular-socialshare.min.js',
         'public/lib/angular-recaptcha/release/angular-recaptcha.min.js',
-        'public/lib/ng-img-crop/compile/minified/ng-img-crop.js'
+        'public/lib/ng-img-crop/compile/minified/ng-img-crop.js',
+        'public/lib/angular-scroll/angular-scroll.min.js'
       ]
     },
     css: 'public/dist/application.min.css',

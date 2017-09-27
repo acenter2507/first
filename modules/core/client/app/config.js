@@ -33,7 +33,8 @@ var ApplicationConfiguration = (function() {
     'angular-loading-bar',
     '720kb.socialshare',
     'vcRecaptcha',
-    'ngImgCrop'
+    'ngImgCrop',
+    'duScroll'
   ];
 
   // Add a new vertical module

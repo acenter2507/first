@@ -6,7 +6,7 @@
 
   PollsController.$inject = [
     '$location',
-    '$anchorScroll',
+    '$document',
     '$scope',
     '$state',
     'Socket',
@@ -21,7 +21,7 @@
 
   function PollsController(
     $location,
-    $anchorScroll,
+    $document,
     $scope,
     $state,
     Socket,
@@ -748,8 +748,8 @@
         return;
       }
       ctrl.cmt_typing = true;
-      $location.hash('comment-box');
-      $anchorScroll();
+      let commentBox = angular.element(document.getElementById('comment-box'));
+      $document.scrollToElement(commentBox, 30, 2000);
     };
     // Thành viên like comment
     ctrl.handleLikeComment = (cmt, type) => {

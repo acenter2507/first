@@ -9,10 +9,10 @@
             <a ui-sref="categorys.polls({ categoryId: ctrl.poll.category.slug })">
             {{ ctrl.poll.category.name }}
           </a>
-            <a class="pull-right" ng-click="ctrl.follow_poll()" ng-if="ctrl.follow._id" tooltip-placement="bottom" uib-tooltip="{{:: 'LB_POLL_UNFOLLOW_TOOLTIP' | translate }}">
+            <a class="pull-right" ng-click="ctrl.handleFollowPoll()" ng-if="ctrl.follow._id" tooltip-placement="bottom" uib-tooltip="{{:: 'LB_POLL_UNFOLLOW_TOOLTIP' | translate }}">
               <i class="fa fa-rss"></i> {{:: 'LB_POLLS_MENU_UNFOLLOW' | translate}}
             </a>
-            <a class="pull-right" ng-click="ctrl.follow_poll()" ng-if="!ctrl.follow._id" tooltip-placement="bottom" uib-tooltip="{{:: 'LB_POLL_FOLLOW_TOOLTIP' | translate }}">
+            <a class="pull-right" ng-click="ctrl.handleFollowPoll()" ng-if="!ctrl.follow._id" tooltip-placement="bottom" uib-tooltip="{{:: 'LB_POLL_FOLLOW_TOOLTIP' | translate }}">
               <i class="fa fa-rss"></i> {{:: 'LB_POLLS_MENU_FOLLOW' | translate}}
             </a>
           </p>
@@ -42,12 +42,12 @@
                   <md-menu-content>
                     <ul class="menu-list">
                       <li ng-if="isLogged">
-                        <a ng-click="ctrl.follow_poll()"><i class="fa fa-rss"></i>&nbsp;{{(ctrl.follow._id) ? 'LB_POLLS_MENU_UNFOLLOW' : 'LB_POLLS_MENU_FOLLOW' | translate }}</a>
+                        <a ng-click="ctrl.handleFollowPoll()"><i class="fa fa-rss"></i>&nbsp;{{(ctrl.follow._id) ? 'LB_POLLS_MENU_UNFOLLOW' : 'LB_POLLS_MENU_FOLLOW' | translate }}</a>
                       </li>
-                      <li ng-if="isLogged && !ctrl.poll.isCurrentUserOwner && !ctrl.reported"><a ng-click="ctrl.report_poll()"><i class="fa fa-exclamation-circle"></i> {{:: 'LB_POLLS_MENU_REPORT' | translate }}</a></li>
+                      <li ng-if="isLogged && !ctrl.poll.isCurrentUserOwner && !ctrl.reported"><a ng-click="ctrl.handleReportPoll()"><i class="fa fa-exclamation-circle"></i> {{:: 'LB_POLLS_MENU_REPORT' | translate }}</a></li>
                       <li ng-if="ctrl.poll.isCurrentUserOwner || ctrl.poll.canEdit"><a ui-sref="polls.edit({ pollId: ctrl.poll.slug })"><i class="fa fa-pencil-square-o"></i> {{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
                       <li ng-if="ctrl.poll.isCurrentUserOwner || ctrl.poll.canEdit"><a ng-click="ctrl.handleRemovePoll()"><i class="fa fa-trash"></i> {{:: 'LB_DELETE' | translate }}</a></li>
-                      <li ng-if="isLogged && !ctrl.poll.isCurrentUserOwner && !ctrl.bookmarked"><a ng-click="ctrl.bookmark_poll()"><i class="fa fa-bookmark"></i> {{:: 'LB_POLLS_MENU_BOOKMARK' | translate }}</a></li>
+                      <li ng-if="isLogged && !ctrl.poll.isCurrentUserOwner && !ctrl.bookmarked"><a ng-click="ctrl.handleBookmarkPoll()"><i class="fa fa-bookmark"></i> {{:: 'LB_POLLS_MENU_BOOKMARK' | translate }}</a></li>
                       <li ng-if="ctrl.poll.isCurrentUserOwner"><a ng-click="ctrl.handleSharePoll()"><i class="fa fa-share-alt"></i> {{:: 'LB_SHARE' | translate }}</a></li>
                     </ul>
                   </md-menu-content>

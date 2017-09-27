@@ -149,9 +149,7 @@
           .then(res => {
             ctrl.ownVote = res.data.ownVote;
             ctrl.votedOpts = res.data.votedOpts;
-            console.log(ctrl.votedOpts);
             ctrl.selectedOpts = _.clone(ctrl.votedOpts);
-            console.log(ctrl.selectedOpts);
             ctrl.radioChecked = ctrl.selectedOpts[0];
             ctrl.follow = res.data.follow;
             ctrl.reported = res.data.reported;
@@ -607,7 +605,8 @@
       });
     }
 
-    ctrl.follow_poll = () => {
+    // Thành viên bấm follow poll
+    ctrl.handleFollowPoll = () => {
       if (!$scope.isLogged) {
         $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;
@@ -624,8 +623,8 @@
           $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
     };
-
-    ctrl.report_poll = () => {
+    // Thành viên bấm report poll
+    ctrl.handleReportPoll = () => {
       if (ctrl.reported) {
         $scope.handleShowMessageWithParam('MS_CM_REPORT_EXIST_ERROR', { title: ctrl.poll.title }, true);
         return;
@@ -648,8 +647,8 @@
           });
       }
     };
-
-    ctrl.bookmark_poll = () => {
+    // Thành viên bấm add bookmart poll
+    ctrl.handleBookmarkPoll = () => {
       if (ctrl.bookmarked) {
         $scope.handleShowMessageWithParam('MS_CM_BOOKMARK_EXIST_ERROR', { title: ctrl.poll.title }, true);
         return;

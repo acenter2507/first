@@ -72,7 +72,6 @@
               appendClassName: 'images-upload-dialog'
             });
             dialog.closePromise.then(function (data) {
-              console.log(typeof data.value);
               if (!data.value || data.value.length === 0 || typeof data.value === 'string') return;
               var paths = data.value || [];
               for (var index = 0; index < paths.length; index++) {

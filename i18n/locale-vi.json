@@ -324,6 +324,7 @@
   "LB_SUPPORT_TITLE": "Gửi ticket hỗ trợ",
   "LB_SUPPORT_BODY_PLACE": "Bạn cần hỗ trợ vấn đề gì?",
   "LB_SUPPORT_BODY_REQUIRE": "Xin hãy cho chúng tôi biết bạn gặp vấn đề gì?",
+  "LB_SUPPORT_ERROR": "Chúng tôi không thể nhận được yêu cầu của bạn, vui lòng thử lại sau.",
   "LB_SUPPORT_SUCCESS": "Cảm ơn! Chúng tôi đã nhận được yêu cầu của bạn. Yêu cầu của bạn sẽ được xử lý và phản hồi lại qua email mà bạn đã cung cấp.",
   "LB_POLICY_1": "Privacy Policy for www.blablaer.com",
   "LB_POLICY_2": "If you require any more information or have any questions about our privacy policy, please feel free to contact us by email at blablaerwebapp@gmail.com.",

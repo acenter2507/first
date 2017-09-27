@@ -149,7 +149,9 @@
           .then(res => {
             ctrl.ownVote = res.data.ownVote;
             ctrl.votedOpts = res.data.votedOpts;
+            console.log(ctrl.votedOpts);
             ctrl.selectedOpts = _.clone(ctrl.votedOpts);
+            console.log(ctrl.selectedOpts);
             ctrl.radioChecked = ctrl.selectedOpts[0];
             ctrl.follow = res.data.follow;
             ctrl.reported = res.data.reported;
@@ -605,7 +607,6 @@
       });
     }
 
-
     ctrl.follow_poll = () => {
       if (!$scope.isLogged) {
         $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
@@ -698,7 +699,6 @@
       angular.element(aside).toggleClass('full');
       angular.element('#aside-panel-full-toggle').find('i').toggleClass('r180');
     }
-
     // Thành viên trả lời comment của thành viên khác
     ctrl.handleReplyComment = cmt => {
       if (!$scope.isLogged) {

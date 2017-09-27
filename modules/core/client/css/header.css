@@ -83,8 +83,7 @@
   display: inline-block;
   width: 130px;
   height: 50px;
-  padding: 0.5rem 1rem;
-  /*background-image: url("../img/brand/logo.png");*/
+  padding: 0.5rem;
   background-repeat: no-repeat;
   background-position: 5px center;
   background-size: 120px auto;

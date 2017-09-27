@@ -73,11 +73,10 @@
             });
             dialog.closePromise.then(function (data) {
               console.log(typeof data.value);
-              if (!data.value || data.value.length === 0 || typeof data.value === 'String') return;
+              if (!data.value || data.value.length === 0 || typeof data.value === 'string') return;
               var paths = data.value || [];
               for (var index = 0; index < paths.length; index++) {
                 var path = paths[index];
-                console.log(path);
                 $editor().wrapSelection('insertHtml', '<img src="' + path + '"><div><br/></div>', true);
               }
             });

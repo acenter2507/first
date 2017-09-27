@@ -96,7 +96,7 @@ angular.module('core').controller('WebAppController', [
     // Thay đổi ngôn ngữ
     $scope.handleChangeLanguage = () => {
       $scope.langDialog = {
-        languages = $window.supportLanguages,
+        languages: $window.supportLanguages,
         language: $translate.use()
       };
       dialog.openConfirm({

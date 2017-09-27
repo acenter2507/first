@@ -5,7 +5,7 @@ angular.module('core').service('Constants', [
   function () {
     this.templateUrls = {
       dialogConfirm: 'modules/core/client/views/templates/confirm.dialog.template.html',
-      languageChange: 'modules/core/client/views/templates/language.dialog.template.html',
+      languageChange: 'modules/core/client/views/templates/languages.dialog.template.html',
     };
     this.storages = {
       // Điều kiện search poll tại màn hình admin

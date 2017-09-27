@@ -12,8 +12,8 @@
         <div class="user-avatar pull-left" ng-if="isLogged">
           <a ui-sref="profile.info({userId: user.slug})"><img src="{{user.profileImageURL}}" alt="{{user.displayName}}"></a>
         </div>
-        <textarea ng-is-enter="{{ctrl.enter_send}}" ng-enter="ctrl.handleSaveComment()" focus-me="{{ctrl.cmt_typing}}" class="msd-elastic: \n; reply-input"
-          data-ng-model="ctrl.tmp_cmt.body" placeholder="{{:: 'LB_POLL_CMT_PLACE' | translate }}"></textarea>
+        <textarea id="comment-box" ng-is-enter="{{ctrl.enter_send}}" ng-enter="ctrl.handleSaveComment()" focus-me="{{ctrl.cmt_typing}}" class="msd-elastic: \n; reply-input"
+          data-ng-model="ctrl.tmp_cmt.body" placeholder="{{:: 'LB_POLL_CMT_PLACE' | translate }}" ng-blur="ctrl.cmt_typing = false;"></textarea>
       </div>
       <label class="text-muted"><input type="checkbox" ng-model="ctrl.enter_send"><small>{{:: 'LB_POLL_ENTER_TO_SEND' | translate }}</small></label>
       <span class="pull-right">
@@ -62,9 +62,9 @@
           </a>
           <md-menu-content>
             <ul class="menu-list">
-              <li ng-if="isLogged && cmt.user._id !== user._id"><a ng-click="ctrl.handleReplyComment(cmt)"><i class="fa fa-reply"></i>{{:: 'LB_REPLY' | translate }}</a></li>
-              <li ng-if="cmt.user._id === user._id"><a ng-click="ctrl.handleEditComment(cmt)"><i class="fa fa-pencil-square-o"></i>{{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
-              <li ng-if="cmt.user._id === user._id"><a ng-click="ctrl.handleDeleteComment(cmt)"><i class="fa fa-trash"></i>{{:: 'LB_DELETE' | translate }}</a></li>
+              <li ng-if="isLogged && cmt.user._id !== user._id"><a ng-click="ctrl.handleReplyComment(cmt)"><i class="fa fa-reply"></i> {{:: 'LB_REPLY' | translate }}</a></li>
+              <li ng-if="cmt.user._id === user._id"><a ng-click="ctrl.handleEditComment(cmt)"><i class="fa fa-pencil-square-o"></i> {{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
+              <li ng-if="cmt.user._id === user._id"><a ng-click="ctrl.handleDeleteComment(cmt)"><i class="fa fa-trash"></i> {{:: 'LB_DELETE' | translate }}</a></li>
             </ul>
           </md-menu-content>
         </md-menu>
@@ -72,9 +72,9 @@
       <br>
       <p class="text-justify" ng-bind-html="cmt.body | nl2br"></p>
       <small class="like_tools pull-right">
-        <a ng-click="ctrl.handleLikeComment(cmt, 1)" ng-class="{'text-muted': cmt.like.type !== 1}"><i class="fa fa-thumbs-o-up"></i>{{:: 'LB_LIKE' | translate }}</a>
+        <a ng-click="ctrl.handleLikeComment(cmt, 1)" ng-class="{'text-muted': cmt.like.type !== 1}"><i class="fa fa-thumbs-o-up"></i> {{:: 'LB_LIKE' | translate }}</a>
         <span class="mg5l mg5r highlight-text" ng-bind="cmt.likeCnt | shortNumber"></span>
-        <a ng-click="ctrl.handleLikeComment(cmt, 2)" ng-class="{'text-muted': cmt.like.type !== 1}"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>{{:: 'LB_DISLIKE' | translate }}</a>
+        <a ng-click="ctrl.handleLikeComment(cmt, 2)" ng-class="{'text-muted': cmt.like.type !== 1}"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> {{:: 'LB_DISLIKE' | translate }}</a>
       </small>
       <div class="clearfix"></div>
       <hr class="mg12y">
@@ -149,9 +149,9 @@
           </a>
           <md-menu-content>
             <ul class="menu-list">
-              <li ng-if="isLogged && cmt.user._id !== user._id"><a ng-click="ctrl.handleReplyComment(cmt)"><i class="fa fa-reply"></i>{{:: 'LB_REPLY' | translate }}</a></li>
-              <li ng-if="cmt.user._id === user._id"><a ng-click="ctrl.handleEditComment(cmt)"><i class="fa fa-pencil-square-o"></i>{{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
-              <li ng-if="cmt.user._id === user._id"><a ng-click="ctrl.handleDeleteComment(cmt)"><i class="fa fa-trash"></i>{{:: 'LB_DELETE' | translate }}</a></li>
+              <li ng-if="isLogged && cmt.user._id !== user._id"><a ng-click="ctrl.handleReplyComment(cmt)"><i class="fa fa-reply"></i> {{:: 'LB_REPLY' | translate }}</a></li>
+              <li ng-if="cmt.user._id === user._id"><a ng-click="ctrl.handleEditComment(cmt)"><i class="fa fa-pencil-square-o"></i> {{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
+              <li ng-if="cmt.user._id === user._id"><a ng-click="ctrl.handleDeleteComment(cmt)"><i class="fa fa-trash"></i> {{:: 'LB_DELETE' | translate }}</a></li>
             </ul>
           </md-menu-content>
         </md-menu>

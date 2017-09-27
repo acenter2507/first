@@ -18,7 +18,7 @@
       <label class="text-muted"><input type="checkbox" ng-model="ctrl.enter_send"><small>{{:: 'LB_POLL_ENTER_TO_SEND' | translate }}</small></label>
       <span class="pull-right">
         <a ng-hide="ctrl.enter_send" ng-click="ctrl.handleSaveComment()">{{:: 'LB_SEND' | translate }}</a>
-        <a class="mg20l" ng-click="ctrl.discard_cmt()" ng-if="ctrl.tmp_cmt.discard">{{:: 'LB_DISCARD' | translate }}</a>
+        <a class="mg20l" ng-click="ctrl.handleDiscardComment()" ng-if="ctrl.tmp_cmt.discard">{{:: 'LB_DISCARD' | translate }}</a>
       </span>
       <hr class="mg10t mg10b" />
     </div>
@@ -62,9 +62,9 @@
           </a>
           <md-menu-content>
             <ul class="menu-list">
-              <li ng-if="isLogged && cmt.user._id !== user._id"><a ng-click="ctrl.reply_cmt(cmt)"><i class="fa fa-reply"></i>{{:: 'LB_REPLY' | translate }}</a></li>
-              <li ng-if="cmt.user._id === user._id"><a ng-click="ctrl.edit_cmt(cmt)"><i class="fa fa-pencil-square-o"></i>{{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
-              <li ng-if="cmt.user._id === user._id"><a ng-click="ctrl.delete_cmt(cmt)"><i class="fa fa-trash"></i>{{:: 'LB_DELETE' | translate }}</a></li>
+              <li ng-if="isLogged && cmt.user._id !== user._id"><a ng-click="ctrl.handleReplyComment(cmt)"><i class="fa fa-reply"></i>{{:: 'LB_REPLY' | translate }}</a></li>
+              <li ng-if="cmt.user._id === user._id"><a ng-click="ctrl.handleEditComment(cmt)"><i class="fa fa-pencil-square-o"></i>{{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
+              <li ng-if="cmt.user._id === user._id"><a ng-click="ctrl.handleDeleteComment(cmt)"><i class="fa fa-trash"></i>{{:: 'LB_DELETE' | translate }}</a></li>
             </ul>
           </md-menu-content>
         </md-menu>
@@ -101,13 +101,13 @@
         <div class="user-avatar pull-left" ng-if="isLogged">
           <a ui-sref="profile.info({userId: user.slug})"><img src="{{user.profileImageURL}}" alt="{{user.displayName}}"></a>
         </div>
-        <textarea ng-is-enter="{{ctrl.enter_send}}" ng-enter="ctrl.handleSaveComment()" focus-me="{{ctrl.cmt_typing}}" class="msd-elastic: \n; reply-input"
+        <textarea id="comment-box" ng-is-enter="{{ctrl.enter_send}}" ng-enter="ctrl.handleSaveComment()" focus-me="{{ctrl.cmt_typing}}" class="msd-elastic: \n; reply-input"
           data-ng-model="ctrl.tmp_cmt.body" placeholder="{{:: 'LB_POLL_CMT_PLACE' | translate }}"></textarea>
       </div>
       <label class="text-muted"><input type="checkbox" ng-model="ctrl.enter_send"><small>{{:: 'LB_POLL_ENTER_TO_SEND' | translate }}</small></label>
       <span class="pull-right">
         <a ng-hide="ctrl.enter_send" ng-click="ctrl.handleSaveComment()">{{:: 'LB_SEND' | translate }}</a>
-        <a class="mg20l" ng-click="ctrl.discard_cmt()" ng-if="ctrl.tmp_cmt.discard">{{:: 'LB_DISCARD' | translate }}</a>
+        <a class="mg20l" ng-click="ctrl.handleDiscardComment()" ng-if="ctrl.tmp_cmt.discard">{{:: 'LB_DISCARD' | translate }}</a>
       </span>
       <hr class="mg10t mg10b" />
     </div>
@@ -149,9 +149,9 @@
           </a>
           <md-menu-content>
             <ul class="menu-list">
-              <li ng-if="isLogged && cmt.user._id !== user._id"><a ng-click="ctrl.reply_cmt(cmt)"><i class="fa fa-reply"></i>{{:: 'LB_REPLY' | translate }}</a></li>
-              <li ng-if="cmt.user._id === user._id"><a ng-click="ctrl.edit_cmt(cmt)"><i class="fa fa-pencil-square-o"></i>{{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
-              <li ng-if="cmt.user._id === user._id"><a ng-click="ctrl.delete_cmt(cmt)"><i class="fa fa-trash"></i>{{:: 'LB_DELETE' | translate }}</a></li>
+              <li ng-if="isLogged && cmt.user._id !== user._id"><a ng-click="ctrl.handleReplyComment(cmt)"><i class="fa fa-reply"></i>{{:: 'LB_REPLY' | translate }}</a></li>
+              <li ng-if="cmt.user._id === user._id"><a ng-click="ctrl.handleEditComment(cmt)"><i class="fa fa-pencil-square-o"></i>{{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
+              <li ng-if="cmt.user._id === user._id"><a ng-click="ctrl.handleDeleteComment(cmt)"><i class="fa fa-trash"></i>{{:: 'LB_DELETE' | translate }}</a></li>
             </ul>
           </md-menu-content>
         </md-menu>

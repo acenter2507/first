@@ -6,6 +6,7 @@
 
   PollsController.$inject = [
     '$location',
+    '$anchorScroll',
     '$scope',
     '$state',
     'Socket',
@@ -20,6 +21,7 @@
 
   function PollsController(
     $location,
+    $anchorScroll,
     $scope,
     $state,
     Socket,
@@ -697,7 +699,8 @@
       angular.element('#aside-panel-full-toggle').find('i').toggleClass('r180');
     }
 
-    ctrl.reply_cmt = cmt => {
+    // Thành viên trả lời comment của thành viên khác
+    ctrl.handleReplyComment = cmt => {
       if (!$scope.isLogged) {
         $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;
@@ -706,26 +709,27 @@
         $scope.handleShowMessage('LB_POLLS_REPLY_DELETED_USER', true);
         return;
       }
-      ctrl.tmp_cmt = {};
-      ctrl.tmp_cmt.to = cmt.user;
-      ctrl.tmp_cmt.toName = cmt.user.displayName;
-      ctrl.tmp_cmt.toSlug = cmt.user.slug;
-      ctrl.tmp_cmt.discard = true;
+      ctrl.tmp_cmt = {
+        to: cmt.user,
+        toName: cmt.user.displayName,
+        toSlug: cmt.user.slug,
+        discard: true
+      };
       ctrl.cmt_typing = true;
     };
-
-    ctrl.edit_cmt = cmt => {
+    // Thành viên chọn sửa comment của minh
+    ctrl.handleEditComment = cmt => {
       ctrl.tmp_cmt = _.clone(cmt);
       ctrl.tmp_cmt.discard = true;
       ctrl.cmt_typing = true;
     };
-
-    ctrl.discard_cmt = () => {
+    // Thành viên huỷ bỏ type comment
+    ctrl.handleDiscardComment = () => {
       ctrl.tmp_cmt = {};
       ctrl.cmt_typing = false;
     };
-
-    ctrl.delete_cmt = cmt => {
+    // Xóa comment
+    ctrl.handleDeleteComment = cmt => {
       // Gọi function show dialog từ scope cha
       $scope.handleShowConfirm({
         content: 'LB_POLLS_CONFIRM_DELETE_CMT',
@@ -737,21 +741,23 @@
         Action.delete_cmt(cmt);
       });
     };
-    var cnt = 0;
-    ctrl.focus_cmt = () => {
+    // Bắt đầu nhập comment
+    ctrl.handleStartTypeComment = () => {
       if (!$scope.isLogged) {
         $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;
       }
       ctrl.cmt_typing = true;
+      $location.hash('comment-box');
+      $anchorScroll();
     };
-
-    ctrl.like_cmt = (cmt, type) => {
+    // Thành viên like comment
+    ctrl.handleLikeComment = (cmt, type) => {
       if (!$scope.isLogged) {
         $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;
       }
-      if ($scope.user.user._id === cmt.user._id) {
+      if ($scope.user._id === cmt.user._id) {
         $scope.handleShowMessage('LB_POLLS_LIKE_CMT_OWN', true);
         return;
       }

@@ -44,7 +44,7 @@
   padding-bottom: 8px !important;
 }
 .navbar-default .navbar-toggle {
-  border-color: none;
+  border: none;
 }
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {

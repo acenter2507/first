@@ -408,6 +408,7 @@
           scope: $scope,
           templateUrl: 'modules/core/client/views/templates/share.dialog.template.html'
         }).then(confirm => {
+          delete $scope.message;
         }, reject => {
           delete $scope.message;
         });

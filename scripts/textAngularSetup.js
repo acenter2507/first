@@ -786,7 +786,7 @@ angular.module('textAngularSetup', [])
                     //imageLink = $window.prompt(taTranslations.insertImage.dialogPrompt, 'http://');
                     
                     dialog.openConfirm({
-                        templateUrl: "<p ng-init=\"url = 'https://'\">{{:: 'LANGUAGE' | translate }}<p><input ng-model=\"url\" class=\"form-control\"><br /><button class=\"btn btn-primary pull-right\" ng-click=\"confirm(url)\">{{:: 'LB_INSERT' | translate }}</button>",
+                        templateUrl: "<p ng-init=\"url = 'https://'\">{{:: 'LANGUAGE' | translate }}<p><input ng-model=\"url\" class=\"form-control\"><br /><button class=\"btn btn-primary pull-right\" ng-click=\"confirm(url)\">{{:: 'LB_INSERT' | translate }}</button><div class=\"clearfix\">",
                         plain: true
                     }).then(confirm => {
                         console.log(confirm);

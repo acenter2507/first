@@ -4,7 +4,7 @@
   </div>
   <hr class="mgn">
   <div class="card-body">
-    <a ng-repeat="lang in languages" ng-click="confirm(lang)" ng-class="'mg10l': !$first">{{:: lang | translate }}</a>
+    <a ng-repeat="lang in languages" ng-click="confirm(lang)" ng-class="{'mg10l': !$first}">{{:: lang | translate }}</a>
     <!--<div class="col-sm-12 col-md-4" ng-repeat="lang in languages">
       <a ng-click="confirm(lang)">
         {{ lang | translate }}

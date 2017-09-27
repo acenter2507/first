@@ -57,7 +57,7 @@
       function (taRegisterTool, taToolFunctions, taOptions, ngDialog) {
         taRegisterTool('uploadImage', {
           iconclass: 'fa fa-upload',
-          tooltiptext: 'Upload an image',
+          tooltiptext: '{{:: \'TOOLTIP_UPLOAD_IMG\' | translate }}', //
           onElementSelect: {
             element: 'img',
             action: taToolFunctions.imgOnSelectAction
@@ -72,6 +72,7 @@
               appendClassName: 'images-upload-dialog'
             });
             dialog.closePromise.then(function (data) {
+              if (!data.value || data.value.length === 0) return;
               var paths = data.value || [];
               for (var index = 0; index < paths.length; index++) {
                 var path = paths[index];
@@ -86,7 +87,6 @@
           ['justifyLeft', 'justifyCenter', 'justifyRight', 'indent', 'outdent'],
           ['html', 'insertImage', 'insertLink', 'insertVideo', 'uploadImage']
         ];
-        // taOptions.toolbar[3].push('uploadImage');
         return taOptions;
       }
     ]);

@@ -177,98 +177,95 @@ angular.module('textAngularSetup', [])
         //insertLink: "Please enter a URL to insert",
         //insertVideo: "Please enter a youtube URL to embed",
         html: {
-            tooltip: "{{:: 'LANGUAGE' | translate }}" //Toggle html / Rich Text
+            tooltip: "{{:: 'TOOLTIP_TOGGLE' | translate }}"
         },
         // tooltip for heading - might be worth splitting
         heading: {
-            tooltip: "{{:: 'LANGUAGE' | translate }}" //'Heading '
+            tooltip: "{{:: 'TOOLTIP_HEADING' | translate }}" //'Heading '
         },
         p: {
-            tooltip: "{{:: 'LANGUAGE' | translate }}" //'Paragraph'
+            tooltip: "{{:: 'TOOLTIP_PARA' | translate }}" //'Paragraph'
         },
         pre: {
-            tooltip: "{{:: 'LANGUAGE' | translate }}" //'Preformatted text'
+            tooltip: "{{:: 'TOOLTIP_PRE' | translate }}" //'Preformatted text'
         },
         ul: {
-            tooltip: "{{:: 'LANGUAGE' | translate }}" //'Unordered List'
+            tooltip: "{{:: 'TOOLTIP_UNORDER' | translate }}" //'Unordered List'
         },
         ol: {
-            tooltip: "{{:: 'LANGUAGE' | translate }}" //'Ordered List'
+            tooltip: "{{:: 'TOOLTIP_ORDER' | translate }}" //'Ordered List'
         },
         quote: {
-            tooltip: "{{:: 'LANGUAGE' | translate }}" //'Quote/unquote selection or paragraph'
+            tooltip: "{{:: 'TOOLTIP_QUOTE' | translate }}" //'Quote/unquote selection or paragraph'
         },
         undo: {
-            tooltip: "{{:: 'LANGUAGE' | translate }}" //'Undo'
+            tooltip: "{{:: 'TOOLTIP_UNDO' | translate }}" //'Undo'
         },
         redo: {
-            tooltip: "{{:: 'LANGUAGE' | translate }}" //'Redo'
+            tooltip: "{{:: 'TOOLTIP_REDO' | translate }}" //'Redo'
         },
         bold: {
-            tooltip: "{{:: 'LANGUAGE' | translate }}" //'Bold'
+            tooltip: "{{:: 'TOOLTIP_BOLD' | translate }}" //'Bold'
         },
         italic: {
-            tooltip: "{{:: 'LANGUAGE' | translate }}" //'Italic'
+            tooltip: "{{:: 'TOOLTIP_ITALIC' | translate }}" //'Italic'
         },
         underline: {
-            tooltip: "{{:: 'LANGUAGE' | translate }}" //'Underline'
+            tooltip: "{{:: 'TOOLTIP_UNDER' | translate }}" //'Underline'
         },
         strikeThrough: {
-            tooltip: "{{:: 'LANGUAGE' | translate }}" //'Strikethrough'
+            tooltip: "{{:: 'TOOLTIP_STRIKE' | translate }}" //'Strikethrough'
         },
         justifyLeft: {
-            tooltip: "{{:: 'LANGUAGE' | translate }}" //'Align text left'
+            tooltip: "{{:: 'TOOLTIP_ALEFT' | translate }}" //'Align text left'
         },
         justifyRight: {
-            tooltip: "{{:: 'LANGUAGE' | translate }}" //'Align text right'
+            tooltip: "{{:: 'TOOLTIP_ARIGHT' | translate }}" //'Align text right'
         },
         justifyFull: {
-            tooltip: "{{:: 'LANGUAGE' | translate }}" //'Justify text'
+            tooltip: "{{:: 'TOOLTIP_AJUS' | translate }}" //'Justify text'
         },
         justifyCenter: {
-            tooltip: "{{:: 'LANGUAGE' | translate }}" //'Center'
+            tooltip: "{{:: 'TOOLTIP_CENTER' | translate }}" //'Center'
         },
         indent: {
-            tooltip: "{{:: 'LANGUAGE' | translate }}" //'Increase indent'
+            tooltip: "{{:: 'TOOLTIP_INDENT' | translate }}" //'Increase indent'
         },
         outdent: {
-            tooltip: "{{:: 'LANGUAGE' | translate }}" //'Decrease indent'
+            tooltip: "{{:: 'TOOLTIP_OUTDENT' | translate }}" //'Decrease indent'
         },
         clear: {
-            tooltip: "{{:: 'LANGUAGE' | translate }}" //'Clear formatting'
+            tooltip: "{{:: 'TOOLTIP_FORMAT' | translate }}" //'Clear formatting'
         },
         insertImage: {
-            dialogPrompt: "{{:: 'LANGUAGE' | translate }}", //'Please enter an image URL to insert',
-            tooltip: "{{:: 'LANGUAGE' | translate }}", //'Insert image',
+            tooltip: "{{:: 'TOOLTIP_INSERT_IMG' | translate }}", //'Insert image',
             hotkey: 'the - possibly language dependent hotkey ... for some future implementation'
         },
         insertVideo: {
-            tooltip: "{{:: 'LANGUAGE' | translate }}", //'Insert video',
-            dialogPrompt: "{{:: 'LANGUAGE' | translate }}" //'Please enter a youtube URL to embed'
+            tooltip: "{{:: 'TOOLTIP_INSERT_VIDEO' | translate }}"
         },
         insertLink: {
-            tooltip: "{{:: 'LANGUAGE' | translate }}", //'Insert / edit link',
-            dialogPrompt: "{{:: 'LANGUAGE' | translate }}" //"Please enter a URL to insert"
+            tooltip: "{{:: 'TOOLTIP_INSERT_LINK' | translate }}"
         },
         editLink: {
             reLinkButton: {
-                tooltip: "{{:: 'LANGUAGE' | translate }}" //"Relink"
+                tooltip: "{{:: 'TOOLTIP_EDITLINK' | translate }}"
             },
             unLinkButton: {
-                tooltip: "{{:: 'LANGUAGE' | translate }}" //"Unlink"
+                tooltip: "{{:: 'TOOLTIP_UNLINK' | translate }}"
             },
             targetToggle: {
-                buttontext: "{{:: 'LANGUAGE' | translate }}" //"Open in New Window"
+                buttontext: "{{:: 'TOOLTIP_TARGET' | translate }}"
             }
         },
         wordcount: {
-            tooltip: "{{:: 'LANGUAGE' | translate }}" //'Display words Count'
+            tooltip: "{{:: 'TOOLTIP_WORD' | translate }}"
         },
         charcount: {
-            tooltip: "{{:: 'LANGUAGE' | translate }}" //'Display characters Count'
+            tooltip: "{{:: 'TOOLTIP_CHAR' | translate }}"
         }
     })
-    .factory('taToolFunctions', ['$window', '$translate', 'ngDialog', 'taTranslations', function ($window, $translate, dialog, taTranslations) {
+    .factory('taToolFunctions', ['$window', 'taTranslations', function ($window, taTranslations) {
         return {
             imgOnSelectAction: function (event, $element, editorScope) {
                 // setup the editor toolbar
@@ -398,19 +395,11 @@ angular.module('textAngularSetup', [])
                 var reLinkButton = angular.element('<button type="button" class="btn btn-default btn-sm btn-small" tabindex="-1" unselectable="on" title="' + taTranslations.editLink.reLinkButton.tooltip + '"><i class="fa fa-edit icon-edit"></i></button>');
                 reLinkButton.on('click', function (event) {
                     event.preventDefault();
-                    //var urlLink = $window.prompt(taTranslations.insertLink.dialogPrompt, $element.attr('href'));
-                    var href = $element.attr('href');
-                    dialog.openConfirm({
-                        templateUrl: "<p>{{:: 'LANGUAGE' | translate }}<p><input ng-model=\"url\" class=\"form-control\" value=" + href + "><br /><button class=\"btn btn-primary\" ng-click=\"confirm(url)\"></button>",
-                        plain: true
-                    }).then(confirm => {
-                        console.log(confirm);
-                    }, reject => {
-                    });
-                    // if (urlLink && urlLink !== '' && urlLink !== 'http://') {
-                    //     $element.attr('href', urlLink);
-                    //     editorScope.updateTaBindtaTextElement();
-                    // }
+                    var urlLink = $window.prompt(taTranslations.insertLink.dialogPrompt, $element.attr('href'));
+                    if (urlLink && urlLink !== '' && urlLink !== 'http://') {
+                        $element.attr('href', urlLink);
+                        editorScope.updateTaBindtaTextElement();
+                    }
                     editorScope.hidePopover();
                 });
                 buttonGroup.append(reLinkButton);
@@ -444,8 +433,8 @@ angular.module('textAngularSetup', [])
             }
         };
     }])
-    .run(['taRegisterTool', '$window', 'taTranslations', 'taSelection', 'taToolFunctions', '$sanitize', 'taOptions', '$log', '$translate', 'ngDialog',
-        function (taRegisterTool, $window, taTranslations, taSelection, taToolFunctions, $sanitize, taOptions, $log, $translate, dialog) {
+    .run(['taRegisterTool', '$window', 'taTranslations', 'taSelection', 'taToolFunctions', '$sanitize', 'taOptions', '$log', 'ngDialog',
+        function (taRegisterTool, $window, taTranslations, taSelection, taToolFunctions, $sanitize, taOptions, $log, dialog) {
             // test for the version of $sanitize that is in use
             // You can disable this check by setting taOptions.textAngularSanitize == false
             var gv = {}; $sanitize('', gv);
@@ -784,7 +773,7 @@ angular.module('textAngularSetup', [])
                 action: function () {
                     var imageLink;
                     dialog.openConfirm({
-                        templateUrl: "<p ng-init=\"url = 'https://'\">{{:: 'LANGUAGE' | translate }}<p><input ng-model=\"url\" class=\"form-control\"><br /><button class=\"btn btn-primary pull-right\" ng-click=\"confirm(url)\">{{:: 'LB_INSERT' | translate }}</button><div class=\"clearfix\">",
+                        templateUrl: "<p ng-init=\"url = 'https://'\">{{:: 'MSG_INSERT_IMG' | translate }}<p><input ng-model=\"url\" class=\"form-control\"><br /><button class=\"btn btn-primary pull-right\" ng-click=\"confirm(url)\">{{:: 'LB_INSERT' | translate }}</button><div class=\"clearfix\">",
                         plain: true
                     }).then(confirm => {
                         imageLink = confirm;
@@ -811,7 +800,7 @@ angular.module('textAngularSetup', [])
                 action: function () {
                     var urlPrompt;
                     dialog.openConfirm({
-                        templateUrl: "<p ng-init=\"url = 'https://'\">{{:: 'LANGUAGE' | translate }}<p><input ng-model=\"url\" class=\"form-control\"><br /><button class=\"btn btn-primary pull-right\" ng-click=\"confirm(url)\">{{:: 'LB_INSERT' | translate }}</button><div class=\"clearfix\">",
+                        templateUrl: "<p ng-init=\"url = 'https://'\">{{:: 'MSG_INSERT_VIDEO' | translate }}<p><input ng-model=\"url\" class=\"form-control\"><br /><button class=\"btn btn-primary pull-right\" ng-click=\"confirm(url)\">{{:: 'LB_INSERT' | translate }}</button><div class=\"clearfix\">",
                         plain: true
                     }).then(confirm => {
                         imageLink = confirm;
@@ -828,36 +817,6 @@ angular.module('textAngularSetup', [])
                             return this.$editor().wrapSelection('insertHTML', embed, true);
                         }
                     });
-                    // urlPrompt = $window.prompt(taTranslations.insertVideo.dialogPrompt, 'https://');
-                    // // block javascript here
-                    // /* istanbul ignore else: if it's javascript don't worry - though probably should show some kind of error message */
-                    // if (!blockJavascript(urlPrompt)) {
-
-                    //     if (urlPrompt && urlPrompt !== '' && urlPrompt !== 'https://') {
-
-                    //         videoId = taToolFunctions.extractYoutubeVideoId(urlPrompt);
-
-                    //         /* istanbul ignore else: if it's invalid don't worry - though probably should show some kind of error message */
-                    //         if (videoId) {
-                    //             // create the embed link
-                    //             var urlLink = "https://www.youtube.com/embed/" + videoId;
-                    //             // create the HTML
-                    //             // for all options see: http://stackoverflow.com/questions/2068344/how-do-i-get-a-youtube-video-thumbnail-from-the-youtube-api
-                    //             // maxresdefault.jpg seems to be undefined on some.
-                    //             var embed = '<img class="ta-insert-video" src="https://img.youtube.com/vi/' + videoId + '/hqdefault.jpg" ta-insert-video="' + urlLink + '" contenteditable="false" allowfullscreen="true" frameborder="0" />';
-                    //             /* istanbul ignore next: don't know how to test this... since it needs a dialogPrompt */
-                    //             var tagName = taSelection.getSelectionElement().tagName;
-                    //             if (tagName && tagName !== null && tagName.toLowerCase() === 'a') {
-                    //                 // due to differences in implementation between FireFox and Chrome, we must move the
-                    //                 // insertion point past the <a> element, otherwise FireFox inserts inside the <a>
-                    //                 // With this change, both FireFox and Chrome behave the same way!
-                    //                 taSelection.setSelectionAfterElement(taSelection.getSelectionElement());
-                    //             }
-                    //             // insert
-                    //             return this.$editor().wrapSelection('insertHTML', embed, true);
-                    //         }
-                    //     }
-                    // }
                 },
                 onElementSelect: {
                     element: 'img',
@@ -877,7 +836,7 @@ angular.module('textAngularSetup', [])
                         urlLink = 'https://';
                     }
                     dialog.openConfirm({
-                        templateUrl: "<p ng-init=\"url = '" + urlLink + "'\">{{:: 'LANGUAGE' | translate }}<p><input ng-model=\"url\" class=\"form-control\"><br /><button class=\"btn btn-primary pull-right\" ng-click=\"confirm(url)\">{{:: 'LB_INSERT' | translate }}</button><div class=\"clearfix\">",
+                        templateUrl: "<p ng-init=\"url = '" + urlLink + "'\">{{:: 'MSG_INSERT_LINK' | translate }}<p><input ng-model=\"url\" class=\"form-control\"><br /><button class=\"btn btn-primary pull-right\" ng-click=\"confirm(url)\">{{:: 'LB_INSERT' | translate }}</button><div class=\"clearfix\">",
                         plain: true
                     }).then(confirm => {
                         urlLink = confirm;
@@ -886,21 +845,6 @@ angular.module('textAngularSetup', [])
                             return this.$editor().wrapSelection('createLink', urlLink, true);
                         }
                     });
-
-                    // if this link has already been set, we need to just edit the existing link
-                    /* istanbul ignore if: we do not test this */
-                    // if (taSelection.getSelectionElement().tagName && taSelection.getSelectionElement().tagName.toLowerCase() === 'a') {
-                    //     urlLink = $window.prompt(taTranslations.insertLink.dialogPrompt, taSelection.getSelectionElement().href);
-                    // } else {
-                    //     urlLink = $window.prompt(taTranslations.insertLink.dialogPrompt, 'http://');
-                    // }
-                    // if (urlLink && urlLink !== '' && urlLink !== 'http://') {
-                    //     // block javascript here
-                    //     /* istanbul ignore else: if it's javascript don't worry - though probably should show some kind of error message */
-                    //     if (!blockJavascript(urlLink)) {
-                    //         return this.$editor().wrapSelection('createLink', urlLink, true);
-                    //     }
-                    // }
                 },
                 activeState: function (commonElement) {
                     if (commonElement) return commonElement[0].tagName === 'A';

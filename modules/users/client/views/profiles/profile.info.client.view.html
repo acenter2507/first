@@ -40,7 +40,7 @@
           <a ui-sref="polls.view({ pollId: activity.slug })">{{:: activity.title }}</a>
         </h3>
         <!-- Poll -->
-        <div ng-if="activity.type === 1" class="text-body" ta-bind="text" ng-model="activity.body" ta-readonly="true"></div>
+        <div ng-if="activity.type === 1" ta-bind="text" ng-model="activity.body" ta-readonly="true"></div>
         <!-- Comment -->
         <p ng-if="activity.type === 2" class="text-justify" ng-bind-html="activity.body | nl2br"></p>
         <!-- Vote -->

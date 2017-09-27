@@ -810,6 +810,9 @@ a {
   display: none; }
   .ta-toolbar.focussed {
     display: block; }*/
+  .placeholder-text {
+    color: #ddd;
+  }
 
 .my-md-select md-select-menu {
   margin-top: 3rem; }

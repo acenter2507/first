@@ -95,15 +95,15 @@ angular.module('core').controller('WebAppController', [
 
     // Thay đổi ngôn ngữ
     $scope.handleChangeLanguage = lang => {
-      $scope.supportLanguages = $window.supportLanguages;
+      $scope.languages = $window.supportLanguages;
       dialog.openConfirm({
         scope: $scope,
         templateUrl: Constants.templateUrls.languageChange
       }).then(confirm => {
-        delete $scope.confirmDialog;
+        delete $scope.languages;
         console.log(confirm);
       }, reject => {
-        delete $scope.confirmDialog;
+        delete $scope.languages;
       });
       // if (lang === $translate.use()) return;
       // $translate(['MS_USERS_LANG_CONFIRM', lang]).then(tsl => {

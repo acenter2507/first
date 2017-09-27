@@ -142,8 +142,11 @@
   </ul>
 
   <!-- Languages -->
-   <ul class="nav navbar-nav navbar-right d-sm-down-none">
-    <li class="dropdown" uib-dropdown>
+  <ul class="nav navbar-nav navbar-right d-sm-down-none">
+    <li ui-sref-active="active">
+      <a ng-click="handleChangeLanguage()">{{language}}</a>
+    </li>
+    <!--<li class="dropdown" uib-dropdown>
       <md-tooltip md-direction="bottom">{{ 'LANGUAGE' | translate }}</md-tooltip>
       <a href="#" class="dropdown-toggle text-uppercase" role="button" uib-dropdown-toggle>{{language}}</a>
       <ul class="dropdown-menu" role="menu">
@@ -151,8 +154,8 @@
           <a ng-disabled="lang === language" ng-click="handleChangeLanguage(lang)">{{ lang | translate }}</a>
         </li>
       </ul>
-    </li>
-  </ul> 
+    </li>-->
+  </ul>
 
   <div class="clearfix"></div>
 </div>

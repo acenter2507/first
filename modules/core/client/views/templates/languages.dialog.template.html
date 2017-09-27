@@ -1,0 +1,14 @@
+<div class="card mgn">
+  <div class="card-header">
+    <strong class="card-title">{{:: 'LB_LANGUAGE_SELECT' | translate }}</strong>
+  </div>
+  <hr class="mgn">
+  <div class="card-body">
+    <div class="col-sm-12 col-md-4" ng-repeat="lang in supportLanguages">
+      <a ng-click="confirm(lang)">
+        <img src="modules/core/client/img/flags/{{lang}}.png">
+        {{ lang | translate }}
+      </a>
+    </div>
+  </div>
+</div>

@@ -95,29 +95,41 @@ angular.module('core').controller('WebAppController', [
 
     // Thay đổi ngôn ngữ
     $scope.handleChangeLanguage = lang => {
-      if (lang === $translate.use()) return;
-      $translate(['MS_USERS_LANG_CONFIRM', lang]).then(tsl => {
-        var content = tsl.MS_USERS_LANG_CONFIRM + tsl[lang];
-        $scope.handleShowConfirm({
-          content: content,
-          type: 1,
-          button: 'LB_CHANGE'
-        }, confirm => {
-          handleSaveLanguage();
-        });
+      $scope.confirmDialog = {
+        supportLanguages: $window.supportLanguages
+      };
+      dialog.openConfirm({
+        scope: $scope,
+        templateUrl: Constants.templateUrls.languageChange
+      }).then(confirm => {
+        delete $scope.confirmDialog;
+        console.log(confirm);
+      }, reject => {
+        delete $scope.confirmDialog;
       });
-      function handleSaveLanguage() {
-        if ($scope.isLogged) {
-          $http.post('/api/users/language', { language: lang }).success(function (response) {
-            window.location.reload();
-          }).error(function (err) {
-            $scope.handleShowMessage(err.message, true);
-          });
-        } else {
-          Storages.set_local(Constants.storages.language, lang);
-          window.location.reload();
-        }
-      }
+      // if (lang === $translate.use()) return;
+      // $translate(['MS_USERS_LANG_CONFIRM', lang]).then(tsl => {
+      //   var content = tsl.MS_USERS_LANG_CONFIRM + tsl[lang];
+      //   $scope.handleShowConfirm({
+      //     content: content,
+      //     type: 1,
+      //     button: 'LB_CHANGE'
+      //   }, confirm => {
+      //     handleSaveLanguage();
+      //   });
+      // });
+      // function handleSaveLanguage() {
+      //   if ($scope.isLogged) {
+      //     $http.post('/api/users/language', { language: lang }).success(function (response) {
+      //       window.location.reload();
+      //     }).error(function (err) {
+      //       $scope.handleShowMessage(err.message, true);
+      //     });
+      //   } else {
+      //     Storages.set_local(Constants.storages.language, lang);
+      //     window.location.reload();
+      //   }
+      // }
     };
 
     /**

@@ -322,7 +322,7 @@
         text-decoration: none; }
   .custom-panel.public .panel-heading {
     color: #fff !important;
-    background-color: #267ED5 !important;
+    background-color: #0084ff !important;
   }
   .custom-panel.watting .panel-heading {
     color: #555 !important;
@@ -454,7 +454,7 @@ div.materialpicker-white.selected {
 .menu-list li a:hover {
   text-decoration: none;
   cursor: pointer;
-  color: #267ED5;
+  color: #0084ff;
 }
 
 .menu-list li a:focus {

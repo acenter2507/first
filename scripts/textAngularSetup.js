@@ -783,39 +783,22 @@ angular.module('textAngularSetup', [])
                 tooltiptext: taTranslations.insertImage.tooltip,
                 action: function () {
                     var imageLink;
-                    //imageLink = $window.prompt(taTranslations.insertImage.dialogPrompt, 'http://');
-                    
                     dialog.openConfirm({
                         templateUrl: "<p ng-init=\"url = 'https://'\">{{:: 'LANGUAGE' | translate }}<p><input ng-model=\"url\" class=\"form-control\"><br /><button class=\"btn btn-primary pull-right\" ng-click=\"confirm(url)\">{{:: 'LB_INSERT' | translate }}</button><div class=\"clearfix\">",
                         plain: true
                     }).then(confirm => {
-                        console.log(confirm);
                         imageLink = confirm;
-                    }, reject => {
-                    });
-
-                    if (imageLink && imageLink !== '' && imageLink !== 'http://') {
-                        /* istanbul ignore next: don't know how to test this... since it needs a dialogPrompt */
-                        // block javascript here
-                        if (!blockJavascript(imageLink)) {
-                            if (taSelection.getSelectionElement().tagName && taSelection.getSelectionElement().tagName.toLowerCase() === 'a') {
-                                // due to differences in implementation between FireFox and Chrome, we must move the
-                                // insertion point past the <a> element, otherwise FireFox inserts inside the <a>
-                                // With this change, both FireFox and Chrome behave the same way!
-                                taSelection.setSelectionAfterElement(taSelection.getSelectionElement());
+                        if (imageLink && imageLink !== '' && imageLink !== 'https://') {
+                            if (!blockJavascript(imageLink)) {
+                                var tagName = taSelection.getSelectionElement().tagName;
+                                if (tagName && tagName.toLowerCase() === 'a') {
+                                    taSelection.setSelectionAfterElement(taSelection.getSelectionElement());
+                                }
+                                var embed = '<img src="' + imageLink + '">';
+                                return this.$editor().wrapSelection('insertHTML', embed, true);
                             }
-                            // In the past we used the simple statement:
-                            //return this.$editor().wrapSelection('insertImage', imageLink, true);
-                            //
-                            // However on Firefox only, when the content is empty this is a problem
-                            // See Issue #1201
-                            // Investigation reveals that Firefox only inserts a <p> only!!!!
-                            // So now we use insertHTML here and all is fine.
-                            // NOTE: this is what 'insertImage' is supposed to do anyway!
-                            var embed = '<img src="' + imageLink + '">';
-                            return this.$editor().wrapSelection('insertHTML', embed, true);
                         }
-                    }
+                    });
                 },
                 onElementSelect: {
                     element: 'img',
@@ -827,36 +810,54 @@ angular.module('textAngularSetup', [])
                 tooltiptext: taTranslations.insertVideo.tooltip,
                 action: function () {
                     var urlPrompt;
-                    urlPrompt = $window.prompt(taTranslations.insertVideo.dialogPrompt, 'https://');
-                    // block javascript here
-                    /* istanbul ignore else: if it's javascript don't worry - though probably should show some kind of error message */
-                    if (!blockJavascript(urlPrompt)) {
-
+                    dialog.openConfirm({
+                        templateUrl: "<p ng-init=\"url = 'https://'\">{{:: 'LANGUAGE' | translate }}<p><input ng-model=\"url\" class=\"form-control\"><br /><button class=\"btn btn-primary pull-right\" ng-click=\"confirm(url)\">{{:: 'LB_INSERT' | translate }}</button><div class=\"clearfix\">",
+                        plain: true
+                    }).then(confirm => {
+                        imageLink = confirm;
                         if (urlPrompt && urlPrompt !== '' && urlPrompt !== 'https://') {
-
+                            if (blockJavascript(urlPrompt)) return;
                             videoId = taToolFunctions.extractYoutubeVideoId(urlPrompt);
-
-                            /* istanbul ignore else: if it's invalid don't worry - though probably should show some kind of error message */
-                            if (videoId) {
-                                // create the embed link
-                                var urlLink = "https://www.youtube.com/embed/" + videoId;
-                                // create the HTML
-                                // for all options see: http://stackoverflow.com/questions/2068344/how-do-i-get-a-youtube-video-thumbnail-from-the-youtube-api
-                                // maxresdefault.jpg seems to be undefined on some.
-                                var embed = '<img class="ta-insert-video" src="https://img.youtube.com/vi/' + videoId + '/hqdefault.jpg" ta-insert-video="' + urlLink + '" contenteditable="false" allowfullscreen="true" frameborder="0" />';
-                                /* istanbul ignore next: don't know how to test this... since it needs a dialogPrompt */
-                                var tagName = taSelection.getSelectionElement().tagName;
-                                if (tagName && tagName !== null && tagName.toLowerCase() === 'a') {
-                                    // due to differences in implementation between FireFox and Chrome, we must move the
-                                    // insertion point past the <a> element, otherwise FireFox inserts inside the <a>
-                                    // With this change, both FireFox and Chrome behave the same way!
-                                    taSelection.setSelectionAfterElement(taSelection.getSelectionElement());
-                                }
-                                // insert
-                                return this.$editor().wrapSelection('insertHTML', embed, true);
+                            if (!videoId) return;
+                            var urlLink = "https://www.youtube.com/embed/" + videoId;
+                            var embed = '<img class="ta-insert-video" src="https://img.youtube.com/vi/' + videoId + '/hqdefault.jpg" ta-insert-video="' + urlLink + '" contenteditable="false" allowfullscreen="true" frameborder="0" />';
+                            var tagName = taSelection.getSelectionElement().tagName;
+                            if (tagName && tagName !== null && tagName.toLowerCase() === 'a') {
+                                taSelection.setSelectionAfterElement(taSelection.getSelectionElement());
                             }
+                            return this.$editor().wrapSelection('insertHTML', embed, true);
                         }
-                    }
+                    });
+                    // urlPrompt = $window.prompt(taTranslations.insertVideo.dialogPrompt, 'https://');
+                    // // block javascript here
+                    // /* istanbul ignore else: if it's javascript don't worry - though probably should show some kind of error message */
+                    // if (!blockJavascript(urlPrompt)) {
+
+                    //     if (urlPrompt && urlPrompt !== '' && urlPrompt !== 'https://') {
+
+                    //         videoId = taToolFunctions.extractYoutubeVideoId(urlPrompt);
+
+                    //         /* istanbul ignore else: if it's invalid don't worry - though probably should show some kind of error message */
+                    //         if (videoId) {
+                    //             // create the embed link
+                    //             var urlLink = "https://www.youtube.com/embed/" + videoId;
+                    //             // create the HTML
+                    //             // for all options see: http://stackoverflow.com/questions/2068344/how-do-i-get-a-youtube-video-thumbnail-from-the-youtube-api
+                    //             // maxresdefault.jpg seems to be undefined on some.
+                    //             var embed = '<img class="ta-insert-video" src="https://img.youtube.com/vi/' + videoId + '/hqdefault.jpg" ta-insert-video="' + urlLink + '" contenteditable="false" allowfullscreen="true" frameborder="0" />';
+                    //             /* istanbul ignore next: don't know how to test this... since it needs a dialogPrompt */
+                    //             var tagName = taSelection.getSelectionElement().tagName;
+                    //             if (tagName && tagName !== null && tagName.toLowerCase() === 'a') {
+                    //                 // due to differences in implementation between FireFox and Chrome, we must move the
+                    //                 // insertion point past the <a> element, otherwise FireFox inserts inside the <a>
+                    //                 // With this change, both FireFox and Chrome behave the same way!
+                    //                 taSelection.setSelectionAfterElement(taSelection.getSelectionElement());
+                    //             }
+                    //             // insert
+                    //             return this.$editor().wrapSelection('insertHTML', embed, true);
+                    //         }
+                    //     }
+                    // }
                 },
                 onElementSelect: {
                     element: 'img',
@@ -869,20 +870,37 @@ angular.module('textAngularSetup', [])
                 iconclass: 'fa fa-link',
                 action: function () {
                     var urlLink;
-                    // if this link has already been set, we need to just edit the existing link
-                    /* istanbul ignore if: we do not test this */
-                    if (taSelection.getSelectionElement().tagName && taSelection.getSelectionElement().tagName.toLowerCase() === 'a') {
-                        urlLink = $window.prompt(taTranslations.insertLink.dialogPrompt, taSelection.getSelectionElement().href);
+                    var tagName = taSelection.getSelectionElement().tagName;
+                    if (tagName && tagName.toLowerCase() === 'a') {
+                        urlLink = taSelection.getSelectionElement().href;
                     } else {
-                        urlLink = $window.prompt(taTranslations.insertLink.dialogPrompt, 'http://');
+                        urlLink = 'https://';
                     }
-                    if (urlLink && urlLink !== '' && urlLink !== 'http://') {
-                        // block javascript here
-                        /* istanbul ignore else: if it's javascript don't worry - though probably should show some kind of error message */
-                        if (!blockJavascript(urlLink)) {
+                    dialog.openConfirm({
+                        templateUrl: "<p ng-init=\"url = '" + urlLink + "'\">{{:: 'LANGUAGE' | translate }}<p><input ng-model=\"url\" class=\"form-control\"><br /><button class=\"btn btn-primary pull-right\" ng-click=\"confirm(url)\">{{:: 'LB_INSERT' | translate }}</button><div class=\"clearfix\">",
+                        plain: true
+                    }).then(confirm => {
+                        urlLink = confirm;
+                        if (urlLink && urlLink !== '' && urlLink !== 'https://') {
+                            if (blockJavascript(urlLink)) return;
                             return this.$editor().wrapSelection('createLink', urlLink, true);
                         }
-                    }
+                    });
+
+                    // if this link has already been set, we need to just edit the existing link
+                    /* istanbul ignore if: we do not test this */
+                    // if (taSelection.getSelectionElement().tagName && taSelection.getSelectionElement().tagName.toLowerCase() === 'a') {
+                    //     urlLink = $window.prompt(taTranslations.insertLink.dialogPrompt, taSelection.getSelectionElement().href);
+                    // } else {
+                    //     urlLink = $window.prompt(taTranslations.insertLink.dialogPrompt, 'http://');
+                    // }
+                    // if (urlLink && urlLink !== '' && urlLink !== 'http://') {
+                    //     // block javascript here
+                    //     /* istanbul ignore else: if it's javascript don't worry - though probably should show some kind of error message */
+                    //     if (!blockJavascript(urlLink)) {
+                    //         return this.$editor().wrapSelection('createLink', urlLink, true);
+                    //     }
+                    // }
                 },
                 activeState: function (commonElement) {
                     if (commonElement) return commonElement[0].tagName === 'A';

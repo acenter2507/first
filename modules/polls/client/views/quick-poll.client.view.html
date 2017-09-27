@@ -28,6 +28,9 @@
   <hr class="mgn">
   <div class="card-body mgnb">
     <form name="ctrl.form.pollForm" ng-submit="ctrl.save(ctrl.form.pollForm.$valid)" novalidate autocomplete="off">
+      <div class="form-group mg6b">
+        <p class="font-sm text-danger mgnb" ng-bind="ctrl.message"></p>
+      </div>
       <div class="form-group mg6b" show-errors>
         <select tabindex="1" name="category" class="form-control" ng-model="ctrl.poll.category" required>
           <option ng-repeat="ctgr in ctrl.categorys" value="{{ctgr._id}}">{{ctgr.name}}</option>
@@ -46,11 +49,11 @@
       </div>
       <!-- Body -->
       <div class="form-group mg6b" show-errors>
-        <text-angular ta-toolbar="''" tabIndex="3" name="body" ng-model="ctrl.poll.body" placeholder="{{:: 'LB_QUICK_BODY_PLACE' | translate }}" required ta-text-editor-class="form-control quick-body"
-          ta-html-editor-class="form-control quick-body"></text-angular>
-          <div ng-messages="ctrl.form.pollForm.body.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">{{:: 'LB_QUICK_BODY_REQUIRE' | translate }}</p>
-          </div>
+        <text-angular ta-toolbar="''" tabIndex="3" name="body" ng-model="ctrl.poll.body" placeholder="{{:: 'LB_QUICK_BODY_PLACE' | translate }}"
+          required ta-text-editor-class="form-control quick-body" ta-html-editor-class="form-control quick-body"></text-angular>
+        <div ng-messages="ctrl.form.pollForm.body.$error" role="alert">
+          <p class="help-block error-text font-sm" ng-message="required">{{:: 'LB_QUICK_BODY_REQUIRE' | translate }}</p>
+        </div>
       </div>
       <div class="form-group mg6b">
         <table class="w100p">
@@ -75,12 +78,9 @@
           </tr>
         </table>
       </div>
-      <div class="form-group mg6b">
+      <div class="form-group mgnb">
         <a ng-click="ctrl.add()" class="pull-right font-lg"><i class="icon-plus"></i></a>
         <div class="clearfix"></div>
-      </div>
-      <div class="form-group mgnb">
-        <p class="font-sm text-danger mgnb" ng-bind="ctrl.message"></p>
       </div>
     </form>
   </div>

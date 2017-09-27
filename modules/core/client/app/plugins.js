@@ -72,10 +72,12 @@
               appendClassName: 'images-upload-dialog'
             });
             dialog.closePromise.then(function (data) {
+                console.log(data);
               if (!data.value || data.value.length === 0) return;
               var paths = data.value || [];
               for (var index = 0; index < paths.length; index++) {
                 var path = paths[index];
+                console.log(path);
                 $editor().wrapSelection('insertHtml', '<img src="' + path + '"><div><br/></div>', true);
               }
             });

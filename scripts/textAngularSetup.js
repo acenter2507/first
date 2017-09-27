@@ -245,24 +245,24 @@ angular.module('textAngularSetup', [])
             tooltip: "{{:: 'TOOLTIP_INSERT_VIDEO' | translate }}"
         },
         insertLink: {
-            tooltip: "{{:: 'TOOLTIP_INSERT_LINK' | translate }}"
+            tooltip: "{{:: 'TOOLTIP_INSERT_LINK' | translate }}", //'Insert / edit link',
         },
         editLink: {
             reLinkButton: {
-                tooltip: "{{:: 'TOOLTIP_EDITLINK' | translate }}"
+                tooltip: "{{:: 'TOOLTIP_EDITLINK' | translate }}" //"Relink"
             },
             unLinkButton: {
-                tooltip: "{{:: 'TOOLTIP_UNLINK' | translate }}"
+                tooltip: "{{:: 'TOOLTIP_UNLINK' | translate }}" //"Unlink"
             },
             targetToggle: {
-                buttontext: "{{:: 'TOOLTIP_TARGET' | translate }}"
+                buttontext: "{{:: 'TOOLTIP_TARGET' | translate }}" //"Open in New Window"
             }
         },
         wordcount: {
-            tooltip: "{{:: 'TOOLTIP_WORD' | translate }}"
+            tooltip: "{{:: 'TOOLTIP_WORD' | translate }}" //'Display words Count'
         },
         charcount: {
-            tooltip: "{{:: 'TOOLTIP_CHAR' | translate }}"
+            tooltip: "{{:: 'TOOLTIP_CHAR' | translate }}" //'Display characters Count'
         }
     })
     .factory('taToolFunctions', ['$window', 'taTranslations', function ($window, taTranslations) {

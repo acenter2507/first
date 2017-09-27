@@ -16,7 +16,7 @@
     <ul class="nav">
       <li class="nav-title" ng-show="isLogged">{{ 'LANGUAGE' | translate }}</li>
       <li class="nav-item">
-        <a class="nav-link" ui-sref="notifs.list">
+        <a class="nav-link" ng-click="handleChangeLanguage()">
           <img style="width: 18px; height: 18px;" ng-src="{{'modules/core/client/img/flags/' + language + '.png'}}">
           {{ language | translate }}
         </a>

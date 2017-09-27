@@ -83,10 +83,10 @@
   display: inline-block;
   width: 130px;
   height: 50px;
-  padding: 0.5rem;
+  /*padding: 0.2rem;*/
   background-repeat: no-repeat;
-  background-position: 5px center;
-  background-size: 120px auto;
+  background-position: center;
+  background-size: 130px auto;
 }
 
 .navbar .navbar-nav .dropdown .dropdown-menu {

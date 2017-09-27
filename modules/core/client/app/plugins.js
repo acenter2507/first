@@ -72,8 +72,7 @@
               appendClassName: 'images-upload-dialog'
             });
             dialog.closePromise.then(function (data) {
-                console.log(data);
-              if (!data.value || data.value.length === 0) return;
+              if (!data.value || data.value.length === 0 || typeof data.value === 'String') return;
               var paths = data.value || [];
               for (var index = 0; index < paths.length; index++) {
                 var path = paths[index];

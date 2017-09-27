@@ -107,5 +107,5 @@
     height: inherit; }
   .navbar .navbar-brand {
     background-position: center;
-    /*width: 100% !important;*/
-    /*margin: 0 auto !important;*/ } }
+    width: 100% !important;
+    margin: 0 auto !important; } }

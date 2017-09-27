@@ -142,8 +142,8 @@
   </ul>
 
   <!-- Languages -->
-  <ul class="nav navbar-nav navbar-right">
-    <li ui-sref-active="active">
+  <ul class="nav navbar-nav navbar-right d-sm-down-none">
+    <li ui-sref-active="active" tooltip-placement="bottom" uib-tooltip="{{:: language | translate }}">
       <a ng-click="handleChangeLanguage()">
         <img style="width: 18px; height: 18px;" ng-src="{{'modules/core/client/img/flags/' + language + '.png'}}">
       </a>

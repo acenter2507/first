@@ -29,10 +29,9 @@
             <strong>{{:: notif.poll.title}}</strong>
           </div>
           <div class="col-xs-3 pdn">
-            <div class="pull-right">
+            <div class="pull-right" tooltip-placement="bottom" uib-tooltip="{{ notif.status === 0 ? 'LB_NOFT_READ' : 'LB_NOFT_UNREAD' | translate }}">
               <span class="fa notif-read-toggle" ng-class="{'fa-circle-o': notif.status === 0, 'fa-dot-circle-o': notif.status === 1}"
                 ng-click="vm.mark_read(notif); $event.stopPropagation();">
-                <md-tooltip md-direction="bottom">{{ notif.status === 0 ? 'Mark as Read' : 'Mark as Unread' }}</md-tooltip>
               </span>
             </div>
 

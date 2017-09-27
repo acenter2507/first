@@ -170,16 +170,12 @@
               <td>
                 <div class="btn-group" role="group">
                   <a ui-sref="admin.users.view({ userId: user._id })"><i class="icon-eye icons"></i>
-                    <md-tooltip md-direction="bottom">View detail of user</md-tooltip>
                   </a>
                   <a class="mg5l" ui-sref="admin.users.edit({ userId: user._id })"><i class="icon-note icons"></i>
-                    <md-tooltip md-direction="bottom">Edit info of user</md-tooltip>
                   </a>
                   <a class="mg5l" ng-click="remove(user)"><i class="icon-trash icons"></i>
-                    <md-tooltip md-direction="bottom">Delete user</md-tooltip>
                   </a>
                   <a ng-if="user.provider === 'local'" class="mg5l" ui-sref="admin.users.resetpass({ userId: user._id })"><i class="icon-refresh icons"></i>
-                    <md-tooltip md-direction="bottom">Reset password of user</md-tooltip>
                   </a>
                 </div>
               </td>

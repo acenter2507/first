@@ -257,16 +257,12 @@
               <td>
                 <div class="btn-group" role="group">
                   <a ui-sref="admin.polls.view({ pollId: poll._id })"><i class="icon-eye icons"></i>
-                    <md-tooltip md-direction="bottom">View detail of poll</md-tooltip>
                   </a>
                   <a class="mg5l" ui-sref="polls.edit({ pollId: poll._id })"><i class="icon-note icons"></i>
-                    <md-tooltip md-direction="bottom">Edit info of poll on public</md-tooltip>
                   </a>
                   <a class="mg5l" ui-sref="polls.view({ pollId: poll.slug })"><i class="icon-login icons"></i>
-                    <md-tooltip md-direction="bottom">View detail of poll on public</md-tooltip>
                   </a>
                   <a class="mg5l" ng-click="remove(poll)"><i class="icon-trash icons"></i>
-                    <md-tooltip md-direction="bottom">Delete user</md-tooltip>
                   </a>
                 </div>
               </td>

@@ -77,6 +77,8 @@
   "LB_NOFT": "Notifications",
   "LB_NOFT_MARKALL": "Mark all notifications read",
   "LB_NOFT_VIEWALL": "View all notifications",
+  "LB_NOFT_READ": "Mark as Read",
+  "LB_NOFT_UNREAD": "Mark as Unread",
   "LB_NOFT_EMPTY": "You have no notifications.",
   "LB_CM_SEEALL": "See all",
   "LB_CM_VIEWALL": "View all",

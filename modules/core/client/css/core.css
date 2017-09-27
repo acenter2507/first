@@ -811,7 +811,7 @@ a {
   .ta-toolbar.focussed {
     display: block; }*/
   .placeholder-text {
-    color: #ccc;
+    color: #999;
   }
 
 .my-md-select md-select-menu {

@@ -44,9 +44,9 @@
         </p>
       </div>
       <div class="poll-info-secure">
-        <span ng-if="!poll.isPublic" class="fa fa-lock"><md-tooltip md-direction="bottom">{{:: 'LB_POLLS_SECURE_PRIVATE' | translate }}</md-tooltip></span>
-        <span ng-if="poll.isPublic && poll.allow_guest" class="fa fa-globe"><md-tooltip md-direction="bottom">{{:: 'LB_POLLS_SECURE_PUBLIC' | translate }}</md-tooltip></span>
-        <span ng-if="poll.isPublic && !poll.allow_guest" class="fa fa-users"><md-tooltip md-direction="bottom">{{:: 'LB_POLLS_SECURE_ONLYUSER' | translate }}</md-tooltip></span>
+        <span ng-if="!poll.isPublic" class="fa fa-lock" tooltip-placement="bottom" uib-tooltip="{{:: 'LB_POLLS_SECURE_PRIVATE' | translate }}"></span>
+        <span ng-if="poll.isPublic && poll.allow_guest" class="fa fa-globe" tooltip-placement="bottom" uib-tooltip="{{:: 'LB_POLLS_SECURE_PUBLIC' | translate }}"></span>
+        <span ng-if="poll.isPublic && !poll.allow_guest" class="fa fa-users" tooltip-placement="bottom" uib-tooltip="{{:: 'LB_POLLS_SECURE_ONLYUSER' | translate }}"></span>
         <a ui-sref="categorys.polls({ categoryId: poll.category.slug })">{{ poll.category.name }}</a>
       </div>
     </div>
@@ -111,21 +111,17 @@
   <hr class="mg5y">
 
   <div class="poll-footer">
-    <div class="poll_item_info">
+    <div class="poll_item_info" tooltip-placement="bottom" uib-tooltip="{{:: 'LB_POLLS_LIKES' | translate }}">
       <i class="fa fa-thumbs-o-up"></i> {{ poll.likeCnt | shortNumber}}
-      <md-tooltip md-direction="bottom">{{:: 'LB_POLLS_LIKES' | translate }}</md-tooltip>
     </div>
-    <div class="poll_item_info">
+    <div class="poll_item_info" tooltip-placement="bottom" uib-tooltip="{{:: 'LB_POLLS_VOTES' | translate }}">
       <i class="fa fa-heart-o"></i> {{ poll.voteCnt | shortNumber}}
-      <md-tooltip md-direction="bottom">{{:: 'LB_POLLS_VOTES' | translate }}</md-tooltip>
     </div>
-    <div class="poll_item_info">
+    <div class="poll_item_info" tooltip-placement="bottom" uib-tooltip="{{:: 'LB_POLLS_VIEWS' | translate }}">
       <i class="fa fa-eye"></i> {{ poll.viewCnt | shortNumber}}
-      <md-tooltip md-direction="bottom">{{:: 'LB_POLLS_VIEWS' | translate }}</md-tooltip>
     </div>
-    <div class="poll_item_info">
+    <div class="poll_item_info" tooltip-placement="bottom" uib-tooltip="{{:: 'LB_POLLS_COMMENTS' | translate }}">
       <i class="fa fa-commenting-o"></i> {{ poll.cmtCnt | shortNumber}}
-      <md-tooltip md-direction="bottom">{{:: 'LB_POLLS_COMMENTS' | translate }}</md-tooltip>
     </div>
     <div class="poll_item_info share">
       <md-menu md-position-mode="target-right target">

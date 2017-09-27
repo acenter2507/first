@@ -53,8 +53,7 @@
         <span ng-if="!cmt.user">{{:: 'LB_DELETED_USER' | translate }}</span>
       <small class="text-muted" am-time-ago="cmt.created"></small>
       <a ng-if="cmt.to">@{{cmt.toName}}</a>
-      <span ng-show="cmt.isEdited" class="fa fa-pencil-square-o"><md-tooltip md-direction="bottom">{{cmt.updated | LLL_format }}</md-tooltip>
-        </span>
+      <span ng-show="cmt.isEdited" class="fa fa-pencil-square-o" tooltip-placement="bottom" uib-tooltip="{{ cmt.updated | LLL_format }}"></span>
       </span>
       <span class="pull-right">
         <md-menu md-offset="-20 25" md-position-mode="target-right target">
@@ -141,9 +140,7 @@
         <span ng-if="!cmt.user">{{:: 'LB_DELETED_USER' | translate }}</span>
       <small class="text-muted" am-time-ago="cmt.created"></small>
       <a ng-if="cmt.to">@{{cmt.toName}}</a>
-      <span ng-show="cmt.isEdited" class="fa fa-pencil-square-o">
-          <md-tooltip md-direction="bottom">{{cmt.updated | LLL_format }}</md-tooltip>
-        </span>
+      <span ng-show="cmt.isEdited" class="fa fa-pencil-square-o" tooltip-placement="bottom" uib-tooltip="{{ cmt.updated | LLL_format }}"></span>
       </span>
       <span class="pull-right">
         <md-menu md-offset="-20 25" md-position-mode="target-right target">

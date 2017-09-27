@@ -59,9 +59,9 @@
                 </p>
               </div>
               <div class="poll-info-secure">
-                <span ng-if="!ctrl.poll.isPublic" class="fa fa-lock"><md-tooltip md-direction="bottom">{{:: 'LB_POLLS_SECURE_PRIVATE' | translate }}</md-tooltip></span>
-                <span ng-if="ctrl.poll.isPublic && ctrl.poll.allow_guest" class="fa fa-globe"><md-tooltip md-direction="bottom">{{:: 'LB_POLLS_SECURE_PUBLIC' | translate }}</md-tooltip></span>
-                <span ng-if="ctrl.poll.isPublic && !ctrl.poll.allow_guest" class="fa fa-users"><md-tooltip md-direction="bottom">{{:: 'LB_POLLS_SECURE_ONLYUSER' | translate }}</md-tooltip></span>
+                <span ng-if="!ctrl.poll.isPublic" class="fa fa-lock" tooltip-placement="bottom" uib-tooltip="{{:: 'LB_POLLS_SECURE_PRIVATE' | translate }}"></span>
+                <span ng-if="ctrl.poll.isPublic && ctrl.poll.allow_guest" class="fa fa-globe" tooltip-placement="bottom" uib-tooltip="{{:: 'LB_POLLS_SECURE_PUBLIC' | translate }}"></span>
+                <span ng-if="ctrl.poll.isPublic && !ctrl.poll.allow_guest" class="fa fa-users" tooltip-placement="bottom" uib-tooltip="{{:: 'LB_POLLS_SECURE_ONLYUSER' | translate }}"></span>
               </div>
             </div>
           </div>

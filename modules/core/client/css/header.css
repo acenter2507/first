@@ -1,9 +1,11 @@
+/*#267ed5*/
+/*#0084ff*/
 .navbar {
   margin-bottom: 0 !important;
   border: none !important; }
 .navbar-default {
   background-color: #0084ff;
-  border-color: #2271bf;
+  border-color: #267ed5;
 }
 .navbar-default .navbar-brand {
   color: #ffffff;
@@ -26,13 +28,13 @@
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
   color: #dddddd;
-  background-color: #2271bf;
+  background-color: #267ed5;
 }
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
   color: #dddddd;
-  background-color: #2271bf;
+  background-color: #267ed5;
 }
 .header-profile-image {
   height: 34px;
@@ -48,7 +50,7 @@
 }
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {
-  background-color: #2271bf;
+  background-color: #267ed5;
 }
 .navbar-default .navbar-toggle .icon-bar {
   background-color: #ffffff;
@@ -76,7 +78,7 @@
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
     color: #dddddd;
-    background-color: #2271bf;
+    background-color: #267ed5;
   }
 }
 .navbar .navbar-brand {

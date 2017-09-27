@@ -749,7 +749,7 @@
       }
       ctrl.cmt_typing = true;
       let commentBox = angular.element(document.getElementById('comment-box'));
-      $document.scrollToElementAnimated(commentBox);
+      $document.scrollToElementAnimated(commentBox, -100);
     };
     // Thành viên like comment
     ctrl.handleLikeComment = (cmt, type) => {

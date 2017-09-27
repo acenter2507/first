@@ -371,6 +371,8 @@ exports.removeOAuthProvider = function (req, res, next) {
 };
 
 function getClientIp(req) {
+  console.log(req.client);
+  console.log(req.headers);
   console.log(req.connection.remoteAddress);
   var ipAddress;
   // Amazon EC2 / Heroku workaround to get real client IP

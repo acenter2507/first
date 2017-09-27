@@ -371,13 +371,9 @@ exports.removeOAuthProvider = function (req, res, next) {
 };
 
 function getClientIp(req) {
-  console.log(req.client);
-  console.log(req.headers);
-  console.log(req.connection.remoteAddress);
   var ipAddress;
   // Amazon EC2 / Heroku workaround to get real client IP
   var forwardedIpsStr = req.header('x-forwarded-for');
-  console.log(forwardedIpsStr);
   if (forwardedIpsStr) {
     // 'x-forwarded-for' header may return multiple IP addresses in
     // the format: "client IP, proxy 1 IP, proxy 2 IP" so take the

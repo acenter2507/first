@@ -144,7 +144,9 @@
   <!-- Languages -->
   <ul class="nav navbar-nav navbar-right d-sm-down-none">
     <li ui-sref-active="active">
-      <a ng-click="handleChangeLanguage()">{{language}}</a>
+      <a ng-click="handleChangeLanguage()">
+        <img ng-src="'modules/core/client/img/flags/' + {{language}} + '.png'">
+      </a>
     </li>
     <!--<li class="dropdown" uib-dropdown>
       <md-tooltip md-direction="bottom">{{ 'LANGUAGE' | translate }}</md-tooltip>

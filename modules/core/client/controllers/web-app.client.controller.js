@@ -101,7 +101,8 @@ angular.module('core').controller('WebAppController', [
       };
       dialog.openConfirm({
         scope: $scope,
-        templateUrl: Constants.templateUrls.languageChange
+        templateUrl: Constants.templateUrls.languageChange,
+        appendClassName: 'pdn'
       }).then(lang => {
         delete $scope.langDialog;
         handleSaveLanguage(lang);

@@ -128,7 +128,10 @@
       ctrl.opts = _.where(ctrl.poll.opts, { status: 1 });
       ctrl.chart = {
         type: 'pie',
-        options: { responsive: true },
+        options: {
+          responsive: true,
+          tooltipCaretSize: 0
+        },
         colors: [],
         labels: [],
         data: []

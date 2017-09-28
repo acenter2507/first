@@ -470,6 +470,7 @@
     // Người dùng click button like poll
     ctrl.handleLikePoll = handleLikePoll;
     function handleLikePoll(type) {
+      console.log(type);
       if (!$scope.isLogged) {
         $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;

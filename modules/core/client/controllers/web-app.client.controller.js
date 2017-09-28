@@ -129,6 +129,12 @@ angular.module('core').controller('WebAppController', [
         }
       }
     };
+    // Thay đổi page title
+    $scope.handleChangePageTitle = title => {
+      // Thiết lập title page = poll title
+      $scope.page_name = title;
+      $scope.page_title = ($scope.Notifications.notifCnt > 0) ? ('(' + $scope.Notifications.notifCnt + ') ' + $scope.page_name) : ('' + $scope.page_name);
+    };
 
     /**
      * DIALOG CONFIG

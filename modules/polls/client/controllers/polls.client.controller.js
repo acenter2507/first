@@ -130,17 +130,8 @@
         type: 'pie',
         options: {
           responsive: true,
-          scales: {
-            xAxes: [{
-              gridLines: {
-                color: 'transparent'
-              }
-            }],
-            yAxes: [{
-              gridLines: {
-                color: 'transparent'
-              }
-            }]
+          scale: {
+            lineArc: false // changes the scale between two modes. Is true for the polar area chart
           }
         },
         colors: [],

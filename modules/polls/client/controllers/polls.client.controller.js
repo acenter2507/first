@@ -598,8 +598,17 @@
               type: 'pie',
               options: {
                 responsive: true,
-                legend: {
-                  display: false
+                scales: {
+                  xAxes: [{
+                    gridLines: {
+                      color: 'transparent'
+                    }
+                  }],
+                  yAxes: [{
+                    gridLines: {
+                      color: 'transparent'
+                    }
+                  }]
                 }
               },
               colors: [],

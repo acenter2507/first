@@ -395,6 +395,7 @@
      * Lưu 1 like comment
      */
     this.save_like_cmt = (cmt, type) => {
+      console.log(cmt.like);
       // type: 1: like - 2: dislike;
       return new Promise((resolve, reject) => {
         var cnt = 0;
@@ -402,16 +403,19 @@
         if (cmt.like._id) {
           switch (cmt.like.type) {
             case 0: {
+              console.log('0');
               cnt = type === 1 ? 1 : -1;
               cmt.like.type = type;
             } break;
 
             case 1: {
+              console.log('1', rs_like);
               cnt = type === 1 ? -1 : -2;
               cmt.like.type = type === 1 ? 0 : 2;
             } break;
 
             case 2: {
+              console.log('2', rs_like);
               cnt = type === 1 ? 2 : 1;
               cmt.like.type = type === 1 ? 1 : 0;
             } break;

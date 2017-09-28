@@ -24,7 +24,7 @@ var CmtlikeSchema = new Schema({
   },
   type: {
     type: Number,
-    default: 1 // 1: like, 2: dislike
+    default: 0 // 1: like, 2: dislike
   }
 });
 

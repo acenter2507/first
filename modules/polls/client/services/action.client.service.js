@@ -356,7 +356,7 @@
         if (vote._id) {
           rs_vote = new Votes({ _id: vote._id });
           rs_vote.opts = opts;
-          rs_vote.updateCnt += 1;
+          rs_vote.updateCnt = vote.updateCnt + 1;
           rs_vote.updated = moment().utc().format();
           rs_vote.$update(successCb, errorCb);
         } else {
@@ -366,10 +366,10 @@
         }
         function successCb(res) {
           Socket.emit('poll_vote', { pollId: poll._id });
-          resolve(res);
+          return resolve(res);
         }
         function errorCb(err) {
-          reject(err);
+          return reject(err);
         }
       });
     };
@@ -384,10 +384,10 @@
         }
         function successCb(res) {
           Socket.emit('opts_request', { pollId: res.poll._id || res.poll, from: res.user._id, to: poll.user._id, optId: res._id });
-          resolve(res);
+          return resolve(res);
         }
         function errorCb(err) {
-          reject(err);
+          return reject(err);
         }
       });
     };
@@ -438,10 +438,10 @@
           //   to: cmt.user._id,
           //   type: res.like.type
           // });
-          resolve(res);
+          return resolve(res);
         }
         function errorCb(err) {
-          reject(err);
+          return reject(err);
         }
       });
     };
@@ -475,10 +475,10 @@
           rs_follow.$save(successCb, errorCb);
         }
         function successCb(res) {
-          resolve(res);
+          return resolve(res);
         }
         function errorCb(err) {
-          reject(err);
+          return reject(err);
         }
       });
     };

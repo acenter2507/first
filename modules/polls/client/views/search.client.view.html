@@ -1,11 +1,9 @@
 <section class="container animated fadeIn mg6t mg50b">
   <div class="row">
     <div class="col-xs-12 pdn">
-      <div class="card card-expand">
+      <div class="card">
         <div class="card-header">
           <strong class="card-title"><i class="fa fa-search"></i> {{:: 'LB_SEARCH_TOOL' | translate }}</strong>
-          <a class="card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
-          <div class="clearfix"></div>
         </div>
         <hr class="mgn">
         <div class="card-body">
@@ -26,8 +24,10 @@
               </div>
             </div>
             <uib-accordion close-others="true">
-              <uib-accordion-group heading="Advanced Search Setting" panel-class="custom-panel public">
-
+              <uib-accordion-group panel-class="custom-panel public">
+                <uib-accordion-heading>
+                  Put any HTML <strong>here</strong><i class="icon-book"></i>
+                </uib-accordion-heading>
                 <div class="form-group">
                   <div class="col-sm-12">
                     <label for="sort">{{:: 'LB_SEARCH_SORT_BY' | translate }}</label>

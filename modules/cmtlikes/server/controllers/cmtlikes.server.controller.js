@@ -54,6 +54,7 @@ exports.read = function(req, res) {
 exports.update = function(req, res) {
   var cmtlike = req.cmtlike;
 
+  console.log(req.body);
   cmtlike = _.extend(cmtlike, req.body);
   var cnt = req.body.cnt || 0;
   cmtlike.save()

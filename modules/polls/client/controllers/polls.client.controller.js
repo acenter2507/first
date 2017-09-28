@@ -136,8 +136,7 @@
           },
           responsive: false,
           tooltips: {
-            yAlign: 'top',
-            xAlign: 'center'
+            height: 100
           }
         },
         colors: [],

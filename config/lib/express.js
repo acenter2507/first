@@ -17,6 +17,7 @@ var config = require('../config'),
   helmet = require('helmet'),
   flash = require('connect-flash'),
   consolidate = require('consolidate'),
+  swig = require('swig'),
   path = require('path'),
   locale = require("locale"),
   fs = require('fs');
@@ -113,6 +114,9 @@ module.exports.initI18n = function (app) {
 module.exports.initViewEngine = function (app) {
   // Set swig as the template engine
   app.engine('server.view.html', consolidate[config.templateEngine]);
+  swig.setDefaults({
+    varControls: ['<%=', '%>']
+  });
 
   // Set views path and view engine
   app.set('view engine', 'server.view.html');

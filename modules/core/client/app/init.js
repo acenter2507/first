@@ -4,8 +4,8 @@
 angular.module(ApplicationConfiguration.applicationModuleName, ApplicationConfiguration.applicationModuleVendorDependencies);
 
 // Setting HTML5 Location Mode
-angular.module(ApplicationConfiguration.applicationModuleName).config(['$locationProvider', '$httpProvider', '$controllerProvider', '$compileProvider', '$interpolateProvider',
-  function ($locationProvider, $httpProvider, $controllerProvider, $compileProvider, $interpolateProvider) {
+angular.module(ApplicationConfiguration.applicationModuleName).config(['$locationProvider', '$httpProvider', '$controllerProvider', '$compileProvider',
+  function ($locationProvider, $httpProvider, $controllerProvider, $compileProvider) {
     // Good for SEO
     $locationProvider.html5Mode(true).hashPrefix('!');
     // Authentication securiry
@@ -17,8 +17,8 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
     // Disable Debug
     $compileProvider.debugInfoEnabled(false);
     // Khai báo symbol cho angular
-    $interpolateProvider.startSymbol('<%=');
-    $interpolateProvider.endSymbol('%>');
+    // $interpolateProvider.startSymbol('<%=');
+    // $interpolateProvider.endSymbol('%>');
   }
 ]);
 

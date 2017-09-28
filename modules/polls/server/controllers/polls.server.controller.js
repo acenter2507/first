@@ -7,6 +7,7 @@ var path = require('path'),
   mongoose = require('mongoose'),
   multer = require('multer'),
   config = require(path.resolve('./config/config')),
+  logger = require(path.resolve('./config/lib/logger').log4jLog),
   Poll = mongoose.model('Poll'),
   Opt = mongoose.model('Opt'),
   Vote = mongoose.model('Vote'),
@@ -74,6 +75,8 @@ exports.create = function (req, res) {
     }, handleError);
 
   function handleError(err) {
+    // Xuất bug ra file log
+    logger.system.error('polls.server.controller.js - create', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -115,6 +118,8 @@ exports.read = function (req, res) {
     });
 
   function handleError(err) {
+    // Xuất bug ra file log
+    logger.system.error('polls.server.controller.js - read', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -169,6 +174,8 @@ exports.update = function (req, res) {
     }, handleError);
 
   function handleError(err) {
+    // Xuất bug ra file log
+    logger.system.error('polls.server.controller.js - update', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -234,6 +241,8 @@ exports.delete = function (req, res) {
     }, handleError);
 
   function handleError(err) {
+    // Xuất bug ra file log
+    logger.system.error('polls.server.controller.js - delete', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -250,6 +259,8 @@ exports.list = function (req, res) {
     .populate('user', 'displayName profileImageURL slug')
     .exec(function (err, polls) {
       if (err) {
+        // Xuất bug ra file log
+        logger.system.error('polls.server.controller.js - list', err);
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)
         });
@@ -278,6 +289,8 @@ exports.pollByID = function (req, res, next, id) {
     .populate('user', 'displayName profileImageURL slug')
     .exec(function (err, poll) {
       if (err) {
+        // Xuất bug ra file log
+        logger.system.error('polls.server.controller.js - pollByID', err);
         return res.status(400).send({
           message: 'Poll is invalid'
         });
@@ -295,7 +308,6 @@ exports.pollByID = function (req, res, next, id) {
  * Lấy danh sách poll cho màn hình polls.list
  */
 exports.findPolls = function (req, res) {
-  console.log(getClientIp(req));
   var page = req.params.page || 0;
   var userId = req.user ? req.user._id : undefined;
   // Lấy ngôn ngữ hiển thị poll
@@ -336,6 +348,8 @@ exports.findPolls = function (req, res) {
       });
     }, handleError);
   function handleError(err) {
+    // Xuất bug ra file log
+    logger.system.error('polls.server.controller.js - findPolls', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -370,6 +384,8 @@ exports.findPopulars = function (req, res) {
 
 
   function handleError(err) {
+    // Xuất bug ra file log
+    logger.system.error('polls.server.controller.js - findPopulars', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -413,6 +429,8 @@ exports.findOwners = function (req, res) {
       res.jsonp(result);
     })
     .catch(err => {
+      // Xuất bug ra file log
+      logger.system.error('polls.server.controller.js - findOwners', err);
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
@@ -449,6 +467,8 @@ exports.findCmts = function (req, res) {
       });
     }, handleError);
   function handleError(err) {
+    // Xuất bug ra file log
+    logger.system.error('polls.server.controller.js - findCmts', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -465,6 +485,8 @@ exports.findVoteopts = function (req, res) {
     })
     .catch(handleError);
   function handleError(err) {
+    // Xuất bug ra file log
+    logger.system.error('polls.server.controller.js - findVoteopts', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -484,18 +506,19 @@ exports.findVotesByOption = function (req, res) {
         .populate('user', 'displayName slug profileImageURL')
         .exec(function (err, votes) {
           if (err) {
-            return res.status(400).send({
-              message: errorHandler.getErrorMessage(err)
-            });
+            return handleError(err);
           } else {
             return res.jsonp(votes);
           }
         });
-    }, err => {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
+    }, handleError);
+  function handleError(err) {
+    // Xuất bug ra file log
+    logger.system.error('polls.server.controller.js - findVotesByOption', err);
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
     });
+  }
 };
 
 exports.removeBookmark = function (req, res) {
@@ -510,6 +533,8 @@ exports.removeBookmark = function (req, res) {
     }
   });
   function handleError(err) {
+    // Xuất bug ra file log
+    logger.system.error('polls.server.controller.js - removeBookmark', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -573,6 +598,8 @@ exports.search = function (req, res) {
     return result;
   }
   function handleError(err) {
+    // Xuất bug ra file log
+    logger.system.error('polls.server.controller.js - search', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -599,16 +626,19 @@ exports.images_upload = function (req, res) {
   if (user) {
     upload(req, res, function (uploadError) {
       if (uploadError) {
-        return res.status(400).send({
-          message: 'Error occurred while uploading images'
-        });
+        return handleError(new Error('LB_POLLS_IMAGE_UPLOAD_ERROR'));
       } else {
         res.jsonp(req.file.path);
       }
     });
   } else {
-    res.status(400).send({
-      message: 'You are not authorized.'
+    return handleError(new Error('MS_CM_AUTH_ERROR'));
+  }
+  function handleError(err) {
+    // Xuất bug ra file log
+    logger.system.error('polls.server.controller.js - images_upload', err);
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
     });
   }
 };

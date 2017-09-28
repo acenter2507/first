@@ -135,6 +135,7 @@
   "LB_POLLS_REPORT_MSG": "Xin hãy cho chúng tôi biết sai phạm của poll này.",
   "LB_POLLS_REPORT_PLACE": "Chuyện gì đã xảy ra...",
   "LB_POLLS_IMAGE_UPLOAD": "Tải ảnh lên",
+  "LB_POLLS_IMAGE_UPLOAD_ERROR": "Đã xảy ra lỗi trong quá trình tải ảnh lên máy chủ",
   "LB_POLLS_UPLOAD_DROP": "Kéo thả các file ảnh của bạn vào đây",
   "LB_POLLS_UPLOAD_CHOOSE": "Chọn ảnh",
   "LB_POLLS_UPLOAD_FORMAT": "Các định dạng hợp lệ:",

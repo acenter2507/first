@@ -135,6 +135,7 @@
   "LB_POLLS_REPORT_MSG": "Tell us why you want to report this poll.",
   "LB_POLLS_REPORT_PLACE": "What's happening...",
   "LB_POLLS_IMAGE_UPLOAD": "IMAGES UPLOAD",
+  "LB_POLLS_IMAGE_UPLOAD_ERROR": "Error occurred while uploading images",
   "LB_POLLS_UPLOAD_DROP": "Drop your images here",
   "LB_POLLS_UPLOAD_CHOOSE": "Choose images",
   "LB_POLLS_UPLOAD_FORMAT": "Available formats:",

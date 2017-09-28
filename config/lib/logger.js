@@ -4,26 +4,40 @@ var _ = require('lodash'),
   config = require('../config'),
   chalk = require('chalk'),
   fileStreamRotator = require('file-stream-rotator'),
-  fs = require('fs');
+  fs = require('fs'),
+  log4js = require('log4js');
 
 // list of valid formats for the logging
 var validFormats = ['combined', 'common', 'dev', 'short', 'tiny'];
-
-// build logger service
-var logger = {
-  getFormat: getLogFormat, // log format to use
-  getOptions: getLogOptions // log options to use
+var log4jsConfig = {
+  appenders: [
+    { type: 'console' }, {
+      type: 'dateFile',
+      category: ['System'],
+      filename: 'logs/system.log',
+      pattern: '.yyyy-MM-dd',
+      alwaysIncludePattern: true
+    }, {
+      type: 'dateFile',
+      category: ['Debug'],
+      filename: 'logs/debug.log',
+      pattern: '.yyyy-MM-dd',
+      alwaysIncludePattern: true
+    }
+  ],
+  'replaceConsole': true
+  // logger.trace('Entering cheese testing');
+  // logger.debug('Got cheese.');
+  // logger.info('Cheese is Gouda.');
+  // logger.warn('Cheese is quite smelly.');
+  // logger.error('Cheese is too ripe!');
+  // logger.fatal('Cheese was breeding ground for listeria.');
 };
-
-// export the logger service
-module.exports = logger;
-
+log4js.configure(log4jsConfig);
 /**
- * The format to use with the logger
- *
- * Returns the log.format option set in the current environment configuration
+ * MORGAN LOG FORMAT
  */
-function getLogFormat () {
+function getLogFormat() {
   var format = config.log && config.log.format ? config.log.format.toString() : 'combined';
 
   // make sure we have a valid format
@@ -41,12 +55,9 @@ function getLogFormat () {
 }
 
 /**
- * The options to use with the logger
- *
- * Returns the log.options object set in the current environment configuration.
- * NOTE: Any options, requiring special handling (e.g. 'stream'), that encounter an error will be removed from the options.
+ * MORGAN LOG OPTIONS
  */
-function getLogOptions () {
+function getLogOptions() {
   var options = config.log && config.log.options ? _.clone(config.log.options, true) : {};
 
   // check if the current environment config has the log stream option set
@@ -107,3 +118,18 @@ function getLogOptions () {
 
   return options;
 }
+
+// build logger service
+var logger = {
+  morganLog: {
+    getFormat: getLogFormat, // log format to use
+    getOptions: getLogOptions // log options to use
+  },
+  log4jLog: {
+    system: log4js.getLogger('System'),
+    debug: log4js.getLogger('Debug'),
+  }
+};
+
+// export the logger service
+module.exports = logger;

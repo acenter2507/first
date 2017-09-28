@@ -47,9 +47,17 @@
     }
 
     function onCreate() {
+      if (!ctrl.isCurrentUserOwner && !$scope.isAdmin) {
+        $state.go('home');
+        $scope.handleShowMessage('MS_CM_AUTH_ERROR', true);
+        return;
+      }
       ctrl.bk_poll = _.clone(ctrl.poll);
       ctrl.opts = ctrl.poll.opts || [];
       if (ctrl.poll._id) {
+        // Thiết lập title page = poll title
+        $scope.page_name = ctrl.poll.title;
+        $scope.page_title = ($scope.Notifications.notifCnt > 0) ? ('(' + $scope.Notifications.notifCnt + ') ' + $scope.page_name) : ('' + $scope.page_name);
         ctrl.poll.close = ctrl.poll.close ? moment(ctrl.poll.close).utc() : ctrl.poll.close;
         ctrl.isClosed = moment(ctrl.poll.close).utc().isAfter(new moment().utc());
         // Lắng nghe các request từ server socket

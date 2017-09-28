@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
   <base href="/">
   <!--<title>{{title}}</title>-->
-  <title>{{ page_title }}</title>
+  <title ng-bind="page_title"></title>
   <meta name="description" content="<%=description%>">
   <meta name="fragment" content="!">
   <!-- Apple META -->
@@ -16,16 +16,16 @@
   <!-- Facebook META -->
   <meta property="fb:app_id" content="<%=facebookAppId%>">
   <meta property="og:site_name" content="<%=title%>">
-  <meta property="og:title" content="<%=title%>">
+  <meta property="og:title" content="{{page_title}}">
   <meta property="og:description" content="<%=description%>">
   <meta property="og:url" content="<%=url%>">
-  <meta property="og:image" content="<%=logo%>">
+  <meta property="og:image" content="<%=socialLogo%>">
   <meta property="og:type" content="website">
   <!-- Twitter META -->
-  <meta name="twitter:title" content="<%=title%>">
+  <meta name="twitter:title" content="{{page_title}}">
   <meta name="twitter:description" content="<%=description%>">
   <meta name="twitter:url" content="<%=url%>">
-  <meta name="twitter:image" content="<%=logo%>">
+  <meta name="twitter:image" content="<%=socialLogo%>">
   <!-- Fav Icon -->
   <link href="<%=favicon%>" rel="shortcut icon" type="image/x-icon">
   <!-- Application CSS Files -->

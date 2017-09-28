@@ -3,6 +3,7 @@
 // Create the Storages wrapper service
 angular.module('core').service('Constants', [
   function () {
+    this.pageName = 'Blablaer';
     this.templateUrls = {
       dialogConfirm: 'modules/core/client/views/templates/confirm.dialog.template.html',
       languageChange: 'modules/core/client/views/templates/languages.dialog.template.html'

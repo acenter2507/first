@@ -39,6 +39,7 @@ module.exports.initLocalVariables = function (app) {
   app.locals.cssFiles = config.files.client.css;
   app.locals.livereload = config.livereload;
   app.locals.logo = config.logo;
+  app.locals.socialLogo = config.socialLogo;
   app.locals.favicon = config.favicon;
   app.locals.locales = config.locales;
   app.locals.supportLanguages = config.supportLanguages;

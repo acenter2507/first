@@ -20,7 +20,7 @@ angular.module('core').controller('WebAppController', [
     $scope.Notifications = Notifications;
     $scope.Categorys = Categorys;
 
-    $scope.page_name = 'Blablaer';
+    $scope.page_name = Constants.pageName;
     $scope.page_title = ($scope.Notifications.notifCnt > 0) ? ('(' + $scope.Notifications.notifCnt + ') ' + $scope.page_name) : ('' + $scope.page_name);
 
     // Watch user info
@@ -29,6 +29,12 @@ angular.module('core').controller('WebAppController', [
     });
     $scope.$watch('Notifications.notifCnt', () => {
       $scope.page_title = ($scope.Notifications.notifCnt > 0) ? ('(' + $scope.Notifications.notifCnt + ') ' + $scope.page_name) : ('' + $scope.page_name);
+    });
+    $scope.$on('$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) => {
+      if (toState !== 'polls.view' && toState !== 'polls.edit') {
+        $scope.page_name = Constants.pageName;
+        $scope.page_title = ($scope.Notifications.notifCnt > 0) ? ('(' + $scope.Notifications.notifCnt + ') ' + $scope.page_name) : ('' + $scope.page_name);
+      }
     });
     // Init
     function onCreate() {

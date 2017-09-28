@@ -419,7 +419,8 @@
           rs_like = new Cmtlikes(cmt.like);
           rs_like.cnt = cnt;
           rs_like.cnt = cmt.like.type;
-          rs_like.$update(successCb, successCb);
+          console.log('Old', rs_like);
+          //rs_like.$update(successCb, successCb);
         } else {
           cnt = type === 1 ? 1 : -1;
           rs_like = new Cmtlikes({
@@ -427,7 +428,8 @@
             type: type
           });
           rs_like.cnt = cnt;
-          rs_like.$save(successCb, successCb);
+          console.log('New', rs_like);
+          //rs_like.$save(successCb, successCb);
         }
         function successCb(res) {
           return resolve(res);

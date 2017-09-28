@@ -2,11 +2,11 @@
 
 //TODO this should be Users service
 angular.module('users.admin')
-  .factory('Admin', admin)
-  .factory('AdminApi', AdminApi);
+  .factory('AdminUserService', admAdminUserServicein)
+  .factory('AdminUserApi', AdminUserApi);
 
-admin.$inject = ['$resource'];
-function admin($resource) {
+AdminUserService.$inject = ['$resource'];
+function AdminUserService($resource) {
   return $resource('api/users/:aduserId', { aduserId: '@_id' }, {
     update: {
       method: 'PUT',
@@ -14,8 +14,8 @@ function admin($resource) {
     },
   });
 }
-AdminApi.$inject = ['$http'];
-function AdminApi($http) {
+AdminUserApi.$inject = ['$http'];
+function AdminUserApi($http) {
   this.get_users = () => {
     return $http.get('/api/admins/users', {
       ignoreLoadingBar: true

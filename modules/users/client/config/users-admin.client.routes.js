@@ -15,35 +15,28 @@ angular.module('users.admin.routes').config(['$stateProvider',
       .state('admin.users.list', {
         url: '/list',
         templateUrl: 'modules/users/client/views/admin/admin-users.client.view.html',
-        controller: 'AdminUserListController',
-        controllerAs: 'ctrl',
-        ncyBreadcrumb: {
-          label: 'List'
-        }
+        controller: 'AdminUsersController',
+        controllerAs: 'ctrl'
       })
       .state('admin.users.new', {
         url: '/new',
-        templateUrl: 'modules/users/client/views/admin/form-user.client.view.html',
+        templateUrl: 'modules/users/client/views/admin/admin-form-user.client.view.html',
         controller: 'AdminUserController',
-        ncyBreadcrumb: {
-          label: 'Add new'
-        },
+        controllerAs: 'ctrl',
         resolve: {
-          userResolve: ['Admin', function (Admin) {
-            return new Admin();
+          userResolve: ['AdminUserService', function (AdminUserService) {
+            return new AdminUserService();
           }]
         }
       })
       .state('admin.users.view', {
         url: '/:userId',
-        templateUrl: 'modules/users/client/views/admin/view-user.client.view.html',
+        templateUrl: 'modules/users/client/views/admin/admin-view-user.client.view.html',
         controller: 'AdminViewUserController',
-        ncyBreadcrumb: {
-          label: 'View user info'
-        },
+        controllerAs: 'ctrl',
         resolve: {
-          userResolve: ['$stateParams', 'Admin', function ($stateParams, Admin) {
-            return Admin.get({
+          userResolve: ['$stateParams', 'AdminUserService', function ($stateParams, AdminUserService) {
+            return AdminUserService.get({
               aduserId: $stateParams.userId
             }).$promise;
           }]
@@ -51,14 +44,12 @@ angular.module('users.admin.routes').config(['$stateProvider',
       })
       .state('admin.users.edit', {
         url: '/:userId/edit',
-        templateUrl: 'modules/users/client/views/admin/form-user.client.view.html',
+        templateUrl: 'modules/users/client/views/admin/admin-form-user.client.view.html',
         controller: 'AdminUserController',
-        ncyBreadcrumb: {
-          label: 'Edit {{ userResolve.displayName }}'
-        },
+        controllerAs: 'ctrl',
         resolve: {
-          userResolve: ['$stateParams', 'Admin', function ($stateParams, Admin) {
-            return Admin.get({
+          userResolve: ['$stateParams', 'AdminUserService', function ($stateParams, AdminUserService) {
+            return AdminUserService.get({
               aduserId: $stateParams.userId
             }).$promise;
           }]
@@ -66,14 +57,12 @@ angular.module('users.admin.routes').config(['$stateProvider',
       })
       .state('admin.users.resetpass', {
         url: '/:userId/resetpass',
-        templateUrl: 'modules/users/client/views/admin/resetpass-user.client.view.html',
+        templateUrl: 'modules/users/client/views/admin/admin-resetpass-user.client.view.html',
         controller: 'AdminUserController',
-        ncyBreadcrumb: {
-          label: 'Reset password'
-        },
+        controllerAs: 'ctrl',
         resolve: {
-          userResolve: ['$stateParams', 'Admin', function ($stateParams, Admin) {
-            return Admin.get({
+          userResolve: ['$stateParams', 'AdminUserService', function ($stateParams, AdminUserService) {
+            return AdminUserService.get({
               aduserId: $stateParams.userId
             }).$promise;
           }]

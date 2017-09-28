@@ -9,7 +9,7 @@ AdminViewUserController.$inject = [
   '$filter',
   'Authentication',
   'userResolve',
-  'AdminApi',
+  'AdminUserApi',
   'Action',
   'PollsService',
   'CmtsService',
@@ -27,7 +27,7 @@ function AdminViewUserController(
   $filter,
   Authentication,
   userResolve,
-  AdminApi,
+  AdminUserApi,
   Action,
   Polls,
   Cmts,
@@ -60,7 +60,7 @@ function AdminViewUserController(
   /* Login log */
   get_logins();
   function get_logins() {
-    AdminApi.get_logins_by_user($scope.user._id)
+    AdminUserApi.get_logins_by_user($scope.user._id)
       .then(res => {
         $scope.logins = res.data || [];
         $scope.loginCnt = $scope.logins.length;
@@ -90,7 +90,7 @@ function AdminViewUserController(
   /* Polls */
   get_polls();
   function get_polls() {
-    AdminApi.get_polls_by_user($scope.user._id)
+    AdminUserApi.get_polls_by_user($scope.user._id)
       .then(res => {
         $scope.polls = res.data || [];
         $scope.pollCnt = $scope.polls.length;
@@ -130,7 +130,7 @@ function AdminViewUserController(
   /* Comments */
   get_cmts();
   function get_cmts() {
-    AdminApi.get_cmts_by_user($scope.user._id)
+    AdminUserApi.get_cmts_by_user($scope.user._id)
       .then(res => {
         $scope.cmts = res.data || [];
         $scope.cmtCnt = $scope.cmts.length;
@@ -162,7 +162,7 @@ function AdminViewUserController(
   /* Votes */
   get_votes();
   function get_votes() {
-    AdminApi.get_votes_by_user($scope.user._id)
+    AdminUserApi.get_votes_by_user($scope.user._id)
       .then(res => {
         $scope.votes = res.data || [];
         $scope.voteCnt = $scope.votes.length;
@@ -194,7 +194,7 @@ function AdminViewUserController(
   /* Reports */
   get_reports();
   function get_reports() {
-    AdminApi.get_reports_by_user($scope.user._id)
+    AdminUserApi.get_reports_by_user($scope.user._id)
       .then(res => {
         $scope.reports = res.data || [];
         $scope.reportCnt = $scope.reports.length;
@@ -226,7 +226,7 @@ function AdminViewUserController(
   /* Be reports */
   get_bereports();
   function get_bereports() {
-    AdminApi.get_bereports_by_user($scope.user._id)
+    AdminUserApi.get_bereports_by_user($scope.user._id)
       .then(res => {
         $scope.bereports = res.data || [];
         $scope.bereportCnt = $scope.bereports.length;
@@ -259,7 +259,7 @@ function AdminViewUserController(
   /* Suggested */
   get_suggests();
   function get_suggests() {
-    AdminApi.get_suggests_by_user($scope.user._id)
+    AdminUserApi.get_suggests_by_user($scope.user._id)
       .then(res => {
         $scope.suggests = res.data || [];
         $scope.suggestCnt = $scope.suggests.length;

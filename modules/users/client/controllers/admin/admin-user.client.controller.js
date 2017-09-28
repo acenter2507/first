@@ -1,10 +1,10 @@
 'use strict';
 angular.module('users.admin')
   .controller('AdminUserController', AdminUserController);
-AdminUserController.$inject = ['$window', '$timeout', '$scope', '$state', 'Authentication', 'userResolve', 'AdminApi', 'Constants', 'FileUploader'];
+AdminUserController.$inject = ['$window', '$timeout', '$scope', '$state', 'Authentication', 'userResolve', 'AdminUserApi', 'Constants', 'FileUploader'];
 
 
-function AdminUserController($window, $timeout, $scope, $state, Authentication, userResolve, AdminApi, Constants, FileUploader) {
+function AdminUserController($window, $timeout, $scope, $state, Authentication, userResolve, AdminUserApi, Constants, FileUploader) {
   $scope.authentication = Authentication;
   $scope.user = userResolve;
   $scope.newPassword = '';
@@ -35,7 +35,7 @@ function AdminUserController($window, $timeout, $scope, $state, Authentication, 
       $scope.$broadcast('show-errors-check-validity', 'userForm');
       return false;
     }
-    AdminApi.reset_pass($scope.user._id, $scope.newPassword)
+    AdminUserApi.reset_pass($scope.user._id, $scope.newPassword)
       .then(() => {
         alert('Reset password successfully');
       })

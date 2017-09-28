@@ -23,10 +23,10 @@
 							  </select>
               </div>
             </div>
-            <uib-accordion close-others="true">
-              <uib-accordion-group panel-class="custom-panel public">
+            <uib-accordion close-others="true" ng-init="openAdvance = false;">
+              <uib-accordion-group panel-class="custom-panel public" is-open="openAdvance">
                 <uib-accordion-heading>
-                  Put any HTML <strong>here</strong><i class="icon-book"></i>
+                  <i class="fa fa-arrow-circle-down" ng-class="{'fa-rotate-180': openAdvance}"></i> {{:: 'LB_ADVANCE_SEARCH' | translate }}
                 </uib-accordion-heading>
                 <div class="form-group">
                   <div class="col-sm-12">

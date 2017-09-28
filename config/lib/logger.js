@@ -36,6 +36,7 @@ var log4jsConfig = {
 };
 log4js.configure({
   appenders: {
+    console: { type: 'console' },
     systemLog: {
       type: 'dateFile',
       filename: 'logs/system.log',

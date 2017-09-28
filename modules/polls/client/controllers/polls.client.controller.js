@@ -129,8 +129,9 @@
       ctrl.chart = {
         type: 'pie',
         options: {
-          fullWidth: true,
-          tooltipFontSize: 10
+          // fullWidth: true,
+          // tooltipFontSize: 10
+          legend: { display: false }
         },
         colors: [],
         labels: [],

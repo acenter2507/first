@@ -5,6 +5,7 @@
  */
 var path = require('path'),
   mongoose = require('mongoose'),
+  logger = require(path.resolve('./config/lib/logger')).log4jLog,
   Vote = mongoose.model('Vote'),
   Voteopt = mongoose.model('Voteopt'),
   Poll = mongoose.model('Poll'),
@@ -46,6 +47,8 @@ exports.create = function (req, res) {
     }, handleError);
 
   function handleError(err) {
+    // Xuất bug ra file log
+    logger.system.error('votes.server.controller.js - create', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -94,6 +97,8 @@ exports.update = function (req, res) {
     }, handleError);
 
   function handleError(err) {
+    // Xuất bug ra file log
+    logger.system.error('votes.server.controller.js - update', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });

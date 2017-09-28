@@ -7,6 +7,7 @@ var _ = require('lodash'),
   fs = require('fs'),
   path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
+  logger = require(path.resolve('./config/lib/logger')).log4jLog,
   mongoose = require('mongoose'),
   multer = require('multer'),
   config = require(path.resolve('./config/config')),
@@ -85,6 +86,8 @@ exports.update = function (req, res) {
   }
 
   function handleError(err) {
+    // Xuất bug ra file log
+    logger.system.error('users.profile.server.controller.js - update', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -216,7 +219,7 @@ exports.changeLanguage = function (req, res) {
     if (err) res.status(400).send({ message: 'MS_CM_LOAD_ERROR' });
     _user.password = undefined;
     _user.salt = undefined;
-    return res.jsonp(_user);
+    return res.end();
   });
 };
 /**
@@ -276,6 +279,8 @@ exports.activitys = function (req, res) {
       }
     }, handleError);
   function handleError(err) {
+    // Xuất bug ra file log
+    logger.system.error('users.profile.server.controller.js - activitys', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -317,6 +322,8 @@ exports.polls = function (req, res) {
       });
     }, handleError);
   function handleError(err) {
+    // Xuất bug ra file log
+    logger.system.error('users.profile.server.controller.js - polls', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -372,6 +379,8 @@ exports.votes = function (req, res) {
       });
     }, handleError);
   function handleError(err) {
+    // Xuất bug ra file log
+    logger.system.error('users.profile.server.controller.js - votes', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -422,6 +431,8 @@ exports.follows = function (req, res) {
     }, handleError);
 
   function handleError(err) {
+    // Xuất bug ra file log
+    logger.system.error('users.profile.server.controller.js - follows', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -472,6 +483,8 @@ exports.bookmarks = function (req, res) {
     }, handleError);
 
   function handleError(err) {
+    // Xuất bug ra file log
+    logger.system.error('users.profile.server.controller.js - bookmarks', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -546,6 +559,8 @@ exports.views = function (req, res) {
     }, handleError);
 
   function handleError(err) {
+    // Xuất bug ra file log
+    logger.system.error('users.profile.server.controller.js - views', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -596,6 +611,8 @@ exports.likes = function (req, res) {
     }, handleError);
 
   function handleError(err) {
+    // Xuất bug ra file log
+    logger.system.error('users.profile.server.controller.js - likes', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -646,6 +663,8 @@ exports.dislikes = function (req, res) {
     }, handleError);
 
   function handleError(err) {
+    // Xuất bug ra file log
+    logger.system.error('users.profile.server.controller.js - dislikes', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });

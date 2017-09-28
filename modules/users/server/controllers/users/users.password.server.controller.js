@@ -5,6 +5,7 @@
  */
 var path = require('path'),
   config = require(path.resolve('./config/config')),
+  logger = require(path.resolve('./config/lib/logger')).log4jLog,
   mail = require(path.resolve('./config/lib/mail')),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   mongoose = require('mongoose'),
@@ -50,6 +51,8 @@ exports.forgot = function (req, res, next) {
     })
     .catch(handleError);
   function handleError(err) {
+    // Xuất bug ra file log
+    logger.system.error('users.password.server.controller.js - forgot', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -102,18 +105,6 @@ exports.reset = function (req, res, next) {
           _user.password = undefined;
           _user.salt = undefined;
           return res.json(_user);
-
-          // var mailTemplate = 'inform_reset_password';
-          // var mailContent = {
-          //   name: _user.displayName,
-          //   appName: config.app.title
-          // };
-          // var mailOptions = {
-          //   from: config.app.title + '<' + config.mailer.account.from + '>',
-          //   to: _user.email,
-          //   subject: 'Your password has been changed'
-          // };
-          // return mail.send(config.mailer.account.options, mailContent, mailOptions, mailTemplate);
         });
       })
       .catch(handleError);
@@ -121,6 +112,8 @@ exports.reset = function (req, res, next) {
 
 
   function handleError(err) {
+    // Xuất bug ra file log
+    logger.system.error('users.password.server.controller.js - reset', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });

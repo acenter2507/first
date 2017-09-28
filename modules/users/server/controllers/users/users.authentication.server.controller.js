@@ -6,6 +6,7 @@
 var path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   config = require(path.resolve('./config/config')),
+  logger = require(path.resolve('./config/lib/logger')).log4jLog,
   mail = require(path.resolve('./config/lib/mail')),
   mongoose = require('mongoose'),
   passport = require('passport'),
@@ -54,6 +55,8 @@ exports.signup = function (req, res) {
     })
     .catch(handleError);
   function handleError(err) {
+    // Xuất bug ra file log
+    logger.system.error('users.authentication.server.controller.js - signup', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -99,6 +102,8 @@ exports.resend = function (req, res) {
   });
 
   function handleError(err) {
+    // Xuất bug ra file log
+    logger.system.error('users.authentication.server.controller.js - resend', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -175,6 +180,8 @@ exports.verify = function (req, res) {
         user.salt = undefined;
         req.login(user, function (err) {
           if (err) {
+            // Xuất bug ra file log
+            logger.system.error('users.authentication.server.controller.js - verify', err);
             res.status(400).send(err);
           } else {
             return res.redirect('/');
@@ -206,6 +213,8 @@ exports.oauthCallback = function (strategy) {
     delete req.session.redirect_to;
     passport.authenticate(strategy, function (err, user, info) {
       if (err) {
+        // Xuất bug ra file log
+        logger.system.error('users.authentication.server.controller.js - oauthCallback', err);
         return res.redirect('/authentication/signin?err=' + encodeURIComponent(errorHandler.getErrorMessage(err)));
       } else if (!user) {
         return res.redirect('/authentication/signin');
@@ -357,17 +366,22 @@ exports.removeOAuthProvider = function (req, res, next) {
 
   user.save(function (err) {
     if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
+      return handleError(err);
     } else {
       req.login(user, function (err) {
         if (err)
-          return res.status(400).send(new Error('MS_CM_LOAD_ERROR'));
+          return handleError(new Error('MS_CM_LOAD_ERROR'));
         return res.json(user);
       });
     }
   });
+  function handleError(err) {
+    // Xuất bug ra file log
+    logger.system.error('users.authentication.server.controller.js - removeOAuthProvider', err);
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 };
 
 function getClientIp(req) {

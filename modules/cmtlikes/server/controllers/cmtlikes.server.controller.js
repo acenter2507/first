@@ -20,6 +20,8 @@ exports.create = function(req, res) {
   cmtlike.save()
     .then(_cmtlike => {
       cmtlike = _cmtlike;
+      // Bỏ phần thông tin user thừa
+      cmtlike.user = _cmtlike.user._id || _cmtlike.user;
       var cmtId = cmtlike.cmt._id || cmtlike.cmt;
       return Cmt.countLike(cmtId, cnt);
     }, handleError)

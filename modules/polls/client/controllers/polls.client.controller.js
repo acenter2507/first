@@ -383,6 +383,9 @@
       }
       Action.save_vote(ctrl.ownVote, ctrl.selectedOpts, ctrl.poll)
         .then(res => {
+          if (!ctrl.ownVote._id) {
+            ctrl.poll.voteCnt += 1;
+          }
           ctrl.ownVote = res;
           ctrl.votedOpts = _.clone(ctrl.selectedOpts);
           handleLoadNewVoteInfo();

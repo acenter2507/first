@@ -130,7 +130,9 @@
         type: 'pie',
         options: {
           responsive: true,
-          tooltipCaretSize: 0
+          tooltips: {
+            caretSize: 0
+          }
         },
         colors: [],
         labels: [],

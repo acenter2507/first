@@ -828,9 +828,8 @@
     };
 
     // Share
-    $scope.share = provider => {
+    ctrl.handleSharePoll = provider => {
       var url = $location.absUrl();
-      // var url = 'http://notatsujapan.com';
       var text = ctrl.poll.title;
       if (provider === 'facebook') {
         Socialshare.share({

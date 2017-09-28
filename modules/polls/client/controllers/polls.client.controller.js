@@ -780,8 +780,10 @@
       }
       ctrl.like_processing = true;
       console.log(type);
+      console.log(cmt);
       Action.save_like_cmt(cmt, type)
         .then(res => {
+          console.log(res);
           cmt.like = res.like;
           cmt.likeCnt = res.likeCnt;
           ctrl.like_processing = false;

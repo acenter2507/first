@@ -129,10 +129,8 @@
       ctrl.chart = {
         type: 'pie',
         options: {
-          responsive: true,
-          tooltipFontSize: 10,
-          tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value %>hrs",
-          percentageInnerCutout: 70
+          fullWidth: true,
+          tooltipFontSize: 10
         },
         colors: [],
         labels: [],

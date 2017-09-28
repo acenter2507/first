@@ -132,6 +132,7 @@
           responsive: true,
           tooltipFontSize: 10,
           tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value %>hrs",
+          percentageInnerCutout: 70
         },
         colors: [],
         labels: [],

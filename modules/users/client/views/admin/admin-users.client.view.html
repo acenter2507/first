@@ -1,8 +1,9 @@
 <div class="row">
+  <!-- Filter  -->
   <div class="card card-expand">
 
     <div class="card-header">
-      <strong class="card-title"><i class="fa fa-filter"></i> Filter tools</strong>
+      <strong class="card-title">Filter tools</strong>
       <a class="card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
       <div class="clearfix"></div>
     </div>
@@ -11,12 +12,12 @@
       <div class="row">
         <div class="form-group col-sm-6">
           <label for="search">Search</label>
-          <input name="search" id="search" class="form-control" type="text" ng-model="filter.search" placeholder="Search" ng-change="figureOutItemsToDisplay()"
-          />
+          <input name="search" id="search" class="form-control input-sm" type="text" ng-model="filter.search" placeholder="Search"
+            ng-change="figureOutItemsToDisplay()" />
         </div>
         <div class="form-group col-sm-6">
           <label for="sort">Sort by</label>
-          <select id="sort" name="sort" class="form-control" ng-model="filter.sort" ng-change="figureOutItemsToDisplay()">
+          <select id="sort" name="sort" class="form-control input-sm" ng-model="filter.sort" ng-change="figureOutItemsToDisplay()">
               <option value>Default</option>
               <option value="-created">Newest to oldest</option>
               <option value="created">Oldest to newest</option>
@@ -88,13 +89,12 @@
     </div>
   </div>
 </div>
+
 <div class="row">
-
   <div class="card">
-
     <div class="card-header">
       <strong class="card-title"><i class="fa fa-list-alt"></i> List user</strong>
-      <a class="card-link" ui-sref="admin.users.new"><i class="fa fa-plus"></i></a>
+      <a class="card-link" ui-sref="admin.users.new">Add new</a>
       <div class="clearfix"></div>
     </div>
     <hr class="mgn">
@@ -105,6 +105,7 @@
             <tr>
               <th class="text-center"><i class="icon-people"></i></th>
               <th>Display Name</th>
+              <th>Email</th>
               <th>Joined date</th>
               <th>Role</th>
               <th class="text-center">Provider</th>
@@ -112,7 +113,6 @@
               <th class="text-center">Comments count</th>
               <th class="text-center">Profiles views</th>
               <th class="text-center">Be reported</th>
-              <th>Activity</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -122,34 +122,17 @@
                 <i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i>
               </td>
             </tr>
-            <tr ng-show="pagedItems.length === 0 && !busy">
-              <td class="text-center" colspan="11">Has no data found.</td>
-            </tr>
             <tr ng-repeat="user in pagedItems">
               <td class="text-center">
                 <div class="admin-avatar">
-                  <img src="{{ user.profileImageURL }}" alt="{{ user.displayName }}" class="img-admin-avatar">
-                  <span class="admin-avatar-status" ng-class="{
-                        'badge-success' : user.status === 'active',
-                        'badge-warning' : user.status == 'away',
-                        'badge-danger'  : user.status == 'busy',
-                        'badge-default' : user.status == 'offline' }">
-                    </span>
+                  <img src="{{:: user.profileImageURL }}" class="img-admin-avatar">
                 </div>
               </td>
 
-              <td>
-                <div>{{ user.displayName }}</div>
-                <div class="text-muted">
-                  <small>{{ user.email }}</small>
-                </div>
-              </td>
-              <td>
-                <span ng-bind="user.created | LL_format"></span>
-              </td>
-              <td>
-                <span ng-bind="user.roles"></span>
-              </td>
+              <td>{{:: user.displayName }}</td>
+              <td>{{:: user.email }}</td>
+              <td>{{:: user.created | LLL_format }}</td>
+              <td>{{:: user.roles }}</td>
               <td class="text-center">
                 <i class="fa" ng-class="{ 'fa fa-facebook-square' : user.provider === 'facebook',
                     'fa fa-twitter-square' : user.provider === 'twitter',
@@ -159,24 +142,16 @@
                     'fa fa-sign-in' : user.provider === 'local'}">
                 </i>
               </td>
-              <td class="text-center">{{ user.report.pollCnt | shortNumber }}</td>
-              <td class="text-center">{{ user.report.cmtCnt | shortNumber }}</td>
-              <td class="text-center">{{ user.report.viewCnt | shortNumber }}</td>
-              <td class="text-center">{{ user.bereportCnt | shortNumber }}</td>
-              <td>
-                <div class="text-muted"><small>Last login</small></div>
-                <strong ng-bind="user.lastLogin | LLL_format"></strong>
-              </td>
+              <td class="text-center">{{:: user.report.pollCnt }}</td>
+              <td class="text-center">{{:: user.report.cmtCnt }}</td>
+              <td class="text-center">{{:: user.report.viewCnt }}</td>
+              <td class="text-center">{{:: user.bereportCnt }}</td>
               <td>
                 <div class="btn-group" role="group">
-                  <a ui-sref="admin.users.view({ userId: user._id })"><i class="icon-eye icons"></i>
-                  </a>
-                  <a class="mg5l" ui-sref="admin.users.edit({ userId: user._id })"><i class="icon-note icons"></i>
-                  </a>
-                  <a class="mg5l" ng-click="remove(user)"><i class="icon-trash icons"></i>
-                  </a>
-                  <a ng-if="user.provider === 'local'" class="mg5l" ui-sref="admin.users.resetpass({ userId: user._id })"><i class="icon-refresh icons"></i>
-                  </a>
+                  <a ui-sref="admin.users.view({ userId: user._id })" class="btn btn-primary btn-xs"><i class="fa fa-info"></i></a>
+                  <a ui-sref="admin.users.edit({ userId: user._id })" class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o"></i></a>
+                  <a ng-click="ctrl.handleDeleteUser(user)" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+                  <a ng-if="user.provider === 'local'" ui-sref="admin.users.resetpass({ userId: user._id })" class="btn btn-primary btn-xs"><i class="fa fa-refresh"></i></a>
                 </div>
               </td>
             </tr>
@@ -189,6 +164,7 @@
     </div>
   </div>
 </div>
+
 <script type="text/ng-template" id="bottom-template-url">
   <button class="btn btn-info btn-sm btn-block" ng-click="filter.created = undefined">
     Clear

@@ -16,6 +16,7 @@ angular.module('users.admin.routes').config(['$stateProvider',
         url: '/list',
         templateUrl: 'modules/users/client/views/admin/admin-users.client.view.html',
         controller: 'AdminUserListController',
+        controllerAs: 'ctrl',
         ncyBreadcrumb: {
           label: 'List'
         }

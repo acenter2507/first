@@ -129,10 +129,7 @@
       ctrl.chart = {
         type: 'pie',
         options: {
-          responsive: true,
-          scale: {
-            lineArc: false // changes the scale between two modes. Is true for the polar area chart
-          }
+          responsive: true
         },
         colors: [],
         labels: [],

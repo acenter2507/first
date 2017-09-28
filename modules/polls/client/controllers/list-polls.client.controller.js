@@ -233,8 +233,8 @@
     };
     // Share
     $scope.share = (poll, provider) => {
-      var url = $location.absUrl() + '/' + poll.slug;
-      // var url = 'http://notatsujapan.com';
+      var url = $location.absUrl() + '/polls/' + poll.slug;
+      console.log(provider);
       var text = poll.title;
       if (provider === 'facebook') {
         Socialshare.share({

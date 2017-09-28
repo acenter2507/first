@@ -596,7 +596,17 @@
           .then(res => { // lấy thông tin vote
             ctrl.chart = {
               type: 'pie',
-              options: { responsive: true },
+              options: {
+                responsive: true,
+                scales: {
+                  xAxes: [{
+                    display: false
+                  }],
+                  yAxes: [{
+                    display: false
+                  }],
+                }
+              },
               colors: [],
               labels: [],
               data: []
@@ -843,7 +853,7 @@
           'provider': 'facebook',
           'attrs': {
             'socialshareUrl': url,
-            'socialshareHashtags': 'hanhatlenh',
+            'socialshareHashtags': 'blablaer',
             'socialshareQuote': text,
             'socialshareMobileiframe': true,
             'socialshareText': text
@@ -861,7 +871,7 @@
           'provider': provider,
           'attrs': {
             'socialshareUrl': url,
-            'socialshareHashtags': 'hanhatlenh',
+            'socialshareHashtags': 'blablaer',
             'socialshareText': text
           }
         });

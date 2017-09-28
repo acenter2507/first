@@ -781,9 +781,7 @@
       ctrl.like_processing = true;
       Action.save_like_cmt(cmt, type)
         .then(res => {
-          console.log(res.like);
-          console.log(res.likeCnt);
-          cmt.like = res.like;
+          cmt.like = res.like || {};
           cmt.likeCnt = res.likeCnt;
           ctrl.like_processing = false;
         })

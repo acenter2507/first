@@ -456,8 +456,7 @@
           rs_like.$save(successCb, successCb);
         }
         function successCb(res) {
-          console.log(res);
-          //return resolve(res);
+          return resolve(res);
         }
         function errorCb(err) {
           return reject(err);

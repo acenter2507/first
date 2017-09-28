@@ -11,7 +11,8 @@ var _ = require('lodash'),
 var validFormats = ['combined', 'common', 'dev', 'short', 'tiny'];
 var log4jsConfig = {
   appenders: [
-    { type: 'console' }, {
+    { type: 'console' },
+    {
       type: 'dateFile',
       category: ['System'],
       filename: 'logs/system.log',
@@ -33,7 +34,32 @@ var log4jsConfig = {
   // logger.error('Cheese is too ripe!');
   // logger.fatal('Cheese was breeding ground for listeria.');
 };
-log4js.configure(log4jsConfig);
+log4js.configure({
+  appenders: {
+    systemLog: {
+      type: 'dateFile',
+      filename: 'logs/system.log',
+      pattern: '.yyyy-MM-dd',
+      alwaysIncludePattern: true
+    },
+    debugLog: {
+      type: 'dateFile',
+      filename: 'logs/debug.log',
+      pattern: '.yyyy-MM-dd',
+      alwaysIncludePattern: true
+    }
+  },
+  categories: {
+    system: { appenders: ['systemLog'], level: 'error' },
+    debug: { appenders: ['debugLog'], level: 'trace' }
+  }
+  // logger.trace('Entering cheese testing');
+  // logger.debug('Got cheese.');
+  // logger.info('Cheese is Gouda.');
+  // logger.warn('Cheese is quite smelly.');
+  // logger.error('Cheese is too ripe!');
+  // logger.fatal('Cheese was breeding ground for listeria.');
+});
 /**
  * MORGAN LOG FORMAT
  */
@@ -126,8 +152,8 @@ var logger = {
     getOptions: getLogOptions // log options to use
   },
   log4jLog: {
-    system: log4js.getLogger('System'),
-    debug: log4js.getLogger('Debug'),
+    system: log4js.getLogger('system'),
+    debug: log4js.getLogger('debug'),
   }
 };
 

@@ -104,6 +104,7 @@
       // Thiết lập title page = poll title
       $scope.page_name = ctrl.poll.title;
       $scope.page_title = ($scope.Notifications.notifCnt > 0) ? ('(' + $scope.Notifications.notifCnt + ') ' + $scope.page_name) : ('' + $scope.page_name);
+      console.log($scope.page_title);
       // Lấy thông tin tương tác của người dùng với poll hiện tại
       prepareOwnerInfo().then(() => {
         // Kiểm tra giá trị vote

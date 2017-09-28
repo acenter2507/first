@@ -10,38 +10,39 @@ angular.module('polls').controller('PollsSearchController', [
   'ngDialog',
   'Profile',
   function ($location, $scope, $state, Action, Storages, Constants, dialog, Profile) {
-    $scope.form = {};
+    var ctrl = this;
+    ctrl.form = {};
 
     // Ngôn ngữ đang sử dụng
-    $scope.language = Storages.get_local(Constants.storages.language);
-    $scope.condition = { language: $scope.language };
+    ctrl.language = Storages.get_local(Constants.storages.language);
+    ctrl.condition = { language: ctrl.language };
+    ctrl.polls = [];
     $scope.busy = false;
-    $scope.polls = [];
 
     initCondition();
     function initCondition() {
       var param = $location.search();
       if (_.isEmpty(param)) {
-        $scope.condition = JSON.parse(Storages.get_local(Constants.storages.public_search_condition, JSON.stringify({})));
-        if ($scope.condition.by) {
-          Profile.get({ userId: $scope.condition.by }, _user => {
+        ctrl.condition = JSON.parse(Storages.get_local(Constants.storages.public_search_condition, JSON.stringify({})));
+        if (ctrl.condition.by) {
+          Profile.get({ userId: ctrl.condition.by }, _user => {
             $scope.selectedUser = _user;
           });
         }
       } else {
-        _.extend($scope.condition, param);
+        _.extend(ctrl.condition, param);
       }
       if (!_.isEmpty(param)) {
         search();
       }
     }
 
-    $scope.search = search;
+    ctrl.handleSearch = handleSearch;
     function handleSearch() {
       if ($scope.busy === true) return;
       $scope.busy = true;
-      $scope.polls = [];
-      Action.search($scope.condition)
+      ctrl.polls = [];
+      Action.search(ctrl.condition)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
             $scope.busy = false;
@@ -55,14 +56,14 @@ angular.module('polls').controller('PollsSearchController', [
         })
         .then(results => {
           // Gán data vào list hiện tại
-          $scope.polls = results || [];
+          ctrl.polls = results || [];
           $scope.busy = false;
         })
         .catch(err => {
           $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
           $scope.busy = false;
         });
-      Storages.set_local(Constants.storages.public_search_condition, JSON.stringify($scope.condition));
+      Storages.set_local(Constants.storages.public_search_condition, JSON.stringify(ctrl.condition));
     }
 
     function prepareShowingData(poll) {
@@ -71,23 +72,23 @@ angular.module('polls').controller('PollsSearchController', [
         return resolve(poll);
       });
     }
-    $scope.clear_filter = () => {
-      $scope.condition = { language: $scope.language };
+    ctrl.handleClearCondition = () => {
+      ctrl.condition = { language: ctrl.language };
       $scope.selectedUser = undefined;
       $scope.$broadcast('angucomplete-alt:clearInput');
     };
-    $scope.clear_created_start = () => {
-      delete $scope.condition.created_start;
+    ctrl.handleClearStartDate = () => {
+      delete ctrl.condition.created_start;
     };
-    $scope.clear_created_end = () => {
-      delete $scope.condition.created_end;
+    ctrl.handleClearEndDate = () => {
+      delete ctrl.condition.created_end;
     };
-    $scope.selectedUserFn = function (selected) {
+    ctrl.selectedUserFn = function (selected) {
       if (selected) {
-        $scope.condition.by = selected.originalObject._id;
+        ctrl.condition.by = selected.originalObject._id;
         $scope.selectedUser = selected.originalObject;
       } else {
-        delete $scope.condition.by;
+        delete ctrl.condition.by;
         $scope.selectedUser = undefined;
       }
     };
@@ -104,7 +105,7 @@ angular.module('polls').controller('PollsSearchController', [
         type: 3,
         button: 'LB_DELETE'
       }, confirm => {
-        $scope.polls = _.without($scope.polls, poll);
+        ctrl.polls = _.without(ctrl.polls, poll);
         Action.delete_poll(poll);
       });
     };

@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
   angular.module('polls').config(routeConfig);
 
@@ -69,6 +69,7 @@
         url: '/search?key?in?status?sort?by?ctgr?created_start?created_end?allow_multiple?allow_add?allow_guest?cmts_pref?cmts?likes_pref?likes?votes_pref?votes?views_pref?views',
         templateUrl: 'modules/polls/client/views/search.client.view.html',
         controller: 'PollsSearchController',
+        controllerAs: 'ctrl',
         data: {
           pageTitle: 'Search'
         }
@@ -89,7 +90,7 @@
       notifId: $stateParams.notif
     }).$promise : null;
   }
-  
+
   newPoll.$inject = ['PollsService'];
 
   function newPoll(PollsService) {

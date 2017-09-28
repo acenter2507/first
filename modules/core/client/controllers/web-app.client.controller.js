@@ -14,7 +14,8 @@ angular.module('core').controller('WebAppController', [
   'toastr',
   '$http',
   'ngDialog',
-  function ($scope, Authentication, Notifications, Socket, Categorys, $translate, amMoment, $window, Storages, Constants, toastr, $http, dialog) {
+  'Socialshare',
+  function ($scope, Authentication, Notifications, Socket, Categorys, $translate, amMoment, $window, Storages, Constants, toastr, $http, dialog, Socialshare) {
     // User info
     $scope.Authentication = Authentication;
     $scope.Notifications = Notifications;

@@ -15,7 +15,6 @@
     'Action',
     'ngDialog',
     '$stateParams',
-    'Socialshare',
     'Notifications'
   ];
 
@@ -30,7 +29,6 @@
     Action,
     dialog,
     $stateParams,
-    Socialshare,
     Notifications
   ) {
     var ctrl = this;

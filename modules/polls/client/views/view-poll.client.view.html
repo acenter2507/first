@@ -54,7 +54,7 @@
                 </md-menu>
                 <p class="poll-info-title-close">
                   <i class="fa fa-calendar"></i>
-                  <span ng-if="ctrl.poll.close">{{:: 'LB_CM_CLOSE' | translate }} <span am-time-ago="ctrl.poll.close"></span></span>
+                  <span ng-if="ctrl.poll.close">{{:: 'LB_CLOSE' | translate }} <span am-time-ago="ctrl.poll.close"></span></span>
                   <span ng-if="!ctrl.poll.close">{{:: 'LB_CM_UNLIMIT' | translate }}</span>
                 </p>
               </div>
@@ -343,6 +343,7 @@
 <div class="aside-panel">
   <div ng-include="'/modules/polls/client/views/new-opt.client.view.html'"></div>
 </div>
+
 <!-- Temlate lấy link vote option -->
 <script type="text/ng-template" id="getLinkOptionTemplate">
   <div class="ngdialog-message">
@@ -358,7 +359,7 @@
     <input class="form-control" ng-model="linkOptionData.url">
 
     <div class="ngdialog-buttons mg10t">
-      <button class="btn btn-default pull-right" ng-click="closeThisDialog()">{{:: 'LB_DONE' | translate }}</button>
+      <button class="btn btn-default pull-right" ng-click="closeThisDialog()">{{:: 'LB_CLOSE' | translate }}</button>
       <button class="btn btn-primary pull-right mg5r" copy-to-clipboard text-to-copy="linkOptionData.url">{{:: 'LB_COPY' | translate }}</button>
     </div>
   </div>

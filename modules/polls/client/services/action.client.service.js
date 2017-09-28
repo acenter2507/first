@@ -408,6 +408,7 @@
               _id: cmt.like._id,
               cnt: cnt
             });
+            console.log('Xóa like hoặc dislike');
             return rs_like.$remove(successCb, successCb);
           } else {
             // Trường hợp đổi button
@@ -418,6 +419,7 @@
               type: type,
               cnt: cnt
             });
+            console.log('Hoán đổi like hoặc dislike');
             return rs_like.$update(successCb, successCb);
           }
 
@@ -453,7 +455,8 @@
             type: type,
             cnt: cnt
           });
-          rs_like.$save(successCb, successCb);
+          console.log('Tạo mới like hoặc dislike');
+          return rs_like.$save(successCb, successCb);
         }
         function successCb(res) {
           return resolve(res);

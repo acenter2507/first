@@ -598,8 +598,14 @@
               type: 'pie',
               options: {
                 responsive: true,
-                scale: {
-                  display: false
+                scales:
+                {
+                  xAxes: [{
+                    display: false
+                  }],
+                  yAxes: [{
+                    display: false
+                  }],
                 }
               },
               colors: [],

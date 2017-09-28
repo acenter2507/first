@@ -129,7 +129,8 @@
       ctrl.chart = {
         type: 'pie',
         options: {
-          responsive: true
+          responsive: true,
+          scaleShowLabels: false
         },
         colors: [],
         labels: [],
@@ -594,27 +595,6 @@
       return new Promise((resolve, reject) => {
         Action.get_voteopts(ctrl.poll._id)
           .then(res => { // lấy thông tin vote
-            ctrl.chart = {
-              type: 'pie',
-              options: {
-                responsive: true,
-                scales: {
-                  xAxes: [{
-                    gridLines: {
-                      color: 'transparent'
-                    }
-                  }],
-                  yAxes: [{
-                    gridLines: {
-                      color: 'transparent'
-                    }
-                  }]
-                }
-              },
-              colors: [],
-              labels: [],
-              data: []
-            };
             ctrl.votes = res.data.votes || [];
             ctrl.voteopts = res.data.voteopts || [];
             ctrl.votedTotal = ctrl.voteopts.length;

@@ -560,6 +560,7 @@ a {
   #toast-container .toast:hover {
     box-shadow: 0 0 5px #000000; }
   .toast-close-button {
+    margin-right: 0.4rem;
     font-size: 1rem;
     opacity: 0.5; }
   .toast-close-button:hover {

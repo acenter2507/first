@@ -4,7 +4,7 @@
     <a class="card-link font-sm" ui-sref="polls.report({ pollId: ctrl.poll.slug })" target="_blank">{{:: 'LB_POLL_CHART_REPORT' | translate }}</a>
   </div>
   <div class="card-body">
-    <canvas style="background: transparent" id="pie" class="chart-base" chart-data="ctrl.chart.data" chart-labels="ctrl.chart.labels"
+    <canvas id="pie" chart-data="ctrl.chart.data" chart-labels="ctrl.chart.labels"
       chart-options="ctrl.chart.options" chart-colors="ctrl.chart.colors" chart-type="ctrl.chart.type" ng-if="ctrl.votedTotal > 0">
     </canvas>
 

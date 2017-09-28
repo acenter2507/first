@@ -37,7 +37,7 @@ angular.module('polls').controller('PollsSearchController', [
     }
 
     $scope.search = search;
-    function search() {
+    function handleSearch() {
       if ($scope.busy === true) return;
       $scope.busy = true;
       $scope.polls = [];

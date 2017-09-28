@@ -2,9 +2,9 @@
   'use strict';
   angular
     .module('polls.admin')
-    .controller('AdminPollsListController', AdminPollsListController);
+    .controller('AdminPollsController', AdminPollsController);
 
-  AdminPollsListController.$inject = [
+    AdminPollsController.$inject = [
     '$state',
     '$scope',
     '$window',
@@ -17,7 +17,7 @@
     'Action'
   ];
 
-  function AdminPollsListController(
+  function AdminPollsController(
     $state,
     $scope,
     $window,

@@ -12,34 +12,24 @@
       .state('admin.polls', {
         url: '/polls',
         abstract: true,
-        template: '<ui-view></ui-view>',
-        ncyBreadcrumb: {
-          label: 'Polls'
-        }
+        template: '<ui-view></ui-view>'
       })
       .state('admin.polls.list', {
         url: '/list',
-        templateUrl: 'modules/polls/client/views/admin/list-polls.client.view.html',
-        controller: 'AdminPollsListController',
-        controllerAs: 'vm',
-        ncyBreadcrumb: {
-          label: 'List'
-        }
+        templateUrl: 'modules/polls/client/views/admin/admin-polls.client.view.html',
+        controller: 'AdminPollsController',
+        controllerAs: 'ctrl',
+        data: { roles: ['admin'] }
       })
       .state('admin.polls.view', {
         url: '/:pollId',
-        templateUrl: 'modules/polls/client/views/admin/view-poll.client.view.html',
+        templateUrl: 'modules/polls/client/views/admin/admin-view-poll.client.view.html',
         controller: 'AdminPollController',
-        controllerAs: 'vm',
+        controllerAs: 'ctrl',
         resolve: {
           pollResolve: getPoll
         },
-        data: {
-          pageTitle: 'View poll'
-        },
-        ncyBreadcrumb: {
-          label: 'View'
-        }
+        data: { roles: ['admin'] }
       });
   }
 

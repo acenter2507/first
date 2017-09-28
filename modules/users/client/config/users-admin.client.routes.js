@@ -7,22 +7,21 @@ angular.module('users.admin.routes').config(['$stateProvider',
       .state('admin.users', {
         url: '/users',
         abstract: true,
-        template: '<ui-view></ui-view>',
-        ncyBreadcrumb: {
-          label: 'Users'
-        }
+        template: '<ui-view></ui-view>'
       })
       .state('admin.users.list', {
         url: '/list',
         templateUrl: 'modules/users/client/views/admin/admin-users.client.view.html',
         controller: 'AdminUsersController',
-        controllerAs: 'ctrl'
+        controllerAs: 'ctrl',
+        data: { roles: ['admin'] }
       })
       .state('admin.users.new', {
         url: '/new',
         templateUrl: 'modules/users/client/views/admin/admin-form-user.client.view.html',
         controller: 'AdminUserController',
         controllerAs: 'ctrl',
+        data: { roles: ['admin'] },
         resolve: {
           userResolve: ['AdminUserService', function (AdminUserService) {
             return new AdminUserService();
@@ -34,6 +33,7 @@ angular.module('users.admin.routes').config(['$stateProvider',
         templateUrl: 'modules/users/client/views/admin/admin-view-user.client.view.html',
         controller: 'AdminViewUserController',
         controllerAs: 'ctrl',
+        data: { roles: ['admin'] },
         resolve: {
           userResolve: ['$stateParams', 'AdminUserService', function ($stateParams, AdminUserService) {
             return AdminUserService.get({
@@ -47,6 +47,7 @@ angular.module('users.admin.routes').config(['$stateProvider',
         templateUrl: 'modules/users/client/views/admin/admin-form-user.client.view.html',
         controller: 'AdminUserController',
         controllerAs: 'ctrl',
+        data: { roles: ['admin'] },
         resolve: {
           userResolve: ['$stateParams', 'AdminUserService', function ($stateParams, AdminUserService) {
             return AdminUserService.get({
@@ -60,6 +61,7 @@ angular.module('users.admin.routes').config(['$stateProvider',
         templateUrl: 'modules/users/client/views/admin/admin-resetpass-user.client.view.html',
         controller: 'AdminUserController',
         controllerAs: 'ctrl',
+        data: { roles: ['admin'] },
         resolve: {
           userResolve: ['$stateParams', 'AdminUserService', function ($stateParams, AdminUserService) {
             return AdminUserService.get({

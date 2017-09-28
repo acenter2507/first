@@ -129,15 +129,7 @@
       ctrl.chart = {
         type: 'pie',
         options: {
-          layout: {
-            padding: {
-              bottom: 25  //set that fits the best
-            }
-          },
-          responsive: false,
-          tooltips: {
-            height: 100
-          }
+          responsive: true
         },
         colors: [],
         labels: [],

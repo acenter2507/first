@@ -2,7 +2,7 @@
 
 //TODO this should be Users service
 angular.module('users.admin')
-  .factory('AdminUserService', admAdminUserServicein)
+  .factory('AdminUserService', AdminUserService)
   .factory('AdminUserApi', AdminUserApi);
 
 AdminUserService.$inject = ['$resource'];

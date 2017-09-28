@@ -129,9 +129,16 @@
       ctrl.chart = {
         type: 'pie',
         options: {
-          // fullWidth: true,
-          // tooltipFontSize: 10
-          legend: { display: false }
+          layout: {
+            padding: {
+              bottom: 25  //set that fits the best
+            }
+          },
+          responsive: false,
+          tooltips: {
+            yAlign: 'top',
+            xAlign: 'center'
+          }
         },
         colors: [],
         labels: [],

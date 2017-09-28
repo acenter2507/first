@@ -158,7 +158,7 @@
       </span>
       <br>
       <p class="text-justify" ng-bind-html="cmt.body | nl2br"></p>
-      <small class="like_tools pull-right">
+      <small class="like_tools pull-right" ng-if="cmt.user._id !== user._id">
         <a ng-click="ctrl.handleLikeComment(cmt, 1)" ng-class="{'text-muted': cmt.like.type !== 1}"><i class="fa fa-thumbs-o-up"></i> {{:: 'LB_LIKE' | translate }}</a>
         <span class="mg5l mg5r highlight-text" ng-bind="cmt.likeCnt | shortNumber"></span>
         <a ng-click="ctrl.handleLikeComment(cmt, 2)" ng-class="{'text-muted': cmt.like.type !== 1}"><i class="fa fa-thumbs-o-down"></i> {{:: 'LB_DISLIKE' | translate }}</a>

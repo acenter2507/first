@@ -470,7 +470,6 @@
     // Người dùng click button like poll
     ctrl.handleLikePoll = handleLikePoll;
     function handleLikePoll(type) {
-      console.log(type);
       if (!$scope.isLogged) {
         $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;
@@ -487,7 +486,7 @@
       Action.save_like(ctrl.like, type, ctrl.poll)
         .then(res => {
           ctrl.poll.likeCnt = res.likeCnt;
-          ctrl.like = res.like;
+          ctrl.like = res.like || {};
           ctrl.like_processing = false;
           if (!$scope.$$phase) $scope.$digest();
         })

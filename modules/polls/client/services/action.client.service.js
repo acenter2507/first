@@ -266,39 +266,57 @@
     this.save_like = (like, type, poll) => {
       // type: 1: like - 2: dislike;
       return new Promise((resolve, reject) => {
-        var cnt = 0;
         var rs_like;
         if (like._id) {
-          switch (like.type) {
-            case 0:
-              cnt = type === 1 ? 1 : -1;
-              like.type = type;
-              break;
-
-            case 1:
-              cnt = type === 1 ? -1 : -2;
-              like.type = type === 1 ? 0 : 2;
-              break;
-
-            case 2:
-              cnt = type === 1 ? 2 : 1;
-              like.type = type === 1 ? 1 : 0;
-              break;
+          // Bấm lặp lại button
+          if (like.type === type) {
+            rs_like = new Likes({ _id: like._id });
+            return rs_like.$remove(successCb, successCb);
+          } else {
+            // Trường hợp đổi button
+            rs_like = new Likes({ _id: like._id, type: type });
+            return rs_like.$update(successCb, successCb);
           }
-          rs_like = new Likes(like);
-          rs_like.cnt = cnt;
-          rs_like.type = like.type;
-          rs_like.$update(successCb, successCb);
         } else {
-          cnt = type === 1 ? 1 : -1;
-          rs_like = new Likes({
-            poll: poll._id,
-            type: type
-          });
-          rs_like.cnt = cnt;
-          rs_like.$save(successCb, successCb);
+          rs_like = new Likes({ poll: poll._id, type: type });
+          return rs_like.$save(successCb, successCb);
         }
+
+
+        // var cnt = 0;
+        // var rs_like;
+        // if (like._id) {
+        //   switch (like.type) {
+        //     case 0:
+        //       cnt = type === 1 ? 1 : -1;
+        //       like.type = type;
+        //       break;
+
+        //     case 1:
+        //       cnt = type === 1 ? -1 : -2;
+        //       like.type = type === 1 ? 0 : 2;
+        //       break;
+
+        //     case 2:
+        //       cnt = type === 1 ? 2 : 1;
+        //       like.type = type === 1 ? 1 : 0;
+        //       break;
+        //   }
+        //   rs_like = new Likes(like);
+        //   rs_like.cnt = cnt;
+        //   rs_like.type = like.type;
+        //   rs_like.$update(successCb, successCb);
+        // } else {
+        //   cnt = type === 1 ? 1 : -1;
+        //   rs_like = new Likes({
+        //     poll: poll._id,
+        //     type: type
+        //   });
+        //   rs_like.cnt = cnt;
+        //   rs_like.$save(successCb, successCb);
+        // }
         function successCb(res) {
+          if (!res.like) return resolve(res);
           if (Authentication.user) {
             Socket.emit('poll_like', {
               pollId: poll._id,
@@ -308,7 +326,7 @@
               type: res.like.type
             });
           }
-          resolve(res);
+          return resolve(res);
         }
         function errorCb(err) {
           reject(err);
@@ -397,62 +415,19 @@
     this.save_like_cmt = (cmt, type) => {
       // type: 1: like - 2: dislike;
       return new Promise((resolve, reject) => {
-        var cnt = 0;
         var rs_like;
         if (cmt.like._id) {
           // Bấm lặp lại button
           if (cmt.like.type === type) {
-            // Trừ nếu là hết thích, cộng lại nếu hết không thích
-            
             rs_like = new Cmtlikes({ _id: cmt.like._id });
-            console.log('Xóa like hoặc dislike');
             return rs_like.$remove(successCb, successCb);
           } else {
             // Trường hợp đổi button
-            // Hoán đổi 2 đơn vị
-            cnt = (type === 1) ? 2 : -2;
-            rs_like = new Cmtlikes({
-              _id: cmt.like._id,
-              type: type,
-              cnt: cnt
-            });
-            console.log('Hoán đổi like hoặc dislike');
+            rs_like = new Cmtlikes({ _id: cmt.like._id, type: type });
             return rs_like.$update(successCb, successCb);
           }
-
-
-          // switch (cmt.like.type) {
-          //   case 0: {
-          //     console.log('0');
-          //     cnt = type === 1 ? 1 : -1;
-          //     cmt.like.type = type;
-          //   } break;
-
-          //   case 1: {
-          //     console.log('1', rs_like);
-          //     cnt = type === 1 ? -1 : -2;
-          //     cmt.like.type = type === 1 ? 0 : 2;
-          //   } break;
-
-          //   case 2: {
-          //     console.log('2', rs_like);
-          //     cnt = type === 1 ? 2 : 1;
-          //     cmt.like.type = type === 1 ? 1 : 0;
-          //   } break;
-          // }
-          // rs_like = new Cmtlikes(cmt.like);
-          // rs_like.cnt = cnt;
-          // rs_like.cnt = cmt.like.type;
-          // console.log('Old', rs_like);
-          //rs_like.$update(successCb, successCb);
         } else {
-          cnt = (type === 1) ? 1 : -1;
-          rs_like = new Cmtlikes({
-            cmt: cmt._id,
-            type: type,
-            cnt: cnt
-          });
-          console.log('Tạo mới like hoặc dislike');
+          rs_like = new Cmtlikes({ cmt: cmt._id, type: type });
           return rs_like.$save(successCb, successCb);
         }
         function successCb(res) {

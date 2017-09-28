@@ -16,7 +16,7 @@ var path = require('path'),
 exports.create = function (req, res) {
   var cmtlike = new Cmtlike(req.body);
   cmtlike.user = req.user;
-  var cnt = req.body.cnt || 0;
+  var cnt = (cmtlike.type === 1) ? 1 : -1;
   cmtlike.save()
     .then(_cmtlike => {
       cmtlike = _cmtlike;
@@ -55,13 +55,15 @@ exports.read = function (req, res) {
  */
 exports.update = function (req, res) {
   var cmtlike = req.cmtlike;
+  // Hoán đổi 2 đơn vị
+  var cnt = (cmtlike.type === 1) ? -2 : 2;
 
-  console.log(req.body);
   cmtlike = _.extend(cmtlike, req.body);
-  var cnt = req.body.cnt || 0;
   cmtlike.save()
     .then(_cmtlike => {
       cmtlike = _cmtlike;
+      // Bỏ phần thông tin user thừa
+      cmtlike.user = _cmtlike.user._id || _cmtlike.user;
       var cmtId = cmtlike.cmt._id || cmtlike.cmt;
       return Cmt.countLike(cmtId, cnt);
     }, handleError)

@@ -15,12 +15,13 @@ var path = require('path'),
  */
 exports.create = function(req, res) {
   var like = new Like(req.body);
-  var cnt = req.body.cnt || 0;
+  var cnt = (like.type === 1) ? 1 : -1;
   like.user = req.user;
 
   like.save()
     .then(_like => {
       like = _like;
+      like.user = _like.user._id || _like.user;
       var pollId = _like.poll._id || _like.poll;
       return Poll.countLike(pollId, cnt);
     }, handleError)
@@ -54,13 +55,15 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
   var like = req.like;
+  // Hoán đổi 2 đơn vị
+  var cnt = (like.type === 1) ? -2 : 2;
 
   like = _.extend(like, req.body);
-  var cnt = req.body.cnt || 0;
 
   like.save()
     .then(_like => {
       like = _like;
+      like.user = _like.user._id || _like.user;
       var pollId = _like.poll._id || _like.poll;
       return Poll.countLike(pollId, cnt);
     }, handleError)
@@ -80,6 +83,22 @@ exports.update = function(req, res) {
  */
 exports.delete = function(req, res) {
   var like = req.like;
+  var cnt = (like.type === 1) ? -1 : 1;
+
+  like.remove()
+    .then(() => {
+      var pollId = like.poll._id || like.poll;
+      return Poll.countLike(pollId, cnt);
+    }, handleError)
+    .then(_poll => {
+      res.jsonp({ likeCnt: _poll.likeCnt });
+    }, handleError);
+
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 
   like.remove(function(err) {
     if (err) {

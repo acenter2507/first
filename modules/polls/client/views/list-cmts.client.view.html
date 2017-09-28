@@ -73,6 +73,7 @@
       <p class="text-justify" ng-bind-html="cmt.body | nl2br"></p>
       <small class="like_tools pull-right">
         <span ng-if="cmt.user._id !== user._id" class="span_btn" ng-click="ctrl.handleLikeComment(cmt, 1)" ng-class="{'highlight-text': cmt.like.type === 1}"><i class="fa fa-thumbs-o-up"></i> {{:: 'LB_LIKE' | translate }}</span>
+        <i ng-if="cmt.user._id !== user._id" class="fa fa-thumbs-o-up"></i>
         <span class="mg5l mg5r highlight-text" ng-bind="cmt.likeCnt | shortNumber"></span>
         <span ng-if="cmt.user._id !== user._id" class="span_btn" ng-click="ctrl.handleLikeComment(cmt, 2)" ng-class="{'highlight-text': cmt.like.type === 2}"><i class="fa fa-thumbs-o-down"></i> {{:: 'LB_DISLIKE' | translate }}</span>
       </small>
@@ -160,6 +161,7 @@
       <p class="text-justify" ng-bind-html="cmt.body | nl2br"></p>
       <small class="like_tools pull-right">
         <span ng-if="cmt.user._id !== user._id" class="span_btn" ng-click="ctrl.handleLikeComment(cmt, 1)" ng-class="{'highlight-text': cmt.like.type === 1}"><i class="fa fa-thumbs-o-up"></i> {{:: 'LB_LIKE' | translate }}</span>
+        <i ng-if="cmt.user._id !== user._id" class="fa fa-thumbs-o-up"></i>
         <span class="mg5l mg5r highlight-text" ng-bind="cmt.likeCnt | shortNumber"></span>
         <span ng-if="cmt.user._id !== user._id" class="span_btn" ng-click="ctrl.handleLikeComment(cmt, 2)" ng-class="{'highlight-text': cmt.like.type === 2}"><i class="fa fa-thumbs-o-down"></i> {{:: 'LB_DISLIKE' | translate }}</span>
       </small>

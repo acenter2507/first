@@ -130,9 +130,7 @@
         type: 'pie',
         options: {
           responsive: true,
-          tooltips: {
-            enabled: false
-          }
+          cutoutPercentage: 60,
         },
         colors: [],
         labels: [],

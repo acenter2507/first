@@ -33,7 +33,7 @@ angular.module('polls').controller('PollsSearchController', [
         _.extend(ctrl.condition, param);
       }
       if (!_.isEmpty(param)) {
-        search();
+        handleSearch();
       }
     }
 

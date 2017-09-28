@@ -598,14 +598,7 @@
               type: 'pie',
               options: {
                 responsive: true,
-                scales: {
-                  xAxes: [{
-                    display: false
-                  }],
-                  yAxes: [{
-                    display: false
-                  }],
-                }
+                scaleShowLabels: false
               },
               colors: [],
               labels: [],

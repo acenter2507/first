@@ -231,39 +231,5 @@
     $scope.q_search = () => {
       $state.go('search');
     };
-    // Share
-    $scope.share = (poll, provider) => {
-      var url = $location.absUrl() + '/polls/' + poll.slug;
-      console.log(provider);
-      var text = poll.title;
-      if (provider === 'facebook') {
-        Socialshare.share({
-          'provider': 'facebook',
-          'attrs': {
-            'socialshareUrl': url,
-            'socialshareHashtags': 'hanhatlenh',
-            'socialshareQuote': text,
-            'socialshareMobileiframe': true,
-            'socialshareText': text
-          }
-        });
-      } else if (provider === 'google') {
-        Socialshare.share({
-          'provider': provider,
-          'attrs': {
-            'socialshareUrl': url
-          }
-        });
-      } else {
-        Socialshare.share({
-          'provider': provider,
-          'attrs': {
-            'socialshareUrl': url,
-            'socialshareHashtags': 'hanhatlenh',
-            'socialshareText': text
-          }
-        });
-      }
-    };
   }
 })();

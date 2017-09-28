@@ -827,40 +827,6 @@
         'pie' : 'polarArea';
     };
 
-    // Share
-    ctrl.handleSharePoll = provider => {
-      var url = $location.absUrl();
-      var text = ctrl.poll.title;
-      if (provider === 'facebook') {
-        Socialshare.share({
-          'provider': 'facebook',
-          'attrs': {
-            'socialshareUrl': url,
-            'socialshareHashtags': 'blablaer',
-            'socialshareQuote': text,
-            'socialshareMobileiframe': true,
-            'socialshareText': text
-          }
-        });
-      } else if (provider === 'google') {
-        Socialshare.share({
-          'provider': provider,
-          'attrs': {
-            'socialshareUrl': url
-          }
-        });
-      } else {
-        Socialshare.share({
-          'provider': provider,
-          'attrs': {
-            'socialshareUrl': url,
-            'socialshareHashtags': 'blablaer',
-            'socialshareText': text
-          }
-        });
-      }
-    };
-
     ctrl.task_queue = {
       is_watting: false,
       last_task_time: 0

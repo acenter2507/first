@@ -185,5 +185,42 @@ angular.module('core').controller('WebAppController', [
         }
       });
     };
+
+    // Common share poll
+
+    // Share
+    $scope.handleShareSocialPoll = (poll, provider) => {
+      var url = 'https://www.blablaer.com/polls/' + poll.slug;
+      var text = poll.title;
+      if (provider === 'facebook') {
+        Socialshare.share({
+          'provider': 'facebook',
+          'attrs': {
+            'socialshareUrl': url,
+            'socialshareHashtags': 'blablaer',
+            'socialshareQuote': text,
+            'socialshareMobileiframe': true,
+            'socialshareText': text
+          }
+        });
+      } else if (provider === 'google') {
+        Socialshare.share({
+          'provider': provider,
+          'attrs': {
+            'socialshareUrl': url
+          }
+        });
+      } else {
+        Socialshare.share({
+          'provider': provider,
+          'attrs': {
+            'socialshareUrl': url,
+            'socialshareHashtags': 'blablaer',
+            'socialshareText': text
+          }
+        });
+      }
+    };
+
   }
 ]);

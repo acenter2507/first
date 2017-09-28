@@ -1,0 +1,515 @@
+<div class="row">
+  <div class="col-xs-12 pd6x">
+    <div class="form-group">
+      <a ui-sref="admin.polls.list" class="btn btn-default pull-right">List</a>
+      <a ng-click="remove()" class="btn btn-danger pull-right mg10r">Delete</a>
+      <a ui-sref="polls.edit({ pollId: vm.poll._id })" class="btn btn-success pull-right mg10r">Edit page</a>
+      <a ui-sref="polls.view({ pollId: vm.poll._id })" class="btn btn-info pull-right mg10r">View page</a>
+    </div>
+  </div>
+</div>
+
+<!-- Report-->
+<div class="row mg12t">
+  <div class="card">
+    <div class="card-header">
+      <strong class="card-title"><i class="fa fa-user"></i> Report</strong>
+      <div class="clearfix"></div>
+    </div>
+    <hr class="mgn">
+    <div class="card-body">
+      <div class="profile-stats mgn">
+        <div class="stat">
+          <div class="stat-value">{{vm.poll.opts.length}}</div>
+          <span class="stat-label"><a href="#options">Options</a></span>
+        </div>
+        <div class="stat">
+          <div class="stat-value">{{vm.poll.likeCnt | shortNumber}}</div>
+          <span class="stat-label">Likes</span>
+        </div>
+        <div class="stat">
+          <div class="stat-value">{{vm.poll.cmtCnt | shortNumber}}</div>
+          <span class="stat-label"><a href="#comments">Comments</a></span>
+        </div>
+        <div class="stat">
+          <div class="stat-value">{{vm.poll.voteCnt | shortNumber}}</div>
+          <span class="stat-label">Votes</span>
+        </div>
+        <div class="stat">
+          <div class="stat-value">{{vm.poll.viewCnt | shortNumber}}</div>
+          <span class="stat-label">Viewed</span>
+        </div>
+        <div class="stat">
+          <div class="stat-value">{{vm.poll.followed | shortNumber}}</div>
+          <span class="stat-label">Followed</span>
+        </div>
+        <div class="stat">
+          <div class="stat-value">{{vm.poll.bookmarked | shortNumber}}</div>
+          <span class="stat-label">Bookmarked</span>
+        </div>
+        <div class="stat">
+          <div class="stat-value">{{vm.poll.reported | shortNumber}}</div>
+          <span class="stat-label">Reported</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- basic Info-->
+<div class="row">
+  <div class="card card-expand">
+    <div class="card-header">
+      <strong class="card-title"><i class="fa fa-user"></i> Basic info</strong>
+      <a class="card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
+      <div class="clearfix"></div>
+    </div>
+    <hr class="mgn">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+          <div class="form-group">
+            <img src="{{vm.poll.user.profileImageURL}}" alt="{{vm.poll.user.displayName}}" class="img-thumbnail user-profile-picture">
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
+          <table class="table">
+            <tr>
+              <td>Title:</td>
+              <td>{{ vm.poll.title }}</td>
+            </tr>
+            <tr>
+              <td>Created user:</td>
+              <td><a ui-sref="admin.users.view({ userId: vm.poll.user._id })">{{ vm.poll.user.displayName }}</a></td>
+            </tr>
+            <tr>
+              <td>Category:</td>
+              <td>{{ vm.poll.category.name }}</td>
+            </tr>
+            <tr>
+              <td>Close:</td>
+              <td>
+                <span ng-if="vm.poll.close">{{vm.poll.close | LLL_format}}</span>
+                <span ng-if="!vm.poll.close">Infinity</span>
+              </td>
+            </tr>
+            <tr>
+              <td>Sercurity:</td>
+              <td>{{(vm.poll.isPublic) ? 'Public' : 'Private'}}</td>
+            </tr>
+            <tr>
+              <td>Allow multiple vote:</td>
+              <td>{{ (vm.poll.allow_multiple) ? 'Multiple' : 'Single' }}</td>
+            </tr>
+            <tr>
+              <td>Allow suggest options:</td>
+              <td>{{ (vm.poll.allow_add) ? 'Allow' : 'Deny' }}</td>
+            </tr>
+            <tr>
+              <td>Allow guest vote:</td>
+              <td>{{ (vm.poll.allow_guest) ? 'Allow' : 'Deny' }}</td>
+            </tr>
+            <tr>
+              <td>Created:</td>
+              <td><span ng-bind="vm.poll.created | LLL_format"></span></td>
+            </tr>
+          </table>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Options -->
+<div class="row" ng-show="vm.poll.opts.length > 0">
+  <div class="card card-expand">
+    <div class="card-header">
+      <strong class="card-title"><i class="fa fa-list-alt"></i> List options</strong>
+      <a class="card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
+      <div class="clearfix"></div>
+    </div>
+    <hr class="mgn">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="options">
+          <thead class="bg-primary">
+            <tr>
+              <th>Vote count</th>
+              <th>Title</th>
+              <th>Added</th>
+              <th class="text-center">Status</th>
+              <th>Created</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="opt in vm.poll.opts">
+              <td>{{ opt.voteCnt  | shortNumber}}</td>
+              <td>{{ opt.title }}</td>
+              <td>{{ opt.user.displayName }}</td>
+              <td class="text-center">
+                <div class="mga w30 h10 bg-primary" ng-if="opt.status === 1"></div>
+                <div class="mga w30 h10 bg-warning" ng-if="opt.status === 2"></div>
+                <div class="mga w30 h10 bg-danger" ng-if="opt.status === 3"></div>
+              </td>
+              <td><span ng-bind="opt.created | LLL_format"></span></td>
+              <td>
+                <a class="mg5l" ng-click="remove_opt(opt)"><i class="icon-trash icons"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div>
+<!-- Comments -->
+<div class="row" ng-show="vm.poll.cmts.length > 0">
+  <div class="card card-expand">
+    <div class="card-header">
+      <strong class="card-title"><i class="fa fa-list-alt"></i> List comments</strong>
+      <a class="card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
+      <div class="clearfix"></div>
+    </div>
+    <hr class="mgn">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="comments">
+          <thead class="bg-primary">
+            <tr>
+              <th class="text-center"><i class="icon-people"></i></th>
+              <th>User</th>
+              <th>Body</th>
+              <th>Reply to</th>
+              <th class="text-center">Likes</th>
+              <th>Created</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="cmt in vm.poll.cmts">
+              <td class="text-center">
+                <div class="admin-avatar">
+                  <img src="{{ cmt.user.profileImageURL }}" alt="{{ cmt.user.displayName }}" class="img-admin-avatar">
+                </div>
+              </td>
+              <td><a ui-sref="admin.users.view({ userId: cmt.user._id })">{{ cmt.user.displayName }}</a></td>
+              <td>{{ cmt.body }}</td>
+              <td><a ui-sref="admin.users.view({ userId: cmt.to })">{{ cmt.toName }}</a></td>
+              <td class="text-center">{{ cmt.likeCnt  | shortNumber}}</td>
+              <td><span ng-bind="cmt.created | LLL_format"></span></td>
+              <td>
+                <a class="mg5l" ng-click="remove_cmt(cmt)"><i class="icon-trash icons"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div>
+<!-- Polls -->
+<!-- <div class="row" ng-show="pollsPagedItems.length > 0">
+  <div class="card card-expand">
+    <div class="card-header">
+      <strong class="card-title"><i class="fa fa-list-alt"></i> List polls</strong>
+      <input class="inline form-control w200 mg12l input-sm" ng-model="pollSearch" ng-change="figureOutItemsToDisplay_polls()"
+        placeholder="Search key...">
+      <a class="card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
+      <div class="clearfix"></div>
+    </div>
+    <hr class="mgn">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover table-outline" id="polls">
+          <thead class="thead-default">
+            <tr>
+              <th>Title</th>
+              <th>Category</th>
+              <th>Sercurity</th>
+              <th>Likes count</th>
+              <th>Views count</th>
+              <th>Comments count</th>
+              <th>Votes count</th>
+              <th>Created</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="poll in pollsPagedItems">
+              <td>{{ poll.title }}</td>
+              <td>{{ poll.category.name }}</td>
+              <td>{{ (poll.isPublic) ? 'Public' : 'Private' }}</td>
+              <td>{{ poll.likeCnt }}</td>
+              <td>{{ poll.viewCnt }}</td>
+              <td>{{ poll.cmtCnt }}</td>
+              <td>{{ poll.voteCnt }}</td>
+              <td><span ng-bind="poll.created | date:'mediumDate'"></span></td>
+              <td>
+                <div class="btn-group" role="group">
+                  <a ui-sref="admin.polls.view({ pollId: poll._id })"><i class="icon-eye icons"></i>
+                    <md-tooltip md-direction="bottom">View detail of poll</md-tooltip>
+                  </a>
+                  <a class="mg5l" ui-sref="admin.polls.edit({ pollId: poll._id })"><i class="icon-note icons"></i>
+                    <md-tooltip md-direction="bottom">Edit info of poll</md-tooltip>
+                  </a>
+                  <a class="mg5l" ng-click="delete_poll(poll)"><i class="icon-trash icons"></i>
+                    <md-tooltip md-direction="bottom">Delete poll</md-tooltip>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="pollFilterLength" ng-model="pollsCurrentPage"
+        ng-change="pollPageChanged()"></uib-pagination>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div> -->
+<!-- Comments -->
+<!-- <div class="row" ng-show="cmtsPagedItems.length > 0">
+  <div class="card card-expand">
+    <div class="card-header">
+      <strong class="card-title"><i class="fa fa-list-alt"></i> List comments</strong>
+      <input class="inline form-control w200 mg12l input-sm" ng-model="cmtSearch" ng-change="figureOutItemsToDisplay_cmts()" placeholder="Search key...">
+      <a class="card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
+      <div class="clearfix"></div>
+    </div>
+    <hr class="mgn">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover table-outline" id="cmts">
+          <thead class="thead-default">
+            <tr>
+              <th>Poll title</th>
+              <th>Content</th>
+              <th>Like count</th>
+              <th>Created</th>
+              <th>Last edited</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="cmt in cmtsPagedItems">
+              <td>{{ cmt.poll.title }}</td>
+              <td><span ng-bind="cmt.body"></span></td>
+              <td>{{ cmt.likeCnt }}</td>
+              <td><span ng-bind="cmt.created"></span></td>
+              <td><span ng-bind="cmt.updated"></span></td>
+              <td>
+                <div class="btn-group" role="group">
+                  <a ui-sref="admin.polls.view({ pollId: cmt.poll._id })"><i class="icon-eye icons"></i>
+                    <md-tooltip md-direction="bottom">View detail in poll</md-tooltip>
+                  </a>
+                  <a class="mg5l" ng-click="delete_cmt(cmt)"><i class="icon-trash icons"></i>
+                    <md-tooltip md-direction="bottom">Delete comment</md-tooltip>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="cmtFilterLength" ng-model="cmtsCurrentPage"
+        ng-change="cmtPageChanged()"></uib-pagination>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div> -->
+<!-- Votes -->
+<!-- <div class="row" ng-show="votesPagedItems.length > 0">
+  <div class="card card-expand">
+    <div class="card-header">
+      <strong class="card-title"><i class="fa fa-list-alt"></i> List votes</strong>
+      <input class="inline form-control w200 mg12l input-sm" ng-model="voteSearch" ng-change="figureOutItemsToDisplay_votes()"
+        placeholder="Search key...">
+      <a class="card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
+      <div class="clearfix"></div>
+    </div>
+    <hr class="mgn">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover table-outline" id="votes">
+          <thead class="thead-default">
+            <tr>
+              <th>Poll title</th>
+              <th>Voted options</th>
+              <th>Updated</th>
+              <th>First voted</th>
+              <th>Last voted</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="vote in votesPagedItems">
+              <td>{{ vote.poll.title }}</td>
+              <td><span ng-bind="vote.opts"></span></td>
+              <td>{{ vote.updateCnt }}</td>
+              <td><span ng-bind="vote.updated"></span></td>
+              <td><span ng-bind="vote.created"></span></td>
+              <td>
+                <div class="btn-group" role="group">
+                  <a ui-sref="admin.polls.view({ pollId: vote.poll._id })"><i class="icon-eye icons"></i>
+                    <md-tooltip md-direction="bottom">View detail poll</md-tooltip>
+                  </a>
+                  <a class="mg5l" ng-click="delete_vote(vote)"><i class="icon-trash icons"></i>
+                    <md-tooltip md-direction="bottom">Delete vote</md-tooltip>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="voteFilterLength" ng-model="votesCurrentPage"
+        ng-change="votePageChanged()"></uib-pagination>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div> -->
+<!-- Poll reports -->
+<!-- <div class="row" ng-show="reportsPagedItems.length > 0">
+  <div class="card card-expand">
+    <div class="card-header">
+      <strong class="card-title"><i class="fa fa-list-alt"></i> List reported</strong>
+      <input class="inline form-control w200 mg12l input-sm" ng-model="reportSearch" ng-change="figureOutItemsToDisplay_reports()"
+        placeholder="Search key...">
+      <a class="card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
+      <div class="clearfix"></div>
+    </div>
+    <hr class="mgn">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover table-outline" id="reports">
+          <thead class="thead-default">
+            <tr>
+              <th>Poll title</th>
+              <th>Reason</th>
+              <th>Created</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="report in reportsPagedItems">
+              <td>{{ report.poll.title }}</td>
+              <td><span ng-bind="report.reason"></span></td>
+              <td><span ng-bind="report.created"></span></td>
+              <td>
+                <div class="btn-group" role="group">
+                  <a ui-sref="admin.polls.view({ pollId: report.poll._id })"><i class="icon-eye icons"></i>
+                    <md-tooltip md-direction="bottom">View detail poll</md-tooltip>
+                  </a>
+                  <a class="mg5l" ng-click="delete_report(report)"><i class="icon-trash icons"></i>
+                    <md-tooltip md-direction="bottom">Delete report</md-tooltip>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="reportFilterLength" ng-model="reportsCurrentPage"
+        ng-change="reportPageChanged()"></uib-pagination>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div> -->
+<!-- Poll bereports -->
+<!-- <div class="row" ng-show="bereportsPagedItems.length > 0">
+  <div class="card card-expand">
+    <div class="card-header">
+      <strong class="card-title"><i class="fa fa-list-alt"></i> List be reported</strong>
+      <input class="inline form-control w200 mg12l input-sm" ng-model="bereportSearch" ng-change="figureOutItemsToDisplay_bereports()"
+        placeholder="Search key...">
+      <a class="card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
+      <div class="clearfix"></div>
+    </div>
+    <hr class="mgn">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover table-outline" id="bereports">
+          <thead class="thead-default">
+            <tr>
+              <th>Poll title</th>
+              <th>Reason</th>
+              <th>Created</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="bereport in bereportsPagedItems">
+              <td>{{ bereport.poll.title }}</td>
+              <td><span ng-bind="bereport.reason"></span></td>
+              <td><span ng-bind="bereport.created"></span></td>
+              <td>
+                <div class="btn-group" role="group">
+                  <a ui-sref="admin.polls.view({ pollId: bereport.poll._id })"><i class="icon-eye icons"></i>
+                    <md-tooltip md-direction="bottom">View detail poll</md-tooltip>
+                  </a>
+                  <a class="mg5l" ng-click="delete_bereport(bereport)"><i class="icon-trash icons"></i>
+                    <md-tooltip md-direction="bottom">Delete bereport</md-tooltip>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="bereportFilterLength" ng-model="bereportsCurrentPage"
+        ng-change="bereportPageChanged()"></uib-pagination>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div> -->
+<!-- Poll suggested -->
+<!-- <div class="row" ng-show="suggestsPagedItems.length > 0">
+  <div class="card card-expand">
+    <div class="card-header">
+      <strong class="card-title"><i class="fa fa-list-alt"></i> List suggested options</strong>
+      <input class="inline form-control w200 mg12l input-sm" ng-model="suggestSearch" ng-change="figureOutItemsToDisplay_suggests()"
+        placeholder="Search key...">
+      <a class="card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
+      <div class="clearfix"></div>
+    </div>
+    <hr class="mgn">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover table-outline" id="suggests">
+          <thead class="thead-default">
+            <tr>
+              <th>Poll title</th>
+              <th>Option title</th>
+              <th>Status</th>
+              <th>Created</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="suggest in suggestsPagedItems">
+              <td>{{ suggest.poll.title }}</td>
+              <td><span ng-bind="suggest.title"></span></td>
+              <td ng-class="{ 'bg-primary': suggest.status === 1, 'bg-warning': suggest.status === 2, 'bg-danger': suggest.status === 3 }">{{ (suggest.status === 1) ? 'Approved' : (suggest.status === 2) ? 'Waiting' : 'Rejected' }}</td>
+              <td><span ng-bind="suggest.created"></span></td>
+              <td>
+                <div class="btn-group" role="group">
+                  <a ui-sref="admin.polls.view({ pollId: suggest.poll._id })"><i class="icon-eye icons"></i>
+                    <md-tooltip md-direction="bottom">View detail poll</md-tooltip>
+                  </a>
+                  <a class="mg5l" ng-click="delete_suggest(suggest)"><i class="icon-trash icons"></i>
+                    <md-tooltip md-direction="bottom">Delete suggest</md-tooltip>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="suggestFilterLength" ng-model="suggestsCurrentPage"
+        ng-change="suggestPageChanged()"></uib-pagination>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div> -->

@@ -82,12 +82,10 @@ exports.update = function (req, res) {
 exports.delete = function (req, res) {
 
   var cmtlike = req.cmtlike;
-  var cnt = req.body.cnt || 0;
-  console.log(cnt);
+  var cnt = (cmtlike.type === 1) ? -1 : 1;
   cmtlike.remove()
     .then(() => {
       var cmtId = cmtlike.cmt._id || cmtlike.cmt;
-      console.log(cmtId);
       return Cmt.countLike(cmtId, cnt);
     }, handleError)
     .then(cmt => {

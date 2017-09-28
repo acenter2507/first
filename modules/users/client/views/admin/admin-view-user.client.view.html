@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-xs-12 pd6x">
+  <div class="col-xs-12">
     <div class="form-group">
       <a ui-sref="admin.users.list" class="btn btn-default pull-right">List</a>
       <a ui-sref="admin.users.edit({ userId: user._id })" class="btn btn-success pull-right mg10r">Edit</a>
@@ -8,123 +8,32 @@
     </div>
   </div>
 </div>
-<div class="row mg12t">
-  <div class="col-xs-12 col-sm-3 pd6x">
-    <div class="admin-card">
-      <div class="admin-card-block pd12 clearfix">
-        <i class="fa fa-cogs bg-primary pd12 font-2xl mg12r pull-left"></i>
-        <h4 class="text-primary mgnb mg4t" ng-bind="loginCnt | shortNumber"></h4>
-        <div class="text-muted text-uppercase">Login</div>
-      </div>
-      <div class="admin-card-footer pd12x pd4y">
-        <a class="font-weight-bold font-sm btn-block text-muted" href="#logins">View More <i class="fa fa-angle-right pull-right font-lg"></i></a>
-      </div>
-    </div>
+<div class="row">
+  <div class="col-xs-12">
+    <table class="table table-bordered">
+      <tr>
+        <th>Login</th>
+        <th>Polls</th>
+        <th>Comments</th>
+        <th>Votes</th>
+        <th>Like Count</th>
+        <th>Suggested</th>
+        <th>Reported</th>
+        <th>Be reported</th>
+      </tr>
+      <tr>
+        <td>{{:: loginCnt}}</td>
+        <td>{{:: pollCnt}}</td>
+        <td>{{:: cmtCnt}}</td>
+        <td>{{:: voteCnt}}</td>
+        <td>{{:: likeCnt}}</td>
+        <td>{{:: suggestCnt}}</td>
+        <td>{{:: reportCnt}}</td>
+        <td>{{:: bereportCnt}}</td>
+      </tr>
+    </table>
   </div>
-  <!--/.col-->
-
-  <div class="col-xs-12 col-sm-3 pd6x">
-    <div class="admin-card">
-      <div class="admin-card-block pd12 clearfix">
-        <i class="fa fa-laptop bg-info pd12 font-2xl mg12r pull-left"></i>
-        <h4 class="text-info mgnb mg4t" ng-bind="pollCnt | shortNumber"></h4>
-        <div class="text-muted text-uppercase">Polls</div>
-      </div>
-      <div class="admin-card-footer pd12x pd4y">
-        <a class="font-weight-bold font-sm btn-block text-muted" href="#polls">View More <i class="fa fa-angle-right pull-right font-lg"></i></a>
-      </div>
-    </div>
-  </div>
-  <!--/.col-->
-
-  <div class="col-xs-12 col-sm-3 pd6x">
-    <div class="admin-card">
-      <div class="admin-card-block pd12 clearfix">
-        <i class="fa fa-moon-o bg-warning pd12 font-2xl mg12r pull-left"></i>
-        <h4 class="text-warning mgnb mg4t" ng-bind="cmtCnt | shortNumber"></h4>
-        <div class="text-muted text-uppercase">Comments</div>
-      </div>
-      <div class="admin-card-footer pd12x pd4y">
-        <a class="font-weight-bold font-sm btn-block text-muted" href="#cmts">View More <i class="fa fa-angle-right pull-right font-lg"></i></a>
-      </div>
-    </div>
-  </div>
-  <!--/.col-->
-
-  <div class="col-xs-12 col-sm-3 pd6x">
-    <div class="admin-card">
-      <div class="admin-card-block pd12 clearfix">
-        <i class="fa fa-bell bg-danger pd12 font-2xl mg12r pull-left"></i>
-        <h4 class="text-danger mgnb mg4t" ng-bind="voteCnt | shortNumber"></h4>
-        <div class="text-muted text-uppercase">Votes</div>
-      </div>
-      <div class="admin-card-footer pd12x pd4y">
-        <a class="font-weight-bold font-sm btn-block text-muted" href="#votes">View More <i class="fa fa-angle-right pull-right font-lg"></i></a>
-      </div>
-    </div>
-  </div>
-  <!--/.col-->
-
 </div>
-<div class="row mg12t">
-  <div class="col-xs-12 col-sm-3 pd6x">
-    <div class="admin-card">
-      <div class="admin-card-block pd12 clearfix">
-        <i class="fa fa-cogs bg-primary pd12 font-2xl mg12r pull-left"></i>
-        <h4 class="text-primary mgnb mg4t" ng-bind="reportCnt | shortNumber"></h4>
-        <div class="text-muted text-uppercase">Reported</div>
-      </div>
-      <div class="admin-card-footer pd12x pd4y">
-        <a class="font-weight-bold font-sm btn-block text-muted" href="#reports">View More <i class="fa fa-angle-right pull-right font-lg"></i></a>
-      </div>
-    </div>
-  </div>
-  <!--/.col-->
-
-  <div class="col-xs-12 col-sm-3 pd6x">
-    <div class="admin-card">
-      <div class="admin-card-block pd12 clearfix">
-        <i class="fa fa-laptop bg-info pd12 font-2xl mg12r pull-left"></i>
-        <h4 class="text-info mgnb mg4t" ng-bind="bereportCnt | shortNumber"></h4>
-        <div class="text-muted text-uppercase">Be reported</div>
-      </div>
-      <div class="admin-card-footer pd12x pd4y">
-        <a class="font-weight-bold font-sm btn-block text-muted" href="#bereports">View More <i class="fa fa-angle-right pull-right font-lg"></i></a>
-      </div>
-    </div>
-  </div>
-  <!--/.col-->
-
-  <div class="col-xs-12 col-sm-3 pd6x">
-    <div class="admin-card">
-      <div class="admin-card-block pd12 clearfix">
-        <i class="fa fa-moon-o bg-warning pd12 font-2xl mg12r pull-left"></i>
-        <h4 class="text-warning mgnb mg4t" ng-bind="likeCnt | shortNumber"></h4>
-        <div class="text-muted text-uppercase">Total like</div>
-      </div>
-      <div class="admin-card-footer pd12x pd4y">
-        <a class="font-weight-bold font-sm btn-block text-muted" href="#">View More <i class="fa fa-angle-right pull-right font-lg"></i></a>
-      </div>
-    </div>
-  </div>
-  <!--/.col-->
-
-  <div class="col-xs-12 col-sm-3 pd6x">
-    <div class="admin-card">
-      <div class="admin-card-block pd12 clearfix">
-        <i class="fa fa-bell bg-danger pd12 font-2xl mg12r pull-left"></i>
-        <h4 class="text-danger mgnb mg4t" ng-bind="suggestCnt | shortNumber"></h4>
-        <div class="text-muted text-uppercase">Suggested</div>
-      </div>
-      <div class="admin-card-footer pd12x pd4y">
-        <a class="font-weight-bold font-sm btn-block text-muted" href="#suggests">View More <i class="fa fa-angle-right pull-right font-lg"></i></a>
-      </div>
-    </div>
-  </div>
-  <!--/.col-->
-
-</div>
-
 <!-- basic Info-->
 <div class="row mg12t">
   <div class="card card-expand">

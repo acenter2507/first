@@ -395,6 +395,8 @@
      * Lưu 1 like comment
      */
     this.save_like_cmt = (cmt, type) => {
+      console.log(type);
+      console.log(cmt);
       // type: 1: like - 2: dislike;
       return new Promise((resolve, reject) => {
         var cnt = 0;
@@ -430,14 +432,6 @@
           rs_like.$save(successCb, successCb);
         }
         function successCb(res) {
-          // Socket.emit('cmt_like', {
-          //   pollId: cmt.poll._id || cmt.poll,
-          //   cmtId: cmt._id,
-          //   likeCnt: res.likeCnt,
-          //   from: res.like.user._id,
-          //   to: cmt.user._id,
-          //   type: res.like.type
-          // });
           return resolve(res);
         }
         function errorCb(err) {

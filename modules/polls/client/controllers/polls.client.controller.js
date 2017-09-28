@@ -130,7 +130,8 @@
         type: 'pie',
         options: {
           responsive: true,
-          cutoutPercentage: 60,
+          tooltipFontSize: 10,
+          tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value %>hrs",
         },
         colors: [],
         labels: [],

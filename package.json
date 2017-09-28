@@ -48,6 +48,7 @@
     "jasmine-core": "^2.3.4",
     "locale": "^0.1.0",
     "lodash": "^3.10.0",
+    "log4js": "^2.3.4",
     "method-override": "^2.3.3",
     "mocha": "~1.20.0",
     "moment": "^2.18.1",

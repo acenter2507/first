@@ -401,42 +401,64 @@
         var cnt = 0;
         var rs_like;
         if (cmt.like._id) {
-          switch (cmt.like.type) {
-            case 0: {
-              console.log('0');
-              cnt = type === 1 ? 1 : -1;
-              cmt.like.type = type;
-            } break;
-
-            case 1: {
-              console.log('1', rs_like);
-              cnt = type === 1 ? -1 : -2;
-              cmt.like.type = type === 1 ? 0 : 2;
-            } break;
-
-            case 2: {
-              console.log('2', rs_like);
-              cnt = type === 1 ? 2 : 1;
-              cmt.like.type = type === 1 ? 1 : 0;
-            } break;
+          // Bấm lặp lại button
+          if (cmt.like.type === type) {
+            // Trừ nếu là hết thích, cộng lại nếu hết không thích
+            cnt = (type === 1) ? -1 : 1;
+            rs_like = new Cmtlikes({
+              _id: cmt.like._id,
+              cnt: cnt
+            });
+            return rs_like.$remove(successCb, successCb);
+          } else {
+            // Trường hợp đổi button
+            // Hoán đổi 2 đơn vị
+            cnt = (type === 1) ? 2 : -2;
+            rs_like = new Cmtlikes({
+              _id: cmt.like._id,
+              type: type,
+              cnt: cnt
+            });
+            return rs_like.$update(successCb, successCb);
           }
-          rs_like = new Cmtlikes(cmt.like);
-          rs_like.cnt = cnt;
-          rs_like.cnt = cmt.like.type;
-          console.log('Old', rs_like);
+
+
+          // switch (cmt.like.type) {
+          //   case 0: {
+          //     console.log('0');
+          //     cnt = type === 1 ? 1 : -1;
+          //     cmt.like.type = type;
+          //   } break;
+
+          //   case 1: {
+          //     console.log('1', rs_like);
+          //     cnt = type === 1 ? -1 : -2;
+          //     cmt.like.type = type === 1 ? 0 : 2;
+          //   } break;
+
+          //   case 2: {
+          //     console.log('2', rs_like);
+          //     cnt = type === 1 ? 2 : 1;
+          //     cmt.like.type = type === 1 ? 1 : 0;
+          //   } break;
+          // }
+          // rs_like = new Cmtlikes(cmt.like);
+          // rs_like.cnt = cnt;
+          // rs_like.cnt = cmt.like.type;
+          // console.log('Old', rs_like);
           //rs_like.$update(successCb, successCb);
         } else {
-          cnt = type === 1 ? 1 : -1;
+          cnt = (type === 1) ? 1 : -1;
           rs_like = new Cmtlikes({
             cmt: cmt._id,
-            type: type
+            type: type,
+            cnt: cnt
           });
-          rs_like.cnt = cnt;
-          console.log('New', rs_like);
-          //rs_like.$save(successCb, successCb);
+          rs_like.$save(successCb, successCb);
         }
         function successCb(res) {
-          return resolve(res);
+          console.log(res);
+          //return resolve(res);
         }
         function errorCb(err) {
           return reject(err);

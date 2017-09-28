@@ -13,7 +13,7 @@ var path = require('path'),
 /**
  * Create a Cmtlike
  */
-exports.create = function(req, res) {
+exports.create = function (req, res) {
   var cmtlike = new Cmtlike(req.body);
   cmtlike.user = req.user;
   var cnt = req.body.cnt || 0;
@@ -39,7 +39,7 @@ exports.create = function(req, res) {
 /**
  * Show the current Cmtlike
  */
-exports.read = function(req, res) {
+exports.read = function (req, res) {
   // convert mongoose document to JSON
   var cmtlike = req.cmtlike ? req.cmtlike.toJSON() : {};
 
@@ -53,7 +53,7 @@ exports.read = function(req, res) {
 /**
  * Update a Cmtlike
  */
-exports.update = function(req, res) {
+exports.update = function (req, res) {
   var cmtlike = req.cmtlike;
 
   console.log(req.body);
@@ -79,25 +79,30 @@ exports.update = function(req, res) {
 /**
  * Delete an Cmtlike
  */
-exports.delete = function(req, res) {
+exports.delete = function (req, res) {
   var cmtlike = req.cmtlike;
+  var cnt = req.body.cnt || 0;
 
-  cmtlike.remove(function(err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.jsonp(cmtlike);
-    }
-  });
+  cmtlike.remove()
+    .then(() => {
+      var cmtId = cmtlike.cmt._id || cmtlike.cmt;
+      return Cmt.countLike(cmtId, cnt);
+    }, handleError)
+    .then(cmt => {
+      res.jsonp({ likeCnt: cmt.likeCnt });
+    }, handleError);
+  function handleError(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
 };
 
 /**
  * List of Cmtlikes
  */
-exports.list = function(req, res) {
-  Cmtlike.find().sort('-created').populate('user', 'displayName slug').exec(function(err, cmtlikes) {
+exports.list = function (req, res) {
+  Cmtlike.find().sort('-created').populate('user', 'displayName slug').exec(function (err, cmtlikes) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -111,7 +116,7 @@ exports.list = function(req, res) {
 /**
  * Cmtlike middleware
  */
-exports.cmtlikeByID = function(req, res, next, id) {
+exports.cmtlikeByID = function (req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
@@ -119,7 +124,7 @@ exports.cmtlikeByID = function(req, res, next, id) {
     });
   }
 
-  Cmtlike.findById(id).populate('user', 'displayName slug').exec(function(err, cmtlike) {
+  Cmtlike.findById(id).populate('user', 'displayName slug').exec(function (err, cmtlike) {
     if (err) {
       return next(err);
     } else if (!cmtlike) {

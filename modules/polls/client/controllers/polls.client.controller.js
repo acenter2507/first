@@ -784,6 +784,7 @@
           cmt.like = res.like || {};
           cmt.likeCnt = res.likeCnt;
           ctrl.like_processing = false;
+          if (!$scope.$$phase) $scope.$digest();
         })
         .catch(err => {
           ctrl.like_processing = false;

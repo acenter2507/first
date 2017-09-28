@@ -403,7 +403,11 @@
           // Bấm lặp lại button
           if (cmt.like.type === type) {
             // Trừ nếu là hết thích, cộng lại nếu hết không thích
-            cnt = (type === 1) ? -1 : 1;
+            if (type === 1) {
+              cnt = -1;
+            } else {
+              cnt = 1;
+            }
             rs_like = new Cmtlikes({
               _id: cmt.like._id,
               cnt: cnt
@@ -413,7 +417,11 @@
           } else {
             // Trường hợp đổi button
             // Hoán đổi 2 đơn vị
-            cnt = (type === 1) ? 2 : -2;
+            if (type === 1) {
+              cnt = 2;
+            } else {
+              cnt = -2;
+            }
             rs_like = new Cmtlikes({
               _id: cmt.like._id,
               type: type,
@@ -449,7 +457,11 @@
           // console.log('Old', rs_like);
           //rs_like.$update(successCb, successCb);
         } else {
-          cnt = (type === 1) ? 1 : -1;
+          if (type === 1) {
+            cnt = 1;
+          } else {
+            cnt = -1;
+          }
           rs_like = new Cmtlikes({
             cmt: cmt._id,
             type: type,

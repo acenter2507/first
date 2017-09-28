@@ -37,17 +37,17 @@
                     {{:: 'LB_POLLS_CREATEON' | translate }}
                     <span am-time-ago="ctrl.poll.created"></span>
                 </span>
-                <md-menu md-offset="-12 20" md-position-mode="target-right target">
+                <md-menu md-offset="-12 20" md-position-mode="target-right target" ng-if="isLogged">
                   <a class="poll-info-title-menu" ng-click="$mdMenu.open($event)" aria-label="Open menu"><i class="icon-options"></i></a>
                   <md-menu-content>
                     <ul class="menu-list">
-                      <li ng-if="isLogged">
+                      <li>
                         <a ng-click="ctrl.handleFollowPoll()"><i class="fa fa-rss"></i>&nbsp;{{(ctrl.follow._id) ? 'LB_POLLS_MENU_UNFOLLOW' : 'LB_POLLS_MENU_FOLLOW' | translate }}</a>
                       </li>
-                      <li ng-if="isLogged && !ctrl.poll.isCurrentUserOwner && !ctrl.reported"><a ng-click="ctrl.handleReportPoll()"><i class="fa fa-exclamation-circle"></i> {{:: 'LB_POLLS_MENU_REPORT' | translate }}</a></li>
+                      <li ng-if="!ctrl.poll.isCurrentUserOwner && !ctrl.reported"><a ng-click="ctrl.handleReportPoll()"><i class="fa fa-exclamation-circle"></i> {{:: 'LB_POLLS_MENU_REPORT' | translate }}</a></li>
                       <li ng-if="ctrl.poll.isCurrentUserOwner || ctrl.poll.canEdit"><a ui-sref="polls.edit({ pollId: ctrl.poll.slug })"><i class="fa fa-pencil-square-o"></i> {{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
                       <li ng-if="ctrl.poll.isCurrentUserOwner || ctrl.poll.canEdit"><a ng-click="ctrl.handleRemovePoll()"><i class="fa fa-trash"></i> {{:: 'LB_DELETE' | translate }}</a></li>
-                      <li ng-if="isLogged && !ctrl.poll.isCurrentUserOwner && !ctrl.bookmarked"><a ng-click="ctrl.handleBookmarkPoll()"><i class="fa fa-bookmark"></i> {{:: 'LB_POLLS_MENU_BOOKMARK' | translate }}</a></li>
+                      <li ng-if="!ctrl.poll.isCurrentUserOwner && !ctrl.bookmarked"><a ng-click="ctrl.handleBookmarkPoll()"><i class="fa fa-bookmark"></i> {{:: 'LB_POLLS_MENU_BOOKMARK' | translate }}</a></li>
                       <li ng-if="ctrl.poll.isCurrentUserOwner"><a ng-click="ctrl.handleSharePoll()"><i class="fa fa-share-alt"></i> {{:: 'LB_SHARE' | translate }}</a></li>
                     </ul>
                   </md-menu-content>

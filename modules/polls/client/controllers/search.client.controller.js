@@ -9,11 +9,11 @@ angular.module('polls').controller('PollsSearchController', [
   'Constants',
   'ngDialog',
   'Profile',
-  '$translate',
-  function ($location, $scope, $state, Action, Storages, Constants, dialog, Profile, $translate) {
+  function ($location, $scope, $state, Action, Storages, Constants, dialog, Profile) {
     $scope.form = {};
 
-    $scope.language = $translate.use();
+    // Ngôn ngữ đang sử dụng
+    $scope.language = Storages.get_local(Constants.storages.language);
     $scope.condition = { language: $scope.language };
     $scope.busy = false;
     $scope.polls = [];

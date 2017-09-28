@@ -285,7 +285,7 @@
               like.type = type === 1 ? 1 : 0;
               break;
           }
-          rs_like = new Likes({ _id: like._id });
+          rs_like = new Likes(like);
           rs_like.cnt = cnt;
           rs_like.type = like.type;
           rs_like.$update(successCb, successCb);
@@ -402,23 +402,24 @@
         var cnt = 0;
         var rs_like;
         if (cmt.like._id) {
+          console.log(cmt.like.type);
           switch (cmt.like.type) {
-            case 0:
+            case 0: {
               cnt = type === 1 ? 1 : -1;
               cmt.like.type = type;
-              break;
+            } break;
 
-            case 1:
+            case 1: {
               cnt = type === 1 ? -1 : -2;
               cmt.like.type = type === 1 ? 0 : 2;
-              break;
+            } break;
 
-            case 2:
+            case 2: {
               cnt = type === 1 ? 2 : 1;
               cmt.like.type = type === 1 ? 1 : 0;
-              break;
+            } break;
           }
-          rs_like = new Cmtlikes({ _id: cmt.like._id });
+          rs_like = new Cmtlikes(cmt.like);
           rs_like.cnt = cnt;
           rs_like.cnt = cmt.like.type;
           rs_like.$update(successCb, successCb);

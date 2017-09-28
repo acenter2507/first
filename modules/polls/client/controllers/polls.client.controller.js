@@ -779,6 +779,7 @@
         return;
       }
       ctrl.like_processing = true;
+      console.log(type);
       Action.save_like_cmt(cmt, type)
         .then(res => {
           cmt.like = res.like;

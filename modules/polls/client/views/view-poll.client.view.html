@@ -72,9 +72,9 @@
           <hr class="mg10y">
           <div class="post-footer">
             <div class="like_tools">
-              <a ng-click="ctrl.handleLikePoll(1)" ng-class="{'text-muted': ctrl.like.type !== 1}"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {{:: 'LB_LIKE' | translate }}</a>
-              <span class="mg5l mg5r" ng-bind="ctrl.poll.likeCnt | shortNumber"></span>
-              <a ng-click="ctrl.handleLikePoll(2)" ng-class="{'text-muted': ctrl.like.type !== 2}"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> {{:: 'LB_DISLIKE' | translate }}</a>
+              <a ng-click="ctrl.handleLikePoll(1)" ng-class="{'text-muted': ctrl.like.type !== 1}"><i class="fa fa-thumbs-o-up"></i> {{:: 'LB_LIKE' | translate }}</a>
+              <span class="mg5l mg5r highlight-text" ng-bind="ctrl.poll.likeCnt | shortNumber"></span>
+              <a ng-click="ctrl.handleLikePoll(2)" ng-class="{'text-muted': ctrl.like.type !== 2}"><i class="fa fa-thumbs-o-down"></i> {{:: 'LB_DISLIKE' | translate }}</a>
             </div>
             <div class="clearfix"></div>
           </div>

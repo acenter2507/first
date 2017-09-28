@@ -369,12 +369,14 @@
         return;
       }
       // Kiểm tra vote spam
-      console.log(ctrl.ownVote);
       if (ctrl.ownVote.updateCnt >= 10) {
         let updatedTime = moment(ctrl.ownVote.updated).utc();
         let now = moment().utc();
         let duration = now.diff(updatedTime, 'minutes');
-        console.log(duration);
+        if (duration < 30) {
+          $scope.handleShowMessageWithParam('LB_VOTE_DENY', { minute: (30 - duration) }, true);
+          return;
+        }
       }
       Action.save_vote(ctrl.ownVote, ctrl.selectedOpts, ctrl.poll)
         .then(res => {

@@ -8,6 +8,7 @@
     </div>
   </div>
 </div>
+
 <div class="row mg12t">
   <div class="col-xs-12">
     <table class="table table-bordered">
@@ -34,6 +35,41 @@
     </table>
   </div>
 </div>
+
+<div class="row mg12t">
+  <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+    <img src="{{user.profileImageURL}}" alt="{{user.displayName}}" class="img-thumbnail user-profile-picture">
+  </div>
+  <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
+    <table class="table">
+      <tr>
+        <td>Name:</td>
+        <td>{{ user.displayName }}</td>
+      </tr>
+      <tr>
+        <td>Email:</td>
+        <td>{{ user.email }}</td>
+      </tr>
+      <tr>
+        <td>Provider:</td>
+        <td>{{ user.provider }}</td>
+      </tr>
+      <tr>
+        <td>Roles:</td>
+        <td><span ng-bind="user.roles"></span></td>
+      </tr>
+      <tr>
+        <td>Last login:</td>
+        <td><span am-time-ago="user.lastLogin"></span></td>
+      </tr>
+      <tr>
+        <td>Created:</td>
+        <td><span ng-bind="user.created | LLL_format"></span></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
 
 <!-- basic Info-->
 <div class="row mg12t">

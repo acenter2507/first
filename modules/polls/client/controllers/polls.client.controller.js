@@ -131,7 +131,7 @@
         options: {
           responsive: true,
           tooltips: {
-            caretSize: 0
+            enabled: false
           }
         },
         colors: [],

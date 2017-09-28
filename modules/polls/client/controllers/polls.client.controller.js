@@ -130,7 +130,9 @@
         type: 'pie',
         options: {
           responsive: true,
-          scaleShowLabels: false
+          scale: {
+            display: false
+          }
         },
         colors: [],
         labels: [],

@@ -156,6 +156,7 @@ var logger = {
   log4jLog: {
     system: log4js.getLogger('system'),
     debug: log4js.getLogger('debug'),
+    console: log4js.getLogger('console'),
   }
 };
 

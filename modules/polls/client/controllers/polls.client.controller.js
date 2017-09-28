@@ -368,6 +368,17 @@
         $scope.handleShowMessage('LB_POLL_CLOSED', true);
         return;
       }
+      // Kiểm tra vote spam
+      if (ctrl.ownVote.updateCnt >= 10) {
+        let updatedTime = moment(ctrl.ownVote.updated).utc();
+        let now = moment().utc();
+        let duration = now.diff(updatedTime, 'minutes');
+        console.log(duration);
+      }
+        let updatedTime = moment(ctrl.ownVote.updated).utc();
+        let now = moment().utc();
+        let duration = now.diff(updatedTime, 'minutes');
+        console.log(duration);
       Action.save_vote(ctrl.ownVote, ctrl.selectedOpts, ctrl.poll)
         .then(res => {
           ctrl.ownVote = res;

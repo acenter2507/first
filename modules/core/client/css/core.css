@@ -628,6 +628,7 @@ a {
 .default-text {
   color: #555;
 }
+canvas#race{position:relative; z-index:100;}
 .avatar {
   font-size: 17px;
   line-height: 17px;

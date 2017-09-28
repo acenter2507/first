@@ -99,16 +99,6 @@ exports.delete = function(req, res) {
       message: errorHandler.getErrorMessage(err)
     });
   }
-
-  like.remove(function(err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.jsonp(like);
-    }
-  });
 };
 
 /**

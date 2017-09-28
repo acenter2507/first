@@ -17,7 +17,7 @@
         <span class="poll-info-title-time">{{:: 'LB_POLLS_CREATEON' | translate }}
             <span am-time-ago="poll.created"></span>
         </span>
-        <md-menu md-offset="-12 20" md-position-mode="target-right target">
+        <md-menu md-offset="-12 20" md-position-mode="target-right target" ng-if="isLogged">
           <a class="poll-info-title-menu" ng-click="$mdMenu.open($event)" aria-label="Open menu"><i class="icon-options"></i></a>
           <md-menu-content>
             <ul class="menu-list">

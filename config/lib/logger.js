@@ -51,7 +51,9 @@ log4js.configure({
   },
   categories: {
     system: { appenders: ['systemLog'], level: 'error' },
-    debug: { appenders: ['debugLog'], level: 'trace' }
+    debug: { appenders: ['debugLog'], level: 'trace' },
+    console: { appenders: ['console'], level: 'trace' },
+    default: { appenders: ['console', 'systemLog'], level: 'trace' }
   }
   // logger.trace('Entering cheese testing');
   // logger.debug('Got cheese.');

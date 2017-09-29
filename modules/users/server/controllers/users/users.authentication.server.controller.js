@@ -11,7 +11,6 @@ var path = require('path'),
   mongoose = require('mongoose'),
   passport = require('passport'),
   User = mongoose.model('User'),
-  Userreport = mongoose.model('Userreport'),
   Userlogin = mongoose.model('Userlogin'),
   crypto = require('crypto'),
   async = require('async'),
@@ -19,6 +18,7 @@ var path = require('path'),
   _ = require('underscore');
 
 exports.signup = function (req, res) {
+  // Xóa thông tin role -> bảo mật
   delete req.body.roles;
   var user = new User(req.body);
   user.provider = 'local';
@@ -31,7 +31,6 @@ exports.signup = function (req, res) {
     .then(token => {
       user.activeAccountToken = token;
       user.status = 1;
-      // user.activeAccountExpires = Date.now() + 1800000; //86400000; // 24h
       return saveUser(user);
     })
     .then(_user => {
@@ -126,6 +125,7 @@ exports.signin = function (req, res, next) {
       // Remove sensitive data before login
       user.password = undefined;
       user.salt = undefined;
+      user.report = undefined;
       req.login(user, function (err) {
         if (err) {
           res.status(400).send(err);
@@ -164,30 +164,31 @@ exports.verify = function (req, res) {
         return res.redirect('/verification/error?err=3');
       user.status = 2;
       user.activeAccountToken = undefined;
-      // user.activeAccountExpires = undefined;
-      user.save(function (err, user) {
-        Userreport.findOne({ user: user._id }, (err, rp) => {
-          if (!rp) {
-            var report = new Userreport({ user: user._id });
-            report.save();
-          }
+      user.lastLogin = new Date();
+      saveUser(user)
+        .then(user => {
+          // Lưu thông tin login
+          var login = new Userlogin({ user: user._id });
+          login.agent = req.headers['user-agent'];
+          login.ip = getClientIp(req);
+          login.save();
+
+          user.password = undefined;
+          user.salt = undefined;
+          user.report = undefined;
+          req.login(user, function (err) {
+            if (err) {
+              // Xuất bug ra file log
+              logger.system.error('users.authentication.server.controller.js - verify', err);
+              res.status(400).send(err);
+            } else {
+              return res.redirect('/');
+            }
+          });
+        })
+        .catch(err => {
+          return res.status(400).send(err);
         });
-        var login = new Userlogin({ user: user._id });
-        login.agent = req.headers['user-agent'];
-        login.ip = getClientIp(req);
-        login.save();
-        user.password = undefined;
-        user.salt = undefined;
-        req.login(user, function (err) {
-          if (err) {
-            // Xuất bug ra file log
-            logger.system.error('users.authentication.server.controller.js - verify', err);
-            res.status(400).send(err);
-          } else {
-            return res.redirect('/');
-          }
-        });
-      });
     }
   });
 };
@@ -223,7 +224,7 @@ exports.oauthCallback = function (strategy) {
       //   return res.redirect('/verification/twitter?social=' + user._id);
       user.salt = undefined;
       user.password = undefined;
-      // user.new = undefined;
+      user.report = undefined;
       req.login(user, function (err) {
         if (err) {
           return res.redirect('/authentication/signin');
@@ -242,10 +243,6 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
 
     User.findOne({ email: providerUserProfile.email }, function (err, _user) {
       if (_user) {
-        // if (_user.email.indexOf('@fake.com') >= 0) {
-        //   _user.new = true;
-        //   return done(err, _user);
-        // }
         // Check if user exists, is not signed in using this provider, and doesn't have that provider data already configured
         if (_user.provider !== providerUserProfile.provider && (!_user.additionalProvidersData || !_user.additionalProvidersData[providerUserProfile.provider])) {
           // Add the provider data to the additional provider data field
@@ -258,9 +255,10 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
           // Then tell mongoose that we've updated the additionalProvidersData field
           _user.markModified('additionalProvidersData');
 
-          _user.save(function (err, user) {
-            return done(err, user);
-          });
+          saveUser(_user)
+            .then(user => {
+              return done(err, user);
+            });
         } else {
           return done(err, _user);
         }
@@ -298,19 +296,11 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
                 providerData: providerUserProfile.providerData
               });
               // And save the user
-              user.save(function (err, _user) {
-                if (!err) {
-                  Userreport.findOne({ user: _user._id }, (err, rp) => {
-                    if (!rp) {
-                      var report = new Userreport({ user: _user._id });
-                      report.save();
-                    }
-                  });
-                  var login = new Userlogin({ user: _user._id });
-                  login.agent = req.headers['user-agent'];
-                  login.ip = getClientIp(req);
-                  login.save();
-                }
+              saveUser(user).then(_user => {
+                var login = new Userlogin({ user: _user._id });
+                login.agent = req.headers['user-agent'];
+                login.ip = getClientIp(req);
+                login.save();
                 return done(err, user);
               });
             } else {
@@ -364,17 +354,18 @@ exports.removeOAuthProvider = function (req, res, next) {
     user.markModified('additionalProvidersData');
   }
 
-  user.save(function (err) {
-    if (err) {
-      return handleError(err);
-    } else {
-      req.login(user, function (err) {
+  saveUser(user)
+    .then(_user => {
+      _user.report = undefined;
+      _user.password = undefined;
+      _user.salt = undefined;
+      req.login(_user, function (err) {
         if (err)
           return handleError(new Error('MS_CM_LOAD_ERROR'));
-        return res.json(user);
+        return res.json(_user);
       });
-    }
-  });
+    })
+    .catch(handleError);
   function handleError(err) {
     // Xuất bug ra file log
     logger.system.error('users.authentication.server.controller.js - removeOAuthProvider', err);

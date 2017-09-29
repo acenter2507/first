@@ -9,9 +9,9 @@ var path = require('path'),
   Poll = mongoose.model('Poll'),
   Cmtlike = mongoose.model('Cmtlike'),
   Polluser = mongoose.model('Polluser'),
-  Userreport = mongoose.model('Userreport'),
+  User = mongoose.model('User'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
-  _ = require('lodash');
+  _ = require('underscore');
 var pollController = require(path.resolve('./modules/polls/server/controllers/polls.server.controller'));
 
 
@@ -27,13 +27,13 @@ exports.create = function (req, res) {
     .then(_cmt => {
       cmt = _cmt;
       // Tăng số comemnt trong reprort
-      var pollId = cmt.poll._id || cmt.poll;
+      let pollId = cmt.poll._id || cmt.poll;
       return Poll.countUpCmt(pollId);
     }, handleError)
     .then(report => {
-      return Userreport.countUpCmt(req.user._id);
+      return User.countUpCmt(req.user._id);
     }, handleError)
-    .then(report => {
+    .then(() => {
       // Tạo record follow
       Polluser.findOne({ poll: cmt.poll, user: cmt.user }).exec((err, _polluser) => {
         if (!_polluser) {
@@ -112,7 +112,7 @@ exports.update = function (req, res) {
  */
 exports.delete = function (req, res) {
   var cmt = req.cmt;
-  const pollId = cmt.poll._id || cmt.poll;
+  let pollId = cmt.poll._id || cmt.poll;
   cmt.remove()
     .then(() => {
       return Poll.countDownCmt(pollId);
@@ -121,7 +121,8 @@ exports.delete = function (req, res) {
       return Cmtlike.remove({ cmt: cmt._id });
     }, handleError)
     .then(() => {
-      return Userreport.countDownCmt(cmt.user);
+      var userId = cmt.user._id || cmt.user;
+      return User.countDownCmt(userId);
     }, handleError)
     .then(() => {
       res.jsonp(cmt);

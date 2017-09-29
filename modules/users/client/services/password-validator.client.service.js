@@ -13,9 +13,9 @@ angular.module('users').factory('PasswordValidator', ['$window', '$translate',
         if (password.length > 32) {
           result.errors.push('MS_PASS_MAXLENGTH_ERROR');
         }
-        if (/^[a-zA-Z0-9- ]*$/.test(password) === false) {
-          result.errors.push('MS_PASS_ILLEGAL_ERROR');
-        }
+        // if (/^[a-zA-Z0-9- ]*$/.test(password) === false) {
+        //   result.errors.push('MS_PASS_ILLEGAL_ERROR');
+        // }
         return result;
       }
     };

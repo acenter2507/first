@@ -100,10 +100,11 @@ exports.reset = function (req, res, next) {
     user.resetPasswordExpires = undefined;
     saveUser(user)
       .then(_user => {
+        _user.report = undefined;
+        _user.password = undefined;
+        _user.salt = undefined;
         req.login(_user, function (err) {
           if (err) return res.status(400).send(err);
-          _user.password = undefined;
-          _user.salt = undefined;
           return res.json(_user);
         });
       })
@@ -142,6 +143,9 @@ exports.changePassword = function (req, res, next) {
                     message: errorHandler.getErrorMessage(err)
                   });
                 } else {
+                  user.report = undefined;
+                  user.password = undefined;
+                  user.salt = undefined;
                   req.login(user, function (err) {
                     if (err) {
                       res.status(400).send(err);

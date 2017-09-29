@@ -9,7 +9,7 @@ var path = require('path'),
   config = require(path.resolve('./config/config')),
   User = mongoose.model('User'),
   Report = mongoose.model('Report'),
-  Userreport = mongoose.model('Userreport'),
+  Polluser = mongoose.model('Polluser'),
   Userlogin = mongoose.model('Userlogin'),
   Poll = mongoose.model('Poll'),
   Like = mongoose.model('Like'),
@@ -33,33 +33,9 @@ var _ = require('underscore');
 exports.user = function (req, res) {
   // res.jsonp(req.model);
   var user = req.model.toObject();
-  getUserReportInfo(user._id)
-    .then(report => {
-      user.report = report;
-      return countUserLogins(user._id);
-    })
+  countUserLogins(user._id)
     .then(count => {
       user.loginCnt = count;
-      return countUserLikes(user._id);
-    })
-    .then(count => {
-      user.likeCnt = count;
-      return countUserSuggested(user._id);
-    })
-    .then(count => {
-      user.suggestCnt = count;
-      return countUserBeReported(user._id);
-    })
-    .then(count => {
-      user.bereportCnt = count;
-      return countUserViewd(user._id);
-    })
-    .then(count => {
-      user.viewedCnt = count;
-      return countUserReports(user._id);
-    })
-    .then(count => {
-      user.reportCnt = count;
       return res.jsonp(user);
     }).catch(err => {
       return handleError(res, err);
@@ -72,24 +48,12 @@ exports.user = function (req, res) {
 exports.user_add = function (req, res) {
   var user = new User(req.body);
   user.provider = 'local';
-  user.displayName = user.firstName + ' ' + user.lastName;
   user.save(function (err, user) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      // Remove sensitive data before login
-      Userreport.findOne({ user: user._id }, (err, rp) => {
-        if (!rp) {
-          var report = new Userreport({ user: user._id });
-          report.save();
-        }
-      });
-      user.password = undefined;
-      user.salt = undefined;
-      res.jsonp(user);
-    }
+    if (err)
+      return handleError(res, err);
+    user.password = undefined;
+    user.salt = undefined;
+    res.jsonp(user);
   });
 };
 
@@ -188,25 +152,23 @@ exports.user_delete = function (req, res) {
   var user = req.model;
   user.remove()
     .then(() => {
-      Userreport.remove({ user: user._id });
-    }, handleError)
+      Polluser.remove({ user: user._id });
+    }, handleErrorLocal)
     .then(() => {
       Notif.remove({ to: user._id });
-    }, handleError)
+    }, handleErrorLocal)
     .then(() => {
       Bookmark.remove({ user: user._id });
-    }, handleError)
+    }, handleErrorLocal)
     .then(() => {
       View.remove({ user: user._id });
-    }, handleError)
+    }, handleErrorLocal)
     .then(() => {
       res.jsonp(user);
-    }, handleError);
+    }, handleErrorLocal);
 
-  function handleError(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
-    });
+  function handleErrorLocal(err) {
+    return handleError(res, err);
   }
 };
 
@@ -251,14 +213,14 @@ exports.userByID = function (req, res, next, id) {
  * Lấy all users
  */
 exports.users_list = function (req, res) {
-  var page = req.params.page || 0;
-  let options = {
-    lean: true,
-    limit: 10,
-    page: page,
-    sort: '-created',
-    populate: [],
-  };
+  //var page = req.params.page || 0;
+  // let options = {
+  //   lean: true,
+  //   limit: 10,
+  //   page: page,
+  //   sort: '-created',
+  //   populate: [],
+  // };
   // Poll.paginate(query, options)
 
 
@@ -285,36 +247,14 @@ exports.users_list = function (req, res) {
             }
           })
           .catch(err => {
-            return handleError(err);
+            return handleError(res, err);
           });
       });
-    }, handleError);
-
-  function handleError(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
+    }, err => {
+      return handleError(res, err);
     });
-  }
 };
 
-
-
-/**
- * User Api
- * Lấy report của user
- */
-// exports.users_report = function (req, res) {
-//   Userreport.findOne({ user: req.model._id })
-//     .exec(function (err, user) {
-//       if (err) {
-//         return res.status(400).send({
-//           message: errorHandler.getErrorMessage(err)
-//         });
-//       }
-
-//       res.jsonp(user);
-//     });
-// };
 /**
  * Lấy reported của user
  */
@@ -340,13 +280,9 @@ exports.users_polls = function (req, res) {
     .exec()
     .then((polls) => {
       res.jsonp(polls);
-    }, handleError);
-
-  function handleError(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
+    }, err => {
+      return handleError(res, err);
     });
-  }
 };
 /**
  * Lấy votes của user
@@ -375,15 +311,13 @@ exports.users_votes = function (req, res) {
             if (++counter === length) {
               res.jsonp(votes);
             }
-          }, handleError);
+          }, err => {
+            return handleError(res, err);
+          });
       });
-    }, handleError);
-
-  function handleError(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
+    }, err => {
+      return handleError(res, err);
     });
-  }
 };
 /**
  * Lấy cmts của user
@@ -395,12 +329,9 @@ exports.users_cmts = function (req, res) {
     .exec()
     .then((cmts) => {
       res.jsonp(cmts);
-    }, handleError);
-  function handleError(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
+    }, err => {
+      return handleError(res, err);
     });
-  }
 };
 /**
  * Lấy report của user
@@ -412,12 +343,9 @@ exports.users_reports = function (req, res) {
     .exec()
     .then((reports) => {
       res.jsonp(reports);
-    }, handleError);
-  function handleError(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
+    }, err => {
+      return handleError(res, err);
     });
-  }
 };
 /**
  * Lấy be report của user
@@ -429,12 +357,9 @@ exports.users_bereports = function (req, res) {
     .exec()
     .then((reports) => {
       res.jsonp(reports);
-    }, handleError);
-  function handleError(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
+    }, err => {
+      return handleError(res, err);
     });
-  }
 };
 /**
  * Lấy suggests của user
@@ -448,15 +373,14 @@ exports.users_suggests = function (req, res) {
         .sort('-created')
         .populate('poll', 'title')
         .exec();
-    }, handleError)
+    }, err => {
+      return handleError(res, err);
+    })
     .then((opts) => {
       res.jsonp(opts);
-    }, handleError);
-  function handleError(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
+    }, err => {
+      return handleError(res, err);
     });
-  }
 };
 /**
  * Lấy history login của user
@@ -466,12 +390,9 @@ exports.users_logins = function (req, res) {
     .exec()
     .then(logins => {
       res.jsonp(logins);
-    }, handleError);
-  function handleError(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
+    }, err => {
+      return handleError(res, err);
     });
-  }
 };
 
 /**
@@ -482,80 +403,11 @@ function handleError(res, err) {
     message: errorHandler.getErrorMessage(err)
   });
 }
-// Thông tin report của user
-function getUserReportInfo(userId) {
-  return new Promise((resolve, reject) => {
-    if (!userId) return resolve({});
-    Userreport.findOne({ user: userId })
-      .exec(function (err, report) {
-        if (err) return reject(err);
-        return resolve(report);
-      });
-  });
-}
 // Đếm số lần login của user
 function countUserLogins(userId) {
   return new Promise((resolve, reject) => {
     if (!userId) return resolve(0);
     Userlogin.find({ user: userId })
-      .count(function (err, count) {
-        if (err) return reject(err);
-        return resolve(count);
-      });
-  });
-}
-// Thông tin report của user
-function countUserLikes(userId) {
-  return new Promise((resolve, reject) => {
-    if (!userId) return resolve(0);
-    Like.find({ user: userId })
-      .count(function (err, count) {
-        if (err) return reject(err);
-        return resolve(count);
-      });
-  });
-}
-// Đếm số lần bị report
-function countUserBeReported(userId) {
-  return new Promise((resolve, reject) => {
-    if (!userId) return resolve(0);
-    Report.find({ victim: userId })
-      .count(function (err, count) {
-        if (err) return reject(err);
-        return resolve(count);
-      });
-  });
-}
-// Đếm số lần đề xuất của user
-function countUserSuggested(userId) {
-  return new Promise((resolve, reject) => {
-    if (!userId) return resolve(0);
-    Poll.find({ user: userId }).exec()
-      .then(polls => {
-        var ids = _.pluck(polls, '_id');
-        return Opt.find({ user: userId, poll: { $nin: ids } }).count();
-      }, reject)
-      .then(count => {
-        return resolve(count);
-      }, reject);
-  });
-}
-// Đếm số lần user đã report người khác
-function countUserReports(userId) {
-  return new Promise((resolve, reject) => {
-    if (!userId) return resolve(0);
-    Report.find({ user: userId })
-      .count(function (err, count) {
-        if (err) return reject(err);
-        return resolve(count);
-      });
-  });
-}
-// Đếm số poll user đã xem
-function countUserViewd(userId) {
-  return new Promise((resolve, reject) => {
-    if (!userId) return resolve(0);
-    View.find({ user: userId })
       .count(function (err, count) {
         if (err) return reject(err);
         return resolve(count);

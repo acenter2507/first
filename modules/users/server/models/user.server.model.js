@@ -50,14 +50,12 @@ var UserSchema = new Schema({
   },
   profileImageURL: {
     type: String,
-    default: 'modules/users/client/img/profile/default.png'
+    default: 'modules/users/client/img/brand/icon.png'
   },
   provider: {
     type: String,
     required: 'Provider is required'
   },
-  providerData: {},
-  additionalProvidersData: {},
   roles: {
     type: [{
       type: String,
@@ -78,22 +76,47 @@ var UserSchema = new Schema({
     default: Date.now
   },
   status: {
-    type: Number, // 0: First time 1: Waiting - 2: Actived - 3: Block
+    type: Number, // 0: First time 1: Waiting - 2: Actived - 3: Block 
     default: 0
+  },
+  language: {
+    type: String,
+    default: 'en'
+  },
+  // Các số liệu thống kê của user
+  report: {
+    // Số poll đã tạo
+    pollCnt: { type: 'Number', default: 0 },
+    // Số comment đã tạo
+    cmtCnt: { type: 'Number', default: 0 },
+    // Số vote đã tạo
+    voteCnt: { type: 'Number', default: 0 },
+    // Số like đã tạo
+    likeCnt: { type: 'Number', default: 0 },
+    // Xếp hạng
+    rank: { type: 'Number', default: 0 },
+    // Số option đã tham gia đề xuất
+    suggestCnt: { type: 'Number', default: 0 },
+    // Số lần được ghé tham page cá nhân
+    beViewCnt: { type: 'Number', default: 0 },
+    // Số poll đã xem
+    viewCnt: { type: 'Number', default: 0 },
+    // Số lần report người khác
+    reportCnt: { type: 'Number', default: 0 },
+    // Số lần bị report
+    beReportCnt: { type: 'Number', default: 0 }
   },
   activeAccountToken: {
     type: String
   },
+  providerData: {},
+  additionalProvidersData: {},
   /* For reset password */
   resetPasswordToken: {
     type: String
   },
   resetPasswordExpires: {
     type: Date
-  },
-  language: {
-    type: String,
-    default: 'en'
   }
 });
 
@@ -113,31 +136,6 @@ UserSchema.pre('save', function (next) {
 });
 
 /**
- * Hook a pre validate method to test the local password
- */
-// UserSchema.methods.verifyEmail = function () {
-  // if (this.email.length <= 0) return '';
-  // var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  // if (!re.test(this.email)) return false;
-
-// };
-
-/**
- * Hook a pre validate method to test the local password
- */
-// UserSchema.pre('validate', function (next) {
-//   if (this.provider === 'local' && this.password && this.isModified('password')) {
-//     var result = owasp.test(this.password);
-//     if (result.errors.length) {
-//       var error = result.errors.join(' ');
-//       this.invalidate('password', error);
-//     }
-//   }
-
-//   next();
-// });
-
-/**
  * Create instance method for hashing a password
  */
 UserSchema.methods.hashPassword = function (password) {
@@ -155,20 +153,129 @@ UserSchema.methods.authenticate = function (password) {
   return this.password === this.hashPassword(password);
 };
 
-/**
-* Generates a random passphrase that passes the owasp test.
-* Returns a promise that resolves with the generated passphrase, or rejects with an error if something goes wrong.
-* NOTE: Passphrases are only tested against the required owasp strength tests, and not the optional tests.
-*/
 UserSchema.statics.generateRandomPassphrase = function () {
   return new Promise(function (resolve, reject) {
     var password = '';
-    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!#$%&@';
     for (var i = 0; i < 8; i++) {
       password += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     return resolve(password);
   });
 };
+
+UserSchema.statics.countUpPoll = function (id) {
+  return this.findById(id).exec(function (err, user) {
+    if (user) {
+      user.report.pollCnt += 1;
+      return user.save();
+    }
+  });
+};
+UserSchema.statics.countDownPoll = function (id) {
+  return this.findById(id).exec(function (err, user) {
+    if (user) {
+      user.report.pollCnt -= 1;
+      return user.save();
+    }
+  });
+};
+
+UserSchema.statics.countUpCmt = function (id) {
+  return this.findById(id).exec(function (err, user) {
+    if (user) {
+      user.report.cmtCnt += 1;
+      return user.save();
+    }
+  });
+};
+UserSchema.statics.countDownCmt = function (id) {
+  return this.findById(id).exec(function (err, user) {
+    if (user) {
+      user.report.cmtCnt -= 1;
+      return user.save();
+    }
+  });
+};
+
+UserSchema.statics.countUpVote = function (id) {
+  return this.findById(id).exec(function (err, user) {
+    if (user) {
+      user.report.voteCnt += 1;
+      return user.save();
+    }
+  });
+};
+UserSchema.statics.countDownVote = function (id) {
+  return this.findById(id).exec(function (err, user) {
+    if (user) {
+      user.report.voteCnt -= 1;
+      return user.save();
+    }
+  });
+};
+
+UserSchema.statics.countUpLike = function (id) {
+  return this.findById(id).exec(function (err, user) {
+    if (user) {
+      user.report.likeCnt += 1;
+      return user.save();
+    }
+  });
+};
+UserSchema.statics.countDownLike = function (id) {
+  return this.findById(id).exec(function (err, user) {
+    if (user) {
+      user.report.likeCnt -= 1;
+      return user.save();
+    }
+  });
+};
+
+UserSchema.statics.countUpSuggest = function (id) {
+  return this.findById(id).exec(function (err, user) {
+    if (user) {
+      user.report.suggestCnt += 1;
+      return user.save();
+    }
+  });
+};
+
+UserSchema.statics.countUpBeView = function (id) {
+  return this.findById(id).exec(function (err, user) {
+    if (user) {
+      user.report.beViewCnt += 1;
+      return user.save();
+    }
+  });
+};
+
+UserSchema.statics.countUpView = function (id) {
+  return this.findById(id).exec(function (err, user) {
+    if (user) {
+      user.report.viewCnt += 1;
+      return user.save();
+    }
+  });
+};
+
+UserSchema.statics.countUpReport = function (id) {
+  return this.findById(id).exec(function (err, user) {
+    if (user) {
+      user.report.reportCnt += 1;
+      return user.save();
+    }
+  });
+};
+
+UserSchema.statics.countUpBeReport = function (id) {
+  return this.findById(id).exec(function (err, user) {
+    if (user) {
+      user.report.beReportCnt += 1;
+      return user.save();
+    }
+  });
+};
+
 
 mongoose.model('User', UserSchema);

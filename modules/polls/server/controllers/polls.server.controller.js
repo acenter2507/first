@@ -12,7 +12,7 @@ var path = require('path'),
   Opt = mongoose.model('Opt'),
   Vote = mongoose.model('Vote'),
   Voteopt = mongoose.model('Voteopt'),
-  Userreport = mongoose.model('Userreport'),
+  User = mongoose.model('User'),
   Polluser = mongoose.model('Polluser'),
   Report = mongoose.model('Report'),
   Bookmark = mongoose.model('Bookmark'),
@@ -43,7 +43,7 @@ exports.create = function (req, res) {
   poll.save()
     .then(_poll => {
       poll = _poll;
-      return Userreport.countUpPoll(req.user._id);
+      return User.countUpPoll(req.user._id);
     }, handleError)
     .then(_report => {
       // Lưu tag vào db
@@ -231,7 +231,8 @@ exports.delete = function (req, res) {
       return Polluser.remove({ poll: poll._id });
     }, handleError)
     .then(() => {
-      return Userreport.countDownPoll(poll.user);
+      let userId = poll.user._id || poll.user;
+      return User.countDownPoll(userId);
     }, handleError)
     .then(() => {
       return View.remove({ poll: poll._id });

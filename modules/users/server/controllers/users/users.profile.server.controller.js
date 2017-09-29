@@ -25,7 +25,6 @@ var _ = require('lodash'),
   Category = mongoose.model('Category'),
   View = mongoose.model('View'),
   Like = mongoose.model('Like'),
-  Userreport = mongoose.model('Userreport'),
   crypto = require('crypto'),
   validator = require('validator');
 
@@ -76,10 +75,11 @@ exports.update = function (req, res) {
     user = _.extend(user, req.body);
     user.updated = Date.now();
     saveUser(user).then(_user => {
+      _user.report = undefined;
+      _user.password = undefined;
+      _user.salt = undefined;
       req.login(_user, function (err) {
         if (err) return res.status(400).send(err);
-        _user.password = undefined;
-        _user.salt = undefined;
         return res.json(_user);
       });
     }).catch(handleError);
@@ -148,6 +148,7 @@ exports.verifyEmail = function (req, res) {
       user.status = 2;
       user.activeAccountToken = undefined;
       user.save(function (err, user) {
+        user.report = undefined;
         user.password = undefined;
         user.salt = undefined;
         req.login(user, function (err) {
@@ -188,6 +189,9 @@ exports.changeProfilePicture = function (req, res) {
               message: errorHandler.getErrorMessage(saveError)
             });
           } else {
+            user.report = undefined;
+            user.password = undefined;
+            user.salt = undefined;
             req.login(user, function (err) {
               if (err) {
                 res.status(400).send(err);
@@ -222,13 +226,8 @@ exports.changeLanguage = function (req, res) {
     return res.end();
   });
 };
-/**
- * Send User
- */
-exports.me = function (req, res) {
-  res.json(req.user || null);
-};
 
+// -----------------------------------------------------------------------
 /**
  * Send User Profile
  */
@@ -285,6 +284,14 @@ exports.activitys = function (req, res) {
       message: errorHandler.getErrorMessage(err)
     });
   }
+};
+
+/**
+ * Tăng giá trị view profile của user
+ */
+users.countUpBeView = function (req, res) {
+  User.countUpBeView(req.profile._id);
+  res.end();
 };
 
 /**
@@ -671,19 +678,6 @@ exports.dislikes = function (req, res) {
   }
 };
 
-exports.report = function (req, res) {
-  Userreport.findOne({ user: req.profile._id })
-    .exec(function (err, report) {
-      if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      } else {
-        res.jsonp(report);
-      }
-    });
-};
-
 exports.search_user_by_name = function (req, res) {
   const name = req.query.s;
   if (!name || name === '') {
@@ -705,9 +699,8 @@ exports.search_user_by_name = function (req, res) {
 
 exports.get_best_users = function (req, res) {
   var limit = req.params.limit || 0;
-  Userreport.find()
-    .sort('-rank')
-    .populate('user', 'displayName profileImageURL slug created')
+  User.find().sort('-rank')
+    .select('displayName profileImageURL slug created')
     .limit(limit * 1)
     .exec(function (err, users) {
       if (err) {
@@ -740,65 +733,3 @@ exports.profileById = function (req, res, next, id) {
       next();
     });
 };
-
-/**
- * USER REPORT
- */
-exports.reportByID = function (req, res, next, id) {
-
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).send({
-      message: 'MS_CM_DATA_NOT_FOUND'
-    });
-  }
-
-  Userreport.findById(id).exec(function (err, report) {
-    if (err) {
-      return next(err);
-    } else if (!report) {
-      return res.status(404).send({
-        message: 'MS_CM_DATA_NOT_FOUND'
-      });
-    }
-    req.report = report;
-    next();
-  });
-};
-exports.read_report = function (req, res) {
-  res.json(req.report || null);
-};
-exports.create_report = function (req, res) {
-  Userreport.findOne({ user: req.body.user }, (err, rp) => {
-    if (!rp) {
-      var report = new Userreport(req.body);
-      report.save(function (err) {
-        if (err) {
-          return res.status(400).send({
-            message: errorHandler.getErrorMessage(err)
-          });
-        } else {
-          res.jsonp(report);
-        }
-      });
-    }
-  });
-};
-exports.update_report = function (req, res) {
-  var report = req.report;
-
-  report = _.extend(report, req.body);
-  report.save()
-    .then(_report => {
-      res.jsonp(_report);
-    }, handleError);
-
-  function handleError(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
-    });
-  }
-};
-exports.delete_report = function (req, res) {
-  res.json(req.report || null);
-};
-

@@ -9,7 +9,7 @@ var path = require('path'),
   Vote = mongoose.model('Vote'),
   Voteopt = mongoose.model('Voteopt'),
   Poll = mongoose.model('Poll'),
-  Userreport = mongoose.model('Userreport'),
+  User = mongoose.model('User'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 
@@ -38,11 +38,12 @@ exports.create = function (req, res) {
     }, handleError)
     // Resul of save Voteopt
     .then(() => {
-      var pollId = vote.poll._id || vote.poll;
+      let pollId = vote.poll._id || vote.poll;
       return Poll.countUpVote(pollId);
     }, handleError)
     .then(() => {
-      return Userreport.countUpVote(req.user._id);
+      let userId = vote.user._id || vote.user;
+      return User.countUpVote(req.user._id);
     }, handleError)
     .then(() => {
       promises = [];
@@ -117,6 +118,10 @@ exports.delete = function (req, res) {
   vote.remove()
     .then(() => {
       return Voteopt.remove({ vote: vote._id });
+    }, handleError)
+    .then(() => {
+      let userId = vote.user._id || vote.user;
+      return User.countDownVote(userId);
     }, handleError)
     .then(() => {
       res.jsonp(vote);

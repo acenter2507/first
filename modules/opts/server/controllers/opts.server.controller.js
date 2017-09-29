@@ -6,23 +6,28 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Opt = mongoose.model('Opt'),
+  User = mongoose.model('User'),
   Voteopt = mongoose.model('Voteopt'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
-  _ = require('lodash');
+  _ = require('underscore');
 
 /**
  * Create a Opt
  */
-exports.create = function(req, res) {
+exports.create = function (req, res) {
   var opt = new Opt(req.body);
   opt.user = req.user;
 
-  opt.save(function(err) {
+  opt.save(function (err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
+      if (opt.status === 2) {
+        let userId = opt.user._id || opt.user;
+        User.countUpSuggest(userId);
+      }
       res.jsonp(opt);
     }
   });
@@ -31,19 +36,19 @@ exports.create = function(req, res) {
 /**
  * Show the current Opt
  */
-exports.read = function(req, res) {
+exports.read = function (req, res) {
   res.jsonp(req.opt);
 };
 
 /**
  * Update a Opt
  */
-exports.update = function(req, res) {
+exports.update = function (req, res) {
   var opt = req.opt;
 
   opt = _.extend(opt, req.body);
 
-  opt.save(function(err) {
+  opt.save(function (err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -57,7 +62,7 @@ exports.update = function(req, res) {
 /**
  * Delete an Opt
  */
-exports.delete = function(req, res) {
+exports.delete = function (req, res) {
   var opt = req.opt;
 
   opt.remove()
@@ -78,8 +83,8 @@ exports.delete = function(req, res) {
 /**
  * List of Opts
  */
-exports.list = function(req, res) {
-  Opt.find().sort('-created').populate('user', 'displayName slug').exec(function(err, opts) {
+exports.list = function (req, res) {
+  Opt.find().sort('-created').populate('user', 'displayName slug').exec(function (err, opts) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -93,7 +98,7 @@ exports.list = function(req, res) {
 /**
  * Opt middleware
  */
-exports.optByID = function(req, res, next, id) {
+exports.optByID = function (req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
@@ -101,7 +106,7 @@ exports.optByID = function(req, res, next, id) {
     });
   }
 
-  Opt.findById(id).populate('user', 'displayName slug').exec(function(err, opt) {
+  Opt.findById(id).populate('user', 'displayName slug').exec(function (err, opt) {
     if (err) {
       return next(err);
     } else if (!opt) {

@@ -10,30 +10,22 @@ angular.module('users').controller('ProfileController', [
   function ($scope, profile, Action, Users, $timeout, dialog) {
     $scope.profile = profile;
     $scope.isCurrentOwner = $scope.profile._id === $scope.user._id;
-    init();
+    onCreate();
 
-    function init() {
-      get_user_report();
+    function onCreate() {
       if ($scope.isLogged && !$scope.isCurrentOwner) {
-        var timer = $timeout(count_up_view_profile, 30000);
+        var timer = $timeout(handleCountUpBeView, 30000);
         $scope.$on('$destroy', () => {
           $timeout.cancel(timer);
+          timer = undefined;
         });
       }
 
     }
 
-    function get_user_report() {
-      Action.get_user_report($scope.profile._id)
-        .then(res => {
-          $scope.report = res.data || { viewCnt: 0, pollCnt: 0, cmtCnt: 0 };
-        })
-        .catch(err => {
-          $scope.handleShowMessage(err.message, true);
-        });
-    }
-    function count_up_view_profile() {
-      Action.count_up_view_profile($scope.report, $scope.profile._id);
+    // Tăng biến đếm số lần xem profile
+    function handleCountUpBeView() {
+      Action.handleCountUpBeView($scope.profile._id);
     }
 
     $scope.delete_poll = (poll) => {

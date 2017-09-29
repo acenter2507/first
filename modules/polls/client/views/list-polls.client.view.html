@@ -118,19 +118,19 @@
         <div class="card-body">
           <div class="mini-poll" ng-repeat="u in vm.bestUsers">
             <div class="poll-avatar">
-              <a ng-if="u.user" ui-sref="profile.info({userId: u.user.slug})">
-                <img src="{{::u.user.profileImageURL}}" alt="{{::u.user.displayName}}">
+              <a ng-if="u" ui-sref="profile.info({userId: u.slug})">
+                <img src="{{::u.profileImageURL}}" alt="{{::u.displayName}}">
               </a>
-              <img ng-if="!u.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
+              <img ng-if="!u" src="modules/users/client/img/profile/default.png" alt="Deleted User">
             </div>
             <div class="poll-info">
               <div class="poll-title">
-                <a ui-sref="profile.info({userId: u.user.slug})">{{::u.user.displayName}}</a>
+                <a ui-sref="profile.info({userId: u.slug})">{{::u.displayName}}</a>
               </div>
               <div class="poll-detail mg16t">
                 <div class="poll-detail-time">
                   <span>{{:: 'LB_JOIN_DAY' | translate }}:</span>
-                  <span am-time-ago="u.user.created"></span>
+                  <span am-time-ago="u.created"></span>
                 </div>
                 <div class="poll-detail-count">
                   <i class="fa fa-pencil"></i>

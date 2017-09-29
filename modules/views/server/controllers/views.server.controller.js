@@ -6,8 +6,9 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   View = mongoose.model('View'),
+  User = mongoose.model('User'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
-  _ = require('lodash');
+  _ = require('underscore');
 
 /**
  * Create a View
@@ -22,6 +23,8 @@ exports.create = function(req, res) {
         message: errorHandler.getErrorMessage(err)
       });
     } else {
+      let userId = view.user._id || view.user;
+      User.countUpView(userId);
       res.jsonp(view);
     }
   });

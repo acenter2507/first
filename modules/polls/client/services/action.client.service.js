@@ -16,7 +16,6 @@
     'ReportsService',
     'BookmarksService',
     'TagsService',
-    'Userreport',
     'ViewsService',
     'UserApi'
   ];
@@ -35,7 +34,6 @@
     Reports,
     Bookmarks,
     Tags,
-    Userreport,
     Views,
     UserApi
   ) {
@@ -118,24 +116,18 @@
       });
     };
     /**
-     * Lấy thông tin count của user
-     */
-    this.get_user_report = userId => {
-      return new Promise((resolve, reject) => {
-        UserApi.get_user_report(userId)
-          .then(res => {
-            resolve(res);
-          })
-          .catch(err => {
-            reject(err);
-          });
-      });
-    };
-    /**
      * Tăng giá trị view profile cho user
      */
-    this.count_up_view_profile = (report, userId) => {
+    this.handleCountUpBeView = userId => {
       return new Promise((resolve, reject) => {
+        $http.get('api/cmts/' + cmtId, {
+          ignoreLoadingBar: true
+        })
+          .then(res => {
+            return resolve(res);
+          }, err => {
+            return reject(err);
+          });
         var rs_report;
         if (report._id) {
           rs_report = new Userreport({ _id: report._id });

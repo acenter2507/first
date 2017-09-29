@@ -9,6 +9,7 @@ var path = require('path'),
   Vote = mongoose.model('Vote'),
   Voteopt = mongoose.model('Voteopt'),
   Poll = mongoose.model('Poll'),
+  Userreport = mongoose.model('Userreport'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 

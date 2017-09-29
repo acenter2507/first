@@ -3,6 +3,7 @@ angular.module('users.admin')
   .controller('AdminViewUserController', AdminViewUserController);
 AdminViewUserController.$inject = [
   '$window',
+  '$document',
   '$scope',
   '$state',
   '$filter',
@@ -19,6 +20,7 @@ AdminViewUserController.$inject = [
 
 function AdminViewUserController(
   $window,
+  $document,
   $scope,
   $state,
   $filter,
@@ -33,12 +35,76 @@ function AdminViewUserController(
 ) {
   var ctrl = this;
   ctrl.user = userResolve;
-  console.log(ctrl.user);
 
   onCreate();
 
   function onCreate() {
   }
+
+  /**
+   * HANDLES
+   */
+  ctrl.handleViewListLogin = () => {
+    if (ctrl.login) {
+      let login = angular.element(document.getElementById('login-table'));
+      $document.scrollToElementAnimated(login, 100);
+    } else {
+      return;
+    }
+  };
+  ctrl.handleViewListPolls = () => {
+
+  };
+  ctrl.handleViewListComments = () => {
+
+  };
+  ctrl.handleViewListVotes = () => {
+
+  };
+  ctrl.handleViewListLikes = () => {
+
+  };
+  ctrl.handleViewListVieweds = () => {
+
+  };
+  ctrl.handleViewListSuggests = () => {
+
+  };
+  ctrl.handleViewListReports = () => {
+
+  };
+  ctrl.handleViewListBeReports = () => {
+
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // $scope.loginCnt = 0;
   // $scope.pollCnt = 0;

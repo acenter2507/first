@@ -8,7 +8,41 @@
     </div>
   </div>
 </div>
-
+<!-- Info -->
+<div class="row mg12t">
+  <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+    <img src="{{ctrl.user.profileImageURL}}" alt="{{ctrl.user.displayName}}" class="img-thumbnail user-profile-picture">
+  </div>
+  <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
+    <table class="table">
+      <tr>
+        <td>Name:</td>
+        <td>{{ ctrl.user.displayName }}</td>
+      </tr>
+      <tr>
+        <td>Email:</td>
+        <td>{{ ctrl.user.email }}</td>
+      </tr>
+      <tr>
+        <td>Provider:</td>
+        <td>{{ ctrl.user.provider }}</td>
+      </tr>
+      <tr>
+        <td>Roles:</td>
+        <td>{{:: ctrl.user.roles}}</td>
+      </tr>
+      <tr>
+        <td>Last login:</td>
+        <td><span am-time-ago="ctrl.user.lastLogin"></span></td>
+      </tr>
+      <tr>
+        <td>Created:</td>
+        <td>{{:: ctrl.user.created | LLL_format }}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+<!-- Report -->
 <div class="row mg12t">
   <div class="col-xs-12">
     <table class="table table-bordered">
@@ -54,40 +88,15 @@
     </table>
   </div>
 </div>
-
+<!-- Login -->
 <div class="row mg12t">
-  <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
-    <img src="{{ctrl.user.profileImageURL}}" alt="{{ctrl.user.displayName}}" class="img-thumbnail user-profile-picture">
-  </div>
-  <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
-    <table class="table">
-      <tr>
-        <td>Name:</td>
-        <td>{{ ctrl.user.displayName }}</td>
-      </tr>
-      <tr>
-        <td>Email:</td>
-        <td>{{ ctrl.user.email }}</td>
-      </tr>
-      <tr>
-        <td>Provider:</td>
-        <td>{{ ctrl.user.provider }}</td>
-      </tr>
-      <tr>
-        <td>Roles:</td>
-        <td>{{:: ctrl.user.roles}}</td>
-      </tr>
-      <tr>
-        <td>Last login:</td>
-        <td><span am-time-ago="ctrl.user.lastLogin"></span></td>
-      </tr>
-      <tr>
-        <td>Created:</td>
-        <td>{{:: ctrl.user.created | LLL_format }}</td>
-      </tr>
-    </table>
+  <div class="col-xs-12">
+
   </div>
 </div>
+
+
+
 
 
 <!-- logins -->

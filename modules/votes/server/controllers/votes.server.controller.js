@@ -24,10 +24,9 @@ exports.create = function (req, res) {
     vote.ip = getClientIp(req);
     vote.guest = true;
   }
-  const opts = req.body.opts;
+  let opts = req.body.opts;
   var promises = [];
   vote.save()
-    // Resul of save vote
     .then(_vote => {
       vote = _vote;
       opts.forEach(opt => {
@@ -40,6 +39,9 @@ exports.create = function (req, res) {
     .then(() => {
       var pollId = vote.poll._id || vote.poll;
       return Poll.countUpVote(pollId);
+    }, handleError)
+    .then(() => {
+      return Userreport.countUpVote(req.user._id);
     }, handleError)
     .then(() => {
       promises = [];

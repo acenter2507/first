@@ -30,12 +30,11 @@ var _ = require('underscore');
 exports.user = function (req, res) {
   // res.jsonp(req.model);
   var user = req.model.toObject();
-  users_report(user).then(_user => {
-    res.jsonp(_user);
+  getUserReportInfo(user._id).then(report => {
+    user.report = report;
+    return res.jsonp(user);
   }).catch(err => {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
-    });
+    return handleError(res, err);
   });
 };
 
@@ -235,9 +234,10 @@ exports.users_list = function (req, res) {
         array[index] = instance.toObject();
         users_be_report(array[index])
           .then(_res => {
-            return users_report(array[index]);
+            return getUserReportInfo(array[index]._id);
           })
-          .then(_res => {
+          .then(report => {
+            array[index].report = report;
             if (++counter === length) {
               res.jsonp(users);
             }
@@ -255,32 +255,13 @@ exports.users_list = function (req, res) {
   }
 };
 
-// Đếm số lần bị report
-function users_be_report(user) {
-  return new Promise((resolve, reject) => {
-    Report.find({ victim: user._id })
-      .count(function (err, count) {
-        if (err) {
-          return reject(err);
-        }
-        user.bereportCnt = count;
-        return resolve(user);
-      });
-  });
+// Đểm các thông tin user đã tạo ra
+exports.getUserCountInfo = function(req, res) {
+  res.end();
 }
-// Thông tin report của user
-function users_report(user) {
-  return new Promise((resolve, reject) => {
-    Userreport.findOne({ user: user._id })
-      .exec(function (err, report) {
-        if (err) {
-          return reject(err);
-        }
-        user.report = report;
-        return resolve(user);
-      });
-  });
-}
+
+
+
 /**
  * User Api
  * Lấy report của user
@@ -455,3 +436,48 @@ exports.users_logins = function (req, res) {
     });
   }
 };
+
+/**
+ * LOCAL FUNCTION
+ */
+function handleError(res, err) {
+  return res.status(400).send({
+    message: errorHandler.getErrorMessage(err)
+  });
+}
+// Thông tin report của user
+function getUserReportInfo(userId) {
+  return new Promise((resolve, reject) => {
+    if (!userId) return resolve({});
+    Userreport.findOne({ user: userId })
+      .exec(function (err, report) {
+        if (err) return reject(err);
+        return resolve(report);
+      });
+  });
+}
+// Đếm số lần login của user
+function countUserLogins(userId) {
+  return new Promise((resolve, reject) => {
+    if (!userId) return resolve(0);
+    Userlogin.find({ user: userId })
+      .count(function (err, count) {
+        if (err) return reject(err);
+        return resolve(count);
+      });
+  });
+}
+
+// Đếm số lần bị report
+function users_be_report(user) {
+  return new Promise((resolve, reject) => {
+    Report.find({ victim: user._id })
+      .count(function (err, count) {
+        if (err) {
+          return reject(err);
+        }
+        user.bereportCnt = count;
+        return resolve(user);
+      });
+  });
+}

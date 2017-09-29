@@ -26,6 +26,10 @@ var UserreportSchema = new Schema({
     type: 'Number',
     default: 0
   },
+  voteCnt: {
+    type: 'Number',
+    default: 0
+  },
   rank: {
     type: 'Number',
     default: 0
@@ -72,6 +76,24 @@ UserreportSchema.statics.countDownCmt = function (id, callback) {
   return this.findOne({ user: id }).exec(function (err, report) {
     if (report) {
       report.cmtCnt -= 1;
+      return report.save();
+    }
+  });
+};
+
+UserreportSchema.statics.countUpVote = function (id, callback) {
+  return this.findOne({ user: id }).exec(function (err, report) {
+    if (report) {
+      report.voteCnt += 1;
+      return report.save();
+    }
+  });
+};
+
+UserreportSchema.statics.countDownVote = function (id, callback) {
+  return this.findOne({ user: id }).exec(function (err, report) {
+    if (report) {
+      report.voteCnt -= 1;
       return report.save();
     }
   });

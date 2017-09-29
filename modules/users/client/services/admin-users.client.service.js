@@ -26,6 +26,11 @@ function AdminUserApi($http) {
       ignoreLoadingBar: true
     });
   };
+  this.getUserCountInfo = userId => {
+    return $http.get('/api/admins/users/' + userId + '/count', {
+      ignoreLoadingBar: true
+    });
+  };
   this.get_polls_by_user = userId => {
     return $http.get('/api/admins/users/' + userId + '/polls', {
       ignoreLoadingBar: true

@@ -139,7 +139,7 @@
         var rs_report;
         if (report._id) {
           rs_report = new Userreport({ _id: report._id });
-          rs_report.viewCnt += 1;
+          rs_report.viewCnt = report.viewCnt + 1;
           rs_report.$update();
         } else {
           rs_report = new Userreport({ user: userId });

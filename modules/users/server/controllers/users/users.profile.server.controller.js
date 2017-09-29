@@ -510,7 +510,11 @@ exports.clear_bookmark = function (req, res) {
  * Xoa toan bo view
  */
 exports.clear_view = function (req, res) {
-  View.remove({ user: req.profile._id }).exec();
+  var user = req.profile;
+  user.report.viewCnt = 0;
+  user.save();
+  View.remove({ user: user._id }).exec();
+  
   res.end();
 };
 

@@ -26,9 +26,11 @@ module.exports = function (app) {
   app.route('/api/profile/:profileId/activitys').get(users.activitys);
   // Tăng biến đếm số lần xem profile của user
   app.route('/api/profile/:profileId/be_view').get(users.countUpBeView);
-
+  // Xóa hết poll đã bookmark
   app.route('/api/profile/:profileId/clear_bookmark').get(users.clear_bookmark);
+  // Xóa hết poll đã view
   app.route('/api/profile/:profileId/clear_view').get(users.clear_view);
+  // Xóa hết poll đã follow
   app.route('/api/profile/:profileId/clear_follow').get(users.clear_follow);
 
   app.route('/api/profile/:profileId/polls/:page').get(users.polls);

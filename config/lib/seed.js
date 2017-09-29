@@ -29,9 +29,6 @@ function saveUser(user) {
         if (err) {
           reject(new Error('Failed to add local ' + user.email));
         } else {
-          var Userreport = mongoose.model('Userreport');
-          var report = new Userreport({ user: theuser._id });
-          report.save();
           resolve(theuser);
         }
       });

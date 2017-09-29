@@ -15,8 +15,7 @@ var mongoose = require('mongoose'),
 // Bookmark = mongoose.model('Bookmark'),
 // Category = mongoose.model('Category'),
 // View = mongoose.model('View'),
-// Like = mongoose.model('Like'),
-//Userreport = mongoose.model('Userreport');
+// Like = mongoose.model('Like');
 
 exports.excute = function () {
   get_users()
@@ -26,11 +25,7 @@ exports.excute = function () {
       var counter = 0;
       users.forEach(function (instance, index, array) {
         array[index] = instance.toObject();
-        get_report(array[index]._id)
-          .then(rs => {
-            array[index].report = rs;
-            return count_poll_like(array[index]._id);
-          })
+        count_poll_like(array[index]._id)
           .then(rs => {
             if (rs.length === 0) {
               array[index].pollLikeCnt = 0;
@@ -74,17 +69,6 @@ function get_users() {
       .select('displayName')
       .then(users => {
         return resolve(users);
-      }, err => {
-        return reject(err);
-      });
-  });
-}
-function get_report(userId) {
-  return new Promise((resolve, reject) => {
-    var Userreport = mongoose.model('Userreport');
-    Userreport.findOne({ user: userId })
-      .then(report => {
-        return resolve(report);
       }, err => {
         return reject(err);
       });
@@ -167,12 +151,9 @@ function point_calculate(user) {
   });
 }
 function save_rank(users) {
-  var Userreport = mongoose.model('Userreport');
+  var User = mongoose.model('User');
   users.forEach((item, index) => {
-    Userreport.update({ user: item._id }, {
-      $set: {
-        rank: index + 1
-      }
-    }).exec();
+    item.rank = index + 1;
+    return item.save();
   });
 }

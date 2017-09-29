@@ -24,45 +24,6 @@
     </div>
     <!-- RIGHT -->
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 pdn d-sm-down-none">
-      <!-- Languages -->
-      <!--<div class="card">
-        <div class="card-header">
-          <strong class="card-title">{{ 'LANGUAGE' | translate }}</strong>
-        </div>
-        <div class="card-body">
-          <a ng-repeat="lang in vm.supportLanguages" ng-click="handleChangeLanguage(lang)" ng-class="{ 'mg5l': !$first, 'text-muted': lang === vm.language }">{{ lang | translate }}</a>
-        </div>
-      </div>-->
-      <!-- Activitys  -->
-      <!-- <div class="card card-expand card-scroll" ng-if="isLogged">
-        <div class="card-header">
-          <strong class="card-title">{{ 'LB_POLLS_TICKERS' | translate }}</strong>
-          <a class="card-expand-toggle pull-right text-muted"><i class="fa fa-caret-down"></i></a>
-        </div>
-        <div class="card-body">
-          <div class="card-scroll-content">
-            <div class="mini-poll" ng-repeat="activity in Activitys.list | orderBy: '-time' track by $index">
-              <div class="poll-avatar">
-                <img src="{{activity.profileImageURL}}" alt="{{activity.displayName}}">
-              </div>
-              <div class="poll-info">
-                <div class="poll-title">
-                  <a ui-sref="profile.info({userId: activity.user})">{{::activity.displayName}}</a>
-                  <span class="text-muted font-xs">{{::activity.action}}</span>
-                  <a ui-sref="polls.view({pollId: activity.poll })">{{::activity.title}}</a>
-                </div>
-                <div class="poll-detail">
-                  <div class="poll-detail-time">
-                    <i class="fa fa-clock-o"></i>
-                    <span am-time-ago="activity.time"></span>
-                  </div>
-                  <div class="poll-detail-count"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
       <!-- Popular poll -->
       <div class="card card-tab">
         <div class="card-header">
@@ -195,13 +156,6 @@
             <li ng-repeat="tag in vm.tags"><a ui-sref="tags.polls({ tagId: tag.slug })" class="tag">{{::tag.name}}({{::tag.count | shortNumber}})</a></li>
           </ul>
         </div>
-      </div>
-
-      <div class="fb-page" data-href="https://www.facebook.com/Blablaer-Vi&#x1ec7;t-Nam-118848098782008/" data-tabs="timeline"
-        data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
-        <blockquote cite="https://www.facebook.com/Blablaer-Vi&#x1ec7;t-Nam-118848098782008/" class="fb-xfbml-parse-ignore">
-          <a href="https://www.facebook.com/Blablaer-Vi&#x1ec7;t-Nam-118848098782008/">Blablaer Việt Nam</a>
-        </blockquote>
       </div>
     </div>
     <!-- LEFT -->

@@ -32,12 +32,29 @@ var _ = require('underscore');
 exports.user = function (req, res) {
   // res.jsonp(req.model);
   var user = req.model.toObject();
-  getUserReportInfo(user._id).then(report => {
-    user.report = report;
-    return res.jsonp(user);
-  }).catch(err => {
-    return handleError(res, err);
-  });
+  getUserReportInfo(user._id)
+    .then(report => {
+      user.report = report;
+      return countUserLogins(user._id);
+    })
+    .then(count => {
+      user.report.loginCnt = count;
+      return countUserLikes(user._id);
+    })
+    .then(count => {
+      user.report.likeCnt = count;
+      return countUserSuggested(user._id);
+    })
+    .then(count => {
+      user.report.suggestCnt = count;
+      return countUserReports(user._id);
+    })
+    .then(count => {
+      user.report.reportCnt = count;
+      return res.jsonp(user);
+    }).catch(err => {
+      return handleError(res, err);
+    });
 };
 
 /**
@@ -504,5 +521,16 @@ function countUserSuggested(userId) {
       .then(count => {
         return resolve(count);
       }, reject);
+  });
+}
+// Đếm số lần user đã report người khác
+function countUserReports(userId) {
+  return new Promise((resolve, reject) => {
+    if (!userId) return resolve(0);
+    Report.find({ user: userId })
+      .count(function (err, count) {
+        if (err) return reject(err);
+        return resolve(count);
+      });
   });
 }

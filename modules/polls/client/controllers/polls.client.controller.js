@@ -592,6 +592,9 @@
       return new Promise((resolve, reject) => {
         Action.get_voteopts(ctrl.poll._id)
           .then(res => { // lấy thông tin vote
+            ctrl.chart.colors = [];
+            ctrl.chart.labels = [];
+            ctrl.chart.data = [];
             ctrl.votes = res.data.votes || [];
             ctrl.voteopts = res.data.voteopts || [];
             ctrl.votedTotal = ctrl.voteopts.length;

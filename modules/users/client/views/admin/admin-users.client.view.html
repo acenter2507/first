@@ -1,4 +1,12 @@
 <div class="row">
+  <div class="col-xs-12">
+    <div class="form-group">
+      <a ui-sref="admin.users.new" class="btn btn-primary pull-right">Add new</a>
+    </div>
+  </div>
+</div>
+
+<div class="row">
   <!-- Filter  -->
   <div class="card card-expand">
 
@@ -91,6 +99,71 @@
 </div>
 
 <div class="row">
+  <div class="col-xs-12">
+
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead class="bg-primary">
+          <tr>
+            <th class="text-center"><i class="icon-people"></i></th>
+            <th>Display Name</th>
+            <th>Email</th>
+            <th>Joined date</th>
+            <th>Role</th>
+            <th class="text-center">Provider</th>
+            <th class="text-center">Polls count</th>
+            <th class="text-center">Comments count</th>
+            <th class="text-center">Profiles views</th>
+            <th class="text-center">Be reported</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="user in pagedItems">
+            <td class="text-center">
+              <div class="admin-avatar">
+                <img src="{{:: user.profileImageURL }}" class="img-admin-avatar">
+              </div>
+            </td>
+
+            <td>{{:: user.displayName }}</td>
+            <td>{{:: user.email }}</td>
+            <td>{{:: user.created | LLL_format }}</td>
+            <td>{{:: user.roles }}</td>
+            <td class="text-center">
+              <i class="fa" ng-class="{ 'fa fa-facebook-square' : user.provider === 'facebook',
+                    'fa fa-twitter-square' : user.provider === 'twitter',
+                    'fa fa-linkedin-square' : user.provider === 'linkedin',
+                    'fa fa-google-plus-square' : user.provider === 'google',
+                    'fa fa-git-square' : user.provider === 'github',
+                    'fa fa-sign-in' : user.provider === 'local'}">
+                </i>
+            </td>
+            <td class="text-center">{{:: user.report.pollCnt }}</td>
+            <td class="text-center">{{:: user.report.cmtCnt }}</td>
+            <td class="text-center">{{:: user.report.viewCnt }}</td>
+            <td class="text-center">{{:: user.bereportCnt }}</td>
+            <td>
+              <div class="dropdown" uib-dropdown>
+                <a class="btn btn-primary btn-sm" role="button" uib-dropdown-toggle>Options</a>
+                <ul class="dropdown-menu" role="menu" style="left: -100px; z-index: 2;">
+                  <li><a ui-sref="admin.users.view({ userId: user._id })">Detail</a></li>
+                  <li><a ui-sref="admin.users.edit({ userId: user._id })">Edit</a></li>
+                  <li><a ng-click="ctrl.handleDeleteUser(user)">Delete</a></li>
+                  <li ng-if="user.provider === 'local'"><a ui-sref="admin.users.resetpass({ userId: user._id })">Reset password</a></li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage"
+        ng-change="pageChanged()"></uib-pagination>
+    </div>
+  </div>
+</div>
+<!--
+<div class="row">
   <div class="card">
     <div class="card-header">
       <strong class="card-title"><i class="fa fa-list-alt"></i> List user</strong>
@@ -99,77 +172,10 @@
     </div>
     <hr class="mgn">
     <div class="card-body">
-      <div class="table-responsive">
-        <table class="table table-bordered">
-          <thead class="bg-primary">
-            <tr>
-              <th class="text-center"><i class="icon-people"></i></th>
-              <th>Display Name</th>
-              <th>Email</th>
-              <th>Joined date</th>
-              <th>Role</th>
-              <th class="text-center">Provider</th>
-              <th class="text-center">Polls count</th>
-              <th class="text-center">Comments count</th>
-              <th class="text-center">Profiles views</th>
-              <th class="text-center">Be reported</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="user in pagedItems">
-              <td class="text-center">
-                <div class="admin-avatar">
-                  <img src="{{:: user.profileImageURL }}" class="img-admin-avatar">
-                </div>
-              </td>
-
-              <td>{{:: user.displayName }}</td>
-              <td>{{:: user.email }}</td>
-              <td>{{:: user.created | LLL_format }}</td>
-              <td>{{:: user.roles }}</td>
-              <td class="text-center">
-                <i class="fa" ng-class="{ 'fa fa-facebook-square' : user.provider === 'facebook',
-                    'fa fa-twitter-square' : user.provider === 'twitter',
-                    'fa fa-linkedin-square' : user.provider === 'linkedin',
-                    'fa fa-google-plus-square' : user.provider === 'google',
-                    'fa fa-git-square' : user.provider === 'github',
-                    'fa fa-sign-in' : user.provider === 'local'}">
-                </i>
-              </td>
-              <td class="text-center">{{:: user.report.pollCnt }}</td>
-              <td class="text-center">{{:: user.report.cmtCnt }}</td>
-              <td class="text-center">{{:: user.report.viewCnt }}</td>
-              <td class="text-center">{{:: user.bereportCnt }}</td>
-              <td>
-                <div class="dropdown" uib-dropdown>
-                  <a class="btn btn-primary btn-sm" role="button" uib-dropdown-toggle>Options</a>
-                  <ul class="dropdown-menu" role="menu" style="left: -100px; z-index: 2;">
-                    <li>
-                      <a ui-sref="admin.users.view({ userId: user._id })">Detail</a>
-                    </li>
-                    <li>
-                      <a ui-sref="admin.users.edit({ userId: user._id })">Edit</a>
-                    </li>
-                    <li>
-                      <a ng-click="ctrl.handleDeleteUser(user)">Delete</a>
-                    </li>
-                    <li ng-if="user.provider === 'local'">
-                      <a ui-sref="admin.users.resetpass({ userId: user._id })">Reset password</a>
-                    </li>
-                  </ul>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage"
-          ng-change="pageChanged()"></uib-pagination>
-      </div>
       <div class="clearfix"></div>
     </div>
   </div>
-</div>
+</div>-->
 
 <script type="text/ng-template" id="bottom-template-url">
   <button class="btn btn-info btn-sm btn-block" ng-click="filter.created = undefined">

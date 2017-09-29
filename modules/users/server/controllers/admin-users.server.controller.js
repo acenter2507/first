@@ -261,7 +261,7 @@ exports.users_list = function (req, res) {
 // Đểm các thông tin user đã tạo ra
 exports.getUserCountInfo = function (req, res) {
   res.end();
-}
+};
 
 
 

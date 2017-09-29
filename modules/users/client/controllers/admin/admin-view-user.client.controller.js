@@ -38,7 +38,6 @@ function AdminViewUserController(
   onCreate();
 
   function onCreate() {
-    prepareUserCountInfo();
   }
 
   // $scope.loginCnt = 0;
@@ -64,16 +63,6 @@ function AdminViewUserController(
   /**
    * PREPARE
    */
-  function prepareUserCountInfo() {
-    AdminUserApi.getUserCountInfo(ctrl.user._id)
-      .success(res => {
-        console.log(res);
-      })
-      .error(err => {
-        alert(err.message);
-        console.log(err);
-      });
-  }
 
   /* Login log */
   // get_logins();

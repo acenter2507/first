@@ -13,6 +13,7 @@ var path = require('path'),
   Userlogin = mongoose.model('Userlogin'),
   Poll = mongoose.model('Poll'),
   Like = mongoose.model('Like'),
+  View = mongoose.model('View'),
 
   Notif = mongoose.model('Notif'),
   Bookmark = mongoose.model('Bookmark'),
@@ -47,6 +48,14 @@ exports.user = function (req, res) {
     })
     .then(count => {
       user.suggestCnt = count;
+      return countUserBeReported(user._id);
+    })
+    .then(count => {
+      user.bereportCnt = count;
+      return countUserViewd(user._id);
+    })
+    .then(count => {
+      user.viewedCnt = count;
       return countUserReports(user._id);
     })
     .then(count => {
@@ -273,11 +282,6 @@ exports.users_list = function (req, res) {
       message: errorHandler.getErrorMessage(err)
     });
   }
-};
-
-// Đểm các thông tin user đã tạo ra
-exports.getUserCountInfo = function (req, res) {
-  res.end();
 };
 
 
@@ -528,6 +532,17 @@ function countUserReports(userId) {
   return new Promise((resolve, reject) => {
     if (!userId) return resolve(0);
     Report.find({ user: userId })
+      .count(function (err, count) {
+        if (err) return reject(err);
+        return resolve(count);
+      });
+  });
+}
+// Đếm số poll user đã xem
+function countUserViewd(userId) {
+  return new Promise((resolve, reject) => {
+    if (!userId) return resolve(0);
+    View.find({ user: userId })
       .count(function (err, count) {
         if (err) return reject(err);
         return resolve(count);

@@ -26,17 +26,17 @@
         <th class="text-center">Profile view</th>
       </tr>
       <tr>
-        <td class="text-center">{{ rank}}</td>
-        <td class="text-center">{{ loginCnt}}</td>
-        <td class="text-center">{{ pollCnt}}</td>
-        <td class="text-center">{{ cmtCnt}}</td>
-        <td class="text-center">{{ voteCnt}}</td>
-        <td class="text-center">{{ likeCnt}}</td>
-        <td class="text-center">{{ viewedCnt}}</td>
-        <td class="text-center">{{ suggestCnt}}</td>
-        <td class="text-center">{{ reportCnt}}</td>
-        <td class="text-center">{{ bereportCnt}}</td>
-        <td class="text-center">{{ viewCnt}}</td>
+        <td class="text-center">{{:: ctrl.user.report.rank}}</td>
+        <td class="text-center">{{:: ctrl.user.loginCnt}}</td>
+        <td class="text-center">{{:: ctrl.user.report.pollCnt}}</td>
+        <td class="text-center">{{:: ctrl.user.report.cmtCnt}}</td>
+        <td class="text-center">{{:: ctrl.user.report.voteCnt}}</td>
+        <td class="text-center">{{:: ctrl.user.likeCnt}}</td>
+        <td class="text-center">{{:: ctrl.user.viewedCnt}}</td>
+        <td class="text-center">{{:: ctrl.user.suggestCnt}}</td>
+        <td class="text-center">{{:: ctrl.user.reportCnt}}</td>
+        <td class="text-center">{{:: ctrl.user.bereportCnt}}</td>
+        <td class="text-center">{{:: ctrl.user.report.viewCnt}}</td>
       </tr>
       <tr>
         <td class="text-center"><a class="btn btn-default btn-sm" ui-sref="admin.users.rank">View</a></td>

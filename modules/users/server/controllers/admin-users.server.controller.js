@@ -38,19 +38,19 @@ exports.user = function (req, res) {
       return countUserLogins(user._id);
     })
     .then(count => {
-      user.report.loginCnt = count;
+      user.loginCnt = count;
       return countUserLikes(user._id);
     })
     .then(count => {
-      user.report.likeCnt = count;
+      user.likeCnt = count;
       return countUserSuggested(user._id);
     })
     .then(count => {
-      user.report.suggestCnt = count;
+      user.suggestCnt = count;
       return countUserReports(user._id);
     })
     .then(count => {
-      user.report.reportCnt = count;
+      user.reportCnt = count;
       return res.jsonp(user);
     }).catch(err => {
       return handleError(res, err);

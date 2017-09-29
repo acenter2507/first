@@ -1,7 +1,7 @@
 'use strict';
 angular.module('users.admin')
   .controller('AdminUsersController', AdminUsersController);
-  AdminUsersController.$inject = ['$scope', '$filter', '$window', 'AdminUserService', 'AdminUserApi'];
+AdminUsersController.$inject = ['$scope', '$filter', '$window', 'AdminUserService', 'AdminUserApi'];
 
 function AdminUsersController($scope, $filter, $window, AdminUserService, AdminUserApi) {
   var ctrl = this;

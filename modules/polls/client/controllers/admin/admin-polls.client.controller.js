@@ -4,7 +4,7 @@
     .module('polls.admin')
     .controller('AdminPollsController', AdminPollsController);
 
-    AdminPollsController.$inject = [
+  AdminPollsController.$inject = [
     '$state',
     '$scope',
     '$window',

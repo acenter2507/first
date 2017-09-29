@@ -120,7 +120,7 @@
      */
     this.handleCountUpBeView = userId => {
       return new Promise((resolve, reject) => {
-        $http.get('api/cmts/' + cmtId, {
+        $http.get('/api/profile/' + userId + '/be_view', {
           ignoreLoadingBar: true
         })
           .then(res => {
@@ -128,17 +128,6 @@
           }, err => {
             return reject(err);
           });
-        var rs_report;
-        if (report._id) {
-          rs_report = new Userreport({ _id: report._id });
-          rs_report.viewCnt = report.viewCnt + 1;
-          rs_report.$update();
-        } else {
-          rs_report = new Userreport({ user: userId });
-          rs_report.viewCnt = 1;
-          rs_report.$save();
-        }
-        resolve();
       });
     };
 

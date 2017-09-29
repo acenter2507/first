@@ -1,5 +1,8 @@
 'use strict';
 
+exports.invokeRolesPolicies = function () {
+  return;
+};
 /**
  * Check If Admin Policy Allows
  */

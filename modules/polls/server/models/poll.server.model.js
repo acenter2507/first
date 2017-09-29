@@ -5,6 +5,7 @@
  */
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
+  paginate = require('mongoose-paginate'),
   slug = require('mongoose-url-slugs');
 
 /**
@@ -102,7 +103,8 @@ var PollSchema = new Schema({
     type: Date
   }
 });
-PollSchema.plugin(slug('title'));
+PollSchema.plugin(slug('title', { update: true }));
+PollSchema.plugin(paginate);
 
 PollSchema.pre('save', function (next) {
   this.updated = new Date();

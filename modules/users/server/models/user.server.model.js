@@ -5,6 +5,7 @@
  */
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
+  paginate = require('mongoose-paginate'),
   slug = require('mongoose-url-slugs'),
   crypto = require('crypto'),
   validator = require('validator');
@@ -97,6 +98,7 @@ var UserSchema = new Schema({
 });
 
 UserSchema.plugin(slug('displayName', { update: true }));
+UserSchema.plugin(paginate);
 
 /**
  * Hook a pre save method to hash the password

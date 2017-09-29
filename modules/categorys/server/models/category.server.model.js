@@ -39,6 +39,6 @@ var CategorySchema = new Schema({
     ref: 'User'
   }
 });
-CategorySchema.plugin(slug('name'));
+CategorySchema.plugin(slug('name', { update: true }));
 
 mongoose.model('Category', CategorySchema);

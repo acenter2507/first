@@ -251,6 +251,19 @@ exports.userByID = function (req, res, next, id) {
  * Lấy all users
  */
 exports.users_list = function (req, res) {
+  var page = req.params.page || 0;
+  let options = {
+    lean: true,
+    limit: 10,
+    page: page,
+    sort: '-created',
+    populate: [],
+  };
+  // Poll.paginate(query, options)
+
+
+
+
   User.find({}, '-salt -password')
     .sort('-created').exec()
     .then((users) => {

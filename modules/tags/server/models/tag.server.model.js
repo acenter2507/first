@@ -39,7 +39,7 @@ var TagSchema = new Schema({
     default: Date.now
   }
 });
-TagSchema.plugin(slug('name'));
+TagSchema.plugin(slug('name', { update: true }));
 
 TagSchema.pre('save', function (next) {
   this.updated = new Date();

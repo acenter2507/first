@@ -5,17 +5,30 @@ AdminUsersController.$inject = ['$scope', '$filter', '$window', 'AdminUserServic
 
 function AdminUsersController($scope, $filter, $window, AdminUserService, AdminUserApi) {
   var ctrl = this;
-  get_users();
-  function get_users() {
-    AdminUserApi.get_users()
-      .then(res => {
-        $scope.users = res.data;
-        $scope.buildPager();
+  ctrl.page = 0;
+  ctrl.sort = '-created';
+
+  onCreate();
+
+  function onCreate() {
+    prepareUsers();
+  }
+  function prepareUsers() {
+    AdminUserApi.getUsers(ctrl.page, ctrl.sort)
+      .success(res => {
+        console.log(res);
+        // $scope.users = res || [];
+        // $scope.buildPager();
       })
-      .catch(err => {
+      .error(err => {
         alert(err.message);
       });
   }
+
+
+
+
+
 
   $scope.buildPager = function () {
     $scope.pagedItems = [];

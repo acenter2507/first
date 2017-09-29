@@ -10,16 +10,18 @@ var path = require('path'),
   User = mongoose.model('User'),
   Report = mongoose.model('Report'),
   Userreport = mongoose.model('Userreport'),
+  Userlogin = mongoose.model('Userlogin'),
+  Poll = mongoose.model('Poll'),
+  Like = mongoose.model('Like'),
+
   Notif = mongoose.model('Notif'),
   Bookmark = mongoose.model('Bookmark'),
   View = mongoose.model('View'),
-  Poll = mongoose.model('Poll'),
   Vote = mongoose.model('Vote'),
   Voteopt = mongoose.model('Voteopt'),
   Cmt = mongoose.model('Cmt'),
   Cmtlike = mongoose.model('Cmtlike'),
   Opt = mongoose.model('Opt'),
-  Userlogin = mongoose.model('Userlogin'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 var _ = require('underscore');
@@ -232,8 +234,9 @@ exports.users_list = function (req, res) {
       users.forEach(function (instance, index, array) {
         if (!instance) return;
         array[index] = instance.toObject();
-        users_be_report(array[index])
-          .then(_res => {
+        countUserBeReported(array[index]._id)
+          .then(count => {
+            array[index].bereportCnt = count;
             return getUserReportInfo(array[index]._id);
           })
           .then(report => {
@@ -256,7 +259,7 @@ exports.users_list = function (req, res) {
 };
 
 // Đểm các thông tin user đã tạo ra
-exports.getUserCountInfo = function(req, res) {
+exports.getUserCountInfo = function (req, res) {
   res.end();
 }
 
@@ -467,17 +470,39 @@ function countUserLogins(userId) {
       });
   });
 }
-
-// Đếm số lần bị report
-function users_be_report(user) {
+// Thông tin report của user
+function countUserLikes(userId) {
   return new Promise((resolve, reject) => {
-    Report.find({ victim: user._id })
+    if (!userId) return resolve(0);
+    Like.find({ user: userId })
       .count(function (err, count) {
-        if (err) {
-          return reject(err);
-        }
-        user.bereportCnt = count;
-        return resolve(user);
+        if (err) return reject(err);
+        return resolve(count);
       });
+  });
+}
+// Đếm số lần bị report
+function countUserBeReported(userId) {
+  return new Promise((resolve, reject) => {
+    if (!userId) return resolve(0);
+    Report.find({ victim: userId })
+      .count(function (err, count) {
+        if (err) return reject(err);
+        return resolve(count);
+      });
+  });
+}
+// Đếm số lần đề xuất của user
+function countUserSuggested(userId) {
+  return new Promise((resolve, reject) => {
+    if (!userId) return resolve(0);
+    Poll.find({ user: userId }).exec()
+      .then(polls => {
+        var ids = _.pluck(polls, '_id');
+        return Opt.find({ user: userId, poll: { $nin: ids } }).count();
+      }, reject)
+      .then(count => {
+        return resolve(count);
+      }, reject);
   });
 }

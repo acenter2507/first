@@ -137,6 +137,14 @@
       ctrl.votes = ctrl.poll.votes || [];
       ctrl.voteopts = handleGetVoteOptionInVote(ctrl.votes);
       ctrl.votedTotal = ctrl.voteopts.length;
+
+      var result = _.map(ctrl.opts, function (opt) {
+        var length = _.reject(ctrl.voteopts, function (el) {
+          return el.toString() !== opt._id.toString();
+        }).length;
+        return { opt: opt._id, count: length };
+      });
+      console.log(result);
       ctrl.opts.forEach(opt => {
         opt.voteCnt = 0;
         opt.progressVal = Action.calPercen(ctrl.votedTotal, opt.voteCnt);
@@ -150,13 +158,6 @@
       votes.forEach(vote => {
         voteOpts = _.union(voteOpts, vote.opts);
       });
-      var result = _.map(voteOpts, function (voteOpt) {
-        var length = _.reject(voteOpts, function (el) {
-          return el === voteOpt;
-        }).length;
-        return { opt: voteOpt, count: length };
-      });
-      console.log(result);
       return voteOpts;
     }
     function prepareOwnerInfo() {

@@ -160,7 +160,6 @@
       return new Promise((resolve, reject) => {
         Action.get_owner_by_pollId(ctrl.poll._id)
           .then(res => {
-            console.log(res);
             ctrl.ownVote = res.data.ownVote;
             ctrl.selectedOpts = ctrl.ownVote.opts || [];
             ctrl.radioChecked = ctrl.selectedOpts[0];

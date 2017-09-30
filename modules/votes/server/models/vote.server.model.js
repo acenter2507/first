@@ -22,13 +22,12 @@ var VoteSchema = new Schema({
 });
 
 VoteSchema.statics.removeOption = function (optId) {
-  this.update({ opts: optId }, { $pull: { opts: optId } });
-  // this.find({ opts: optId }).exec(function (err, votes) {
-  //   console.log(votes);
-  //   votes.forEach(function (vote) {
-  //     vote.opts.pull(optId);
-  //   });
-  // });
+  this.find({ opts: optId }).exec(function (err, votes) {
+    votes.forEach(function (vote) {
+      vote.opts.pull(optId);
+      vote.save();
+    });
+  });
 };
 
 mongoose.model('Vote', VoteSchema);

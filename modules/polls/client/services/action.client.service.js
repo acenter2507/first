@@ -567,7 +567,7 @@
     };
     this.countByOptions = (opts, voteOpts) => {
       var collect = _.map(opts, function (opt) {
-        // var array = _.clone(voteOpts);
+        var array = _.clone(voteOpts);
         var length = _.reject(voteOpts, function (el) {
           return el.toString() !== opt._id.toString();
         }).length;

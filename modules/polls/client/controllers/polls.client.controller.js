@@ -138,7 +138,7 @@
       ctrl.voteopts = handleGetVoteOptionInVote(ctrl.votes);
       ctrl.votedTotal = ctrl.voteopts.length;
       ctrl.opts.forEach(opt => {
-        opt.voteCnt = _.where(ctrl.voteopts, { opt: opt._id }).length || 0;
+        opt.voteCnt = _.find(ctrl.voteopts, (optId) => { return optId.toString() === opt._id.toString() }).length || 0;
         opt.progressVal = Action.calPercen(ctrl.votedTotal, opt.voteCnt);
         ctrl.chart.colors.push(opt.color);
         ctrl.chart.labels.push(opt.title);
@@ -150,7 +150,6 @@
       votes.forEach(vote => {
         voteOpts = _.union(voteOpts, vote.opts);
       });
-      console.log(voteOpts);
       return voteOpts;
     }
     function prepareOwnerInfo() {

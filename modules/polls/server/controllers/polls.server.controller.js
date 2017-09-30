@@ -761,7 +761,6 @@ function get_votes_by_pollId(pollId) {
       .populate('user', 'displayName')
       .exec()
       .then(votes => {
-        rs.votes = votes;
         return resolve(votes);
       }, err => {
         return reject(err);

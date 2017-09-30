@@ -80,7 +80,6 @@
       } else {
         Action.get_poll($stateParams.pollId)
           .then(_poll => {
-            console.log(_poll);
             ctrl.poll = _poll;
             onCreate();
           });
@@ -164,7 +163,7 @@
           .then(res => {
             console.log(res);
             ctrl.ownVote = res.data.ownVote;
-            ctrl.votedOpts = res.data.votedOpts;
+            ctrl.votedOpts = ctrl.ownVote.opts || [];
             ctrl.selectedOpts = _.clone(ctrl.votedOpts);
             ctrl.radioChecked = ctrl.selectedOpts[0];
             ctrl.follow = res.data.follow;

@@ -134,6 +134,7 @@
       };
       ctrl.votes = ctrl.poll.votes || [];
       ctrl.voteopts = Action.getOptionsInVotes(ctrl.votes);
+      console.log(ctrl.voteopts);
       ctrl.votedTotal = ctrl.voteopts.length;
       var collect = Action.countByOptions(ctrl.opts, ctrl.voteopts);
 

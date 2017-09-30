@@ -206,8 +206,10 @@
       Socket.on('cmt_add', obj => {
         // Nếu tự nhận message của chính mình
         if (Socket.socket.socket.id === obj.client) return;
+        console.log(obj);
         Action.loadCommentById(obj.cmtId)
           .then(res => {
+            console.log(res);
             var _cmt = res.data || {};
             var item = _.findWhere(ctrl.cmts, { _id: _cmt._id });
             if (item) {

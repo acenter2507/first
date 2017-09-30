@@ -184,6 +184,7 @@
           rs_cmt.$save(successCb, errorCb);
         }
         function successCb(res) {
+          console.log(cmt);
           if (Authentication.user) {
             Socket.emit('cmt_add', {
               cmtId: res._id,

@@ -134,9 +134,9 @@
       };
       ctrl.votes = ctrl.poll.votes || [];
       ctrl.voteopts = Action.getOptionsInVotes(ctrl.votes);
-      console.log(ctrl.voteopts);
       ctrl.votedTotal = ctrl.voteopts.length;
       var collect = Action.countByOptions(ctrl.opts, ctrl.voteopts);
+      console.log(ctrl.voteopts);
 
       ctrl.opts.forEach(opt => {
         opt.voteCnt = _.findWhere(collect, { opt: opt._id }).count;

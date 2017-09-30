@@ -208,8 +208,8 @@
         if (Socket.socket.socket.id === obj.client) return;
         Action.loadCommentById(obj.cmtId)
           .then(cmt => {
-            console.log(res);
-            if (!res) return;
+            console.log(cmt);
+            if (!cmt) return;
             var item = _.findWhere(ctrl.cmts, { _id: cmt._id });
             if (item) {
               _.extend(_.findWhere(ctrl.cmts, { _id: cmt._id }), cmt);

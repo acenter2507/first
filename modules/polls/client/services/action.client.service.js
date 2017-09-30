@@ -12,7 +12,7 @@
     'OptsService',
     'LikesService',
     'CmtlikesService',
-    'PollusersService',
+    'FollowsService',
     'ReportsService',
     'BookmarksService',
     'TagsService',

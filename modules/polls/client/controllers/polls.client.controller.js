@@ -151,7 +151,7 @@
         Action.get_owner_by_pollId(ctrl.poll._id)
           .then(res => {
             ctrl.ownVote = res.data.ownVote;
-            ctrl.selectedOpts = ctrl.ownVote.opts || [];
+            ctrl.selectedOpts = ctrl.ownVote._id ? _.clone(ctrl.ownVote.opts) : [];
             ctrl.radioChecked = ctrl.selectedOpts[0];
             ctrl.follow = res.data.follow;
             ctrl.reported = res.data.reported;
@@ -363,8 +363,6 @@
         return;
       }
       // Nếu thông tin mới và cũ giống nhau
-      console.log(ctrl.ownVote.opts);
-      console.log(ctrl.selectedOpts);
       if (angular.equals(ctrl.ownVote.opts, ctrl.selectedOpts)) {
         return;
       }

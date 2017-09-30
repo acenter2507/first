@@ -546,9 +546,16 @@
         labels: [],
         data: []
       };
-      poll.total = poll.voteopts.length;
+      var options = this.getOptionsInVotes(poll.votes);
+      poll.total = options.length;
+      var collect = _.map(poll.opts, function (opt) {
+        var length = _.reject(options, function (el) {
+          return el.toString() !== opt._id.toString();
+        }).length;
+        return { opt: opt._id, count: length };
+      });
       poll.opts.forEach(opt => {
-        opt.voteCnt = _.where(poll.voteopts, { opt: opt._id }).length || 0;
+        opt.voteCnt =  _.findWhere(collect, { opt: opt._id }).count;
         opt.progressVal = calPercen(poll.total, opt.voteCnt);
         poll.chart.data.push(opt.voteCnt);
         poll.chart.colors.push(opt.color);
@@ -556,6 +563,13 @@
       });
       return poll;
     };
+    this.getOptionsInVotes = (votes) => {
+      var options = [];
+      votes.forEach(vote => {
+        options = _.union(options, vote.opts);
+      });
+      return options;
+    }
     // Tính phần trăm tỉ lệ vote cho opt
     this.calPercen = calPercen;
     function calPercen(total, value) {

@@ -18,9 +18,9 @@
             popover-popup-delay="500" popover-placement="top-left" popover-class="black-popover">
           </p>
           <span class="value">
-            <span>{{ opt.voteCnt | shortNumber }}</span>
-            <span>/</span>
-            <span>{{ ctrl.votedTotal | shortNumber }}</span>
+            <span>{{ opt.voteCnt | shortNumber }}/{{ ctrl.votedTotal | shortNumber }}</span>
+            <!--<span>/</span>
+            <span>{{ ctrl.votedTotal | shortNumber }}</span>-->
             <span class="text-muted small">({{ opt.progressVal }}%)</span>
           </span>
         </div>

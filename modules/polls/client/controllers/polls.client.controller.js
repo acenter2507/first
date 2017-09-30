@@ -151,8 +151,8 @@
         voteOpts = _.union(voteOpts, vote.opts);
       });
       var result = _.map(voteOpts, function (voteOpt) {
-        var length = _.reject(array, function (el) {
-          return (el.id.indexOf(voteOpt) < 0);
+        var length = _.reject(voteOpts, function (el) {
+          return el === voteOpt;
         }).length;
         return { opt: voteOpt, count: length };
       });

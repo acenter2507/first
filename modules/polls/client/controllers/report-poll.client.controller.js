@@ -118,7 +118,6 @@
       // Thiết lập các thông tin cho poll
       ctrl.opts = _.where(ctrl.poll.opts, { status: 1 });
       ctrl.votes = ctrl.poll.votes || [];
-      ctrl.voteopts = ctrl.poll.voteopts || [];
       ctrl.barChartLabels = _.pluck(ctrl.opts, 'title');
     }
     function prepareDays() {
@@ -347,19 +346,12 @@
       var data = [];
       var member = [];
       var guest = [];
-      var voteopts, vote, memberCnt, guestCnt, created, isMatch;
+      var memberCnt, guestCnt, created, isMatch;
       ctrl.opts.forEach(opt => {
         memberCnt = 0;
         guestCnt = 0;
-        var voteopts = _.where(ctrl.voteopts, { opt: opt._id });
-        if (voteopts.length === 0) {
-          member.push(memberCnt);
-          guest.push(guestCnt);
-          return;
-        }
-        voteopts.forEach(voteopt => {
-          vote = _.findWhere(ctrl.votes, { _id: voteopt.vote });
-          if (!vote) return;
+        ctrl.votes.forEach(vote => {
+          if (!_.contains(vote.opts, opt._id)) return;
           if (ctrl.timezone === 'utc') {
             created = moment(vote.updated).utc();
           } else if (ctrl.timezone === 'language') {
@@ -385,6 +377,7 @@
               memberCnt++;
             }
           }
+
         });
         member.push(memberCnt);
         guest.push(guestCnt);

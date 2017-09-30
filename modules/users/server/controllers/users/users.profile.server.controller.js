@@ -289,7 +289,7 @@ exports.activitys = function (req, res) {
 /**
  * Tăng giá trị view profile của user
  */
-users.countUpBeView = function (req, res) {
+exports.countUpBeView = function (req, res) {
   User.countUpBeView(req.profile._id);
   res.end();
 };

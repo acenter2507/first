@@ -229,27 +229,7 @@ exports.users_list = function (req, res) {
   User.find({}, '-salt -password')
     .sort('-created').exec()
     .then((users) => {
-      if (users.length === 0) return res.jsonp(users);
-      var length = users.length;
-      var counter = 0;
-      users.forEach(function (instance, index, array) {
-        if (!instance) return;
-        array[index] = instance.toObject();
-        countUserBeReported(array[index]._id)
-          .then(count => {
-            array[index].bereportCnt = count;
-            return getUserReportInfo(array[index]._id);
-          })
-          .then(report => {
-            array[index].report = report;
-            if (++counter === length) {
-              res.jsonp(users);
-            }
-          })
-          .catch(err => {
-            return handleError(res, err);
-          });
-      });
+      res.jsonp(users);
     }, err => {
       return handleError(res, err);
     });

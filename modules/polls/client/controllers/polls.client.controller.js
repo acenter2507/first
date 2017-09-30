@@ -206,18 +206,17 @@
       Socket.on('cmt_add', obj => {
         // Nếu tự nhận message của chính mình
         if (Socket.socket.socket.id === obj.client) return;
-        console.log(obj);
         Action.loadCommentById(obj.cmtId)
-          .then(res => {
+          .then(cmt => {
             console.log(res);
-            var _cmt = res.data || {};
-            var item = _.findWhere(ctrl.cmts, { _id: _cmt._id });
+            if (!res) return;
+            var item = _.findWhere(ctrl.cmts, { _id: cmt._id });
             if (item) {
-              _.extend(_.findWhere(ctrl.cmts, { _id: _cmt._id }), _cmt);
+              _.extend(_.findWhere(ctrl.cmts, { _id: cmt._id }), cmt);
               if (!$scope.$$phase) $scope.$digest();
             } else {
               if (obj.isNew) {
-                ctrl.cmts.push(_cmt);
+                ctrl.cmts.push(cmt);
                 ctrl.poll.cmtCnt += 1;
                 if (!$scope.$$phase) $scope.$digest();
               }

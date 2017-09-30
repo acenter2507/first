@@ -134,9 +134,9 @@
       };
       ctrl.votes = ctrl.poll.votes || [];
       ctrl.voteopts = Action.getOptionsInVotes(ctrl.votes);
+      console.log(ctrl.voteopts);
       ctrl.votedTotal = ctrl.voteopts.length;
       var collect = Action.countByOptions(ctrl.opts, ctrl.voteopts);
-      console.log(ctrl.voteopts);
 
       ctrl.opts.forEach(opt => {
         opt.voteCnt = _.findWhere(collect, { opt: opt._id }).count;
@@ -161,7 +161,6 @@
             return resolve();
           })
           .catch(err => {
-            console.log(err);
             $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
             return reject();
           });

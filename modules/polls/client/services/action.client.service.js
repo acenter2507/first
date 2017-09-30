@@ -562,6 +562,7 @@
       var options = [];
       votes.forEach(vote => {
         // options.push(vote.opts.join());
+        options.concat(vote.opts);
       });
       return options;
     };

@@ -438,7 +438,7 @@
       var collect = this.countByOptions(poll.opts, options);
       poll.opts.forEach(opt => {
         opt.voteCnt = _.findWhere(collect, { opt: opt._id }).count;
-        opt.progressVal = calPercen(poll.total, opt.voteCnt);
+        opt.progressVal = this.calPercen(poll.total, opt.voteCnt);
         poll.chart.data.push(opt.voteCnt);
         poll.chart.colors.push(opt.color);
         poll.chart.labels.push(opt.title);
@@ -470,7 +470,7 @@
         return 0;
       }
       return Math.floor(value * 100 / total) || 0;
-    }
+    };
     return this;
   }
 })();

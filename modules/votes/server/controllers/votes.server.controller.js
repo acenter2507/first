@@ -25,8 +25,10 @@ exports.create = function (req, res) {
     vote.ip = getClientIp(req);
     vote.guest = true;
   }
-  console.log(vote);
-  return res.end();
+  vote.save().then(vote => {
+    console.log(vote);
+    res.jsonp(vote);
+  }, handleError);
   // let opts = req.body.opts;
   // var promises = [];
   // vote.save()
@@ -52,7 +54,7 @@ exports.create = function (req, res) {
   //     res.jsonp(vote);
   //   }, handleError);
 
-  
+
   function handleError(err) {
     // Xuất bug ra file log
     logger.system.error('votes.server.controller.js - create', err);

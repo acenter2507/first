@@ -561,14 +561,14 @@
     this.getOptionsInVotes = votes => {
       var options = [];
       votes.forEach(vote => {
-        options = _.union(options, vote.opts);
+        options.push(vote.opts);
       });
       return options;
     };
     this.countByOptions = (opts, voteOpts) => {
       var collect = _.map(opts, function (opt) {
-        var array = _.clone(voteOpts);
-        var length = _.reject(array, function (el) {
+        // var array = _.clone(voteOpts);
+        var length = _.reject(voteOpts, function (el) {
           return el.toString() !== opt._id.toString();
         }).length;
         return { opt: opt._id, count: length };

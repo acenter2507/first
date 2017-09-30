@@ -40,7 +40,6 @@
         onCreate();
       } else {
         Action.get_poll($stateParams.pollId).then(_poll => {
-          console.log(_poll);
           ctrl.poll = _poll;
           onCreate();
         });

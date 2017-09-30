@@ -25,31 +25,34 @@ exports.create = function (req, res) {
     vote.ip = getClientIp(req);
     vote.guest = true;
   }
-  let opts = req.body.opts;
-  var promises = [];
-  vote.save()
-    .then(_vote => {
-      vote = _vote;
-      opts.forEach(opt => {
-        var voteopt = new Voteopt({ opt: opt, vote: _vote._id });
-        promises.push(voteopt.save());
-      });
-      return Promise.all(promises);
-    }, handleError)
-    // Resul of save Voteopt
-    .then(() => {
-      let pollId = vote.poll._id || vote.poll;
-      return Poll.countUpVote(pollId);
-    }, handleError)
-    .then(() => {
-      let userId = vote.user._id || vote.user;
-      return User.countUpVote(req.user._id);
-    }, handleError)
-    .then(() => {
-      promises = [];
-      res.jsonp(vote);
-    }, handleError);
+  console.log(vote);
+  return res.end();
+  // let opts = req.body.opts;
+  // var promises = [];
+  // vote.save()
+  //   .then(_vote => {
+  //     vote = _vote;
+  //     opts.forEach(opt => {
+  //       var voteopt = new Voteopt({ opt: opt, vote: _vote._id });
+  //       promises.push(voteopt.save());
+  //     });
+  //     return Promise.all(promises);
+  //   }, handleError)
+  //   // Resul of save Voteopt
+  //   .then(() => {
+  //     let pollId = vote.poll._id || vote.poll;
+  //     return Poll.countUpVote(pollId);
+  //   }, handleError)
+  //   .then(() => {
+  //     let userId = vote.user._id || vote.user;
+  //     return User.countUpVote(req.user._id);
+  //   }, handleError)
+  //   .then(() => {
+  //     promises = [];
+  //     res.jsonp(vote);
+  //   }, handleError);
 
+  
   function handleError(err) {
     // Xuất bug ra file log
     logger.system.error('votes.server.controller.js - create', err);

@@ -133,14 +133,10 @@
         data: []
       };
       ctrl.votes = ctrl.poll.votes || [];
-      ctrl.voteopts = handleGetVoteOptionInVote(ctrl.votes);
+      ctrl.voteopts = Action.getOptionsInVotes(ctrl.votes);
       ctrl.votedTotal = ctrl.voteopts.length;
-      var collect = _.map(ctrl.opts, function (opt) {
-        var length = _.reject(ctrl.voteopts, function (el) {
-          return el.toString() !== opt._id.toString();
-        }).length;
-        return { opt: opt._id, count: length };
-      });
+      var collect = Action.countByOptions(ctrl.opts, ctrl.voteopts);
+
       ctrl.opts.forEach(opt => {
         opt.voteCnt = _.findWhere(collect, { opt: opt._id }).count;
         opt.progressVal = Action.calPercen(ctrl.votedTotal, opt.voteCnt);
@@ -148,13 +144,6 @@
         ctrl.chart.labels.push(opt.title);
         ctrl.chart.data.push(opt.voteCnt);
       });
-    }
-    function handleGetVoteOptionInVote(votes) {
-      var voteOpts = [];
-      votes.forEach(vote => {
-        voteOpts = _.union(voteOpts, vote.opts);
-      });
-      return voteOpts;
     }
     function prepareOwnerInfo() {
       return new Promise((resolve, reject) => {
@@ -607,14 +596,9 @@
             ctrl.chart.labels = [];
             ctrl.chart.data = [];
             ctrl.votes = res.data || [];
-            ctrl.voteopts = handleGetVoteOptionInVote(ctrl.votes);
+            ctrl.voteopts = Action.getOptionsInVotes(ctrl.votes);
             ctrl.votedTotal = ctrl.voteopts.length;
-            var collect = _.map(ctrl.opts, function (opt) {
-              var length = _.reject(ctrl.voteopts, function (el) {
-                return el.toString() !== opt._id.toString();
-              }).length;
-              return { opt: opt._id, count: length };
-            });
+            var collect = Action.countByOptions(ctrl.opts, ctrl.voteopts);
 
             ctrl.opts.forEach(opt => {
               opt.voteCnt = _.findWhere(collect, { opt: opt._id }).count;

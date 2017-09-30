@@ -137,16 +137,14 @@
       ctrl.votes = ctrl.poll.votes || [];
       ctrl.voteopts = handleGetVoteOptionInVote(ctrl.votes);
       ctrl.votedTotal = ctrl.voteopts.length;
-
-      var result = _.map(ctrl.opts, function (opt) {
+      var collect = _.map(ctrl.opts, function (opt) {
         var length = _.reject(ctrl.voteopts, function (el) {
           return el.toString() !== opt._id.toString();
         }).length;
         return { opt: opt._id, count: length };
       });
-      console.log(result);
       ctrl.opts.forEach(opt => {
-        opt.voteCnt = 0;
+        opt.voteCnt = _.findWhere(collect, { opt: opt._id}).count;
         opt.progressVal = Action.calPercen(ctrl.votedTotal, opt.voteCnt);
         ctrl.chart.colors.push(opt.color);
         ctrl.chart.labels.push(opt.title);

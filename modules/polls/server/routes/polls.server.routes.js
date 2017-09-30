@@ -31,7 +31,7 @@ module.exports = function(app) {
   // Tăng biến đếm lượt view của poll
   app.route('/api/countUpView/:pollId').get(polls.countUpView);
   // Load thông tin vote của 1 poll
-  app.route('/api/findVoteopts/:pollId').get(polls.findVoteopts);
+  app.route('/api/findVotes/:pollId').get(polls.findVotes);
   // Lấy danh sách đã vote cho 1 option
   app.route('/api/findVotesByOption/:optId').get(polls.findVotesByOption);
   // Xóa 1 poll ra khỏi list bookmark

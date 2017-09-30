@@ -320,7 +320,7 @@
      */
     this.get_voteopts = pollId => {
       return new Promise((resolve, reject) => {
-        $http.get('/api/findVoteopts/' + pollId, {
+        $http.get('/api/findVotes/' + pollId, {
           ignoreLoadingBar: true
         })
           .then(res => {

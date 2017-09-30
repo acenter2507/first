@@ -39,10 +39,6 @@
 
     prepareShowingData();
     function prepareShowingData() {
-      vm.poll.votedTotal = vm.poll.voteopts.length;
-      vm.poll.opts.forEach(opt => {
-        opt.voteCnt = _.where(vm.poll.voteopts, { opt: opt._id }).length || 0;
-      });
     }
   }
 })();

@@ -7,7 +7,7 @@ var path = require('path'),
   mongoose = require('mongoose'),
   Opt = mongoose.model('Opt'),
   User = mongoose.model('User'),
-  Voteopt = mongoose.model('Voteopt'),
+  Vote = mongoose.model('Vote'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('underscore');
 
@@ -67,9 +67,7 @@ exports.delete = function (req, res) {
 
   opt.remove()
     .then(() => {
-      return Voteopt.remove({ opt: opt._id });
-    }, handleError)
-    .then(() => {
+      Vote.removeOption(opt._id);
       res.jsonp(opt);
     }, handleError);
 

@@ -21,4 +21,14 @@ var VoteSchema = new Schema({
   created: { type: Date, default: Date.now }
 });
 
+UserSchema.statics.removeOption = function (optId) {
+  this.find({
+    opts: { $elemMatch: { $contains: optId } }
+  }).exec(function (err, votes) {
+    votes.forEach(function (vote) {
+      vote.opts.pull(optId);
+    });
+  });
+};
+
 mongoose.model('Vote', VoteSchema);

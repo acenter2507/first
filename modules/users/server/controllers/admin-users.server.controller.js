@@ -19,7 +19,6 @@ var path = require('path'),
   Bookmark = mongoose.model('Bookmark'),
   View = mongoose.model('View'),
   Vote = mongoose.model('Vote'),
-  Voteopt = mongoose.model('Voteopt'),
   Cmt = mongoose.model('Cmt'),
   Cmtlike = mongoose.model('Cmtlike'),
   Opt = mongoose.model('Opt'),
@@ -271,30 +270,10 @@ exports.users_votes = function (req, res) {
   Vote.find({ user: req.model._id })
     .sort('-created')
     .populate('poll', 'title')
+    .populate('opts', 'title')
     .exec()
     .then((votes) => {
-      if (votes.length === 0) return res.jsonp(votes);
-      var length = votes.length;
-      var counter = 0;
-      votes.forEach(function (instance, index, array) {
-        if (!instance) return;
-        array[index] = instance.toObject();
-        Voteopt.find({ vote: array[index]._id })
-          .populate('opt', 'title')
-          .exec()
-          .then(voteopts => {
-            var opts = [];
-            voteopts.forEach(function (voteopt) {
-              opts.push(voteopt.opt.title);
-            });
-            array[index].opts = opts;
-            if (++counter === length) {
-              res.jsonp(votes);
-            }
-          }, err => {
-            return handleError(res, err);
-          });
-      });
+      res.jsonp(votes);
     }, err => {
       return handleError(res, err);
     });

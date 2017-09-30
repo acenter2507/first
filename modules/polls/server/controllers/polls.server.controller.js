@@ -11,7 +11,6 @@ var path = require('path'),
   Poll = mongoose.model('Poll'),
   Opt = mongoose.model('Opt'),
   Vote = mongoose.model('Vote'),
-  Voteopt = mongoose.model('Voteopt'),
   User = mongoose.model('User'),
   Follow = mongoose.model('Follow'),
   Report = mongoose.model('Report'),
@@ -201,15 +200,6 @@ exports.delete = function (req, res) {
     }, handleError)
     .then(() => { // Xóa comment
       return Cmt.remove({ poll: poll._id });
-    }, handleError)
-    .then(() => { // Xóa thông tin của vote
-      var promises = [];
-      Vote.find({ poll: poll._id }).exec((err, votes) => {
-        votes.forEach(vote => {
-          promises.push(Voteopt.remove({ vote: vote._id }));
-        });
-        return Promise.all(promises);
-      });
     }, handleError)
     .then(() => { // Xóa votes
       return Vote.remove({ poll: poll._id });
@@ -475,7 +465,7 @@ exports.findCmts = function (req, res) {
 /**
  * Lấy toàn bộ thông tin các vote và các opt của vote (polls.view)
  */
-exports.findVoteopts = function (req, res) {
+exports.findVotes = function (req, res) {
   get_votes_by_pollId(req.poll._id)
     .then(votes => {
       res.jsonp(votes);
@@ -483,7 +473,7 @@ exports.findVoteopts = function (req, res) {
     .catch(handleError);
   function handleError(err) {
     // Xuất bug ra file log
-    logger.system.error('polls.server.controller.js - findVoteopts', err);
+    logger.system.error('polls.server.controller.js - findVotes', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -496,18 +486,11 @@ exports.findVoteopts = function (req, res) {
 exports.findVotesByOption = function (req, res) {
   var optId = req.params.optId || '';
   var ids;
-  Voteopt.find({ opt: optId }).exec()
-    .then(voteopts => {
-      var ids = _.pluck(voteopts, 'vote');
-      Vote.find({ _id: { $in: ids }, guest: false })
-        .populate('user', 'displayName slug profileImageURL')
-        .exec(function (err, votes) {
-          if (err) {
-            return handleError(err);
-          } else {
-            return res.jsonp(votes);
-          }
-        });
+  Vote.find({ opts: { $elemMatch: { $contains: optId } } })
+    .populate('user', 'displayName slug profileImageURL')
+    .exec()
+    .then(votes => {
+      return res.jsonp(votes);
     }, handleError);
   function handleError(err) {
     // Xuất bug ra file log

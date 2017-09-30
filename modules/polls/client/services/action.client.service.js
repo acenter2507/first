@@ -563,7 +563,7 @@
       votes.forEach(vote => {
         // options.push(vote.opts.join());
         console.log(vote);
-        options.concat(vote.opts);
+        options.push(vote.opts);
       });
       return options;
     };

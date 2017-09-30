@@ -561,7 +561,7 @@
     this.getOptionsInVotes = votes => {
       var options = [];
       votes.forEach(vote => {
-        options.concat(vote.opts);
+        options.push(vote.opts.join());
       });
       return options;
     };

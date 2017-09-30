@@ -25,10 +25,18 @@ exports.create = function (req, res) {
     vote.ip = getClientIp(req);
     vote.guest = true;
   }
-  vote.save().then(_vote => {
-    console.log(_vote);
-    res.end();
-  }, handleError);
+  vote.save()
+    .then(_vote => {
+      let pollId = vote.poll._id || vote.poll;
+      return Poll.countUpVote(pollId);
+    }, handleError)
+    .then(() => {
+      let userId = vote.user._id || vote.user;
+      return User.countUpVote(req.user._id);
+    }, handleError)
+    .then(() => {
+      res.jsonp(vote);
+    }, handleError);
   // let opts = req.body.opts;
   // var promises = [];
   // vote.save()

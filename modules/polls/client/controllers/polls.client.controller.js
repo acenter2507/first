@@ -148,7 +148,7 @@
     function handleGetVoteOptionInVote(votes) {
       var voteOpts = [];
       votes.forEach(vote => {
-        voteOpts = _.union(voteOpts, _.pluck(vote, 'opts'));
+        voteOpts = _.union(voteOpts, vote.opts);
       });
       console.log(voteOpts);
       return voteOpts;

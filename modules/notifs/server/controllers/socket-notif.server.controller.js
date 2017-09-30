@@ -136,7 +136,7 @@ function pollCmtNotif(req) {
                         user: follow.user.toString()
                       });
                       socketIds.forEach(item => {
-                        io.sockets.connected[item.socket].emit('notifs', _notif._id );
+                        io.sockets.connected[item.socket].emit('notifs', _notif._id);
                       });
                     });
                 }

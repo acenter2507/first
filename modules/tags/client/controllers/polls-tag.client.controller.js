@@ -11,6 +11,7 @@
     '$translate',
     'tagResolve',
     'Action',
+    'TagsApi',
     'ngDialog'
   ];
 
@@ -19,6 +20,7 @@
     $translate,
     tag,
     Action,
+    TagsApi,
     dialog
   ) {
     var vm = this;
@@ -35,7 +37,7 @@
     function handleLoadPolls() {
       if ($scope.stopped || $scope.busy) return;
       $scope.busy = true;
-      Action.get_tag_polls(vm.tag._id, vm.page, vm.language, vm.sort)
+      TagsApi.getPollsByTagId(vm.tag._id, vm.page, vm.language, vm.sort)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
             $scope.stopped = true;
@@ -88,7 +90,7 @@
         button: 'LB_DELETE'
       }, confirm => {
         vm.polls = _.without(vm.polls, poll);
-        Action.delete_poll(poll);
+        Action.deletePoll(poll);
       });
     };
     $scope.report_poll = (poll) => {
@@ -104,7 +106,7 @@
       }, reject => {
       });
       function handle_confirm(reason) {
-        Action.save_report(poll, reason)
+        Action.saveReportPoll(poll, reason)
           .then(res => {
             poll.reported = (res) ? true : false;
             $scope.handleShowMessageWithParam('MS_CM_REPORT_SUCCESS', { title: poll.title }, false);
@@ -119,7 +121,7 @@
         $scope.handleShowMessageWithParam('MS_CM_BOOKMARK_EXIST_ERROR', { title: poll.title }, true);
         return;
       }
-      Action.save_bookmark(poll._id)
+      Action.saveBookmarkPoll(poll._id)
         .then(res => {
           poll.bookmarked = (res) ? true : false;
           $scope.handleShowMessageWithParam('MS_CM_BOOKMARK_SUCCESS', { title: poll.title }, false);
@@ -133,7 +135,7 @@
         $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;
       }
-      Action.save_follow(poll.follow)
+      Action.saveFollowPoll(poll.follow)
         .then(res => {
           if (res) {
             poll.follow = res;

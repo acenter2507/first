@@ -11,6 +11,8 @@
     '$window',
     'Socket',
     'Action',
+    'TagsApi',
+    'ProfileApi',
     'ngDialog',
     'Constants',
     'Socialshare',
@@ -24,6 +26,8 @@
     $window,
     Socket,
     Action,
+    TagsApi,
+    ProfileApi,
     dialog,
     Constants,
     Socialshare,
@@ -73,7 +77,7 @@
     function handleLoadPolls() {
       if (vm.stopped || vm.busy) return;
       vm.busy = true;
-      Action.get_polls(vm.page, vm.language)
+      Action.loadPolls(vm.page, vm.language)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
             vm.stopped = true;
@@ -108,7 +112,7 @@
       });
     }
     function preparePopularPolls() {
-      Action.get_populars(0, vm.language)
+      Action.loadPopularPolls(0, vm.language)
         .then(res => {
           vm.populars = res.data;
         })
@@ -117,7 +121,7 @@
         });
     }
     function preparePopularTags() {
-      Action.get_popular_tags()
+      TagsApi.loadPopularTags()
         .then(res => {
           vm.tags = res.data;
         })
@@ -126,7 +130,7 @@
         });
     }
     function prepareTopUsers() {
-      Action.get_best_users(10)
+      ProfileApi.loadTopUsers(10)
         .then(res => {
           vm.bestUsers = res.data;
         })
@@ -148,7 +152,7 @@
         button: 'LB_DELETE'
       }, confirm => {
         vm.polls = _.without(vm.polls, poll);
-        Action.delete_poll(poll);
+        Action.deletePoll(poll);
       });
     };
     $scope.report_poll = (poll) => {
@@ -164,7 +168,7 @@
       }, reject => {
       });
       function handle_confirm(reason) {
-        Action.save_report(poll, reason)
+        Action.saveReportPoll(poll, reason)
           .then(res => {
             poll.reported = (res) ? true : false;
             $scope.handleShowMessageWithParam('MS_CM_REPORT_SUCCESS', { title: poll.title }, false);
@@ -179,7 +183,7 @@
         $scope.handleShowMessageWithParam('MS_CM_BOOKMARK_EXIST_ERROR', { title: poll.title }, true);
         return;
       }
-      Action.save_bookmark(poll._id)
+      Action.saveBookmarkPoll(poll._id)
         .then(res => {
           poll.bookmarked = (res) ? true : false;
           $scope.handleShowMessageWithParam('MS_CM_BOOKMARK_SUCCESS', { title: poll.title }, false);
@@ -193,7 +197,7 @@
         $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;
       }
-      Action.save_follow(poll.follow)
+      Action.saveFollowPoll(poll.follow)
         .then(res => {
           if (res) {
             poll.follow = res;

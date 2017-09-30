@@ -48,7 +48,7 @@
       }
       ctrl.poll.summary = ctrl.poll.body;
       var rs = new PollsService(ctrl.poll);
-      Action.save_poll(rs)
+      Action.savePoll(rs)
         .then(res => {
           $state.go('polls.view', { pollId: res.slug });
           $scope.closeThisDialog();

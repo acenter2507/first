@@ -39,7 +39,7 @@
         ctrl.poll = new PollsService();
         onCreate();
       } else {
-        Action.get_poll($stateParams.pollId).then(_poll => {
+        Action.loadPollById($stateParams.pollId).then(_poll => {
           ctrl.poll = _poll;
           onCreate();
         });
@@ -129,7 +129,7 @@
       }
       function handleSave() {
         ctrl.poll.opts = ctrl.opts;
-        Action.save_poll(ctrl.poll)
+        Action.savePoll(ctrl.poll)
           .then(res => {
             $state.go('polls.view', { pollId: res.slug });
           })

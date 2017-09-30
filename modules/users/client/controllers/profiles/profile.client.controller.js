@@ -4,10 +4,11 @@ angular.module('users').controller('ProfileController', [
   '$scope',
   'profileResolve',
   'Action',
+  'ProfileApi',
   'Users',
   '$timeout',
   'ngDialog',
-  function ($scope, profile, Action, Users, $timeout, dialog) {
+  function ($scope, profile, Action, ProfileApi, Users, $timeout, dialog) {
     $scope.profile = profile;
     $scope.isCurrentOwner = $scope.profile._id === $scope.user._id;
     onCreate();
@@ -25,7 +26,7 @@ angular.module('users').controller('ProfileController', [
 
     // Tăng biến đếm số lần xem profile
     function handleCountUpBeView() {
-      Action.handleCountUpBeView($scope.profile._id);
+      ProfileApi.countUpBeView($scope.profile._id);
     }
 
     $scope.delete_poll = (poll) => {
@@ -40,7 +41,7 @@ angular.module('users').controller('ProfileController', [
         button: 'LB_DELETE'
       }, confirm => {
         $scope.polls = _.without($scope.polls, poll);
-        Action.delete_poll(poll);
+        Action.deletePoll(poll);
       });
     };
     $scope.report_poll = poll => {
@@ -56,7 +57,7 @@ angular.module('users').controller('ProfileController', [
       }, reject => {
       });
       function handle_confirm(reason) {
-        Action.save_report(poll, reason)
+        Action.saveReportPoll(poll, reason)
           .then(res => {
             poll.reported = (res) ? true : false;
             $scope.handleShowMessageWithParam('MS_CM_REPORT_SUCCESS', { title: poll.title }, false);
@@ -75,7 +76,7 @@ angular.module('users').controller('ProfileController', [
         $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;
       }
-      Action.save_bookmark(poll._id)
+      Action.saveBookmarkPoll(poll._id)
         .then(res => {
           poll.bookmarked = (res) ? true : false;
           $scope.handleShowMessageWithParam('MS_CM_BOOKMARK_SUCCESS', { title: poll.title }, false);
@@ -89,7 +90,7 @@ angular.module('users').controller('ProfileController', [
         $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;
       }
-      Action.save_follow(poll.follow)
+      Action.saveFollowPoll(poll.follow)
         .then(res => {
           if (res) {
             poll.follow = res;

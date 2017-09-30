@@ -2,10 +2,10 @@
 
 angular.module('users').controller('ProfileFollowsController', [
   '$scope',
-  'UserApi',
+  'ProfileApi',
   'Action',
   'ngDialog',
-  function ($scope, UserApi, Action, dialog) {
+  function ($scope, ProfileApi, Action, dialog) {
     $scope.screen = 'profile-follow';
     $scope.polls = [];
     $scope.page = 0;
@@ -16,7 +16,7 @@ angular.module('users').controller('ProfileFollowsController', [
     function get_polls() {
       if ($scope.busy || $scope.stopped) return;
       $scope.busy = true;
-      UserApi.get_follows($scope.profile._id, $scope.page)
+      ProfileApi.get_follows($scope.profile._id, $scope.page)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
             $scope.busy = false;
@@ -64,7 +64,7 @@ angular.module('users').controller('ProfileFollowsController', [
       if ($scope.isCurrentOwner) {
         $scope.polls = _.without($scope.polls, poll);
       }
-      Action.save_follow(poll.follow)
+      Action.saveFollowPoll(poll.follow)
         .then(res => {
         })
         .catch(err => {
@@ -73,7 +73,7 @@ angular.module('users').controller('ProfileFollowsController', [
     };
     $scope.clear_follow = () => {
       if (!$scope.isCurrentOwner) return;
-      UserApi.clear_follow($scope.profile._id);
+      ProfileApi.clear_follow($scope.profile._id);
       $scope.polls = [];
     };
   }

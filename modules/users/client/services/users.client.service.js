@@ -19,7 +19,7 @@ angular.module('users').factory('Profile', ['$resource',
   }
 ]);
 
-angular.module('users').factory('UserApi', ['$http',
+angular.module('users').factory('ProfileApi', ['$http',
   function ($http) {
     // Lấy list activitys của user
     this.get_activitys = userId => {
@@ -49,6 +49,9 @@ angular.module('users').factory('UserApi', ['$http',
     this.get_views = (userId, page) => {
       return $http.get('/api/profile/' + userId + '/views/' + page, { ignoreLoadingBar: true });
     };
+    this.loadTopUsers = (limit) => {
+      return $http.get('/api/profile/top/' + limit, { ignoreLoadingBar: true });
+    };
     this.clear_bookmark = userId => {
       return $http.get('/api/profile/' + userId + '/clear_bookmark', { ignoreLoadingBar: true });
     };
@@ -57,6 +60,14 @@ angular.module('users').factory('UserApi', ['$http',
     };
     this.clear_follow = userId => {
       return $http.get('/api/profile/' + userId + '/clear_follow', { ignoreLoadingBar: true });
+    };
+    this.countUpBeView = userId => {
+      return $http.get('/api/profile/' + userId + '/be_view', { ignoreLoadingBar: true });
+    };
+    this.search_user_by_name = name => {
+      return $http.get('/api/users/search/s=' + name, {
+        ignoreLoadingBar: true
+      });
     };
     return this;
   }

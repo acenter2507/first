@@ -2,9 +2,9 @@
 
 angular.module('users').controller('ProfileInfoController', [
   '$scope',
-  'UserApi',
+  'ProfileApi',
   'Action',
-  function ($scope, UserApi, Action) {
+  function ($scope, ProfileApi, Action) {
     $scope.polls = [];
     $scope.cmts = [];
     $scope.votes = [];
@@ -16,7 +16,7 @@ angular.module('users').controller('ProfileInfoController', [
     function get_data() {
       if ($scope.busy) return;
       $scope.busy = true;
-      UserApi.get_activitys($scope.profile._id)
+      ProfileApi.get_activitys($scope.profile._id)
         .then(res => {
           $scope.polls = res.data.polls;
           $scope.cmts = res.data.cmts;

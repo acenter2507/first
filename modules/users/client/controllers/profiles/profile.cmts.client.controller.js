@@ -2,8 +2,8 @@
 
 angular.module('users').controller('ProfileCmtsController', [
   '$scope',
-  'UserApi',
-  function ($scope, UserApi) {
+  'ProfileApi',
+  function ($scope, ProfileApi) {
     $scope.cmts = [];
     $scope.page = 0;
     $scope.busy = false;
@@ -13,7 +13,7 @@ angular.module('users').controller('ProfileCmtsController', [
     function get_cmts() {
       if ($scope.busy || $scope.stopped) return;
       $scope.busy = true;
-      UserApi.get_cmts($scope.profile._id, $scope.page)
+      ProfileApi.get_cmts($scope.profile._id, $scope.page)
         .success(res => {
           if (!res || !res.length || res.length === 0) {
             $scope.busy = false;

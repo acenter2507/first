@@ -33,7 +33,7 @@
               <li ng-if="isLogged && !poll.isCurrentUserOwner && !poll.reported"><a ng-click="report_poll(poll)"><i class="fa fa-exclamation-circle"></i> {{:: 'LB_POLLS_MENU_REPORT' | translate }}</a></li>
               <li ng-if="isLogged && !poll.isCurrentUserOwner && !poll.bookmarked"><a ng-click="bookmark_poll(poll)"><i class="fa fa-bookmark"></i> {{:: 'LB_POLLS_MENU_BOOKMARK' | translate }}</a></li>
               <!-- Chỉ màn hình Profile bookmark -->
-              <li ng-if="isCurrentOwner && screen === 'profile-bookmark'"><a ng-click="remove_bookmark(poll)"><i class="fa fa-bookmark"></i> {{:: 'LB_POLLS_MENU_RMBOOKMARK' | translate }}</a></li>
+              <li ng-if="isCurrentOwner && screen === 'profile-bookmark'"><a ng-click="handleRemoveBookmark(poll)"><i class="fa fa-bookmark"></i> {{:: 'LB_POLLS_MENU_RMBOOKMARK' | translate }}</a></li>
             </ul>
           </md-menu-content>
         </md-menu>

@@ -17,8 +17,6 @@ module.exports = function (app) {
   app.route('/api/users/language').post(users.changeLanguage);
   // Tim user theo tên
   app.route('/api/users/search').get(users.search_user_by_name);
-  // Màn hình home lấy top user
-  app.route('/api/users/best/:limit').get(users.get_best_users);
 
   // Lấy thông tin của user đang được xem profile page
   app.route('/api/profile/:profileId').get(users.profile);
@@ -32,6 +30,8 @@ module.exports = function (app) {
   app.route('/api/profile/:profileId/clear_view').get(users.clear_view);
   // Xóa hết poll đã follow
   app.route('/api/profile/:profileId/clear_follow').get(users.clear_follow);
+  // Màn hình home lấy top user
+  app.route('/api/profile/top/:limit').get(users.loadTopUsers);
 
   app.route('/api/profile/:profileId/polls/:page').get(users.polls);
   app.route('/api/profile/:profileId/cmts/:page').get(users.cmts);

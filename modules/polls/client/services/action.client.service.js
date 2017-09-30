@@ -15,9 +15,7 @@
     'FollowsService',
     'ReportsService',
     'BookmarksService',
-    'TagsService',
-    'ViewsService',
-    'UserApi'
+    'ViewsService'
   ];
 
   function Action(
@@ -33,14 +31,12 @@
     Follows,
     Reports,
     Bookmarks,
-    Tags,
-    Views,
-    UserApi
+    Views
   ) {
     /**
      * Lấy danh sách poll cho màn hình polls.list
      */
-    this.get_polls = (_page, language) => {
+    this.loadPolls = (_page, language) => {
       return new Promise((resolve, reject) => {
         var page = _page || 0;
         $http.get('/api/findPolls/' + page + '/' + language, {
@@ -56,7 +52,7 @@
     /**
      * Lấy danh sách poll mổi bật cho màn hình polls.list
      */
-    this.get_populars = (_page, language) => {
+    this.loadPopularPolls = (_page, language) => {
       return new Promise((resolve, reject) => {
         var page = _page || 0;
         $http.get('/api/findPopulars/' + page + '/' + language, {
@@ -72,7 +68,7 @@
     /**
      * Lấy toàn bộ thông tin của user đối với poll màn hình polls.view
      */
-    this.get_owner_by_pollId = pollId => {
+    this.loadOwnerInfo = pollId => {
       return new Promise((resolve, reject) => {
         $http.get('/api/findOwners/' + pollId, {
           ignoreLoadingBar: true
@@ -85,60 +81,27 @@
       });
     };
     /**
-     * Load comments màn hình polls.view
+     * Lấy poll bằng poll id
      */
-    this.get_cmts = (pollId, _page, sort) => {
+    this.loadPollById = pollId => {
       return new Promise((resolve, reject) => {
-        var page = _page || 0;
-        $http.get('/api/findCmts/' + pollId + '/' + page + '/' + sort, {
-          ignoreLoadingBar: true
-        })
-          .then(res => {
-            return resolve(res);
-          }, err => {
-            return reject(err);
-          });
-      });
-    };
-    /**
-     * Load comments màn hình polls.view
-     */
-    this.get_cmt = cmtId => {
-      return new Promise((resolve, reject) => {
-        $http.get('api/cmts/' + cmtId, {
-          ignoreLoadingBar: true
-        })
-          .then(res => {
-            return resolve(res);
-          }, err => {
-            return reject(err);
-          });
-      });
-    };
-    /**
-     * Tăng giá trị view profile cho user
-     */
-    this.handleCountUpBeView = userId => {
-      return new Promise((resolve, reject) => {
-        $http.get('/api/profile/' + userId + '/be_view', {
-          ignoreLoadingBar: true
-        })
-          .then(res => {
-            return resolve(res);
-          }, err => {
-            return reject(err);
-          });
-      });
-    };
-
-    this.get_poll = pollId => {
-      return new Promise((resolve, reject) => {
-        Polls.get({ pollId: pollId }, _poll => {
-          return resolve(_poll);
+        Polls.get({ pollId: pollId }, poll => {
+          return resolve(poll);
         });
       });
     };
-    this.save_poll = poll => {
+    /**
+    * Tăng count view của point
+    */
+    this.search = condition => {
+      return $http.post('/api/search', { condition: condition }, {
+        ignoreLoadingBar: true
+      });
+    };
+    /**
+     * Lưu poll
+     */
+    this.savePoll = poll => {
       return new Promise((resolve, reject) => {
         var isNew = !poll._id ? true : false;
         if (!isNew) {
@@ -161,7 +124,10 @@
         }
       });
     };
-    this.delete_poll = poll => {
+    /**
+     * Xóa poll
+     */
+    this.deletePoll = poll => {
       return new Promise((resolve, reject) => {
         var rs_poll = new Polls({ _id: poll._id });
         rs_poll.$remove(() => {
@@ -171,22 +137,19 @@
       });
     };
     /**
-    * Lưu poll vào danh sách đã view của user
-    */
-    this.save_view_poll = view => {
-      return new Promise((resolve, reject) => {
-        if (view._id) return resolve();
-        var rs_view = new Views(view);
-        rs_view.user = Authentication.user._id;
-        rs_view.$save();
-      });
-    };
-    /**
     * Tăng count view của point
     */
-    this.count_up_view_poll = pollId => {
+    this.upViewPoll = pollId => {
+      return $http.get('/api/countUpView/' + pollId, { ignoreLoadingBar: true });
+    };
+    // ------------------ COMMENT -------------------------------
+    /**
+     * Load comments màn hình polls.view
+     */
+    this.loadComments = (pollId, _page, sort) => {
       return new Promise((resolve, reject) => {
-        $http.get('/api/countUpView/' + pollId, {
+        var page = _page || 0;
+        $http.get('/api/findCmts/' + pollId + '/' + page + '/' + sort, {
           ignoreLoadingBar: true
         })
           .then(res => {
@@ -196,18 +159,28 @@
           });
       });
     };
-    // Lưu comment vào db
-    this.save_cmt = (poll, cmt) => {
+    /**
+     * Load comments màn hình polls.view
+     */
+    this.loadCommentById = cmtId => {
+      return new Promise((resolve, reject) => {
+        Cmts.get({ cmtId: cmtId }, cmt => {
+          return resolve(cmt);
+        });
+      });
+    };
+    /**
+     * Lưu comment vào db
+     */
+    this.saveComment = (cmt) => {
       return new Promise((resolve, reject) => {
         var rs_cmt = new Cmts(cmt);
         var isNew = !cmt._id ? true : false;
-        var promise;
         if (!isNew) {
           rs_cmt.isEdited = true;
-          rs_cmt.updated = moment().format();
+          rs_cmt.updated = moment().utc().format();
           rs_cmt.$update(successCb, errorCb);
         } else {
-          rs_cmt.poll = poll._id;
           rs_cmt.$save(successCb, errorCb);
         }
         function successCb(res) {
@@ -215,13 +188,9 @@
             Socket.emit('cmt_add', {
               cmtId: res._id,
               isNew: isNew,
-              pollId: poll._id,
+              pollId: res.poll._id || res.poll,
               to: res.to,
               from: Authentication.user._id
-              // poll: poll.slug,
-              // displayName: Authentication.user.displayName,
-              // profileImageURL: Authentication.user.profileImageURL,
-              // title: poll.title
             });
           }
           res.isNew = isNew;
@@ -232,19 +201,32 @@
         }
       });
     };
-    // Xóa comment
-    this.delete_cmt = cmt => {
-      return new Promise((resolve, reject) => {
-        var rs_cmt = new Cmts({ _id: cmt._id });
-        rs_cmt.$remove(() => {
-          Socket.emit('cmt_del', { pollId: cmt.poll._id, cmtId: cmt._id });
-          return resolve();
-        });
+    /**
+     * Xóa comment
+     */
+    this.deleteComment = cmt => {
+      var rs_cmt = new Cmts({ _id: cmt._id });
+      rs_cmt.$remove(() => {
+        Socket.emit('cmt_del', { pollId: cmt.poll._id, cmtId: cmt._id });
       });
     };
 
+    // ------------------ Views -------------------------------
+    /**
+    * Lưu poll vào danh sách đã view của user
+    */
+    this.saveViewPoll = view => {
+      return new Promise((resolve, reject) => {
+        if (view._id) return resolve();
+        var rs_view = new Views(view);
+        rs_view.$save();
+      });
+    };
+
+
+    // ------------------ Like -------------------------------
     // Lưu like vào db
-    this.save_like = (like, type, poll) => {
+    this.saveLikePoll = (like, type, poll) => {
       // type: 1: like - 2: dislike;
       return new Promise((resolve, reject) => {
         var rs_like;
@@ -262,40 +244,6 @@
           rs_like = new Likes({ poll: poll._id, type: type });
           return rs_like.$save(successCb, successCb);
         }
-
-
-        // var cnt = 0;
-        // var rs_like;
-        // if (like._id) {
-        //   switch (like.type) {
-        //     case 0:
-        //       cnt = type === 1 ? 1 : -1;
-        //       like.type = type;
-        //       break;
-
-        //     case 1:
-        //       cnt = type === 1 ? -1 : -2;
-        //       like.type = type === 1 ? 0 : 2;
-        //       break;
-
-        //     case 2:
-        //       cnt = type === 1 ? 2 : 1;
-        //       like.type = type === 1 ? 1 : 0;
-        //       break;
-        //   }
-        //   rs_like = new Likes(like);
-        //   rs_like.cnt = cnt;
-        //   rs_like.type = like.type;
-        //   rs_like.$update(successCb, successCb);
-        // } else {
-        //   cnt = type === 1 ? 1 : -1;
-        //   rs_like = new Likes({
-        //     poll: poll._id,
-        //     type: type
-        //   });
-        //   rs_like.cnt = cnt;
-        //   rs_like.$save(successCb, successCb);
-        // }
         function successCb(res) {
           if (!res.like) return resolve(res);
           if (Authentication.user) {
@@ -315,41 +263,23 @@
       });
     };
 
+    // ------------------ Votes -------------------------------
     /**
-     * Lấy toàn bộ thông tin các vote và các opt của vote
+     * Lấy toàn bộ thông tin các votes 
      */
-    this.get_voteopts = pollId => {
-      return new Promise((resolve, reject) => {
-        $http.get('/api/findVotes/' + pollId, {
-          ignoreLoadingBar: true
-        })
-          .then(res => {
-            return resolve(res);
-          }, err => {
-            return reject(err);
-          });
-      });
+    this.loadVotesByPollId = pollId => {
+      return $http.get('/api/findVotes/' + pollId, { ignoreLoadingBar: true });
     };
     /**
      * Lấy toàn bộ thông tin các vote của 1 option
      */
-    this.get_votes_by_opt = optId => {
-      return new Promise((resolve, reject) => {
-        $http.get('/api/findVotesByOption/' + optId, {
-          ignoreLoadingBar: true
-        })
-          .then(res => {
-            return resolve(res);
-          }, err => {
-            return reject(err);
-          });
-      });
+    this.loadVotesByOptionId = optId => {
+      return $http.get('/api/findVotesByOption/' + optId, { ignoreLoadingBar: true });
     };
-
     /**
      * Lưu 1 vote của poll
      */
-    this.save_vote = (vote, opts, poll) => {
+    this.saveVote = (vote, opts, poll) => {
       return new Promise((resolve, reject) => {
         var rs_vote;
         if (vote._id) {
@@ -372,8 +302,11 @@
         }
       });
     };
+
+
+    // ------------------ Options -------------------------------
     // Lưu option
-    this.save_opt = (opt, poll) => {
+    this.saveOption = (opt, poll) => {
       return new Promise((resolve, reject) => {
         var rs_opt = new Opts(opt);
         if (opt._id) {
@@ -390,10 +323,12 @@
         }
       });
     };
+
+    // ------------------ Options -------------------------------
     /**
      * Lưu 1 like comment
      */
-    this.save_like_cmt = (cmt, type) => {
+    this.saveLikeComment = (cmt, type) => {
       // type: 1: like - 2: dislike;
       return new Promise((resolve, reject) => {
         var rs_like;
@@ -419,25 +354,29 @@
         }
       });
     };
-    this.save_report = (poll, reason) => {
+
+    // ------------------ Reports -------------------------------
+    /**
+     * Lưu 1 report của user với 1 poll
+     */
+    this.saveReportPoll = (poll, reason) => {
       return new Promise((resolve, reject) => {
         var rs_report = new Reports({
           poll: poll._id,
           victim: poll.user ? poll.user._id : null,
           reason: reason
         });
-        rs_report.$save(
-          res => {
-            return resolve(res);
-          },
-          err => {
-            return reject(err);
-          }
-        );
+        rs_report.$save(res => {
+          return resolve(res);
+        }, reject);
       });
     };
-    // Lưu follow vào db
-    this.save_follow = follow => {
+
+    // ------------------ Follows -------------------------------
+    /**
+     * Lưu 1 follow của user với 1 poll
+     */
+    this.saveFollowPoll = follow => {
       return new Promise((resolve, reject) => {
         var rs_follow;
         if (follow._id) {
@@ -456,80 +395,28 @@
         }
       });
     };
-    this.save_bookmark = pollId => {
+
+    // ------------------ Bookmarks -------------------------------
+    /**
+     * Lưu 1 bokmark của user với 1 poll
+     */
+    this.saveBookmarkPoll = pollId => {
       return new Promise((resolve, reject) => {
         var rs_bookmark = new Bookmarks({ poll: pollId });
-        rs_bookmark.$save(
-          res => {
-            return resolve(res);
-          },
-          err => {
-            return reject(err);
-          }
-        );
+        rs_bookmark.$save(res => {
+          return resolve(res);
+        }, err => {
+          return reject(err);
+        });
       });
     };
     /**
      * Xóa bookmark
      */
-    this.remove_bookmark = pollId => {
-      return new Promise((resolve, reject) => {
-        $http.get('/api/removeBookmark/' + pollId, {
-          ignoreLoadingBar: true
-        })
-          .then(res => {
-            return resolve(res);
-          }, err => {
-            return reject(err);
-          });
-      });
+    this.removeBookmarkPoll = pollId => {
+      return $http.get('/api/removeBookmark/' + pollId, { ignoreLoadingBar: true });
     };
-    /**
-     * Lấy list poll thuộc category
-     */
-    this.get_category_polls = (categoryId, page, language, sort) => {
-      return $http.get('/api/categorys/' + categoryId + '/polls/' + page + '/' + language + '/' + sort, {
-        ignoreLoadingBar: true
-      });
-    };
-    this.search = condition => {
-      return $http.post('/api/search', { condition: condition }, {
-        ignoreLoadingBar: true
-      });
-    };
-    this.search_user_by_name = name => {
-      return $http.get('/api/users/search/s=' + name, {
-        ignoreLoadingBar: true
-      });
-    };
-    this.get_tags = () => {
-      return new Promise((resolve, reject) => {
-        Tags.query().$promise
-          .then(res => {
-            return resolve(res);
-          }, err => {
-            return reject(err);
-          });
-      });
-    };
-    this.get_popular_tags = () => {
-      return $http.get('/api/tags/popular', {
-        ignoreLoadingBar: true
-      });
-    };
-    this.get_best_users = (limit) => {
-      return $http.get('/api/users/best/' + limit, {
-        ignoreLoadingBar: true
-      });
-    };
-    /**
-     * Lấy list poll thuộc tag
-     */
-    this.get_tag_polls = (tagId, page, language, sort) => {
-      return $http.get('/api/tags/' + tagId + '/polls/' + page + '/' + language + '/' + sort, {
-        ignoreLoadingBar: true
-      });
-    };
+
     /**
      * Xử lý poll khi show lên màn hình
      */
@@ -578,8 +465,7 @@
       return collect;
     };
     // Tính phần trăm tỉ lệ vote cho opt
-    this.calPercen = calPercen;
-    function calPercen(total, value) {
+    this.calPercen = (total, value) => {
       if (total === 0) {
         return 0;
       }

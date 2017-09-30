@@ -660,7 +660,7 @@ exports.search_user_by_name = function (req, res) {
     });
 };
 
-exports.get_best_users = function (req, res) {
+exports.loadTopUsers = function (req, res) {
   var limit = req.params.limit || 0;
   User.find().sort('-rank')
     .select('displayName profileImageURL slug created')

@@ -1,17 +1,16 @@
 // Tags service used to communicate Tags REST endpoints
-(function() {
+(function () {
   'use strict';
 
   angular
     .module('tags')
-    .factory('TagsService', TagsService);
+    .factory('TagsService', TagsService)
+    .factory('TagsApi', TagsApi);
 
   TagsService.$inject = ['$resource'];
 
   function TagsService($resource) {
-    return $resource('api/tags/:tagId', {
-      tagId: '@_id'
-    }, {
+    return $resource('api/tags/:tagId', { tagId: '@_id' }, {
       update: {
         method: 'PUT',
         ignoreLoadingBar: true
@@ -19,15 +18,25 @@
     });
   }
 
-  angular
-    .module('tags')
-    .factory('TagsApi', TagsApi);
+  TagsApi.$inject = ['$http'];
 
-  TagsApi.$inject = ['$http', '$q'];
-
-  function TagsApi($http, $q) {
-    this.loadTag = () => {
-
+  function TagsApi($http) {
+    /**
+     * Lấy danh sách tags phổ biến
+     */
+    this.loadPopularTags = () => {
+      return $http.get('/api/tags/popular', {
+        ignoreLoadingBar: true
+      });
     };
+    /**
+     * Lấy list poll thuộc tag
+     */
+    this.getPollsByTagId = (tagId, page, language, sort) => {
+      return $http.get('/api/tags/' + tagId + '/polls/' + page + '/' + language + '/' + sort, {
+        ignoreLoadingBar: true
+      });
+    };
+    return this;
   }
 }());

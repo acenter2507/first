@@ -2,10 +2,10 @@
 
 angular.module('users').controller('ProfileViewsController', [
   '$scope',
-  'UserApi',
+  'ProfileApi',
   'Action',
   'ngDialog',
-  function ($scope, UserApi, Action, dialog) {
+  function ($scope, ProfileApi, Action, dialog) {
     $scope.screen = 'profile-view';
     $scope.polls = [];
     $scope.page = 0;
@@ -16,7 +16,7 @@ angular.module('users').controller('ProfileViewsController', [
     function get_polls() {
       if ($scope.busy || $scope.stopped) return;
       $scope.busy = true;
-      UserApi.get_views($scope.profile._id, $scope.page)
+      ProfileApi.get_views($scope.profile._id, $scope.page)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
             $scope.busy = false;
@@ -58,7 +58,7 @@ angular.module('users').controller('ProfileViewsController', [
 
     $scope.clear_view = () => {
       if (!$scope.isCurrentOwner) return;
-      UserApi.clear_view($scope.profile._id);
+      ProfileApi.clear_view($scope.profile._id);
       $scope.polls = [];
     };
   }

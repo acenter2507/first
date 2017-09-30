@@ -2,10 +2,10 @@
 
 angular.module('users').controller('ProfilePollsController', [
   '$scope',
-  'UserApi',
+  'ProfileApi',
   'Action',
   'ngDialog',
-  function ($scope, UserApi, Action, dialog) {
+  function ($scope, ProfileApi, Action, dialog) {
     $scope.screen = 'profile-polls';
     $scope.polls = [];
     $scope.page = 0;
@@ -16,7 +16,7 @@ angular.module('users').controller('ProfilePollsController', [
     function get_polls() {
       if ($scope.busy || $scope.stopped) return;
       $scope.busy = true;
-      UserApi.get_polls($scope.profile._id, $scope.page)
+      ProfileApi.get_polls($scope.profile._id, $scope.page)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
             $scope.busy = false;

@@ -2,10 +2,10 @@
 
 angular.module('users').controller('ProfileBookmarksController', [
   '$scope',
-  'UserApi',
+  'ProfileApi',
   'Action',
   'ngDialog',
-  function ($scope, UserApi, Action, dialog) {
+  function ($scope, ProfileApi, Action, dialog) {
     $scope.screen = 'profile-bookmark';
     $scope.polls = [];
     $scope.page = 0;
@@ -16,7 +16,7 @@ angular.module('users').controller('ProfileBookmarksController', [
     function get_polls() {
       if ($scope.busy || $scope.stopped) return;
       $scope.busy = true;
-      UserApi.get_bookmarks($scope.profile._id, $scope.page)
+      ProfileApi.get_bookmarks($scope.profile._id, $scope.page)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
             $scope.busy = false;
@@ -57,7 +57,7 @@ angular.module('users').controller('ProfileBookmarksController', [
       }
     };
 
-    $scope.remove_bookmark = poll => {
+    $scope.handleRemoveBookmark = poll => {
       // Gọi function show dialog từ scope cha
       $scope.handleShowConfirm({
         content: 'LB_POLLS_CONFIRM_BOOKMARK',
@@ -65,13 +65,13 @@ angular.module('users').controller('ProfileBookmarksController', [
         button: 'LB_DELETE'
       }, confirm => {
         $scope.polls = _.without($scope.polls, poll);
-        Action.remove_bookmark(poll._id);
+        Action.removeBookmarkPoll(poll._id);
       });
     };
 
     $scope.clear_bookmark = () => {
       if (!$scope.isCurrentOwner) return;
-      UserApi.clear_bookmark($scope.profile._id);
+      ProfileApi.clear_bookmark($scope.profile._id);
       $scope.polls = [];
     };
   }

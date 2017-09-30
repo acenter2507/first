@@ -106,7 +106,7 @@ angular.module('polls').controller('PollsSearchController', [
         button: 'LB_DELETE'
       }, confirm => {
         ctrl.polls = _.without(ctrl.polls, poll);
-        Action.delete_poll(poll);
+        Action.deletePoll(poll);
       });
     };
     $scope.report_poll = (poll) => {
@@ -122,7 +122,7 @@ angular.module('polls').controller('PollsSearchController', [
       }, reject => {
       });
       function handle_confirm(reason) {
-        Action.save_report(poll, reason)
+        Action.saveReportPoll(poll, reason)
           .then(res => {
             poll.reported = (res) ? true : false;
             $scope.handleShowMessageWithParam('MS_CM_REPORT_SUCCESS', { title: poll.title }, false);
@@ -137,7 +137,7 @@ angular.module('polls').controller('PollsSearchController', [
         $scope.handleShowMessageWithParam('MS_CM_BOOKMARK_EXIST_ERROR', { title: poll.title }, true);
         return;
       }
-      Action.save_bookmark(poll._id)
+      Action.saveBookmarkPoll(poll._id)
         .then(res => {
           poll.bookmarked = (res) ? true : false;
           $scope.handleShowMessageWithParam('MS_CM_BOOKMARK_SUCCESS', { title: poll.title }, false);
@@ -151,7 +151,7 @@ angular.module('polls').controller('PollsSearchController', [
         $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;
       }
-      Action.save_follow(poll.follow)
+      Action.saveFollowPoll(poll.follow)
         .then(res => {
           if (res) {
             poll.follow = res;

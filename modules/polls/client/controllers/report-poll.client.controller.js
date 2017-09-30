@@ -62,7 +62,7 @@
       if (!$stateParams.pollId) {
         $state.go('home');
       } else {
-        Action.get_poll($stateParams.pollId)
+        Action.loadPollById($stateParams.pollId)
           .then(_poll => {
             ctrl.poll = _poll;
             onCreate();

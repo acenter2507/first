@@ -77,7 +77,7 @@
       if (!$stateParams.pollId) {
         $state.go('home');
       } else {
-        Action.get_poll($stateParams.pollId)
+        Action.loadPollById($stateParams.pollId)
           .then(_poll => {
             ctrl.poll = _poll;
             onCreate();
@@ -147,7 +147,7 @@
     }
     function prepareOwnerInfo() {
       return new Promise((resolve, reject) => {
-        Action.get_owner_by_pollId(ctrl.poll._id)
+        Action.loadOwnerInfo(ctrl.poll._id)
           .then(res => {
             ctrl.ownVote = res.data.ownVote;
             ctrl.selectedOpts = ctrl.ownVote._id ? _.clone(ctrl.ownVote.opts) : [];
@@ -206,7 +206,7 @@
       Socket.on('cmt_add', obj => {
         // Nếu tự nhận message của chính mình
         if (Socket.socket.socket.id === obj.client) return;
-        Action.get_cmt(obj.cmtId)
+        Action.loadCommentById(obj.cmtId)
           .then(res => {
             var _cmt = res.data || {};
             var item = _.findWhere(ctrl.cmts, { _id: _cmt._id });
@@ -242,7 +242,7 @@
       });
       Socket.on('poll_update', obj => {
         if (Socket.socket.socket.id === obj.client) return;
-        Action.get_poll(ctrl.poll._id)
+        Action.loadPollById(ctrl.poll._id)
           .then(_poll => {
             ctrl.poll = _poll;
             prepareShowingData();
@@ -251,7 +251,7 @@
           });
       });
       Socket.on('opts_update', res => {
-        Action.get_poll(ctrl.poll._id)
+        Action.loadPollById(ctrl.poll._id)
           .then(_poll => {
             ctrl.poll = _poll;
             prepareShowingData();
@@ -293,7 +293,7 @@
     function handleLoadComments() {
       if (ctrl.stopped || ctrl.busy) return;
       ctrl.busy = true;
-      Action.get_cmts(ctrl.poll._id, ctrl.page, ctrl.cmt_sort.val)
+      Action.loadComments(ctrl.poll._id, ctrl.page, ctrl.cmt_sort.val)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
             ctrl.stopped = true;
@@ -327,7 +327,8 @@
         return;
       }
       ctrl.cmt_processing = true;
-      Action.save_cmt(ctrl.poll, ctrl.tmp_cmt)
+      ctrl.tmp_cmt.poll = ctrl.poll._id;
+      Action.saveComment(ctrl.tmp_cmt)
         .then(res => {
           ctrl.tmp_cmt = {};
           ctrl.cmt_processing = false;
@@ -379,7 +380,7 @@
           return;
         }
       }
-      Action.save_vote(ctrl.ownVote, ctrl.selectedOpts, ctrl.poll)
+      Action.saveVote(ctrl.ownVote, ctrl.selectedOpts, ctrl.poll)
         .then(res => {
           if (!ctrl.ownVote._id) {
             ctrl.poll.voteCnt += 1;
@@ -483,7 +484,7 @@
         return;
       }
       ctrl.like_processing = true;
-      Action.save_like(ctrl.like, type, ctrl.poll)
+      Action.saveLikePoll(ctrl.like, type, ctrl.poll)
         .then(res => {
           ctrl.poll.likeCnt = res.likeCnt;
           ctrl.like = res.like || {};
@@ -530,7 +531,7 @@
         scope: $scope,
         appendClassName: 'images-upload-dialog'
       });
-      Action.get_votes_by_opt(opt._id)
+      Action.loadVotesByOptionId(opt._id)
         .then(res => {
           $scope.dialogData.votes = res.data || [];
           $scope.dialogData.message = 'LB_VOTE_EMPTY';
@@ -568,9 +569,9 @@
       if (!ctrl.poll.isCurrentUserOwner) {
         var count_up = $timeout(() => {
           ctrl.poll.viewCnt += 1;
-          Action.count_up_view_poll(ctrl.poll._id);
+          Action.upViewPoll(ctrl.poll._id);
           if ($scope.isLogged) {
-            Action.save_view_poll(ctrl.view);
+            Action.saveViewPoll(ctrl.view);
           }
         }, 30000);
         $scope.$on('$destroy', () => {
@@ -589,7 +590,7 @@
     // Load mới thông tin đã vote của poll (khi có ai đó vote)
     function handleLoadNewVoteInfo() {
       return new Promise((resolve, reject) => {
-        Action.get_voteopts(ctrl.poll._id)
+        Action.loadVotesByPollId(ctrl.poll._id)
           .then(res => { // lấy thông tin vote
             ctrl.chart.colors = [];
             ctrl.chart.labels = [];
@@ -622,7 +623,7 @@
         $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;
       }
-      Action.save_follow(ctrl.follow)
+      Action.saveFollowPoll(ctrl.follow)
         .then(res => {
           if (res) {
             ctrl.follow = res;
@@ -648,7 +649,7 @@
       }, reject => {
       });
       function handle_confirm(reason) {
-        Action.save_report(ctrl.poll, reason)
+        Action.saveReportPoll(ctrl.poll, reason)
           .then(res => {
             ctrl.reported = (res) ? true : false;
             $scope.handleShowMessageWithParam('MS_CM_REPORT_SUCCESS', { title: ctrl.poll.title }, false);
@@ -664,7 +665,7 @@
         $scope.handleShowMessageWithParam('MS_CM_BOOKMARK_EXIST_ERROR', { title: ctrl.poll.title }, true);
         return;
       }
-      Action.save_bookmark(ctrl.poll._id)
+      Action.saveBookmarkPoll(ctrl.poll._id)
         .then(res => {
           ctrl.bookmarked = (res) ? true : false;
           $scope.handleShowMessageWithParam('MS_CM_BOOKMARK_SUCCESS', { title: ctrl.poll.title }, false);
@@ -691,7 +692,7 @@
         $scope.$broadcast('show-errors-check-validity', 'ctrl.form.optForm');
         return false;
       }
-      Action.save_opt(ctrl.tmp_opt, ctrl.poll)
+      Action.saveOption(ctrl.tmp_opt, ctrl.poll)
         .then(res => {
           $scope.$broadcast('show-errors-reset', 'ctrl.form.optForm');
           angular.element('body').removeClass('aside-panel-open');
@@ -748,7 +749,7 @@
       }, confirm => {
         ctrl.cmts = _.without(ctrl.cmts, cmt);
         ctrl.poll.cmtCnt -= 1;
-        Action.delete_cmt(cmt);
+        Action.deleteComment(cmt);
       });
     };
     // Bắt đầu nhập comment
@@ -776,7 +777,7 @@
         return;
       }
       ctrl.like_processing = true;
-      Action.save_like_cmt(cmt, type)
+      Action.saveLikeComment(cmt, type)
         .then(res => {
           cmt.like = res.like || {};
           cmt.likeCnt = res.likeCnt;

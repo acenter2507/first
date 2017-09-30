@@ -19,7 +19,7 @@ var _ = require('lodash'),
   Vote = mongoose.model('Vote'),
   Voteopt = mongoose.model('Voteopt'),
   Polltag = mongoose.model('Polltag'),
-  Polluser = mongoose.model('Polluser'),
+  Follow = mongoose.model('Follow'),
   Report = mongoose.model('Report'),
   Bookmark = mongoose.model('Bookmark'),
   Category = mongoose.model('Category'),
@@ -402,7 +402,7 @@ exports.follows = function (req, res) {
   var userId = req.user ? req.user._id : undefined;
   var polls = [];
 
-  Polluser.find({ user: req.profile._id })
+  Follow.find({ user: req.profile._id })
     .sort('-created')
     .populate({
       path: 'poll',
@@ -522,7 +522,7 @@ exports.clear_view = function (req, res) {
  * Xoa toan bo view
  */
 exports.clear_follow = function (req, res) {
-  Polluser.remove({ user: req.profile._id }).exec();
+  Follow.remove({ user: req.profile._id }).exec();
   res.end();
 };
 

@@ -1,17 +1,15 @@
-// Pollusers service used to communicate Pollusers REST endpoints
+// Follows service used to communicate Follows REST endpoints
 (function () {
   'use strict';
 
   angular
-    .module('pollusers')
-    .factory('PollusersService', PollusersService);
+    .module('follows')
+    .factory('FollowsService', FollowsService);
 
-  PollusersService.$inject = ['$resource'];
+  FollowsService.$inject = ['$resource'];
 
-  function PollusersService($resource) {
-    return $resource('api/pollusers/:polluserId', {
-      polluserId: '@_id'
-    }, {
+  function FollowsService($resource) {
+    return $resource('api/follows/:followId', { followId: '@_id' }, {
       update: {
         method: 'PUT',
         ignoreLoadingBar: true

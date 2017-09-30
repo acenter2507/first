@@ -7,9 +7,9 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 /**
- * Polluser Schema
+ * Follow Schema
  */
-var PolluserSchema = new Schema({
+var FollowSchema = new Schema({
   user: {
     type: Schema.ObjectId,
     ref: 'User'
@@ -24,4 +24,4 @@ var PolluserSchema = new Schema({
   }
 });
 
-mongoose.model('Polluser', PolluserSchema);
+mongoose.model('Follow', FollowSchema);

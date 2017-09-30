@@ -70,7 +70,6 @@ function EditProfileController(
         // Trường hợp trả về user
         if (res._id) {
           Authentication.user = res;
-          console.log(res);
           $scope.handleShowMessage('LB_PROFILE_SUCCESE', false);
         } else {
           Storages.set_session(Constants.storages.flash, res.message);

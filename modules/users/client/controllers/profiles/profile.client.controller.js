@@ -9,7 +9,6 @@ angular.module('users').controller('ProfileController', [
   'ngDialog',
   function ($scope, profile, Action, Users, $timeout, dialog) {
     $scope.profile = profile;
-    console.log($scope.profile);
     $scope.isCurrentOwner = $scope.profile._id === $scope.user._id;
     onCreate();
 

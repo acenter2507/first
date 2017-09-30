@@ -9,7 +9,7 @@ var path = require('path'),
   config = require(path.resolve('./config/config')),
   User = mongoose.model('User'),
   Report = mongoose.model('Report'),
-  Polluser = mongoose.model('Polluser'),
+  Follow = mongoose.model('Follow'),
   Userlogin = mongoose.model('Userlogin'),
   Poll = mongoose.model('Poll'),
   Like = mongoose.model('Like'),
@@ -152,7 +152,7 @@ exports.user_delete = function (req, res) {
   var user = req.model;
   user.remove()
     .then(() => {
-      Polluser.remove({ user: user._id });
+      Follow.remove({ user: user._id });
     }, handleErrorLocal)
     .then(() => {
       Notif.remove({ to: user._id });

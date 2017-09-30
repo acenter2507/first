@@ -5,113 +5,109 @@
  */
 var path = require('path'),
   mongoose = require('mongoose'),
-  Polluser = mongoose.model('Polluser'),
+  Follow = mongoose.model('Follow'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
-  _ = require('lodash');
+  _ = require('underscore');
 
 /**
- * Create a Polluser
+ * Create a follow
  */
 exports.create = function(req, res) {
-  var polluser = new Polluser(req.body);
-  polluser.user = req.user;
+  var follow = new Follow(req.body);
+  follow.user = req.user;
 
-  polluser.save(function(err) {
+  follow.save(function(err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.jsonp(polluser);
+      res.jsonp(follow);
     }
   });
 };
 
 /**
- * Show the current Polluser
+ * Show the current Follow
  */
 exports.read = function(req, res) {
   // convert mongoose document to JSON
-  var polluser = req.polluser ? req.polluser.toJSON() : {};
-
-  // Add a custom field to the Article, for determining if the current User is the "owner".
-  // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
-  polluser.isCurrentUserOwner = req.user && polluser.user && polluser.user._id.toString() === req.user._id.toString();
-
-  res.jsonp(polluser);
+  var follow = req.follow ? req.follow.toJSON() : {};
+  follow.isCurrentUserOwner = req.user && follow.user && follow.user._id.toString() === req.user._id.toString();
+  res.jsonp(follow);
 };
 
 /**
- * Update a Polluser
+ * Update a follow
  */
 exports.update = function(req, res) {
-  var polluser = req.polluser;
+  var follow = req.follow;
 
-  polluser = _.extend(polluser, req.body);
+  follow = _.extend(follow, req.body);
 
-  polluser.save(function(err) {
+  follow.save(function(err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.jsonp(polluser);
+      res.jsonp(follow);
     }
   });
 };
 
 /**
- * Delete an Polluser
+ * Delete an follow
  */
 exports.delete = function(req, res) {
-  var polluser = req.polluser;
+  var follow = req.follow;
 
-  polluser.remove(function(err) {
+  follow.remove(function(err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.jsonp(polluser);
+      res.jsonp(follow);
     }
   });
 };
 
 /**
- * List of Pollusers
+ * List of follows
  */
 exports.list = function(req, res) {
-  Polluser.find().sort('-created').populate('user', 'displayName slug').exec(function(err, pollusers) {
+  Follow.find().sort('-created').populate('user', 'displayName slug').exec(function(err, follows) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.jsonp(pollusers);
+      res.jsonp(follows);
     }
   });
 };
 
 /**
- * Polluser middleware
+ * Follow middleware
  */
-exports.polluserByID = function(req, res, next, id) {
+exports.followByID = function(req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
-      message: 'Polluser is invalid'
+      message: 'Follow is invalid'
     });
   }
 
-  Polluser.findById(id).populate('user', 'displayName slug').exec(function (err, polluser) {
+  Follow.findById(id).populate('user', 'displayName slug').exec(function (err, follow) {
     if (err) {
       return next(err);
-    } else if (!polluser) {
+    } else if (!follow) {
       return res.status(404).send({
-        message: 'No Polluser with that identifier has been found'
+        message: 'No Follow with that identifier has been found'
       });
     }
-    req.polluser = polluser;
+    req.follow = follow;
     next();
   });
 };

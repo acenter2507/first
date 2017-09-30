@@ -6,7 +6,7 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Poll = mongoose.model('Poll'),
-  Polluser = mongoose.model('Polluser'),
+  Follow = mongoose.model('Follow'),
   Report = mongoose.model('Report'),
   Bookmark = mongoose.model('Bookmark'),
   Like = mongoose.model('Like'),
@@ -184,7 +184,7 @@ function search_condition_analysis(condition) {
 
 function count_followed(pollId) {
   return new Promise((resolve, reject) => {
-    Polluser.find({ poll: pollId }).count((err, cnt) => {
+    Follow.find({ poll: pollId }).count((err, cnt) => {
       if (err) {
         return reject(err);
       } else {

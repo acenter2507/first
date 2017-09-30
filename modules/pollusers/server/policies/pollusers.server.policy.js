@@ -9,47 +9,47 @@ var acl = require('acl');
 acl = new acl(new acl.memoryBackend());
 
 /**
- * Invoke Pollusers Permissions
+ * Invoke Follows Permissions
  */
 exports.invokeRolesPolicies = function () {
   acl.allow([{
     roles: ['admin'],
     allows: [{
-      resources: '/api/pollusers',
+      resources: '/api/follows',
       permissions: '*'
     }, {
-      resources: '/api/pollusers/:polluserId',
+      resources: '/api/follows/:followId',
       permissions: '*'
     }]
   }, {
     roles: ['user'],
     allows: [{
-      resources: '/api/pollusers',
+      resources: '/api/follows',
       permissions: ['get', 'post']
     }, {
-      resources: '/api/pollusers/:polluserId',
+      resources: '/api/follows/:followId',
       permissions: ['get']
     }]
   }, {
     roles: ['guest'],
     allows: [{
-      resources: '/api/pollusers',
+      resources: '/api/follows',
       permissions: ['get']
     }, {
-      resources: '/api/pollusers/:polluserId',
+      resources: '/api/follows/:followId',
       permissions: ['get']
     }]
   }]);
 };
 
 /**
- * Check If Pollusers Policy Allows
+ * Check If follows Policy Allows
  */
 exports.isAllowed = function (req, res, next) {
   var roles = (req.user) ? req.user.roles : ['guest'];
 
-  // If an Polluser is being processed and the current user created it then allow any manipulation
-  if (req.polluser && req.user && req.polluser.user && req.polluser.user.id === req.user.id) {
+  // If an follows is being processed and the current user created it then allow any manipulation
+  if (req.follow && req.user && req.follow.user && req.follow.user.id === req.user.id) {
     return next();
   }
 

@@ -28,12 +28,15 @@ module.exports = function(app) {
   app.route('/api/findOwners/:pollId').get(polls.findOwners);
   // Load comment cho màn hình poll.view theo page
   app.route('/api/findCmts/:pollId/:page/:sort').get(polls.findCmts);
-
+  // Tăng biến đếm lượt view của poll
   app.route('/api/countUpView/:pollId').get(polls.countUpView);
-
+  // Load thông tin vote của 1 poll
   app.route('/api/findVoteopts/:pollId').get(polls.findVoteopts);
+  // Lấy danh sách đã vote cho 1 option
   app.route('/api/findVotesByOption/:optId').get(polls.findVotesByOption);
+  // Xóa 1 poll ra khỏi list bookmark
   app.route('/api/removeBookmark/:pollId').get(polls.removeBookmark);
+  // Chức năng search
   app.route('/api/search').post(polls.search);
 
   // ADMIN
@@ -41,18 +44,6 @@ module.exports = function(app) {
     .post(admin_polls.search);
   app.route('/api/polls/admin/report').all(pollsPolicy.isAllowed)
     .post(admin_polls.report);
-
-
-  // app.route('/api/findOwnerVote/:pollId').get(polls.findOwnerVote);
-  // app.route('/api/findVotes/:pollId').get(polls.findVotes);
-  // app.route('/api/findTags/:pollId').get(polls.findTags);
-  // app.route('/api/findPollLike/:pollId').get(polls.findPollLike);
-  // app.route('/api/findPolluser/:pollId').get(polls.findPolluser);
-  // app.route('/api/findOpts/:pollId').get(polls.findOpts);
-  // app.route('/api/findReport/:pollId').get(polls.findReport);
-  // app.route('/api/findBookmark/:pollId').get(polls.findBookmark);
-  // app.route('/api/findPollreport/:pollId').get(polls.findPollreport);
-  // app.route('/api/findView/:pollId').get(polls.findView);
 
   // Finish by binding the Poll middleware
   app.param('pollId', polls.pollByID);

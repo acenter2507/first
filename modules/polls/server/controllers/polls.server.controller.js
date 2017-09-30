@@ -13,7 +13,7 @@ var path = require('path'),
   Vote = mongoose.model('Vote'),
   Voteopt = mongoose.model('Voteopt'),
   User = mongoose.model('User'),
-  Polluser = mongoose.model('Polluser'),
+  Follow = mongoose.model('Follow'),
   Report = mongoose.model('Report'),
   Bookmark = mongoose.model('Bookmark'),
   Like = mongoose.model('Like'),
@@ -67,10 +67,10 @@ exports.create = function (req, res) {
     .then(() => {
       // Tạo biến follow mới
       promises = [];
-      var _polluser = new Polluser({ poll: poll._id, user: req.user._id });
-      return _polluser.save();
+      var _follow = new Follow({ poll: poll._id, user: req.user._id });
+      return _follow.save();
     }, handleError)
-    .then(_polluser => {
+    .then(() => {
       res.jsonp(poll);
     }, handleError);
 
@@ -228,7 +228,7 @@ exports.delete = function (req, res) {
       return Like.remove({ poll: poll._id });
     }, handleError)
     .then(() => { // Xóa thông tin follow
-      return Polluser.remove({ poll: poll._id });
+      return Follow.remove({ poll: poll._id });
     }, handleError)
     .then(() => {
       let userId = poll.user._id || poll.user;
@@ -784,7 +784,7 @@ function get_votes_by_pollId(pollId) {
 function get_follow_by_pollId(pollId, userId) {
   return new Promise((resolve, reject) => {
     if (!userId) return resolve();
-    Polluser.findOne({
+    Follow.findOne({
       poll: pollId,
       user: userId
     }).exec((err, follow) => {

@@ -3,20 +3,20 @@
 /**
  * Module dependencies
  */
-var pollusersPolicy = require('../policies/pollusers.server.policy'),
-  pollusers = require('../controllers/pollusers.server.controller');
+var followsPolicy = require('../policies/follows.server.policy'),
+  follows = require('../controllers/follows.server.controller');
 
 module.exports = function(app) {
-  // Pollusers Routes
-  app.route('/api/pollusers').all(pollusersPolicy.isAllowed)
-    .get(pollusers.list)
-    .post(pollusers.create);
+  // follows Routes
+  app.route('/api/follows').all(followsPolicy.isAllowed)
+    .get(follows.list)
+    .post(follows.create);
 
-  app.route('/api/pollusers/:polluserId').all(pollusersPolicy.isAllowed)
-    .get(pollusers.read)
-    .put(pollusers.update)
-    .delete(pollusers.delete);
+  app.route('/api/follows/:followId').all(followsPolicy.isAllowed)
+    .get(follows.read)
+    .put(follows.update)
+    .delete(follows.delete);
 
-  // Finish by binding the Polluser middleware
-  app.param('polluserId', pollusers.polluserByID);
+  // Finish by binding the follow middleware
+  app.param('followId', follows.followByID);
 };

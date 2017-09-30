@@ -47,7 +47,7 @@
     }
 
     function onCreate() {
-      if (!ctrl.isCurrentUserOwner && !$scope.isAdmin) {
+      if (!ctrl.poll.isCurrentUserOwner && !$scope.isAdmin) {
         $state.go('home');
         $scope.handleShowMessage('MS_CM_AUTH_ERROR', true);
         return;

@@ -22,9 +22,8 @@ var VoteSchema = new Schema({
 });
 
 VoteSchema.statics.removeOption = function (optId) {
-  this.find({
-    opts: { $elemMatch: optId }
-  }).exec(function (err, votes) {
+  this.find({ opts: optId }).exec(function (err, votes) {
+    console.log(votes);
     votes.forEach(function (vote) {
       vote.opts.pull(optId);
     });

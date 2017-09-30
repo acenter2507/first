@@ -162,6 +162,7 @@
       return new Promise((resolve, reject) => {
         Action.get_owner_by_pollId(ctrl.poll._id)
           .then(res => {
+            console.log(res);
             ctrl.ownVote = res.data.ownVote;
             ctrl.votedOpts = res.data.votedOpts;
             ctrl.selectedOpts = _.clone(ctrl.votedOpts);
@@ -174,6 +175,7 @@
             return resolve();
           })
           .catch(err => {
+            console.log(err);
             $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
             return reject();
           });

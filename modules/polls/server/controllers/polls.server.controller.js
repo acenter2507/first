@@ -392,7 +392,6 @@ exports.findOwners = function (req, res) {
   get_vote_by_pollId_and_userId(req.poll._id, userId, ip)
     .then(_result => {
       result.ownVote = _result || { poll: req.poll._id };
-      result.votedOpts = result.ownVote.opts;
       return get_follow_by_pollId(req.poll._id, userId);
     })
     .then(_result => {

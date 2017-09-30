@@ -14,7 +14,7 @@ var path = require('path'),
  */
 exports.create = function(req, res) {
   var bookmark = new Bookmark(req.body);
-  bookmark.user = req.user;
+  bookmark.user = req.user._id;
 
   bookmark.save(function(err) {
     if (err) {

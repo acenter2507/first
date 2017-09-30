@@ -19,7 +19,7 @@ var path = require('path'),
 exports.create = function (req, res) {
   var vote = new Vote(req.body);
   if (req.user) {
-    vote.user = req.user;
+    vote.user = req.user._id;
     vote.guest = false;
   } else {
     vote.ip = getClientIp(req);

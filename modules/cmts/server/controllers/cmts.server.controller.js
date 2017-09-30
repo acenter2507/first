@@ -20,7 +20,7 @@ var pollController = require(path.resolve('./modules/polls/server/controllers/po
  */
 exports.create = function (req, res) {
   var cmt = new Cmt(req.body);
-  cmt.user = req.user;
+  cmt.user = req.user._id;
 
   // Lưu comment vào db
   cmt.save()

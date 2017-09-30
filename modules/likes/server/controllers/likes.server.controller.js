@@ -17,7 +17,7 @@ var path = require('path'),
 exports.create = function (req, res) {
   var like = new Like(req.body);
   var cnt = (like.type === 1) ? 1 : -1;
-  like.user = req.user;
+  like.user = req.user._id;
 
   like.save()
     .then(_like => {

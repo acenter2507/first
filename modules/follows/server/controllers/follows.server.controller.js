@@ -14,7 +14,7 @@ var path = require('path'),
  */
 exports.create = function(req, res) {
   var follow = new Follow(req.body);
-  follow.user = req.user;
+  follow.user = req.user._id;
 
   follow.save(function(err) {
     if (err) {

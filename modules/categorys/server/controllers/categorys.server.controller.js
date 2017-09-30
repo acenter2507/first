@@ -17,7 +17,7 @@ var pollController = require(path.resolve('./modules/polls/server/controllers/po
  */
 exports.create = function (req, res) {
   var category = new Category(req.body);
-  category.user = req.user;
+  category.user = req.user._id;
 
   category.save(function (err) {
     if (err) {

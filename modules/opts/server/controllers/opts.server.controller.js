@@ -16,7 +16,7 @@ var path = require('path'),
  */
 exports.create = function (req, res) {
   var opt = new Opt(req.body);
-  opt.user = req.user;
+  opt.user = req.user._id;
 
   opt.save(function (err) {
     if (err) {

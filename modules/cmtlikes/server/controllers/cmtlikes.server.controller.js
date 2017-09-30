@@ -15,7 +15,7 @@ var path = require('path'),
  */
 exports.create = function (req, res) {
   var cmtlike = new Cmtlike(req.body);
-  cmtlike.user = req.user;
+  cmtlike.user = req.user._id;
   var cnt = (cmtlike.type === 1) ? 1 : -1;
   cmtlike.save()
     .then(_cmtlike => {

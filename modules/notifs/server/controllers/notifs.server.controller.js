@@ -16,7 +16,7 @@ var path = require('path'),
  */
 exports.create = function (req, res) {
   var notif = new Notif(req.body);
-  notif.user = req.user;
+  notif.user = req.user._id;
 
   notif.save(function (err) {
     if (err) {

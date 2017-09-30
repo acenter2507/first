@@ -402,10 +402,7 @@ exports.findOwners = function (req, res) {
   get_vote_by_pollId_and_userId(req.poll._id, userId, ip)
     .then(_result => {
       result.ownVote = _result || { poll: req.poll._id };
-      return get_opts_by_voteId(result.ownVote._id);
-    })
-    .then(_result => {
-      result.votedOpts = _.pluck(_result, '_id') || [];
+      result.votedOpts = result.ownVote.opts;
       return get_follow_by_pollId(req.poll._id, userId);
     })
     .then(_result => {
@@ -870,22 +867,6 @@ function get_vote_by_pollId_and_userId(pollId, userId, ip) {
       });
   });
 }
-// Lấy danh sách các option của 1 vote
-function get_opts_by_voteId(voteId) {
-  return new Promise((resolve, reject) => {
-    if (!voteId) return resolve();
-    Voteopt.find({ vote: voteId })
-      .populate('opt', 'title')
-      .exec(function (err, voteopts) {
-        if (err) {
-          return reject(err);
-        } else {
-          var opts = _.pluck(voteopts, 'opt') || [];
-          return resolve(opts);
-        }
-      });
-  });
-}
 // Lấy thông tin like của user đối với 1 poll
 function get_like_by_pollId_and_userId(pollId, userId) {
   return new Promise((resolve, reject) => {
@@ -1007,4 +988,3 @@ exports.get_follow_by_pollId = get_follow_by_pollId;
 exports.get_report_by_pollId = get_report_by_pollId;
 exports.get_bookmark_by_pollId = get_bookmark_by_pollId;
 exports.get_like_by_cmtId_and_userId = get_like_by_cmtId_and_userId;
-exports.get_opts_by_voteId = get_opts_by_voteId;

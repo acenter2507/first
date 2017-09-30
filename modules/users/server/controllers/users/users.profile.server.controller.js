@@ -254,28 +254,8 @@ exports.activitys = function (req, res) {
         .populate('poll', 'title isPublic slug').exec();
     }, handleError)
     .then(votes => {
-      if (votes.length === 0) {
-        result.votes = votes;
-        return res.jsonp(result);
-      } else {
-        var length = votes.length;
-        var counter = 0;
-        votes.forEach(function (instance, index, array) {
-          if (!instance) return;
-          array[index] = instance.toObject();
-          pollController.get_opts_by_voteId(array[index]._id)
-            .then(opts => {
-              array[index].opts = opts;
-              if (++counter === length) {
-                result.votes = votes;
-                res.jsonp(result);
-              }
-
-            })
-            .catch(handleError);
-        });
-
-      }
+      result.votes = votes;
+      return res.jsonp(result);
     }, handleError);
   function handleError(err) {
     // Xuất bug ra file log
@@ -368,21 +348,7 @@ exports.votes = function (req, res) {
     .skip(10 * page)
     .limit(10)
     .then(votes => {
-      if (votes.length === 0) return res.jsonp([]);
-      var length = votes.length;
-      var counter = 0;
-      votes.forEach(function (instance, index, array) {
-        if (!instance) return;
-        array[index] = instance.toObject();
-        pollController.get_opts_by_voteId(array[index]._id)
-          .then(result => {
-            array[index].opts = result;
-            if (++counter === length) {
-              res.jsonp(votes);
-            }
-          })
-          .catch(handleError);
-      });
+      res.jsonp(votes);
     }, handleError);
   function handleError(err) {
     // Xuất bug ra file log
@@ -511,7 +477,7 @@ exports.clear_view = function (req, res) {
   user.report.viewCnt = 0;
   user.save();
   View.remove({ user: user._id }).exec();
-  
+
   res.end();
 };
 

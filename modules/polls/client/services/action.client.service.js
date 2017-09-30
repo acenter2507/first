@@ -569,7 +569,7 @@
         options = _.union(options, vote.opts);
       });
       return options;
-    }
+    };
     // Tính phần trăm tỉ lệ vote cho opt
     this.calPercen = calPercen;
     function calPercen(total, value) {

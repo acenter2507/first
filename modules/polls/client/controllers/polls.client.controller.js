@@ -36,7 +36,6 @@
     // Options variable
     ctrl.opts = [];
     ctrl.tmp_opt = {};
-    ctrl.votedOpts = [];
     ctrl.selectedOpts = [];
 
     // Sắp xếp comments
@@ -163,8 +162,7 @@
           .then(res => {
             console.log(res);
             ctrl.ownVote = res.data.ownVote;
-            ctrl.votedOpts = ctrl.ownVote.opts || [];
-            ctrl.selectedOpts = _.clone(ctrl.votedOpts);
+            ctrl.selectedOpts = ctrl.ownVote.opts || [];
             ctrl.radioChecked = ctrl.selectedOpts[0];
             ctrl.follow = res.data.follow;
             ctrl.reported = res.data.reported;
@@ -376,7 +374,7 @@
         return;
       }
       // Nếu thông tin mới và cũ giống nhau
-      if (angular.equals(ctrl.votedOpts, ctrl.selectedOpts)) {
+      if (angular.equals(ctrl.ownVote.opts, ctrl.selectedOpts)) {
         return;
       }
       // Nếu poll đã hết thời hạn
@@ -400,12 +398,11 @@
             ctrl.poll.voteCnt += 1;
           }
           ctrl.ownVote = res;
-          ctrl.votedOpts = _.clone(ctrl.selectedOpts);
           handleLoadNewVoteInfo();
         })
         .catch(err => {
           $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
-          ctrl.selectedOpts = angular.copy(ctrl.votedOpts) || [];
+          ctrl.selectedOpts = ctrl.ownVote.opts || [];
         });
     }
     // Sắp xếp comments

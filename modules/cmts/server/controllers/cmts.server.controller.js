@@ -177,7 +177,7 @@ exports.cmtByID = function (req, res, next, id) {
     });
   }
 
-  Cmt.findById(id).populate('poll').populate('user', 'displayName profileImageURL slug').exec(function (err, cmt) {
+  Cmt.findById(id).populate('poll', 'slug').populate('user', 'displayName profileImageURL slug').exec(function (err, cmt) {
     if (err) {
       return next(err);
     } else if (!cmt) {

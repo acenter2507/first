@@ -555,7 +555,7 @@
         return { opt: opt._id, count: length };
       });
       poll.opts.forEach(opt => {
-        opt.voteCnt =  _.findWhere(collect, { opt: opt._id }).count;
+        opt.voteCnt = _.findWhere(collect, { opt: opt._id }).count;
         opt.progressVal = calPercen(poll.total, opt.voteCnt);
         poll.chart.data.push(opt.voteCnt);
         poll.chart.colors.push(opt.color);

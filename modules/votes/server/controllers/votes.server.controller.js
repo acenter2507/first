@@ -25,9 +25,9 @@ exports.create = function (req, res) {
     vote.ip = getClientIp(req);
     vote.guest = true;
   }
-  vote.save().then(vote => {
-    console.log(vote);
-    res.jsonp(vote);
+  vote.save().then(_vote => {
+    console.log(_vote);
+    res.end();
   }, handleError);
   // let opts = req.body.opts;
   // var promises = [];

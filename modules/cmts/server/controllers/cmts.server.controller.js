@@ -8,7 +8,7 @@ var path = require('path'),
   Cmt = mongoose.model('Cmt'),
   Poll = mongoose.model('Poll'),
   Cmtlike = mongoose.model('Cmtlike'),
-  Polluser = mongoose.model('Polluser'),
+  Follow = mongoose.model('Follow'),
   User = mongoose.model('User'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('underscore');
@@ -35,10 +35,10 @@ exports.create = function (req, res) {
     }, handleError)
     .then(() => {
       // Tạo record follow
-      Polluser.findOne({ poll: cmt.poll, user: cmt.user }).exec((err, _polluser) => {
-        if (!_polluser) {
-          _polluser = new Polluser({ poll: cmt.poll, user: cmt.user });
-          return _polluser.save();
+      Follow.findOne({ poll: cmt.poll, user: cmt.user }).exec((err, follow) => {
+        if (!follow) {
+          follow = new Follow({ poll: cmt.poll, user: cmt.user });
+          return follow.save();
         }
       });
     }, handleError)

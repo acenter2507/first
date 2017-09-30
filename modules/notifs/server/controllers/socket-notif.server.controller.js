@@ -2,7 +2,7 @@
 
 var path = require('path'),
   mongoose = require('mongoose'),
-  Polluser = mongoose.model('Polluser'),
+  Follow = mongoose.model('Follow'),
   Notif = mongoose.model('Notif');
 
 const _ = require('underscore');
@@ -98,13 +98,13 @@ function pollCmtNotif(req) {
       });
   } else {
     // Tìm toàn bộ các member đang theo dõi poll
-    Polluser.find({ poll: req.pollId }).then(
-      pollusers => {
+    Follow.find({ poll: req.pollId }).then(
+      follows => {
         var notif;
         // Tạo notif cho toàn bộ các member đang theo dõi
-        pollusers.forEach((polluser, index) => {
-          if (polluser.user.toString() !== req.from.toString()) {
-            Notif.findOne({ to: polluser.user, type: 3, status: 0, poll: req.pollId })
+        follows.forEach((follow, index) => {
+          if (follow.user.toString() !== req.from.toString()) {
+            Notif.findOne({ to: follow.user, type: 3, status: 0, poll: req.pollId })
               .then(_nof => {
                 if (_nof) {
                   if (_nof.from.toString() !== req.from) {
@@ -114,7 +114,7 @@ function pollCmtNotif(req) {
                     _nof.save().then(
                       _notif => {
                         var socketIds = _.where(global.socketUsers, {
-                          user: polluser.user.toString()
+                          user: follow.user.toString()
                         });
                         socketIds.forEach(item => {
                           io.sockets.connected[item.socket].emit('notifs', _notif._id);
@@ -124,7 +124,7 @@ function pollCmtNotif(req) {
                 } else {
                   _nof = new Notif({
                     from: req.from,
-                    to: polluser.user,
+                    to: follow.user,
                     content: 'commented on',
                     type: 3,
                     poll: req.pollId,
@@ -133,13 +133,10 @@ function pollCmtNotif(req) {
                   _nof.save().then(
                     _notif => {
                       var socketIds = _.where(global.socketUsers, {
-                        user: polluser.user.toString()
+                        user: follow.user.toString()
                       });
                       socketIds.forEach(item => {
-                        io.sockets.connected[item.socket].emit(
-                          'notifs',
-                          _notif._id
-                        );
+                        io.sockets.connected[item.socket].emit('notifs', _notif._id );
                       });
                     });
                 }

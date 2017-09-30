@@ -1,5 +1,5 @@
 (function (app) {
   'use strict';
 
-  app.registerModule('pollusers');
+  app.registerModule('follows');
 }(ApplicationConfiguration));

@@ -15,7 +15,7 @@ var path = require('path'),
  */
 exports.create = function(req, res) {
   var view = new View(req.body);
-  view.user = req.user;
+  view.user = req.user._id;
 
   view.save(function(err) {
     if (err) {

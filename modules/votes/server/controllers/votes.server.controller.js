@@ -7,7 +7,6 @@ var path = require('path'),
   mongoose = require('mongoose'),
   logger = require(path.resolve('./config/lib/logger')).log4jLog,
   Vote = mongoose.model('Vote'),
-  Voteopt = mongoose.model('Voteopt'),
   Poll = mongoose.model('Poll'),
   User = mongoose.model('User'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
@@ -93,24 +92,10 @@ exports.update = function (req, res) {
   var vote = req.vote;
 
   vote = _.extend(vote, req.body);
-  const opts = req.body.opts;
-  var promises = [];
 
   vote.save()
     .then(_vote => {
-      vote = _vote;
-      return Voteopt.remove({ vote: vote._id });
-    }, handleError)
-    .then(() => {
-      opts.forEach(opt => {
-        var voteopt = new Voteopt({ opt: opt, vote: vote._id });
-        promises.push(voteopt.save());
-      });
-      return Promise.all(promises);
-    }, handleError)
-    .then(_tags => {
-      promises = [];
-      res.jsonp(vote);
+      res.jsonp(_vote);
     }, handleError);
 
   function handleError(err) {
@@ -130,7 +115,8 @@ exports.delete = function (req, res) {
 
   vote.remove()
     .then(() => {
-      return Voteopt.remove({ vote: vote._id });
+      let pollId = vote.poll._id || vote.poll;
+      return Poll.countDownVote(pollId);
     }, handleError)
     .then(() => {
       let userId = vote.user._id || vote.user;

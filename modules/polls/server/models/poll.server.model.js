@@ -133,6 +133,17 @@ PollSchema.statics.countUpVote = function (id, callback) {
   });
 };
 
+PollSchema.statics.countDownVote = function (id, callback) {
+  return this.findById(id).exec(function (err, poll) {
+    if (poll) {
+      poll.voteCnt -= 1;
+      return poll.save();
+    } else {
+      console.log('Error!: Not found poll with ID: ' + id);
+    }
+  });
+};
+
 PollSchema.statics.countUpCmt = function (id, callback) {
   return this.findById(id).exec(function (err, poll) {
     if (poll) {

@@ -17,7 +17,7 @@ var pollController = require(path.resolve('./modules/polls/server/controllers/po
  */
 exports.create = function (req, res) {
   var tag = new Tag(req.body);
-  tag.user = req.user;
+  tag.user = req.user._id;
 
   tag.save(function (err) {
     if (err) {
@@ -190,7 +190,6 @@ exports.polls = function (req, res) {
           .then(result => {
             array[index].opts = result.opts;
             array[index].votes = result.votes;
-            array[index].voteopts = result.voteopts;
             array[index].follow = result.follow;
             array[index].reported = result.reported;
             array[index].bookmarked = result.bookmarked;

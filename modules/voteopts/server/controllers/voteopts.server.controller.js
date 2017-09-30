@@ -14,7 +14,7 @@ var path = require('path'),
  */
 exports.create = function(req, res) {
   var voteopt = new Voteopt(req.body);
-  voteopt.user = req.user;
+  voteopt.user = req.user._id;
 
   voteopt.save(function(err) {
     if (err) {

@@ -58,7 +58,7 @@ exports.create = function (req, res) {
       promises = [];
       opts.forEach(opt => {
         var _opt = new Opt(opt);
-        _opt.user = req.user;
+        _opt.user = req.user._id;
         _opt.poll = poll._id;
         promises.push(_opt.save());
       });
@@ -104,9 +104,8 @@ exports.read = function (req, res) {
       poll.opts = result || [];
       return get_votes_by_pollId(poll._id);
     })
-    .then(result => {
-      poll.votes = result.votes || [];
-      poll.voteopts = result.voteopts || [];
+    .then(votes => {
+      poll.votes = votes || [];
       return get_tags_by_pollId(poll._id);
     })
     .then(result => {
@@ -338,7 +337,6 @@ exports.findPolls = function (req, res) {
             });
             array[index].opts = opts;
             array[index].votes = result.votes;
-            array[index].voteopts = result.voteopts;
             array[index].follow = result.follow;
             array[index].reported = result.reported;
             array[index].bookmarked = result.bookmarked;
@@ -482,8 +480,8 @@ exports.findCmts = function (req, res) {
  */
 exports.findVoteopts = function (req, res) {
   get_votes_by_pollId(req.poll._id)
-    .then(result => {
-      res.jsonp(result);
+    .then(votes => {
+      res.jsonp(votes);
     })
     .catch(handleError);
   function handleError(err) {
@@ -564,7 +562,6 @@ exports.search = function (req, res) {
           .then(result => {
             array[index].opts = result.opts;
             array[index].votes = result.votes;
-            array[index].voteopts = result.voteopts;
             array[index].follow = result.follow;
             array[index].reported = result.reported;
             array[index].bookmarked = result.bookmarked;
@@ -760,21 +757,12 @@ function get_cmts_by_pollId(pollId) {
 // Lấy thông tin vote và các option được vote cho poll
 function get_votes_by_pollId(pollId) {
   return new Promise((resolve, reject) => {
-    var rs = {}, ids;
     Vote.find({ poll: pollId })
       .populate('user', 'displayName')
       .exec()
       .then(votes => {
         rs.votes = votes;
-        ids = _.pluck(votes, '_id');
-        Voteopt.find({ vote: { $in: ids } }).exec(function (err, opts) {
-          if (err) {
-            return reject(err);
-          } else {
-            rs.voteopts = opts;
-            return resolve(rs);
-          }
-        });
+        return resolve(votes);
       }, err => {
         return reject(err);
       });
@@ -936,9 +924,8 @@ function get_full_by_pollId(pollId, userId) {
         return get_votes_by_pollId(pollId);
       })
       // Lấy toàn bộ thông tin votes
-      .then(result => {
-        info.votes = result.votes || [];
-        info.voteopts = result.voteopts || [];
+      .then(votes => {
+        info.votes = votes || [];
         return get_follow_by_pollId(pollId, userId);
       })
       // Lấy follow của user hiện hành

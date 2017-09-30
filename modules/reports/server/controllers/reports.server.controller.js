@@ -15,7 +15,7 @@ var path = require('path'),
  */
 exports.create = function(req, res) {
   var report = new Report(req.body);
-  report.user = req.user;
+  report.user = req.user._id;
 
   report.save(function(err) {
     if (err) {

@@ -134,7 +134,7 @@
         data: []
       };
       ctrl.votes = ctrl.poll.votes || [];
-      ctrl.voteopts = ctrl.poll.voteopts || [];
+      ctrl.voteopts = handleGetVoteOptionInVote(ctrl.votes);
       ctrl.votedTotal = ctrl.voteopts.length;
       ctrl.opts.forEach(opt => {
         opt.voteCnt = _.where(ctrl.voteopts, { opt: opt._id }).length || 0;
@@ -143,6 +143,14 @@
         ctrl.chart.labels.push(opt.title);
         ctrl.chart.data.push(opt.voteCnt);
       });
+    }
+    function handleGetVoteOptionInVote(votes) {
+      var voteOpts = [];
+      votes.forEach(vote => {
+        voteOpts = _.union(voteOpts, _.pluck(vote, 'opts'));
+      });
+      console.log(voteOpts);
+      return voteOpts;
     }
     function prepareOwnerInfo() {
       return new Promise((resolve, reject) => {

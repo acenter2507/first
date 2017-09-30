@@ -14,7 +14,7 @@ var path = require('path'),
  */
 exports.create = function(req, res) {
   var polltag = new Polltag(req.body);
-  polltag.user = req.user;
+  polltag.user = req.user._id;
 
   polltag.save(function(err) {
     if (err) {

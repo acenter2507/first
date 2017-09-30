@@ -150,7 +150,6 @@ exports.polls = function (req, res) {
           .then(result => {
             array[index].opts = result.opts;
             array[index].votes = result.votes;
-            array[index].voteopts = result.voteopts;
             array[index].follow = result.follow;
             array[index].reported = result.reported;
             array[index].bookmarked = result.bookmarked;

@@ -485,7 +485,7 @@ exports.findVotes = function (req, res) {
 exports.findVotesByOption = function (req, res) {
   var optId = req.params.optId || '';
   var ids;
-  Vote.find({ opts: { $elemMatch: { $contains: optId } } })
+  Vote.find({ opts: optId })
     .populate('user', 'displayName slug profileImageURL')
     .exec()
     .then(votes => {

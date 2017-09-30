@@ -21,6 +21,7 @@ var VoteSchema = new Schema({
   created: { type: Date, default: Date.now }
 });
 
+// Loại bỏ option ra khỏi danh sách vote khi option đó bị xóa
 VoteSchema.statics.removeOption = function (optId) {
   this.find({ opts: optId }).exec(function (err, votes) {
     votes.forEach(function (vote) {

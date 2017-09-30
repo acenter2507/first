@@ -144,7 +144,7 @@
         return { opt: opt._id, count: length };
       });
       ctrl.opts.forEach(opt => {
-        opt.voteCnt = _.findWhere(collect, { opt: opt._id}).count;
+        opt.voteCnt = _.findWhere(collect, { opt: opt._id }).count;
         opt.progressVal = Action.calPercen(ctrl.votedTotal, opt.voteCnt);
         ctrl.chart.colors.push(opt.color);
         ctrl.chart.labels.push(opt.title);
@@ -609,11 +609,18 @@
             ctrl.chart.colors = [];
             ctrl.chart.labels = [];
             ctrl.chart.data = [];
-            ctrl.votes = res.data.votes || [];
-            ctrl.voteopts = res.data.voteopts || [];
+            ctrl.votes = res.data || [];
+            ctrl.voteopts = handleGetVoteOptionInVote(ctrl.votes);
             ctrl.votedTotal = ctrl.voteopts.length;
+            var collect = _.map(ctrl.opts, function (opt) {
+              var length = _.reject(ctrl.voteopts, function (el) {
+                return el.toString() !== opt._id.toString();
+              }).length;
+              return { opt: opt._id, count: length };
+            });
+
             ctrl.opts.forEach(opt => {
-              opt.voteCnt = _.where(ctrl.voteopts, { opt: opt._id }).length || 0;
+              opt.voteCnt = _.findWhere(collect, { opt: opt._id }).count;
               opt.progressVal = Action.calPercen(ctrl.votedTotal, opt.voteCnt);
               ctrl.chart.colors.push(opt.color);
               ctrl.chart.labels.push(opt.title);

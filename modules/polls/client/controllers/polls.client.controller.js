@@ -138,8 +138,8 @@
       ctrl.voteopts = handleGetVoteOptionInVote(ctrl.votes);
       ctrl.votedTotal = ctrl.voteopts.length;
       ctrl.opts.forEach(opt => {
-        opt.voteCnt =
-          opt.progressVal = Action.calPercen(ctrl.votedTotal, opt.voteCnt);
+        opt.voteCnt = 0;
+        opt.progressVal = Action.calPercen(ctrl.votedTotal, opt.voteCnt);
         ctrl.chart.colors.push(opt.color);
         ctrl.chart.labels.push(opt.title);
         ctrl.chart.data.push(opt.voteCnt);

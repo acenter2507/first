@@ -363,6 +363,8 @@
         return;
       }
       // Nếu thông tin mới và cũ giống nhau
+      console.log(ctrl.ownVote.opts);
+      console.log(ctrl.selectedOpts);
       if (angular.equals(ctrl.ownVote.opts, ctrl.selectedOpts)) {
         return;
       }

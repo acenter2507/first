@@ -252,7 +252,7 @@ exports.generateUsers = function (req, res) {
   for (var i = 1; i <= number; i++) {
     var user = new User();
     var now = new Date().getTime();
-    user.displayName = 'Generate User ' + now;
+    user.displayName = 'Generate User ' + now + i;
     user.email = now + i + '@localhost.com';
     user.password = pass;
     user.provider = 'local';

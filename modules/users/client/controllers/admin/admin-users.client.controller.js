@@ -24,7 +24,7 @@ function AdminUsersController($scope, $filter, $window, AdminUserService, AdminU
     AdminUserApi.loadAdminUsers(vm.page, vm.sort)
       .success(res => {
         vm.users = res.docs;
-        vm.totalPage = res.pages;
+        vm.totalPage = createArrayFromRange(res.pages);
         vm.totalUser = res.total;
         console.log(res);
         // $scope.users = res || [];
@@ -54,6 +54,14 @@ function AdminUsersController($scope, $filter, $window, AdminUserService, AdminU
     vm.page = page;
     handleLoadUsers();
   };
+
+  function createArrayFromRange(range) {
+    var array;
+    for (var i = 1; i <= range; i++) {
+      array.push(i);
+    }
+    return array;
+  }
 
   $scope.buildPager = function () {
     $scope.pagedItems = [];

@@ -504,11 +504,7 @@
       // Lấy tất cả các user đã vote cho lựa chọn này
       function loadAllUsersVotedForThisOption() {
         // Lấy các vote đã có vote cho option hiện tại
-        var _votes = _.pluck(_.where(vm.voteopts, { opt: opt._id }), 'vote');
-        // Lấy các lần vote có có vote cho option hiện tại
-        opt.votes = _.filter(vm.votes, (vote) => {
-          return _.contains(_votes, vote._id);
-        });
+        opt.votes = _.filter(vm.votes, (vote) => { return _.contains(vote.opts, opt._id); });
         // Lấy các user đã vote cho option hiện tại
         opt.users = _.pluck(_.filter(opt.votes, (vote) => {
           return !vote.guest;

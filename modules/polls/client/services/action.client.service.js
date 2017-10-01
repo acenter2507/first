@@ -298,6 +298,7 @@
           return resolve(res);
         }
         function errorCb(err) {
+          console.log(err);
           return reject(err);
         }
       });

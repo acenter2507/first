@@ -141,7 +141,6 @@ module.exports.start = function start(options) {
       User.generateRandomPassphrase()
         .then(seedTheUser(adminAccount))
         .then(function () {
-
           resolve();
         })
         .catch(reportError(reject));

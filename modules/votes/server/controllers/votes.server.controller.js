@@ -26,6 +26,7 @@ exports.create = function (req, res) {
   }
   vote.save()
     .then(_vote => {
+      vote = _vote;
       let pollId = vote.poll._id || vote.poll;
       return Poll.countUpVote(pollId);
     }, handleError)
@@ -66,9 +67,7 @@ exports.read = function (req, res) {
  */
 exports.update = function (req, res) {
   var vote = req.vote;
-
   vote = _.extend(vote, req.body);
-
   vote.save()
     .then(_vote => {
       res.jsonp(_vote);

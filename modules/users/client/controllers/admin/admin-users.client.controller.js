@@ -56,7 +56,7 @@ function AdminUsersController($scope, $filter, $window, AdminUserService, AdminU
   };
 
   function createArrayFromRange(range) {
-    var array;
+    var array = [];
     for (var i = 1; i <= range; i++) {
       array.push(i);
     }

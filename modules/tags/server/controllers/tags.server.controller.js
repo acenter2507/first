@@ -153,7 +153,7 @@ exports.popular = function (req, res) {
           .then(result => {
             array[index].count = result || 0;
             if (++counter === length) {
-              tags = _.sortBy(tags, function(o) { return -o.count; });
+              tags = _.sortBy(tags, function (o) { return -o.count; });
               tags = tags.splice(0, 10);
               res.jsonp(tags);
             }
@@ -186,7 +186,11 @@ exports.polls = function (req, res) {
       polls.forEach(function (instance, index, array) {
         if (!instance) return;
         array[index] = instance.toObject();
-        pollController.get_full_by_pollId(array[index]._id, userId)
+        pollController.get_last_cmt_by_pollId(array[index]._id)
+          .then(result => {
+            array[index].lastCmt = result || {};
+            return pollController.get_full_by_pollId(array[index]._id, userId);
+          })
           .then(result => {
             array[index].opts = result.opts;
             array[index].votes = result.votes;

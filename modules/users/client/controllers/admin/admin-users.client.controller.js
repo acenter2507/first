@@ -14,7 +14,7 @@ function AdminUsersController($scope, $filter, $window, AdminUserService, AdminU
     prepareUsers();
   }
   function prepareUsers() {
-    AdminUserApi.getUsers(vm.page, vm.sort)
+    AdminUserApi.loadAdminUsers(vm.page, vm.sort)
       .success(res => {
         console.log(res);
         // $scope.users = res || [];

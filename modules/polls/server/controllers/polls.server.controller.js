@@ -536,7 +536,11 @@ exports.search = function (req, res) {
       polls.forEach(function (instance, index, array) {
         if (!instance) return;
         array[index] = instance.toObject();
-        get_full_by_pollId(array[index]._id, userId)
+        get_last_cmt_by_pollId(array[index]._id)
+          .then(result => {
+            array[index].lastCmt = result || {};
+            return get_full_by_pollId(array[index]._id, userId);
+          })
           .then(result => {
             array[index].opts = result.opts;
             array[index].votes = result.votes;
@@ -969,3 +973,4 @@ exports.get_follow_by_pollId = get_follow_by_pollId;
 exports.get_report_by_pollId = get_report_by_pollId;
 exports.get_bookmark_by_pollId = get_bookmark_by_pollId;
 exports.get_like_by_cmtId_and_userId = get_like_by_cmtId_and_userId;
+exports.get_last_cmt_by_pollId = get_last_cmt_by_pollId;

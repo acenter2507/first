@@ -212,7 +212,8 @@ exports.userByID = function (req, res, next, id) {
  * Lấy all users
  */
 exports.users_list = function (req, res) {
-  //var page = req.params.page || 0;
+  var page = req.params.page || 0;
+  
   // let options = {
   //   lean: true,
   //   limit: 10,
@@ -225,13 +226,13 @@ exports.users_list = function (req, res) {
 
 
 
-  User.find({}, '-salt -password')
-    .sort('-created').exec()
-    .then((users) => {
-      res.jsonp(users);
-    }, err => {
-      return handleError(res, err);
-    });
+  // User.find({}, '-salt -password')
+  //   .sort('-created').exec()
+  //   .then((users) => {
+  //     res.jsonp(users);
+  //   }, err => {
+  //     return handleError(res, err);
+  //   });
 };
 
 /**

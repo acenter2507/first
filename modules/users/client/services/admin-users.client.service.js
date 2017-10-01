@@ -16,10 +16,8 @@ function AdminUserService($resource) {
 }
 AdminUserApi.$inject = ['$http'];
 function AdminUserApi($http) {
-  this.getUsers = page => {
-    return $http.get('/api/admins/users/' + page, {
-      ignoreLoadingBar: true
-    });
+  this.loadAdminUsers = page => {
+    return $http.get('/api/admins/users/' + page, { ignoreLoadingBar: true });
   };
   this.reset_pass = (userId, pass) => {
     return $http.post('/api/admins/users/' + userId + '/resetpass', { password: pass }, {

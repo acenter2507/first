@@ -50,7 +50,7 @@ var UserSchema = new Schema({
   },
   profileImageURL: {
     type: String,
-    default: 'modules/users/client/img/brand/icon.png'
+    default: 'modules/core/client/img/brand/icon.png'
   },
   provider: {
     type: String,

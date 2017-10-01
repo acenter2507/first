@@ -8,6 +8,7 @@ function AdminUsersController($scope, $filter, $window, AdminUserService, AdminU
   vm.users = [];
   vm.busy = false;
   vm.page = 1;
+  vm.condition = {};
   vm.totalPage = 0;
   vm.totalUser = 0;
   vm.sort = '-created';
@@ -26,9 +27,6 @@ function AdminUsersController($scope, $filter, $window, AdminUserService, AdminU
         vm.users = res.docs;
         vm.totalPage = createArrayFromRange(res.pages);
         vm.totalUser = res.total;
-        console.log(res);
-        // $scope.users = res || [];
-        // $scope.buildPager();
       })
       .error(err => {
         alert(err.message);
@@ -55,38 +53,6 @@ function AdminUsersController($scope, $filter, $window, AdminUserService, AdminU
     handleLoadUsers();
   };
 
-  function createArrayFromRange(range) {
-    var array = [];
-    for (var i = 1; i <= range; i++) {
-      array.push(i);
-    }
-    return array;
-  }
-
-  $scope.buildPager = function () {
-    $scope.pagedItems = [];
-    $scope.itemsPerPage = 15;
-    $scope.currentPage = 1;
-    $scope.filter = {};
-    $scope.figureOutItemsToDisplay();
-  };
-
-  $scope.figureOutItemsToDisplay = function () {
-    $scope.filteredItems = $filter('users_filter')($scope.users, $scope.filter);
-    $scope.filterLength = $scope.filteredItems.length;
-    var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
-    var end = begin + $scope.itemsPerPage;
-    $scope.pagedItems = $scope.filteredItems.slice(begin, end);
-  };
-
-  $scope.pageChanged = function () {
-    $scope.figureOutItemsToDisplay();
-  };
-
-  $scope.clear_filter = () => {
-    $scope.filter = {};
-    $scope.figureOutItemsToDisplay();
-  };
   vm.handleDeleteUser = user => {
     if ($window.confirm('Are you sure you want to delete?')) {
       var rs_user = new AdminUserService({ _id: user._id });
@@ -96,5 +62,38 @@ function AdminUsersController($scope, $filter, $window, AdminUserService, AdminU
       });
     }
   };
+
+  function createArrayFromRange(range) {
+    var array = [];
+    for (var i = 1; i <= range; i++) {
+      array.push(i);
+    }
+    return array;
+  }
+
+  // $scope.buildPager = function () {
+  //   $scope.pagedItems = [];
+  //   $scope.itemsPerPage = 15;
+  //   $scope.currentPage = 1;
+  //   $scope.filter = {};
+  //   $scope.figureOutItemsToDisplay();
+  // };
+
+  // $scope.figureOutItemsToDisplay = function () {
+  //   $scope.filteredItems = $filter('users_filter')($scope.users, $scope.filter);
+  //   $scope.filterLength = $scope.filteredItems.length;
+  //   var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
+  //   var end = begin + $scope.itemsPerPage;
+  //   $scope.pagedItems = $scope.filteredItems.slice(begin, end);
+  // };
+
+  // $scope.pageChanged = function () {
+  //   $scope.figureOutItemsToDisplay();
+  // };
+
+  // $scope.clear_filter = () => {
+  //   $scope.filter = {};
+  //   $scope.figureOutItemsToDisplay();
+  // };
 }
 

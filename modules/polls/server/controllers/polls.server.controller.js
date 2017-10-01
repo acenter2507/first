@@ -298,7 +298,6 @@ exports.pollByID = function (req, res, next, id) {
  * Lấy danh sách poll cho màn hình polls.list
  */
 exports.findPolls = function (req, res) {
-  console.log(getClientIp(req));
   var page = req.params.page || 0;
   var userId = req.user ? req.user._id : undefined;
   // Lấy ngôn ngữ hiển thị poll
@@ -914,7 +913,7 @@ function get_full_by_pollId(pollId, userId) {
 function get_last_cmt_by_pollId(pollId) {
   return new Promise((resolve, reject) => {
     Cmt.findOne({ poll: pollId })
-      .sort('-updated')
+      .sort('-created')
       .populate('user', 'displayName profileImageURL slug')
       .select('body updated user')
       .exec((err, cmt) => {

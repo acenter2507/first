@@ -212,7 +212,7 @@ exports.userByID = function (req, res, next, id) {
  * Lấy all users
  */
 exports.loadAdminUsers = function (req, res) {
-  var page = req.params.page || 0;
+  var page = req.params.page || 1;
   var sort = req.params.sort || '-created';
   User.paginate({}, {
     sort: sort,

@@ -5,7 +5,7 @@ AdminUsersController.$inject = ['$scope', '$filter', '$window', 'AdminUserServic
 
 function AdminUsersController($scope, $filter, $window, AdminUserService, AdminUserApi) {
   var vm = this;
-  vm.page = 0;
+  vm.page = 1;
   vm.sort = '-created';
 
   onCreate();

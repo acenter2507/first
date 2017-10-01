@@ -8,16 +8,24 @@ function AdminUsersController($scope, $filter, $window, AdminUserService, AdminU
   vm.users = [];
   vm.busy = false;
   vm.page = 1;
+  vm.totalPage = 0;
+  vm.totalUser = 0;
   vm.sort = '-created';
 
   onCreate();
 
   function onCreate() {
-    prepareUsers();
+    handleLoadUsers();
   }
-  function prepareUsers() {
+  /**
+   * HANDLES
+   */
+  function handleLoadUsers() {
     AdminUserApi.loadAdminUsers(vm.page, vm.sort)
       .success(res => {
+        vm.users = res.docs;
+        vm.totalPage = res.pages;
+        vm.totalUser = res.total;
         console.log(res);
         // $scope.users = res || [];
         // $scope.buildPager();
@@ -27,28 +35,25 @@ function AdminUsersController($scope, $filter, $window, AdminUserService, AdminU
       });
   }
 
-  /**
-   * HANDLES
-   */
   vm.handleCreateTestUsers = () => {
     if (vm.busy) return;
     vm.busy = true;
     var numberOfUser = $window.prompt('Number of users to generate', 0);
     var passWord = $window.prompt('Password for all', '');
     AdminUserApi.generateUsers(numberOfUser, passWord).then(res => {
-      console.log(res);
       vm.page = 1;
-      prepareUsers();
+      handleLoadUsers();
       vm.busy = false;
     }).catch(err => {
       vm.busy = false;
       alert(err.message);
-      console.log(err);
     });
   };
 
-
-
+  vm.handleChangePage = page => {
+    vm.page = page;
+    handleLoadUsers();
+  };
 
   $scope.buildPager = function () {
     $scope.pagedItems = [];

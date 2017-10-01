@@ -160,8 +160,9 @@
           </tr>
         </tbody>
       </table>
-      <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage"
-        ng-change="pageChanged()"></uib-pagination>
+      <ul class="pagination">
+        <li ng-repeat="page in vm.totalPage" ng-class="{'active': page === vm.page}"><a ng-click="vm.handleChangePage(page)">{{page}}</a></li>
+      </ul>
     </div>
   </div>
 </div>

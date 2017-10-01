@@ -213,7 +213,12 @@ exports.userByID = function (req, res, next, id) {
  */
 exports.users_list = function (req, res) {
   var page = req.params.page || 0;
-  
+  User.paginate({}, {
+    page: page,
+    limit: 10
+  }).then(function (users) {
+    res.jsonp(users);
+  });
   // let options = {
   //   lean: true,
   //   limit: 10,

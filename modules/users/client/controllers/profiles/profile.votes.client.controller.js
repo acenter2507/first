@@ -14,7 +14,7 @@ angular.module('users').controller('ProfileVotesController', [
     function get_votes() {
       if ($scope.busy || $scope.stopped) return;
       $scope.busy = true;
-      ProfileApi.get_votes($scope.profile._id, $scope.page)
+      ProfileApi.loadProfileVotes($scope.profile._id, $scope.page)
         .success(res => {
           if (!res || !res.length || res.length === 0) {
             $scope.busy = false;

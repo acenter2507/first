@@ -16,7 +16,7 @@ angular.module('users').controller('ProfileDislikesController', [
     function get_polls() {
       if ($scope.busy || $scope.stopped) return;
       $scope.busy = true;
-      ProfileApi.get_dislikes($scope.profile._id, $scope.page)
+      ProfileApi.loadProfileDislikedPolls($scope.profile._id, $scope.page)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
             $scope.busy = false;

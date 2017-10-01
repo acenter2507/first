@@ -16,7 +16,7 @@ angular.module('users').controller('ProfileBookmarksController', [
     function get_polls() {
       if ($scope.busy || $scope.stopped) return;
       $scope.busy = true;
-      ProfileApi.get_bookmarks($scope.profile._id, $scope.page)
+      ProfileApi.loadProfileBookmarks($scope.profile._id, $scope.page)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
             $scope.busy = false;
@@ -71,7 +71,7 @@ angular.module('users').controller('ProfileBookmarksController', [
 
     $scope.clear_bookmark = () => {
       if (!$scope.isCurrentOwner) return;
-      ProfileApi.clear_bookmark($scope.profile._id);
+      ProfileApi.deleteProfileBookmarks($scope.profile._id);
       $scope.polls = [];
     };
   }

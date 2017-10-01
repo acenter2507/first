@@ -16,7 +16,7 @@ angular.module('users').controller('ProfileFollowsController', [
     function get_polls() {
       if ($scope.busy || $scope.stopped) return;
       $scope.busy = true;
-      ProfileApi.get_follows($scope.profile._id, $scope.page)
+      ProfileApi.loadProfileFollows($scope.profile._id, $scope.page)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
             $scope.busy = false;
@@ -73,7 +73,7 @@ angular.module('users').controller('ProfileFollowsController', [
     };
     $scope.clear_follow = () => {
       if (!$scope.isCurrentOwner) return;
-      ProfileApi.clear_follow($scope.profile._id);
+      ProfileApi.deleteProfileFollows($scope.profile._id);
       $scope.polls = [];
     };
   }

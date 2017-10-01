@@ -16,7 +16,7 @@ angular.module('users').controller('ProfileLikesController', [
     function get_polls() {
       if ($scope.busy || $scope.stopped) return;
       $scope.busy = true;
-      ProfileApi.get_likes($scope.profile._id, $scope.page)
+      ProfileApi.loadProfileLikedPolls($scope.profile._id, $scope.page)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
             $scope.busy = false;

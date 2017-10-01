@@ -22,43 +22,43 @@ angular.module('users').factory('Profile', ['$resource',
 angular.module('users').factory('ProfileApi', ['$http',
   function ($http) {
     // Lấy list activitys của user
-    this.get_activitys = userId => {
+    this.loadProfileActivitys = userId => {
       return $http.get('/api/profile/' + userId + '/activitys/', { ignoreLoadingBar: true });
     };
-    this.get_polls = (userId, page) => {
+    this.loadProfilePolls = (userId, page) => {
       return $http.get('/api/profile/' + userId + '/polls/' + page, { ignoreLoadingBar: true });
     };
-    this.get_cmts = (userId, page) => {
+    this.loadProfileComments = (userId, page) => {
       return $http.get('/api/profile/' + userId + '/cmts/' + page, { ignoreLoadingBar: true });
     };
-    this.get_likes = (userId, page) => {
+    this.loadProfileLikedPolls = (userId, page) => {
       return $http.get('/api/profile/' + userId + '/likes/' + page, { ignoreLoadingBar: true });
     };
-    this.get_dislikes = (userId, page) => {
+    this.loadProfileDislikedPolls = (userId, page) => {
       return $http.get('/api/profile/' + userId + '/dislikes/' + page, { ignoreLoadingBar: true });
     };
-    this.get_bookmarks = (userId, page) => {
+    this.loadProfileBookmarks = (userId, page) => {
       return $http.get('/api/profile/' + userId + '/bookmarks/' + page, { ignoreLoadingBar: true });
     };
-    this.get_follows = (userId, page) => {
+    this.loadProfileFollows = (userId, page) => {
       return $http.get('/api/profile/' + userId + '/follows/' + page, { ignoreLoadingBar: true });
     };
-    this.get_votes = (userId, page) => {
+    this.loadProfileVotes = (userId, page) => {
       return $http.get('/api/profile/' + userId + '/votes/' + page, { ignoreLoadingBar: true });
     };
-    this.get_views = (userId, page) => {
+    this.loadProfileViews = (userId, page) => {
       return $http.get('/api/profile/' + userId + '/views/' + page, { ignoreLoadingBar: true });
     };
     this.loadTopUsers = (limit) => {
       return $http.get('/api/profile/top/' + limit, { ignoreLoadingBar: true });
     };
-    this.clear_bookmark = userId => {
+    this.deleteProfileBookmarks = userId => {
       return $http.get('/api/profile/' + userId + '/clear_bookmark', { ignoreLoadingBar: true });
     };
-    this.clear_view = userId => {
+    this.deleteProfileViews = userId => {
       return $http.get('/api/profile/' + userId + '/clear_view', { ignoreLoadingBar: true });
     };
-    this.clear_follow = userId => {
+    this.deleteProfileFollows = userId => {
       return $http.get('/api/profile/' + userId + '/clear_follow', { ignoreLoadingBar: true });
     };
     this.countUpBeView = userId => {

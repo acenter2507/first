@@ -16,7 +16,7 @@ angular.module('users').controller('ProfileViewsController', [
     function get_polls() {
       if ($scope.busy || $scope.stopped) return;
       $scope.busy = true;
-      ProfileApi.get_views($scope.profile._id, $scope.page)
+      ProfileApi.loadProfileViews($scope.profile._id, $scope.page)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
             $scope.busy = false;
@@ -58,7 +58,7 @@ angular.module('users').controller('ProfileViewsController', [
 
     $scope.clear_view = () => {
       if (!$scope.isCurrentOwner) return;
-      ProfileApi.clear_view($scope.profile._id);
+      ProfileApi.deleteProfileViews($scope.profile._id);
       $scope.polls = [];
     };
   }

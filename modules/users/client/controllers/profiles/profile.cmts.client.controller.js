@@ -13,7 +13,7 @@ angular.module('users').controller('ProfileCmtsController', [
     function get_cmts() {
       if ($scope.busy || $scope.stopped) return;
       $scope.busy = true;
-      ProfileApi.get_cmts($scope.profile._id, $scope.page)
+      ProfileApi.loadProfileComments($scope.profile._id, $scope.page)
         .success(res => {
           if (!res || !res.length || res.length === 0) {
             $scope.busy = false;

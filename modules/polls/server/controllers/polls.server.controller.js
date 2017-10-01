@@ -485,7 +485,7 @@ exports.findVotes = function (req, res) {
 exports.findVotesByOption = function (req, res) {
   var optId = req.params.optId || '';
   var ids;
-  Vote.find({ opts: optId })
+  Vote.find({ opts: optId, guest: false })
     .populate('user', 'displayName slug profileImageURL')
     .exec()
     .then(votes => {

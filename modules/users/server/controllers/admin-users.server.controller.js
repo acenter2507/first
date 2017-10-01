@@ -264,7 +264,7 @@ exports.generateUsers = function (req, res) {
     res.jsonp(users);
   }).catch(err => {
     res.status(400).send(err);
-  })
+  });
 };
 
 /**

@@ -44,7 +44,7 @@ function AdminUsersController($scope, $filter, $window, AdminUserService, AdminU
       alert(err.message);
       console.log(err);
     });
-  }
+  };
 
 
 

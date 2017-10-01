@@ -1,7 +1,10 @@
 <div class="row">
   <div class="col-xs-12">
     <div class="form-group">
-      <a ui-sref="admin.users.new" class="btn btn-primary pull-right">Add new</a>
+      <a ng-click="vm.handleCreateTestUsers()" class="btn btn-primary pull-right">
+        <i class="fa fa-spinner fa-pulse fa-fw" ng-show="vm.busy"></i>Generate
+      </a>
+      <a ui-sref="admin.users.new" class="btn btn-primary pull-right mg10r">Add new</a>
     </div>
   </div>
 </div>
@@ -119,7 +122,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="user in pagedItems">
+          <tr ng-repeat="user in vm.users">
             <td class="text-center">
               <div class="admin-avatar">
                 <img src="{{:: user.profileImageURL }}" class="img-admin-avatar">

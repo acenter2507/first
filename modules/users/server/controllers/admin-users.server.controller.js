@@ -243,6 +243,31 @@ exports.loadAdminUsers = function (req, res) {
 };
 
 /**
+ * Lấy all users
+ */
+exports.generateUsers = function (req, res) {
+  var number = req.params.number || 1;
+  var pass = req.params.pass || '12345678';
+  var promise = [];
+  for (var i = 1; i <= number; i++) {
+    var user = new User();
+    var now = new Date().getTime();
+    user.displayName = 'Generate User ' + now;
+    user.email = now + '@localhost.com';
+    user.password = pass;
+    user.provider = 'local';
+    user.roles = ['user'];
+    user.status = 2;
+    promise.push(user.save());
+  }
+  Promise.all(promise).then(users => {
+    res.jsonp(users);
+  }).catch(err => {
+    res.status(400).send(err);
+  })
+};
+
+/**
  * Lấy reported của user
  */
 // exports.users_reported = function (req, res) {

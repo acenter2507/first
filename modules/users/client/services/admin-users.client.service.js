@@ -19,6 +19,9 @@ function AdminUserApi($http) {
   this.loadAdminUsers = (page, sort) => {
     return $http.get('/api/admins/users/' + page + '/' + sort, { ignoreLoadingBar: true });
   };
+  this.generateUsers = (number, pass) => {
+    return $http.get('/api/admins/users/generate/' + number + '/' + pass, { ignoreLoadingBar: true });
+  };
   this.reset_pass = (userId, pass) => {
     return $http.post('/api/admins/users/' + userId + '/resetpass', { password: pass }, {
       ignoreLoadingBar: true

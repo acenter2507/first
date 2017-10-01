@@ -5,6 +5,8 @@ AdminUsersController.$inject = ['$scope', '$filter', '$window', 'AdminUserServic
 
 function AdminUsersController($scope, $filter, $window, AdminUserService, AdminUserApi) {
   var vm = this;
+  vm.users = [];
+  vm.busy = false;
   vm.page = 1;
   vm.sort = '-created';
 
@@ -25,7 +27,24 @@ function AdminUsersController($scope, $filter, $window, AdminUserService, AdminU
       });
   }
 
-
+  /**
+   * HANDLES
+   */
+  vm.handleCreateTestUsers = () => {
+    if (vm.busy) return;
+    vm.busy = true;
+    var numberOfUser = $window.prompt('Number of users to generate', 0);
+    var passWord = $window.prompt('Password for all', '');
+    AdminUserApi.generateUsers(numberOfUser, passWord).then(res => {
+      console.log(res);
+      vm.users = _.union(vm.users, res.data);
+      vm.busy = false;
+    }).catch(err => {
+      vm.busy = false;
+      alert(err.message);
+      console.log(err);
+    });
+  }
 
 
 

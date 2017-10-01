@@ -84,12 +84,15 @@
       .poll-body .poll-body-post .poll-body-activity-content {
         color: #777;
         padding: 6px;
-        font-size: 0.85rem;
-        line-height: 1rem;
+        /* font-size: 0.85rem; */
+        /* line-height: 1rem; */
         overflow: hidden;
-        max-height: 75px;
+        /* max-height: 75px; */
         width: 100%;}
         .poll-body .poll-body-post .poll-body-activity-content p {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
           margin: 0; }
 
   .poll-body .poll-body-options {

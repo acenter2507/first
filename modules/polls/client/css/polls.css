@@ -90,6 +90,7 @@
         /* max-height: 75px; */
         width: 100%;}
         .poll-body .poll-body-post .poll-body-activity-content p {
+          width: 100%;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;

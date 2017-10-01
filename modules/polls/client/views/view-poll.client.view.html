@@ -5,18 +5,18 @@
       <div class="card" id="poll_title_card">
         <div class="card-body">
           <p>
-            <i ng-class="['fa', ctrl.poll.category.icon]"></i>
-            <a ui-sref="categorys.polls({ categoryId: ctrl.poll.category.slug })">
-            {{ ctrl.poll.category.name }}
+            <i ng-class="['fa', vm.poll.category.icon]"></i>
+            <a ui-sref="categorys.polls({ categoryId: vm.poll.category.slug })">
+            {{ vm.poll.category.name }}
           </a>
-            <a class="pull-right" ng-click="ctrl.handleFollowPoll()" ng-if="ctrl.follow._id" tooltip-placement="bottom" uib-tooltip="{{:: 'LB_POLL_UNFOLLOW_TOOLTIP' | translate }}">
+            <a class="pull-right" ng-click="vm.handleFollowPoll()" ng-if="vm.follow._id" tooltip-placement="bottom" uib-tooltip="{{:: 'LB_POLL_UNFOLLOW_TOOLTIP' | translate }}">
               <i class="fa fa-rss"></i> {{:: 'LB_POLLS_MENU_UNFOLLOW' | translate}}
             </a>
-            <a class="pull-right" ng-click="ctrl.handleFollowPoll()" ng-if="!ctrl.follow._id" tooltip-placement="bottom" uib-tooltip="{{:: 'LB_POLL_FOLLOW_TOOLTIP' | translate }}">
+            <a class="pull-right" ng-click="vm.handleFollowPoll()" ng-if="!vm.follow._id" tooltip-placement="bottom" uib-tooltip="{{:: 'LB_POLL_FOLLOW_TOOLTIP' | translate }}">
               <i class="fa fa-rss"></i> {{:: 'LB_POLLS_MENU_FOLLOW' | translate}}
             </a>
           </p>
-          <h3 class="mg5t mg5b">{{ ctrl.poll.title }}</h3>
+          <h3 class="mg5t mg5b">{{ vm.poll.title }}</h3>
         </div>
       </div>
       <!-- First post -->
@@ -24,58 +24,58 @@
         <div class="card-body">
           <div class="poll-header">
             <div class="poll-avatar">
-              <a ng-if="ctrl.poll.user" ui-sref="profile.info({userId: ctrl.poll.user.slug})">
-                <img src="{{:: ctrl.poll.user.profileImageURL}}" alt="{{:: ctrl.poll.user.displayName}}">
+              <a ng-if="vm.poll.user" ui-sref="profile.info({userId: vm.poll.user.slug})">
+                <img src="{{:: vm.poll.user.profileImageURL}}" alt="{{:: vm.poll.user.displayName}}">
               </a>
-              <img ng-if="!ctrl.poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
+              <img ng-if="!vm.poll.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
             </div>
             <div class="poll-info">
               <div class="poll-info-title">
-                <a class="poll-info-title-user-name" ng-if="ctrl.poll.user" ui-sref="profile.info({userId: ctrl.poll.user.slug})">{{::ctrl.poll.user.displayName}}</a>
-                <span class="poll-info-title-user-name" ng-if="!ctrl.poll.user">{{:: 'LB_DELETED_USER' | translate }}</span>
+                <a class="poll-info-title-user-name" ng-if="vm.poll.user" ui-sref="profile.info({userId: vm.poll.user.slug})">{{::vm.poll.user.displayName}}</a>
+                <span class="poll-info-title-user-name" ng-if="!vm.poll.user">{{:: 'LB_DELETED_USER' | translate }}</span>
                 <span class="poll-info-title-time">
                     {{:: 'LB_POLLS_CREATEON' | translate }}
-                    <span am-time-ago="ctrl.poll.created"></span>
+                    <span am-time-ago="vm.poll.created"></span>
                 </span>
                 <md-menu md-offset="-12 20" md-position-mode="target-right target" ng-if="isLogged">
                   <a class="poll-info-title-menu" ng-click="$mdMenu.open($event)" aria-label="Open menu"><i class="icon-options"></i></a>
                   <md-menu-content>
                     <ul class="menu-list">
                       <li>
-                        <a ng-click="ctrl.handleFollowPoll()"><i class="fa fa-rss"></i>&nbsp;{{(ctrl.follow._id) ? 'LB_POLLS_MENU_UNFOLLOW' : 'LB_POLLS_MENU_FOLLOW' | translate }}</a>
+                        <a ng-click="vm.handleFollowPoll()"><i class="fa fa-rss"></i>&nbsp;{{(vm.follow._id) ? 'LB_POLLS_MENU_UNFOLLOW' : 'LB_POLLS_MENU_FOLLOW' | translate }}</a>
                       </li>
-                      <li ng-if="!ctrl.poll.isCurrentUserOwner && !ctrl.reported"><a ng-click="ctrl.handleReportPoll()"><i class="fa fa-exclamation-circle"></i> {{:: 'LB_POLLS_MENU_REPORT' | translate }}</a></li>
-                      <li ng-if="ctrl.poll.isCurrentUserOwner || ctrl.poll.canEdit"><a ui-sref="polls.edit({ pollId: ctrl.poll.slug })"><i class="fa fa-pencil-square-o"></i> {{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
-                      <li ng-if="ctrl.poll.isCurrentUserOwner || ctrl.poll.canEdit"><a ng-click="ctrl.handleRemovePoll()"><i class="fa fa-trash"></i> {{:: 'LB_DELETE' | translate }}</a></li>
-                      <li ng-if="!ctrl.poll.isCurrentUserOwner && !ctrl.bookmarked"><a ng-click="ctrl.handleBookmarkPoll()"><i class="fa fa-bookmark"></i> {{:: 'LB_POLLS_MENU_BOOKMARK' | translate }}</a></li>
-                      <li ng-if="ctrl.poll.isCurrentUserOwner"><a ng-click="ctrl.handleSharePoll()"><i class="fa fa-share-alt"></i> {{:: 'LB_SHARE' | translate }}</a></li>
+                      <li ng-if="!vm.poll.isCurrentUserOwner && !vm.reported"><a ng-click="vm.handleReportPoll()"><i class="fa fa-exclamation-circle"></i> {{:: 'LB_POLLS_MENU_REPORT' | translate }}</a></li>
+                      <li ng-if="vm.poll.isCurrentUserOwner || vm.poll.canEdit"><a ui-sref="polls.edit({ pollId: vm.poll.slug })"><i class="fa fa-pencil-square-o"></i> {{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
+                      <li ng-if="vm.poll.isCurrentUserOwner || vm.poll.canEdit"><a ng-click="vm.handleRemovePoll()"><i class="fa fa-trash"></i> {{:: 'LB_DELETE' | translate }}</a></li>
+                      <li ng-if="!vm.poll.isCurrentUserOwner && !vm.bookmarked"><a ng-click="vm.handleBookmarkPoll()"><i class="fa fa-bookmark"></i> {{:: 'LB_POLLS_MENU_BOOKMARK' | translate }}</a></li>
+                      <li ng-if="vm.poll.isCurrentUserOwner"><a ng-click="vm.handleSharePoll()"><i class="fa fa-share-alt"></i> {{:: 'LB_SHARE' | translate }}</a></li>
                     </ul>
                   </md-menu-content>
                 </md-menu>
                 <p class="poll-info-title-close">
                   <i class="fa fa-calendar"></i>
-                  <span ng-if="ctrl.poll.close">{{:: 'LB_CLOSE' | translate }} <span am-time-ago="ctrl.poll.close"></span></span>
-                  <span ng-if="!ctrl.poll.close">{{:: 'LB_CM_UNLIMIT' | translate }}</span>
+                  <span ng-if="vm.poll.close">{{:: 'LB_CLOSE' | translate }} <span am-time-ago="vm.poll.close"></span></span>
+                  <span ng-if="!vm.poll.close">{{:: 'LB_CM_UNLIMIT' | translate }}</span>
                 </p>
               </div>
               <div class="poll-info-secure">
-                <span ng-if="!ctrl.poll.isPublic" class="fa fa-lock" tooltip-placement="bottom" uib-tooltip="{{:: 'LB_POLLS_SECURE_PRIVATE' | translate }}"></span>
-                <span ng-if="ctrl.poll.isPublic && ctrl.poll.allow_guest" class="fa fa-globe" tooltip-placement="bottom" uib-tooltip="{{:: 'LB_POLLS_SECURE_PUBLIC' | translate }}"></span>
-                <span ng-if="ctrl.poll.isPublic && !ctrl.poll.allow_guest" class="fa fa-users" tooltip-placement="bottom" uib-tooltip="{{:: 'LB_POLLS_SECURE_ONLYUSER' | translate }}"></span>
+                <span ng-if="!vm.poll.isPublic" class="fa fa-lock" tooltip-placement="bottom" uib-tooltip="{{:: 'LB_POLLS_SECURE_PRIVATE' | translate }}"></span>
+                <span ng-if="vm.poll.isPublic && vm.poll.allow_guest" class="fa fa-globe" tooltip-placement="bottom" uib-tooltip="{{:: 'LB_POLLS_SECURE_PUBLIC' | translate }}"></span>
+                <span ng-if="vm.poll.isPublic && !vm.poll.allow_guest" class="fa fa-users" tooltip-placement="bottom" uib-tooltip="{{:: 'LB_POLLS_SECURE_ONLYUSER' | translate }}"></span>
               </div>
             </div>
           </div>
           <hr class="mg5t mg10y">
           <div class="post-body">
-            <div ta-bind="text" ng-model="ctrl.poll.body" ta-readonly="true"></div>
+            <div ta-bind="text" ng-model="vm.poll.body" ta-readonly="true"></div>
           </div>
           <hr class="mg10y">
           <div class="post-footer">
             <div class="like_tools">
-              <span ng-if="!ctrl.poll.isCurrentUserOwner" class="span_btn" ng-click="ctrl.handleLikePoll(1)" ng-class="{'highlight-text': ctrl.like.type === 1}"><i class="fa fa-thumbs-o-up"></i> {{:: 'LB_LIKE' | translate }}</span>
-              <i ng-if="ctrl.poll.isCurrentUserOwner" class="fa fa-thumbs-o-up"></i>
-              <span class="mg5l mg5r highlight-text" ng-bind="ctrl.poll.likeCnt | shortNumber"></span>
-              <span ng-if="!ctrl.poll.isCurrentUserOwner" class="span_btn" ng-click="ctrl.handleLikePoll(2)" ng-class="{'highlight-text': ctrl.like.type === 2}"><i class="fa fa-thumbs-o-down"></i> {{:: 'LB_DISLIKE' | translate }}</span>
+              <span ng-if="!vm.poll.isCurrentUserOwner" class="span_btn" ng-click="vm.handleLikePoll(1)" ng-class="{'highlight-text': vm.like.type === 1}"><i class="fa fa-thumbs-o-up"></i> {{:: 'LB_LIKE' | translate }}</span>
+              <i ng-if="vm.poll.isCurrentUserOwner" class="fa fa-thumbs-o-up"></i>
+              <span class="mg5l mg5r highlight-text" ng-bind="vm.poll.likeCnt | shortNumber"></span>
+              <span ng-if="!vm.poll.isCurrentUserOwner" class="span_btn" ng-click="vm.handleLikePoll(2)" ng-class="{'highlight-text': vm.like.type === 2}"><i class="fa fa-thumbs-o-down"></i> {{:: 'LB_DISLIKE' | translate }}</span>
             </div>
             <div class="clearfix"></div>
           </div>
@@ -84,14 +84,14 @@
       <!-- Options -->
       <div class="card" id="opts_detail_card">
         <div class="card-header">
-          <strong class="card-title">{{:: 'LB_POLL_OPTIONS' | translate }} ({{ctrl.opts.length | shortNumber }})</strong>
-          <a class="card-link font-sm" ng-if="ctrl.opts.length > 0 && !ctrl.isClosed" ng-click="ctrl.handleGetLinkOption()">{{:: 'LB_VOTE_GET_LINK' | translate }}</a>
+          <strong class="card-title">{{:: 'LB_POLL_OPTIONS' | translate }} ({{vm.opts.length | shortNumber }})</strong>
+          <a class="card-link font-sm" ng-if="vm.opts.length > 0 && !vm.isClosed" ng-click="vm.handleGetLinkOption()">{{:: 'LB_VOTE_GET_LINK' | translate }}</a>
         </div>
         <div class="card-body">
-          <span class="text-muted" ng-if="!ctrl.opts.length || ctrl.opts.length === 0">{{:: 'LB_POLL_OPTIONS_EMPTY' | translate }}</span>
+          <span class="text-muted" ng-if="!vm.opts.length || vm.opts.length === 0">{{:: 'LB_POLL_OPTIONS_EMPTY' | translate }}</span>
           <!-- Danh sách options -->
-          <uib-accordion close-others="true" ng-if="ctrl.opts.length > 0">
-            <uib-accordion-group ng-repeat="opt in ctrl.opts" heading="{{opt.title}} ( {{ opt.voteCnt | shortNumber }} votes)" panel-class="custom-panel public">
+          <uib-accordion close-others="true" ng-if="vm.opts.length > 0">
+            <uib-accordion-group ng-repeat="opt in vm.opts" heading="{{opt.title}} ( {{ opt.voteCnt | shortNumber }} votes)" panel-class="custom-panel public">
               <span class="pull-right text-muted font-sm">
                 <span>{{:: 'LB_ADD_BY' | translate }}</span>
               <a ui-sref="profile.info({userId: opt.user.slug})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>
@@ -108,53 +108,53 @@
 
       <!-- #Show only MD screen -->
       <!-- Vote card -->
-      <div class="card d-md-none" ng-if="ctrl.isClosed">
+      <div class="card d-md-none" ng-if="vm.isClosed">
         <div class="card-header">
           <strong class="card-title">{{:: 'LB_POLL_VOTE_PANEL' | translate }}</strong>
         </div>
         <div class="card-body">
-          <h4 ng-if="ctrl.isClosed">{{:: 'LB_POLL_CLOSED' | translate }}</h4>
+          <h4 ng-if="vm.isClosed">{{:: 'LB_POLL_CLOSED' | translate }}</h4>
         </div>
       </div>
-      <div class="card d-md-none" ng-if="!ctrl.isClosed">
+      <div class="card d-md-none" ng-if="!vm.isClosed">
         <div class="card-header">
           <strong class="card-title">{{:: 'LB_POLL_VOTE_PANEL' | translate }}</strong>
-          <a class="card-link font-sm" ng-if="ctrl.opts.length > 0" ng-click="ctrl.handleGetLinkOption()">{{:: 'LB_VOTE_GET_LINK' | translate }}</a>
+          <a class="card-link font-sm" ng-if="vm.opts.length > 0" ng-click="vm.handleGetLinkOption()">{{:: 'LB_VOTE_GET_LINK' | translate }}</a>
         </div>
         <div class="card-body">
-          <div class="poll-remaining" ng-if="ctrl.poll.close">
+          <div class="poll-remaining" ng-if="vm.poll.close">
             <p>
-              <span>{{ctrl.close_duration.days}}{{:: 'LB_POLL_CLOSE_DAY' | translate }}</span>
-              <span>{{ctrl.close_duration.hours}}{{:: 'LB_POLL_CLOSE_HOUR' | translate }}</span>
-              <span>{{ctrl.close_duration.minutes}}{{:: 'LB_POLL_CLOSE_MIN' | translate }}</span>
-              <span>{{ctrl.close_duration.seconds}}{{:: 'LB_POLL_CLOSE_SEC' | translate }}</span>
+              <span>{{vm.close_duration.days}}{{:: 'LB_POLL_CLOSE_DAY' | translate }}</span>
+              <span>{{vm.close_duration.hours}}{{:: 'LB_POLL_CLOSE_HOUR' | translate }}</span>
+              <span>{{vm.close_duration.minutes}}{{:: 'LB_POLL_CLOSE_MIN' | translate }}</span>
+              <span>{{vm.close_duration.seconds}}{{:: 'LB_POLL_CLOSE_SEC' | translate }}</span>
             </p>
           </div>
           <hr class="mgn mg12b">
-          <span class="text-muted font-sm" ng-if="!ctrl.opts.length || ctrl.opts.length === 0">{{:: 'LB_POLL_OPTIONS_EMPTY' | translate }}</span>
+          <span class="text-muted font-sm" ng-if="!vm.opts.length || vm.opts.length === 0">{{:: 'LB_POLL_OPTIONS_EMPTY' | translate }}</span>
 
-          <div class="form-group" ng-if="!ctrl.poll.allow_multiple">
-            <md-radio-group ng-model="ctrl.radioChecked" ng-change="ctrl.handleChecked()">
-              <md-radio-button ng-repeat="opt in ctrl.opts" ng-value="opt._id" class="md-primary">
+          <div class="form-group" ng-if="!vm.poll.allow_multiple">
+            <md-radio-group ng-model="vm.radioChecked" ng-change="vm.handleChecked()">
+              <md-radio-button ng-repeat="opt in vm.opts" ng-value="opt._id" class="md-primary">
                 {{opt.title}}
                 <strong class="mg5l" ng-style="{color: opt.color}">●</strong>
               </md-radio-button>
             </md-radio-group>
           </div>
-          <div class="form-group" ng-if="ctrl.poll.allow_multiple">
-            <div ng-repeat="opt in ctrl.opts">
-              <md-checkbox class="md-primary" ng-checked="ctrl.is_voted(opt._id)" ng-click="ctrl.handleChecked(opt._id)">
+          <div class="form-group" ng-if="vm.poll.allow_multiple">
+            <div ng-repeat="opt in vm.opts">
+              <md-checkbox class="md-primary" ng-checked="vm.is_voted(opt._id)" ng-click="vm.handleChecked(opt._id)">
                 {{opt.title}}
                 <strong class="mg5l" ng-style="{color: opt.color}">●</strong>
               </md-checkbox>
             </div>
           </div>
           <div class="form-group">
-            <button ng-show="ctrl.opts.length > 0 && ctrl.isCanVote" class="btn btn-primary pull-right" ng-click="ctrl.handleSaveVote()">
-              {{(ctrl.ownVote._id) ? 'LB_CHANGE_VOTE' : 'LB_VOTE' | translate }}
+            <button ng-show="vm.opts.length > 0 && vm.isCanVote" class="btn btn-primary pull-right" ng-click="vm.handleSaveVote()">
+              {{(vm.ownVote._id) ? 'LB_CHANGE_VOTE' : 'LB_VOTE' | translate }}
             </button>
-            <button ng-show="isLogged && ctrl.poll.allow_add && !ctrl.poll.isCurrentUserOwner" class="btn btn-warning pull-right mg10r"
-              ng-click="ctrl.handleStartInputOption()">{{:: 'LB_SUGGEST' | translate }}</button>
+            <button ng-show="isLogged && vm.poll.allow_add && !vm.poll.isCurrentUserOwner" class="btn btn-warning pull-right mg10r"
+              ng-click="vm.handleStartInputOption()">{{:: 'LB_SUGGEST' | translate }}</button>
           </div>
           <div class="clearfix"></div>
         </div>
@@ -168,11 +168,11 @@
         </div>
         <div class="card-body">
           <p class="text-justify mgn">
-            <button class="btn btn-facebook icon" type="button" ng-click="handleShareSocialPoll(ctrl.poll, 'facebook')"></button>
-            <button class="btn btn-twitter icon" type="button" ng-click="handleShareSocialPoll(ctrl.poll, 'twitter')"></button>
-            <button class="btn btn-linkedin icon" type="button" ng-click="handleShareSocialPoll(ctrl.poll, 'linkedin')"></button>
-            <button class="btn btn-google-plus icon" type="button" ng-click="handleShareSocialPoll(ctrl.poll, 'google')"></button>
-            <button class="btn btn-tumblr icon" type="button" ng-click="handleShareSocialPoll(ctrl.poll, 'tumblr')"></button>
+            <button class="btn btn-facebook icon" type="button" ng-click="handleShareSocialPoll(vm.poll, 'facebook')"></button>
+            <button class="btn btn-twitter icon" type="button" ng-click="handleShareSocialPoll(vm.poll, 'twitter')"></button>
+            <button class="btn btn-linkedin icon" type="button" ng-click="handleShareSocialPoll(vm.poll, 'linkedin')"></button>
+            <button class="btn btn-google-plus icon" type="button" ng-click="handleShareSocialPoll(vm.poll, 'google')"></button>
+            <button class="btn btn-tumblr icon" type="button" ng-click="handleShareSocialPoll(vm.poll, 'tumblr')"></button>
           </p>
           <div class="clearfix"></div>
         </div>
@@ -183,9 +183,9 @@
           <strong class="card-title">{{:: 'LB_TAGS' | translate }}</strong>
         </div>
         <div class="card-body">
-          <span class="text-muted font-sm" ng-if="!ctrl.poll.tags.length || ctrl.poll.tags.length === 0">{{:: 'LB_POLL_TAGS_EMPTY' | translate }}</span>
-          <ul class="tags" ng-if="ctrl.poll.tags.length > 0">
-            <li ng-repeat="tag in ctrl.poll.tags"><a ui-sref="tags.polls({ tagId: tag.slug })" class="tag">{{:: tag.name}}</a></li>
+          <span class="text-muted font-sm" ng-if="!vm.poll.tags.length || vm.poll.tags.length === 0">{{:: 'LB_POLL_TAGS_EMPTY' | translate }}</span>
+          <ul class="tags" ng-if="vm.poll.tags.length > 0">
+            <li ng-repeat="tag in vm.poll.tags"><a ui-sref="tags.polls({ tagId: tag.slug })" class="tag">{{:: tag.name}}</a></li>
           </ul>
         </div>
       </div>
@@ -204,25 +204,25 @@
         <div class="card-body">
           <div class="col-xs-3 pdn">
             <div class="poll_info_item">
-              <div class="value">{{ctrl.poll.voteCnt | shortNumber}}</div>
+              <div class="value">{{vm.poll.voteCnt | shortNumber}}</div>
               <span class="label">{{:: 'LB_POLLS_VOTES' | translate }}</span>
             </div>
           </div>
           <div class="col-xs-3 pdn text-center">
             <div class="poll_info_item pull-left">
-              <div class="value">{{ctrl.poll.viewCnt | shortNumber}}</div>
+              <div class="value">{{vm.poll.viewCnt | shortNumber}}</div>
               <span class="label">{{:: 'LB_POLLS_VIEWS' | translate }}</span>
             </div>
           </div>
           <div class="col-xs-3 pdn text-center">
             <div class="poll_info_item pull-right">
-              <div class="value">{{ctrl.poll.cmtCnt | shortNumber}}</div>
+              <div class="value">{{vm.poll.cmtCnt | shortNumber}}</div>
               <span class="label">{{:: 'LB_POLLS_COMMENTS' | translate }}</span>
             </div>
           </div>
           <div class="col-xs-3 pdn">
             <div class="poll_info_item">
-              <div class="value">{{ctrl.poll.likeCnt | shortNumber}}</div>
+              <div class="value">{{vm.poll.likeCnt | shortNumber}}</div>
               <span class="label">{{:: 'LB_POLLS_LIKES' | translate }}</span>
             </div>
           </div>
@@ -230,54 +230,54 @@
         </div>
       </div>
       <!-- Vote card -->
-      <div class="card" ng-if="ctrl.isClosed">
+      <div class="card" ng-if="vm.isClosed">
         <div class="card-header">
           <strong class="card-title">{{:: 'LB_POLL_VOTE_PANEL' | translate }}</strong>
         </div>
         <div class="card-body">
-          <h4 ng-if="ctrl.isClosed">{{:: 'LB_POLL_CLOSED' | translate }}</h4>
+          <h4 ng-if="vm.isClosed">{{:: 'LB_POLL_CLOSED' | translate }}</h4>
         </div>
       </div>
-      <div class="card" ng-if="!ctrl.isClosed">
+      <div class="card" ng-if="!vm.isClosed">
         <div class="card-header">
           <strong class="card-title">{{:: 'LB_POLL_VOTE_PANEL' | translate }}</strong>
-          <a class="card-link font-sm" ng-if="ctrl.opts.length > 0" ng-click="ctrl.handleGetLinkOption()">{{:: 'LB_VOTE_GET_LINK' | translate }}</a>
+          <a class="card-link font-sm" ng-if="vm.opts.length > 0" ng-click="vm.handleGetLinkOption()">{{:: 'LB_VOTE_GET_LINK' | translate }}</a>
         </div>
         <div class="card-body">
-          <div class="poll-remaining" ng-if="ctrl.poll.close">
+          <div class="poll-remaining" ng-if="vm.poll.close">
             <p>
-              <span>{{ctrl.close_duration.days}}{{:: 'LB_POLL_CLOSE_DAY' | translate }}</span>
-              <span>{{ctrl.close_duration.hours}}{{:: 'LB_POLL_CLOSE_HOUR' | translate }}</span>
-              <span>{{ctrl.close_duration.minutes}}{{:: 'LB_POLL_CLOSE_MIN' | translate }}</span>
-              <span>{{ctrl.close_duration.seconds}}{{:: 'LB_POLL_CLOSE_SEC' | translate }}</span>
+              <span>{{vm.close_duration.days}}{{:: 'LB_POLL_CLOSE_DAY' | translate }}</span>
+              <span>{{vm.close_duration.hours}}{{:: 'LB_POLL_CLOSE_HOUR' | translate }}</span>
+              <span>{{vm.close_duration.minutes}}{{:: 'LB_POLL_CLOSE_MIN' | translate }}</span>
+              <span>{{vm.close_duration.seconds}}{{:: 'LB_POLL_CLOSE_SEC' | translate }}</span>
             </p>
           </div>
           <hr class="mgn mg12b">
-          <span class="text-muted font-sm" ng-if="!ctrl.opts.length || ctrl.opts.length === 0">{{:: 'LB_POLL_OPTIONS_EMPTY' | translate }}</span>
+          <span class="text-muted font-sm" ng-if="!vm.opts.length || vm.opts.length === 0">{{:: 'LB_POLL_OPTIONS_EMPTY' | translate }}</span>
           <!-- Danh sách lựa chọn đối với trường hợp vote đơn -->
-          <div class="form-group" ng-if="!ctrl.poll.allow_multiple">
-            <md-radio-group ng-model="ctrl.radioChecked" ng-change="ctrl.handleChecked()">
-              <md-radio-button ng-repeat="opt in ctrl.opts" ng-value="opt._id" class="md-primary">
+          <div class="form-group" ng-if="!vm.poll.allow_multiple">
+            <md-radio-group ng-model="vm.radioChecked" ng-change="vm.handleChecked()">
+              <md-radio-button ng-repeat="opt in vm.opts" ng-value="opt._id" class="md-primary">
                 {{opt.title}}
                 <strong class="mg5l" ng-style="{color: opt.color}">●</strong>
               </md-radio-button>
             </md-radio-group>
           </div>
           <!-- Danh sách lựa chọn đối với trường hợp vote nhiều -->
-          <div class="form-group" ng-if="ctrl.poll.allow_multiple">
-            <div ng-repeat="opt in ctrl.opts">
-              <md-checkbox class="md-primary" ng-checked="ctrl.is_voted(opt._id)" ng-click="ctrl.handleChecked(opt._id)">
+          <div class="form-group" ng-if="vm.poll.allow_multiple">
+            <div ng-repeat="opt in vm.opts">
+              <md-checkbox class="md-primary" ng-checked="vm.is_voted(opt._id)" ng-click="vm.handleChecked(opt._id)">
                 {{opt.title}}
                 <strong class="mg5l" ng-style="{color: opt.color}">●</strong>
               </md-checkbox>
             </div>
           </div>
           <div class="form-group">
-            <button ng-show="ctrl.opts.length > 0 && ctrl.isCanVote" class="btn btn-primary pull-right" ng-click="ctrl.handleSaveVote()">
-              {{(ctrl.ownVote._id) ? 'LB_CHANGE_VOTE' : 'LB_VOTE' | translate }}
+            <button ng-show="vm.opts.length > 0 && vm.isCanVote" class="btn btn-primary pull-right" ng-click="vm.handleSaveVote()">
+              {{(vm.ownVote._id) ? 'LB_CHANGE_VOTE' : 'LB_VOTE' | translate }}
             </button>
-            <button ng-show="isLogged && ctrl.poll.allow_add && !ctrl.poll.isCurrentUserOwner" class="btn btn-warning pull-right mg10r"
-              ng-click="ctrl.handleStartInputOption()">{{:: 'LB_SUGGEST' | translate }}</button>
+            <button ng-show="isLogged && vm.poll.allow_add && !vm.poll.isCurrentUserOwner" class="btn btn-warning pull-right mg10r"
+              ng-click="vm.handleStartInputOption()">{{:: 'LB_SUGGEST' | translate }}</button>
           </div>
           <div class="clearfix"></div>
         </div>
@@ -291,11 +291,11 @@
         </div>
         <div class="card-body">
           <p class="text-justify mgn">
-            <button class="btn btn-facebook icon" type="button" ng-click="handleShareSocialPoll(ctrl.poll, 'facebook')"></button>
-            <button class="btn btn-twitter icon" type="button" ng-click="handleShareSocialPoll(ctrl.poll, 'twitter')"></button>
-            <button class="btn btn-linkedin icon" type="button" ng-click="handleShareSocialPoll(ctrl.poll, 'linkedin')"></button>
-            <button class="btn btn-google-plus icon" type="button" ng-click="handleShareSocialPoll(ctrl.poll, 'google')"></button>
-            <button class="btn btn-tumblr icon" type="button" ng-click="handleShareSocialPoll(ctrl.poll, 'tumblr')"></button>
+            <button class="btn btn-facebook icon" type="button" ng-click="handleShareSocialPoll(vm.poll, 'facebook')"></button>
+            <button class="btn btn-twitter icon" type="button" ng-click="handleShareSocialPoll(vm.poll, 'twitter')"></button>
+            <button class="btn btn-linkedin icon" type="button" ng-click="handleShareSocialPoll(vm.poll, 'linkedin')"></button>
+            <button class="btn btn-google-plus icon" type="button" ng-click="handleShareSocialPoll(vm.poll, 'google')"></button>
+            <button class="btn btn-tumblr icon" type="button" ng-click="handleShareSocialPoll(vm.poll, 'tumblr')"></button>
           </p>
           <div class="clearfix"></div>
         </div>
@@ -306,9 +306,9 @@
           <strong class="card-title">{{:: 'LB_TAGS' | translate }}</strong>
         </div>
         <div class="card-body">
-          <span class="text-muted font-sm" ng-if="!ctrl.poll.tags.length || ctrl.poll.tags.length === 0">{{:: 'LB_POLL_TAGS_EMPTY' | translate }}</span>
-          <ul class="tags" ng-if="ctrl.poll.tags.length">
-            <li ng-repeat="tag in ctrl.poll.tags"><a ui-sref="tags.polls({ tagId: tag.slug })" class="tag">{{:: tag.name}}</a></li>
+          <span class="text-muted font-sm" ng-if="!vm.poll.tags.length || vm.poll.tags.length === 0">{{:: 'LB_POLL_TAGS_EMPTY' | translate }}</span>
+          <ul class="tags" ng-if="vm.poll.tags.length">
+            <li ng-repeat="tag in vm.poll.tags"><a ui-sref="tags.polls({ tagId: tag.slug })" class="tag">{{:: tag.name}}</a></li>
           </ul>
         </div>
       </div>
@@ -322,15 +322,15 @@
       </md-fab-trigger>
 
       <md-fab-actions>
-        <md-button aria-label="Like" class="md-fab md-raised" ng-click="ctrl.handleLikePoll(1)">
+        <md-button aria-label="Like" class="md-fab md-raised" ng-click="vm.handleLikePoll(1)">
           <i class="fa fa-thumbs-o-up"></i>
           <md-tooltip class="d-md-none" md-direction="right" md-visible="isOpen">{{:: 'LB_LIKE' | translate }}</md-tooltip>
         </md-button>
-        <md-button aria-label="Dislike" class="md-fab md-raised" ng-click="ctrl.handleLikePoll(2)">
+        <md-button aria-label="Dislike" class="md-fab md-raised" ng-click="vm.handleLikePoll(2)">
           <i class="fa fa-thumbs-o-down"></i>
           <md-tooltip class="d-md-none" md-direction="right" md-visible="isOpen">{{:: 'LB_DISLIKE' | translate }}</md-tooltip>
         </md-button>
-        <md-button aria-label="Comment" class="md-fab md-raised" ng-click="ctrl.handleStartTypeComment()">
+        <md-button aria-label="Comment" class="md-fab md-raised" ng-click="vm.handleStartTypeComment()">
           <i class="fa fa-commenting"></i>
           <md-tooltip class="d-md-none" md-direction="right" md-visible="isOpen">{{:: 'LB_COMMENT' | translate }}</md-tooltip>
         </md-button>

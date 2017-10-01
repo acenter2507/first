@@ -56,7 +56,7 @@ angular.module('users').controller('ProfileFollowsController', [
       }
     };
 
-    $scope.follow_poll = (poll) => {
+    $scope.handleFollowPoll = (poll) => {
       if (!$scope.isLogged) {
         $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;

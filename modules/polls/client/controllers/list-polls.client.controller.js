@@ -140,7 +140,7 @@
     }
 
     // Thao tác khác
-    $scope.delete_poll = (poll) => {
+    $scope.handleDeletePoll = (poll) => {
       if (!poll.isCurrentUserOwner) {
         $scope.handleShowMessage('MS_CM_AUTH_ERROR', true);
         return;
@@ -155,7 +155,7 @@
         Action.deletePoll(poll);
       });
     };
-    $scope.report_poll = (poll) => {
+    $scope.handleReportPoll = (poll) => {
       if (poll.reported) {
         $scope.handleShowMessageWithParam('MS_CM_REPORT_EXIST_ERROR', { title: poll.title }, true);
         return;
@@ -178,7 +178,7 @@
           });
       }
     };
-    $scope.bookmark_poll = (poll) => {
+    $scope.handleBookmarkPoll = (poll) => {
       if (poll.bookmarked) {
         $scope.handleShowMessageWithParam('MS_CM_BOOKMARK_EXIST_ERROR', { title: poll.title }, true);
         return;
@@ -192,7 +192,7 @@
           $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
     };
-    $scope.follow_poll = (poll) => {
+    $scope.handleFollowPoll = (poll) => {
       if (!$scope.isLogged) {
         $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;
@@ -224,7 +224,7 @@
         template: '<quick-poll></quick-poll>',
         plain: true,
         controller: 'QuickPollController',
-        controllerAs: 'ctrl',
+        controllerAs: 'vm',
         appendClassName: 'images-upload-dialog',
         closeByDocument: false
       });

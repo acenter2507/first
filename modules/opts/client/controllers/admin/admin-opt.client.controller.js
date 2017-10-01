@@ -14,6 +14,6 @@
     $window,
     opt
   ) {
-    var ctrl = this;
+    var vm = this;
   }
 })();

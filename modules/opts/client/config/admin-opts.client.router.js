@@ -18,14 +18,14 @@
         url: '/list',
         templateUrl: 'modules/opts/client/views/admin/admin-opts.client.view.html',
         controller: 'AdminOptsController',
-        controllerAs: 'ctrl',
+        controllerAs: 'vm',
         data: { roles: ['admin'] }
       })
       .state('admin.opts.view', {
         url: '/:optId',
         templateUrl: 'modules/opts/client/views/admin/admin-view-opt.client.view.html',
         controller: 'AdminOptController',
-        controllerAs: 'ctrl',
+        controllerAs: 'vm',
         resolve: {
           optResolve: getOpt
         },

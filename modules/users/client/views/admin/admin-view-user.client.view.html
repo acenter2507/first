@@ -2,42 +2,42 @@
   <div class="col-xs-12">
     <div class="form-group">
       <a ui-sref="admin.users.list" class="btn btn-default pull-right">List</a>
-      <a ui-sref="admin.users.edit({ userId: ctrl.user._id })" class="btn btn-success pull-right mg10r">Edit</a>
+      <a ui-sref="admin.users.edit({ userId: vm.user._id })" class="btn btn-success pull-right mg10r">Edit</a>
       <a ng-click="remove()" class="btn btn-danger pull-right mg10r">Delete</a>
-      <a ui-sref="profile.info({ userId: ctrl.user.slug })" class="btn btn-info pull-right mg10r">View profile</a>
+      <a ui-sref="profile.info({ userId: vm.user.slug })" class="btn btn-info pull-right mg10r">View profile</a>
     </div>
   </div>
 </div>
 <!-- Info -->
 <div class="row mg12t">
   <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
-    <img src="{{ctrl.user.profileImageURL}}" alt="{{ctrl.user.displayName}}" class="img-thumbnail user-profile-picture">
+    <img src="{{vm.user.profileImageURL}}" alt="{{vm.user.displayName}}" class="img-thumbnail user-profile-picture">
   </div>
   <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
     <table class="table">
       <tr>
         <td>Name:</td>
-        <td>{{ ctrl.user.displayName }}</td>
+        <td>{{ vm.user.displayName }}</td>
       </tr>
       <tr>
         <td>Email:</td>
-        <td>{{ ctrl.user.email }}</td>
+        <td>{{ vm.user.email }}</td>
       </tr>
       <tr>
         <td>Provider:</td>
-        <td>{{ ctrl.user.provider }}</td>
+        <td>{{ vm.user.provider }}</td>
       </tr>
       <tr>
         <td>Roles:</td>
-        <td>{{:: ctrl.user.roles}}</td>
+        <td>{{:: vm.user.roles}}</td>
       </tr>
       <tr>
         <td>Last login:</td>
-        <td><span am-time-ago="ctrl.user.lastLogin"></span></td>
+        <td><span am-time-ago="vm.user.lastLogin"></span></td>
       </tr>
       <tr>
         <td>Created:</td>
-        <td>{{:: ctrl.user.created | LLL_format }}</td>
+        <td>{{:: vm.user.created | LLL_format }}</td>
       </tr>
     </table>
   </div>
@@ -60,29 +60,29 @@
         <th class="text-center">Profile view</th>
       </tr>
       <tr>
-        <td class="text-center">{{:: ctrl.user.report.rank}}</td>
-        <td class="text-center">{{:: ctrl.user.loginCnt}}</td>
-        <td class="text-center">{{:: ctrl.user.report.pollCnt}}</td>
-        <td class="text-center">{{:: ctrl.user.report.cmtCnt}}</td>
-        <td class="text-center">{{:: ctrl.user.report.voteCnt}}</td>
-        <td class="text-center">{{:: ctrl.user.report.likeCnt}}</td>
-        <td class="text-center">{{:: ctrl.user.report.viewedCnt}}</td>
-        <td class="text-center">{{:: ctrl.user.report.suggestCnt}}</td>
-        <td class="text-center">{{:: ctrl.user.report.reportCnt}}</td>
-        <td class="text-center">{{:: ctrl.user.report.bereportCnt}}</td>
-        <td class="text-center">{{:: ctrl.user.report.viewCnt}}</td>
+        <td class="text-center">{{:: vm.user.report.rank}}</td>
+        <td class="text-center">{{:: vm.user.loginCnt}}</td>
+        <td class="text-center">{{:: vm.user.report.pollCnt}}</td>
+        <td class="text-center">{{:: vm.user.report.cmtCnt}}</td>
+        <td class="text-center">{{:: vm.user.report.voteCnt}}</td>
+        <td class="text-center">{{:: vm.user.report.likeCnt}}</td>
+        <td class="text-center">{{:: vm.user.report.viewedCnt}}</td>
+        <td class="text-center">{{:: vm.user.report.suggestCnt}}</td>
+        <td class="text-center">{{:: vm.user.report.reportCnt}}</td>
+        <td class="text-center">{{:: vm.user.report.bereportCnt}}</td>
+        <td class="text-center">{{:: vm.user.report.viewCnt}}</td>
       </tr>
       <tr>
         <td class="text-center"><a class="btn btn-default btn-sm" ui-sref="admin.users.rank">View</a></td>
-        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="ctrl.handleViewListLogin()">View</button></td>
-        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="ctrl.handleViewListPolls()">View</td>
-        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="ctrl.handleViewListComments()">View</td>
-        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="ctrl.handleViewListVotes()">View</td>
-        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="ctrl.handleViewListLikes()">View</td>
-        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="ctrl.handleViewListVieweds()">View</td>
-        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="ctrl.handleViewListSuggests()">View</td>
-        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="ctrl.handleViewListReports()">View</td>
-        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="ctrl.handleViewListBeReports()">View</td>
+        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="vm.handleViewListLogin()">View</button></td>
+        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="vm.handleViewListPolls()">View</td>
+        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="vm.handleViewListComments()">View</td>
+        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="vm.handleViewListVotes()">View</td>
+        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="vm.handleViewListLikes()">View</td>
+        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="vm.handleViewListVieweds()">View</td>
+        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="vm.handleViewListSuggests()">View</td>
+        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="vm.handleViewListReports()">View</td>
+        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="vm.handleViewListBeReports()">View</td>
         <td class="text-center"></td>
       </tr>
     </table>
@@ -176,7 +176,7 @@
                   </a>
                   <a class="mg5l" ui-sref="polls.edit({ pollId: poll._id })"><i class="icon-note icons"></i>
                   </a>
-                  <a class="mg5l" ng-click="delete_poll(poll)"><i class="icon-trash icons"></i>
+                  <a class="mg5l" ng-click="handleDeletePoll(poll)"><i class="icon-trash icons"></i>
                   </a>
                 </div>
               </td>

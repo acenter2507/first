@@ -3,23 +3,23 @@
   <div class="row">
     <div class="card">
       <div class="card-header">
-        <a ng-click="ctrl.handleSavePoll(ctrl.form.pollForm.$valid)">{{ctrl.poll._id ? 'LB_SAVE' : 'LB_POST' | translate }}</a>
-        <a class="mg10l" ng-click="ctrl.handleDiscard()">{{:: 'LB_DISCARD' | translate}}</a>
+        <a ng-click="vm.handleSavePoll(vm.form.pollForm.$valid)">{{vm.poll._id ? 'LB_SAVE' : 'LB_POST' | translate }}</a>
+        <a class="mg10l" ng-click="vm.handleDiscard()">{{:: 'LB_DISCARD' | translate}}</a>
         <md-menu md-offset="10 30">
-          <a class="card-link" ng-class="{ 'text-shake': !ctrl.poll.isPublic }" ng-click="$mdMenu.open($event)"><i class="fa fa-lock"></i> {{:: 'LB_POLL_OPTION' | translate}}</a>
+          <a class="card-link" ng-class="{ 'text-shake': !vm.poll.isPublic }" ng-click="$mdMenu.open($event)"><i class="fa fa-lock"></i> {{:: 'LB_POLL_OPTION' | translate}}</a>
           <md-menu-content>
             <ul class="menu-list mg5b">
               <li class="mgn pdn">
-                <md-checkbox class="md-primary" ng-model="ctrl.poll.isPublic">{{:: 'LB_PUBLIC' | translate}}</md-checkbox>
+                <md-checkbox class="md-primary" ng-model="vm.poll.isPublic">{{:: 'LB_PUBLIC' | translate}}</md-checkbox>
               </li>
               <li class="mgn pdn">
-                <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_guest">{{:: 'LB_POLL_ALLOW_GUEST' | translate}}</md-checkbox>
+                <md-checkbox class="md-primary" ng-model="vm.poll.allow_guest">{{:: 'LB_POLL_ALLOW_GUEST' | translate}}</md-checkbox>
               </li>
               <li class="mgn pdn">
-                <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_multiple">{{:: 'LB_POLL_MULTIPLE' | translate}}</md-checkbox>
+                <md-checkbox class="md-primary" ng-model="vm.poll.allow_multiple">{{:: 'LB_POLL_MULTIPLE' | translate}}</md-checkbox>
               </li>
               <li class="mgn pdn">
-                <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_add">{{:: 'LB_POLL_SUGGEST' | translate}}</md-checkbox>
+                <md-checkbox class="md-primary" ng-model="vm.poll.allow_add">{{:: 'LB_POLL_SUGGEST' | translate}}</md-checkbox>
               </li>
             </ul>
           </md-menu-content>
@@ -28,14 +28,14 @@
       </div>
       <hr class="mgn">
       <div class="card-body" ng-init="moreCollapse = true;">
-        <form name="ctrl.form.pollForm" ng-submit="ctrl.handleSavePoll(ctrl.form.pollForm.$valid)" novalidate autocomplete="off">
+        <form name="vm.form.pollForm" ng-submit="vm.handleSavePoll(vm.form.pollForm.$valid)" novalidate autocomplete="off">
           <!-- Category -->
           <div class="form-group mg10b" show-errors>
-            <select tabindex="1" name="category" class="form-control" ng-model="ctrl.poll.category" required>
+            <select tabindex="1" name="category" class="form-control" ng-model="vm.poll.category" required>
               <option value>{{:: 'LB_CATEGORY' | translate}}</option>
-              <option ng-repeat="ctgr in Categorys.list" value="{{ctgr._id}}" ng-selected="ctrl.poll.category._id === ctgr._id" >{{:: ctgr.name}}</option>
+              <option ng-repeat="ctgr in Categorys.list" value="{{ctgr._id}}" ng-selected="vm.poll.category._id === ctgr._id" >{{:: ctgr.name}}</option>
             </select>
-            <div ng-messages="ctrl.form.pollForm.category.$error" role="alert">
+            <div ng-messages="vm.form.pollForm.category.$error" role="alert">
               <p class="help-block error-text" ng-message="required">{{:: 'LB_CATEGORY_REQUIRE' | translate}}</p>
             </div>
           </div>
@@ -47,14 +47,14 @@
           <div uib-collapse="moreCollapse">
             <!-- Close time -->
             <div class="form-group">
-              <div class="input-group" today="true" moment-picker="ctrl.poll.close" format="YYYY-MM-DD HH:mm" start-view="month" additions="{ bottom: 'bottom-template-url' }">
-                <input class="form-control" placeholder="{{:: 'LB_POLL_CLOSE' | translate }}" ng-model="ctrl.poll.close" readonly="true">
+              <div class="input-group" today="true" moment-picker="vm.poll.close" format="YYYY-MM-DD HH:mm" start-view="month" additions="{ bottom: 'bottom-template-url' }">
+                <input class="form-control" placeholder="{{:: 'LB_POLL_CLOSE' | translate }}" ng-model="vm.poll.close" readonly="true">
                 <span class="input-group-addon span_btn"><i class="fa fa-calendar"></i></span>
               </div>
             </div>
             <!-- Tags -->
             <div class="form-group" ng-controller="AutocompleteTagController">
-              <tags-input ng-model="ctrl.poll.tags" display-property="name" placeholder="{{:: placeholder | translate }}" add-from-autocomplete-only="true"
+              <tags-input ng-model="vm.poll.tags" display-property="name" placeholder="{{:: placeholder | translate }}" add-from-autocomplete-only="true"
                 replace-spaces-with-dashes="false" min-length="1" enforce-max-tags class="tags-custom">
                 <auto-complete source="loadItems($query)" min-length="1" debounce-delay="0" max-results="10"></auto-complete>
               </tags-input>
@@ -62,29 +62,29 @@
           </div>
           <!-- Title -->
           <div class="form-group" show-errors>
-            <input tabindex="2" focus-me="true" type="text" class="form-control" name="title" ng-model="ctrl.poll.title" placeholder="{{:: 'LB_POLL_TITLE_PLACE' | translate }}"
+            <input tabindex="2" focus-me="true" type="text" class="form-control" name="title" ng-model="vm.poll.title" placeholder="{{:: 'LB_POLL_TITLE_PLACE' | translate }}"
               required/>
-            <div ng-messages="ctrl.form.pollForm.title.$error" role="alert">
+            <div ng-messages="vm.form.pollForm.title.$error" role="alert">
               <p class="help-block error-text" ng-message="required">{{:: 'LB_POLL_TITLE_REQUIRE' | translate }}</p>
             </div>
           </div>
           <!-- Body -->
           <div class="form-group" show-errors>
             <text-angular-toolbar class="mgn" name="toolbar1"></text-angular-toolbar>
-            <text-angular tabindex="3" ta-target-toolbars='toolbar1,toolbar2' name="body" ng-model="ctrl.poll.body" required placeholder="{{:: 'LB_POLL_BODY_PLACE' | translate }}"></text-angular>
+            <text-angular tabindex="3" ta-target-toolbars='toolbar1,toolbar2' name="body" ng-model="vm.poll.body" required placeholder="{{:: 'LB_POLL_BODY_PLACE' | translate }}"></text-angular>
             <text-angular-toolbar class="mgn" name="toolbar2"></text-angular-toolbar>
-            <div ng-messages="ctrl.form.pollForm.body.$error" role="alert">
+            <div ng-messages="vm.form.pollForm.body.$error" role="alert">
               <p class="help-block error-text" ng-message="required">{{:: 'LB_POLL_BODY_REQUIRE' | translate }}</p>
             </div>
           </div>
           <!-- Option -->
           <uib-accordion close-others="true">
-            <uib-accordion-group ng-repeat="opt in ctrl.opts | orderBy: 'create'" heading="{{opt.title}}" panel-class="{{'custom-panel ' + (opt.status === 1 ? 'public' : 'waiting')}}">
+            <uib-accordion-group ng-repeat="opt in vm.opts | orderBy: 'create'" heading="{{opt.title}}" panel-class="{{'custom-panel ' + (opt.status === 1 ? 'public' : 'waiting')}}">
               <span>
-                <a ng-click="ctrl.handleRemoveOption(opt)">{{:: 'LB_DELETE' | translate }}</a>
-                <a class="mg10l" ng-if="opt.status == 1" ng-click="ctrl.handleStartInputOption(opt)">{{:: 'LB_POLLS_MENU_EDIT' | translate }}</a>
-                <a class="mg10l" ng-if="opt.status == 2" ng-click="ctrl.handleApproveOption(opt)">{{:: 'LB_APPROVE' | translate }}</a>
-                <a class="mg10l" ng-if="opt.status == 2" ng-click="ctrl.handleRejectOption(opt)">{{:: 'LB_REJECT' | translate }}</a>
+                <a ng-click="vm.handleRemoveOption(opt)">{{:: 'LB_DELETE' | translate }}</a>
+                <a class="mg10l" ng-if="opt.status == 1" ng-click="vm.handleStartInputOption(opt)">{{:: 'LB_POLLS_MENU_EDIT' | translate }}</a>
+                <a class="mg10l" ng-if="opt.status == 2" ng-click="vm.handleApproveOption(opt)">{{:: 'LB_APPROVE' | translate }}</a>
+                <a class="mg10l" ng-if="opt.status == 2" ng-click="vm.handleRejectOption(opt)">{{:: 'LB_REJECT' | translate }}</a>
               </span>
               <small class="pull-right text-muted">
                 {{:: 'LB_ADD_BY' | translate }}
@@ -101,23 +101,23 @@
       </div>
       <hr class="mgn">
       <div class="card-footer">
-        <a ng-click="ctrl.handleSavePoll(ctrl.form.pollForm.$valid)">{{ctrl.poll._id ? 'LB_SAVE' : 'LB_POST' | translate }}</a>
-        <a class="mg10l" ng-click="ctrl.handleDiscard()">{{:: 'LB_DISCARD' | translate}}</a>
+        <a ng-click="vm.handleSavePoll(vm.form.pollForm.$valid)">{{vm.poll._id ? 'LB_SAVE' : 'LB_POST' | translate }}</a>
+        <a class="mg10l" ng-click="vm.handleDiscard()">{{:: 'LB_DISCARD' | translate}}</a>
         <md-menu md-offset="10 30">
-          <a class="pull-right" ng-class="{ 'text-shake': !ctrl.poll.isPublic }" ng-click="$mdMenu.open($event)"><i class="fa fa-lock"></i> {{:: 'LB_POLL_OPTION' | translate}}</a>
+          <a class="pull-right" ng-class="{ 'text-shake': !vm.poll.isPublic }" ng-click="$mdMenu.open($event)"><i class="fa fa-lock"></i> {{:: 'LB_POLL_OPTION' | translate}}</a>
           <md-menu-content>
             <ul class="menu-list mg5b">
               <li class="mgn pdn">
-                <md-checkbox class="md-primary" ng-model="ctrl.poll.isPublic">{{:: 'LB_PUBLIC' | translate}}</md-checkbox>
+                <md-checkbox class="md-primary" ng-model="vm.poll.isPublic">{{:: 'LB_PUBLIC' | translate}}</md-checkbox>
               </li>
               <li class="mgn pdn">
-                <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_guest">{{:: 'LB_POLL_ALLOW_GUEST' | translate}}</md-checkbox>
+                <md-checkbox class="md-primary" ng-model="vm.poll.allow_guest">{{:: 'LB_POLL_ALLOW_GUEST' | translate}}</md-checkbox>
               </li>
               <li class="mgn pdn">
-                <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_multiple">{{:: 'LB_POLL_MULTIPLE' | translate}}</md-checkbox>
+                <md-checkbox class="md-primary" ng-model="vm.poll.allow_multiple">{{:: 'LB_POLL_MULTIPLE' | translate}}</md-checkbox>
               </li>
               <li class="mgn pdn">
-                <md-checkbox class="md-primary" ng-model="ctrl.poll.allow_add">{{:: 'LB_POLL_SUGGEST' | translate}}</md-checkbox>
+                <md-checkbox class="md-primary" ng-model="vm.poll.allow_add">{{:: 'LB_POLL_SUGGEST' | translate}}</md-checkbox>
               </li>
             </ul>
           </md-menu-content>
@@ -129,7 +129,7 @@
 
   <!-- Menu nhanh -->
   <div class="quick-menu">
-    <md-button md-colors="{background: 'blue'}" aria-label="add" class="md-fab" ng-click="ctrl.handleStartInputOption()"><i class="fa fa-plus"></i></md-button>
+    <md-button md-colors="{background: 'blue'}" aria-label="add" class="md-fab" ng-click="vm.handleStartInputOption()"><i class="fa fa-plus"></i></md-button>
   </div>
 
   <!-- Thêm option mới -->
@@ -140,5 +140,5 @@
 
   <!-- Template xóa datepicker -->
   <script type="text/ng-template" id="bottom-template-url">
-    <button class="btn btn-default btn-sm btn-block" ng-click="ctrl.handleClearCloseDate()">{{:: 'LB_CLEAR' | translate }}</button>
+    <button class="btn btn-default btn-sm btn-block" ng-click="vm.handleClearCloseDate()">{{:: 'LB_CLEAR' | translate }}</button>
   </script>

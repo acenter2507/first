@@ -24,7 +24,7 @@
         url: '/create',
         templateUrl: 'modules/polls/client/views/form-poll.client.view.html',
         controller: 'PollInputController',
-        controllerAs: 'ctrl',
+        controllerAs: 'vm',
         data: {
           roles: ['user', 'admin'],
           pageTitle: 'Polls Create'
@@ -34,7 +34,7 @@
         url: '/:pollId/edit?notif',
         templateUrl: 'modules/polls/client/views/form-poll.client.view.html',
         controller: 'PollInputController',
-        controllerAs: 'ctrl',
+        controllerAs: 'vm',
         data: {
           roles: ['user', 'admin'],
           pageTitle: 'Edit Poll {{ pollResolve.name }}'
@@ -44,7 +44,7 @@
         url: '/:pollId/report',
         templateUrl: 'modules/polls/client/views/report-poll.client.view.html',
         controller: 'PollReportController',
-        controllerAs: 'ctrl'
+        controllerAs: 'vm'
       })
       .state('polls.view', {
         url: '/:pollId?notif?share?vote',
@@ -52,7 +52,7 @@
           '': {
             templateUrl: 'modules/polls/client/views/view-poll.client.view.html',
             controller: 'PollsController',
-            controllerAs: 'ctrl',
+            controllerAs: 'vm',
             data: {
               pageTitle: 'Poll {{ pollResolve.name }}'
             }
@@ -69,7 +69,7 @@
         url: '/search?key?in?status?sort?by?ctgr?created_start?created_end?allow_multiple?allow_add?allow_guest?cmts_pref?cmts?likes_pref?likes?votes_pref?votes?views_pref?views',
         templateUrl: 'modules/polls/client/views/search.client.view.html',
         controller: 'PollsSearchController',
-        controllerAs: 'ctrl',
+        controllerAs: 'vm',
         data: {
           pageTitle: 'Search'
         }

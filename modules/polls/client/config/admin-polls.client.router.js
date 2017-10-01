@@ -18,14 +18,14 @@
         url: '/list',
         templateUrl: 'modules/polls/client/views/admin/admin-polls.client.view.html',
         controller: 'AdminPollsController',
-        controllerAs: 'ctrl',
+        controllerAs: 'vm',
         data: { roles: ['admin'] }
       })
       .state('admin.polls.view', {
         url: '/:pollId',
         templateUrl: 'modules/polls/client/views/admin/admin-view-poll.client.view.html',
         controller: 'AdminPollController',
-        controllerAs: 'ctrl',
+        controllerAs: 'vm',
         resolve: {
           pollResolve: getPoll
         },

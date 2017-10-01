@@ -29,7 +29,7 @@ angular.module('users').controller('ProfileController', [
       ProfileApi.countUpBeView($scope.profile._id);
     }
 
-    $scope.delete_poll = (poll) => {
+    $scope.handleDeletePoll = (poll) => {
       if (!poll.isCurrentUserOwner) {
         $scope.handleShowMessage('MS_CM_AUTH_ERROR', true);
         return;
@@ -44,7 +44,7 @@ angular.module('users').controller('ProfileController', [
         Action.deletePoll(poll);
       });
     };
-    $scope.report_poll = poll => {
+    $scope.handleReportPoll = poll => {
       if (poll.reported) {
         $scope.handleShowMessageWithParam('MS_CM_REPORT_EXIST_ERROR', { title: poll.title }, true);
         return;
@@ -67,7 +67,7 @@ angular.module('users').controller('ProfileController', [
           });
       }
     };
-    $scope.bookmark_poll = (poll) => {
+    $scope.handleBookmarkPoll = (poll) => {
       if (poll.bookmarked) {
         $scope.handleShowMessageWithParam('MS_CM_BOOKMARK_EXIST_ERROR', { title: poll.title }, true);
         return;
@@ -85,7 +85,7 @@ angular.module('users').controller('ProfileController', [
           $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
     };
-    $scope.follow_poll = poll => {
+    $scope.handleFollowPoll = poll => {
       if (!$scope.isLogged) {
         $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;

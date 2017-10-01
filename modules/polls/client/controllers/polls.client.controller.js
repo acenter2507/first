@@ -31,44 +31,44 @@
     $stateParams,
     Notifications
   ) {
-    var ctrl = this;
-    ctrl.form = {};
+    var vm = this;
+    vm.form = {};
     // Options variable
-    ctrl.opts = [];
-    ctrl.tmp_opt = {};
-    ctrl.selectedOpts = [];
+    vm.opts = [];
+    vm.tmp_opt = {};
+    vm.selectedOpts = [];
 
     // Sắp xếp comments
-    ctrl.cmt_sorts = [
+    vm.cmt_sorts = [
       { val: '-created', name: 'Newest to oldest' },
       { val: 'created', name: 'Oldest to newest' },
       { val: '-likeCnt', name: 'Most likes' }
     ];
-    ctrl.cmt_sort = ctrl.cmt_sorts[0];
+    vm.cmt_sort = vm.cmt_sorts[0];
     // Biến tự động gửi khi enter
-    ctrl.enter_send = true;
+    vm.enter_send = true;
     // Người dùng đã report poll hiện tại
-    ctrl.reported = false;
+    vm.reported = false;
     // Người dùng đã bookmark poll hiện tại
-    ctrl.bookmarked = false;
-    ctrl.votes = [];
-    ctrl.voteopts = [];
-    ctrl.votedTotal = 0;
+    vm.bookmarked = false;
+    vm.votes = [];
+    vm.voteopts = [];
+    vm.votedTotal = 0;
 
     // Infinity scroll
-    ctrl.cmts = [];
-    ctrl.page = 0;
-    ctrl.busy = false;
-    ctrl.stopped = false;
+    vm.cmts = [];
+    vm.page = 0;
+    vm.busy = false;
+    vm.stopped = false;
 
-    ctrl.cmt_processing = false;
-    ctrl.cmt_typing = false;
-    ctrl.like_processing = false;
-    ctrl.tmp_cmt = {};
-    ctrl.optionToggle = -1;
+    vm.cmt_processing = false;
+    vm.cmt_typing = false;
+    vm.like_processing = false;
+    vm.tmp_cmt = {};
+    vm.optionToggle = -1;
 
-    ctrl.close_duration = {};
-    ctrl.remaining = 1;
+    vm.close_duration = {};
+    vm.remaining = 1;
 
     onPrepare();
 
@@ -79,7 +79,7 @@
       } else {
         Action.loadPollById($stateParams.pollId)
           .then(_poll => {
-            ctrl.poll = _poll;
+            vm.poll = _poll;
             onCreate();
           });
       }
@@ -87,18 +87,18 @@
     // Init data
     function onCreate() {
       // Nếu poll không tồn tại thì về trang chủ
-      if (!ctrl.poll || !ctrl.poll._id) {
+      if (!vm.poll || !vm.poll._id) {
         $state.go('home');
         $scope.handleShowMessage('LB_POLL_EXIST_ERROR', true);
         return;
       }
       // Kiểm tra nếu poll là private và không có code share thì không show thông tin poll
-      if (!ctrl.poll.isCurrentUserOwner && !ctrl.poll.isPublic && $stateParams.share !== ctrl.poll.share_code) {
+      if (!vm.poll.isCurrentUserOwner && !vm.poll.isPublic && $stateParams.share !== vm.poll.share_code) {
         $state.go('home');
         $scope.handleShowMessage('LB_POLLS_PRIVATE_ERROR', true);
         return;
       }
-      $scope.handleChangePageTitle(ctrl.poll.title);
+      $scope.handleChangePageTitle(vm.poll.title);
       // Lấy thông tin tương tác của người dùng với poll hiện tại
       prepareOwnerInfo().then(() => {
         // Kiểm tra giá trị vote
@@ -120,10 +120,10 @@
 
     function prepareShowingData() {
       // Thiết lập các thông tin cho poll
-      ctrl.poll.close = ctrl.poll.close ? moment(ctrl.poll.close) : ctrl.poll.close;
-      ctrl.isClosed = ctrl.poll.close ? moment(ctrl.poll.close).isBefore(new moment().utc()) : false;
-      ctrl.opts = _.where(ctrl.poll.opts, { status: 1 });
-      ctrl.chart = {
+      vm.poll.close = vm.poll.close ? moment(vm.poll.close) : vm.poll.close;
+      vm.isClosed = vm.poll.close ? moment(vm.poll.close).isBefore(new moment().utc()) : false;
+      vm.opts = _.where(vm.poll.opts, { status: 1 });
+      vm.chart = {
         type: 'pie',
         options: {
           responsive: true
@@ -132,31 +132,31 @@
         labels: [],
         data: []
       };
-      ctrl.votes = ctrl.poll.votes || [];
-      ctrl.voteopts = Action.getOptionsInVotes(ctrl.votes);
-      ctrl.votedTotal = ctrl.voteopts.length;
-      var collect = Action.countByOptions(ctrl.opts, ctrl.voteopts);
+      vm.votes = vm.poll.votes || [];
+      vm.voteopts = Action.getOptionsInVotes(vm.votes);
+      vm.votedTotal = vm.voteopts.length;
+      var collect = Action.countByOptions(vm.opts, vm.voteopts);
 
-      ctrl.opts.forEach(opt => {
+      vm.opts.forEach(opt => {
         opt.voteCnt = _.findWhere(collect, { opt: opt._id }).count;
-        opt.progressVal = Action.calPercen(ctrl.votedTotal, opt.voteCnt);
-        ctrl.chart.colors.push(opt.color);
-        ctrl.chart.labels.push(opt.title);
-        ctrl.chart.data.push(opt.voteCnt);
+        opt.progressVal = Action.calPercen(vm.votedTotal, opt.voteCnt);
+        vm.chart.colors.push(opt.color);
+        vm.chart.labels.push(opt.title);
+        vm.chart.data.push(opt.voteCnt);
       });
     }
     function prepareOwnerInfo() {
       return new Promise((resolve, reject) => {
-        Action.loadOwnerInfo(ctrl.poll._id)
+        Action.loadOwnerInfo(vm.poll._id)
           .then(res => {
-            ctrl.ownVote = res.data.ownVote;
-            ctrl.selectedOpts = ctrl.ownVote._id ? _.clone(ctrl.ownVote.opts) : [];
-            ctrl.radioChecked = ctrl.selectedOpts[0];
-            ctrl.follow = res.data.follow;
-            ctrl.reported = res.data.reported;
-            ctrl.bookmarked = res.data.bookmarked;
-            ctrl.like = res.data.like;
-            ctrl.view = res.data.view;
+            vm.ownVote = res.data.ownVote;
+            vm.selectedOpts = vm.ownVote._id ? _.clone(vm.ownVote.opts) : [];
+            vm.radioChecked = vm.selectedOpts[0];
+            vm.follow = res.data.follow;
+            vm.reported = res.data.reported;
+            vm.bookmarked = res.data.bookmarked;
+            vm.like = res.data.like;
+            vm.view = res.data.view;
             return resolve();
           })
           .catch(err => {
@@ -174,24 +174,24 @@
     function prepareParamVote() {
       if (!$stateParams.vote) return;
       // Kiểm tra mã vote có tồn tại trong danh sách option không
-      var opt = _.findWhere(ctrl.opts, { _id: $stateParams.vote.trim() });
+      var opt = _.findWhere(vm.opts, { _id: $stateParams.vote.trim() });
       // Nếu không tìm thấy thông tin option đúng với request thì show message
       if (!opt || !opt._id) return $scope.handleShowMessage('LB_POLL_VOTE_ERROR', true);
       // Kiểm tra điều kiện user có được vote hay không
-      if (!ctrl.isCanVote) return $scope.handleShowMessage('LB_POLL_VOTE_AUTH_ERROR', true);
+      if (!vm.isCanVote) return $scope.handleShowMessage('LB_POLL_VOTE_AUTH_ERROR', true);
       // Kiểm tra user đã từng vote hay chưa
-      if (ctrl.ownVote._id) {
+      if (vm.ownVote._id) {
         $scope.handleShowConfirm({
           content: 'LB_POLL_VOTE_CONFIRM',
           type: 1,
           button: 'LB_CHANGE'
         }, () => {
-          ctrl.selectedOpts = [opt._id];
-          ctrl.radioChecked = opt._id;
+          vm.selectedOpts = [opt._id];
+          vm.radioChecked = opt._id;
           handleSaveVote();
         });
       } else {
-        ctrl.selectedOpts = [opt._id];
+        vm.selectedOpts = [opt._id];
         handleSaveVote();
       }
     }
@@ -200,7 +200,7 @@
         Socket.connect();
       }
       Socket.emit('subscribe_poll', {
-        pollId: ctrl.poll._id,
+        pollId: vm.poll._id,
         userId: $scope.user._id
       });
       Socket.on('cmt_add', obj => {
@@ -210,14 +210,14 @@
           .then(cmt => {
             console.log(cmt);
             if (!cmt) return;
-            var item = _.findWhere(ctrl.cmts, { _id: cmt._id });
+            var item = _.findWhere(vm.cmts, { _id: cmt._id });
             if (item) {
-              _.extend(_.findWhere(ctrl.cmts, { _id: cmt._id }), cmt);
+              _.extend(_.findWhere(vm.cmts, { _id: cmt._id }), cmt);
               if (!$scope.$$phase) $scope.$digest();
             } else {
               if (obj.isNew) {
-                ctrl.cmts.push(cmt);
-                ctrl.poll.cmtCnt += 1;
+                vm.cmts.push(cmt);
+                vm.poll.cmtCnt += 1;
                 if (!$scope.$$phase) $scope.$digest();
               }
             }
@@ -229,8 +229,8 @@
       Socket.on('cmt_del', obj => {
         // Nếu tự nhận message của chính mình
         if (Socket.socket.socket.id === obj.client) return;
-        ctrl.cmts = _.without(ctrl.cmts, _.findWhere(ctrl.cmts, { _id: obj.cmtId }));
-        ctrl.poll.cmtCnt -= 1;
+        vm.cmts = _.without(vm.cmts, _.findWhere(vm.cmts, { _id: obj.cmtId }));
+        vm.poll.cmtCnt -= 1;
       });
       Socket.on('poll_vote', obj => {
         if (Socket.socket.socket.id === obj.client) return;
@@ -243,18 +243,18 @@
       });
       Socket.on('poll_update', obj => {
         if (Socket.socket.socket.id === obj.client) return;
-        Action.loadPollById(ctrl.poll._id)
+        Action.loadPollById(vm.poll._id)
           .then(_poll => {
-            ctrl.poll = _poll;
+            vm.poll = _poll;
             prepareShowingData();
           }, err => {
             $scope.handleShowMessage(err.message, true);
           });
       });
       Socket.on('opts_update', res => {
-        Action.loadPollById(ctrl.poll._id)
+        Action.loadPollById(vm.poll._id)
           .then(_poll => {
-            ctrl.poll = _poll;
+            vm.poll = _poll;
             prepareShowingData();
           }, err => {
             $scope.handleShowMessage(err.message, true);
@@ -262,7 +262,7 @@
       });
       $scope.$on('$destroy', function () {
         Socket.emit('unsubscribe_poll', {
-          pollId: ctrl.poll._id,
+          pollId: vm.poll._id,
           userId: $scope.user._id
         });
         Socket.removeListener('cmt_add');
@@ -273,16 +273,16 @@
         Socket.removeListener('poll_delete');
         Socket.removeListener('poll_update');
         Socket.removeListener('opts_update');
-        $timeout.cancel(ctrl.excute_timer);
+        $timeout.cancel(vm.excute_timer);
       });
     }
     function prepareCloseRemaining() {
       // Nếu poll không thiết lập giới hạn, hoặc đã hết hạn thì bỏ qua
-      if (ctrl.isClosed || !ctrl.poll.close) return;
+      if (vm.isClosed || !vm.poll.close) return;
       // Tạo biến timer chạy từng giây update count down
-      ctrl.remaining = $timeout(handleCreateTimer, 1000);
+      vm.remaining = $timeout(handleCreateTimer, 1000);
       $scope.$on('$destroy', () => {
-        $timeout.cancel(ctrl.remaining);
+        $timeout.cancel(vm.remaining);
       });
     }
 
@@ -290,21 +290,21 @@
      * HANDLES
      */
     // Lấy comments từ server
-    ctrl.handleLoadComments = handleLoadComments;
+    vm.handleLoadComments = handleLoadComments;
     function handleLoadComments() {
-      if (ctrl.stopped || ctrl.busy) return;
-      ctrl.busy = true;
-      Action.loadComments(ctrl.poll._id, ctrl.page, ctrl.cmt_sort.val)
+      if (vm.stopped || vm.busy) return;
+      vm.busy = true;
+      Action.loadComments(vm.poll._id, vm.page, vm.cmt_sort.val)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
-            ctrl.stopped = true;
-            ctrl.busy = false;
+            vm.stopped = true;
+            vm.busy = false;
           } else {
             // Gán data vào danh sách comment hiện tại
-            ctrl.cmts = _.union(ctrl.cmts, res.data);
-            ctrl.page += 1;
-            ctrl.busy = false;
-            if (res.data.length < 10) { ctrl.stopped = true; }
+            vm.cmts = _.union(vm.cmts, res.data);
+            vm.page += 1;
+            vm.busy = false;
+            if (res.data.length < 10) { vm.stopped = true; }
           }
           if (!$scope.$$phase) $scope.$digest();
         })
@@ -313,9 +313,9 @@
         });
     }
     // Lưu comment
-    ctrl.handleSaveComment = handleSaveComment;
+    vm.handleSaveComment = handleSaveComment;
     function handleSaveComment() {
-      if (!ctrl.tmp_cmt.body || !ctrl.tmp_cmt.body.length || ctrl.tmp_cmt.body.length === 0) {
+      if (!vm.tmp_cmt.body || !vm.tmp_cmt.body.length || vm.tmp_cmt.body.length === 0) {
         $scope.handleShowMessage('LB_POLLS_CMT_EMPTY', true);
         return;
       }
@@ -323,57 +323,57 @@
         $state.go('authentication.signin');
         return false;
       }
-      if (ctrl.cmt_processing) {
+      if (vm.cmt_processing) {
         $scope.handleShowMessage('LB_POLLS_CMT_WAIT', true);
         return;
       }
-      ctrl.cmt_processing = true;
-      ctrl.tmp_cmt.poll = ctrl.poll._id;
-      Action.saveComment(ctrl.tmp_cmt)
+      vm.cmt_processing = true;
+      vm.tmp_cmt.poll = vm.poll._id;
+      Action.saveComment(vm.tmp_cmt)
         .then(res => {
-          ctrl.tmp_cmt = {};
-          ctrl.cmt_processing = false;
-          ctrl.cmt_typing = false;
+          vm.tmp_cmt = {};
+          vm.cmt_processing = false;
+          vm.cmt_typing = false;
 
-          var item = _.findWhere(ctrl.cmts, { _id: res._id });
+          var item = _.findWhere(vm.cmts, { _id: res._id });
           if (item) {
-            _.extend(_.findWhere(ctrl.cmts, { _id: res._id }), res);
+            _.extend(_.findWhere(vm.cmts, { _id: res._id }), res);
           } else {
             if (res.isNew) {
-              ctrl.cmts.push(res);
-              ctrl.poll.cmtCnt += 1;
+              vm.cmts.push(res);
+              vm.poll.cmtCnt += 1;
             }
           }
         })
         .catch(err => {
           $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
-          ctrl.cmt_processing = false;
+          vm.cmt_processing = false;
         });
     }
     // Lưu thông tin bình chọn
-    ctrl.handleSaveVote = handleSaveVote;
+    vm.handleSaveVote = handleSaveVote;
     function handleSaveVote() {
       // Nếu chưa đăng nhập mà gặp phải poll chỉ cho thành viên
-      if (!$scope.isLogged && !ctrl.poll.allow_guest) {
+      if (!$scope.isLogged && !vm.poll.allow_guest) {
         return $state.go('authentication.signin');
       }
       // Nếu không vote cho cái nào mà bấm
-      if (!ctrl.selectedOpts.length || ctrl.selectedOpts.length === 0) {
+      if (!vm.selectedOpts.length || vm.selectedOpts.length === 0) {
         $scope.handleShowMessage('LB_POLLS_VOTE_EMPTY', true);
         return;
       }
       // Nếu thông tin mới và cũ giống nhau
-      if (angular.equals(ctrl.ownVote.opts, ctrl.selectedOpts)) {
+      if (angular.equals(vm.ownVote.opts, vm.selectedOpts)) {
         return;
       }
       // Nếu poll đã hết thời hạn
-      if (ctrl.isClosed) {
+      if (vm.isClosed) {
         $scope.handleShowMessage('LB_POLL_CLOSED', true);
         return;
       }
       // Kiểm tra vote spam
-      if (ctrl.ownVote.updateCnt >= 10) {
-        let updatedTime = moment(ctrl.ownVote.updated).utc();
+      if (vm.ownVote.updateCnt >= 10) {
+        let updatedTime = moment(vm.ownVote.updated).utc();
         let now = moment().utc();
         let duration = now.diff(updatedTime, 'minutes');
         if (duration < 30) {
@@ -381,35 +381,35 @@
           return;
         }
       }
-      Action.saveVote(ctrl.ownVote, ctrl.selectedOpts, ctrl.poll)
+      Action.saveVote(vm.ownVote, vm.selectedOpts, vm.poll)
         .then(res => {
-          if (!ctrl.ownVote._id) {
-            ctrl.poll.voteCnt += 1;
+          if (!vm.ownVote._id) {
+            vm.poll.voteCnt += 1;
           }
-          ctrl.ownVote = res;
+          vm.ownVote = res;
           handleLoadNewVoteInfo();
         })
         .catch(err => {
           $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
-          ctrl.selectedOpts = ctrl.ownVote.opts || [];
+          vm.selectedOpts = vm.ownVote.opts || [];
         });
     }
     // Sắp xếp comments
-    ctrl.handleSortComments = handleSortComments;
+    vm.handleSortComments = handleSortComments;
     function handleSortComments(index) {
-      ctrl.cmt_sort = ctrl.cmt_sorts[index];
-      ctrl.cmts = [];
-      ctrl.page = 0;
-      ctrl.busy = false;
-      ctrl.stopped = false;
+      vm.cmt_sort = vm.cmt_sorts[index];
+      vm.cmts = [];
+      vm.page = 0;
+      vm.busy = false;
+      vm.stopped = false;
       handleLoadComments();
     }
     // Share poll với url
-    ctrl.handleSharePoll = handleSharePoll;
+    vm.handleSharePoll = handleSharePoll;
     function handleSharePoll() {
-      if (!ctrl.poll.share_code || ctrl.poll.share_code === '') {
-        ctrl.poll.share_code = handleGenerateShareCode();
-        ctrl.poll.$update(() => {
+      if (!vm.poll.share_code || vm.poll.share_code === '') {
+        vm.poll.share_code = handleGenerateShareCode();
+        vm.poll.$update(() => {
           show_dialog();
         }, err => {
           $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
@@ -420,7 +420,7 @@
       function show_dialog() {
         $scope.message = {};
         $scope.message.content = 'LB_POLLS_SHARE';
-        $scope.message.url = $location.absUrl().split('?')[0] + '?share=' + ctrl.poll.share_code;
+        $scope.message.url = $location.absUrl().split('?')[0] + '?share=' + vm.poll.share_code;
         dialog.openConfirm({
           scope: $scope,
           templateUrl: 'modules/core/client/views/templates/share.dialog.template.html'
@@ -432,7 +432,7 @@
       }
     }
     // Share poll với url
-    ctrl.handleGetLinkOption = handleGetLinkOption;
+    vm.handleGetLinkOption = handleGetLinkOption;
     function handleGetLinkOption() {
       var url = $location.absUrl().split('?')[0] + '?vote=';
       function handleSeletedOption() {
@@ -440,9 +440,9 @@
       }
       $scope.linkOptionData = {
         baseUrl: url,
-        opts: ctrl.opts,
-        selected: ctrl.opts[0]._id,
-        url: url + ctrl.opts[0]._id,
+        opts: vm.opts,
+        selected: vm.opts[0]._id,
+        url: url + vm.opts[0]._id,
         handleSeletedOption: handleSeletedOption
       };
       dialog.openConfirm({
@@ -455,7 +455,7 @@
       });
     }
     // Remove existing Poll
-    ctrl.handleRemovePoll = handleRemovePoll;
+    vm.handleRemovePoll = handleRemovePoll;
     function handleRemovePoll() {
       // Gọi function show dialog từ scope cha
       $scope.handleShowConfirm({
@@ -463,50 +463,50 @@
         type: 3,
         button: 'LB_DELETE'
       }, confirm => {
-        ctrl.poll.$remove(() => {
-          Socket.emit('poll_delete', { pollId: ctrl.poll._id });
+        vm.poll.$remove(() => {
+          Socket.emit('poll_delete', { pollId: vm.poll._id });
           $state.go('home');
         });
       });
     }
     // Người dùng click button like poll
-    ctrl.handleLikePoll = handleLikePoll;
+    vm.handleLikePoll = handleLikePoll;
     function handleLikePoll(type) {
       if (!$scope.isLogged) {
         $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;
       }
-      if (ctrl.poll.isCurrentUserOwner) {
+      if (vm.poll.isCurrentUserOwner) {
         $scope.handleShowMessage('LB_POLLS_LIKE_OWN', true);
         return;
       }
-      if (ctrl.like_processing) {
+      if (vm.like_processing) {
         $scope.handleShowMessage('LB_POLLS_LIKE_MANY', true);
         return;
       }
-      ctrl.like_processing = true;
-      Action.saveLikePoll(ctrl.like, type, ctrl.poll)
+      vm.like_processing = true;
+      Action.saveLikePoll(vm.like, type, vm.poll)
         .then(res => {
-          ctrl.poll.likeCnt = res.likeCnt;
-          ctrl.like = res.like || {};
-          ctrl.like_processing = false;
+          vm.poll.likeCnt = res.likeCnt;
+          vm.like = res.like || {};
+          vm.like_processing = false;
           if (!$scope.$$phase) $scope.$digest();
         })
         .catch(err => {
           $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
-          ctrl.like_processing = false;
+          vm.like_processing = false;
         });
     }
     // Người dùng trỏ chuột đến 
-    ctrl.handleMouseEnterOption = handleMouseEnterOption;
+    vm.handleMouseEnterOption = handleMouseEnterOption;
     function handleMouseEnterOption(opt) {
       opt.loadUserTimer = $timeout(loadAllUsersVotedForThisOption, 500);
       // Lấy tất cả các user đã vote cho lựa chọn này
       function loadAllUsersVotedForThisOption() {
         // Lấy các vote đã có vote cho option hiện tại
-        var _votes = _.pluck(_.where(ctrl.voteopts, { opt: opt._id }), 'vote');
+        var _votes = _.pluck(_.where(vm.voteopts, { opt: opt._id }), 'vote');
         // Lấy các lần vote có có vote cho option hiện tại
-        opt.votes = _.filter(ctrl.votes, (vote) => {
+        opt.votes = _.filter(vm.votes, (vote) => {
           return _.contains(_votes, vote._id);
         });
         // Lấy các user đã vote cho option hiện tại
@@ -521,7 +521,7 @@
       }
     }
     // Người dùng trỏ chuột đến 
-    ctrl.handleMouseClickOption = handleMouseClickOption;
+    vm.handleMouseClickOption = handleMouseClickOption;
     function handleMouseClickOption(opt) {
       $scope.dialogData = {
         loading: true,
@@ -550,29 +550,29 @@
       });
     }
     // Người dùng trỏ chuột đến 
-    ctrl.handleMouseLeaveOption = handleMouseLeaveOption;
+    vm.handleMouseLeaveOption = handleMouseLeaveOption;
     function handleMouseLeaveOption(opt) {
       $timeout.cancel(opt.loadUserTimer);
       delete opt.loadUserTimer;
     }
     // Tạo Timer đếm ngược
     function handleCreateTimer() {
-      ctrl.close_duration = Remaining.duration(ctrl.poll.close);
-      ctrl.isClosed = moment(ctrl.poll.close).isBefore(new moment());
-      if (!ctrl.isClosed) {
-        ctrl.remaining = $timeout(handleCreateTimer, 1000);
+      vm.close_duration = Remaining.duration(vm.poll.close);
+      vm.isClosed = moment(vm.poll.close).isBefore(new moment());
+      if (!vm.isClosed) {
+        vm.remaining = $timeout(handleCreateTimer, 1000);
       } else {
-        $timeout.cancel(ctrl.remaining);
+        $timeout.cancel(vm.remaining);
       }
     }
     // Lưu poll vào viewed và tăng lượt view
     function handleSaveViewed() {
-      if (!ctrl.poll.isCurrentUserOwner) {
+      if (!vm.poll.isCurrentUserOwner) {
         var count_up = $timeout(() => {
-          ctrl.poll.viewCnt += 1;
-          Action.upViewPoll(ctrl.poll._id);
+          vm.poll.viewCnt += 1;
+          Action.upViewPoll(vm.poll._id);
           if ($scope.isLogged) {
-            Action.saveViewPoll(ctrl.view);
+            Action.saveViewPoll(vm.view);
           }
         }, 30000);
         $scope.$on('$destroy', () => {
@@ -591,22 +591,22 @@
     // Load mới thông tin đã vote của poll (khi có ai đó vote)
     function handleLoadNewVoteInfo() {
       return new Promise((resolve, reject) => {
-        Action.loadVotesByPollId(ctrl.poll._id)
+        Action.loadVotesByPollId(vm.poll._id)
           .then(res => { // lấy thông tin vote
-            ctrl.chart.colors = [];
-            ctrl.chart.labels = [];
-            ctrl.chart.data = [];
-            ctrl.votes = res.data || [];
-            ctrl.voteopts = Action.getOptionsInVotes(ctrl.votes);
-            ctrl.votedTotal = ctrl.voteopts.length;
-            var collect = Action.countByOptions(ctrl.opts, ctrl.voteopts);
+            vm.chart.colors = [];
+            vm.chart.labels = [];
+            vm.chart.data = [];
+            vm.votes = res.data || [];
+            vm.voteopts = Action.getOptionsInVotes(vm.votes);
+            vm.votedTotal = vm.voteopts.length;
+            var collect = Action.countByOptions(vm.opts, vm.voteopts);
 
-            ctrl.opts.forEach(opt => {
+            vm.opts.forEach(opt => {
               opt.voteCnt = _.findWhere(collect, { opt: opt._id }).count;
-              opt.progressVal = Action.calPercen(ctrl.votedTotal, opt.voteCnt);
-              ctrl.chart.colors.push(opt.color);
-              ctrl.chart.labels.push(opt.title);
-              ctrl.chart.data.push(opt.voteCnt);
+              opt.progressVal = Action.calPercen(vm.votedTotal, opt.voteCnt);
+              vm.chart.colors.push(opt.color);
+              vm.chart.labels.push(opt.title);
+              vm.chart.data.push(opt.voteCnt);
             });
             if (!$scope.$$phase) $scope.$digest();
             return resolve();
@@ -619,17 +619,17 @@
     }
 
     // Thành viên bấm follow poll
-    ctrl.handleFollowPoll = () => {
+    vm.handleFollowPoll = () => {
       if (!$scope.isLogged) {
         $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;
       }
-      Action.saveFollowPoll(ctrl.follow)
+      Action.saveFollowPoll(vm.follow)
         .then(res => {
           if (res) {
-            ctrl.follow = res;
+            vm.follow = res;
           } else {
-            ctrl.follow = { poll: ctrl.poll._id };
+            vm.follow = { poll: vm.poll._id };
           }
         })
         .catch(err => {
@@ -637,9 +637,9 @@
         });
     };
     // Thành viên bấm report poll
-    ctrl.handleReportPoll = () => {
-      if (ctrl.reported) {
-        $scope.handleShowMessageWithParam('MS_CM_REPORT_EXIST_ERROR', { title: ctrl.poll.title }, true);
+    vm.handleReportPoll = () => {
+      if (vm.reported) {
+        $scope.handleShowMessageWithParam('MS_CM_REPORT_EXIST_ERROR', { title: vm.poll.title }, true);
         return;
       }
       dialog.openConfirm({
@@ -650,10 +650,10 @@
       }, reject => {
       });
       function handle_confirm(reason) {
-        Action.saveReportPoll(ctrl.poll, reason)
+        Action.saveReportPoll(vm.poll, reason)
           .then(res => {
-            ctrl.reported = (res) ? true : false;
-            $scope.handleShowMessageWithParam('MS_CM_REPORT_SUCCESS', { title: ctrl.poll.title }, false);
+            vm.reported = (res) ? true : false;
+            $scope.handleShowMessageWithParam('MS_CM_REPORT_SUCCESS', { title: vm.poll.title }, false);
           })
           .catch(err => {
             $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
@@ -661,15 +661,15 @@
       }
     };
     // Thành viên bấm add bookmart poll
-    ctrl.handleBookmarkPoll = () => {
-      if (ctrl.bookmarked) {
-        $scope.handleShowMessageWithParam('MS_CM_BOOKMARK_EXIST_ERROR', { title: ctrl.poll.title }, true);
+    vm.handleBookmarkPoll = () => {
+      if (vm.bookmarked) {
+        $scope.handleShowMessageWithParam('MS_CM_BOOKMARK_EXIST_ERROR', { title: vm.poll.title }, true);
         return;
       }
-      Action.saveBookmarkPoll(ctrl.poll._id)
+      Action.saveBookmarkPoll(vm.poll._id)
         .then(res => {
-          ctrl.bookmarked = (res) ? true : false;
-          $scope.handleShowMessageWithParam('MS_CM_BOOKMARK_SUCCESS', { title: ctrl.poll.title }, false);
+          vm.bookmarked = (res) ? true : false;
+          $scope.handleShowMessageWithParam('MS_CM_BOOKMARK_SUCCESS', { title: vm.poll.title }, false);
         })
         .catch(err => {
           $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
@@ -677,42 +677,42 @@
     };
 
     // Click button add option
-    ctrl.handleStartInputOption = handleStartInputOption;
+    vm.handleStartInputOption = handleStartInputOption;
     function handleStartInputOption() {
-      if (!ctrl.poll.user) {
+      if (!vm.poll.user) {
         $scope.handleShowMessage('LB_POLLS_SUGGEST_DELETED_USER', true);
         return;
       }
-      ctrl.tmp_opt = { poll: ctrl.poll._id, title: '', body: '', status: 2 };
+      vm.tmp_opt = { poll: vm.poll._id, title: '', body: '', status: 2 };
       angular.element('body').toggleClass('aside-panel-open');
     }
     // Click button save option
-    ctrl.handleSaveOption = handleSaveOption;
+    vm.handleSaveOption = handleSaveOption;
     function handleSaveOption(isValid) {
       if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'ctrl.form.optForm');
+        $scope.$broadcast('show-errors-check-validity', 'vm.form.optForm');
         return false;
       }
-      Action.saveOption(ctrl.tmp_opt, ctrl.poll)
+      Action.saveOption(vm.tmp_opt, vm.poll)
         .then(res => {
-          $scope.$broadcast('show-errors-reset', 'ctrl.form.optForm');
+          $scope.$broadcast('show-errors-reset', 'vm.form.optForm');
           angular.element('body').removeClass('aside-panel-open');
           $scope.handleShowMessage('LB_POLLS_SUGGEST_SUCCES', false);
         })
         .catch(err => {
           $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
-          $scope.$broadcast('show-errors-reset', 'ctrl.form.optForm');
+          $scope.$broadcast('show-errors-reset', 'vm.form.optForm');
           angular.element('body').removeClass('aside-panel-open');
         });
     }
-    ctrl.handleShowFullOption = handleShowFullOption;
+    vm.handleShowFullOption = handleShowFullOption;
     function handleShowFullOption() {
       let aside = angular.element('.aside-panel')[0];
       angular.element(aside).toggleClass('full');
       angular.element('#aside-panel-full-toggle').find('i').toggleClass('r180');
     }
     // Thành viên trả lời comment của thành viên khác
-    ctrl.handleReplyComment = cmt => {
+    vm.handleReplyComment = cmt => {
       if (!$scope.isLogged) {
         $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;
@@ -721,50 +721,50 @@
         $scope.handleShowMessage('LB_POLLS_REPLY_DELETED_USER', true);
         return;
       }
-      ctrl.tmp_cmt = {
+      vm.tmp_cmt = {
         to: cmt.user,
         toName: cmt.user.displayName,
         toSlug: cmt.user.slug,
         discard: true
       };
-      ctrl.cmt_typing = true;
+      vm.cmt_typing = true;
     };
     // Thành viên chọn sửa comment của minh
-    ctrl.handleEditComment = cmt => {
-      ctrl.tmp_cmt = _.clone(cmt);
-      ctrl.tmp_cmt.discard = true;
-      ctrl.cmt_typing = true;
+    vm.handleEditComment = cmt => {
+      vm.tmp_cmt = _.clone(cmt);
+      vm.tmp_cmt.discard = true;
+      vm.cmt_typing = true;
     };
     // Thành viên huỷ bỏ type comment
-    ctrl.handleDiscardComment = () => {
-      ctrl.tmp_cmt = {};
-      ctrl.cmt_typing = false;
+    vm.handleDiscardComment = () => {
+      vm.tmp_cmt = {};
+      vm.cmt_typing = false;
     };
     // Xóa comment
-    ctrl.handleDeleteComment = cmt => {
+    vm.handleDeleteComment = cmt => {
       // Gọi function show dialog từ scope cha
       $scope.handleShowConfirm({
         content: 'LB_POLLS_CONFIRM_DELETE_CMT',
         type: 3,
         button: 'LB_DELETE'
       }, confirm => {
-        ctrl.cmts = _.without(ctrl.cmts, cmt);
-        ctrl.poll.cmtCnt -= 1;
+        vm.cmts = _.without(vm.cmts, cmt);
+        vm.poll.cmtCnt -= 1;
         Action.deleteComment(cmt);
       });
     };
     // Bắt đầu nhập comment
-    ctrl.handleStartTypeComment = () => {
+    vm.handleStartTypeComment = () => {
       if (!$scope.isLogged) {
         $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;
       }
-      ctrl.cmt_typing = true;
+      vm.cmt_typing = true;
       let commentBox = angular.element(document.getElementById('comment-box'));
       $document.scrollToElementAnimated(commentBox, 100);
     };
     // Thành viên like comment
-    ctrl.handleLikeComment = (cmt, type) => {
+    vm.handleLikeComment = (cmt, type) => {
       if (!$scope.isLogged) {
         $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;
@@ -773,88 +773,88 @@
         $scope.handleShowMessage('LB_POLLS_LIKE_CMT_OWN', true);
         return;
       }
-      if (ctrl.like_processing) {
+      if (vm.like_processing) {
         $scope.handleShowMessage('LB_POLLS_LIKE_MANY', true);
         return;
       }
-      ctrl.like_processing = true;
+      vm.like_processing = true;
       Action.saveLikeComment(cmt, type)
         .then(res => {
           cmt.like = res.like || {};
           cmt.likeCnt = res.likeCnt;
-          ctrl.like_processing = false;
+          vm.like_processing = false;
           if (!$scope.$$phase) $scope.$digest();
         })
         .catch(err => {
-          ctrl.like_processing = false;
+          vm.like_processing = false;
           $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
     };
 
     // VOTE
-    ctrl.handleChecked = (id) => {
-      if (ctrl.poll.allow_multiple) {
-        if (_.contains(ctrl.selectedOpts, id)) {
-          ctrl.selectedOpts = _.without(ctrl.selectedOpts, id);
+    vm.handleChecked = (id) => {
+      if (vm.poll.allow_multiple) {
+        if (_.contains(vm.selectedOpts, id)) {
+          vm.selectedOpts = _.without(vm.selectedOpts, id);
         } else {
-          ctrl.selectedOpts.push(id);
+          vm.selectedOpts.push(id);
         }
       } else {
-        ctrl.selectedOpts = [ctrl.radioChecked];
+        vm.selectedOpts = [vm.radioChecked];
       }
     };
-    ctrl.isCanVote = () => {
-      if (ctrl.poll.allow_guest) {
+    vm.isCanVote = () => {
+      if (vm.poll.allow_guest) {
         return true;
       } else {
         return $scope.isLogged;
       }
     };
-    ctrl.is_voted = function (id) {
-      return _.contains(ctrl.selectedOpts, id);
+    vm.is_voted = function (id) {
+      return _.contains(vm.selectedOpts, id);
     };
-    ctrl.is_voted_all = () => {
-      return ctrl.selectedOpts.length === ctrl.opts.length;
+    vm.is_voted_all = () => {
+      return vm.selectedOpts.length === vm.opts.length;
     };
-    ctrl.toggleAll = () => {
-      if (ctrl.selectedOpts.length === ctrl.opts.length) {
-        ctrl.selectedOpts = [];
-      } else if (ctrl.selectedOpts.length === 0 || ctrl.selectedOpts.length > 0) {
-        ctrl.selectedOpts = _.pluck(ctrl.opts, '_id');
+    vm.toggleAll = () => {
+      if (vm.selectedOpts.length === vm.opts.length) {
+        vm.selectedOpts = [];
+      } else if (vm.selectedOpts.length === 0 || vm.selectedOpts.length > 0) {
+        vm.selectedOpts = _.pluck(vm.opts, '_id');
       }
     };
-    ctrl.isIndeterminate = () => {
-      return (ctrl.selectedOpts.length !== 0 && ctrl.selectedOpts.length !== ctrl.opts.length);
+    vm.isIndeterminate = () => {
+      return (vm.selectedOpts.length !== 0 && vm.selectedOpts.length !== vm.opts.length);
     };
-    ctrl.toggle_chart = () => {
-      ctrl.chart.type = ctrl.chart.type === 'polarArea' ?
+    vm.toggle_chart = () => {
+      vm.chart.type = vm.chart.type === 'polarArea' ?
         'pie' : 'polarArea';
     };
 
-    ctrl.task_queue = {
+    vm.task_queue = {
       is_watting: false,
       last_task_time: 0
     };
-    ctrl.excute_timer = {};
+    vm.excute_timer = {};
     function excute_task() {
       var now = new Date().getTime();
-      var dif = now - ctrl.task_queue.last_task_time;
+      var dif = now - vm.task_queue.last_task_time;
       if (dif > 5000) {
         handleLoadNewVoteInfo()
           .then(() => {
-            ctrl.task_queue.last_task_time = now;
-            ctrl.task_queue.is_watting = false;
-            $timeout.cancel(ctrl.excute_timer);
+            vm.task_queue.last_task_time = now;
+            vm.task_queue.is_watting = false;
+            $timeout.cancel(vm.excute_timer);
           })
           .catch(err => {
-            ctrl.task_queue.last_task_time = now;
-            ctrl.task_queue.is_watting = false;
-            $timeout.cancel(ctrl.excute_timer);
+            vm.task_queue.last_task_time = now;
+            vm.task_queue.is_watting = false;
+            $timeout.cancel(vm.excute_timer);
           });
       } else {
-        if (!ctrl.task_queue.is_watting) {
-          ctrl.task_queue.is_watting = true;
-          ctrl.excute_timer = $timeout(excute_task, (5000 - dif + 1000));
+        if (!vm.task_queue.is_watting) {
+          vm.task_queue.is_watting = true;
+          vm.excute_timer = $timeout(excute_task, (5000 - dif + 1000));
         }
       }
     }

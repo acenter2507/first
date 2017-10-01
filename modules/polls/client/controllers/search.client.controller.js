@@ -10,39 +10,39 @@ angular.module('polls').controller('PollsSearchController', [
   'ngDialog',
   'Profile',
   function ($location, $scope, $state, Action, Storages, Constants, dialog, Profile) {
-    var ctrl = this;
-    ctrl.form = {};
+    var vm = this;
+    vm.form = {};
 
     // Ngôn ngữ đang sử dụng
-    ctrl.language = Storages.get_local(Constants.storages.language);
-    ctrl.condition = { language: ctrl.language };
-    ctrl.polls = [];
+    vm.language = Storages.get_local(Constants.storages.language);
+    vm.condition = { language: vm.language };
+    vm.polls = [];
     $scope.busy = false;
 
     initCondition();
     function initCondition() {
       var param = $location.search();
       if (_.isEmpty(param)) {
-        ctrl.condition = JSON.parse(Storages.get_local(Constants.storages.public_search_condition, JSON.stringify({})));
-        if (ctrl.condition.by) {
-          Profile.get({ userId: ctrl.condition.by }, _user => {
+        vm.condition = JSON.parse(Storages.get_local(Constants.storages.public_search_condition, JSON.stringify({})));
+        if (vm.condition.by) {
+          Profile.get({ userId: vm.condition.by }, _user => {
             $scope.selectedUser = _user;
           });
         }
       } else {
-        _.extend(ctrl.condition, param);
+        _.extend(vm.condition, param);
       }
       if (!_.isEmpty(param)) {
         handleSearch();
       }
     }
 
-    ctrl.handleSearch = handleSearch;
+    vm.handleSearch = handleSearch;
     function handleSearch() {
       if ($scope.busy === true) return;
       $scope.busy = true;
-      ctrl.polls = [];
-      Action.search(ctrl.condition)
+      vm.polls = [];
+      Action.search(vm.condition)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
             $scope.busy = false;
@@ -56,14 +56,14 @@ angular.module('polls').controller('PollsSearchController', [
         })
         .then(results => {
           // Gán data vào list hiện tại
-          ctrl.polls = results || [];
+          vm.polls = results || [];
           $scope.busy = false;
         })
         .catch(err => {
           $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
           $scope.busy = false;
         });
-      Storages.set_local(Constants.storages.public_search_condition, JSON.stringify(ctrl.condition));
+      Storages.set_local(Constants.storages.public_search_condition, JSON.stringify(vm.condition));
     }
 
     function prepareShowingData(poll) {
@@ -72,29 +72,29 @@ angular.module('polls').controller('PollsSearchController', [
         return resolve(poll);
       });
     }
-    ctrl.handleClearCondition = () => {
-      ctrl.condition = { language: ctrl.language };
+    vm.handleClearCondition = () => {
+      vm.condition = { language: vm.language };
       $scope.selectedUser = undefined;
       $scope.$broadcast('angucomplete-alt:clearInput');
     };
-    ctrl.handleClearStartDate = () => {
-      delete ctrl.condition.created_start;
+    vm.handleClearStartDate = () => {
+      delete vm.condition.created_start;
     };
-    ctrl.handleClearEndDate = () => {
-      delete ctrl.condition.created_end;
+    vm.handleClearEndDate = () => {
+      delete vm.condition.created_end;
     };
-    ctrl.selectedUserFn = function (selected) {
+    vm.selectedUserFn = function (selected) {
       if (selected) {
-        ctrl.condition.by = selected.originalObject._id;
+        vm.condition.by = selected.originalObject._id;
         $scope.selectedUser = selected.originalObject;
       } else {
-        delete ctrl.condition.by;
+        delete vm.condition.by;
         $scope.selectedUser = undefined;
       }
     };
 
     // Thao tác khác
-    $scope.delete_poll = (poll) => {
+    $scope.handleDeletePoll = (poll) => {
       if (!poll.isCurrentUserOwner) {
         $scope.handleShowMessage('MS_CM_AUTH_ERROR', true);
         return;
@@ -105,11 +105,11 @@ angular.module('polls').controller('PollsSearchController', [
         type: 3,
         button: 'LB_DELETE'
       }, confirm => {
-        ctrl.polls = _.without(ctrl.polls, poll);
+        vm.polls = _.without(vm.polls, poll);
         Action.deletePoll(poll);
       });
     };
-    $scope.report_poll = (poll) => {
+    $scope.handleReportPoll = (poll) => {
       if (poll.reported) {
         $scope.handleShowMessageWithParam('MS_CM_REPORT_EXIST_ERROR', { title: poll.title }, true);
         return;
@@ -132,7 +132,7 @@ angular.module('polls').controller('PollsSearchController', [
           });
       }
     };
-    $scope.bookmark_poll = (poll) => {
+    $scope.handleBookmarkPoll = (poll) => {
       if (poll.bookmarked) {
         $scope.handleShowMessageWithParam('MS_CM_BOOKMARK_EXIST_ERROR', { title: poll.title }, true);
         return;
@@ -146,7 +146,7 @@ angular.module('polls').controller('PollsSearchController', [
           $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
     };
-    $scope.follow_poll = (poll) => {
+    $scope.handleFollowPoll = (poll) => {
       if (!$scope.isLogged) {
         $scope.handleShowMessage('MS_CM_LOGIN_ERROR', true);
         return;

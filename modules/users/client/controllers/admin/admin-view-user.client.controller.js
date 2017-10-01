@@ -33,8 +33,8 @@ function AdminViewUserController(
   Reports,
   Opts
 ) {
-  var ctrl = this;
-  ctrl.user = userResolve;
+  var vm = this;
+  vm.user = userResolve;
 
   onCreate();
 
@@ -44,36 +44,36 @@ function AdminViewUserController(
   /**
    * HANDLES
    */
-  ctrl.handleViewListLogin = () => {
-    if (ctrl.login) {
+  vm.handleViewListLogin = () => {
+    if (vm.login) {
       let login = angular.element(document.getElementById('login-table'));
       $document.scrollToElementAnimated(login, 100);
     } else {
       return;
     }
   };
-  ctrl.handleViewListPolls = () => {
+  vm.handleViewListPolls = () => {
 
   };
-  ctrl.handleViewListComments = () => {
+  vm.handleViewListComments = () => {
 
   };
-  ctrl.handleViewListVotes = () => {
+  vm.handleViewListVotes = () => {
 
   };
-  ctrl.handleViewListLikes = () => {
+  vm.handleViewListLikes = () => {
 
   };
-  ctrl.handleViewListVieweds = () => {
+  vm.handleViewListVieweds = () => {
 
   };
-  ctrl.handleViewListSuggests = () => {
+  vm.handleViewListSuggests = () => {
 
   };
-  ctrl.handleViewListReports = () => {
+  vm.handleViewListReports = () => {
 
   };
-  ctrl.handleViewListBeReports = () => {
+  vm.handleViewListBeReports = () => {
 
   };
 
@@ -369,7 +369,7 @@ function AdminViewUserController(
   //   }
   // };
 
-  // $scope.delete_poll = poll => {
+  // $scope.handleDeletePoll = poll => {
   //   if ($window.confirm('Delete this poll?')) {
   //     var rs_poll = new Polls({ _id: poll._id });
   //     $scope.polls = _.without($scope.polls, poll);

@@ -24,30 +24,30 @@
     Constants,
     $filter
   ) {
-    var ctrl = this;
-    ctrl.categorys = Categorys.list;
-    ctrl.message = '';
-    ctrl.form = {};
-    ctrl.poll = {
+    var vm = this;
+    vm.categorys = Categorys.list;
+    vm.message = '';
+    vm.form = {};
+    vm.poll = {
       opts: [{
         color: Constants.colors[5]
       }, {
         color: Constants.colors[75]
       }],
-      category: ctrl.categorys[0]._id
+      category: vm.categorys[0]._id
     };
 
-    ctrl.save = isValid => {
+    vm.save = isValid => {
       if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'ctrl.form.pollForm');
+        $scope.$broadcast('show-errors-check-validity', 'vm.form.pollForm');
         return false;
       }
       if (!validOptions()) {
-        ctrl.message = 'Please check your options, has invalid info';
+        vm.message = 'Please check your options, has invalid info';
         return false;
       }
-      ctrl.poll.summary = ctrl.poll.body;
-      var rs = new PollsService(ctrl.poll);
+      vm.poll.summary = vm.poll.body;
+      var rs = new PollsService(vm.poll);
       Action.savePoll(rs)
         .then(res => {
           $state.go('polls.view', { pollId: res.slug });
@@ -58,26 +58,26 @@
           $scope.handleShowMessage('MS_CM_LOAD_ERROR', true);
         });
     };
-    ctrl.add = () => {
+    vm.add = () => {
       var color = randomColor();
-      ctrl.poll.opts.push({
+      vm.poll.opts.push({
         color: color
       });
     };
-    ctrl.remove = opt => {
-      ctrl.poll.opts = _.without(ctrl.poll.opts, opt);
+    vm.remove = opt => {
+      vm.poll.opts = _.without(vm.poll.opts, opt);
     };
-    ctrl.write_as_post = () => {
+    vm.write_as_post = () => {
       $scope.closeThisDialog();
       $state.go('polls.create');
     };
-    ctrl.discard = () => {
+    vm.discard = () => {
       $scope.closeThisDialog();
     };
 
     function validOptions() {
-      for (var index = 0; index < ctrl.poll.opts.length; index++) {
-        var element = ctrl.poll.opts[index];
+      for (var index = 0; index < vm.poll.opts.length; index++) {
+        var element = vm.poll.opts[index];
         if (!element.title || element.title === '' || element.color === '') {
           return false;
         }
@@ -86,7 +86,7 @@
     }
     function randomColor() {
       var length = Constants.colors.length;
-      var currentColors = _.pluck(ctrl.poll.opts, 'color');
+      var currentColors = _.pluck(vm.poll.opts, 'color');
       var color, index;
       do {
         index = getRandomArbitrary(0, length);

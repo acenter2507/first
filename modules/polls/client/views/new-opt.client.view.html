@@ -1,14 +1,14 @@
 <div class="card mgn">
   <div class="card-header pd12y">
-    <a ng-click="ctrl.handleSaveOption(ctrl.form.optForm.$valid)">{{:: 'LB_SAVE' | translate}}</a>
+    <a ng-click="vm.handleSaveOption(vm.form.optForm.$valid)">{{:: 'LB_SAVE' | translate}}</a>
     <a class="mg10l aside-panel-toggle">{{:: 'LB_DISCARD' | translate}}</a>
     <md-menu md-offset="0 30">
       <a ng-click="$mdMenu.open($event)" class="card-link" aria-label="Color" href="#">
-        <i class="fa fa-square" ng-style="{'color': ctrl.tmp_opt.color || '#ccc' }"></i>
+        <i class="fa fa-square" ng-style="{'color': vm.tmp_opt.color || '#ccc' }"></i>
         {{:: 'LB_OPTION_COLOR' | translate}}
       </a>
       <md-menu-content>
-        <material-picker format="'hex'" ng-model="ctrl.tmp_opt.color" size="15"></material-picker>
+        <material-picker format="'hex'" ng-model="vm.tmp_opt.color" size="15"></material-picker>
       </md-menu-content>
     </md-menu>
     <div class="clearfix"></div>
@@ -16,30 +16,30 @@
   <hr class="mgn">
   <div class="card-body" ng-init="isHideOptBody = true;">
     <div class="col-xs-12">
-      <form name="ctrl.form.optForm" ng-submit="ctrl.handleSaveOption(ctrl.form.optForm.$valid)" class="form-horizontal" novalidate>
+      <form name="vm.form.optForm" ng-submit="vm.handleSaveOption(vm.form.optForm.$valid)" class="form-horizontal" novalidate>
         <fieldset>
           <div class="form-group" show-errors>
-            <input type="hidden" name="color" ng-model="ctrl.tmp_opt.color" required>
-            <div ng-messages="ctrl.form.optForm.color.$error" role="alert">
+            <input type="hidden" name="color" ng-model="vm.tmp_opt.color" required>
+            <div ng-messages="vm.form.optForm.color.$error" role="alert">
               <p class="help-block error-text" ng-message="required">{{:: 'LB_OPTION_COLOR_REQUIRE' | translate}}</p>
             </div>
           </div>
           <div class="clearfix"></div>
           <div class="form-group" show-errors>
-            <input name="title" type="text" ng-model="ctrl.tmp_opt.title" class="form-control" placeholder="{{:: 'LB_OPTION_TITLE_PLACE' | translate}}" required>
-            <div ng-messages="ctrl.form.optForm.title.$error" role="alert">
+            <input name="title" type="text" ng-model="vm.tmp_opt.title" class="form-control" placeholder="{{:: 'LB_OPTION_TITLE_PLACE' | translate}}" required>
+            <div ng-messages="vm.form.optForm.title.$error" role="alert">
               <p class="help-block error-text" ng-message="required">{{:: 'LB_OPTION_TITLE_REQUIRE' | translate}}</p>
             </div>
           </div>
           <div class="form-group">
-            <a class="pull-right" id="aside-panel-full-toggle" ng-click="isHideOptBody = !isHideOptBody; ctrl.handleShowFullOption()">
+            <a class="pull-right" id="aside-panel-full-toggle" ng-click="isHideOptBody = !isHideOptBody; vm.handleShowFullOption()">
               {{:: 'LB_SEE_FULL' | translate}}
               <i class="fa fa-caret-up"></i>
             </a>
             <div class="clearfix"></div>
           </div>
           <div class="form-group" uib-collapse="isHideOptBody">
-            <text-angular ng-model="ctrl.tmp_opt.body"></text-angular>
+            <text-angular ng-model="vm.tmp_opt.body"></text-angular>
           </div>
         </fieldset>
       </form>

@@ -149,7 +149,7 @@
                 <ul class="dropdown-menu" role="menu" style="left: -100px; z-index: 2;">
                   <li><a ui-sref="admin.users.view({ userId: user._id })">Detail</a></li>
                   <li><a ui-sref="admin.users.edit({ userId: user._id })">Edit</a></li>
-                  <li><a ng-click="ctrl.handleDeleteUser(user)">Delete</a></li>
+                  <li><a ng-click="vm.handleDeleteUser(user)">Delete</a></li>
                   <li ng-if="user.provider === 'local'"><a ui-sref="admin.users.resetpass({ userId: user._id })">Reset password</a></li>
                 </ul>
               </div>

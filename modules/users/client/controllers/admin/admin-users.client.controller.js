@@ -4,9 +4,9 @@ angular.module('users.admin')
 AdminUsersController.$inject = ['$scope', '$filter', '$window', 'AdminUserService', 'AdminUserApi'];
 
 function AdminUsersController($scope, $filter, $window, AdminUserService, AdminUserApi) {
-  var ctrl = this;
-  ctrl.page = 0;
-  ctrl.sort = '-created';
+  var vm = this;
+  vm.page = 0;
+  vm.sort = '-created';
 
   onCreate();
 
@@ -14,7 +14,7 @@ function AdminUsersController($scope, $filter, $window, AdminUserService, AdminU
     prepareUsers();
   }
   function prepareUsers() {
-    AdminUserApi.getUsers(ctrl.page, ctrl.sort)
+    AdminUserApi.getUsers(vm.page, vm.sort)
       .success(res => {
         console.log(res);
         // $scope.users = res || [];
@@ -54,7 +54,7 @@ function AdminUsersController($scope, $filter, $window, AdminUserService, AdminU
     $scope.filter = {};
     $scope.figureOutItemsToDisplay();
   };
-  ctrl.handleDeleteUser = user => {
+  vm.handleDeleteUser = user => {
     if ($window.confirm('Are you sure you want to delete?')) {
       var rs_user = new AdminUserService({ _id: user._id });
       rs_user.$remove(() => {

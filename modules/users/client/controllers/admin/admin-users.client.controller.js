@@ -37,7 +37,8 @@ function AdminUsersController($scope, $filter, $window, AdminUserService, AdminU
     var passWord = $window.prompt('Password for all', '');
     AdminUserApi.generateUsers(numberOfUser, passWord).then(res => {
       console.log(res);
-      vm.users = _.union(vm.users, res.data);
+      vm.page = 1;
+      prepareUsers();
       vm.busy = false;
     }).catch(err => {
       vm.busy = false;

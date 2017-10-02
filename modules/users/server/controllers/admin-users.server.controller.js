@@ -241,8 +241,10 @@ exports.loadAdminUsers = function (req, res) {
   if (condition.language) {
     and_arr.push({ language: condition.language });
   }
-  query = { $and: and_arr };
-
+  if (and_arr.length > 0) {
+    query = { $and: and_arr };
+  }
+  
   User.paginate(query, {
     sort: sort,
     page: page,

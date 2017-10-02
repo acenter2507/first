@@ -78,6 +78,7 @@ function AdminViewUserController(
   vm.handleViewListBeReports = () => {
 
   };
+
   vm.handleDeleteUser = () => {
     if ($window.confirm('Are you sure you want to delete?')) {
       var rs_user = new AdminUserService({ _id: vm.user._id });
@@ -106,7 +107,8 @@ function AdminViewUserController(
   };
   vm.handleResetPassword = () => {
     var pass = $window.prompt('Enter new password:');
-    if (!pass || pass === '' || pass.length < 8 || pass.length > 32)
+    if (!pass) return;
+    if (pass === '' || pass.length < 8 || pass.length > 32)
       return alert('Password failed.');
     AdminUserApi.resetUserPassword(vm.user._id, pass)
       .success(res => {

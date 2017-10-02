@@ -115,10 +115,8 @@
             <th>Joined</th>
             <th>Role</th>
             <th class="text-center">Provider</th>
+            <th class="text-center">Status</th>
             <th class="text-center">Polls</th>
-            <th class="text-center">Comments</th>
-            <th class="text-center">Profile views</th>
-            <th class="text-center">Be reported</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -143,6 +141,14 @@
                     'fa fa-sign-in' : user.provider === 'local'}">
                 </i>
             </td>
+            <th class="text-center">
+              <div ng-switch="user.status">
+                <span ng-switch-when="1">Verify waiting</span>
+                <span ng-switch-when="2">Actived</span>
+                <span ng-switch-when="3">Blocked</span>
+                <span ng-switch-default>Unknown</span>
+              </div>
+            </th>
             <td class="text-center">{{:: user.report.pollCnt }}</td>
             <td class="text-center">{{:: user.report.cmtCnt }}</td>
             <td class="text-center">{{:: user.report.viewCnt }}</td>

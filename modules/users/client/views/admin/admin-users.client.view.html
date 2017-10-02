@@ -22,6 +22,7 @@
             <label for="search">Search</label>
             <input name="search" id="search" class="form-control" type="text" ng-model="vm.condition.search" placeholder="Search" />
           </div>
+          <div class="clearfix"></div>
         </div>
         <div class="form-group">
           <div class="col-sm-6">
@@ -41,6 +42,7 @@
               <option value="user">User</option>
             </select>
           </div>
+          <div class="clearfix"></div>
         </div>
         <div class="form-group">
           <div class="col-sm-6">
@@ -59,6 +61,7 @@
             <input id="created" name="created" class="form-control input-sm" today="true" moment-picker="vm.condition.created" ng-model="vm.condition.created"
               format="YYYY/MM/DD" start-view="month" placeholder="Select a date..." additions="{ bottom: 'bottom-template-url' }">
           </div>
+          <div class="clearfix"></div>
         </div>
         <div class="form-group">
           <div class="col-sm-6">
@@ -85,12 +88,14 @@
               <option value="report.beReportCnt">Least be reported</option>
             </select>
           </div>
+          <div class="clearfix"></div>
         </div>
-        <div class="form-group mg12t">
+        <div class="form-group">
           <div class="col-sm-12">
             <button class="btn btn-primary btn-sm pull-right" ng-click="vm.handleSearch()">Search</button>
             <button class="btn btn-default btn-sm pull-right mg10r" ng-click="vm.handleClearCondition()">Clear</button>
           </div>
+          <div class="clearfix"></div>
         </div>
       </uib-accordion-group>
     </uib-accordion>

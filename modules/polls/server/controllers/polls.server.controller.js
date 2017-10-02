@@ -698,7 +698,7 @@ function search_condition_analysis(condition) {
     }
   }
   // Search by key in title
-  if (condition.key && condition.key) {
+  if (condition.key && condition.key !== '') {
     if (!condition.in || condition.in === 'title') {
       and_arr.push({ title: { $regex: '.*' + condition.key + '.*' } });
     } else if (condition.in === 'content') {

@@ -12,6 +12,7 @@ function AdminUsersController($scope, $filter, $window, AdminUserService, AdminU
   vm.totalPage = 0;
   vm.totalUser = 0;
   vm.sort = '-created';
+  vm.supportedLanguages = $window.supportLanguages;
 
   onCreate();
 

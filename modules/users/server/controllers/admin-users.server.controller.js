@@ -22,6 +22,7 @@ var path = require('path'),
   Cmt = mongoose.model('Cmt'),
   Cmtlike = mongoose.model('Cmtlike'),
   Opt = mongoose.model('Opt'),
+  _moment = require('moment'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 var _ = require('underscore');
@@ -212,25 +213,43 @@ exports.userByID = function (req, res, next, id) {
  * Lấy all users
  */
 exports.loadAdminUsers = function (req, res) {
-  console.log(req.body);
-  res.end();
-  // var page = req.params.page || 1;
-  // var sort = req.params.sort || '-created';
-  // User.paginate({}, {
-  //   sort: sort,
-  //   page: page,
-  //   limit: 10
-  // }).then(function (users) {
-  //   res.jsonp(users);
-  // });
-  // let options = {
-  //   lean: true,
-  //   limit: 10,
-  //   page: page,
-  //   sort: '-created',
-  //   populate: [],
-  // };
-  // Poll.paginate(query, options)
+  var page = req.body.page || 1;
+  var condition = req.body.condition || {};
+  var sort = condition.sort || '-created';
+  var and_arr = [];
+  var query = {};
+  if (condition.search && condition.search !== '') {
+    and_arr.push({ displayName: { $regex: '.*' + condition.search + '.*' } });
+  }
+  if (condition.status) {
+    and_arr.push({ status: condition.status });
+  }
+  if (condition.status) {
+    and_arr.push({ status: condition.status });
+  }
+  if (condition.roles) {
+    if (condition.roles === 'admin') {
+      and_arr.push({ roles: condition.roles });
+    } else {
+      and_arr.push({ roles: { $ne: condition.roles } });
+    }
+  }
+  if (condition.created) {
+    let end = new _moment(condition.created).utc().startOf('day');
+    and_arr.push({ created: { $lt: end } });
+  }
+  if (condition.language) {
+    and_arr.push({ language: condition.language });
+  }
+  query = { $and: and_arr };
+
+  User.paginate(query, {
+    sort: sort,
+    page: page,
+    limit: 10
+  }).then(function (users) {
+    res.jsonp(users);
+  });
 
 
 

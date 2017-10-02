@@ -22,19 +22,22 @@ function AdminUsersController($scope, $filter, $window, AdminUserService, AdminU
   /**
    * HANDLES
    */
-  vm.handleLoadUsers = handleLoadUsers;
   function handleLoadUsers() {
     AdminUserApi.loadAdminUsers(vm.page, vm.condition)
       .success(res => {
-        console.log(res);
-        // vm.users = res.docs;
-        // vm.totalPage = createArrayFromRange(res.pages);
-        // vm.totalUser = res.total;
+        vm.users = res.docs;
+        vm.totalPage = createArrayFromRange(res.pages);
+        vm.totalUser = res.total;
       })
       .error(err => {
         alert(err.message);
       });
   }
+
+  vm.handleSearch = () => {
+    vm.page = 1;
+    handleLoadUsers();
+  };
 
   vm.handleCreateTestUsers = () => {
     if (vm.busy) return;
@@ -68,6 +71,7 @@ function AdminUsersController($scope, $filter, $window, AdminUserService, AdminU
 
   vm.handleClearCondition = () => {
     vm.condition = {};
+    vm.page = 1;
     handleLoadUsers();
   };
 

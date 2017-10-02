@@ -89,6 +89,25 @@ function AdminUsersController($scope, $filter, $window, AdminUserService, AdminU
       });
   };
 
+  vm.handleBlockUser = user => {
+    if ($window.confirm('Are you sure you want to block?')) {
+      var rs_user = new AdminUserService({ _id: user._id });
+      rs_user.status = 3;
+      rs_user.$update(() => {
+        alert('Done');
+      });
+    }
+  };
+
+  vm.handleUnBlockUser = user => {
+    if ($window.confirm('Are you sure you want to unblock?')) {
+      var rs_user = new AdminUserService({ _id: user._id });
+      rs_user.status = 2;
+      rs_user.$update(() => {
+        alert('Done');
+      });
+    }
+  };
   function createArrayFromRange(range) {
     var array = [];
     for (var i = 1; i <= range; i++) {

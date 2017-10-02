@@ -9,6 +9,7 @@ AdminViewUserController.$inject = [
   '$filter',
   'userResolve',
   'AdminUserApi',
+  'AdminUserService',
   'Action',
   'PollsService',
   'CmtsService',
@@ -26,6 +27,7 @@ function AdminViewUserController(
   $filter,
   userResolve,
   AdminUserApi,
+  AdminUserService,
   Action,
   Polls,
   Cmts,
@@ -85,7 +87,22 @@ function AdminViewUserController(
     }
   };
   vm.handleBlockUser = () => {
-
+    if ($window.confirm('Are you sure you want to block?')) {
+      var rs_user = new AdminUserService({ _id: vm.user._id });
+      rs_user.status = 3;
+      rs_user.$update(() => {
+        alert('Done');
+      });
+    }
+  };
+  vm.handleUnBlockUser = () => {
+    if ($window.confirm('Are you sure you want to unblock?')) {
+      var rs_user = new AdminUserService({ _id: vm.user._id });
+      rs_user.status = 2;
+      rs_user.$update(() => {
+        alert('Done');
+      });
+    }
   };
   vm.handleResetPassword = () => {
     var pass = $window.prompt('Enter new password:');

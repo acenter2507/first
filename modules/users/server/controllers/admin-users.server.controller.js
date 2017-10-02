@@ -213,7 +213,6 @@ exports.userByID = function (req, res, next, id) {
  * Lấy all users
  */
 exports.loadAdminUsers = function (req, res) {
-  console.log(req.body);
   var page = req.body.page || 1;
   var condition = req.body.condition || {};
   var sort = condition.sort || '-created';

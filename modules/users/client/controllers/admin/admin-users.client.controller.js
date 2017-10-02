@@ -75,6 +75,20 @@ function AdminUsersController($scope, $filter, $window, AdminUserService, AdminU
     handleLoadUsers();
   };
 
+  vm.handleResetPassword = user => {
+    var pass = $window.prompt('Enter new password:');
+    if (pass === '' || pass.length < 8 || pass.length > 32)
+      return alert('Password failed.');
+    AdminUserApi.resetUserPassword(user._id, pass)
+      .success(res => {
+        alert('Done');
+      })
+      .error(err => {
+        console.log(err);
+        alert(err.message);
+      });
+  };
+
   function createArrayFromRange(range) {
     var array = [];
     for (var i = 1; i <= range; i++) {
@@ -82,30 +96,4 @@ function AdminUsersController($scope, $filter, $window, AdminUserService, AdminU
     }
     return array;
   }
-
-  // $scope.buildPager = function () {
-  //   $scope.pagedItems = [];
-  //   $scope.itemsPerPage = 15;
-  //   $scope.currentPage = 1;
-  //   $scope.filter = {};
-  //   $scope.figureOutItemsToDisplay();
-  // };
-
-  // $scope.figureOutItemsToDisplay = function () {
-  //   $scope.filteredItems = $filter('users_filter')($scope.users, $scope.filter);
-  //   $scope.filterLength = $scope.filteredItems.length;
-  //   var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
-  //   var end = begin + $scope.itemsPerPage;
-  //   $scope.pagedItems = $scope.filteredItems.slice(begin, end);
-  // };
-
-  // $scope.pageChanged = function () {
-  //   $scope.figureOutItemsToDisplay();
-  // };
-
-  // $scope.clear_filter = () => {
-  //   $scope.filter = {};
-  //   $scope.figureOutItemsToDisplay();
-  // };
 }
-

@@ -76,6 +76,30 @@ function AdminViewUserController(
   vm.handleViewListBeReports = () => {
 
   };
+  vm.handleDeleteUser = () => {
+    if ($window.confirm('Are you sure you want to delete?')) {
+      var rs_user = new AdminUserService({ _id: vm.user._id });
+      rs_user.$remove(() => {
+        $state.go('admin.users.list');
+      });
+    }
+  };
+  vm.handleBlockUser = () => {
+
+  };
+  vm.handleResetPassword = () => {
+    var pass = $window.prompt('Enter new password:');
+    if (pass === '' || pass.length < 8 || pass.length > 32)
+      return alert('Password failed.');
+    AdminUserApi.resetUserPassword(vm.user._id, pass)
+      .success(res => {
+        alert('Done');
+      })
+      .error(err => {
+        console.log(err);
+        alert(err.message);
+      });
+  };
 
 
 

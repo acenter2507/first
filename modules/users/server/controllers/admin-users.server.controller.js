@@ -123,7 +123,7 @@ exports.user_update = function (req, res) {
 /**
  * Reset password
  */
-exports.user_resetpass = function (req, res) {
+exports.resetPassword = function (req, res) {
   var user = req.model;
   var password = req.body.password;
 

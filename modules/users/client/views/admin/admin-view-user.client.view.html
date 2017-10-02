@@ -1,31 +1,33 @@
 <div class="row">
   <div class="col-xs-12">
     <div class="form-group">
-      <a ui-sref="admin.users.list" class="btn btn-default pull-right">List</a>
-      <a ui-sref="admin.users.edit({ userId: vm.user._id })" class="btn btn-success pull-right mg10r">Edit</a>
-      <a ng-click="remove()" class="btn btn-danger pull-right mg10r">Delete</a>
-      <a ui-sref="profile.info({ userId: vm.user.slug })" class="btn btn-info pull-right mg10r">View profile</a>
+      <a ui-sref="admin.users.list" class="btn btn-default pull-right btn-sm">List</a>
+      <a ui-sref="admin.users.edit({ userId: vm.user._id })" class="btn btn-success pull-right btn-sm mg5r">Edit</a>
+      <a ng-click="vm.handleDeleteUser()" class="btn btn-danger pull-right btn-sm mg5r">Delete</a>
+      <a ui-sref="profile.info({ userId: vm.user.slug })" class="btn btn-info btn-sm pull-right mg5r">View profile</a>
+      <a ng-click="vm.handleBlockUser()" class="btn btn-default btn-sm pull-right mg5r">Block</a>
+      <a ng-if="user.provider === 'local'" ng-click="vm.handleResetPassword()" class="btn btn-default btn-sm pull-right mg5r">Reset pass</a>
     </div>
   </div>
 </div>
 <!-- Info -->
 <div class="row mg12t">
   <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
-    <img src="{{vm.user.profileImageURL}}" alt="{{vm.user.displayName}}" class="img-thumbnail user-profile-picture">
+    <img src="{{::vm.user.profileImageURL}}" alt="{{::vm.user.displayName}}" class="img-thumbnail user-profile-picture">
   </div>
   <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
     <table class="table">
       <tr>
         <td>Name:</td>
-        <td>{{ vm.user.displayName }}</td>
+        <td>{{:: vm.user.displayName }}</td>
       </tr>
       <tr>
         <td>Email:</td>
-        <td>{{ vm.user.email }}</td>
+        <td>{{:: vm.user.email }}</td>
       </tr>
       <tr>
         <td>Provider:</td>
-        <td>{{ vm.user.provider }}</td>
+        <td>{{:: vm.user.provider }}</td>
       </tr>
       <tr>
         <td>Roles:</td>

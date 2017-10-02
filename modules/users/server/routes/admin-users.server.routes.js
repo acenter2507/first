@@ -29,7 +29,7 @@ module.exports = function (app) {
   // Lấy danh sách polls của user cho page admin.user.view
   app.route('/api/admins/users/:aduserId/polls').get(adminPolicy.isAllowed, adminController.users_polls);
 
-  app.route('/api/admins/users/:aduserId/resetpass').post(adminPolicy.isAllowed, adminController.user_resetpass);
+  app.route('/api/admins/users/:aduserId/resetpass').post(adminPolicy.isAllowed, adminController.resetPassword);
   // app.route('/api/admins/users/:aduserId/report').get(adminPolicy.isAllowed, admin.users_report);
   // app.route('/api/admins/users/:aduserId/reported').get(adminPolicy.isAllowed, admin.users_reported);
   app.route('/api/admins/users/:aduserId/cmts').get(adminPolicy.isAllowed, adminController.users_cmts);

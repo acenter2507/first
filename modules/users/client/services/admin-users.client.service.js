@@ -22,7 +22,7 @@ function AdminUserApi($http) {
   this.generateUsers = (number, pass) => {
     return $http.get('/api/admins/users/generate/' + number + '/' + pass, { ignoreLoadingBar: true });
   };
-  this.reset_pass = (userId, pass) => {
+  this.resetUserPassword = (userId, pass) => {
     return $http.post('/api/admins/users/' + userId + '/resetpass', { password: pass }, {
       ignoreLoadingBar: true
     });

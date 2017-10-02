@@ -106,7 +106,7 @@ function AdminViewUserController(
   };
   vm.handleResetPassword = () => {
     var pass = $window.prompt('Enter new password:');
-    if (pass === '' || pass.length < 8 || pass.length > 32)
+    if (!pass || pass === '' || pass.length < 8 || pass.length > 32)
       return alert('Password failed.');
     AdminUserApi.resetUserPassword(vm.user._id, pass)
       .success(res => {

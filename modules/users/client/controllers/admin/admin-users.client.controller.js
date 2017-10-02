@@ -77,7 +77,7 @@ function AdminUsersController($scope, $filter, $window, AdminUserService, AdminU
 
   vm.handleResetPassword = user => {
     var pass = $window.prompt('Enter new password:');
-    if (pass === '' || pass.length < 8 || pass.length > 32)
+    if (!pass || pass === '' || pass.length < 8 || pass.length > 32)
       return alert('Password failed.');
     AdminUserApi.resetUserPassword(user._id, pass)
       .success(res => {

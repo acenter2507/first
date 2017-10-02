@@ -23,7 +23,7 @@ module.exports = function (app) {
 
   // app.route('/api/admins/users/:aduserId/picture').post(adminPolicy.isAllowed, admin.users_profile_image);
   // Lấy danh sách user cho page admin.user.list
-  app.route('/api/admins/users/:page/:sort').get(adminPolicy.isAllowed, adminController.loadAdminUsers);
+  app.route('/api/admins/users/search').post(adminPolicy.isAllowed, adminController.loadAdminUsers);
   // Tự động tạo user
   app.route('/api/admins/users/generate/:number/:pass').get(adminPolicy.isAllowed, adminController.generateUsers);
   // Lấy danh sách polls của user cho page admin.user.view

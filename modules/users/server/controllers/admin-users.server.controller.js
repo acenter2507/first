@@ -212,15 +212,17 @@ exports.userByID = function (req, res, next, id) {
  * Lấy all users
  */
 exports.loadAdminUsers = function (req, res) {
-  var page = req.params.page || 1;
-  var sort = req.params.sort || '-created';
-  User.paginate({}, {
-    sort: sort,
-    page: page,
-    limit: 10
-  }).then(function (users) {
-    res.jsonp(users);
-  });
+  console.log(req.body);
+  res.end();
+  // var page = req.params.page || 1;
+  // var sort = req.params.sort || '-created';
+  // User.paginate({}, {
+  //   sort: sort,
+  //   page: page,
+  //   limit: 10
+  // }).then(function (users) {
+  //   res.jsonp(users);
+  // });
   // let options = {
   //   lean: true,
   //   limit: 10,

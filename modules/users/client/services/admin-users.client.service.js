@@ -16,8 +16,8 @@ function AdminUserService($resource) {
 }
 AdminUserApi.$inject = ['$http'];
 function AdminUserApi($http) {
-  this.loadAdminUsers = (page, sort) => {
-    return $http.get('/api/admins/users/' + page + '/' + sort, { ignoreLoadingBar: true });
+  this.loadAdminUsers = (page, condition) => {
+    return $http.post('/api/admins/users/search', { condition: condition, page: page}, { ignoreLoadingBar: true });
   };
   this.generateUsers = (number, pass) => {
     return $http.get('/api/admins/users/generate/' + number + '/' + pass, { ignoreLoadingBar: true });

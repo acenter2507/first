@@ -46,6 +46,7 @@ function AdminViewUserController(
   /**
    * HANDLES
    */
+  //-------------- LOGINS
   vm.handleViewListLogin = () => {
     if (vm.login) {
       let login = angular.element(document.getElementById('login-table'));
@@ -76,6 +77,7 @@ function AdminViewUserController(
       });
   }
 
+  //-------------- POLLS
   vm.handleViewListPolls = () => {
     if (vm.polls) {
       let poll = angular.element(document.getElementById('polls-table'));

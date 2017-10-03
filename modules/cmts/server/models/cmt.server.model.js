@@ -22,7 +22,7 @@ var CmtSchema = new Schema({
   isEdited: { type: Boolean, default: false },
   likeCnt: { type: Number, default: 0 }
 });
-UserSchema.plugin(paginate);
+CmtSchema.plugin(paginate);
 
 CmtSchema.pre('save', function (next) {
   next();

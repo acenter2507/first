@@ -397,7 +397,7 @@ exports.loadAdminUserLogins = function (req, res) {
   }
   if (condition.created) {
     let start = new _moment(condition.created).utc().startOf('day').format();
-    let end = new _moment(condition.created).utc().add(1, 'days').format();
+    let end = new _moment(condition.created).utc().add(1, 'days').startOf('day').format();
     and_arr.push({ created: { $gt: start, $lt: end } });
   }
   query = { $and: and_arr };

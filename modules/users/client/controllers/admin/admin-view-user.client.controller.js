@@ -63,7 +63,7 @@ function AdminViewUserController(
     handleLoadUserLoginInfo();
   };
   function handleLoadUserLoginInfo() {
-    AdminUserApi.loadAdminUserLogins(vm.login.page, vm.login.condition)
+    AdminUserApi.loadAdminUserLogins(vm.user._id, vm.login.page, vm.login.condition)
       .success(res => {
         vm.login.data = res.docs;
         vm.login.pages = createArrayFromRange(res.pages);

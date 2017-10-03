@@ -133,7 +133,7 @@
   </div>
 </div>
 
-<!-- Login -->
+<!-- Polls -->
 <div class="row mg12t" id="polls-table">
   <div class="col-xs-12">
     <form class="form-inline">
@@ -186,6 +186,58 @@
   </div>
 </div>
 
+<!-- Polls -->
+<div class="row mg12t" id="comments-table">
+  <div class="col-xs-12">
+    <form class="form-inline">
+      <div class="form-group">
+        <input type="text" class="form-control input-sm" ng-model="vm.cmts.condition.search" placeholder="Search">
+      </div>
+      <div class="form-group">
+        <input class="form-control input-sm" today="true" moment-picker="vm.cmts.condition.created" ng-model="vm.cmts.condition.created" format="YYYY/MM/DD" start-view="month" placeholder="Select a date...">
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-sm" ng-click="vm.handleCmtsPageChanged(1)">Search</button>
+        <button class="btn btn-default btn-sm" ng-click="vm.cmts.condition = {};  vm.handleCmtsPageChanged(1)">Clear</button>
+      </div>
+    </form>
+  </div>
+  <div class="col-xs-12">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead class="thead-default">
+          <tr>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Mode</th>
+            <th>Likes</th>
+            <th>Views</th>
+            <th>Comments</th>
+            <th>Votes</th>
+            <th>Reports</th>
+            <th>Created</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="poll in vm.polls.data">
+            <td>{{:: poll.title }}</td>
+            <td><a ui-sref="admin.polls.view({ pollId: poll._id})">{{:: poll.category.name }}</a></td>
+            <td>{{:: (poll.isPublic) ? 'Public' : 'Private' }}</td>
+            <td>{{:: poll.likeCnt }}</td>
+            <td>{{:: poll.viewCnt}}</td>
+            <td>{{:: poll.cmtCnt}}</td>
+            <td>{{:: poll.voteCnt}}</td>
+            <td>{{:: poll.beReportCnt}}</td>
+            <td>{{:: poll.created | LLL_format}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <ul class="pagination">
+        <li ng-repeat="page in vm.polls.pages" ng-class="{'active': page === vm.polls.page}"><a ng-click="vm.handlePollsPageChanged(page)">{{page}}</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
 <!-- Polls -->
 <div class="row" ng-show="pollsPagedItems.length > 0">
   <div class="card card-expand">
@@ -243,6 +295,7 @@
     </div>
   </div>
 </div>
+
 <!-- Comments -->
 <div class="row" ng-show="cmtsPagedItems.length > 0">
   <div class="card card-expand">

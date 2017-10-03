@@ -317,6 +317,7 @@ exports.loadAdminUserPolls = function (req, res) {
   Poll.paginate(query, {
     sort: sort,
     populate: ('category', 'name'),
+    populate: [{path:'category', select:'name'}],
     page: page,
     limit: 10
   }).then(function (polls) {

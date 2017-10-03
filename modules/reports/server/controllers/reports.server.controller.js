@@ -7,6 +7,7 @@ var path = require('path'),
   mongoose = require('mongoose'),
   Report = mongoose.model('Report'),
   User = mongoose.model('User'),
+  Poll = mongoose.model('Poll'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('underscore');
 
@@ -23,8 +24,10 @@ exports.create = function(req, res) {
         message: errorHandler.getErrorMessage(err)
       });
     } else {
+      let pollId = report.poll._id || report.poll;
       let userId = report.user._id || report.user;
       let victimId = report.victim._id || report.victim;
+      Poll.countUpBeReport(pollId);
       User.countUpReport(userId);
       User.countUpBeReport(victimId);
       res.jsonp(report);

@@ -293,16 +293,37 @@ exports.generateUsers = function (req, res) {
 /**
  * Lấy polls của user
  */
-exports.users_polls = function (req, res) {
-  Poll.find({ user: req.model._id })
-    .sort('-created')
-    .populate('category', 'name icon color slug')
-    .exec()
-    .then((polls) => {
-      res.jsonp(polls);
-    }, err => {
-      return handleError(res, err);
+exports.loadAdminUserPolls = function (req, res) {
+  var page = req.body.page || 1;
+  var condition = req.body.condition || {};
+  var sort = '-created';
+  var query = {};
+  var and_arr = [];
+  and_arr.push({ user: req.model._id });
+  if (condition.search && condition.search !== '') {
+    and_arr.push({
+      $or: [
+        { title: { $regex: '.*' + condition.search + '.*' } },
+        { body: { $regex: '.*' + condition.search + '.*' } }
+      ]
     });
+  }
+  if (condition.created) {
+    let start = new _moment(condition.created).utc().startOf('day').format();
+    let end = new _moment(condition.created).utc().add(1, 'days').startOf('day').format();
+    and_arr.push({ created: { $gt: start, $lt: end } });
+  }
+  query = { $and: and_arr };
+  Poll.paginate(query, {
+    sort: sort,
+    populate: ('category', 'name'),
+    page: page,
+    limit: 10
+  }).then(function (polls) {
+    res.jsonp(polls);
+  }, err => {
+    return handleError(res, err);
+  });
 };
 /**
  * Lấy votes của user

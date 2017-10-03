@@ -27,7 +27,7 @@ module.exports = function (app) {
   // Tự động tạo user
   app.route('/api/admins/users/generate/:number/:pass').get(adminPolicy.isAllowed, adminController.generateUsers);
   // Lấy danh sách polls của user cho page admin.user.view
-  app.route('/api/admins/users/:aduserId/polls').get(adminPolicy.isAllowed, adminController.users_polls);
+  app.route('/api/admins/users/:aduserId/polls').post(adminPolicy.isAllowed, adminController.loadAdminUserPolls);
 
   app.route('/api/admins/users/:aduserId/resetpass').post(adminPolicy.isAllowed, adminController.resetPassword);
   // app.route('/api/admins/users/:aduserId/report').get(adminPolicy.isAllowed, admin.users_report);

@@ -30,10 +30,8 @@ function AdminUserApi($http) {
   this.loadAdminUserLogins = (userId, page, condition) => {
     return $http.post('/api/admins/users/' + userId + '/logins', { condition: condition, page: page }, { ignoreLoadingBar: true });
   };
-  this.get_polls_by_user = userId => {
-    return $http.get('/api/admins/users/' + userId + '/polls', {
-      ignoreLoadingBar: true
-    });
+  this.loadAdminUserPolls = userId => {
+    return $http.get('/api/admins/users/' + userId + '/polls', { condition: condition, page: page }, { ignoreLoadingBar: true });
   };
   this.get_cmts_by_user = userId => {
     return $http.get('/api/admins/users/' + userId + '/cmts', {

@@ -316,7 +316,7 @@ exports.loadAdminUserPolls = function (req, res) {
   query = { $and: and_arr };
   Poll.paginate(query, {
     sort: sort,
-    // populate: [{ path: 'category', select: 'name' }],
+    populate: [{ path: 'category', select: 'name' }],
     page: page,
     limit: 10
   }).then(function (polls) {

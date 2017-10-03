@@ -51,6 +51,9 @@ function AdminViewUserController(
       let login = angular.element(document.getElementById('login-table'));
       $document.scrollToElementAnimated(login, 100);
     } else {
+      vm.login = {};
+      vm.login.page = 1;
+      AdminUserApi.loadAdminUserLogins();
       return;
     }
   };

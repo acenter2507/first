@@ -77,7 +77,7 @@
         <td class="text-center">{{:: vm.user.report.viewCnt}}</td>
       </tr>
       <tr>
-        <td class="text-center"><a class="btn btn-default btn-sm" ui-sref="admin.users.rank">View</a></td>
+        <td></td>
         <td class="text-center"><button class="btn btn-default btn-sm" ng-click="vm.handleViewListLogin()">View</button></td>
         <td class="text-center"><button class="btn btn-default btn-sm" ng-click="vm.handleViewListPolls()">View</td>
         <td class="text-center"><button class="btn btn-default btn-sm" ng-click="vm.handleViewListComments()">View</td>
@@ -93,14 +93,36 @@
   </div>
 </div>
 <!-- Login -->
-<div class="row mg12t">
+<div class="row mg12t" id="login-table">
   <div class="col-xs-12">
-
+    <form class="form-inline">
+      <div class="form-group">
+        <input type="email" class="form-control" id="email">
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" id="pwd">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+    </div>
+    <table class="table table-bordered">
+      <thead class="bg-primary">
+        <tr>
+          <th>Ip</th>
+          <th>Agent</th>
+          <th>Login time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="login in loginsPagedItems">
+          <td>{{ login.ip }}</td>
+          <td>{{ login.agent }}</td>
+          <td><span ng-bind="login.created"></span></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
-
-
-
 
 
 <!-- logins -->

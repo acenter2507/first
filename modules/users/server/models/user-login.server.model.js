@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
+  paginate = require('mongoose-paginate'),
   Schema = mongoose.Schema;
 
 /**
@@ -27,5 +28,6 @@ var UserloginSchema = new Schema({
     default: ''
   }
 });
+UserloginSchema.plugin(paginate);
 
 mongoose.model('Userlogin', UserloginSchema);

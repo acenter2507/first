@@ -119,6 +119,8 @@ function AdminViewUserController(
         alert(err.message);
       });
   };
+  vm.handlePushVerify = () => {
+  };
 
 
 

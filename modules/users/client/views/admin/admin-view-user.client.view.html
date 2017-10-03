@@ -5,6 +5,7 @@
       <a ui-sref="admin.users.edit({ userId: vm.user._id })" class="btn btn-success pull-right btn-sm mg5r">Edit</a>
       <a ng-click="vm.handleDeleteUser()" class="btn btn-danger pull-right btn-sm mg5r">Delete</a>
       <a ui-sref="profile.info({ userId: vm.user.slug })" class="btn btn-info btn-sm pull-right mg5r">View profile</a>
+      <a ng-if="vm.user.status === 1" ng-click="vm.handlePushVerify()" class="btn btn-default btn-sm pull-right mg5r">Send mail push</a>
       <a ng-if="vm.user.status === 2" ng-click="vm.handleBlockUser()" class="btn btn-default btn-sm pull-right mg5r">Block</a>
       <a ng-if="vm.user.status === 3" ng-click="vm.handleUnBlockUser()" class="btn btn-default btn-sm pull-right mg5r">Unblock</a>
       <a ng-if="vm.user.provider === 'local'" ng-click="vm.handleResetPassword()" class="btn btn-default btn-sm pull-right mg5r">Reset pass</a>

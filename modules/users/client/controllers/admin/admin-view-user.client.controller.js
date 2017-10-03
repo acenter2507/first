@@ -11,7 +11,6 @@ AdminViewUserController.$inject = [
   'AdminUserApi',
   'AdminUserService',
   'Action',
-  'PollsService',
   'CmtsService',
   'VotesService',
   'ReportsService',
@@ -29,8 +28,7 @@ function AdminViewUserController(
   AdminUserApi,
   AdminUserService,
   Action,
-  Polls,
-  Cmts,
+  CmtsService,
   Votes,
   Reports,
   Opts
@@ -107,7 +105,43 @@ function AdminViewUserController(
         console.log(err);
       });
   }
-  
+
+  //-------------- COMMENTS
+  vm.handleViewListComments = () => {
+    if (vm.cmts) {
+      let cmts = angular.element(document.getElementById('comments-table'));
+      $document.scrollToElementAnimated(cmts, 100);
+    } else {
+      vm.cmts = {};
+      vm.cmts.page = 1;
+      vm.cmts.condition = {};
+      handleLoadUserComments();
+      return;
+    }
+  };
+  vm.handleCommentsPageChanged = page => {
+    vm.cmts.page = page;
+    handleLoadUserComments();
+  };
+  vm.handleDeleteComment = cmt => {
+    var comment = new CmtsService({ _id: cmt._id });
+    vm.cmts.data = _.without(vm.cmts.data, cmt);
+    comment.$remove();
+  };
+  function handleLoadUserComments() {
+    AdminUserApi.loadAdminUserComments(vm.user._id, vm.cmts.page, vm.cmts.condition)
+      .success(res => {
+        vm.cmts.data = res.docs;
+        vm.cmts.pages = createArrayFromRange(res.pages);
+        vm.cmts.total = res.total;
+        vm.handleViewListComments();
+      })
+      .error(err => {
+        alert(err.message);
+        console.log(err);
+      });
+  }
+
 
   vm.handleViewListComments = () => {
 

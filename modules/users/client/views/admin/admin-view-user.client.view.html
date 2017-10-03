@@ -167,8 +167,8 @@
         </thead>
         <tbody>
           <tr ng-repeat="poll in vm.polls.data">
-            <td>{{:: poll.title }}</td>
-            <td><a ui-sref="admin.polls.view({ pollId: poll._id})">{{:: poll.category.name }}</a></td>
+            <td><a ui-sref="admin.polls.view({ pollId: poll._id})">{{:: poll.title }}</a></td>
+            <td>{{:: poll.category.name }}</td>
             <td>{{:: (poll.isPublic) ? 'Public' : 'Private' }}</td>
             <td>{{:: poll.likeCnt }}</td>
             <td>{{:: poll.viewCnt}}</td>
@@ -197,8 +197,8 @@
         <input class="form-control input-sm" today="true" moment-picker="vm.cmts.condition.created" ng-model="vm.cmts.condition.created" format="YYYY/MM/DD" start-view="month" placeholder="Select a date...">
       </div>
       <div class="form-group">
-        <button class="btn btn-primary btn-sm" ng-click="vm.handleCmtsPageChanged(1)">Search</button>
-        <button class="btn btn-default btn-sm" ng-click="vm.cmts.condition = {};  vm.handleCmtsPageChanged(1)">Clear</button>
+        <button class="btn btn-primary btn-sm" ng-click="vm.handleCommentsPageChanged(1)">Search</button>
+        <button class="btn btn-default btn-sm" ng-click="vm.cmts.condition = {};  vm.handleCommentsPageChanged(1)">Clear</button>
       </div>
     </form>
   </div>
@@ -229,7 +229,7 @@
         </tbody>
       </table>
       <ul class="pagination">
-        <li ng-repeat="page in vm.cmts.pages" ng-class="{'active': page === vm.cmts.page}"><a ng-click="vm.handleCmtsPageChanged(page)">{{page}}</a></li>
+        <li ng-repeat="page in vm.cmts.pages" ng-class="{'active': page === vm.cmts.page}"><a ng-click="vm.handleCommentsPageChanged(page)">{{page}}</a></li>
       </ul>
     </div>
   </div>

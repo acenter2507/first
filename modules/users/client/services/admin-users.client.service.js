@@ -27,6 +27,9 @@ function AdminUserApi($http) {
       ignoreLoadingBar: true
     });
   };
+  this.loadAdminUserLogins = (userId, page, condition) => {
+    return $http.post('/api/admins/users/' + userId + '/logins', { condition: condition, page: page }, { ignoreLoadingBar: true });
+  };
   this.get_polls_by_user = userId => {
     return $http.get('/api/admins/users/' + userId + '/polls', {
       ignoreLoadingBar: true
@@ -54,11 +57,6 @@ function AdminUserApi($http) {
   };
   this.get_suggests_by_user = userId => {
     return $http.get('/api/admins/users/' + userId + '/suggests', {
-      ignoreLoadingBar: true
-    });
-  };
-  this.get_logins_by_user = userId => {
-    return $http.get('/api/admins/users/' + userId + '/logins', {
       ignoreLoadingBar: true
     });
   };

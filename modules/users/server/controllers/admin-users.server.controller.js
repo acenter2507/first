@@ -240,7 +240,7 @@ exports.loadAdminUsers = function (req, res) {
   if (and_arr.length > 0) {
     query = { $and: and_arr };
   }
-  
+
   User.paginate(query, {
     sort: sort,
     page: page,
@@ -248,17 +248,6 @@ exports.loadAdminUsers = function (req, res) {
   }).then(function (users) {
     res.jsonp(users);
   });
-
-
-
-
-  // User.find({}, '-salt -password')
-  //   .sort('-created').exec()
-  //   .then((users) => {
-  //     res.jsonp(users);
-  //   }, err => {
-  //     return handleError(res, err);
-  //   });
 };
 
 /**
@@ -396,14 +385,27 @@ exports.users_suggests = function (req, res) {
 /**
  * Lấy history login của user
  */
-exports.users_logins = function (req, res) {
-  Userlogin.find({ user: req.model._id })
-    .exec()
-    .then(logins => {
-      res.jsonp(logins);
-    }, err => {
-      return handleError(res, err);
-    });
+exports.loadAdminUserLogins = function (req, res) {
+  var page = req.body.page || 1;
+  var condition = req.body.condition || {};
+  var sort = '-created';
+  var query = {};
+  var and_arr = [];
+  and_arr.push({ user: req.model._id });
+  if (condition.created) {
+    let end = new _moment(condition.created).utc().startOf('day');
+    and_arr.push({ created: end });
+  }
+  query = { $and: and_arr };
+  Userlogin.paginate(query, {
+    sort: sort,
+    page: page,
+    limit: 10
+  }).then(function (logins) {
+    res.jsonp(logins);
+  }, err => {
+    return handleError(res, err);
+  });
 };
 
 /**

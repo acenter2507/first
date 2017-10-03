@@ -37,7 +37,8 @@ module.exports = function (app) {
   app.route('/api/admins/users/:aduserId/reports').get(adminPolicy.isAllowed, adminController.users_reports);
   app.route('/api/admins/users/:aduserId/bereports').get(adminPolicy.isAllowed, adminController.users_bereports);
   app.route('/api/admins/users/:aduserId/suggests').get(adminPolicy.isAllowed, adminController.users_suggests);
-  app.route('/api/admins/users/:aduserId/logins').get(adminPolicy.isAllowed, adminController.users_logins);
+  // Lấy danh sách logins của user
+  app.route('/api/admins/users/:aduserId/logins').post(adminPolicy.isAllowed, adminController.loadAdminUserLogins);
 
   // Finish by binding the user middleware
   app.param('aduserId', adminController.userByID);

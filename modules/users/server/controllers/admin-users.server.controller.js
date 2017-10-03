@@ -392,9 +392,13 @@ exports.loadAdminUserLogins = function (req, res) {
   var query = {};
   var and_arr = [];
   and_arr.push({ user: req.model._id });
+  if (condition.search && condition.search !== '') {
+    and_arr.push({ agent: { $regex: '.*' + condition.search + '.*' } });
+  }
   if (condition.created) {
-    let end = new _moment(condition.created).utc().startOf('day');
-    and_arr.push({ created: end });
+    let start = new _moment(condition.created).utc().startOf('day').format();
+    let end = new _moment(condition.created).utc().add(1, 'days').format();
+    and_arr.push({ created: { $gt: start, $lt: end } });
   }
   query = { $and: and_arr };
   Userlogin.paginate(query, {

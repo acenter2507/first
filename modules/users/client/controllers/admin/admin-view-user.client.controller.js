@@ -53,10 +53,28 @@ function AdminViewUserController(
     } else {
       vm.login = {};
       vm.login.page = 1;
-      AdminUserApi.loadAdminUserLogins();
+      vm.login.condition = {};
+      handleLoadUserLoginInfo();
       return;
     }
   };
+  vm.handleLoginPageChanged = page => {
+    vm.login.page = page;
+    handleLoadUserLoginInfo();
+  };
+  function handleLoadUserLoginInfo() {
+    AdminUserApi.loadAdminUserLogins(vm.login.condition, vm.login.page)
+      .success(res => {
+        vm.login.data = res.docs;
+        vm.login.pages = createArrayFromRange(res.pages);
+        vm.login.total = res.total;
+      })
+      .error(err => {
+        alert(err.message);
+        console.log(err);
+      });
+  }
+
   vm.handleViewListPolls = () => {
 
   };
@@ -124,14 +142,13 @@ function AdminViewUserController(
   };
   vm.handlePushVerify = () => {
   };
-
-
-
-
-
-
-
-
+  function createArrayFromRange(range) {
+    var array = [];
+    for (var i = 1; i <= range; i++) {
+      array.push(i);
+    }
+    return array;
+  }
 
 
 

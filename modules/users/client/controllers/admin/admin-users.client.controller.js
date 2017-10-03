@@ -31,6 +31,7 @@ function AdminUsersController($scope, $filter, $window, AdminUserService, AdminU
       })
       .error(err => {
         alert(err.message);
+        console.log(err);
       });
   }
 

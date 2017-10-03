@@ -94,31 +94,29 @@
 </div>
 <!-- Login -->
 <div class="row mg12t" id="login-table">
-  <div class="col-sm-12">
-    <div class="form-group">
-      <input class="form-control input-sm w200" today="true" moment-picker="vm.login.condition.created" ng-model="vm.login.condition.created" format="YYYY-MM-DD HH:mm" start-view="month" placeholder="Select a date..."/>
-      <button type="button" ng-click="vm.handleLoginPageChanged(1)" class="btn btn-default">Search</button>
-      <button type="button" ng-click="vm.login.condition = {}; vm.handleLoginPageChanged(1)" class="btn btn-default">Clear</button>
+  <div class="col-xs-12">
+    <div class="table-responsive pd200b">
+      <table class="table table-bordered">
+        <thead class="bg-primary">
+          <tr>
+            <th>Ip</th>
+            <th>Agent</th>
+            <th>Login time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="login in vm.login.data">
+            <td>{{:: login.ip }}</td>
+            <td>{{:: login.agent }}</td>
+            <td>{{:: login.created | LLL_format }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <ul class="pagination">
+        <li ng-repeat="page in vm.login.pages" ng-class="{'active': page === vm.login.page}"><a ng-click="vm.handleLoginPageChanged(page)">{{page}}</a></li>
+      </ul>
+    </div>
   </div>
-  <div class="table-responsive">
-    <table class="table table-bordered">
-      <thead class="bg-primary">
-        <tr>
-          <th>Ip</th>
-          <th>Agent</th>
-          <th>Login time</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="login in vm.login.data">
-          <td>{{:: login.ip }}</td>
-          <td>{{:: login.agent }}</td>
-          <td>{{:: login.created | LLL_format }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
 </div>
 
 <!-- logins -->

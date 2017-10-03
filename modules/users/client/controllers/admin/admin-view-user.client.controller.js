@@ -68,6 +68,7 @@ function AdminViewUserController(
         vm.login.data = res.docs;
         vm.login.pages = createArrayFromRange(res.pages);
         vm.login.total = res.total;
+        vm.handleViewListLogin();
       })
       .error(err => {
         alert(err.message);

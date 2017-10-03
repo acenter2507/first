@@ -77,8 +77,36 @@ function AdminViewUserController(
   }
 
   vm.handleViewListPolls = () => {
-
+    if (vm.polls) {
+      let poll = angular.element(document.getElementById('polls-table'));
+      $document.scrollToElementAnimated(poll, 100);
+    } else {
+      vm.polls = {};
+      vm.polls.page = 1;
+      vm.polls.condition = {};
+      handleLoadUserPolls();
+      return;
+    }
   };
+  vm.handlePollsPageChanged = page => {
+    vm.polls.page = page;
+    handleLoadUserPolls();
+  };
+  function handleLoadUserPolls() {
+    AdminUserApi.loadAdminUserPolls(vm.user._id, vm.polls.page, vm.polls.condition)
+      .success(res => {
+        vm.polls.data = res.docs;
+        vm.polls.pages = createArrayFromRange(res.pages);
+        vm.polls.total = res.total;
+        vm.handleViewListPolls();
+      })
+      .error(err => {
+        alert(err.message);
+        console.log(err);
+      });
+  }
+  
+
   vm.handleViewListComments = () => {
 
   };

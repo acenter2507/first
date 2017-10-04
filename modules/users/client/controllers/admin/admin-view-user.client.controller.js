@@ -29,7 +29,7 @@ function AdminViewUserController(
   AdminUserService,
   Action,
   CmtsService,
-  Votes,
+  VotesService,
   Reports,
   Opts
 ) {
@@ -142,6 +142,41 @@ function AdminViewUserController(
       });
   }
 
+  //-------------- VOTES
+  vm.handleViewListVotes = () => {
+    if (vm.votes) {
+      let votes = angular.element(document.getElementById('votes-table'));
+      $document.scrollToElementAnimated(votes, 100);
+    } else {
+      vm.votes = {};
+      vm.votes.page = 1;
+      vm.votes.condition = {};
+      handleLoadUserVotes();
+      return;
+    }
+  };
+  vm.handleVotesPageChanged = page => {
+    vm.votes.page = page;
+    handleLoadUserVotes();
+  };
+  vm.handleDeleteComment = vote => {
+    var rsVote = new VotesService({ _id: vote._id });
+    vm.votes.data = _.without(vm.votes.data, vote);
+    rsVote.$remove();
+  };
+  function handleLoadUserVotes() {
+    AdminUserApi.loadAdminUserVotes(vm.user._id, vm.votes.page, vm.votes.condition)
+      .success(res => {
+        vm.votes.data = res.docs;
+        vm.votes.pages = createArrayFromRange(res.pages);
+        vm.votes.total = res.total;
+        vm.handleViewListComments();
+      })
+      .error(err => {
+        alert(err.message);
+        console.log(err);
+      });
+  }
 
   vm.handleViewListComments = () => {
 

@@ -36,6 +36,10 @@ function AdminUserApi($http) {
   this.loadAdminUserComments = (userId, page, condition) => {
     return $http.post('/api/admins/users/' + userId + '/cmts', { condition: condition, page: page }, { ignoreLoadingBar: true });
   };
+  this.loadAdminUserVotes = (userId, page, condition) => {
+    return $http.post('/api/admins/users/' + userId + '/votes', { condition: condition, page: page }, { ignoreLoadingBar: true });
+  };
+
   this.get_votes_by_user = userId => {
     return $http.get('/api/admins/users/' + userId + '/votes', {
       ignoreLoadingBar: true

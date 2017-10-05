@@ -208,7 +208,6 @@
         if (Socket.socket.socket.id === obj.client) return;
         Action.loadCommentById(obj.cmtId)
           .then(cmt => {
-            console.log(cmt);
             if (!cmt) return;
             var item = _.findWhere(vm.cmts, { _id: cmt._id });
             if (item) {

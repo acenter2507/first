@@ -39,7 +39,7 @@ module.exports = function (app) {
   // Lấy danh sách các lần view
   app.route('/api/admins/users/:aduserId/viewed').post(adminPolicy.isAllowed, adminController.loadAdminUserVieweds);
   // Lấy danh sách các lần đề xuất
-  app.route('/api/admins/users/:aduserId/suggests').get(adminPolicy.isAllowed, adminController.loadAdminUserSuggests);
+  app.route('/api/admins/users/:aduserId/suggests').post(adminPolicy.isAllowed, adminController.loadAdminUserSuggests);
 
   // app.route('/api/admins/users/:aduserId/report').get(adminPolicy.isAllowed, admin.users_report);
   // app.route('/api/admins/users/:aduserId/reported').get(adminPolicy.isAllowed, admin.users_reported);

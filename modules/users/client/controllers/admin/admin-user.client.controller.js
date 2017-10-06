@@ -22,7 +22,8 @@ function AdminUserController($window, $timeout, $scope, $state, userResolve, Adm
     }
 
     function successCb(res) {
-      $state.reload();
+      vm.user = res;
+      alert('Done');
     }
     function errorCb(err) {
       alert('Can\'t save user: ' + err.message);

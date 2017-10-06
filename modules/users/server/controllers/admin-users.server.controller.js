@@ -366,7 +366,7 @@ exports.loadAdminUserVotes = function (req, res) {
   }).then(function (votes) {
     if (condition.search && condition.search !== '') {
       votes = _.filter(votes, vote => {
-        if (!vote || vote.poll) return false;
+        if (!vote || !vote.poll) return false;
         return vote.poll.title.indexOf(condition.search) >= 0;
       });
     }
@@ -402,7 +402,7 @@ exports.loadAdminUserLikes = function (req, res) {
   }).then(function (likes) {
     if (condition.search && condition.search !== '') {
       likes = _.filter(likes, like => {
-        if (!like || like.poll) return false;
+        if (!like || !like.poll) return false;
         return like.poll.title.indexOf(condition.search) >= 0;
       });
     }
@@ -435,7 +435,7 @@ exports.loadAdminUserVieweds = function (req, res) {
   }).then(function (views) {
     if (condition.search && condition.search !== '') {
       views = _.filter(views, view => {
-        if (!view || view.poll) return false;
+        if (!view || !view.poll) return false;
         return view.poll.title.indexOf(condition.search) >= 0;
       });
     }

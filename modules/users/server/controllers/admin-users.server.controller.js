@@ -276,21 +276,6 @@ exports.generateUsers = function (req, res) {
 };
 
 /**
- * Lấy reported của user
- */
-// exports.users_reported = function (req, res) {
-//   Report.find({ victim: req.model._id })
-//     .count(function (err, count) {
-//       if (err) {
-//         return res.status(400).send({
-//           message: errorHandler.getErrorMessage(err)
-//         });
-//       }
-
-//       res.jsonp(count);
-//     });
-// };
-/**
  * Lấy polls của user
  */
 exports.loadAdminUserPolls = function (req, res) {
@@ -388,7 +373,6 @@ exports.loadAdminUserVotes = function (req, res) {
     return handleError(res, err);
   });
 };
-
 /**
  * Lấy votes của user
  */
@@ -418,6 +402,36 @@ exports.loadAdminUserLikes = function (req, res) {
     limit: 10
   }).then(function (likes) {
     res.jsonp(likes);
+  }, err => {
+    return handleError(res, err);
+  });
+};
+/**
+ * Lấy votes của user
+ */
+exports.loadAdminUserVieweds = function (req, res) {
+  var page = req.body.page || 1;
+  var condition = req.body.condition || {};
+  var sort = '-created';
+  var query = {};
+  var and_arr = [];
+  and_arr.push({ user: req.model._id });
+  if (condition.search && condition.search !== '') {
+    and_arr.push({ 'poll.title': { $regex: '.*' + condition.search + '.*' } });
+  }
+  if (condition.created) {
+    let start = new _moment(condition.created).utc().startOf('day').format();
+    let end = new _moment(condition.created).utc().add(1, 'days').startOf('day').format();
+    and_arr.push({ created: { $gt: start, $lt: end } });
+  }
+  query = { $and: and_arr };
+  View.paginate(query, {
+    sort: sort,
+    populate: [{ path: 'poll', select: 'title' }],
+    page: page,
+    limit: 10
+  }).then(function (views) {
+    res.jsonp(views);
   }, err => {
     return handleError(res, err);
   });

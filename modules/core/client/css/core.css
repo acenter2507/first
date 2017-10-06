@@ -664,12 +664,6 @@ canvas#race{position:relative; z-index:100;}
   font-weight: 500;
   line-height: 1.1; }
 
-.custom-breadcrumb {
-  padding: 0;
-  margin-bottom: 0;
-  background-color: transparent;
-  border-radius: 0;
-}
 .badge-count {
   display: inline-block;
   min-width: 10px;

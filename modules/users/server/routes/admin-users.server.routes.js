@@ -36,6 +36,8 @@ module.exports = function (app) {
   app.route('/api/admins/users/:aduserId/votes').post(adminPolicy.isAllowed, adminController.loadAdminUserVotes);
   // Lấy danh sách các lần like/dislike
   app.route('/api/admins/users/:aduserId/likes').post(adminPolicy.isAllowed, adminController.loadAdminUserLikes);
+  // Lấy danh sách các lần view
+  app.route('/api/admins/users/:aduserId/viewed').post(adminPolicy.isAllowed, adminController.loadAdminUserVieweds);
 
   // app.route('/api/admins/users/:aduserId/report').get(adminPolicy.isAllowed, admin.users_report);
   // app.route('/api/admins/users/:aduserId/reported').get(adminPolicy.isAllowed, admin.users_reported);

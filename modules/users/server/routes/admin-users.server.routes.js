@@ -40,10 +40,11 @@ module.exports = function (app) {
   app.route('/api/admins/users/:aduserId/viewed').post(adminPolicy.isAllowed, adminController.loadAdminUserVieweds);
   // Lấy danh sách các lần đề xuất
   app.route('/api/admins/users/:aduserId/suggests').post(adminPolicy.isAllowed, adminController.loadAdminUserSuggests);
+  // Lấy danh sách các lần report người khác
+  app.route('/api/admins/users/:aduserId/reports').post(adminPolicy.isAllowed, adminController.loadAdminUserReports);
 
   // app.route('/api/admins/users/:aduserId/report').get(adminPolicy.isAllowed, admin.users_report);
   // app.route('/api/admins/users/:aduserId/reported').get(adminPolicy.isAllowed, admin.users_reported);
-  app.route('/api/admins/users/:aduserId/reports').get(adminPolicy.isAllowed, adminController.users_reports);
   app.route('/api/admins/users/:aduserId/bereports').get(adminPolicy.isAllowed, adminController.users_bereports);
   // Lấy danh sách logins của user
   app.route('/api/admins/users/:aduserId/logins').post(adminPolicy.isAllowed, adminController.loadAdminUserLogins);

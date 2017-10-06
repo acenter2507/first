@@ -31,7 +31,7 @@ function AdminViewUserController(
   CmtsService,
   VotesService,
   Reports,
-  Opts
+  OptsService
 ) {
   var vm = this;
   vm.user = userResolve;
@@ -226,6 +226,11 @@ function AdminViewUserController(
     vm.suggests.page = page;
     handleLoadUserSuggests();
   };
+  vm.handleDeleteOption = opt => {
+    var rsOpt = new OptsService({ _id: opt._id });
+    vm.suggests.data = _.without(vm.suggests.data, opt);
+    rsOpt.$remove();
+  };
   function handleLoadUserSuggests() {
     AdminUserApi.loadAdminUserSuggests(vm.user._id, vm.suggests.page, vm.suggests.condition)
       .success(res => {
@@ -240,9 +245,39 @@ function AdminViewUserController(
       });
   }
 
+  //-------------- REPORTED
   vm.handleViewListReports = () => {
-
+    if (vm.reports) {
+      let reports = angular.element(document.getElementById('reports-table'));
+      $document.scrollToElementAnimated(reports, 100);
+    } else {
+      vm.reports = {};
+      vm.reports.page = 1;
+      vm.reports.condition = {};
+      handleLoadUserReports();
+      return;
+    }
   };
+  vm.handleReportsPageChanged = page => {
+    vm.reports.page = page;
+    handleLoadUserReports();
+  };
+  function handleLoadUserReports() {
+    AdminUserApi.loadAdminUserReports(vm.user._id, vm.reports.page, vm.reports.condition)
+      .success(res => {
+        vm.reports.data = res.docs;
+        vm.reports.pages = createArrayFromRange(res.pages);
+        vm.reports.total = res.total;
+        vm.handleViewListReports();
+      })
+      .error(err => {
+        alert(err.message);
+        console.log(err);
+      });
+  }
+
+
+
   vm.handleViewListBeReports = () => {
 
   };

@@ -209,30 +209,30 @@ function AdminViewUserController(
       });
   }
 
-  //-------------- LIKES
-  vm.handleViewListVieweds = () => {
-    if (vm.views) {
-      let views = angular.element(document.getElementById('views-table'));
-      $document.scrollToElementAnimated(views, 100);
+  //-------------- SUGGESTEDS
+  vm.handleViewListSuggests = () => {
+    if (vm.suggests) {
+      let suggests = angular.element(document.getElementById('suggests-table'));
+      $document.scrollToElementAnimated(suggests, 100);
     } else {
-      vm.views = {};
-      vm.views.page = 1;
-      vm.views.condition = {};
-      handleLoadUserVieweds();
+      vm.suggests = {};
+      vm.suggests.page = 1;
+      vm.suggests.condition = {};
+      handleLoadUserSuggests();
       return;
     }
   };
-  vm.handleViewedsPageChanged = page => {
-    vm.views.page = page;
-    handleLoadUserVieweds();
+  vm.handleSuggestsPageChanged = page => {
+    vm.suggests.page = page;
+    handleLoadUserSuggests();
   };
-  function handleLoadUserVieweds() {
-    AdminUserApi.loadAdminUserVieweds(vm.user._id, vm.views.page, vm.views.condition)
+  function handleLoadUserSuggests() {
+    AdminUserApi.loadAdminUserSuggests(vm.user._id, vm.suggests.page, vm.suggests.condition)
       .success(res => {
-        vm.views.data = res.docs;
-        vm.views.pages = createArrayFromRange(res.pages);
-        vm.views.total = res.total;
-        vm.handleViewListVieweds();
+        vm.suggests.data = res.docs;
+        vm.suggests.pages = createArrayFromRange(res.pages);
+        vm.suggests.total = res.total;
+        vm.handleViewListSuggests();
       })
       .error(err => {
         alert(err.message);

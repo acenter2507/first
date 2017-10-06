@@ -45,6 +45,9 @@ function AdminUserApi($http) {
   this.loadAdminUserVieweds = (userId, page, condition) => {
     return $http.post('/api/admins/users/' + userId + '/viewed', { condition: condition, page: page }, { ignoreLoadingBar: true });
   };
+  this.loadAdminUserSuggests = (userId, page, condition) => {
+    return $http.post('/api/admins/users/' + userId + '/suggests', { condition: condition, page: page }, { ignoreLoadingBar: true });
+  };
 
   this.get_reports_by_user = userId => {
     return $http.get('/api/admins/users/' + userId + '/reports', {

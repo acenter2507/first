@@ -688,6 +688,7 @@
         $scope.$broadcast('show-errors-check-validity', 'vm.form.optForm');
         return false;
       }
+      vm.tmp_opt.isSuggest = true;
       Action.saveOption(vm.tmp_opt, vm.poll)
         .then(res => {
           $scope.$broadcast('show-errors-reset', 'vm.form.optForm');

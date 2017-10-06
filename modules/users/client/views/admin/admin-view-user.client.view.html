@@ -101,7 +101,8 @@
         <input type="text" class="form-control input-sm" ng-model="vm.login.condition.search" placeholder="Search">
       </div>
       <div class="form-group">
-        <input id="created" name="created" class="form-control input-sm" today="true" moment-picker="vm.login.condition.created" ng-model="vm.login.condition.created" format="YYYY/MM/DD" start-view="month" placeholder="Select a date...">
+        <input id="created" name="created" class="form-control input-sm" today="true" moment-picker="vm.login.condition.created"
+          ng-model="vm.login.condition.created" format="YYYY/MM/DD" start-view="month" placeholder="Select a date...">
       </div>
       <div class="form-group">
         <button class="btn btn-primary btn-sm" ng-click="vm.handleLoginPageChanged(1)">Search</button>
@@ -143,7 +144,8 @@
         <input type="text" class="form-control input-sm" ng-model="vm.polls.condition.search" placeholder="Search">
       </div>
       <div class="form-group">
-        <input class="form-control input-sm" today="true" moment-picker="vm.polls.condition.created" ng-model="vm.polls.condition.created" format="YYYY/MM/DD" start-view="month" placeholder="Select a date...">
+        <input class="form-control input-sm" today="true" moment-picker="vm.polls.condition.created" ng-model="vm.polls.condition.created"
+          format="YYYY/MM/DD" start-view="month" placeholder="Select a date...">
       </div>
       <div class="form-group">
         <button class="btn btn-primary btn-sm" ng-click="vm.handlePollsPageChanged(1)">Search</button>
@@ -197,7 +199,8 @@
         <input type="text" class="form-control input-sm" ng-model="vm.cmts.condition.search" placeholder="Search">
       </div>
       <div class="form-group">
-        <input class="form-control input-sm" today="true" moment-picker="vm.cmts.condition.created" ng-model="vm.cmts.condition.created" format="YYYY/MM/DD" start-view="month" placeholder="Select a date...">
+        <input class="form-control input-sm" today="true" moment-picker="vm.cmts.condition.created" ng-model="vm.cmts.condition.created"
+          format="YYYY/MM/DD" start-view="month" placeholder="Select a date...">
       </div>
       <div class="form-group">
         <button class="btn btn-primary btn-sm" ng-click="vm.handleCommentsPageChanged(1)">Search</button>
@@ -244,10 +247,8 @@
   <div class="col-xs-12">
     <form class="form-inline">
       <div class="form-group">
-        <input type="text" class="form-control input-sm" ng-model="vm.votes.condition.search" placeholder="Search">
-      </div>
-      <div class="form-group">
-        <input class="form-control input-sm" today="true" moment-picker="vm.votes.condition.created" ng-model="vm.votes.condition.created" format="YYYY/MM/DD" start-view="month" placeholder="Select a date...">
+        <input class="form-control input-sm" today="true" moment-picker="vm.votes.condition.created" ng-model="vm.votes.condition.created"
+          format="YYYY/MM/DD" start-view="month" placeholder="Select a date...">
       </div>
       <div class="form-group">
         <button class="btn btn-primary btn-sm" ng-click="vm.handleVotesPageChanged(1)">Search</button>
@@ -296,10 +297,8 @@
   <div class="col-xs-12">
     <form class="form-inline">
       <div class="form-group">
-        <input type="text" class="form-control input-sm" ng-model="vm.likes.condition.search" placeholder="Search">
-      </div>
-      <div class="form-group">
-        <input class="form-control input-sm" today="true" moment-picker="vm.likes.condition.created" ng-model="vm.likes.condition.created" format="YYYY/MM/DD" start-view="month" placeholder="Select a date...">
+        <input class="form-control input-sm" today="true" moment-picker="vm.likes.condition.created" ng-model="vm.likes.condition.created"
+          format="YYYY/MM/DD" start-view="month" placeholder="Select a date...">
       </div>
       <div class="form-group">
         <select ng-model="vm.likes.condition.type" class="form-control input-sm">
@@ -345,10 +344,8 @@
   <div class="col-xs-12">
     <form class="form-inline">
       <div class="form-group">
-        <input type="text" class="form-control input-sm" ng-model="vm.views.condition.search" placeholder="Search">
-      </div>
-      <div class="form-group">
-        <input class="form-control input-sm" today="true" moment-picker="vm.views.condition.created" ng-model="vm.views.condition.created" format="YYYY/MM/DD" start-view="month" placeholder="Select a date...">
+        <input class="form-control input-sm" today="true" moment-picker="vm.views.condition.created" ng-model="vm.views.condition.created"
+          format="YYYY/MM/DD" start-view="month" placeholder="Select a date...">
       </div>
       <div class="form-group">
         <button class="btn btn-primary btn-sm" ng-click="vm.handleViewedsPageChanged(1)">Search</button>
@@ -379,6 +376,61 @@
   </div>
 </div>
 
+<!-- Suggests -->
+<h3 class="mg4b">Suggested</h3>
+<div class="row mg12t" id="suggests-table">
+  <div class="col-xs-12">
+    <form class="form-inline">
+      <div class="form-group">
+        <select ng-model="vm.suggests.condition.status" class="form-control input-sm">
+          <option value="">All</option>
+          <option value="1">Approved</option>
+          <option value="2">Waiting</option>
+          <option value="3">Rejected</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <input class="form-control input-sm" today="true" moment-picker="vm.suggests.condition.created" ng-model="vm.suggests.condition.created"
+          format="YYYY/MM/DD" start-view="month" placeholder="Select a date...">
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-sm" ng-click="vm.handleSuggestsPageChanged(1)">Search</button>
+        <button class="btn btn-default btn-sm" ng-click="vm.suggests.condition = {};  vm.handleSuggestsPageChanged(1)">Clear</button>
+      </div>
+    </form>
+  </div>
+  <div class="col-xs-12">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead class="bg-primary">
+          <tr>
+            <th>Poll</th>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="suggest in vm.suggests.data">
+            <td><a ui-sref="admin.polls.view({ pollId: suggest.poll._id})">{{:: suggest.poll.title }}</a></td>
+            <td><a ui-sref="admin.opts.view({ optId: suggest._id})">{{:: suggest.title }}</a></td>
+            <td>
+              <div ng-switch="suggest.status">
+                <span ng-switch-when="1">Approved</span>
+                <span ng-switch-when="2">Waiting</span>
+                <span ng-switch-when="3">Rejected</span>
+              </div>
+            </td>
+            <td>{{:: suggest.created | LLL_format}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <ul class="pagination">
+        <li ng-repeat="page in vm.suggests.pages" ng-class="{'active': page === vm.suggests.page}"><a ng-click="vm.handleSuggestsPageChanged(page)">{{page}}</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
 
 
 <!-- Poll reports -->

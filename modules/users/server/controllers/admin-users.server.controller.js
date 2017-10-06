@@ -364,12 +364,6 @@ exports.loadAdminUserVotes = function (req, res) {
     page: page,
     limit: 10
   }).then(function (votes) {
-    if (condition.search && condition.search !== '') {
-      votes = _.filter(votes, vote => {
-        if (!vote || !vote.poll) return false;
-        return vote.poll.title.indexOf(condition.search) >= 0;
-      });
-    }
     res.jsonp(votes);
   }, err => {
     return handleError(res, err);
@@ -400,12 +394,6 @@ exports.loadAdminUserLikes = function (req, res) {
     page: page,
     limit: 10
   }).then(function (likes) {
-    if (condition.search && condition.search !== '') {
-      likes = _.filter(likes, like => {
-        if (!like || !like.poll) return false;
-        return like.poll.title.indexOf(condition.search) >= 0;
-      });
-    }
     res.jsonp(likes);
   }, err => {
     return handleError(res, err);
@@ -433,13 +421,39 @@ exports.loadAdminUserVieweds = function (req, res) {
     page: page,
     limit: 10
   }).then(function (views) {
-    if (condition.search && condition.search !== '') {
-      views = _.filter(views, view => {
-        if (!view || !view.poll) return false;
-        return view.poll.title.indexOf(condition.search) >= 0;
-      });
-    }
     res.jsonp(views);
+  }, err => {
+    return handleError(res, err);
+  });
+};
+/**
+ * Lấy suggests của user
+ */
+exports.loadAdminUserSuggests = function (req, res) {
+  var page = req.body.page || 1;
+  var condition = req.body.condition || {};
+  var sort = '-created';
+  var query = {};
+  var and_arr = [];
+  and_arr.push({ user: req.model._id });
+  and_arr.push({ isSuggest: true });
+  if (condition.created) {
+    let start = new _moment(condition.created).utc().startOf('day').format();
+    let end = new _moment(condition.created).utc().add(1, 'days').startOf('day').format();
+    and_arr.push({ created: { $gt: start, $lt: end } });
+  }
+  if (condition.status) {
+    and_arr.push({ status: condition.status });
+  }
+  query = { $and: and_arr };
+
+  Opt.paginate(query, {
+    sort: sort,
+    populate: [{ path: 'poll', select: 'title' }],
+    page: page,
+    limit: 10
+  }).then(function (opts) {
+    res.jsonp(opts);
   }, err => {
     return handleError(res, err);
   });
@@ -469,27 +483,6 @@ exports.users_bereports = function (req, res) {
     .exec()
     .then((reports) => {
       res.jsonp(reports);
-    }, err => {
-      return handleError(res, err);
-    });
-};
-/**
- * Lấy suggests của user
- */
-exports.users_suggests = function (req, res) {
-  Poll.find({ user: req.model._id })
-    .exec()
-    .then(polls => {
-      var ids = _.pluck(polls, '_id');
-      return Opt.find({ user: req.model._id, poll: { $nin: ids } })
-        .sort('-created')
-        .populate('poll', 'title')
-        .exec();
-    }, err => {
-      return handleError(res, err);
-    })
-    .then((opts) => {
-      res.jsonp(opts);
     }, err => {
       return handleError(res, err);
     });

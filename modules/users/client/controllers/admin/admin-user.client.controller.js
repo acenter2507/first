@@ -22,7 +22,6 @@ function AdminUserController($window, $timeout, $scope, $state, userResolve, Adm
     }
 
     function successCb(res) {
-      console.log(res);
       alert('Done');
     }
     function errorCb(err) {

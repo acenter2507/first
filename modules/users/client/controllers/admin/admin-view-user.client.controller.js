@@ -240,10 +240,6 @@ function AdminViewUserController(
       });
   }
 
-  
-  vm.handleViewListSuggests = () => {
-
-  };
   vm.handleViewListReports = () => {
 
   };

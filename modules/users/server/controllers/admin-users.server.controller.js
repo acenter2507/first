@@ -51,8 +51,6 @@ exports.user_add = function (req, res) {
   user.save(function (err, user) {
     if (err)
       return handleError(res, err);
-    user.password = undefined;
-    user.salt = undefined;
     res.jsonp(user);
   });
 };

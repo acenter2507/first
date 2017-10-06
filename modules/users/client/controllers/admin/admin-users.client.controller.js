@@ -65,7 +65,6 @@ function AdminUsersController($scope, $filter, $window, AdminUserService, AdminU
       var rs_user = new AdminUserService({ _id: user._id });
       rs_user.$remove(() => {
         $scope.users = _.without($scope.users, user);
-        $scope.figureOutItemsToDisplay();
       });
     }
   };

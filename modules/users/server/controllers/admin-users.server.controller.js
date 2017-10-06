@@ -17,7 +17,6 @@ var path = require('path'),
 
   Notif = mongoose.model('Notif'),
   Bookmark = mongoose.model('Bookmark'),
-  View = mongoose.model('View'),
   Vote = mongoose.model('Vote'),
   Cmt = mongoose.model('Cmt'),
   Cmtlike = mongoose.model('Cmtlike'),
@@ -434,6 +433,7 @@ exports.loadAdminUserVieweds = function (req, res) {
   }).then(function (views) {
     if (condition.search && condition.search !== '') {
       views = _.filter(views, view => {
+        console.log(view);
         return view.poll.title.indexOf(condition.search) >= 0;
       });
     }

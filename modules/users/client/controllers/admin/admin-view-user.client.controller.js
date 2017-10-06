@@ -276,7 +276,7 @@ function AdminViewUserController(
       });
   }
 
-  //-------------- REPORTED
+  //-------------- BE REPORTED
   vm.handleViewListBeReports = () => {
     if (vm.bereports) {
       let bereports = angular.element(document.getElementById('bereports-table'));
@@ -296,9 +296,9 @@ function AdminViewUserController(
   function handleLoadUserBeReports() {
     AdminUserApi.loadAdminUserBeReports(vm.user._id, vm.bereports.page, vm.bereports.condition)
       .success(res => {
-        vm.reports.data = res.docs;
-        vm.reports.pages = createArrayFromRange(res.pages);
-        vm.reports.total = res.total;
+        vm.bereports.data = res.docs;
+        vm.bereports.pages = createArrayFromRange(res.pages);
+        vm.bereports.total = res.total;
         vm.handleViewListBeReports();
       })
       .error(err => {

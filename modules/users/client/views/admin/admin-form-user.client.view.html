@@ -1,10 +1,14 @@
 <div class="row">
   <div class="col-xs-12 pd6x">
     <div class="form-group">
-      <a ui-sref="admin.users.list" class="btn btn-default pull-right">List</a>
-      <a ng-if="user._id" ui-sref="admin.users.view({ userId: user._id })" class="btn btn-success pull-right mg10r">View</a>
-      <a ng-if="user._id" ng-click="remove()" class="btn btn-danger pull-right mg10r">Delete</a>
-      <a class="btn btn-primary pull-right mg10r" ng-click="save(userForm.$valid)">{{ (user._id) ? 'Update' : 'Save' }}</a>
+      <a ui-sref="admin.users.list" class="btn btn-default pull-right btn-sm">List</a>
+      <a ng-click="vm.handleDeleteUser()" class="btn btn-danger pull-right btn-sm mg5r">Delete</a>
+      <a ui-sref="profile.info({ userId: vm.user.slug })" class="btn btn-info btn-sm pull-right mg5r">View profile</a>
+      <a ng-if="vm.user.status === 1" ng-click="vm.handlePushVerify()" class="btn btn-default btn-sm pull-right mg5r">Send mail push</a>
+      <a ng-if="vm.user.status === 2" ng-click="vm.handleBlockUser()" class="btn btn-default btn-sm pull-right mg5r">Block</a>
+      <a ng-if="vm.user.status === 3" ng-click="vm.handleUnBlockUser()" class="btn btn-default btn-sm pull-right mg5r">Unblock</a>
+      <a ng-if="vm.user.provider === 'local'" ng-click="vm.handleResetPassword()" class="btn btn-default btn-sm pull-right mg5r">Reset pass</a>
+      <a class="btn btn-primary pull-right mg5r" ng-click="vm.handleSaveUser(userForm.$valid)">{{ (vm.user._id) ? 'Update' : 'Save' }}</a>
     </div>
   </div>
 </div>
@@ -18,42 +22,23 @@
     </div>
     <hr class="mgn">
     <div class="card-body">
-      <form name="userForm" ng-submit="save(userForm.$valid)" novalidate autocomplete="off">
+      <form name="userForm" ng-submit="vm.handleSaveUser(userForm.$valid)" novalidate autocomplete="off">
         <fieldset>
           <div class="row">
             <!-- First name-->
             <div class="form-group col-sm-6" show-errors>
-              <label for="firstName">First Name</label>
-              <input type="text" id="firstName" name="firstName" class="form-control" ng-model="user.firstName" placeholder="First Name"
+              <label for="displayName">Name</label>
+              <input type="text" id="displayName" name="displayName" class="form-control" ng-model="vm.user.displayName" placeholder="Display Name"
                 required>
-              <div ng-messages="userForm.firstName.$error" role="alert">
-                <p class="help-block error-text" ng-message="required">First name is required.</p>
-              </div>
-            </div>
-            <!-- Last name-->
-            <div class="form-group col-sm-6" show-errors>
-              <label for="lastName">Last Name</label>
-              <input type="text" id="lastName" name="lastName" class="form-control" ng-model="user.lastName" placeholder="Last Name" required>
-              <div ng-messages="userForm.lastName.$error" role="alert">
-                <p class="help-block error-text" ng-message="required">Last name is required.</p>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <!-- Email-->
-            <div class="form-group col-sm-6" show-errors>
-              <label for="email">Email <small>(Formart: abc@xyz.com)</small></label>
-              <input type="email" id="email" name="email" class="form-control" ng-model="user.email" placeholder="Email" required>
-              <div ng-messages="userForm.email.$error" role="alert">
-                <p class="help-block error-text" ng-message="required">Email address is required.</p>
-                <p class="help-block error-text" ng-message="email">Email address is invalid.</p>
+              <div ng-messages="userForm.displayName.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Display is required.</p>
               </div>
             </div>
             <!-- Roles-->
             <div class="form-group col-sm-6" show-errors>
               <label class="control-label" for="roles">Roles <small>(Formart: 'user', 'user, admin')</small></label>
               <div class="controls">
-                <input class="form-control" type="text" name="roles" ng-model="user.roles" id="roles" ng-list required />
+                <input class="form-control" type="text" name="roles" ng-model="vm.user.roles" id="roles" ng-list required />
                 <div ng-messages="userForm.roles.$error" role="alert">
                   <p class="help-block error-text" ng-message="required">At least one role is required.</p>
                 </div>
@@ -61,34 +46,27 @@
             </div>
           </div>
           <div class="row">
-            <!-- Username-->
+            <!-- Email-->
             <div class="form-group col-sm-6" show-errors>
-              <label for="username">Username</label>
-              <input type="text" id="username" name="username" class="form-control" ng-model="user.username" placeholder="Username" lowercase
-                required>
-              <div ng-messages="userForm.username.$error" role="alert">
-                <p class="help-block error-text" ng-message="required">Username is required.</p>
+              <label for="email">Email <small>(Formart: abc@xyz.com)</small></label>
+              <input type="email" id="email" name="email" class="form-control" ng-model="vm.user.email" placeholder="Email" required>
+              <div ng-messages="userForm.email.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Email address is required.</p>
+                <p class="help-block error-text" ng-message="email">Email address is invalid.</p>
               </div>
             </div>
             <!-- Password-->
-            <div class="form-group col-sm-6" show-errors ng-if="!user._id">
+            <div class="form-group col-sm-6" show-errors ng-if="!vm.user._id">
               <label for="password">Password</label>
-              <input type="password" id="password" name="password" class="form-control" ng-model="user.password" placeholder="Password"
-                popover="{{popoverMsg}}" popover-trigger="focus" password-validator required>
+              <input type="password" id="password" name="password" class="form-control" ng-model="vm.user.password" placeholder="Password" password-validator required>
               <div ng-messages="userForm.password.$error" role="alert">
                 <p class="help-block error-text" ng-message="required">Password is required.</p>
                 <div ng-repeat="passwordError in passwordErrors">
                   <p class="help-block error-text" ng-show="userForm.password.$error.requirements">{{passwordError}}</p>
                 </div>
               </div>
-              <div class="form-group" ng-show="!userForm.password.$error.required">
-                <uib-progressbar class="progress-xs" value="requirementsProgress" type="{{requirementsColor}}"></uib-progressbar>
-              </div>
             </div>
-            <div class="form-group col-sm-6" ng-if="user._id">
-              <label>&nbsp;</label>
-              <a class="btn btn-default btn-block" ui-sref="admin.users.resetpass({ userId: user._id })">Reset password</a>
-            </div>
+            <div class="form-group col-sm-6" ng-if="vm.user._id"></div>
           </div>
         </fieldset>
       </form>

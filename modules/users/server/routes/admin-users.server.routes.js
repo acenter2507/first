@@ -47,9 +47,6 @@ module.exports = function (app) {
   // Lấy danh sách các lần bị người khác report
   app.route('/api/admins/users/:aduserId/bereports').post(adminPolicy.isAllowed, adminController.loadAdminUserBeReports);
 
-  // app.route('/api/admins/users/:aduserId/report').get(adminPolicy.isAllowed, admin.users_report);
-  // app.route('/api/admins/users/:aduserId/reported').get(adminPolicy.isAllowed, admin.users_reported);
-
   // Finish by binding the user middleware
   app.param('aduserId', adminController.userByID);
 };

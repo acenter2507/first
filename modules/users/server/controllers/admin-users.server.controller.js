@@ -402,7 +402,7 @@ exports.loadAdminUserLikes = function (req, res) {
   }).then(function (likes) {
     if (condition.search && condition.search !== '') {
       likes = _.filter(likes, like=> {
-        return vote.poll.like.indexOf(condition.search) >= 0;
+        return like.poll.like.indexOf(condition.search) >= 0;
       });
     }
     res.jsonp(likes);

@@ -22,7 +22,7 @@ function AdminUserController($window, $timeout, $scope, $state, userResolve, Adm
     }
 
     function successCb(res) {
-      vm.user = res;
+      console.log(res);
       alert('Done');
     }
     function errorCb(err) {

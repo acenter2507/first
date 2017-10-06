@@ -47,6 +47,7 @@ exports.user = function (req, res) {
 exports.user_add = function (req, res) {
   var user = new User(req.body);
   user.provider = 'local';
+  user.status = 2;
   user.save(function (err, user) {
     if (err)
       return handleError(res, err);

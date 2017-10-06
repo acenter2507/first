@@ -79,20 +79,21 @@
       <tr>
         <td></td>
         <td class="text-center"><button class="btn btn-default btn-sm" ng-click="vm.handleViewListLogin()">View</button></td>
-        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="vm.handleViewListPolls()">View</td>
-        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="vm.handleViewListComments()">View</td>
-        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="vm.handleViewListVotes()">View</td>
-        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="vm.handleViewListLikes()">View</td>
-        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="vm.handleViewListVieweds()">View</td>
-        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="vm.handleViewListSuggests()">View</td>
-        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="vm.handleViewListReports()">View</td>
-        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="vm.handleViewListBeReports()">View</td>
+        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="vm.handleViewListPolls()">View</button></td>
+        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="vm.handleViewListComments()">View</button></td>
+        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="vm.handleViewListVotes()">View</button></td>
+        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="vm.handleViewListLikes()">View</button></td>
+        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="vm.handleViewListVieweds()">View</button></td>
+        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="vm.handleViewListSuggests()">View</button></td>
+        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="vm.handleViewListReports()">View</button></td>
+        <td class="text-center"><button class="btn btn-default btn-sm" ng-click="vm.handleViewListBeReports()">View</button></td>
         <td class="text-center"></td>
       </tr>
     </table>
   </div>
 </div>
 <!-- Login -->
+<h3 class="mg4b">Logins</h3>
 <div class="row mg12t" id="login-table">
   <div class="col-xs-12">
     <form class="form-inline">
@@ -134,6 +135,7 @@
 </div>
 
 <!-- Polls -->
+<h3 class="mg4b">Polls</h3>
 <div class="row mg12t" id="polls-table">
   <div class="col-xs-12">
     <form class="form-inline">
@@ -187,6 +189,7 @@
 </div>
 
 <!-- Comments -->
+<h3 class="mg4b">Comments</h3>
 <div class="row mg12t" id="comments-table">
   <div class="col-xs-12">
     <form class="form-inline">
@@ -218,7 +221,7 @@
         <tbody>
           <tr ng-repeat="cmt in vm.cmts.data">
             <td><a ui-sref="admin.polls.view({ pollId: cmt.poll._id})">{{:: cmt.poll.title }}</a></td>
-            <td>{{:: cmt.body }}</td>
+            <td>{{:: cmt.body | nl2br }}</td>
             <td>{{:: cmt.likeCnt }}</td>
             <td>{{:: cmt.created | LLL_format }}</td>
             <td>{{:: cmt.updated | LLL_format }}</td>
@@ -236,9 +239,13 @@
 </div>
 
 <!-- Votes -->
+<h3 class="mg4b">Votes</h3>
 <div class="row mg12t" id="votes-table">
   <div class="col-xs-12">
     <form class="form-inline">
+      <div class="form-group">
+        <input type="text" class="form-control input-sm" ng-model="vm.votes.condition.search" placeholder="Search">
+      </div>
       <div class="form-group">
         <input class="form-control input-sm" today="true" moment-picker="vm.votes.condition.created" ng-model="vm.votes.condition.created" format="YYYY/MM/DD" start-view="month" placeholder="Select a date...">
       </div>
@@ -283,56 +290,97 @@
   </div>
 </div>
 
-
-<!-- Votes -->
-<div class="row" ng-show="votesPagedItems.length > 0">
-  <div class="card card-expand">
-    <div class="card-header">
-      <strong class="card-title"><i class="fa fa-list-alt"></i> List votes</strong>
-      <input class="inline form-control w200 mg12l input-sm" ng-model="voteSearch" ng-change="figureOutItemsToDisplay_votes()"
-        placeholder="Search key...">
-      <a class="card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
-      <div class="clearfix"></div>
-    </div>
-    <hr class="mgn">
-    <div class="card-body">
-      <div class="table-responsive">
-        <table class="table table-hover table-outline" id="votes">
-          <thead class="thead-default">
-            <tr>
-              <th>Poll title</th>
-              <th>Voted options</th>
-              <th>Updated</th>
-              <th>First voted</th>
-              <th>Last voted</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="vote in votesPagedItems">
-              <td>{{ vote.poll.title }}</td>
-              <td><span ng-bind="vote.opts"></span></td>
-              <td>{{ vote.updateCnt | shortNumber }}</td>
-              <td><span ng-bind="vote.updated"></span></td>
-              <td><span ng-bind="vote.created"></span></td>
-              <td>
-                <div class="btn-group" role="group">
-                  <a ui-sref="admin.polls.view({ pollId: vote.poll._id })"><i class="icon-eye icons"></i>
-                  </a>
-                  <a class="mg5l" ng-click="delete_vote(vote)"><i class="icon-trash icons"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+<!-- Likes -->
+<h3 class="mg4b">Likes</h3>
+<div class="row mg12t" id="likes-table">
+  <div class="col-xs-12">
+    <form class="form-inline">
+      <div class="form-group">
+        <input type="text" class="form-control input-sm" ng-model="vm.likes.condition.search" placeholder="Search">
       </div>
-      <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="voteFilterLength" ng-model="votesCurrentPage"
-        ng-change="votePageChanged()"></uib-pagination>
-      <div class="clearfix"></div>
+      <div class="form-group">
+        <input class="form-control input-sm" today="true" moment-picker="vm.likes.condition.created" ng-model="vm.likes.condition.created" format="YYYY/MM/DD" start-view="month" placeholder="Select a date...">
+      </div>
+      <div class="form-group">
+        <select ng-model="vm.likes.condition.type" class="form-control input-sm">
+          <option value="">All</option>
+          <option value="1">Like</option>
+          <option value="2">Dislike</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-sm" ng-click="vm.handleLikesPageChanged(1)">Search</button>
+        <button class="btn btn-default btn-sm" ng-click="vm.likes.condition = {};  vm.handleLikesPageChanged(1)">Clear</button>
+      </div>
+    </form>
+  </div>
+  <div class="col-xs-12">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead class="bg-primary">
+          <tr>
+            <th>Poll title</th>
+            <th>Type</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="like in vm.likes.data">
+            <td><a ui-sref="admin.polls.view({ pollId: like.poll._id})">{{:: like.poll.title }}</a></td>
+            <td>{{:: (like.type === 1) ? 'Like' : 'Dislike' }}</td>
+            <td>{{:: like.create | LLL_format }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <ul class="pagination">
+        <li ng-repeat="page in vm.likes.pages" ng-class="{'active': page === vm.likes.page}"><a ng-click="vm.handleLikesPageChanged(page)">{{page}}</a></li>
+      </ul>
     </div>
   </div>
 </div>
+
+<!-- Viewed -->
+<h3 class="mg4b">Viewed</h3>
+<div class="row mg12t" id="views-table">
+  <div class="col-xs-12">
+    <form class="form-inline">
+      <div class="form-group">
+        <input type="text" class="form-control input-sm" ng-model="vm.views.condition.search" placeholder="Search">
+      </div>
+      <div class="form-group">
+        <input class="form-control input-sm" today="true" moment-picker="vm.views.condition.created" ng-model="vm.views.condition.created" format="YYYY/MM/DD" start-view="month" placeholder="Select a date...">
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-sm" ng-click="vm.handleViewedsPageChanged(1)">Search</button>
+        <button class="btn btn-default btn-sm" ng-click="vm.views.condition = {};  vm.handleViewedsPageChanged(1)">Clear</button>
+      </div>
+    </form>
+  </div>
+  <div class="col-xs-12">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead class="bg-primary">
+          <tr>
+            <th>Poll</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="view in vm.views.data">
+            <td><a ui-sref="admin.polls.view({ pollId: view.poll._id})">{{:: view.poll.title }}</a></td>
+            <td>{{:: view.created | LLL_format}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <ul class="pagination">
+        <li ng-repeat="page in vm.views.pages" ng-class="{'active': page === vm.views.page}"><a ng-click="vm.handleViewedsPageChanged(page)">{{page}}</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+
 <!-- Poll reports -->
 <div class="row" ng-show="reportsPagedItems.length > 0">
   <div class="card card-expand">

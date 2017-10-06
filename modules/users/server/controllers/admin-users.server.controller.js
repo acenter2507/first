@@ -344,7 +344,7 @@ exports.loadAdminUserComments = function (req, res) {
     and_arr.push({ created: { $gt: start, $lt: end } });
   }
   query = { $and: and_arr };
-  Poll.paginate(query, {
+  Cmt.paginate(query, {
     sort: sort,
     populate: [{ path: 'poll', select: 'title' }],
     page: page,
@@ -358,18 +358,71 @@ exports.loadAdminUserComments = function (req, res) {
 /**
  * Lấy votes của user
  */
-exports.users_votes = function (req, res) {
-  Vote.find({ user: req.model._id })
-    .sort('-created')
-    .populate('poll', 'title')
-    .populate('opts', 'title')
-    .exec()
-    .then((votes) => {
-      res.jsonp(votes);
-    }, err => {
-      return handleError(res, err);
-    });
+exports.loadAdminUserVotes = function (req, res) {
+  var page = req.body.page || 1;
+  var condition = req.body.condition || {};
+  var sort = '-created';
+  var query = {};
+  var and_arr = [];
+  and_arr.push({ user: req.model._id });
+  if (condition.search && condition.search !== '') {
+    and_arr.push({ 'poll.title': { $regex: '.*' + condition.search + '.*' } });
+  }
+  if (condition.created) {
+    let start = new _moment(condition.created).utc().startOf('day').format();
+    let end = new _moment(condition.created).utc().add(1, 'days').startOf('day').format();
+    and_arr.push({ created: { $gt: start, $lt: end } });
+  }
+  query = { $and: and_arr };
+  Vote.paginate(query, {
+    sort: sort,
+    populate: [
+      { path: 'poll', select: 'title' },
+      { path: 'opts', select: 'title' }
+    ],
+    page: page,
+    limit: 10
+  }).then(function (votes) {
+    res.jsonp(votes);
+  }, err => {
+    return handleError(res, err);
+  });
 };
+
+/**
+ * Lấy votes của user
+ */
+exports.loadAdminUserLikes = function (req, res) {
+  var page = req.body.page || 1;
+  var condition = req.body.condition || {};
+  var sort = '-created';
+  var query = {};
+  var and_arr = [];
+  and_arr.push({ user: req.model._id });
+  if (condition.search && condition.search !== '') {
+    and_arr.push({ 'poll.title': { $regex: '.*' + condition.search + '.*' } });
+  }
+  if (condition.created) {
+    let start = new _moment(condition.created).utc().startOf('day').format();
+    let end = new _moment(condition.created).utc().add(1, 'days').startOf('day').format();
+    and_arr.push({ created: { $gt: start, $lt: end } });
+  }
+  if (condition.type) {
+    and_arr.push({ type: condition.type });
+  }
+  query = { $and: and_arr };
+  Like.paginate(query, {
+    sort: sort,
+    populate: [{ path: 'poll', select: 'title' }],
+    page: page,
+    limit: 10
+  }).then(function (likes) {
+    res.jsonp(likes);
+  }, err => {
+    return handleError(res, err);
+  });
+};
+
 /**
  * Lấy report của user
  */

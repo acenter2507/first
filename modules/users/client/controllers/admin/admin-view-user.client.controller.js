@@ -159,7 +159,7 @@ function AdminViewUserController(
     vm.votes.page = page;
     handleLoadUserVotes();
   };
-  vm.handleDeleteComment = vote => {
+  vm.handleDeleteVote = vote => {
     var rsVote = new VotesService({ _id: vote._id });
     vm.votes.data = _.without(vm.votes.data, vote);
     rsVote.$remove();
@@ -170,7 +170,7 @@ function AdminViewUserController(
         vm.votes.data = res.docs;
         vm.votes.pages = createArrayFromRange(res.pages);
         vm.votes.total = res.total;
-        vm.handleViewListComments();
+        vm.handleViewListVotes();
       })
       .error(err => {
         alert(err.message);
@@ -178,18 +178,69 @@ function AdminViewUserController(
       });
   }
 
-  vm.handleViewListComments = () => {
-
-  };
-  vm.handleViewListVotes = () => {
-
-  };
+  //-------------- LIKES
   vm.handleViewListLikes = () => {
-
+    if (vm.likes) {
+      let likes = angular.element(document.getElementById('likes-table'));
+      $document.scrollToElementAnimated(likes, 100);
+    } else {
+      vm.likes = {};
+      vm.likes.page = 1;
+      vm.likes.condition = {};
+      handleLoadUserLikes();
+      return;
+    }
   };
+  vm.handleLikesPageChanged = page => {
+    vm.likes.page = page;
+    handleLoadUserLikes();
+  };
+  function handleLoadUserLikes() {
+    AdminUserApi.loadAdminUserLikes(vm.user._id, vm.likes.page, vm.likes.condition)
+      .success(res => {
+        vm.likes.data = res.docs;
+        vm.likes.pages = createArrayFromRange(res.pages);
+        vm.likes.total = res.total;
+        vm.handleViewListLikes();
+      })
+      .error(err => {
+        alert(err.message);
+        console.log(err);
+      });
+  }
+
+  //-------------- LIKES
   vm.handleViewListVieweds = () => {
-
+    if (vm.views) {
+      let views = angular.element(document.getElementById('views-table'));
+      $document.scrollToElementAnimated(views, 100);
+    } else {
+      vm.views = {};
+      vm.views.page = 1;
+      vm.views.condition = {};
+      handleLoadUserVieweds();
+      return;
+    }
   };
+  vm.handleViewedsPageChanged = page => {
+    vm.views.page = page;
+    handleLoadUserVieweds();
+  };
+  function handleLoadUserVieweds() {
+    AdminUserApi.loadAdminUserVieweds(vm.user._id, vm.views.page, vm.views.condition)
+      .success(res => {
+        vm.views.data = res.docs;
+        vm.views.pages = createArrayFromRange(res.pages);
+        vm.views.total = res.total;
+        vm.handleViewListVieweds();
+      })
+      .error(err => {
+        alert(err.message);
+        console.log(err);
+      });
+  }
+
+  
   vm.handleViewListSuggests = () => {
 
   };

@@ -151,7 +151,7 @@
             </th>
             <td class="text-center">{{:: user.report.pollCnt }}</td>
             <td>
-              <div class="dropdown" uib-dropdown>
+              <div class="dropdown" uib-dropdown dropdown-append-to-body>
                 <a class="btn btn-primary btn-sm" role="button" uib-dropdown-toggle>Options</a>
                 <ul class="dropdown-menu" role="menu" style="left: -100px; z-index: 2;">
                   <li><a ui-sref="admin.users.view({ userId: user._id })">Detail</a></li>

@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
+  paginate = require('mongoose-paginate'),
   Schema = mongoose.Schema;
 
 /**
@@ -30,5 +31,6 @@ VoteSchema.statics.removeOption = function (optId) {
     });
   });
 };
+VoteSchema.plugin(paginate);
 
 mongoose.model('Vote', VoteSchema);

@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
+  paginate = require('mongoose-paginate'),
   Schema = mongoose.Schema;
 
 /**
@@ -27,5 +28,6 @@ var LikeSchema = new Schema({
     default: 0 // 0: notthing, 1: like, 2: dislike
   }
 });
+LikeSchema.plugin(paginate);
 
 mongoose.model('Like', LikeSchema);

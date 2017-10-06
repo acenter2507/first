@@ -28,6 +28,8 @@ module.exports = function (app) {
   app.route('/api/admins/users/generate/:number/:pass').get(adminPolicy.isAllowed, adminController.generateUsers);
   // Reset password cho user
   app.route('/api/admins/users/:aduserId/resetpass').post(adminPolicy.isAllowed, adminController.resetPassword);
+  // Lấy danh sách logins của user
+  app.route('/api/admins/users/:aduserId/logins').post(adminPolicy.isAllowed, adminController.loadAdminUserLogins);
   // Lấy danh sách polls của user cho page admin.user.view
   app.route('/api/admins/users/:aduserId/polls').post(adminPolicy.isAllowed, adminController.loadAdminUserPolls);
   // Lấy danh sách comment của user
@@ -42,12 +44,11 @@ module.exports = function (app) {
   app.route('/api/admins/users/:aduserId/suggests').post(adminPolicy.isAllowed, adminController.loadAdminUserSuggests);
   // Lấy danh sách các lần report người khác
   app.route('/api/admins/users/:aduserId/reports').post(adminPolicy.isAllowed, adminController.loadAdminUserReports);
+  // Lấy danh sách các lần bị người khác report
+  app.route('/api/admins/users/:aduserId/bereports').post(adminPolicy.isAllowed, adminController.loadAdminUserBeReports);
 
   // app.route('/api/admins/users/:aduserId/report').get(adminPolicy.isAllowed, admin.users_report);
   // app.route('/api/admins/users/:aduserId/reported').get(adminPolicy.isAllowed, admin.users_reported);
-  app.route('/api/admins/users/:aduserId/bereports').get(adminPolicy.isAllowed, adminController.users_bereports);
-  // Lấy danh sách logins của user
-  app.route('/api/admins/users/:aduserId/logins').post(adminPolicy.isAllowed, adminController.loadAdminUserLogins);
 
   // Finish by binding the user middleware
   app.param('aduserId', adminController.userByID);

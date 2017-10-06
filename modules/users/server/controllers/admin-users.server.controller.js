@@ -493,7 +493,7 @@ exports.loadAdminUserReports = function (req, res) {
 /**
  * Lấy be report của user
  */
-exports.loadAdminUserReports = function (req, res) {
+exports.loadAdminUserBeReports = function (req, res) {
   var page = req.body.page || 1;
   var condition = req.body.condition || {};
   var sort = '-created';

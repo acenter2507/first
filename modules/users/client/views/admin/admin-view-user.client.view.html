@@ -468,9 +468,12 @@
         <tbody>
           <tr ng-repeat="report in vm.reports.data">
             <td><a ui-sref="admin.polls.view({ pollId: report.poll._id})">{{:: report.poll.title }}</a></td>
-            <td><a ui-sref="admin.users.view({ userId: report.victim._id})">{{:: report.victim.displayName }}</a></td>
-            <td>{{:: report.reason | nl2br}}</td>
-            <td>{{:: report.created | LLL_format}}</td>
+            <td>
+              <a ng-if="report.victim" ui-sref="admin.users.view({ userId: report.victim._id})">{{:: report.victim.displayName }}</a>
+              <span ng-if="!report.victim">Deleted user</span>
+            </td>
+            <td>{{:: report.reason | nl2br }}</td>
+            <td>{{:: report.created | LLL_format }}</td>
           </tr>
         </tbody>
       </table>
@@ -481,140 +484,50 @@
   </div>
 </div>
 
-<!-- Poll reports -->
-<div class="row" ng-show="reportsPagedItems.length > 0">
-  <div class="card card-expand">
-    <div class="card-header">
-      <strong class="card-title"><i class="fa fa-list-alt"></i> List reported</strong>
-      <input class="inline form-control w200 mg12l input-sm" ng-model="reportSearch" ng-change="figureOutItemsToDisplay_reports()"
-        placeholder="Search key...">
-      <a class="card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
-      <div class="clearfix"></div>
-    </div>
-    <hr class="mgn">
-    <div class="card-body">
-      <div class="table-responsive">
-        <table class="table table-hover table-outline" id="reports">
-          <thead class="thead-default">
-            <tr>
-              <th>Poll title</th>
-              <th>Reason</th>
-              <th>Created</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="report in reportsPagedItems">
-              <td>{{ report.poll.title }}</td>
-              <td><span ng-bind="report.reason"></span></td>
-              <td><span ng-bind="report.created"></span></td>
-              <td>
-                <div class="btn-group" role="group">
-                  <a ui-sref="admin.polls.view({ pollId: report.poll._id })"><i class="icon-eye icons"></i>
-                  </a>
-                  <a class="mg5l" ng-click="delete_report(report)"><i class="icon-trash icons"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+<!-- Suggests -->
+<h3 class="mg4b">Be Reports</h3>
+<div class="row mg12t" id="bereports-table">
+  <div class="col-xs-12">
+    <form class="form-inline">
+      <div class="form-group">
+        <input type="text" class="form-control input-sm" ng-model="vm.bereports.condition.search" placeholder="Search">
       </div>
-      <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="reportFilterLength" ng-model="reportsCurrentPage"
-        ng-change="reportPageChanged()"></uib-pagination>
-      <div class="clearfix"></div>
-    </div>
+      <div class="form-group">
+        <input class="form-control input-sm" today="true" moment-picker="vm.bereports.condition.created" ng-model="vm.bereports.condition.created"
+          format="YYYY/MM/DD" start-view="month" placeholder="Select a date...">
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-sm" ng-click="vm.handleBeReportsPageChanged(1)">Search</button>
+        <button class="btn btn-default btn-sm" ng-click="vm.bereports.condition = {};  vm.handleBeReportsPageChanged(1)">Clear</button>
+      </div>
+    </form>
   </div>
-</div>
-<!-- Poll bereports -->
-<div class="row" ng-show="bereportsPagedItems.length > 0">
-  <div class="card card-expand">
-    <div class="card-header">
-      <strong class="card-title"><i class="fa fa-list-alt"></i> List be reported</strong>
-      <input class="inline form-control w200 mg12l input-sm" ng-model="bereportSearch" ng-change="figureOutItemsToDisplay_bereports()"
-        placeholder="Search key...">
-      <a class="card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
-      <div class="clearfix"></div>
-    </div>
-    <hr class="mgn">
-    <div class="card-body">
-      <div class="table-responsive">
-        <table class="table table-hover table-outline" id="bereports">
-          <thead class="thead-default">
-            <tr>
-              <th>Poll title</th>
-              <th>Reason</th>
-              <th>Created</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="bereport in bereportsPagedItems">
-              <td>{{ bereport.poll.title }}</td>
-              <td><span ng-bind="bereport.reason"></span></td>
-              <td><span ng-bind="bereport.created"></span></td>
-              <td>
-                <div class="btn-group" role="group">
-                  <a ui-sref="admin.polls.view({ pollId: bereport.poll._id })"><i class="icon-eye icons"></i>
-                  </a>
-                  <a class="mg5l" ng-click="delete_bereport(bereport)"><i class="icon-trash icons"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="bereportFilterLength" ng-model="bereportsCurrentPage"
-        ng-change="bereportPageChanged()"></uib-pagination>
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</div>
-<!-- Poll suggested -->
-<div class="row" ng-show="suggestsPagedItems.length > 0">
-  <div class="card card-expand">
-    <div class="card-header">
-      <strong class="card-title"><i class="fa fa-list-alt"></i> List suggested options</strong>
-      <input class="inline form-control w200 mg12l input-sm" ng-model="suggestSearch" ng-change="figureOutItemsToDisplay_suggests()"
-        placeholder="Search key...">
-      <a class="card-expand-toggle card-link"><i class="fa fa-arrow-circle-down"></i></a>
-      <div class="clearfix"></div>
-    </div>
-    <hr class="mgn">
-    <div class="card-body">
-      <div class="table-responsive">
-        <table class="table table-hover table-outline" id="suggests">
-          <thead class="thead-default">
-            <tr>
-              <th>Poll title</th>
-              <th>Option title</th>
-              <th>Status</th>
-              <th>Created</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="suggest in suggestsPagedItems">
-              <td>{{ suggest.poll.title }}</td>
-              <td><span ng-bind="suggest.title"></span></td>
-              <td ng-class="{ 'bg-primary': suggest.status === 1, 'bg-warning': suggest.status === 2, 'bg-danger': suggest.status === 3 }">{{ (suggest.status === 1) ? 'Approved' : (suggest.status === 2) ? 'Waiting' : 'Rejected' }}</td>
-              <td><span ng-bind="suggest.created"></span></td>
-              <td>
-                <div class="btn-group" role="group">
-                  <a ui-sref="admin.polls.view({ pollId: suggest.poll._id })"><i class="icon-eye icons"></i>
-                  </a>
-                  <a class="mg5l" ng-click="delete_suggest(suggest)"><i class="icon-trash icons"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="suggestFilterLength" ng-model="suggestsCurrentPage"
-        ng-change="suggestPageChanged()"></uib-pagination>
-      <div class="clearfix"></div>
+  <div class="col-xs-12">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead class="bg-primary">
+          <tr>
+            <th>Poll</th>
+            <th>Owner</th>
+            <th>Reason</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="bereport in vm.bereports.data">
+            <td><a ui-sref="admin.polls.view({ pollId: bereport.poll._id})">{{:: bereport.poll.title }}</a></td>
+            <td>
+              <a ng-if="bereport.user" ui-sref="admin.users.view({ userId: bereport.user._id})">{{:: bereport.user.displayName }}</a>
+              <span ng-if="!bereport.user">Deleted user</span>
+            </td>
+            <td>{{:: bereport.reason | nl2br }}</td>
+            <td>{{:: bereport.created | LLL_format }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <ul class="pagination">
+        <li ng-repeat="page in vm.bereports.pages" ng-class="{'active': page === vm.bereports.page}"><a ng-click="vm.handleBeReportsPageChanged(page)">{{page}}</a></li>
+      </ul>
     </div>
   </div>
 </div>

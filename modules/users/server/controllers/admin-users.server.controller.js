@@ -484,8 +484,8 @@ exports.loadAdminUserReports = function (req, res) {
     ],
     page: page,
     limit: 10
-  }).then(function (opts) {
-    res.jsonp(opts);
+  }).then(function (reports) {
+    res.jsonp(reports);
   }, err => {
     return handleError(res, err);
   });
@@ -493,16 +493,36 @@ exports.loadAdminUserReports = function (req, res) {
 /**
  * Lấy be report của user
  */
-exports.users_bereports = function (req, res) {
-  Report.find({ victim: req.model._id })
-    .sort('-created')
-    .populate('poll', 'title')
-    .exec()
-    .then((reports) => {
-      res.jsonp(reports);
-    }, err => {
-      return handleError(res, err);
-    });
+exports.loadAdminUserReports = function (req, res) {
+  var page = req.body.page || 1;
+  var condition = req.body.condition || {};
+  var sort = '-created';
+  var query = {};
+  var and_arr = [];
+  and_arr.push({ victim: req.model._id });
+  if (condition.search && condition.search !== '') {
+    and_arr.push({ reason: { $regex: '.*' + condition.search + '.*' } });
+  }
+  if (condition.created) {
+    let start = new _moment(condition.created).utc().startOf('day').format();
+    let end = new _moment(condition.created).utc().add(1, 'days').startOf('day').format();
+    and_arr.push({ created: { $gt: start, $lt: end } });
+  }
+  query = { $and: and_arr };
+
+  Report.paginate(query, {
+    sort: sort,
+    populate: [
+      { path: 'poll', select: 'title' },
+      { path: 'user', select: 'displayName' }
+    ],
+    page: page,
+    limit: 10
+  }).then(function (reports) {
+    res.jsonp(reports);
+  }, err => {
+    return handleError(res, err);
+  });
 };
 /**
  * Lấy history login của user

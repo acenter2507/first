@@ -276,11 +276,36 @@ function AdminViewUserController(
       });
   }
 
-
-
+  //-------------- REPORTED
   vm.handleViewListBeReports = () => {
-
+    if (vm.bereports) {
+      let bereports = angular.element(document.getElementById('bereports-table'));
+      $document.scrollToElementAnimated(bereports, 100);
+    } else {
+      vm.bereports = {};
+      vm.bereports.page = 1;
+      vm.bereports.condition = {};
+      handleLoadUserBeReports();
+      return;
+    }
   };
+  vm.handleBeReportsPageChanged = page => {
+    vm.bereports.page = page;
+    handleLoadUserBeReports();
+  };
+  function handleLoadUserBeReports() {
+    AdminUserApi.loadAdminUserBeReports(vm.user._id, vm.bereports.page, vm.bereports.condition)
+      .success(res => {
+        vm.reports.data = res.docs;
+        vm.reports.pages = createArrayFromRange(res.pages);
+        vm.reports.total = res.total;
+        vm.handleViewListBeReports();
+      })
+      .error(err => {
+        alert(err.message);
+        console.log(err);
+      });
+  }
 
   vm.handleDeleteUser = () => {
     if ($window.confirm('Are you sure you want to delete?')) {

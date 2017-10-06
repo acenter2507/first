@@ -38,18 +38,16 @@ function AdminUserController($window, $timeout, $scope, $state, userResolve, Adm
   };
   vm.handleBlockUser = () => {
     if ($window.confirm('Are you sure you want to block?')) {
-      var rs_user = new AdminUserService({ _id: vm.user._id });
-      rs_user.status = 3;
-      rs_user.$update(() => {
+      vm.user.status = 3;
+      vm.user.$update(() => {
         alert('Done');
       });
     }
   };
   vm.handleUnBlockUser = () => {
     if ($window.confirm('Are you sure you want to unblock?')) {
-      var rs_user = new AdminUserService({ _id: vm.user._id });
-      rs_user.status = 2;
-      rs_user.$update(() => {
+      vm.user.status = 2;
+      vm.user.$update(() => {
         alert('Done');
       });
     }

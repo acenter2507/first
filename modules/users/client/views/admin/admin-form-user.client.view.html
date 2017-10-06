@@ -2,12 +2,12 @@
   <div class="col-xs-12 pd6x">
     <div class="form-group">
       <a ui-sref="admin.users.list" class="btn btn-default pull-right btn-sm">List</a>
-      <a ng-click="vm.handleDeleteUser()" class="btn btn-danger pull-right btn-sm mg5r">Delete</a>
-      <a ui-sref="profile.info({ userId: vm.user.slug })" class="btn btn-info btn-sm pull-right mg5r">View profile</a>
-      <a ng-if="vm.user.status === 1" ng-click="vm.handlePushVerify()" class="btn btn-default btn-sm pull-right mg5r">Send mail push</a>
-      <a ng-if="vm.user.status === 2" ng-click="vm.handleBlockUser()" class="btn btn-default btn-sm pull-right mg5r">Block</a>
-      <a ng-if="vm.user.status === 3" ng-click="vm.handleUnBlockUser()" class="btn btn-default btn-sm pull-right mg5r">Unblock</a>
-      <a ng-if="vm.user.provider === 'local'" ng-click="vm.handleResetPassword()" class="btn btn-default btn-sm pull-right mg5r">Reset pass</a>
+      <a ng-if="vm.user._id" ng-click="vm.handleDeleteUser()" class="btn btn-danger pull-right btn-sm mg5r">Delete</a>
+      <a ng-if="vm.user._id" ui-sref="profile.info({ userId: vm.user.slug })" class="btn btn-info btn-sm pull-right mg5r">View profile</a>
+      <a ng-if="vm.user._id && vm.user.status === 1" ng-click="vm.handlePushVerify()" class="btn btn-default btn-sm pull-right mg5r">Send mail push</a>
+      <a ng-if="vm.user._id && vm.user.status === 2" ng-click="vm.handleBlockUser()" class="btn btn-default btn-sm pull-right mg5r">Block</a>
+      <a ng-if="vm.user._id && vm.user.status === 3" ng-click="vm.handleUnBlockUser()" class="btn btn-default btn-sm pull-right mg5r">Unblock</a>
+      <a ng-if="vm.user._id && vm.user.provider === 'local'" ng-click="vm.handleResetPassword()" class="btn btn-default btn-sm pull-right mg5r">Reset pass</a>
       <a class="btn btn-primary pull-right mg5r" ng-click="vm.handleSaveUser(userForm.$valid)">{{ (vm.user._id) ? 'Update' : 'Save' }}</a>
     </div>
   </div>

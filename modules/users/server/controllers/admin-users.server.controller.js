@@ -350,9 +350,6 @@ exports.loadAdminUserVotes = function (req, res) {
   var query = {};
   var and_arr = [];
   and_arr.push({ user: req.model._id });
-  if (condition.search && condition.search !== '') {
-    and_arr.push({ 'poll.title': { $regex: '.*' + condition.search + '.*' } });
-  }
   if (condition.created) {
     let start = new _moment(condition.created).utc().startOf('day').format();
     let end = new _moment(condition.created).utc().add(1, 'days').startOf('day').format();
@@ -368,6 +365,11 @@ exports.loadAdminUserVotes = function (req, res) {
     page: page,
     limit: 10
   }).then(function (votes) {
+    if (condition.search && condition.search !== '') {
+      votes = _.filter(votes, vote=> {
+        return vote.poll.title.indexOf(condition.search) >= 0;
+      });
+    }
     res.jsonp(votes);
   }, err => {
     return handleError(res, err);
@@ -383,9 +385,6 @@ exports.loadAdminUserLikes = function (req, res) {
   var query = {};
   var and_arr = [];
   and_arr.push({ user: req.model._id });
-  if (condition.search && condition.search !== '') {
-    and_arr.push({ 'poll.title': { $regex: '.*' + condition.search + '.*' } });
-  }
   if (condition.created) {
     let start = new _moment(condition.created).utc().startOf('day').format();
     let end = new _moment(condition.created).utc().add(1, 'days').startOf('day').format();
@@ -401,6 +400,11 @@ exports.loadAdminUserLikes = function (req, res) {
     page: page,
     limit: 10
   }).then(function (likes) {
+    if (condition.search && condition.search !== '') {
+      likes = _.filter(likes, like=> {
+        return vote.poll.like.indexOf(condition.search) >= 0;
+      });
+    }
     res.jsonp(likes);
   }, err => {
     return handleError(res, err);
@@ -416,9 +420,6 @@ exports.loadAdminUserVieweds = function (req, res) {
   var query = {};
   var and_arr = [];
   and_arr.push({ user: req.model._id });
-  if (condition.search && condition.search !== '') {
-    and_arr.push({ 'poll.title': { $regex: '.*' + condition.search + '.*' } });
-  }
   if (condition.created) {
     let start = new _moment(condition.created).utc().startOf('day').format();
     let end = new _moment(condition.created).utc().add(1, 'days').startOf('day').format();
@@ -431,6 +432,11 @@ exports.loadAdminUserVieweds = function (req, res) {
     page: page,
     limit: 10
   }).then(function (views) {
+    if (condition.search && condition.search !== '') {
+      views = _.filter(views, view=> {
+        return view.poll.like.indexOf(condition.search) >= 0;
+      });
+    }
     res.jsonp(views);
   }, err => {
     return handleError(res, err);

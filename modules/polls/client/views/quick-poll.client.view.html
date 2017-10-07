@@ -3,21 +3,18 @@
     <a ng-click="vm.save(vm.form.pollForm.$valid)">{{:: 'LB_POST' | translate }}</a>
     <a class="mg10l" ng-click="vm.discard()">{{:: 'LB_DISCARD' | translate}}</a>
     <div uib-dropdown class="card-link">
-      <a class="text-muted" ng-class="{ 'text-shake': !vm.poll.isPublic }" uib-dropdown-toggle href="#"><i class="fa fa-lock"></i> {{:: 'LB_POLL_OPTION' | translate}}</a>
+      <a ng-class="{ 'text-shake': !vm.poll.isPublic }" uib-dropdown-toggle href="#"><i class="fa fa-lock"></i> {{:: 'LB_POLL_OPTION' | translate}}</a>
       <ul class="uib-dropdown-menu dropdown-menu-right dropdown-menu-flat" role="menu">
-        <li class="pdn text-right">
-          <a class="pull-right" ng-click="$mdMenu.close()"><i class="fa fa-times"></i></a>
-        </li>
-        <li class="mgn pdn">
+        <li>
           <md-checkbox class="md-primary" ng-model="vm.poll.isPublic">{{:: 'LB_PUBLIC' | translate}}</md-checkbox>
         </li>
-        <li class="mgn pdn">
+        <li>
           <md-checkbox class="md-primary" ng-model="vm.poll.allow_guest">{{:: 'LB_POLL_ALLOW_GUEST' | translate}}</md-checkbox>
         </li>
-        <li class="mgn pdn">
+        <li>
           <md-checkbox class="md-primary" ng-model="vm.poll.allow_multiple">{{:: 'LB_POLL_MULTIPLE' | translate}}</md-checkbox>
         </li>
-        <li class="mgn pdn">
+        <li>
           <md-checkbox class="md-primary" ng-model="vm.poll.allow_add">{{:: 'LB_POLL_SUGGEST' | translate}}</md-checkbox>
         </li>
       </ul>

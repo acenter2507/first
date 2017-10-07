@@ -35,26 +35,6 @@
             <li ng-if="isCurrentOwner && screen === 'profile-bookmark'"><a ng-click="handleRemoveBookmark(poll)"><i class="fa fa-bookmark"></i> {{:: 'LB_POLLS_MENU_RMBOOKMARK' | translate }}</a></li>
           </ul>
         </div>
-        <!-- <md-menu md-offset="-12 20" md-position-mode="target-right target" ng-if="isLogged">
-          <a class="poll-info-title-menu" ng-click="$mdMenu.open($event)" aria-label="Open menu"><i class="icon-options"></i></a>
-          <md-menu-content>
-            <ul class="menu-list">
-              <li><a ui-sref="polls.view({ pollId: poll.slug })"><i class="fa fa-eye"></i> {{:: 'LB_POLLS_MENU_VIEW' | translate }}</a></li>
-              <li ng-if="poll.isCurrentUserOwner"><a ui-sref="polls.edit({ pollId: poll.slug })"><i class="fa fa-pencil-square-o"></i> {{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
-              <li ng-if="poll.isCurrentUserOwner"><a ng-click="handleDeletePoll(poll)"><i class="fa fa-trash"></i> {{:: 'LB_DELETE' | translate }}</a></li>
-              <li ng-if="isLogged">
-                <a ng-click="handleFollowPoll(poll)">
-                  <i class="fa fa-rss"></i>
-                  {{(poll.follow._id) ? 'LB_POLLS_MENU_UNFOLLOW' : 'LB_POLLS_MENU_FOLLOW' | translate}}
-                </a>
-              </li>
-              <li ng-if="isLogged && !poll.isCurrentUserOwner && !poll.reported"><a ng-click="handleReportPoll(poll)"><i class="fa fa-exclamation-circle"></i> {{:: 'LB_POLLS_MENU_REPORT' | translate }}</a></li>
-              <li ng-if="isLogged && !poll.isCurrentUserOwner && !poll.bookmarked"><a ng-click="handleBookmarkPoll(poll)"><i class="fa fa-bookmark"></i> {{:: 'LB_POLLS_MENU_BOOKMARK' | translate }}</a></li>
-              
-              <li ng-if="isCurrentOwner && screen === 'profile-bookmark'"><a ng-click="handleRemoveBookmark(poll)"><i class="fa fa-bookmark"></i> {{:: 'LB_POLLS_MENU_RMBOOKMARK' | translate }}</a></li>
-            </ul>
-          </md-menu-content>
-        </md-menu> -->
         <p class="poll-info-title-close">
           <i class="fa fa-calendar"></i>
           <span ng-if="poll.close">{{:: 'LB_CLOSE' | translate }} <span am-time-ago="poll.close"></span></span>

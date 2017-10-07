@@ -9,7 +9,7 @@
           <div class="cover-name"><span>{{:: profile.displayName }}</span></div>
           <div uib-dropdown dropdown-append-to-body class="cover-menu">
             <button class="btn-fab" uib-dropdown-toggle><i class="fa fa-ellipsis-v fa-lg"></i></button>
-            <ul class="uib-dropdown-menu dropdown-menu-flat" role="menu">
+            <ul class="uib-dropdown-menu dropdown-menu-right dropdown-menu-flat" role="menu">
               <li ui-sref-active="active" ng-if="isCurrentOwner"><a ui-sref="settings.profile">{{:: 'LB_PROFILE_EDIT' | translate }}</a></li>
               <li ui-sref-active="active"><a ui-sref="profile.info">{{:: 'LB_PROFILE' | translate }}</a></li>
               <hr class="mg10t mg10b" />

@@ -19,7 +19,7 @@
         </span>
         <div uib-dropdown dropdown-append-to-body class="poll-info-title-menu" ng-if="isLogged">
           <a class="text-muted" uib-dropdown-toggle href="#"><i class="icon-options"></i></a>
-          <ul class="uib-dropdown-menu dropdown-menu-right dropdown-menu-flat mg5t- mg10r-" role="menu" aria-labelledby="split-button">
+          <ul class="uib-dropdown-menu dropdown-menu-right dropdown-menu-flat mg5t- mg10r-">
             <li><a ui-sref="polls.view({ pollId: poll.slug })"><i class="fa fa-eye"></i> {{:: 'LB_POLLS_MENU_VIEW' | translate }}</a></li>
             <li ng-if="poll.isCurrentUserOwner"><a ui-sref="polls.edit({ pollId: poll.slug })"><i class="fa fa-pencil-square-o"></i> {{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
             <li ng-if="poll.isCurrentUserOwner"><a ng-click="handleDeletePoll(poll)"><i class="fa fa-trash"></i> {{:: 'LB_DELETE' | translate }}</a></li>

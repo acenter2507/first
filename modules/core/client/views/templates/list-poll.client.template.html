@@ -17,9 +17,9 @@
         <span class="poll-info-title-time">{{:: 'LB_POLLS_CREATEON' | translate }}
           <span am-time-ago="poll.created"></span>
         </span>
-        <div uib-dropdown dropdown-append-to-body class="poll-info-title-menu" ng-if="isLogged">
+        <div uib-dropdown dropdown-append-to-body outsideClick class="poll-info-title-menu" ng-if="isLogged">
           <a class="text-muted" uib-dropdown-toggle href="#"><i class="icon-options"></i></a>
-          <ul class="uib-dropdown-menu dropdown-menu-right dropdown-menu-flat mg5t- mg10r-">
+          <ul class="uib-dropdown-menu dropdown-menu-right dropdown-menu-flat mg5t-">
             <li><a ui-sref="polls.view({ pollId: poll.slug })"><i class="fa fa-eye"></i> {{:: 'LB_POLLS_MENU_VIEW' | translate }}</a></li>
             <li ng-if="poll.isCurrentUserOwner"><a ui-sref="polls.edit({ pollId: poll.slug })"><i class="fa fa-pencil-square-o"></i> {{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
             <li ng-if="poll.isCurrentUserOwner"><a ng-click="handleDeletePoll(poll)"><i class="fa fa-trash"></i> {{:: 'LB_DELETE' | translate }}</a></li>
@@ -123,7 +123,7 @@
     </div>
     <div class="poll_item_info share" uib-dropdown dropdown-append-to-body>
       <a href="#" class="text-muted" uib-dropdown-toggle><i class="fa fa-share-alt"></i></a>
-      <ul class="uib-dropdown-menu dropdown-menu-right dropdown-menu-flat mg5t- mg10r-">
+      <ul class="uib-dropdown-menu dropdown-menu-right dropdown-menu-flat">
         <div class="quick-share-menu">
           <a class="text-muted" ng-click="handleShareSocialPoll(poll, 'facebook')"><i class="fa fa-facebook"></i></a>
           <a class="text-muted" ng-click="handleShareSocialPoll(poll, 'twitter')"><i class="fa fa-twitter"></i></a>

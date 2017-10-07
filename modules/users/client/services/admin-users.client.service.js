@@ -54,21 +54,11 @@ function AdminUserApi($http) {
   this.loadAdminUserBeReports = (userId, page, condition) => {
     return $http.post('/api/admins/users/' + userId + '/bereports', { condition: condition, page: page }, { ignoreLoadingBar: true });
   };
-
-  this.get_reports_by_user = userId => {
-    return $http.get('/api/admins/users/' + userId + '/reports', {
-      ignoreLoadingBar: true
-    });
+  this.loadAdminUserBeReports = (userId, page, condition) => {
+    return $http.post('/api/admins/users/' + userId + '/bereports', { condition: condition, page: page }, { ignoreLoadingBar: true });
   };
-  this.get_bereports_by_user = userId => {
-    return $http.get('/api/admins/users/' + userId + '/bereports', {
-      ignoreLoadingBar: true
-    });
-  };
-  this.get_suggests_by_user = userId => {
-    return $http.get('/api/admins/users/' + userId + '/suggests', {
-      ignoreLoadingBar: true
-    });
+  this.pushVerifyUser = (userId) => {
+    return $http.get('/api/admins/users/' + userId + '/pushVerify', { ignoreLoadingBar: true });
   };
   return this;
 }

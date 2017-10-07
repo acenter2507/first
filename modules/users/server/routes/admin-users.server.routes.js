@@ -46,6 +46,8 @@ module.exports = function (app) {
   app.route('/api/admins/users/:aduserId/reports').post(adminPolicy.isAllowed, adminController.loadAdminUserReports);
   // Lấy danh sách các lần bị người khác report
   app.route('/api/admins/users/:aduserId/bereports').post(adminPolicy.isAllowed, adminController.loadAdminUserBeReports);
+  // Gửi email nhắc người dùng verify account
+  app.route('/api/admins/users/:aduserId/pushVerify').get(adminPolicy.isAllowed, adminController.pushVerifyUser);
 
   // Finish by binding the user middleware
   app.param('aduserId', adminController.userByID);

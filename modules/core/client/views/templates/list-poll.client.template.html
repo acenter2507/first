@@ -15,9 +15,27 @@
         <a class="poll-info-title-user-name" ng-if="poll.user" ui-sref="profile.info({userId: poll.user.slug})">{{::poll.user.displayName}}</a>
         <span class="poll-info-title-user-name" ng-if="!poll.user">{{:: 'LB_DELETED_USER' | translate }}</span>
         <span class="poll-info-title-time">{{:: 'LB_POLLS_CREATEON' | translate }}
-            <span am-time-ago="poll.created"></span>
+          <span am-time-ago="poll.created"></span>
         </span>
-        <md-menu md-offset="-12 20" md-position-mode="target-right target" ng-if="isLogged">
+        <div uib-dropdown dropdown-append-to-body class="poll-info-title-menu" ng-if="isLogged">
+          <a class="text-muted" uib-dropdown-toggle href="#"><i class="icon-options"></i></a>
+          <ul class="uib-dropdown-menu dropdown-menu-right dropdown-menu-flat mg5t- mg10r-" role="menu" aria-labelledby="split-button">
+            <li><a ui-sref="polls.view({ pollId: poll.slug })"><i class="fa fa-eye"></i> {{:: 'LB_POLLS_MENU_VIEW' | translate }}</a></li>
+            <li ng-if="poll.isCurrentUserOwner"><a ui-sref="polls.edit({ pollId: poll.slug })"><i class="fa fa-pencil-square-o"></i> {{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
+            <li ng-if="poll.isCurrentUserOwner"><a ng-click="handleDeletePoll(poll)"><i class="fa fa-trash"></i> {{:: 'LB_DELETE' | translate }}</a></li>
+            <li ng-if="isLogged">
+              <a ng-click="handleFollowPoll(poll)">
+                <i class="fa fa-rss"></i>
+                {{(poll.follow._id) ? 'LB_POLLS_MENU_UNFOLLOW' : 'LB_POLLS_MENU_FOLLOW' | translate}}
+              </a>
+            </li>
+            <li ng-if="isLogged && !poll.isCurrentUserOwner && !poll.reported"><a ng-click="handleReportPoll(poll)"><i class="fa fa-exclamation-circle"></i> {{:: 'LB_POLLS_MENU_REPORT' | translate }}</a></li>
+            <li ng-if="isLogged && !poll.isCurrentUserOwner && !poll.bookmarked"><a ng-click="handleBookmarkPoll(poll)"><i class="fa fa-bookmark"></i> {{:: 'LB_POLLS_MENU_BOOKMARK' | translate }}</a></li>
+              
+            <li ng-if="isCurrentOwner && screen === 'profile-bookmark'"><a ng-click="handleRemoveBookmark(poll)"><i class="fa fa-bookmark"></i> {{:: 'LB_POLLS_MENU_RMBOOKMARK' | translate }}</a></li>
+          </ul>
+        </div>
+        <!-- <md-menu md-offset="-12 20" md-position-mode="target-right target" ng-if="isLogged">
           <a class="poll-info-title-menu" ng-click="$mdMenu.open($event)" aria-label="Open menu"><i class="icon-options"></i></a>
           <md-menu-content>
             <ul class="menu-list">
@@ -32,11 +50,11 @@
               </li>
               <li ng-if="isLogged && !poll.isCurrentUserOwner && !poll.reported"><a ng-click="handleReportPoll(poll)"><i class="fa fa-exclamation-circle"></i> {{:: 'LB_POLLS_MENU_REPORT' | translate }}</a></li>
               <li ng-if="isLogged && !poll.isCurrentUserOwner && !poll.bookmarked"><a ng-click="handleBookmarkPoll(poll)"><i class="fa fa-bookmark"></i> {{:: 'LB_POLLS_MENU_BOOKMARK' | translate }}</a></li>
-              <!-- Chỉ màn hình Profile bookmark -->
+              
               <li ng-if="isCurrentOwner && screen === 'profile-bookmark'"><a ng-click="handleRemoveBookmark(poll)"><i class="fa fa-bookmark"></i> {{:: 'LB_POLLS_MENU_RMBOOKMARK' | translate }}</a></li>
             </ul>
           </md-menu-content>
-        </md-menu>
+        </md-menu> -->
         <p class="poll-info-title-close">
           <i class="fa fa-calendar"></i>
           <span ng-if="poll.close">{{:: 'LB_CLOSE' | translate }} <span am-time-ago="poll.close"></span></span>
@@ -123,18 +141,35 @@
     <div class="poll_item_info" tooltip-placement="bottom" uib-tooltip="{{:: 'LB_POLLS_COMMENTS' | translate }}">
       <i class="fa fa-commenting-o"></i> {{ poll.cmtCnt | shortNumber}}
     </div>
-    <div class="poll_item_info share">
-      <md-menu md-position-mode="target-right target">
-        <a href="#" ng-mouseenter="$mdMenu.open()"><i class="fa fa-share-alt"></i></a>
-        <md-menu-content width="1" ng-mouseleave="$mdMenu.close()">
+        <div uib-dropdown dropdown-append-to-body class="poll-info-title-menu" ng-if="isLogged">
+          <a class="text-muted" uib-dropdown-toggle href="#"><i class="icon-options"></i></a>
+          <ul class="uib-dropdown-menu dropdown-menu-right dropdown-menu-flat mg5t- mg10r-" role="menu" aria-labelledby="split-button">
+            <li><a ui-sref="polls.view({ pollId: poll.slug })"><i class="fa fa-eye"></i> {{:: 'LB_POLLS_MENU_VIEW' | translate }}</a></li>
+            <li ng-if="poll.isCurrentUserOwner"><a ui-sref="polls.edit({ pollId: poll.slug })"><i class="fa fa-pencil-square-o"></i> {{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
+            <li ng-if="poll.isCurrentUserOwner"><a ng-click="handleDeletePoll(poll)"><i class="fa fa-trash"></i> {{:: 'LB_DELETE' | translate }}</a></li>
+            <li ng-if="isLogged">
+              <a ng-click="handleFollowPoll(poll)">
+                <i class="fa fa-rss"></i>
+                {{(poll.follow._id) ? 'LB_POLLS_MENU_UNFOLLOW' : 'LB_POLLS_MENU_FOLLOW' | translate}}
+              </a>
+            </li>
+            <li ng-if="isLogged && !poll.isCurrentUserOwner && !poll.reported"><a ng-click="handleReportPoll(poll)"><i class="fa fa-exclamation-circle"></i> {{:: 'LB_POLLS_MENU_REPORT' | translate }}</a></li>
+            <li ng-if="isLogged && !poll.isCurrentUserOwner && !poll.bookmarked"><a ng-click="handleBookmarkPoll(poll)"><i class="fa fa-bookmark"></i> {{:: 'LB_POLLS_MENU_BOOKMARK' | translate }}</a></li>
+              
+            <li ng-if="isCurrentOwner && screen === 'profile-bookmark'"><a ng-click="handleRemoveBookmark(poll)"><i class="fa fa-bookmark"></i> {{:: 'LB_POLLS_MENU_RMBOOKMARK' | translate }}</a></li>
+          </ul>
+        </div>
+    <div class="poll_item_info share" uib-dropdown dropdown-append-to-body>
+      <a href="#" class="text-muted" uib-dropdown-toggle><i class="fa fa-share-alt"></i></a>
+      <ul class="uib-dropdown-menu dropdown-menu-right dropdown-menu-flat mg5t- mg10r-" role="menu" aria-labelledby="split-button">
           <div class="quick-share-menu">
-            <a ng-click="handleShareSocialPoll(poll, 'facebook')"><i class="fa fa-facebook"></i></a>
-            <a ng-click="handleShareSocialPoll(poll, 'twitter')"><i class="fa fa-twitter"></i></a>
-            <a ng-click="handleShareSocialPoll(poll, 'linkedin')"><i class="fa fa-linkedin"></i></a>
-            <a ng-click="handleShareSocialPoll(poll, 'google')"><i class="fa fa-google-plus"></i></a>
-            <a ng-click="handleShareSocialPoll(poll, 'tumblr')"><i class="fa fa-tumblr"></i></a>
+            <a class="text-muted" ng-click="handleShareSocialPoll(poll, 'facebook')"><i class="fa fa-facebook"></i></a>
+            <a class="text-muted" ng-click="handleShareSocialPoll(poll, 'twitter')"><i class="fa fa-twitter"></i></a>
+            <a class="text-muted" ng-click="handleShareSocialPoll(poll, 'linkedin')"><i class="fa fa-linkedin"></i></a>
+            <a class="text-muted" ng-click="handleShareSocialPoll(poll, 'google')"><i class="fa fa-google-plus"></i></a>
+            <a class="text-muted" ng-click="handleShareSocialPoll(poll, 'tumblr')"><i class="fa fa-tumblr"></i></a>
           </div>
-      </md-menu>
+      </ul>
     </div>
   </div>
 

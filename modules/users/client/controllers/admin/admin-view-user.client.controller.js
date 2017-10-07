@@ -346,6 +346,12 @@ function AdminViewUserController(
       });
   };
   vm.handlePushVerify = () => {
+    AdminUserApi.pushVerifyUser(vm.user._id)
+      .success(() => { alert("Done"); })
+      .error(err => {
+        alert(err.message);
+        console.log(err);
+      });
   };
   function createArrayFromRange(range) {
     var array = [];

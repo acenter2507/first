@@ -14,6 +14,13 @@ a {
   a:focus {
     text-decoration: none !important;
     outline: none !important; }
+a.text-muted {
+  opacity: 0.8;
+  color: #777; }
+  a.text-muted:hover,
+  a.text-muted:focus {
+    opacity: 1;
+    color: #777; }
 textarea {
   resize: vertical; }
 
@@ -611,6 +618,19 @@ textarea {
       border: dotted 2px #267ed5; }
     .ngdialog.ngdialog-theme-default.images-upload-dialog input[type="file"] {
       display: none;}
+
+.uib-dropdown-menu.dropdown-menu-flat {
+  background-clip: padding-box !important;
+  background-color: #fff !important;
+  /*border: 1px solid rgba(0, 0, 0, .15);*/
+  /*border-radius: 3px;*/
+  border: none;
+  border-radius: 0;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, .3) !important; }
+  .uib-dropdown-menu.dropdown-menu-right.dropdown-menu-flat {
+    border-top-right-radius: 0 !important; }
+    .uib-dropdown-menu.dropdown-menu-flat > li > a {
+      padding: 3px 12px !important; }
 
 .highlight-text {
   color: #267ed5;

@@ -14,6 +14,8 @@ var path = require('path'),
   Poll = mongoose.model('Poll'),
   Like = mongoose.model('Like'),
   View = mongoose.model('View'),
+  mail = require(path.resolve('./config/lib/mail')),
+  crypto = require('crypto'),
 
   Notif = mongoose.model('Notif'),
   Bookmark = mongoose.model('Bookmark'),
@@ -515,6 +517,42 @@ exports.loadAdminUserLogins = function (req, res) {
 };
 
 /**
+ * Nhắc user xác nhận tài khoản
+ */
+exports.pushVerifyUser = function (req, res) {
+  if (!req.model || req.model.email) {
+    return handleError(res, new Error('Check info user'));
+  }
+  var user = req.model.toObject();
+  getToken()
+    .then(token => {
+      user.activeAccountToken = token;
+      return saveUser(user);
+    })
+    .then(_user => {
+      var url = config.http + '://' + req.headers.host + '/api/auth/verify/' + _user.activeAccountToken;
+      var mailTemplate = 'verification_' + _user.language;
+      var mailContent = {
+        name: _user.displayName,
+        appName: config.app.title,
+        url: url
+      };
+      var subject = global.translate[_user.language].EMAIL_SJ_VERIFICATION || global.translate[config.defaultLanguage].EMAIL_SJ_VERIFICATION;
+      var mailOptions = {
+        from: config.app.title + '<' + config.mailer.account.from + '>',
+        to: _user.email,
+        subject: subject
+      };
+      return mail.send(config.mailer.account.options, mailContent, mailOptions, mailTemplate);
+    })
+    .then(() => {
+      return res.end();
+    })
+    .catch(err => {
+      return handleError(res, err);
+    });
+};
+/**
  * LOCAL FUNCTION
  */
 function handleError(res, err) {
@@ -531,5 +569,28 @@ function countUserLogins(userId) {
         if (err) return reject(err);
         return resolve(count);
       });
+  });
+}
+// Tạo token verify tài khoản
+function getToken() {
+  return new Promise((resolve, reject) => {
+    crypto.randomBytes(20, function (err, buffer) {
+      if (err) {
+        return reject(new Error('MS_CM_LOAD_ERROR'));
+      }
+      var token = buffer.toString('hex');
+      return resolve(token);
+    });
+  });
+}
+function saveUser(user) {
+  return new Promise((resolve, reject) => {
+    if (!user) return reject(new Error('MS_CM_LOAD_ERROR'));
+    user.save(function (err, _user) {
+      if (err) return reject(new Error('MS_CM_LOAD_ERROR'));
+      _user.password = undefined;
+      _user.salt = undefined;
+      return resolve(_user);
+    });
   });
 }

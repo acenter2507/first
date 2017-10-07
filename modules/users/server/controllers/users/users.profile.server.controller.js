@@ -666,7 +666,7 @@ exports.search_user_by_name = function (req, res) {
 
 exports.loadTopUsers = function (req, res) {
   var limit = req.params.limit || 0;
-  User.find().sort('-report.rank')
+  User.find({ roles: { $ne: 'admin' } }).sort('-report.rank')
     .select('displayName profileImageURL slug created report.rank report.pollCnt report.cmtCnt')
     .limit(limit * 1)
     .exec(function (err, users) {

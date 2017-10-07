@@ -214,8 +214,8 @@
     };
 
     // Quick menu
-    $scope.isOpen = false;
-    $scope.q_quick_poll = () => {
+    vm.q_quick_menu_open = false;
+    vm.q_quick_poll = () => {
       if (!$scope.isLogged) {
         $state.go('authentication.signin');
         return;
@@ -229,10 +229,10 @@
         closeByDocument: false
       });
     };
-    $scope.q_post_poll = () => {
+    vm.q_post_poll = () => {
       $state.go('polls.create');
     };
-    $scope.q_search = () => {
+    vm.q_search = () => {
       $state.go('search');
     };
   }

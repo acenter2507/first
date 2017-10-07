@@ -162,22 +162,22 @@
   <div class="clearfix"></div>
 
   <div class="quick-menu">
-    <md-fab-speed-dial md-direction="up" class="md-scale md-fab-bottom-left">
+    <md-fab-speed-dial md-open="vm.q_quick_menu_open" md-direction="up" class="md-scale md-fab-bottom-left">
       <md-fab-trigger>
         <md-button md-colors="{background: 'blue'}" class="md-fab"><i class="fa fa-bolt"></i></md-button>
       </md-fab-trigger>
 
-      <!-- <md-fab-actions>
-        <md-button aria-label="Search" class="md-fab md-raised" ng-click="q_search()"><i class="fa fa-search"></i>
-          <md-tooltip class="d-md-none" md-direction="right" md-visible="isOpen">{{:: 'LB_SEARCH' | translate }}</md-tooltip>
+      <md-fab-actions>
+        <md-button aria-label="Search" class="md-fab md-raised" ng-click="vm.q_search()"><i class="fa fa-search"></i>
+          <md-tooltip class="d-md-none" md-direction="right" md-visible="vm.q_quick_menu_open">{{:: 'LB_SEARCH' | translate }}</md-tooltip>
         </md-button>
-        <md-button aria-label="New Post" class="md-fab md-raised" ng-click="q_post_poll()"><i class="fa fa-pencil-square-o"></i>
-          <md-tooltip class="d-md-none" md-direction="right" md-visible="isOpen">{{:: 'LB_WRITE' | translate }}</md-tooltip>
+        <md-button aria-label="New Post" class="md-fab md-raised" ng-click="vm.q_post_poll()"><i class="fa fa-pencil-square-o"></i>
+          <md-tooltip class="d-md-none" md-direction="right" md-visible="vm.q_quick_menu_open">{{:: 'LB_WRITE' | translate }}</md-tooltip>
         </md-button>
-        <md-button aria-label="Quick Poll" class="md-fab md-raised" ng-click="q_quick_poll()"><i class="fa fa-rocket"></i>
-          <md-tooltip class="d-md-none" md-direction="right" md-visible="isOpen">{{:: 'LB_QUICK' | translate }}</md-tooltip>
+        <md-button aria-label="Quick Poll" class="md-fab md-raised" ng-click="vm.q_quick_poll()"><i class="fa fa-rocket"></i>
+          <md-tooltip class="d-md-none" md-direction="right" md-visible="vm.q_quick_menu_open">{{:: 'LB_QUICK' | translate }}</md-tooltip>
         </md-button>
-      </md-fab-actions> -->
+      </md-fab-actions>
     </md-fab-speed-dial>
   </div>
 </section>

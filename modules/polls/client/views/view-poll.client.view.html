@@ -34,10 +34,24 @@
                 <a class="poll-info-title-user-name" ng-if="vm.poll.user" ui-sref="profile.info({userId: vm.poll.user.slug})">{{::vm.poll.user.displayName}}</a>
                 <span class="poll-info-title-user-name" ng-if="!vm.poll.user">{{:: 'LB_DELETED_USER' | translate }}</span>
                 <span class="poll-info-title-time">
-                    {{:: 'LB_POLLS_CREATEON' | translate }}
-                    <span am-time-ago="vm.poll.created"></span>
+                  {{:: 'LB_POLLS_CREATEON' | translate }}
+                  <span am-time-ago="vm.poll.created"></span>
                 </span>
-                <md-menu md-offset="-12 20" md-position-mode="target-right target" ng-if="isLogged">
+                <div uib-dropdown dropdown-append-to-body class="poll-info-title-menu" ng-if="isLogged">
+                  <a class="text-muted" uib-dropdown-toggle href="#"><i class="icon-options"></i></a>
+                  <ul class="uib-dropdown-menu dropdown-menu-right dropdown-menu-flat mg5t- mg10r-" role="menu" aria-labelledby="split-button">
+                    <li>
+                      <a ng-click="vm.handleFollowPoll()"><i class="fa fa-rss"></i>&nbsp;{{(vm.follow._id) ? 'LB_POLLS_MENU_UNFOLLOW' : 'LB_POLLS_MENU_FOLLOW' | translate }}</a>
+                    </li>
+                    <li ng-if="!vm.poll.isCurrentUserOwner && !vm.reported"><a ng-click="vm.handleReportPoll()"><i class="fa fa-exclamation-circle"></i> {{:: 'LB_POLLS_MENU_REPORT' | translate }}</a></li>
+                    <li ng-if="vm.poll.isCurrentUserOwner || vm.poll.canEdit"><a ui-sref="polls.edit({ pollId: vm.poll.slug })"><i class="fa fa-pencil-square-o"></i> {{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
+                    <li ng-if="vm.poll.isCurrentUserOwner || vm.poll.canEdit"><a ng-click="vm.handleRemovePoll()"><i class="fa fa-trash"></i> {{:: 'LB_DELETE' | translate }}</a></li>
+                    <li ng-if="!vm.poll.isCurrentUserOwner && !vm.bookmarked"><a ng-click="vm.handleBookmarkPoll()"><i class="fa fa-bookmark"></i> {{:: 'LB_POLLS_MENU_BOOKMARK' | translate }}</a></li>
+                    <li ng-if="vm.poll.isCurrentUserOwner"><a ng-click="vm.handleSharePoll()"><i class="fa fa-share-alt"></i> {{:: 'LB_SHARE' | translate }}</a></li>
+                  </ul>
+                </div>
+
+                <!-- <md-menu md-offset="-12 20" md-position-mode="target-right target" ng-if="isLogged">
                   <a class="poll-info-title-menu" ng-click="$mdMenu.open($event)" aria-label="Open menu"><i class="icon-options"></i></a>
                   <md-menu-content>
                     <ul class="menu-list">
@@ -51,7 +65,7 @@
                       <li ng-if="vm.poll.isCurrentUserOwner"><a ng-click="vm.handleSharePoll()"><i class="fa fa-share-alt"></i> {{:: 'LB_SHARE' | translate }}</a></li>
                     </ul>
                   </md-menu-content>
-                </md-menu>
+                </md-menu> -->
                 <p class="poll-info-title-close">
                   <i class="fa fa-calendar"></i>
                   <span ng-if="vm.poll.close">{{:: 'LB_CLOSE' | translate }} <span am-time-ago="vm.poll.close"></span></span>
@@ -153,8 +167,7 @@
             <button ng-show="vm.opts.length > 0 && vm.isCanVote" class="btn btn-primary pull-right" ng-click="vm.handleSaveVote()">
               {{(vm.ownVote._id) ? 'LB_CHANGE_VOTE' : 'LB_VOTE' | translate }}
             </button>
-            <button ng-show="isLogged && vm.poll.allow_add && !vm.poll.isCurrentUserOwner" class="btn btn-warning pull-right mg10r"
-              ng-click="vm.handleStartInputOption()">{{:: 'LB_SUGGEST' | translate }}</button>
+            <button ng-show="isLogged && vm.poll.allow_add && !vm.poll.isCurrentUserOwner" class="btn btn-warning pull-right mg10r" ng-click="vm.handleStartInputOption()">{{:: 'LB_SUGGEST' | translate }}</button>
           </div>
           <div class="clearfix"></div>
         </div>
@@ -276,8 +289,7 @@
             <button ng-show="vm.opts.length > 0 && vm.isCanVote" class="btn btn-primary pull-right" ng-click="vm.handleSaveVote()">
               {{(vm.ownVote._id) ? 'LB_CHANGE_VOTE' : 'LB_VOTE' | translate }}
             </button>
-            <button ng-show="isLogged && vm.poll.allow_add && !vm.poll.isCurrentUserOwner" class="btn btn-warning pull-right mg10r"
-              ng-click="vm.handleStartInputOption()">{{:: 'LB_SUGGEST' | translate }}</button>
+            <button ng-show="isLogged && vm.poll.allow_add && !vm.poll.isCurrentUserOwner" class="btn btn-warning pull-right mg10r" ng-click="vm.handleStartInputOption()">{{:: 'LB_SUGGEST' | translate }}</button>
           </div>
           <div class="clearfix"></div>
         </div>
@@ -353,7 +365,7 @@
     <md-radio-group ng-model="linkOptionData.selected" ng-change="linkOptionData.handleSeletedOption()">
       <md-radio-button ng-repeat="opt in linkOptionData.opts" ng-value="opt._id" class="md-primary">
         {{:: opt.title }}
-        </md-radio-button>
+      </md-radio-button>
     </md-radio-group>
     <!-- Vùng hiển thị url các option -->
     <textarea class="form-control" ng-model="linkOptionData.url"></textarea>

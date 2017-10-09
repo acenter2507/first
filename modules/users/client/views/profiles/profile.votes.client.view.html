@@ -20,11 +20,12 @@
             <strong><a ui-sref="profile.info({userId: profile.slug})">{{:: profile.displayName}}</a></strong>
             <small class="text-muted">{{:: 'LB_PROFILE_VOTE_ON' | translate }}</small>
             <small class="text-muted" am-time-ago="vote.created"></small>
+            <br>
+            <span class="font-sm text-muted" ng-if="vote.updateCnt > 0">
+              {{:: 'LB_PROFILE_VOTE_LAST_CHANGE' | translate }}
+              <span class="text-muted" am-time-ago="vote.updated"></span>
+            </span>
           </span>
-          <p class="font-sm text-muted" ng-if="vote.updateCnt > 0">
-            {{:: 'LB_PROFILE_VOTE_LAST_CHANGE' | translate }}
-            <span class="text-muted" am-time-ago="vote.updated"></span>
-          </p>
           <div class="clearfix"></div>
           <hr class="mg5y">
         </div>

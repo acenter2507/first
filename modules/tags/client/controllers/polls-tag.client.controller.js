@@ -70,6 +70,12 @@
         return resolve(poll);
       });
     }
+    vm.handleChangeSortType = () => {
+      vm.page = 1;
+      $scope.busy = $scope.stopped = false;
+      vm.polls = [];
+      handleLoadPolls();
+    }
 
     $scope.poll_filter = poll => {
       if (poll.isPublic) {

@@ -343,15 +343,17 @@ exports.cmts = function (req, res) {
  * Get likes of user
  */
 exports.votes = function (req, res) {
-  var page = req.params.page || 0;
-  Vote.find({ user: req.profile._id })
-    .sort('-created')
-    .populate('poll', 'title isPublic slug')
-    .skip(10 * page)
-    .limit(10)
-    .then(votes => {
-      res.jsonp(votes);
-    }, handleError);
+  var page = req.params.page || 1;
+
+  Vote.paginate({ user: req.profile._id }, {
+    page: page,
+    limit: 10,
+    populate: [
+      { path: 'poll', select: 'title isPublic slug' },
+      { path: 'opts', select: 'title' }]
+  }).then(result => {
+    res.jsonp(result.docs);
+  }).catch(handleError);
   function handleError(err) {
     // Xuất bug ra file log
     logger.system.error('users.profile.server.controller.js - votes', err);

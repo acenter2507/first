@@ -6,12 +6,12 @@ angular.module('users').controller('ProfileVotesController', [
   'Action',
   function ($scope, ProfileApi, Action) {
     $scope.votes = [];
-    $scope.page = 0;
+    $scope.page = 1;
     $scope.busy = false;
     $scope.stopped = false;
 
-    $scope.get_votes = get_votes;
-    function get_votes() {
+    $scope.loadVotes = loadVotes;
+    function loadVotes() {
       if ($scope.busy || $scope.stopped) return;
       $scope.busy = true;
       ProfileApi.loadProfileVotes($scope.profile._id, $scope.page)
@@ -24,6 +24,7 @@ angular.module('users').controller('ProfileVotesController', [
           $scope.votes = _.union($scope.votes, res);
           $scope.page += 1;
           $scope.busy = false;
+          if (res.length < 10) $scope.stopped = true;
         })
         .error(err => {
           $scope.handleShowMessage(err.message, true);

@@ -6,7 +6,7 @@
       <li class="breadcrumb-item active">{{:: 'LB_POLLS_VOTES' | translate }}</li>
     </ol>
   </div>
-  <div class="row" infinite-scroll="get_votes()" infinite-scroll-distance='2'>
+  <div class="row" infinite-scroll="loadVotes()" infinite-scroll-distance='2'>
     <div ng-repeat="vote in votes | filter: vote_filter" class="card">
       <div class="card-body">
 

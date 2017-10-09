@@ -138,17 +138,8 @@
      * Load comments màn hình polls.view
      */
     this.loadComments = (pollId, _page, sort) => {
-      return new Promise((resolve, reject) => {
-        var page = _page || 0;
-        $http.get('/api/findCmts/' + pollId + '/' + page + '/' + sort, {
-          ignoreLoadingBar: true
-        })
-          .then(res => {
-            return resolve(res);
-          }, err => {
-            return reject(err);
-          });
-      });
+      var page = _page || 1;
+      return $http.get('/api/loadComments/' + pollId + '/' + page + '/' + sort, { ignoreLoadingBar: true });
     };
     /**
      * Load comments màn hình polls.view

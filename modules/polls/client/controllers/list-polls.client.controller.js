@@ -39,7 +39,7 @@
     vm.bestUsers = [];
     vm.tags = [];
     vm.new_data = [];
-    vm.page = 0;
+    vm.page = 1;
     vm.busy = false;
     vm.stopped = false;
     vm.is_has_new_polls = false;

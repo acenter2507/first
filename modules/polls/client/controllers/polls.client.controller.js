@@ -57,7 +57,7 @@
 
     // Infinity scroll
     vm.cmts = [];
-    vm.page = 0;
+    vm.page = 1;
     vm.busy = false;
     vm.stopped = false;
 
@@ -303,7 +303,7 @@
             vm.cmts = _.union(vm.cmts, res.data);
             vm.page += 1;
             vm.busy = false;
-            if (res.data.length < 10) { vm.stopped = true; }
+            if (res.data.length < 10) vm.stopped = true;
           }
           if (!$scope.$$phase) $scope.$digest();
         })
@@ -398,7 +398,7 @@
     function handleSortComments(index) {
       vm.cmt_sort = vm.cmt_sorts[index];
       vm.cmts = [];
-      vm.page = 0;
+      vm.page = 1;
       vm.busy = false;
       vm.stopped = false;
       handleLoadComments();

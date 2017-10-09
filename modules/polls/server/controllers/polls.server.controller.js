@@ -404,32 +404,38 @@ exports.findOwners = function (req, res) {
 /**
  * Load comment cho màn hình poll.view theo page
  */
-exports.findCmts = function (req, res) {
+exports.loadComments = function (req, res) {
   var userId = req.user ? req.user._id : undefined;
-  var page = req.params.page || 0;
+  var page = req.params.page || 1;
   var sort = req.params.sort || '-created';
-  Cmt.find({ poll: req.poll._id })
-    .sort(sort)
-    .populate('user', 'displayName profileImageURL slug')
-    .skip(10 * page)
-    .limit(10).exec()
-    .then(cmts => {
-      if (cmts.length === 0) return res.jsonp(cmts);
-      var length = cmts.length;
-      var counter = 0;
-      cmts.forEach(function (instance, index, array) {
-        if (!instance) return;
-        array[index] = instance.toObject();
-        get_like_by_cmtId_and_userId(array[index]._id, userId)
-          .then(result => {
-            array[index].like = result || {};
-            if (++counter === length) {
-              res.jsonp(cmts);
-            }
-          })
-          .catch(handleError);
-      });
-    }, handleError);
+
+  Cmt.paginate(
+    { poll: req.poll._id },
+    {
+      page: page,
+      limit: 10,
+      sort: sort,
+      populate: [{ path: 'user', select: 'displayName profileImageURL slug' }]
+    }
+  ).then(result => {
+    var cmts = result.docs;
+    if (cmts.length === 0) return res.jsonp(cmts);
+    var length = cmts.length;
+    var counter = 0;
+    cmts.forEach(function (instance, index, array) {
+      if (!instance) return;
+      array[index] = instance.toObject();
+      get_like_by_cmtId_and_userId(array[index]._id, userId)
+        .then(result => {
+          array[index].like = result || {};
+          if (++counter === length) {
+            res.jsonp(cmts);
+          }
+        })
+        .catch(handleError);
+    });
+  }).catch(handleError);
+
   function handleError(err) {
     // Xuất bug ra file log
     logger.system.error('polls.server.controller.js - findCmts', err);

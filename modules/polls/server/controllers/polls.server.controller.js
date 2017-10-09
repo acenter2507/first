@@ -20,7 +20,6 @@ var path = require('path'),
   Cmtlike = mongoose.model('Cmtlike'),
   View = mongoose.model('View'),
   Tag = mongoose.model('Tag'),
-  Polltag = mongoose.model('Polltag'),
   errorHandler = require(path.resolve(
     './modules/core/server/controllers/errors.server.controller'
   )),
@@ -43,14 +42,6 @@ exports.create = function (req, res) {
     .then(_poll => {
       poll = _poll;
       return User.countUpPoll(req.user._id);
-    }, handleError)
-    .then(_report => {
-      // Lưu tag vào db
-      tags.forEach(tag => {
-        var polltag = new Polltag({ tag: tag, poll: poll._id });
-        promises.push(polltag.save());
-      });
-      return Promise.all(promises);
     }, handleError)
     .then(() => {
       // Lưu options vào db
@@ -105,10 +96,6 @@ exports.read = function (req, res) {
     })
     .then(votes => {
       poll.votes = votes || [];
-      return get_tags_by_pollId(poll._id);
-    })
-    .then(result => {
-      poll.tags = result || [];
       res.jsonp(poll);
     })
     .catch(err => {
@@ -136,16 +123,6 @@ exports.update = function (req, res) {
   poll.save()
     .then(_poll => {
       poll = _poll;
-      return Polltag.remove({ poll: _poll._id });
-    }, handleError)
-    .then(() => {
-      tags.forEach(tag => {
-        var polltag = new Polltag({ tag: tag, poll: poll._id });
-        promises.push(polltag.save());
-      });
-      return Promise.all(promises);
-    }, handleError)
-    .then(() => {
       promises = [];
       opts.forEach(opt => {
         if (opt._id) {
@@ -203,9 +180,6 @@ exports.delete = function (req, res) {
     }, handleError)
     .then(() => { // Xóa votes
       return Vote.remove({ poll: poll._id });
-    }, handleError)
-    .then(() => { // Xóa thông tin tag của poll
-      return Polltag.remove({ poll: poll._id });
     }, handleError)
     .then(() => { // Xóa thông tin report về poll
       return Report.remove({ poll: poll._id });
@@ -277,6 +251,7 @@ exports.pollByID = function (req, res, next, id) {
   Poll.findOne(query)
     .populate('category', 'name color icon slug')
     .populate('user', 'displayName profileImageURL slug')
+    .populate('tags', 'name slug')
     .exec(function (err, poll) {
       if (err) {
         // Xuất bug ra file log
@@ -303,7 +278,7 @@ exports.findPolls = function (req, res) {
   // Lấy ngôn ngữ hiển thị poll
   var language = req.params.language || config.mappingLanguages[req.locale];
   Poll.find({ isPublic: true, language: language })
-    .select('-body -updated -share_code')
+    .select('-body -updated -share_code -tags')
     .sort('-created')
     .populate('category', 'name color icon slug')
     .populate('user', 'displayName profileImageURL slug')
@@ -811,23 +786,6 @@ function get_view_by_pollId(pollId, userId) {
         return resolve(view);
       }
     });
-  });
-}
-// Lấy list tag đã add cho poll
-function get_tags_by_pollId(pollId) {
-  return new Promise((resolve, reject) => {
-    Polltag.find({ poll: pollId })
-      .populate('tag').exec(function (err, polltags) {
-        if (err) {
-          return reject(err);
-        } else {
-          var tags = [];
-          polltags.forEach(function (pt) {
-            tags.push(pt.tag);
-          });
-          return resolve(tags);
-        }
-      });
   });
 }
 // Lấy thông tin vote của user hiện hành đối với poll (nếu là guest thì sử dụng ip)

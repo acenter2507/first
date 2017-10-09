@@ -104,8 +104,7 @@
      * HANDLES
      */
     // Lưu poll
-    vm.handleSavePoll = handleSavePoll;
-    function handleSavePoll(isValid) {
+    vm.handleSavePoll = isValid => {
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.pollForm');
         return false;
@@ -137,7 +136,7 @@
             $scope.handleShowMessage(err.message, true);
           });
       }
-    }
+    };
     // Hủy nhập poll
     vm.handleDiscard = handleDiscard;
     function handleDiscard() {

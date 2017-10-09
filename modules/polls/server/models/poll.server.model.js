@@ -49,7 +49,11 @@ var PollSchema = new Schema({
   // Ngày tạo
   created: { type: Date, default: Date.now },
   // Ngày thay đổi
-  updated: { type: Date }
+  updated: { type: Date },
+  /**
+   * LenhHN update đổi cấu trúc db 20171008
+   */
+  tags: [{ type: Schema.ObjectId, ref: 'Tag' }]
 });
 PollSchema.plugin(slug('title', { update: true }));
 PollSchema.plugin(paginate);
@@ -131,6 +135,14 @@ PollSchema.statics.countUpBeReport = function (id) {
       poll.beReportCnt += 1;
       return poll.save();
     }
+  });
+};
+PollSchema.statics.removeTag = function (tagId) {
+  return this.find({ tags: tagId }).exec(function (err, polls) {
+    polls.forEach(function(poll) {
+      poll.tags.pull(tagId);
+      return poll.save();
+    });
   });
 };
 mongoose.model('Poll', PollSchema);

@@ -7,6 +7,7 @@ var path = require('path'),
   mongoose = require('mongoose'),
   config = require(path.resolve('./config/config')),
   Tag = mongoose.model('Tag'),
+  Poll = mongoose.model('Poll'),
   Polltag = mongoose.model('Polltag'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('underscore');
@@ -70,9 +71,7 @@ exports.delete = function (req, res) {
 
   tag.remove()
     .then(() => {
-      return Polltag.remove({ tag: tag._id });
-    }, handleError)
-    .then(() => {
+      Poll.removeTag(tag._id);
       res.jsonp(tag);
     }, handleError);
 
@@ -175,11 +174,20 @@ exports.popular = function (req, res) {
  */
 exports.polls = function (req, res) {
   var userId = req.user ? req.user._id : undefined;
-  var page = req.params.page || 0;
+  var page = req.params.page || 1;
   var language = req.params.language || config.mappingLanguages[req.locale];
-  var sort = req.params.page || '-created';
-  get_polls_by_tagId(req.tag._id, page, language)
-    .then(polls => {
+  var sort = req.params.sort || '-created';
+
+  var query = { tags: tagId, language: language };
+    Poll.paginate(query, {
+      sort: sort,
+      populate: [
+        { path: 'user', select: 'displayName profileImageURL slug'},
+        { path: 'category', select: 'name color icon slug'],
+      page: page,
+      limit: 10
+    }).then(function (polls) {
+      
       if (polls.length === 0) return res.jsonp(polls);
       var length = polls.length;
       var counter = 0;
@@ -203,11 +211,9 @@ exports.polls = function (req, res) {
           })
           .catch(handleError);
       });
-    })
-    .catch(handleError);
+    }, handleError);
 
   function handleError(err) {
-    console.log(err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -217,6 +223,7 @@ exports.polls = function (req, res) {
  * Đếm số poll trong tag
  */
 function get_polls_by_tagId(tagId, page, language) {
+  Poll.paginate({ tags: tagId })
   return new Promise((resolve, reject) => {
     Polltag.find({ tag: tagId })
       .populate({
@@ -247,7 +254,7 @@ function get_polls_by_tagId(tagId, page, language) {
  */
 function count_polls_by_tagId(tagId) {
   return new Promise((resolve, reject) => {
-    Polltag.find({ tag: tagId })
+    Poll.find({ tags: tagId })
       .count(function (err, count) {
         if (err) {
           return reject(err);

@@ -37,17 +37,8 @@
      * Lấy danh sách poll cho màn hình polls.list
      */
     this.loadPolls = (_page, language) => {
-      return new Promise((resolve, reject) => {
-        var page = _page || 0;
-        $http.get('/api/findPolls/' + page + '/' + language, {
-          ignoreLoadingBar: true
-        })
-          .then(res => {
-            return resolve(res);
-          }, err => {
-            return reject(err);
-          });
-      });
+      var page = _page || 1;
+      return $http.get('/api/loadPolls/' + page + '/' + language, { ignoreLoadingBar: true });
     };
     /**
      * Lấy danh sách poll mổi bật cho màn hình polls.list

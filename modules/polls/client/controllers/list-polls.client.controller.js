@@ -97,6 +97,7 @@
           vm.polls = _.union(vm.polls, results);
           vm.page += 1;
           vm.busy = false;
+          if (results.length < 10) vm.stopped = true;
           if (!$scope.$$phase) $scope.$digest();
         })
         .catch(err => {

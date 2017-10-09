@@ -269,45 +269,52 @@ exports.pollByID = function (req, res, next, id) {
 /**
  * Lấy danh sách poll cho màn hình polls.list
  */
-exports.findPolls = function (req, res) {
-  var page = req.params.page || 0;
+exports.loadPolls = function (req, res) {
+  var page = req.params.page || 1;
   var userId = req.user ? req.user._id : undefined;
   // Lấy ngôn ngữ hiển thị poll
   var language = req.params.language || config.mappingLanguages[req.locale];
-  Poll.find({ isPublic: true, language: language })
-    .select('-body -updated -share_code -tags')
-    .sort('-created')
-    .populate('category', 'name color icon slug')
-    .populate('user', 'displayName profileImageURL slug')
-    .skip(10 * page).limit(10).exec()
-    .then(polls => {
-      if (polls.length === 0) return res.jsonp(polls);
-      var length = polls.length;
-      var counter = 0;
-      polls.forEach(function (instance, index, array) {
-        if (!instance) return;
-        array[index] = instance.toObject();
-        get_last_cmt_by_pollId(array[index]._id)
-          .then(result => {
-            array[index].lastCmt = result || {};
-            return get_full_by_pollId(array[index]._id, userId);
-          })
-          .then(result => {
-            var opts = __.map(result.opts, function (obj) {
-              return __.pick(obj, '_id', 'color', 'title');
-            });
-            array[index].opts = opts;
-            array[index].votes = result.votes;
-            array[index].follow = result.follow;
-            array[index].reported = result.reported;
-            array[index].bookmarked = result.bookmarked;
-            if (++counter === length) {
-              res.jsonp(polls);
-            }
-          })
-          .catch(handleError);
-      });
-    }, handleError);
+  Poll.paginate(
+    { isPublic: true, language: language },
+    {
+      page: page,
+      limit: 10,
+      sort: '-created',
+      select: '-body -updated -share_code -tags',
+      populate: [
+        { path: 'category', select: 'name color icon slug' },
+        { path: 'user', select: 'displayName profileImageURL slug' }
+      ]
+    }
+  ).then(result => {
+    var polls = result.docs;
+    if (polls.length === 0) return res.jsonp(polls);
+    var length = polls.length;
+    var counter = 0;
+    polls.forEach(function (instance, index, array) {
+      if (!instance) return;
+      array[index] = instance.toObject();
+      get_last_cmt_by_pollId(array[index]._id)
+        .then(result => {
+          array[index].lastCmt = result || {};
+          return get_full_by_pollId(array[index]._id, userId);
+        })
+        .then(result => {
+          var opts = __.map(result.opts, function (obj) {
+            return __.pick(obj, '_id', 'color', 'title');
+          });
+          array[index].opts = opts;
+          array[index].votes = result.votes;
+          array[index].follow = result.follow;
+          array[index].reported = result.reported;
+          array[index].bookmarked = result.bookmarked;
+          if (++counter === length) {
+            res.jsonp(polls);
+          }
+        })
+        .catch(handleError);
+    });
+  }).catch(handleError);
   function handleError(err) {
     // Xuất bug ra file log
     logger.system.error('polls.server.controller.js - findPolls', err);

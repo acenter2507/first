@@ -75,7 +75,7 @@
       $scope.busy = $scope.stopped = false;
       vm.polls = [];
       handleLoadPolls();
-    }
+    };
 
     $scope.poll_filter = poll => {
       if (poll.isPublic) {

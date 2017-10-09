@@ -8,7 +8,6 @@ var path = require('path'),
   config = require(path.resolve('./config/config')),
   Tag = mongoose.model('Tag'),
   Poll = mongoose.model('Poll'),
-  Polltag = mongoose.model('Polltag'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('underscore');
 var pollController = require(path.resolve('./modules/polls/server/controllers/polls.server.controller'));
@@ -179,39 +178,38 @@ exports.polls = function (req, res) {
   var sort = req.params.sort || '-created';
 
   var query = { tags: tagId, language: language };
-    Poll.paginate(query, {
-      sort: sort,
-      populate: [
-        { path: 'user', select: 'displayName profileImageURL slug'},
-        { path: 'category', select: 'name color icon slug'],
-      page: page,
-      limit: 10
-    }).then(function (polls) {
-      
-      if (polls.length === 0) return res.jsonp(polls);
-      var length = polls.length;
-      var counter = 0;
-      polls.forEach(function (instance, index, array) {
-        if (!instance) return;
-        array[index] = instance.toObject();
-        pollController.get_last_cmt_by_pollId(array[index]._id)
-          .then(result => {
-            array[index].lastCmt = result || {};
-            return pollController.get_full_by_pollId(array[index]._id, userId);
-          })
-          .then(result => {
-            array[index].opts = result.opts;
-            array[index].votes = result.votes;
-            array[index].follow = result.follow;
-            array[index].reported = result.reported;
-            array[index].bookmarked = result.bookmarked;
-            if (++counter === length) {
-              res.jsonp(polls);
-            }
-          })
-          .catch(handleError);
-      });
-    }, handleError);
+  Poll.paginate(query, {
+    sort: sort,
+    populate: [
+      { path: 'user', select: 'displayName profileImageURL slug' },
+      { path: 'category', select: 'name color icon slug' }],
+    page: page,
+    limit: 10
+  }).then(function (polls) {
+    if (polls.length === 0) return res.jsonp(polls);
+    var length = polls.length;
+    var counter = 0;
+    polls.forEach(function (instance, index, array) {
+      if (!instance) return;
+      array[index] = instance.toObject();
+      pollController.get_last_cmt_by_pollId(array[index]._id)
+        .then(result => {
+          array[index].lastCmt = result || {};
+          return pollController.get_full_by_pollId(array[index]._id, userId);
+        })
+        .then(result => {
+          array[index].opts = result.opts;
+          array[index].votes = result.votes;
+          array[index].follow = result.follow;
+          array[index].reported = result.reported;
+          array[index].bookmarked = result.bookmarked;
+          if (++counter === length) {
+            return res.jsonp(polls);
+          }
+        })
+        .catch(handleError);
+    });
+  }, handleError);
 
   function handleError(err) {
     return res.status(400).send({
@@ -219,35 +217,6 @@ exports.polls = function (req, res) {
     });
   }
 };
-/**
- * Đếm số poll trong tag
- */
-function get_polls_by_tagId(tagId, page, language) {
-  Poll.paginate({ tags: tagId })
-  return new Promise((resolve, reject) => {
-    Polltag.find({ tag: tagId })
-      .populate({
-        path: 'poll',
-        model: 'Poll',
-        match: { language: language },
-        populate: [
-          { path: 'user', select: 'displayName profileImageURL slug', model: 'User' },
-          { path: 'category', select: 'name color icon slug', model: 'Category' }
-        ]
-      })
-      .skip(10 * page).limit(10)
-      .exec((err, polltags) => {
-        if (err) {
-          return reject(err);
-        } else {
-          var polls = _.filter(_.pluck(polltags, 'poll'), poll => {
-            return (poll);
-          });
-          return resolve(polls);
-        }
-      });
-  });
-}
 
 /**
  * Đếm số poll trong tag

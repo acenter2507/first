@@ -47,14 +47,14 @@
     }
 
     function onCreate() {
-      if (!vm.poll.isCurrentUserOwner && !$scope.isAdmin) {
-        $state.go('home');
-        $scope.handleShowMessage('MS_CM_AUTH_ERROR', true);
-        return;
-      }
       vm.bk_poll = _.clone(vm.poll);
       vm.opts = vm.poll.opts || [];
       if (vm.poll._id) {
+        if (!vm.poll.isCurrentUserOwner && !$scope.isAdmin) {
+          $state.go('home');
+          $scope.handleShowMessage('MS_CM_AUTH_ERROR', true);
+          return;
+        }
         $scope.handleChangePageTitle(vm.poll.title);
         vm.poll.close = vm.poll.close ? moment(vm.poll.close).utc() : vm.poll.close;
         vm.isClosed = moment(vm.poll.close).utc().isAfter(new moment().utc());

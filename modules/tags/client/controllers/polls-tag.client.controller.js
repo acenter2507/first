@@ -29,7 +29,7 @@
     $scope.busy = false;
     vm.polls = [];
     vm.language = $translate.use();
-    vm.page = 0;
+    vm.page = 1;
     vm.sort = '-created';
 
     handleLoadPolls();

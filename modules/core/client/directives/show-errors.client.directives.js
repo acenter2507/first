@@ -58,8 +58,9 @@ angular
           if (angular.isUndefined(name) || formCtrl.$name === name) {
             initCheck = true;
             showValidationMessages = true;
-
-            return toggleClasses(formCtrl[inputName].$invalid);
+            var input = formCtrl[inputName];
+            if (!input) return;
+            return toggleClasses(input.$invalid);
           }
         });
 

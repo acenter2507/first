@@ -55,7 +55,11 @@ var PollSchema = new Schema({
    */
   tags: [{ type: Schema.ObjectId, ref: 'Tag' }]
 });
+// Tạo index search
+PollSchema.index({title: 'text', body: 'text', 'tags.name': 'text'});
+// Plugin tạo slug url
 PollSchema.plugin(slug('title', { update: true }));
+// Plugin hỗ trợ pagination
 PollSchema.plugin(paginate);
 
 PollSchema.pre('save', function (next) {

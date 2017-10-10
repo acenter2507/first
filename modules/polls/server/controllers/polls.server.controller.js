@@ -684,11 +684,12 @@ function search_condition_analysis(condition) {
   }
   // Search by key in title
   if (condition.key && condition.key !== '') {
-    if (!condition.in || condition.in === 'title') {
-      and_arr.push({ title: { $regex: '.*' + condition.key + '.*' } });
-    } else if (condition.in === 'content') {
-      and_arr.push({ $or: [{ title: { $regex: '.*' + condition.key + '.*' } }, { body: { $regex: '.*' + condition.key + '.*' } }] });
-    }
+    and_arr.push({ $text: { $search: condition.key } });
+    // if (!condition.in || condition.in === 'title') {
+    //   and_arr.push({ title: { $regex: '.*' + condition.key + '.*' } });
+    // } else if (condition.in === 'content') {
+    //   and_arr.push({ $or: [{ title: { $regex: '.*' + condition.key + '.*' } }, { body: { $regex: '.*' + condition.key + '.*' } }] });
+    // }
   }
   search = { $and: and_arr };
   return search;

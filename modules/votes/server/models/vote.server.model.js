@@ -21,6 +21,7 @@ var VoteSchema = new Schema({
   updated: { type: Date, default: Date.now },
   created: { type: Date, default: Date.now }
 });
+VoteSchema.plugin(paginate);
 
 // Loại bỏ option ra khỏi danh sách vote khi option đó bị xóa
 VoteSchema.statics.removeOption = function (optId) {
@@ -31,6 +32,5 @@ VoteSchema.statics.removeOption = function (optId) {
     });
   });
 };
-VoteSchema.plugin(paginate);
 
 mongoose.model('Vote', VoteSchema);

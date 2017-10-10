@@ -345,7 +345,7 @@ exports.loadProfileComments = function (req, res) {
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
-  })
+  });
 };
 
 /**

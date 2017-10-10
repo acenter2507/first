@@ -13,7 +13,7 @@ var mongoose = require('mongoose'),
  */
 var PollSchema = new Schema({
   // Title poll
-  title: { type: String, required: 'Please fill Poll title', trim: true},
+  title: { type: String, required: 'Please fill Poll title', trim: true },
   // Nội dung poll
   body: { type: String, required: 'Please fill Poll body', trim: true },
   // Tóm tắt

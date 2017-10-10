@@ -604,40 +604,6 @@ exports.loadProfileViews = function (req, res) {
       });
     }, handleError);
 
-  // View.find({ user: req.profile._id })
-  //   .sort('-created')
-  //   .populate({
-  //     path: 'poll',
-  //     model: 'Poll',
-  //     populate: [
-  //       { path: 'user', select: 'displayName profileImageURL slug', model: 'User' },
-  //       { path: 'category', select: 'name color icon slug', model: 'Category' }
-  //     ]
-  //   })
-  //   .skip(10 * page).exec()
-  //   .then(views => {
-  //     if (views.length === 0) return res.jsonp([]);
-  //     polls = _.pluck(views, 'poll');
-  //     var length = polls.length;
-  //     var counter = 0;
-  //     polls.forEach(function (instance, index, array) {
-  //       if (!instance) return;
-  //       array[index] = instance.toObject();
-  //       pollController.get_full_by_pollId(array[index]._id, userId)
-  //         .then(result => {
-  //           array[index].opts = result.opts;
-  //           array[index].votes = result.votes;
-  //           array[index].follow = result.follow;
-  //           array[index].reported = result.reported;
-  //           array[index].bookmarked = result.bookmarked;
-  //           if (++counter === length) {
-  //             res.jsonp(polls);
-  //           }
-  //         })
-  //         .catch(handleError);
-  //     });
-  //   }, handleError);
-
   function handleError(err) {
     // Xuất bug ra file log
     logger.system.error('users.profile.server.controller.js - views', err);
@@ -650,31 +616,40 @@ exports.loadProfileViews = function (req, res) {
 /**
  * Lấy các poll user đã like
  */
-exports.likes = function (req, res) {
-  var page = req.params.page || 0;
+exports.loadProfileLikedPolls = function (req, res) {
+  var page = req.params.page || 1;
   var userId = req.user ? req.user._id : undefined;
-  var polls = [];
 
-  Like.find({ user: req.profile._id, type: 1 })
-    .sort('-created')
-    .populate({
-      path: 'poll',
-      model: 'Poll',
-      populate: [
-        { path: 'user', select: 'displayName profileImageURL slug', model: 'User' },
-        { path: 'category', select: 'name color icon slug', model: 'Category' }
-      ]
-    })
-    .skip(10 * page).exec()
-    .then(likes => {
+  var query = { user: req.profile._id, type: 1 };
+  var options = {
+    page: page,
+    sort: '-created',
+    limit: 10,
+    populate: [
+      {
+        path: 'poll', populate: [
+          { path: 'user', select: 'displayName profileImageURL slug', model: 'User' },
+          { path: 'category', select: 'name color icon slug', model: 'Category' }
+        ]
+      }
+    ]
+  };
+
+  Like.paginate(query, options)
+    .then(result => {
+      var likes = result.docs;
       if (likes.length === 0) return res.jsonp([]);
-      polls = _.pluck(likes, 'poll');
+      var polls = _.pluck(likes, 'poll');
       var length = polls.length;
       var counter = 0;
       polls.forEach(function (instance, index, array) {
         if (!instance) return;
         array[index] = instance.toObject();
-        pollController.get_full_by_pollId(array[index]._id, userId)
+        pollController.get_last_cmt_by_pollId(array[index]._id)
+          .then(result => {
+            array[index].lastCmt = result || {};
+            return pollController.get_full_by_pollId(array[index]._id, userId);
+          })
           .then(result => {
             array[index].opts = result.opts;
             array[index].votes = result.votes;
@@ -701,31 +676,40 @@ exports.likes = function (req, res) {
 /**
  * Lấy các poll user đã dislike
  */
-exports.dislikes = function (req, res) {
+exports.loadProfileDislikedPolls = function (req, res) {
   var page = req.params.page || 0;
   var userId = req.user ? req.user._id : undefined;
-  var polls = [];
 
-  Like.find({ user: req.profile._id, type: 2 })
-    .sort('-created')
-    .populate({
-      path: 'poll',
-      model: 'Poll',
-      populate: [
-        { path: 'user', select: 'displayName profileImageURL slug', model: 'User' },
-        { path: 'category', select: 'name color icon slug', model: 'Category' }
-      ]
-    })
-    .skip(10 * page).exec()
-    .then(dislikes => {
+  var query = { user: req.profile._id, type: 2 };
+  var options = {
+    page: page,
+    sort: '-created',
+    limit: 10,
+    populate: [
+      {
+        path: 'poll', populate: [
+          { path: 'user', select: 'displayName profileImageURL slug', model: 'User' },
+          { path: 'category', select: 'name color icon slug', model: 'Category' }
+        ]
+      }
+    ]
+  };
+
+  Like.paginate(query, options)
+    .then(result => {
+      var dislikes = result.docs;
       if (dislikes.length === 0) return res.jsonp([]);
-      polls = _.pluck(dislikes, 'poll');
+      var polls = _.pluck(dislikes, 'poll');
       var length = polls.length;
       var counter = 0;
       polls.forEach(function (instance, index, array) {
         if (!instance) return;
         array[index] = instance.toObject();
-        pollController.get_full_by_pollId(array[index]._id, userId)
+        pollController.get_last_cmt_by_pollId(array[index]._id)
+          .then(result => {
+            array[index].lastCmt = result || {};
+            return pollController.get_full_by_pollId(array[index]._id, userId);
+          })
           .then(result => {
             array[index].opts = result.opts;
             array[index].votes = result.votes;
@@ -739,6 +723,8 @@ exports.dislikes = function (req, res) {
           .catch(handleError);
       });
     }, handleError);
+
+
 
   function handleError(err) {
     // Xuất bug ra file log

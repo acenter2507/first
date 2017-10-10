@@ -36,8 +36,8 @@ module.exports = function (app) {
   app.route('/api/profile/:profileId/polls/:page').get(users.loadProfilePolls);
   app.route('/api/profile/:profileId/cmts/:page').get(users.loadProfileComments);
   app.route('/api/profile/:profileId/votes/:page').get(users.loadProfileVotes);
-  app.route('/api/profile/:profileId/likes/:page').get(users.likes);
-  app.route('/api/profile/:profileId/dislikes/:page').get(users.dislikes);
+  app.route('/api/profile/:profileId/likes/:page').get(users.loadProfileLikedPolls);
+  app.route('/api/profile/:profileId/dislikes/:page').get(users.loadProfileDislikedPolls);
   app.route('/api/profile/:profileId/bookmarks/:page').get(users.loadProfileBookmarks);
   app.route('/api/profile/:profileId/follows/:page').get(users.loadProfileFollows);
   app.route('/api/profile/:profileId/views/:page').get(users.loadProfileViews);

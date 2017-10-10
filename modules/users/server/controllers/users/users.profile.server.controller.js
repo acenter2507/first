@@ -275,16 +275,24 @@ exports.countUpBeView = function (req, res) {
 /**
  * Lấy các poll mà user đã create cho màn hình Profile.polls
  */
-exports.polls = function (req, res) {
-  var page = req.params.page || 0;
+exports.loadProfilePolls = function (req, res) {
+  var page = req.params.page || 1;
   var userId = req.user ? req.user._id : undefined;
-  Poll.find({ user: req.profile._id })
-    .sort('-created')
-    .populate('user', 'displayName profileImageURL slug')
-    .populate('category', 'name color icon slug')
-    .skip(10 * page)
-    .limit(10).exec()
-    .then(polls => {
+
+  var query = { user: req.profile._id };
+  var options = {
+    page: page,
+    sort: '-created',
+    limit: 10,
+    select: '-tags',
+    populate: [
+      { path: 'user', select: 'displayName profileImageURL slug' },
+      { path: 'category', select: 'name color icon slug' }
+    ]
+  };
+  Poll.paginate(query, options)
+    .then(result => {
+      var polls = result.docs;
       if (polls.length === 0) return res.jsonp([]);
       var length = polls.length;
       var counter = 0;
@@ -321,28 +329,29 @@ exports.polls = function (req, res) {
 /**
  * Lấy các cmts mà user đã create cho màn hình Profile.cmts
  */
-exports.cmts = function (req, res) {
-  var page = req.params.page || 0;
-  Cmt.find({ user: req.profile._id })
-    .sort('-created')
-    .populate('poll', 'title isPublic slug')
-    .skip(10 * page)
-    .limit(10)
-    .exec(function (err, cmts) {
-      if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      } else {
-        res.jsonp(cmts);
-      }
+exports.loadProfileComments = function (req, res) {
+  var page = req.params.page || 1;
+  Cmt.paginate(
+    { user: req.profile._id },
+    {
+      sort: '-created',
+      page: page,
+      limit: 10,
+      populate: [{ path: 'poll', select: 'title isPublic slug' }]
+    }
+  ).then(result => {
+    res.jsonp(result.docs);
+  }).catch(err => {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
     });
+  })
 };
 
 /**
  * Get likes of user
  */
-exports.votes = function (req, res) {
+exports.loadProfileVotes = function (req, res) {
   var page = req.params.page || 1;
 
   Vote.paginate({ user: req.profile._id }, {
@@ -366,25 +375,30 @@ exports.votes = function (req, res) {
 /**
  * Lấy các poll user đã follow tại màn hình profile.bookmark
  */
-exports.follows = function (req, res) {
-  var page = req.params.page || 0;
+exports.loadProfileFollows = function (req, res) {
+  var page = req.params.page || 1;
   var userId = req.user ? req.user._id : undefined;
-  var polls = [];
 
-  Follow.find({ user: req.profile._id })
-    .sort('-created')
-    .populate({
-      path: 'poll',
-      model: 'Poll',
-      populate: [
-        { path: 'user', select: 'displayName profileImageURL slug', model: 'User' },
-        { path: 'category', select: 'name color icon slug', model: 'Category' }
-      ]
-    })
-    .skip(10 * page).exec()
-    .then(follows => {
+  var query = { user: req.profile._id };
+  var options = {
+    page: page,
+    sort: '-created',
+    limit: 10,
+    populate: [
+      {
+        path: 'poll', populate: [
+          { path: 'user', select: 'displayName profileImageURL slug', model: 'User' },
+          { path: 'category', select: 'name color icon slug', model: 'Category' }
+        ]
+      }
+    ]
+  };
+
+  Follow.paginate(query, options)
+    .then(result => {
+      var follows = result.docs;
       if (follows.length === 0) return res.jsonp([]);
-      polls = _.pluck(follows, 'poll');
+      var polls = _.pluck(follows, 'poll');
       var length = polls.length;
       var counter = 0;
       polls.forEach(function (instance, index, array) {
@@ -404,6 +418,40 @@ exports.follows = function (req, res) {
           .catch(handleError);
       });
     }, handleError);
+
+  // Follow.find({ user: req.profile._id })
+  //   .sort('-created')
+  //   .populate({
+  //     path: 'poll',
+  //     model: 'Poll',
+  //     populate: [
+  //       { path: 'user', select: 'displayName profileImageURL slug', model: 'User' },
+  //       { path: 'category', select: 'name color icon slug', model: 'Category' }
+  //     ]
+  //   })
+  //   .skip(10 * page).exec()
+  //   .then(follows => {
+  //     if (follows.length === 0) return res.jsonp([]);
+  //     polls = _.pluck(follows, 'poll');
+  //     var length = polls.length;
+  //     var counter = 0;
+  //     polls.forEach(function (instance, index, array) {
+  //       if (!instance) return;
+  //       array[index] = instance.toObject();
+  //       pollController.get_full_by_pollId(array[index]._id, userId)
+  //         .then(result => {
+  //           array[index].opts = result.opts;
+  //           array[index].votes = result.votes;
+  //           array[index].follow = result.follow;
+  //           array[index].reported = result.reported;
+  //           array[index].bookmarked = result.bookmarked;
+  //           if (++counter === length) {
+  //             res.jsonp(polls);
+  //           }
+  //         })
+  //         .catch(handleError);
+  //     });
+  //   }, handleError);
 
   function handleError(err) {
     // Xuất bug ra file log

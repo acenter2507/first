@@ -5,12 +5,11 @@ angular.module('users').controller('ProfileCmtsController', [
   'ProfileApi',
   function ($scope, ProfileApi) {
     $scope.cmts = [];
-    $scope.page = 0;
+    $scope.page = 1;
     $scope.busy = false;
     $scope.stopped = false;
 
-    $scope.get_cmts = get_cmts;
-    function get_cmts() {
+    $scope.loadComments = () => {
       if ($scope.busy || $scope.stopped) return;
       $scope.busy = true;
       ProfileApi.loadProfileComments($scope.profile._id, $scope.page)
@@ -23,6 +22,8 @@ angular.module('users').controller('ProfileCmtsController', [
           $scope.cmts = _.union($scope.cmts, res);
           $scope.page += 1;
           $scope.busy = false;
+          if (res.length < 10) $scope.stopped = true;
+          if (!$scope.$$phase) $scope.$digest();
         })
         .error(err => {
           $scope.handleShowMessage(err.message, true);

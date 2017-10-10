@@ -4,8 +4,7 @@ angular.module('users').controller('ProfileBookmarksController', [
   '$scope',
   'ProfileApi',
   'Action',
-  'ngDialog',
-  function ($scope, ProfileApi, Action, dialog) {
+  function ($scope, ProfileApi, Action) {
     $scope.screen = 'profile-bookmark';
     $scope.polls = [];
     $scope.page = 0;

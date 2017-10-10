@@ -8,21 +8,17 @@ angular.module('users').controller('ProfilePollsController', [
   function ($scope, ProfileApi, Action, dialog) {
     $scope.screen = 'profile-polls';
     $scope.polls = [];
-    $scope.page = 0;
+    $scope.page = 1;
     $scope.busy = false;
     $scope.stopped = false;
 
-    $scope.get_polls = get_polls;
-    function get_polls() {
+    $scope.loadPolls = () => {
       if ($scope.busy || $scope.stopped) return;
       $scope.busy = true;
       ProfileApi.loadProfilePolls($scope.profile._id, $scope.page)
         .then(res => {
-          if (!res.data.length || res.data.length === 0) {
-            $scope.busy = false;
-            $scope.stopped = true;
+          if (!res.data.length || res.data.length === 0)
             return;
-          }
           var promises = [];
           res.data.forEach(poll => {
             promises.push(prepareShowingData(poll));
@@ -35,6 +31,8 @@ angular.module('users').controller('ProfilePollsController', [
           $scope.polls = _.union($scope.polls, results);
           $scope.page += 1;
           $scope.busy = false;
+          if (results.length < 10) $scope.stopped = true;
+          if (!$scope.$$phase) $scope.$digest();
         })
         .catch(err => {
           $scope.busy = false;

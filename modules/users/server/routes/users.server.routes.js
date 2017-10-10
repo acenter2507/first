@@ -33,13 +33,13 @@ module.exports = function (app) {
   // Màn hình home lấy top user
   app.route('/api/profile/top/:limit').get(users.loadTopUsers);
 
-  app.route('/api/profile/:profileId/polls/:page').get(users.polls);
-  app.route('/api/profile/:profileId/cmts/:page').get(users.cmts);
-  app.route('/api/profile/:profileId/votes/:page').get(users.votes);
+  app.route('/api/profile/:profileId/polls/:page').get(users.loadProfilePolls);
+  app.route('/api/profile/:profileId/cmts/:page').get(users.loadProfileComments);
+  app.route('/api/profile/:profileId/votes/:page').get(users.loadProfileVotes);
   app.route('/api/profile/:profileId/likes/:page').get(users.likes);
   app.route('/api/profile/:profileId/dislikes/:page').get(users.dislikes);
   app.route('/api/profile/:profileId/bookmarks/:page').get(users.bookmarks);
-  app.route('/api/profile/:profileId/follows/:page').get(users.follows);
+  app.route('/api/profile/:profileId/follows/:page').get(users.loadProfileFollows);
   app.route('/api/profile/:profileId/views/:page').get(users.views);
 
 

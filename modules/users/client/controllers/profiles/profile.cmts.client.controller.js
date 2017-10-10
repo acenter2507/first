@@ -28,7 +28,7 @@ angular.module('users').controller('ProfileCmtsController', [
         .error(err => {
           $scope.handleShowMessage(err.message, true);
         });
-    }
+    };
     $scope.cmt_filter = cmt => {
       if (cmt.poll.isPublic) {
         return true;

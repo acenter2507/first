@@ -10,8 +10,7 @@ angular.module('users').controller('ProfileVotesController', [
     $scope.busy = false;
     $scope.stopped = false;
 
-    $scope.loadVotes = loadVotes;
-    function loadVotes() {
+    $scope.loadVotes = () => {
       if ($scope.busy || $scope.stopped) return;
       $scope.busy = true;
       ProfileApi.loadProfileVotes($scope.profile._id, $scope.page)
@@ -29,7 +28,7 @@ angular.module('users').controller('ProfileVotesController', [
         .error(err => {
           $scope.handleShowMessage(err.message, true);
         });
-    }
+    };
     $scope.vote_filter = vote => {
       if (vote.poll.isPublic) {
         return true;

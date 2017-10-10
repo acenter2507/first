@@ -13,7 +13,7 @@ var mongoose = require('mongoose'),
  */
 var PollSchema = new Schema({
   // Title poll
-  title: { type: String, required: 'Please fill Poll title', trim: true },
+  title: { type: String, required: 'Please fill Poll title', trim: true},
   // Nội dung poll
   body: { type: String, required: 'Please fill Poll body', trim: true },
   // Tóm tắt
@@ -55,10 +55,10 @@ var PollSchema = new Schema({
    */
   tags: [{ type: Schema.ObjectId, ref: 'Tag' }]
 });
-// Tạo index search
-PollSchema.index({ title: 'text', body: 'text', 'tags.name': 'text' });
 // Plugin tạo slug url
 PollSchema.plugin(slug('title', { update: true }));
+// Tạo index search
+PollSchema.index({ title: 'text', body: 'text', slug: 'text', 'tags.name': 'text' });
 // Plugin hỗ trợ pagination
 PollSchema.plugin(paginate);
 

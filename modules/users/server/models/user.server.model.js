@@ -11,13 +11,6 @@ var mongoose = require('mongoose'),
   validator = require('validator');
 
 /**
- * A Validation function for local strategy properties
- */
-var validateLocalStrategyProperty = function (property) {
-  return ((this.provider !== 'local' && !this.updated) || property.length);
-};
-
-/**
  * A Validation function for local strategy email
  */
 var validateLocalStrategyEmail = function (email) {
@@ -28,11 +21,7 @@ var validateLocalStrategyEmail = function (email) {
  * User Schema
  */
 var UserSchema = new Schema({
-  displayName: {
-    type: String,
-    trim: true,
-    validate: [validateLocalStrategyProperty, 'Please fill in your last name']
-  },
+  displayName: { type: String, required: true, trim: true },
   email: {
     type: String,
     unique: true,
@@ -41,48 +30,23 @@ var UserSchema = new Schema({
     default: '',
     validate: [validateLocalStrategyEmail, 'Please fill a valid email address']
   },
-  password: {
-    type: String,
-    default: ''
-  },
-  salt: {
-    type: String
-  },
-  profileImageURL: {
-    type: String,
-    default: 'modules/core/client/img/brand/icon.png'
-  },
-  provider: {
-    type: String,
-    required: 'Provider is required'
-  },
+  password: { type: String, default: '' },
+  salt: { type: String },
+  profileImageURL: { type: String, default: 'modules/core/client/img/brand/icon.png' },
+  provider: { type: String, required: true },
   roles: {
     type: [{
       type: String,
       enum: ['user', 'admin']
     }],
     default: ['user'],
-    required: 'Please provide at least one role'
+    required: true
   },
-  updated: {
-    type: Date
-  },
-  lastLogin: {
-    type: Date,
-    default: Date.now
-  },
-  created: {
-    type: Date,
-    default: Date.now
-  },
-  status: {
-    type: Number, // 0: First time 1: Waiting - 2: Actived - 3: Block 
-    default: 0
-  },
-  language: {
-    type: String,
-    default: 'en'
-  },
+  updated: { type: Date },
+  lastLogin: { type: Date, default: Date.now },
+  created: { type: Date, default: Date.now },
+  status: { type: Number, default: 0 }, // 0: First time 1: Waiting - 2: Actived - 3: Block
+  language: { type: String, default: 'en' },
   // Các số liệu thống kê của user
   report: {
     // Số poll đã tạo
@@ -106,21 +70,16 @@ var UserSchema = new Schema({
     // Số lần bị report
     beReportCnt: { type: 'Number', default: 0 }
   },
-  activeAccountToken: {
-    type: String
-  },
+  activeAccountToken: { type: String },
   providerData: {},
   additionalProvidersData: {},
   /* For reset password */
-  resetPasswordToken: {
-    type: String
-  },
-  resetPasswordExpires: {
-    type: Date
-  }
+  resetPasswordToken: { type: String },
+  resetPasswordExpires: { type: Date }
 });
-
 UserSchema.plugin(slug('displayName', { update: true }));
+// Tạo index search
+UserSchema.index({ displayName: 'text', email: 'text', slug: 'text' });
 UserSchema.plugin(paginate);
 
 /**

@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
+  paginate = require('mongoose-paginate'),
   Schema = mongoose.Schema;
 
 /**
@@ -30,7 +31,12 @@ var TicketSchema = new Schema({
   },
   date: {
     type: Date
-  }
+  },
+  responseBody: {
+    type: 'String',
+    default: '',
+    
+  },
 });
-
+TicketSchema.plugin(paginate);
 mongoose.model('Ticket', TicketSchema);

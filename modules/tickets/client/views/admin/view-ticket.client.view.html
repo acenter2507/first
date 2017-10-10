@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-xs-12 pd6x">
+    <div class="form-group">
+      <a ui-sref="admin.tickets.list" class="btn btn-default pull-right">List</a>
+      <a ui-sref="admin.tickets.edit({ ticketId: ticket._id })" class="btn btn-success pull-right mg10r">Edit</a>
+      <a ng-click="remove()" class="btn btn-danger pull-right mg10r">Delete</a>
+      <a ui-sref="admin.tickets.reply({ ticketId: ticket._id })" class="btn btn-info pull-right mg10r">Reply</a>
+    </div>
+  </div>
+</div>
+
+<!-- Form -->
+<div class="row">
+  <div class="col-xs-12 pdn">
+    <div class="card">
+      <div class="card-body">
+        <form name="ticketForm" class="form-horizontal" novalidate>
+          <fieldset>
+            <!-- Status Create -->
+            <div class="form-group mgn mg10b pd6l pd6r ">
+              <label class="control-label ">Status : {{ ticket.status === 1 ?  'Wating' : 'Resolved' }}</label>
+
+            </div>
+            <!-- Date Create -->
+            <div class="form-group mgn mg10b pd6l pd6r " >
+              <label class="control-label ">Date Create : {{ticket.date | LLL_format}}</label>
+            </div>
+            <!-- Email -->
+            <div class="form-group mgn mg10b pd6l pd6r">
+              <label class="control-label" for="email">Email</label>
+              <input disabled name="email" type="text" ng-model="ticket.email" id="email" class="form-control" placeholder="Email" required>
+            
+            </div>
+            <!-- Body -->
+            <div class="form-group mgn mg10b pd6l pd6r" >
+              <label class="control-label" for="ticketbody">Body</label>
+              <textarea name="ticketbody" ng-model="ticket.body" id="responsebody" disabled class="form-control" cols="30" rows="10" placeholder="Body"
+                 />
+             
+            </div>
+
+            <!-- Reply -->
+            <div class="form-group mgn mg10b pd6l pd6r ">
+              <label class="control-label " for="responseBody ">ResponseBody</label>
+              <textarea name="responseBody" readonly ng-model="ticket.responseBody" id="responseBody" cols="30" rows="10" class="form-control" placeholder="Response Body "
+                >
+                
+              </div>
+              
+            </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

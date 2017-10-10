@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-xs-12 pd6x">
+    <div class="form-group">
+      <a ui-sref="admin.tickets.view({ ticketId: ticket._id })" class="btn btn-default pull-right">
+        
+        View
+      </a>
+      <a ng-click="send(ticketForm.$valid)" class="btn btn-success pull-right mg10r">
+          <i class="fa fa-spinner fa-pulse fa-fw" ng-show="busy"></i>Send
+        </a>
+    </div>
+  </div>
+</div>
+
+<!-- Form -->
+<div class="row">
+  <div class="col-xs-12 pdn">
+    <div class="card">
+      <div class="card-body">
+        <form name="ticketForm" class="form-horizontal" novalidate>
+          <fieldset>
+            <!-- Status Create -->
+            <div class="form-group mgn mg10b pd6l pd6r ">
+              <label class="control-label ">Status : {{ ticket.status === 1 ?  'Wating' : 'Resolved' }}</label>
+
+            </div>
+            <!-- Date Create -->
+            <div class="form-group mgn mg10b pd6l pd6r ">
+              <label class="control-label ">Date Create : {{ticket.date | LLL_format}}</label>
+            </div>
+            <!-- Email -->
+            <div class="form-group mgn mg10b pd6l pd6r" >
+              <label class="control-label" for="email">Send To: {{ticket.email}}</label>
+            </div>
+          
+            <!-- Reply -->
+            <div class="form-group mgn mg10b pd6l pd6r " show-errors>
+              <label class="control-label " for="responseBody ">ResponseBody</label>
+              <textarea name="responseBody" ng-model="ticket.responseBody" id="responseBody" cols="30" rows="10" class="form-control" placeholder="Response Body "
+                required>
+                        <div ng-messages="ticketForm.responseBody.$error" role="alert ">
+                          <p class="help-block error-text " ng-message="required ">Response body is required.</p>
+                        </div>
+             
+              </div>
+              
+            </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

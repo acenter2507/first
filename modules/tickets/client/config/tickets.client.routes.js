@@ -20,6 +20,7 @@
         controller: 'TicketsListController',
         controllerAs: 'vm',
         data: {
+          roles: ['admin'],
           pageTitle: 'Tickets List'
         }
       })
@@ -32,7 +33,7 @@
           ticketResolve: newTicket
         },
         data: {
-          roles: ['user', 'admin'],
+          //roles: ['user', 'admin'],
           pageTitle: 'Tickets Create'
         }
       })
@@ -45,7 +46,7 @@
           ticketResolve: getTicket
         },
         data: {
-          roles: ['user', 'admin'],
+          roles: ['admin'],
           pageTitle: 'Edit Ticket {{ ticketResolve.name }}'
         }
       })
@@ -58,6 +59,7 @@
           ticketResolve: getTicket
         },
         data: {
+          roles: ['admin'],
           pageTitle: 'Ticket {{ ticketResolve.name }}'
         }
       });

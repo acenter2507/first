@@ -4,7 +4,7 @@
       <div class="card">
         <div class="card-header">
           <strong class="card-title">{{:: 'LB_SUPPORT_TITLE' | translate }}</strong>
-          <a ng-click="send(vm.form.ticketForm.$valid)" class="card-link">
+          <a ng-click="vm.save(vm.form.ticketForm.$valid)" class="card-link">
               <i class="fa fa-spinner fa-pulse fa-fw" ng-show="vm.busy"></i>
               {{:: 'LB_SEND' | translate}}
             </a>

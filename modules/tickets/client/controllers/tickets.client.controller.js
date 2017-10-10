@@ -6,9 +6,9 @@
     .module('tickets')
     .controller('TicketsController', TicketsController);
 
-  TicketsController.$inject = ['$scope', '$state', '$window', 'ticketResolve', 'vcRecaptchaService', 'Constants'];
+  TicketsController.$inject = ['$scope', '$state', '$window', 'ticketResolve', 'vcRecaptchaService', 'Constants', 'TicketsService'];
 
-  function TicketsController ($scope, $state, $window, ticket, vcRecaptchaService, Constants) {
+  function TicketsController ($scope, $state, $window, ticket, vcRecaptchaService, Constants, TicketsService) {
     var vm = this;
 
     vm.busy = false;
@@ -49,7 +49,7 @@
         vm.busy = false;
         return false;
       }
-
+      console.log('save');
       vm.ticket.date = moment().utc();
       // TODO: move create/update logic to service
       if (vm.ticket._id) {
@@ -59,8 +59,9 @@
       }
 
       function successCallback(res) {
-        delete vm.ticket;
+        vm.ticket = new TicketsService();
         vm.busy = false;
+        $scope.$broadcast('show-errors-reset', 'vm.form.ticketForm');
         $scope.handleShowMessage('LB_SUPPORT_SUCCESS', false);
       }
 

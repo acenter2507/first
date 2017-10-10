@@ -59,6 +59,14 @@
       <li class="nav-item">
         <a class="nav-link" ui-sref-active="active" ui-sref="admin.charts"><i class="icon-pie-chart"></i> Charts</a>
       </li>
+      <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('admin.tickets')}">
+        <a class="nav-link nav-dropdown-toggle" ng-class="{active: $state.includes('admin.tickets')}" href="#"><i class="fa fa-users"></i> Tickets</a>
+        <ul class="nav-dropdown-items">
+          <li class="nav-item">
+            <a class="nav-link" ui-sref-active="active" ui-sref="admin.tickets.list"><i class="fa fa-list-alt"></i> List</a>
+          </li>
+        </ul>
+      </li>
       <li class="divider"></li>
       <li class="nav-title">
         Extras

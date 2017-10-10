@@ -119,26 +119,26 @@ exports.list = function (req, res) {
 /**
  * List of Categorys (Dùng chung cho cả admin và public)
  */
-exports.count_polls = function (req, res) {
-  Poll.find({ category: req.category._id }).count(function (err, count) {
-    res.jsonp(count);
-  });
-};
-/**
- * List of Categorys (Dùng chung cho cả admin và public)
- */
 exports.polls = function (req, res) {
-  var page = req.params.page || 0;
+  var userId = req.user ? req.user._id : undefined;
+  var page = req.params.page || 1;
   var language = req.params.language || config.mappingLanguages[req.locale];
   var sort = req.params.sort || '-created';
-  var userId = req.user ? req.user._id : undefined;
-  Poll.find({ category: req.category._id, isPublic: true, language: language })
-    .sort(sort)
-    .populate('user', 'displayName profileImageURL slug')
-    .populate('category', 'name color icon slug')
-    .skip(10 * page)
-    .limit(10).exec()
-    .then(polls => {
+
+  var query = { category: req.category._id, isPublic: true, language: language };
+  var options = {
+    sort: sort,
+    select: '-tags',
+    populate: [
+      { path: 'user', select: 'displayName profileImageURL slug' },
+      { path: 'category', select: 'name color icon slug' }
+    ],
+    page: page,
+    limit: 10
+  };
+  Poll.paginate(query, options)
+    .then(result => {
+      var polls = result.docs || [];
       if (polls.length === 0) return res.jsonp(polls);
       var length = polls.length;
       var counter = 0;

@@ -182,7 +182,7 @@ exports.polls = function (req, res) {
   var language = req.params.language || config.mappingLanguages[req.locale];
   var sort = req.params.sort || '-created';
 
-  var query = { tags: req.tag._id, language: language };
+  var query = { tags: req.tag._id, isPublic: true, language: language };
   Poll.paginate(query, {
     sort: sort,
     populate: [
@@ -199,8 +199,7 @@ exports.polls = function (req, res) {
     polls.forEach(function (instance, index, array) {
       if (!instance) return;
       array[index] = instance.toObject();
-      pollController
-        .get_last_cmt_by_pollId(array[index]._id)
+      pollController.get_last_cmt_by_pollId(array[index]._id)
         .then(result => {
           array[index].lastCmt = result || {};
           return pollController.get_full_by_pollId(array[index]._id, userId);

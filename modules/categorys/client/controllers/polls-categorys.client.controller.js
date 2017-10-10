@@ -29,7 +29,7 @@
     // Infinity scroll
     $scope.stopped = false;
     $scope.busy = false;
-    vm.page = 0;
+    vm.page = 1;
     vm.sort = '-created';
     vm.language = $translate.use();
     vm.polls = [];
@@ -41,11 +41,7 @@
       $scope.busy = true;
       CategorysApi.loadPollByCategoryId(vm.category._id, vm.page, vm.language, vm.sort)
         .then(res => {
-          if (!res.data.length || res.data.length === 0) {
-            $scope.stopped = true;
-            $scope.busy = false;
-            return;
-          }
+          if (!res.data.length || res.data.length === 0) return;
           // Load options và tính vote cho các opt trong polls
           var promises = [];
           res.data.forEach(poll => {
@@ -59,7 +55,7 @@
           vm.polls = _.union(vm.polls, results);
           vm.page += 1;
           $scope.busy = false;
-          if (results.length < 10) { $scope.stopped = true; }
+          if (results.length < 10) $scope.stopped = true;
           if (!$scope.$$phase) $scope.$digest();
         })
         .catch(err => {
@@ -70,7 +66,7 @@
     }
     vm.handleChangeSortType = handleChangeSortType;
     function handleChangeSortType() {
-      vm.page = 0;
+      vm.page = 1;
       $scope.busy = $scope.stopped = false;
       vm.polls = [];
       handleLoadPolls();

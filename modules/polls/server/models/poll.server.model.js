@@ -56,7 +56,7 @@ var PollSchema = new Schema({
   tags: [{ type: Schema.ObjectId, ref: 'Tag' }]
 });
 // Tạo index search
-PollSchema.index({title: 'text', body: 'text', 'tags.name': 'text'});
+PollSchema.index({ title: 'text', body: 'text', 'tags.name': 'text' });
 // Plugin tạo slug url
 PollSchema.plugin(slug('title', { update: true }));
 // Plugin hỗ trợ pagination
@@ -143,7 +143,7 @@ PollSchema.statics.countUpBeReport = function (id) {
 };
 PollSchema.statics.removeTag = function (tagId) {
   return this.find({ tags: tagId }).exec(function (err, polls) {
-    polls.forEach(function(poll) {
+    polls.forEach(function (poll) {
       poll.tags.pull(tagId);
       return poll.save();
     });

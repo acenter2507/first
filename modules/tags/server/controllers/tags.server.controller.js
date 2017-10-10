@@ -1,16 +1,16 @@
-"use strict";
+'use strict';
 
 /**
  * Module dependencies.
  */
-var path = require("path"),
-  mongoose = require("mongoose"),
-  config = require(path.resolve("./config/config")),
-  Tag = mongoose.model("Tag"),
-  Poll = mongoose.model("Poll"),
-  errorHandler = require(path.resolve("./modules/core/server/controllers/errors.server.controller")),
-  _ = require("underscore");
-var pollController = require(path.resolve("./modules/polls/server/controllers/polls.server.controller"));
+var path = require('path'),
+  mongoose = require('mongoose'),
+  config = require(path.resolve('./config/config')),
+  Tag = mongoose.model('Tag'),
+  Poll = mongoose.model('Poll'),
+  errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
+  _ = require('underscore');
+var pollController = require(path.resolve('./modules/polls/server/controllers/polls.server.controller'));
 
 /**
  * Create a Tag
@@ -37,7 +37,7 @@ exports.read = function (req, res) {
   // convert mongoose document to JSON
   var tag = req.tag ? req.tag.toJSON() : {};
 
-  // Add a custom field to the Article, for determining if the current User is the "owner".
+  // Add a custom field to the Article, for determining if the current User is the 'owner'.
   // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
   tag.isCurrentUserOwner =
     req.user && tag.user && tag.user._id.toString() === req.user._id.toString();
@@ -124,15 +124,15 @@ exports.tagByID = function (req, res, next, id) {
   }
 
   Tag.findOne(query)
-    .populate("user", "displayName slug")
+    .populate('user', 'displayName slug')
     .exec(function (err, tag) {
       if (err) {
         return res.status(400).send({
-          message: "Tag is invalid"
+          message: 'Tag is invalid'
         });
       } else if (!tag) {
         return res.status(404).send({
-          message: "No Tag with that identifier has been found"
+          message: 'No Tag with that identifier has been found'
         });
       }
       req.tag = tag;
@@ -180,14 +180,14 @@ exports.polls = function (req, res) {
   var userId = req.user ? req.user._id : undefined;
   var page = req.params.page || 1;
   var language = req.params.language || config.mappingLanguages[req.locale];
-  var sort = req.params.sort || "-created";
+  var sort = req.params.sort || '-created';
 
   var query = { tags: req.tag._id, language: language };
   Poll.paginate(query, {
     sort: sort,
     populate: [
-      { path: "user", select: "displayName profileImageURL slug" },
-      { path: "category", select: "name color icon slug" }
+      { path: 'user', select: 'displayName profileImageURL slug' },
+      { path: 'category', select: 'name color icon slug' }
     ],
     page: page,
     limit: 10

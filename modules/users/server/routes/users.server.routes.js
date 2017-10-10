@@ -38,9 +38,9 @@ module.exports = function (app) {
   app.route('/api/profile/:profileId/votes/:page').get(users.loadProfileVotes);
   app.route('/api/profile/:profileId/likes/:page').get(users.likes);
   app.route('/api/profile/:profileId/dislikes/:page').get(users.dislikes);
-  app.route('/api/profile/:profileId/bookmarks/:page').get(users.bookmarks);
+  app.route('/api/profile/:profileId/bookmarks/:page').get(users.loadProfileBookmarks);
   app.route('/api/profile/:profileId/follows/:page').get(users.loadProfileFollows);
-  app.route('/api/profile/:profileId/views/:page').get(users.views);
+  app.route('/api/profile/:profileId/views/:page').get(users.loadProfileViews);
 
 
   // Finish by binding the user middleware

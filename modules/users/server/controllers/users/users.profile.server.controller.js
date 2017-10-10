@@ -423,7 +423,66 @@ exports.loadProfileFollows = function (req, res) {
       });
     }, handleError);
 
-  // Follow.find({ user: req.profile._id })
+  function handleError(err) {
+    // Xuất bug ra file log
+    logger.system.error('users.profile.server.controller.js - follows', err);
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
+  }
+};
+
+/**
+ * Lấy các poll user đã bookmark tại màn hình profile.bookmark
+ */
+exports.loadProfileBookmarks = function (req, res) {
+  var page = req.params.page || 1;
+  var userId = req.user ? req.user._id : undefined;
+
+  var query = { user: req.profile._id };
+  var options = {
+    page: page,
+    sort: '-created',
+    limit: 10,
+    populate: [
+      {
+        path: 'poll', populate: [
+          { path: 'user', select: 'displayName profileImageURL slug', model: 'User' },
+          { path: 'category', select: 'name color icon slug', model: 'Category' }
+        ]
+      }
+    ]
+  };
+
+  Bookmark.paginate(query, options)
+    .then(result => {
+      var bookmarks = result.docs;
+      if (bookmarks.length === 0) return res.jsonp([]);
+      var polls = _.pluck(bookmarks, 'poll');
+      var length = polls.length;
+      var counter = 0;
+      polls.forEach(function (instance, index, array) {
+        if (!instance) return;
+        array[index] = instance.toObject();
+        pollController.get_last_cmt_by_pollId(array[index]._id)
+          .then(result => {
+            array[index].lastCmt = result || {};
+            return pollController.get_full_by_pollId(array[index]._id, userId);
+          })
+          .then(result => {
+            array[index].opts = result.opts;
+            array[index].votes = result.votes;
+            array[index].follow = result.follow;
+            array[index].reported = result.reported;
+            array[index].bookmarked = result.bookmarked;
+            if (++counter === length) {
+              res.jsonp(polls);
+            }
+          })
+          .catch(handleError);
+      });
+    }, handleError);
+  // Bookmark.find({ user: req.profile._id })
   //   .sort('-created')
   //   .populate({
   //     path: 'poll',
@@ -434,9 +493,9 @@ exports.loadProfileFollows = function (req, res) {
   //     ]
   //   })
   //   .skip(10 * page).exec()
-  //   .then(follows => {
-  //     if (follows.length === 0) return res.jsonp([]);
-  //     polls = _.pluck(follows, 'poll');
+  //   .then(bms => {
+  //     if (bms.length === 0) return res.jsonp([]);
+  //     polls = _.pluck(bms, 'poll');
   //     var length = polls.length;
   //     var counter = 0;
   //     polls.forEach(function (instance, index, array) {
@@ -456,57 +515,6 @@ exports.loadProfileFollows = function (req, res) {
   //         .catch(handleError);
   //     });
   //   }, handleError);
-
-  function handleError(err) {
-    // Xuất bug ra file log
-    logger.system.error('users.profile.server.controller.js - follows', err);
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
-    });
-  }
-};
-
-/**
- * Lấy các poll user đã bookmark tại màn hình profile.bookmark
- */
-exports.bookmarks = function (req, res) {
-  var page = req.params.page || 0;
-  var userId = req.user ? req.user._id : undefined;
-  var polls = [];
-
-  Bookmark.find({ user: req.profile._id })
-    .sort('-created')
-    .populate({
-      path: 'poll',
-      model: 'Poll',
-      populate: [
-        { path: 'user', select: 'displayName profileImageURL slug', model: 'User' },
-        { path: 'category', select: 'name color icon slug', model: 'Category' }
-      ]
-    })
-    .skip(10 * page).exec()
-    .then(bms => {
-      if (bms.length === 0) return res.jsonp([]);
-      polls = _.pluck(bms, 'poll');
-      var length = polls.length;
-      var counter = 0;
-      polls.forEach(function (instance, index, array) {
-        if (!instance) return;
-        array[index] = instance.toObject();
-        pollController.get_full_by_pollId(array[index]._id, userId)
-          .then(result => {
-            array[index].opts = result.opts;
-            array[index].votes = result.votes;
-            array[index].follow = result.follow;
-            array[index].reported = result.reported;
-            array[index].bookmarked = result.bookmarked;
-            if (++counter === length) {
-              res.jsonp(polls);
-            }
-          })
-          .catch(handleError);
-      });
-    }, handleError);
 
   function handleError(err) {
     // Xuất bug ra file log
@@ -548,31 +556,40 @@ exports.clear_follow = function (req, res) {
 /**
  * Lấy các poll user đã view
  */
-exports.views = function (req, res) {
-  var page = req.params.page || 0;
+exports.loadProfileViews = function (req, res) {
+  var page = req.params.page || 1;
   var userId = req.user ? req.user._id : undefined;
-  var polls = [];
 
-  View.find({ user: req.profile._id })
-    .sort('-created')
-    .populate({
-      path: 'poll',
-      model: 'Poll',
-      populate: [
-        { path: 'user', select: 'displayName profileImageURL slug', model: 'User' },
-        { path: 'category', select: 'name color icon slug', model: 'Category' }
-      ]
-    })
-    .skip(10 * page).exec()
-    .then(views => {
+  var query = { user: req.profile._id };
+  var options = {
+    page: page,
+    sort: '-created',
+    limit: 10,
+    populate: [
+      {
+        path: 'poll', populate: [
+          { path: 'user', select: 'displayName profileImageURL slug', model: 'User' },
+          { path: 'category', select: 'name color icon slug', model: 'Category' }
+        ]
+      }
+    ]
+  };
+
+  View.paginate(query, options)
+    .then(result => {
+      var views = result.docs;
       if (views.length === 0) return res.jsonp([]);
-      polls = _.pluck(views, 'poll');
+      var polls = _.pluck(views, 'poll');
       var length = polls.length;
       var counter = 0;
       polls.forEach(function (instance, index, array) {
         if (!instance) return;
         array[index] = instance.toObject();
-        pollController.get_full_by_pollId(array[index]._id, userId)
+        pollController.get_last_cmt_by_pollId(array[index]._id)
+          .then(result => {
+            array[index].lastCmt = result || {};
+            return pollController.get_full_by_pollId(array[index]._id, userId);
+          })
           .then(result => {
             array[index].opts = result.opts;
             array[index].votes = result.votes;
@@ -586,6 +603,40 @@ exports.views = function (req, res) {
           .catch(handleError);
       });
     }, handleError);
+
+  // View.find({ user: req.profile._id })
+  //   .sort('-created')
+  //   .populate({
+  //     path: 'poll',
+  //     model: 'Poll',
+  //     populate: [
+  //       { path: 'user', select: 'displayName profileImageURL slug', model: 'User' },
+  //       { path: 'category', select: 'name color icon slug', model: 'Category' }
+  //     ]
+  //   })
+  //   .skip(10 * page).exec()
+  //   .then(views => {
+  //     if (views.length === 0) return res.jsonp([]);
+  //     polls = _.pluck(views, 'poll');
+  //     var length = polls.length;
+  //     var counter = 0;
+  //     polls.forEach(function (instance, index, array) {
+  //       if (!instance) return;
+  //       array[index] = instance.toObject();
+  //       pollController.get_full_by_pollId(array[index]._id, userId)
+  //         .then(result => {
+  //           array[index].opts = result.opts;
+  //           array[index].votes = result.votes;
+  //           array[index].follow = result.follow;
+  //           array[index].reported = result.reported;
+  //           array[index].bookmarked = result.bookmarked;
+  //           if (++counter === length) {
+  //             res.jsonp(polls);
+  //           }
+  //         })
+  //         .catch(handleError);
+  //     });
+  //   }, handleError);
 
   function handleError(err) {
     // Xuất bug ra file log

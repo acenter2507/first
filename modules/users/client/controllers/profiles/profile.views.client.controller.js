@@ -38,7 +38,7 @@ angular.module('users').controller('ProfileViewsController', [
           $scope.stopped = true;
           $scope.handleShowMessage(err.message, true);
         });
-    }
+    };
     function prepareShowingData(poll) {
       return new Promise((resolve, reject) => {
         poll = Action.prepareShowingData(poll);

@@ -103,6 +103,7 @@ exports.delete = function (req, res) {
     }, handleError);
 
   function handleError(err) {
+    console.log(err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });

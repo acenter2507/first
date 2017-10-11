@@ -15,6 +15,7 @@
     'ProfileApi',
     'ngDialog',
     'Constants',
+    'Storages',
     'Socialshare',
     '$translate'
   ];
@@ -30,6 +31,7 @@
     ProfileApi,
     dialog,
     Constants,
+    Storages,
     Socialshare,
     $translate
   ) {
@@ -44,7 +46,7 @@
     vm.stopped = false;
     vm.is_has_new_polls = false;
     vm.supportLanguages = $window.supportLanguages;
-    vm.language = $translate.use();
+    vm.language = Storages.get_local(Constants.storages.language) || $translate.use();
 
     onPrepare();
 

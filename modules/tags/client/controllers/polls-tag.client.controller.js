@@ -12,7 +12,9 @@
     'tagResolve',
     'Action',
     'TagsApi',
-    'ngDialog'
+    'ngDialog',
+    'Storages',
+    'Constants'
   ];
 
   function PollsTagController(
@@ -21,14 +23,16 @@
     tag,
     Action,
     TagsApi,
-    dialog
+    dialog,
+    Storages,
+    Constants
   ) {
     var vm = this;
     vm.tag = tag;
 
     $scope.busy = false;
     vm.polls = [];
-    vm.language = $translate.use();
+    vm.language = Storages.get_local(Constants.storages.language) || $translate.use();
     vm.page = 1;
     vm.sort = '-created';
 

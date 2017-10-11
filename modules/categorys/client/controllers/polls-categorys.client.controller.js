@@ -12,7 +12,9 @@
     'categoryResolve',
     'Action',
     'CategorysApi',
-    'ngDialog'
+    'ngDialog',
+    'Storages',
+    'Constants'
   ];
 
   function CategoryPollsController(
@@ -21,7 +23,9 @@
     category,
     Action,
     CategorysApi,
-    dialog
+    dialog,
+    Storages,
+    Constants
   ) {
     var vm = this;
     vm.category = category;
@@ -31,7 +35,7 @@
     $scope.busy = false;
     vm.page = 1;
     vm.sort = '-created';
-    vm.language = $translate.use();
+    vm.language = Storages.get_local(Constants.storages.language) || $translate.use();
     vm.polls = [];
 
     handleLoadPolls();

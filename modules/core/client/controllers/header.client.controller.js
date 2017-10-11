@@ -31,7 +31,6 @@ angular.module('core').controller('HeaderController', [
       // Nghe sự kiện chuyển thay đổi ngôn ngữ
       $scope.$on('changeLanguage', (event, args) => {
         $scope.language = args.language;
-        console.log('Header: changeLanguage: ', args.language);
       });
     }
     // Đánh dấu tất cả notifs thành đã xem

@@ -218,7 +218,6 @@ exports.changeLanguage = function (req, res) {
   }
   user.language = language;
   user.save(function (err, _user) {
-    console.log(err);
     if (err) return res.status(400).send({ message: 'MS_CM_LOAD_ERROR' });
     return res.end();
   });

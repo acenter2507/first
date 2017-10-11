@@ -79,7 +79,7 @@ var UserSchema = new Schema({
 });
 UserSchema.plugin(slug('displayName', { update: true }));
 // Tạo index search
-UserSchema.index({ displayName: 'text', email: 'text', slug: 'text' });
+// UserSchema.index({ displayName: 'text', email: 'text', slug: 'text' });
 UserSchema.plugin(paginate);
 
 /**

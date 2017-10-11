@@ -92,7 +92,7 @@ exports.delete = function (req, res) {
   like.remove()
     .then(() => {
       var userId = like.user._id || like.user;
-      return User.countLike(userId);
+      return User.countDownLike(userId);
     }, handleError)
     .then(() => {
       var pollId = like.poll._id || like.poll;

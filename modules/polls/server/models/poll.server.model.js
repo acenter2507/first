@@ -58,7 +58,7 @@ var PollSchema = new Schema({
 // Plugin tạo slug url
 PollSchema.plugin(slug('title', { update: true }));
 // Tạo index search
-PollSchema.index({ title: 'text', body: 'text', slug: 'text', 'tags.name': 'text' }, { name: 'My text index', weights: { title: 4, body: 3, slug: 2, 'tags.name': 1 }});
+PollSchema.index({ title: 'text', body: 'text', slug: 'text', 'tags.name': 'text' }, { name: 'My text index', weights: { title: 4, body: 3, slug: 2, 'tags.name': 1 } });
 // Plugin hỗ trợ pagination
 PollSchema.plugin(paginate);
 

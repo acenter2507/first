@@ -274,6 +274,7 @@ exports.loadPolls = function (req, res) {
   var userId = req.user ? req.user._id : undefined;
   // Lấy ngôn ngữ hiển thị poll
   var language = req.params.language || config.mappingLanguages[req.locale];
+  console.log(language);
   Poll.paginate(
     { isPublic: true, language: language },
     {

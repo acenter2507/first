@@ -219,8 +219,6 @@ exports.changeLanguage = function (req, res) {
   user.language = language;
   user.save(function (err, _user) {
     if (err) res.status(400).send({ message: 'MS_CM_LOAD_ERROR' });
-    _user.password = undefined;
-    _user.salt = undefined;
     return res.end();
   });
 };

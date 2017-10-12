@@ -685,7 +685,7 @@ function search_condition_analysis(condition) {
   // Search by key in title
   if (condition.key && condition.key !== '') {
     var key_lower = condition.key.toLowerCase();
-    var key_upper = condition.key.toUpperCase()
+    var key_upper = condition.key.toUpperCase();
     var or_arr = [
       { title: { $regex: '/^' + condition.key + '/i' } },
       { title: { $regex: '/^' + key_lower + '/i' } },

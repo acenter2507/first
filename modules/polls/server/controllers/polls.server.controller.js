@@ -503,8 +503,8 @@ exports.removeBookmark = function (req, res) {
 exports.searchPolls = function (req, res) {
   const condition = req.body.condition;
   condition.language = condition.language || config.mappingLanguages[req.locale];
-  var search = search_condition_analysis(condition);
   var userId = req.user ? req.user._id : undefined;
+  var search = search_condition_analysis(condition, userId);
   var sort = condition.sort || '-created';
   Poll.find(search)
     .select('-titleSearch -bodySearch -tags')
@@ -607,10 +607,20 @@ exports.images_upload = function (req, res) {
 };
 
 // Phan tich dieu kien search
-function search_condition_analysis(condition) {
+function search_condition_analysis(condition, userId) {
   var search = {};
   var and_arr = [];
-  and_arr.push({ isPublic: true });
+  and_arr.push({
+    $or: [
+      { isPublic: true },
+      {
+        $and: [
+          { isPublic: false },
+          { user: userId }
+        ]
+      }
+    ]
+  });
   and_arr.push({ language: condition.language });
   // Search by user
   if (condition.by) {

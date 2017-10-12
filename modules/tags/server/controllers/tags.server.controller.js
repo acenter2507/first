@@ -181,8 +181,21 @@ exports.polls = function (req, res) {
   var page = req.params.page || 1;
   var language = req.params.language || config.mappingLanguages[req.locale];
   var sort = req.params.sort || '-created';
+  // Tạo query hiển thị
+  var query = {
+    tags: req.tag._id,
+    language: language,
+    $or: [
+      { isPublic: true },
+      {
+        $and: [
+          { isPublic: false },
+          { user: userId }
+        ]
+      }
+    ],
+  };
 
-  var query = { tags: req.tag._id, isPublic: true, language: language };
   Poll.paginate(query, {
     sort: sort,
     select: '-titleSearch -bodySearch -tags',

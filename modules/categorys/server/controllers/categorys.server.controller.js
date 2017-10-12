@@ -125,7 +125,21 @@ exports.polls = function (req, res) {
   var language = req.params.language || config.mappingLanguages[req.locale];
   var sort = req.params.sort || '-created';
 
-  var query = { category: req.category._id, isPublic: true, language: language };
+  // Tạo query hiển thị
+  var query = {
+    category: req.category._id,
+    language: language,
+    $or: [
+      { isPublic: true },
+      {
+        $and: [
+          { isPublic: false },
+          { user: userId }
+        ]
+      }
+    ],
+  };
+
   var options = {
     sort: sort,
     select: '-tags',

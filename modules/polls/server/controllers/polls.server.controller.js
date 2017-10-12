@@ -687,12 +687,12 @@ function search_condition_analysis(condition) {
     var key_lower = condition.key.toLowerCase();
     var key_upper = condition.key.toUpperCase();
     var or_arr = [
-      { title: { $regex: '/^' + condition.key + '/i' } },
-      { title: { $regex: '/^' + key_lower + '/i' } },
-      { title: { $regex: '/^' + key_upper + '/i' } },
-      { body: { $regex: '/^' + condition.key + '/i' } },
-      { body: { $regex: '/^' + key_lower + '/i' } },
-      { body: { $regex: '/^' + key_upper + '/i' } }
+      { title: { $regex: '.*' + condition.key + '.*' } },
+      { title: { $regex: '.*' + key_lower + '.*' } },
+      { title: { $regex: '.*' + key_upper + '.*' } },
+      { body: { $regex: '.*' + condition.key + '.*' } },
+      { body: { $regex: '.*' + key_lower + '.*' } },
+      { body: { $regex: '.*' + key_upper + '.*' } }
     ];
     and_arr.push({ $or: or_arr });
 

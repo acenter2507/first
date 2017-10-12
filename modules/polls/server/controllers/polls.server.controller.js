@@ -692,7 +692,13 @@ function search_condition_analysis(condition) {
       { title: { $regex: '.*' + key_upper + '.*' } },
       { body: { $regex: '.*' + condition.key + '.*' } },
       { body: { $regex: '.*' + key_lower + '.*' } },
-      { body: { $regex: '.*' + key_upper + '.*' } }
+      { body: { $regex: '.*' + key_upper + '.*' } },
+      { bodySearch: { $regex: '.*' + condition.key + '.*' } },
+      { bodySearch: { $regex: '.*' + key_lower + '.*' } },
+      { bodySearch: { $regex: '.*' + key_upper + '.*' } },
+      { titleSearch: { $regex: '.*' + condition.key + '.*' } },
+      { titleSearch: { $regex: '.*' + key_lower + '.*' } },
+      { titleSearch: { $regex: '.*' + key_upper + '.*' } }
     ];
     and_arr.push({ $or: or_arr });
 

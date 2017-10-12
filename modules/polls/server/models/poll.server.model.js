@@ -53,7 +53,12 @@ var PollSchema = new Schema({
   /**
    * LenhHN update đổi cấu trúc db 20171008
    */
-  tags: [{ type: Schema.ObjectId, ref: 'Tag' }]
+  tags: [{ type: Schema.ObjectId, ref: 'Tag' }],
+  /**
+   * LenhHN update thêm trường search không dấu
+   */
+  titleSearch: { type: String, default: '' },
+  bodySearch: { type: String, default: '' }
 });
 // Plugin tạo slug url
 PollSchema.plugin(slug('title', { update: true }));
@@ -65,11 +70,11 @@ PollSchema.plugin(paginate);
 PollSchema.pre('save', function (next) {
   this.updated = new Date();
 
-  if (this.body && this.isModified('body')) {
-    this.search_body = pureText(this.body);
+  if (this.title && this.isModified('body')) {
+    this.bodySearch = pureText(this.body);
   }
-  if (this.body && this.isModified('title')) {
-    this.search_title = pureText(this.title);
+  if (this.title && this.isModified('title')) {
+    this.titleSearch = pureText(this.title);
   }
   next();
 });
@@ -166,7 +171,7 @@ function pureText(str) {
   str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
   str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
   str = str.replace(/đ/g, "d");
-  return str;
+  return str.toLowerCase();
 }
 
 mongoose.model('Poll', PollSchema);

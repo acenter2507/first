@@ -9,7 +9,7 @@
         <div class="card-body">
           <form name="vm.form.searchForm" class="form-horizontal" novalidate>
             <div class="form-group">
-              <div class="col-md-6">
+              <div class="col-md-12">
                 <label>{{:: 'LB_SEARCH_KEY' | translate }}</label>
                 <input type="text" class="form-control" placeholder="{{:: 'LB_SEARCH_KEY' | translate }}..." ng-model="vm.condition.key">
               </div>
@@ -17,7 +17,7 @@
                 <label>In</label>
                 <select class="form-control" ng-model="vm.condition.in">
 							  	<option value>{{:: 'LB_SEARCH_NOT_SET' | translate }}</option>
-							  	<option value="title">{{:: 'LB_SEARCH_NOT_SET' | translate }}</option>
+							  	<option value="title">{{:: 'LB_SEARCH_IN_TITLE' | translate }}</option>
 							  	<option value="content">{{:: 'LB_SEARCH_IN_BODY' | translate }}</option>
 							  	<option value="options">{{:: 'LB_SEARCH_IN_OPTION' | translate }}</option>
 							  </select>

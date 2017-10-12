@@ -23,21 +23,21 @@ module.exports = function(app) {
   // Lấy danh sách poll cho màn hình polls.list
   app.route('/api/loadPolls/:page/:language').get(polls.loadPolls);
   // Lấy danh sách poll nổi bật cho màn hình polls.list
-  app.route('/api/findPopulars/:page/:language').get(polls.findPopulars);
+  app.route('/api/loadPopularPolls/:page/:language').get(polls.loadPopularPolls);
   // Lấy thông tin của user hiện hành đối với poll cho màn hình polls.view
-  app.route('/api/findOwners/:pollId').get(polls.findOwners);
+  app.route('/api/loadOwnerInfo/:pollId').get(polls.loadOwnerInfo);
   // Load comment cho màn hình poll.view theo page
   app.route('/api/loadComments/:pollId/:page/:sort').get(polls.loadComments);
   // Tăng biến đếm lượt view của poll
   app.route('/api/countUpView/:pollId').get(polls.countUpView);
   // Load thông tin vote của 1 poll
-  app.route('/api/findVotes/:pollId').get(polls.findVotes);
+  app.route('/api/loadVotesByPoll/:pollId').get(polls.loadVotesByPoll);
   // Lấy danh sách đã vote cho 1 option
-  app.route('/api/findVotesByOption/:optId').get(polls.findVotesByOption);
+  app.route('/api/loadVotesByOption/:optId').get(polls.loadVotesByOption);
   // Xóa 1 poll ra khỏi list bookmark
   app.route('/api/removeBookmark/:pollId').get(polls.removeBookmark);
   // Chức năng search
-  app.route('/api/search').post(polls.search);
+  app.route('/api/searchPolls').post(polls.searchPolls);
 
   // ADMIN
   app.route('/api/polls/admin/search').all(pollsPolicy.isAllowed)

@@ -185,6 +185,7 @@ exports.polls = function (req, res) {
   var query = { tags: req.tag._id, isPublic: true, language: language };
   Poll.paginate(query, {
     sort: sort,
+    select: '-titleSearch -bodySearch -tags',
     populate: [
       { path: 'user', select: 'displayName profileImageURL slug' },
       { path: 'category', select: 'name color icon slug' }

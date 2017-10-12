@@ -42,7 +42,7 @@ angular.module('polls').controller('PollsSearchController', [
       if ($scope.busy === true) return;
       $scope.busy = true;
       vm.polls = [];
-      Action.search(vm.condition)
+      Action.searchPolls(vm.condition)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
             $scope.busy = false;

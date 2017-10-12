@@ -44,32 +44,14 @@
      * Lấy danh sách poll mổi bật cho màn hình polls.list
      */
     this.loadPopularPolls = (_page, language) => {
-      return new Promise((resolve, reject) => {
-        var page = _page || 0;
-        $http.get('/api/findPopulars/' + page + '/' + language, {
-          ignoreLoadingBar: true
-        })
-          .then(res => {
-            return resolve(res);
-          }, err => {
-            return reject(err);
-          });
-      });
+      var page = _page || 0;
+      return $http.get('/api/loadPopularPolls/' + page + '/' + language, { ignoreLoadingBar: true });
     };
     /**
      * Lấy toàn bộ thông tin của user đối với poll màn hình polls.view
      */
     this.loadOwnerInfo = pollId => {
-      return new Promise((resolve, reject) => {
-        $http.get('/api/findOwners/' + pollId, {
-          ignoreLoadingBar: true
-        })
-          .then(res => {
-            return resolve(res);
-          }, err => {
-            return reject(err);
-          });
-      });
+      return $http.get('/api/loadOwnerInfo/' + pollId, { ignoreLoadingBar: true });
     };
     /**
      * Lấy poll bằng poll id
@@ -84,10 +66,8 @@
     /**
     * Tăng count view của point
     */
-    this.search = condition => {
-      return $http.post('/api/search', { condition: condition }, {
-        ignoreLoadingBar: true
-      });
+    this.searchPolls = condition => {
+      return $http.post('/api/searchPolls', { condition: condition }, { ignoreLoadingBar: true });
     };
     /**
      * Lưu poll
@@ -250,13 +230,13 @@
      * Lấy toàn bộ thông tin các votes 
      */
     this.loadVotesByPollId = pollId => {
-      return $http.get('/api/findVotes/' + pollId, { ignoreLoadingBar: true });
+      return $http.get('/api/loadVotesByPoll/' + pollId, { ignoreLoadingBar: true });
     };
     /**
      * Lấy toàn bộ thông tin các vote của 1 option
      */
     this.loadVotesByOptionId = optId => {
-      return $http.get('/api/findVotesByOption/' + optId, { ignoreLoadingBar: true });
+      return $http.get('/api/loadVotesByOption/' + optId, { ignoreLoadingBar: true });
     };
     /**
      * Lưu 1 vote của poll

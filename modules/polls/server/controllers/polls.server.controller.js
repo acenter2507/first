@@ -78,15 +78,8 @@ exports.read = function (req, res) {
   // convert mongoose document to JSON
   var poll = req.poll ? req.poll.toJSON() : {};
 
-  poll.isCurrentUserOwner =
-    req.user &&
-    poll.user &&
-    poll.user._id.toString() === req.user._id.toString();
-  poll.canEdit =
-    req.user &&
-    req.user.roles &&
-    req.user.roles.length &&
-    req.user.roles.indexOf('admin') > -1;
+  poll.isCurrentUserOwner = req.user && poll.user && poll.user._id.toString() === req.user._id.toString();
+  poll.canEdit = req.user && req.user.roles && req.user.roles.length && req.user.roles.indexOf('admin') > -1;
   get_opts_by_pollId(poll._id)
     .then(result => {
       poll.opts = result || [];
@@ -246,6 +239,7 @@ exports.pollByID = function (req, res, next, id) {
   }
 
   Poll.findOne(query)
+    .select('-titleSearch -bodySearch')
     .populate('category', 'name color icon slug')
     .populate('user', 'displayName profileImageURL slug')
     .populate('tags', 'name slug')
@@ -280,7 +274,7 @@ exports.loadPolls = function (req, res) {
       page: page,
       limit: 10,
       sort: '-created',
-      select: '-body -updated -share_code -tags',
+      select: '-body -updated -share_code -tags -titleSearch -bodySearch',
       populate: [
         { path: 'category', select: 'name color icon slug' },
         { path: 'user', select: 'displayName profileImageURL slug' }
@@ -327,7 +321,7 @@ exports.loadPolls = function (req, res) {
 /**
  * Lấy danh sách poll nổi bật cho màn hình polls.list
  */
-exports.findPopulars = function (req, res) {
+exports.loadPopularPolls = function (req, res) {
   let rs = {};
   let sort = '-likeCnt';
   let limit = 10;
@@ -353,7 +347,7 @@ exports.findPopulars = function (req, res) {
 
   function handleError(err) {
     // Xuất bug ra file log
-    logger.system.error('polls.server.controller.js - findPopulars', err);
+    logger.system.error('polls.server.controller.js - loadPopularPolls', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -363,7 +357,7 @@ exports.findPopulars = function (req, res) {
 /**
  * Lấy thông tin của user hiện hành đối với poll cho màn hình polls.view
  */
-exports.findOwners = function (req, res) {
+exports.loadOwnerInfo = function (req, res) {
   var userId = req.user ? req.user._id : undefined;
   var ip = getClientIp(req);
   var result = {};
@@ -394,7 +388,7 @@ exports.findOwners = function (req, res) {
     })
     .catch(err => {
       // Xuất bug ra file log
-      logger.system.error('polls.server.controller.js - findOwners', err);
+      logger.system.error('polls.server.controller.js - loadOwnerInfo', err);
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
@@ -448,7 +442,7 @@ exports.loadComments = function (req, res) {
 /**
  * Lấy toàn bộ thông tin các vote và các opt của vote (polls.view)
  */
-exports.findVotes = function (req, res) {
+exports.loadVotesByPoll = function (req, res) {
   get_votes_by_pollId(req.poll._id)
     .then(votes => {
       res.jsonp(votes);
@@ -456,7 +450,7 @@ exports.findVotes = function (req, res) {
     .catch(handleError);
   function handleError(err) {
     // Xuất bug ra file log
-    logger.system.error('polls.server.controller.js - findVotes', err);
+    logger.system.error('polls.server.controller.js - loadVotesByPoll', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -466,7 +460,7 @@ exports.findVotes = function (req, res) {
 /**
  * Lấy toàn bộ thông tin các vote của một options
  */
-exports.findVotesByOption = function (req, res) {
+exports.loadVotesByOption = function (req, res) {
   var optId = req.params.optId || '';
   var ids;
   Vote.find({ opts: optId, guest: false })
@@ -477,7 +471,7 @@ exports.findVotesByOption = function (req, res) {
     }, handleError);
   function handleError(err) {
     // Xuất bug ra file log
-    logger.system.error('polls.server.controller.js - findVotesByOption', err);
+    logger.system.error('polls.server.controller.js - loadVotesByOption', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -504,13 +498,14 @@ exports.removeBookmark = function (req, res) {
   }
 };
 
-exports.search = function (req, res) {
+exports.searchPolls = function (req, res) {
   const condition = req.body.condition;
   condition.language = condition.language || config.mappingLanguages[req.locale];
   var search = search_condition_analysis(condition);
   var userId = req.user ? req.user._id : undefined;
   var sort = condition.sort || '-created';
   Poll.find(search)
+    .select('-titleSearch -bodySearch -tags')
     .populate('category', 'name color icon slug')
     .populate('user', 'displayName profileImageURL slug')
     .sort(sort).exec()
@@ -533,7 +528,7 @@ exports.search = function (req, res) {
             array[index].reported = result.reported;
             array[index].bookmarked = result.bookmarked;
             if (++counter === length) {
-              polls = _filter_key(polls, condition);
+              // polls = _filter_key(polls, condition);
               res.jsonp(polls);
             }
           })
@@ -565,7 +560,7 @@ exports.search = function (req, res) {
   }
   function handleError(err) {
     // Xuất bug ra file log
-    logger.system.error('polls.server.controller.js - search', err);
+    logger.system.error('polls.server.controller.js - searchPolls', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });

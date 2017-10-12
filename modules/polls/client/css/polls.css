@@ -7,10 +7,10 @@
 .poll-footer {
   position: relative;
 }
-.poll-body p,
+/*.poll-body p,
 .post-body p{
   display: inline-block;
-}
+}*/
 
 .poll-header {
   display: flex;

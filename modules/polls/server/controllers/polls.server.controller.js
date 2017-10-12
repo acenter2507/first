@@ -70,7 +70,6 @@ exports.create = function (req, res) {
     });
   }
 };
-
 /**
  * Show the current Poll
  */
@@ -101,7 +100,6 @@ exports.read = function (req, res) {
     });
   }
 };
-
 /**
  * Update a Poll
  */
@@ -146,7 +144,6 @@ exports.update = function (req, res) {
     });
   }
 };
-
 /**
  * Delete an Poll
  */
@@ -202,7 +199,6 @@ exports.delete = function (req, res) {
     });
   }
 };
-
 /**
  * List of Polls x
  */
@@ -223,7 +219,6 @@ exports.list = function (req, res) {
       }
     });
 };
-
 /**
  * Poll middleware
  */
@@ -259,7 +254,6 @@ exports.pollByID = function (req, res, next, id) {
       next();
     });
 };
-
 /**
  * Lấy danh sách poll cho màn hình polls.list
  */
@@ -268,8 +262,21 @@ exports.loadPolls = function (req, res) {
   var userId = req.user ? req.user._id : undefined;
   // Lấy ngôn ngữ hiển thị poll
   var language = req.params.language || config.mappingLanguages[req.locale];
+  // Tạo query hiển thị
+  var query = {
+    language: language,
+    $or: [
+      { isPublic: true },
+      {
+        $and: [
+          { isPublic: false },
+          { user: userId }
+        ]
+      }
+    ],
+  };
   Poll.paginate(
-    { isPublic: true, language: language },
+    query,
     {
       page: page,
       limit: 10,
@@ -317,7 +324,6 @@ exports.loadPolls = function (req, res) {
     });
   }
 };
-
 /**
  * Lấy danh sách poll nổi bật cho màn hình polls.list
  */
@@ -353,7 +359,6 @@ exports.loadPopularPolls = function (req, res) {
     });
   }
 };
-
 /**
  * Lấy thông tin của user hiện hành đối với poll cho màn hình polls.view
  */
@@ -394,7 +399,6 @@ exports.loadOwnerInfo = function (req, res) {
       });
     });
 };
-
 /**
  * Load comment cho màn hình poll.view theo page
  */
@@ -438,7 +442,6 @@ exports.loadComments = function (req, res) {
     });
   }
 };
-
 /**
  * Lấy toàn bộ thông tin các vote và các opt của vote (polls.view)
  */
@@ -456,7 +459,6 @@ exports.loadVotesByPoll = function (req, res) {
     });
   }
 };
-
 /**
  * Lấy toàn bộ thông tin các vote của một options
  */

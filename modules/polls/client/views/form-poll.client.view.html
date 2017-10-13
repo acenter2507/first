@@ -59,7 +59,7 @@
                 <auto-complete source="loadItems($query)" min-length="1" debounce-delay="0" max-results="10"></auto-complete>
               </tags-input>
               <div role="alert" ng-show="vm.form.pollForm.tags.$invalid">
-                <p class="help-block error-text">{{:: 'LB_TAGS_ERROR' | translate}}</p>
+                <p class="text-danger">{{:: 'LB_TAGS_ERROR' | translate}}</p>
               </div>
             </div>
           </div>

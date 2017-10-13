@@ -30,7 +30,7 @@
             <strong>{{:: notif.poll.title}}</strong>
           </div>
           <div class="notifications-action">
-            <span class="fa fa-2x notifications-mark"
+            <span class="fa fa-lg notifications-mark"
               ng-class="{'fa-circle-o': notif.status === 0, 'fa-dot-circle-o': notif.status === 1}"
               ng-click="vm.mark_read(notif); $event.stopPropagation();"
               tooltip-placement="bottom" uib-tooltip="{{ notif.status === 0 ? 'LB_NOFT_READ' : 'LB_NOFT_UNREAD' | translate }}">

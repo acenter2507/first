@@ -314,7 +314,8 @@
         transition: height 50ms ease-in-out;
         background-color: #fff;
         border: 1px solid #dddfe2;
-
+        font-size: 14px;
+        line-height: 18px;
       }
 
 

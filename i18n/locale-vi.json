@@ -191,6 +191,7 @@
   "LB_QUICK_BODY_REQUIRE": "Bạn cần phải hỏi gì đó",
   "LB_QUICK_OPT_PLACE": "Thêm lựa chọn...",
   "LB_CATEGORY_REQUIRE": "Xin hãy chọn danh mục của poll",
+  "LB_TAGS_ERROR": "Thông tin thẻ không hợp lệ",
   "LB_OPTION_TITLE_PLACE": "Tên của lựa chọn...",  
   "LB_OPTION_TITLE_REQUIRE": "Bạn cần nhập tên của lựa chọn.",
   "LB_OPTION_COLOR": "Màu hiển thị",

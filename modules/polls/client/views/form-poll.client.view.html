@@ -54,10 +54,13 @@
             </div>
             <!-- Tags -->
             <div class="form-group" ng-controller="AutocompleteTagController">
-              <tags-input ng-model="vm.poll.tags" display-property="name" placeholder="{{:: placeholder | translate }}" add-from-autocomplete-only="true"
+              <tags-input name="tags" ng-model="vm.poll.tags" display-property="name" placeholder="{{:: placeholder | translate }}" add-from-autocomplete-only="true"
                 replace-spaces-with-dashes="false" min-length="1" enforce-max-tags class="tags-custom">
                 <auto-complete source="loadItems($query)" min-length="1" debounce-delay="0" max-results="10"></auto-complete>
               </tags-input>
+              <div ng-messages="vm.form.pollForm.tags.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">{{:: 'LB_TAGS_ERROR' | translate}}</p>
+              </div>
             </div>
           </div>
           <!-- Title -->

@@ -191,6 +191,7 @@
   "LB_QUICK_BODY_REQUIRE": "You must ask somthing.",
   "LB_QUICK_OPT_PLACE": "Type an option...",
   "LB_CATEGORY_REQUIRE": "Category is required.",
+  "LB_TAGS_ERROR": "Tag's info has invalid.",
   "LB_OPTION_TITLE_PLACE": "Option's title",  
   "LB_OPTION_TITLE_REQUIRE": "Option's title is required.",
   "LB_OPTION_COLOR": "Option's color",

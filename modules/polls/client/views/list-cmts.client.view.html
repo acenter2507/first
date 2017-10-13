@@ -5,8 +5,7 @@
   <div class="card-body">
     <div class="comment-form" ng-if="isLogged">
       <div class="form-group mg5b">
-        <span ng-if="vm.tmp_cmt.to">@</span>
-        <a ng-if="vm.tmp_cmt.to" ui-sref="profile.info({userId: vm.tmp_cmt.toSlug})" ng-bind="vm.tmp_cmt.toName"></a>
+        <a ng-if="vm.tmp_cmt.to" ui-sref="profile.info({userId: vm.tmp_cmt.toSlug})">@{{vm.tmp_cmt.toName}}</a>
       </div>
       <div class="comment-to-block">
 
@@ -28,7 +27,7 @@
           </div>
         </div>
       </div>
-      <hr class="mg10b" />
+      <hr class="mgnt mg10b" />
     </div>
 
     <div class="cmt_sort" ng-if="vm.cmts.length > 0">

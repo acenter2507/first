@@ -11,11 +11,12 @@
       flex-grow: 1; }
     .notifications a.list-group-item .notifications-action {
       position: relative;
-      width: 30px; }
+      width: 30px;
+      height: 100%; }
       .notifications a.list-group-item .notifications-action .notifications-mark {
         cursor: pointer;
         position: absolute;
-        top: 0;
+        bottom: 0;
         right: 0;
         color: #267ed5;
         z-index: 2; }

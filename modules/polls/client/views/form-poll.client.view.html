@@ -1,5 +1,4 @@
 <section class="container-fluid animated fadeIn mg6t mg50b">
-  <pre>{{vm.form.pollForm.tags}}</pre>
   <!-- Form -->
   <div class="row">
     <div class="card">
@@ -59,7 +58,7 @@
                 replace-spaces-with-dashes="false" min-length="1" enforce-max-tags class="tags-custom">
                 <auto-complete source="loadItems($query)" min-length="1" debounce-delay="0" max-results="10"></auto-complete>
               </tags-input>
-              <div role="alert">
+              <div role="alert" ng-show="vm.form.pollForm.tags.$invalid">
                 <p class="help-block error-text">{{:: 'LB_TAGS_ERROR' | translate}}</p>
               </div>
             </div>

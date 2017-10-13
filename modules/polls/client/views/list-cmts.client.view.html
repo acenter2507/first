@@ -27,11 +27,18 @@
           </div>
         </div>
       </div>
-      <hr class="mgnt mg10b" />
     </div>
-
-    <div class="cmt_sort" ng-if="vm.cmts.length > 0">
-      <small class="pull-right">{{:: 'LB_SORT' | translate }}:
+    <hr class="mgnt mg10b" />
+    <div class="comment-sort-block" ng-if="vm.cmts.length > 0">
+      <div class="comment-sort-menu" class="" uib-dropdown dropdown-append-to-body>
+        <a href="#" uib-dropdown-toggle>{{:: 'LB_SORT' | translate }}:{{vm.cmt_sort.name}}<i class="fa fa-angle-down"></i></a>
+        <ul class="uib-dropdown-menu dropdown-menu-right dropdown-menu-flat">
+          <li ng-repeat="cmt_sort in vm.cmt_sorts">
+            <a ng-click="vm.handleSortComments($index)">{{cmt_sort.name}}</a>
+          </li>
+        </ul>
+      </div>
+      <!--<small class="pull-right">{{:: 'LB_SORT' | translate }}:
       <md-menu md-offset="-12 25" md-position-mode="target-right target">
         <a ng-click="$mdMenu.open($event)" aria-label="Open sort menu">
           {{vm.cmt_sort.name}}<i class="fa fa-angle-down"></i>
@@ -44,8 +51,8 @@
           </ul>
         </md-menu-content>
       </md-menu>
-      </small>
-      <div class="clearfix h30"></div>
+      </small>-->
+      <div class="clearfix"></div>
     </div>
 
     <div class="cmt_list" ng-repeat="cmt in vm.cmts | orderBy: vm.cmt_sort.val">

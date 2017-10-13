@@ -319,21 +319,11 @@
     .comment-form .comment-box .comment-input .comment-tools {
       width: 100%;
       margin-top: 12px; }
-
-
-/*.comment-box {
-  width: calc(100% - 56px);
-  resize: none;
-  min-height: 46px;
-  max-height: 400px;
-  padding-left: 5px;
-  padding-right: 5px;
-  transition: height 50ms ease-in-out;
-  box-shadow: 0 0 2px rgba(0,0,0,0.2);
-  border: 1px solid #d5d5d5;
-  margin-top: 3px;
-  border-radius: 0;
-}*/
+.comment-sort-block {
+  width: 100%; }
+  .comment-sort-block .comment-sort-menu {
+    float: right;
+    margin-top: auto; }
 
 .opt_color {
   min-width: 24px;

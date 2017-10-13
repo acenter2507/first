@@ -631,6 +631,9 @@ textarea {
     border-top-right-radius: 0 !important; }
     .uib-dropdown-menu.dropdown-menu-flat > li > a {
       padding: 3px 12px !important; }
+    .uib-dropdown-menu.dropdown-menu-flat li.disabled {
+      pointer-events:none;
+      opacity:0.6; }
 
 .highlight-text {
   color: #267ed5;

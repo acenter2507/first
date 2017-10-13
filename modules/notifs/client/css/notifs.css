@@ -4,7 +4,24 @@
   .notifications a.list-group-item {
     cursor: pointer !important;
     border-radius: 0 !important;
-    border: none !important; }
+    border: none !important;
+    display: flex;
+    flex-direction: row; }
+    .notifications a.list-group-item .notifications-info {
+      flex-grow: 1; }
+    .notifications a.list-group-item .notifications-action {
+      position: relative;
+      width: 50px; }
+      .notifications a.list-group-item .notifications-action .notifications-mark {
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 30px;
+        width: 30px; }
+      .notifications a.list-group-item .notifications-action .notifications-mark .notif-read-toggle {
+        color: #267ed5;
+        z-index: 2; }
   .notifications a.list-group-item:not(:first-child) {
     border-top: 1px solid #eee !important;}
   .notifications a.list-group-item.unread {
@@ -12,8 +29,3 @@
   .notifications a.list-group-item:hover,
   .notifications a.list-group-item.unread:hover {
     background-color: #ddd !important; }
-    .notifications a.list-group-item > .pull-right{
-      cursor: default; }
-    .notifications > a.list-group-item .notif-read-toggle {
-      color: #267ed5;
-      z-index: 2; }

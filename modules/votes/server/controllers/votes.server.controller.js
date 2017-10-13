@@ -31,8 +31,12 @@ exports.create = function (req, res) {
       return Poll.countUpVote(pollId);
     }, handleError)
     .then(() => {
-      let userId = vote.user._id || vote.user;
-      return User.countUpVote(req.user._id);
+      if (!vote.guest) {
+        let userId = vote.user._id || vote.user;
+        return User.countUpVote(req.user._id);
+      } else {
+        return;
+      }
     }, handleError)
     .then(() => {
       res.jsonp(vote);
@@ -94,8 +98,12 @@ exports.delete = function (req, res) {
       return Poll.countDownVote(pollId);
     }, handleError)
     .then(() => {
-      let userId = vote.user._id || vote.user;
-      return User.countDownVote(userId);
+      if (!vote.guest) {
+        let userId = vote.user._id || vote.user;
+        return User.countDownVote(userId);
+      } else {
+        return;
+      }
     }, handleError)
     .then(() => {
       res.jsonp(vote);

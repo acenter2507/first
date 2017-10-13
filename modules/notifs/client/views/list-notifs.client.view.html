@@ -19,14 +19,24 @@
     <div class="col-xs-12 pd6x">
       <div class="list-group notifications">
         <a ng-repeat="notif in vm.notifs" ng-click="vm.view_notif(notif)" class="list-group-item" ng-class="{'unread': notif.status === 0}">
-          <div class="col-xs-9 pdn">
+          <div class="notifications-info">
             <div class="user-avatar pull-left">
-              <img src="{{:: notif.from.profileImageURL}}" alt="{{:: notif.from.displayName}}" ng-if="notif.from._id">
-              <img src="modules/users/client/img/profile/default.png" alt="Deleted User" ng-if="!notif.from._id">
+              <img src="{{:: notif.from.profileImageURL}}" alt="{{:: notif.from.displayName}}" ng-if="notif.from">
+              <img src="modules/users/client/img/profile/default.png" alt="Deleted User" ng-if="!notif.from">
             </div>
-            <strong>{{:: notif.from.displayName}}</strong>
+            <strong ng-if="notif.from">{{:: notif.from.displayName}}</strong>
+            <strong ng-if="!notif.from">Deleted user</strong>
             <small class="default-text">{{:: notif.content}}</small>
             <strong>{{:: notif.poll.title}}</strong>
+          </div>
+          <div class="notifications-action">
+            <div class="notifications-mark" tooltip-placement="bottom" uib-tooltip="{{ notif.status === 0 ? 'LB_NOFT_READ' : 'LB_NOFT_UNREAD' | translate }}">
+              <span class="fa notif-read-toggle fa-lg" ng-class="{'fa-circle-o': notif.status === 0, 'fa-dot-circle-o': notif.status === 1}"
+                ng-click="vm.mark_read(notif); $event.stopPropagation();">
+              </span>
+            </div>
+          </div>
+          <div class="col-xs-9 pdn">
           </div>
           <div class="col-xs-3 pdn">
             <div class="pull-right" tooltip-placement="bottom" uib-tooltip="{{ notif.status === 0 ? 'LB_NOFT_READ' : 'LB_NOFT_UNREAD' | translate }}">

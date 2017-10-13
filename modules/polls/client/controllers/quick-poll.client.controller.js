@@ -42,10 +42,10 @@
         $scope.$broadcast('show-errors-check-validity', 'vm.form.pollForm');
         return false;
       }
-      if (!validOptions()) {
-        vm.message = 'Please check your options, has invalid info';
-        return false;
-      }
+      // if (!validOptions()) {
+      //   vm.message = 'Please check your options, has invalid info';
+      //   return false;
+      // }
       vm.poll.opts = validOptions();
       //vm.poll.summary = vm.poll.body;
       var rs = new PollsService(vm.poll);

@@ -20,7 +20,7 @@
             class="msd-elastic: \n; reply-input" data-ng-model="vm.tmp_cmt.body" placeholder="{{:: 'LB_POLL_CMT_PLACE' | translate }}"
             ng-blur="vm.cmt_typing = false;"></textarea>
           <div class="comment-tools">
-            <md-checkbox class="md-default" ng-model="vm.enter_send">{{:: 'LB_POLL_ENTER_TO_SEND' | translate }}</md-checkbox>
+            <md-checkbox class="md-primary" ng-model="vm.enter_send">{{:: 'LB_POLL_ENTER_TO_SEND' | translate }}</md-checkbox>
             <span class="pull-right">
               <a ng-hide="vm.enter_send" ng-click="vm.handleSaveComment()">{{:: 'LB_SEND' | translate }}</a>
               <a class="mg20l" ng-click="vm.handleDiscardComment()" ng-if="vm.tmp_cmt.discard">{{:: 'LB_DISCARD' | translate }}</a>

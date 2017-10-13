@@ -807,9 +807,9 @@ canvas#race{position:relative; z-index:100;}
   .ta-bind:focus {
     outline: none; }
   .ta-bind p {
-    font-size: 1rem;
-    line-height: 1.38;
-    margin-bottom: 6px; }
+    font-size: 14px;
+    line-height: 18px;
+    margin-bottom: 0; }
   .ta-bind img {
     max-width: 100%; }
 

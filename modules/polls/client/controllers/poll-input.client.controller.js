@@ -105,6 +105,7 @@
      */
     // Lưu poll
     vm.handleSavePoll = isValid => {
+      console.log(vm.form.pollForm.$error);
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.pollForm');
         return false;

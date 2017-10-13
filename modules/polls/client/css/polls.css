@@ -320,7 +320,8 @@
       width: 100%;
       margin-top: 12px; }
 .comment-sort-block {
-  width: 100%; }
+  width: 100%;
+  margin-bottom: 20px; }
   .comment-sort-block .comment-sort-menu {
     float: right; }
 

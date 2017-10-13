@@ -46,7 +46,8 @@
         vm.message = 'Please check your options, has invalid info';
         return false;
       }
-      vm.poll.summary = vm.poll.body;
+      vm.poll.opts = validOptions();
+      //vm.poll.summary = vm.poll.body;
       var rs = new PollsService(vm.poll);
       Action.savePoll(rs)
         .then(res => {
@@ -76,13 +77,14 @@
     };
 
     function validOptions() {
+      var options = [];
       for (var index = 0; index < vm.poll.opts.length; index++) {
         var element = vm.poll.opts[index];
-        if (!element.title || element.title === '' || element.color === '') {
-          return false;
+        if (element.title && element.title !== '' && element.color !== '') {
+          options.push(element)
         }
       }
-      return true;
+      return options;
     }
     function randomColor() {
       var length = Constants.colors.length;

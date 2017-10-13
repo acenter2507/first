@@ -19,15 +19,15 @@
           <textarea id="comment-box" ng-is-enter="{{vm.enter_send}}" ng-enter="vm.handleSaveComment()" focus-me="{{vm.cmt_typing}}"
             class="msd-elastic: \n; reply-input" data-ng-model="vm.tmp_cmt.body" placeholder="{{:: 'LB_POLL_CMT_PLACE' | translate }}"
             ng-blur="vm.cmt_typing = false;"></textarea>
-        </div>
-      </div>
-      <div class="comment-tools">
-        <md-checkbox ng-model="vm.enter_send">{{:: 'LB_POLL_ENTER_TO_SEND' | translate }}</md-checkbox>
+          <div class="comment-tools">
+            <md-checkbox ng-model="vm.enter_send">{{:: 'LB_POLL_ENTER_TO_SEND' | translate }}</md-checkbox>
 
-        <span class="pull-right">
-          <a ng-hide="vm.enter_send" ng-click="vm.handleSaveComment()">{{:: 'LB_SEND' | translate }}</a>
-          <a class="mg20l" ng-click="vm.handleDiscardComment()" ng-if="vm.tmp_cmt.discard">{{:: 'LB_DISCARD' | translate }}</a>
-        </span>
+            <span class="pull-right">
+              <a ng-hide="vm.enter_send" ng-click="vm.handleSaveComment()">{{:: 'LB_SEND' | translate }}</a>
+              <a class="mg20l" ng-click="vm.handleDiscardComment()" ng-if="vm.tmp_cmt.discard">{{:: 'LB_DISCARD' | translate }}</a>
+            </span>
+          </div>
+        </div>
       </div>
       <hr class="mg10t mg10b" />
     </div>

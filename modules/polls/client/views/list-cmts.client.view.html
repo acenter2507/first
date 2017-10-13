@@ -37,7 +37,7 @@
           <i class="fa fa-angle-down"></i>
         </a>
         <ul class="uib-dropdown-menu dropdown-menu-right dropdown-menu-flat">
-          <li ng-repeat="cmt_sort in vm.cmt_sorts" ng-disabled="vm.cmt_sort.val === cmt_sort.val">
+          <li ng-repeat="cmt_sort in vm.cmt_sorts" ng-class="{ 'disable': vm.cmt_sort.val === cmt_sort.val}">
             <a ng-click="vm.handleSortComments($index)">{{cmt_sort.name}}</a>
           </li>
         </ul>

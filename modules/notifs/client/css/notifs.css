@@ -16,7 +16,7 @@
       .notifications a.list-group-item .notifications-action .notifications-mark {
         cursor: pointer;
         position: absolute;
-        bottom: 0;
+        top: 0;
         right: 0;
         color: #267ed5;
         z-index: 2; }

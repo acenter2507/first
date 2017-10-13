@@ -322,8 +322,7 @@
 .comment-sort-block {
   width: 100%; }
   .comment-sort-block .comment-sort-menu {
-    float: right;
-    margin-top: auto; }
+    float: right; }
 
 .opt_color {
   min-width: 24px;

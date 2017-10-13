@@ -31,7 +31,11 @@
     <hr class="mgnt mg10b" />
     <div class="comment-sort-block" ng-if="vm.cmts.length > 0">
       <div class="comment-sort-menu" class="" uib-dropdown dropdown-append-to-body>
-        <a href="#" uib-dropdown-toggle>{{:: 'LB_SORT' | translate }}:{{vm.cmt_sort.name}}<i class="fa fa-angle-down"></i></a>
+        <a href="#" uib-dropdown-toggle>
+          <span class="text-muted">{{:: 'LB_SORT' | translate }}:</span>
+          {{vm.cmt_sort.name}}
+          <i class="fa fa-angle-down"></i>
+        </a>
         <ul class="uib-dropdown-menu dropdown-menu-right dropdown-menu-flat">
           <li ng-repeat="cmt_sort in vm.cmt_sorts">
             <a ng-click="vm.handleSortComments($index)">{{cmt_sort.name}}</a>

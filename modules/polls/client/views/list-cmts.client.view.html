@@ -7,9 +7,7 @@
       <div class="form-group mg5b">
         <a ng-if="vm.tmp_cmt.to" ui-sref="profile.info({userId: vm.tmp_cmt.toSlug})">@{{vm.tmp_cmt.toName}}</a>
       </div>
-      <div class="comment-to-block">
-
-      </div>
+      <div class="comment-to-block"></div>
       <div class="comment-box">
         <div class="comment-user">
           <img src="{{:: user.profileImageURL}}">
@@ -97,42 +95,45 @@
     <a class="card-expand-toggle pull-right text-muted"><i class="fa fa-caret-down"></i></a>
   </div>
   <div class="card-body">
-    <div class="cmt_form" ng-if="isLogged">
+    
+    <div class="comment-form" ng-if="isLogged">
       <div class="form-group mg5b">
-        <span ng-if="vm.tmp_cmt.to">@</span>
-        <a ng-if="vm.tmp_cmt.to" ui-sref="profile.info({userId: vm.tmp_cmt.toSlug})" ng-bind="vm.tmp_cmt.toName"></a>
+        <a ng-if="vm.tmp_cmt.to" ui-sref="profile.info({userId: vm.tmp_cmt.toSlug})">@{{vm.tmp_cmt.toName}}</a>
       </div>
-      <div class="form-group">
-        <div class="user-avatar pull-left" ng-if="isLogged">
-          <a ui-sref="profile.info({userId: user.slug})"><img src="{{user.profileImageURL}}" alt="{{user.displayName}}"></a>
+      <div class="comment-to-block"></div>
+      <div class="comment-box">
+        <div class="comment-user">
+          <img src="{{:: user.profileImageURL}}">
         </div>
-        <textarea id="comment-box" ng-is-enter="{{vm.enter_send}}" ng-enter="vm.handleSaveComment()" focus-me="{{vm.cmt_typing}}"
-          class="msd-elastic: \n; reply-input" data-ng-model="vm.tmp_cmt.body" placeholder="{{:: 'LB_POLL_CMT_PLACE' | translate }}"></textarea>
+        <div class="comment-input">
+          <textarea id="comment-box" ng-is-enter="{{vm.enter_send}}" ng-enter="vm.handleSaveComment()" focus-me="{{vm.cmt_typing}}"
+            class="msd-elastic: \n; reply-input" data-ng-model="vm.tmp_cmt.body" placeholder="{{:: 'LB_POLL_CMT_PLACE' | translate }}"
+            ng-blur="vm.cmt_typing = false;"></textarea>
+          <div class="comment-tools">
+            <md-checkbox class="md-primary" ng-model="vm.enter_send">{{:: 'LB_POLL_ENTER_TO_SEND' | translate }}</md-checkbox>
+            <span class="pull-right">
+              <a ng-hide="vm.enter_send" ng-click="vm.handleSaveComment()">{{:: 'LB_SEND' | translate }}</a>
+              <a class="mg20l" ng-click="vm.handleDiscardComment()" ng-if="vm.tmp_cmt.discard">{{:: 'LB_DISCARD' | translate }}</a>
+            </span>
+          </div>
+        </div>
       </div>
-      <label class="text-muted"><input type="checkbox" ng-model="vm.enter_send"><small>{{:: 'LB_POLL_ENTER_TO_SEND' | translate }}</small></label>
-      <span class="pull-right">
-        <a ng-hide="vm.enter_send" ng-click="vm.handleSaveComment()">{{:: 'LB_SEND' | translate }}</a>
-        <a class="mg20l" ng-click="vm.handleDiscardComment()" ng-if="vm.tmp_cmt.discard">{{:: 'LB_DISCARD' | translate }}</a>
-      </span>
-      <hr class="mg10t mg10b" />
     </div>
-
-    <div class="cmt_sort" ng-if="vm.cmts.length > 0">
-      <small class="pull-right">{{:: 'LB_SORT' | translate }}:
-      <md-menu md-offset="-12 25" md-position-mode="target-right target">
-        <a ng-click="$mdMenu.open($event)" aria-label="Open sort menu">
-          {{vm.cmt_sort.name}}<i class="fa fa-angle-down"></i>
+    <hr class="mgnt mg10b" />
+    <div class="comment-sort-block" ng-if="vm.cmts.length > 0">
+      <div class="comment-sort-menu" class="" uib-dropdown dropdown-append-to-body>
+        <a href="#" uib-dropdown-toggle>
+          <span class="text-muted">{{:: 'LB_SORT' | translate }}:</span>
+          {{vm.cmt_sort.name}}
+          <i class="fa fa-angle-down"></i>
         </a>
-        <md-menu-content>
-          <ul class="menu-list">
-            <li ng-repeat="cmt_sort in vm.cmt_sorts">
-              <a ng-click="vm.handleSortComments($index)">{{cmt_sort.name}}</a>
-            </li>
-          </ul>
-        </md-menu-content>
-      </md-menu>
-      </small>
-      <div class="clearfix h30"></div>
+        <ul class="uib-dropdown-menu dropdown-menu-right dropdown-menu-flat">
+          <li ng-repeat="cmt_sort in vm.cmt_sorts" ng-class="{ 'disabled': vm.cmt_sort.val === cmt_sort.val}">
+            <a ng-click="vm.handleSortComments($index)">{{cmt_sort.name}}</a>
+          </li>
+        </ul>
+      </div>
+      <div class="clearfix"></div>
     </div>
 
     <div class="cmt_list" ng-repeat="cmt in vm.cmts">

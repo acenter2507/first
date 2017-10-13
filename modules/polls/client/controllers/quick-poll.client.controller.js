@@ -81,7 +81,7 @@
       for (var index = 0; index < vm.poll.opts.length; index++) {
         var element = vm.poll.opts[index];
         if (element.title && element.title !== '' && element.color !== '') {
-          options.push(element)
+          options.push(element);
         }
       }
       return options;

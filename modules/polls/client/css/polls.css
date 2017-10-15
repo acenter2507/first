@@ -335,6 +335,13 @@
       height: 38px; }
   .comment-list-block .comment-content {
     flex-grow: 1;}
+    .comment-list-block .comment-content .comment-info {
+      position: relative;
+      width: 100%;}
+      .comment-list-block .comment-content .comment-info .comment-menu{
+        position: absolute;
+        top: 0;
+        right: 0; }
 
 .opt_color {
   min-width: 24px;

@@ -53,6 +53,14 @@
           <a ng-if="cmt.user" class="font-weight-bold" ui-sref="profile.info({userId: cmt.user.slug})">{{ cmt.user.displayName }}</a>
           <span ng-if="!cmt.user" class="font-weight-bold text-muted">{{:: 'LB_DELETED_USER' | translate }}</span>
           <span class="text-muted font-sm" am-time-ago="cmt.created"></span>
+          <div uib-dropdown dropdown-append-to-body class="poll-info-title-menu" ng-if="isLogged">
+            <a class="text-muted" uib-dropdown-toggle href="#"><i class="glyphicon glyphicon-option-horizontal"></i></a>
+            <ul class="uib-dropdown-menu dropdown-menu-right dropdown-menu-flat">
+              <li ng-if="isLogged && cmt.user._id !== user._id"><a ng-click="vm.handleReplyComment(cmt)"><i class="fa fa-reply"></i> {{:: 'LB_REPLY' | translate }}</a></li>
+              <li ng-if="cmt.user._id === user._id"><a ng-click="vm.handleEditComment(cmt)"><i class="fa fa-pencil-square-o"></i> {{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
+              <li ng-if="cmt.user._id === user._id"><a ng-click="vm.handleDeleteComment(cmt)"><i class="fa fa-trash"></i> {{:: 'LB_DELETE' | translate }}</a></li>
+            </ul>
+          </div>
         </div>
         <div class="comment-change" ng-if="cmt.isEdited">
           <span class="fa fa-pencil-square-o"></span>

@@ -38,7 +38,7 @@
                   <span am-time-ago="vm.poll.created"></span>
                 </span>
                 <div uib-dropdown dropdown-append-to-body class="poll-info-title-menu" ng-if="isLogged">
-                  <a class="text-muted" uib-dropdown-toggle href="#"><i class="icon-options"></i></a>
+                  <a class="text-muted" uib-dropdown-toggle href="#"><i class="glyphicon glyphicon-option-horizontal"></i></a>
                   <ul class="uib-dropdown-menu dropdown-menu-right dropdown-menu-flat mg5t- mg12r-" role="menu" aria-labelledby="split-button">
                     <li>
                       <a ng-click="vm.handleFollowPoll()"><i class="fa fa-rss"></i>&nbsp;{{(vm.follow._id) ? 'LB_POLLS_MENU_UNFOLLOW' : 'LB_POLLS_MENU_FOLLOW' | translate }}</a>

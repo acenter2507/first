@@ -17,8 +17,8 @@
         <span class="poll-info-title-time">{{:: 'LB_POLLS_CREATEON' | translate }}
           <span am-time-ago="poll.created"></span>
         </span>
-        <div uib-dropdown dropdown-append-to-body outsideClick class="poll-info-title-menu" ng-if="isLogged">
-          <a class="text-muted" uib-dropdown-toggle href="#"><i class="icon-options"></i></a>
+        <div uib-dropdown dropdown-append-to-body class="poll-info-title-menu" ng-if="isLogged">
+          <a class="text-muted" uib-dropdown-toggle href="#"><i class="glyphicon glyphicon-option-horizontal"></i></a>
           <ul class="uib-dropdown-menu dropdown-menu-right dropdown-menu-flat mg5t-">
             <li><a ui-sref="polls.view({ pollId: poll.slug })"><i class="fa fa-eye"></i> {{:: 'LB_POLLS_MENU_VIEW' | translate }}</a></li>
             <li ng-if="poll.isCurrentUserOwner"><a ui-sref="polls.edit({ pollId: poll.slug })"><i class="fa fa-pencil-square-o"></i> {{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>

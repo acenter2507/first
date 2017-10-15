@@ -53,7 +53,7 @@
           <a ng-if="cmt.user" class="font-weight-bold" ui-sref="profile.info({userId: cmt.user.slug})">{{ cmt.user.displayName }}</a>
           <span ng-if="!cmt.user" class="font-weight-bold text-muted">{{:: 'LB_DELETED_USER' | translate }}</span>
           <span class="text-muted font-sm" am-time-ago="cmt.created"></span>
-          <div uib-dropdown dropdown-append-to-body class="poll-info-title-menu" ng-if="isLogged">
+          <div uib-dropdown dropdown-append-to-body class="comment-menu" ng-if="isLogged">
             <a class="text-muted" uib-dropdown-toggle href="#"><i class="glyphicon glyphicon-option-horizontal"></i></a>
             <ul class="uib-dropdown-menu dropdown-menu-right dropdown-menu-flat">
               <li ng-if="isLogged && cmt.user._id !== user._id"><a ng-click="vm.handleReplyComment(cmt)"><i class="fa fa-reply"></i> {{:: 'LB_REPLY' | translate }}</a></li>

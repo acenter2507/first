@@ -324,6 +324,14 @@
   margin-bottom: 20px; }
   .comment-sort-block .comment-sort-menu {
     float: right; }
+.comment-list-block {
+  display: flex;
+  flex-direction: row; }
+  .comment-list-block .comment-user {
+    width: 38px;
+    margin-right: 6px;}
+  .comment-list-block .comment-content {
+    flex-grow: 1;}
 
 .opt_color {
   min-width: 24px;

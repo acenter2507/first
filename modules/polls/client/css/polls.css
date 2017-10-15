@@ -330,6 +330,9 @@
   .comment-list-block .comment-user {
     width: 38px;
     margin-right: 6px;}
+    .comment-list-block .comment-user img {
+      width: 38px;
+      height: 38px; }
   .comment-list-block .comment-content {
     flex-grow: 1;}
 

@@ -46,7 +46,7 @@
     <!-- List comment -->
     <div class="comment-list-block" ng-repeat="cmt in vm.cmts | orderBy: vm.cmt_sort.val">
       <div class="comment-user">
-        <img src="{{:: user.profileImageURL}}">
+        <img src="{{:: cmt.user.profileImageURL}}">
       </div>
       <div class="comment-content">
         <div class="comment-info">

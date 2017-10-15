@@ -112,7 +112,7 @@
     <a class="card-expand-toggle pull-right text-muted"><i class="fa fa-caret-down"></i></a>
   </div>
   <div class="card-body">
-    
+
     <div class="comment-form" ng-if="isLogged">
       <div class="form-group mg5b">
         <a ng-if="vm.tmp_cmt.to" ui-sref="profile.info({userId: vm.tmp_cmt.toSlug})">@{{vm.tmp_cmt.toName}}</a>
@@ -153,7 +153,23 @@
       <div class="clearfix"></div>
     </div>
 
-    <div class="cmt_list" ng-repeat="cmt in vm.cmts">
+    <!-- List comment -->
+    <div class="comment-list-block" ng-repeat="cmt in vm.cmts | orderBy: vm.cmt_sort.val">
+      <div class="comment-user">
+        <img src="{{:: cmt.user.profileImageURL}}">
+      </div>
+      <div class="comment-content">
+        <div class="comment-info">
+          <a ng-if="cmt.user" class="font-weight-bold" ui-sref="profile.info({userId: cmt.user.slug})">{{ cmt.user.displayName }}</a>
+          <span ng-if="!cmt.user" class="font-weight-bold text-muted">{{:: 'LB_DELETED_USER' | translate }}</span>
+          <span class="text-muted font-sm" am-time-ago="cmt.created"></span>
+        </div>
+        <div class="comment-text">
+          <p class="text-justify" ng-bind-html="cmt.body | nl2br"></p>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="cmt_list" ng-repeat="cmt in vm.cmts">
       <div class="user-avatar pull-left">
         <a ng-if="cmt.user" ui-sref="profile.info({userId: cmt.user.slug})"><img src="{{cmt.user.profileImageURL}}" alt="{{cmt.user.displayName}}"></a>
         <img ng-if="!cmt.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
@@ -189,7 +205,7 @@
       </small>
       <div class="clearfix"></div>
       <hr class="mg12y">
-    </div>
+    </div> -->
     <div class="row text-center" ng-if="!vm.stopped">
       <a ng-click="vm.handleLoadComments()">{{:: 'LB_LOAD_MORE' | translate }}</a>
     </div>

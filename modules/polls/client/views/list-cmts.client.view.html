@@ -54,6 +54,11 @@
           <span ng-if="!cmt.user" class="font-weight-bold text-muted">{{:: 'LB_DELETED_USER' | translate }}</span>
           <span class="text-muted font-sm" am-time-ago="cmt.created"></span>
         </div>
+        <div class="comment-change" ng-if="cmt.isEdited">
+          <span class="fa fa-pencil-square-o"></span>
+          <span class="text-muted font-sm">{{:: 'LB_PROFILE_VOTE_LAST_CHANGE' | translate }}</span>
+          <span class="text-muted font-sm" am-time-ago="cmt.updated"></span>
+        </div>
         <div class="comment-text">
           <p class="text-justify" ng-bind-html="cmt.body | nl2br"></p>
         </div>

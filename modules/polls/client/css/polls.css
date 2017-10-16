@@ -328,7 +328,8 @@
 .comment-item-block {
   display: flex;
   flex-direction: row;
-  margin-bottom: 10px;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
   border-bottom: 1px solid #eee; }
   .comment-item-block .comment-user {
     width: 38px;

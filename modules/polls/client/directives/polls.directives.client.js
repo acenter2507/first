@@ -40,7 +40,7 @@
       var isEnter = attrs.ngIsEnter === 'true';
       element.bind('keydown keypress', function (event) {
         if ((event.ctrlKey || event.metaKey) && (event.keyCode === 13)) {
-          console.log('kajdhkajshdjkashdkjashdjk');
+          element.value = element.value + '\n';
         } else if (event.which === 13) {
           if (isEnter) {
             scope.$apply(function () {

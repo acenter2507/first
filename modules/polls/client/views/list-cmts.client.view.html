@@ -45,35 +45,30 @@
       <div class="clearfix"></div>
     </div>
     <!-- Danh sách comment -->
-    <div class="comment-list-block" ng-repeat="cmt in vm.cmts | orderBy: vm.cmt_sort.val">
+    <div class="comment-item-block" ng-repeat="cmt in vm.cmts | orderBy: vm.cmt_sort.val">
       <div class="comment-user"><img src="{{:: cmt.user.profileImageURL}}"></div>
       <div class="comment-content">
         <div class="comment-info">
           <a ng-if="cmt.user" class="font-weight-bold" ui-sref="profile.info({userId: cmt.user.slug})">{{ cmt.user.displayName }}</a>
           <span ng-if="!cmt.user" class="font-weight-bold text-muted">{{:: 'LB_DELETED_USER' | translate }}</span>
           <span class="text-muted font-sm" am-time-ago="cmt.created"></span>
-          <div uib-dropdown dropdown-append-to-body class="comment-menu" ng-if="isLogged">
+          <span ng-show="cmt.isEdited" class="fa fa-pencil-square-o" tooltip-placement="bottom" uib-tooltip="{{ cmt.updated | LLL_format }}"></span>
+          <div uib-dropdown dropdown-append-to-body class="comment-menu" ng-if="cmt.isCurrentUserOwner">
             <a class="text-muted" uib-dropdown-toggle href="#"><i class="glyphicon glyphicon-option-horizontal"></i></a>
             <ul class="uib-dropdown-menu dropdown-menu-right dropdown-menu-flat">
-              <li ng-if="isLogged && cmt.user._id !== user._id"><a ng-click="vm.handleReplyComment(cmt)"><i class="fa fa-reply"></i> {{:: 'LB_REPLY' | translate }}</a></li>
               <li ng-if="cmt.user._id === user._id"><a ng-click="vm.handleEditComment(cmt)"><i class="fa fa-pencil-square-o"></i> {{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
               <li ng-if="cmt.user._id === user._id"><a ng-click="vm.handleDeleteComment(cmt)"><i class="fa fa-trash"></i> {{:: 'LB_DELETE' | translate }}</a></li>
             </ul>
           </div>
         </div>
-        <div class="comment-change" ng-if="cmt.isEdited">
-          <span class="fa fa-pencil-square-o"></span>
-          <span class="text-muted font-sm">{{:: 'LB_PROFILE_VOTE_LAST_CHANGE' | translate }}</span>
-          <span class="text-muted font-sm" am-time-ago="cmt.updated"></span>
-        </div>
         <div class="comment-text">
           <p class="text-justify" ng-bind-html="cmt.body | nl2br"></p>
         </div>
         <div class="comment-tools">
-          <span ng-if="isLogged && !cmt.isCurrentUserOwner" ng-click="vm.handleLikeComment(cmt, 1)" ng-class="{'liked': cmt.like.type === 1}"><i class="fa fa-thumbs-o-up"></i> {{:: 'LB_LIKE' | translate }}</span>
+          <span ng-if="isLogged && !cmt.isCurrentUserOwner" class="like" ng-click="vm.handleLikeComment(cmt, 1)" ng-class="{'liked': cmt.like.type === 1}"><i class="fa fa-thumbs-o-up"></i> {{:: 'LB_LIKE' | translate }}</span>
           <i ng-if="cmt.isCurrentUserOwner || !isLogged" class="fa fa-thumbs-o-up"></i>
           <span class="counter" ng-bind="cmt.likeCnt | shortNumber"></span>
-          <span ng-if="isLogged && !cmt.isCurrentUserOwner" ng-click="vm.handleLikeComment(cmt, 2)" ng-class="{'liked': cmt.like.type === 2}"><i class="fa fa-thumbs-o-down"></i> {{:: 'LB_DISLIKE' | translate }}</span>
+          <span ng-if="isLogged && !cmt.isCurrentUserOwner" class="like" ng-click="vm.handleLikeComment(cmt, 2)" ng-class="{'liked': cmt.like.type === 2}"><i class="fa fa-thumbs-o-down"></i> {{:: 'LB_DISLIKE' | translate }}</span>
         </div>
       </div>
     </div>

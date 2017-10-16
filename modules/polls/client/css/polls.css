@@ -325,33 +325,35 @@
   margin-top: 20px;}
   .comment-sort-block .comment-sort-menu {
     float: right; }
-.comment-list-block {
+.comment-item-block {
   display: flex;
-  flex-direction: row; }
-  .comment-list-block .comment-user {
+  flex-direction: row;
+  margin-bottom: 10px; }
+  .comment-item-block .comment-user {
     width: 38px;
     margin-right: 6px;}
-    .comment-list-block .comment-user img {
+    .comment-item-block .comment-user img {
       width: 38px;
       height: 38px; }
-  .comment-list-block .comment-content {
-    flex-grow: 1;
-    font-size: 13px;
-    line-height: 16px; }
-    .comment-list-block .comment-content .comment-info {
+  .comment-item-block .comment-content {
+    margin-top: 10px;
+    flex-grow: 1; }
+    .comment-item-block .comment-content .comment-info {
       position: relative;
       width: 100%;}
-      .comment-list-block .comment-content .comment-info .comment-menu{
+      .comment-item-block .comment-content .comment-info .comment-menu{
         position: absolute;
         top: 0;
         right: 0; }
-    .comment-list-block .comment-content .comment-tools {
+    .comment-item-block .comment-content .comment-tools {
       position: relative; }
-      .comment-list-block .comment-content .comment-tools span {
+      .comment-item-block .comment-content .comment-tools span.like {
         cursor: pointer; }
-      .comment-list-block .comment-content .comment-tools span.liked {
+      .comment-item-block .comment-content .comment-tools span.like:hover {
+        color: #267ed5; }
+      .comment-item-block .comment-content .comment-tools span.liked {
         color: #267ed5;  }
-      .comment-list-block .comment-content .comment-tools span.counter {
+      .comment-item-block .comment-content .comment-tools span.counter {
         margin-left: 5px;
         margin-right: 5px;
         cursor: none;

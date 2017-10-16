@@ -27,7 +27,7 @@
         </div>
       </div>
     </div>
-    <hr class="mgnt mg10b" />
+    <hr class="mgn" />
     <!-- Sắp xếp comment -->
     <div class="comment-sort-block" ng-if="vm.cmts.length > 0">
       <div class="comment-sort-menu" class="" uib-dropdown dropdown-append-to-body>
@@ -46,10 +46,7 @@
     </div>
     <!-- Danh sách comment -->
     <div class="comment-list-block" ng-repeat="cmt in vm.cmts | orderBy: vm.cmt_sort.val">
-      <comment-item comment="cmt"></comment-item>
-      <div class="comment-user">
-        <img src="{{:: cmt.user.profileImageURL}}">
-      </div>
+      <div class="comment-user"><img src="{{:: cmt.user.profileImageURL}}"></div>
       <div class="comment-content">
         <div class="comment-info">
           <a ng-if="cmt.user" class="font-weight-bold" ui-sref="profile.info({userId: cmt.user.slug})">{{ cmt.user.displayName }}</a>
@@ -71,6 +68,12 @@
         </div>
         <div class="comment-text">
           <p class="text-justify" ng-bind-html="cmt.body | nl2br"></p>
+        </div>
+        <div class="comment-tools">
+          <span ng-if="isLogged && !cmt.isCurrentUserOwner" ng-click="vm.handleLikeComment(cmt, 1)" ng-class="{'liked': cmt.like.type === 1}"><i class="fa fa-thumbs-o-up"></i> {{:: 'LB_LIKE' | translate }}</span>
+          <i ng-if="cmt.isCurrentUserOwner || !isLogged" class="fa fa-thumbs-o-up"></i>
+          <span class="counter" ng-bind="cmt.likeCnt | shortNumber"></span>
+          <span ng-if="isLogged && !cmt.isCurrentUserOwner" ng-click="vm.handleLikeComment(cmt, 2)" ng-class="{'liked': cmt.like.type === 2}"><i class="fa fa-thumbs-o-down"></i> {{:: 'LB_DISLIKE' | translate }}</span>
         </div>
       </div>
     </div>

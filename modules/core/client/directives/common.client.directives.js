@@ -4,7 +4,6 @@ angular
   .directive('a', preventClickDirective)
   .directive('a', cardExpandDirective)
   .directive('copyToClipboard', copyToClipboardDirective)
-  .directive('usersDropdrown', usersDropDownDirective)
   .directive('a', asideMenuToggleDirective)
   .directive('body', asideMenuHideDirective)
   .directive('backToTop', backToTopDirective)
@@ -94,21 +93,6 @@ function copyToClipboardDirective() {
     }
   };
   return directive;
-}
-
-// Show drop down list user
-function usersDropDownDirective() {
-  var directive = {
-    restrict: 'E',
-    scope: true,
-    template: '<ul class="dropdown-menu" role="menu"><li><i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i></li></ul>',
-    link: link
-  };
-  return directive;
-
-  function link(scope, element, attrs) {
-    console.log(element);
-  }
 }
 
 //LayoutToggle

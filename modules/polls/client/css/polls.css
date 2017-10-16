@@ -322,7 +322,7 @@
 .comment-sort-block {
   width: 100%;
   margin-bottom: 20px;
-  border-bottom: 1px solid #ddd; }
+  margin-top: 20px;}
   .comment-sort-block .comment-sort-menu {
     float: right; }
 .comment-list-block {
@@ -343,6 +343,17 @@
         position: absolute;
         top: 0;
         right: 0; }
+    .comment-list-block .comment-content .comment-tools {
+      position: relative; }
+      .comment-list-block .comment-content .comment-tools span {
+        cursor: pointer; }
+      .comment-list-block .comment-content .comment-tools span.liked {
+        color: #267ed5;  }
+      .comment-list-block .comment-content .comment-tools span.counter {
+        margin-left: 5px;
+        margin-right: 5px;
+        cursor: none;
+        color: #267ed5; }
 
 .opt_color {
   min-width: 24px;

@@ -423,6 +423,7 @@ exports.loadComments = function (req, res) {
     cmts.forEach(function (instance, index, array) {
       if (!instance) return;
       array[index] = instance.toObject();
+      array[index].isCurrentUserOwner = (array[index].user._id === userId);
       get_like_by_cmtId_and_userId(array[index]._id, userId)
         .then(result => {
           array[index].like = result || {};

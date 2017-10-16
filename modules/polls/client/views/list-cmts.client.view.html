@@ -67,50 +67,11 @@
           <i ng-if="cmt.isCurrentUserOwner || !isLogged" class="fa fa-thumbs-o-up"></i>
           <span class="counter" ng-bind="cmt.likeCnt | shortNumber"></span>
           <span ng-if="isLogged && !cmt.isCurrentUserOwner" class="like" ng-click="vm.handleLikeComment(cmt, 2)" ng-class="{'liked': cmt.like.type === 2}"><i class="fa fa-thumbs-o-down"></i> {{:: 'LB_DISLIKE' | translate }}</span>
-          <span ng-if="isLogged && !cmt.isCurrentUserOwner" class="like mg5l" ng-click="vm.handleReplyComment(cmt)"><i class="fa fa-reply"></i> {{:: 'LB_REPLY' | translate }}</span>
+          <span ng-if="isLogged && !cmt.isCurrentUserOwner" class="reply" ng-click="vm.handleReplyComment(cmt)"><i class="fa fa-reply"></i> {{:: 'LB_REPLY' | translate }}</span>
         </div>
       </div>
     </div>
 
-    <!-- <div class="cmt_list" ng-repeat="cmt in vm.cmts | orderBy: vm.cmt_sort.val">
-      <div class="user-avatar pull-left">
-        <a ng-if="cmt.user" ui-sref="profile.info({userId: cmt.user.slug})">
-        <img src="{{cmt.user.profileImageURL}}" alt="{{cmt.user.displayName}}">
-      </a>
-        <img ng-if="!cmt.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
-      </div>
-      <span class="pull-left">
-        <strong><a ui-sref="profile.info({userId: cmt.user.slug})" ng-if="cmt.user" ng-bind="cmt.user.displayName"></a></strong>
-        <span ng-if="!cmt.user">{{:: 'LB_DELETED_USER' | translate }}</span>
-      <small class="text-muted" am-time-ago="cmt.created"></small>
-      <a ng-if="cmt.to">@{{cmt.toName}}</a>
-      <span ng-show="cmt.isEdited" class="fa fa-pencil-square-o" tooltip-placement="bottom" uib-tooltip="{{ cmt.updated | LLL_format }}"></span>
-      </span>
-      <span class="pull-right">
-        <md-menu md-offset="-20 25" md-position-mode="target-right target">
-          <a class="span-link" ng-click="$mdMenu.open($event)" aria-label="Open comment menu">
-            <i class="fa fa-angle-down"></i>
-          </a>
-          <md-menu-content>
-            <ul class="menu-list">
-              <li ng-if="isLogged && cmt.user._id !== user._id"><a ng-click="vm.handleReplyComment(cmt)"><i class="fa fa-reply"></i> {{:: 'LB_REPLY' | translate }}</a></li>
-              <li ng-if="cmt.user._id === user._id"><a ng-click="vm.handleEditComment(cmt)"><i class="fa fa-pencil-square-o"></i> {{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
-              <li ng-if="cmt.user._id === user._id"><a ng-click="vm.handleDeleteComment(cmt)"><i class="fa fa-trash"></i> {{:: 'LB_DELETE' | translate }}</a></li>
-            </ul>
-          </md-menu-content>
-        </md-menu>
-      </span>
-      <br>
-      <p class="text-justify" ng-bind-html="cmt.body | nl2br"></p>
-      <small class="like_tools pull-right">
-        <span ng-if="cmt.user._id !== user._id" class="span_btn" ng-click="vm.handleLikeComment(cmt, 1)" ng-class="{'highlight-text': cmt.like.type === 1}"><i class="fa fa-thumbs-o-up"></i> {{:: 'LB_LIKE' | translate }}</span>
-        <i ng-if="cmt.user._id === user._id" class="fa fa-thumbs-o-up"></i>
-        <span class="mg5l mg5r highlight-text" ng-bind="cmt.likeCnt | shortNumber"></span>
-        <span ng-if="cmt.user._id !== user._id" class="span_btn" ng-click="vm.handleLikeComment(cmt, 2)" ng-class="{'highlight-text': cmt.like.type === 2}"><i class="fa fa-thumbs-o-down"></i> {{:: 'LB_DISLIKE' | translate }}</span>
-      </small>
-      <div class="clearfix"></div>
-      <hr class="mg12y">
-    </div> -->
     <div class="row text-center" ng-if="!vm.stopped">
       <a ng-click="vm.handleLoadComments()">{{:: 'LB_LOAD_MORE' | translate }}</a>
     </div>
@@ -125,15 +86,14 @@
   </div>
   <div class="card-body">
 
+    <!-- Form nhập comment -->
     <div class="comment-form" ng-if="isLogged">
       <div class="form-group mg5b">
         <a ng-if="vm.tmp_cmt.to" ui-sref="profile.info({userId: vm.tmp_cmt.toSlug})">@{{vm.tmp_cmt.toName}}</a>
       </div>
       <div class="comment-to-block"></div>
       <div class="comment-box">
-        <div class="comment-user">
-          <img src="{{:: user.profileImageURL}}">
-        </div>
+        <div class="comment-user"><img src="{{:: user.profileImageURL}}"></div>
         <div class="comment-input">
           <textarea id="comment-box" ng-is-enter="{{vm.enter_send}}" ng-enter="vm.handleSaveComment()" focus-me="{{vm.cmt_typing}}"
             class="msd-elastic: \n; reply-input" data-ng-model="vm.tmp_cmt.body" placeholder="{{:: 'LB_POLL_CMT_PLACE' | translate }}"
@@ -148,7 +108,8 @@
         </div>
       </div>
     </div>
-    <hr class="mgnt mg10b" />
+    <hr class="mgn" />
+    <!-- Sắp xếp comment -->
     <div class="comment-sort-block" ng-if="vm.cmts.length > 0">
       <div class="comment-sort-menu" class="" uib-dropdown dropdown-append-to-body>
         <a href="#" uib-dropdown-toggle>
@@ -164,60 +125,35 @@
       </div>
       <div class="clearfix"></div>
     </div>
-
-    <!-- List comment -->
-    <div class="comment-list-block" ng-repeat="cmt in vm.cmts | orderBy: vm.cmt_sort.val">
-      <div class="comment-user">
-        <img src="{{:: cmt.user.profileImageURL}}">
-      </div>
+    <!-- Danh sách comment -->
+    <div class="comment-item-block" ng-repeat="cmt in vm.cmts | orderBy: vm.cmt_sort.val">
+      <div class="comment-user"><img src="{{:: cmt.user.profileImageURL}}"></div>
       <div class="comment-content">
         <div class="comment-info">
           <a ng-if="cmt.user" class="font-weight-bold" ui-sref="profile.info({userId: cmt.user.slug})">{{ cmt.user.displayName }}</a>
           <span ng-if="!cmt.user" class="font-weight-bold text-muted">{{:: 'LB_DELETED_USER' | translate }}</span>
           <span class="text-muted font-sm" am-time-ago="cmt.created"></span>
+          <span ng-show="cmt.isEdited" class="fa fa-pencil-square-o" tooltip-placement="bottom" uib-tooltip="{{ cmt.updated | LLL_format }}"></span>
+          <div uib-dropdown dropdown-append-to-body class="comment-menu" ng-if="cmt.isCurrentUserOwner || isAdmin">
+            <a class="text-muted" uib-dropdown-toggle href="#"><i class="glyphicon glyphicon-option-horizontal"></i></a>
+            <ul class="uib-dropdown-menu dropdown-menu-right dropdown-menu-flat">
+              <li><a ng-click="vm.handleEditComment(cmt)"><i class="fa fa-pencil-square-o"></i> {{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
+              <li><a ng-click="vm.handleDeleteComment(cmt)"><i class="fa fa-trash"></i> {{:: 'LB_DELETE' | translate }}</a></li>
+            </ul>
+          </div>
         </div>
         <div class="comment-text">
           <p class="text-justify" ng-bind-html="cmt.body | nl2br"></p>
         </div>
+        <div class="comment-tools">
+          <span ng-if="isLogged && !cmt.isCurrentUserOwner" class="like" ng-click="vm.handleLikeComment(cmt, 1)" ng-class="{'liked': cmt.like.type === 1}"><i class="fa fa-thumbs-o-up"></i> {{:: 'LB_LIKE' | translate }}</span>
+          <i ng-if="cmt.isCurrentUserOwner || !isLogged" class="fa fa-thumbs-o-up"></i>
+          <span class="counter" ng-bind="cmt.likeCnt | shortNumber"></span>
+          <span ng-if="isLogged && !cmt.isCurrentUserOwner" class="like" ng-click="vm.handleLikeComment(cmt, 2)" ng-class="{'liked': cmt.like.type === 2}"><i class="fa fa-thumbs-o-down"></i> {{:: 'LB_DISLIKE' | translate }}</span>
+          <span ng-if="isLogged && !cmt.isCurrentUserOwner" class="reply" ng-click="vm.handleReplyComment(cmt)"><i class="fa fa-reply"></i> {{:: 'LB_REPLY' | translate }}</span>
+        </div>
       </div>
     </div>
-    <!-- <div class="cmt_list" ng-repeat="cmt in vm.cmts">
-      <div class="user-avatar pull-left">
-        <a ng-if="cmt.user" ui-sref="profile.info({userId: cmt.user.slug})"><img src="{{cmt.user.profileImageURL}}" alt="{{cmt.user.displayName}}"></a>
-        <img ng-if="!cmt.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
-      </div>
-      <span class="pull-left">
-        <strong><a ui-sref="profile.info({userId: cmt.user.slug})" ng-if="cmt.user" ng-bind="cmt.user.displayName"></a></strong>
-        <span ng-if="!cmt.user">{{:: 'LB_DELETED_USER' | translate }}</span>
-      <small class="text-muted" am-time-ago="cmt.created"></small>
-      <a ng-if="cmt.to">@{{cmt.toName}}</a>
-      <span ng-show="cmt.isEdited" class="fa fa-pencil-square-o" tooltip-placement="bottom" uib-tooltip="{{ cmt.updated | LLL_format }}"></span>
-      </span>
-      <span class="pull-right">
-        <md-menu md-offset="-20 25" md-position-mode="target-right target">
-          <a class="span-link" ng-click="$mdMenu.open($event)" aria-label="Open comment menu">
-            <i class="fa fa-angle-down"></i>
-          </a>
-          <md-menu-content>
-            <ul class="menu-list">
-              <li ng-if="isLogged && cmt.user._id !== user._id"><a ng-click="vm.handleReplyComment(cmt)"><i class="fa fa-reply"></i> {{:: 'LB_REPLY' | translate }}</a></li>
-              <li ng-if="cmt.user._id === user._id"><a ng-click="vm.handleEditComment(cmt)"><i class="fa fa-pencil-square-o"></i> {{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
-              <li ng-if="cmt.user._id === user._id"><a ng-click="vm.handleDeleteComment(cmt)"><i class="fa fa-trash"></i> {{:: 'LB_DELETE' | translate }}</a></li>
-            </ul>
-          </md-menu-content>
-        </md-menu>
-      </span>
-      <br>
-      <p class="text-justify" ng-bind-html="cmt.body | nl2br"></p>
-      <small class="like_tools pull-right">
-        <span ng-if="cmt.user._id !== user._id" class="span_btn" ng-click="vm.handleLikeComment(cmt, 1)" ng-class="{'highlight-text': cmt.like.type === 1}"><i class="fa fa-thumbs-o-up"></i> {{:: 'LB_LIKE' | translate }}</span>
-        <i ng-if="cmt.user._id === user._id" class="fa fa-thumbs-o-up"></i>
-        <span class="mg5l mg5r highlight-text" ng-bind="cmt.likeCnt | shortNumber"></span>
-        <span ng-if="cmt.user._id !== user._id" class="span_btn" ng-click="vm.handleLikeComment(cmt, 2)" ng-class="{'highlight-text': cmt.like.type === 2}"><i class="fa fa-thumbs-o-down"></i> {{:: 'LB_DISLIKE' | translate }}</span>
-      </small>
-      <div class="clearfix"></div>
-      <hr class="mg12y">
-    </div> -->
     <div class="row text-center" ng-if="!vm.stopped">
       <a ng-click="vm.handleLoadComments()">{{:: 'LB_LOAD_MORE' | translate }}</a>
     </div>

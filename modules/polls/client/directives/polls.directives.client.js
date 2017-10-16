@@ -6,6 +6,7 @@
     .directive('ngEnter', ngEnter)
     .directive('focusMe', focusMe)
     .directive('autoAdjust', autoAdjust)
+    .directive('span', autoAdjust)
     .directive('a', expandCard);
 
   pollItem.$inject = ['$http', '$templateCache', '$compile'];
@@ -41,8 +42,8 @@
       element.bind('keydown keypress', function (event) {
         if ((event.ctrlKey || event.metaKey) && (event.keyCode === 13)) {
           var text = element.val();
-          console.log(text);
           element.val(text + '\n');
+          event.preventDefault();
         } else if (event.which === 13) {
           if (isEnter) {
             scope.$apply(function () {

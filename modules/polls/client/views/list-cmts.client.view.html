@@ -149,6 +149,7 @@
       </div>
     </div>
     <hr class="mgn" />
+
     <!-- Sắp xếp comment -->
     <div class="comment-sort-block" ng-if="vm.cmts.length > 0">
       <div class="comment-sort-menu" class="" uib-dropdown dropdown-append-to-body>
@@ -165,6 +166,7 @@
       </div>
       <div class="clearfix"></div>
     </div>
+    
     <!-- Danh sách comment -->
     <div class="comment-item-block" ng-repeat="cmt in vm.cmts | orderBy: vm.cmt_sort.val">
       <div class="comment-user"><img src="{{:: cmt.user.profileImageURL}}"></div>

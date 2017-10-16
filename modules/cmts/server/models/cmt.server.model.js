@@ -15,6 +15,9 @@ var CmtSchema = new Schema({
   poll: { type: Schema.ObjectId, ref: 'Poll' },
   created: { type: Date, default: Date.now },
   user: { type: Schema.ObjectId, ref: 'User' },
+  replies: [
+    
+  ],
   to: { type: Schema.ObjectId, ref: 'User' },
   toName: { type: String, default: '' },
   toSlug: { type: String, default: '' },

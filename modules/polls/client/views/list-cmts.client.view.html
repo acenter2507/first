@@ -10,9 +10,7 @@
       </div>
       <div class="comment-to-block"></div>
       <div class="comment-box">
-        <div class="comment-user">
-          <img src="{{:: user.profileImageURL}}">
-        </div>
+        <div class="comment-user"><img src="{{:: user.profileImageURL}}"></div>
         <div class="comment-input">
           <textarea id="comment-box" ng-is-enter="{{vm.enter_send}}" ng-enter="vm.handleSaveComment()" focus-me="{{vm.cmt_typing}}"
             class="msd-elastic: \n; reply-input" data-ng-model="vm.tmp_cmt.body" placeholder="{{:: 'LB_POLL_CMT_PLACE' | translate }}"

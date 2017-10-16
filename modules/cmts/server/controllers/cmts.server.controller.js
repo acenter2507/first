@@ -44,7 +44,7 @@ exports.create = function (req, res) {
     .then(() => {
       // Trả về comment
       var commentUser = cmt.user._id || cmt.user;
-      cmt.isCurrentUserOwner = (commentUser === req.user._id);
+      cmt.isCurrentUserOwner = req.user && cmt.user && req.user._id.toString() === cmt.user._id.toString();
       res.jsonp(cmt);
     }, handleError);
 

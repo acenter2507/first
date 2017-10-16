@@ -3,6 +3,7 @@
   angular.module('polls')
     .directive('pollItem', pollItem)
     .directive('quickPoll', quickPoll)
+    .directive('commentItem', commentItem)
     .directive('ngEnter', ngEnter)
     .directive('focusMe', focusMe)
     .directive('autoAdjust', autoAdjust)
@@ -34,6 +35,24 @@
       }
     };
   }
+  /**
+   * Một item comment
+   */
+  commentItem.$inject = [];
+  function commentItem() {
+    var directive = {
+      restrict: 'E',
+      scope: true,
+      template: '<div>{{cmt.created}}</div>',
+      link: link
+    };
+    return directive;
+    function link(scope, element, attrs) {
+      console.log(attrs);
+    }
+  }
+
+
   function ngEnter() {
     return function (scope, element, attrs) {
       element.bind('keydown keypress', function (event) {

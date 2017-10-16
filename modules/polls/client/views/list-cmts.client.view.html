@@ -3,6 +3,7 @@
     <strong class="card-title">{{:: 'LB_POLLS_COMMENTS' | translate }} ({{vm.poll.cmtCnt | shortNumber}})</strong>
   </div>
   <div class="card-body">
+    <!-- Form nhập comment -->
     <div class="comment-form" ng-if="isLogged">
       <div class="form-group mg5b">
         <a ng-if="vm.tmp_cmt.to" ui-sref="profile.info({userId: vm.tmp_cmt.toSlug})">@{{vm.tmp_cmt.toName}}</a>
@@ -27,6 +28,7 @@
       </div>
     </div>
     <hr class="mgnt mg10b" />
+    <!-- Sắp xếp comment -->
     <div class="comment-sort-block" ng-if="vm.cmts.length > 0">
       <div class="comment-sort-menu" class="" uib-dropdown dropdown-append-to-body>
         <a href="#" uib-dropdown-toggle>
@@ -42,9 +44,9 @@
       </div>
       <div class="clearfix"></div>
     </div>
-
-    <!-- List comment -->
+    <!-- Danh sách comment -->
     <div class="comment-list-block" ng-repeat="cmt in vm.cmts | orderBy: vm.cmt_sort.val">
+      <comment-item comment="cmt"></comment-item>
       <div class="comment-user">
         <img src="{{:: cmt.user.profileImageURL}}">
       </div>

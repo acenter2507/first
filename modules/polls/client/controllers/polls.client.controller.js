@@ -299,6 +299,7 @@
             vm.stopped = true;
             vm.busy = false;
           } else {
+            console.log(res.data);
             // Gán data vào danh sách comment hiện tại
             vm.cmts = _.union(vm.cmts, res.data);
             vm.page += 1;

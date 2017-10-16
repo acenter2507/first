@@ -56,8 +56,8 @@
           <div uib-dropdown dropdown-append-to-body class="comment-menu" ng-if="cmt.isCurrentUserOwner || isAdmin">
             <a class="text-muted" uib-dropdown-toggle href="#"><i class="glyphicon glyphicon-option-horizontal"></i></a>
             <ul class="uib-dropdown-menu dropdown-menu-right dropdown-menu-flat">
-              <li ng-if="cmt.user._id === user._id"><a ng-click="vm.handleEditComment(cmt)"><i class="fa fa-pencil-square-o"></i> {{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
-              <li ng-if="cmt.user._id === user._id"><a ng-click="vm.handleDeleteComment(cmt)"><i class="fa fa-trash"></i> {{:: 'LB_DELETE' | translate }}</a></li>
+              <li><a ng-click="vm.handleEditComment(cmt)"><i class="fa fa-pencil-square-o"></i> {{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
+              <li><a ng-click="vm.handleDeleteComment(cmt)"><i class="fa fa-trash"></i> {{:: 'LB_DELETE' | translate }}</a></li>
             </ul>
           </div>
         </div>

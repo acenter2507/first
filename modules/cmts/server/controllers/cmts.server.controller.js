@@ -25,7 +25,7 @@ exports.create = function (req, res) {
   // Lưu comment vào db
   cmt.save()
     .then(_cmt => {
-      cmt = _cmt;
+      cmt = _cmt.toObject();
       // Tăng số comemnt trong reprort
       let pollId = cmt.poll._id || cmt.poll;
       return Poll.countUpCmt(pollId);
@@ -36,14 +36,15 @@ exports.create = function (req, res) {
     .then(() => {
       // Tạo record follow
       Follow.findOne({ poll: cmt.poll, user: cmt.user }).exec((err, follow) => {
-        if (!follow) {
-          follow = new Follow({ poll: cmt.poll, user: cmt.user });
-          return follow.save();
-        }
+        if (follow) return;
+        follow = new Follow({ poll: cmt.poll, user: cmt.user });
+        return follow.save();
       });
     }, handleError)
     .then(() => {
       // Trả về comment
+      var commentUser = cmt.user._id || cmt.user;
+      cmt.isCurrentUserOwner = (commentUser === req.user._id);
       res.jsonp(cmt);
     }, handleError);
 

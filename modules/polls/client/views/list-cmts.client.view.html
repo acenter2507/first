@@ -69,6 +69,7 @@
           <i ng-if="cmt.isCurrentUserOwner || !isLogged" class="fa fa-thumbs-o-up"></i>
           <span class="counter" ng-bind="cmt.likeCnt | shortNumber"></span>
           <span ng-if="isLogged && !cmt.isCurrentUserOwner" class="like" ng-click="vm.handleLikeComment(cmt, 2)" ng-class="{'liked': cmt.like.type === 2}"><i class="fa fa-thumbs-o-down"></i> {{:: 'LB_DISLIKE' | translate }}</span>
+          <span ng-if="isLogged && !cmt.isCurrentUserOwner" class="like mg5l" ng-click="vm.handleReplyComment(cmt)"><i class="fa fa-reply"></i> {{:: 'LB_REPLY' | translate }}</span>
         </div>
       </div>
     </div>

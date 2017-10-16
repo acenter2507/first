@@ -53,7 +53,7 @@
           <span ng-if="!cmt.user" class="font-weight-bold text-muted">{{:: 'LB_DELETED_USER' | translate }}</span>
           <span class="text-muted font-sm" am-time-ago="cmt.created"></span>
           <span ng-show="cmt.isEdited" class="fa fa-pencil-square-o" tooltip-placement="bottom" uib-tooltip="{{ cmt.updated | LLL_format }}"></span>
-          <div uib-dropdown dropdown-append-to-body class="comment-menu" ng-if="cmt.isCurrentUserOwner">
+          <div uib-dropdown dropdown-append-to-body class="comment-menu" ng-if="cmt.isCurrentUserOwner || isAdmin">
             <a class="text-muted" uib-dropdown-toggle href="#"><i class="glyphicon glyphicon-option-horizontal"></i></a>
             <ul class="uib-dropdown-menu dropdown-menu-right dropdown-menu-flat">
               <li ng-if="cmt.user._id === user._id"><a ng-click="vm.handleEditComment(cmt)"><i class="fa fa-pencil-square-o"></i> {{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>

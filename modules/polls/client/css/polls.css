@@ -327,6 +327,8 @@
     float: right; }
 .comment-item-block {
   display: flex;
+  font-size: 13px;
+  line-height: 16px;
   flex-direction: row;
   padding-bottom: 5px;
   margin-bottom: 5px;

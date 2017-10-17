@@ -33,6 +33,7 @@
     inject: true,
     register: true,
     sinon: true,
+    UAParser: true,
     _: true
   }
 }

@@ -8,6 +8,7 @@
     .config(textAngularConfig)
     .config(loadingBarConfig)
     .config(momentPickerConfig)
+    .config(toolTipConfig)
     .run(runConfig);
 
 
@@ -103,6 +104,19 @@
     momentPickerProvider.options({
       minutesFormat: 'HH:mm'
     });
+  }
+
+  toolTipConfig.$inject = ['$tooltipProvider'];
+  function toolTipConfig($tooltipProvider) {
+    var parser = new UAParser();
+    var result = parser.getResult();
+    var touch = result.device && (result.device.type === 'tablet' || result.device.type === 'mobile');
+    if (touch) {
+      var options = {
+        trigger: 'dontTrigger'
+      };
+      $tooltipProvider.options(options);
+    }
   }
 
   runConfig.$inject = ['$rootScope', '$translate', 'amMoment', '$window', 'webStorage'];

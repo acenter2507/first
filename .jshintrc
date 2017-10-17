@@ -18,7 +18,8 @@
     "ApplicationConfiguration": true,
     "_": true,
     "moment": false,
-    "$": false
+    "$": false,
+    "UAParser": true
   },
   "predef": [ // Extra globals.
     "inject",

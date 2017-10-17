@@ -12,7 +12,7 @@
             <a class="pull-right" ng-click="vm.handleFollowPoll()" ng-if="vm.follow._id" tooltip-placement="bottom" uib-tooltip="{{:: 'LB_POLL_UNFOLLOW_TOOLTIP' | translate }}">
               <i class="fa fa-rss"></i> {{:: 'LB_POLLS_MENU_UNFOLLOW' | translate}}
             </a>
-            <a class="pull-right" ng-click="vm.handleFollowPoll()" ng-if="!vm.follow._id" tooltip-placement="bottom" uib-tooltip="{{:: 'LB_POLL_FOLLOW_TOOLTIP' | translate }}">
+            <a class="pull-right text-muted" ng-click="vm.handleFollowPoll()" ng-if="!vm.follow._id" tooltip-placement="bottom" uib-tooltip="{{:: 'LB_POLL_FOLLOW_TOOLTIP' | translate }}">
               <i class="fa fa-rss"></i> {{:: 'LB_POLLS_MENU_FOLLOW' | translate}}
             </a>
           </p>

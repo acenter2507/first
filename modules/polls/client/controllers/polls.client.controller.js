@@ -673,6 +673,7 @@
 
     // Click button add option
     vm.handleStartInputOption = handleStartInputOption;
+    vm.isFocusOptionInput = false;
     function handleStartInputOption() {
       if (!vm.poll.user) {
         $scope.handleShowMessage('LB_POLLS_SUGGEST_DELETED_USER', true);
@@ -680,6 +681,7 @@
       }
       vm.tmp_opt = { poll: vm.poll._id, title: '', body: '', status: 2 };
       angular.element('body').toggleClass('aside-panel-open');
+      vm.isFocusOptionInput = true;
     }
     // Click button save option
     vm.handleSaveOption = handleSaveOption;
@@ -693,6 +695,7 @@
         .then(res => {
           $scope.$broadcast('show-errors-reset', 'vm.form.optForm');
           angular.element('body').removeClass('aside-panel-open');
+          vm.isFocusOptionInput = false;
           $scope.handleShowMessage('LB_POLLS_SUGGEST_SUCCES', false);
         })
         .catch(err => {

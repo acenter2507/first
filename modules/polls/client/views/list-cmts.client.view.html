@@ -73,45 +73,6 @@
       </div>
     </div>
 
-    <!-- <div class="cmt_list" ng-repeat="cmt in vm.cmts | orderBy: vm.cmt_sort.val">
-      <div class="user-avatar pull-left">
-        <a ng-if="cmt.user" ui-sref="profile.info({userId: cmt.user.slug})">
-        <img src="{{cmt.user.profileImageURL}}" alt="{{cmt.user.displayName}}">
-      </a>
-        <img ng-if="!cmt.user" src="modules/users/client/img/profile/default.png" alt="Deleted User">
-      </div>
-      <span class="pull-left">
-        <strong><a ui-sref="profile.info({userId: cmt.user.slug})" ng-if="cmt.user" ng-bind="cmt.user.displayName"></a></strong>
-        <span ng-if="!cmt.user">{{:: 'LB_DELETED_USER' | translate }}</span>
-      <small class="text-muted" am-time-ago="cmt.created"></small>
-      <a ng-if="cmt.to">@{{cmt.toName}}</a>
-      <span ng-show="cmt.isEdited" class="fa fa-pencil-square-o" tooltip-placement="bottom" uib-tooltip="{{ cmt.updated | LLL_format }}"></span>
-      </span>
-      <span class="pull-right">
-        <md-menu md-offset="-20 25" md-position-mode="target-right target">
-          <a class="span-link" ng-click="$mdMenu.open($event)" aria-label="Open comment menu">
-            <i class="fa fa-angle-down"></i>
-          </a>
-          <md-menu-content>
-            <ul class="menu-list">
-              <li ng-if="isLogged && cmt.user._id !== user._id"><a ng-click="vm.handleReplyComment(cmt)"><i class="fa fa-reply"></i> {{:: 'LB_REPLY' | translate }}</a></li>
-              <li ng-if="cmt.user._id === user._id"><a ng-click="vm.handleEditComment(cmt)"><i class="fa fa-pencil-square-o"></i> {{:: 'LB_POLLS_MENU_EDIT' | translate }}</a></li>
-              <li ng-if="cmt.user._id === user._id"><a ng-click="vm.handleDeleteComment(cmt)"><i class="fa fa-trash"></i> {{:: 'LB_DELETE' | translate }}</a></li>
-            </ul>
-          </md-menu-content>
-        </md-menu>
-      </span>
-      <br>
-      <p class="text-justify" ng-bind-html="cmt.body | nl2br"></p>
-      <small class="like_tools pull-right">
-        <span ng-if="cmt.user._id !== user._id" class="span_btn" ng-click="vm.handleLikeComment(cmt, 1)" ng-class="{'highlight-text': cmt.like.type === 1}"><i class="fa fa-thumbs-o-up"></i> {{:: 'LB_LIKE' | translate }}</span>
-        <i ng-if="cmt.user._id === user._id" class="fa fa-thumbs-o-up"></i>
-        <span class="mg5l mg5r highlight-text" ng-bind="cmt.likeCnt | shortNumber"></span>
-        <span ng-if="cmt.user._id !== user._id" class="span_btn" ng-click="vm.handleLikeComment(cmt, 2)" ng-class="{'highlight-text': cmt.like.type === 2}"><i class="fa fa-thumbs-o-down"></i> {{:: 'LB_DISLIKE' | translate }}</span>
-      </small>
-      <div class="clearfix"></div>
-      <hr class="mg12y">
-    </div> -->
     <div class="row text-center" ng-if="!vm.stopped">
       <a ng-click="vm.handleLoadComments()">{{:: 'LB_LOAD_MORE' | translate }}</a>
     </div>
@@ -122,10 +83,9 @@
 <div class="card d-md-none card-expand">
   <div class="card-header pd12b">
     <strong class="card-title">{{:: 'LB_POLLS_COMMENTS' | translate }} ({{vm.poll.cmtCnt | shortNumber}})</strong>
-    <a class="card-expand-toggle pull-right text-muted" ng-if="vm.cmts.length > 0"><i class="fa fa-caret-down"></i></a>
+    <a class="card-expand-toggle pull-right text-muted" ng-if="vm.cmts.length > 0 || isLogged"><i class="fa fa-caret-down"></i></a>
   </div>
   <div class="card-body">
-
     <!-- Form nhập comment -->
     <div class="comment-form" ng-if="isLogged">
       <div class="form-group mg5b">
@@ -149,7 +109,6 @@
       </div>
     </div>
     <hr class="mgn" />
-
     <!-- Sắp xếp comment -->
     <div class="comment-sort-block" ng-if="vm.cmts.length > 0">
       <div class="comment-sort-menu" class="" uib-dropdown dropdown-append-to-body>
@@ -166,7 +125,6 @@
       </div>
       <div class="clearfix"></div>
     </div>
-    
     <!-- Danh sách comment -->
     <div class="comment-item-block" ng-repeat="cmt in vm.cmts | orderBy: vm.cmt_sort.val">
       <div class="comment-user"><img src="{{:: cmt.user.profileImageURL}}"></div>
@@ -197,6 +155,7 @@
         </div>
       </div>
     </div>
+
     <div class="row text-center" ng-if="!vm.stopped">
       <a ng-click="vm.handleLoadComments()">{{:: 'LB_LOAD_MORE' | translate }}</a>
     </div>

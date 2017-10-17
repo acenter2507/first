@@ -320,15 +320,15 @@
       <md-fab-actions>
         <md-button aria-label="Like" class="md-fab md-raised" ng-click="vm.handleLikePoll(1)">
           <i class="fa fa-thumbs-o-up"></i>
-          <md-tooltip class="d-md-none" md-direction="right" md-visible="vm.q_quick_menu_open">{{:: 'LB_LIKE' | translate }}</md-tooltip>
+          <!-- <md-tooltip class="d-md-none" md-direction="right" md-visible="vm.q_quick_menu_open">{{:: 'LB_LIKE' | translate }}</md-tooltip> -->
         </md-button>
         <md-button aria-label="Dislike" class="md-fab md-raised" ng-click="vm.handleLikePoll(2)">
           <i class="fa fa-thumbs-o-down"></i>
-          <md-tooltip class="d-md-none" md-direction="right" md-visible="vm.q_quick_menu_open">{{:: 'LB_DISLIKE' | translate }}</md-tooltip>
+          <!-- <md-tooltip class="d-md-none" md-direction="right" md-visible="vm.q_quick_menu_open">{{:: 'LB_DISLIKE' | translate }}</md-tooltip> -->
         </md-button>
-        <md-button aria-label="Comment" class="md-fab md-raised" ng-click="vm.handleStartTypeComment()">
+        <md-button aria-label="Comment" class="md-fab md-raised d-sm-down-none" ng-click="vm.handleStartTypeComment()">
           <i class="fa fa-commenting"></i>
-          <md-tooltip class="d-md-none" md-direction="right" md-visible="vm.q_quick_menu_open">{{:: 'LB_COMMENT' | translate }}</md-tooltip>
+          <!-- <md-tooltip class="d-md-none" md-direction="right" md-visible="vm.q_quick_menu_open">{{:: 'LB_COMMENT' | translate }}</md-tooltip> -->
         </md-button>
       </md-fab-actions>
     </md-fab-speed-dial>

@@ -105,7 +105,6 @@
      */
     // Lưu poll
     vm.handleSavePoll = isValid => {
-      console.log(vm.form.pollForm.$error);
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.pollForm');
         return false;
@@ -163,9 +162,11 @@
     }
     // Gọi màn hình nhập thông tin options
     vm.handleStartInputOption = handleStartInputOption;
+    vm.isFocusOptionInput = false;
     function handleStartInputOption(opt) {
       vm.tmp_opt = (opt) ? opt : { poll: vm.poll._id, title: '', body: '', status: 1 };
       angular.element('body').toggleClass('aside-panel-open');
+      vm.isFocusOptionInput = true;
     }
     // Xóa option
     vm.handleRemoveOption = handleRemoveOption;
@@ -239,6 +240,7 @@
       vm.tmp_opt = {};
       $scope.$broadcast('show-errors-reset', 'vm.form.optForm');
       angular.element('body').removeClass('aside-panel-open');
+      vm.isFocusOptionInput = false;
     }
     // Hiển thị full màn hình
     vm.handleShowFullOption = handleShowFullOption;

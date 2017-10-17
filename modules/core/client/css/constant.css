@@ -930,6 +930,8 @@
 
 .text-white {
   color: #fff !important; }
+  .text-normal {
+    color: #555 !important; }
 
 .font-weight-normal {
   font-weight: normal; }

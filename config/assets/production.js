@@ -15,7 +15,8 @@ module.exports = {
         'public/lib/ng-dialog/css/ngDialog-theme-default.min.css',
         'public/lib/angucomplete-alt/angucomplete-alt.css',
         'public/lib/simple-line-icons/css/simple-line-icons.css',
-        'public/lib/angular-loading-bar/build/loading-bar.min.css'
+        'public/lib/angular-loading-bar/build/loading-bar.min.css',
+        'public/lib/ng-img-crop/compile/minified/ng-img-crop.css'
       ],
       js: [
         'public/lib/jquery/dist/jquery.min.js',
@@ -60,7 +61,8 @@ module.exports = {
         'public/lib/angular-socialshare/dist/angular-socialshare.min.js',
         'public/lib/angular-recaptcha/release/angular-recaptcha.min.js',
         'public/lib/ng-img-crop/compile/minified/ng-img-crop.js',
-        'public/lib/angular-scroll/angular-scroll.min.js'
+        'public/lib/angular-scroll/angular-scroll.min.js',
+        'public/lib/ua-parser-js/dist/ua-parser.min.js'
       ]
     },
     css: 'public/dist/application.min.css',

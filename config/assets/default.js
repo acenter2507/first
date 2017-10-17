@@ -61,7 +61,8 @@ module.exports = {
         'public/lib/angular-socialshare/dist/angular-socialshare.js',
         'public/lib/angular-recaptcha/release/angular-recaptcha.js',
         'public/lib/ng-img-crop/compile/unminified/ng-img-crop.js',
-        'public/lib/angular-scroll/angular-scroll.js'
+        'public/lib/angular-scroll/angular-scroll.js',
+        'public/lib/ua-parser-js/dist/ua-parser.min.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

@@ -350,11 +350,11 @@
         right: 0; }
     .comment-item-block .comment-content .comment-tools {
       position: relative; }
-      .comment-item-block .comment-content .comment-tools span.like
-      .comment-item-block .comment-content .comment-tools span.reply, {
+      .comment-item-block .comment-content .comment-tools span.like,
+      .comment-item-block .comment-content .comment-tools span.reply {
         cursor: pointer; }
-      .comment-item-block .comment-content .comment-tools span.like:hover
-      .comment-item-block .comment-content .comment-tools span.reply:hover, {
+      .comment-item-block .comment-content .comment-tools span.like:hover,
+      .comment-item-block .comment-content .comment-tools span.reply:hover {
         color: #267ed5; }
       .comment-item-block .comment-content .comment-tools span.liked {
         color: #267ed5;  }

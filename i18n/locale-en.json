@@ -148,6 +148,7 @@
   "LB_POLL_TITLE_REQUIRE": "You must type somthing for title.",
   "LB_POLL_BODY_PLACE": "Type you post content here",
   "LB_POLL_BODY_REQUIRE": "You must type somthing for body.",
+  "LB_POLL_SAVE_ERROR": "Thông tin nhập không hợp lệ, vui lòng kiểm tra lại",
   "LB_POLL_ENTER_TO_SEND": "Enter to send",
   "LB_POLL_CHART_PANEL": "Chart panel",
   "LB_POLL_CHART_CHANGE": "Change chart",

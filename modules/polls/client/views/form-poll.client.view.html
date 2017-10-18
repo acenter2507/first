@@ -48,9 +48,8 @@
             <!-- Close time -->
             <div class="form-group">
               <div class="input-group">
-                <span class="input-group-addon">
-                  <input type="button" class="btn btn-default" moment-picker="vm.poll.close" format="YYYY-MM-DD HH:mm" start-view="month" additions="{ bottom: 'bottom-template-url' }"
-                    today="true">
+                <span class="input-group-addon" moment-picker="vm.poll.close" format="YYYY-MM-DD HH:mm" start-view="month" additions="{ bottom: 'bottom-template-url' }"
+                today="true">
                   <i class="fa fa-calendar"></i>
                   </span>
                 <input class="form-control" placeholder="{{:: 'LB_POLL_CLOSE' | translate }}" ng-model="vm.poll.close">

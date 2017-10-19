@@ -107,6 +107,7 @@
     vm.handleSavePoll = isValid => {
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.pollForm');
+        $scope.handleShowMessage('LB_POLL_SAVE_ERROR', true);
         return false;
       }
 
@@ -232,7 +233,6 @@
     function handleSaveOption(isValid) {
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.optForm');
-        $scope.handleShowMessage('LB_POLL_SAVE_ERROR', true);
         return false;
       }
       if (!vm.tmp_opt._id && !_.contains(vm.opts, vm.tmp_opt)) {

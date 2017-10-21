@@ -33,7 +33,7 @@
           <div class="form-group mg10b" show-errors>
             <select tabindex="1" name="category" class="form-control" ng-model="vm.poll.category" required>
               <option value>{{:: 'LB_CATEGORY' | translate}}</option>
-              <option ng-repeat="ctgr in Categorys.list" value="{{ctgr._id}}" ng-selected="vm.poll.category._id === ctgr._id" >{{:: ctgr.name}}</option>
+              <option ng-repeat="ctgr in Categorys.list" value="{{ctgr._id}}" ng-selected="vm.poll.category._id === ctgr._id || vm.poll.category === ctgr._id" >{{:: ctgr.name}}</option>
             </select>
             <div ng-messages="vm.form.pollForm.category.$error" role="alert">
               <p class="help-block error-text" ng-message="required">{{:: 'LB_CATEGORY_REQUIRE' | translate}}</p>

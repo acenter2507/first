@@ -17,7 +17,8 @@ angular.module('core').service('Constants', [
       public_search_condition: '192783hf9283492834',
       // Message flash
       flash: '409234lMLDOIFA98fa',
-      language: '851kf00aAF093402395'
+      language: '851kf00aAF093402395',
+      draft_poll: 'A837498ivkjdvhIUF3984'
     };
     this.reCaptcha = {
       key: '6LeV2y4UAAAAAIysrsCFTAKqbgwVkp5MQbd019mX',

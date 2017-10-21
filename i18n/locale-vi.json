@@ -197,6 +197,7 @@
   "LB_OPTION_TITLE_REQUIRE": "Bạn cần nhập tên của lựa chọn.",
   "LB_OPTION_COLOR": "Màu hiển thị",
   "LB_OPTION_COLOR_REQUIRE": "Bạn cần phải chọn một màu cho lựa chọn để hiển thị trên biểu đồ.",
+  "LB_OPTION_DUPLICATE": "Có vẻ như lựa chọn mới đã tồn tại.",
   "LB_WRITE_MORE_TOOLTIP": "Tạo poll đầy đủ như một bài viết",
   "LB_SEARCH_TOOL": "Công cụ tìm kiếm",
   "LB_SEARCH_KEY": "Từ khóa",

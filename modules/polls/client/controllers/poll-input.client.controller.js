@@ -13,6 +13,8 @@
     'OptsService',
     'Socket',
     'Action',
+    'Constants',
+    'Storages',
     'Notifications'
   ];
 
@@ -24,6 +26,8 @@
     Opts,
     Socket,
     Action,
+    Constants,
+    Storages,
     Notifications
   ) {
     var vm = this;
@@ -60,6 +64,10 @@
         vm.isClosed = moment(vm.poll.close).utc().isAfter(new moment().utc());
         // Lắng nghe các request từ server socket
         prepareSocketListener();
+      } else {
+        // Kiểm tra có poll lưu trong storage hay không
+        var poll = JSON.parse(Storages.get_session(Constants.storages.draft_poll, JSON.stringify({})));
+        vm.poll = _.extend(vm.poll, poll);
       }
       // Kiểm tra thông báo
       prepareParamNotification();
@@ -131,6 +139,7 @@
         vm.poll.opts = vm.opts;
         Action.savePoll(vm.poll)
           .then(res => {
+            Storages.remove_local(Constants.storages.draft_poll);
             $state.go('polls.view', { pollId: res.slug });
           })
           .catch(err => {
@@ -165,7 +174,7 @@
     vm.handleStartInputOption = handleStartInputOption;
     vm.isFocusOptionInput = false;
     function handleStartInputOption(opt) {
-      vm.tmp_opt = (opt) ? opt : { poll: vm.poll._id, title: '', body: '', status: 1 };
+      vm.tmp_opt = (opt) ? angular.clone(opt) : { poll: vm.poll._id, title: '', body: '', status: 1 };
       angular.element('body').toggleClass('aside-panel-open');
       vm.isFocusOptionInput = true;
     }
@@ -235,8 +244,18 @@
         $scope.$broadcast('show-errors-check-validity', 'vm.form.optForm');
         return false;
       }
-      if (!vm.tmp_opt._id && !_.contains(vm.opts, vm.tmp_opt)) {
-        vm.opts.push(_.clone(vm.tmp_opt));
+      // Kiểm tra poll đã tồn tại
+      if (vm.tmp_opt._id) {
+        // Update vào option cũ
+        var opt = _.findWhere(vm.opts, { _id: vm.tmp_opt._id });
+        opt = _.extend(opt, vm.tmp_opt);
+      } else {
+        // Nếu chưa có option nào giống với option mới thì add vào list
+        if (!_.contains(vm.opts, vm.tmp_opt)) {
+          vm.opts.push(_.clone(vm.tmp_opt));
+        } else {
+          $scope.handleShowMessage('LB_OPTION_DUPLICATE', true);
+        }
       }
       vm.tmp_opt = {};
       $scope.$broadcast('show-errors-reset', 'vm.form.optForm');

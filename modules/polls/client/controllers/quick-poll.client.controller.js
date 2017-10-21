@@ -12,6 +12,7 @@
     'Categorys',
     'Action',
     'Constants',
+    'Storages',
     '$filter'
   ];
 
@@ -22,6 +23,7 @@
     Categorys,
     Action,
     Constants,
+    Storages,
     $filter
   ) {
     var vm = this;
@@ -70,6 +72,7 @@
     };
     vm.write_as_post = () => {
       $scope.closeThisDialog();
+      Storages.set_local(Constants.storages.draft_poll, JSON.stringify(vm.poll));
       $state.go('polls.create');
     };
     vm.discard = () => {

@@ -197,6 +197,7 @@
   "LB_OPTION_TITLE_REQUIRE": "Option's title is required.",
   "LB_OPTION_COLOR": "Option's color",
   "LB_OPTION_COLOR_REQUIRE": "You must select color for option.",
+  "LB_OPTION_DUPLICATE": "Có vẻ như lựa chọn mới đã tồn tại.",
   "LB_WRITE_MORE_TOOLTIP": "Create poll as a post",
   "LB_SEARCH_TOOL": "Search tool",
   "LB_SEARCH_KEY": "Keyword",

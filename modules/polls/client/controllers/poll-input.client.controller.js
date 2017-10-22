@@ -148,6 +148,12 @@
           });
       }
     };
+    // Lưu nháp
+    vm.handleSaveDraft = () => {
+      vm.poll.opts = vm.opts;
+      Storages.set_local(Constants.storages.draft_poll, JSON.stringify(vm.poll));
+      $scope.handleShowMessage('LB_POLL_SAVE_DRAFT', false);
+    };
     // Hủy nhập poll
     vm.handleDiscard = handleDiscard;
     function handleDiscard() {

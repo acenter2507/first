@@ -111,7 +111,7 @@
           content: "\2039";
           transition: .3s; }
       .sidebar .nav .nav-item.nav-dropdown.open {
-        background: rgba(0, 0, 0, 0.2); }
+        background: #000; }
         .sidebar .nav .nav-item.nav-dropdown.open > ul, .sidebar .nav .nav-item.nav-dropdown.open > ol {
           max-height: 1000px; }
         .sidebar .nav .nav-item.nav-dropdown.open .nav-link, .sidebar .nav .nav-item.nav-dropdown.open .navbar .dropdown-toggle, .navbar .sidebar .nav .nav-item.nav-dropdown.open .dropdown-toggle {

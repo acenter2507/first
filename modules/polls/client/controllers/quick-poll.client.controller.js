@@ -32,9 +32,11 @@
     vm.form = {};
     vm.poll = {
       opts: [{
-        color: Constants.colors[5]
+        color: Constants.colors[5],
+        status: 1
       }, {
-        color: Constants.colors[75]
+        color: Constants.colors[75],
+        status: 1
       }],
       category: vm.categorys[0]._id
     };
@@ -64,7 +66,8 @@
     vm.add = () => {
       var color = randomColor();
       vm.poll.opts.push({
-        color: color
+        color: color,
+        status: 1
       });
     };
     vm.remove = opt => {

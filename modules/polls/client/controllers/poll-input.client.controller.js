@@ -66,10 +66,9 @@
         // Kiểm tra có poll lưu trong storage hay không
         var poll = JSON.parse(Storages.get_local(Constants.storages.draft_poll, JSON.stringify({})));
         vm.poll = _.extend(vm.poll, poll);
-        console.log(vm.poll);
       }
-      vm.bk_poll = _.clone(vm.poll);
       vm.opts = vm.poll.opts || [];
+      vm.bk_poll = _.clone(vm.poll);
       // Kiểm tra thông báo
       prepareParamNotification();
     }

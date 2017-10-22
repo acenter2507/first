@@ -84,14 +84,17 @@
           </div>
           <!-- Option -->
           <uib-accordion close-others="true">
-            <uib-accordion-group ng-repeat="opt in vm.opts | orderBy: 'create'" heading="{{opt.title}}" panel-class="{{'custom-panel ' + (opt.status === 1 ? 'public' : 'waiting')}}">
+            <uib-accordion-group ng-repeat="opt in vm.opts | orderBy: 'create'" panel-class="{{'custom-panel ' + (opt.status === 1 ? 'public' : 'waiting')}}">
+              <uib-accordion-heading>
+                {{opt.title}}
+              </uib-accordion-heading>
               <span>
                 <a ng-click="vm.handleRemoveOption(opt)">{{:: 'LB_DELETE' | translate }}</a>
                 <a class="mg10l" ng-if="opt.status == 1" ng-click="vm.handleStartInputOption(opt)">{{:: 'LB_POLLS_MENU_EDIT' | translate }}</a>
                 <a class="mg10l" ng-if="opt.status == 2" ng-click="vm.handleApproveOption(opt)">{{:: 'LB_APPROVE' | translate }}</a>
                 <a class="mg10l" ng-if="opt.status == 2" ng-click="vm.handleRejectOption(opt)">{{:: 'LB_REJECT' | translate }}</a>
               </span>
-              <small class="pull-right text-muted">
+              <small class="pull-right text-muted" ng-if="opt._id">
                 {{:: 'LB_ADD_BY' | translate }}
                 <a ui-sref="profile.info({userId: opt.user.slug})" ng-if="opt.user" ng-bind="opt.user.displayName"></a>
                 <span ng-if="!opt.user">{{:: 'LB_DELETED_USER' | translate }}</span>

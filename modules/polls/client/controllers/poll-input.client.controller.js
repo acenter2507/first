@@ -170,6 +170,7 @@
         });
       }
       function handle_discard() {
+        Storages.remove_local(Constants.storages.draft_poll);
         if (vm.poll._id) {
           $state.go('polls.view', { pollId: vm.poll.slug });
         } else {
@@ -181,7 +182,7 @@
     vm.handleStartInputOption = handleStartInputOption;
     vm.isFocusOptionInput = false;
     function handleStartInputOption(opt) {
-      vm.tmp_opt = (opt) ? angular.clone(opt) : { poll: vm.poll._id, title: '', body: '', status: 1 };
+      vm.tmp_opt = (opt) ? _.clone(opt) : { poll: vm.poll._id, title: '', body: '', status: 1 };
       angular.element('body').toggleClass('aside-panel-open');
       vm.isFocusOptionInput = true;
     }

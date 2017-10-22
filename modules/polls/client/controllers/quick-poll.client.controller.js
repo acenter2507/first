@@ -72,6 +72,7 @@
     };
     vm.write_as_post = () => {
       $scope.closeThisDialog();
+      vm.poll.opts = validOptions();
       Storages.set_local(Constants.storages.draft_poll, JSON.stringify(vm.poll));
       $state.go('polls.create');
     };

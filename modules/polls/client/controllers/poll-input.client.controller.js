@@ -51,8 +51,6 @@
     }
 
     function onCreate() {
-      vm.bk_poll = _.clone(vm.poll);
-      vm.opts = vm.poll.opts || [];
       if (vm.poll._id) {
         if (!vm.poll.isCurrentUserOwner && !$scope.isAdmin) {
           $state.go('home');
@@ -69,6 +67,8 @@
         var poll = JSON.parse(Storages.get_local(Constants.storages.draft_poll, JSON.stringify({})));
         vm.poll = _.extend(vm.poll, poll);
       }
+      vm.bk_poll = _.clone(vm.poll);
+      vm.opts = vm.poll.opts || [];
       // Kiểm tra thông báo
       prepareParamNotification();
     }

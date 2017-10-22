@@ -108,6 +108,7 @@
       <div class="card-footer">
         <a ng-click="vm.handleSavePoll(vm.form.pollForm.$valid)">{{vm.poll._id ? 'LB_SAVE' : 'LB_POST' | translate }}</a>
         <a class="mg10l" ng-click="vm.handleDiscard()">{{:: 'LB_DISCARD' | translate}}</a>
+        <a class="mg10l" ng-click="vm.handleSaveDraft()">{{:: 'LB_SAVE_DRAFT' | translate}}</a>
         <md-menu md-offset="10 30">
           <a class="pull-right" ng-class="{ 'text-shake': !vm.poll.isPublic }" ng-click="$mdMenu.open($event)"><i class="fa fa-lock"></i> {{:: 'LB_POLL_OPTION' | translate}}</a>
           <md-menu-content>

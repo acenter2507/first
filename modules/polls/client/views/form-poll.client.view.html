@@ -48,11 +48,10 @@
           <div uib-collapse="moreCollapse">
             <!-- Close time -->
             <div class="form-group">
-              <span>Đang fix bug</span>
-              <!--<input class="form-control" placeholder="{{:: 'LB_POLL_CLOSE' | translate }}" ng-model="vm.poll.close">
               <div class="input-group" today="true" moment-picker="vm.poll.close" format="YYYY-MM-DD HH:mm" start-view="month" additions="{ bottom: 'bottom-template-url' }">
                 <span class="input-group-addon span_btn" ><i class="fa fa-calendar"></i></span>
-              </div>-->
+                <input class="form-control" placeholder="{{:: 'LB_POLL_CLOSE' | translate }}" ng-model="vm.poll.close">
+              </div>
             </div>
             <!-- Tags -->
             <div class="form-group" ng-controller="AutocompleteTagController" show-errors>

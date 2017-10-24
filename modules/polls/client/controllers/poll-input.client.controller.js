@@ -119,33 +119,36 @@
         return false;
       }
 
-      if (!handleValidateCloseDate()) {
-        $scope.handleShowMessage('LB_POLLS_CLOSE_INVALID', true);
-        return;
-      }
-      if (!vm.poll.isPublic) {
-        // Gọi function show dialog từ scope cha
-        $scope.handleShowConfirm({
-          content: 'LB_POLLS_PRIVATE_SAVE',
-          type: 1,
-          button: 'LB_SAVE'
-        }, confirm => {
-          handleSave();
-        });
-      } else {
-        handleSave();
-      }
-      function handleSave() {
-        vm.poll.opts = vm.opts;
-        Action.savePoll(vm.poll)
-          .then(res => {
-            Storages.remove_local(Constants.storages.draft_poll);
-            $state.go('polls.view', { pollId: res.slug });
-          })
-          .catch(err => {
-            $scope.handleShowMessage(err.message, true);
-          });
-      }
+      console.log(vm.poll);
+      return;
+
+      // if (!handleValidateCloseDate()) {
+      //   $scope.handleShowMessage('LB_POLLS_CLOSE_INVALID', true);
+      //   return;
+      // }
+      // if (!vm.poll.isPublic) {
+      //   // Gọi function show dialog từ scope cha
+      //   $scope.handleShowConfirm({
+      //     content: 'LB_POLLS_PRIVATE_SAVE',
+      //     type: 1,
+      //     button: 'LB_SAVE'
+      //   }, confirm => {
+      //     handleSave();
+      //   });
+      // } else {
+      //   handleSave();
+      // }
+      // function handleSave() {
+      //   vm.poll.opts = vm.opts;
+      //   Action.savePoll(vm.poll)
+      //     .then(res => {
+      //       Storages.remove_local(Constants.storages.draft_poll);
+      //       $state.go('polls.view', { pollId: res.slug });
+      //     })
+      //     .catch(err => {
+      //       $scope.handleShowMessage(err.message, true);
+      //     });
+      // }
     };
     // Lưu nháp
     vm.handleSaveDraft = () => {

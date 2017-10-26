@@ -24,7 +24,7 @@ angular.module('users').controller('ProfileInfoController', [
           merge_activity();
           $scope.busy = false;
         }, err => {
-          $scope.handleShowMessage(err.message || err.data.message, true);
+          $scope.handleShowMessage(err.message, true);
         });
     }
 

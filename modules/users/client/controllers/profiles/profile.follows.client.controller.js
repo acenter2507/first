@@ -37,7 +37,7 @@ angular.module('users').controller('ProfileFollowsController', [
         .catch(err => {
           $scope.busy = false;
           $scope.stopped = true;
-          $scope.handleShowMessage(err.message || err.data.message, true);
+          $scope.handleShowMessage(err.message, true);
         });
     };
     function prepareShowingData(poll) {
@@ -66,7 +66,7 @@ angular.module('users').controller('ProfileFollowsController', [
         .then(res => {
         })
         .catch(err => {
-          $scope.handleShowMessage(err.message || err.data.message, true);
+          $scope.handleShowMessage(err.message, true);
         });
     };
     $scope.clear_follow = () => {

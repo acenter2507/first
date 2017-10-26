@@ -80,7 +80,7 @@
             $scope.Categorys.load();
           })
           .catch(err => {
-            alert(err.message || err.data.message);
+            alert(err.message);
           });
       };
       reader.readAsText(file);

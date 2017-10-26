@@ -25,7 +25,7 @@ function AdminUserController($window, $timeout, $scope, $state, userResolve, Adm
       alert('Done');
     }
     function errorCb(err) {
-      alert('Can\'t save user: ' + err.message || err.data.message);
+      alert('Can\'t save user: ' + err.message);
     }
   };
 
@@ -63,7 +63,7 @@ function AdminUserController($window, $timeout, $scope, $state, userResolve, Adm
       })
       .error(err => {
         console.log(err);
-        alert(err.message || err.data.message);
+        alert(err.message);
       });
   };
 }

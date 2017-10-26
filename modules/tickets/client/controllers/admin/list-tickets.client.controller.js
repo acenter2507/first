@@ -30,7 +30,7 @@ function AdminTicketListController($scope, $filter, $window, $state, TicketsServ
         console.log(vm.tickets);
       })
       .error(err => {
-        alert(err.message || err.data.message);
+        alert(err.message);
       });
   }
 

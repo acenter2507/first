@@ -26,7 +26,7 @@ angular.module('users').controller('ProfileVotesController', [
           if (res.length < 10) $scope.stopped = true;
         })
         .error(err => {
-          $scope.handleShowMessage(err.message || err.data.message, true);
+          $scope.handleShowMessage(err.message, true);
         });
     };
     $scope.vote_filter = vote => {

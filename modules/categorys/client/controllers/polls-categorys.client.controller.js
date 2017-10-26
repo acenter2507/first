@@ -65,7 +65,7 @@
         .catch(err => {
           $scope.busy = false;
           $scope.stopped = true;
-          $scope.handleShowMessage(err.message || err.data.message, true);
+          $scope.handleShowMessage(err.message, true);
         });
     }
     vm.handleChangeSortType = handleChangeSortType;
@@ -125,7 +125,7 @@
             $scope.handleShowMessageWithParam('MS_CM_REPORT_SUCCESS', { title: poll.title }, false);
           })
           .catch(err => {
-            $scope.handleShowMessage(err.message || err.data.message, true);
+            $scope.handleShowMessage(err.message, true);
           });
       }
     };
@@ -140,7 +140,7 @@
           $scope.handleShowMessageWithParam('MS_CM_BOOKMARK_SUCCESS', { title: poll.title }, false);
         })
         .catch(err => {
-          $scope.handleShowMessage(err.message || err.data.message, true);
+          $scope.handleShowMessage(err.message, true);
         });
     };
     $scope.handleFollowPoll = (poll) => {
@@ -157,7 +157,7 @@
           }
         })
         .catch(err => {
-          $scope.handleShowMessage(err.message || err.data.message, true);
+          $scope.handleShowMessage(err.message, true);
         });
     };
   }

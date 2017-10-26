@@ -67,7 +67,7 @@
 
       function errorCallback(err) {
         vm.busy = false;
-        $scope.handleShowMessage(err.message || err.data.message, true);
+        $scope.handleShowMessage(err.message, true);
       }
     }
   }

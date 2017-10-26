@@ -72,7 +72,7 @@
             vm.tags = _.union(vm.tags, _tags);
           })
           .catch(err => {
-            alert(err.message || err.data.message);
+            alert(err.message);
           });
 
       };

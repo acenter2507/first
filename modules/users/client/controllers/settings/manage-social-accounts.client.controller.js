@@ -36,7 +36,7 @@ angular.module('users').controller('SocialAccountsController', ['$scope', '$http
         $scope.success = true;
         $scope.user = Authentication.user = response;
       }).error(function (err) {
-        $scope.handleShowMessage(err.message || err.data.message, true);
+        $scope.handleShowMessage(err.message, true);
       });
     };
   }

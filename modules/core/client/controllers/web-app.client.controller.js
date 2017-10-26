@@ -122,7 +122,7 @@ angular.module('core').controller('WebAppController', [
           $http.post('/api/users/language', { language: lang }).success(function (response) {
             window.location.reload();
           }).error(function (err) {
-            $scope.handleShowMessage(err.message || err.data.message, true);
+            $scope.handleShowMessage(err.message, true);
           });
         } else {
           Storages.set_local(Constants.storages.language, lang);

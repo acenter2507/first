@@ -222,7 +222,7 @@
             }
           })
           .catch(err => {
-            $scope.handleShowMessage(err.message || err.data.message, true);
+            $scope.handleShowMessage(err.message, true);
           });
       });
       Socket.on('cmt_del', obj => {
@@ -247,7 +247,7 @@
             vm.poll = _poll;
             prepareShowingData();
           }, err => {
-            $scope.handleShowMessage(err.message || err.data.message, true);
+            $scope.handleShowMessage(err.message, true);
           });
       });
       Socket.on('opts_update', res => {
@@ -256,7 +256,7 @@
             vm.poll = _poll;
             prepareShowingData();
           }, err => {
-            $scope.handleShowMessage(err.message || err.data.message, true);
+            $scope.handleShowMessage(err.message, true);
           });
       });
       $scope.$on('$destroy', function () {

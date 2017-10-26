@@ -48,14 +48,12 @@
           <div uib-collapse="moreCollapse">
             <!-- Close time -->
             <!-- TODO -->
-            <div class="form-group">
-                <span moment-picker="ctrl.component">
-                    {{ vm.component || 'Click here to select a date' }}
-                </span>
-              <!-- <div class="input-group" today="true" moment-picker="vm.poll.close" format="YYYY-MM-DD HH:mm" start-view="month" additions="{ bottom: 'bottom-template-url' }">
-                <input class="form-control" placeholder="{{:: 'LB_POLL_CLOSE' | translate }}" ng-model="vm.poll.close" disabled>
-                <span class="input-group-addon span_btn"><i class="fa fa-calendar"></i></span>
-              </div> -->
+            <div class="form-group" ng-init="vm.isOpenPicker = false;">
+              <div today="true" moment-picker="vm.poll.close" format="YYYY-MM-DD HH:mm" start-view="month" additions="{ bottom: 'bottom-template-url' }" is-open="{{vm.isOpenPicker}}"></div>
+              <div class="input-group">
+                <input class="form-control" placeholder="{{:: 'LB_POLL_CLOSE' | translate }}" ng-model="vm.poll.close" readonly>
+                <span class="input-group-addon span_btn" ng-click="vm.isOpenPicker = !vm.isOpenPicker;"><i class="fa fa-calendar"></i></span>
+              </div>
             </div>
             <!-- Tags -->
             <div class="form-group" ng-controller="AutocompleteTagController" show-errors>

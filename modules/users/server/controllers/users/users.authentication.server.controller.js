@@ -101,9 +101,7 @@ exports.resend = function (req, res) {
   function handleError(err) {
     // Xuất bug ra file log
     logger.system.error('users.authentication.server.controller.js - resend', err);
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
-    });
+    return res.status(400).send({ message: err.message });
   }
 };
 

@@ -54,7 +54,6 @@ angular.module('users').controller('AuthenticationController', [
           $scope.isShowForm = false;
         }
       }).error(function (err) {
-        console.log(err);
         $scope.busy = false;
         $scope.handleShowMessage(err.message, true);
       });

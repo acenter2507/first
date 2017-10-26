@@ -56,7 +56,7 @@ exports.signup = function (req, res) {
   function handleError(err) {
     // Xuất bug ra file log
     logger.system.error('users.authentication.server.controller.js - signup', err);
-    return res.status(400).send(err);
+    return res.status(400).send({ message: err.message });
   }
 };
 

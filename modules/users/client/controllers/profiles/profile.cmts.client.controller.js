@@ -26,7 +26,7 @@ angular.module('users').controller('ProfileCmtsController', [
           if (!$scope.$$phase) $scope.$digest();
         })
         .error(err => {
-          $scope.handleShowMessage(err.message, true);
+          $scope.handleShowMessage(err.message || err.data.message, true);
         });
     };
     $scope.cmt_filter = cmt => {

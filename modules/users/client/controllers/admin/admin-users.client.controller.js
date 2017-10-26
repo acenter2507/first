@@ -30,7 +30,7 @@ function AdminUsersController($scope, $filter, $window, AdminUserService, AdminU
         vm.totalUser = res.total;
       })
       .error(err => {
-        alert(err.message);
+        alert(err.message || err.data.message);
         console.log(err);
       });
   }
@@ -51,7 +51,7 @@ function AdminUsersController($scope, $filter, $window, AdminUserService, AdminU
       vm.busy = false;
     }).catch(err => {
       vm.busy = false;
-      alert(err.message);
+      alert(err.message || err.data.message);
     });
   };
 
@@ -86,7 +86,7 @@ function AdminUsersController($scope, $filter, $window, AdminUserService, AdminU
       })
       .error(err => {
         console.log(err);
-        alert(err.message);
+        alert(err.message || err.data.message);
       });
   };
 

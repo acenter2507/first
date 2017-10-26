@@ -28,7 +28,7 @@ angular.module('users').controller('PasswordController', ['$scope', '$stateParam
         // Show user error message and clear form
         $scope.busy = false;
         $scope.credentials = null;
-        $scope.handleShowMessage(err.message, true);
+        $scope.handleShowMessage(err.message || err.data.message, true);
       });
     };
 
@@ -51,7 +51,7 @@ angular.module('users').controller('PasswordController', ['$scope', '$stateParam
         $location.path('/password/reset/success');
       }).error(function (err) {
         $scope.busy = false;
-        $scope.handleShowMessage(err.message, true);
+        $scope.handleShowMessage(err.message || err.data.message, true);
       });
     };
   }

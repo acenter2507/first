@@ -19,7 +19,7 @@ angular.module('users').controller('ChangePasswordController', ['$scope', '$http
         $scope.password_busy = false;
         $scope.handleShowMessage(response.message, false);
       }).error(function (err) {
-        $scope.handleShowMessage(err.message, true);
+        $scope.handleShowMessage(err.message || err.data.message, true);
         $scope.password_busy = false;
       });
     };

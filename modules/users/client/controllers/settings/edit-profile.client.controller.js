@@ -78,7 +78,7 @@ function EditProfileController(
       }, function (err) {
         $scope.profile_busy = false;
         $scope.userInfo = _.pick($scope.user, '_id', 'displayName', 'email');
-        $scope.handleShowMessage(err.message, true);
+        $scope.handleShowMessage(err.message || err.data.message, true);
       });
     }
   };

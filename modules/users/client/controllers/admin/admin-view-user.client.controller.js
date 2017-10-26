@@ -70,7 +70,7 @@ function AdminViewUserController(
         vm.handleViewListLogin();
       })
       .error(err => {
-        alert(err.message);
+        alert(err.message || err.data.message);
         console.log(err);
       });
   }
@@ -101,7 +101,7 @@ function AdminViewUserController(
         vm.handleViewListPolls();
       })
       .error(err => {
-        alert(err.message);
+        alert(err.message || err.data.message);
         console.log(err);
       });
   }
@@ -137,7 +137,7 @@ function AdminViewUserController(
         vm.handleViewListComments();
       })
       .error(err => {
-        alert(err.message);
+        alert(err.message || err.data.message);
         console.log(err);
       });
   }
@@ -173,7 +173,7 @@ function AdminViewUserController(
         vm.handleViewListVotes();
       })
       .error(err => {
-        alert(err.message);
+        alert(err.message || err.data.message);
         console.log(err);
       });
   }
@@ -204,7 +204,7 @@ function AdminViewUserController(
         vm.handleViewListLikes();
       })
       .error(err => {
-        alert(err.message);
+        alert(err.message || err.data.message);
         console.log(err);
       });
   }
@@ -240,7 +240,7 @@ function AdminViewUserController(
         vm.handleViewListSuggests();
       })
       .error(err => {
-        alert(err.message);
+        alert(err.message || err.data.message);
         console.log(err);
       });
   }
@@ -271,7 +271,7 @@ function AdminViewUserController(
         vm.handleViewListReports();
       })
       .error(err => {
-        alert(err.message);
+        alert(err.message || err.data.message);
         console.log(err);
       });
   }
@@ -302,7 +302,7 @@ function AdminViewUserController(
         vm.handleViewListBeReports();
       })
       .error(err => {
-        alert(err.message);
+        alert(err.message || err.data.message);
         console.log(err);
       });
   }
@@ -342,14 +342,14 @@ function AdminViewUserController(
       })
       .error(err => {
         console.log(err);
-        alert(err.message);
+        alert(err.message || err.data.message);
       });
   };
   vm.handlePushVerify = () => {
     AdminUserApi.pushVerifyUser(vm.user._id)
       .success(() => { alert('Done'); })
       .error(err => {
-        alert(err.message);
+        alert(err.message || err.data.message);
         console.log(err);
       });
   };

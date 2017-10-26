@@ -33,7 +33,7 @@
           vm.poll.cmts = res.data.cmts;
         })
         .catch(err => {
-          alert(err.message);
+          alert(err.message || err.data.message);
         });
     }
 

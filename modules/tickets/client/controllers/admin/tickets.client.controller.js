@@ -39,7 +39,7 @@ function AdminTicketController($scope, $filter, $window, $state, TicketsService,
 
     function errorCallback(err) {
       $scope.busy = false;
-      $scope.handleShowMessage(err.message, true);
+      $scope.handleShowMessage(err.message || err.data.message, true);
     }
   };
 }

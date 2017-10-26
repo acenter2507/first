@@ -28,7 +28,7 @@ var UserSchema = new Schema({
     lowercase: true,
     trim: true,
     default: '',
-    validate: [validateLocalStrategyEmail, 'Please fill a valid email address']
+    validate: [validateLocalStrategyEmail, 'LB_USER_EMAIL_INVALID']
   },
   password: { type: String, default: '' },
   salt: { type: String },

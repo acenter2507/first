@@ -146,7 +146,7 @@
       //       $state.go('polls.view', { pollId: res.slug });
       //     })
       //     .catch(err => {
-      //       $scope.handleShowMessage(err.message, true);
+      //       $scope.handleShowMessage(err.message || err.data.message, true);
       //     });
       // }
     };

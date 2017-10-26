@@ -32,6 +32,7 @@ var path = require('path'),
 exports.create = function (req, res) {
   var poll = new Poll(req.body);
   // Test
+  // TODO
   console.log(poll);
   if (poll) return res.end();
 

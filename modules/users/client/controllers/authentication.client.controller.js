@@ -7,8 +7,6 @@ angular.module('users').controller('AuthenticationController', [
   '$location',
   '$window',
   'Authentication',
-  'PasswordValidator',
-  'ngDialog',
   'Constants',
   'vcRecaptchaService',
   '$translate',
@@ -19,8 +17,6 @@ angular.module('users').controller('AuthenticationController', [
     $location,
     $window,
     Authentication,
-    PasswordValidator,
-    dialog,
     Constants,
     vcRecaptchaService,
     $translate
@@ -59,7 +55,7 @@ angular.module('users').controller('AuthenticationController', [
         }
       }).error(function (err) {
         $scope.busy = false;
-        $scope.handleShowMessage(err.message, true);
+        $scope.handleShowMessage(err.data.message, true);
       });
     };
     $scope.signin = function (isValid) {
@@ -79,7 +75,7 @@ angular.module('users').controller('AuthenticationController', [
         $state.go($state.previous.state.name || 'home', $state.previous.params);
       }).error(function (err) {
         $scope.busy = false;
-        $scope.handleShowMessage(err.message, true);
+        $scope.handleShowMessage(err.data.message, true);
       });
     };
     $scope.resend = function () {
@@ -92,7 +88,7 @@ angular.module('users').controller('AuthenticationController', [
         }
       }).error(function (err) {
         $scope.resend_busy = false;
-        $scope.handleShowMessage(err.message, true);
+        $scope.handleShowMessage(err.data.message, true);
       });
     };
 

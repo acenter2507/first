@@ -49,10 +49,13 @@
             <!-- Close time -->
             <!-- TODO -->
             <div class="form-group">
-              <div class="input-group" today="true" moment-picker="vm.poll.close" format="YYYY-MM-DD HH:mm" start-view="month" additions="{ bottom: 'bottom-template-url' }">
+                <span moment-picker="ctrl.component">
+                    {{ vm.component || 'Click here to select a date' }}
+                </span>
+              <!-- <div class="input-group" today="true" moment-picker="vm.poll.close" format="YYYY-MM-DD HH:mm" start-view="month" additions="{ bottom: 'bottom-template-url' }">
                 <input class="form-control" placeholder="{{:: 'LB_POLL_CLOSE' | translate }}" ng-model="vm.poll.close" disabled>
                 <span class="input-group-addon span_btn"><i class="fa fa-calendar"></i></span>
-              </div>
+              </div> -->
             </div>
             <!-- Tags -->
             <div class="form-group" ng-controller="AutocompleteTagController" show-errors>

@@ -50,13 +50,9 @@
         right: 0;}
   
   .poll-body .poll-body-post {
-    min-height: 50px;
-    display: flex;
-    align-items: stretch;
-    flex-direction: row; }
+    min-height: 50px; }
     .poll-body .poll-body-post .poll-body-title {
-      vertical-align: middle;
-      flex-grow: 1; }
+      width: 60%; }
     .poll-body .poll-body-post .poll-body-activity {
       width: 40%;
       min-height: 50px;

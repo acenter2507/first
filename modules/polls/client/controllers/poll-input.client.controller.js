@@ -58,7 +58,7 @@
           return;
         }
         $scope.handleChangePageTitle(vm.poll.title);
-        vm.poll.close = vm.poll.close ? moment(vm.poll.close).local() : vm.poll.close;
+        vm.poll.close = vm.poll.close ? moment(vm.poll.close) : vm.poll.close;
         vm.isClosed = moment(vm.poll.close).utc().isAfter(new moment().utc());
         // Lắng nghe các request từ server socket
         prepareSocketListener();

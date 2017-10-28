@@ -12,11 +12,12 @@
     </div>
     <div class="poll-info">
       <div class="poll-info-title">
+        <!-- Tên chủ poll -->
         <a class="poll-info-title-user-name" ng-if="poll.user" ui-sref="profile.info({userId: poll.user.slug})">{{::poll.user.displayName}}</a>
         <span class="poll-info-title-user-name" ng-if="!poll.user">{{:: 'LB_DELETED_USER' | translate }}</span>
-        <span class="poll-info-title-time">{{:: 'LB_POLLS_CREATEON' | translate }}
-          <span am-time-ago="poll.created"></span>
-        </span>
+        <!-- Thời gian tạo poll -->
+        <span class="poll-info-title-time" am-time-ago="poll.created"></span>
+        
         <div uib-dropdown dropdown-append-to-body class="poll-info-title-menu" ng-if="isLogged">
           <a class="text-muted" uib-dropdown-toggle href="#"><i class="glyphicon glyphicon-option-horizontal"></i></a>
           <ul class="uib-dropdown-menu dropdown-menu-right dropdown-menu-flat mg5t-">

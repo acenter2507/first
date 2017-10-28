@@ -24,19 +24,8 @@ angular.module('core').controller('WebAppController', [
     $scope.page_name = Constants.pageName;
     $scope.page_title = ($scope.Notifications.notifCnt > 0) ? ('(' + $scope.Notifications.notifCnt + ') ' + $scope.page_name) : ('' + $scope.page_name);
 
-    // Watch user info
-    $scope.$watch('Authentication.user', () => {
-      onCreate();
-    });
-    $scope.$watch('Notifications.notifCnt', () => {
-      $scope.page_title = ($scope.Notifications.notifCnt > 0) ? ('(' + $scope.Notifications.notifCnt + ') ' + $scope.page_name) : ('' + $scope.page_name);
-    });
-    $scope.$on('$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) => {
-      if (toState !== 'polls.view' && toState !== 'polls.edit') {
-        $scope.page_name = Constants.pageName;
-        $scope.page_title = ($scope.Notifications.notifCnt > 0) ? ('(' + $scope.Notifications.notifCnt + ') ' + $scope.page_name) : ('' + $scope.page_name);
-      }
-    });
+    prepareScopeListener();
+
     // Init
     function onCreate() {
       $scope.user = Authentication.user;
@@ -65,6 +54,22 @@ angular.module('core').controller('WebAppController', [
         });
       }
     }
+    // Khởi tạo trigger theo dõi scope
+    function prepareScopeListener() {
+      // Watch user info
+      $scope.$watch('Authentication.user', () => {
+        onCreate();
+      });
+      $scope.$watch('Notifications.notifCnt', () => {
+        $scope.page_title = ($scope.Notifications.notifCnt > 0) ? ('(' + $scope.Notifications.notifCnt + ') ' + $scope.page_name) : ('' + $scope.page_name);
+      });
+      $scope.$on('$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) => {
+        if (toState !== 'polls.view' && toState !== 'polls.edit') {
+          $scope.page_name = Constants.pageName;
+          $scope.page_title = ($scope.Notifications.notifCnt > 0) ? ('(' + $scope.Notifications.notifCnt + ') ' + $scope.page_name) : ('' + $scope.page_name);
+        }
+      });
+    }
     // Init socket
     function prepareSocketListener() {
       if (!Socket.socket) {
@@ -76,6 +81,11 @@ angular.module('core').controller('WebAppController', [
       $scope.$on('$destroy', function () {
         Socket.removeListener('notifs');
       });
+    }
+    function prepareDeviceChecking() {
+      var parser = new UAParser();
+      var result = parser.getResult();
+      $scope.isMobile = result.device && (result.device.type === 'tablet' || result.device.type === 'mobile');
     }
     // Load categorys
     function prepareCategorys() {
@@ -186,8 +196,6 @@ angular.module('core').controller('WebAppController', [
         }
       });
     };
-
-    // Common share poll
 
     // Share
     $scope.handleShareSocialPoll = (poll, provider) => {

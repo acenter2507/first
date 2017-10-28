@@ -390,6 +390,7 @@
       } else {
         poll.isCurrentUserOwner = Authentication.user._id === poll.user._id;
       }
+      poll.close = poll.close ? moment(poll.close).utc() : poll.close;
       poll.chart = {
         options: { responsive: true },
         colors: [],

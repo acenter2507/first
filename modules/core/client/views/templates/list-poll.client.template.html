@@ -17,7 +17,7 @@
         <span class="poll-info-title-user-name" ng-if="!poll.user">{{:: 'LB_DELETED_USER' | translate }}</span>
         <!-- Thời gian tạo poll -->
         <span class="poll-info-title-time" am-time-ago="poll.created"></span>
-        
+        <!-- Menu góc trên bên phải poll -->
         <div uib-dropdown dropdown-append-to-body class="poll-info-title-menu" ng-if="isLogged">
           <a class="text-muted" uib-dropdown-toggle href="#"><i class="glyphicon glyphicon-option-horizontal"></i></a>
           <ul class="uib-dropdown-menu dropdown-menu-right dropdown-menu-flat mg5t-">
@@ -36,6 +36,7 @@
             <li ng-if="isCurrentOwner && screen === 'profile-bookmark'"><a ng-click="handleRemoveBookmark(poll)"><i class="fa fa-bookmark"></i> {{:: 'LB_POLLS_MENU_RMBOOKMARK' | translate }}</a></li>
           </ul>
         </div>
+        <!-- Ngày đóng poll -->
         <p class="poll-info-title-close">
           <i class="fa fa-calendar"></i>
           <span ng-if="poll.close">{{:: 'LB_CLOSE' | translate }} <span am-time-ago="poll.close"></span></span>

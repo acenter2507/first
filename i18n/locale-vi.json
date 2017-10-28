@@ -159,6 +159,7 @@
   "LB_POLL_UNFOLLOW_TOOLTIP": "Bạn đang theo dõi poll này.",
   "LB_POLL_OPTIONS": "Lựa chọn",
   "LB_POLL_OPTIONS_EMPTY": "Chưa có lựa chọn nào được tạo.",
+  "LB_POLL_VOTES_EMPTY": "Chưa có lượt bình chọn nào.",
   "LB_POLL_VOTE_PANEL": "Bảng bình chọn",
   "LB_POLL_CLOSED": "Đã hết thời hạn bình chọn",
   "LB_POLL_CLOSE_DAY": "d:",

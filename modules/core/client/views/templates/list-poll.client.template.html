@@ -43,6 +43,7 @@
           <span ng-if="!poll.close">{{:: 'LB_CM_UNLIMIT' | translate }}</span>
         </p>
       </div>
+      <!-- Hiển thị chế độ security -->
       <div class="poll-info-secure">
         <span ng-if="!poll.isPublic" class="fa fa-lock" tooltip-placement="bottom" uib-tooltip="{{:: 'LB_POLLS_SECURE_PRIVATE' | translate }}"></span>
         <span ng-if="poll.isPublic && poll.allow_guest" class="fa fa-globe" tooltip-placement="bottom" uib-tooltip="{{:: 'LB_POLLS_SECURE_PUBLIC' | translate }}"></span>
@@ -55,11 +56,13 @@
   <div class="poll-body">
     <div class="poll-body-post">
       <div class="poll-body-title">
+        <!-- Tiêu đề poll -->
         <a ui-sref="polls.view({ pollId: poll.slug })">
           <h4 class="mg12y">{{:: poll.title }}</h4>
         </a>
       </div>
-      <div class="poll-body-activity d-sm-down-none" ng-style="{'border-color': poll.category.color}">
+      <!-- Last comment -->
+      <div ng-if="!isMobile" class="poll-body-activity d-sm-down-none" ng-style="{'border-color': poll.category.color}">
         <div class="poll-body-activity-user" ng-if="poll.lastCmt._id">
           <div class="mini-avatar">
             <a ng-if="poll.lastCmt.user._id" ui-sref="profile.info({userId: poll.lastCmt.user.slug})">
@@ -78,12 +81,10 @@
         </div>
       </div>
     </div>
-    <!-- Tóm tắt poll  -->
-    <!--<div class="poll-body-text" ta-bind="text" ng-model="poll.summary" ta-readonly="true"></div>-->
-    <!--<p ng-show="poll.body.length > poll.summary.length" class="poll_item_body">
-      <a ui-sref="polls.view({ pollId: poll.slug })">see more</a>
-    </p>-->
-    <div class="poll-body-options" ng-if="poll.total > 0">
+    <!-- Options -->
+    <p ng-if="poll.opts.length === 0" class="text-muted font-sm">{{:: 'LB_POLL_OPTIONS_EMPTY' | translate}}</p>
+    <p ng-if="poll.opts.length > 0 && poll.total === 0" class="text-muted font-sm">{{:: 'LB_POLL_VOTES_EMPTY' | translate}}</p>
+    <div ng-if="poll.total > 0" class="poll-body-options">
       <div class="progress-box">
         <ul class="horizontal-bars type-2">
           <li ng-repeat="opt in poll.opts | orderBy: '-voteCnt' | limitTo: 3">

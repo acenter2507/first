@@ -159,6 +159,7 @@
   "LB_POLL_UNFOLLOW_TOOLTIP": "You'r following this poll.",
   "LB_POLL_OPTIONS": "Options",
   "LB_POLL_OPTIONS_EMPTY": "Has no option added.",
+  "LB_POLL_VOTES_EMPTY": "Has no option voted.",
   "LB_POLL_VOTE_PANEL": "Vote panel",
   "LB_POLL_CLOSED": "This poll has closed.",
   "LB_POLL_CLOSE_DAY": "d:",

@@ -75,9 +75,9 @@
           </div>
           <!-- Body -->
           <div class="form-group" show-errors>
-            <!--<text-angular-toolbar class="mgn" name="toolbar1"></text-angular-toolbar>-->
-            <text-angular tabindex="3" name="body" ng-model="vm.poll.body" placeholder="{{:: 'LB_POLL_BODY_PLACE' | translate }}" required></text-angular>
-            <!--<text-angular-toolbar class="mgn" name="toolbar2"></text-angular-toolbar>-->
+            <text-angular-toolbar class="mgn" name="toolbar1"></text-angular-toolbar>
+            <text-angular tabindex="3" ta-target-toolbars="'toolbar1,toolbar2'" name="body" ng-model="vm.poll.body" placeholder="{{:: 'LB_POLL_BODY_PLACE' | translate }}" required></text-angular>
+            <text-angular-toolbar class="mgn" name="toolbar2"></text-angular-toolbar>
             <div ng-messages="vm.form.pollForm.body.$error" role="alert">
               <p class="help-block error-text" ng-message="required">{{:: 'LB_POLL_BODY_REQUIRE' | translate }}</p>
             </div>

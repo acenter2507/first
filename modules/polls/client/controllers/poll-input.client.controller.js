@@ -44,8 +44,6 @@
         onCreate();
       } else {
         Action.loadPollById($stateParams.pollId).then(_poll => {
-          // TODO
-          console.log(_poll);
           vm.poll = _poll;
           onCreate();
         });
@@ -61,7 +59,13 @@
         }
         $scope.handleChangePageTitle(vm.poll.title);
         vm.closeDate = vm.poll.close ? moment(vm.poll.close).local().format() : undefined;
-        vm.isClosed = moment(vm.poll.close).utc().isAfter(new moment().utc());
+        vm.isClosed = vm.poll.close ? moment(vm.poll.close).utc().isBefore(moment().utc()) : false;
+        //TODO
+        if (vm.isClosed) {
+          console.log('Poll đã đóng');
+        } else {
+          console.log('Poll chưa đóng');
+        }
         // Lắng nghe các request từ server socket
         prepareSocketListener();
       } else {

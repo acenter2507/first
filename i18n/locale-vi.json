@@ -120,7 +120,7 @@
   "LB_POLLS_CONFIRM_REJECT": "Bạn chắc muốn từ chối đề xuất này?",
   "LB_POLLS_CONFIRM_BOOKMARK": "Bạn chắc muốn xóa đánh dấu poll này?",
   "LB_POLLS_DELETED": "Rất tiếc poll này đã bị xóa",
-  "LB_POLLS_CLOSE_INVALID": "Ngày đóng poll không hợp lệ",
+  "LB_POLLS_CLOSE_INVALID": "Thời gian kết thúc bình chọn không hợp lệ",
   "LB_POLLS_PRIVATE_SAVE": "Poll đang ở chế độ riêng tư, bạn vẫn muốn tiếp tục chứ?",
   "LB_POLLS_SHARE": "Gửi url bên dưới cho bất kỳ ai bạn muốn chia sẽ",
   "LB_POLLS_PRIVATE_ERROR": "Bạn không thể xem poll riêng tư mà không được chia sẽ",

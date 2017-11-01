@@ -121,7 +121,7 @@
     function prepareShowingData() {
       // Thiết lập các thông tin cho poll
       vm.poll.close = vm.poll.close ? moment(vm.poll.close).utc() : vm.poll.close;
-      vm.isClosed = vm.poll.close ? moment(vm.poll.close).isBefore(new moment().utc()) : false;
+      vm.isClosed = vm.poll.close ? moment(vm.poll.close).utc().isBefore(new moment().utc()) : false;
       vm.opts = _.where(vm.poll.opts, { status: 1 });
       vm.chart = {
         type: 'pie',

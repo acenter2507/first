@@ -60,12 +60,6 @@
         $scope.handleChangePageTitle(vm.poll.title);
         vm.closeDate = vm.poll.close ? moment(vm.poll.close).local().format() : undefined;
         vm.isClosed = vm.poll.close ? moment(vm.poll.close).utc().isBefore(moment().utc()) : false;
-        //TODO
-        if (vm.isClosed) {
-          console.log('Poll đã đóng');
-        } else {
-          console.log('Poll chưa đóng');
-        }
         // Lắng nghe các request từ server socket
         prepareSocketListener();
       } else {
@@ -291,7 +285,7 @@
     function handleValidateCloseDate() {
       if (!vm.poll.close) return true;
       if (vm.poll._id && vm.isClosed) return true;
-      return moment(vm.poll.close).utc().isAfter(new moment().utc());
+      return moment(vm.poll.close).utc().isAfter(moment().utc());
     }
   }
 })();

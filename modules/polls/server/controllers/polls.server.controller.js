@@ -245,15 +245,12 @@ exports.pollByID = function (req, res, next, id) {
       if (err) {
         // Xuất bug ra file log
         logger.system.error('polls.server.controller.js - pollByID', err);
-        return res.status(400).send({
-          message: 'Poll is invalid'
-        });
+        return res.status(400).send({ message: 'LB_POLL_NOT_FOUND' });
       } else if (!poll) {
-        return res.status(404).send({
-          message: 'No Poll with that identifier has been found'
-        });
+        return res.status(404).send({ message: 'LB_POLL_NOT_FOUND' });
       }
       req.poll = poll;
+      console.log(poll);
       next();
     });
 };

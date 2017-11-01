@@ -167,6 +167,7 @@
   "LB_POLL_CLOSE_MIN": "m:",
   "LB_POLL_CLOSE_SEC": "s",
   "LB_POLL_SOCIAL": "Socials panel",
+  "LB_POLL_NOT_FOUND": "Poll is not found",
   "LB_POLL_TAGS_EMPTY": "Has no tag added",
   "LB_POLL_REPORT_PANEL": "Report panel",
   "LB_POLL_CMT_PLACE": "Type your comment...",

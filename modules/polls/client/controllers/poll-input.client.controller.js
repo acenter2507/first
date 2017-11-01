@@ -60,12 +60,10 @@
           return;
         }
         $scope.handleChangePageTitle(vm.poll.title);
-        vm.closeDate = moment(vm.poll.close);
-        console.log(vm.closeDate.format());
-        console.log(vm.closeDate.local().format());
-        console.log(vm.closeDate.utc().format());
+        vm.closeDate = vm.poll.close ? moment(vm.poll.close).local() : undefined;
+        console.log(moment().utc().format());
         //vm.poll.close = vm.poll.close ? moment(vm.poll.close) : vm.poll.close;
-        // vm.isClosed = moment(vm.poll.close).utc().isAfter(new moment().utc());
+        vm.isClosed = moment(vm.poll.close).utc().isAfter(new moment().utc());
         // Lắng nghe các request từ server socket
         prepareSocketListener();
       } else {

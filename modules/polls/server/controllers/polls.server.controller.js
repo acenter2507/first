@@ -250,7 +250,6 @@ exports.pollByID = function (req, res, next, id) {
         return res.status(404).send({ message: 'LB_POLL_NOT_FOUND' });
       }
       req.poll = poll;
-      console.log(poll);
       next();
     });
 };

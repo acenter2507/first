@@ -49,10 +49,10 @@
             <!-- Close time -->
             <div class="form-group" ng-init="vm.isOpenPicker = false;">
               <div class="input-group">
-                <input class="form-control" placeholder="{{:: 'LB_POLL_CLOSE' | translate }}" ng-model="vm.poll.close" readonly>
+                <input class="form-control" placeholder="{{:: 'LB_POLL_CLOSE' | translate }}" ng-model="vm.closeDate" readonly>
                 <span class="input-group-addon span_btn" ng-click="vm.isOpenPicker = !vm.isOpenPicker;"><i class="fa fa-calendar"></i></span>
               </div>
-              <div today="true" moment-picker="vm.poll.close" format="YYYY-MM-DD HH:mm" start-view="month" additions="{ bottom: 'bottom-template-url' }" is-open="vm.isOpenPicker"></div>
+              <div today="true" moment-picker="vm.closeDate" format="YYYY-MM-DD HH:mm" start-view="month" additions="{ bottom: 'bottom-template-url' }" is-open="vm.isOpenPicker"></div>
             </div>
             <!-- Tags -->
             <div class="form-group" ng-controller="AutocompleteTagController" show-errors>

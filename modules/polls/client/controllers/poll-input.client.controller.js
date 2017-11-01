@@ -120,6 +120,7 @@
         $scope.handleShowMessage('LB_POLL_SAVE_ERROR', true);
         return false;
       }
+      vm.poll.close = vm.closeDate;
       if (!handleValidateCloseDate()) {
         $scope.handleShowMessage('LB_POLLS_CLOSE_INVALID', true);
         return;
@@ -136,7 +137,6 @@
       } else {
         handleSave();
       }
-      vm.poll.close = vm.closeDate;
       function handleSave() {
         vm.poll.opts = vm.opts;
         Action.savePoll(vm.poll)

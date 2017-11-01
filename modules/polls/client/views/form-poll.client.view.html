@@ -80,11 +80,9 @@
             <text-angular-toolbar class="mgn" name="toolbar2"></text-angular-toolbar>
             <div class="clearfix"></div>
             <p>ạkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjkjk</p>
+            <pre>{{vm.form.pollForm.body}}</pre>
             <div ng-messages="vm.form.pollForm.body.$error" role="alert">
               <p class="help-block error-text" ng-message="required">{{:: 'LB_POLL_BODY_REQUIRE' | translate }}</p>
-            </div>
-            <div ng-messages="vm.form.pollForm.title.$error" role="alert">
-              <p class="help-block error-text" ng-message="required">{{:: 'LB_POLL_TITLE_REQUIRE' | translate }}</p>
             </div>
           </div>
           <!-- Option -->

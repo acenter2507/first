@@ -44,6 +44,8 @@
         onCreate();
       } else {
         Action.loadPollById($stateParams.pollId).then(_poll => {
+          // TODO
+          console.log(_poll);
           vm.poll = _poll;
           onCreate();
         });
@@ -134,6 +136,8 @@
       } else {
         handleSave();
       }
+      // TODO
+      console.log(vm.poll.close);
       function handleSave() {
         vm.poll.opts = vm.opts;
         Action.savePoll(vm.poll)

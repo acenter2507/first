@@ -36,6 +36,9 @@ exports.create = function (req, res) {
   var opts = req.body.opts || [];
   var promises = [];
 
+  // TODO
+  console.log(poll.close);
+
   poll.save()
     .then(_poll => {
       poll = _poll;

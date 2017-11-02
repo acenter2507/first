@@ -32,9 +32,10 @@ angular.module('polls').controller('PollsSearchController', [
       } else {
         _.extend(vm.condition, param);
       }
+      console.log(vm.condition);
       vm.start = (vm.condition.created_start) ? moment(vm.condition.created_start, 'YYYY/MM/DD') : undefined;
       vm.end = (vm.condition.created_end) ? moment(vm.condition.created_end, 'YYYY/MM/DD') : undefined;
-      if (!_.isEmpty(vm.condition)) {
+      if (!_.isEmpty(param)) {
         handleSearch();
       }
     }

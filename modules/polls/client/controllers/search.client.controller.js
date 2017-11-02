@@ -15,7 +15,7 @@ angular.module('polls').controller('PollsSearchController', [
 
     // Ngôn ngữ đang sử dụng
     vm.language = Storages.get_local(Constants.storages.language);
-    vm.condition = { language: vm.language };
+    vm.condition = { language: vm.language, cmts_pref: 'most', likes_pref: 'most', votes_pref: 'most', views_pref: 'most' };
     vm.polls = [];
     $scope.busy = false;
 
@@ -77,7 +77,7 @@ angular.module('polls').controller('PollsSearchController', [
       });
     }
     vm.handleClearCondition = () => {
-      vm.condition = { language: vm.language };
+      vm.condition = { language: vm.language, cmts_pref: 'most', likes_pref: 'most', votes_pref: 'most', views_pref: 'most' };
       delete vm.start;
       delete vm.end;
       $scope.selectedUser = undefined;

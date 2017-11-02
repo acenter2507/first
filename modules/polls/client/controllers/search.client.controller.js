@@ -78,6 +78,8 @@ angular.module('polls').controller('PollsSearchController', [
     }
     vm.handleClearCondition = () => {
       vm.condition = { language: vm.language };
+      delete vm.start;
+      delete vm.end;
       $scope.selectedUser = undefined;
       $scope.$broadcast('angucomplete-alt:clearInput');
     };

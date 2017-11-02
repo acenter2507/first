@@ -628,7 +628,7 @@ function search_condition_analysis(condition, userId) {
   }
   if (condition.created_start) {
     console.log(condition.created_start);
-    let start = new _moment(condition.created_start).format();
+    let start = new _moment(condition.created_start).startOf('day').format();
     console.log(start);
     and_arr.push({ created: { $gte: start } });
   }

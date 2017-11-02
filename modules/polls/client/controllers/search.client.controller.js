@@ -45,8 +45,8 @@ angular.module('polls').controller('PollsSearchController', [
       if ($scope.busy === true) return;
       $scope.busy = true;
       vm.polls = [];
-      vm.condition.created_start = (vm.start) ? vm.start.format('YYYY/MM/DD') : undefined;
-      vm.condition.created_end = (vm.end) ? vm.end.format('YYYY/MM/DD') : undefined;
+      vm.condition.created_start = (vm.start) ? vm.start.format() : undefined;
+      vm.condition.created_end = (vm.end) ? vm.end.format() : undefined;
       Action.searchPolls(vm.condition)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {

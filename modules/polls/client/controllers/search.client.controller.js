@@ -24,6 +24,7 @@ angular.module('polls').controller('PollsSearchController', [
       var param = $location.search();
       if (_.isEmpty(param)) {
         vm.condition = JSON.parse(Storages.get_local(Constants.storages.public_search_condition, JSON.stringify({})));
+        console.log(vm.condition);
         vm.condition.created_start = (vm.condition.created_start) ? moment(vm.condition.created_start, 'YYYY/MM/DD') : undefined;
         vm.condition.created_end = (vm.condition.created_end) ? moment(vm.condition.created_end, 'YYYY/MM/DD') : undefined;
 

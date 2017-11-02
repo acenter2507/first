@@ -112,8 +112,8 @@
                     <div class="col-sm-12 pdn"><label>{{:: 'LB_SEARCH_CMT_CNT' | translate }}</label></div>
                     <div class="col-sm-6 pdn">
                       <select class="form-control input-sm" ng-model="vm.condition.cmts_pref">
-                        <option value="least" ng-selected="true">{{:: 'LB_SEARCH_CNT_LEAST' | translate }}</option>
-                        <option value="most">{{:: 'LB_SEARCH_CNT_MOST' | translate }}</option>
+                        <option value="most" ng-selected="true">{{:: 'LB_SEARCH_CNT_MOST' | translate }}</option>
+                        <option value="least">{{:: 'LB_SEARCH_CNT_LEAST' | translate }}</option>
                       </select>
                     </div>
                     <div class="col-sm-6 pdn">
@@ -125,9 +125,8 @@
                     <div class="col-sm-12 pdn"><label>{{:: 'LB_SEARCH_LIKE_CNT' | translate }}</label></div>
                     <div class="col-sm-6 pdn">
                       <select class="form-control input-sm" ng-model="vm.condition.likes_pref">
-                        <option value>{{:: 'LB_SEARCH_NOT_SET' | translate }}</option>
+                        <option value="most" ng-selected="true">{{:: 'LB_SEARCH_CNT_MOST' | translate }}</option>
                         <option value="least">{{:: 'LB_SEARCH_CNT_LEAST' | translate }}</option>
-                        <option value="most">{{:: 'LB_SEARCH_CNT_MOST' | translate }}</option>
                       </select>
                     </div>
                     <div class="col-sm-6 pdn">
@@ -141,9 +140,8 @@
                     <div class="col-sm-12 pdn"><label>{{:: 'LB_SEARCH_VOTE_CNT' | translate }}</label></div>
                     <div class="col-sm-6 pdn">
                       <select class="form-control input-sm" ng-model="vm.condition.votes_pref">
-                        <option value>{{:: 'LB_SEARCH_NOT_SET' | translate }}</option>
+                        <option value="most" ng-selected="true">{{:: 'LB_SEARCH_CNT_MOST' | translate }}</option>
                         <option value="least">{{:: 'LB_SEARCH_CNT_LEAST' | translate }}</option>
-                        <option value="most">{{:: 'LB_SEARCH_CNT_MOST' | translate }}</option>
                       </select>
                     </div>
                     <div class="col-sm-6 pdn">
@@ -155,9 +153,8 @@
                     <div class="col-sm-12 pdn"><label>{{:: 'LB_SEARCH_VIEW_CNT' | translate }}</label></div>
                     <div class="col-sm-6 pdn">
                       <select class="form-control input-sm" ng-model="vm.condition.views_pref">
-                        <option value>{{:: 'LB_SEARCH_NOT_SET' | translate }}</option>
+                        <option value="most" ng-selected="true">{{:: 'LB_SEARCH_CNT_MOST' | translate }}</option>
                         <option value="least">{{:: 'LB_SEARCH_CNT_LEAST' | translate }}</option>
-                        <option value="most">{{:: 'LB_SEARCH_CNT_MOST' | translate }}</option>
                       </select>
                     </div>
                     <div class="col-sm-6 pdn">

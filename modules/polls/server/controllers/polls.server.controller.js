@@ -627,15 +627,11 @@ function search_condition_analysis(condition, userId) {
     and_arr.push({ category: condition.ctgr });
   }
   if (condition.created_start) {
-    console.log(condition.created_start);
     let start = new _moment(condition.created_start).utc().startOf('day').add(1, 'day').format();
-    console.log(start);
     and_arr.push({ created: { $gte: start } });
   }
   if (condition.created_end) {
-    console.log(condition.created_end);
     let end = new _moment(condition.created_end).utc().endOf('day').add(1, 'day').format();
-    console.log(end);
     and_arr.push({ created: { $lt: end } });
   }
   if (condition.allow_multiple) {
@@ -650,7 +646,7 @@ function search_condition_analysis(condition, userId) {
     let allow_guest = condition.allow_guest === 'true';
     and_arr.push({ allow_add: allow_guest });
   }
-  if (condition.cmts && parseInt(condition.cmts) && !condition.cmts_pref) {
+  if (condition.cmts && parseInt(condition.cmts)) {
     let cmtCnt = parseInt(condition.cmts);
     if (condition.cmts_pref === 'least') {
       and_arr.push({ cmtCnt: { $lt: cmtCnt } });

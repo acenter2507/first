@@ -627,15 +627,11 @@ function search_condition_analysis(condition, userId) {
     and_arr.push({ category: condition.ctgr });
   }
   if (condition.created_start) {
-    console.log(condition.created_start);
-    let start = new _moment(condition.created_start).startOf('day').format();
-    console.log(start);
+    let start = new _moment(condition.created_start).endOf('day').format();
     and_arr.push({ created: { $gte: start } });
   }
   if (condition.created_end) {
-    console.log(condition.created_end);
     let end = new _moment(condition.created_end).endOf('day').format();
-    console.log(end);
     and_arr.push({ created: { $lt: end } });
   }
   if (condition.allow_multiple) {

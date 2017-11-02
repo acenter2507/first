@@ -639,7 +639,7 @@ function search_condition_analysis(condition, userId) {
     console.log(condition.created_start);
     let end = new _moment(condition.created_end).utc().startOf('day');
     // TODO
-    console.log(start.format());
+    console.log(end.format());
     and_arr.push({ created: { $lt: end } });
   }
   if (condition.allow_multiple) {

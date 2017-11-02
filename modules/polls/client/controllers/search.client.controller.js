@@ -82,6 +82,7 @@ angular.module('polls').controller('PollsSearchController', [
       delete vm.end;
       $scope.selectedUser = undefined;
       $scope.$broadcast('angucomplete-alt:clearInput');
+      Storages.set_local(Constants.storages.public_search_condition, JSON.stringify({}));
     };
     vm.handleClearStartDate = () => {
       delete vm.condition.created_start;

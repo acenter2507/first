@@ -24,6 +24,7 @@ angular.module('polls').controller('PollsSearchController', [
       var param = $location.search();
       if (_.isEmpty(param)) {
         vm.condition = JSON.parse(Storages.get_local(Constants.storages.public_search_condition, JSON.stringify({})));
+        console.log(vm.condition);
         if (vm.condition.by) {
           Profile.get({ userId: vm.condition.by }, _user => {
             $scope.selectedUser = _user;

@@ -637,7 +637,7 @@ function search_condition_analysis(condition, userId) {
   if (condition.created_end) {
     // TODO
     console.log(condition.created_start);
-    let end = new _moment(condition.created_end).utc().startOf('day');
+    let end = new _moment(condition.created_end).utc().endOf('day');
     // TODO
     console.log(end.format());
     and_arr.push({ created: { $lt: end } });

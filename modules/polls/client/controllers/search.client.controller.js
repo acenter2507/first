@@ -46,8 +46,6 @@ angular.module('polls').controller('PollsSearchController', [
       vm.polls = [];
       vm.condition.created_start = (vm.start) ? vm.start.startOf('day').format() : undefined;
       vm.condition.created_end = (vm.end) ? vm.end.endOf('day').format() : undefined;
-      console.log(vm.condition.created_start);
-      console.log(vm.condition.created_end);
       Action.searchPolls(vm.condition)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {

@@ -24,10 +24,6 @@ angular.module('polls').controller('PollsSearchController', [
       var param = $location.search();
       if (_.isEmpty(param)) {
         vm.condition = JSON.parse(Storages.get_local(Constants.storages.public_search_condition, JSON.stringify({})));
-        console.log(vm.condition);
-        vm.condition.created_start = (vm.condition.created_start) ? moment(vm.condition.created_start, 'YYYY/MM/DD') : undefined;
-        vm.condition.created_end = (vm.condition.created_end) ? moment(vm.condition.created_end, 'YYYY/MM/DD') : undefined;
-
         if (vm.condition.by) {
           Profile.get({ userId: vm.condition.by }, _user => {
             $scope.selectedUser = _user;
@@ -36,7 +32,9 @@ angular.module('polls').controller('PollsSearchController', [
       } else {
         _.extend(vm.condition, param);
       }
-      if (!_.isEmpty(param)) {
+      vm.start = (vm.condition.created_start) ? moment(vm.condition.created_start, 'YYYY/MM/DD') : undefined;
+      vm.end = (vm.condition.created_end) ? moment(vm.condition.created_end, 'YYYY/MM/DD') : undefined;
+      if (!_.isEmpty(vm.condition)) {
         handleSearch();
       }
     }
@@ -46,8 +44,8 @@ angular.module('polls').controller('PollsSearchController', [
       if ($scope.busy === true) return;
       $scope.busy = true;
       vm.polls = [];
-      vm.condition.created_start = (vm.condition.created_start) ? vm.condition.created_start.format() : undefined;
-      vm.condition.created_end = (vm.condition.created_end) ? vm.condition.created_end.format() : undefined;
+      vm.condition.created_start = (vm.start) ? vm.start.format('YYYY/MM/DD') : undefined;
+      vm.condition.created_end = (vm.start) ? vm.end.format('YYYY/MM/DD') : undefined;
       Action.searchPolls(vm.condition)
         .then(res => {
           if (!res.data.length || res.data.length === 0) {
@@ -85,9 +83,11 @@ angular.module('polls').controller('PollsSearchController', [
     };
     vm.handleClearStartDate = () => {
       delete vm.condition.created_start;
+      delete vm.start;
     };
     vm.handleClearEndDate = () => {
       delete vm.condition.created_end;
+      delete vm.end;
     };
     vm.selectedUserFn = function (selected) {
       if (selected) {

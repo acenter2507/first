@@ -70,13 +70,13 @@
                   <div class="col-sm-6">
                     <div class="col-sm-12 pdn"><label>{{:: 'LB_SEARCH_CREATED' | translate }}</label></div>
                     <div class="col-sm-6 pdn">
-                      <input id="created_start" name="created_start" class="form-control input-sm" today="true" moment-picker="vm.condition.created_start"
-                        ng-model="vm.condition.created_start" format="YYYY/MM/DD" start-view="month" placeholder="{{:: 'LB_SEARCH_CREATED_START' | translate }}"
+                      <input id="created_start" name="created_start" class="form-control input-sm" today="true" moment-picker="vm.start"
+                        ng-model="vm.start" format="YYYY/MM/DD" start-view="month" placeholder="{{:: 'LB_SEARCH_CREATED_START' | translate }}"
                         additions="{ bottom: 'start_bottom-template-url' }">
                     </div>
                     <div class="col-sm-6 pdn">
-                      <input id="created_end" name="created_end" class="form-control input-sm" today="true" moment-picker="vm.condition.created_end"
-                        ng-model="vm.condition.created_end" format="YYYY/MM/DD" start-view="month" placeholder="{{:: 'LB_SEARCH_CREATED_END' | translate }}"
+                      <input id="created_end" name="created_end" class="form-control input-sm" today="true" moment-picker="vm.end"
+                        ng-model="vm.end" format="YYYY/MM/DD" start-view="month" placeholder="{{:: 'LB_SEARCH_CREATED_END' | translate }}"
                         additions="{ bottom: 'end_bottom-template-url' }">
                     </div>
                   </div>

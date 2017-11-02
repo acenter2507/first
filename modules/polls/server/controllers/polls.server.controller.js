@@ -629,11 +629,13 @@ function search_condition_analysis(condition, userId) {
   if (condition.created_start) {
     console.log(condition.created_start);
     let start = new _moment(condition.created_start, 'YYYY/MM/DD').utc();
+    console.log(start);
     and_arr.push({ created: { $gte: start } });
   }
   if (condition.created_end) {
     console.log(condition.created_end);
     let end = new _moment(condition.created_end, 'YYYY/MM/DD').utc().endOf('day');
+    console.log(end);
     and_arr.push({ created: { $lt: end } });
   }
   if (condition.allow_multiple) {

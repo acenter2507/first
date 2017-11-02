@@ -627,14 +627,14 @@ function search_condition_analysis(condition, userId) {
     and_arr.push({ category: condition.ctgr });
   }
   if (condition.created_start) {
-    let start = new _moment(condition.created_start).utc().format();
-    console.log(start);
-    and_arr.push({ created: { $gte: start } });
+    // let start = new _moment(condition.created_start).utc().format();
+    // console.log(start);
+    and_arr.push({ created: { $gte: condition.created_start } });
   }
   if (condition.created_end) {
-    let end = new _moment(condition.created_end).utc().format();
-    console.log(end);
-    and_arr.push({ created: { $lt: end } });
+    // let end = new _moment(condition.created_end).utc().format();
+    // console.log(end);
+    and_arr.push({ created: { $lt: condition.created_end } });
   }
   if (condition.allow_multiple) {
     let allow_multiple = condition.allow_multiple === 'true';
